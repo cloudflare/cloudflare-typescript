@@ -58,16 +58,6 @@ export interface ContextAwareness {
   skip: SkipConfiguration;
 }
 
-/**
- * The type of the profile.
- */
-export type CustomProfile = 'custom';
-
-/**
- * The type of the profile.
- */
-export type PredefinedProfile = 'predefined';
-
 export type Profile =
   | PredefinedAPI.PredefinedProfile
   | CustomAPI.CustomProfile
@@ -232,8 +222,6 @@ export interface ProfileGetParams {
 
 export namespace Profiles {
   export import ContextAwareness = ProfilesAPI.ContextAwareness;
-  export import CustomProfile = ProfilesAPI.CustomProfile;
-  export import PredefinedProfile = ProfilesAPI.PredefinedProfile;
   export import Profile = ProfilesAPI.Profile;
   export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
@@ -241,6 +229,7 @@ export namespace Profiles {
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
   export import Custom = CustomAPI.Custom;
+  export import CustomProfile = CustomAPI.CustomProfile;
   export import Pattern = CustomAPI.Pattern;
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
   export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
@@ -249,6 +238,7 @@ export namespace Profiles {
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
   export import CustomGetParams = CustomAPI.CustomGetParams;
   export import Predefined = PredefinedAPI.Predefined;
+  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
   export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
   export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

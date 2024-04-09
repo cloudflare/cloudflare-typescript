@@ -206,20 +206,7 @@ export class AccessRules extends APIResource {
 
 export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
 
-export interface ASNConfiguration {
-  /**
-   * The configuration target. You must set the target to `asn` when specifying an
-   * Autonomous System Number (ASN) in the rule.
-   */
-  target?: 'asn';
-
-  /**
-   * The AS number to match.
-   */
-  value?: string;
-}
-
-export interface CIDRConfiguration {
+export interface AccessRuleCIDRConfiguration {
   /**
    * The configuration target. You must set the target to `ip_range` when specifying
    * an IP address range in the rule.
@@ -229,6 +216,33 @@ export interface CIDRConfiguration {
   /**
    * The IP address range to match. You can only use prefix lengths `/16` and `/24`
    * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
+   */
+  value?: string;
+}
+
+export interface AccessRuleIPConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip` when specifying an IP
+   * address in the rule.
+   */
+  target?: 'ip';
+
+  /**
+   * The IP address to match. This address will be compared to the IP address of
+   * incoming requests.
+   */
+  value?: string;
+}
+
+export interface ASNConfiguration {
+  /**
+   * The configuration target. You must set the target to `asn` when specifying an
+   * Autonomous System Number (ASN) in the rule.
+   */
+  target?: 'asn';
+
+  /**
+   * The AS number to match.
    */
   value?: string;
 }
@@ -243,20 +257,6 @@ export interface CountryConfiguration {
   /**
    * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
    * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
-   */
-  value?: string;
-}
-
-export interface IPConfiguration {
-  /**
-   * The configuration target. You must set the target to `ip` when specifying an IP
-   * address in the rule.
-   */
-  target?: 'ip';
-
-  /**
-   * The IP address to match. This address will be compared to the IP address of
-   * incoming requests.
    */
   value?: string;
 }
@@ -288,9 +288,9 @@ export interface AccessRuleCreateParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | IPConfiguration
+    | AccessRuleIPConfiguration
     | IPV6Configuration
-    | CIDRConfiguration
+    | AccessRuleCIDRConfiguration
     | ASNConfiguration
     | CountryConfiguration;
 
@@ -430,9 +430,9 @@ export interface AccessRuleEditParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | IPConfiguration
+    | AccessRuleIPConfiguration
     | IPV6Configuration
-    | CIDRConfiguration
+    | AccessRuleCIDRConfiguration
     | ASNConfiguration
     | CountryConfiguration;
 
@@ -473,10 +473,10 @@ export interface AccessRuleGetParams {
 }
 
 export namespace AccessRules {
+  export import AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
+  export import AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
   export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
-  export import CIDRConfiguration = AccessRulesAPI.CIDRConfiguration;
   export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
-  export import IPConfiguration = AccessRulesAPI.IPConfiguration;
   export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;

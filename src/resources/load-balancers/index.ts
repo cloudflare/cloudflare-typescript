@@ -26,6 +26,7 @@ export {
   PoolDeleteParams,
   PoolEditParams,
   PoolGetParams,
+  PoolsSinglePage,
   Pools,
 } from './pools/index';
 export { PreviewGetParams, Previews } from './previews';

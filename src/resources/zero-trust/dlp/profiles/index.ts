@@ -2,8 +2,6 @@
 
 export {
   ContextAwareness,
-  CustomProfile,
-  PredefinedProfile,
   Profile,
   SkipConfiguration,
   ProfileGetResponse,
