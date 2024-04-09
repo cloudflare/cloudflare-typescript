@@ -3,8 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/waiting-rooms/rules';
-import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
-import { EventsSinglePage } from 'cloudflare/resources/waiting-rooms/events/events';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
   /**
@@ -50,11 +49,11 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<EventsSinglePage, EventsAPI.Event> {
+  ): Core.PagePromise<RulesSinglePage, Rule> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
-      EventsSinglePage,
+      RulesSinglePage,
       options,
     );
   }
@@ -96,16 +95,18 @@ export class Rules extends APIResource {
   }
 }
 
+export class RulesSinglePage extends SinglePage<Rule> {}
+
 export interface Rule {
+  /**
+   * The ID of the rule.
+   */
+  id?: string;
+
   /**
    * The action to take when the expression matches.
    */
-  action: 'bypass_waiting_room';
-
-  /**
-   * Criteria defining when there is a match for the current rule.
-   */
-  expression: string;
+  action?: 'bypass_waiting_room';
 
   /**
    * The description of the rule.
@@ -116,17 +117,29 @@ export interface Rule {
    * When set to true, the rule is enabled.
    */
   enabled?: boolean;
+
+  /**
+   * Criteria defining when there is a match for the current rule.
+   */
+  expression?: string;
+
+  last_updated?: string;
+
+  /**
+   * The version of the rule.
+   */
+  version?: string;
 }
 
-export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<EventsAPI.Event>;
+export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<Rule>;
 
-export type RuleCreateResponse = Array<EventsAPI.Event>;
+export type RuleCreateResponse = Array<Rule>;
 
-export type RuleUpdateResponse = Array<EventsAPI.Event>;
+export type RuleUpdateResponse = Array<Rule>;
 
-export type RuleDeleteResponse = Array<EventsAPI.Event>;
+export type RuleDeleteResponse = Array<Rule>;
 
-export type RuleEditResponse = Array<EventsAPI.Event>;
+export type RuleEditResponse = Array<Rule>;
 
 export interface RuleCreateParams {
   /**
@@ -164,7 +177,31 @@ export interface RuleUpdateParams {
   /**
    * Body param:
    */
-  body: Array<Rule>;
+  body: Array<RuleUpdateParams.Body>;
+}
+
+export namespace RuleUpdateParams {
+  export interface Body {
+    /**
+     * The action to take when the expression matches.
+     */
+    action: 'bypass_waiting_room';
+
+    /**
+     * Criteria defining when there is a match for the current rule.
+     */
+    expression: string;
+
+    /**
+     * The description of the rule.
+     */
+    description?: string;
+
+    /**
+     * When set to true, the rule is enabled.
+     */
+    enabled?: boolean;
+  }
 }
 
 export interface RuleListParams {
@@ -253,11 +290,10 @@ export namespace Rules {
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import RulesSinglePage = RulesAPI.RulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
 }
-
-export { EventsSinglePage };

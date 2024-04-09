@@ -253,6 +253,7 @@ export namespace Packages {
   export import GroupEditParams = GroupsAPI.GroupEditParams;
   export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import Rules = RulesAPI.Rules;
+  export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
   export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;

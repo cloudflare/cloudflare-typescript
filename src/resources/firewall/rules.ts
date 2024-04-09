@@ -4,6 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RulesAPI from 'cloudflare/resources/firewall/rules';
+import * as FiltersAPI from 'cloudflare/resources/filters';
+import * as RateLimitsAPI from 'cloudflare/resources/rate-limits';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
@@ -131,14 +133,14 @@ export interface Rule {
    * The action to apply to a matched request. The `log` action is only available on
    * an Enterprise plan.
    */
-  action?: 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass';
+  action?: RateLimitsAPI.Action;
 
   /**
    * An informative summary of the firewall rule.
    */
   description?: string;
 
-  filter?: Rule.FirewallFilter | DeletedFilter;
+  filter?: FiltersAPI.Filter | DeletedFilter;
 
   /**
    * When true, indicates that the firewall rule is currently paused.
@@ -158,36 +160,6 @@ export interface Rule {
    * A short reference tag. Allows you to select related firewall rules.
    */
   ref?: string;
-}
-
-export namespace Rule {
-  export interface FirewallFilter {
-    /**
-     * The unique identifier of the filter.
-     */
-    id?: string;
-
-    /**
-     * An informative summary of the filter.
-     */
-    description?: string;
-
-    /**
-     * The filter expression. For more information, refer to
-     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-     */
-    expression?: string;
-
-    /**
-     * When true, indicates that the filter is currently paused.
-     */
-    paused?: boolean;
-
-    /**
-     * A short reference tag. Allows you to select related filters.
-     */
-    ref?: string;
-  }
 }
 
 export interface DeletedFilter {
