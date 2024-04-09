@@ -550,19 +550,19 @@ export namespace Cloudflare {
   export import CloudforceOne = API.CloudforceOne;
 
   export import ErrorData = API.ErrorData;
+  export import Identifier = API.Identifier;
+  export import ResponseInfo = API.ResponseInfo;
+  export import Result = API.Result;
   export import UnnamedSchemaRef025497b7e63379c31929636b5186e45c = API.UnnamedSchemaRef025497b7e63379c31929636b5186e45c;
   export import UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9 = API.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9;
   export import UnnamedSchemaRef23001f1f0b697900e282236466a95fa3 = API.UnnamedSchemaRef23001f1f0b697900e282236466a95fa3;
-  export import UnnamedSchemaRef3248f24329456e19dfa042fff9986f72 = API.UnnamedSchemaRef3248f24329456e19dfa042fff9986f72;
   export import UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 = API.UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19;
   export import UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8 = API.UnnamedSchemaRef413ab4522f0bb93f63444799121fe2f8;
-  export import UnnamedSchemaRef5cf232a1d651060af6450ae882932776 = API.UnnamedSchemaRef5cf232a1d651060af6450ae882932776;
   export import UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0 = API.UnnamedSchemaRef602dd5f63eab958d53da61434dec08f0;
   export import UnnamedSchemaRef619309774d07ec6904f1e354560d6028 = API.UnnamedSchemaRef619309774d07ec6904f1e354560d6028;
   export import UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1 = API.UnnamedSchemaRef65e3c8c1a9c4638ec25cdbbaca7165c1;
   export import UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151 = API.UnnamedSchemaRef67bbb1ccdd42c3e2937b9fd19f791151;
   export import UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c = API.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
-  export import UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837 = API.UnnamedSchemaRef8900f4cb9dca9b9ed0ac41ad571e6837;
   export import UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f = API.UnnamedSchemaRef8d6a37a1e4190f86652802244d29525f;
   export import UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a = API.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
   export import UnnamedSchemaRefB0ec5cc02c98b665099a5707a2db4ea6 = API.UnnamedSchemaRefB0ec5cc02c98b665099a5707a2db4ea6;
@@ -570,7 +570,6 @@ export namespace Cloudflare {
   export import UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6 = API.UnnamedSchemaRefB92f86eb861cd3dee83c40884802fda6;
   export import UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854 = API.UnnamedSchemaRefCc2ac1a037e5d6702fc77b3bcb527854;
   export import UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b = API.UnnamedSchemaRefD8600eb4758b3ae35607a0327bcd691b;
-  export import UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b = API.UnnamedSchemaRefE7c61ebe06ebfc3861ae8b9db4ba152b;
   export import UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846 = API.UnnamedSchemaRefEc4d85c3d1bcc6b3b7e99c199ae99846;
   export import UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24 = API.UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24;
 }
