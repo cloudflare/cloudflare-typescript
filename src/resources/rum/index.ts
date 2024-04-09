@@ -2,7 +2,7 @@
 
 export { RUM } from './rum';
 export {
-  Rule,
+  RUMRule,
   RuleListResponse,
   RuleDeleteResponse,
   RuleCreateParams,

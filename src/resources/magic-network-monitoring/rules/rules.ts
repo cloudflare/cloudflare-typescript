@@ -13,11 +13,14 @@ export class Rules extends APIResource {
    * Create network monitoring rules for account. Currently only supports creating a
    * single rule per API request.
    */
-  create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<Rule | null> {
+  create(
+    params: RuleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
-        result: Rule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -25,11 +28,14 @@ export class Rules extends APIResource {
   /**
    * Update network monitoring rules for account.
    */
-  update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Rule | null> {
+  update(
+    params: RuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
-        result: Rule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,9 +46,13 @@ export class Rules extends APIResource {
   list(
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesSinglePage, Rule | null> {
+  ): Core.PagePromise<MagicNetworkMonitoringRulesSinglePage, MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/mnm/rules`, RulesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/mnm/rules`,
+      MagicNetworkMonitoringRulesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -52,45 +62,53 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Rule | null> {
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Rule | null }>
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a network monitoring rule for account.
    */
-  edit(ruleId: string, params: RuleEditParams, options?: Core.RequestOptions): Core.APIPromise<Rule | null> {
+  edit(
+    ruleId: string,
+    params: RuleEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Rule | null }>
+      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List a single network monitoring rule for account.
    */
-  get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<Rule | null> {
+  get(
+    ruleId: string,
+    params: RuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: Rule | null;
+        result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RulesSinglePage extends SinglePage<Rule | null> {}
+export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule | null> {}
 
-export interface Rule {
+export interface MagicNetworkMonitoringRule {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -229,9 +247,9 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import Rule = RulesAPI.Rule;
+  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
   export import UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d = RulesAPI.UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d;
-  export import RulesSinglePage = RulesAPI.RulesSinglePage;
+  export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

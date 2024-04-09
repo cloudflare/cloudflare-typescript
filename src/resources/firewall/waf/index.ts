@@ -3,8 +3,8 @@
 export {
   Override,
   RewriteAction,
-  Rules,
   URLs,
+  WAFRule,
   OverrideDeleteResponse,
   OverrideCreateParams,
   OverrideUpdateParams,

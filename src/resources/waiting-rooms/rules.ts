@@ -49,11 +49,11 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesSinglePage, Rule> {
+  ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
     const { zone_id } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
-      RulesSinglePage,
+      WaitingRoomRulesSinglePage,
       options,
     );
   }
@@ -95,9 +95,11 @@ export class Rules extends APIResource {
   }
 }
 
-export class RulesSinglePage extends SinglePage<Rule> {}
+export class WaitingRoomRulesSinglePage extends SinglePage<WaitingRoomRule> {}
 
-export interface Rule {
+export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<WaitingRoomRule>;
+
+export interface WaitingRoomRule {
   /**
    * The ID of the rule.
    */
@@ -131,15 +133,13 @@ export interface Rule {
   version?: string;
 }
 
-export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<Rule>;
+export type RuleCreateResponse = Array<WaitingRoomRule>;
 
-export type RuleCreateResponse = Array<Rule>;
+export type RuleUpdateResponse = Array<WaitingRoomRule>;
 
-export type RuleUpdateResponse = Array<Rule>;
+export type RuleDeleteResponse = Array<WaitingRoomRule>;
 
-export type RuleDeleteResponse = Array<Rule>;
-
-export type RuleEditResponse = Array<Rule>;
+export type RuleEditResponse = Array<WaitingRoomRule>;
 
 export interface RuleCreateParams {
   /**
@@ -284,13 +284,13 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
-  export import Rule = RulesAPI.Rule;
   export import UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = RulesAPI.UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430;
+  export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RulesSinglePage = RulesAPI.RulesSinglePage;
+  export import WaitingRoomRulesSinglePage = RulesAPI.WaitingRoomRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

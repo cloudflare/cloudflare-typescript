@@ -2,13 +2,13 @@
 
 export {
   AllowedModesAnomaly,
-  Rule,
   UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5,
+  RuleListResponse,
   RuleEditResponse,
   RuleListParams,
   RuleEditParams,
   RuleGetParams,
-  RulesV4PagePaginationArray,
+  RuleListResponsesV4PagePaginationArray,
   Rules,
 } from './rules';
 export {

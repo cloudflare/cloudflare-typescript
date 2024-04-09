@@ -10,11 +10,11 @@ export class Rules extends APIResource {
   /**
    * Creates a new Zero Trust Gateway rule.
    */
-  create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<Rule> {
+  create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/gateway/rules`, { body, ...options }) as Core.APIPromise<{
-        result: Rule;
+        result: GatewayRule;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -22,22 +22,29 @@ export class Rules extends APIResource {
   /**
    * Updates a configured Zero Trust Gateway rule.
    */
-  update(ruleId: string, params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Rule> {
+  update(
+    ruleId: string,
+    params: RuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Rule }>
+      }) as Core.APIPromise<{ result: GatewayRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the Zero Trust Gateway rules for an account.
    */
-  list(params: RuleListParams, options?: Core.RequestOptions): Core.PagePromise<RulesSinglePage, Rule> {
+  list(
+    params: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/gateway/rules`, RulesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/gateway/rules`, GatewayRulesSinglePage, options);
   }
 
   /**
@@ -60,17 +67,17 @@ export class Rules extends APIResource {
   /**
    * Fetches a single Zero Trust Gateway rule.
    */
-  get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<Rule> {
+  get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: Rule;
+        result: GatewayRule;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RulesSinglePage extends SinglePage<Rule> {}
+export class GatewayRulesSinglePage extends SinglePage<GatewayRule> {}
 
 export interface DNSResolverSettingsV4 {
   /**
@@ -125,7 +132,7 @@ export interface DNSResolverSettingsV6 {
  */
 export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress';
 
-export interface Rule {
+export interface GatewayRule {
   /**
    * The API resource UUID.
    */
@@ -738,10 +745,10 @@ export namespace Rules {
   export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
   export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
   export import GatewayFilter = RulesAPI.GatewayFilter;
-  export import Rule = RulesAPI.Rule;
+  export import GatewayRule = RulesAPI.GatewayRule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;
-  export import RulesSinglePage = RulesAPI.RulesSinglePage;
+  export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

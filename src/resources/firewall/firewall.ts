@@ -29,12 +29,12 @@ export namespace Firewall {
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
   export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
   export import Rules = RulesAPI.Rules;
+  export import FirewallRule = RulesAPI.FirewallRule;
   export import Products = RulesAPI.Products;
-  export import Rule = RulesAPI.Rule;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RulesV4PagePaginationArray = RulesAPI.RulesV4PagePaginationArray;
+  export import FirewallRulesV4PagePaginationArray = RulesAPI.FirewallRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
