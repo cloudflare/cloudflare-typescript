@@ -2,13 +2,7 @@
 
 export { ASN, ASNGetParams, ASNResource } from './asn/index';
 export { AttackSurfaceReport } from './attack-surface-report/index';
-export {
-  DNS,
-  UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050,
-  DNSListResponse,
-  DNSListParams,
-  DNSListResponsesV4PagePagination,
-} from './dns';
+export { DNS, DNSListResponse, DNSListParams, DNSListResponsesV4PagePagination } from './dns';
 export { Domain, DomainGetParams, Domains } from './domains/index';
 export {
   DomainHistory,

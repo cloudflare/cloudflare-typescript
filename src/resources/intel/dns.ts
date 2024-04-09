@@ -43,24 +43,26 @@ export interface DNS {
   /**
    * Reverse DNS look-ups observed during the time period.
    */
-  reverse_records?: Array<UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050>;
+  reverse_records?: Array<DNS.ReverseRecord>;
 }
 
-export interface UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 {
-  /**
-   * First seen date of the DNS record during the time period.
-   */
-  first_seen?: string;
+export namespace DNS {
+  export interface ReverseRecord {
+    /**
+     * First seen date of the DNS record during the time period.
+     */
+    first_seen?: string;
 
-  /**
-   * Hostname that the IP was observed resolving to.
-   */
-  hostname?: unknown;
+    /**
+     * Hostname that the IP was observed resolving to.
+     */
+    hostname?: unknown;
 
-  /**
-   * Last seen date of the DNS record during the time period.
-   */
-  last_seen?: string;
+    /**
+     * Last seen date of the DNS record during the time period.
+     */
+    last_seen?: string;
+  }
 }
 
 export interface DNSListResponse {
@@ -109,7 +111,6 @@ export namespace DNSListParams {
 
 export namespace DNS {
   export import DNS = DNSAPI.DNS;
-  export import UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050 = DNSAPI.UnnamedSchemaRefB5e16cee4f32382c294201aedb9fc050;
   export import DNSListResponse = DNSAPI.DNSListResponse;
   export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
   export import DNSListParams = DNSAPI.DNSListParams;
