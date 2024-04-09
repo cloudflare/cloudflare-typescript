@@ -8,7 +8,7 @@ export {
 } from './audit-logs';
 export { Billing } from './billing/index';
 export {
-  CIDRListItem,
+  CIDRList,
   Policy,
   TokenCreateResponse,
   TokenListResponse,
@@ -21,9 +21,7 @@ export {
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
-export { Firewall } from './firewall/index';
 export { Invite, InviteEditParams, InvitesSinglePage, Invites } from './invites';
-export { LoadBalancing } from './load-balancing/index';
 export {
   Organization,
   OrganizationDeleteResponse,

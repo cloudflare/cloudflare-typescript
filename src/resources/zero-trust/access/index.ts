@@ -46,7 +46,7 @@ export {
   Applications,
 } from './applications/index';
 export {
-  AssociatedHostnamesItem,
+  AssociatedHostnames,
   Certificate,
   CertificateDeleteResponse,
   CertificateCreateParams,

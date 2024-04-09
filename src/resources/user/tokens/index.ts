@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  CIDRListItem,
+  CIDRList,
   Policy,
   TokenCreateResponse,
   TokenListResponse,
@@ -16,7 +16,6 @@ export {
 } from './tokens';
 export {
   Permission,
-  PermissionItem,
   PermissionGroupListResponse,
   PermissionGroupListResponsesSinglePage,
   PermissionGroups,

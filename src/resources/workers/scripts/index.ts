@@ -2,7 +2,6 @@
 
 export {
   ConsumerScript,
-  ConsumerScriptItem,
   TailCreateResponse,
   TailDeleteResponse,
   TailGetResponse,

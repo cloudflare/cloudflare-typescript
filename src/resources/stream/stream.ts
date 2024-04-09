@@ -101,7 +101,7 @@ export class Stream extends APIResource {
 
 export class VideosSinglePage extends SinglePage<Video> {}
 
-export type AllowedOriginsItem = string;
+export type AllowedOrigins = string;
 
 export interface Video {
   /**
@@ -109,7 +109,7 @@ export interface Video {
    * an array and use `*` for wildcard subdomains. Empty arrays allow the video to be
    * viewed on any origin.
    */
-  allowedOrigins?: Array<AllowedOriginsItem>;
+  allowedOrigins?: Array<AllowedOrigins>;
 
   /**
    * The date and time the media item was created.

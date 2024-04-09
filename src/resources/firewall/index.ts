@@ -21,7 +21,7 @@ export {
   Lockdown,
   LockdownCIDRConfiguration,
   LockdownIPConfiguration,
-  URLsItem,
+  URLs,
   LockdownDeleteResponse,
   LockdownCreateParams,
   LockdownUpdateParams,
@@ -32,7 +32,7 @@ export {
 } from './lockdowns';
 export { Firewall } from './firewall';
 export {
-  ProductsItem,
+  Products,
   Rule,
   DeletedFilter,
   RuleCreateResponse,

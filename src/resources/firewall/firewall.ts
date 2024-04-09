@@ -21,7 +21,7 @@ export namespace Firewall {
   export import Lockdown = LockdownsAPI.Lockdown;
   export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
   export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
-  export import URLsItem = LockdownsAPI.URLsItem;
+  export import URLs = LockdownsAPI.URLs;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
@@ -29,7 +29,7 @@ export namespace Firewall {
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
   export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
   export import Rules = RulesAPI.Rules;
-  export import ProductsItem = RulesAPI.ProductsItem;
+  export import Products = RulesAPI.Products;
   export import Rule = RulesAPI.Rule;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;

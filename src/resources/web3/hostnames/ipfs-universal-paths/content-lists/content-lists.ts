@@ -58,14 +58,13 @@ export interface ContentListUpdateParams {
   /**
    * Content list entries.
    */
-  entries: Array<EntriesAPI.ContentListItem>;
+  entries: Array<EntriesAPI.ContentList>;
 }
 
 export namespace ContentLists {
   export import ContentList = ContentListsAPI.ContentList;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
-  export import ContentListItem = EntriesAPI.ContentListItem;
   export import UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86 = EntriesAPI.UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86;
   export import EntryListResponse = EntriesAPI.EntryListResponse;
   export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;

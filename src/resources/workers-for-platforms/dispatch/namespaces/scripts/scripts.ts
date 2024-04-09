@@ -177,7 +177,7 @@ export namespace ScriptUpdateParams {
       /**
        * List of Workers that will consume logs from the attached Worker.
        */
-      tail_consumers?: Array<TailAPI.ConsumerScriptItem>;
+      tail_consumers?: Array<TailAPI.ConsumerScript>;
 
       /**
        * Usage model to apply to invocations.

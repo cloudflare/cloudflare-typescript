@@ -2,7 +2,7 @@
 
 export { AnalyzeCreateParams, Analyze } from './analyze';
 export {
-  HostItem,
+  Host,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
   CertificatePackEditResponse,

@@ -10,10 +10,10 @@ export class Events extends APIResource {
   summaries: SummariesAPI.Summaries = new SummariesAPI.Summaries(this._client);
 }
 
-export type DimensionItem = 'event' | 'appID' | 'coloName' | 'ipVersion';
+export type Dimension = 'event' | 'appID' | 'coloName' | 'ipVersion';
 
 export namespace Events {
-  export import DimensionItem = EventsAPI.DimensionItem;
+  export import Dimension = EventsAPI.Dimension;
   export import Bytimes = BytimesAPI.Bytimes;
   export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
   export import BytimeGetParams = BytimesAPI.BytimeGetParams;

@@ -133,22 +133,6 @@ Methods:
 
 - <code title="get /user/billing/profile">client.user.billing.profile.<a href="./src/resources/user/billing/profile.ts">get</a>() -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 
-## Firewall
-
-### AccessRules
-
-Types:
-
-- <code><a href="./src/resources/user/firewall/access-rules.ts">FirewallRule</a></code>
-- <code><a href="./src/resources/user/firewall/access-rules.ts">AccessRuleDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /user/firewall/access_rules/rules">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">create</a>({ ...params }) -> FirewallRule</code>
-- <code title="get /user/firewall/access_rules/rules">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">list</a>({ ...params }) -> FirewallRulesV4PagePaginationArray</code>
-- <code title="delete /user/firewall/access_rules/rules/{identifier}">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">delete</a>(identifier, { ...params }) -> AccessRuleDeleteResponse</code>
-- <code title="patch /user/firewall/access_rules/rules/{identifier}">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">edit</a>(identifier, { ...params }) -> FirewallRule</code>
-
 ## Invites
 
 Types:
@@ -160,75 +144,6 @@ Methods:
 - <code title="get /user/invites">client.user.invites.<a href="./src/resources/user/invites.ts">list</a>() -> InvitesSinglePage</code>
 - <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 - <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-
-## LoadBalancing
-
-### Monitors
-
-Types:
-
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorCreateResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorUpdateResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorListResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorDeleteResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorEditResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorGetResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorPreviewResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/monitors.ts">MonitorReferencesResponse</a></code>
-
-Methods:
-
-- <code title="post /user/load_balancers/monitors">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">create</a>({ ...params }) -> MonitorCreateResponse</code>
-- <code title="put /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">update</a>(monitorId, { ...params }) -> MonitorUpdateResponse</code>
-- <code title="get /user/load_balancers/monitors">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">list</a>() -> MonitorListResponsesSinglePage</code>
-- <code title="delete /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">delete</a>(monitorId, { ...params }) -> MonitorDeleteResponse</code>
-- <code title="patch /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">edit</a>(monitorId, { ...params }) -> MonitorEditResponse</code>
-- <code title="get /user/load_balancers/monitors/{monitor_id}">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">get</a>(monitorId) -> MonitorGetResponse</code>
-- <code title="post /user/load_balancers/monitors/{monitor_id}/preview">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">preview</a>(monitorId, { ...params }) -> MonitorPreviewResponse</code>
-- <code title="get /user/load_balancers/monitors/{monitor_id}/references">client.user.loadBalancing.monitors.<a href="./src/resources/user/load-balancing/monitors.ts">references</a>(monitorId) -> MonitorReferencesResponse | null</code>
-
-### Pools
-
-Types:
-
-- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolDeleteResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolHealthResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolPreviewResponse</a></code>
-- <code><a href="./src/resources/user/load-balancing/pools.ts">PoolReferencesResponse</a></code>
-
-Methods:
-
-- <code title="post /user/load_balancers/pools">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">create</a>({ ...params }) -> Pool</code>
-- <code title="put /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">update</a>(poolId, { ...params }) -> Pool</code>
-- <code title="get /user/load_balancers/pools">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">list</a>({ ...params }) -> PoolsSinglePage</code>
-- <code title="delete /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">delete</a>(poolId, { ...params }) -> PoolDeleteResponse</code>
-- <code title="patch /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">edit</a>(poolId, { ...params }) -> Pool</code>
-- <code title="get /user/load_balancers/pools/{pool_id}">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">get</a>(poolId) -> Pool</code>
-- <code title="get /user/load_balancers/pools/{pool_id}/health">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">health</a>(poolId) -> PoolHealthResponse</code>
-- <code title="post /user/load_balancers/pools/{pool_id}/preview">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">preview</a>(poolId, { ...params }) -> PoolPreviewResponse</code>
-- <code title="get /user/load_balancers/pools/{pool_id}/references">client.user.loadBalancing.pools.<a href="./src/resources/user/load-balancing/pools.ts">references</a>(poolId) -> PoolReferencesResponse | null</code>
-
-### Preview
-
-Types:
-
-- <code><a href="./src/resources/user/load-balancing/preview.ts">PreviewGetResponse</a></code>
-
-Methods:
-
-- <code title="get /user/load_balancers/preview/{preview_id}">client.user.loadBalancing.preview.<a href="./src/resources/user/load-balancing/preview.ts">get</a>(previewId) -> PreviewGetResponse</code>
-
-### Analytics
-
-Types:
-
-- <code><a href="./src/resources/user/load-balancing/analytics/analytics.ts">Analytics</a></code>
-
-#### Events
-
-Methods:
-
-- <code title="get /user/load_balancing_analytics/events">client.user.loadBalancing.analytics.events.<a href="./src/resources/user/load-balancing/analytics/events.ts">list</a>({ ...params }) -> AnalyticsSinglePage</code>
 
 ## Organizations
 
@@ -262,7 +177,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/tokens/tokens.ts">CIDRListItem</a></code>
+- <code><a href="./src/resources/user/tokens/tokens.ts">CIDRList</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">Policy</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenListResponse</a></code>
@@ -283,7 +198,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/user/tokens/permission-groups.ts">Permission</a></code>
-- <code><a href="./src/resources/user/tokens/permission-groups.ts">PermissionItem</a></code>
 - <code><a href="./src/resources/user/tokens/permission-groups.ts">PermissionGroupListResponse</a></code>
 
 Methods:
@@ -939,10 +853,10 @@ Types:
 
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">AdaptiveRouting</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">CheckRegion</a></code>
-- <code><a href="./src/resources/load-balancers/load-balancers.ts">DefaultPoolsItem</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">DefaultPools</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">FilterOptions</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">Header</a></code>
-- <code><a href="./src/resources/load-balancers/load-balancers.ts">HostItem</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">Host</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadBalancer</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadShedding</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">LocationStrategy</a></code>
@@ -950,7 +864,7 @@ Types:
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">Origin</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">OriginSteering</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">RandomSteering</a></code>
-- <code><a href="./src/resources/load-balancers/load-balancers.ts">RulesItem</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">Rules</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">SessionAffinityAttributes</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadBalancerDeleteResponse</a></code>
 
@@ -1148,7 +1062,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">HostItem</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackEditResponse</a></code>
@@ -1289,7 +1203,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationItem</a></code>
+- <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociation</a></code>
 - <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">TLSHostnameAssociation</a></code>
 - <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationUpdateResponse</a></code>
 - <code><a href="./src/resources/certificate-authorities/hostname-associations.ts">HostnameAssociationGetResponse</a></code>
@@ -1411,7 +1325,7 @@ Types:
 - <code><a href="./src/resources/dns/records.ts">NSRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">PTRRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">Record</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordTagsItem</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordTags</a></code>
 - <code><a href="./src/resources/dns/records.ts">SMIMEARecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">SRVRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">SSHFPRecord</a></code>
@@ -1468,7 +1382,7 @@ Types:
 
 - <code><a href="./src/resources/dns/firewall/firewall.ts">AttackMitigation</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">Firewall</a></code>
-- <code><a href="./src/resources/dns/firewall/firewall.ts">FirewallIPsItem</a></code>
+- <code><a href="./src/resources/dns/firewall/firewall.ts">FirewallIPs</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">UpstreamIPs</a></code>
 - <code><a href="./src/resources/dns/firewall/firewall.ts">FirewallDeleteResponse</a></code>
 
@@ -1598,7 +1512,7 @@ Types:
 - <code><a href="./src/resources/firewall/lockdowns.ts">Lockdown</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownCIDRConfiguration</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownIPConfiguration</a></code>
-- <code><a href="./src/resources/firewall/lockdowns.ts">URLsItem</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">URLs</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownDeleteResponse</a></code>
 
 Methods:
@@ -1613,7 +1527,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/firewall/rules.ts">ProductsItem</a></code>
+- <code><a href="./src/resources/firewall/rules.ts">Products</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">Rule</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">DeletedFilter</a></code>
 - <code><a href="./src/resources/firewall/rules.ts">RuleCreateResponse</a></code>
@@ -2121,7 +2035,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">AdditionalRoutesItem</a></code>
+- <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">AdditionalRoutes</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">CookieAttributes</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">Query</a></code>
 - <code><a href="./src/resources/waiting-rooms/waiting-rooms.ts">WaitingRoom</a></code>
@@ -2253,18 +2167,18 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">ContentListItem</a></code>
+- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">ContentList</a></code>
 - <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86</a></code>
 - <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryListResponse</a></code>
 - <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">create</a>(zoneIdentifier, identifier, { ...params }) -> ContentListItem</code>
-- <code title="put /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">update</a>(zoneIdentifier, identifier, contentListEntryIdentifier, { ...params }) -> ContentListItem</code>
+- <code title="post /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">create</a>(zoneIdentifier, identifier, { ...params }) -> ContentList</code>
+- <code title="put /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">update</a>(zoneIdentifier, identifier, contentListEntryIdentifier, { ...params }) -> ContentList</code>
 - <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">list</a>(zoneIdentifier, identifier) -> EntryListResponse | null</code>
 - <code title="delete /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">delete</a>(zoneIdentifier, identifier, contentListEntryIdentifier, { ...params }) -> EntryDeleteResponse | null</code>
-- <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">get</a>(zoneIdentifier, identifier, contentListEntryIdentifier) -> ContentListItem</code>
+- <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">get</a>(zoneIdentifier, identifier, contentListEntryIdentifier) -> ContentList</code>
 
 # Workers
 
@@ -2325,7 +2239,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/workers/scripts/tail.ts">ConsumerScript</a></code>
-- <code><a href="./src/resources/workers/scripts/tail.ts">ConsumerScriptItem</a></code>
 - <code><a href="./src/resources/workers/scripts/tail.ts">TailCreateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/tail.ts">TailDeleteResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/tail.ts">TailGetResponse</a></code>
@@ -2732,7 +2645,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/spectrum/analytics/events/events.ts">DimensionItem</a></code>
+- <code><a href="./src/resources/spectrum/analytics/events/events.ts">Dimension</a></code>
 
 #### Bytimes
 
@@ -3203,11 +3116,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/intel/sinkholes.ts">SinkholeItem</a></code>
+- <code><a href="./src/resources/intel/sinkholes.ts">Sinkhole</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>({ ...params }) -> SinkholeItemsSinglePage</code>
+- <code title="get /accounts/{account_id}/intel/sinkholes">client.intel.sinkholes.<a href="./src/resources/intel/sinkholes.ts">list</a>({ ...params }) -> SinkholesSinglePage</code>
 
 ## AttackSurfaceReport
 
@@ -3615,7 +3528,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/request-tracers/traces.ts">Trace</a></code>
-- <code><a href="./src/resources/request-tracers/traces.ts">TraceItem</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
 
 Methods:
@@ -3692,7 +3604,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/stream/stream.ts">AllowedOriginsItem</a></code>
+- <code><a href="./src/resources/stream/stream.ts">AllowedOrigins</a></code>
 - <code><a href="./src/resources/stream/stream.ts">Video</a></code>
 
 Methods:
@@ -4202,7 +4114,7 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DevicePostureRule</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">Input</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">MatchItem</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">Match</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef41885dd46b9e0294254c49305a273681</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27</a></code>
@@ -4405,7 +4317,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">AssociatedHostnamesItem</a></code>
+- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">AssociatedHostnames</a></code>
 - <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">Certificate</a></code>
 - <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">CertificateDeleteResponse</a></code>
 
@@ -4940,7 +4852,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/gateway/lists/items.ts">ListsItem</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/lists/items.ts">Lists</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/items.ts">ItemListResponse</a></code>
 
 Methods:
@@ -4979,7 +4891,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">GatewayIPsItem</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">GatewayIPs</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpoint</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">UnnamedSchemaRef4753ee81779d0e57189420079abab61e</a></code>
 
@@ -5065,13 +4977,13 @@ Types:
 
 - <code><a href="./src/resources/challenges/widgets.ts">Widget</a></code>
 - <code><a href="./src/resources/challenges/widgets.ts">WidgetDomain</a></code>
-- <code><a href="./src/resources/challenges/widgets.ts">WidgetDomainItem</a></code>
+- <code><a href="./src/resources/challenges/widgets.ts">WidgetListResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">create</a>({ ...params }) -> Widget</code>
 - <code title="put /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">update</a>(sitekey, { ...params }) -> Widget</code>
-- <code title="get /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">list</a>({ ...params }) -> WidgetDomainsV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">list</a>({ ...params }) -> WidgetListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">delete</a>(sitekey, { ...params }) -> Widget</code>
 - <code title="get /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">get</a>(sitekey, { ...params }) -> Widget</code>
 - <code title="post /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">rotateSecret</a>(sitekey, { ...params }) -> Widget</code>
@@ -6261,7 +6173,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">Item</a></code>
-- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">ListItem</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/requests.ts">List</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">Quota</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestConstants</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/requests.ts">RequestTypes</a></code>
@@ -6271,7 +6183,7 @@ Methods:
 
 - <code title="post /accounts/{account_identifier}/cloudforce-one/requests/new">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">create</a>(accountIdentifier, { ...params }) -> Item</code>
 - <code title="put /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">update</a>(accountIdentifier, requestIdentifier, { ...params }) -> Item</code>
-- <code title="post /accounts/{account_identifier}/cloudforce-one/requests">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">list</a>(accountIdentifier, { ...params }) -> ListItemsV4PagePaginationArray</code>
+- <code title="post /accounts/{account_identifier}/cloudforce-one/requests">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">list</a>(accountIdentifier, { ...params }) -> ListsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">delete</a>(accountIdentifier, requestIdentifier) -> RequestDeleteResponse</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/constants">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">constants</a>(accountIdentifier) -> RequestConstants</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}">client.cloudforceOne.requests.<a href="./src/resources/cloudforce-one/requests/requests.ts">get</a>(accountIdentifier, requestIdentifier) -> Item</code>
@@ -6297,7 +6209,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">LabelItem</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/priority.ts">Label</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">Priority</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityEdit</a></code>
 - <code><a href="./src/resources/cloudforce-one/requests/priority.ts">PriorityDeleteResponse</a></code>

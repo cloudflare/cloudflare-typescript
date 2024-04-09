@@ -98,7 +98,7 @@ export namespace DNS {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
-  export import RecordTagsItem = RecordsAPI.RecordTagsItem;
+  export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;
   export import SRVRecord = RecordsAPI.SRVRecord;
   export import SSHFPRecord = RecordsAPI.SSHFPRecord;
@@ -128,7 +128,7 @@ export namespace DNS {
   export import FirewallResource = FirewallAPI.FirewallResource;
   export import AttackMitigation = FirewallAPI.AttackMitigation;
   export import Firewall = FirewallAPI.Firewall;
-  export import FirewallIPsItem = FirewallAPI.FirewallIPsItem;
+  export import FirewallIPs = FirewallAPI.FirewallIPs;
   export import UpstreamIPs = FirewallAPI.UpstreamIPs;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
   export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;

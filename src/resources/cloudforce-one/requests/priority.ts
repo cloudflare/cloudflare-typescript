@@ -84,7 +84,7 @@ export class PriorityResource extends APIResource {
   }
 }
 
-export type LabelItem = string;
+export type Label = string;
 
 export interface Priority {
   /**
@@ -100,7 +100,7 @@ export interface Priority {
   /**
    * List of labels
    */
-  labels: Array<LabelItem>;
+  labels: Array<Label>;
 
   /**
    * Priority
@@ -127,7 +127,7 @@ export interface PriorityEdit {
   /**
    * List of labels
    */
-  labels: Array<LabelItem>;
+  labels: Array<Label>;
 
   /**
    * Priority
@@ -151,7 +151,7 @@ export interface PriorityCreateParams {
   /**
    * List of labels
    */
-  labels: Array<LabelItem>;
+  labels: Array<Label>;
 
   /**
    * Priority
@@ -173,7 +173,7 @@ export interface PriorityUpdateParams {
   /**
    * List of labels
    */
-  labels: Array<LabelItem>;
+  labels: Array<Label>;
 
   /**
    * Priority
@@ -192,7 +192,7 @@ export interface PriorityUpdateParams {
 }
 
 export namespace PriorityResource {
-  export import LabelItem = PriorityAPI.LabelItem;
+  export import Label = PriorityAPI.Label;
   export import Priority = PriorityAPI.Priority;
   export import PriorityEdit = PriorityAPI.PriorityEdit;
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;

@@ -4,7 +4,7 @@ export { Analytics } from './analytics/index';
 export {
   AttackMitigation,
   Firewall,
-  FirewallIPsItem,
+  FirewallIPs,
   UpstreamIPs,
   FirewallDeleteResponse,
   FirewallCreateParams,

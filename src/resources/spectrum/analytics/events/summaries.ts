@@ -46,7 +46,7 @@ export interface SummaryGetParams {
    * | coloName  | Colo Name                     | SFO                                                        |
    * | ipVersion | IP version used by the client | 4, 6.                                                      |
    */
-  dimensions?: Array<EventsAPI.DimensionItem>;
+  dimensions?: Array<EventsAPI.Dimension>;
 
   /**
    * Used to filter rows by one or more dimensions. Filters can be combined using OR
