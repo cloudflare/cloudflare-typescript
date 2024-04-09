@@ -21,7 +21,7 @@ export {
   Lockdown,
   LockdownCIDRConfiguration,
   LockdownIPConfiguration,
-  URLs,
+  LockdownURL,
   LockdownDeleteResponse,
   LockdownCreateParams,
   LockdownUpdateParams,

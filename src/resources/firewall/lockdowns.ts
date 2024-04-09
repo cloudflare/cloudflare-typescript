@@ -144,7 +144,7 @@ export interface Lockdown {
    * URL will be escaped before use, which means you can only use simple wildcard
    * patterns.
    */
-  urls: Array<URLs>;
+  urls: Array<LockdownURL>;
 }
 
 export interface LockdownCIDRConfiguration {
@@ -174,7 +174,7 @@ export interface LockdownIPConfiguration {
   value?: string;
 }
 
-export type URLs = string;
+export type LockdownURL = string;
 
 export interface LockdownDeleteResponse {
   /**
@@ -243,7 +243,7 @@ export namespace Lockdowns {
   export import Lockdown = LockdownsAPI.Lockdown;
   export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
   export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
-  export import URLs = LockdownsAPI.URLs;
+  export import LockdownURL = LockdownsAPI.LockdownURL;
   export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
