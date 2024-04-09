@@ -4,8 +4,8 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TldsAPI from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
-import * as Shared from 'cloudflare/resources/shared';
 import * as RadarAPI from 'cloudflare/resources/radar/radar';
+import * as TopAPI from 'cloudflare/resources/radar/http/top';
 import * as MaliciousAPI from 'cloudflare/resources/radar/email/security/top/tlds/malicious';
 import * as SpamAPI from 'cloudflare/resources/radar/email/security/top/tlds/spam';
 import * as SpoofAPI from 'cloudflare/resources/radar/email/security/top/tlds/spoof';
@@ -39,7 +39,7 @@ export class Tlds extends APIResource {
 export interface TldGetResponse {
   meta: TldGetResponse.Meta;
 
-  top_0: Array<Shared.UnnamedSchemaRef2173d81a0b2d332c9e2ac46900fe8bb9>;
+  top_0: Array<TopAPI.Browser>;
 }
 
 export namespace TldGetResponse {

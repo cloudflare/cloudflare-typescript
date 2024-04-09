@@ -2,7 +2,6 @@
 
 export {
   ACL,
-  UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd,
   ACLDeleteResponse,
   ACLCreateParams,
   ACLUpdateParams,
@@ -47,7 +46,6 @@ export {
 export { SecondaryDNS } from './secondary-dns';
 export {
   TSIG,
-  UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738,
   TSIGDeleteResponse,
   TSIGCreateParams,
   TSIGUpdateParams,

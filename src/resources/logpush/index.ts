@@ -4,6 +4,7 @@ export { Datasets } from './datasets/index';
 export { InstantLogpushJob, EdgeGetResponse, EdgeCreateParams, EdgeGetParams, Edge } from './edge';
 export { Logpush } from './logpush';
 export {
+  OwnershipValidation,
   OwnershipCreateResponse,
   OwnershipCreateParams,
   OwnershipValidateParams,

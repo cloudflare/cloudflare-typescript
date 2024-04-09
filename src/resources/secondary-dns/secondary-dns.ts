@@ -50,7 +50,6 @@ export namespace SecondaryDNS {
   export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import ACLs = ACLsAPI.ACLs;
   export import ACL = ACLsAPI.ACL;
-  export import UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd = ACLsAPI.UnnamedSchemaRef08eaa2f22bb9ce0f80063d710d4edafd;
   export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
@@ -70,7 +69,6 @@ export namespace SecondaryDNS {
   export import PeerGetParams = PeersAPI.PeerGetParams;
   export import TSIGs = TSIGsAPI.TSIGs;
   export import TSIG = TSIGsAPI.TSIG;
-  export import UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738 = TSIGsAPI.UnnamedSchemaRefC3d6ffaf5dde0c570eaa72462c2ee738;
   export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
   export import TSIGsSinglePage = TSIGsAPI.TSIGsSinglePage;
   export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;

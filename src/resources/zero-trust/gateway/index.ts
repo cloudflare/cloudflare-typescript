@@ -30,7 +30,6 @@ export {
   Rule,
   RuleSetting,
   Schedule,
-  UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
@@ -66,7 +65,6 @@ export {
 } from './audit-ssh-settings';
 export {
   Lists,
-  UnnamedSchemaRef30ecd0f5ce68fc07dbb7760deda3d707,
   ListCreateResponse,
   ListCreateParams,
   ListUpdateParams,

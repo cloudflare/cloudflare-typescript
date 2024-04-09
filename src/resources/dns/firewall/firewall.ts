@@ -172,69 +172,6 @@ export interface Firewall {
  */
 export type FirewallIPsItem = string | string;
 
-export interface UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  /**
-   * Deprecate the response to ANY requests.
-   */
-  deprecate_any_requests: boolean;
-
-  dns_firewall_ips: Array<FirewallIPsItem>;
-
-  /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
-   */
-  ecs_fallback: boolean;
-
-  /**
-   * Maximum DNS Cache TTL.
-   */
-  maximum_cache_ttl: number;
-
-  /**
-   * Minimum DNS Cache TTL.
-   */
-  minimum_cache_ttl: number;
-
-  /**
-   * Last modification of DNS Firewall cluster.
-   */
-  modified_on: string;
-
-  /**
-   * DNS Firewall Cluster Name.
-   */
-  name: string;
-
-  upstream_ips: Array<UpstreamIPs>;
-
-  /**
-   * Attack mitigation settings.
-   */
-  attack_mitigation?: AttackMitigation | null;
-
-  /**
-   * Negative DNS Cache TTL.
-   */
-  negative_cache_ttl?: number | null;
-
-  /**
-   * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
-   */
-  ratelimit?: number | null;
-
-  /**
-   * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
-   */
-  retries?: number;
-}
-
 /**
  * Upstream DNS Server IPv4 Address.
  */
@@ -402,7 +339,6 @@ export namespace FirewallResource {
   export import AttackMitigation = FirewallAPI.AttackMitigation;
   export import Firewall = FirewallAPI.Firewall;
   export import FirewallIPsItem = FirewallAPI.FirewallIPsItem;
-  export import UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955 = FirewallAPI.UnnamedSchemaRef7a0f93d9e1afc3221d2a57b7bab16955;
   export import UpstreamIPs = FirewallAPI.UpstreamIPs;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
   export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;

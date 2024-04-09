@@ -328,7 +328,7 @@ export namespace Scripts {
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import Deployments = DeploymentsAPI.Deployments;
-  export import UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8 = DeploymentsAPI.UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8;
+  export import Deployment = DeploymentsAPI.Deployment;
   export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
   export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;

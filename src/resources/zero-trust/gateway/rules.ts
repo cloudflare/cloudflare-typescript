@@ -550,97 +550,6 @@ export interface Schedule {
   wed?: string;
 }
 
-export interface UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a {
-  /**
-   * The API resource UUID.
-   */
-  id?: string;
-
-  /**
-   * The action to preform when the associated traffic, identity, and device posture
-   * expressions are either absent or evaluate to `true`.
-   */
-  action?:
-    | 'on'
-    | 'off'
-    | 'allow'
-    | 'block'
-    | 'scan'
-    | 'noscan'
-    | 'safesearch'
-    | 'ytrestricted'
-    | 'isolate'
-    | 'noisolate'
-    | 'override'
-    | 'l4_override'
-    | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
-
-  created_at?: string;
-
-  /**
-   * Date of deletion, if any.
-   */
-  deleted_at?: string | null;
-
-  /**
-   * The description of the rule.
-   */
-  description?: string;
-
-  /**
-   * The wirefilter expression used for device posture check matching.
-   */
-  device_posture?: string;
-
-  /**
-   * True if the rule is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * The protocol or layer to evaluate the traffic, identity, and device posture
-   * expressions.
-   */
-  filters?: Array<GatewayFilter>;
-
-  /**
-   * The wirefilter expression used for identity matching.
-   */
-  identity?: string;
-
-  /**
-   * The name of the rule.
-   */
-  name?: string;
-
-  /**
-   * Precedence sets the order of your rules. Lower values indicate higher
-   * precedence. At each processing phase, applicable rules are evaluated in
-   * ascending order of this value.
-   */
-  precedence?: number;
-
-  /**
-   * Additional settings that modify the rule's action.
-   */
-  rule_settings?: RuleSetting;
-
-  /**
-   * The schedule for activating DNS policies. This does not apply to HTTP or network
-   * policies.
-   */
-  schedule?: Schedule;
-
-  /**
-   * The wirefilter expression used for traffic matching.
-   */
-  traffic?: string;
-
-  updated_at?: string;
-}
-
 export interface RuleCreateParams {
   /**
    * Path param:
@@ -832,7 +741,6 @@ export namespace Rules {
   export import Rule = RulesAPI.Rule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;
-  export import UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a = RulesAPI.UnnamedSchemaRef0b0764cdb06aad66b555fd74c8c78b2a;
   export import RulesSinglePage = RulesAPI.RulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;

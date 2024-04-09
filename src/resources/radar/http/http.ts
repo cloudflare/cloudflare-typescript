@@ -19,6 +19,7 @@ export class HTTP extends APIResource {
 
 export namespace HTTP {
   export import Top = TopAPI.Top;
+  export import Browser = TopAPI.Browser;
   export import TopBrowserFamiliesResponse = TopAPI.TopBrowserFamiliesResponse;
   export import TopBrowsersResponse = TopAPI.TopBrowsersResponse;
   export import TopBrowserFamiliesParams = TopAPI.TopBrowserFamiliesParams;

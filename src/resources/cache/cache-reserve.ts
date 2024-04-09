@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
 
-export class CacheReserve extends APIResource {
+export class CacheReserveResource extends APIResource {
   /**
    * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
    * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
@@ -86,12 +86,12 @@ export class CacheReserve extends APIResource {
 /**
  * ID of the zone setting.
  */
-export type UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = 'cache_reserve_clear';
+export type CacheReserve = 'cache_reserve';
 
 /**
  * ID of the zone setting.
  */
-export type UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad = 'cache_reserve';
+export type UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = 'cache_reserve_clear';
 
 /**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
@@ -138,7 +138,7 @@ export interface CacheReserveEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
+  id: CacheReserve;
 
   /**
    * last time this setting was modified.
@@ -163,7 +163,7 @@ export interface CacheReserveGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
+  id: CacheReserve;
 
   /**
    * last time this setting was modified.
@@ -247,9 +247,9 @@ export interface CacheReserveStatusParams {
   zone_id: string;
 }
 
-export namespace CacheReserve {
+export namespace CacheReserveResource {
+  export import CacheReserve = CacheReserveAPI.CacheReserve;
   export import UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = CacheReserveAPI.UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
-  export import UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad = CacheReserveAPI.UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;

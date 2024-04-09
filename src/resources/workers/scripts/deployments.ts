@@ -44,7 +44,7 @@ export class Deployments extends APIResource {
   }
 }
 
-export interface UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8 {
+export interface Deployment {
   /**
    * Human-readable message about the deployment.
    */
@@ -54,7 +54,7 @@ export interface UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8 {
 export interface DeploymentCreateResponse {
   id?: string;
 
-  annotations?: UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8;
+  annotations?: Deployment;
 
   author_email?: string;
 
@@ -73,7 +73,7 @@ export namespace DeploymentGetResponse {
   export interface Deployment {
     id?: string;
 
-    annotations?: DeploymentsAPI.UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8;
+    annotations?: DeploymentsAPI.Deployment;
 
     author_email?: string;
 
@@ -94,7 +94,7 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  annotations?: UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8;
+  annotations?: Deployment;
 
   /**
    * Body param:
@@ -110,7 +110,7 @@ export interface DeploymentGetParams {
 }
 
 export namespace Deployments {
-  export import UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8 = DeploymentsAPI.UnnamedSchemaRefFda1c6f6758e763ae3b2964521f2fdd8;
+  export import Deployment = DeploymentsAPI.Deployment;
   export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
   export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
   export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;

@@ -8,7 +8,7 @@ import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-ca
 import * as VariantsAPI from 'cloudflare/resources/cache/variants';
 
 export class Cache extends APIResource {
-  cacheReserve: CacheReserveAPI.CacheReserve = new CacheReserveAPI.CacheReserve(this._client);
+  cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
   smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(
     this._client,
   );
@@ -143,9 +143,9 @@ export namespace CachePurgeParams {
 }
 
 export namespace Cache {
+  export import CacheReserveResource = CacheReserveAPI.CacheReserveResource;
   export import CacheReserve = CacheReserveAPI.CacheReserve;
   export import UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = CacheReserveAPI.UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
-  export import UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad = CacheReserveAPI.UnnamedSchemaRef37c385b4ebac5c7a6475b3f81ef9a7ad;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
