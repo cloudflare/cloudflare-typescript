@@ -1,6 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  AllowedModesAnomaly,
+  Rule,
+  UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5,
+  RuleEditResponse,
+  RuleListParams,
+  RuleEditParams,
+  RuleGetParams,
+  RulesV4PagePaginationArray,
+  Rules,
+} from './rules';
+export {
   Group,
   GroupListParams,
   GroupEditParams,
@@ -15,13 +26,3 @@ export {
   PackageListResponsesV4PagePaginationArray,
   Packages,
 } from './packages';
-export {
-  Rule,
-  UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5,
-  RuleEditResponse,
-  RuleListParams,
-  RuleEditParams,
-  RuleGetParams,
-  RulesV4PagePaginationArray,
-  Rules,
-} from './rules';

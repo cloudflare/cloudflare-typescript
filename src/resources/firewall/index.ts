@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  ASNConfiguration,
+  CIDRConfiguration,
+  CountryConfiguration,
+  IPConfiguration,
+  IPV6Configuration,
   AccessRuleListResponse,
   AccessRuleDeleteResponse,
   AccessRuleCreateParams,

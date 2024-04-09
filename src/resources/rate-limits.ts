@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
+import * as RateLimitsAPI from 'cloudflare/resources/rate-limits';
 import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -30,24 +31,23 @@ export class RateLimits extends APIResource {
     zoneIdentifier: string,
     query?: RateLimitListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RateLimitListResponsesV4PagePaginationArray, RateLimitListResponse>;
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RateLimitListResponsesV4PagePaginationArray, RateLimitListResponse>;
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>;
   list(
     zoneIdentifier: string,
     query: RateLimitListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RateLimitListResponsesV4PagePaginationArray, RateLimitListResponse> {
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/rate_limits`,
-      RateLimitListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/rate_limits`, RateLimitsV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -100,9 +100,27 @@ export class RateLimits extends APIResource {
   }
 }
 
-export class RateLimitListResponsesV4PagePaginationArray extends V4PagePaginationArray<RateLimitListResponse> {}
+export class RateLimitsV4PagePaginationArray extends V4PagePaginationArray<RateLimit> {}
 
-export interface RateLimitListResponse {
+/**
+ * The action to apply to a matched request. The `log` action is only available on
+ * an Enterprise plan.
+ */
+export type Action =
+  | 'block'
+  | 'challenge'
+  | 'js_challenge'
+  | 'managed_challenge'
+  | 'allow'
+  | 'log'
+  | 'bypass';
+
+/**
+ * An HTTP method or `_ALL_` to indicate all methods.
+ */
+export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
+
+export interface RateLimit {
   /**
    * The unique identifier of the rate limit.
    */
@@ -112,13 +130,13 @@ export interface RateLimitListResponse {
    * The action to perform when the threshold of matched traffic within the
    * configured period is exceeded.
    */
-  action?: RateLimitListResponse.Action;
+  action?: RateLimit.Action;
 
   /**
    * Criteria specifying when the current rate limit should be bypassed. You can
    * specify that the rate limit should not apply to one or more URLs.
    */
-  bypass?: Array<RateLimitListResponse.Bypass>;
+  bypass?: Array<RateLimit.Bypass>;
 
   /**
    * An informative summary of the rate limit. This value is sanitized and any tags
@@ -134,7 +152,7 @@ export interface RateLimitListResponse {
   /**
    * Determines which traffic the rate limit counts towards the threshold.
    */
-  match?: RateLimitListResponse.Match;
+  match?: RateLimit.Match;
 
   /**
    * The time in seconds (an integer value) to count matching traffic. If the count
@@ -150,7 +168,7 @@ export interface RateLimitListResponse {
   threshold?: number;
 }
 
-export namespace RateLimitListResponse {
+export namespace RateLimit {
   /**
    * The action to perform when the threshold of matched traffic within the
    * configured period is exceeded.
@@ -248,7 +266,7 @@ export namespace RateLimitListResponse {
        * `['POST','PUT']`) or all methods (`['_ALL_']`). This field is optional when
        * creating a rate limit.
        */
-      methods?: Array<'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'>;
+      methods?: Array<RateLimitsAPI.Methods>;
 
       /**
        * The HTTP schemes to match. You can specify one scheme (`['HTTPS']`), both
