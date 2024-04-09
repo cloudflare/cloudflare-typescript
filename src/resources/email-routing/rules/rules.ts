@@ -19,12 +19,12 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     body: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRule> {
+  ): Core.APIPromise<EmailRoutingRule> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/email/routing/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: EmailRule }>
+      }) as Core.APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,12 +36,12 @@ export class Rules extends APIResource {
     ruleIdentifier: string,
     body: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRule> {
+  ): Core.APIPromise<EmailRoutingRule> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: EmailRule }>
+      }) as Core.APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,22 +52,22 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     query?: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRulesV4PagePaginationArray, EmailRule>;
+  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRulesV4PagePaginationArray, EmailRule>;
+  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule>;
   list(
     zoneIdentifier: string,
     query: RuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<EmailRulesV4PagePaginationArray, EmailRule> {
+  ): Core.PagePromise<EmailRoutingRulesV4PagePaginationArray, EmailRoutingRule> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
     return this._client.getAPIList(
       `/zones/${zoneIdentifier}/email/routing/rules`,
-      EmailRulesV4PagePaginationArray,
+      EmailRoutingRulesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -79,12 +79,12 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     ruleIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRule> {
+  ): Core.APIPromise<EmailRoutingRule> {
     return (
       this._client.delete(
         `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: EmailRule }>
+      ) as Core.APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -95,17 +95,17 @@ export class Rules extends APIResource {
     zoneIdentifier: string,
     ruleIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<EmailRule> {
+  ): Core.APIPromise<EmailRoutingRule> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/email/routing/rules/${ruleIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: EmailRule }>
+      ) as Core.APIPromise<{ result: EmailRoutingRule }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class EmailRulesV4PagePaginationArray extends V4PagePaginationArray<EmailRule> {}
+export class EmailRoutingRulesV4PagePaginationArray extends V4PagePaginationArray<EmailRoutingRule> {}
 
 /**
  * Actions pattern.
@@ -119,7 +119,7 @@ export interface Action {
   value: Array<string>;
 }
 
-export interface EmailRule {
+export interface EmailRoutingRule {
   /**
    * Routing rule identifier.
    */
@@ -239,9 +239,9 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
 
 export namespace Rules {
   export import Action = RulesAPI.Action;
-  export import EmailRule = RulesAPI.EmailRule;
+  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
   export import Matcher = RulesAPI.Matcher;
-  export import EmailRulesV4PagePaginationArray = RulesAPI.EmailRulesV4PagePaginationArray;
+  export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

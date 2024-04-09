@@ -109,9 +109,9 @@ export namespace EmailRouting {
   export import DNSGetResponse = DNSAPI.DNSGetResponse;
   export import Rules = RulesAPI.Rules;
   export import Action = RulesAPI.Action;
-  export import EmailRule = RulesAPI.EmailRule;
+  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
   export import Matcher = RulesAPI.Matcher;
-  export import EmailRulesV4PagePaginationArray = RulesAPI.EmailRulesV4PagePaginationArray;
+  export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;

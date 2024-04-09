@@ -2,12 +2,12 @@
 
 export {
   Action,
-  EmailRule,
+  EmailRoutingRule,
   Matcher,
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
-  EmailRulesV4PagePaginationArray,
+  EmailRoutingRulesV4PagePaginationArray,
   Rules,
 } from './rules';
 export {
