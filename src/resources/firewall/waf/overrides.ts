@@ -165,8 +165,10 @@ export interface Override {
    * entered URL will be escaped before use, which means you can only use simple
    * wildcard patterns.
    */
-  urls?: Array<URLs>;
+  urls?: Array<OverrideURL>;
 }
+
+export type OverrideURL = string;
 
 /**
  * Specifies that, when a WAF rule matches, its configured action will be replaced
@@ -189,8 +191,6 @@ export interface RewriteAction {
 
   simulate?: string;
 }
-
-export type URLs = string;
 
 /**
  * An object that allows you to override the action of specific WAF rules. Each key
@@ -218,8 +218,8 @@ export type OverrideDeleteParams = unknown;
 
 export namespace Overrides {
   export import Override = OverridesAPI.Override;
+  export import OverrideURL = OverridesAPI.OverrideURL;
   export import RewriteAction = OverridesAPI.RewriteAction;
-  export import URLs = OverridesAPI.URLs;
   export import WAFRule = OverridesAPI.WAFRule;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;

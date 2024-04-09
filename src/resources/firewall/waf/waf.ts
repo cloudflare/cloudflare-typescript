@@ -12,8 +12,8 @@ export class WAF extends APIResource {
 export namespace WAF {
   export import Overrides = OverridesAPI.Overrides;
   export import Override = OverridesAPI.Override;
+  export import OverrideURL = OverridesAPI.OverrideURL;
   export import RewriteAction = OverridesAPI.RewriteAction;
-  export import URLs = OverridesAPI.URLs;
   export import WAFRule = OverridesAPI.WAFRule;
   export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
