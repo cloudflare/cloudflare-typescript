@@ -19,6 +19,86 @@ export class DEX extends APIResource {
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 
+export interface NetworkPath {
+  /**
+   * API Resource UUID tag.
+   */
+  id: string;
+
+  deviceName?: string;
+
+  /**
+   * The interval at which the Traceroute synthetic application test is set to run.
+   */
+  interval?: string;
+
+  kind?: 'traceroute';
+
+  name?: string;
+
+  networkPath?: NetworkPath.NetworkPath | null;
+
+  /**
+   * The host of the Traceroute synthetic application test
+   */
+  url?: string;
+}
+
+export namespace NetworkPath {
+  export interface NetworkPath {
+    slots: Array<NetworkPath.Slot>;
+
+    /**
+     * Specifies the sampling applied, if any, to the slots response. When sampled,
+     * results shown represent the first test run to the start of each sampling
+     * interval.
+     */
+    sampling?: NetworkPath.Sampling | null;
+  }
+
+  export namespace NetworkPath {
+    export interface Slot {
+      /**
+       * API Resource UUID tag.
+       */
+      id: string;
+
+      /**
+       * Round trip time in ms of the client to app mile
+       */
+      clientToAppRttMs: number | null;
+
+      /**
+       * Round trip time in ms of the client to Cloudflare egress mile
+       */
+      clientToCfEgressRttMs: number | null;
+
+      /**
+       * Round trip time in ms of the client to Cloudflare ingress mile
+       */
+      clientToCfIngressRttMs: number | null;
+
+      timestamp: string;
+
+      /**
+       * Round trip time in ms of the client to ISP mile
+       */
+      clientToIspRttMs?: number | null;
+    }
+
+    /**
+     * Specifies the sampling applied, if any, to the slots response. When sampled,
+     * results shown represent the first test run to the start of each sampling
+     * interval.
+     */
+    export interface Sampling {
+      unit: 'hours';
+
+      value: number;
+    }
+  }
+}
+
 export interface Percentiles {
   /**
    * p50 observed in the time period
@@ -53,6 +133,7 @@ export interface UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 {
 }
 
 export namespace DEX {
+  export import NetworkPath = DEXAPI.NetworkPath;
   export import Percentiles = DEXAPI.Percentiles;
   export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Colos = ColosAPI.Colos;
@@ -74,7 +155,6 @@ export namespace DEX {
   export import TestListParams = TestsAPI.TestListParams;
   export import TracerouteTestResults = TracerouteTestResultsAPI.TracerouteTestResults;
   export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;
-  export import NetworkPath = TracerouteTestsAPI.NetworkPath;
   export import Traceroute = TracerouteTestsAPI.Traceroute;
   export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
   export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
