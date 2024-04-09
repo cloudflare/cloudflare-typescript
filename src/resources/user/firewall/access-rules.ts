@@ -97,9 +97,9 @@ export interface FirewallRule {
    * The rule configuration.
    */
   configuration:
-    | AccessRulesAPI.IPConfiguration
+    | AccessRulesAPI.AccessRuleIPConfiguration
     | AccessRulesAPI.IPV6Configuration
-    | AccessRulesAPI.CIDRConfiguration
+    | AccessRulesAPI.AccessRuleCIDRConfiguration
     | AccessRulesAPI.ASNConfiguration
     | AccessRulesAPI.CountryConfiguration;
 
@@ -136,9 +136,9 @@ export interface AccessRuleCreateParams {
    * The rule configuration.
    */
   configuration:
-    | AccessRulesAPI.IPConfiguration
+    | AccessRulesAPI.AccessRuleIPConfiguration
     | AccessRulesAPI.IPV6Configuration
-    | AccessRulesAPI.CIDRConfiguration
+    | AccessRulesAPI.AccessRuleCIDRConfiguration
     | AccessRulesAPI.ASNConfiguration
     | AccessRulesAPI.CountryConfiguration;
 

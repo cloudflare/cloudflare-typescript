@@ -3,8 +3,8 @@
 export { Accounts } from './accounts';
 export {
   Member,
+  MemberRoles,
   MemberWithInviteCode,
-  Roles,
   MemberListResponse,
   MemberDeleteResponse,
   MemberCreateParams,

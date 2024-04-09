@@ -33,8 +33,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/members.ts">Member</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberRoles</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberWithInviteCode</a></code>
-- <code><a href="./src/resources/accounts/members.ts">Roles</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
 
@@ -192,7 +192,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/load-balancers/pools.ts">Pool</a></code>
 - <code><a href="./src/resources/user/load-balancers/pools.ts">PoolDeleteResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/pools.ts">PoolHealthResponse</a></code>
 - <code><a href="./src/resources/user/load-balancers/pools.ts">PoolPreviewResponse</a></code>
@@ -1592,10 +1591,10 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/firewall/lockdowns.ts">CIDRConfiguration</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">Configuration</a></code>
-- <code><a href="./src/resources/firewall/lockdowns.ts">IPConfiguration</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">Lockdown</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownCIDRConfiguration</a></code>
+- <code><a href="./src/resources/firewall/lockdowns.ts">LockdownIPConfiguration</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">URLsItem</a></code>
 - <code><a href="./src/resources/firewall/lockdowns.ts">LockdownDeleteResponse</a></code>
 
@@ -1630,10 +1629,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleCIDRConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleIPConfiguration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">ASNConfiguration</a></code>
-- <code><a href="./src/resources/firewall/access-rules.ts">CIDRConfiguration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">CountryConfiguration</a></code>
-- <code><a href="./src/resources/firewall/access-rules.ts">IPConfiguration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">IPV6Configuration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleDeleteResponse</a></code>
@@ -4813,8 +4812,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">ContextAwareness</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">CustomProfile</a></code>
-- <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">PredefinedProfile</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">Profile</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">SkipConfiguration</a></code>
 - <code><a href="./src/resources/zero-trust/dlp/profiles/profiles.ts">ProfileGetResponse</a></code>
