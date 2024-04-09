@@ -111,7 +111,7 @@ export interface CustomProfile {
   /**
    * The type of the profile.
    */
-  type?: ProfilesAPI.CustomProfile;
+  type?: 'custom';
 
   updated_at?: string;
 }

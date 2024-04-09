@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  AccessRuleCIDRConfiguration,
+  AccessRuleIPConfiguration,
   ASNConfiguration,
-  CIDRConfiguration,
   CountryConfiguration,
-  IPConfiguration,
   IPV6Configuration,
   AccessRuleListResponse,
   AccessRuleDeleteResponse,
@@ -17,10 +17,10 @@ export {
   AccessRules,
 } from './access-rules';
 export {
-  CIDRConfiguration,
   Configuration,
-  IPConfiguration,
   Lockdown,
+  LockdownCIDRConfiguration,
+  LockdownIPConfiguration,
   URLsItem,
   LockdownDeleteResponse,
   LockdownCreateParams,

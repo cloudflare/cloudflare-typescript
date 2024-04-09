@@ -30,12 +30,10 @@ export namespace LoadBalancers {
   export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
   export import MonitorPreviewParams = MonitorsAPI.MonitorPreviewParams;
   export import Pools = PoolsAPI.Pools;
-  export import Pool = PoolsAPI.Pool;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolHealthResponse = PoolsAPI.PoolHealthResponse;
   export import PoolPreviewResponse = PoolsAPI.PoolPreviewResponse;
   export import PoolReferencesResponse = PoolsAPI.PoolReferencesResponse;
-  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;

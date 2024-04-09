@@ -1448,6 +1448,7 @@ export namespace LoadBalancers {
   export import Pools = PoolsAPI.Pools;
   export import Pool = PoolsAPI.Pool;
   export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
+  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
   export import PoolCreateParams = PoolsAPI.PoolCreateParams;
   export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
   export import PoolListParams = PoolsAPI.PoolListParams;
