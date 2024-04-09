@@ -19,6 +19,5 @@ export {
 } from './dns-settings';
 export { Settings } from './settings/index';
 export { SubscriptionCreateParams, Subscriptions } from './subscriptions';
-export { Workers } from './workers/index';
 export { ZoneHold, HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds } from './holds';
 export { Zones } from './zones';
