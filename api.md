@@ -151,17 +151,15 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/firewall/access-rules.ts">AccessRuleCreateResponse</a></code>
-- <code><a href="./src/resources/user/firewall/access-rules.ts">AccessRuleListResponse</a></code>
+- <code><a href="./src/resources/user/firewall/access-rules.ts">FirewallRule</a></code>
 - <code><a href="./src/resources/user/firewall/access-rules.ts">AccessRuleDeleteResponse</a></code>
-- <code><a href="./src/resources/user/firewall/access-rules.ts">AccessRuleEditResponse</a></code>
 
 Methods:
 
-- <code title="post /user/firewall/access_rules/rules">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">create</a>({ ...params }) -> AccessRuleCreateResponse</code>
-- <code title="get /user/firewall/access_rules/rules">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">list</a>({ ...params }) -> AccessRuleListResponsesV4PagePaginationArray</code>
+- <code title="post /user/firewall/access_rules/rules">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">create</a>({ ...params }) -> FirewallRule</code>
+- <code title="get /user/firewall/access_rules/rules">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">list</a>({ ...params }) -> FirewallRulesV4PagePaginationArray</code>
 - <code title="delete /user/firewall/access_rules/rules/{identifier}">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">delete</a>(identifier, { ...params }) -> AccessRuleDeleteResponse</code>
-- <code title="patch /user/firewall/access_rules/rules/{identifier}">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">edit</a>(identifier, { ...params }) -> AccessRuleEditResponse</code>
+- <code title="patch /user/firewall/access_rules/rules/{identifier}">client.user.firewall.accessRules.<a href="./src/resources/user/firewall/access-rules.ts">edit</a>(identifier, { ...params }) -> FirewallRule</code>
 
 ## Invites
 
@@ -1339,6 +1337,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostname</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomMetadata</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1</a></code>
@@ -1569,19 +1568,16 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/filters.ts">Filter</a></code>
 - <code><a href="./src/resources/filters.ts">FilterCreateResponse</a></code>
-- <code><a href="./src/resources/filters.ts">FilterUpdateResponse</a></code>
-- <code><a href="./src/resources/filters.ts">FilterListResponse</a></code>
-- <code><a href="./src/resources/filters.ts">FilterDeleteResponse</a></code>
-- <code><a href="./src/resources/filters.ts">FilterGetResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">create</a>(zoneIdentifier, { ...params }) -> FilterCreateResponse | null</code>
-- <code title="put /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">update</a>(zoneIdentifier, id, { ...params }) -> FilterUpdateResponse</code>
-- <code title="get /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">list</a>(zoneIdentifier, { ...params }) -> FilterListResponsesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(zoneIdentifier, id, { ...params }) -> FilterDeleteResponse</code>
-- <code title="get /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">get</a>(zoneIdentifier, id) -> FilterGetResponse</code>
+- <code title="put /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">update</a>(zoneIdentifier, id, { ...params }) -> Filter</code>
+- <code title="get /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">list</a>(zoneIdentifier, { ...params }) -> FiltersV4PagePaginationArray</code>
+- <code title="delete /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(zoneIdentifier, id, { ...params }) -> Filter</code>
+- <code title="get /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">get</a>(zoneIdentifier, id) -> Filter</code>
 
 # Firewall
 
@@ -1627,6 +1623,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/firewall/access-rules.ts">ASNConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">CIDRConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">CountryConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">IPConfiguration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">IPV6Configuration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleDeleteResponse</a></code>
 
@@ -1701,6 +1702,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">AllowedModesAnomaly</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">Rule</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleEditResponse</a></code>
@@ -1976,13 +1978,15 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rate-limits.ts">RateLimitListResponse</a></code>
+- <code><a href="./src/resources/rate-limits.ts">Action</a></code>
+- <code><a href="./src/resources/rate-limits.ts">Methods</a></code>
+- <code><a href="./src/resources/rate-limits.ts">RateLimit</a></code>
 - <code><a href="./src/resources/rate-limits.ts">RateLimitDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">create</a>(zoneIdentifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">list</a>(zoneIdentifier, { ...params }) -> RateLimitListResponsesV4PagePaginationArray</code>
+- <code title="get /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">list</a>(zoneIdentifier, { ...params }) -> RateLimitsV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">delete</a>(zoneIdentifier, id, { ...params }) -> RateLimitDeleteResponse</code>
 - <code title="put /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(zoneIdentifier, id, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
 - <code title="get /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(zoneIdentifier, id) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
@@ -2130,21 +2134,16 @@ Types:
 
 - <code><a href="./src/resources/waiting-rooms/events/events.ts">Event</a></code>
 - <code><a href="./src/resources/waiting-rooms/events/events.ts">UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventCreateResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventUpdateResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventListResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/events/events.ts">EventDeleteResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventEditResponse</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">EventGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">create</a>(waitingRoomId, { ...params }) -> EventCreateResponse</code>
-- <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">update</a>(waitingRoomId, eventId, { ...params }) -> EventUpdateResponse</code>
-- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">list</a>(waitingRoomId, { ...params }) -> EventListResponsesSinglePage</code>
+- <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">create</a>(waitingRoomId, { ...params }) -> Event</code>
+- <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">update</a>(waitingRoomId, eventId, { ...params }) -> Event</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">list</a>(waitingRoomId, { ...params }) -> EventsSinglePage</code>
 - <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">delete</a>(waitingRoomId, eventId, { ...params }) -> EventDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">edit</a>(waitingRoomId, eventId, { ...params }) -> EventEditResponse</code>
-- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">get</a>(waitingRoomId, eventId, { ...params }) -> EventGetResponse</code>
+- <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">edit</a>(waitingRoomId, eventId, { ...params }) -> Event</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}">client.waitingRooms.events.<a href="./src/resources/waiting-rooms/events/events.ts">get</a>(waitingRoomId, eventId, { ...params }) -> Event</code>
 
 ### Details
 
@@ -2172,7 +2171,7 @@ Methods:
 
 - <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">create</a>(waitingRoomId, { ...params }) -> RuleCreateResponse | null</code>
 - <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">update</a>(waitingRoomId, [ ...body ]) -> RuleUpdateResponse | null</code>
-- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">list</a>(waitingRoomId, { ...params }) -> EventsSinglePage</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">list</a>(waitingRoomId, { ...params }) -> RulesSinglePage</code>
 - <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">delete</a>(waitingRoomId, ruleId, { ...params }) -> RuleDeleteResponse | null</code>
 - <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">edit</a>(waitingRoomId, ruleId, { ...params }) -> RuleEditResponse | null</code>
 

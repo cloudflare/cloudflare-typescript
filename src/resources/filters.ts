@@ -29,10 +29,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterUpdateResponse> {
+  ): Core.APIPromise<Filter> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: FilterUpdateResponse;
+        result: Filter;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -45,24 +45,23 @@ export class Filters extends APIResource {
     zoneIdentifier: string,
     query?: FilterListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse>;
+  ): Core.PagePromise<FiltersV4PagePaginationArray, Filter>;
   list(
     zoneIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse>;
+  ): Core.PagePromise<FiltersV4PagePaginationArray, Filter>;
   list(
     zoneIdentifier: string,
     query: FilterListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<FilterListResponsesV4PagePaginationArray, FilterListResponse> {
+  ): Core.PagePromise<FiltersV4PagePaginationArray, Filter> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/filters`,
-      FilterListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/filters`, FiltersV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -73,10 +72,10 @@ export class Filters extends APIResource {
     id: string,
     body: FilterDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<FilterDeleteResponse> {
+  ): Core.APIPromise<Filter> {
     return (
       this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
-        result: FilterDeleteResponse;
+        result: Filter;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -84,50 +83,18 @@ export class Filters extends APIResource {
   /**
    * Fetches the details of a filter.
    */
-  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FilterGetResponse> {
+  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Filter> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
-        result: FilterGetResponse;
+        result: Filter;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FilterListResponsesV4PagePaginationArray extends V4PagePaginationArray<FilterListResponse> {}
+export class FiltersV4PagePaginationArray extends V4PagePaginationArray<Filter> {}
 
-export type FilterCreateResponse = Array<FilterCreateResponse.FilterCreateResponseItem>;
-
-export namespace FilterCreateResponse {
-  export interface FilterCreateResponseItem {
-    /**
-     * The unique identifier of the filter.
-     */
-    id: string;
-
-    /**
-     * The filter expression. For more information, refer to
-     * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-     */
-    expression: string;
-
-    /**
-     * When true, indicates that the filter is currently paused.
-     */
-    paused: boolean;
-
-    /**
-     * An informative summary of the filter.
-     */
-    description?: string;
-
-    /**
-     * A short reference tag. Allows you to select related filters.
-     */
-    ref?: string;
-  }
-}
-
-export interface FilterUpdateResponse {
+export interface Filter {
   /**
    * The unique identifier of the filter.
    */
@@ -155,89 +122,7 @@ export interface FilterUpdateResponse {
   ref?: string;
 }
 
-export interface FilterListResponse {
-  /**
-   * The unique identifier of the filter.
-   */
-  id: string;
-
-  /**
-   * The filter expression. For more information, refer to
-   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-   */
-  expression: string;
-
-  /**
-   * When true, indicates that the filter is currently paused.
-   */
-  paused: boolean;
-
-  /**
-   * An informative summary of the filter.
-   */
-  description?: string;
-
-  /**
-   * A short reference tag. Allows you to select related filters.
-   */
-  ref?: string;
-}
-
-export interface FilterDeleteResponse {
-  /**
-   * The unique identifier of the filter.
-   */
-  id: string;
-
-  /**
-   * An informative summary of the filter.
-   */
-  description?: string;
-
-  /**
-   * The filter expression. For more information, refer to
-   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-   */
-  expression?: string;
-
-  /**
-   * When true, indicates that the filter is currently paused.
-   */
-  paused?: boolean;
-
-  /**
-   * A short reference tag. Allows you to select related filters.
-   */
-  ref?: string;
-}
-
-export interface FilterGetResponse {
-  /**
-   * The unique identifier of the filter.
-   */
-  id?: string;
-
-  /**
-   * An informative summary of the filter.
-   */
-  description?: string;
-
-  /**
-   * The filter expression. For more information, refer to
-   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-   */
-  expression?: string;
-
-  /**
-   * When true, indicates that the filter is currently paused.
-   */
-  paused?: boolean;
-
-  /**
-   * A short reference tag. Allows you to select related filters.
-   */
-  ref?: string;
-}
+export type FilterCreateResponse = Array<Filter>;
 
 export type FilterCreateParams = unknown;
 

@@ -1,15 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Firewall } from './firewall';
 export {
-  AccessRuleCreateResponse,
-  AccessRuleListResponse,
+  FirewallRule,
   AccessRuleDeleteResponse,
-  AccessRuleEditResponse,
   AccessRuleCreateParams,
   AccessRuleListParams,
   AccessRuleDeleteParams,
   AccessRuleEditParams,
-  AccessRuleListResponsesV4PagePaginationArray,
+  FirewallRulesV4PagePaginationArray,
   AccessRules,
 } from './access-rules';
-export { Firewall } from './firewall';
