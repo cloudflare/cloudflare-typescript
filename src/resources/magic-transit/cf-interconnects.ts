@@ -142,7 +142,7 @@ export namespace CfInterconnectListResponse {
       /**
        * How frequent the health check is run. The default value is `mid`.
        */
-      rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
+      rate?: MagicTransitAPI.HealthCheckRate;
 
       /**
        * The destination address in a request type health check. After the healthcheck is
@@ -219,7 +219,7 @@ export namespace CfInterconnectUpdateParams {
     /**
      * How frequent the health check is run. The default value is `mid`.
      */
-    rate?: MagicTransitAPI.UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
+    rate?: MagicTransitAPI.HealthCheckRate;
 
     /**
      * The destination address in a request type health check. After the healthcheck is

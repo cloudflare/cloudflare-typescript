@@ -4,7 +4,6 @@ export {
   Hostname,
   List,
   Redirect,
-  UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,

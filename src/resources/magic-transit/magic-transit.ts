@@ -34,7 +34,7 @@ export interface HealthCheck {
   /**
    * How frequent the health check is run. The default value is `mid`.
    */
-  rate?: UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5;
+  rate?: HealthCheckRate;
 
   /**
    * The destination address in a request type health check. After the healthcheck is
@@ -52,14 +52,14 @@ export interface HealthCheck {
 }
 
 /**
+ * How frequent the health check is run. The default value is `mid`.
+ */
+export type HealthCheckRate = 'low' | 'mid' | 'high';
+
+/**
  * The type of healthcheck to run, reply or request. The default value is `reply`.
  */
 export type HealthCheckType = 'reply' | 'request';
-
-/**
- * How frequent the health check is run. The default value is `mid`.
- */
-export type UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5 = 'low' | 'mid' | 'high';
 
 export namespace MagicTransit {
   export import CfInterconnects = CfInterconnectsAPI.CfInterconnects;

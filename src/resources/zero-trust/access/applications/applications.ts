@@ -1068,6 +1068,26 @@ export interface CorsHeaders {
  */
 export type CustomPagesh = string;
 
+/**
+ * A globally unique name for an identity or service provider.
+ */
+export type SaasAppNameFormat =
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+
+/**
+ * The format of the name identifier sent to the SaaS application.
+ */
+export type SaasAppNameIDFormat = 'id' | 'email';
+
+export interface SaasAppSource {
+  /**
+   * The name of the IdP attribute.
+   */
+  name?: string;
+}
+
 export interface SAMLSaasApp {
   /**
    * Optional identifier indicating the authentication protocol used for the saas
@@ -1099,7 +1119,7 @@ export interface SAMLSaasApp {
   /**
    * The format of the name identifier sent to the SaaS application.
    */
-  name_id_format?: 'id' | 'email';
+  name_id_format?: SaasAppNameIDFormat;
 
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -1146,21 +1166,9 @@ export namespace SAMLSaasApp {
     /**
      * A globally unique name for an identity or service provider.
      */
-    name_format?:
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
+    name_format?: ApplicationsAPI.SaasAppNameFormat;
 
-    source?: CustomAttributes.Source;
-  }
-
-  export namespace CustomAttributes {
-    export interface Source {
-      /**
-       * The name of the IdP attribute.
-       */
-      name?: string;
-    }
+    source?: ApplicationsAPI.SaasAppSource;
   }
 }
 
@@ -2663,6 +2671,9 @@ export namespace Applications {
   export import Application = ApplicationsAPI.Application;
   export import CorsHeaders = ApplicationsAPI.CorsHeaders;
   export import CustomPagesh = ApplicationsAPI.CustomPagesh;
+  export import SaasAppNameFormat = ApplicationsAPI.SaasAppNameFormat;
+  export import SaasAppNameIDFormat = ApplicationsAPI.SaasAppNameIDFormat;
+  export import SaasAppSource = ApplicationsAPI.SaasAppSource;
   export import SAMLSaasApp = ApplicationsAPI.SAMLSaasApp;
   export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;

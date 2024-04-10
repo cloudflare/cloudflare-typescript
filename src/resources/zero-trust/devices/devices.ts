@@ -182,9 +182,9 @@ export namespace Devices {
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
   export import DEXTests = DEXTestsAPI.DEXTests;
+  export import DEXTest = DEXTestsAPI.DEXTest;
   export import SchemaData = DEXTestsAPI.SchemaData;
   export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
-  export import UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 = DEXTestsAPI.UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
   export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
@@ -194,7 +194,6 @@ export namespace Devices {
   export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
   export import Networks = NetworksAPI.Networks;
   export import DeviceNetwork = NetworksAPI.DeviceNetwork;
-  export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
   export import DeviceNetworksSinglePage = NetworksAPI.DeviceNetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
@@ -204,7 +203,6 @@ export namespace Devices {
   export import NetworkGetParams = NetworksAPI.NetworkGetParams;
   export import Policies = PoliciesAPI.Policies;
   export import SettingsPolicy = PoliciesAPI.SettingsPolicy;
-  export import UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581 = PoliciesAPI.UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import SettingsPoliciesSinglePage = PoliciesAPI.SettingsPoliciesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
@@ -216,9 +214,6 @@ export namespace Devices {
   export import DeviceInput = PostureAPI.DeviceInput;
   export import DeviceMatch = PostureAPI.DeviceMatch;
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
-  export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
-  export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
-  export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
   export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;

@@ -88,6 +88,60 @@ export class DEXTests extends APIResource {
 
 export class SchemaHTTPSSinglePage extends SinglePage<SchemaHTTP> {}
 
+export interface DEXTest {
+  /**
+   * The configuration object which contains the details for the WARP client to
+   * conduct the test.
+   */
+  data: SchemaData;
+
+  /**
+   * Determines whether or not the test is active.
+   */
+  enabled: boolean;
+
+  /**
+   * How often the test will run.
+   */
+  interval: string;
+
+  /**
+   * The name of the DEX test. Must be unique.
+   */
+  name: string;
+
+  /**
+   * Additional details about the test.
+   */
+  description?: string;
+
+  /**
+   * Device settings profiles targeted by this test
+   */
+  target_policies?: Array<DEXTest.TargetPolicy>;
+
+  targeted?: boolean;
+}
+
+export namespace DEXTest {
+  export interface TargetPolicy {
+    /**
+     * The id of the device settings profile
+     */
+    id?: string;
+
+    /**
+     * Whether the profile is the account default
+     */
+    default?: boolean;
+
+    /**
+     * The name of the device settings profile
+     */
+    name?: string;
+  }
+}
+
 /**
  * The configuration object which contains the details for the WARP client to
  * conduct the test.
@@ -145,60 +199,6 @@ export interface SchemaHTTP {
 }
 
 export namespace SchemaHTTP {
-  export interface TargetPolicy {
-    /**
-     * The id of the device settings profile
-     */
-    id?: string;
-
-    /**
-     * Whether the profile is the account default
-     */
-    default?: boolean;
-
-    /**
-     * The name of the device settings profile
-     */
-    name?: string;
-  }
-}
-
-export interface UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
-  /**
-   * The configuration object which contains the details for the WARP client to
-   * conduct the test.
-   */
-  data: SchemaData;
-
-  /**
-   * Determines whether or not the test is active.
-   */
-  enabled: boolean;
-
-  /**
-   * How often the test will run.
-   */
-  interval: string;
-
-  /**
-   * The name of the DEX test. Must be unique.
-   */
-  name: string;
-
-  /**
-   * Additional details about the test.
-   */
-  description?: string;
-
-  /**
-   * Device settings profiles targeted by this test
-   */
-  target_policies?: Array<UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9.TargetPolicy>;
-
-  targeted?: boolean;
-}
-
-export namespace UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 {
   export interface TargetPolicy {
     /**
      * The id of the device settings profile
@@ -356,9 +356,9 @@ export interface DEXTestGetParams {
 }
 
 export namespace DEXTests {
+  export import DEXTest = DEXTestsAPI.DEXTest;
   export import SchemaData = DEXTestsAPI.SchemaData;
   export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
-  export import UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9 = DEXTestsAPI.UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9;
   export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
   export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
   export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
