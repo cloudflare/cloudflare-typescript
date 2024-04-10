@@ -63,7 +63,6 @@ export namespace ZeroTrust {
   export import SeatEditResponse = SeatsAPI.SeatEditResponse;
   export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;
-  export import AccessDevicePostureRule = AccessAPI.AccessDevicePostureRule;
   export import AccessRule = AccessAPI.AccessRule;
   export import AnyValidServiceTokenRule = AccessAPI.AnyValidServiceTokenRule;
   export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
