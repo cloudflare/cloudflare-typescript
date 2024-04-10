@@ -44,13 +44,23 @@ export type AccessRule =
   | OktaGroupRule
   | SAMLGroupRule
   | ServiceTokenRule
-  | AnyValidServiceTokenRule
+  | AccessRule.AccessAnyValidServiceTokenRule
   | ExternalEvaluationRule
   | CountryRule
   | AuthenticationMethodRule
   | AccessRule.AccessDevicePostureRule;
 
 export namespace AccessRule {
+  /**
+   * Matches any valid Access Service Token
+   */
+  export interface AccessAnyValidServiceTokenRule {
+    /**
+     * An empty object which matches on all service tokens.
+     */
+    any_valid_service_token: unknown;
+  }
+
   /**
    * Enforces a device posture rule has run successfully
    */
@@ -66,16 +76,6 @@ export namespace AccessRule {
       integration_uid: string;
     }
   }
-}
-
-/**
- * Matches any valid Access Service Token
- */
-export interface AnyValidServiceTokenRule {
-  /**
-   * An empty object which matches on all service tokens.
-   */
-  any_valid_service_token: unknown;
 }
 
 /**
@@ -369,7 +369,6 @@ export namespace ServiceTokenRule {
 
 export namespace Access {
   export import AccessRule = AccessAPI.AccessRule;
-  export import AnyValidServiceTokenRule = AccessAPI.AnyValidServiceTokenRule;
   export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
   export import AzureGroupRule = AccessAPI.AzureGroupRule;
   export import CertificateRule = AccessAPI.CertificateRule;
