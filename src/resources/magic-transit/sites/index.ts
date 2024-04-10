@@ -3,8 +3,8 @@
 export {
   ACL,
   ACLConfiguration,
+  AllowedProtocol,
   Subnet,
-  UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916,
   ACLCreateResponse,
   ACLUpdateResponse,
   ACLListResponse,

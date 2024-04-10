@@ -82,55 +82,6 @@ export class Variants extends APIResource {
   }
 }
 
-export interface UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 {
-  variant?: UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3.Variant;
-}
-
-export namespace UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 {
-  export interface Variant {
-    id: string;
-
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    options: Variant.Options;
-
-    /**
-     * Indicates whether the variant can access an image without a signature,
-     * regardless of image access control.
-     */
-    neverRequireSignedURLs?: boolean;
-  }
-
-  export namespace Variant {
-    /**
-     * Allows you to define image resizing sizes for different use cases.
-     */
-    export interface Options {
-      /**
-       * The fit property describes how the width and height dimensions should be
-       * interpreted.
-       */
-      fit: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
-
-      /**
-       * Maximum height in image pixels.
-       */
-      height: number;
-
-      /**
-       * What EXIF data should be preserved in the output image.
-       */
-      metadata: 'keep' | 'copyright' | 'none';
-
-      /**
-       * Maximum width in image pixels.
-       */
-      width: number;
-    }
-  }
-}
-
 export interface Variant {
   variants?: Variant.Variants;
 }
@@ -459,7 +410,6 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
   export import Variant = VariantsAPI.Variant;
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;

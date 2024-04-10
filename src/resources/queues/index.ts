@@ -2,7 +2,6 @@
 
 export {
   Consumer,
-  UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5,
   ConsumerCreateResponse,
   ConsumerUpdateResponse,
   ConsumerDeleteResponse,

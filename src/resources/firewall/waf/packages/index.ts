@@ -2,7 +2,7 @@
 
 export {
   AllowedModesAnomaly,
-  UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5,
+  WAFRuleGroup,
   RuleListResponse,
   RuleEditResponse,
   RuleGetResponse,

@@ -307,7 +307,7 @@ export namespace Scripts {
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
   export import Schedules = SchedulesAPI.Schedules;
-  export import UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26 = SchedulesAPI.UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26;
+  export import Schedule = SchedulesAPI.Schedule;
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
   export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
   export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;

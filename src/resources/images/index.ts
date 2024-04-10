@@ -2,7 +2,6 @@
 
 export {
   Image,
-  UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a,
   V1ListResponse,
   V1DeleteResponse,
   V1CreateParams,

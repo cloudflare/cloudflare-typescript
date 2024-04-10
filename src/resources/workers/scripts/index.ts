@@ -20,6 +20,14 @@ export {
   Deployments,
 } from './deployments';
 export {
+  Schedule,
+  ScheduleUpdateResponse,
+  ScheduleGetResponse,
+  ScheduleUpdateParams,
+  ScheduleGetParams,
+  Schedules,
+} from './schedules';
+export {
   Script,
   ScriptSetting,
   ScriptUpdateParams,
@@ -30,14 +38,6 @@ export {
   Scripts,
 } from './scripts';
 export { SettingEditParams, SettingGetParams, Settings } from './settings';
-export {
-  UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26,
-  ScheduleUpdateResponse,
-  ScheduleGetResponse,
-  ScheduleUpdateParams,
-  ScheduleGetParams,
-  Schedules,
-} from './schedules';
 export {
   VersionCreateResponse,
   VersionListResponse,
