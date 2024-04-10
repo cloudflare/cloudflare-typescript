@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as ASNsAPI from 'cloudflare/resources/radar/entities/asns';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class ASNs extends APIResource {
   /**
@@ -258,12 +257,20 @@ export namespace ASNIPResponse {
 }
 
 export interface ASNRelResponse {
-  meta: RadarAPI.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
+  meta: ASNRelResponse.Meta;
 
   rels: Array<ASNRelResponse.Rel>;
 }
 
 export namespace ASNRelResponse {
+  export interface Meta {
+    data_time: string;
+
+    query_time: string;
+
+    total_peers: number;
+  }
+
   export interface Rel {
     asn1: number;
 

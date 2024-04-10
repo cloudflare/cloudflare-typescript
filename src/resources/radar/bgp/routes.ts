@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RoutesAPI from 'cloudflare/resources/radar/bgp/routes';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Routes extends APIResource {
   /**
@@ -89,12 +88,20 @@ export class Routes extends APIResource {
 }
 
 export interface RouteMoasResponse {
-  meta: RadarAPI.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
+  meta: RouteMoasResponse.Meta;
 
   moas: Array<RouteMoasResponse.Moa>;
 }
 
 export namespace RouteMoasResponse {
+  export interface Meta {
+    data_time: string;
+
+    query_time: string;
+
+    total_peers: number;
+  }
+
   export interface Moa {
     origins: Array<Moa.Origin>;
 
@@ -113,12 +120,20 @@ export namespace RouteMoasResponse {
 }
 
 export interface RoutePfx2asResponse {
-  meta: RadarAPI.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
+  meta: RoutePfx2asResponse.Meta;
 
   prefix_origins: Array<RoutePfx2asResponse.PrefixOrigin>;
 }
 
 export namespace RoutePfx2asResponse {
+  export interface Meta {
+    data_time: string;
+
+    query_time: string;
+
+    total_peers: number;
+  }
+
   export interface PrefixOrigin {
     origin: number;
 
@@ -131,12 +146,20 @@ export namespace RoutePfx2asResponse {
 }
 
 export interface RouteStatsResponse {
-  meta: RadarAPI.UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7;
+  meta: RouteStatsResponse.Meta;
 
   stats: RouteStatsResponse.Stats;
 }
 
 export namespace RouteStatsResponse {
+  export interface Meta {
+    data_time: string;
+
+    query_time: string;
+
+    total_peers: number;
+  }
+
   export interface Stats {
     distinct_origins: number;
 
@@ -186,7 +209,21 @@ export interface RouteTimeseriesResponse {
 
 export namespace RouteTimeseriesResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
   }
 
   export interface SerieIPV4_24s {

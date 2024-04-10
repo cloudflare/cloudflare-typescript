@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as LocationsAPI from 'cloudflare/resources/radar/http/locations/locations';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as BotClassAPI from 'cloudflare/resources/radar/http/locations/bot-class';
 import * as DeviceTypeAPI from 'cloudflare/resources/radar/http/locations/device-type';
 import * as HTTPMethodAPI from 'cloudflare/resources/radar/http/locations/http-method';
@@ -46,12 +45,12 @@ export class Locations extends APIResource {
 export interface LocationGetResponse {
   meta: LocationGetResponse.Meta;
 
-  top_0: Array<RadarAPI.UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09>;
+  top_0: Array<LocationGetResponse.Top0>;
 }
 
 export namespace LocationGetResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -59,11 +58,49 @@ export namespace LocationGetResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
   }
 }
 

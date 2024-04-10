@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AS112API from 'cloudflare/resources/radar/as112/as112';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as SummaryAPI from 'cloudflare/resources/radar/as112/summary';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/as112/timeseries-groups';
 import * as TopAPI from 'cloudflare/resources/radar/as112/top';
@@ -42,14 +41,14 @@ export class AS112 extends APIResource {
 export interface AS112TimeseriesResponse {
   meta: AS112TimeseriesResponse.Meta;
 
-  serie_0: RadarAPI.UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb;
+  serie_0: AS112TimeseriesResponse.Serie0;
 }
 
 export namespace AS112TimeseriesResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -57,11 +56,47 @@ export namespace AS112TimeseriesResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Serie0 {
+    timestamps: Array<string>;
+
+    values: Array<string>;
   }
 }
 

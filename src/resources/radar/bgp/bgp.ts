@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as RoutesAPI from 'cloudflare/resources/radar/bgp/routes';
 import * as HijacksAPI from 'cloudflare/resources/radar/bgp/hijacks/hijacks';
 import * as LeaksAPI from 'cloudflare/resources/radar/bgp/leaks/leaks';
@@ -44,14 +43,14 @@ export class BGP extends APIResource {
 export interface BGPTimeseriesResponse {
   meta: BGPTimeseriesResponse.Meta;
 
-  serie_0: RadarAPI.UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb;
+  serie_0: BGPTimeseriesResponse.Serie0;
 }
 
 export namespace BGPTimeseriesResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -59,11 +58,47 @@ export namespace BGPTimeseriesResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Serie0 {
+    timestamps: Array<string>;
+
+    values: Array<string>;
   }
 }
 
