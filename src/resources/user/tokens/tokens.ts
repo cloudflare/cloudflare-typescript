@@ -144,6 +144,77 @@ export namespace Policy {
   }
 }
 
+export interface Token {
+  /**
+   * Token identifier tag.
+   */
+  id: string;
+
+  /**
+   * Token name.
+   */
+  name: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies: Array<Policy>;
+
+  /**
+   * Status of the token.
+   */
+  status: 'active' | 'disabled' | 'expired';
+
+  condition?: Token.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+}
+
+export namespace Token {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    request_ip?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<TokensAPI.CIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<TokensAPI.CIDRList>;
+    }
+  }
+}
+
 export interface TokenCreateResponse {
   /**
    * The token value.
@@ -306,6 +377,7 @@ export type TokenDeleteParams = unknown;
 export namespace Tokens {
   export import CIDRList = TokensAPI.CIDRList;
   export import Policy = TokensAPI.Policy;
+  export import Token = TokensAPI.Token;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
