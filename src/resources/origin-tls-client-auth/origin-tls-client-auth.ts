@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
 import * as SettingsAPI from 'cloudflare/resources/origin-tls-client-auth/settings';
 import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
 import { SinglePage } from 'cloudflare/pagination';
@@ -21,11 +20,11 @@ export class OriginTLSClientAuth extends APIResource {
   create(
     params: OriginTLSClientAuthCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<OriginTLSClientAuthCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: OriginTLSClientAuthCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,13 +51,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/origin_tls_client_auth/${certificateId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,13 +68,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<OriginTLSClientAuthGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: OriginTLSClientAuthGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -103,6 +102,12 @@ export interface ZoneAuthenticatedOriginPull {
    */
   private_key?: string;
 }
+
+export type OriginTLSClientAuthCreateResponse = unknown | string | null;
+
+export type OriginTLSClientAuthDeleteResponse = unknown | string | null;
+
+export type OriginTLSClientAuthGetResponse = unknown | string | null;
 
 export interface OriginTLSClientAuthCreateParams {
   /**

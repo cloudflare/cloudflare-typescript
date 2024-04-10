@@ -12,11 +12,11 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariants> {
+  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariant> {
     const { zone_id, body } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/variants`, { body: body, ...options }) as Core.APIPromise<{
-        result: CacheVariants;
+        result: CacheVariant;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -61,11 +61,11 @@ export class Variants extends APIResource {
  * does not serve the variant requested, the response will not be cached. This will
  * be indicated with BYPASS cache status in the response headers.
  */
-export interface CacheVariants {
+export interface CacheVariant {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
+  id: CacheVariantIdentifier;
 
   /**
    * last time this setting was modified.
@@ -76,7 +76,7 @@ export interface CacheVariants {
 /**
  * ID of the zone setting.
  */
-export type UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0 = 'variants';
+export type CacheVariantIdentifier = 'variants';
 
 /**
  * Variant support enables caching variants of images with certain file extensions
@@ -89,7 +89,7 @@ export interface VariantEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
+  id: CacheVariantIdentifier;
 
   /**
    * last time this setting was modified.
@@ -186,7 +186,7 @@ export interface VariantGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
+  id: CacheVariantIdentifier;
 
   /**
    * last time this setting was modified.
@@ -377,8 +377,8 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export import CacheVariants = VariantsAPI.CacheVariants;
-  export import UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0 = VariantsAPI.UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
+  export import CacheVariant = VariantsAPI.CacheVariant;
+  export import CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
-import * as Shared from 'cloudflare/resources/shared';
+import * as QueuesAPI from 'cloudflare/resources/queues/queues';
 
 export class Consumers extends APIResource {
   /**
@@ -85,7 +85,7 @@ export interface Consumer {
 
   service?: unknown;
 
-  settings?: Shared.UnnamedSchemaRef23001f1f0b697900e282236466a95fa3;
+  settings?: QueuesAPI.QueueSettings;
 }
 
 export interface UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 {

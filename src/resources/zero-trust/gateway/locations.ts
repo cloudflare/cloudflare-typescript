@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as LocationsAPI from 'cloudflare/resources/zero-trust/gateway/locations';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Locations extends APIResource {
@@ -55,13 +54,13 @@ export class Locations extends APIResource {
     locationId: string,
     params: LocationDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<LocationDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/locations/${locationId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: LocationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -174,6 +173,8 @@ export interface UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 {
   updated_at?: string;
 }
 
+export type LocationDeleteResponse = unknown | string | null;
+
 export interface LocationCreateParams {
   /**
    * Path param:
@@ -254,6 +255,7 @@ export namespace Locations {
   export import Location = LocationsAPI.Location;
   export import LocationNetwork = LocationsAPI.LocationNetwork;
   export import UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 = LocationsAPI.UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66;
+  export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
   export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;

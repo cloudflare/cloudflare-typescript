@@ -551,16 +551,10 @@ export namespace Cloudflare {
 
   export import ErrorData = API.ErrorData;
   export import Identifier = API.Identifier;
+  export import LoadBalancerPreview = API.LoadBalancerPreview;
   export import PaginationInfo = API.PaginationInfo;
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
-  export import UnnamedSchemaRef025497b7e63379c31929636b5186e45c = API.UnnamedSchemaRef025497b7e63379c31929636b5186e45c;
-  export import UnnamedSchemaRef23001f1f0b697900e282236466a95fa3 = API.UnnamedSchemaRef23001f1f0b697900e282236466a95fa3;
-  export import UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19 = API.UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19;
-  export import UnnamedSchemaRef619309774d07ec6904f1e354560d6028 = API.UnnamedSchemaRef619309774d07ec6904f1e354560d6028;
-  export import UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c = API.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
-  export import UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a = API.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
-  export import UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24 = API.UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24;
 }
 
 export default Cloudflare;

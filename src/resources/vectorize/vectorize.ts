@@ -15,6 +15,7 @@ export namespace Vectorize {
   export import IndexInsert = IndexesAPI.IndexInsert;
   export import IndexQuery = IndexesAPI.IndexQuery;
   export import IndexUpsert = IndexesAPI.IndexUpsert;
+  export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
   export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
   export import CreateIndicesSinglePage = IndexesAPI.CreateIndicesSinglePage;
   export import IndexCreateParams = IndexesAPI.IndexCreateParams;

@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DatabaseAPI from 'cloudflare/resources/d1/database';
-import * as Shared from 'cloudflare/resources/shared';
 import * as D1API from 'cloudflare/resources/d1/d1';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -45,12 +44,12 @@ export class Database extends APIResource {
     accountIdentifier: string,
     databaseIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<DatabaseDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: DatabaseDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -142,6 +141,8 @@ export interface DatabaseListResponse {
   version?: string;
 }
 
+export type DatabaseDeleteResponse = unknown | string | null;
+
 export type DatabaseQueryResponse = Array<QueryResult>;
 
 export interface DatabaseCreateParams {
@@ -178,6 +179,7 @@ export namespace Database {
   export import QueryResult = DatabaseAPI.QueryResult;
   export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
+  export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
   export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;

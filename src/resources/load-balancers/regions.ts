@@ -3,22 +3,18 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Regions extends APIResource {
   /**
    * List all region mappings.
    */
-  list(
-    params: RegionListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  list(params: RegionListParams, options?: Core.RequestOptions): Core.APIPromise<RegionListResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/load_balancers/regions`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: RegionListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -52,6 +48,8 @@ export class Regions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type RegionListResponse = unknown | string | null;
 
 /**
  * A list of countries and subdivisions mapped to a region.
@@ -88,6 +86,7 @@ export interface RegionGetParams {
 }
 
 export namespace Regions {
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;
   export import RegionListParams = RegionsAPI.RegionListParams;
   export import RegionGetParams = RegionsAPI.RegionGetParams;

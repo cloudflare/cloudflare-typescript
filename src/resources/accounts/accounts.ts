@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as Shared from 'cloudflare/resources/shared';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -15,14 +14,11 @@ export class Accounts extends APIResource {
   /**
    * Update an existing account.
    */
-  update(
-    params: AccountUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AccountUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: AccountUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -53,15 +49,10 @@ export class Accounts extends APIResource {
   /**
    * Get information about a specific account that you are a member of.
    */
-  get(
-    params: AccountGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
-      }>
+      this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: AccountGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -125,7 +116,11 @@ export namespace Account {
   }
 }
 
+export type AccountUpdateResponse = unknown | string | null;
+
 export type AccountListResponse = unknown;
+
+export type AccountGetResponse = unknown | string | null;
 
 export interface AccountUpdateParams {
   /**
@@ -211,6 +206,7 @@ export namespace Accounts {
   export import Roles = RolesAPI.Roles;
   export import PermissionGrant = RolesAPI.PermissionGrant;
   export import RoleListResponse = RolesAPI.RoleListResponse;
+  export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;

@@ -3,25 +3,23 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RevokeAPI from 'cloudflare/resources/zero-trust/devices/revoke';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Revoke extends APIResource {
   /**
    * Revokes a list of devices.
    */
-  create(
-    params: RevokeCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  create(params: RevokeCreateParams, options?: Core.RequestOptions): Core.APIPromise<RevokeCreateResponse> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/revoke`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: RevokeCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type RevokeCreateResponse = unknown | string | null;
 
 export interface RevokeCreateParams {
   /**
@@ -36,5 +34,6 @@ export interface RevokeCreateParams {
 }
 
 export namespace Revoke {
+  export import RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
   export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
 }

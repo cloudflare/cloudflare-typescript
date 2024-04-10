@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as Shared from 'cloudflare/resources/shared';
 import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -26,11 +25,11 @@ export class Roles extends APIResource {
     roleId: unknown,
     params: RoleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<RoleGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/roles/${roleId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: RoleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -66,6 +65,8 @@ export interface RoleListResponse {
   permissions: Array<PermissionGroupsAPI.Permission>;
 }
 
+export type RoleGetResponse = unknown | string | null;
+
 export interface RoleListParams {
   account_id: unknown;
 }
@@ -77,6 +78,7 @@ export interface RoleGetParams {
 export namespace Roles {
   export import PermissionGrant = RolesAPI.PermissionGrant;
   export import RoleListResponse = RolesAPI.RoleListResponse;
+  export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;

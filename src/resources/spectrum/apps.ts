@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AppsAPI from 'cloudflare/resources/spectrum/apps';
-import * as Shared from 'cloudflare/resources/shared';
 import * as SpectrumAPI from 'cloudflare/resources/spectrum/spectrum';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -87,14 +86,10 @@ export class Apps extends APIResource {
   /**
    * Gets the application configuration of a specific application inside a zone.
    */
-  get(
-    zone: string,
-    appId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(zone: string, appId: string, options?: Core.RequestOptions): Core.APIPromise<AppGetResponse> {
     return (
       this._client.get(`/zones/${zone}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: AppGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -273,6 +268,8 @@ export interface AppDeleteResponse {
   id?: string;
 }
 
+export type AppGetResponse = unknown | string | null;
+
 export interface AppCreateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
@@ -424,6 +421,7 @@ export namespace Apps {
   export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
+  export import AppGetResponse = AppsAPI.AppGetResponse;
   export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;

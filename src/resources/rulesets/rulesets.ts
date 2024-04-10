@@ -637,6 +637,7 @@ export namespace Rulesets {
   export import BlockRule = RulesAPI.BlockRule;
   export import ExecuteRule = RulesAPI.ExecuteRule;
   export import LogRule = RulesAPI.LogRule;
+  export import Logging = RulesAPI.Logging;
   export import RulesetRule = RulesAPI.RulesetRule;
   export import SkipRule = RulesAPI.SkipRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;

@@ -3,7 +3,7 @@
 export { Cache } from './cache';
 export {
   CacheReserve,
-  UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d,
+  CacheReserveClear,
   CacheReserveClearResponse,
   CacheReserveEditResponse,
   CacheReserveGetResponse,
@@ -15,8 +15,8 @@ export {
   CacheReserveResource,
 } from './cache-reserve';
 export {
-  CacheVariants,
-  UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0,
+  CacheVariant,
+  CacheVariantIdentifier,
   VariantEditResponse,
   VariantGetResponse,
   VariantDeleteParams,
@@ -33,6 +33,9 @@ export {
   RegionalTieredCacheResource,
 } from './regional-tiered-cache';
 export {
+  SmartTieredCacheDeleteResponse,
+  SmartTieredCacheEditResponse,
+  SmartTieredCacheGetResponse,
   SmartTieredCacheDeleteParams,
   SmartTieredCacheEditParams,
   SmartTieredCacheGetParams,

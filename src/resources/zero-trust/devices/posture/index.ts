@@ -19,6 +19,7 @@ export {
 export {
   Integration,
   UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507,
+  IntegrationDeleteResponse,
   IntegrationCreateParams,
   IntegrationListParams,
   IntegrationDeleteParams,

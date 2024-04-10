@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IndexesAPI from 'cloudflare/resources/vectorize/indexes';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Indexes extends APIResource {
@@ -61,12 +60,12 @@ export class Indexes extends APIResource {
     accountIdentifier: string,
     indexName: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<IndexDeleteResponse> {
     return (
       this._client.delete(
         `/accounts/${accountIdentifier}/vectorize/indexes/${indexName}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: IndexDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -276,6 +275,8 @@ export interface IndexUpsert {
   ids?: Array<string>;
 }
 
+export type IndexDeleteResponse = unknown | string | null;
+
 /**
  * Array of vectors with matching ids.
  */
@@ -363,6 +364,7 @@ export namespace Indexes {
   export import IndexInsert = IndexesAPI.IndexInsert;
   export import IndexQuery = IndexesAPI.IndexQuery;
   export import IndexUpsert = IndexesAPI.IndexUpsert;
+  export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
   export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
   export import CreateIndicesSinglePage = IndexesAPI.CreateIndicesSinglePage;
   export import IndexCreateParams = IndexesAPI.IndexCreateParams;

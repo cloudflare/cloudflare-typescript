@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ProxyEndpointsAPI from 'cloudflare/resources/zero-trust/gateway/proxy-endpoints';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class ProxyEndpoints extends APIResource {
@@ -42,13 +41,13 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: string,
     params: ProxyEndpointDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<ProxyEndpointDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: ProxyEndpointDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -141,6 +140,8 @@ export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
   updated_at?: string;
 }
 
+export type ProxyEndpointDeleteResponse = unknown | string | null;
+
 export interface ProxyEndpointCreateParams {
   /**
    * Path param:
@@ -199,6 +200,7 @@ export namespace ProxyEndpoints {
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
+  export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;

@@ -25,7 +25,14 @@ export {
   ConnectivitySettings,
 } from './connectivity-settings';
 export { DLP } from './dlp/index';
-export { Device, DeviceListParams, DeviceGetParams, DevicesSinglePage, Devices } from './devices/index';
+export {
+  Device,
+  DeviceGetResponse,
+  DeviceListParams,
+  DeviceGetParams,
+  DevicesSinglePage,
+  Devices,
+} from './devices/index';
 export {
   GatewayCreateResponse,
   GatewayListResponse,

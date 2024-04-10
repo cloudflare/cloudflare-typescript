@@ -91,7 +91,7 @@ export type CacheReserve = 'cache_reserve';
 /**
  * ID of the zone setting.
  */
-export type UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = 'cache_reserve_clear';
+export type CacheReserveClear = 'cache_reserve_clear';
 
 /**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
@@ -103,7 +103,7 @@ export interface CacheReserveClearResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
+  id: CacheReserveClear;
 
   /**
    * last time this setting was modified.
@@ -186,7 +186,7 @@ export interface CacheReserveStatusResponse {
   /**
    * ID of the zone setting.
    */
-  id: UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
+  id: CacheReserveClear;
 
   /**
    * last time this setting was modified.
@@ -249,7 +249,7 @@ export interface CacheReserveStatusParams {
 
 export namespace CacheReserveResource {
   export import CacheReserve = CacheReserveAPI.CacheReserve;
-  export import UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = CacheReserveAPI.UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
+  export import CacheReserveClear = CacheReserveAPI.CacheReserveClear;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;

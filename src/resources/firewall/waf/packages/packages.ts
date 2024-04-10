@@ -248,6 +248,8 @@ export namespace Packages {
   export import PackageListParams = PackagesAPI.PackageListParams;
   export import Groups = GroupsAPI.Groups;
   export import Group = GroupsAPI.Group;
+  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
+  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
   export import GroupListParams = GroupsAPI.GroupListParams;
   export import GroupEditParams = GroupsAPI.GroupEditParams;
@@ -257,6 +259,7 @@ export namespace Packages {
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;

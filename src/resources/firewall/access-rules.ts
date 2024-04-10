@@ -5,7 +5,6 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as AccessRulesAPI from 'cloudflare/resources/firewall/access-rules';
-import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AccessRules extends APIResource {
@@ -19,7 +18,7 @@ export class AccessRules extends APIResource {
   create(
     params: AccessRuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<AccessRuleCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -41,7 +40,7 @@ export class AccessRules extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: AccessRuleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -132,7 +131,7 @@ export class AccessRules extends APIResource {
     identifier: unknown,
     params: AccessRuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<AccessRuleEditResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -154,7 +153,7 @@ export class AccessRules extends APIResource {
       this._client.patch(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: AccessRuleEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -165,16 +164,13 @@ export class AccessRules extends APIResource {
     identifier: unknown,
     params?: AccessRuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
-  get(
-    identifier: unknown,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
+  ): Core.APIPromise<AccessRuleGetResponse>;
+  get(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<AccessRuleGetResponse>;
   get(
     identifier: unknown,
     params: AccessRuleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<AccessRuleGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(identifier, {}, params);
     }
@@ -199,7 +195,7 @@ export class AccessRules extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: AccessRuleGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -274,6 +270,8 @@ export interface IPV6Configuration {
   value?: string;
 }
 
+export type AccessRuleCreateResponse = unknown | string | null;
+
 export type AccessRuleListResponse = unknown;
 
 export interface AccessRuleDeleteResponse {
@@ -282,6 +280,10 @@ export interface AccessRuleDeleteResponse {
    */
   id: string;
 }
+
+export type AccessRuleEditResponse = unknown | string | null;
+
+export type AccessRuleGetResponse = unknown | string | null;
 
 export interface AccessRuleCreateParams {
   /**
@@ -478,8 +480,11 @@ export namespace AccessRules {
   export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
   export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
   export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
+  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
+  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
+  export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
   export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;

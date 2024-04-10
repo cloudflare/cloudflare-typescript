@@ -4,6 +4,7 @@ export {
   BlockRule,
   ExecuteRule,
   LogRule,
+  Logging,
   RulesetRule,
   SkipRule,
   RuleCreateResponse,

@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as VariantsAPI from 'cloudflare/resources/images/v1/variants';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Variants extends APIResource {
   /**
@@ -38,13 +37,13 @@ export class Variants extends APIResource {
     variantId: string,
     params: VariantDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<VariantDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: VariantDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -235,6 +234,8 @@ export namespace VariantCreateResponse {
     }
   }
 }
+
+export type VariantDeleteResponse = unknown | string | null;
 
 export interface VariantEditResponse {
   variant?: VariantEditResponse.Variant;
@@ -461,6 +462,7 @@ export namespace Variants {
   export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
   export import Variant = VariantsAPI.Variant;
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
+  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;

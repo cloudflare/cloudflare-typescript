@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Subscriptions extends APIResource {
@@ -14,10 +13,10 @@ export class Subscriptions extends APIResource {
     identifier: string,
     body: SubscriptionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<SubscriptionUpdateResponse> {
     return (
       this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: SubscriptionUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,10 +39,10 @@ export class Subscriptions extends APIResource {
     identifier: string,
     body: SubscriptionEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<SubscriptionEditResponse> {
     return (
       this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: SubscriptionEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -206,12 +205,16 @@ export namespace Subscription {
   }
 }
 
+export type SubscriptionUpdateResponse = unknown | string | null;
+
 export interface SubscriptionDeleteResponse {
   /**
    * Subscription identifier tag.
    */
   subscription_id?: string;
 }
+
+export type SubscriptionEditResponse = unknown | string | null;
 
 export type SubscriptionGetResponse = Array<Subscription>;
 
@@ -425,7 +428,9 @@ export namespace SubscriptionEditParams {
 
 export namespace Subscriptions {
   export import Subscription = SubscriptionsAPI.Subscription;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
+  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
   export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;

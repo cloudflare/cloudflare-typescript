@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
-import * as Shared from 'cloudflare/resources/shared';
 import * as PrioritizeAPI from 'cloudflare/resources/custom-certificates/prioritize';
 import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -17,11 +16,11 @@ export class CustomCertificates extends APIResource {
   create(
     params: CustomCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CustomCertificateCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: CustomCertificateCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -69,13 +68,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CustomCertificateEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: CustomCertificateEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -86,13 +85,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CustomCertificateGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: CustomCertificateGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -111,7 +110,7 @@ export interface CustomCertificate {
    * the shortest chain and newest intermediates. And the force bundle verifies the
    * chain, but does not otherwise modify it.
    */
-  bundle_method: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
+  bundle_method: CustomHostnamesAPI.BundleMethod;
 
   /**
    * When the certificate from the authority expires.
@@ -198,12 +197,18 @@ export interface GeoRestrictions {
   label?: 'us' | 'eu' | 'highest_security';
 }
 
+export type CustomCertificateCreateResponse = unknown | string | null;
+
 export interface CustomCertificateDeleteResponse {
   /**
    * Identifier
    */
   id?: string;
 }
+
+export type CustomCertificateEditResponse = unknown | string | null;
+
+export type CustomCertificateGetResponse = unknown | string | null;
 
 export interface CustomCertificateCreateParams {
   /**
@@ -227,7 +232,7 @@ export interface CustomCertificateCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
+  bundle_method?: CustomHostnamesAPI.BundleMethod;
 
   /**
    * Body param: Specify the region where your private key can be held locally for
@@ -301,7 +306,7 @@ export interface CustomCertificateEditParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
+  bundle_method?: CustomHostnamesAPI.BundleMethod;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
