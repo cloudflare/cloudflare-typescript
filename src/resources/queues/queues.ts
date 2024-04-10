@@ -13,14 +13,11 @@ export class Queues extends APIResource {
   /**
    * Creates a new queue.
    */
-  create(
-    params: QueueCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueCreateResponse | null> {
+  create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<QueueCreated | null> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues`, { body: body, ...options }) as Core.APIPromise<{
-        result: QueueCreateResponse | null;
+        result: QueueCreated | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,25 +29,22 @@ export class Queues extends APIResource {
     queueId: string,
     params: QueueUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueUpdateResponse | null> {
+  ): Core.APIPromise<QueueUpdated | null> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/queues/${queueId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: QueueUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: QueueUpdated | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the queues owned by an account.
    */
-  list(
-    params: QueueListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<QueueListResponsesSinglePage, QueueListResponse> {
+  list(params: QueueListParams, options?: Core.RequestOptions): Core.PagePromise<QueuesSinglePage, Queue> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/queues`, QueueListResponsesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/queues`, QueuesSinglePage, options);
   }
 
   /**
@@ -73,21 +67,17 @@ export class Queues extends APIResource {
   /**
    * Get information about a specific queue.
    */
-  get(
-    queueId: string,
-    params: QueueGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<QueueGetResponse | null> {
+  get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
-        result: QueueGetResponse | null;
+        result: Queue | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class QueueListResponsesSinglePage extends SinglePage<QueueListResponse> {}
+export class QueuesSinglePage extends SinglePage<Queue> {}
 
 export interface Queue {
   consumers?: unknown;
@@ -102,7 +92,7 @@ export interface Queue {
 
   producers_total_count?: unknown;
 
-  queue_id?: unknown;
+  queue_id?: string;
 
   queue_name?: string;
 }
@@ -117,14 +107,6 @@ export interface QueueCreated {
   queue_name?: string;
 }
 
-export interface QueueSettings {
-  batch_size?: number;
-
-  max_retries?: number;
-
-  max_wait_time_ms?: number;
-}
-
 export interface QueueUpdated {
   created_on?: unknown;
 
@@ -135,63 +117,7 @@ export interface QueueUpdated {
   queue_name?: string;
 }
 
-export interface QueueCreateResponse {
-  created_on?: unknown;
-
-  modified_on?: unknown;
-
-  queue_id?: unknown;
-
-  queue_name?: string;
-}
-
-export interface QueueUpdateResponse {
-  created_on?: unknown;
-
-  modified_on?: unknown;
-
-  queue_id?: unknown;
-
-  queue_name?: string;
-}
-
-export interface QueueListResponse {
-  consumers?: unknown;
-
-  consumers_total_count?: unknown;
-
-  created_on?: unknown;
-
-  modified_on?: unknown;
-
-  producers?: unknown;
-
-  producers_total_count?: unknown;
-
-  queue_id?: string;
-
-  queue_name?: string;
-}
-
 export type QueueDeleteResponse = unknown | Array<unknown> | string;
-
-export interface QueueGetResponse {
-  consumers?: unknown;
-
-  consumers_total_count?: unknown;
-
-  created_on?: unknown;
-
-  modified_on?: unknown;
-
-  producers?: unknown;
-
-  producers_total_count?: unknown;
-
-  queue_id?: string;
-
-  queue_name?: string;
-}
 
 export interface QueueCreateParams {
   /**
