@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RankingAPI from 'cloudflare/resources/radar/ranking/ranking';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as DomainAPI from 'cloudflare/resources/radar/ranking/domain';
 
 export class Ranking extends APIResource {
@@ -63,7 +62,21 @@ export interface RankingTimeseriesGroupsResponse {
 
 export namespace RankingTimeseriesGroupsResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
   }
 
   export interface Serie0 {

@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as TopAPI from 'cloudflare/resources/radar/bgp/top/top';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as AsesAPI from 'cloudflare/resources/radar/bgp/top/ases';
 
 export class Top extends APIResource {
@@ -39,7 +38,21 @@ export interface TopPrefixesResponse {
 
 export namespace TopPrefixesResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
+  }
+
+  export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
   }
 
   export interface Top0 {

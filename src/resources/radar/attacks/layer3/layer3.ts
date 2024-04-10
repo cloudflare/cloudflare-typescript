@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as Layer3API from 'cloudflare/resources/radar/attacks/layer3/layer3';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 import * as SummaryAPI from 'cloudflare/resources/radar/attacks/layer3/summary';
 import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/attacks/layer3/timeseries-groups';
 import * as TopAPI from 'cloudflare/resources/radar/attacks/layer3/top/top';
@@ -42,7 +41,15 @@ export class Layer3 extends APIResource {
 export interface Layer3TimeseriesResponse {
   meta: unknown;
 
-  serie_0: RadarAPI.UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb;
+  serie_0: Layer3TimeseriesResponse.Serie0;
+}
+
+export namespace Layer3TimeseriesResponse {
+  export interface Serie0 {
+    timestamps: Array<string>;
+
+    values: Array<string>;
+  }
 }
 
 export interface Layer3TimeseriesParams {

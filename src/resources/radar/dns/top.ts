@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TopAPI from 'cloudflare/resources/radar/dns/top';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class Top extends APIResource {
   /**
@@ -33,44 +32,120 @@ export class Top extends APIResource {
 export interface TopAsesResponse {
   meta: TopAsesResponse.Meta;
 
-  top_0: Array<RadarAPI.UnnamedSchemaRef4124a22436f90127c7fa2c4543219752>;
+  top_0: Array<TopAsesResponse.Top0>;
 }
 
 export namespace TopAsesResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientASN: number;
+
+    clientASName: string;
+
+    value: string;
   }
 }
 
 export interface TopLocationsResponse {
   meta: TopLocationsResponse.Meta;
 
-  top_0: Array<RadarAPI.UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09>;
+  top_0: Array<TopLocationsResponse.Top0>;
 }
 
 export namespace TopLocationsResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
     }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
+    }
+  }
+
+  export interface Top0 {
+    clientCountryAlpha2: string;
+
+    clientCountryName: string;
+
+    value: string;
   }
 }
 
