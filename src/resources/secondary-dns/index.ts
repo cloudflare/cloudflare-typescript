@@ -14,8 +14,8 @@ export {
 export {
   DisableTransfer,
   EnableTransfer,
+  Outgoing,
   OutgoingStatus,
-  UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
@@ -28,19 +28,34 @@ export {
   OutgoingEnableParams,
   OutgoingForceNotifyParams,
   OutgoingGetParams,
-  Outgoing,
+  OutgoingResource,
 } from './outgoing/index';
 export { ForceAXFR, ForceAXFRCreateParams, ForceAXFRResource } from './force-axfr';
 export {
+  Incoming,
+  IncomingCreateResponse,
+  IncomingUpdateResponse,
+  IncomingDeleteResponse,
+  IncomingGetResponse,
+  IncomingCreateParams,
+  IncomingUpdateParams,
+  IncomingDeleteParams,
+  IncomingGetParams,
+  IncomingResource,
+} from './incoming';
+export {
   Peer,
-  UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0,
+  PeerCreateResponse,
+  PeerUpdateResponse,
+  PeerListResponse,
   PeerDeleteResponse,
+  PeerGetResponse,
   PeerCreateParams,
   PeerUpdateParams,
   PeerListParams,
   PeerDeleteParams,
   PeerGetParams,
-  PeersSinglePage,
+  PeerListResponsesSinglePage,
   Peers,
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
@@ -55,15 +70,3 @@ export {
   TSIGsSinglePage,
   TSIGs,
 } from './tsigs';
-export {
-  UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a,
-  IncomingCreateResponse,
-  IncomingUpdateResponse,
-  IncomingDeleteResponse,
-  IncomingGetResponse,
-  IncomingCreateParams,
-  IncomingUpdateParams,
-  IncomingDeleteParams,
-  IncomingGetParams,
-  Incoming,
-} from './incoming';

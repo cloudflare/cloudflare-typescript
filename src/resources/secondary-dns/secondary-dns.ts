@@ -10,8 +10,8 @@ import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoi
 
 export class SecondaryDNS extends APIResource {
   forceAXFR: ForceAXFRAPI.ForceAXFRResource = new ForceAXFRAPI.ForceAXFRResource(this._client);
-  incoming: IncomingAPI.Incoming = new IncomingAPI.Incoming(this._client);
-  outgoing: OutgoingAPI.Outgoing = new OutgoingAPI.Outgoing(this._client);
+  incoming: IncomingAPI.IncomingResource = new IncomingAPI.IncomingResource(this._client);
+  outgoing: OutgoingAPI.OutgoingResource = new OutgoingAPI.OutgoingResource(this._client);
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
   peers: PeersAPI.Peers = new PeersAPI.Peers(this._client);
   tsigs: TSIGsAPI.TSIGs = new TSIGsAPI.TSIGs(this._client);
@@ -21,8 +21,8 @@ export namespace SecondaryDNS {
   export import ForceAXFRResource = ForceAXFRAPI.ForceAXFRResource;
   export import ForceAXFR = ForceAXFRAPI.ForceAXFR;
   export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
+  export import IncomingResource = IncomingAPI.IncomingResource;
   export import Incoming = IncomingAPI.Incoming;
-  export import UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a = IncomingAPI.UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
   export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
   export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;
@@ -31,11 +31,11 @@ export namespace SecondaryDNS {
   export import IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
   export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
   export import IncomingGetParams = IncomingAPI.IncomingGetParams;
-  export import Outgoing = OutgoingAPI.Outgoing;
+  export import OutgoingResource = OutgoingAPI.OutgoingResource;
   export import DisableTransfer = OutgoingAPI.DisableTransfer;
   export import EnableTransfer = OutgoingAPI.EnableTransfer;
+  export import Outgoing = OutgoingAPI.Outgoing;
   export import OutgoingStatus = OutgoingAPI.OutgoingStatus;
-  export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
@@ -59,9 +59,12 @@ export namespace SecondaryDNS {
   export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Peers = PeersAPI.Peers;
   export import Peer = PeersAPI.Peer;
-  export import UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0 = PeersAPI.UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0;
+  export import PeerCreateResponse = PeersAPI.PeerCreateResponse;
+  export import PeerUpdateResponse = PeersAPI.PeerUpdateResponse;
+  export import PeerListResponse = PeersAPI.PeerListResponse;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import PeersSinglePage = PeersAPI.PeersSinglePage;
+  export import PeerGetResponse = PeersAPI.PeerGetResponse;
+  export import PeerListResponsesSinglePage = PeersAPI.PeerListResponsesSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;

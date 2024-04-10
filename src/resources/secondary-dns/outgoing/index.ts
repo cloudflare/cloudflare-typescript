@@ -3,8 +3,8 @@
 export {
   DisableTransfer,
   EnableTransfer,
+  Outgoing,
   OutgoingStatus,
-  UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564,
   OutgoingCreateResponse,
   OutgoingUpdateResponse,
   OutgoingDeleteResponse,
@@ -17,6 +17,6 @@ export {
   OutgoingEnableParams,
   OutgoingForceNotifyParams,
   OutgoingGetParams,
-  Outgoing,
+  OutgoingResource,
 } from './outgoing';
 export { StatusGetParams, Status } from './status';

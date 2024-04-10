@@ -128,40 +128,6 @@ export interface Image {
   variants?: Array<string | string | string>;
 }
 
-export interface UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a {
-  /**
-   * Image unique identifier.
-   */
-  id?: string;
-
-  /**
-   * Image file name.
-   */
-  filename?: string;
-
-  /**
-   * User modifiable key-value store. Can be used for keeping references to another
-   * system of record for managing images. Metadata must not exceed 1024 bytes.
-   */
-  meta?: unknown;
-
-  /**
-   * Indicates whether the image can be a accessed only using it's UID. If set to
-   * true, a signed token needs to be generated with a signing key to view the image.
-   */
-  requireSignedURLs?: boolean;
-
-  /**
-   * When the media item was uploaded.
-   */
-  uploaded?: string;
-
-  /**
-   * Object specifying available variants for an image.
-   */
-  variants?: Array<string | string | string>;
-}
-
 export interface V1ListResponse {
   errors: Array<Shared.ResponseInfo>;
 
@@ -261,7 +227,6 @@ export interface V1GetParams {
 
 export namespace V1 {
   export import Image = V1API.Image;
-  export import UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a = V1API.UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a;
   export import V1ListResponse = V1API.V1ListResponse;
   export import V1DeleteResponse = V1API.V1DeleteResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
@@ -272,7 +237,6 @@ export namespace V1 {
   export import V1GetParams = V1API.V1GetParams;
   export import Keys = KeysAPI.Keys;
   export import Key = KeysAPI.Key;
-  export import UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 = KeysAPI.UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
@@ -280,7 +244,6 @@ export namespace V1 {
   export import Stat = StatsAPI.Stat;
   export import StatGetParams = StatsAPI.StatGetParams;
   export import Variants = VariantsAPI.Variants;
-  export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
   export import Variant = VariantsAPI.Variant;
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
   export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;

@@ -256,7 +256,7 @@ export namespace Packages {
   export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import Rules = RulesAPI.Rules;
   export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+  export import WAFRuleGroup = RulesAPI.WAFRuleGroup;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;

@@ -120,42 +120,6 @@ export interface Hostname {
   target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
 }
 
-export interface UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  created_on?: string;
-
-  /**
-   * An optional description of the hostname.
-   */
-  description?: string;
-
-  /**
-   * DNSLink value used if the target is ipfs.
-   */
-  dnslink?: string;
-
-  modified_on?: string;
-
-  /**
-   * The hostname that will point to the target gateway via CNAME.
-   */
-  name?: string;
-
-  /**
-   * Status of the hostname's activation.
-   */
-  status?: 'active' | 'pending' | 'deleting' | 'error';
-
-  /**
-   * Target gateway of the hostname.
-   */
-  target?: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
-}
-
 export interface HostnameDeleteResponse {
   /**
    * Identifier
@@ -196,7 +160,6 @@ export interface HostnameEditParams {
 
 export namespace Hostnames {
   export import Hostname = HostnamesAPI.Hostname;
-  export import UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e = HostnamesAPI.UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
   export import HostnamesSinglePage = HostnamesAPI.HostnamesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;

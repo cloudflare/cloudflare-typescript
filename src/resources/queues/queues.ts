@@ -246,7 +246,6 @@ export interface QueueGetParams {
 export namespace Queues {
   export import Consumers = ConsumersAPI.Consumers;
   export import Consumer = ConsumersAPI.Consumer;
-  export import UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 = ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;

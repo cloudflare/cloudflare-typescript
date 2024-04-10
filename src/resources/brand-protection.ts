@@ -35,23 +35,23 @@ export interface Info {
   /**
    * List of categorizations applied to this submission.
    */
-  categorizations?: Array<UnnamedSchemaRef209db30ed499548152d6f3bccf720b54>;
+  categorizations?: Array<Info.Categorization>;
 
   /**
    * List of model results for completed scans.
    */
-  model_results?: Array<UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014>;
+  model_results?: Array<URLInfoModelResults>;
 
   /**
    * List of signatures that matched against site content found when crawling the
    * URL.
    */
-  rule_matches?: Array<UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8>;
+  rule_matches?: Array<RuleMatch>;
 
   /**
    * Status of the most recent scan found.
    */
-  scan_status?: UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869;
+  scan_status?: ScanStatus;
 
   /**
    * For internal use.
@@ -69,49 +69,21 @@ export interface Info {
   url?: string;
 }
 
-export interface Submit {
-  /**
-   * URLs that were excluded from scanning because their domain is in our no-scan
-   * list.
-   */
-  excluded_urls?: Array<UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669>;
+export namespace Info {
+  export interface Categorization {
+    /**
+     * Name of the category applied.
+     */
+    category?: string;
 
-  /**
-   * URLs that were skipped because the same URL is currently being scanned
-   */
-  skipped_urls?: Array<UnnamedSchemaRef44e66100b948bfe723054c56b6144766>;
-
-  /**
-   * URLs that were successfully submitted for scanning.
-   */
-  submitted_urls?: Array<UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb>;
+    /**
+     * Result of human review for this categorization.
+     */
+    verification_status?: string;
+  }
 }
 
-export interface UnnamedSchemaRef209db30ed499548152d6f3bccf720b54 {
-  /**
-   * Name of the category applied.
-   */
-  category?: string;
-
-  /**
-   * Result of human review for this categorization.
-   */
-  verification_status?: string;
-}
-
-export interface UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb {
-  /**
-   * URL that was submitted.
-   */
-  url?: string;
-
-  /**
-   * ID assigned to this URL submission. Used to retrieve scanning results.
-   */
-  url_id?: number;
-}
-
-export interface UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8 {
+export interface RuleMatch {
   /**
    * For internal use.
    */
@@ -133,41 +105,10 @@ export interface UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8 {
   name?: string;
 }
 
-export interface UnnamedSchemaRef44e66100b948bfe723054c56b6144766 {
-  /**
-   * URL that was skipped.
-   */
-  url?: string;
-
-  /**
-   * ID of the submission of that URL that is currently scanning.
-   */
-  url_id?: number;
-}
-
-export interface UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669 {
-  /**
-   * URL that was excluded.
-   */
-  url?: string;
-}
-
-export interface UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014 {
-  /**
-   * Name of the model.
-   */
-  model_name?: string;
-
-  /**
-   * Score output by the model for this submission.
-   */
-  model_score?: number;
-}
-
 /**
  * Status of the most recent scan found.
  */
-export interface UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869 {
+export interface ScanStatus {
   /**
    * Timestamp of when the submission was processed.
    */
@@ -187,6 +128,69 @@ export interface UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869 {
    * ID of the most recent submission.
    */
   submission_id?: number;
+}
+
+export interface Submit {
+  /**
+   * URLs that were excluded from scanning because their domain is in our no-scan
+   * list.
+   */
+  excluded_urls?: Array<Submit.ExcludedURL>;
+
+  /**
+   * URLs that were skipped because the same URL is currently being scanned
+   */
+  skipped_urls?: Array<Submit.SkippedURL>;
+
+  /**
+   * URLs that were successfully submitted for scanning.
+   */
+  submitted_urls?: Array<Submit.SubmittedURL>;
+}
+
+export namespace Submit {
+  export interface ExcludedURL {
+    /**
+     * URL that was excluded.
+     */
+    url?: string;
+  }
+
+  export interface SkippedURL {
+    /**
+     * URL that was skipped.
+     */
+    url?: string;
+
+    /**
+     * ID of the submission of that URL that is currently scanning.
+     */
+    url_id?: number;
+  }
+
+  export interface SubmittedURL {
+    /**
+     * URL that was submitted.
+     */
+    url?: string;
+
+    /**
+     * ID assigned to this URL submission. Used to retrieve scanning results.
+     */
+    url_id?: number;
+  }
+}
+
+export interface URLInfoModelResults {
+  /**
+   * Name of the model.
+   */
+  model_name?: string;
+
+  /**
+   * Score output by the model for this submission.
+   */
+  model_score?: number;
 }
 
 export interface BrandProtectionSubmitParams {
