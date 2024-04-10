@@ -41,7 +41,7 @@ export type AccessRule =
   | AccessRule.AccessAzureGroupRule
   | AccessRule.AccessGitHubOrganizationRule
   | AccessRule.AccessGSuiteGroupRule
-  | AccessRule.AccessOktaGroupRule
+  | OktaGroupRule
   | AccessRule.AccessSAMLGroupRule
   | AccessRule.AccessServiceTokenRule
   | AccessRule.AccessAnyValidServiceTokenRule
@@ -229,27 +229,6 @@ export namespace AccessRule {
   }
 
   /**
-   * Matches an Okta group. Requires an Okta identity provider.
-   */
-  export interface AccessOktaGroupRule {
-    okta: AccessOktaGroupRule.Okta;
-  }
-
-  export namespace AccessOktaGroupRule {
-    export interface Okta {
-      /**
-       * The ID of your Okta identity provider.
-       */
-      connection_id: string;
-
-      /**
-       * The email of the Okta group.
-       */
-      email: string;
-    }
-  }
-
-  /**
    * Matches a SAML group. Requires a SAML identity provider.
    */
   export interface AccessSAMLGroupRule {
@@ -367,8 +346,30 @@ export namespace AccessRule {
   }
 }
 
+/**
+ * Matches an Okta group. Requires an Okta identity provider.
+ */
+export interface OktaGroupRule {
+  okta: OktaGroupRule.Okta;
+}
+
+export namespace OktaGroupRule {
+  export interface Okta {
+    /**
+     * The ID of your Okta identity provider.
+     */
+    connection_id: string;
+
+    /**
+     * The email of the Okta group.
+     */
+    email: string;
+  }
+}
+
 export namespace Access {
   export import AccessRule = AccessAPI.AccessRule;
+  export import OktaGroupRule = AccessAPI.OktaGroupRule;
   export import Applications = ApplicationsAPI.Applications;
   export import AllowedHeadersh = ApplicationsAPI.AllowedHeadersh;
   export import AllowedIdpsh = ApplicationsAPI.AllowedIdpsh;
