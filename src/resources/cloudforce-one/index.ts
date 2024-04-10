@@ -3,7 +3,7 @@
 export { CloudforceOne } from './cloudforce-one';
 export {
   Item,
-  List,
+  ListItem,
   Quota,
   RequestConstants,
   RequestTypes,
@@ -11,6 +11,6 @@ export {
   RequestCreateParams,
   RequestUpdateParams,
   RequestListParams,
-  ListsV4PagePaginationArray,
+  ListItemsV4PagePaginationArray,
   Requests,
 } from './requests/index';

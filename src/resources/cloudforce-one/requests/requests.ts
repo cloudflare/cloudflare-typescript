@@ -55,10 +55,10 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ListsV4PagePaginationArray, List> {
+  ): Core.PagePromise<ListItemsV4PagePaginationArray, ListItem> {
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/cloudforce-one/requests`,
-      ListsV4PagePaginationArray,
+      ListItemsV4PagePaginationArray,
       { body, method: 'post', ...options },
     );
   }
@@ -132,7 +132,7 @@ export class Requests extends APIResource {
   }
 }
 
-export class ListsV4PagePaginationArray extends V4PagePaginationArray<List> {}
+export class ListItemsV4PagePaginationArray extends V4PagePaginationArray<ListItem> {}
 
 export interface Item {
   /**
@@ -189,7 +189,7 @@ export interface Item {
   tokens?: number;
 }
 
-export interface List {
+export interface ListItem {
   /**
    * UUID
    */
@@ -380,12 +380,12 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
 
 export namespace Requests {
   export import Item = RequestsAPI.Item;
-  export import List = RequestsAPI.List;
+  export import ListItem = RequestsAPI.ListItem;
   export import Quota = RequestsAPI.Quota;
   export import RequestConstants = RequestsAPI.RequestConstants;
   export import RequestTypes = RequestsAPI.RequestTypes;
   export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import ListsV4PagePaginationArray = RequestsAPI.ListsV4PagePaginationArray;
+  export import ListItemsV4PagePaginationArray = RequestsAPI.ListItemsV4PagePaginationArray;
   export import RequestCreateParams = RequestsAPI.RequestCreateParams;
   export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
   export import RequestListParams = RequestsAPI.RequestListParams;
