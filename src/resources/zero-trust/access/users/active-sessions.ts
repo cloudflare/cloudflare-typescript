@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ActiveSessionsAPI from 'cloudflare/resources/zero-trust/access/users/active-sessions';
+import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class ActiveSessions extends APIResource {
@@ -90,7 +91,7 @@ export interface ActiveSessionGetResponse {
 
   email?: string;
 
-  geo?: ActiveSessionGetResponse.Geo;
+  geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
 
   iat?: number;
 
@@ -146,10 +147,6 @@ export namespace ActiveSessionGetResponse {
 
       path?: string;
     }
-  }
-
-  export interface Geo {
-    country?: string;
   }
 
   export interface IDP {

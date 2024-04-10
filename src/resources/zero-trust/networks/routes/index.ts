@@ -3,9 +3,9 @@
 export { IPGetParams, IPs } from './ips';
 export { NetworkCreateParams, NetworkDeleteParams, NetworkEditParams, Networks } from './networks';
 export {
+  NetworkRoute,
   Route,
   Teamnet,
-  UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6,
   RouteCreateParams,
   RouteListParams,
   RouteDeleteParams,

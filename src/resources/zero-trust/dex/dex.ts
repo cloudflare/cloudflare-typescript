@@ -19,6 +19,17 @@ export class DEX extends APIResource {
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 
+export interface DeviceExperienceMonitor {
+  id: string;
+
+  /**
+   * Whether the policy is the default for the account
+   */
+  default: boolean;
+
+  name: string;
+}
+
 export interface NetworkPath {
   /**
    * API Resource UUID tag.
@@ -121,21 +132,10 @@ export interface Percentiles {
   p99?: number | null;
 }
 
-export interface UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 {
-  id: string;
-
-  /**
-   * Whether the policy is the default for the account
-   */
-  default: boolean;
-
-  name: string;
-}
-
 export namespace DEX {
+  export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
   export import Percentiles = DEXAPI.Percentiles;
-  export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Colos = ColosAPI.Colos;
   export import ColoListResponse = ColosAPI.ColoListResponse;
   export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;

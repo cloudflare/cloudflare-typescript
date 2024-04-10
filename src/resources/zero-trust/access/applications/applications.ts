@@ -2696,6 +2696,7 @@ export namespace Applications {
   export import CADeleteParams = CAsAPI.CADeleteParams;
   export import CAGetParams = CAsAPI.CAGetParams;
   export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
+  export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;

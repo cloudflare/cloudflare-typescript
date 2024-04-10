@@ -40,27 +40,29 @@ export interface LoggingSetting {
   /**
    * Logging settings by rule type.
    */
-  settings_by_rule_type?: UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
+  settings_by_rule_type?: LoggingSetting.SettingsByRuleType;
 }
 
-/**
- * Logging settings by rule type.
- */
-export interface UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b {
+export namespace LoggingSetting {
   /**
-   * Logging settings for DNS firewall.
+   * Logging settings by rule type.
    */
-  dns?: unknown;
+  export interface SettingsByRuleType {
+    /**
+     * Logging settings for DNS firewall.
+     */
+    dns?: unknown;
 
-  /**
-   * Logging settings for HTTP/HTTPS firewall.
-   */
-  http?: unknown;
+    /**
+     * Logging settings for HTTP/HTTPS firewall.
+     */
+    http?: unknown;
 
-  /**
-   * Logging settings for Network firewall.
-   */
-  l4?: unknown;
+    /**
+     * Logging settings for Network firewall.
+     */
+    l4?: unknown;
+  }
 }
 
 export interface LoggingUpdateParams {
@@ -79,7 +81,29 @@ export interface LoggingUpdateParams {
   /**
    * Body param: Logging settings by rule type.
    */
-  settings_by_rule_type?: UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
+  settings_by_rule_type?: LoggingUpdateParams.SettingsByRuleType;
+}
+
+export namespace LoggingUpdateParams {
+  /**
+   * Logging settings by rule type.
+   */
+  export interface SettingsByRuleType {
+    /**
+     * Logging settings for DNS firewall.
+     */
+    dns?: unknown;
+
+    /**
+     * Logging settings for HTTP/HTTPS firewall.
+     */
+    http?: unknown;
+
+    /**
+     * Logging settings for Network firewall.
+     */
+    l4?: unknown;
+  }
 }
 
 export interface LoggingGetParams {
@@ -88,7 +112,6 @@ export interface LoggingGetParams {
 
 export namespace Logging {
   export import LoggingSetting = LoggingAPI.LoggingSetting;
-  export import UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b = LoggingAPI.UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
   export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
   export import LoggingGetParams = LoggingAPI.LoggingGetParams;
 }
