@@ -29,7 +29,7 @@ export class ItemListResponsesSinglePage extends SinglePage<ItemListResponse> {}
 /**
  * The items in the list.
  */
-export type ItemListResponse = Array<ListsAPI.Lists>;
+export type ItemListResponse = Array<ListsAPI.GatewayList>;
 
 export interface ItemListParams {
   account_id: string;
