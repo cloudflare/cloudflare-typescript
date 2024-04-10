@@ -763,6 +763,7 @@ export namespace Posture {
   export import Integrations = IntegrationsAPI.Integrations;
   export import Integration = IntegrationsAPI.Integration;
   export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
+  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;

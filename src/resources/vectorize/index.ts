@@ -7,6 +7,7 @@ export {
   IndexInsert,
   IndexQuery,
   IndexUpsert,
+  IndexDeleteResponse,
   IndexGetByIDsResponse,
   IndexCreateParams,
   IndexUpdateParams,

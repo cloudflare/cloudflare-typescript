@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
 import * as SettingsAPI from 'cloudflare/resources/pagerules/settings';
 
 export class Pagerules extends APIResource {
@@ -14,11 +13,11 @@ export class Pagerules extends APIResource {
   create(
     params: PageruleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<PageruleCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: PageruleCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,11 +30,11 @@ export class Pagerules extends APIResource {
     pageruleId: string,
     params: PageruleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<PageruleUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: PageruleUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -76,13 +75,13 @@ export class Pagerules extends APIResource {
     pageruleId: string,
     params: PageruleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<PageruleEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/pagerules/${pageruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: PageruleEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -93,11 +92,11 @@ export class Pagerules extends APIResource {
     pageruleId: string,
     params: PageruleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<PageruleGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: PageruleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -240,6 +239,10 @@ export namespace URLTarget {
   }
 }
 
+export type PageruleCreateResponse = unknown | string | null;
+
+export type PageruleUpdateResponse = unknown | string | null;
+
 export type PageruleListResponse = Array<PageRule>;
 
 export interface PageruleDeleteResponse {
@@ -248,6 +251,10 @@ export interface PageruleDeleteResponse {
    */
   id: string;
 }
+
+export type PageruleEditResponse = unknown | string | null;
+
+export type PageruleGetResponse = unknown | string | null;
 
 export interface PageruleCreateParams {
   /**

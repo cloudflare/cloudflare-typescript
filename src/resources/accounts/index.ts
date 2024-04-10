@@ -18,6 +18,7 @@ export {
 export {
   PermissionGrant,
   RoleListResponse,
+  RoleGetResponse,
   RoleListParams,
   RoleGetParams,
   RoleListResponsesSinglePage,

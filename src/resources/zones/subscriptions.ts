@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ZonesSubscriptionsAPI from 'cloudflare/resources/zones/subscriptions';
-import * as Shared from 'cloudflare/resources/shared';
 import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
 import { SubscriptionsSinglePage } from 'cloudflare/resources/user/subscriptions';
 
@@ -15,10 +14,10 @@ export class Subscriptions extends APIResource {
     identifier: string,
     body: SubscriptionCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<SubscriptionCreateResponse> {
     return (
       this._client.post(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: SubscriptionCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -40,17 +39,18 @@ export class Subscriptions extends APIResource {
   /**
    * Lists zone subscription details.
    */
-  get(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse> {
     return (
       this._client.get(`/zones/${identifier}/subscription`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: SubscriptionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type SubscriptionCreateResponse = unknown | string | null;
+
+export type SubscriptionGetResponse = unknown | string | null;
 
 export interface SubscriptionCreateParams {
   app?: SubscriptionCreateParams.App;
@@ -156,6 +156,8 @@ export namespace SubscriptionCreateParams {
 }
 
 export namespace Subscriptions {
+  export import SubscriptionCreateResponse = ZonesSubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
 }
 

@@ -6,6 +6,7 @@ export {
   ListCreateResponse,
   ListUpdateResponse,
   ListListResponse,
+  ListDeleteResponse,
   ListEditResponse,
   ListGetResponse,
   ListCreateParams,

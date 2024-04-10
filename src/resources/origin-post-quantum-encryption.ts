@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class OriginPostQuantumEncryption extends APIResource {
   /**
@@ -16,13 +15,13 @@ export class OriginPostQuantumEncryption extends APIResource {
   update(
     params: OriginPostQuantumEncryptionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<OriginPostQuantumEncryptionUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: OriginPostQuantumEncryptionUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -37,15 +36,19 @@ export class OriginPostQuantumEncryption extends APIResource {
   get(
     params: OriginPostQuantumEncryptionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: OriginPostQuantumEncryptionGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type OriginPostQuantumEncryptionUpdateResponse = unknown | string | null;
+
+export type OriginPostQuantumEncryptionGetResponse = unknown | string | null;
 
 export interface OriginPostQuantumEncryptionUpdateParams {
   /**

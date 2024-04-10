@@ -6,8 +6,11 @@ export {
   ASNConfiguration,
   CountryConfiguration,
   IPV6Configuration,
+  AccessRuleCreateResponse,
   AccessRuleListResponse,
   AccessRuleDeleteResponse,
+  AccessRuleEditResponse,
+  AccessRuleGetResponse,
   AccessRuleCreateParams,
   AccessRuleListParams,
   AccessRuleDeleteParams,
@@ -47,8 +50,11 @@ export {
   Rules,
 } from './rules';
 export {
+  UARuleCreateResponse,
+  UARuleUpdateResponse,
   UARuleListResponse,
   UARuleDeleteResponse,
+  UARuleGetResponse,
   UARuleCreateParams,
   UARuleUpdateParams,
   UARuleListParams,

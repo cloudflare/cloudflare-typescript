@@ -5,7 +5,6 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as CAsAPI from 'cloudflare/resources/zero-trust/access/applications/cas';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class CAs extends APIResource {
@@ -16,16 +15,13 @@ export class CAs extends APIResource {
     uuid: string,
     params?: CACreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
-  create(
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
+  ): Core.APIPromise<CACreateResponse>;
+  create(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CACreateResponse>;
   create(
     uuid: string,
     params: CACreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CACreateResponse> {
     if (isRequestOptions(params)) {
       return this.create(uuid, {}, params);
     }
@@ -50,7 +46,7 @@ export class CAs extends APIResource {
       this._client.post(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: CACreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -135,20 +131,13 @@ export class CAs extends APIResource {
   /**
    * Fetches a short-lived certificate CA and its public key.
    */
-  get(
-    uuid: string,
-    params?: CAGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
-  get(
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a>;
+  get(uuid: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
   get(
     uuid: string,
     params: CAGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CAGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(uuid, {}, params);
     }
@@ -173,7 +162,7 @@ export class CAs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: CAGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -198,12 +187,16 @@ export interface CA {
   public_key?: string;
 }
 
+export type CACreateResponse = unknown | string | null;
+
 export interface CADeleteResponse {
   /**
    * The ID of the CA.
    */
   id?: string;
 }
+
+export type CAGetResponse = unknown | string | null;
 
 export interface CACreateParams {
   /**
@@ -255,7 +248,9 @@ export interface CAGetParams {
 
 export namespace CAs {
   export import CA = CAsAPI.CA;
+  export import CACreateResponse = CAsAPI.CACreateResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
+  export import CAGetResponse = CAsAPI.CAGetResponse;
   export import CAsSinglePage = CAsAPI.CAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;

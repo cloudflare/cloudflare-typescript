@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as Shared from 'cloudflare/resources/shared';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
@@ -17,10 +16,10 @@ export class Memberships extends APIResource {
     membershipId: string,
     body: MembershipUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<MembershipUpdateResponse> {
     return (
       this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: MembershipUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -61,13 +60,10 @@ export class Memberships extends APIResource {
   /**
    * Get a specific membership.
    */
-  get(
-    membershipId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(membershipId: string, options?: Core.RequestOptions): Core.APIPromise<MembershipGetResponse> {
     return (
       this._client.get(`/memberships/${membershipId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: MembershipGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -141,12 +137,16 @@ export namespace Membership {
   }
 }
 
+export type MembershipUpdateResponse = unknown | string | null;
+
 export interface MembershipDeleteResponse {
   /**
    * Membership identifier tag.
    */
   id?: string;
 }
+
+export type MembershipGetResponse = unknown | string | null;
 
 export interface MembershipUpdateParams {
   /**

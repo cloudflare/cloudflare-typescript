@@ -1459,6 +1459,7 @@ export namespace LoadBalancers {
   export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
   export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
   export import Regions = RegionsAPI.Regions;
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;
   export import RegionListParams = RegionsAPI.RegionListParams;
   export import RegionGetParams = RegionsAPI.RegionGetParams;

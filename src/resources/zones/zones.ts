@@ -402,5 +402,7 @@ export namespace Zones {
   export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
   export import HoldGetParams = HoldsAPI.HoldGetParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
+  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
 }

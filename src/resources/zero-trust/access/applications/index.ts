@@ -36,7 +36,9 @@ export {
 } from './policies';
 export {
   CA,
+  CACreateResponse,
   CADeleteResponse,
+  CAGetResponse,
   CACreateParams,
   CAListParams,
   CADeleteParams,

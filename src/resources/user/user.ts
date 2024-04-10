@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
 import * as AuditLogsAPI from 'cloudflare/resources/user/audit-logs';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
 import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
@@ -21,30 +20,25 @@ export class User extends APIResource {
   /**
    * Edit part of your user details.
    */
-  edit(
-    body: UserEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  edit(body: UserEditParams, options?: Core.RequestOptions): Core.APIPromise<UserEditResponse> {
     return (
-      this._client.patch('/user', { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
-      }>
+      this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * User Details
    */
-  get(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
-    return (
-      this._client.get('/user', options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  get(options?: Core.RequestOptions): Core.APIPromise<UserGetResponse> {
+    return (this._client.get('/user', options) as Core.APIPromise<{ result: UserGetResponse }>)._thenUnwrap(
+      (obj) => obj.result,
+    );
   }
 }
+
+export type UserEditResponse = unknown | string | null;
+
+export type UserGetResponse = unknown | string | null;
 
 export interface UserEditParams {
   /**
@@ -81,17 +75,22 @@ export namespace User {
   export import Billing = BillingAPI.Billing;
   export import Invites = InvitesAPI.Invites;
   export import Invite = InvitesAPI.Invite;
+  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
+  export import InviteGetResponse = InvitesAPI.InviteGetResponse;
   export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
   export import InviteEditParams = InvitesAPI.InviteEditParams;
   export import Organizations = OrganizationsAPI.Organizations;
   export import Organization = OrganizationsAPI.Organization;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
+  export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationDeleteParams = OrganizationsAPI.OrganizationDeleteParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import Subscription = SubscriptionsAPI.Subscription;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
+  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
   export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
@@ -100,8 +99,10 @@ export namespace User {
   export import CIDRList = TokensAPI.CIDRList;
   export import Policy = TokensAPI.Policy;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
+  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;
   export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
+  export import TokenGetResponse = TokensAPI.TokenGetResponse;
   export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
   export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
   export import TokenCreateParams = TokensAPI.TokenCreateParams;

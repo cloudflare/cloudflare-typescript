@@ -14,6 +14,7 @@ export namespace Images {
   export import Image = V1API.Image;
   export import UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a = V1API.UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a;
   export import V1ListResponse = V1API.V1ListResponse;
+  export import V1DeleteResponse = V1API.V1DeleteResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1API.V1CreateParams;
   export import V1ListParams = V1API.V1ListParams;

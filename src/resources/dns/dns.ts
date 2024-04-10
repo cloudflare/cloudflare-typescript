@@ -11,25 +11,12 @@ export class DNS extends APIResource {
   firewall: FirewallAPI.FirewallResource = new FirewallAPI.FirewallResource(this._client);
 }
 
-export interface UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba {
-  /**
-   * Array of dimension values, representing the combination of dimension values
-   * corresponding to this row.
-   */
-  dimensions: Array<string>;
-
-  /**
-   * Array with one item per requested metric. Each item is a single value.
-   */
-  metrics: Array<number>;
-}
-
 /**
  * Nominal metric values, broken down by time interval.
  */
-export type UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca = Array<unknown>;
+export type DNSAnalyticsNominalMetric = Array<unknown>;
 
-export interface UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2 {
+export interface DNSAnalyticsQuery {
   /**
    * Array of dimension names.
    */
@@ -98,6 +85,8 @@ export namespace DNS {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
+  export import RecordMetadata = RecordsAPI.RecordMetadata;
+  export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
   export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;
   export import SRVRecord = RecordsAPI.SRVRecord;
@@ -106,9 +95,6 @@ export namespace DNS {
   export import TLSARecord = RecordsAPI.TLSARecord;
   export import TTL = RecordsAPI.TTL;
   export import TXTRecord = RecordsAPI.TXTRecord;
-  export import UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb = RecordsAPI.UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
-  export import UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c = RecordsAPI.UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c;
-  export import UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd = RecordsAPI.UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd;
   export import URIRecord = RecordsAPI.URIRecord;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;
