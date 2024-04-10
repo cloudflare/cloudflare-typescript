@@ -47,7 +47,7 @@ export type AccessRule =
   | AccessRule.AccessAnyValidServiceTokenRule
   | ExternalEvaluationRule
   | CountryRule
-  | AuthenticationMethodRule
+  | AccessRule.AccessAuthenticationMethodRule
   | AccessRule.AccessDevicePostureRule;
 
 export namespace AccessRule {
@@ -59,6 +59,22 @@ export namespace AccessRule {
      * An empty object which matches on all service tokens.
      */
     any_valid_service_token: unknown;
+  }
+
+  /**
+   * Enforce different MFA options
+   */
+  export interface AccessAuthenticationMethodRule {
+    auth_method: AccessAuthenticationMethodRule.AuthMethod;
+  }
+
+  export namespace AccessAuthenticationMethodRule {
+    export interface AuthMethod {
+      /**
+       * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+       */
+      auth_method: string;
+    }
   }
 
   /**
@@ -75,22 +91,6 @@ export namespace AccessRule {
        */
       integration_uid: string;
     }
-  }
-}
-
-/**
- * Enforce different MFA options
- */
-export interface AuthenticationMethodRule {
-  auth_method: AuthenticationMethodRule.AuthMethod;
-}
-
-export namespace AuthenticationMethodRule {
-  export interface AuthMethod {
-    /**
-     * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
-     */
-    auth_method: string;
   }
 }
 
@@ -369,7 +369,6 @@ export namespace ServiceTokenRule {
 
 export namespace Access {
   export import AccessRule = AccessAPI.AccessRule;
-  export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
   export import AzureGroupRule = AccessAPI.AzureGroupRule;
   export import CertificateRule = AccessAPI.CertificateRule;
   export import CountryRule = AccessAPI.CountryRule;
