@@ -134,9 +134,6 @@ export interface MagicNetworkMonitoringRule {
 
   prefixes: Array<string>;
 
-  /**
-   * The id of the rule. Must be unique.
-   */
   id?: string;
 
   /**
