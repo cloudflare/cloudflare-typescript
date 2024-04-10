@@ -349,6 +349,11 @@ export interface RouteTimeseriesParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Include data delay meta information
+   */
+  includeDelay?: boolean;
+
+  /**
    * Location Alpha2 code.
    */
   location?: string;
