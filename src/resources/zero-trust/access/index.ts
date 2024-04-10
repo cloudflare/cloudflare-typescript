@@ -2,7 +2,6 @@
 
 export {
   AccessRule,
-  AuthenticationMethodRule,
   AzureGroupRule,
   CertificateRule,
   CountryRule,
