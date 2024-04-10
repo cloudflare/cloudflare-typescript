@@ -300,7 +300,7 @@ export interface KeylessCertificateCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1;
+  bundle_method?: CustomHostnamesAPI.BundleMethod;
 
   /**
    * Body param: The keyless SSL name.

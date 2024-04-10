@@ -133,6 +133,7 @@ export namespace Gateway {
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
+  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListEditResponse = ListsAPI.ListEditResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListListResponsesSinglePage = ListsAPI.ListListResponsesSinglePage;
@@ -146,6 +147,7 @@ export namespace Gateway {
   export import Location = LocationsAPI.Location;
   export import LocationNetwork = LocationsAPI.LocationNetwork;
   export import UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 = LocationsAPI.UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66;
+  export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
   export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
@@ -161,6 +163,7 @@ export namespace Gateway {
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
+  export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
@@ -174,6 +177,7 @@ export namespace Gateway {
   export import GatewayRule = RulesAPI.GatewayRule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;

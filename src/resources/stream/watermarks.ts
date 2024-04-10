@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
-import * as Shared from 'cloudflare/resources/shared';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -15,13 +14,13 @@ export class Watermarks extends APIResource {
   create(
     params: WatermarkCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<WatermarkCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: WatermarkCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,13 +59,13 @@ export class Watermarks extends APIResource {
     identifier: string,
     params: WatermarkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<WatermarkGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/watermarks/${identifier}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: WatermarkGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -140,7 +139,11 @@ export interface Watermaks {
   width?: number;
 }
 
+export type WatermarkCreateResponse = unknown | string | null;
+
 export type WatermarkDeleteResponse = unknown | string;
+
+export type WatermarkGetResponse = unknown | string | null;
 
 export interface WatermarkCreateParams {
   /**
@@ -217,7 +220,9 @@ export interface WatermarkGetParams {
 
 export namespace Watermarks {
   export import Watermaks = WatermarksAPI.Watermaks;
+  export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
+  export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
   export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;

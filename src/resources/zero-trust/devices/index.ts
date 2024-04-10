@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Device, DeviceListParams, DeviceGetParams, DevicesSinglePage, Devices } from './devices';
+export {
+  Device,
+  DeviceGetResponse,
+  DeviceListParams,
+  DeviceGetParams,
+  DevicesSinglePage,
+  Devices,
+} from './devices';
 export {
   DeviceInput,
   DeviceMatch,
@@ -31,7 +38,7 @@ export {
 } from './networks';
 export { DeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
 export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
-export { RevokeCreateParams, Revoke } from './revoke';
+export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
 export {
   SchemaData,
   SchemaHTTP,
@@ -57,4 +64,4 @@ export {
   SettingsPoliciesSinglePage,
   Policies,
 } from './policies/index';
-export { UnrevokeCreateParams, Unrevoke } from './unrevoke';
+export { UnrevokeCreateResponse, UnrevokeCreateParams, Unrevoke } from './unrevoke';

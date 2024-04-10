@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TieredCachingAPI from 'cloudflare/resources/argo/tiered-caching';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class TieredCaching extends APIResource {
   /**
@@ -12,11 +11,11 @@ export class TieredCaching extends APIResource {
   edit(
     params: TieredCachingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<TieredCachingEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/argo/tiered_caching`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: TieredCachingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,15 +26,19 @@ export class TieredCaching extends APIResource {
   get(
     params: TieredCachingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<TieredCachingGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/argo/tiered_caching`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: TieredCachingGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type TieredCachingEditResponse = unknown | string | null;
+
+export type TieredCachingGetResponse = unknown | string | null;
 
 export interface TieredCachingEditParams {
   /**
@@ -57,6 +60,8 @@ export interface TieredCachingGetParams {
 }
 
 export namespace TieredCaching {
+  export import TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
+  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
   export import TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
   export import TieredCachingGetParams = TieredCachingAPI.TieredCachingGetParams;
 }

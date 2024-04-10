@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
-import * as Shared from 'cloudflare/resources/shared';
 import * as ItemsAPI from 'cloudflare/resources/zero-trust/gateway/lists/items';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -61,13 +60,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<ListDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: ListDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -208,6 +207,8 @@ export interface ListListResponse {
 
   updated_at?: string;
 }
+
+export type ListDeleteResponse = unknown | string | null;
 
 export interface ListEditResponse {
   /**
@@ -357,6 +358,7 @@ export namespace Lists {
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
+  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListEditResponse = ListsAPI.ListEditResponse;
   export import ListGetResponse = ListsAPI.ListGetResponse;
   export import ListListResponsesSinglePage = ListsAPI.ListListResponsesSinglePage;

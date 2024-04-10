@@ -207,7 +207,7 @@ export interface ARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -289,7 +289,7 @@ export interface AAAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -376,7 +376,7 @@ export interface CAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -479,7 +479,7 @@ export interface CERTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -582,7 +582,7 @@ export interface CNAMERecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -669,7 +669,7 @@ export interface DNSKEYRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -777,7 +777,7 @@ export interface DSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -885,7 +885,7 @@ export interface HTTPSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -988,7 +988,7 @@ export interface LOCRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1137,7 +1137,7 @@ export interface MXRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1218,7 +1218,7 @@ export interface NAPTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1331,7 +1331,7 @@ export interface NSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1407,7 +1407,7 @@ export interface PTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1465,6 +1465,39 @@ export type Record =
   | URIRecord;
 
 /**
+ * Extra Cloudflare-specific information about the record.
+ */
+export interface RecordMetadata {
+  /**
+   * Will exist if Cloudflare automatically added this DNS record during initial
+   * setup.
+   */
+  auto_added?: boolean;
+
+  /**
+   * Where the record originated from.
+   */
+  source?: string;
+}
+
+export interface RecordProcessTiming {
+  /**
+   * When the file parsing ended.
+   */
+  end_time?: string;
+
+  /**
+   * Processing time of the file in seconds.
+   */
+  process_time?: number;
+
+  /**
+   * When the file parsing started.
+   */
+  start_time?: string;
+}
+
+/**
  * Individual tag of the form name:value (the name must consist of only letters,
  * numbers, underscores and hyphens)
  */
@@ -1516,7 +1549,7 @@ export interface SMIMEARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1627,7 +1660,7 @@ export interface SRVRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1757,7 +1790,7 @@ export interface SSHFPRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1860,7 +1893,7 @@ export interface SVCBRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1963,7 +1996,7 @@ export interface TLSARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2073,7 +2106,7 @@ export interface TXTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2106,61 +2139,6 @@ export interface TXTRecord {
    * The domain of the record.
    */
   zone_name?: string;
-}
-
-/**
- * Extra Cloudflare-specific information about the record.
- */
-export interface UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb {
-  /**
-   * Will exist if Cloudflare automatically added this DNS record during initial
-   * setup.
-   */
-  auto_added?: boolean;
-
-  /**
-   * Where the record originated from.
-   */
-  source?: string;
-}
-
-export type UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
-
-export interface UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd {
-  /**
-   * When the file parsing ended.
-   */
-  end_time?: string;
-
-  /**
-   * Processing time of the file in seconds.
-   */
-  process_time?: number;
-
-  /**
-   * When the file parsing started.
-   */
-  start_time?: string;
 }
 
 export interface URIRecord {
@@ -2215,7 +2193,7 @@ export interface URIRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -6356,6 +6334,8 @@ export namespace Records {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
+  export import RecordMetadata = RecordsAPI.RecordMetadata;
+  export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
   export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;
   export import SRVRecord = RecordsAPI.SRVRecord;
@@ -6364,9 +6344,6 @@ export namespace Records {
   export import TLSARecord = RecordsAPI.TLSARecord;
   export import TTL = RecordsAPI.TTL;
   export import TXTRecord = RecordsAPI.TXTRecord;
-  export import UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb = RecordsAPI.UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb;
-  export import UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c = RecordsAPI.UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c;
-  export import UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd = RecordsAPI.UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd;
   export import URIRecord = RecordsAPI.URIRecord;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;

@@ -20,6 +20,11 @@ export {
   DNSSettings,
 } from './dns-settings';
 export { Settings } from './settings/index';
-export { SubscriptionCreateParams, Subscriptions } from './subscriptions';
+export {
+  SubscriptionCreateResponse,
+  SubscriptionGetResponse,
+  SubscriptionCreateParams,
+  Subscriptions,
+} from './subscriptions';
 export { ZoneHold, HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds } from './holds';
 export { Zones } from './zones';

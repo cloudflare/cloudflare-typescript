@@ -3,20 +3,16 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Webhooks extends APIResource {
   /**
    * Creates a webhook notification.
    */
-  update(
-    params: WebhookUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  update(params: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: WebhookUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -37,20 +33,21 @@ export class Webhooks extends APIResource {
   /**
    * Retrieves a list of webhooks.
    */
-  get(
-    params: WebhookGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: WebhookGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export type WebhookUpdateResponse = unknown | string | null;
+
 export type WebhookDeleteResponse = unknown | string;
+
+export type WebhookGetResponse = unknown | string | null;
 
 export interface WebhookUpdateParams {
   /**
@@ -84,7 +81,9 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
+  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
   export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
+  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
   export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
   export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;

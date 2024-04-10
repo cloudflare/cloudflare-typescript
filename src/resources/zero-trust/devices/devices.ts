@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DevicesAPI from 'cloudflare/resources/zero-trust/devices/devices';
-import * as Shared from 'cloudflare/resources/shared';
 import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
 import * as NetworksAPI from 'cloudflare/resources/zero-trust/devices/networks';
 import * as OverrideCodesAPI from 'cloudflare/resources/zero-trust/devices/override-codes';
@@ -39,11 +38,11 @@ export class Devices extends APIResource {
     deviceId: string,
     params: DeviceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<DeviceGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: DeviceGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -166,6 +165,8 @@ export namespace Device {
   }
 }
 
+export type DeviceGetResponse = unknown | string | null;
+
 export interface DeviceListParams {
   account_id: string;
 }
@@ -176,6 +177,7 @@ export interface DeviceGetParams {
 
 export namespace Devices {
   export import Device = DevicesAPI.Device;
+  export import DeviceGetResponse = DevicesAPI.DeviceGetResponse;
   export import DevicesSinglePage = DevicesAPI.DevicesSinglePage;
   export import DeviceListParams = DevicesAPI.DeviceListParams;
   export import DeviceGetParams = DevicesAPI.DeviceGetParams;
@@ -225,12 +227,14 @@ export namespace Devices {
   export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Revoke = RevokeAPI.Revoke;
+  export import RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
   export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
   export import Settings = SettingsAPI.Settings;
   export import DeviceSettings = SettingsAPI.DeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
   export import Unrevoke = UnrevokeAPI.Unrevoke;
+  export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
   export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
   export import OverrideCodes = OverrideCodesAPI.OverrideCodes;
   export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;

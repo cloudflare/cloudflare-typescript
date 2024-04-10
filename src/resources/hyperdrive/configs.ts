@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConfigsAPI from 'cloudflare/resources/hyperdrive/configs';
-import * as Shared from 'cloudflare/resources/shared';
 import * as HyperdriveAPI from 'cloudflare/resources/hyperdrive/hyperdrive';
 import { HyperdrivesSinglePage } from 'cloudflare/resources/hyperdrive/hyperdrive';
 
@@ -63,13 +62,13 @@ export class Configs extends APIResource {
     hyperdriveId: string,
     params: ConfigDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<ConfigDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: ConfigDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -108,6 +107,8 @@ export class Configs extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export type ConfigDeleteResponse = unknown | string | null;
 
 export interface ConfigCreateParams {
   /**
@@ -177,6 +178,7 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
+  export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigListParams = ConfigsAPI.ConfigListParams;

@@ -5,6 +5,7 @@ export {
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
   CertificatePackEditResponse,
+  CertificatePackGetResponse,
   CertificatePackListParams,
   CertificatePackDeleteParams,
   CertificatePackEditParams,

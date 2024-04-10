@@ -5,7 +5,6 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Rules extends APIResource {
   /**
@@ -174,7 +173,7 @@ export interface BlockRule {
   /**
    * An object configuring the rule's logging behavior.
    */
-  logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+  logging?: Logging;
 
   /**
    * The reference of the rule (the rule ID by default).
@@ -265,7 +264,7 @@ export interface ExecuteRule {
   /**
    * An object configuring the rule's logging behavior.
    */
-  logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+  logging?: Logging;
 
   /**
    * The reference of the rule (the rule ID by default).
@@ -447,12 +446,22 @@ export interface LogRule {
   /**
    * An object configuring the rule's logging behavior.
    */
-  logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+  logging?: Logging;
 
   /**
    * The reference of the rule (the rule ID by default).
    */
   ref?: string;
+}
+
+/**
+ * An object configuring the rule's logging behavior.
+ */
+export interface Logging {
+  /**
+   * Whether to generate a log when the rule matches.
+   */
+  enabled: boolean;
 }
 
 export interface RulesetRule {
@@ -504,7 +513,7 @@ export interface RulesetRule {
   /**
    * An object configuring the rule's logging behavior.
    */
-  logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+  logging?: Logging;
 
   /**
    * The reference of the rule (the rule ID by default).
@@ -561,7 +570,7 @@ export interface SkipRule {
   /**
    * An object configuring the rule's logging behavior.
    */
-  logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+  logging?: Logging;
 
   /**
    * The reference of the rule (the rule ID by default).
@@ -886,7 +895,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -974,7 +983,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1153,7 +1162,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1207,7 +1216,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1341,7 +1350,7 @@ export namespace RuleEditParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1429,7 +1438,7 @@ export namespace RuleEditParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1608,7 +1617,7 @@ export namespace RuleEditParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1662,7 +1671,7 @@ export namespace RuleEditParams {
     /**
      * Body param: An object configuring the rule's logging behavior.
      */
-    logging?: Shared.UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c;
+    logging?: Logging;
 
     /**
      * Body param: The reference of the rule (the rule ID by default).
@@ -1735,6 +1744,7 @@ export namespace Rules {
   export import BlockRule = RulesAPI.BlockRule;
   export import ExecuteRule = RulesAPI.ExecuteRule;
   export import LogRule = RulesAPI.LogRule;
+  export import Logging = RulesAPI.Logging;
   export import RulesetRule = RulesAPI.RulesetRule;
   export import SkipRule = RulesAPI.SkipRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;

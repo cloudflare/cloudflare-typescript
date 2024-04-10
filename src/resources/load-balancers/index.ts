@@ -30,5 +30,5 @@ export {
   Pools,
 } from './pools/index';
 export { PreviewGetResponse, PreviewGetParams, Previews } from './previews';
-export { RegionGetResponse, RegionListParams, RegionGetParams, Regions } from './regions';
+export { RegionListResponse, RegionGetResponse, RegionListParams, RegionGetParams, Regions } from './regions';
 export { SearchGetResponse, SearchGetParams, Searches } from './searches';

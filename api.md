@@ -4,29 +4,25 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
+- <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef025497b7e63379c31929636b5186e45c</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef23001f1f0b697900e282236466a95fa3</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef33f2e3917f3fe46ad98af0acbb1d9a19</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef619309774d07ec6904f1e354560d6028</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef70f2c6ccd8a405358ac7ef8fc3d6751c</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</a></code>
-- <code><a href="./src/resources/shared.ts">UnnamedSchemaRefEe1e79edcb234d14c4dd266880f2fd24</a></code>
 
 # Accounts
 
 Types:
 
 - <code><a href="./src/resources/accounts/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">AccountUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountListResponse</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">AccountGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">update</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">update</a>({ ...params }) -> AccountUpdateResponse</code>
 - <code title="get /accounts">client.accounts.<a href="./src/resources/accounts/accounts.ts">list</a>({ ...params }) -> AccountListResponsesV4PagePaginationArray</code>
-- <code title="get /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">get</a>({ ...params }) -> AccountGetResponse</code>
 
 ## Members
 
@@ -52,25 +48,28 @@ Types:
 
 - <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
+- <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
-- <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
 # OriginCACertificates
 
 Types:
 
 - <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificate</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateCreateResponse</a></code>
 - <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-ca-certificates.ts">OriginCACertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="post /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">create</a>({ ...params }) -> OriginCACertificateCreateResponse</code>
 - <code title="get /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">list</a>({ ...params }) -> OriginCACertificatesSinglePage</code>
 - <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateId, { ...params }) -> OriginCACertificateDeleteResponse</code>
-- <code title="get /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">get</a>(certificateId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">get</a>(certificateId) -> OriginCACertificateGetResponse</code>
 
 # IPs
 
@@ -89,21 +88,28 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/memberships.ts">Membership</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipUpdateResponse</a></code>
 - <code><a href="./src/resources/memberships.ts">MembershipDeleteResponse</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipGetResponse</a></code>
 
 Methods:
 
-- <code title="put /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(membershipId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(membershipId, { ...params }) -> MembershipUpdateResponse</code>
 - <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsV4PagePaginationArray</code>
 - <code title="delete /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">delete</a>(membershipId, { ...params }) -> MembershipDeleteResponse</code>
-- <code title="get /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">get</a>(membershipId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">get</a>(membershipId) -> MembershipGetResponse</code>
 
 # User
 
+Types:
+
+- <code><a href="./src/resources/user/user.ts">UserEditResponse</a></code>
+- <code><a href="./src/resources/user/user.ts">UserGetResponse</a></code>
+
 Methods:
 
-- <code title="patch /user">client.user.<a href="./src/resources/user/user.ts">edit</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /user">client.user.<a href="./src/resources/user/user.ts">get</a>() -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /user">client.user.<a href="./src/resources/user/user.ts">edit</a>({ ...params }) -> UserEditResponse</code>
+- <code title="get /user">client.user.<a href="./src/resources/user/user.ts">get</a>() -> UserGetResponse</code>
 
 ## AuditLogs
 
@@ -129,21 +135,27 @@ Methods:
 
 ### Profile
 
+Types:
+
+- <code><a href="./src/resources/user/billing/profile.ts">ProfileGetResponse</a></code>
+
 Methods:
 
-- <code title="get /user/billing/profile">client.user.billing.profile.<a href="./src/resources/user/billing/profile.ts">get</a>() -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /user/billing/profile">client.user.billing.profile.<a href="./src/resources/user/billing/profile.ts">get</a>() -> ProfileGetResponse</code>
 
 ## Invites
 
 Types:
 
 - <code><a href="./src/resources/user/invites.ts">Invite</a></code>
+- <code><a href="./src/resources/user/invites.ts">InviteEditResponse</a></code>
+- <code><a href="./src/resources/user/invites.ts">InviteGetResponse</a></code>
 
 Methods:
 
 - <code title="get /user/invites">client.user.invites.<a href="./src/resources/user/invites.ts">list</a>() -> InvitesSinglePage</code>
-- <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteId, { ...params }) -> InviteEditResponse</code>
+- <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteId) -> InviteGetResponse</code>
 
 ## Organizations
 
@@ -151,26 +163,29 @@ Types:
 
 - <code><a href="./src/resources/user/organizations.ts">Organization</a></code>
 - <code><a href="./src/resources/user/organizations.ts">OrganizationDeleteResponse</a></code>
+- <code><a href="./src/resources/user/organizations.ts">OrganizationGetResponse</a></code>
 
 Methods:
 
 - <code title="get /user/organizations">client.user.organizations.<a href="./src/resources/user/organizations.ts">list</a>({ ...params }) -> OrganizationsV4PagePaginationArray</code>
 - <code title="delete /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">delete</a>(organizationId, { ...params }) -> OrganizationDeleteResponse</code>
-- <code title="get /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">get</a>(organizationId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">get</a>(organizationId) -> OrganizationGetResponse</code>
 
 ## Subscriptions
 
 Types:
 
 - <code><a href="./src/resources/user/subscriptions.ts">Subscription</a></code>
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionEditResponse</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
-- <code title="put /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">update</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">update</a>(identifier, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="delete /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">delete</a>(identifier, { ...params }) -> SubscriptionDeleteResponse</code>
-- <code title="put /zones/{identifier}/subscription">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">edit</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /zones/{identifier}/subscription">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">edit</a>(identifier, { ...params }) -> SubscriptionEditResponse</code>
 - <code title="get /user/subscriptions">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">get</a>() -> SubscriptionGetResponse | null</code>
 
 ## Tokens
@@ -180,17 +195,19 @@ Types:
 - <code><a href="./src/resources/user/tokens/tokens.ts">CIDRList</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">Policy</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/user/tokens/tokens.ts">TokenUpdateResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenListResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenDeleteResponse</a></code>
+- <code><a href="./src/resources/user/tokens/tokens.ts">TokenGetResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenVerifyResponse</a></code>
 
 Methods:
 
 - <code title="post /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
-- <code title="put /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> TokenUpdateResponse</code>
 - <code title="get /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
 - <code title="delete /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">delete</a>(tokenId, { ...params }) -> TokenDeleteResponse | null</code>
-- <code title="get /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">get</a>(tokenId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">get</a>(tokenId) -> TokenGetResponse</code>
 - <code title="get /user/tokens/verify">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">verify</a>() -> TokenVerifyResponse</code>
 
 ### PermissionGroups
@@ -841,11 +858,16 @@ Methods:
 
 ## Subscriptions
 
+Types:
+
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/zones/subscriptions.ts">SubscriptionGetResponse</a></code>
+
 Methods:
 
-- <code title="post /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
 - <code title="get /accounts/{account_identifier}/subscriptions">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">list</a>(accountIdentifier) -> SubscriptionsSinglePage</code>
-- <code title="get /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>(identifier) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # LoadBalancers
 
@@ -969,11 +991,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/load-balancers/regions.ts">RegionListResponse</a></code>
 - <code><a href="./src/resources/load-balancers/regions.ts">RegionGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/load_balancers/regions">client.loadBalancers.regions.<a href="./src/resources/load-balancers/regions.ts">list</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}/load_balancers/regions">client.loadBalancers.regions.<a href="./src/resources/load-balancers/regions.ts">list</a>({ ...params }) -> RegionListResponse</code>
 - <code title="get /accounts/{account_id}/load_balancers/regions/{region_id}">client.loadBalancers.regions.<a href="./src/resources/load-balancers/regions.ts">get</a>(regionId, { ...params }) -> RegionGetResponse</code>
 
 ## Searches
@@ -1001,7 +1024,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
-- <code><a href="./src/resources/cache/cache-reserve.ts">UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClear</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
@@ -1016,24 +1039,30 @@ Methods:
 
 ## SmartTieredCache
 
+Types:
+
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheDeleteResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheEditResponse</a></code>
+- <code><a href="./src/resources/cache/smart-tiered-cache.ts">SmartTieredCacheGetResponse</a></code>
+
 Methods:
 
-- <code title="delete /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">delete</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="patch /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">edit</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">delete</a>({ ...params }) -> SmartTieredCacheDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">edit</a>({ ...params }) -> SmartTieredCacheEditResponse</code>
+- <code title="get /zones/{zone_id}/cache/tiered_cache_smart_topology_enable">client.cache.smartTieredCache.<a href="./src/resources/cache/smart-tiered-cache.ts">get</a>({ ...params }) -> SmartTieredCacheGetResponse</code>
 
 ## Variants
 
 Types:
 
-- <code><a href="./src/resources/cache/variants.ts">CacheVariants</a></code>
-- <code><a href="./src/resources/cache/variants.ts">UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0</a></code>
+- <code><a href="./src/resources/cache/variants.ts">CacheVariant</a></code>
+- <code><a href="./src/resources/cache/variants.ts">CacheVariantIdentifier</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantEditResponse</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantGetResponse</a></code>
 
 Methods:
 
-- <code title="delete /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">delete</a>({ ...params }) -> CacheVariants</code>
+- <code title="delete /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">delete</a>({ ...params }) -> CacheVariant</code>
 - <code title="patch /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">edit</a>({ ...params }) -> VariantEditResponse</code>
 - <code title="get /zones/{zone_id}/cache/variants">client.cache.variants.<a href="./src/resources/cache/variants.ts">get</a>({ ...params }) -> VariantGetResponse</code>
 
@@ -1054,9 +1083,13 @@ Methods:
 
 ## Analyze
 
+Types:
+
+- <code><a href="./src/resources/ssl/analyze.ts">AnalyzeCreateResponse</a></code>
+
 Methods:
 
-- <code title="post /zones/{zone_id}/ssl/analyze">client.ssl.analyze.<a href="./src/resources/ssl/analyze.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{zone_id}/ssl/analyze">client.ssl.analyze.<a href="./src/resources/ssl/analyze.ts">create</a>({ ...params }) -> AnalyzeCreateResponse</code>
 
 ## CertificatePacks
 
@@ -1066,13 +1099,14 @@ Types:
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackEditResponse</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackGetResponse</a></code>
 
 Methods:
 
 - <code title="get /zones/{zone_id}/ssl/certificate_packs">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">list</a>({ ...params }) -> CertificatePackListResponsesSinglePage</code>
 - <code title="delete /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">delete</a>(certificatePackId, { ...params }) -> CertificatePackDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">edit</a>(certificatePackId, { ...params }) -> CertificatePackEditResponse</code>
-- <code title="get /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">get</a>(certificatePackId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}">client.ssl.certificatePacks.<a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">get</a>(certificatePackId, { ...params }) -> CertificatePackGetResponse</code>
 
 ### Order
 
@@ -1134,15 +1168,18 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="put /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
+- <code title="put /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="get /accounts/{account_identifier}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">list</a>(accountIdentifier) -> SubscriptionsSinglePage</code>
 - <code title="delete /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
-- <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # ACM
 
@@ -1162,17 +1199,27 @@ Methods:
 
 ## SmartRouting
 
+Types:
+
+- <code><a href="./src/resources/argo/smart-routing.ts">SmartRoutingEditResponse</a></code>
+- <code><a href="./src/resources/argo/smart-routing.ts">SmartRoutingGetResponse</a></code>
+
 Methods:
 
-- <code title="patch /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">edit</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">edit</a>({ ...params }) -> SmartRoutingEditResponse</code>
+- <code title="get /zones/{zone_id}/argo/smart_routing">client.argo.smartRouting.<a href="./src/resources/argo/smart-routing.ts">get</a>({ ...params }) -> SmartRoutingGetResponse</code>
 
 ## TieredCaching
 
+Types:
+
+- <code><a href="./src/resources/argo/tiered-caching.ts">TieredCachingEditResponse</a></code>
+- <code><a href="./src/resources/argo/tiered-caching.ts">TieredCachingGetResponse</a></code>
+
 Methods:
 
-- <code title="patch /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">edit</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">edit</a>({ ...params }) -> TieredCachingEditResponse</code>
+- <code title="get /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">get</a>({ ...params }) -> TieredCachingGetResponse</code>
 
 # Plans
 
@@ -1233,15 +1280,18 @@ Types:
 
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificate</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">GeoRestrictions</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateCreateResponse</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateEditResponse</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">create</a>({ ...params }) -> CustomCertificateCreateResponse</code>
 - <code title="get /zones/{zone_id}/custom_certificates">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">list</a>({ ...params }) -> CustomCertificatesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">delete</a>(customCertificateId, { ...params }) -> CustomCertificateDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">edit</a>(customCertificateId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">get</a>(customCertificateId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">edit</a>(customCertificateId, { ...params }) -> CustomCertificateEditResponse</code>
+- <code title="get /zones/{zone_id}/custom_certificates/{custom_certificate_id}">client.customCertificates.<a href="./src/resources/custom-certificates/custom-certificates.ts">get</a>(customCertificateId, { ...params }) -> CustomCertificateGetResponse</code>
 
 ## Prioritize
 
@@ -1257,28 +1307,37 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">BundleMethod</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostname</a></code>
-- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef16aca57bde2963201c7e6e895436c1c1</a></code>
-- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef78adb375f06c6d462dd92b99e2ecf510</a></code>
-- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRef9a9935a9a770967bb604ae41a81e42e1</a></code>
-- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">UnnamedSchemaRefD2a16d7ee1ad3a888dd5821c918d51fd</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">DCVMethod</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">DomainValidationType</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameCreateResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameListResponse</a></code>
 - <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameDeleteResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameEditResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/custom-hostnames.ts">CustomHostnameGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">create</a>({ ...params }) -> CustomHostname</code>
-- <code title="get /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">list</a>({ ...params }) -> CustomHostnamesV4PagePaginationArray</code>
+- <code title="post /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">create</a>({ ...params }) -> CustomHostnameCreateResponse</code>
+- <code title="get /zones/{zone_id}/custom_hostnames">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">list</a>({ ...params }) -> CustomHostnameListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">delete</a>(customHostnameId, { ...params }) -> CustomHostnameDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">edit</a>(customHostnameId, { ...params }) -> CustomHostname</code>
-- <code title="get /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">get</a>(customHostnameId, { ...params }) -> CustomHostname</code>
+- <code title="patch /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">edit</a>(customHostnameId, { ...params }) -> CustomHostnameEditResponse</code>
+- <code title="get /zones/{zone_id}/custom_hostnames/{custom_hostname_id}">client.customHostnames.<a href="./src/resources/custom-hostnames/custom-hostnames.ts">get</a>(customHostnameId, { ...params }) -> CustomHostnameGetResponse</code>
 
 ## FallbackOrigin
 
+Types:
+
+- <code><a href="./src/resources/custom-hostnames/fallback-origin.ts">FallbackOriginUpdateResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/fallback-origin.ts">FallbackOriginDeleteResponse</a></code>
+- <code><a href="./src/resources/custom-hostnames/fallback-origin.ts">FallbackOriginGetResponse</a></code>
+
 Methods:
 
-- <code title="put /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">update</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="delete /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">delete</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">update</a>({ ...params }) -> FallbackOriginUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">delete</a>({ ...params }) -> FallbackOriginDeleteResponse</code>
+- <code title="get /zones/{zone_id}/custom_hostnames/fallback_origin">client.customHostnames.fallbackOrigin.<a href="./src/resources/custom-hostnames/fallback-origin.ts">get</a>({ ...params }) -> FallbackOriginGetResponse</code>
 
 # CustomNameservers
 
@@ -1302,9 +1361,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/dns/dns.ts">UnnamedSchemaRef6595695ff25b0614667b25f66b7bbaba</a></code>
-- <code><a href="./src/resources/dns/dns.ts">UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca</a></code>
-- <code><a href="./src/resources/dns/dns.ts">UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2</a></code>
+- <code><a href="./src/resources/dns/dns.ts">DNSAnalyticsNominalMetric</a></code>
+- <code><a href="./src/resources/dns/dns.ts">DNSAnalyticsQuery</a></code>
 
 ## Records
 
@@ -1324,6 +1382,8 @@ Types:
 - <code><a href="./src/resources/dns/records.ts">NSRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">PTRRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">Record</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordMetadata</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordProcessTiming</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordTags</a></code>
 - <code><a href="./src/resources/dns/records.ts">SMIMEARecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">SRVRecord</a></code>
@@ -1332,9 +1392,6 @@ Types:
 - <code><a href="./src/resources/dns/records.ts">TLSARecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">TTL</a></code>
 - <code><a href="./src/resources/dns/records.ts">TXTRecord</a></code>
-- <code><a href="./src/resources/dns/records.ts">UnnamedSchemaRef1391721bdb8938d5420a8bc738a44deb</a></code>
-- <code><a href="./src/resources/dns/records.ts">UnnamedSchemaRef186756a742f85f535cb7bfb2d03b2b8c</a></code>
-- <code><a href="./src/resources/dns/records.ts">UnnamedSchemaRef2f895e023ae55b55d2f5925449b819cd</a></code>
 - <code><a href="./src/resources/dns/records.ts">URIRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordDeleteResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordExportResponse</a></code>
@@ -1550,31 +1607,37 @@ Types:
 - <code><a href="./src/resources/firewall/access-rules.ts">ASNConfiguration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">CountryConfiguration</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">IPV6Configuration</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleCreateResponse</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleDeleteResponse</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleEditResponse</a></code>
+- <code><a href="./src/resources/firewall/access-rules.ts">AccessRuleGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">create</a>({ ...params }) -> AccessRuleCreateResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">list</a>({ ...params }) -> AccessRuleListResponsesV4PagePaginationArray</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">delete</a>(identifier, { ...params }) -> AccessRuleDeleteResponse | null</code>
-- <code title="patch /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">edit</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">get</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">edit</a>(identifier, { ...params }) -> AccessRuleEditResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/firewall/access_rules/rules/{identifier}">client.firewall.accessRules.<a href="./src/resources/firewall/access-rules.ts">get</a>(identifier, { ...params }) -> AccessRuleGetResponse</code>
 
 ## UARules
 
 Types:
 
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleCreateResponse</a></code>
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleUpdateResponse</a></code>
 - <code><a href="./src/resources/firewall/ua-rules.ts">UARuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/ua-rules.ts">UARuleDeleteResponse</a></code>
+- <code><a href="./src/resources/firewall/ua-rules.ts">UARuleGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_identifier}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">create</a>(zoneIdentifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="put /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{zone_identifier}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">create</a>(zoneIdentifier, { ...params }) -> UARuleCreateResponse</code>
+- <code title="put /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> UARuleUpdateResponse</code>
 - <code title="get /zones/{zone_identifier}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">list</a>(zoneIdentifier, { ...params }) -> UARuleListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">delete</a>(zoneIdentifier, id, { ...params }) -> UARuleDeleteResponse</code>
-- <code title="get /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">get</a>(zoneIdentifier, id) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">get</a>(zoneIdentifier, id) -> UARuleGetResponse</code>
 
 ## WAF
 
@@ -1613,12 +1676,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/firewall/waf/packages/groups.ts">Group</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/groups.ts">GroupEditResponse</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/groups.ts">GroupGetResponse</a></code>
 
 Methods:
 
 - <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/groups">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">list</a>(packageId, { ...params }) -> GroupsV4PagePaginationArray</code>
-- <code title="patch /zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">edit</a>(packageId, groupId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">get</a>(packageId, groupId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">edit</a>(packageId, groupId, { ...params }) -> GroupEditResponse</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}">client.firewall.waf.packages.groups.<a href="./src/resources/firewall/waf/packages/groups.ts">get</a>(packageId, groupId, { ...params }) -> GroupGetResponse</code>
 
 #### Rules
 
@@ -1628,12 +1693,13 @@ Types:
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleEditResponse</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleGetResponse</a></code>
 
 Methods:
 
 - <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">list</a>(packageId, { ...params }) -> RuleListResponsesV4PagePaginationArray</code>
 - <code title="patch /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">edit</a>(packageId, ruleId, { ...params }) -> RuleEditResponse</code>
-- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">get</a>(packageId, ruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}">client.firewall.waf.packages.rules.<a href="./src/resources/firewall/waf/packages/rules.ts">get</a>(packageId, ruleId, { ...params }) -> RuleGetResponse</code>
 
 # Healthchecks
 
@@ -1831,13 +1897,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">ZoneAuthenticatedOriginPull</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">OriginTLSClientAuthGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">create</a>({ ...params }) -> OriginTLSClientAuthCreateResponse</code>
 - <code title="get /zones/{zone_id}/origin_tls_client_auth">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">list</a>({ ...params }) -> ZoneAuthenticatedOriginPullsSinglePage</code>
-- <code title="delete /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">delete</a>(certificateId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">get</a>(certificateId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">delete</a>(certificateId, { ...params }) -> OriginTLSClientAuthDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/{certificate_id}">client.originTLSClientAuth.<a href="./src/resources/origin-tls-client-auth/origin-tls-client-auth.ts">get</a>(certificateId, { ...params }) -> OriginTLSClientAuthGetResponse</code>
 
 ## Hostnames
 
@@ -1886,17 +1955,21 @@ Types:
 - <code><a href="./src/resources/pagerules/pagerules.ts">Route</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">Targes</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">URLTarget</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleCreateResponse</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleUpdateResponse</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleListResponse</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleDeleteResponse</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleEditResponse</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">update</a>(pageruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">create</a>({ ...params }) -> PageruleCreateResponse</code>
+- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">update</a>(pageruleId, { ...params }) -> PageruleUpdateResponse</code>
 - <code title="get /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">list</a>({ ...params }) -> PageruleListResponse</code>
 - <code title="delete /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">delete</a>(pageruleId, { ...params }) -> PageruleDeleteResponse | null</code>
-- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">edit</a>(pageruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">get</a>(pageruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">edit</a>(pageruleId, { ...params }) -> PageruleEditResponse</code>
+- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">get</a>(pageruleId, { ...params }) -> PageruleGetResponse</code>
 
 ## Settings
 
@@ -1915,15 +1988,18 @@ Types:
 - <code><a href="./src/resources/rate-limits.ts">Action</a></code>
 - <code><a href="./src/resources/rate-limits.ts">Methods</a></code>
 - <code><a href="./src/resources/rate-limits.ts">RateLimit</a></code>
+- <code><a href="./src/resources/rate-limits.ts">RateLimitCreateResponse</a></code>
 - <code><a href="./src/resources/rate-limits.ts">RateLimitDeleteResponse</a></code>
+- <code><a href="./src/resources/rate-limits.ts">RateLimitEditResponse</a></code>
+- <code><a href="./src/resources/rate-limits.ts">RateLimitGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">create</a>(zoneIdentifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">create</a>(zoneIdentifier, { ...params }) -> RateLimitCreateResponse</code>
 - <code title="get /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">list</a>(zoneIdentifier, { ...params }) -> RateLimitsV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">delete</a>(zoneIdentifier, id, { ...params }) -> RateLimitDeleteResponse</code>
-- <code title="put /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(zoneIdentifier, id, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(zoneIdentifier, id) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(zoneIdentifier, id, { ...params }) -> RateLimitEditResponse</code>
+- <code title="get /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(zoneIdentifier, id) -> RateLimitGetResponse</code>
 
 # SecondaryDNS
 
@@ -2197,6 +2273,7 @@ Types:
 - <code><a href="./src/resources/workers/workers.ts">ServiceBinding</a></code>
 - <code><a href="./src/resources/workers/workers.ts">SingleStepMigration</a></code>
 - <code><a href="./src/resources/workers/workers.ts">SteppedMigration</a></code>
+- <code><a href="./src/resources/workers/workers.ts">WorkerMetadata</a></code>
 
 ## AI
 
@@ -2419,6 +2496,7 @@ Types:
 
 - <code><a href="./src/resources/queues/queues.ts">Queue</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueCreated</a></code>
+- <code><a href="./src/resources/queues/queues.ts">QueueSettings</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueUpdated</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueCreateResponse</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueUpdateResponse</a></code>
@@ -2573,6 +2651,7 @@ Types:
 - <code><a href="./src/resources/rulesets/rules.ts">BlockRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">Logging</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RulesetRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">SkipRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RuleCreateResponse</a></code>
@@ -2676,6 +2755,7 @@ Types:
 - <code><a href="./src/resources/spectrum/apps.ts">AppUpdateResponse</a></code>
 - <code><a href="./src/resources/spectrum/apps.ts">AppListResponse</a></code>
 - <code><a href="./src/resources/spectrum/apps.ts">AppDeleteResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppGetResponse</a></code>
 
 Methods:
 
@@ -2683,7 +2763,7 @@ Methods:
 - <code title="put /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">update</a>(zone, appId, { ...params }) -> AppUpdateResponse | null</code>
 - <code title="get /zones/{zone}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">list</a>(zone, { ...params }) -> AppListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(zone, appId, { ...params }) -> AppDeleteResponse | null</code>
-- <code title="get /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(zone, appId) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(zone, appId) -> AppGetResponse</code>
 
 # Addressing
 
@@ -2853,9 +2933,13 @@ Methods:
 
 ## Profiles
 
+Types:
+
+- <code><a href="./src/resources/billing/profiles.ts">ProfileGetResponse</a></code>
+
 Methods:
 
-- <code title="get /accounts/{account_identifier}/billing/profile">client.billing.profiles.<a href="./src/resources/billing/profiles.ts">get</a>(accountIdentifier) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_identifier}/billing/profile">client.billing.profiles.<a href="./src/resources/billing/profiles.ts">get</a>(accountIdentifier) -> ProfileGetResponse</code>
 
 # BrandProtection
 
@@ -2898,12 +2982,13 @@ Types:
 - <code><a href="./src/resources/images/v1/v1.ts">Image</a></code>
 - <code><a href="./src/resources/images/v1/v1.ts">UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a</a></code>
 - <code><a href="./src/resources/images/v1/v1.ts">V1ListResponse</a></code>
+- <code><a href="./src/resources/images/v1/v1.ts">V1DeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/images/v1">client.images.v1.<a href="./src/resources/images/v1/v1.ts">create</a>({ ...params }) -> Image</code>
 - <code title="get /accounts/{account_id}/images/v1">client.images.v1.<a href="./src/resources/images/v1/v1.ts">list</a>({ ...params }) -> V1ListResponsesV4PagePagination</code>
-- <code title="delete /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">delete</a>(imageId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">delete</a>(imageId, { ...params }) -> V1DeleteResponse</code>
 - <code title="patch /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">edit</a>(imageId, { ...params }) -> Image</code>
 - <code title="get /accounts/{account_id}/images/v1/{image_id}">client.images.v1.<a href="./src/resources/images/v1/v1.ts">get</a>(imageId, { ...params }) -> Image</code>
 
@@ -2937,6 +3022,7 @@ Types:
 - <code><a href="./src/resources/images/v1/variants.ts">UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">Variant</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">VariantCreateResponse</a></code>
+- <code><a href="./src/resources/images/v1/variants.ts">VariantDeleteResponse</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">VariantEditResponse</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">VariantGetResponse</a></code>
 
@@ -2944,7 +3030,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/images/v1/variants">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">create</a>({ ...params }) -> VariantCreateResponse</code>
 - <code title="get /accounts/{account_id}/images/v1/variants">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">list</a>({ ...params }) -> Variant</code>
-- <code title="delete /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">delete</a>(variantId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">delete</a>(variantId, { ...params }) -> VariantDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">edit</a>(variantId, { ...params }) -> VariantEditResponse</code>
 - <code title="get /accounts/{account_id}/images/v1/variants/{variant_id}">client.images.v1.variants.<a href="./src/resources/images/v1/variants.ts">get</a>(variantId, { ...params }) -> VariantGetResponse</code>
 
@@ -3713,38 +3799,43 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/stream/watermarks.ts">Watermaks</a></code>
+- <code><a href="./src/resources/stream/watermarks.ts">WatermarkCreateResponse</a></code>
 - <code><a href="./src/resources/stream/watermarks.ts">WatermarkDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/watermarks.ts">WatermarkGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> WatermarkCreateResponse</code>
 - <code title="get /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">list</a>({ ...params }) -> WatermaksSinglePage</code>
 - <code title="delete /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">delete</a>(identifier, { ...params }) -> WatermarkDeleteResponse</code>
-- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> WatermarkGetResponse</code>
 
 ## Webhooks
 
 Types:
 
+- <code><a href="./src/resources/stream/webhooks.ts">WebhookUpdateResponse</a></code>
 - <code><a href="./src/resources/stream/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/webhooks.ts">WebhookGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">update</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">update</a>({ ...params }) -> WebhookUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">delete</a>({ ...params }) -> WebhookDeleteResponse</code>
-- <code title="get /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}/stream/webhook">client.stream.webhooks.<a href="./src/resources/stream/webhooks.ts">get</a>({ ...params }) -> WebhookGetResponse</code>
 
 ## Captions
 
 Types:
 
 - <code><a href="./src/resources/stream/captions.ts">Caption</a></code>
+- <code><a href="./src/resources/stream/captions.ts">CaptionUpdateResponse</a></code>
 - <code><a href="./src/resources/stream/captions.ts">CaptionDeleteResponse</a></code>
 - <code><a href="./src/resources/stream/captions.ts">CaptionGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">update</a>(identifier, language, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">update</a>(identifier, language, { ...params }) -> CaptionUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">delete</a>(identifier, language, { ...params }) -> CaptionDeleteResponse</code>
 - <code title="get /accounts/{account_id}/stream/{identifier}/captions">client.stream.captions.<a href="./src/resources/stream/captions.ts">get</a>(identifier, { ...params }) -> CaptionGetResponse</code>
 
@@ -3752,13 +3843,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/stream/downloads.ts">DownloadCreateResponse</a></code>
 - <code><a href="./src/resources/stream/downloads.ts">DownloadDeleteResponse</a></code>
+- <code><a href="./src/resources/stream/downloads.ts">DownloadGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">create</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">create</a>(identifier, { ...params }) -> DownloadCreateResponse</code>
 - <code title="delete /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">delete</a>(identifier, { ...params }) -> DownloadDeleteResponse</code>
-- <code title="get /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">get</a>(identifier, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/downloads">client.stream.downloads.<a href="./src/resources/stream/downloads.ts">get</a>(identifier, { ...params }) -> DownloadGetResponse</code>
 
 ## Embed
 
@@ -3884,13 +3977,14 @@ Types:
 - <code><a href="./src/resources/d1/database.ts">QueryResult</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseCreateResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseListResponse</a></code>
+- <code><a href="./src/resources/d1/database.ts">DatabaseDeleteResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseQueryResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database.ts">create</a>({ ...params }) -> DatabaseCreateResponse</code>
 - <code title="get /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database.ts">list</a>({ ...params }) -> DatabaseListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_identifier}/d1/database/{database_identifier}">client.d1.database.<a href="./src/resources/d1/database.ts">delete</a>(accountIdentifier, databaseIdentifier) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_identifier}/d1/database/{database_identifier}">client.d1.database.<a href="./src/resources/d1/database.ts">delete</a>(accountIdentifier, databaseIdentifier) -> DatabaseDeleteResponse</code>
 - <code title="get /accounts/{account_identifier}/d1/database/{database_identifier}">client.d1.database.<a href="./src/resources/d1/database.ts">get</a>(accountIdentifier, databaseIdentifier) -> D1</code>
 - <code title="post /accounts/{account_identifier}/d1/database/{database_identifier}/query">client.d1.database.<a href="./src/resources/d1/database.ts">query</a>(accountIdentifier, databaseIdentifier, { ...params }) -> DatabaseQueryResponse</code>
 
@@ -3999,11 +4093,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/devices.ts">Device</a></code>
+- <code><a href="./src/resources/zero-trust/devices/devices.ts">DeviceGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/devices">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">list</a>({ ...params }) -> DevicesSinglePage</code>
-- <code title="get /accounts/{account_id}/devices/{device_id}">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">get</a>(deviceId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /accounts/{account_id}/devices/{device_id}">client.zeroTrust.devices.<a href="./src/resources/zero-trust/devices/devices.ts">get</a>(deviceId, { ...params }) -> DeviceGetResponse</code>
 
 ### DEXTests
 
@@ -4135,20 +4230,25 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">Integration</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">IntegrationDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">create</a>({ ...params }) -> Integration | null</code>
 - <code title="get /accounts/{account_id}/devices/posture/integration">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">list</a>({ ...params }) -> IntegrationsSinglePage</code>
-- <code title="delete /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">delete</a>(integrationId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">delete</a>(integrationId, { ...params }) -> IntegrationDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">edit</a>(integrationId, { ...params }) -> Integration | null</code>
 - <code title="get /accounts/{account_id}/devices/posture/integration/{integration_id}">client.zeroTrust.devices.posture.integrations.<a href="./src/resources/zero-trust/devices/posture/integrations.ts">get</a>(integrationId, { ...params }) -> Integration | null</code>
 
 ### Revoke
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/revoke.ts">RevokeCreateResponse</a></code>
+
 Methods:
 
-- <code title="post /accounts/{account_id}/devices/revoke">client.zeroTrust.devices.revoke.<a href="./src/resources/zero-trust/devices/revoke.ts">create</a>([ ...body ]) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /accounts/{account_id}/devices/revoke">client.zeroTrust.devices.revoke.<a href="./src/resources/zero-trust/devices/revoke.ts">create</a>([ ...body ]) -> RevokeCreateResponse</code>
 
 ### Settings
 
@@ -4163,9 +4263,13 @@ Methods:
 
 ### Unrevoke
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/unrevoke.ts">UnrevokeCreateResponse</a></code>
+
 Methods:
 
-- <code title="post /accounts/{account_id}/devices/unrevoke">client.zeroTrust.devices.unrevoke.<a href="./src/resources/zero-trust/devices/unrevoke.ts">create</a>([ ...body ]) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /accounts/{account_id}/devices/unrevoke">client.zeroTrust.devices.unrevoke.<a href="./src/resources/zero-trust/devices/unrevoke.ts">create</a>([ ...body ]) -> UnrevokeCreateResponse</code>
 
 ### OverrideCodes
 
@@ -4260,14 +4364,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CA</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CACreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CADeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CAGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">create</a>(uuid, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">create</a>(uuid, { ...params }) -> CACreateResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">list</a>({ ...params }) -> CAsSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">delete</a>(uuid, { ...params }) -> CADeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">get</a>(uuid, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">get</a>(uuid, { ...params }) -> CAGetResponse</code>
 
 #### UserPolicyChecks
 
@@ -4822,6 +4928,7 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListDeleteResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListEditResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListGetResponse</a></code>
 
@@ -4830,7 +4937,7 @@ Methods:
 - <code title="post /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">create</a>({ ...params }) -> ListCreateResponse</code>
 - <code title="put /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">update</a>(listId, { ...params }) -> ListUpdateResponse</code>
 - <code title="get /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">list</a>({ ...params }) -> ListListResponsesSinglePage</code>
-- <code title="delete /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">delete</a>(listId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">delete</a>(listId, { ...params }) -> ListDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">edit</a>(listId, { ...params }) -> ListEditResponse</code>
 - <code title="get /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">get</a>(listId, { ...params }) -> ListGetResponse</code>
 
@@ -4851,13 +4958,14 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">Location</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationNetwork</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/gateway/locations">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">create</a>({ ...params }) -> Location</code>
 - <code title="put /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">update</a>(locationId, { ...params }) -> Location</code>
 - <code title="get /accounts/{account_id}/gateway/locations">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">list</a>({ ...params }) -> LocationsSinglePage</code>
-- <code title="delete /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">delete</a>(locationId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">delete</a>(locationId, { ...params }) -> LocationDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/locations/{location_id}">client.zeroTrust.gateway.locations.<a href="./src/resources/zero-trust/gateway/locations.ts">get</a>(locationId, { ...params }) -> Location</code>
 
 ### Logging
@@ -4879,12 +4987,13 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">GatewayIPs</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpoint</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">UnnamedSchemaRef4753ee81779d0e57189420079abab61e</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpointDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/gateway/proxy_endpoints">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">create</a>({ ...params }) -> ProxyEndpoint</code>
 - <code title="get /accounts/{account_id}/gateway/proxy_endpoints">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">list</a>({ ...params }) -> ProxyEndpointsSinglePage</code>
-- <code title="delete /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">delete</a>(proxyEndpointId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">delete</a>(proxyEndpointId, { ...params }) -> ProxyEndpointDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">edit</a>(proxyEndpointId, { ...params }) -> ProxyEndpoint</code>
 - <code title="get /accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}">client.zeroTrust.gateway.proxyEndpoints.<a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">get</a>(proxyEndpointId, { ...params }) -> ProxyEndpoint</code>
 
@@ -4898,13 +5007,14 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">GatewayRule</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">RuleSetting</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/rules.ts">Schedule</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/rules.ts">RuleDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">create</a>({ ...params }) -> GatewayRule</code>
 - <code title="put /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">update</a>(ruleId, { ...params }) -> GatewayRule</code>
 - <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
-- <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> GatewayRule</code>
 
 ## Networks
@@ -4982,12 +5092,16 @@ Types:
 
 ## Configs
 
+Types:
+
+- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigDeleteResponse</a></code>
+
 Methods:
 
 - <code title="post /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">create</a>({ ...params }) -> Hyperdrive | null</code>
 - <code title="put /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">update</a>(hyperdriveId, { ...params }) -> Hyperdrive | null</code>
 - <code title="get /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">list</a>({ ...params }) -> HyperdrivesSinglePage</code>
-- <code title="delete /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">delete</a>(hyperdriveId, { ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">delete</a>(hyperdriveId, { ...params }) -> ConfigDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">edit</a>(hyperdriveId, { ...params }) -> Hyperdrive | null</code>
 - <code title="get /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">get</a>(hyperdriveId, { ...params }) -> Hyperdrive | null</code>
 
@@ -5035,6 +5149,7 @@ Types:
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexInsert</a></code>
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexQuery</a></code>
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexUpsert</a></code>
+- <code><a href="./src/resources/vectorize/indexes.ts">IndexDeleteResponse</a></code>
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexGetByIDsResponse</a></code>
 
 Methods:
@@ -5042,7 +5157,7 @@ Methods:
 - <code title="post /accounts/{account_identifier}/vectorize/indexes">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">create</a>(accountIdentifier, { ...params }) -> CreateIndex | null</code>
 - <code title="put /accounts/{account_identifier}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">update</a>(accountIdentifier, indexName, { ...params }) -> CreateIndex | null</code>
 - <code title="get /accounts/{account_identifier}/vectorize/indexes">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">list</a>(accountIdentifier) -> CreateIndicesSinglePage</code>
-- <code title="delete /accounts/{account_identifier}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">delete</a>(accountIdentifier, indexName) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="delete /accounts/{account_identifier}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">delete</a>(accountIdentifier, indexName) -> IndexDeleteResponse</code>
 - <code title="post /accounts/{account_identifier}/vectorize/indexes/{index_name}/delete-by-ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">deleteByIds</a>(accountIdentifier, indexName, { ...params }) -> IndexDeleteVectorsByID | null</code>
 - <code title="get /accounts/{account_identifier}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">get</a>(accountIdentifier, indexName) -> CreateIndex | null</code>
 - <code title="post /accounts/{account_identifier}/vectorize/indexes/{index_name}/get-by-ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">getByIds</a>(accountIdentifier, indexName, { ...params }) -> IndexGetByIDsResponse | null</code>
@@ -6007,10 +6122,15 @@ Methods:
 
 # OriginPostQuantumEncryption
 
+Types:
+
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionUpdateResponse</a></code>
+- <code><a href="./src/resources/origin-post-quantum-encryption.ts">OriginPostQuantumEncryptionGetResponse</a></code>
+
 Methods:
 
-- <code title="put /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">update</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
-- <code title="get /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">get</a>({ ...params }) -> UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a</code>
+- <code title="put /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">update</a>({ ...params }) -> OriginPostQuantumEncryptionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/cache/origin_post_quantum_encryption">client.originPostQuantumEncryption.<a href="./src/resources/origin-post-quantum-encryption.ts">get</a>({ ...params }) -> OriginPostQuantumEncryptionGetResponse</code>
 
 # Speed
 

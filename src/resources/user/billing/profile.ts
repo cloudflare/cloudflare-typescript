@@ -2,19 +2,21 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
+import * as ProfileAPI from 'cloudflare/resources/user/billing/profile';
 
 export class Profile extends APIResource {
   /**
    * Accesses your billing profile object.
    */
-  get(
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
     return (
-      this._client.get('/user/billing/profile', options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
-      }>
+      this._client.get('/user/billing/profile', options) as Core.APIPromise<{ result: ProfileGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export type ProfileGetResponse = unknown | string | null;
+
+export namespace Profile {
+  export import ProfileGetResponse = ProfileAPI.ProfileGetResponse;
 }

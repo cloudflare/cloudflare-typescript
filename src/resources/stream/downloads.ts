@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as DownloadsAPI from 'cloudflare/resources/stream/downloads';
-import * as Shared from 'cloudflare/resources/shared';
 
 export class Downloads extends APIResource {
   /**
@@ -13,13 +12,13 @@ export class Downloads extends APIResource {
     identifier: string,
     params: DownloadCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<DownloadCreateResponse> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/stream/${identifier}/downloads`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: DownloadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,17 +46,21 @@ export class Downloads extends APIResource {
     identifier: string,
     params: DownloadGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<DownloadGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/stream/${identifier}/downloads`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: DownloadGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
+export type DownloadCreateResponse = unknown | string | null;
+
 export type DownloadDeleteResponse = unknown | string;
+
+export type DownloadGetResponse = unknown | string | null;
 
 export interface DownloadCreateParams {
   /**
@@ -86,7 +89,9 @@ export interface DownloadGetParams {
 }
 
 export namespace Downloads {
+  export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
   export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
+  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
   export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
   export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
   export import DownloadGetParams = DownloadsAPI.DownloadGetParams;

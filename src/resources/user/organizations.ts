@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
-import * as Shared from 'cloudflare/resources/shared';
 import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -44,13 +43,10 @@ export class Organizations extends APIResource {
   /**
    * Gets a specific organization the user is associated with.
    */
-  get(
-    organizationId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationGetResponse> {
     return (
       this._client.get(`/user/organizations/${organizationId}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: OrganizationGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -92,6 +88,8 @@ export interface OrganizationDeleteResponse {
   id?: string;
 }
 
+export type OrganizationGetResponse = unknown | string | null;
+
 export interface OrganizationListParams extends V4PagePaginationArrayParams {
   /**
    * Direction to order organizations.
@@ -124,6 +122,7 @@ export type OrganizationDeleteParams = unknown;
 export namespace Organizations {
   export import Organization = OrganizationsAPI.Organization;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
+  export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationDeleteParams = OrganizationsAPI.OrganizationDeleteParams;

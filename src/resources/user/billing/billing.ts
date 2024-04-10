@@ -15,4 +15,5 @@ export namespace Billing {
   export import BillingHistoriesV4PagePaginationArray = HistoryAPI.BillingHistoriesV4PagePaginationArray;
   export import HistoryListParams = HistoryAPI.HistoryListParams;
   export import Profile = ProfileAPI.Profile;
+  export import ProfileGetResponse = ProfileAPI.ProfileGetResponse;
 }

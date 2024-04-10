@@ -117,6 +117,14 @@ export interface QueueCreated {
   queue_name?: string;
 }
 
+export interface QueueSettings {
+  batch_size?: number;
+
+  max_retries?: number;
+
+  max_wait_time_ms?: number;
+}
+
 export interface QueueUpdated {
   created_on?: unknown;
 

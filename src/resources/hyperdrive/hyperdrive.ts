@@ -27,6 +27,7 @@ export interface Hyperdrive {
 
 export namespace HyperdriveResource {
   export import Configs = ConfigsAPI.Configs;
+  export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigListParams = ConfigsAPI.ConfigListParams;
