@@ -40,93 +40,6 @@ export class Radar extends APIResource {
   );
 }
 
-export interface UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42 {
-  code: string;
-
-  name: string;
-}
-
-export interface UnnamedSchemaRef4124a22436f90127c7fa2c4543219752 {
-  clientASN: number;
-
-  clientASName: string;
-
-  value: string;
-}
-
-export interface UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51 {
-  error: string;
-}
-
-export interface UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb {
-  timestamps: Array<string>;
-
-  values: Array<string>;
-}
-
-export interface UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55 {
-  timestamps: Array<string>;
-  [k: string]: Array<string>;
-}
-
-export interface UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09 {
-  clientCountryAlpha2: string;
-
-  clientCountryName: string;
-
-  value: string;
-}
-
-export interface UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297 {
-  IPv4: string;
-
-  IPv6: string;
-}
-
-export interface UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a {
-  IPv4: Array<string>;
-
-  IPv6: Array<string>;
-
-  timestamps: Array<string>;
-}
-
-export interface UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1 {
-  dataSource: string;
-
-  description: string;
-
-  eventType: string;
-
-  isInstantaneous: unknown;
-
-  endTime?: string;
-
-  linkedUrl?: string;
-
-  startTime?: string;
-}
-
-export interface UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5 {
-  /**
-   * Adjusted end of date range.
-   */
-  endTime: string;
-
-  /**
-   * Adjusted start of date range.
-   */
-  startTime: string;
-}
-
-export interface UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7 {
-  data_time: string;
-
-  query_time: string;
-
-  total_peers: number;
-}
-
 export namespace Radar {
   export import Annotations = AnnotationsAPI.Annotations;
   export import BGP = BGPAPI.BGP;
@@ -156,8 +69,8 @@ export namespace Radar {
   export import ConnectionTamperingSummaryParams = ConnectionTamperingAPI.ConnectionTamperingSummaryParams;
   export import ConnectionTamperingTimeseriesGroupsParams = ConnectionTamperingAPI.ConnectionTamperingTimeseriesGroupsParams;
   export import Email = EmailAPI.Email;
-  export import UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c = EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
-  export import UnnamedSchemaRef853c157ad369010995e35be614e0343f = EmailAPI.UnnamedSchemaRef853c157ad369010995e35be614e0343f;
+  export import RadarEmailSeries = EmailAPI.RadarEmailSeries;
+  export import RadarEmailSummary = EmailAPI.RadarEmailSummary;
   export import Attacks = AttacksAPI.Attacks;
   export import Entities = EntitiesAPI.Entities;
   export import EntityGetResponse = EntitiesAPI.EntityGetResponse;

@@ -218,19 +218,19 @@ export class TimeseriesGroups extends APIResource {
 export interface TimeseriesGroupARCResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupDKIMResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupDMARCResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupMaliciousResponse {
@@ -264,7 +264,7 @@ export namespace TimeseriesGroupSpamResponse {
 export interface TimeseriesGroupSPFResponse {
   meta: unknown;
 
-  serie_0: EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
+  serie_0: EmailAPI.RadarEmailSeries;
 }
 
 export interface TimeseriesGroupSpoofResponse {

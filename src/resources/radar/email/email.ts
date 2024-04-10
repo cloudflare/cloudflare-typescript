@@ -10,7 +10,7 @@ export class Email extends APIResource {
   security: SecurityAPI.Security = new SecurityAPI.Security(this._client);
 }
 
-export interface UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c {
+export interface RadarEmailSeries {
   FAIL: Array<string>;
 
   NONE: Array<string>;
@@ -18,7 +18,7 @@ export interface UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c {
   PASS: Array<string>;
 }
 
-export interface UnnamedSchemaRef853c157ad369010995e35be614e0343f {
+export interface RadarEmailSummary {
   FAIL: string;
 
   NONE: string;
@@ -27,8 +27,8 @@ export interface UnnamedSchemaRef853c157ad369010995e35be614e0343f {
 }
 
 export namespace Email {
-  export import UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c = EmailAPI.UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c;
-  export import UnnamedSchemaRef853c157ad369010995e35be614e0343f = EmailAPI.UnnamedSchemaRef853c157ad369010995e35be614e0343f;
+  export import RadarEmailSeries = EmailAPI.RadarEmailSeries;
+  export import RadarEmailSummary = EmailAPI.RadarEmailSummary;
   export import Routing = RoutingAPI.Routing;
   export import Security = SecurityAPI.Security;
 }

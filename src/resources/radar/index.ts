@@ -26,6 +26,7 @@ export { HTTP } from './http/index';
 export { NetflowTimeseriesResponse, NetflowTimeseriesParams, Netflows } from './netflows/index';
 export { Quality } from './quality/index';
 export { Radar } from './radar';
+export { RadarEmailSeries, RadarEmailSummary, Email } from './email/index';
 export {
   RankingTimeseriesGroupsResponse,
   RankingTopResponse,
@@ -39,9 +40,4 @@ export {
   TrafficAnomalyGetParams,
   TrafficAnomalies,
 } from './traffic-anomalies/index';
-export {
-  UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c,
-  UnnamedSchemaRef853c157ad369010995e35be614e0343f,
-  Email,
-} from './email/index';
 export { VerifiedBots } from './verified-bots/index';
