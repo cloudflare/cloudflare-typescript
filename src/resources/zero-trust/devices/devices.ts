@@ -213,15 +213,12 @@ export namespace Devices {
   export import Posture = PostureAPI.Posture;
   export import DeviceInput = PostureAPI.DeviceInput;
   export import DeviceMatch = PostureAPI.DeviceMatch;
+  export import DevicePostureRule = PostureAPI.DevicePostureRule;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
-  export import PostureCreateResponse = PostureAPI.PostureCreateResponse;
-  export import PostureUpdateResponse = PostureAPI.PostureUpdateResponse;
-  export import PostureListResponse = PostureAPI.PostureListResponse;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
-  export import PostureGetResponse = PostureAPI.PostureGetResponse;
-  export import PostureListResponsesSinglePage = PostureAPI.PostureListResponsesSinglePage;
+  export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
   export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
   export import PostureListParams = PostureAPI.PostureListParams;

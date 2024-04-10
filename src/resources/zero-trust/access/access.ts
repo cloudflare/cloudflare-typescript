@@ -27,22 +27,6 @@ export class Access extends APIResource {
 }
 
 /**
- * Enforces a device posture rule has run successfully
- */
-export interface AccessDevicePostureRule {
-  device_posture: AccessDevicePostureRule.DevicePosture;
-}
-
-export namespace AccessDevicePostureRule {
-  export interface DevicePosture {
-    /**
-     * The ID of a device posture integration.
-     */
-    integration_uid: string;
-  }
-}
-
-/**
  * Matches a specific email.
  */
 export type AccessRule =
@@ -64,7 +48,25 @@ export type AccessRule =
   | ExternalEvaluationRule
   | CountryRule
   | AuthenticationMethodRule
-  | AccessDevicePostureRule;
+  | AccessRule.AccessDevicePostureRule;
+
+export namespace AccessRule {
+  /**
+   * Enforces a device posture rule has run successfully
+   */
+  export interface AccessDevicePostureRule {
+    device_posture: AccessDevicePostureRule.DevicePosture;
+  }
+
+  export namespace AccessDevicePostureRule {
+    export interface DevicePosture {
+      /**
+       * The ID of a device posture integration.
+       */
+      integration_uid: string;
+    }
+  }
+}
 
 /**
  * Matches any valid Access Service Token
@@ -366,7 +368,6 @@ export namespace ServiceTokenRule {
 }
 
 export namespace Access {
-  export import AccessDevicePostureRule = AccessAPI.AccessDevicePostureRule;
   export import AccessRule = AccessAPI.AccessRule;
   export import AnyValidServiceTokenRule = AccessAPI.AnyValidServiceTokenRule;
   export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
