@@ -59,13 +59,7 @@ export {
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
-  GatewaySettings,
-  AuditSSHSettingUpdateParams,
-  AuditSSHSettingGetParams,
-  AuditSSHSettings,
-} from './audit-ssh-settings';
-export {
-  Lists,
+  GatewayList,
   ListCreateResponse,
   ListUpdateResponse,
   ListListResponse,
@@ -79,7 +73,14 @@ export {
   ListEditParams,
   ListGetParams,
   ListListResponsesSinglePage,
+  Lists,
 } from './lists/index';
+export {
+  GatewaySettings,
+  AuditSSHSettingUpdateParams,
+  AuditSSHSettingGetParams,
+  AuditSSHSettings,
+} from './audit-ssh-settings';
 export {
   Location,
   LocationNetwork,

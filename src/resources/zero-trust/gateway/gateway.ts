@@ -130,6 +130,7 @@ export namespace Gateway {
   export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import Lists = ListsAPI.Lists;
+  export import GatewayList = ListsAPI.GatewayList;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;
