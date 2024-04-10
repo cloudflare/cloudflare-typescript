@@ -13,7 +13,7 @@ export class Alerting extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 }
 
-export interface UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405 {
+export interface Alert {
   /**
    * UUID
    */
