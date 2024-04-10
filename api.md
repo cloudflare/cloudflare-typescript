@@ -4227,7 +4227,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/access.ts">AccessRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">AuthenticationMethodRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">AzureGroupRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">CertificateRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">CountryRule</a></code>
