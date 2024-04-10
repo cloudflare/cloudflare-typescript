@@ -5181,20 +5181,6 @@ Methods:
 
 # Radar
 
-Types:
-
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef16e559c45a31db5480e21fbe904b2e42</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef4124a22436f90127c7fa2c4543219752</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef73de8b634bb48667e28a6c6c56080c51</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef75bae70cf28e6bcef364b9840db3bdeb</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef7826220e105d84352ba1108d9ed88e55</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef83a14d589e799bc901b9ccc870251d09</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef8b383e904d9fb02521257ef9cc77d297</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRef9002274ed7cb7f3dc567421e31529a3a</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5</a></code>
-- <code><a href="./src/resources/radar/radar.ts">UnnamedSchemaRefC5858f1f916a921846e0b6159af470a7</a></code>
-
 ## Annotations
 
 ### Outages
@@ -5437,8 +5423,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/radar/email/email.ts">UnnamedSchemaRef67c73d4742566cab0909f71b1822e88c</a></code>
-- <code><a href="./src/resources/radar/email/email.ts">UnnamedSchemaRef853c157ad369010995e35be614e0343f</a></code>
+- <code><a href="./src/resources/radar/email/email.ts">RadarEmailSeries</a></code>
+- <code><a href="./src/resources/radar/email/email.ts">RadarEmailSummary</a></code>
 
 ### Routing
 

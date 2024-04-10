@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as ConnectionTamperingAPI from 'cloudflare/resources/radar/connection-tampering';
-import * as RadarAPI from 'cloudflare/resources/radar/radar';
 
 export class ConnectionTampering extends APIResource {
   /**
@@ -63,16 +62,46 @@ export interface ConnectionTamperingSummaryResponse {
 
 export namespace ConnectionTamperingSummaryResponse {
   export interface Meta {
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     confidenceInfo?: Meta.ConfidenceInfo;
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
     }
   }
 
@@ -119,7 +148,7 @@ export namespace ConnectionTamperingTimeseriesGroupsResponse {
   export interface Meta {
     aggInterval: string;
 
-    dateRange: Array<RadarAPI.UnnamedSchemaRefBaac9d7da12de53e99142f8ecd3982e5>;
+    dateRange: Array<Meta.DateRange>;
 
     lastUpdated: string;
 
@@ -127,10 +156,40 @@ export namespace ConnectionTamperingTimeseriesGroupsResponse {
   }
 
   export namespace Meta {
+    export interface DateRange {
+      /**
+       * Adjusted end of date range.
+       */
+      endTime: string;
+
+      /**
+       * Adjusted start of date range.
+       */
+      startTime: string;
+    }
+
     export interface ConfidenceInfo {
-      annotations?: Array<RadarAPI.UnnamedSchemaRefB5f3bd1840490bc487ffef84567807b1>;
+      annotations?: Array<ConfidenceInfo.Annotation>;
 
       level?: number;
+    }
+
+    export namespace ConfidenceInfo {
+      export interface Annotation {
+        dataSource: string;
+
+        description: string;
+
+        eventType: string;
+
+        isInstantaneous: unknown;
+
+        endTime?: string;
+
+        linkedUrl?: string;
+
+        startTime?: string;
+      }
     }
   }
 
