@@ -2,7 +2,6 @@
 
 export {
   Hostname,
-  UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e,
   HostnameDeleteResponse,
   HostnameCreateParams,
   HostnameDeleteParams,

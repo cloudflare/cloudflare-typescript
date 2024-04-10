@@ -290,8 +290,8 @@ export namespace Sites {
   export import ACLs = ACLsAPI.ACLs;
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
   export import Subnet = ACLsAPI.Subnet;
-  export import UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
   export import ACLListResponse = ACLsAPI.ACLListResponse;

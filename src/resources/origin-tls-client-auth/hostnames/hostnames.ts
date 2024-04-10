@@ -217,7 +217,9 @@ export namespace Hostnames {
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import Certificate = CertificatesAPI.Certificate;
-  export import UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9 = CertificatesAPI.UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9;
+  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;

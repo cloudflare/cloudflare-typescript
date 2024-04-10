@@ -88,17 +88,6 @@ export interface Consumer {
   settings?: QueuesAPI.QueueSettings;
 }
 
-export interface UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 {
-  /**
-   * The maximum number of messages to include in a batch
-   */
-  batch_size?: number;
-
-  max_retries?: number;
-
-  max_wait_time_ms?: number;
-}
-
 export interface ConsumerCreateResponse {
   created_on?: unknown;
 
@@ -110,7 +99,20 @@ export interface ConsumerCreateResponse {
 
   script_name?: unknown;
 
-  settings?: UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
+  settings?: ConsumerCreateResponse.Settings;
+}
+
+export namespace ConsumerCreateResponse {
+  export interface Settings {
+    /**
+     * The maximum number of messages to include in a batch
+     */
+    batch_size?: number;
+
+    max_retries?: number;
+
+    max_wait_time_ms?: number;
+  }
 }
 
 export interface ConsumerUpdateResponse {
@@ -151,7 +153,20 @@ export namespace ConsumerGetResponse {
 
     service?: unknown;
 
-    settings?: ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
+    settings?: ConsumerGetResponseItem.Settings;
+  }
+
+  export namespace ConsumerGetResponseItem {
+    export interface Settings {
+      /**
+       * The maximum number of messages to include in a batch
+       */
+      batch_size?: number;
+
+      max_retries?: number;
+
+      max_wait_time_ms?: number;
+    }
   }
 }
 
@@ -200,7 +215,6 @@ export interface ConsumerGetParams {
 
 export namespace Consumers {
   export import Consumer = ConsumersAPI.Consumer;
-  export import UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5 = ConsumersAPI.UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5;
   export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
   export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
   export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;

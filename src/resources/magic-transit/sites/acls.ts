@@ -124,7 +124,7 @@ export interface ACL {
    */
   name?: string;
 
-  protocols?: Array<UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
+  protocols?: Array<AllowedProtocol>;
 }
 
 export interface ACLConfiguration {
@@ -152,15 +152,15 @@ export interface ACLConfiguration {
 }
 
 /**
- * A valid IPv4 address.
- */
-export type Subnet = string | string;
-
-/**
  * Array of allowed communication protocols between configured LANs. If no
  * protocols are provided, all protocols are allowed.
  */
-export type UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = 'tcp' | 'udp' | 'icmp';
+export type AllowedProtocol = 'tcp' | 'udp' | 'icmp';
+
+/**
+ * A valid IPv4 address.
+ */
+export type Subnet = string | string;
 
 export interface ACLCreateResponse {
   acls?: Array<ACL>;
@@ -229,7 +229,7 @@ export namespace ACLCreateParams {
      */
     forward_locally?: boolean;
 
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
+    protocols?: Array<ACLsAPI.AllowedProtocol>;
   }
 }
 
@@ -269,7 +269,7 @@ export namespace ACLUpdateParams {
      */
     name?: string;
 
-    protocols?: Array<ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916>;
+    protocols?: Array<ACLsAPI.AllowedProtocol>;
   }
 }
 
@@ -302,8 +302,8 @@ export interface ACLGetParams {
 export namespace ACLs {
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
   export import Subnet = ACLsAPI.Subnet;
-  export import UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916 = ACLsAPI.UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916;
   export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
   export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
   export import ACLListResponse = ACLsAPI.ACLListResponse;

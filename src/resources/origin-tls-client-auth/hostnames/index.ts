@@ -11,7 +11,9 @@ export {
 } from './hostnames';
 export {
   Certificate,
-  UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9,
+  CertificateCreateResponse,
+  CertificateDeleteResponse,
+  CertificateGetResponse,
   CertificateCreateParams,
   CertificateListParams,
   CertificateDeleteParams,

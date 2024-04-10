@@ -3,7 +3,6 @@
 export { BlobGetParams, Blobs } from './blobs';
 export {
   Image,
-  UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a,
   V1ListResponse,
   V1DeleteResponse,
   V1CreateParams,
@@ -14,17 +13,9 @@ export {
   V1ListResponsesV4PagePagination,
   V1,
 } from './v1';
-export {
-  Key,
-  UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95,
-  KeyUpdateParams,
-  KeyListParams,
-  KeyDeleteParams,
-  Keys,
-} from './keys';
+export { Key, KeyUpdateParams, KeyListParams, KeyDeleteParams, Keys } from './keys';
 export { Stat, StatGetParams, Stats } from './stats';
 export {
-  UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3,
   Variant,
   VariantCreateResponse,
   VariantDeleteResponse,
