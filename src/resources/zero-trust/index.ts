@@ -1,25 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AccessRule,
-  AzureGroupRule,
-  CertificateRule,
-  CountryRule,
-  DomainRule,
-  EmailListRule,
-  EmailRule,
-  EveryoneRule,
-  ExternalEvaluationRule,
-  GitHubOrganizationRule,
-  GroupRule,
-  GSuiteGroupRule,
-  IPListRule,
-  IPRule,
-  OktaGroupRule,
-  SAMLGroupRule,
-  ServiceTokenRule,
-  Access,
-} from './access/index';
+export { AccessRule, GroupRule, Access } from './access/index';
 export {
   AzureAD,
   GenericOAuthConfig,
