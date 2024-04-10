@@ -106,7 +106,7 @@ export class Lists extends APIResource {
 
 export class ListListResponsesSinglePage extends SinglePage<ListListResponse> {}
 
-export interface Lists {
+export interface GatewayList {
   created_at?: string;
 
   /**
@@ -131,7 +131,7 @@ export interface ListCreateResponse {
   /**
    * The items in the list.
    */
-  items?: Array<Lists>;
+  items?: Array<GatewayList>;
 
   /**
    * The name of the list.
@@ -296,7 +296,7 @@ export interface ListCreateParams {
   /**
    * Body param: The items in the list.
    */
-  items?: Array<Lists>;
+  items?: Array<GatewayList>;
 }
 
 export interface ListUpdateParams {
@@ -341,7 +341,7 @@ export interface ListEditParams {
   /**
    * Body param: The items in the list.
    */
-  append?: Array<Lists>;
+  append?: Array<GatewayList>;
 
   /**
    * Body param: A list of the item values you want to remove.
@@ -354,7 +354,7 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
-  export import Lists = ListsAPI.Lists;
+  export import GatewayList = ListsAPI.GatewayList;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
   export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
   export import ListListResponse = ListsAPI.ListListResponse;

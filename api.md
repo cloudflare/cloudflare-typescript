@@ -4909,7 +4909,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">Lists</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">GatewayList</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListListResponse</a></code>
