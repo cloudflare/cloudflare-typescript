@@ -37,7 +37,7 @@ export type AccessRule =
   | AccessRule.AccessIPRule
   | AccessRule.AccessIPListRule
   | AccessRule.AccessCertificateRule
-  | GroupRule
+  | AccessRule.AccessAccessGroupRule
   | AccessRule.AccessAzureGroupRule
   | AccessRule.AccessGitHubOrganizationRule
   | AccessRule.AccessGSuiteGroupRule
@@ -146,6 +146,22 @@ export namespace AccessRule {
    */
   export interface AccessCertificateRule {
     certificate: unknown;
+  }
+
+  /**
+   * Matches an Access group.
+   */
+  export interface AccessAccessGroupRule {
+    group: AccessAccessGroupRule.Group;
+  }
+
+  export namespace AccessAccessGroupRule {
+    export interface Group {
+      /**
+       * The ID of a previously created Access group.
+       */
+      id: string;
+    }
   }
 
   /**
@@ -351,25 +367,8 @@ export namespace AccessRule {
   }
 }
 
-/**
- * Matches an Access group.
- */
-export interface GroupRule {
-  group: GroupRule.Group;
-}
-
-export namespace GroupRule {
-  export interface Group {
-    /**
-     * The ID of a previously created Access group.
-     */
-    id: string;
-  }
-}
-
 export namespace Access {
   export import AccessRule = AccessAPI.AccessRule;
-  export import GroupRule = AccessAPI.GroupRule;
   export import Applications = ApplicationsAPI.Applications;
   export import AllowedHeadersh = ApplicationsAPI.AllowedHeadersh;
   export import AllowedIdpsh = ApplicationsAPI.AllowedIdpsh;

@@ -4227,7 +4227,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/access.ts">AccessRule</a></code>
-- <code><a href="./src/resources/zero-trust/access/access.ts">GroupRule</a></code>
 
 ### Applications
 
