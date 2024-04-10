@@ -2,6 +2,9 @@
 
 export { CustomHostnames } from './custom-hostnames';
 export {
+  FallbackOriginUpdateResponse,
+  FallbackOriginDeleteResponse,
+  FallbackOriginGetResponse,
   FallbackOriginUpdateParams,
   FallbackOriginDeleteParams,
   FallbackOriginGetParams,

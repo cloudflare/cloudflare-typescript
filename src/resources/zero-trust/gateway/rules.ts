@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/zero-trust/gateway/rules';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
@@ -54,13 +53,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<RuleDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -557,6 +556,8 @@ export interface Schedule {
   wed?: string;
 }
 
+export type RuleDeleteResponse = unknown | string | null;
+
 export interface RuleCreateParams {
   /**
    * Path param:
@@ -748,6 +749,7 @@ export namespace Rules {
   export import GatewayRule = RulesAPI.GatewayRule;
   export import RuleSetting = RulesAPI.RuleSetting;
   export import Schedule = RulesAPI.Schedule;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;

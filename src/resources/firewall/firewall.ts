@@ -47,8 +47,11 @@ export namespace Firewall {
   export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
   export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
   export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
+  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
   export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
   export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
+  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
+  export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
   export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
@@ -56,8 +59,11 @@ export namespace Firewall {
   export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
   export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
   export import UARules = UARulesAPI.UARules;
+  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
+  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
   export import UARuleListResponse = UARulesAPI.UARuleListResponse;
   export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
+  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
   export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
   export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
   export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;

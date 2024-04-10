@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
-import * as Shared from 'cloudflare/resources/shared';
 import * as OrderAPI from 'cloudflare/resources/ssl/certificate-packs/order';
 import * as QuotaAPI from 'cloudflare/resources/ssl/certificate-packs/quota';
 import { SinglePage } from 'cloudflare/pagination';
@@ -70,13 +69,13 @@ export class CertificatePacks extends APIResource {
     certificatePackId: string,
     params: CertificatePackGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CertificatePackGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: CertificatePackGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -161,6 +160,8 @@ export interface CertificatePackEditResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
+export type CertificatePackGetResponse = unknown | string | null;
+
 export interface CertificatePackListParams {
   /**
    * Path param: Identifier
@@ -209,6 +210,7 @@ export namespace CertificatePacks {
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
+  export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
   export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
   export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
   export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;

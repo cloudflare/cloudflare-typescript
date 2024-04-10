@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
-import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Integrations extends APIResource {
@@ -45,13 +44,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<IntegrationDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: IntegrationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -191,6 +190,8 @@ export namespace UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 {
     client_id: string;
   }
 }
+
+export type IntegrationDeleteResponse = unknown | string | null;
 
 export interface IntegrationCreateParams {
   /**
@@ -553,6 +554,7 @@ export interface IntegrationGetParams {
 export namespace Integrations {
   export import Integration = IntegrationsAPI.Integration;
   export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
+  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
   export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;

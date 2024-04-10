@@ -2676,7 +2676,9 @@ export namespace Applications {
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import CAs = CAsAPI.CAs;
   export import CA = CAsAPI.CA;
+  export import CACreateResponse = CAsAPI.CACreateResponse;
   export import CADeleteResponse = CAsAPI.CADeleteResponse;
+  export import CAGetResponse = CAsAPI.CAGetResponse;
   export import CAsSinglePage = CAsAPI.CAsSinglePage;
   export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;

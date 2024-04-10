@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RulesAPI from 'cloudflare/resources/firewall/waf/packages/rules';
-import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Rules extends APIResource {
@@ -58,13 +57,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<RuleGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
         options,
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: RuleGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -396,6 +395,8 @@ export namespace RuleEditResponse {
   }
 }
 
+export type RuleGetResponse = unknown | string | null;
+
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
@@ -465,6 +466,7 @@ export namespace Rules {
   export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;

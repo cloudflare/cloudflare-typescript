@@ -48,7 +48,7 @@ export interface ByTime {
    */
   min: unknown;
 
-  query: DNSAPI.UnnamedSchemaRef85b45d163202bbab7456da6b346d9fe2;
+  query: DNSAPI.DNSAnalyticsQuery;
 
   /**
    * Total number of rows in the result.
@@ -80,7 +80,7 @@ export namespace ByTime {
      * Array with one item per requested metric. Each item is an array of values,
      * broken down by time interval.
      */
-    metrics: Array<DNSAPI.UnnamedSchemaRef65be9614de145bf4a58d0fddf46df7ca>;
+    metrics: Array<DNSAPI.DNSAnalyticsNominalMetric>;
   }
 }
 

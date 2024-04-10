@@ -145,7 +145,7 @@ export namespace CachePurgeParams {
 export namespace Cache {
   export import CacheReserveResource = CacheReserveAPI.CacheReserveResource;
   export import CacheReserve = CacheReserveAPI.CacheReserve;
-  export import UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d = CacheReserveAPI.UnnamedSchemaRef2b5e755404a4bfd7892291ce97c4968d;
+  export import CacheReserveClear = CacheReserveAPI.CacheReserveClear;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
@@ -155,12 +155,15 @@ export namespace Cache {
   export import CacheReserveGetParams = CacheReserveAPI.CacheReserveGetParams;
   export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
   export import SmartTieredCache = SmartTieredCacheAPI.SmartTieredCache;
+  export import SmartTieredCacheDeleteResponse = SmartTieredCacheAPI.SmartTieredCacheDeleteResponse;
+  export import SmartTieredCacheEditResponse = SmartTieredCacheAPI.SmartTieredCacheEditResponse;
+  export import SmartTieredCacheGetResponse = SmartTieredCacheAPI.SmartTieredCacheGetResponse;
   export import SmartTieredCacheDeleteParams = SmartTieredCacheAPI.SmartTieredCacheDeleteParams;
   export import SmartTieredCacheEditParams = SmartTieredCacheAPI.SmartTieredCacheEditParams;
   export import SmartTieredCacheGetParams = SmartTieredCacheAPI.SmartTieredCacheGetParams;
   export import Variants = VariantsAPI.Variants;
-  export import CacheVariants = VariantsAPI.CacheVariants;
-  export import UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0 = VariantsAPI.UnnamedSchemaRef669bfbb16c0913af7077c3c194fbfcd0;
+  export import CacheVariant = VariantsAPI.CacheVariant;
+  export import CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

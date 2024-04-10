@@ -12,6 +12,7 @@ export {
 } from './audio-tracks';
 export {
   Caption,
+  CaptionUpdateResponse,
   CaptionDeleteResponse,
   CaptionGetResponse,
   CaptionUpdateParams,
@@ -23,7 +24,9 @@ export { Clip, ClipCreateParams, ClipResource } from './clip';
 export { CopyCreateParams, Copy } from './copy';
 export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUpload } from './direct-upload';
 export {
+  DownloadCreateResponse,
   DownloadDeleteResponse,
+  DownloadGetResponse,
   DownloadCreateParams,
   DownloadDeleteParams,
   DownloadGetParams,
@@ -53,7 +56,9 @@ export { TokenCreateResponse, TokenCreateParams, Token } from './token';
 export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
   Watermaks,
+  WatermarkCreateResponse,
   WatermarkDeleteResponse,
+  WatermarkGetResponse,
   WatermarkCreateParams,
   WatermarkListParams,
   WatermarkDeleteParams,
@@ -62,7 +67,9 @@ export {
   Watermarks,
 } from './watermarks';
 export {
+  WebhookUpdateResponse,
   WebhookDeleteResponse,
+  WebhookGetResponse,
   WebhookUpdateParams,
   WebhookDeleteParams,
   WebhookGetParams,

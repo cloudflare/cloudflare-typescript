@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as RateLimitsAPI from 'cloudflare/resources/rate-limits';
-import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class RateLimits extends APIResource {
@@ -16,10 +15,10 @@ export class RateLimits extends APIResource {
     zoneIdentifier: string,
     body: RateLimitCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<RateLimitCreateResponse> {
     return (
       this._client.post(`/zones/${zoneIdentifier}/rate_limits`, { body, ...options }) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: RateLimitCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -75,12 +74,12 @@ export class RateLimits extends APIResource {
     id: string,
     body: RateLimitEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<RateLimitEditResponse> {
     return (
       this._client.put(`/zones/${zoneIdentifier}/rate_limits/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: RateLimitEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,10 +90,10 @@ export class RateLimits extends APIResource {
     zoneIdentifier: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<RateLimitGetResponse> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{
-        result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a;
+        result: RateLimitGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -297,12 +296,18 @@ export namespace RateLimit {
   }
 }
 
+export type RateLimitCreateResponse = unknown | string | null;
+
 export interface RateLimitDeleteResponse {
   /**
    * The unique identifier of the rate limit.
    */
   id?: string;
 }
+
+export type RateLimitEditResponse = unknown | string | null;
+
+export type RateLimitGetResponse = unknown | string | null;
 
 export type RateLimitCreateParams = unknown;
 

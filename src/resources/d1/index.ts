@@ -5,6 +5,7 @@ export {
   QueryResult,
   DatabaseCreateResponse,
   DatabaseListResponse,
+  DatabaseDeleteResponse,
   DatabaseQueryResponse,
   DatabaseCreateParams,
   DatabaseListParams,

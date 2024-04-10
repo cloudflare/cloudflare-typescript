@@ -55,13 +55,13 @@ export class V1 extends APIResource {
     imageId: string,
     params: V1DeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<V1DeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      }) as Core.APIPromise<{ result: V1DeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -181,6 +181,8 @@ export namespace V1ListResponse {
   }
 }
 
+export type V1DeleteResponse = unknown | string | null;
+
 export interface V1CreateParams {
   /**
    * Path param: Account identifier tag.
@@ -261,6 +263,7 @@ export namespace V1 {
   export import Image = V1API.Image;
   export import UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a = V1API.UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a;
   export import V1ListResponse = V1API.V1ListResponse;
+  export import V1DeleteResponse = V1API.V1DeleteResponse;
   export import V1ListResponsesV4PagePagination = V1API.V1ListResponsesV4PagePagination;
   export import V1CreateParams = V1API.V1CreateParams;
   export import V1ListParams = V1API.V1ListParams;
@@ -280,6 +283,7 @@ export namespace V1 {
   export import UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3 = VariantsAPI.UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3;
   export import Variant = VariantsAPI.Variant;
   export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
+  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantCreateParams = VariantsAPI.VariantCreateParams;

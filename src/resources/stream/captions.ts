@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CaptionsAPI from 'cloudflare/resources/stream/captions';
-import * as Shared from 'cloudflare/resources/shared';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Captions extends APIResource {
@@ -16,13 +15,13 @@ export class Captions extends APIResource {
     language: string,
     params: CaptionUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a> {
+  ): Core.APIPromise<CaptionUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Shared.UnnamedSchemaRef9444735ca60712dbcf8afd832eb5716a }>
+      ) as Core.APIPromise<{ result: CaptionUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -73,6 +72,8 @@ export interface Caption {
   language?: string;
 }
 
+export type CaptionUpdateResponse = unknown | string | null;
+
 export type CaptionDeleteResponse = unknown | Array<unknown> | string;
 
 export type CaptionGetResponse = Array<Caption>;
@@ -110,6 +111,7 @@ export interface CaptionGetParams {
 
 export namespace Captions {
   export import Caption = CaptionsAPI.Caption;
+  export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
