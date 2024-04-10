@@ -11,9 +11,9 @@ export class Networks extends APIResource {
 
 export namespace Networks {
   export import Routes = RoutesAPI.Routes;
+  export import NetworkRoute = RoutesAPI.NetworkRoute;
   export import Route = RoutesAPI.Route;
   export import Teamnet = RoutesAPI.Teamnet;
-  export import UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6 = RoutesAPI.UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6;
   export import TeamnetsV4PagePaginationArray = RoutesAPI.TeamnetsV4PagePaginationArray;
   export import RouteCreateParams = RoutesAPI.RouteCreateParams;
   export import RouteListParams = RoutesAPI.RouteListParams;

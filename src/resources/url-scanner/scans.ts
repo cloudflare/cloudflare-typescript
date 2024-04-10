@@ -75,10 +75,18 @@ export class Scans extends APIResource {
   }
 }
 
-export interface UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 {
+export interface URLScannerDomain {
+  id: number;
+
+  name: string;
+
+  super_category_id?: number;
+}
+
+export interface URLScannerTask {
   effectiveUrl: string;
 
-  errors: Array<UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631.Error>;
+  errors: Array<URLScannerTask.Error>;
 
   location: string;
 
@@ -97,18 +105,10 @@ export interface UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 {
   visibility: string;
 }
 
-export namespace UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 {
+export namespace URLScannerTask {
   export interface Error {
     message: string;
   }
-}
-
-export interface UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6 {
-  id: number;
-
-  name: string;
-
-  super_category_id?: number;
 }
 
 export interface ScanCreateResponse {
@@ -205,7 +205,7 @@ export namespace ScanGetResponse {
 
       export namespace Processors {
         export interface Categories {
-          content: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
+          content: Array<ScansAPI.URLScannerDomain>;
 
           risks: Array<Categories.Risk>;
         }
@@ -582,18 +582,18 @@ export namespace ScanGetResponse {
         export interface Categories {
           inherited: Categories.Inherited;
 
-          content?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
+          content?: Array<ScansAPI.URLScannerDomain>;
 
-          risks?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
+          risks?: Array<ScansAPI.URLScannerDomain>;
         }
 
         export namespace Categories {
           export interface Inherited {
-            content?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
+            content?: Array<ScansAPI.URLScannerDomain>;
 
             from?: string;
 
-            risks?: Array<ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6>;
+            risks?: Array<ScansAPI.URLScannerDomain>;
           }
         }
 
@@ -833,8 +833,8 @@ export interface ScanScreenshotParams {
 }
 
 export namespace Scans {
-  export import UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631 = ScansAPI.UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631;
-  export import UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6 = ScansAPI.UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6;
+  export import URLScannerDomain = ScansAPI.URLScannerDomain;
+  export import URLScannerTask = ScansAPI.URLScannerTask;
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
   export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;

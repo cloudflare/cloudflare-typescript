@@ -4368,6 +4368,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckGeo</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/user-policy-checks.ts">UserPolicyCheckListResponse</a></code>
 
 Methods:
@@ -4570,9 +4571,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">DeviceExperienceMonitor</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPath</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">Percentiles</a></code>
-- <code><a href="./src/resources/zero-trust/dex/dex.ts">UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11</a></code>
 
 ### Colos
 
@@ -4895,10 +4896,10 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">CustomCertificateSettings</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ExtendedEmailMatching</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">FipsSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">GatewayConfigurationSettings</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">NotificationSettings</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ProtocolDetection</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">TLSSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationEditResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationGetResponse</a></code>
@@ -4946,7 +4947,6 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">Location</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationNetwork</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/locations.ts">UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationDeleteResponse</a></code>
 
 Methods:
@@ -4962,7 +4962,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/gateway/logging.ts">LoggingSetting</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/logging.ts">UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b</a></code>
 
 Methods:
 
@@ -4975,7 +4974,6 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">GatewayIPs</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpoint</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">UnnamedSchemaRef4753ee81779d0e57189420079abab61e</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/proxy-endpoints.ts">ProxyEndpointDeleteResponse</a></code>
 
 Methods:
@@ -5012,9 +5010,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">NetworkRoute</a></code>
 - <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">Route</a></code>
 - <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">Teamnet</a></code>
-- <code><a href="./src/resources/zero-trust/networks/routes/routes.ts">UnnamedSchemaRefC125d35cbb7f93aab989cd19bd764ed6</a></code>
 
 Methods:
 
@@ -5168,8 +5166,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/url-scanner/scans.ts">UnnamedSchemaRef3750739f772bbdf0bb00d6634ccc0631</a></code>
-- <code><a href="./src/resources/url-scanner/scans.ts">UnnamedSchemaRef6d7a78acccfc753a8e931b1c4e72b6a6</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">URLScannerDomain</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">URLScannerTask</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanCreateResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanGetResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanHarResponse</a></code>

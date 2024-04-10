@@ -119,10 +119,10 @@ export namespace Gateway {
   export import CustomCertificateSettings = ConfigurationsAPI.CustomCertificateSettings;
   export import ExtendedEmailMatching = ConfigurationsAPI.ExtendedEmailMatching;
   export import FipsSettings = ConfigurationsAPI.FipsSettings;
+  export import GatewayConfigurationSettings = ConfigurationsAPI.GatewayConfigurationSettings;
   export import NotificationSettings = ConfigurationsAPI.NotificationSettings;
   export import ProtocolDetection = ConfigurationsAPI.ProtocolDetection;
   export import TLSSettings = ConfigurationsAPI.TLSSettings;
-  export import UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e = ConfigurationsAPI.UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
   export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
   export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
@@ -146,7 +146,6 @@ export namespace Gateway {
   export import Locations = LocationsAPI.Locations;
   export import Location = LocationsAPI.Location;
   export import LocationNetwork = LocationsAPI.LocationNetwork;
-  export import UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66 = LocationsAPI.UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
@@ -156,13 +155,11 @@ export namespace Gateway {
   export import LocationGetParams = LocationsAPI.LocationGetParams;
   export import Logging = LoggingAPI.Logging;
   export import LoggingSetting = LoggingAPI.LoggingSetting;
-  export import UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b = LoggingAPI.UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b;
   export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
   export import LoggingGetParams = LoggingAPI.LoggingGetParams;
   export import ProxyEndpoints = ProxyEndpointsAPI.ProxyEndpoints;
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
-  export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;

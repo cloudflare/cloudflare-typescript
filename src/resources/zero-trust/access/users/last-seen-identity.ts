@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as LastSeenIdentityAPI from 'cloudflare/resources/zero-trust/access/users/last-seen-identity';
+import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
 
 export class LastSeenIdentity extends APIResource {
   /**
@@ -33,7 +34,7 @@ export interface Identity {
 
   email?: string;
 
-  geo?: Identity.Geo;
+  geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
 
   iat?: number;
 
@@ -87,10 +88,6 @@ export namespace Identity {
 
       path?: string;
     }
-  }
-
-  export interface Geo {
-    country?: string;
   }
 
   export interface IDP {

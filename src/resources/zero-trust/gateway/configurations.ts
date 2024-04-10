@@ -212,51 +212,9 @@ export interface FipsSettings {
 }
 
 /**
- * Configure a message to display on the user's device when an antivirus search is
- * performed.
- */
-export interface NotificationSettings {
-  /**
-   * Set notification on
-   */
-  enabled?: boolean;
-
-  /**
-   * Customize the message shown in the notification.
-   */
-  msg?: string;
-
-  /**
-   * Optional URL to direct users to additional information. If not set, the
-   * notification will open a block page.
-   */
-  support_url?: string;
-}
-
-/**
- * Protocol Detection settings.
- */
-export interface ProtocolDetection {
-  /**
-   * Enable detecting protocol on initial bytes of client traffic.
-   */
-  enabled?: boolean;
-}
-
-/**
- * TLS interception settings.
- */
-export interface TLSSettings {
-  /**
-   * Enable inspecting encrypted HTTP traffic.
-   */
-  enabled?: boolean;
-}
-
-/**
  * account settings.
  */
-export interface UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e {
+export interface GatewayConfigurationSettings {
   /**
    * Activity log settings.
    */
@@ -309,6 +267,48 @@ export interface UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e {
 }
 
 /**
+ * Configure a message to display on the user's device when an antivirus search is
+ * performed.
+ */
+export interface NotificationSettings {
+  /**
+   * Set notification on
+   */
+  enabled?: boolean;
+
+  /**
+   * Customize the message shown in the notification.
+   */
+  msg?: string;
+
+  /**
+   * Optional URL to direct users to additional information. If not set, the
+   * notification will open a block page.
+   */
+  support_url?: string;
+}
+
+/**
+ * Protocol Detection settings.
+ */
+export interface ProtocolDetection {
+  /**
+   * Enable detecting protocol on initial bytes of client traffic.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * TLS interception settings.
+ */
+export interface TLSSettings {
+  /**
+   * Enable inspecting encrypted HTTP traffic.
+   */
+  enabled?: boolean;
+}
+
+/**
  * account settings.
  */
 export interface ConfigurationUpdateResponse {
@@ -317,7 +317,7 @@ export interface ConfigurationUpdateResponse {
   /**
    * account settings.
    */
-  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
+  settings?: GatewayConfigurationSettings;
 
   updated_at?: string;
 }
@@ -331,7 +331,7 @@ export interface ConfigurationEditResponse {
   /**
    * account settings.
    */
-  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
+  settings?: GatewayConfigurationSettings;
 
   updated_at?: string;
 }
@@ -345,7 +345,7 @@ export interface ConfigurationGetResponse {
   /**
    * account settings.
    */
-  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
+  settings?: GatewayConfigurationSettings;
 
   updated_at?: string;
 }
@@ -359,7 +359,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Body param: account settings.
    */
-  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
+  settings?: GatewayConfigurationSettings;
 }
 
 export interface ConfigurationEditParams {
@@ -371,7 +371,7 @@ export interface ConfigurationEditParams {
   /**
    * Body param: account settings.
    */
-  settings?: UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
+  settings?: GatewayConfigurationSettings;
 }
 
 export interface ConfigurationGetParams {
@@ -387,10 +387,10 @@ export namespace Configurations {
   export import CustomCertificateSettings = ConfigurationsAPI.CustomCertificateSettings;
   export import ExtendedEmailMatching = ConfigurationsAPI.ExtendedEmailMatching;
   export import FipsSettings = ConfigurationsAPI.FipsSettings;
+  export import GatewayConfigurationSettings = ConfigurationsAPI.GatewayConfigurationSettings;
   export import NotificationSettings = ConfigurationsAPI.NotificationSettings;
   export import ProtocolDetection = ConfigurationsAPI.ProtocolDetection;
   export import TLSSettings = ConfigurationsAPI.TLSSettings;
-  export import UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e = ConfigurationsAPI.UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e;
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
   export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
   export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
