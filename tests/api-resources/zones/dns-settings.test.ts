@@ -28,7 +28,10 @@ describe('resource dnsSettings', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.zones.dnsSettings.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      foundation_dns: false,
+      multi_provider: false,
       nameservers: { type: 'cloudflare.standard' },
+      secondary_overrides: false,
     });
   });
 

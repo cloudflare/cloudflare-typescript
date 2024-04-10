@@ -30,9 +30,27 @@ export class DNSSettings extends APIResource {
 
 export interface DNSSetting {
   /**
+   * Whether to enable Foundation DNS Advanced Nameservers on the zone.
+   */
+  foundation_dns?: boolean;
+
+  /**
+   * Whether to enable multi-provider DNS, which causes Cloudflare to activate the
+   * zone even when non-Cloudflare NS records exist, and to respect NS records at the
+   * zone apex during outbound zone transfers.
+   */
+  multi_provider?: boolean;
+
+  /**
    * Settings determining the nameservers through which the zone should be available.
    */
   nameservers?: Nameserver;
+
+  /**
+   * Allows a Secondary DNS zone to use (proxied) override records and CNAME
+   * flattening at the zone apex.
+   */
+  secondary_overrides?: boolean;
 }
 
 /**
@@ -52,10 +70,28 @@ export interface DNSSettingEditParams {
   zone_id: string;
 
   /**
+   * Body param: Whether to enable Foundation DNS Advanced Nameservers on the zone.
+   */
+  foundation_dns?: boolean;
+
+  /**
+   * Body param: Whether to enable multi-provider DNS, which causes Cloudflare to
+   * activate the zone even when non-Cloudflare NS records exist, and to respect NS
+   * records at the zone apex during outbound zone transfers.
+   */
+  multi_provider?: boolean;
+
+  /**
    * Body param: Settings determining the nameservers through which the zone should
    * be available.
    */
   nameservers?: Nameserver;
+
+  /**
+   * Body param: Allows a Secondary DNS zone to use (proxied) override records and
+   * CNAME flattening at the zone apex.
+   */
+  secondary_overrides?: boolean;
 }
 
 export interface DNSSettingGetParams {
