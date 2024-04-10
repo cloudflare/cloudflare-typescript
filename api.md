@@ -2499,21 +2499,16 @@ Types:
 
 - <code><a href="./src/resources/queues/queues.ts">Queue</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueCreated</a></code>
-- <code><a href="./src/resources/queues/queues.ts">QueueSettings</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueUpdated</a></code>
-- <code><a href="./src/resources/queues/queues.ts">QueueCreateResponse</a></code>
-- <code><a href="./src/resources/queues/queues.ts">QueueUpdateResponse</a></code>
-- <code><a href="./src/resources/queues/queues.ts">QueueListResponse</a></code>
 - <code><a href="./src/resources/queues/queues.ts">QueueDeleteResponse</a></code>
-- <code><a href="./src/resources/queues/queues.ts">QueueGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">create</a>({ ...params }) -> QueueCreateResponse | null</code>
-- <code title="put /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">update</a>(queueId, { ...params }) -> QueueUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueueListResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">create</a>({ ...params }) -> QueueCreated | null</code>
+- <code title="put /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">update</a>(queueId, { ...params }) -> QueueUpdated | null</code>
+- <code title="get /accounts/{account_id}/queues">client.queues.<a href="./src/resources/queues/queues.ts">list</a>({ ...params }) -> QueuesSinglePage</code>
 - <code title="delete /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">delete</a>(queueId, { ...params }) -> QueueDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueId, { ...params }) -> QueueGetResponse | null</code>
+- <code title="get /accounts/{account_id}/queues/{queue_id}">client.queues.<a href="./src/resources/queues/queues.ts">get</a>(queueId, { ...params }) -> Queue | null</code>
 
 ## Consumers
 
@@ -3611,6 +3606,11 @@ Types:
 
 - <code><a href="./src/resources/request-tracers/traces.ts">Trace</a></code>
 - <code><a href="./src/resources/request-tracers/traces.ts">TraceItem</a></code>
+- <code><a href="./src/resources/request-tracers/traces.ts">TraceCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/request-tracer/trace">client.requestTracers.traces.<a href="./src/resources/request-tracers/traces.ts">create</a>({ ...params }) -> TraceCreateResponse</code>
 
 # Rules
 
