@@ -14,11 +14,11 @@ export class Lists extends APIResource {
   /**
    * Creates a new list of the specified type.
    */
-  create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleList | null> {
+  create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListsList | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{
-        result: RuleList | null;
+        result: ListsList | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,13 +30,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleList | null> {
+  ): Core.APIPromise<ListsList | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleList | null }>
+      }) as Core.APIPromise<{ result: ListsList | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,9 +46,9 @@ export class Lists extends APIResource {
   list(
     params: ListListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RuleListsSinglePage, RuleList> {
+  ): Core.PagePromise<ListsListsSinglePage, ListsList> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/rules/lists`, RuleListsSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/rules/lists`, ListsListsSinglePage, options);
   }
 
   /**
@@ -75,17 +75,17 @@ export class Lists extends APIResource {
     listId: string,
     params: ListGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleList | null> {
+  ): Core.APIPromise<ListsList | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
-        result: RuleList | null;
+        result: ListsList | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RuleListsSinglePage extends SinglePage<RuleList> {}
+export class ListsListsSinglePage extends SinglePage<ListsList> {}
 
 /**
  * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
@@ -95,26 +95,7 @@ export interface Hostname {
   url_hostname: string;
 }
 
-/**
- * The definition of the redirect.
- */
-export interface Redirect {
-  source_url: string;
-
-  target_url: string;
-
-  include_subdomains?: boolean;
-
-  preserve_path_suffix?: boolean;
-
-  preserve_query_string?: boolean;
-
-  status_code?: 301 | 302 | 307 | 308;
-
-  subpath_matching?: boolean;
-}
-
-export interface RuleList {
+export interface ListsList {
   /**
    * The unique ID of the list.
    */
@@ -155,6 +136,25 @@ export interface RuleList {
    * The number of [filters](/operations/filters-list-filters) referencing the list.
    */
   num_referencing_filters?: number;
+}
+
+/**
+ * The definition of the redirect.
+ */
+export interface Redirect {
+  source_url: string;
+
+  target_url: string;
+
+  include_subdomains?: boolean;
+
+  preserve_path_suffix?: boolean;
+
+  preserve_query_string?: boolean;
+
+  status_code?: 301 | 302 | 307 | 308;
+
+  subpath_matching?: boolean;
 }
 
 export interface ListDeleteResponse {
@@ -228,10 +228,10 @@ export interface ListGetParams {
 
 export namespace Lists {
   export import Hostname = ListsAPI.Hostname;
+  export import ListsList = ListsAPI.ListsList;
   export import Redirect = ListsAPI.Redirect;
-  export import RuleList = ListsAPI.RuleList;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import RuleListsSinglePage = ListsAPI.RuleListsSinglePage;
+  export import ListsListsSinglePage = ListsAPI.ListsListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;
