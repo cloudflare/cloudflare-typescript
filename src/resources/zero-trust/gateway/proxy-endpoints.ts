@@ -117,29 +117,6 @@ export interface ProxyEndpoint {
   updated_at?: string;
 }
 
-export interface UnnamedSchemaRef4753ee81779d0e57189420079abab61e {
-  id?: string;
-
-  created_at?: string;
-
-  /**
-   * A list of CIDRs to restrict ingress connections.
-   */
-  ips?: Array<GatewayIPs>;
-
-  /**
-   * The name of the proxy endpoint.
-   */
-  name?: string;
-
-  /**
-   * The subdomain to be used as the destination in the proxy client.
-   */
-  subdomain?: string;
-
-  updated_at?: string;
-}
-
 export type ProxyEndpointDeleteResponse = unknown | string | null;
 
 export interface ProxyEndpointCreateParams {
@@ -199,7 +176,6 @@ export interface ProxyEndpointGetParams {
 export namespace ProxyEndpoints {
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
-  export import UnnamedSchemaRef4753ee81779d0e57189420079abab61e = ProxyEndpointsAPI.UnnamedSchemaRef4753ee81779d0e57189420079abab61e;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
   export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;

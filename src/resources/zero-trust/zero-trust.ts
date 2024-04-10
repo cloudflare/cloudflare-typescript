@@ -66,9 +66,9 @@ export namespace ZeroTrust {
   export import Access = AccessAPI.Access;
   export import AccessRule = AccessAPI.AccessRule;
   export import DEX = DEXAPI.DEX;
+  export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
   export import Percentiles = DEXAPI.Percentiles;
-  export import UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11 = DEXAPI.UnnamedSchemaRefBf9e2abcf1b78a6cab8e6e29e2228a11;
   export import Tunnels = TunnelsAPI.Tunnels;
   export import Tunnel = TunnelsAPI.Tunnel;
   export import WARPConnectorTunnel = TunnelsAPI.WARPConnectorTunnel;

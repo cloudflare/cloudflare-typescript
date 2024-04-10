@@ -50,6 +50,7 @@ export {
   CAs,
 } from './cas';
 export {
+  UserPolicyCheckGeo,
   UserPolicyCheckListResponse,
   UserPolicyCheckListParams,
   UserPolicyChecks,

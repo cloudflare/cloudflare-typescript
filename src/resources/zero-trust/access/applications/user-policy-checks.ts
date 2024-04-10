@@ -54,6 +54,10 @@ export class UserPolicyChecks extends APIResource {
   }
 }
 
+export interface UserPolicyCheckGeo {
+  country?: string;
+}
+
 export interface UserPolicyCheckListResponse {
   app_state?: UserPolicyCheckListResponse.AppState;
 
@@ -87,7 +91,7 @@ export namespace UserPolicyCheckListResponse {
 
     email?: string;
 
-    geo?: UserIdentity.Geo;
+    geo?: UserPolicyChecksAPI.UserPolicyCheckGeo;
 
     iat?: number;
 
@@ -104,12 +108,6 @@ export namespace UserPolicyCheckListResponse {
 
     version?: number;
   }
-
-  export namespace UserIdentity {
-    export interface Geo {
-      country?: string;
-    }
-  }
 }
 
 export interface UserPolicyCheckListParams {
@@ -125,6 +123,7 @@ export interface UserPolicyCheckListParams {
 }
 
 export namespace UserPolicyChecks {
+  export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
 }

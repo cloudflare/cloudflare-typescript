@@ -9,10 +9,10 @@ export {
   CustomCertificateSettings,
   ExtendedEmailMatching,
   FipsSettings,
+  GatewayConfigurationSettings,
   NotificationSettings,
   ProtocolDetection,
   TLSSettings,
-  UnnamedSchemaRef055aaf3918bf29f81c09d394a864182e,
   ConfigurationUpdateResponse,
   ConfigurationEditResponse,
   ConfigurationGetResponse,
@@ -49,7 +49,6 @@ export {
 export {
   GatewayIPs,
   ProxyEndpoint,
-  UnnamedSchemaRef4753ee81779d0e57189420079abab61e,
   ProxyEndpointDeleteResponse,
   ProxyEndpointCreateParams,
   ProxyEndpointListParams,
@@ -84,7 +83,6 @@ export {
 export {
   Location,
   LocationNetwork,
-  UnnamedSchemaRef1b37523fdb0ae5806cd8e062492aab66,
   LocationDeleteResponse,
   LocationCreateParams,
   LocationUpdateParams,
@@ -94,10 +92,4 @@ export {
   LocationsSinglePage,
   Locations,
 } from './locations';
-export {
-  LoggingSetting,
-  UnnamedSchemaRefE86eeb84b7e922c35cfb0031a6309f7b,
-  LoggingUpdateParams,
-  LoggingGetParams,
-  Logging,
-} from './logging';
+export { LoggingSetting, LoggingUpdateParams, LoggingGetParams, Logging } from './logging';
