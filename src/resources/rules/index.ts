@@ -2,15 +2,15 @@
 
 export {
   Hostname,
+  ListsList,
   Redirect,
-  RuleList,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
   ListDeleteParams,
   ListGetParams,
-  RuleListsSinglePage,
+  ListsListsSinglePage,
   Lists,
 } from './lists/index';
 export { Rules } from './rules';
