@@ -87,21 +87,6 @@ export interface Configuration {
   router_ips: Array<string>;
 }
 
-export interface UnnamedSchemaRef621ca3f6ea9a96427c902b0d14279ff8 {
-  /**
-   * Fallback sampling rate of flow messages being sent in packets per second. This
-   * should match the packet sampling rate configured on the router.
-   */
-  default_sampling: number;
-
-  /**
-   * The account name.
-   */
-  name: string;
-
-  router_ips: Array<string>;
-}
-
 export interface ConfigCreateParams {
   /**
    * Path param:
@@ -156,7 +141,6 @@ export interface ConfigGetParams {
 
 export namespace Configs {
   export import Configuration = ConfigsAPI.Configuration;
-  export import UnnamedSchemaRef621ca3f6ea9a96427c902b0d14279ff8 = ConfigsAPI.UnnamedSchemaRef621ca3f6ea9a96427c902b0d14279ff8;
   export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
   export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
   export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;

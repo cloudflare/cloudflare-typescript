@@ -141,56 +141,6 @@ export namespace Integration {
   }
 }
 
-export interface UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The configuration object containing third-party integration information.
-   */
-  config?: UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507.Config;
-
-  /**
-   * The interval between each posture check with the third-party API. Use `m` for
-   * minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
-   */
-  interval?: string;
-
-  /**
-   * The name of the device posture integration.
-   */
-  name?: string;
-
-  /**
-   * The type of device posture integration.
-   */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
-}
-
-export namespace UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 {
-  /**
-   * The configuration object containing third-party integration information.
-   */
-  export interface Config {
-    /**
-     * The Workspace One API URL provided in the Workspace One Admin Dashboard.
-     */
-    api_url: string;
-
-    /**
-     * The Workspace One Authorization URL depending on your region.
-     */
-    auth_url: string;
-
-    /**
-     * The Workspace One client ID provided in the Workspace One Admin Dashboard.
-     */
-    client_id: string;
-  }
-}
-
 export type IntegrationDeleteResponse = unknown | string | null;
 
 export interface IntegrationCreateParams {
@@ -553,7 +503,6 @@ export interface IntegrationGetParams {
 
 export namespace Integrations {
   export import Integration = IntegrationsAPI.Integration;
-  export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;

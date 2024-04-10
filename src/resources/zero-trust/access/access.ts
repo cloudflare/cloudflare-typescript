@@ -378,6 +378,9 @@ export namespace Access {
   export import Application = ApplicationsAPI.Application;
   export import CorsHeaders = ApplicationsAPI.CorsHeaders;
   export import CustomPagesh = ApplicationsAPI.CustomPagesh;
+  export import SaasAppNameFormat = ApplicationsAPI.SaasAppNameFormat;
+  export import SaasAppNameIDFormat = ApplicationsAPI.SaasAppNameIDFormat;
+  export import SaasAppSource = ApplicationsAPI.SaasAppSource;
   export import SAMLSaasApp = ApplicationsAPI.SAMLSaasApp;
   export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;

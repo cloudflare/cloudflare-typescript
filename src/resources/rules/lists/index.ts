@@ -4,7 +4,6 @@ export {
   Hostname,
   List,
   Redirect,
-  UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a,
   ListDeleteResponse,
   ListCreateParams,
   ListUpdateParams,
@@ -15,8 +14,8 @@ export {
   Lists,
 } from './lists';
 export {
-  UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775,
-  UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865,
+  ListCursor,
+  ListItem,
   ItemCreateResponse,
   ItemUpdateResponse,
   ItemListResponse,
@@ -29,8 +28,4 @@ export {
   ItemListResponsesCursorPagination,
   Items,
 } from './items';
-export {
-  UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd,
-  BulkOperationGetResponse,
-  BulkOperations,
-} from './bulk-operations';
+export { OperationStatus, BulkOperationGetResponse, BulkOperations } from './bulk-operations';

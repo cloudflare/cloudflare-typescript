@@ -77,8 +77,6 @@ export interface SplitTunnelExclude {
   host?: string;
 }
 
-export type UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = Array<SplitTunnelExclude>;
-
 export type ExcludeUpdateResponse = Array<SplitTunnelExclude>;
 
 export type ExcludeGetResponse = Array<SplitTunnelExclude>;
@@ -105,7 +103,6 @@ export interface ExcludeGetParams {
 
 export namespace Excludes {
   export import SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
-  export import UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8 = ExcludesAPI.UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8;
   export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
   export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
   export import SplitTunnelExcludesSinglePage = ExcludesAPI.SplitTunnelExcludesSinglePage;
