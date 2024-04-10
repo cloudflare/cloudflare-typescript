@@ -97,8 +97,6 @@ export class Rules extends APIResource {
 
 export class WaitingRoomRulesSinglePage extends SinglePage<WaitingRoomRule> {}
 
-export type UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = Array<WaitingRoomRule>;
-
 export interface WaitingRoomRule {
   /**
    * The ID of the rule.
@@ -284,7 +282,6 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
-  export import UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = RulesAPI.UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430;
   export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;

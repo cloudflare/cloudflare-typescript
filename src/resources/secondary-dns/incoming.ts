@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IncomingAPI from 'cloudflare/resources/secondary-dns/incoming';
 
-export class Incoming extends APIResource {
+export class IncomingResource extends APIResource {
   /**
    * Create secondary zone configuration for incoming zone transfers.
    */
@@ -64,7 +64,7 @@ export class Incoming extends APIResource {
   }
 }
 
-export interface UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a {
+export interface Incoming {
   id?: string;
 
   /**
@@ -290,8 +290,8 @@ export interface IncomingGetParams {
   zone_id: string;
 }
 
-export namespace Incoming {
-  export import UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a = IncomingAPI.UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a;
+export namespace IncomingResource {
+  export import Incoming = IncomingAPI.Incoming;
   export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
   export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
   export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;

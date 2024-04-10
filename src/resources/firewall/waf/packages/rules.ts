@@ -79,7 +79,7 @@ export type AllowedModesAnomaly = 'on' | 'off';
 /**
  * The rule group to which the current WAF rule belongs.
  */
-export interface UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 {
+export interface WAFRuleGroup {
   /**
    * The unique identifier of the rule group.
    */
@@ -129,7 +129,7 @@ export namespace RuleListResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current WAF rule will be used when evaluating the request.
@@ -178,7 +178,7 @@ export namespace RuleListResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * The action that the current WAF rule will perform when triggered. Applies to
@@ -223,7 +223,7 @@ export namespace RuleListResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current rule will be used when evaluating the request.
@@ -281,7 +281,7 @@ export namespace RuleEditResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current WAF rule will be used when evaluating the request.
@@ -330,7 +330,7 @@ export namespace RuleEditResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * The action that the current WAF rule will perform when triggered. Applies to
@@ -375,7 +375,7 @@ export namespace RuleEditResponse {
     /**
      * The rule group to which the current WAF rule belongs.
      */
-    group: RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+    group: RulesAPI.WAFRuleGroup;
 
     /**
      * When set to `on`, the current rule will be used when evaluating the request.
@@ -463,7 +463,7 @@ export interface RuleGetParams {
 
 export namespace Rules {
   export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export import UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5 = RulesAPI.UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5;
+  export import WAFRuleGroup = RulesAPI.WAFRuleGroup;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import RuleGetResponse = RulesAPI.RuleGetResponse;

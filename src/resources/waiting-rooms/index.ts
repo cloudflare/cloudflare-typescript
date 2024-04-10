@@ -2,7 +2,6 @@
 
 export {
   Event,
-  UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6,
   EventDeleteResponse,
   EventCreateParams,
   EventUpdateParams,
@@ -26,7 +25,6 @@ export {
 } from './settings';
 export { StatusGetResponse, StatusGetParams, Statuses } from './statuses';
 export {
-  UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430,
   WaitingRoomRule,
   RuleCreateResponse,
   RuleUpdateResponse,

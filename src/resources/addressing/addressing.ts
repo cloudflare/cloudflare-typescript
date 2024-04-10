@@ -34,9 +34,12 @@ export namespace Addressing {
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Prefixes = PrefixesAPI.Prefixes;
   export import Prefix = PrefixesAPI.Prefix;
-  export import UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46 = PrefixesAPI.UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46;
+  export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
+  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
+  export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
+  export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
+  export import PrefixListResponsesSinglePage = PrefixesAPI.PrefixListResponsesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;

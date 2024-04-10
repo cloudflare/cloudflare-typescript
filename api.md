@@ -1691,7 +1691,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">AllowedModesAnomaly</a></code>
-- <code><a href="./src/resources/firewall/waf/packages/rules.ts">UnnamedSchemaRef532d8b97684c9032dd36bae8acddebf5</a></code>
+- <code><a href="./src/resources/firewall/waf/packages/rules.ts">WAFRuleGroup</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleListResponse</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleEditResponse</a></code>
 - <code><a href="./src/resources/firewall/waf/packages/rules.ts">RuleGetResponse</a></code>
@@ -1711,7 +1711,6 @@ Types:
 - <code><a href="./src/resources/healthchecks/healthchecks.ts">HTTPConfiguration</a></code>
 - <code><a href="./src/resources/healthchecks/healthchecks.ts">QueryHealthcheck</a></code>
 - <code><a href="./src/resources/healthchecks/healthchecks.ts">TCPConfiguration</a></code>
-- <code><a href="./src/resources/healthchecks/healthchecks.ts">UnnamedSchemaRefAaa560acadcbf1ae1dc619ba1ea5948e</a></code>
 - <code><a href="./src/resources/healthchecks/healthchecks.ts">HealthcheckDeleteResponse</a></code>
 
 Methods:
@@ -1742,7 +1741,6 @@ Types:
 - <code><a href="./src/resources/keyless-certificates.ts">Hostname</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificate</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">Tunnel</a></code>
-- <code><a href="./src/resources/keyless-certificates.ts">UnnamedSchemaRefA91f0bd72ee433f010eecfdc94ccf298</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificateDeleteResponse</a></code>
 
 Methods:
@@ -1771,8 +1769,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/logpush/datasets/jobs.ts">Job</a></code>
-- <code><a href="./src/resources/logpush/datasets/jobs.ts">OutputOptions</a></code>
 - <code><a href="./src/resources/logpush/datasets/jobs.ts">JobGetResponse</a></code>
 
 Methods:
@@ -1795,16 +1791,21 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/logpush/jobs.ts">UnnamedSchemaRef2f2e9d7fbcc0e6856257a03a1dbbdfb5</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">LogpushJob</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">OutputOptions</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">JobCreateResponse</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">JobUpdateResponse</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">JobListResponse</a></code>
 - <code><a href="./src/resources/logpush/jobs.ts">JobDeleteResponse</a></code>
+- <code><a href="./src/resources/logpush/jobs.ts">JobGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>({ ...params }) -> Job | null</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(jobId, { ...params }) -> Job | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>({ ...params }) -> JobsSinglePage</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>({ ...params }) -> JobCreateResponse | null</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(jobId, { ...params }) -> JobUpdateResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>({ ...params }) -> JobListResponsesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">delete</a>(jobId, { ...params }) -> JobDeleteResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(jobId, { ...params }) -> Job | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(jobId, { ...params }) -> JobGetResponse | null</code>
 
 ## Ownership
 
@@ -1927,14 +1928,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">Certificate</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">UnnamedSchemaRefD182888b36f93a765d9ce5aefa3009e9</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateCreateResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">CertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">create</a>({ ...params }) -> Certificate</code>
+- <code title="post /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
 - <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">list</a>({ ...params }) -> AuthenticatedOriginPullsSinglePage</code>
-- <code title="delete /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">delete</a>(certificateId, { ...params }) -> Certificate</code>
-- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">get</a>(certificateId, { ...params }) -> Certificate</code>
+- <code title="delete /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">delete</a>(certificateId, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}">client.originTLSClientAuth.hostnames.certificates.<a href="./src/resources/origin-tls-client-auth/hostnames/certificates.ts">get</a>(certificateId, { ...params }) -> CertificateGetResponse</code>
 
 ## Settings
 
@@ -2018,7 +2021,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/secondary-dns/incoming.ts">UnnamedSchemaRef150c555e27f53dbb40cdce4d6644ff0a</a></code>
+- <code><a href="./src/resources/secondary-dns/incoming.ts">Incoming</a></code>
 - <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingCreateResponse</a></code>
 - <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingUpdateResponse</a></code>
 - <code><a href="./src/resources/secondary-dns/incoming.ts">IncomingDeleteResponse</a></code>
@@ -2037,8 +2040,8 @@ Types:
 
 - <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">DisableTransfer</a></code>
 - <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">EnableTransfer</a></code>
+- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">Outgoing</a></code>
 - <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingStatus</a></code>
-- <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564</a></code>
 - <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingCreateResponse</a></code>
 - <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingUpdateResponse</a></code>
 - <code><a href="./src/resources/secondary-dns/outgoing/outgoing.ts">OutgoingDeleteResponse</a></code>
@@ -2081,16 +2084,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/secondary-dns/peers.ts">Peer</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">UnnamedSchemaRefBc727f0a53d75f2b531245a82603fbe0</a></code>
+- <code><a href="./src/resources/secondary-dns/peers.ts">PeerCreateResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/peers.ts">PeerUpdateResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/peers.ts">PeerListResponse</a></code>
 - <code><a href="./src/resources/secondary-dns/peers.ts">PeerDeleteResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/peers.ts">PeerGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">create</a>({ ...params }) -> Peer</code>
-- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">update</a>(peerId, { ...params }) -> Peer</code>
-- <code title="get /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">list</a>({ ...params }) -> PeersSinglePage</code>
+- <code title="post /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">create</a>({ ...params }) -> PeerCreateResponse</code>
+- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">update</a>(peerId, { ...params }) -> PeerUpdateResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">list</a>({ ...params }) -> PeerListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">delete</a>(peerId, { ...params }) -> PeerDeleteResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">get</a>(peerId, { ...params }) -> Peer</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">get</a>(peerId, { ...params }) -> PeerGetResponse</code>
 
 ## TSIGs
 
@@ -2141,7 +2147,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/waiting-rooms/events/events.ts">Event</a></code>
-- <code><a href="./src/resources/waiting-rooms/events/events.ts">UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6</a></code>
 - <code><a href="./src/resources/waiting-rooms/events/events.ts">EventDeleteResponse</a></code>
 
 Methods:
@@ -2168,7 +2173,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/waiting-rooms/rules.ts">UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">WaitingRoomRule</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleCreateResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleUpdateResponse</a></code>
@@ -2215,7 +2219,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/web3/hostnames/hostnames.ts">Hostname</a></code>
-- <code><a href="./src/resources/web3/hostnames/hostnames.ts">UnnamedSchemaRef2e420942fb77cd2cd2ba3ca7b5f32e1e</a></code>
 - <code><a href="./src/resources/web3/hostnames/hostnames.ts">HostnameDeleteResponse</a></code>
 
 Methods:
@@ -2243,7 +2246,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">UnnamedSchemaRef5e618833803e286db9ee7c73727f8b86</a></code>
 - <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryCreateResponse</a></code>
 - <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryUpdateResponse</a></code>
 - <code><a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">EntryListResponse</a></code>
@@ -2304,7 +2306,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/workers/scripts/schedules.ts">UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26</a></code>
+- <code><a href="./src/resources/workers/scripts/schedules.ts">Schedule</a></code>
 - <code><a href="./src/resources/workers/scripts/schedules.ts">ScheduleUpdateResponse</a></code>
 - <code><a href="./src/resources/workers/scripts/schedules.ts">ScheduleGetResponse</a></code>
 
@@ -2518,7 +2520,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/queues/consumers.ts">Consumer</a></code>
-- <code><a href="./src/resources/queues/consumers.ts">UnnamedSchemaRefFbd3a4642487e41594e9af0ccb9a5ca5</a></code>
 - <code><a href="./src/resources/queues/consumers.ts">ConsumerCreateResponse</a></code>
 - <code><a href="./src/resources/queues/consumers.ts">ConsumerUpdateResponse</a></code>
 - <code><a href="./src/resources/queues/consumers.ts">ConsumerDeleteResponse</a></code>
@@ -2856,16 +2857,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/addressing/prefixes/prefixes.ts">Prefix</a></code>
-- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">UnnamedSchemaRefE358666e049bf8f9281c0a4f89b5fe46</a></code>
+- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixCreateResponse</a></code>
+- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixListResponse</a></code>
 - <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixDeleteResponse</a></code>
+- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixEditResponse</a></code>
+- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">create</a>({ ...params }) -> Prefix</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">list</a>({ ...params }) -> PrefixesSinglePage</code>
+- <code title="post /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">create</a>({ ...params }) -> PrefixCreateResponse</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">list</a>({ ...params }) -> PrefixListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">delete</a>(prefixId, { ...params }) -> PrefixDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">edit</a>(prefixId, { ...params }) -> Prefix</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">get</a>(prefixId, { ...params }) -> Prefix</code>
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">edit</a>(prefixId, { ...params }) -> PrefixEditResponse</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">get</a>(prefixId, { ...params }) -> PrefixGetResponse</code>
 
 ### BGP
 
@@ -2947,14 +2951,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/brand-protection.ts">Info</a></code>
+- <code><a href="./src/resources/brand-protection.ts">RuleMatch</a></code>
+- <code><a href="./src/resources/brand-protection.ts">ScanStatus</a></code>
 - <code><a href="./src/resources/brand-protection.ts">Submit</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRef209db30ed499548152d6f3bccf720b54</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRef39419d70e2399b28b15cd660afd342fb</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRef3e10ea08deb8102a27500f986488c1e8</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRef44e66100b948bfe723054c56b6144766</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRef767c0981cf47f45f0c766253dbd18669</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRef9b4c9779a35b172cb69c71389ebc7014</a></code>
-- <code><a href="./src/resources/brand-protection.ts">UnnamedSchemaRefA64e2a18a86750b6bd72cdf37ecfd869</a></code>
+- <code><a href="./src/resources/brand-protection.ts">URLInfoModelResults</a></code>
 
 Methods:
 
@@ -2981,7 +2981,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/images/v1/v1.ts">Image</a></code>
-- <code><a href="./src/resources/images/v1/v1.ts">UnnamedSchemaRefE8461c343d70f42d35d6d68f1a58d05a</a></code>
 - <code><a href="./src/resources/images/v1/v1.ts">V1ListResponse</a></code>
 - <code><a href="./src/resources/images/v1/v1.ts">V1DeleteResponse</a></code>
 
@@ -2998,7 +2997,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/images/v1/keys.ts">Key</a></code>
-- <code><a href="./src/resources/images/v1/keys.ts">UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95</a></code>
 
 Methods:
 
@@ -3020,7 +3018,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/images/v1/variants.ts">UnnamedSchemaRefD02195de7dadf27801875f36cddfa3a3</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">Variant</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">VariantCreateResponse</a></code>
 - <code><a href="./src/resources/images/v1/variants.ts">VariantDeleteResponse</a></code>
@@ -3354,8 +3351,8 @@ Types:
 
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACL</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLConfiguration</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">AllowedProtocol</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">Subnet</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">UnnamedSchemaRef87fa9e5fe9f6b8d607be1df57340d916</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLCreateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLUpdateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLListResponse</a></code>

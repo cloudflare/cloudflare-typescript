@@ -1869,7 +1869,6 @@ export namespace WaitingRooms {
   export import PagePreviewParams = PageAPI.PagePreviewParams;
   export import Events = EventsAPI.Events;
   export import Event = EventsAPI.Event;
-  export import UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6 = EventsAPI.UnnamedSchemaRef229c159575bc68a9c21f5a1615629cf6;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
   export import EventsSinglePage = EventsAPI.EventsSinglePage;
   export import EventCreateParams = EventsAPI.EventCreateParams;
@@ -1879,7 +1878,6 @@ export namespace WaitingRooms {
   export import EventEditParams = EventsAPI.EventEditParams;
   export import EventGetParams = EventsAPI.EventGetParams;
   export import Rules = RulesAPI.Rules;
-  export import UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430 = RulesAPI.UnnamedSchemaRefF1c0ba8f44601f2db2e07b9397b6c430;
   export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;

@@ -69,24 +69,6 @@ export namespace Key {
   }
 }
 
-export interface UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 {
-  keys?: Array<UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95.Key>;
-}
-
-export namespace UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 {
-  export interface Key {
-    /**
-     * Key name.
-     */
-    name?: string;
-
-    /**
-     * Key value.
-     */
-    value?: string;
-  }
-}
-
 export interface KeyUpdateParams {
   /**
    * Account identifier tag.
@@ -110,7 +92,6 @@ export interface KeyDeleteParams {
 
 export namespace Keys {
   export import Key = KeysAPI.Key;
-  export import UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95 = KeysAPI.UnnamedSchemaRef918e794287a67b5e85126e00cf2d9a95;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;

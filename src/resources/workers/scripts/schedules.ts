@@ -40,7 +40,7 @@ export class Schedules extends APIResource {
   }
 }
 
-export interface UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26 {
+export interface Schedule {
   created_on?: unknown;
 
   cron?: unknown;
@@ -49,11 +49,11 @@ export interface UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26 {
 }
 
 export interface ScheduleUpdateResponse {
-  schedules?: Array<UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26>;
+  schedules?: Array<Schedule>;
 }
 
 export interface ScheduleGetResponse {
-  schedules?: Array<UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26>;
+  schedules?: Array<Schedule>;
 }
 
 export interface ScheduleUpdateParams {
@@ -76,7 +76,7 @@ export interface ScheduleGetParams {
 }
 
 export namespace Schedules {
-  export import UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26 = SchedulesAPI.UnnamedSchemaRefC8302c265937f9d6f96fd69644e56b26;
+  export import Schedule = SchedulesAPI.Schedule;
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
   export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
   export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;

@@ -5,7 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
 import * as StatusAPI from 'cloudflare/resources/secondary-dns/outgoing/status';
 
-export class Outgoing extends APIResource {
+export class OutgoingResource extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
 
   /**
@@ -120,12 +120,7 @@ export type DisableTransfer = string;
  */
 export type EnableTransfer = string;
 
-/**
- * The zone transfer status of a primary zone
- */
-export type OutgoingStatus = string | null;
-
-export interface UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 {
+export interface Outgoing {
   id?: string;
 
   /**
@@ -158,6 +153,11 @@ export interface UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 {
    */
   soa_serial?: number;
 }
+
+/**
+ * The zone transfer status of a primary zone
+ */
+export type OutgoingStatus = string | null;
 
 export interface OutgoingCreateResponse {
   id?: string;
@@ -357,11 +357,11 @@ export interface OutgoingGetParams {
   zone_id: string;
 }
 
-export namespace Outgoing {
+export namespace OutgoingResource {
   export import DisableTransfer = OutgoingAPI.DisableTransfer;
   export import EnableTransfer = OutgoingAPI.EnableTransfer;
+  export import Outgoing = OutgoingAPI.Outgoing;
   export import OutgoingStatus = OutgoingAPI.OutgoingStatus;
-  export import UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564 = OutgoingAPI.UnnamedSchemaRef0e152c3e4c55b8a0ca6531578a42c564;
   export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
   export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
   export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
