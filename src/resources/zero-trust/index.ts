@@ -2,7 +2,6 @@
 
 export {
   AccessRule,
-  AnyValidServiceTokenRule,
   AuthenticationMethodRule,
   AzureGroupRule,
   CertificateRule,
