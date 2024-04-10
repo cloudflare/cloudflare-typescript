@@ -3619,17 +3619,17 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/rules/lists/lists.ts">Hostname</a></code>
+- <code><a href="./src/resources/rules/lists/lists.ts">ListsList</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">Redirect</a></code>
-- <code><a href="./src/resources/rules/lists/lists.ts">RuleList</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">ListDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">create</a>({ ...params }) -> RuleList | null</code>
-- <code title="put /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">update</a>(listId, { ...params }) -> RuleList | null</code>
-- <code title="get /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">list</a>({ ...params }) -> RuleListsSinglePage</code>
+- <code title="post /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">create</a>({ ...params }) -> ListsList | null</code>
+- <code title="put /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">update</a>(listId, { ...params }) -> ListsList | null</code>
+- <code title="get /accounts/{account_id}/rules/lists">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">list</a>({ ...params }) -> ListsListsSinglePage</code>
 - <code title="delete /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">delete</a>(listId, { ...params }) -> ListDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">get</a>(listId, { ...params }) -> RuleList | null</code>
+- <code title="get /accounts/{account_id}/rules/lists/{list_id}">client.rules.lists.<a href="./src/resources/rules/lists/lists.ts">get</a>(listId, { ...params }) -> ListsList | null</code>
 
 ### BulkOperations
 
