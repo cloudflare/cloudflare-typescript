@@ -64,7 +64,6 @@ export namespace ZeroTrust {
   export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;
   export import AccessRule = AccessAPI.AccessRule;
-  export import AuthenticationMethodRule = AccessAPI.AuthenticationMethodRule;
   export import AzureGroupRule = AccessAPI.AzureGroupRule;
   export import CertificateRule = AccessAPI.CertificateRule;
   export import CountryRule = AccessAPI.CountryRule;
