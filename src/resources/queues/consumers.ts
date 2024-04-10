@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
-import * as QueuesAPI from 'cloudflare/resources/queues/queues';
 
 export class Consumers extends APIResource {
   /**
@@ -85,7 +84,20 @@ export interface Consumer {
 
   service?: unknown;
 
-  settings?: QueuesAPI.QueueSettings;
+  settings?: Consumer.Settings;
+}
+
+export namespace Consumer {
+  export interface Settings {
+    /**
+     * The maximum number of messages to include in a batch
+     */
+    batch_size?: number;
+
+    max_retries?: number;
+
+    max_wait_time_ms?: number;
+  }
 }
 
 export interface ConsumerCreateResponse {
@@ -141,34 +153,7 @@ export namespace ConsumerUpdateResponse {
 
 export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
 
-export type ConsumerGetResponse = Array<ConsumerGetResponse.ConsumerGetResponseItem>;
-
-export namespace ConsumerGetResponse {
-  export interface ConsumerGetResponseItem {
-    created_on?: unknown;
-
-    environment?: unknown;
-
-    queue_name?: unknown;
-
-    service?: unknown;
-
-    settings?: ConsumerGetResponseItem.Settings;
-  }
-
-  export namespace ConsumerGetResponseItem {
-    export interface Settings {
-      /**
-       * The maximum number of messages to include in a batch
-       */
-      batch_size?: number;
-
-      max_retries?: number;
-
-      max_wait_time_ms?: number;
-    }
-  }
-}
+export type ConsumerGetResponse = Array<Consumer>;
 
 export interface ConsumerCreateParams {
   /**
