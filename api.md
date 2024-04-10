@@ -2530,11 +2530,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rulesets/rulesets.ts">BlockRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">ExecuteRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">LogRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">SkipRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetGetResponse</a></code>
@@ -2574,6 +2570,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/rulesets/rules.ts">BlockRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RulesetRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">SkipRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RuleCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RuleDeleteResponse</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RuleEditResponse</a></code>
