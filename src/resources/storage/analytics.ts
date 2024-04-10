@@ -36,7 +36,7 @@ export class Analytics extends APIResource {
  * Metrics on Workers KV requests.
  */
 export interface Components {
-  data: Array<UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7> | null;
+  data: Array<Components.Data> | null;
 
   /**
    * Number of seconds between current time and last processed event, i.e. how many
@@ -71,6 +71,13 @@ export interface Components {
 }
 
 export namespace Components {
+  export interface Data {
+    /**
+     * List of metrics returned by the query.
+     */
+    metrics: Array<unknown>;
+  }
+
   /**
    * For specifying result metrics.
    */
@@ -131,7 +138,7 @@ export namespace Components {
  * Metrics on Workers KV requests.
  */
 export interface Schema {
-  data: Array<UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7> | null;
+  data: Array<Schema.Data> | null;
 
   /**
    * Number of seconds between current time and last processed event, i.e. how many
@@ -166,6 +173,13 @@ export interface Schema {
 }
 
 export namespace Schema {
+  export interface Data {
+    /**
+     * List of metrics returned by the query.
+     */
+    metrics: Array<unknown>;
+  }
+
   /**
    * For specifying result metrics.
    */
@@ -220,13 +234,6 @@ export namespace Schema {
      */
     until?: string;
   }
-}
-
-export interface UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7 {
-  /**
-   * List of metrics returned by the query.
-   */
-  metrics: Array<unknown>;
 }
 
 export interface AnalyticsListParams {
@@ -370,7 +377,6 @@ export namespace AnalyticsStoredParams {
 export namespace Analytics {
   export import Components = AnalyticsAPI.Components;
   export import Schema = AnalyticsAPI.Schema;
-  export import UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7 = AnalyticsAPI.UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7;
   export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
   export import AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
 }

@@ -12,7 +12,6 @@ export namespace Rules {
   export import Hostname = ListsAPI.Hostname;
   export import List = ListsAPI.List;
   export import Redirect = ListsAPI.Redirect;
-  export import UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a = ListsAPI.UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListsSinglePage = ListsAPI.ListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;

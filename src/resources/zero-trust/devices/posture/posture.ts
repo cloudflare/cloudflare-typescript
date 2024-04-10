@@ -118,7 +118,7 @@ export namespace DeviceInput {
     /**
      * Operating system
      */
-    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+    operating_system: 'windows' | 'linux' | 'mac';
 
     /**
      * File path.
@@ -174,7 +174,7 @@ export namespace DeviceInput {
     /**
      * operator
      */
-    operator: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+    operator: '<' | '<=' | '>' | '>=' | '==';
 
     /**
      * Version of OS
@@ -214,7 +214,7 @@ export namespace DeviceInput {
     /**
      * Operating system
      */
-    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+    operating_system: 'windows' | 'linux' | 'mac';
 
     /**
      * File path.
@@ -236,7 +236,7 @@ export namespace DeviceInput {
     /**
      * Operating system
      */
-    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+    operating_system: 'windows' | 'linux' | 'mac';
 
     /**
      * File path.
@@ -270,7 +270,7 @@ export namespace DeviceInput {
     /**
      * Operating system
      */
-    operating_system: PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
+    operating_system: 'windows' | 'linux' | 'mac';
 
     /**
      * Path for the application.
@@ -326,7 +326,7 @@ export namespace DeviceInput {
     /**
      * operator
      */
-    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+    operator?: '<' | '<=' | '>' | '>=' | '==';
 
     /**
      * Os Version
@@ -449,7 +449,7 @@ export namespace DeviceInput {
     /**
      * operator
      */
-    operator?: PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
+    operator?: '<' | '<=' | '>' | '>=' | '==';
   }
 }
 
@@ -458,79 +458,6 @@ export interface DeviceMatch {
 }
 
 export interface DevicePostureRule {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The description of the device posture rule.
-   */
-  description?: string;
-
-  /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
-   */
-  expiration?: string;
-
-  /**
-   * The value to be checked against.
-   */
-  input?: DeviceInput;
-
-  /**
-   * The conditions that the client must match to run the rule.
-   */
-  match?: Array<DeviceMatch>;
-
-  /**
-   * The name of the device posture rule.
-   */
-  name?: string;
-
-  /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
-   */
-  schedule?: string;
-
-  /**
-   * The type of device posture rule.
-   */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
-}
-
-/**
- * operator
- */
-export type UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = '<' | '<=' | '>' | '>=' | '==';
-
-/**
- * Operating system
- */
-export type UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = 'windows' | 'linux' | 'mac';
-
-export interface UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 {
   /**
    * API UUID.
    */
@@ -750,9 +677,6 @@ export namespace Posture {
   export import DeviceInput = PostureAPI.DeviceInput;
   export import DeviceMatch = PostureAPI.DeviceMatch;
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
-  export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
-  export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
-  export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
   export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
@@ -762,7 +686,6 @@ export namespace Posture {
   export import PostureGetParams = PostureAPI.PostureGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
   export import Integration = IntegrationsAPI.Integration;
-  export import UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507 = IntegrationsAPI.UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507;
   export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
   export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;

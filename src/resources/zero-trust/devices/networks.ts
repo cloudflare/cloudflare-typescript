@@ -131,50 +131,6 @@ export namespace DeviceNetwork {
   }
 }
 
-export interface UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de {
-  /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
-   */
-  config?: UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de.Config;
-
-  /**
-   * The name of the device managed network. This name must be unique.
-   */
-  name?: string;
-
-  /**
-   * API UUID.
-   */
-  network_id?: string;
-
-  /**
-   * The type of device managed network.
-   */
-  type?: 'tls';
-}
-
-export namespace UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de {
-  /**
-   * The configuration object containing information for the WARP client to detect
-   * the managed network.
-   */
-  export interface Config {
-    /**
-     * A network address of the form "host:port" that the WARP client will use to
-     * detect the presence of a TLS host.
-     */
-    tls_sockaddr: string;
-
-    /**
-     * The SHA-256 hash of the TLS certificate presented by the host found at
-     * tls_sockaddr. If absent, regular certificate verification (trusted roots, valid
-     * timestamp, etc) will be used to validate the certificate.
-     */
-    sha256?: string;
-  }
-}
-
 export type NetworkDeleteResponse = Array<DeviceNetwork>;
 
 export interface NetworkCreateParams {
@@ -287,7 +243,6 @@ export interface NetworkGetParams {
 
 export namespace Networks {
   export import DeviceNetwork = NetworksAPI.DeviceNetwork;
-  export import UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de = NetworksAPI.UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de;
   export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
   export import DeviceNetworksSinglePage = NetworksAPI.DeviceNetworksSinglePage;
   export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;

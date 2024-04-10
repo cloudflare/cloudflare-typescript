@@ -3246,8 +3246,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheck</a></code>
+- <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckRate</a></code>
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckType</a></code>
-- <code><a href="./src/resources/magic-transit/magic-transit.ts">UnnamedSchemaRefEebdc868ce7f7ae92e23438caa84e7b5</a></code>
 
 ## CfInterconnects
 
@@ -3418,7 +3418,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/magic-network-monitoring/configs/configs.ts">Configuration</a></code>
-- <code><a href="./src/resources/magic-network-monitoring/configs/configs.ts">UnnamedSchemaRef621ca3f6ea9a96427c902b0d14279ff8</a></code>
 
 Methods:
 
@@ -3439,7 +3438,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">MagicNetworkMonitoringRule</a></code>
-- <code><a href="./src/resources/magic-network-monitoring/rules/rules.ts">UnnamedSchemaRef99ba74ba6027c3c87ca03d4e81cfc16d</a></code>
 
 Methods:
 
@@ -3628,7 +3626,6 @@ Types:
 - <code><a href="./src/resources/rules/lists/lists.ts">Hostname</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">List</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">Redirect</a></code>
-- <code><a href="./src/resources/rules/lists/lists.ts">UnnamedSchemaRefE706d5e8367564544e2991af82ebb07a</a></code>
 - <code><a href="./src/resources/rules/lists/lists.ts">ListDeleteResponse</a></code>
 
 Methods:
@@ -3643,7 +3640,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rules/lists/bulk-operations.ts">UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd</a></code>
+- <code><a href="./src/resources/rules/lists/bulk-operations.ts">OperationStatus</a></code>
 - <code><a href="./src/resources/rules/lists/bulk-operations.ts">BulkOperationGetResponse</a></code>
 
 Methods:
@@ -3654,8 +3651,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rules/lists/items.ts">UnnamedSchemaRef34bb6e31800bc0207c083affa12d2775</a></code>
-- <code><a href="./src/resources/rules/lists/items.ts">UnnamedSchemaRef46621d4d5b6644caae5c9167b8e28865</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ListCursor</a></code>
+- <code><a href="./src/resources/rules/lists/items.ts">ListItem</a></code>
 - <code><a href="./src/resources/rules/lists/items.ts">ItemCreateResponse</a></code>
 - <code><a href="./src/resources/rules/lists/items.ts">ItemUpdateResponse</a></code>
 - <code><a href="./src/resources/rules/lists/items.ts">ItemListResponse</a></code>
@@ -3678,7 +3675,6 @@ Types:
 
 - <code><a href="./src/resources/storage/analytics.ts">Components</a></code>
 - <code><a href="./src/resources/storage/analytics.ts">Schema</a></code>
-- <code><a href="./src/resources/storage/analytics.ts">UnnamedSchemaRef608bee5065f7314d6fa572b89a1910f7</a></code>
 
 Methods:
 
@@ -3875,7 +3871,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/alerting/alerting.ts">UnnamedSchemaRefD6e23adacaca017802aaa484a8b3f405</a></code>
+- <code><a href="./src/resources/alerting/alerting.ts">Alert</a></code>
 
 ## AvailableAlerts
 
@@ -4102,9 +4098,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTest</a></code>
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaData</a></code>
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">SchemaHTTP</a></code>
-- <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">UnnamedSchemaRef15fd6ef0641450fd873ffb71715170c9</a></code>
 - <code><a href="./src/resources/zero-trust/devices/dex-tests.ts">DEXTestDeleteResponse</a></code>
 
 Methods:
@@ -4120,7 +4116,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/networks.ts">DeviceNetwork</a></code>
-- <code><a href="./src/resources/zero-trust/devices/networks.ts">UnnamedSchemaRefD2b048663faf5e0cd5c90501b71171de</a></code>
 - <code><a href="./src/resources/zero-trust/devices/networks.ts">NetworkDeleteResponse</a></code>
 
 Methods:
@@ -4136,7 +4131,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SettingsPolicy</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">UnnamedSchemaRefF636ff9f2cb41ff4b715cf8ed8515581</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">PolicyDeleteResponse</a></code>
 
 Methods:
@@ -4162,7 +4156,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">SplitTunnelExclude</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">UnnamedSchemaRef0462afe1a32ee90b1999d4277af59fa8</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">ExcludeUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">ExcludeGetResponse</a></code>
 
@@ -4177,7 +4170,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomain</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">UnnamedSchemaRef1fbf91ecd61792c751fead58dc8005e6</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomainPolicy</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomainUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomainGetResponse</a></code>
 
@@ -4192,7 +4185,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">SplitTunnelInclude</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">UnnamedSchemaRef5e0c6134a624678286f4a424b001870a</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">IncludeUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">IncludeGetResponse</a></code>
 
@@ -4209,9 +4201,6 @@ Types:
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceInput</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceMatch</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DevicePostureRule</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef41885dd46b9e0294254c49305a273681</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">PostureDeleteResponse</a></code>
 
 Methods:
@@ -4227,7 +4216,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">Integration</a></code>
-- <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">UnnamedSchemaRefB84b377dfc9454d455b646d4bc9ab507</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/integrations.ts">IntegrationDeleteResponse</a></code>
 
 Methods:
@@ -4343,6 +4331,9 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CorsHeaders</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CustomPagesh</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaasAppNameFormat</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaasAppNameIDFormat</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaasAppSource</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SAMLSaasApp</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SelfHostedDomainsh</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationDeleteResponse</a></code>

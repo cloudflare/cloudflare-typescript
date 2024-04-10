@@ -29,11 +29,11 @@ export class BulkOperations extends APIResource {
 /**
  * The current status of the asynchronous operation.
  */
-export type UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd = 'pending' | 'running' | 'completed' | 'failed';
+export type OperationStatus = 'pending' | 'running' | 'completed' | 'failed';
 
 export type BulkOperationGetResponse = Array<unknown>;
 
 export namespace BulkOperations {
-  export import UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd = BulkOperationsAPI.UnnamedSchemaRefCc279fb99baf6a166db5c4e790a8c6cd;
+  export import OperationStatus = BulkOperationsAPI.OperationStatus;
   export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
 }
