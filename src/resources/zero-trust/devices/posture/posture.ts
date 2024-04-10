@@ -15,11 +15,11 @@ export class Posture extends APIResource {
   create(
     params: PostureCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureCreateResponse | null> {
+  ): Core.APIPromise<DevicePostureRule | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/posture`, { body, ...options }) as Core.APIPromise<{
-        result: PostureCreateResponse | null;
+        result: DevicePostureRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,13 +31,13 @@ export class Posture extends APIResource {
     ruleId: string,
     params: PostureUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureUpdateResponse | null> {
+  ): Core.APIPromise<DevicePostureRule | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/posture/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PostureUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: DevicePostureRule | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,11 +47,11 @@ export class Posture extends APIResource {
   list(
     params: PostureListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PostureListResponsesSinglePage, PostureListResponse> {
+  ): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRule> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/devices/posture`,
-      PostureListResponsesSinglePage,
+      DevicePostureRulesSinglePage,
       options,
     );
   }
@@ -80,17 +80,17 @@ export class Posture extends APIResource {
     ruleId: string,
     params: PostureGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureGetResponse | null> {
+  ): Core.APIPromise<DevicePostureRule | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
-        result: PostureGetResponse | null;
+        result: DevicePostureRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PostureListResponsesSinglePage extends SinglePage<PostureListResponse> {}
+export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRule> {}
 
 /**
  * The value to be checked against.
@@ -457,6 +457,69 @@ export interface DeviceMatch {
   platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
 }
 
+export interface DevicePostureRule {
+  /**
+   * API UUID.
+   */
+  id?: string;
+
+  /**
+   * The description of the device posture rule.
+   */
+  description?: string;
+
+  /**
+   * Sets the expiration time for a posture check result. If empty, the result
+   * remains valid until it is overwritten by new data from the WARP client.
+   */
+  expiration?: string;
+
+  /**
+   * The value to be checked against.
+   */
+  input?: DeviceInput;
+
+  /**
+   * The conditions that the client must match to run the rule.
+   */
+  match?: Array<DeviceMatch>;
+
+  /**
+   * The name of the device posture rule.
+   */
+  name?: string;
+
+  /**
+   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
+   * five minutes). Minimum: `1m`.
+   */
+  schedule?: string;
+
+  /**
+   * The type of device posture rule.
+   */
+  type?:
+    | 'file'
+    | 'application'
+    | 'tanium'
+    | 'gateway'
+    | 'warp'
+    | 'disk_encryption'
+    | 'sentinelone'
+    | 'carbonblack'
+    | 'firewall'
+    | 'os_version'
+    | 'domain_joined'
+    | 'client_certificate'
+    | 'unique_client_id'
+    | 'kolide'
+    | 'tanium_s2s'
+    | 'crowdstrike_s2s'
+    | 'intune'
+    | 'workspace_one'
+    | 'sentinelone_s2s';
+}
+
 /**
  * operator
  */
@@ -530,263 +593,11 @@ export interface UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 {
     | 'sentinelone_s2s';
 }
 
-export interface PostureCreateResponse {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The description of the device posture rule.
-   */
-  description?: string;
-
-  /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
-   */
-  expiration?: string;
-
-  /**
-   * The value to be checked against.
-   */
-  input?: DeviceInput;
-
-  /**
-   * The conditions that the client must match to run the rule.
-   */
-  match?: Array<DeviceMatch>;
-
-  /**
-   * The name of the device posture rule.
-   */
-  name?: string;
-
-  /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
-   */
-  schedule?: string;
-
-  /**
-   * The type of device posture rule.
-   */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
-}
-
-export interface PostureUpdateResponse {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The description of the device posture rule.
-   */
-  description?: string;
-
-  /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
-   */
-  expiration?: string;
-
-  /**
-   * The value to be checked against.
-   */
-  input?: DeviceInput;
-
-  /**
-   * The conditions that the client must match to run the rule.
-   */
-  match?: Array<DeviceMatch>;
-
-  /**
-   * The name of the device posture rule.
-   */
-  name?: string;
-
-  /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
-   */
-  schedule?: string;
-
-  /**
-   * The type of device posture rule.
-   */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
-}
-
-export interface PostureListResponse {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The description of the device posture rule.
-   */
-  description?: string;
-
-  /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
-   */
-  expiration?: string;
-
-  /**
-   * The value to be checked against.
-   */
-  input?: DeviceInput;
-
-  /**
-   * The conditions that the client must match to run the rule.
-   */
-  match?: Array<DeviceMatch>;
-
-  /**
-   * The name of the device posture rule.
-   */
-  name?: string;
-
-  /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
-   */
-  schedule?: string;
-
-  /**
-   * The type of device posture rule.
-   */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
-}
-
 export interface PostureDeleteResponse {
   /**
    * API UUID.
    */
   id?: string;
-}
-
-export interface PostureGetResponse {
-  /**
-   * API UUID.
-   */
-  id?: string;
-
-  /**
-   * The description of the device posture rule.
-   */
-  description?: string;
-
-  /**
-   * Sets the expiration time for a posture check result. If empty, the result
-   * remains valid until it is overwritten by new data from the WARP client.
-   */
-  expiration?: string;
-
-  /**
-   * The value to be checked against.
-   */
-  input?: DeviceInput;
-
-  /**
-   * The conditions that the client must match to run the rule.
-   */
-  match?: Array<DeviceMatch>;
-
-  /**
-   * The name of the device posture rule.
-   */
-  name?: string;
-
-  /**
-   * Polling frequency for the WARP client posture check. Default: `5m` (poll every
-   * five minutes). Minimum: `1m`.
-   */
-  schedule?: string;
-
-  /**
-   * The type of device posture rule.
-   */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
 }
 
 export interface PostureCreateParams {
@@ -938,15 +749,12 @@ export interface PostureGetParams {
 export namespace Posture {
   export import DeviceInput = PostureAPI.DeviceInput;
   export import DeviceMatch = PostureAPI.DeviceMatch;
+  export import DevicePostureRule = PostureAPI.DevicePostureRule;
   export import UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930 = PostureAPI.UnnamedSchemaRef34ef0ad73a63c3f76ed170adca181930;
   export import UnnamedSchemaRef41885dd46b9e0294254c49305a273681 = PostureAPI.UnnamedSchemaRef41885dd46b9e0294254c49305a273681;
   export import UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27 = PostureAPI.UnnamedSchemaRef9e35ef84511131488ae286ce78ac4b27;
-  export import PostureCreateResponse = PostureAPI.PostureCreateResponse;
-  export import PostureUpdateResponse = PostureAPI.PostureUpdateResponse;
-  export import PostureListResponse = PostureAPI.PostureListResponse;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
-  export import PostureGetResponse = PostureAPI.PostureGetResponse;
-  export import PostureListResponsesSinglePage = PostureAPI.PostureListResponsesSinglePage;
+  export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
   export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
   export import PostureListParams = PostureAPI.PostureListParams;
