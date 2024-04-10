@@ -11,4 +11,6 @@ export namespace RequestTracers {
   export import Traces = TracesAPI.Traces;
   export import Trace = TracesAPI.Trace;
   export import TraceItem = TracesAPI.TraceItem;
+  export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
+  export import TraceCreateParams = TracesAPI.TraceCreateParams;
 }
