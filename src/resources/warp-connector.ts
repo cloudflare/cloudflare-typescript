@@ -127,7 +127,7 @@ export namespace WARPConnector {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.TunnelConnection>;
+    connections?: Array<TunnelsAPI.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -199,7 +199,7 @@ export namespace WARPConnector {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.TunnelConnection>;
+    connections?: Array<TunnelsAPI.Connection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
