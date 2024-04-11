@@ -2076,19 +2076,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/secondary-dns/peers.ts">Peer</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">PeerCreateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">PeerUpdateResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">PeerListResponse</a></code>
+- <code><a href="./src/resources/secondary-dns/peers.ts">Peers</a></code>
 - <code><a href="./src/resources/secondary-dns/peers.ts">PeerDeleteResponse</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">PeerGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">create</a>({ ...params }) -> PeerCreateResponse</code>
-- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">update</a>(peerId, { ...params }) -> PeerUpdateResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">list</a>({ ...params }) -> PeerListResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">create</a>({ ...params }) -> Peer</code>
+- <code title="put /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">update</a>(peerId, { ...params }) -> Peer</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">list</a>({ ...params }) -> PeersSinglePage</code>
 - <code title="delete /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">delete</a>(peerId, { ...params }) -> PeerDeleteResponse</code>
-- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">get</a>(peerId, { ...params }) -> PeerGetResponse</code>
+- <code title="get /accounts/{account_id}/secondary_dns/peers/{peer_id}">client.secondaryDNS.peers.<a href="./src/resources/secondary-dns/peers.ts">get</a>(peerId, { ...params }) -> Peer</code>
 
 ## TSIGs
 
