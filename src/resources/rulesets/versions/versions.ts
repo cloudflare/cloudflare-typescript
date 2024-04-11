@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/versions/versions';
+import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
 import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 import { RulesetsSinglePage } from 'cloudflare/resources/rulesets/rulesets';
 import * as ByTagAPI from 'cloudflare/resources/rulesets/versions/by-tag';
@@ -202,7 +203,7 @@ export interface VersionGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: RulesetsAPI.ResponseRule;
+  rules: Array<RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule>;
 
   /**
    * The version of the ruleset.

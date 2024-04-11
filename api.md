@@ -2592,8 +2592,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rulesets/rulesets.ts">RequestRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">ResponseRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
