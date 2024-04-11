@@ -77,6 +77,7 @@ export { Networks } from './networks/index';
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export {
   Tunnel,
+  TunnelConnection,
   WARPConnectorTunnel,
   TunnelCreateParams,
   TunnelListParams,

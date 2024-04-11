@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ByTagAPI from 'cloudflare/resources/rulesets/versions/by-tag';
-import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
+import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 
 export class ByTag extends APIResource {
   /**
@@ -81,7 +81,7 @@ export interface ByTagGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule>;
+  rules: Array<RulesetsAPI.ResponeRule>;
 
   /**
    * The version of the ruleset.
