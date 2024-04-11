@@ -106,11 +106,6 @@ export interface Script {
   modified_on?: string;
 
   /**
-   * Deprecated. Deployment metadata for internal usage.
-   */
-  pipeline_hash?: string;
-
-  /**
    * Specifies the placement mode for the Worker (e.g. 'smart').
    */
   placement_mode?: string;
@@ -158,7 +153,8 @@ export namespace ScriptUpdateParams {
      * Body param: A module comprising a Worker script, often a javascript file.
      * Multiple modules may be provided as separate named parts, but at least one
      * module must be present and referenced in the metadata as `main_module` or
-     * `body_part` by part name.
+     * `body_part` by part name. Source maps may also be included using the
+     * `application/source-map` content type.
      */
     '<any part name>'?: Array<Uploadable>;
 
