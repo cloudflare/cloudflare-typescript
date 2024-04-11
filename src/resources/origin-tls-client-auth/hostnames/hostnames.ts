@@ -32,13 +32,17 @@ export class Hostnames extends APIResource {
   /**
    * Get the Hostname Status for Client Authentication
    */
-  get(hostname: string, params: HostnameGetParams, options?: Core.RequestOptions): Core.APIPromise<ID> {
+  get(
+    hostname: string,
+    params: HostnameGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AuthenticatedOriginPull> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
         options,
-      ) as Core.APIPromise<{ result: ID }>
+      ) as Core.APIPromise<{ result: AuthenticatedOriginPull }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -49,17 +53,39 @@ export interface AuthenticatedOriginPull {
   /**
    * Identifier
    */
-  id?: string;
+  cert_id?: string;
 
   /**
-   * Identifier
+   * Status of the certificate or the association.
    */
-  cert_id?: string;
+  cert_status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deleted'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was updated.
+   */
+  cert_updated_at?: string;
+
+  /**
+   * The time when the certificate was uploaded.
+   */
+  cert_uploaded_on?: string;
 
   /**
    * The hostname certificate.
    */
   certificate?: string;
+
+  /**
+   * The time when the certificate was created.
+   */
+  created_at?: string;
 
   /**
    * Indicates whether hostname-level authenticated origin pulls is enabled. A null
@@ -68,15 +94,47 @@ export interface AuthenticatedOriginPull {
   enabled?: boolean | null;
 
   /**
+   * The date when the certificate expires.
+   */
+  expires_on?: string;
+
+  /**
    * The hostname on the origin for which the client certificate uploaded will be
    * used.
    */
   hostname?: string;
 
   /**
-   * The hostname certificate's private key.
+   * The certificate authority that issued the certificate.
    */
-  private_key?: string;
+  issuer?: string;
+
+  /**
+   * The serial number on the uploaded certificate.
+   */
+  serial_number?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * Status of the certificate or the association.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deleted'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * The time when the certificate was updated.
+   */
+  updated_at?: string;
 }
 
 export interface ID {

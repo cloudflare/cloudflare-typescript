@@ -135,7 +135,7 @@ export namespace RuleListResponse {
      * When set to `on`, the current WAF rule will be used when evaluating the request.
      * Applies to anomaly detection WAF rules.
      */
-    mode: 'on' | 'off';
+    mode: RulesAPI.AllowedModesAnomaly;
 
     /**
      * The unique identifier of a WAF package.
@@ -287,7 +287,7 @@ export namespace RuleEditResponse {
      * When set to `on`, the current WAF rule will be used when evaluating the request.
      * Applies to anomaly detection WAF rules.
      */
-    mode: 'on' | 'off';
+    mode: RulesAPI.AllowedModesAnomaly;
 
     /**
      * The unique identifier of a WAF package.
