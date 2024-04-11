@@ -17,7 +17,9 @@ export class Scripts extends APIResource {
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
 
   /**
-   * Upload a worker module to a Workers for Platforms namespace.
+   * Upload a worker module to a Workers for Platforms namespace. You can find an
+   * example of the metadata on our docs:
+   * https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/reference/metadata/
    */
   update(
     dispatchNamespace: string,
@@ -105,7 +107,8 @@ export namespace ScriptUpdateParams {
      * Body param: A module comprising a Worker script, often a javascript file.
      * Multiple modules may be provided as separate named parts, but at least one
      * module must be present and referenced in the metadata as `main_module` or
-     * `body_part` by part name.
+     * `body_part` by part name. Source maps may also be included using the
+     * `application/source-map` content type.
      */
     '<any part name>'?: Array<Uploadable>;
 
@@ -240,8 +243,11 @@ export namespace Scripts {
   export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
   export import ContentGetParams = ContentAPI.ContentGetParams;
   export import Settings = SettingsAPI.Settings;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import Bindings = BindingsAPI.Bindings;
+  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

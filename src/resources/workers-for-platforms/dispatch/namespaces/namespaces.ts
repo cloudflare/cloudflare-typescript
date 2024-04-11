@@ -58,7 +58,7 @@ export class Namespaces extends APIResource {
   }
 
   /**
-   * Fetch a Workers for Platforms namespace.
+   * Get a Workers for Platforms namespace.
    */
   get(
     dispatchNamespace: string,

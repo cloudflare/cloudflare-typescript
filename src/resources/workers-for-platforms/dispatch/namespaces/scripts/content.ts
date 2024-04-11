@@ -70,7 +70,8 @@ export interface ContentUpdateParams {
    * module must be present. This should be referenced either in the metadata as
    * `main_module` (esm)/`body_part` (service worker) or as a header
    * `CF-WORKER-MAIN-MODULE-PART` (esm) /`CF-WORKER-BODY-PART` (service worker) by
-   * part name.
+   * part name. Source maps may also be included using the `application/source-map`
+   * content type.
    */
   '<any part name>'?: Array<Uploadable>;
 

@@ -15,14 +15,21 @@ export class Bindings extends APIResource {
     scriptName: string,
     params: BindingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WorkersAPI.Binding> {
+  ): Core.APIPromise<BindingGetResponse> {
     const { account_id } = params;
-    return this._client.get(
-      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/bindings`,
-      options,
-    );
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/bindings`,
+        options,
+      ) as Core.APIPromise<{ result: BindingGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
+
+/**
+ * List of bindings attached to this Worker
+ */
+export type BindingGetResponse = Array<WorkersAPI.Binding>;
 
 export interface BindingGetParams {
   /**
@@ -32,5 +39,6 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
+  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
   export import BindingGetParams = BindingsAPI.BindingGetParams;
 }
