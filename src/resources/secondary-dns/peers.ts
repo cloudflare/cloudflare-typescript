@@ -9,46 +9,35 @@ export class Peers extends APIResource {
   /**
    * Create Peer.
    */
-  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<PeerCreateResponse> {
+  create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: PeerCreateResponse }>
+      }) as Core.APIPromise<{ result: Peer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify Peer.
    */
-  update(
-    peerId: string,
-    params: PeerUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PeerUpdateResponse> {
+  update(peerId: string, params: PeerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PeerUpdateResponse }>
+      }) as Core.APIPromise<{ result: Peer }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Peers.
    */
-  list(
-    params: PeerListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PeerListResponsesSinglePage, PeerListResponse> {
+  list(params: PeerListParams, options?: Core.RequestOptions): Core.PagePromise<PeersSinglePage, Peer> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/secondary_dns/peers`,
-      PeerListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/secondary_dns/peers`, PeersSinglePage, options);
   }
 
   /**
@@ -71,25 +60,19 @@ export class Peers extends APIResource {
   /**
    * Get Peer.
    */
-  get(
-    peerId: string,
-    params: PeerGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PeerGetResponse> {
+  get(peerId: string, params: PeerGetParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
-        result: PeerGetResponse;
+        result: Peer;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PeerListResponsesSinglePage extends SinglePage<PeerListResponse> {}
+export class PeersSinglePage extends SinglePage<Peer> {}
 
-export type Peer = unknown;
-
-export interface PeerCreateResponse {
+export interface Peer {
   id: string;
 
   /**
@@ -124,113 +107,10 @@ export interface PeerCreateResponse {
   tsig_id?: string;
 }
 
-export interface PeerUpdateResponse {
-  id: string;
-
-  /**
-   * The name of the peer.
-   */
-  name: string;
-
-  /**
-   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-   * this peer is linked to. For primary zones this IP defines the IP of the
-   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
-   * zones this IP defines the IP of the primary nameserver Cloudflare will send
-   * AXFR/IXFR requests to.
-   */
-  ip?: string;
-
-  /**
-   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-   * zones.
-   */
-  ixfr_enable?: boolean;
-
-  /**
-   * DNS port of primary or secondary nameserver, depending on what zone this peer is
-   * linked to.
-   */
-  port?: number;
-
-  /**
-   * TSIG authentication will be used for zone transfer if configured.
-   */
-  tsig_id?: string;
-}
-
-export interface PeerListResponse {
-  id: string;
-
-  /**
-   * The name of the peer.
-   */
-  name: string;
-
-  /**
-   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-   * this peer is linked to. For primary zones this IP defines the IP of the
-   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
-   * zones this IP defines the IP of the primary nameserver Cloudflare will send
-   * AXFR/IXFR requests to.
-   */
-  ip?: string;
-
-  /**
-   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-   * zones.
-   */
-  ixfr_enable?: boolean;
-
-  /**
-   * DNS port of primary or secondary nameserver, depending on what zone this peer is
-   * linked to.
-   */
-  port?: number;
-
-  /**
-   * TSIG authentication will be used for zone transfer if configured.
-   */
-  tsig_id?: string;
-}
+export type Peers = unknown;
 
 export interface PeerDeleteResponse {
   id?: string;
-}
-
-export interface PeerGetResponse {
-  id: string;
-
-  /**
-   * The name of the peer.
-   */
-  name: string;
-
-  /**
-   * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone
-   * this peer is linked to. For primary zones this IP defines the IP of the
-   * secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary
-   * zones this IP defines the IP of the primary nameserver Cloudflare will send
-   * AXFR/IXFR requests to.
-   */
-  ip?: string;
-
-  /**
-   * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary
-   * zones.
-   */
-  ixfr_enable?: boolean;
-
-  /**
-   * DNS port of primary or secondary nameserver, depending on what zone this peer is
-   * linked to.
-   */
-  port?: number;
-
-  /**
-   * TSIG authentication will be used for zone transfer if configured.
-   */
-  tsig_id?: string;
 }
 
 export interface PeerCreateParams {
@@ -305,12 +185,9 @@ export interface PeerGetParams {
 
 export namespace Peers {
   export import Peer = PeersAPI.Peer;
-  export import PeerCreateResponse = PeersAPI.PeerCreateResponse;
-  export import PeerUpdateResponse = PeersAPI.PeerUpdateResponse;
-  export import PeerListResponse = PeersAPI.PeerListResponse;
+  export import Peers = PeersAPI.Peers;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import PeerGetResponse = PeersAPI.PeerGetResponse;
-  export import PeerListResponsesSinglePage = PeersAPI.PeerListResponsesSinglePage;
+  export import PeersSinglePage = PeersAPI.PeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;

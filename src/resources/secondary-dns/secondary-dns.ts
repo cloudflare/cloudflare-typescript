@@ -59,12 +59,8 @@ export namespace SecondaryDNS {
   export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import Peers = PeersAPI.Peers;
   export import Peer = PeersAPI.Peer;
-  export import PeerCreateResponse = PeersAPI.PeerCreateResponse;
-  export import PeerUpdateResponse = PeersAPI.PeerUpdateResponse;
-  export import PeerListResponse = PeersAPI.PeerListResponse;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import PeerGetResponse = PeersAPI.PeerGetResponse;
-  export import PeerListResponsesSinglePage = PeersAPI.PeerListResponsesSinglePage;
+  export import PeersSinglePage = PeersAPI.PeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;
   export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
   export import PeerListParams = PeersAPI.PeerListParams;
