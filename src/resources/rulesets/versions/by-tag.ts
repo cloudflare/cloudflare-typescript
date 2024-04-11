@@ -81,7 +81,7 @@ export interface ByTagGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: RulesetsAPI.ResponeRule;
+  rules: RulesetsAPI.ResponseRule;
 
   /**
    * The version of the ruleset.
