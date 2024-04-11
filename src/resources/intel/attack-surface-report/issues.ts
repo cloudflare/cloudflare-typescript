@@ -86,14 +86,6 @@ export class IssueListResponsesV4PagePagination extends V4PagePagination<IssueLi
 
 export type IssueClass = Array<string>;
 
-export type IssueType = Array<
-  | 'compliance_violation'
-  | 'email_security'
-  | 'exposed_infrastructure'
-  | 'insecure_configuration'
-  | 'weak_authentication'
->;
-
 export type Product = Array<string>;
 
 export type SeverityQueryParam = 'low' | 'moderate' | 'critical';
@@ -221,12 +213,24 @@ export interface IssueListParams extends V4PagePaginationParams {
   /**
    * Query param:
    */
-  issue_type?: IssueType;
+  issue_type?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: IssueType;
+  'issue_type~neq'?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
@@ -283,12 +287,24 @@ export interface IssueClassParams {
   /**
    * Query param:
    */
-  issue_type?: IssueType;
+  issue_type?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: IssueType;
+  'issue_type~neq'?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
@@ -357,12 +373,24 @@ export interface IssueSeverityParams {
   /**
    * Query param:
    */
-  issue_type?: IssueType;
+  issue_type?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: IssueType;
+  'issue_type~neq'?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
@@ -419,12 +447,24 @@ export interface IssueTypeParams {
   /**
    * Query param:
    */
-  issue_type?: IssueType;
+  issue_type?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: IssueType;
+  'issue_type~neq'?: Array<
+    | 'compliance_violation'
+    | 'email_security'
+    | 'exposed_infrastructure'
+    | 'insecure_configuration'
+    | 'weak_authentication'
+  >;
 
   /**
    * Query param:
@@ -459,7 +499,6 @@ export interface IssueTypeParams {
 
 export namespace Issues {
   export import IssueClass = IssuesAPI.IssueClass;
-  export import IssueType = IssuesAPI.IssueType;
   export import Product = IssuesAPI.Product;
   export import SeverityQueryParam = IssuesAPI.SeverityQueryParam;
   export import Subject = IssuesAPI.Subject;
