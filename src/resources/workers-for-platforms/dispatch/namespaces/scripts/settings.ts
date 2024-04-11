@@ -3,8 +3,9 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as SettingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/settings';
-import * as Shared from 'cloudflare/resources/shared';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
+import * as WorkersAPI from 'cloudflare/resources/workers/workers';
+import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
+import { multipartFormRequestOptions } from 'cloudflare/core';
 
 export class Settings extends APIResource {
   /**
@@ -15,13 +16,13 @@ export class Settings extends APIResource {
     scriptName: string,
     params: SettingEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
+  ): Core.APIPromise<SettingEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>
+        multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -33,14 +34,136 @@ export class Settings extends APIResource {
     scriptName: string,
     params: SettingGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
+  ): Core.APIPromise<SettingGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
         options,
-      ) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>
+      ) as Core.APIPromise<{ result: SettingGetResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface SettingEditResponse {
+  /**
+   * List of bindings attached to this Worker
+   */
+  bindings?: Array<WorkersAPI.Binding>;
+
+  /**
+   * Opt your Worker into changes after this date
+   */
+  compatibility_date?: string;
+
+  /**
+   * Opt your Worker into specific changes
+   */
+  compatibility_flags?: Array<string>;
+
+  /**
+   * Limits to apply for this Worker.
+   */
+  limits?: SettingEditResponse.Limits;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * Migrations to apply for Durable Objects associated with this Worker.
+   */
+  migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+
+  placement?: WorkersAPI.PlacementConfiguration;
+
+  /**
+   * Tags to help you manage your Workers
+   */
+  tags?: Array<string>;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
+export namespace SettingEditResponse {
+  /**
+   * Limits to apply for this Worker.
+   */
+  export interface Limits {
+    /**
+     * The amount of CPU time this Worker can use in milliseconds.
+     */
+    cpu_ms?: number;
+  }
+}
+
+export interface SettingGetResponse {
+  /**
+   * List of bindings attached to this Worker
+   */
+  bindings?: Array<WorkersAPI.Binding>;
+
+  /**
+   * Opt your Worker into changes after this date
+   */
+  compatibility_date?: string;
+
+  /**
+   * Opt your Worker into specific changes
+   */
+  compatibility_flags?: Array<string>;
+
+  /**
+   * Limits to apply for this Worker.
+   */
+  limits?: SettingGetResponse.Limits;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * Migrations to apply for Durable Objects associated with this Worker.
+   */
+  migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+
+  placement?: WorkersAPI.PlacementConfiguration;
+
+  /**
+   * Tags to help you manage your Workers
+   */
+  tags?: Array<string>;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
+export namespace SettingGetResponse {
+  /**
+   * Limits to apply for this Worker.
+   */
+  export interface Limits {
+    /**
+     * The amount of CPU time this Worker can use in milliseconds.
+     */
+    cpu_ms?: number;
   }
 }
 
@@ -53,22 +176,70 @@ export interface SettingEditParams {
   /**
    * Body param:
    */
-  errors: Array<Shared.ResponseInfo>;
+  settings?: SettingEditParams.Settings;
+}
 
-  /**
-   * Body param:
-   */
-  messages: Array<Shared.ResponseInfo>;
+export namespace SettingEditParams {
+  export interface Settings {
+    /**
+     * List of bindings attached to this Worker
+     */
+    bindings?: Array<WorkersAPI.Binding>;
 
-  /**
-   * Body param:
-   */
-  result: ScriptsAPI.ScriptSetting;
+    /**
+     * Opt your Worker into changes after this date
+     */
+    compatibility_date?: string;
 
-  /**
-   * Body param: Whether the API call was successful
-   */
-  success: true;
+    /**
+     * Opt your Worker into specific changes
+     */
+    compatibility_flags?: Array<string>;
+
+    /**
+     * Limits to apply for this Worker.
+     */
+    limits?: Settings.Limits;
+
+    /**
+     * Whether Logpush is turned on for the Worker.
+     */
+    logpush?: boolean;
+
+    /**
+     * Migrations to apply for Durable Objects associated with this Worker.
+     */
+    migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+
+    placement?: WorkersAPI.PlacementConfiguration;
+
+    /**
+     * Tags to help you manage your Workers
+     */
+    tags?: Array<string>;
+
+    /**
+     * List of Workers that will consume logs from the attached Worker.
+     */
+    tail_consumers?: Array<TailAPI.ConsumerScript>;
+
+    /**
+     * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+     */
+    usage_model?: string;
+  }
+
+  export namespace Settings {
+    /**
+     * Limits to apply for this Worker.
+     */
+    export interface Limits {
+      /**
+       * The amount of CPU time this Worker can use in milliseconds.
+       */
+      cpu_ms?: number;
+    }
+  }
 }
 
 export interface SettingGetParams {
@@ -79,6 +250,8 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
 }
