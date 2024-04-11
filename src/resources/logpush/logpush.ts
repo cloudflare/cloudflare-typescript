@@ -25,12 +25,8 @@ export namespace Logpush {
   export import Jobs = JobsAPI.Jobs;
   export import LogpushJob = JobsAPI.LogpushJob;
   export import OutputOptions = JobsAPI.OutputOptions;
-  export import JobCreateResponse = JobsAPI.JobCreateResponse;
-  export import JobUpdateResponse = JobsAPI.JobUpdateResponse;
-  export import JobListResponse = JobsAPI.JobListResponse;
   export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
-  export import JobGetResponse = JobsAPI.JobGetResponse;
-  export import JobListResponsesSinglePage = JobsAPI.JobListResponsesSinglePage;
+  export import LogpushJobsSinglePage = JobsAPI.LogpushJobsSinglePage;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;
   export import JobListParams = JobsAPI.JobListParams;

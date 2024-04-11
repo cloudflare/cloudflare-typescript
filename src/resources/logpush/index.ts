@@ -6,17 +6,13 @@ export { Logpush } from './logpush';
 export {
   LogpushJob,
   OutputOptions,
-  JobCreateResponse,
-  JobUpdateResponse,
-  JobListResponse,
   JobDeleteResponse,
-  JobGetResponse,
   JobCreateParams,
   JobUpdateParams,
   JobListParams,
   JobDeleteParams,
   JobGetParams,
-  JobListResponsesSinglePage,
+  LogpushJobsSinglePage,
   Jobs,
 } from './jobs';
 export {
