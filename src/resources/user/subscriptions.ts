@@ -191,31 +191,6 @@ export interface SubscriptionComponent {
 }
 
 /**
- * A component value for a subscription.
- */
-export interface SubscriptionComponentValue {
-  /**
-   * The default amount assigned.
-   */
-  default?: number;
-
-  /**
-   * The name of the component value.
-   */
-  name?: string;
-
-  /**
-   * The unit price for the component value.
-   */
-  price?: number;
-
-  /**
-   * The amount of the component value assigned.
-   */
-  value?: number;
-}
-
-/**
  * A simple zone object. May have null properties if not a zone subscription.
  */
 export interface SubscriptionZone {
@@ -315,7 +290,6 @@ export namespace Subscriptions {
   export import RatePlan = SubscriptionsAPI.RatePlan;
   export import Subscription = SubscriptionsAPI.Subscription;
   export import SubscriptionComponent = SubscriptionsAPI.SubscriptionComponent;
-  export import SubscriptionComponentValue = SubscriptionsAPI.SubscriptionComponentValue;
   export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
