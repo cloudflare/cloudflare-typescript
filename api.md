@@ -4193,9 +4193,24 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">CarbonblackInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">ClientCertificateInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">CrowdstrikeInput</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceInput</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DeviceMatch</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DevicePostureRule</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DiskEncryptionInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">DomainJoinedInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">FileInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">FirewallInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">IntuneInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">KolideInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">OSVersionInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">SentineloneInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">SentineloneS2sInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">TaniumInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">UniqueClientIDInput</a></code>
+- <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">WorkspaceOneInput</a></code>
 - <code><a href="./src/resources/zero-trust/devices/posture/posture.ts">PostureDeleteResponse</a></code>
 
 Methods:
