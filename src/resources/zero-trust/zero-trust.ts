@@ -65,6 +65,7 @@ export namespace ZeroTrust {
   export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;
   export import AccessRule = AccessAPI.AccessRule;
+  export import OktaGroupRule = AccessAPI.OktaGroupRule;
   export import DEX = DEXAPI.DEX;
   export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
