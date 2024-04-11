@@ -15,12 +15,4 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export {
-  PermissionGrant,
-  RoleListResponse,
-  RoleGetResponse,
-  RoleListParams,
-  RoleGetParams,
-  RoleListResponsesSinglePage,
-  Roles,
-} from './roles';
+export { PermissionGrant, RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';

@@ -205,9 +205,7 @@ export namespace Accounts {
   export import MemberGetParams = MembersAPI.MemberGetParams;
   export import Roles = RolesAPI.Roles;
   export import PermissionGrant = RolesAPI.PermissionGrant;
-  export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
-  export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }

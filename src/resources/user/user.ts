@@ -69,8 +69,6 @@ export interface UserEditParams {
 
 export namespace User {
   export import AuditLogs = AuditLogsAPI.AuditLogs;
-  export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
-  export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
   export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
   export import Billing = BillingAPI.Billing;
   export import Invites = InvitesAPI.Invites;
@@ -87,7 +85,11 @@ export namespace User {
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationDeleteParams = OrganizationsAPI.OrganizationDeleteParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
+  export import RatePlan = SubscriptionsAPI.RatePlan;
   export import Subscription = SubscriptionsAPI.Subscription;
+  export import SubscriptionComponent = SubscriptionsAPI.SubscriptionComponent;
+  export import SubscriptionComponentValue = SubscriptionsAPI.SubscriptionComponentValue;
+  export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;

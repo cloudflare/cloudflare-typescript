@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
+import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
 
 export class Connections extends APIResource {
   /**
@@ -65,7 +66,7 @@ export interface Client {
   /**
    * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
    */
-  conns?: Array<Client.Conn>;
+  conns?: Array<TunnelsAPI.TunnelConnection>;
 
   /**
    * Features enabled for the Cloudflare Tunnel.
@@ -81,53 +82,6 @@ export interface Client {
    * The cloudflared version used to establish this connection.
    */
   version?: string;
-}
-
-export namespace Client {
-  export interface Conn {
-    /**
-     * UUID of the Cloudflare Tunnel connection.
-     */
-    id?: string;
-
-    /**
-     * UUID of the cloudflared instance.
-     */
-    client_id?: unknown;
-
-    /**
-     * The cloudflared version used to establish this connection.
-     */
-    client_version?: string;
-
-    /**
-     * The Cloudflare data center used for this connection.
-     */
-    colo_name?: string;
-
-    /**
-     * Cloudflare continues to track connections for several minutes after they
-     * disconnect. This is an optimization to improve latency and reliability of
-     * reconnecting. If `true`, the connection has disconnected but is still being
-     * tracked. If `false`, the connection is actively serving traffic.
-     */
-    is_pending_reconnect?: boolean;
-
-    /**
-     * Timestamp of when the connection was established.
-     */
-    opened_at?: string;
-
-    /**
-     * The public IP address of the host running cloudflared.
-     */
-    origin_ip?: string;
-
-    /**
-     * UUID of the Cloudflare Tunnel connection.
-     */
-    uuid?: string;
-  }
 }
 
 export type ConnectionDeleteResponse = unknown | Array<unknown> | string;

@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import * as Shared from 'cloudflare/resources/shared';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
@@ -93,7 +93,7 @@ export interface Member {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<Member.Role>;
+  roles: Array<MemberRole>;
 
   status: unknown;
 
@@ -101,53 +101,6 @@ export interface Member {
 }
 
 export namespace Member {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: RolesAPI.PermissionGrant;
-
-      billing?: RolesAPI.PermissionGrant;
-
-      cache_purge?: RolesAPI.PermissionGrant;
-
-      dns?: RolesAPI.PermissionGrant;
-
-      dns_records?: RolesAPI.PermissionGrant;
-
-      lb?: RolesAPI.PermissionGrant;
-
-      logs?: RolesAPI.PermissionGrant;
-
-      organization?: RolesAPI.PermissionGrant;
-
-      ssl?: RolesAPI.PermissionGrant;
-
-      waf?: RolesAPI.PermissionGrant;
-
-      zone_settings?: RolesAPI.PermissionGrant;
-
-      zones?: RolesAPI.PermissionGrant;
-    }
-  }
-
   export interface User {
     /**
      * The contact email address of the user.
@@ -177,10 +130,52 @@ export namespace Member {
   }
 }
 
-/**
- * List of role names for the user at the account.
- */
-export type MemberRole = Array<string>;
+export interface MemberRole {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role name.
+   */
+  name: string;
+
+  permissions: MemberRole.Permissions;
+}
+
+export namespace MemberRole {
+  export interface Permissions {
+    analytics?: RolesAPI.PermissionGrant;
+
+    billing?: RolesAPI.PermissionGrant;
+
+    cache_purge?: RolesAPI.PermissionGrant;
+
+    dns?: RolesAPI.PermissionGrant;
+
+    dns_records?: RolesAPI.PermissionGrant;
+
+    lb?: RolesAPI.PermissionGrant;
+
+    logs?: RolesAPI.PermissionGrant;
+
+    organization?: RolesAPI.PermissionGrant;
+
+    ssl?: RolesAPI.PermissionGrant;
+
+    waf?: RolesAPI.PermissionGrant;
+
+    zone_settings?: RolesAPI.PermissionGrant;
+
+    zones?: RolesAPI.PermissionGrant;
+  }
+}
 
 export interface MemberWithInviteCode {
   /**
@@ -191,7 +186,7 @@ export interface MemberWithInviteCode {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<MemberWithInviteCode.Role>;
+  roles: Array<MemberRole>;
 
   status: unknown;
 
@@ -204,53 +199,6 @@ export interface MemberWithInviteCode {
 }
 
 export namespace MemberWithInviteCode {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: RolesAPI.PermissionGrant;
-
-      billing?: RolesAPI.PermissionGrant;
-
-      cache_purge?: RolesAPI.PermissionGrant;
-
-      dns?: RolesAPI.PermissionGrant;
-
-      dns_records?: RolesAPI.PermissionGrant;
-
-      lb?: RolesAPI.PermissionGrant;
-
-      logs?: RolesAPI.PermissionGrant;
-
-      organization?: RolesAPI.PermissionGrant;
-
-      ssl?: RolesAPI.PermissionGrant;
-
-      waf?: RolesAPI.PermissionGrant;
-
-      zone_settings?: RolesAPI.PermissionGrant;
-
-      zones?: RolesAPI.PermissionGrant;
-    }
-  }
-
   export interface User {
     /**
      * The contact email address of the user.
@@ -299,36 +247,12 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<MemberListResponse.Role>;
+  roles: Array<Shared.IamRole>;
 
   /**
    * A member's status in the organization.
    */
   status: 'accepted' | 'invited';
-}
-
-export namespace MemberListResponse {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<PermissionGroupsAPI.Permission>;
-  }
 }
 
 export interface MemberDeleteResponse {
@@ -369,16 +293,7 @@ export interface MemberUpdateParams {
   /**
    * Body param: Roles assigned to this member.
    */
-  roles: Array<MemberUpdateParams.Role>;
-}
-
-export namespace MemberUpdateParams {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-  }
+  roles: Array<MemberRole>;
 }
 
 export interface MemberListParams extends V4PagePaginationArrayParams {

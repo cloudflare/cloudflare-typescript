@@ -4,7 +4,6 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
-import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -98,7 +97,7 @@ export interface Membership {
   /**
    * List of role names for the user at the account.
    */
-  roles?: MembersAPI.MemberRole;
+  roles?: Array<string>;
 
   /**
    * Status of this membership.

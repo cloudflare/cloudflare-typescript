@@ -5,7 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
-import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
+import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 import * as VersionsAPI from 'cloudflare/resources/rulesets/phases/versions';
 
 export class Phases extends APIResource {
@@ -238,7 +238,7 @@ export interface PhaseUpdateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule>;
+  rules: Array<RulesetsAPI.ResponeRule>;
 
   /**
    * The version of the ruleset.
@@ -306,7 +306,7 @@ export interface PhaseGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule>;
+  rules: Array<RulesetsAPI.ResponeRule>;
 
   /**
    * The version of the ruleset.
@@ -323,7 +323,7 @@ export interface PhaseUpdateParams {
   /**
    * Body param: The list of rules in the ruleset.
    */
-  rules: Array<RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule>;
+  rules: Array<RulesetsAPI.RequestRule>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
