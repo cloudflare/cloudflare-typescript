@@ -2,6 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class WARPConnectorResource extends APIResource {
@@ -126,7 +127,7 @@ export namespace WARPConnector {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelCfdTunnel.Connection>;
+    connections?: Array<TunnelsAPI.TunnelConnection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -181,53 +182,6 @@ export namespace WARPConnector {
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 
-  export namespace TunnelCfdTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the cloudflared instance.
-       */
-      client_id?: unknown;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
-  }
-
   /**
    * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
@@ -245,7 +199,7 @@ export namespace WARPConnector {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelWARPConnectorTunnel.Connection>;
+    connections?: Array<TunnelsAPI.TunnelConnection>;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -292,53 +246,6 @@ export namespace WARPConnector {
      * The type of tunnel.
      */
     tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
-  }
-
-  export namespace TunnelWARPConnectorTunnel {
-    export interface Connection {
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      id?: string;
-
-      /**
-       * UUID of the cloudflared instance.
-       */
-      client_id?: unknown;
-
-      /**
-       * The cloudflared version used to establish this connection.
-       */
-      client_version?: string;
-
-      /**
-       * The Cloudflare data center used for this connection.
-       */
-      colo_name?: string;
-
-      /**
-       * Cloudflare continues to track connections for several minutes after they
-       * disconnect. This is an optimization to improve latency and reliability of
-       * reconnecting. If `true`, the connection has disconnected but is still being
-       * tracked. If `false`, the connection is actively serving traffic.
-       */
-      is_pending_reconnect?: boolean;
-
-      /**
-       * Timestamp of when the connection was established.
-       */
-      opened_at?: string;
-
-      /**
-       * The public IP address of the host running cloudflared.
-       */
-      origin_ip?: string;
-
-      /**
-       * UUID of the Cloudflare Tunnel connection.
-       */
-      uuid?: string;
-    }
   }
 }
 

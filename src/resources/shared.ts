@@ -1,11 +1,132 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from 'cloudflare/resources/shared';
+import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
+import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
+
+export interface AuditLog {
+  /**
+   * A string that uniquely identifies the audit log.
+   */
+  id?: string;
+
+  action?: AuditLog.Action;
+
+  actor?: AuditLog.Actor;
+
+  /**
+   * The source of the event.
+   */
+  interface?: string;
+
+  /**
+   * An object which can lend more context to the action being logged. This is a
+   * flexible value and varies between different actions.
+   */
+  metadata?: unknown;
+
+  /**
+   * The new value of the resource that was modified.
+   */
+  newValue?: string;
+
+  /**
+   * The value of the resource before it was modified.
+   */
+  oldValue?: string;
+
+  owner?: AuditLog.Owner;
+
+  resource?: AuditLog.Resource;
+
+  /**
+   * A UTC RFC3339 timestamp that specifies when the action being logged occured.
+   */
+  when?: string;
+}
+
+export namespace AuditLog {
+  export interface Action {
+    /**
+     * A boolean that indicates if the action attempted was successful.
+     */
+    result?: boolean;
+
+    /**
+     * A short string that describes the action that was performed.
+     */
+    type?: string;
+  }
+
+  export interface Actor {
+    /**
+     * The ID of the actor that performed the action. If a user performed the action,
+     * this will be their User ID.
+     */
+    id?: string;
+
+    /**
+     * The email of the user that performed the action.
+     */
+    email?: string;
+
+    /**
+     * The IP address of the request that performed the action.
+     */
+    ip?: string;
+
+    /**
+     * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
+     */
+    type?: 'user' | 'admin' | 'Cloudflare';
+  }
+
+  export interface Owner {
+    /**
+     * Identifier
+     */
+    id?: string;
+  }
+
+  export interface Resource {
+    /**
+     * An identifier for the resource that was affected by the action.
+     */
+    id?: string;
+
+    /**
+     * A short string that describes the resource that was affected by the action.
+     */
+    type?: string;
+  }
+}
 
 export interface ErrorData {
   code?: number;
 
   message?: string;
+}
+
+export interface IamRole {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role Name.
+   */
+  name: string;
+
+  /**
+   * Access permissions for this User.
+   */
+  permissions: Array<PermissionGroupsAPI.Permission>;
 }
 
 export interface Identifier {
@@ -60,108 +181,9 @@ export namespace Result {
 
     messages?: Array<unknown>;
 
-    result?: Array<UnionMember0.Result>;
+    result?: Array<Shared.AuditLog>;
 
     success?: boolean;
-  }
-
-  export namespace UnionMember0 {
-    export interface Result {
-      /**
-       * A string that uniquely identifies the audit log.
-       */
-      id?: string;
-
-      action?: Result.Action;
-
-      actor?: Result.Actor;
-
-      /**
-       * The source of the event.
-       */
-      interface?: string;
-
-      /**
-       * An object which can lend more context to the action being logged. This is a
-       * flexible value and varies between different actions.
-       */
-      metadata?: unknown;
-
-      /**
-       * The new value of the resource that was modified.
-       */
-      newValue?: string;
-
-      /**
-       * The value of the resource before it was modified.
-       */
-      oldValue?: string;
-
-      owner?: Result.Owner;
-
-      resource?: Result.Resource;
-
-      /**
-       * A UTC RFC3339 timestamp that specifies when the action being logged occured.
-       */
-      when?: string;
-    }
-
-    export namespace Result {
-      export interface Action {
-        /**
-         * A boolean that indicates if the action attempted was successful.
-         */
-        result?: boolean;
-
-        /**
-         * A short string that describes the action that was performed.
-         */
-        type?: string;
-      }
-
-      export interface Actor {
-        /**
-         * The ID of the actor that performed the action. If a user performed the action,
-         * this will be their User ID.
-         */
-        id?: string;
-
-        /**
-         * The email of the user that performed the action.
-         */
-        email?: string;
-
-        /**
-         * The IP address of the request that performed the action.
-         */
-        ip?: string;
-
-        /**
-         * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
-         */
-        type?: 'user' | 'admin' | 'Cloudflare';
-      }
-
-      export interface Owner {
-        /**
-         * Identifier
-         */
-        id?: string;
-      }
-
-      export interface Resource {
-        /**
-         * An identifier for the resource that was affected by the action.
-         */
-        id?: string;
-
-        /**
-         * A short string that describes the resource that was affected by the action.
-         */
-        type?: string;
-      }
-    }
   }
 
   export interface AaaAPIResponseCommon {
@@ -177,3 +199,7 @@ export namespace Result {
     success: true;
   }
 }
+
+export class IamRolesSinglePage extends SinglePage<IamRole> {}
+
+export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

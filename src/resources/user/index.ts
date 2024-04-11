@@ -1,11 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AuditLogListResponse,
-  AuditLogListParams,
-  AuditLogListResponsesV4PagePaginationArray,
-  AuditLogs,
-} from './audit-logs';
+export { AuditLogListParams, AuditLogs } from './audit-logs';
 export { Billing } from './billing/index';
 export {
   CIDRList,
@@ -42,7 +37,11 @@ export {
   Organizations,
 } from './organizations';
 export {
+  RatePlan,
   Subscription,
+  SubscriptionComponent,
+  SubscriptionComponentValue,
+  SubscriptionZone,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
   SubscriptionEditResponse,

@@ -20,6 +20,7 @@ export { ManagementCreateResponse, ManagementCreateParams, Management } from './
 export { TokenGetResponse, TokenGetParams, Token } from './token';
 export {
   Tunnel,
+  TunnelConnection,
   WARPConnectorTunnel,
   TunnelCreateParams,
   TunnelListParams,

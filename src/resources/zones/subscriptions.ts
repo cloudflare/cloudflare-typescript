@@ -58,7 +58,7 @@ export interface SubscriptionCreateParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionCreateParams.ComponentValue>;
+  component_values?: Array<SubscriptionsAPI.SubscriptionComponent>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -68,12 +68,12 @@ export interface SubscriptionCreateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionCreateParams.RatePlan;
+  rate_plan?: SubscriptionsAPI.RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionCreateParams.Zone;
+  zone?: SubscriptionsAPI.SubscriptionZone;
 }
 
 export namespace SubscriptionCreateParams {
@@ -83,76 +83,6 @@ export namespace SubscriptionCreateParams {
      */
     install_id?: string;
   }
-
-  /**
-   * A component value for a subscription.
-   */
-  export interface ComponentValue {
-    /**
-     * The default amount assigned.
-     */
-    default?: number;
-
-    /**
-     * The name of the component value.
-     */
-    name?: string;
-
-    /**
-     * The unit price for the component value.
-     */
-    price?: number;
-
-    /**
-     * The amount of the component value assigned.
-     */
-    value?: number;
-  }
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  export interface RatePlan {
-    /**
-     * The ID of the rate plan.
-     */
-    id?: string;
-
-    /**
-     * The currency applied to the rate plan subscription.
-     */
-    currency?: string;
-
-    /**
-     * Whether this rate plan is managed externally from Cloudflare.
-     */
-    externally_managed?: boolean;
-
-    /**
-     * Whether a rate plan is enterprise-based (or newly adopted term contract).
-     */
-    is_contract?: boolean;
-
-    /**
-     * The full name of the rate plan.
-     */
-    public_name?: string;
-
-    /**
-     * The scope that this rate plan applies to.
-     */
-    scope?: string;
-
-    /**
-     * The list of sets this rate plan applies to.
-     */
-    sets?: Array<string>;
-  }
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  export interface Zone {}
 }
 
 export namespace Subscriptions {

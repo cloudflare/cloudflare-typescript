@@ -142,6 +142,51 @@ export namespace Tunnel {
   }
 }
 
+export interface TunnelConnection {
+  /**
+   * UUID of the Cloudflare Tunnel connection.
+   */
+  id?: string;
+
+  /**
+   * UUID of the cloudflared instance.
+   */
+  client_id?: unknown;
+
+  /**
+   * The cloudflared version used to establish this connection.
+   */
+  client_version?: string;
+
+  /**
+   * The Cloudflare data center used for this connection.
+   */
+  colo_name?: string;
+
+  /**
+   * Cloudflare continues to track connections for several minutes after they
+   * disconnect. This is an optimization to improve latency and reliability of
+   * reconnecting. If `true`, the connection has disconnected but is still being
+   * tracked. If `false`, the connection is actively serving traffic.
+   */
+  is_pending_reconnect?: boolean;
+
+  /**
+   * Timestamp of when the connection was established.
+   */
+  opened_at?: string;
+
+  /**
+   * The public IP address of the host running cloudflared.
+   */
+  origin_ip?: string;
+
+  /**
+   * UUID of the Cloudflare Tunnel connection.
+   */
+  uuid?: string;
+}
+
 export interface WARPConnectorTunnel {
   /**
    * UUID of the tunnel.
@@ -303,6 +348,7 @@ export interface TunnelGetParams {
 
 export namespace Tunnels {
   export import Tunnel = TunnelsAPI.Tunnel;
+  export import TunnelConnection = TunnelsAPI.TunnelConnection;
   export import WARPConnectorTunnel = TunnelsAPI.WARPConnectorTunnel;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;

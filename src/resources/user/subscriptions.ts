@@ -61,6 +61,46 @@ export class Subscriptions extends APIResource {
 
 export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
 
+/**
+ * The rate plan applied to the subscription.
+ */
+export interface RatePlan {
+  /**
+   * The ID of the rate plan.
+   */
+  id?: string;
+
+  /**
+   * The currency applied to the rate plan subscription.
+   */
+  currency?: string;
+
+  /**
+   * Whether this rate plan is managed externally from Cloudflare.
+   */
+  externally_managed?: boolean;
+
+  /**
+   * Whether a rate plan is enterprise-based (or newly adopted term contract).
+   */
+  is_contract?: boolean;
+
+  /**
+   * The full name of the rate plan.
+   */
+  public_name?: string;
+
+  /**
+   * The scope that this rate plan applies to.
+   */
+  scope?: string;
+
+  /**
+   * The list of sets this rate plan applies to.
+   */
+  sets?: Array<string>;
+}
+
 export interface Subscription {
   /**
    * Subscription identifier tag.
@@ -72,7 +112,7 @@ export interface Subscription {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<Subscription.ComponentValue>;
+  component_values?: Array<SubscriptionComponent>;
 
   /**
    * The monetary unit in which pricing information is displayed.
@@ -103,7 +143,7 @@ export interface Subscription {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: Subscription.RatePlan;
+  rate_plan?: RatePlan;
 
   /**
    * The state that the subscription is in.
@@ -113,7 +153,7 @@ export interface Subscription {
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: Subscription.Zone;
+  zone?: SubscriptionZone;
 }
 
 export namespace Subscription {
@@ -123,86 +163,71 @@ export namespace Subscription {
      */
     install_id?: string;
   }
+}
+
+/**
+ * A component value for a subscription.
+ */
+export interface SubscriptionComponent {
+  /**
+   * The default amount assigned.
+   */
+  default?: number;
 
   /**
-   * A component value for a subscription.
+   * The name of the component value.
    */
-  export interface ComponentValue {
-    /**
-     * The default amount assigned.
-     */
-    default?: number;
-
-    /**
-     * The name of the component value.
-     */
-    name?: string;
-
-    /**
-     * The unit price for the component value.
-     */
-    price?: number;
-
-    /**
-     * The amount of the component value assigned.
-     */
-    value?: number;
-  }
+  name?: string;
 
   /**
-   * The rate plan applied to the subscription.
+   * The unit price for the component value.
    */
-  export interface RatePlan {
-    /**
-     * The ID of the rate plan.
-     */
-    id?: string;
-
-    /**
-     * The currency applied to the rate plan subscription.
-     */
-    currency?: string;
-
-    /**
-     * Whether this rate plan is managed externally from Cloudflare.
-     */
-    externally_managed?: boolean;
-
-    /**
-     * Whether a rate plan is enterprise-based (or newly adopted term contract).
-     */
-    is_contract?: boolean;
-
-    /**
-     * The full name of the rate plan.
-     */
-    public_name?: string;
-
-    /**
-     * The scope that this rate plan applies to.
-     */
-    scope?: string;
-
-    /**
-     * The list of sets this rate plan applies to.
-     */
-    sets?: Array<string>;
-  }
+  price?: number;
 
   /**
-   * A simple zone object. May have null properties if not a zone subscription.
+   * The amount of the component value assigned.
    */
-  export interface Zone {
-    /**
-     * Identifier
-     */
-    id?: string;
+  value?: number;
+}
 
-    /**
-     * The domain name
-     */
-    name?: string;
-  }
+/**
+ * A component value for a subscription.
+ */
+export interface SubscriptionComponentValue {
+  /**
+   * The default amount assigned.
+   */
+  default?: number;
+
+  /**
+   * The name of the component value.
+   */
+  name?: string;
+
+  /**
+   * The unit price for the component value.
+   */
+  price?: number;
+
+  /**
+   * The amount of the component value assigned.
+   */
+  value?: number;
+}
+
+/**
+ * A simple zone object. May have null properties if not a zone subscription.
+ */
+export interface SubscriptionZone {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The domain name
+   */
+  name?: string;
 }
 
 export type SubscriptionUpdateResponse = unknown | string | null;
@@ -224,7 +249,7 @@ export interface SubscriptionUpdateParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionUpdateParams.ComponentValue>;
+  component_values?: Array<SubscriptionComponent>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -234,12 +259,12 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionUpdateParams.RatePlan;
+  rate_plan?: RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionUpdateParams.Zone;
+  zone?: SubscriptionZone;
 }
 
 export namespace SubscriptionUpdateParams {
@@ -249,76 +274,6 @@ export namespace SubscriptionUpdateParams {
      */
     install_id?: string;
   }
-
-  /**
-   * A component value for a subscription.
-   */
-  export interface ComponentValue {
-    /**
-     * The default amount assigned.
-     */
-    default?: number;
-
-    /**
-     * The name of the component value.
-     */
-    name?: string;
-
-    /**
-     * The unit price for the component value.
-     */
-    price?: number;
-
-    /**
-     * The amount of the component value assigned.
-     */
-    value?: number;
-  }
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  export interface RatePlan {
-    /**
-     * The ID of the rate plan.
-     */
-    id?: string;
-
-    /**
-     * The currency applied to the rate plan subscription.
-     */
-    currency?: string;
-
-    /**
-     * Whether this rate plan is managed externally from Cloudflare.
-     */
-    externally_managed?: boolean;
-
-    /**
-     * Whether a rate plan is enterprise-based (or newly adopted term contract).
-     */
-    is_contract?: boolean;
-
-    /**
-     * The full name of the rate plan.
-     */
-    public_name?: string;
-
-    /**
-     * The scope that this rate plan applies to.
-     */
-    scope?: string;
-
-    /**
-     * The list of sets this rate plan applies to.
-     */
-    sets?: Array<string>;
-  }
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  export interface Zone {}
 }
 
 export type SubscriptionDeleteParams = unknown;
@@ -329,7 +284,7 @@ export interface SubscriptionEditParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionEditParams.ComponentValue>;
+  component_values?: Array<SubscriptionComponent>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -339,12 +294,12 @@ export interface SubscriptionEditParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionEditParams.RatePlan;
+  rate_plan?: RatePlan;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionEditParams.Zone;
+  zone?: SubscriptionZone;
 }
 
 export namespace SubscriptionEditParams {
@@ -354,80 +309,14 @@ export namespace SubscriptionEditParams {
      */
     install_id?: string;
   }
-
-  /**
-   * A component value for a subscription.
-   */
-  export interface ComponentValue {
-    /**
-     * The default amount assigned.
-     */
-    default?: number;
-
-    /**
-     * The name of the component value.
-     */
-    name?: string;
-
-    /**
-     * The unit price for the component value.
-     */
-    price?: number;
-
-    /**
-     * The amount of the component value assigned.
-     */
-    value?: number;
-  }
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  export interface RatePlan {
-    /**
-     * The ID of the rate plan.
-     */
-    id?: string;
-
-    /**
-     * The currency applied to the rate plan subscription.
-     */
-    currency?: string;
-
-    /**
-     * Whether this rate plan is managed externally from Cloudflare.
-     */
-    externally_managed?: boolean;
-
-    /**
-     * Whether a rate plan is enterprise-based (or newly adopted term contract).
-     */
-    is_contract?: boolean;
-
-    /**
-     * The full name of the rate plan.
-     */
-    public_name?: string;
-
-    /**
-     * The scope that this rate plan applies to.
-     */
-    scope?: string;
-
-    /**
-     * The list of sets this rate plan applies to.
-     */
-    sets?: Array<string>;
-  }
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  export interface Zone {}
 }
 
 export namespace Subscriptions {
+  export import RatePlan = SubscriptionsAPI.RatePlan;
   export import Subscription = SubscriptionsAPI.Subscription;
+  export import SubscriptionComponent = SubscriptionsAPI.SubscriptionComponent;
+  export import SubscriptionComponentValue = SubscriptionsAPI.SubscriptionComponentValue;
+  export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
