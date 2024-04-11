@@ -1432,13 +1432,9 @@ export interface LoadBalancerGetParams {
 
 export namespace LoadBalancers {
   export import Monitors = MonitorsAPI.Monitors;
-  export import MonitorCreateResponse = MonitorsAPI.MonitorCreateResponse;
-  export import MonitorUpdateResponse = MonitorsAPI.MonitorUpdateResponse;
-  export import MonitorListResponse = MonitorsAPI.MonitorListResponse;
+  export import Monitor = MonitorsAPI.Monitor;
   export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
-  export import MonitorEditResponse = MonitorsAPI.MonitorEditResponse;
-  export import MonitorGetResponse = MonitorsAPI.MonitorGetResponse;
-  export import MonitorListResponsesSinglePage = MonitorsAPI.MonitorListResponsesSinglePage;
+  export import MonitorsSinglePage = MonitorsAPI.MonitorsSinglePage;
   export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
   export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
   export import MonitorListParams = MonitorsAPI.MonitorListParams;

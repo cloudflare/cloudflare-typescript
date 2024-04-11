@@ -17,17 +17,13 @@ export { Addressing } from './addressing';
 export { LOADocumentCreateResponse, LOADocumentCreateParams, LOADocuments } from './loa-documents/index';
 export {
   Prefix,
-  PrefixCreateResponse,
-  PrefixListResponse,
   PrefixDeleteResponse,
-  PrefixEditResponse,
-  PrefixGetResponse,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,
   PrefixEditParams,
   PrefixGetParams,
-  PrefixListResponsesSinglePage,
+  PrefixesSinglePage,
   Prefixes,
 } from './prefixes/index';
 export { ServiceListResponse, ServiceListParams, ServiceListResponsesSinglePage, Services } from './services';
