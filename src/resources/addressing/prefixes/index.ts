@@ -11,16 +11,12 @@ export {
 } from './delegations';
 export {
   Prefix,
-  PrefixCreateResponse,
-  PrefixListResponse,
   PrefixDeleteResponse,
-  PrefixEditResponse,
-  PrefixGetResponse,
   PrefixCreateParams,
   PrefixListParams,
   PrefixDeleteParams,
   PrefixEditParams,
   PrefixGetParams,
-  PrefixListResponsesSinglePage,
+  PrefixesSinglePage,
   Prefixes,
 } from './prefixes';

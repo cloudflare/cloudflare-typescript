@@ -2,19 +2,15 @@
 
 export { LoadBalancers } from './load-balancers';
 export {
-  MonitorCreateResponse,
-  MonitorUpdateResponse,
-  MonitorListResponse,
+  Monitor,
   MonitorDeleteResponse,
-  MonitorEditResponse,
-  MonitorGetResponse,
   MonitorCreateParams,
   MonitorUpdateParams,
   MonitorListParams,
   MonitorDeleteParams,
   MonitorEditParams,
   MonitorGetParams,
-  MonitorListResponsesSinglePage,
+  MonitorsSinglePage,
   Monitors,
 } from './monitors/index';
 export {

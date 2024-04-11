@@ -28,13 +28,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListUpdateResponse> {
+  ): Core.APIPromise<GatewayList> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ListUpdateResponse }>
+      }) as Core.APIPromise<{ result: GatewayList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,13 +44,9 @@ export class Lists extends APIResource {
   list(
     params: ListListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<ListListResponsesSinglePage, ListListResponse> {
+  ): Core.PagePromise<GatewayListsSinglePage, GatewayList> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/gateway/lists`,
-      ListListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, GatewayListsSinglePage, options);
   }
 
   /**
@@ -73,46 +69,69 @@ export class Lists extends APIResource {
   /**
    * Appends or removes an item from a configured Zero Trust list.
    */
-  edit(
-    listId: string,
-    params: ListEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListEditResponse> {
+  edit(listId: string, params: ListEditParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ListEditResponse }>
+      }) as Core.APIPromise<{ result: GatewayList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Zero Trust list.
    */
-  get(
-    listId: string,
-    params: ListGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListGetResponse> {
+  get(listId: string, params: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
-        result: ListGetResponse;
+        result: GatewayList;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ListListResponsesSinglePage extends SinglePage<ListListResponse> {}
+export class GatewayListsSinglePage extends SinglePage<GatewayList> {}
 
-export interface GatewayList {
+export interface GatewayItem {
   created_at?: string;
 
   /**
    * The value of the item in a list.
    */
   value?: string;
+}
+
+export interface GatewayList {
+  /**
+   * API Resource UUID tag.
+   */
+  id?: string;
+
+  /**
+   * The number of items in the list.
+   */
+  count?: number;
+
+  created_at?: string;
+
+  /**
+   * The description of the list.
+   */
+  description?: string;
+
+  /**
+   * The name of the list.
+   */
+  name?: string;
+
+  /**
+   * The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
+
+  updated_at?: string;
 }
 
 export interface ListCreateResponse {
@@ -131,69 +150,7 @@ export interface ListCreateResponse {
   /**
    * The items in the list.
    */
-  items?: Array<GatewayList>;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
-export interface ListUpdateResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
-export interface ListListResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
+  items?: Array<GatewayItem>;
 
   /**
    * The name of the list.
@@ -209,68 +166,6 @@ export interface ListListResponse {
 }
 
 export type ListDeleteResponse = unknown | string | null;
-
-export interface ListEditResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
-
-export interface ListGetResponse {
-  /**
-   * API Resource UUID tag.
-   */
-  id?: string;
-
-  /**
-   * The number of items in the list.
-   */
-  count?: number;
-
-  created_at?: string;
-
-  /**
-   * The description of the list.
-   */
-  description?: string;
-
-  /**
-   * The name of the list.
-   */
-  name?: string;
-
-  /**
-   * The type of list.
-   */
-  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
-
-  updated_at?: string;
-}
 
 export interface ListCreateParams {
   /**
@@ -296,7 +191,7 @@ export interface ListCreateParams {
   /**
    * Body param: The items in the list.
    */
-  items?: Array<GatewayList>;
+  items?: Array<GatewayItem>;
 }
 
 export interface ListUpdateParams {
@@ -341,7 +236,7 @@ export interface ListEditParams {
   /**
    * Body param: The items in the list.
    */
-  append?: Array<GatewayList>;
+  append?: Array<GatewayItem>;
 
   /**
    * Body param: A list of the item values you want to remove.
@@ -354,14 +249,11 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
+  export import GatewayItem = ListsAPI.GatewayItem;
   export import GatewayList = ListsAPI.GatewayList;
   export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListUpdateResponse = ListsAPI.ListUpdateResponse;
-  export import ListListResponse = ListsAPI.ListListResponse;
   export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import ListEditResponse = ListsAPI.ListEditResponse;
-  export import ListGetResponse = ListsAPI.ListGetResponse;
-  export import ListListResponsesSinglePage = ListsAPI.ListListResponsesSinglePage;
+  export import GatewayListsSinglePage = ListsAPI.GatewayListsSinglePage;
   export import ListCreateParams = ListsAPI.ListCreateParams;
   export import ListUpdateParams = ListsAPI.ListUpdateParams;
   export import ListListParams = ListsAPI.ListListParams;
