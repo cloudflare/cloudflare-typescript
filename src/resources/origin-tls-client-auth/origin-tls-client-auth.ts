@@ -93,14 +93,36 @@ export interface ZoneAuthenticatedOriginPull {
   certificate?: string;
 
   /**
-   * Indicates whether zone-level authenticated origin pulls is enabled.
+   * When the certificate from the authority expires.
    */
-  enabled?: boolean;
+  expires_on?: string;
 
   /**
-   * The zone's private key.
+   * The certificate authority that issued the certificate.
    */
-  private_key?: string;
+  issuer?: string;
+
+  /**
+   * The type of hash used for the certificate.
+   */
+  signature?: string;
+
+  /**
+   * Status of the certificate activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deleted'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the certificate was uploaded.
+   */
+  uploaded_on?: string;
 }
 
 export type OriginTLSClientAuthCreateResponse = unknown | string | null;

@@ -175,7 +175,6 @@ Types:
 - <code><a href="./src/resources/user/subscriptions.ts">RatePlan</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">Subscription</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionComponent</a></code>
-- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionComponentValue</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionZone</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionDeleteResponse</a></code>
@@ -1741,11 +1740,11 @@ Types:
 
 Methods:
 
-- <code title="post /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">create</a>({ ...params }) -> Hostname</code>
+- <code title="post /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">create</a>({ ...params }) -> KeylessCertificate</code>
 - <code title="get /zones/{zone_id}/keyless_certificates">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">list</a>({ ...params }) -> KeylessCertificatesSinglePage</code>
 - <code title="delete /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">delete</a>(keylessCertificateId, { ...params }) -> KeylessCertificateDeleteResponse</code>
-- <code title="patch /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">edit</a>(keylessCertificateId, { ...params }) -> Hostname</code>
-- <code title="get /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">get</a>(keylessCertificateId, { ...params }) -> Hostname</code>
+- <code title="patch /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">edit</a>(keylessCertificateId, { ...params }) -> KeylessCertificate</code>
+- <code title="get /zones/{zone_id}/keyless_certificates/{keyless_certificate_id}">client.keylessCertificates.<a href="./src/resources/keyless-certificates.ts">get</a>(keylessCertificateId, { ...params }) -> KeylessCertificate</code>
 
 # Logpush
 
@@ -1913,7 +1912,7 @@ Types:
 Methods:
 
 - <code title="put /zones/{zone_id}/origin_tls_client_auth/hostnames">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">update</a>({ ...params }) -> HostnameUpdateResponse | null</code>
-- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/{hostname}">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">get</a>(hostname, { ...params }) -> ID</code>
+- <code title="get /zones/{zone_id}/origin_tls_client_auth/hostnames/{hostname}">client.originTLSClientAuth.hostnames.<a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">get</a>(hostname, { ...params }) -> AuthenticatedOriginPull</code>
 
 ### Certificates
 
@@ -1949,7 +1948,7 @@ Types:
 
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageRule</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">Route</a></code>
-- <code><a href="./src/resources/pagerules/pagerules.ts">Targes</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">Target</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">URLTarget</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleCreateResponse</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleUpdateResponse</a></code>
@@ -2076,7 +2075,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/secondary-dns/peers.ts">Peer</a></code>
-- <code><a href="./src/resources/secondary-dns/peers.ts">Peers</a></code>
 - <code><a href="./src/resources/secondary-dns/peers.ts">PeerDeleteResponse</a></code>
 
 Methods:

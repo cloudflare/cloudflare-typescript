@@ -141,7 +141,7 @@ export interface PageRule {
   /**
    * The rule targets to evaluate on each request.
    */
-  targets: Array<Targes>;
+  targets: Array<Target>;
 }
 
 export interface Route {
@@ -176,11 +176,11 @@ export namespace Route {
 /**
  * A request condition target.
  */
-export interface Targes {
+export interface Target {
   /**
    * String constraint.
    */
-  constraint: Targes.Constraint;
+  constraint: Target.Constraint;
 
   /**
    * A target based on the URL of the request.
@@ -188,7 +188,7 @@ export interface Targes {
   target: 'url';
 }
 
-export namespace Targes {
+export namespace Target {
   /**
    * String constraint.
    */
@@ -271,7 +271,7 @@ export interface PageruleCreateParams {
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<Targes>;
+  targets: Array<Target>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -303,7 +303,7 @@ export interface PageruleUpdateParams {
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<Targes>;
+  targets: Array<Target>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -389,7 +389,7 @@ export interface PageruleEditParams {
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets?: Array<Targes>;
+  targets?: Array<Target>;
 }
 
 export interface PageruleGetParams {

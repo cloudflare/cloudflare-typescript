@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
-import * as PeersAPI from 'cloudflare/resources/secondary-dns/peers';
 import * as StatusAPI from 'cloudflare/resources/secondary-dns/outgoing/status';
 
 export class OutgoingResource extends APIResource {
@@ -147,7 +146,7 @@ export interface Outgoing {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peers>;
+  peers?: Array<unknown>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -186,7 +185,7 @@ export interface OutgoingCreateResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peers>;
+  peers?: Array<unknown>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -220,7 +219,7 @@ export interface OutgoingUpdateResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peers>;
+  peers?: Array<unknown>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -264,7 +263,7 @@ export interface OutgoingGetResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peers>;
+  peers?: Array<unknown>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -286,7 +285,7 @@ export interface OutgoingCreateParams {
   /**
    * Body param: A list of peer tags.
    */
-  peers: Array<PeersAPI.Peers>;
+  peers: Array<unknown>;
 }
 
 export interface OutgoingUpdateParams {
@@ -303,7 +302,7 @@ export interface OutgoingUpdateParams {
   /**
    * Body param: A list of peer tags.
    */
-  peers: Array<PeersAPI.Peers>;
+  peers: Array<unknown>;
 }
 
 export interface OutgoingDeleteParams {
