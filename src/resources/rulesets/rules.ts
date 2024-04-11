@@ -215,6 +215,144 @@ export namespace BlockRule {
   }
 }
 
+export interface ChallengeRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'challenge';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: unknown;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export interface CompressResponseRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'compress_response';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: CompressResponseRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace CompressResponseRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Custom order for compression algorithms.
+     */
+    algorithms?: Array<ActionParameters.Algorithm>;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * Compression algorithm to enable.
+     */
+    export interface Algorithm {
+      /**
+       * Name of compression algorithm to enable.
+       */
+      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
+    }
+  }
+}
+
 export interface ExecuteRule {
   /**
    * The timestamp of when the rule was last modified.
@@ -397,6 +535,63 @@ export namespace ExecuteRule {
   }
 }
 
+export interface JsChallengeRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'js_challenge';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: unknown;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
 export interface LogRule {
   /**
    * The timestamp of when the rule was last modified.
@@ -464,6 +659,439 @@ export interface Logging {
   enabled: boolean;
 }
 
+export interface ManagedChallengeRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'managed_challenge';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: unknown;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export interface RedirectRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'redirect';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: RedirectRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace RedirectRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Serve a redirect based on a bulk list lookup.
+     */
+    from_list?: ActionParameters.FromList;
+
+    /**
+     * Serve a redirect based on the request properties.
+     */
+    from_value?: ActionParameters.FromValue;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * Serve a redirect based on a bulk list lookup.
+     */
+    export interface FromList {
+      /**
+       * Expression that evaluates to the list lookup key.
+       */
+      key?: string;
+
+      /**
+       * The name of the list to match against.
+       */
+      name?: string;
+    }
+
+    /**
+     * Serve a redirect based on the request properties.
+     */
+    export interface FromValue {
+      /**
+       * Keep the query string of the original request.
+       */
+      preserve_query_string?: boolean;
+
+      /**
+       * The status code to be used for the redirect.
+       */
+      status_code?: 301 | 302 | 303 | 307 | 308;
+
+      /**
+       * The URL to redirect the request to.
+       */
+      target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
+    }
+
+    export namespace FromValue {
+      export interface StaticURLRedirect {
+        /**
+         * The URL to redirect the request to.
+         */
+        value?: string;
+      }
+
+      export interface DynamicURLRedirect {
+        /**
+         * An expression to evaluate to get the URL to redirect the request to.
+         */
+        expression?: string;
+      }
+    }
+  }
+}
+
+export interface RewriteRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'rewrite';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: RewriteRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace RewriteRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Map of request headers to modify.
+     */
+    headers?: Record<
+      string,
+      ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+    >;
+
+    /**
+     * URI to rewrite the request to.
+     */
+    uri?: ActionParameters.URI;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * Remove the header from the request.
+     */
+    export interface RemoveHeader {
+      operation: 'remove';
+    }
+
+    /**
+     * Set a request header with a static value.
+     */
+    export interface StaticHeader {
+      operation: 'set';
+
+      /**
+       * Static value for the header.
+       */
+      value: string;
+    }
+
+    /**
+     * Set a request header with a dynamic value.
+     */
+    export interface DynamicHeader {
+      /**
+       * Expression for the header value.
+       */
+      expression: string;
+
+      operation: 'set';
+    }
+
+    /**
+     * URI to rewrite the request to.
+     */
+    export interface URI {
+      /**
+       * Path portion rewrite.
+       */
+      path?: RulesAPI.RewriteURIPart;
+
+      /**
+       * Query portion rewrite.
+       */
+      query?: RulesAPI.RewriteURIPart;
+    }
+  }
+}
+
+export type RewriteURIPart = RewriteURIPart.StaticValue | RewriteURIPart.DynamicValue;
+
+export namespace RewriteURIPart {
+  export interface StaticValue {
+    /**
+     * Predefined replacement value.
+     */
+    value: string;
+  }
+
+  export interface DynamicValue {
+    /**
+     * Expression to evaluate for the replacement value.
+     */
+    expression: string;
+  }
+}
+
+export interface RouteRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'route';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: RouteRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace RouteRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Rewrite the HTTP Host header.
+     */
+    host_header?: string;
+
+    /**
+     * Override the IP/TCP destination.
+     */
+    origin?: ActionParameters.Origin;
+
+    /**
+     * Override the Server Name Indication (SNI).
+     */
+    sni?: ActionParameters.Sni;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * Override the IP/TCP destination.
+     */
+    export interface Origin {
+      /**
+       * Override the resolved hostname.
+       */
+      host?: string;
+
+      /**
+       * Override the destination port.
+       */
+      port?: number;
+    }
+
+    /**
+     * Override the Server Name Indication (SNI).
+     */
+    export interface Sni {
+      /**
+       * The SNI override.
+       */
+      value: string;
+    }
+  }
+}
+
 export interface RulesetRule {
   /**
    * The timestamp of when the rule was last modified.
@@ -519,6 +1147,751 @@ export interface RulesetRule {
    * The reference of the rule (the rule ID by default).
    */
   ref?: string;
+}
+
+export interface ScoreRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'score';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: ScoreRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace ScoreRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Increment contains the delta to change the score and can be either positive or
+     * negative.
+     */
+    increment?: number;
+  }
+}
+
+export interface ServeErrorRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'serve_error';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: ServeErrorRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace ServeErrorRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Error response content.
+     */
+    content?: string;
+
+    /**
+     * Content-type header to set with the response.
+     */
+    content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
+
+    /**
+     * The status code to use for the error.
+     */
+    status_code?: number;
+  }
+}
+
+export interface SetCacheSettingsRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'set_cache_settings';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: SetCacheSettingsRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace SetCacheSettingsRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * List of additional ports that caching can be enabled on.
+     */
+    additional_cacheable_ports?: Array<number>;
+
+    /**
+     * Specify how long client browsers should cache the response. Cloudflare cache
+     * purge will not purge content cached on client browsers, so high browser TTLs may
+     * lead to stale content.
+     */
+    browser_ttl?: ActionParameters.BrowserTTL;
+
+    /**
+     * Mark whether the request’s response from origin is eligible for caching. Caching
+     * itself will still depend on the cache-control header and your other caching
+     * configurations.
+     */
+    cache?: boolean;
+
+    /**
+     * Define which components of the request are included or excluded from the cache
+     * key Cloudflare uses to store the response in cache.
+     */
+    cache_key?: ActionParameters.CacheKey;
+
+    /**
+     * Mark whether the request's response from origin is eligible for Cache Reserve
+     * (requires a Cache Reserve add-on plan).
+     */
+    cache_reserve?: ActionParameters.CacheReserve;
+
+    /**
+     * TTL (Time to Live) specifies the maximum time to cache a resource in the
+     * Cloudflare edge network.
+     */
+    edge_ttl?: ActionParameters.EdgeTTL;
+
+    /**
+     * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
+     */
+    origin_cache_control?: boolean;
+
+    /**
+     * Generate Cloudflare error pages from issues sent from the origin server. When
+     * on, error pages will trigger for issues from the origin
+     */
+    origin_error_page_passthru?: boolean;
+
+    /**
+     * Define a timeout value between two successive read operations to your origin
+     * server. Historically, the timeout value between two read options from Cloudflare
+     * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
+     * errors because of timeouts from an origin server, try increasing this timeout
+     * value.
+     */
+    read_timeout?: number;
+
+    /**
+     * Specify whether or not Cloudflare should respect strong ETag (entity tag)
+     * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
+     */
+    respect_strong_etags?: boolean;
+
+    /**
+     * Define if Cloudflare should serve stale content while getting the latest content
+     * from the origin. If on, Cloudflare will not serve stale content while getting
+     * the latest content from the origin.
+     */
+    serve_stale?: ActionParameters.ServeStale;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * Specify how long client browsers should cache the response. Cloudflare cache
+     * purge will not purge content cached on client browsers, so high browser TTLs may
+     * lead to stale content.
+     */
+    export interface BrowserTTL {
+      /**
+       * Determines which browser ttl mode to use.
+       */
+      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+
+      /**
+       * The TTL (in seconds) if you choose override_origin mode.
+       */
+      default?: number;
+    }
+
+    /**
+     * Define which components of the request are included or excluded from the cache
+     * key Cloudflare uses to store the response in cache.
+     */
+    export interface CacheKey {
+      /**
+       * Separate cached content based on the visitor’s device type
+       */
+      cache_by_device_type?: boolean;
+
+      /**
+       * Protect from web cache deception attacks while allowing static assets to be
+       * cached
+       */
+      cache_deception_armor?: boolean;
+
+      /**
+       * Customize which components of the request are included or excluded from the
+       * cache key.
+       */
+      custom_key?: CacheKey.CustomKey;
+
+      /**
+       * Treat requests with the same query parameters the same, regardless of the order
+       * those query parameters are in. A value of true ignores the query strings' order.
+       */
+      ignore_query_strings_order?: boolean;
+    }
+
+    export namespace CacheKey {
+      /**
+       * Customize which components of the request are included or excluded from the
+       * cache key.
+       */
+      export interface CustomKey {
+        /**
+         * The cookies to include in building the cache key.
+         */
+        cookie?: CustomKey.Cookie;
+
+        /**
+         * The header names and values to include in building the cache key.
+         */
+        header?: CustomKey.Header;
+
+        /**
+         * Whether to use the original host or the resolved host in the cache key.
+         */
+        host?: CustomKey.Host;
+
+        /**
+         * Use the presence or absence of parameters in the query string to build the cache
+         * key.
+         */
+        query_string?: CustomKey.QueryString;
+
+        /**
+         * Characteristics of the request user agent used in building the cache key.
+         */
+        user?: CustomKey.User;
+      }
+
+      export namespace CustomKey {
+        /**
+         * The cookies to include in building the cache key.
+         */
+        export interface Cookie {
+          /**
+           * Checks for the presence of these cookie names. The presence of these cookies is
+           * used in building the cache key.
+           */
+          check_presence?: Array<string>;
+
+          /**
+           * Include these cookies' names and their values.
+           */
+          include?: Array<string>;
+        }
+
+        /**
+         * The header names and values to include in building the cache key.
+         */
+        export interface Header {
+          /**
+           * Checks for the presence of these header names. The presence of these headers is
+           * used in building the cache key.
+           */
+          check_presence?: Array<string>;
+
+          /**
+           * Whether or not to include the origin header. A value of true will exclude the
+           * origin header in the cache key.
+           */
+          exclude_origin?: boolean;
+
+          /**
+           * Include these headers' names and their values.
+           */
+          include?: Array<string>;
+        }
+
+        /**
+         * Whether to use the original host or the resolved host in the cache key.
+         */
+        export interface Host {
+          /**
+           * Use the resolved host in the cache key. A value of true will use the resolved
+           * host, while a value or false will use the original host.
+           */
+          resolved?: boolean;
+        }
+
+        /**
+         * Use the presence or absence of parameters in the query string to build the cache
+         * key.
+         */
+        export interface QueryString {
+          /**
+           * build the cache key using all query string parameters EXCECPT these excluded
+           * parameters
+           */
+          exclude?: QueryString.Exclude;
+
+          /**
+           * build the cache key using a list of query string parameters that ARE in the
+           * request.
+           */
+          include?: QueryString.Include;
+        }
+
+        export namespace QueryString {
+          /**
+           * build the cache key using all query string parameters EXCECPT these excluded
+           * parameters
+           */
+          export interface Exclude {
+            /**
+             * Exclude all query string parameters from use in building the cache key.
+             */
+            all?: boolean;
+
+            /**
+             * A list of query string parameters NOT used to build the cache key. All
+             * parameters present in the request but missing in this list will be used to build
+             * the cache key.
+             */
+            list?: Array<string>;
+          }
+
+          /**
+           * build the cache key using a list of query string parameters that ARE in the
+           * request.
+           */
+          export interface Include {
+            /**
+             * Use all query string parameters in the cache key.
+             */
+            all?: boolean;
+
+            /**
+             * A list of query string parameters used to build the cache key.
+             */
+            list?: Array<string>;
+          }
+        }
+
+        /**
+         * Characteristics of the request user agent used in building the cache key.
+         */
+        export interface User {
+          /**
+           * Use the user agent's device type in the cache key.
+           */
+          device_type?: boolean;
+
+          /**
+           * Use the user agents's country in the cache key.
+           */
+          geo?: boolean;
+
+          /**
+           * Use the user agent's language in the cache key.
+           */
+          lang?: boolean;
+        }
+      }
+    }
+
+    /**
+     * Mark whether the request's response from origin is eligible for Cache Reserve
+     * (requires a Cache Reserve add-on plan).
+     */
+    export interface CacheReserve {
+      /**
+       * Determines whether cache reserve is enabled. If this is true and a request meets
+       * eligibility criteria, Cloudflare will write the resource to cache reserve.
+       */
+      eligible: boolean;
+
+      /**
+       * The minimum file size eligible for store in cache reserve.
+       */
+      min_file_size: number;
+    }
+
+    /**
+     * TTL (Time to Live) specifies the maximum time to cache a resource in the
+     * Cloudflare edge network.
+     */
+    export interface EdgeTTL {
+      /**
+       * The TTL (in seconds) if you choose override_origin mode.
+       */
+      default: number;
+
+      /**
+       * edge ttl options
+       */
+      mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
+
+      /**
+       * List of single status codes, or status code ranges to apply the selected mode
+       */
+      status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
+    }
+
+    export namespace EdgeTTL {
+      /**
+       * Specify how long Cloudflare should cache the response based on the status code
+       * from the origin. Can be a single status code or a range or status codes
+       */
+      export interface StatusCodeTTL {
+        /**
+         * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
+         * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
+         * setting Cache-Control header with the value of "no-store".
+         */
+        value: number;
+
+        /**
+         * The range of status codes used to apply the selected mode.
+         */
+        status_code_range?: StatusCodeTTL.StatusCodeRange;
+
+        /**
+         * Set the ttl for responses with this specific status code
+         */
+        status_code_value?: number;
+      }
+
+      export namespace StatusCodeTTL {
+        /**
+         * The range of status codes used to apply the selected mode.
+         */
+        export interface StatusCodeRange {
+          /**
+           * response status code lower bound
+           */
+          from: number;
+
+          /**
+           * response status code upper bound
+           */
+          to: number;
+        }
+      }
+    }
+
+    /**
+     * Define if Cloudflare should serve stale content while getting the latest content
+     * from the origin. If on, Cloudflare will not serve stale content while getting
+     * the latest content from the origin.
+     */
+    export interface ServeStale {
+      /**
+       * Defines whether Cloudflare should serve stale content while updating. If true,
+       * Cloudflare will not serve stale content while getting the latest content from
+       * the origin.
+       */
+      disable_stale_while_updating: boolean;
+    }
+  }
+}
+
+export interface SetConfigRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'set_config';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: SetConfigRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace SetConfigRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * Turn on or off Automatic HTTPS Rewrites.
+     */
+    automatic_https_rewrites?: boolean;
+
+    /**
+     * Select which file extensions to minify automatically.
+     */
+    autominify?: ActionParameters.Autominify;
+
+    /**
+     * Turn on or off Browser Integrity Check.
+     */
+    bic?: boolean;
+
+    /**
+     * Turn off all active Cloudflare Apps.
+     */
+    disable_apps?: boolean;
+
+    /**
+     * Turn off Zaraz.
+     */
+    disable_zaraz?: boolean;
+
+    /**
+     * Turn on or off Email Obfuscation.
+     */
+    email_obfuscation?: boolean;
+
+    /**
+     * Turn on or off the Hotlink Protection.
+     */
+    hotlink_protection?: boolean;
+
+    /**
+     * Turn on or off Mirage.
+     */
+    mirage?: boolean;
+
+    /**
+     * Turn on or off Opportunistic Encryption.
+     */
+    opportunistic_encryption?: boolean;
+
+    /**
+     * Configure the Polish level.
+     */
+    polish?: 'off' | 'lossless' | 'lossy';
+
+    /**
+     * Turn on or off Rocket Loader
+     */
+    rocket_loader?: boolean;
+
+    /**
+     * Configure the Security Level.
+     */
+    security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+
+    /**
+     * Turn on or off Server Side Excludes.
+     */
+    server_side_excludes?: boolean;
+
+    /**
+     * Configure the SSL level.
+     */
+    ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
+
+    /**
+     * Turn on or off Signed Exchanges (SXG).
+     */
+    sxg?: boolean;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * Select which file extensions to minify automatically.
+     */
+    export interface Autominify {
+      /**
+       * Minify CSS files.
+       */
+      css?: boolean;
+
+      /**
+       * Minify HTML files.
+       */
+      html?: boolean;
+
+      /**
+       * Minify JS files.
+       */
+      js?: boolean;
+    }
+  }
 }
 
 export interface SkipRule {
@@ -695,20 +2068,20 @@ export interface RuleCreateResponse {
    */
   rules: Array<
     | BlockRule
-    | RuleCreateResponse.RulesetsChallengeRule
-    | RuleCreateResponse.RulesetsCompressResponseRule
+    | ChallengeRule
+    | CompressResponseRule
     | ExecuteRule
-    | RuleCreateResponse.RulesetsJsChallengeRule
+    | JsChallengeRule
     | LogRule
-    | RuleCreateResponse.RulesetsManagedChallengeRule
-    | RuleCreateResponse.RulesetsRedirectRule
-    | RuleCreateResponse.RulesetsRewriteRule
-    | RuleCreateResponse.RulesetsRouteRule
-    | RuleCreateResponse.RulesetsScoreRule
-    | RuleCreateResponse.RulesetsServeErrorRule
-    | RuleCreateResponse.RulesetsSetConfigRule
+    | ManagedChallengeRule
+    | RedirectRule
+    | RewriteRule
+    | RouteRule
+    | ScoreRule
+    | ServeErrorRule
+    | SetConfigRule
     | SkipRule
-    | RuleCreateResponse.RulesetsSetCacheSettingsRule
+    | SetCacheSettingsRule
   >;
 
   /**
@@ -720,1393 +2093,6 @@ export interface RuleCreateResponse {
    * An informative description of the ruleset.
    */
   description?: string;
-}
-
-export namespace RuleCreateResponse {
-  export interface RulesetsChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsCompressResponseRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'compress_response';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsCompressResponseRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsCompressResponseRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Custom order for compression algorithms.
-       */
-      algorithms?: Array<ActionParameters.Algorithm>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Compression algorithm to enable.
-       */
-      export interface Algorithm {
-        /**
-         * Name of compression algorithm to enable.
-         */
-        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
-      }
-    }
-  }
-
-  export interface RulesetsJsChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'js_challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsManagedChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'managed_challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsRedirectRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'redirect';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRedirectRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRedirectRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      from_list?: ActionParameters.FromList;
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      from_value?: ActionParameters.FromValue;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      export interface FromList {
-        /**
-         * Expression that evaluates to the list lookup key.
-         */
-        key?: string;
-
-        /**
-         * The name of the list to match against.
-         */
-        name?: string;
-      }
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      export interface FromValue {
-        /**
-         * Keep the query string of the original request.
-         */
-        preserve_query_string?: boolean;
-
-        /**
-         * The status code to be used for the redirect.
-         */
-        status_code?: 301 | 302 | 303 | 307 | 308;
-
-        /**
-         * The URL to redirect the request to.
-         */
-        target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
-      }
-
-      export namespace FromValue {
-        export interface StaticURLRedirect {
-          /**
-           * The URL to redirect the request to.
-           */
-          value?: string;
-        }
-
-        export interface DynamicURLRedirect {
-          /**
-           * An expression to evaluate to get the URL to redirect the request to.
-           */
-          expression?: string;
-        }
-      }
-    }
-  }
-
-  export interface RulesetsRewriteRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'rewrite';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRewriteRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRewriteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Map of request headers to modify.
-       */
-      headers?: Record<
-        string,
-        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
-      >;
-
-      /**
-       * URI to rewrite the request to.
-       */
-      uri?: ActionParameters.URI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Remove the header from the request.
-       */
-      export interface RemoveHeader {
-        operation: 'remove';
-      }
-
-      /**
-       * Set a request header with a static value.
-       */
-      export interface StaticHeader {
-        operation: 'set';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Set a request header with a dynamic value.
-       */
-      export interface DynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'set';
-      }
-
-      /**
-       * URI to rewrite the request to.
-       */
-      export interface URI {
-        /**
-         * Path portion rewrite.
-         */
-        path?: URI.StaticValue | URI.DynamicValue;
-
-        /**
-         * Query portion rewrite.
-         */
-        query?: URI.StaticValue | URI.DynamicValue;
-      }
-
-      export namespace URI {
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-      }
-    }
-  }
-
-  export interface RulesetsRouteRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'route';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRouteRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRouteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Rewrite the HTTP Host header.
-       */
-      host_header?: string;
-
-      /**
-       * Override the IP/TCP destination.
-       */
-      origin?: ActionParameters.Origin;
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      sni?: ActionParameters.Sni;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Override the IP/TCP destination.
-       */
-      export interface Origin {
-        /**
-         * Override the resolved hostname.
-         */
-        host?: string;
-
-        /**
-         * Override the destination port.
-         */
-        port?: number;
-      }
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      export interface Sni {
-        /**
-         * The SNI override.
-         */
-        value: string;
-      }
-    }
-  }
-
-  export interface RulesetsScoreRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'score';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsScoreRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsScoreRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Increment contains the delta to change the score and can be either positive or
-       * negative.
-       */
-      increment?: number;
-    }
-  }
-
-  export interface RulesetsServeErrorRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'serve_error';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsServeErrorRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsServeErrorRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Error response content.
-       */
-      content?: string;
-
-      /**
-       * Content-type header to set with the response.
-       */
-      content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
-
-      /**
-       * The status code to use for the error.
-       */
-      status_code?: number;
-    }
-  }
-
-  export interface RulesetsSetConfigRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_config';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsSetConfigRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSetConfigRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Turn on or off Automatic HTTPS Rewrites.
-       */
-      automatic_https_rewrites?: boolean;
-
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      autominify?: ActionParameters.Autominify;
-
-      /**
-       * Turn on or off Browser Integrity Check.
-       */
-      bic?: boolean;
-
-      /**
-       * Turn off all active Cloudflare Apps.
-       */
-      disable_apps?: boolean;
-
-      /**
-       * Turn off Zaraz.
-       */
-      disable_zaraz?: boolean;
-
-      /**
-       * Turn on or off Email Obfuscation.
-       */
-      email_obfuscation?: boolean;
-
-      /**
-       * Turn on or off the Hotlink Protection.
-       */
-      hotlink_protection?: boolean;
-
-      /**
-       * Turn on or off Mirage.
-       */
-      mirage?: boolean;
-
-      /**
-       * Turn on or off Opportunistic Encryption.
-       */
-      opportunistic_encryption?: boolean;
-
-      /**
-       * Configure the Polish level.
-       */
-      polish?: 'off' | 'lossless' | 'lossy';
-
-      /**
-       * Turn on or off Rocket Loader
-       */
-      rocket_loader?: boolean;
-
-      /**
-       * Configure the Security Level.
-       */
-      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-      /**
-       * Turn on or off Server Side Excludes.
-       */
-      server_side_excludes?: boolean;
-
-      /**
-       * Configure the SSL level.
-       */
-      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-
-      /**
-       * Turn on or off Signed Exchanges (SXG).
-       */
-      sxg?: boolean;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      export interface Autominify {
-        /**
-         * Minify CSS files.
-         */
-        css?: boolean;
-
-        /**
-         * Minify HTML files.
-         */
-        html?: boolean;
-
-        /**
-         * Minify JS files.
-         */
-        js?: boolean;
-      }
-    }
-  }
-
-  export interface RulesetsSetCacheSettingsRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_cache_settings';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsSetCacheSettingsRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSetCacheSettingsRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * List of additional ports that caching can be enabled on.
-       */
-      additional_cacheable_ports?: Array<number>;
-
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      browser_ttl?: ActionParameters.BrowserTTL;
-
-      /**
-       * Mark whether the request’s response from origin is eligible for caching. Caching
-       * itself will still depend on the cache-control header and your other caching
-       * configurations.
-       */
-      cache?: boolean;
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      cache_key?: ActionParameters.CacheKey;
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      cache_reserve?: ActionParameters.CacheReserve;
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      edge_ttl?: ActionParameters.EdgeTTL;
-
-      /**
-       * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
-       */
-      origin_cache_control?: boolean;
-
-      /**
-       * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin
-       */
-      origin_error_page_passthru?: boolean;
-
-      /**
-       * Define a timeout value between two successive read operations to your origin
-       * server. Historically, the timeout value between two read options from Cloudflare
-       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
-       * errors because of timeouts from an origin server, try increasing this timeout
-       * value.
-       */
-      read_timeout?: number;
-
-      /**
-       * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-       * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
-       */
-      respect_strong_etags?: boolean;
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      serve_stale?: ActionParameters.ServeStale;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      export interface BrowserTTL {
-        /**
-         * Determines which browser ttl mode to use.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default?: number;
-      }
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      export interface CacheKey {
-        /**
-         * Separate cached content based on the visitor’s device type
-         */
-        cache_by_device_type?: boolean;
-
-        /**
-         * Protect from web cache deception attacks while allowing static assets to be
-         * cached
-         */
-        cache_deception_armor?: boolean;
-
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        custom_key?: CacheKey.CustomKey;
-
-        /**
-         * Treat requests with the same query parameters the same, regardless of the order
-         * those query parameters are in. A value of true ignores the query strings' order.
-         */
-        ignore_query_strings_order?: boolean;
-      }
-
-      export namespace CacheKey {
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        export interface CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          cookie?: CustomKey.Cookie;
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          header?: CustomKey.Header;
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          host?: CustomKey.Host;
-
-          /**
-           * Use the presence or absence of parameters in the query string to build the cache
-           * key.
-           */
-          query_string?: CustomKey.QueryString;
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          user?: CustomKey.User;
-        }
-
-        export namespace CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          export interface Cookie {
-            /**
-             * Checks for the presence of these cookie names. The presence of these cookies is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Include these cookies' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          export interface Header {
-            /**
-             * Checks for the presence of these header names. The presence of these headers is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Whether or not to include the origin header. A value of true will exclude the
-             * origin header in the cache key.
-             */
-            exclude_origin?: boolean;
-
-            /**
-             * Include these headers' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          export interface Host {
-            /**
-             * Use the resolved host in the cache key. A value of true will use the resolved
-             * host, while a value or false will use the original host.
-             */
-            resolved?: boolean;
-          }
-
-          /**
-           * Use the presence or absence of parameters in the query string to build the cache
-           * key.
-           */
-          export interface QueryString {
-            /**
-             * build the cache key using all query string parameters EXCECPT these excluded
-             * parameters
-             */
-            exclude?: QueryString.Exclude;
-
-            /**
-             * build the cache key using a list of query string parameters that ARE in the
-             * request.
-             */
-            include?: QueryString.Include;
-          }
-
-          export namespace QueryString {
-            /**
-             * build the cache key using all query string parameters EXCECPT these excluded
-             * parameters
-             */
-            export interface Exclude {
-              /**
-               * Exclude all query string parameters from use in building the cache key.
-               */
-              all?: boolean;
-
-              /**
-               * A list of query string parameters NOT used to build the cache key. All
-               * parameters present in the request but missing in this list will be used to build
-               * the cache key.
-               */
-              list?: Array<string>;
-            }
-
-            /**
-             * build the cache key using a list of query string parameters that ARE in the
-             * request.
-             */
-            export interface Include {
-              /**
-               * Use all query string parameters in the cache key.
-               */
-              all?: boolean;
-
-              /**
-               * A list of query string parameters used to build the cache key.
-               */
-              list?: Array<string>;
-            }
-          }
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          export interface User {
-            /**
-             * Use the user agent's device type in the cache key.
-             */
-            device_type?: boolean;
-
-            /**
-             * Use the user agents's country in the cache key.
-             */
-            geo?: boolean;
-
-            /**
-             * Use the user agent's language in the cache key.
-             */
-            lang?: boolean;
-          }
-        }
-      }
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      export interface CacheReserve {
-        /**
-         * Determines whether cache reserve is enabled. If this is true and a request meets
-         * eligibility criteria, Cloudflare will write the resource to cache reserve.
-         */
-        eligible: boolean;
-
-        /**
-         * The minimum file size eligible for store in cache reserve.
-         */
-        min_file_size: number;
-      }
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      export interface EdgeTTL {
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default: number;
-
-        /**
-         * edge ttl options
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * List of single status codes, or status code ranges to apply the selected mode
-         */
-        status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
-      }
-
-      export namespace EdgeTTL {
-        /**
-         * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes
-         */
-        export interface StatusCodeTTL {
-          /**
-           * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-           * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-           * setting Cache-Control header with the value of "no-store".
-           */
-          value: number;
-
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          status_code_range?: StatusCodeTTL.StatusCodeRange;
-
-          /**
-           * Set the ttl for responses with this specific status code
-           */
-          status_code_value?: number;
-        }
-
-        export namespace StatusCodeTTL {
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          export interface StatusCodeRange {
-            /**
-             * response status code lower bound
-             */
-            from: number;
-
-            /**
-             * response status code upper bound
-             */
-            to: number;
-          }
-        }
-      }
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      export interface ServeStale {
-        /**
-         * Defines whether Cloudflare should serve stale content while updating. If true,
-         * Cloudflare will not serve stale content while getting the latest content from
-         * the origin.
-         */
-        disable_stale_while_updating: boolean;
-      }
-    }
-  }
 }
 
 /**
@@ -2166,20 +2152,20 @@ export interface RuleDeleteResponse {
    */
   rules: Array<
     | BlockRule
-    | RuleDeleteResponse.RulesetsChallengeRule
-    | RuleDeleteResponse.RulesetsCompressResponseRule
+    | ChallengeRule
+    | CompressResponseRule
     | ExecuteRule
-    | RuleDeleteResponse.RulesetsJsChallengeRule
+    | JsChallengeRule
     | LogRule
-    | RuleDeleteResponse.RulesetsManagedChallengeRule
-    | RuleDeleteResponse.RulesetsRedirectRule
-    | RuleDeleteResponse.RulesetsRewriteRule
-    | RuleDeleteResponse.RulesetsRouteRule
-    | RuleDeleteResponse.RulesetsScoreRule
-    | RuleDeleteResponse.RulesetsServeErrorRule
-    | RuleDeleteResponse.RulesetsSetConfigRule
+    | ManagedChallengeRule
+    | RedirectRule
+    | RewriteRule
+    | RouteRule
+    | ScoreRule
+    | ServeErrorRule
+    | SetConfigRule
     | SkipRule
-    | RuleDeleteResponse.RulesetsSetCacheSettingsRule
+    | SetCacheSettingsRule
   >;
 
   /**
@@ -2191,1393 +2177,6 @@ export interface RuleDeleteResponse {
    * An informative description of the ruleset.
    */
   description?: string;
-}
-
-export namespace RuleDeleteResponse {
-  export interface RulesetsChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsCompressResponseRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'compress_response';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsCompressResponseRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsCompressResponseRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Custom order for compression algorithms.
-       */
-      algorithms?: Array<ActionParameters.Algorithm>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Compression algorithm to enable.
-       */
-      export interface Algorithm {
-        /**
-         * Name of compression algorithm to enable.
-         */
-        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
-      }
-    }
-  }
-
-  export interface RulesetsJsChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'js_challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsManagedChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'managed_challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsRedirectRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'redirect';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRedirectRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRedirectRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      from_list?: ActionParameters.FromList;
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      from_value?: ActionParameters.FromValue;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      export interface FromList {
-        /**
-         * Expression that evaluates to the list lookup key.
-         */
-        key?: string;
-
-        /**
-         * The name of the list to match against.
-         */
-        name?: string;
-      }
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      export interface FromValue {
-        /**
-         * Keep the query string of the original request.
-         */
-        preserve_query_string?: boolean;
-
-        /**
-         * The status code to be used for the redirect.
-         */
-        status_code?: 301 | 302 | 303 | 307 | 308;
-
-        /**
-         * The URL to redirect the request to.
-         */
-        target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
-      }
-
-      export namespace FromValue {
-        export interface StaticURLRedirect {
-          /**
-           * The URL to redirect the request to.
-           */
-          value?: string;
-        }
-
-        export interface DynamicURLRedirect {
-          /**
-           * An expression to evaluate to get the URL to redirect the request to.
-           */
-          expression?: string;
-        }
-      }
-    }
-  }
-
-  export interface RulesetsRewriteRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'rewrite';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRewriteRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRewriteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Map of request headers to modify.
-       */
-      headers?: Record<
-        string,
-        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
-      >;
-
-      /**
-       * URI to rewrite the request to.
-       */
-      uri?: ActionParameters.URI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Remove the header from the request.
-       */
-      export interface RemoveHeader {
-        operation: 'remove';
-      }
-
-      /**
-       * Set a request header with a static value.
-       */
-      export interface StaticHeader {
-        operation: 'set';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Set a request header with a dynamic value.
-       */
-      export interface DynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'set';
-      }
-
-      /**
-       * URI to rewrite the request to.
-       */
-      export interface URI {
-        /**
-         * Path portion rewrite.
-         */
-        path?: URI.StaticValue | URI.DynamicValue;
-
-        /**
-         * Query portion rewrite.
-         */
-        query?: URI.StaticValue | URI.DynamicValue;
-      }
-
-      export namespace URI {
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-      }
-    }
-  }
-
-  export interface RulesetsRouteRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'route';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRouteRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRouteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Rewrite the HTTP Host header.
-       */
-      host_header?: string;
-
-      /**
-       * Override the IP/TCP destination.
-       */
-      origin?: ActionParameters.Origin;
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      sni?: ActionParameters.Sni;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Override the IP/TCP destination.
-       */
-      export interface Origin {
-        /**
-         * Override the resolved hostname.
-         */
-        host?: string;
-
-        /**
-         * Override the destination port.
-         */
-        port?: number;
-      }
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      export interface Sni {
-        /**
-         * The SNI override.
-         */
-        value: string;
-      }
-    }
-  }
-
-  export interface RulesetsScoreRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'score';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsScoreRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsScoreRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Increment contains the delta to change the score and can be either positive or
-       * negative.
-       */
-      increment?: number;
-    }
-  }
-
-  export interface RulesetsServeErrorRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'serve_error';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsServeErrorRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsServeErrorRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Error response content.
-       */
-      content?: string;
-
-      /**
-       * Content-type header to set with the response.
-       */
-      content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
-
-      /**
-       * The status code to use for the error.
-       */
-      status_code?: number;
-    }
-  }
-
-  export interface RulesetsSetConfigRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_config';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsSetConfigRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSetConfigRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Turn on or off Automatic HTTPS Rewrites.
-       */
-      automatic_https_rewrites?: boolean;
-
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      autominify?: ActionParameters.Autominify;
-
-      /**
-       * Turn on or off Browser Integrity Check.
-       */
-      bic?: boolean;
-
-      /**
-       * Turn off all active Cloudflare Apps.
-       */
-      disable_apps?: boolean;
-
-      /**
-       * Turn off Zaraz.
-       */
-      disable_zaraz?: boolean;
-
-      /**
-       * Turn on or off Email Obfuscation.
-       */
-      email_obfuscation?: boolean;
-
-      /**
-       * Turn on or off the Hotlink Protection.
-       */
-      hotlink_protection?: boolean;
-
-      /**
-       * Turn on or off Mirage.
-       */
-      mirage?: boolean;
-
-      /**
-       * Turn on or off Opportunistic Encryption.
-       */
-      opportunistic_encryption?: boolean;
-
-      /**
-       * Configure the Polish level.
-       */
-      polish?: 'off' | 'lossless' | 'lossy';
-
-      /**
-       * Turn on or off Rocket Loader
-       */
-      rocket_loader?: boolean;
-
-      /**
-       * Configure the Security Level.
-       */
-      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-      /**
-       * Turn on or off Server Side Excludes.
-       */
-      server_side_excludes?: boolean;
-
-      /**
-       * Configure the SSL level.
-       */
-      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-
-      /**
-       * Turn on or off Signed Exchanges (SXG).
-       */
-      sxg?: boolean;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      export interface Autominify {
-        /**
-         * Minify CSS files.
-         */
-        css?: boolean;
-
-        /**
-         * Minify HTML files.
-         */
-        html?: boolean;
-
-        /**
-         * Minify JS files.
-         */
-        js?: boolean;
-      }
-    }
-  }
-
-  export interface RulesetsSetCacheSettingsRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_cache_settings';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsSetCacheSettingsRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSetCacheSettingsRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * List of additional ports that caching can be enabled on.
-       */
-      additional_cacheable_ports?: Array<number>;
-
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      browser_ttl?: ActionParameters.BrowserTTL;
-
-      /**
-       * Mark whether the request’s response from origin is eligible for caching. Caching
-       * itself will still depend on the cache-control header and your other caching
-       * configurations.
-       */
-      cache?: boolean;
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      cache_key?: ActionParameters.CacheKey;
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      cache_reserve?: ActionParameters.CacheReserve;
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      edge_ttl?: ActionParameters.EdgeTTL;
-
-      /**
-       * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
-       */
-      origin_cache_control?: boolean;
-
-      /**
-       * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin
-       */
-      origin_error_page_passthru?: boolean;
-
-      /**
-       * Define a timeout value between two successive read operations to your origin
-       * server. Historically, the timeout value between two read options from Cloudflare
-       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
-       * errors because of timeouts from an origin server, try increasing this timeout
-       * value.
-       */
-      read_timeout?: number;
-
-      /**
-       * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-       * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
-       */
-      respect_strong_etags?: boolean;
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      serve_stale?: ActionParameters.ServeStale;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      export interface BrowserTTL {
-        /**
-         * Determines which browser ttl mode to use.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default?: number;
-      }
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      export interface CacheKey {
-        /**
-         * Separate cached content based on the visitor’s device type
-         */
-        cache_by_device_type?: boolean;
-
-        /**
-         * Protect from web cache deception attacks while allowing static assets to be
-         * cached
-         */
-        cache_deception_armor?: boolean;
-
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        custom_key?: CacheKey.CustomKey;
-
-        /**
-         * Treat requests with the same query parameters the same, regardless of the order
-         * those query parameters are in. A value of true ignores the query strings' order.
-         */
-        ignore_query_strings_order?: boolean;
-      }
-
-      export namespace CacheKey {
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        export interface CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          cookie?: CustomKey.Cookie;
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          header?: CustomKey.Header;
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          host?: CustomKey.Host;
-
-          /**
-           * Use the presence or absence of parameters in the query string to build the cache
-           * key.
-           */
-          query_string?: CustomKey.QueryString;
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          user?: CustomKey.User;
-        }
-
-        export namespace CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          export interface Cookie {
-            /**
-             * Checks for the presence of these cookie names. The presence of these cookies is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Include these cookies' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          export interface Header {
-            /**
-             * Checks for the presence of these header names. The presence of these headers is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Whether or not to include the origin header. A value of true will exclude the
-             * origin header in the cache key.
-             */
-            exclude_origin?: boolean;
-
-            /**
-             * Include these headers' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          export interface Host {
-            /**
-             * Use the resolved host in the cache key. A value of true will use the resolved
-             * host, while a value or false will use the original host.
-             */
-            resolved?: boolean;
-          }
-
-          /**
-           * Use the presence or absence of parameters in the query string to build the cache
-           * key.
-           */
-          export interface QueryString {
-            /**
-             * build the cache key using all query string parameters EXCECPT these excluded
-             * parameters
-             */
-            exclude?: QueryString.Exclude;
-
-            /**
-             * build the cache key using a list of query string parameters that ARE in the
-             * request.
-             */
-            include?: QueryString.Include;
-          }
-
-          export namespace QueryString {
-            /**
-             * build the cache key using all query string parameters EXCECPT these excluded
-             * parameters
-             */
-            export interface Exclude {
-              /**
-               * Exclude all query string parameters from use in building the cache key.
-               */
-              all?: boolean;
-
-              /**
-               * A list of query string parameters NOT used to build the cache key. All
-               * parameters present in the request but missing in this list will be used to build
-               * the cache key.
-               */
-              list?: Array<string>;
-            }
-
-            /**
-             * build the cache key using a list of query string parameters that ARE in the
-             * request.
-             */
-            export interface Include {
-              /**
-               * Use all query string parameters in the cache key.
-               */
-              all?: boolean;
-
-              /**
-               * A list of query string parameters used to build the cache key.
-               */
-              list?: Array<string>;
-            }
-          }
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          export interface User {
-            /**
-             * Use the user agent's device type in the cache key.
-             */
-            device_type?: boolean;
-
-            /**
-             * Use the user agents's country in the cache key.
-             */
-            geo?: boolean;
-
-            /**
-             * Use the user agent's language in the cache key.
-             */
-            lang?: boolean;
-          }
-        }
-      }
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      export interface CacheReserve {
-        /**
-         * Determines whether cache reserve is enabled. If this is true and a request meets
-         * eligibility criteria, Cloudflare will write the resource to cache reserve.
-         */
-        eligible: boolean;
-
-        /**
-         * The minimum file size eligible for store in cache reserve.
-         */
-        min_file_size: number;
-      }
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      export interface EdgeTTL {
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default: number;
-
-        /**
-         * edge ttl options
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * List of single status codes, or status code ranges to apply the selected mode
-         */
-        status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
-      }
-
-      export namespace EdgeTTL {
-        /**
-         * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes
-         */
-        export interface StatusCodeTTL {
-          /**
-           * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-           * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-           * setting Cache-Control header with the value of "no-store".
-           */
-          value: number;
-
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          status_code_range?: StatusCodeTTL.StatusCodeRange;
-
-          /**
-           * Set the ttl for responses with this specific status code
-           */
-          status_code_value?: number;
-        }
-
-        export namespace StatusCodeTTL {
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          export interface StatusCodeRange {
-            /**
-             * response status code lower bound
-             */
-            from: number;
-
-            /**
-             * response status code upper bound
-             */
-            to: number;
-          }
-        }
-      }
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      export interface ServeStale {
-        /**
-         * Defines whether Cloudflare should serve stale content while updating. If true,
-         * Cloudflare will not serve stale content while getting the latest content from
-         * the origin.
-         */
-        disable_stale_while_updating: boolean;
-      }
-    }
-  }
 }
 
 /**
@@ -3637,20 +2236,20 @@ export interface RuleEditResponse {
    */
   rules: Array<
     | BlockRule
-    | RuleEditResponse.RulesetsChallengeRule
-    | RuleEditResponse.RulesetsCompressResponseRule
+    | ChallengeRule
+    | CompressResponseRule
     | ExecuteRule
-    | RuleEditResponse.RulesetsJsChallengeRule
+    | JsChallengeRule
     | LogRule
-    | RuleEditResponse.RulesetsManagedChallengeRule
-    | RuleEditResponse.RulesetsRedirectRule
-    | RuleEditResponse.RulesetsRewriteRule
-    | RuleEditResponse.RulesetsRouteRule
-    | RuleEditResponse.RulesetsScoreRule
-    | RuleEditResponse.RulesetsServeErrorRule
-    | RuleEditResponse.RulesetsSetConfigRule
+    | ManagedChallengeRule
+    | RedirectRule
+    | RewriteRule
+    | RouteRule
+    | ScoreRule
+    | ServeErrorRule
+    | SetConfigRule
     | SkipRule
-    | RuleEditResponse.RulesetsSetCacheSettingsRule
+    | SetCacheSettingsRule
   >;
 
   /**
@@ -3664,1409 +2263,22 @@ export interface RuleEditResponse {
   description?: string;
 }
 
-export namespace RuleEditResponse {
-  export interface RulesetsChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsCompressResponseRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'compress_response';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsCompressResponseRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsCompressResponseRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Custom order for compression algorithms.
-       */
-      algorithms?: Array<ActionParameters.Algorithm>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Compression algorithm to enable.
-       */
-      export interface Algorithm {
-        /**
-         * Name of compression algorithm to enable.
-         */
-        name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
-      }
-    }
-  }
-
-  export interface RulesetsJsChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'js_challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsManagedChallengeRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'managed_challenge';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: unknown;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export interface RulesetsRedirectRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'redirect';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRedirectRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRedirectRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      from_list?: ActionParameters.FromList;
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      from_value?: ActionParameters.FromValue;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Serve a redirect based on a bulk list lookup.
-       */
-      export interface FromList {
-        /**
-         * Expression that evaluates to the list lookup key.
-         */
-        key?: string;
-
-        /**
-         * The name of the list to match against.
-         */
-        name?: string;
-      }
-
-      /**
-       * Serve a redirect based on the request properties.
-       */
-      export interface FromValue {
-        /**
-         * Keep the query string of the original request.
-         */
-        preserve_query_string?: boolean;
-
-        /**
-         * The status code to be used for the redirect.
-         */
-        status_code?: 301 | 302 | 303 | 307 | 308;
-
-        /**
-         * The URL to redirect the request to.
-         */
-        target_url?: FromValue.StaticURLRedirect | FromValue.DynamicURLRedirect;
-      }
-
-      export namespace FromValue {
-        export interface StaticURLRedirect {
-          /**
-           * The URL to redirect the request to.
-           */
-          value?: string;
-        }
-
-        export interface DynamicURLRedirect {
-          /**
-           * An expression to evaluate to get the URL to redirect the request to.
-           */
-          expression?: string;
-        }
-      }
-    }
-  }
-
-  export interface RulesetsRewriteRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'rewrite';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRewriteRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRewriteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Map of request headers to modify.
-       */
-      headers?: Record<
-        string,
-        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
-      >;
-
-      /**
-       * URI to rewrite the request to.
-       */
-      uri?: ActionParameters.URI;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Remove the header from the request.
-       */
-      export interface RemoveHeader {
-        operation: 'remove';
-      }
-
-      /**
-       * Set a request header with a static value.
-       */
-      export interface StaticHeader {
-        operation: 'set';
-
-        /**
-         * Static value for the header.
-         */
-        value: string;
-      }
-
-      /**
-       * Set a request header with a dynamic value.
-       */
-      export interface DynamicHeader {
-        /**
-         * Expression for the header value.
-         */
-        expression: string;
-
-        operation: 'set';
-      }
-
-      /**
-       * URI to rewrite the request to.
-       */
-      export interface URI {
-        /**
-         * Path portion rewrite.
-         */
-        path?: URI.StaticValue | URI.DynamicValue;
-
-        /**
-         * Query portion rewrite.
-         */
-        query?: URI.StaticValue | URI.DynamicValue;
-      }
-
-      export namespace URI {
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-      }
-    }
-  }
-
-  export interface RulesetsRouteRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'route';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsRouteRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsRouteRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Rewrite the HTTP Host header.
-       */
-      host_header?: string;
-
-      /**
-       * Override the IP/TCP destination.
-       */
-      origin?: ActionParameters.Origin;
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      sni?: ActionParameters.Sni;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Override the IP/TCP destination.
-       */
-      export interface Origin {
-        /**
-         * Override the resolved hostname.
-         */
-        host?: string;
-
-        /**
-         * Override the destination port.
-         */
-        port?: number;
-      }
-
-      /**
-       * Override the Server Name Indication (SNI).
-       */
-      export interface Sni {
-        /**
-         * The SNI override.
-         */
-        value: string;
-      }
-    }
-  }
-
-  export interface RulesetsScoreRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'score';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsScoreRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsScoreRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Increment contains the delta to change the score and can be either positive or
-       * negative.
-       */
-      increment?: number;
-    }
-  }
-
-  export interface RulesetsServeErrorRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'serve_error';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsServeErrorRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsServeErrorRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Error response content.
-       */
-      content?: string;
-
-      /**
-       * Content-type header to set with the response.
-       */
-      content_type?: 'application/json' | 'text/xml' | 'text/plain' | 'text/html';
-
-      /**
-       * The status code to use for the error.
-       */
-      status_code?: number;
-    }
-  }
-
-  export interface RulesetsSetConfigRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_config';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsSetConfigRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSetConfigRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * Turn on or off Automatic HTTPS Rewrites.
-       */
-      automatic_https_rewrites?: boolean;
-
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      autominify?: ActionParameters.Autominify;
-
-      /**
-       * Turn on or off Browser Integrity Check.
-       */
-      bic?: boolean;
-
-      /**
-       * Turn off all active Cloudflare Apps.
-       */
-      disable_apps?: boolean;
-
-      /**
-       * Turn off Zaraz.
-       */
-      disable_zaraz?: boolean;
-
-      /**
-       * Turn on or off Email Obfuscation.
-       */
-      email_obfuscation?: boolean;
-
-      /**
-       * Turn on or off the Hotlink Protection.
-       */
-      hotlink_protection?: boolean;
-
-      /**
-       * Turn on or off Mirage.
-       */
-      mirage?: boolean;
-
-      /**
-       * Turn on or off Opportunistic Encryption.
-       */
-      opportunistic_encryption?: boolean;
-
-      /**
-       * Configure the Polish level.
-       */
-      polish?: 'off' | 'lossless' | 'lossy';
-
-      /**
-       * Turn on or off Rocket Loader
-       */
-      rocket_loader?: boolean;
-
-      /**
-       * Configure the Security Level.
-       */
-      security_level?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-      /**
-       * Turn on or off Server Side Excludes.
-       */
-      server_side_excludes?: boolean;
-
-      /**
-       * Configure the SSL level.
-       */
-      ssl?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-
-      /**
-       * Turn on or off Signed Exchanges (SXG).
-       */
-      sxg?: boolean;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Select which file extensions to minify automatically.
-       */
-      export interface Autominify {
-        /**
-         * Minify CSS files.
-         */
-        css?: boolean;
-
-        /**
-         * Minify HTML files.
-         */
-        html?: boolean;
-
-        /**
-         * Minify JS files.
-         */
-        js?: boolean;
-      }
-    }
-  }
-
-  export interface RulesetsSetCacheSettingsRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'set_cache_settings';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsSetCacheSettingsRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsSetCacheSettingsRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * List of additional ports that caching can be enabled on.
-       */
-      additional_cacheable_ports?: Array<number>;
-
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      browser_ttl?: ActionParameters.BrowserTTL;
-
-      /**
-       * Mark whether the request’s response from origin is eligible for caching. Caching
-       * itself will still depend on the cache-control header and your other caching
-       * configurations.
-       */
-      cache?: boolean;
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      cache_key?: ActionParameters.CacheKey;
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      cache_reserve?: ActionParameters.CacheReserve;
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      edge_ttl?: ActionParameters.EdgeTTL;
-
-      /**
-       * When enabled, Cloudflare will aim to strictly adhere to RFC 7234.
-       */
-      origin_cache_control?: boolean;
-
-      /**
-       * Generate Cloudflare error pages from issues sent from the origin server. When
-       * on, error pages will trigger for issues from the origin
-       */
-      origin_error_page_passthru?: boolean;
-
-      /**
-       * Define a timeout value between two successive read operations to your origin
-       * server. Historically, the timeout value between two read options from Cloudflare
-       * to an origin server is 100 seconds. If you are attempting to reduce HTTP 524
-       * errors because of timeouts from an origin server, try increasing this timeout
-       * value.
-       */
-      read_timeout?: number;
-
-      /**
-       * Specify whether or not Cloudflare should respect strong ETag (entity tag)
-       * headers. When off, Cloudflare converts strong ETag headers to weak ETag headers.
-       */
-      respect_strong_etags?: boolean;
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      serve_stale?: ActionParameters.ServeStale;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * Specify how long client browsers should cache the response. Cloudflare cache
-       * purge will not purge content cached on client browsers, so high browser TTLs may
-       * lead to stale content.
-       */
-      export interface BrowserTTL {
-        /**
-         * Determines which browser ttl mode to use.
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default?: number;
-      }
-
-      /**
-       * Define which components of the request are included or excluded from the cache
-       * key Cloudflare uses to store the response in cache.
-       */
-      export interface CacheKey {
-        /**
-         * Separate cached content based on the visitor’s device type
-         */
-        cache_by_device_type?: boolean;
-
-        /**
-         * Protect from web cache deception attacks while allowing static assets to be
-         * cached
-         */
-        cache_deception_armor?: boolean;
-
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        custom_key?: CacheKey.CustomKey;
-
-        /**
-         * Treat requests with the same query parameters the same, regardless of the order
-         * those query parameters are in. A value of true ignores the query strings' order.
-         */
-        ignore_query_strings_order?: boolean;
-      }
-
-      export namespace CacheKey {
-        /**
-         * Customize which components of the request are included or excluded from the
-         * cache key.
-         */
-        export interface CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          cookie?: CustomKey.Cookie;
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          header?: CustomKey.Header;
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          host?: CustomKey.Host;
-
-          /**
-           * Use the presence or absence of parameters in the query string to build the cache
-           * key.
-           */
-          query_string?: CustomKey.QueryString;
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          user?: CustomKey.User;
-        }
-
-        export namespace CustomKey {
-          /**
-           * The cookies to include in building the cache key.
-           */
-          export interface Cookie {
-            /**
-             * Checks for the presence of these cookie names. The presence of these cookies is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Include these cookies' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * The header names and values to include in building the cache key.
-           */
-          export interface Header {
-            /**
-             * Checks for the presence of these header names. The presence of these headers is
-             * used in building the cache key.
-             */
-            check_presence?: Array<string>;
-
-            /**
-             * Whether or not to include the origin header. A value of true will exclude the
-             * origin header in the cache key.
-             */
-            exclude_origin?: boolean;
-
-            /**
-             * Include these headers' names and their values.
-             */
-            include?: Array<string>;
-          }
-
-          /**
-           * Whether to use the original host or the resolved host in the cache key.
-           */
-          export interface Host {
-            /**
-             * Use the resolved host in the cache key. A value of true will use the resolved
-             * host, while a value or false will use the original host.
-             */
-            resolved?: boolean;
-          }
-
-          /**
-           * Use the presence or absence of parameters in the query string to build the cache
-           * key.
-           */
-          export interface QueryString {
-            /**
-             * build the cache key using all query string parameters EXCECPT these excluded
-             * parameters
-             */
-            exclude?: QueryString.Exclude;
-
-            /**
-             * build the cache key using a list of query string parameters that ARE in the
-             * request.
-             */
-            include?: QueryString.Include;
-          }
-
-          export namespace QueryString {
-            /**
-             * build the cache key using all query string parameters EXCECPT these excluded
-             * parameters
-             */
-            export interface Exclude {
-              /**
-               * Exclude all query string parameters from use in building the cache key.
-               */
-              all?: boolean;
-
-              /**
-               * A list of query string parameters NOT used to build the cache key. All
-               * parameters present in the request but missing in this list will be used to build
-               * the cache key.
-               */
-              list?: Array<string>;
-            }
-
-            /**
-             * build the cache key using a list of query string parameters that ARE in the
-             * request.
-             */
-            export interface Include {
-              /**
-               * Use all query string parameters in the cache key.
-               */
-              all?: boolean;
-
-              /**
-               * A list of query string parameters used to build the cache key.
-               */
-              list?: Array<string>;
-            }
-          }
-
-          /**
-           * Characteristics of the request user agent used in building the cache key.
-           */
-          export interface User {
-            /**
-             * Use the user agent's device type in the cache key.
-             */
-            device_type?: boolean;
-
-            /**
-             * Use the user agents's country in the cache key.
-             */
-            geo?: boolean;
-
-            /**
-             * Use the user agent's language in the cache key.
-             */
-            lang?: boolean;
-          }
-        }
-      }
-
-      /**
-       * Mark whether the request's response from origin is eligible for Cache Reserve
-       * (requires a Cache Reserve add-on plan).
-       */
-      export interface CacheReserve {
-        /**
-         * Determines whether cache reserve is enabled. If this is true and a request meets
-         * eligibility criteria, Cloudflare will write the resource to cache reserve.
-         */
-        eligible: boolean;
-
-        /**
-         * The minimum file size eligible for store in cache reserve.
-         */
-        min_file_size: number;
-      }
-
-      /**
-       * TTL (Time to Live) specifies the maximum time to cache a resource in the
-       * Cloudflare edge network.
-       */
-      export interface EdgeTTL {
-        /**
-         * The TTL (in seconds) if you choose override_origin mode.
-         */
-        default: number;
-
-        /**
-         * edge ttl options
-         */
-        mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
-
-        /**
-         * List of single status codes, or status code ranges to apply the selected mode
-         */
-        status_code_ttl: Array<EdgeTTL.StatusCodeTTL>;
-      }
-
-      export namespace EdgeTTL {
-        /**
-         * Specify how long Cloudflare should cache the response based on the status code
-         * from the origin. Can be a single status code or a range or status codes
-         */
-        export interface StatusCodeTTL {
-          /**
-           * Time to cache a response (in seconds). A value of 0 is equivalent to setting the
-           * Cache-Control header with the value "no-cache". A value of -1 is equivalent to
-           * setting Cache-Control header with the value of "no-store".
-           */
-          value: number;
-
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          status_code_range?: StatusCodeTTL.StatusCodeRange;
-
-          /**
-           * Set the ttl for responses with this specific status code
-           */
-          status_code_value?: number;
-        }
-
-        export namespace StatusCodeTTL {
-          /**
-           * The range of status codes used to apply the selected mode.
-           */
-          export interface StatusCodeRange {
-            /**
-             * response status code lower bound
-             */
-            from: number;
-
-            /**
-             * response status code upper bound
-             */
-            to: number;
-          }
-        }
-      }
-
-      /**
-       * Define if Cloudflare should serve stale content while getting the latest content
-       * from the origin. If on, Cloudflare will not serve stale content while getting
-       * the latest content from the origin.
-       */
-      export interface ServeStale {
-        /**
-         * Defines whether Cloudflare should serve stale content while updating. If true,
-         * Cloudflare will not serve stale content while getting the latest content from
-         * the origin.
-         */
-        disable_stale_while_updating: boolean;
-      }
-    }
-  }
-}
-
 export type RuleCreateParams =
   | RuleCreateParams.BlockRule
-  | RuleCreateParams.RulesetsChallengeRule
-  | RuleCreateParams.RulesetsCompressResponseRule
+  | RuleCreateParams.ChallengeRule
+  | RuleCreateParams.CompressResponseRule
   | RuleCreateParams.ExecuteRule
-  | RuleCreateParams.RulesetsJsChallengeRule
+  | RuleCreateParams.JsChallengeRule
   | RuleCreateParams.LogRule
-  | RuleCreateParams.RulesetsManagedChallengeRule
-  | RuleCreateParams.RulesetsRedirectRule
-  | RuleCreateParams.RulesetsRewriteRule
-  | RuleCreateParams.RulesetsRouteRule
-  | RuleCreateParams.RulesetsScoreRule
-  | RuleCreateParams.RulesetsServeErrorRule
-  | RuleCreateParams.RulesetsSetConfigRule
+  | RuleCreateParams.ManagedChallengeRule
+  | RuleCreateParams.RedirectRule
+  | RuleCreateParams.RewriteRule
+  | RuleCreateParams.RouteRule
+  | RuleCreateParams.ScoreRule
+  | RuleCreateParams.ServeErrorRule
+  | RuleCreateParams.SetConfigRule
   | RuleCreateParams.SkipRule
-  | RuleCreateParams.RulesetsSetCacheSettingsRule;
+  | RuleCreateParams.SetCacheSettingsRule;
 
 export namespace RuleCreateParams {
   export interface BlockRule {
@@ -5157,7 +2369,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsChallengeRule {
+  export interface ChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5211,7 +2423,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export interface RulesetsCompressResponseRule {
+  export interface CompressResponseRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5237,7 +2449,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsCompressResponseRule.ActionParameters;
+    action_parameters?: RuleCreateParams.CompressResponseRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -5265,7 +2477,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsCompressResponseRule {
+  export namespace CompressResponseRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -5468,7 +2680,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsJsChallengeRule {
+  export interface JsChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5576,7 +2788,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export interface RulesetsManagedChallengeRule {
+  export interface ManagedChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5630,7 +2842,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export interface RulesetsRedirectRule {
+  export interface RedirectRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5656,7 +2868,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsRedirectRule.ActionParameters;
+    action_parameters?: RuleCreateParams.RedirectRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -5684,7 +2896,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsRedirectRule {
+  export namespace RedirectRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -5754,7 +2966,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsRewriteRule {
+  export interface RewriteRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5780,7 +2992,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsRewriteRule.ActionParameters;
+    action_parameters?: RuleCreateParams.RewriteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -5808,7 +3020,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsRewriteRule {
+  export namespace RewriteRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -5866,47 +3078,17 @@ export namespace RuleCreateParams {
         /**
          * Path portion rewrite.
          */
-        path?: URI.StaticValue | URI.DynamicValue;
+        path?: RulesAPI.RewriteURIPart;
 
         /**
          * Query portion rewrite.
          */
-        query?: URI.StaticValue | URI.DynamicValue;
-      }
-
-      export namespace URI {
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
+        query?: RulesAPI.RewriteURIPart;
       }
     }
   }
 
-  export interface RulesetsRouteRule {
+  export interface RouteRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5932,7 +3114,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsRouteRule.ActionParameters;
+    action_parameters?: RuleCreateParams.RouteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -5960,7 +3142,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsRouteRule {
+  export namespace RouteRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -6009,7 +3191,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsScoreRule {
+  export interface ScoreRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6035,7 +3217,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsScoreRule.ActionParameters;
+    action_parameters?: RuleCreateParams.ScoreRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -6063,7 +3245,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsScoreRule {
+  export namespace ScoreRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -6076,7 +3258,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsServeErrorRule {
+  export interface ServeErrorRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6102,7 +3284,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsServeErrorRule.ActionParameters;
+    action_parameters?: RuleCreateParams.ServeErrorRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -6130,7 +3312,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsServeErrorRule {
+  export namespace ServeErrorRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -6152,7 +3334,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsSetConfigRule {
+  export interface SetConfigRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6178,7 +3360,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsSetConfigRule.ActionParameters;
+    action_parameters?: RuleCreateParams.SetConfigRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -6206,7 +3388,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsSetConfigRule {
+  export namespace SetConfigRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -6424,7 +3606,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsSetCacheSettingsRule {
+  export interface SetCacheSettingsRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6450,7 +3632,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsSetCacheSettingsRule.ActionParameters;
+    action_parameters?: RuleCreateParams.SetCacheSettingsRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -6478,7 +3660,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsSetCacheSettingsRule {
+  export namespace SetCacheSettingsRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -6871,20 +4053,20 @@ export interface RuleDeleteParams {
 
 export type RuleEditParams =
   | RuleEditParams.BlockRule
-  | RuleEditParams.RulesetsChallengeRule
-  | RuleEditParams.RulesetsCompressResponseRule
+  | RuleEditParams.ChallengeRule
+  | RuleEditParams.CompressResponseRule
   | RuleEditParams.ExecuteRule
-  | RuleEditParams.RulesetsJsChallengeRule
+  | RuleEditParams.JsChallengeRule
   | RuleEditParams.LogRule
-  | RuleEditParams.RulesetsManagedChallengeRule
-  | RuleEditParams.RulesetsRedirectRule
-  | RuleEditParams.RulesetsRewriteRule
-  | RuleEditParams.RulesetsRouteRule
-  | RuleEditParams.RulesetsScoreRule
-  | RuleEditParams.RulesetsServeErrorRule
-  | RuleEditParams.RulesetsSetConfigRule
+  | RuleEditParams.ManagedChallengeRule
+  | RuleEditParams.RedirectRule
+  | RuleEditParams.RewriteRule
+  | RuleEditParams.RouteRule
+  | RuleEditParams.ScoreRule
+  | RuleEditParams.ServeErrorRule
+  | RuleEditParams.SetConfigRule
   | RuleEditParams.SkipRule
-  | RuleEditParams.RulesetsSetCacheSettingsRule;
+  | RuleEditParams.SetCacheSettingsRule;
 
 export namespace RuleEditParams {
   export interface BlockRule {
@@ -6975,7 +4157,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsChallengeRule {
+  export interface ChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7029,7 +4211,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export interface RulesetsCompressResponseRule {
+  export interface CompressResponseRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7055,7 +4237,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsCompressResponseRule.ActionParameters;
+    action_parameters?: RuleEditParams.CompressResponseRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7083,7 +4265,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsCompressResponseRule {
+  export namespace CompressResponseRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7286,7 +4468,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsJsChallengeRule {
+  export interface JsChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7394,7 +4576,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export interface RulesetsManagedChallengeRule {
+  export interface ManagedChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7448,7 +4630,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export interface RulesetsRedirectRule {
+  export interface RedirectRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7474,7 +4656,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsRedirectRule.ActionParameters;
+    action_parameters?: RuleEditParams.RedirectRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7502,7 +4684,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsRedirectRule {
+  export namespace RedirectRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7572,7 +4754,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsRewriteRule {
+  export interface RewriteRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7598,7 +4780,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsRewriteRule.ActionParameters;
+    action_parameters?: RuleEditParams.RewriteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7626,7 +4808,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsRewriteRule {
+  export namespace RewriteRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7684,47 +4866,17 @@ export namespace RuleEditParams {
         /**
          * Path portion rewrite.
          */
-        path?: URI.StaticValue | URI.DynamicValue;
+        path?: RulesAPI.RewriteURIPart;
 
         /**
          * Query portion rewrite.
          */
-        query?: URI.StaticValue | URI.DynamicValue;
-      }
-
-      export namespace URI {
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
-
-        export interface StaticValue {
-          /**
-           * Predefined replacement value.
-           */
-          value: string;
-        }
-
-        export interface DynamicValue {
-          /**
-           * Expression to evaluate for the replacement value.
-           */
-          expression: string;
-        }
+        query?: RulesAPI.RewriteURIPart;
       }
     }
   }
 
-  export interface RulesetsRouteRule {
+  export interface RouteRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7750,7 +4902,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsRouteRule.ActionParameters;
+    action_parameters?: RuleEditParams.RouteRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7778,7 +4930,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsRouteRule {
+  export namespace RouteRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7827,7 +4979,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsScoreRule {
+  export interface ScoreRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7853,7 +5005,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsScoreRule.ActionParameters;
+    action_parameters?: RuleEditParams.ScoreRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7881,7 +5033,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsScoreRule {
+  export namespace ScoreRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7894,7 +5046,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsServeErrorRule {
+  export interface ServeErrorRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7920,7 +5072,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsServeErrorRule.ActionParameters;
+    action_parameters?: RuleEditParams.ServeErrorRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -7948,7 +5100,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsServeErrorRule {
+  export namespace ServeErrorRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -7970,7 +5122,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsSetConfigRule {
+  export interface SetConfigRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -7996,7 +5148,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsSetConfigRule.ActionParameters;
+    action_parameters?: RuleEditParams.SetConfigRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -8024,7 +5176,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsSetConfigRule {
+  export namespace SetConfigRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -8242,7 +5394,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsSetCacheSettingsRule {
+  export interface SetCacheSettingsRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8268,7 +5420,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsSetCacheSettingsRule.ActionParameters;
+    action_parameters?: RuleEditParams.SetCacheSettingsRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -8296,7 +5448,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsSetCacheSettingsRule {
+  export namespace SetCacheSettingsRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -8677,10 +5829,22 @@ export namespace RuleEditParams {
 
 export namespace Rules {
   export import BlockRule = RulesAPI.BlockRule;
+  export import ChallengeRule = RulesAPI.ChallengeRule;
+  export import CompressResponseRule = RulesAPI.CompressResponseRule;
   export import ExecuteRule = RulesAPI.ExecuteRule;
+  export import JsChallengeRule = RulesAPI.JsChallengeRule;
   export import LogRule = RulesAPI.LogRule;
   export import Logging = RulesAPI.Logging;
+  export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;
+  export import RedirectRule = RulesAPI.RedirectRule;
+  export import RewriteRule = RulesAPI.RewriteRule;
+  export import RewriteURIPart = RulesAPI.RewriteURIPart;
+  export import RouteRule = RulesAPI.RouteRule;
   export import RulesetRule = RulesAPI.RulesetRule;
+  export import ScoreRule = RulesAPI.ScoreRule;
+  export import ServeErrorRule = RulesAPI.ServeErrorRule;
+  export import SetCacheSettingsRule = RulesAPI.SetCacheSettingsRule;
+  export import SetConfigRule = RulesAPI.SetConfigRule;
   export import SkipRule = RulesAPI.SkipRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;

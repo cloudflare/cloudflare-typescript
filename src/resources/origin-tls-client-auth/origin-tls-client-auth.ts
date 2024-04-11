@@ -177,7 +177,6 @@ export interface OriginTLSClientAuthGetParams {
 export namespace OriginTLSClientAuth {
   export import Hostnames = HostnamesAPI.Hostnames;
   export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import ID = HostnamesAPI.ID;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
