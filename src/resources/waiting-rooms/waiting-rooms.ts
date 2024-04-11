@@ -52,8 +52,11 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<WaitingRoomsSinglePage, WaitingRoom> {
-    const { zone_id } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsSinglePage, options);
+    const { zone_id, ...query } = params;
+    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -1502,9 +1505,19 @@ export interface WaitingRoomUpdateParams {
 
 export interface WaitingRoomListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Query param: Page number of paginated results.
+   */
+  page?: unknown;
+
+  /**
+   * Query param: Maximum number of results per page. Must be a multiple of 5.
+   */
+  per_page?: unknown;
 }
 
 export interface WaitingRoomDeleteParams {
