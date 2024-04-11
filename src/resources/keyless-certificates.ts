@@ -9,11 +9,14 @@ export class KeylessCertificates extends APIResource {
   /**
    * Create Keyless SSL Configuration
    */
-  create(params: KeylessCertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<Hostname> {
+  create(
+    params: KeylessCertificateCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeylessCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/keyless_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: Hostname;
+        result: KeylessCertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -58,13 +61,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Hostname> {
+  ): Core.APIPromise<KeylessCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Hostname }>
+      }) as Core.APIPromise<{ result: KeylessCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -75,13 +78,13 @@ export class KeylessCertificates extends APIResource {
     keylessCertificateId: string,
     params: KeylessCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Hostname> {
+  ): Core.APIPromise<KeylessCertificate> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: Hostname }>
+      ) as Core.APIPromise<{ result: KeylessCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

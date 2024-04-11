@@ -40,7 +40,6 @@ export {
   RatePlan,
   Subscription,
   SubscriptionComponent,
-  SubscriptionComponentValue,
   SubscriptionZone,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
