@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AccessRule, Access } from './access/index';
+export { AccessRule, OktaGroupRule, Access } from './access/index';
 export {
   AzureAD,
   GenericOAuthConfig,
