@@ -18,8 +18,11 @@ export {
 export {
   Connection,
   Tunnel,
+  TunnelCreateResponse,
   TunnelListResponse,
+  TunnelDeleteResponse,
   TunnelEditResponse,
+  TunnelGetResponse,
   TunnelCreateParams,
   TunnelListParams,
   TunnelDeleteParams,
