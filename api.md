@@ -2075,6 +2075,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/secondary-dns/peers.ts">Peer</a></code>
+- <code><a href="./src/resources/secondary-dns/peers.ts">Peers</a></code>
 - <code><a href="./src/resources/secondary-dns/peers.ts">PeerDeleteResponse</a></code>
 
 Methods:
