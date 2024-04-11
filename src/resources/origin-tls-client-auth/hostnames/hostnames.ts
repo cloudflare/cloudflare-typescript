@@ -137,94 +137,6 @@ export interface AuthenticatedOriginPull {
   updated_at?: string;
 }
 
-export interface ID {
-  /**
-   * Identifier
-   */
-  cert_id?: string;
-
-  /**
-   * Status of the certificate or the association.
-   */
-  cert_status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
-
-  /**
-   * The time when the certificate was updated.
-   */
-  cert_updated_at?: string;
-
-  /**
-   * The time when the certificate was uploaded.
-   */
-  cert_uploaded_on?: string;
-
-  /**
-   * The hostname certificate.
-   */
-  certificate?: string;
-
-  /**
-   * The time when the certificate was created.
-   */
-  created_at?: string;
-
-  /**
-   * Indicates whether hostname-level authenticated origin pulls is enabled. A null
-   * value voids the association.
-   */
-  enabled?: boolean | null;
-
-  /**
-   * The date when the certificate expires.
-   */
-  expires_on?: string;
-
-  /**
-   * The hostname on the origin for which the client certificate uploaded will be
-   * used.
-   */
-  hostname?: string;
-
-  /**
-   * The certificate authority that issued the certificate.
-   */
-  issuer?: string;
-
-  /**
-   * The serial number on the uploaded certificate.
-   */
-  serial_number?: string;
-
-  /**
-   * The type of hash used for the certificate.
-   */
-  signature?: string;
-
-  /**
-   * Status of the certificate or the association.
-   */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
-
-  /**
-   * The time when the certificate was updated.
-   */
-  updated_at?: string;
-}
-
 export type HostnameUpdateResponse = Array<AuthenticatedOriginPull>;
 
 export interface HostnameUpdateParams {
@@ -269,7 +181,6 @@ export interface HostnameGetParams {
 
 export namespace Hostnames {
   export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import ID = HostnamesAPI.ID;
   export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
   export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
   export import HostnameGetParams = HostnamesAPI.HostnameGetParams;

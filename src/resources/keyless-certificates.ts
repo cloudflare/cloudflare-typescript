@@ -91,60 +91,6 @@ export class KeylessCertificates extends APIResource {
 
 export class KeylessCertificatesSinglePage extends SinglePage<KeylessCertificate> {}
 
-export interface Hostname {
-  /**
-   * Keyless certificate identifier tag.
-   */
-  id: string;
-
-  /**
-   * When the Keyless SSL was created.
-   */
-  created_on: string;
-
-  /**
-   * Whether or not the Keyless SSL is on or off.
-   */
-  enabled: boolean;
-
-  /**
-   * The keyless SSL name.
-   */
-  host: string;
-
-  /**
-   * When the Keyless SSL was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * The keyless SSL name.
-   */
-  name: string;
-
-  /**
-   * Available permissions for the Keyless SSL for the current user requesting the
-   * item.
-   */
-  permissions: Array<unknown>;
-
-  /**
-   * The keyless SSL port used to communicate between Cloudflare and the client's
-   * Keyless SSL server.
-   */
-  port: number;
-
-  /**
-   * Status of the Keyless SSL.
-   */
-  status: 'active' | 'deleted';
-
-  /**
-   * Configuration for using Keyless SSL through a Cloudflare Tunnel
-   */
-  tunnel?: Tunnel;
-}
-
 export interface KeylessCertificate {
   /**
    * Keyless certificate identifier tag.
