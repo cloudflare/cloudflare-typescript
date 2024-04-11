@@ -200,9 +200,19 @@ export class Rulesets extends APIResource {
 
 export class RulesetsSinglePage extends SinglePage<Ruleset> {}
 
-export type RequestRule = RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule;
+/**
+ * The list of rules in the ruleset.
+ */
+export type RequestRule = Array<
+  RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule
+>;
 
-export type ResponeRule = RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule;
+/**
+ * The list of rules in the ruleset.
+ */
+export type ResponeRule = Array<
+  RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule
+>;
 
 /**
  * A ruleset object.
@@ -322,7 +332,7 @@ export interface RulesetCreateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<ResponeRule>;
+  rules: ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -390,7 +400,7 @@ export interface RulesetUpdateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<ResponeRule>;
+  rules: ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -458,7 +468,7 @@ export interface RulesetGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<ResponeRule>;
+  rules: ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -513,7 +523,7 @@ export interface RulesetCreateParams {
   /**
    * Body param: The list of rules in the ruleset.
    */
-  rules: Array<RequestRule>;
+  rules: RequestRule;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -537,7 +547,7 @@ export interface RulesetUpdateParams {
   /**
    * Body param: The list of rules in the ruleset.
    */
-  rules: Array<RequestRule>;
+  rules: RequestRule;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
