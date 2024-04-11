@@ -4707,8 +4707,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Connection</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Tunnel</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelConnection</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">WARPConnectorTunnel</a></code>
 
 Methods:

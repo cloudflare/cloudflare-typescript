@@ -89,8 +89,8 @@ export namespace ZeroTrust {
   export import NetworkPath = DEXAPI.NetworkPath;
   export import Percentiles = DEXAPI.Percentiles;
   export import Tunnels = TunnelsAPI.Tunnels;
+  export import Connection = TunnelsAPI.Connection;
   export import Tunnel = TunnelsAPI.Tunnel;
-  export import TunnelConnection = TunnelsAPI.TunnelConnection;
   export import WARPConnectorTunnel = TunnelsAPI.WARPConnectorTunnel;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
