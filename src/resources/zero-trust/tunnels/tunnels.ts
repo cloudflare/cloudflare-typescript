@@ -3,14 +3,12 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
-import * as WARPConnectorAPI from 'cloudflare/resources/warp-connector';
-import { WARPConnectorsV4PagePaginationArray } from 'cloudflare/resources/warp-connector';
 import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/tunnels/configurations';
 import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
 import * as ConnectorsAPI from 'cloudflare/resources/zero-trust/tunnels/connectors';
 import * as ManagementAPI from 'cloudflare/resources/zero-trust/tunnels/management';
 import * as TokenAPI from 'cloudflare/resources/zero-trust/tunnels/token';
-import { type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Tunnels extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
@@ -37,12 +35,13 @@ export class Tunnels extends APIResource {
   list(
     params: TunnelListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WARPConnectorsV4PagePaginationArray, WARPConnectorAPI.WARPConnector> {
+  ): Core.PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/tunnels`, WARPConnectorsV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/tunnels`,
+      TunnelListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -69,13 +68,13 @@ export class Tunnels extends APIResource {
     tunnelId: string,
     params: TunnelEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WARPConnectorAPI.WARPConnector> {
+  ): Core.APIPromise<TunnelEditResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WARPConnectorAPI.WARPConnector }>
+      }) as Core.APIPromise<{ result: TunnelEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -91,6 +90,8 @@ export class Tunnels extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class TunnelListResponsesV4PagePaginationArray extends V4PagePaginationArray<TunnelListResponse> {}
 
 export interface Connection {
   /**
@@ -187,53 +188,297 @@ export namespace Tunnel {
   }
 }
 
-export interface WARPConnectorTunnel {
+/**
+ * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ */
+export type TunnelListResponse =
+  | TunnelListResponse.TunnelCfdTunnel
+  | TunnelListResponse.TunnelWARPConnectorTunnel;
+
+export namespace TunnelListResponse {
   /**
-   * UUID of the tunnel.
+   * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
    */
-  id: string;
+  export interface TunnelCfdTunnel {
+    /**
+     * UUID of the tunnel.
+     */
+    id?: string;
+
+    /**
+     * Cloudflare account ID
+     */
+    account_tag?: string;
+
+    /**
+     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     */
+    connections?: Array<TunnelsAPI.Connection>;
+
+    /**
+     * Timestamp of when the tunnel established at least one connection to Cloudflare's
+     * edge. If `null`, the tunnel is inactive.
+     */
+    conns_active_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+     * edge). If `null`, the tunnel is active.
+     */
+    conns_inactive_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel was created.
+     */
+    created_at?: string;
+
+    /**
+     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * deleted.
+     */
+    deleted_at?: string | null;
+
+    /**
+     * Metadata associated with the tunnel.
+     */
+    metadata?: unknown;
+
+    /**
+     * A user-friendly name for the tunnel.
+     */
+    name?: string;
+
+    /**
+     * If `true`, the tunnel can be configured remotely from the Zero Trust dashboard.
+     * If `false`, the tunnel must be configured locally on the origin machine.
+     */
+    remote_config?: boolean;
+
+    /**
+     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+     */
+    status?: string;
+
+    /**
+     * The type of tunnel.
+     */
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  }
 
   /**
-   * The tunnel connections between your origin and Cloudflare's edge.
+   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
    */
-  connections: Array<WARPConnectorTunnel.Connection>;
+  export interface TunnelWARPConnectorTunnel {
+    /**
+     * UUID of the tunnel.
+     */
+    id?: string;
 
-  /**
-   * Timestamp of when the tunnel was created.
-   */
-  created_at: string;
+    /**
+     * Cloudflare account ID
+     */
+    account_tag?: string;
 
-  /**
-   * A user-friendly name for the tunnel.
-   */
-  name: string;
+    /**
+     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     */
+    connections?: Array<TunnelsAPI.Connection>;
 
-  /**
-   * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
-   * deleted.
-   */
-  deleted_at?: string | null;
+    /**
+     * Timestamp of when the tunnel established at least one connection to Cloudflare's
+     * edge. If `null`, the tunnel is inactive.
+     */
+    conns_active_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+     * edge). If `null`, the tunnel is active.
+     */
+    conns_inactive_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel was created.
+     */
+    created_at?: string;
+
+    /**
+     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * deleted.
+     */
+    deleted_at?: string | null;
+
+    /**
+     * Metadata associated with the tunnel.
+     */
+    metadata?: unknown;
+
+    /**
+     * A user-friendly name for the tunnel.
+     */
+    name?: string;
+
+    /**
+     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+     */
+    status?: string;
+
+    /**
+     * The type of tunnel.
+     */
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  }
 }
 
-export namespace WARPConnectorTunnel {
-  export interface Connection {
+/**
+ * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+ */
+export type TunnelEditResponse =
+  | TunnelEditResponse.TunnelCfdTunnel
+  | TunnelEditResponse.TunnelWARPConnectorTunnel;
+
+export namespace TunnelEditResponse {
+  /**
+   * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
+   */
+  export interface TunnelCfdTunnel {
     /**
-     * The Cloudflare data center used for this connection.
+     * UUID of the tunnel.
      */
-    colo_name?: string;
+    id?: string;
 
     /**
-     * Cloudflare continues to track connections for several minutes after they
-     * disconnect. This is an optimization to improve latency and reliability of
-     * reconnecting. If `true`, the connection has disconnected but is still being
-     * tracked. If `false`, the connection is actively serving traffic.
+     * Cloudflare account ID
      */
-    is_pending_reconnect?: boolean;
+    account_tag?: string;
 
     /**
-     * UUID of the Cloudflare Tunnel connection.
+     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    uuid?: string;
+    connections?: Array<TunnelsAPI.Connection>;
+
+    /**
+     * Timestamp of when the tunnel established at least one connection to Cloudflare's
+     * edge. If `null`, the tunnel is inactive.
+     */
+    conns_active_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+     * edge). If `null`, the tunnel is active.
+     */
+    conns_inactive_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel was created.
+     */
+    created_at?: string;
+
+    /**
+     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * deleted.
+     */
+    deleted_at?: string | null;
+
+    /**
+     * Metadata associated with the tunnel.
+     */
+    metadata?: unknown;
+
+    /**
+     * A user-friendly name for the tunnel.
+     */
+    name?: string;
+
+    /**
+     * If `true`, the tunnel can be configured remotely from the Zero Trust dashboard.
+     * If `false`, the tunnel must be configured locally on the origin machine.
+     */
+    remote_config?: boolean;
+
+    /**
+     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+     */
+    status?: string;
+
+    /**
+     * The type of tunnel.
+     */
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+  }
+
+  /**
+   * A Warp Connector Tunnel that connects your origin to Cloudflare's edge.
+   */
+  export interface TunnelWARPConnectorTunnel {
+    /**
+     * UUID of the tunnel.
+     */
+    id?: string;
+
+    /**
+     * Cloudflare account ID
+     */
+    account_tag?: string;
+
+    /**
+     * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+     */
+    connections?: Array<TunnelsAPI.Connection>;
+
+    /**
+     * Timestamp of when the tunnel established at least one connection to Cloudflare's
+     * edge. If `null`, the tunnel is inactive.
+     */
+    conns_active_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
+     * edge). If `null`, the tunnel is active.
+     */
+    conns_inactive_at?: string | null;
+
+    /**
+     * Timestamp of when the tunnel was created.
+     */
+    created_at?: string;
+
+    /**
+     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * deleted.
+     */
+    deleted_at?: string | null;
+
+    /**
+     * Metadata associated with the tunnel.
+     */
+    metadata?: unknown;
+
+    /**
+     * A user-friendly name for the tunnel.
+     */
+    name?: string;
+
+    /**
+     * The status of the tunnel. Valid values are `inactive` (tunnel has never been
+     * run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy
+     * state), `healthy` (tunnel is active and able to serve traffic), or `down`
+     * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
+     */
+    status?: string;
+
+    /**
+     * The type of tunnel.
+     */
+    tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
   }
 }
 
@@ -349,7 +594,9 @@ export interface TunnelGetParams {
 export namespace Tunnels {
   export import Connection = TunnelsAPI.Connection;
   export import Tunnel = TunnelsAPI.Tunnel;
-  export import WARPConnectorTunnel = TunnelsAPI.WARPConnectorTunnel;
+  export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
+  export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
+  export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
   export import TunnelDeleteParams = TunnelsAPI.TunnelDeleteParams;
@@ -375,5 +622,3 @@ export namespace Tunnels {
   export import ManagementCreateResponse = ManagementAPI.ManagementCreateResponse;
   export import ManagementCreateParams = ManagementAPI.ManagementCreateParams;
 }
-
-export { WARPConnectorsV4PagePaginationArray };
