@@ -2,7 +2,6 @@
 
 export {
   AuthenticatedOriginPull,
-  ID,
   HostnameUpdateResponse,
   HostnameUpdateParams,
   HostnameGetParams,

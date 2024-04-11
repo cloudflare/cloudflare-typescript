@@ -1733,7 +1733,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/keyless-certificates.ts">Hostname</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificate</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">Tunnel</a></code>
 - <code><a href="./src/resources/keyless-certificates.ts">KeylessCertificateDeleteResponse</a></code>
@@ -1906,7 +1905,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">AuthenticatedOriginPull</a></code>
-- <code><a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">ID</a></code>
 - <code><a href="./src/resources/origin-tls-client-auth/hostnames/hostnames.ts">HostnameUpdateResponse</a></code>
 
 Methods:
@@ -2633,10 +2631,22 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/rulesets/rules.ts">BlockRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ChallengeRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">CompressResponseRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">JsChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">Logging</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ManagedChallengeRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RedirectRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RewriteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RewriteURIPart</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">RouteRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RulesetRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ScoreRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ServeErrorRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">SetCacheSettingsRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">SetConfigRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">SkipRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RuleCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">RuleDeleteResponse</a></code>
@@ -4066,6 +4076,32 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings">client.workersForPlatforms.dispatch.namespaces.scripts.bindings.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings.ts">get</a>(dispatchNamespace, scriptName, { ...params }) -> BindingGetResponse</code>
+
+##### Secrets
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretUpdateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretListResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> SecretUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">list</a>(dispatchNamespace, scriptName, { ...params }) -> SecretListResponsesSinglePage</code>
+
+##### Tags
+
+Types:
+
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">TagUpdateResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">TagListResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">TagDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags">client.workersForPlatforms.dispatch.namespaces.scripts.tags.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">update</a>(dispatchNamespace, scriptName, [ ...body ]) -> TagUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags">client.workersForPlatforms.dispatch.namespaces.scripts.tags.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">list</a>(dispatchNamespace, scriptName, { ...params }) -> TagListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags/{tag}">client.workersForPlatforms.dispatch.namespaces.scripts.tags.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/tags.ts">delete</a>(dispatchNamespace, scriptName, tag, { ...params }) -> TagDeleteResponse | null</code>
 
 # ZeroTrust
 
