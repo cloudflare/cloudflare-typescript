@@ -42,12 +42,14 @@ export {
 export {
   Connection,
   Tunnel,
-  WARPConnectorTunnel,
+  TunnelListResponse,
+  TunnelEditResponse,
   TunnelCreateParams,
   TunnelListParams,
   TunnelDeleteParams,
   TunnelEditParams,
   TunnelGetParams,
+  TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels/index';
 export {
