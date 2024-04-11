@@ -15,21 +15,7 @@ describe('resource settings', () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.settings.edit(
       'my-dispatch-namespace',
       'this-is_my_script-01',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        errors: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-        ],
-        messages: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-        ],
-        result: {},
-        success: true,
-      },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -47,25 +33,41 @@ describe('resource settings', () => {
       'this-is_my_script-01',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        errors: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-        ],
-        messages: [
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-          { code: 1000, message: 'string' },
-        ],
-        result: {
+        settings: {
+          bindings: [{ type: 'kv_namespace' }, { type: 'kv_namespace' }, { type: 'kv_namespace' }],
+          compatibility_date: '2022-04-05',
+          compatibility_flags: [
+            'formdata_parser_supports_files',
+            'formdata_parser_supports_files',
+            'formdata_parser_supports_files',
+          ],
+          limits: { cpu_ms: 50 },
           logpush: false,
+          migrations: {
+            new_tag: 'v2',
+            old_tag: 'v1',
+            deleted_classes: ['string', 'string', 'string'],
+            new_classes: ['string', 'string', 'string'],
+            renamed_classes: [
+              { from: 'string', to: 'string' },
+              { from: 'string', to: 'string' },
+              { from: 'string', to: 'string' },
+            ],
+            transferred_classes: [
+              { from: 'string', from_script: 'string', to: 'string' },
+              { from: 'string', from_script: 'string', to: 'string' },
+              { from: 'string', from_script: 'string', to: 'string' },
+            ],
+          },
+          placement: { mode: 'smart' },
+          tags: ['my-tag', 'my-tag', 'my-tag'],
           tail_consumers: [
             { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
             { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
             { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
           ],
+          usage_model: 'unbound',
         },
-        success: true,
       },
     );
   });
