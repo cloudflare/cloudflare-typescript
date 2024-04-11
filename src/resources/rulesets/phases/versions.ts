@@ -295,7 +295,7 @@ export interface VersionGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.ResponeRule>;
+  rules: RulesetsAPI.ResponeRule;
 
   /**
    * The version of the ruleset.

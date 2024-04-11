@@ -132,7 +132,7 @@ export namespace WARPConnectorCreateResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -204,7 +204,7 @@ export namespace WARPConnectorCreateResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -279,7 +279,7 @@ export namespace WARPConnectorListResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -351,7 +351,7 @@ export namespace WARPConnectorListResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -426,7 +426,7 @@ export namespace WARPConnectorDeleteResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -498,7 +498,7 @@ export namespace WARPConnectorDeleteResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -573,7 +573,7 @@ export namespace WARPConnectorEditResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -645,7 +645,7 @@ export namespace WARPConnectorEditResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -720,7 +720,7 @@ export namespace WARPConnectorGetResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
@@ -792,7 +792,7 @@ export namespace WARPConnectorGetResponse {
     /**
      * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
      */
-    connections?: Array<TunnelsAPI.Connection>;
+    connections?: TunnelsAPI.Connection;
 
     /**
      * Timestamp of when the tunnel established at least one connection to Cloudflare's

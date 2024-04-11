@@ -66,7 +66,7 @@ export interface Client {
   /**
    * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
    */
-  conns?: Array<TunnelsAPI.Connection>;
+  conns?: TunnelsAPI.Connection;
 
   /**
    * Features enabled for the Cloudflare Tunnel.

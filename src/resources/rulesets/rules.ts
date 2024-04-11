@@ -694,7 +694,7 @@ export interface RuleCreateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.ResponeRule>;
+  rules: RulesetsAPI.ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -762,7 +762,7 @@ export interface RuleDeleteResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.ResponeRule>;
+  rules: RulesetsAPI.ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -830,7 +830,7 @@ export interface RuleEditResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.ResponeRule>;
+  rules: RulesetsAPI.ResponeRule;
 
   /**
    * The version of the ruleset.
