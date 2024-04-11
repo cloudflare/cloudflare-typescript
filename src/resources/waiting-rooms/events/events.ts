@@ -57,11 +57,11 @@ export class Events extends APIResource {
     params: EventListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<EventsSinglePage, Event> {
-    const { zone_id } = params;
+    const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`,
       EventsSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -412,9 +412,19 @@ export interface EventUpdateParams {
 
 export interface EventListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Query param: Page number of paginated results.
+   */
+  page?: unknown;
+
+  /**
+   * Query param: Maximum number of results per page. Must be a multiple of 5.
+   */
+  per_page?: unknown;
 }
 
 export interface EventDeleteParams {
