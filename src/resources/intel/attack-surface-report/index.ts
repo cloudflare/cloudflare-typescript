@@ -3,7 +3,6 @@
 export { AttackSurfaceReport } from './attack-surface-report';
 export {
   IssueClass,
-  IssueType,
   Product,
   SeverityQueryParam,
   Subject,

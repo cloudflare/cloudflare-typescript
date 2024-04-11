@@ -210,7 +210,7 @@ export type RequestRule = Array<
 /**
  * The list of rules in the ruleset.
  */
-export type ResponeRule = Array<
+export type ResponseRule = Array<
   RulesAPI.BlockRule | RulesAPI.ExecuteRule | RulesAPI.LogRule | RulesAPI.SkipRule
 >;
 
@@ -332,7 +332,7 @@ export interface RulesetCreateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: ResponeRule;
+  rules: ResponseRule;
 
   /**
    * The version of the ruleset.
@@ -400,7 +400,7 @@ export interface RulesetUpdateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: ResponeRule;
+  rules: ResponseRule;
 
   /**
    * The version of the ruleset.
@@ -468,7 +468,7 @@ export interface RulesetGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: ResponeRule;
+  rules: ResponseRule;
 
   /**
    * The version of the ruleset.
