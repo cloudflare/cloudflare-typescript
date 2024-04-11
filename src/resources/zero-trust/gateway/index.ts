@@ -59,20 +59,17 @@ export {
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
+  GatewayItem,
   GatewayList,
   ListCreateResponse,
-  ListUpdateResponse,
-  ListListResponse,
   ListDeleteResponse,
-  ListEditResponse,
-  ListGetResponse,
   ListCreateParams,
   ListUpdateParams,
   ListListParams,
   ListDeleteParams,
   ListEditParams,
   ListGetParams,
-  ListListResponsesSinglePage,
+  GatewayListsSinglePage,
   Lists,
 } from './lists/index';
 export {

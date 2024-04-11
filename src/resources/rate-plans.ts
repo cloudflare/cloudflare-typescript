@@ -16,23 +16,6 @@ export class RatePlans extends APIResource {
   }
 }
 
-export interface Component {
-  /**
-   * The default amount allocated.
-   */
-  default?: number;
-
-  /**
-   * The unique component.
-   */
-  name?: 'zones' | 'page_rules' | 'dedicated_certificates' | 'dedicated_certificates_custom';
-
-  /**
-   * The unit price of the addon.
-   */
-  unit_price?: number;
-}
-
 export interface RatePlan {
   /**
    * Plan identifier tag.
@@ -42,7 +25,7 @@ export interface RatePlan {
   /**
    * Array of available components values for the plan.
    */
-  components?: Array<Component>;
+  components?: Array<RatePlan.Component>;
 
   /**
    * The monetary unit in which pricing information is displayed.
@@ -63,6 +46,25 @@ export interface RatePlan {
    * The plan name.
    */
   name?: string;
+}
+
+export namespace RatePlan {
+  export interface Component {
+    /**
+     * The default amount allocated.
+     */
+    default?: number;
+
+    /**
+     * The unique component.
+     */
+    name?: 'zones' | 'page_rules' | 'dedicated_certificates' | 'dedicated_certificates_custom';
+
+    /**
+     * The unit price of the addon.
+     */
+    unit_price?: number;
+  }
 }
 
 export type RatePlanGetResponse = Array<RatePlan>;

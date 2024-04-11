@@ -905,21 +905,17 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorCreateResponse</a></code>
-- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorUpdateResponse</a></code>
-- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorListResponse</a></code>
+- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">Monitor</a></code>
 - <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorDeleteResponse</a></code>
-- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorEditResponse</a></code>
-- <code><a href="./src/resources/load-balancers/monitors/monitors.ts">MonitorGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">create</a>({ ...params }) -> MonitorCreateResponse</code>
-- <code title="put /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">update</a>(monitorId, { ...params }) -> MonitorUpdateResponse</code>
-- <code title="get /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">list</a>({ ...params }) -> MonitorListResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">create</a>({ ...params }) -> Monitor</code>
+- <code title="put /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">update</a>(monitorId, { ...params }) -> Monitor</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitors">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">list</a>({ ...params }) -> MonitorsSinglePage</code>
 - <code title="delete /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">delete</a>(monitorId, { ...params }) -> MonitorDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">edit</a>(monitorId, { ...params }) -> MonitorEditResponse</code>
-- <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">get</a>(monitorId, { ...params }) -> MonitorGetResponse</code>
+- <code title="patch /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">edit</a>(monitorId, { ...params }) -> Monitor</code>
+- <code title="get /accounts/{account_id}/load_balancers/monitors/{monitor_id}">client.loadBalancers.monitors.<a href="./src/resources/load-balancers/monitors/monitors.ts">get</a>(monitorId, { ...params }) -> Monitor</code>
 
 ### Previews
 
@@ -1238,7 +1234,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/rate-plans.ts">Component</a></code>
 - <code><a href="./src/resources/rate-plans.ts">RatePlan</a></code>
 - <code><a href="./src/resources/rate-plans.ts">RatePlanGetResponse</a></code>
 
@@ -1794,19 +1789,15 @@ Types:
 
 - <code><a href="./src/resources/logpush/jobs.ts">LogpushJob</a></code>
 - <code><a href="./src/resources/logpush/jobs.ts">OutputOptions</a></code>
-- <code><a href="./src/resources/logpush/jobs.ts">JobCreateResponse</a></code>
-- <code><a href="./src/resources/logpush/jobs.ts">JobUpdateResponse</a></code>
-- <code><a href="./src/resources/logpush/jobs.ts">JobListResponse</a></code>
 - <code><a href="./src/resources/logpush/jobs.ts">JobDeleteResponse</a></code>
-- <code><a href="./src/resources/logpush/jobs.ts">JobGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>({ ...params }) -> JobCreateResponse | null</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(jobId, { ...params }) -> JobUpdateResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>({ ...params }) -> JobListResponsesSinglePage</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">create</a>({ ...params }) -> LogpushJob | null</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">update</a>(jobId, { ...params }) -> LogpushJob | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">list</a>({ ...params }) -> LogpushJobsSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">delete</a>(jobId, { ...params }) -> JobDeleteResponse | null</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(jobId, { ...params }) -> JobGetResponse | null</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/logpush/jobs/{job_id}">client.logpush.jobs.<a href="./src/resources/logpush/jobs.ts">get</a>(jobId, { ...params }) -> LogpushJob | null</code>
 
 ## Ownership
 
@@ -2855,19 +2846,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/addressing/prefixes/prefixes.ts">Prefix</a></code>
-- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixCreateResponse</a></code>
-- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixListResponse</a></code>
 - <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixDeleteResponse</a></code>
-- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixEditResponse</a></code>
-- <code><a href="./src/resources/addressing/prefixes/prefixes.ts">PrefixGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">create</a>({ ...params }) -> PrefixCreateResponse</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">list</a>({ ...params }) -> PrefixListResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">create</a>({ ...params }) -> Prefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">list</a>({ ...params }) -> PrefixesSinglePage</code>
 - <code title="delete /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">delete</a>(prefixId, { ...params }) -> PrefixDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">edit</a>(prefixId, { ...params }) -> PrefixEditResponse</code>
-- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">get</a>(prefixId, { ...params }) -> PrefixGetResponse</code>
+- <code title="patch /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">edit</a>(prefixId, { ...params }) -> Prefix</code>
+- <code title="get /accounts/{account_id}/addressing/prefixes/{prefix_id}">client.addressing.prefixes.<a href="./src/resources/addressing/prefixes/prefixes.ts">get</a>(prefixId, { ...params }) -> Prefix</code>
 
 ### BGP
 
@@ -4948,22 +4935,19 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">GatewayItem</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">GatewayList</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListEditResponse</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/lists/lists.ts">ListGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">create</a>({ ...params }) -> ListCreateResponse</code>
-- <code title="put /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">update</a>(listId, { ...params }) -> ListUpdateResponse</code>
-- <code title="get /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">list</a>({ ...params }) -> ListListResponsesSinglePage</code>
+- <code title="put /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">update</a>(listId, { ...params }) -> GatewayList</code>
+- <code title="get /accounts/{account_id}/gateway/lists">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">list</a>({ ...params }) -> GatewayListsSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">delete</a>(listId, { ...params }) -> ListDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">edit</a>(listId, { ...params }) -> ListEditResponse</code>
-- <code title="get /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">get</a>(listId, { ...params }) -> ListGetResponse</code>
+- <code title="patch /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">edit</a>(listId, { ...params }) -> GatewayList</code>
+- <code title="get /accounts/{account_id}/gateway/lists/{list_id}">client.zeroTrust.gateway.lists.<a href="./src/resources/zero-trust/gateway/lists/lists.ts">get</a>(listId, { ...params }) -> GatewayList</code>
 
 #### Items
 

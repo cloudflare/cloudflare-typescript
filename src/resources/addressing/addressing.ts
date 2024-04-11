@@ -34,12 +34,8 @@ export namespace Addressing {
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Prefixes = PrefixesAPI.Prefixes;
   export import Prefix = PrefixesAPI.Prefix;
-  export import PrefixCreateResponse = PrefixesAPI.PrefixCreateResponse;
-  export import PrefixListResponse = PrefixesAPI.PrefixListResponse;
   export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixEditResponse = PrefixesAPI.PrefixEditResponse;
-  export import PrefixGetResponse = PrefixesAPI.PrefixGetResponse;
-  export import PrefixListResponsesSinglePage = PrefixesAPI.PrefixListResponsesSinglePage;
+  export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
   export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
   export import PrefixListParams = PrefixesAPI.PrefixListParams;
   export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;

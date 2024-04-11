@@ -11,7 +11,7 @@ export class Jobs extends APIResource {
   /**
    * Creates a new Logpush job for an account or zone.
    */
-  create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<JobCreateResponse | null> {
+  create(params: JobCreateParams, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -33,7 +33,7 @@ export class Jobs extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: JobCreateResponse | null }>
+      }) as Core.APIPromise<{ result: LogpushJob | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,7 +44,7 @@ export class Jobs extends APIResource {
     jobId: number,
     params: JobUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobUpdateResponse | null> {
+  ): Core.APIPromise<LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -66,7 +66,7 @@ export class Jobs extends APIResource {
       this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: JobUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: LogpushJob | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,12 +76,12 @@ export class Jobs extends APIResource {
   list(
     params?: JobListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<JobListResponsesSinglePage, JobListResponse | null>;
-  list(options?: Core.RequestOptions): Core.PagePromise<JobListResponsesSinglePage, JobListResponse | null>;
+  ): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null>;
+  list(options?: Core.RequestOptions): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null>;
   list(
     params: JobListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<JobListResponsesSinglePage, JobListResponse | null> {
+  ): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -104,7 +104,7 @@ export class Jobs extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/logpush/jobs`,
-      JobListResponsesSinglePage,
+      LogpushJobsSinglePage,
       options,
     );
   }
@@ -149,13 +149,13 @@ export class Jobs extends APIResource {
     jobId: number,
     params?: JobGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobGetResponse | null>;
-  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobGetResponse | null>;
+  ): Core.APIPromise<LogpushJob | null>;
+  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null>;
   get(
     jobId: number,
     params: JobGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobGetResponse | null> {
+  ): Core.APIPromise<LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.get(jobId, {}, params);
     }
@@ -180,12 +180,12 @@ export class Jobs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
         options,
-      ) as Core.APIPromise<{ result: JobGetResponse | null }>
+      ) as Core.APIPromise<{ result: LogpushJob | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class JobListResponsesSinglePage extends SinglePage<JobListResponse | null> {}
+export class LogpushJobsSinglePage extends SinglePage<LogpushJob | null> {}
 
 export interface LogpushJob {
   /**
@@ -339,311 +339,7 @@ export interface OutputOptions {
   timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
 }
 
-export interface JobCreateResponse {
-  /**
-   * Unique id of the job.
-   */
-  id?: number;
-
-  /**
-   * Name of the dataset.
-   */
-  dataset?: string | null;
-
-  /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
-   */
-  destination_conf?: string;
-
-  /**
-   * Flag that indicates if the job is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * If not null, the job is currently failing. Failures are usually repetitive
-   * (example: no permissions to write to destination bucket). Only the last failure
-   * is recorded. On successful execution of a job the error_message and last_error
-   * are set to null.
-   */
-  error_message?: string | null;
-
-  /**
-   * The frequency at which Cloudflare sends batches of logs to your destination.
-   * Setting frequency to high sends your logs in larger quantities of smaller files.
-   * Setting frequency to low sends logs in smaller quantities of larger files.
-   */
-  frequency?: 'high' | 'low' | null;
-
-  /**
-   * Records the last time for which logs have been successfully pushed. If the last
-   * successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z
-   * then the value of this field will be 2018-07-23T10:01:00Z. If the job has never
-   * run or has just been enabled and hasn't run yet then the field will be empty.
-   */
-  last_complete?: string | null;
-
-  /**
-   * Records the last time the job failed. If not null, the job is currently failing.
-   * If null, the job has either never failed or has run successfully at least once
-   * since last failure. See also the error_message field.
-   */
-  last_error?: string | null;
-
-  /**
-   * @deprecated: This field is deprecated. Use `output_options` instead.
-   * Configuration string. It specifies things like requested fields and timestamp
-   * formats. If migrating from the logpull api, copy the url (full url or just the
-   * query string) of your call here, and logpush will keep on making this call for
-   * you, setting start and end times appropriately.
-   */
-  logpull_options?: string | null;
-
-  /**
-   * Optional human readable job name. Not unique. Cloudflare suggests that you set
-   * this to a meaningful string, like the domain name, to make it easier to identify
-   * your job.
-   */
-  name?: string | null;
-
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  output_options?: OutputOptions | null;
-}
-
-export interface JobUpdateResponse {
-  /**
-   * Unique id of the job.
-   */
-  id?: number;
-
-  /**
-   * Name of the dataset.
-   */
-  dataset?: string | null;
-
-  /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
-   */
-  destination_conf?: string;
-
-  /**
-   * Flag that indicates if the job is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * If not null, the job is currently failing. Failures are usually repetitive
-   * (example: no permissions to write to destination bucket). Only the last failure
-   * is recorded. On successful execution of a job the error_message and last_error
-   * are set to null.
-   */
-  error_message?: string | null;
-
-  /**
-   * The frequency at which Cloudflare sends batches of logs to your destination.
-   * Setting frequency to high sends your logs in larger quantities of smaller files.
-   * Setting frequency to low sends logs in smaller quantities of larger files.
-   */
-  frequency?: 'high' | 'low' | null;
-
-  /**
-   * Records the last time for which logs have been successfully pushed. If the last
-   * successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z
-   * then the value of this field will be 2018-07-23T10:01:00Z. If the job has never
-   * run or has just been enabled and hasn't run yet then the field will be empty.
-   */
-  last_complete?: string | null;
-
-  /**
-   * Records the last time the job failed. If not null, the job is currently failing.
-   * If null, the job has either never failed or has run successfully at least once
-   * since last failure. See also the error_message field.
-   */
-  last_error?: string | null;
-
-  /**
-   * @deprecated: This field is deprecated. Use `output_options` instead.
-   * Configuration string. It specifies things like requested fields and timestamp
-   * formats. If migrating from the logpull api, copy the url (full url or just the
-   * query string) of your call here, and logpush will keep on making this call for
-   * you, setting start and end times appropriately.
-   */
-  logpull_options?: string | null;
-
-  /**
-   * Optional human readable job name. Not unique. Cloudflare suggests that you set
-   * this to a meaningful string, like the domain name, to make it easier to identify
-   * your job.
-   */
-  name?: string | null;
-
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  output_options?: OutputOptions | null;
-}
-
-export interface JobListResponse {
-  /**
-   * Unique id of the job.
-   */
-  id?: number;
-
-  /**
-   * Name of the dataset.
-   */
-  dataset?: string | null;
-
-  /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
-   */
-  destination_conf?: string;
-
-  /**
-   * Flag that indicates if the job is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * If not null, the job is currently failing. Failures are usually repetitive
-   * (example: no permissions to write to destination bucket). Only the last failure
-   * is recorded. On successful execution of a job the error_message and last_error
-   * are set to null.
-   */
-  error_message?: string | null;
-
-  /**
-   * The frequency at which Cloudflare sends batches of logs to your destination.
-   * Setting frequency to high sends your logs in larger quantities of smaller files.
-   * Setting frequency to low sends logs in smaller quantities of larger files.
-   */
-  frequency?: 'high' | 'low' | null;
-
-  /**
-   * Records the last time for which logs have been successfully pushed. If the last
-   * successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z
-   * then the value of this field will be 2018-07-23T10:01:00Z. If the job has never
-   * run or has just been enabled and hasn't run yet then the field will be empty.
-   */
-  last_complete?: string | null;
-
-  /**
-   * Records the last time the job failed. If not null, the job is currently failing.
-   * If null, the job has either never failed or has run successfully at least once
-   * since last failure. See also the error_message field.
-   */
-  last_error?: string | null;
-
-  /**
-   * @deprecated: This field is deprecated. Use `output_options` instead.
-   * Configuration string. It specifies things like requested fields and timestamp
-   * formats. If migrating from the logpull api, copy the url (full url or just the
-   * query string) of your call here, and logpush will keep on making this call for
-   * you, setting start and end times appropriately.
-   */
-  logpull_options?: string | null;
-
-  /**
-   * Optional human readable job name. Not unique. Cloudflare suggests that you set
-   * this to a meaningful string, like the domain name, to make it easier to identify
-   * your job.
-   */
-  name?: string | null;
-
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  output_options?: OutputOptions | null;
-}
-
 export type JobDeleteResponse = unknown | Array<unknown> | string;
-
-export interface JobGetResponse {
-  /**
-   * Unique id of the job.
-   */
-  id?: number;
-
-  /**
-   * Name of the dataset.
-   */
-  dataset?: string | null;
-
-  /**
-   * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed.
-   * Additional configuration parameters supported by the destination may be
-   * included.
-   */
-  destination_conf?: string;
-
-  /**
-   * Flag that indicates if the job is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * If not null, the job is currently failing. Failures are usually repetitive
-   * (example: no permissions to write to destination bucket). Only the last failure
-   * is recorded. On successful execution of a job the error_message and last_error
-   * are set to null.
-   */
-  error_message?: string | null;
-
-  /**
-   * The frequency at which Cloudflare sends batches of logs to your destination.
-   * Setting frequency to high sends your logs in larger quantities of smaller files.
-   * Setting frequency to low sends logs in smaller quantities of larger files.
-   */
-  frequency?: 'high' | 'low' | null;
-
-  /**
-   * Records the last time for which logs have been successfully pushed. If the last
-   * successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z
-   * then the value of this field will be 2018-07-23T10:01:00Z. If the job has never
-   * run or has just been enabled and hasn't run yet then the field will be empty.
-   */
-  last_complete?: string | null;
-
-  /**
-   * Records the last time the job failed. If not null, the job is currently failing.
-   * If null, the job has either never failed or has run successfully at least once
-   * since last failure. See also the error_message field.
-   */
-  last_error?: string | null;
-
-  /**
-   * @deprecated: This field is deprecated. Use `output_options` instead.
-   * Configuration string. It specifies things like requested fields and timestamp
-   * formats. If migrating from the logpull api, copy the url (full url or just the
-   * query string) of your call here, and logpush will keep on making this call for
-   * you, setting start and end times appropriately.
-   */
-  logpull_options?: string | null;
-
-  /**
-   * Optional human readable job name. Not unique. Cloudflare suggests that you set
-   * this to a meaningful string, like the domain name, to make it easier to identify
-   * your job.
-   */
-  name?: string | null;
-
-  /**
-   * The structured replacement for `logpull_options`. When including this field, the
-   * `logpull_option` field will be ignored.
-   */
-  output_options?: OutputOptions | null;
-}
 
 export interface JobCreateParams {
   /**
@@ -811,12 +507,8 @@ export interface JobGetParams {
 export namespace Jobs {
   export import LogpushJob = JobsAPI.LogpushJob;
   export import OutputOptions = JobsAPI.OutputOptions;
-  export import JobCreateResponse = JobsAPI.JobCreateResponse;
-  export import JobUpdateResponse = JobsAPI.JobUpdateResponse;
-  export import JobListResponse = JobsAPI.JobListResponse;
   export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
-  export import JobGetResponse = JobsAPI.JobGetResponse;
-  export import JobListResponsesSinglePage = JobsAPI.JobListResponsesSinglePage;
+  export import LogpushJobsSinglePage = JobsAPI.LogpushJobsSinglePage;
   export import JobCreateParams = JobsAPI.JobCreateParams;
   export import JobUpdateParams = JobsAPI.JobUpdateParams;
   export import JobListParams = JobsAPI.JobListParams;
