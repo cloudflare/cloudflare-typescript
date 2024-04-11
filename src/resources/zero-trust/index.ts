@@ -40,6 +40,17 @@ export {
   IdentityProviders,
 } from './identity-providers';
 export {
+  Connection,
+  Tunnel,
+  WARPConnectorTunnel,
+  TunnelCreateParams,
+  TunnelListParams,
+  TunnelDeleteParams,
+  TunnelEditParams,
+  TunnelGetParams,
+  Tunnels,
+} from './tunnels/index';
+export {
   ConnectivitySettingEditResponse,
   ConnectivitySettingGetResponse,
   ConnectivitySettingEditParams,
@@ -75,15 +86,4 @@ export {
 } from './organizations';
 export { Networks } from './networks/index';
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
-export {
-  Tunnel,
-  TunnelConnection,
-  WARPConnectorTunnel,
-  TunnelCreateParams,
-  TunnelListParams,
-  TunnelDeleteParams,
-  TunnelEditParams,
-  TunnelGetParams,
-  Tunnels,
-} from './tunnels/index';
 export { ZeroTrust } from './zero-trust';

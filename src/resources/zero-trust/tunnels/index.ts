@@ -15,12 +15,9 @@ export {
   ConfigurationGetParams,
   Configurations,
 } from './configurations';
-export { ConnectorGetParams, Connectors } from './connectors';
-export { ManagementCreateResponse, ManagementCreateParams, Management } from './management';
-export { TokenGetResponse, TokenGetParams, Token } from './token';
 export {
+  Connection,
   Tunnel,
-  TunnelConnection,
   WARPConnectorTunnel,
   TunnelCreateParams,
   TunnelListParams,
@@ -29,3 +26,6 @@ export {
   TunnelGetParams,
   Tunnels,
 } from './tunnels';
+export { ConnectorGetParams, Connectors } from './connectors';
+export { ManagementCreateResponse, ManagementCreateParams, Management } from './management';
+export { TokenGetResponse, TokenGetParams, Token } from './token';
