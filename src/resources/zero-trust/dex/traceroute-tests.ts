@@ -79,7 +79,7 @@ export interface Traceroute {
    */
   name: string;
 
-  target_policies?: Array<DEXAPI.DeviceExperienceMonitor>;
+  target_policies?: Array<DEXAPI.DeviceExperienceMonitor> | null;
 
   targeted?: boolean;
 
