@@ -205,7 +205,7 @@ export class Cloudflare extends Core.APIClient {
   alerting: API.Alerting = new API.Alerting(this);
   d1: API.D1Resource = new API.D1Resource(this);
   r2: API.R2 = new API.R2(this);
-  warpConnector: API.WARPConnectorResource = new API.WARPConnectorResource(this);
+  warpConnector: API.WARPConnector = new API.WARPConnector(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   challenges: API.Challenges = new API.Challenges(this);
@@ -515,7 +515,7 @@ export namespace Cloudflare {
 
   export import R2 = API.R2;
 
-  export import WARPConnectorResource = API.WARPConnectorResource;
+  export import WARPConnector = API.WARPConnector;
 
   export import WorkersForPlatforms = API.WorkersForPlatforms;
 
