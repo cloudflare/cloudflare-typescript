@@ -2593,7 +2593,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/rulesets/rulesets.ts">RequestRule</a></code>
-- <code><a href="./src/resources/rulesets/rulesets.ts">ResponeRule</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">ResponseRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
@@ -3199,7 +3199,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClass</a></code>
-- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueType</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">Product</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">SeverityQueryParam</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">Subject</a></code>
