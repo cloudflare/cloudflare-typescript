@@ -91,8 +91,11 @@ export namespace ZeroTrust {
   export import Tunnels = TunnelsAPI.Tunnels;
   export import Connection = TunnelsAPI.Connection;
   export import Tunnel = TunnelsAPI.Tunnel;
+  export import TunnelCreateResponse = TunnelsAPI.TunnelCreateResponse;
   export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
+  export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
   export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
+  export import TunnelGetResponse = TunnelsAPI.TunnelGetResponse;
   export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
   export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
