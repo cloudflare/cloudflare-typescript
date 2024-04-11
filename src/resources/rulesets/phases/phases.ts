@@ -238,7 +238,7 @@ export interface PhaseUpdateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.ResponeRule>;
+  rules: RulesetsAPI.ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -306,7 +306,7 @@ export interface PhaseGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.ResponeRule>;
+  rules: RulesetsAPI.ResponeRule;
 
   /**
    * The version of the ruleset.
@@ -323,7 +323,7 @@ export interface PhaseUpdateParams {
   /**
    * Body param: The list of rules in the ruleset.
    */
-  rules: Array<RulesetsAPI.RequestRule>;
+  rules: RulesetsAPI.RequestRule;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
