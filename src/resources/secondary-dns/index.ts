@@ -45,6 +45,7 @@ export {
 } from './incoming';
 export {
   Peer,
+  Peers,
   PeerDeleteResponse,
   PeerCreateParams,
   PeerUpdateParams,
@@ -52,7 +53,6 @@ export {
   PeerDeleteParams,
   PeerGetParams,
   PeersSinglePage,
-  Peers,
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
 export {
