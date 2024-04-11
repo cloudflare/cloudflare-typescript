@@ -97,7 +97,7 @@ export interface Incoming {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peer>;
+  peers?: Array<PeersAPI.Peers>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -137,7 +137,7 @@ export interface IncomingCreateResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peer>;
+  peers?: Array<PeersAPI.Peers>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -177,7 +177,7 @@ export interface IncomingUpdateResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peer>;
+  peers?: Array<PeersAPI.Peers>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -221,7 +221,7 @@ export interface IncomingGetResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<PeersAPI.Peer>;
+  peers?: Array<PeersAPI.Peers>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -249,7 +249,7 @@ export interface IncomingCreateParams {
   /**
    * Body param: A list of peer tags.
    */
-  peers: Array<PeersAPI.Peer>;
+  peers: Array<PeersAPI.Peers>;
 }
 
 export interface IncomingUpdateParams {
@@ -272,7 +272,7 @@ export interface IncomingUpdateParams {
   /**
    * Body param: A list of peer tags.
    */
-  peers: Array<PeersAPI.Peer>;
+  peers: Array<PeersAPI.Peers>;
 }
 
 export interface IncomingDeleteParams {

@@ -45,18 +45,14 @@ export {
 } from './incoming';
 export {
   Peer,
-  PeerCreateResponse,
-  PeerUpdateResponse,
-  PeerListResponse,
+  Peers,
   PeerDeleteResponse,
-  PeerGetResponse,
   PeerCreateParams,
   PeerUpdateParams,
   PeerListParams,
   PeerDeleteParams,
   PeerGetParams,
-  PeerListResponsesSinglePage,
-  Peers,
+  PeersSinglePage,
 } from './peers';
 export { SecondaryDNS } from './secondary-dns';
 export {
