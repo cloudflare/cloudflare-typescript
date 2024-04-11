@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as Shared from 'cloudflare/resources/shared';
-import { IamRolesSinglePage } from 'cloudflare/resources/shared';
+import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Roles extends APIResource {
   /**
@@ -13,9 +13,9 @@ export class Roles extends APIResource {
   list(
     params: RoleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<IamRolesSinglePage, Shared.IamRole> {
+  ): Core.PagePromise<RoleListResponsesSinglePage, RoleListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/roles`, IamRolesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/roles`, RoleListResponsesSinglePage, options);
   }
 
   /**
@@ -35,10 +35,34 @@ export class Roles extends APIResource {
   }
 }
 
+export class RoleListResponsesSinglePage extends SinglePage<RoleListResponse> {}
+
 export interface PermissionGrant {
   read?: boolean;
 
   write?: boolean;
+}
+
+export interface RoleListResponse {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role Name.
+   */
+  name: string;
+
+  /**
+   * Access permissions for this User.
+   */
+  permissions: Array<PermissionGroupsAPI.Permission>;
 }
 
 export type RoleGetResponse = unknown | string | null;
@@ -53,9 +77,9 @@ export interface RoleGetParams {
 
 export namespace Roles {
   export import PermissionGrant = RolesAPI.PermissionGrant;
+  export import RoleListResponse = RolesAPI.RoleListResponse;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
+  export import RoleListResponsesSinglePage = RolesAPI.RoleListResponsesSinglePage;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
 }
-
-export { IamRolesSinglePage };

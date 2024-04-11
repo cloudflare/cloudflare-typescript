@@ -551,7 +551,6 @@ export namespace Cloudflare {
 
   export import AuditLog = API.AuditLog;
   export import ErrorData = API.ErrorData;
-  export import IamRole = API.IamRole;
   export import Identifier = API.Identifier;
   export import LoadBalancerPreview = API.LoadBalancerPreview;
   export import PaginationInfo = API.PaginationInfo;

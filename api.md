@@ -4,7 +4,6 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
-- <code><a href="./src/resources/shared.ts">IamRole</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
@@ -49,11 +48,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
+- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> IamRolesSinglePage</code>
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
 # OriginCACertificates

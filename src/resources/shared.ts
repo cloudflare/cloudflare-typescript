@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from 'cloudflare/resources/shared';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
-import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
+import { V4PagePaginationArray } from 'cloudflare/pagination';
 
 export interface AuditLog {
   /**
@@ -107,28 +106,6 @@ export interface ErrorData {
   message?: string;
 }
 
-export interface IamRole {
-  /**
-   * Role identifier tag.
-   */
-  id: string;
-
-  /**
-   * Description of role's permissions.
-   */
-  description: string;
-
-  /**
-   * Role Name.
-   */
-  name: string;
-
-  /**
-   * Access permissions for this User.
-   */
-  permissions: Array<PermissionGroupsAPI.Permission>;
-}
-
 export interface Identifier {
   /**
    * Identifier
@@ -199,7 +176,5 @@ export namespace Result {
     success: true;
   }
 }
-
-export class IamRolesSinglePage extends SinglePage<IamRole> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}
