@@ -92,146 +92,89 @@ export class Posture extends APIResource {
 
 export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRule> {}
 
+export type CarbonblackInput = string;
+
+export interface ClientCertificateInput {
+  /**
+   * UUID of Cloudflare managed certificate.
+   */
+  certificate_id: string;
+
+  /**
+   * Common Name that is protected by the certificate
+   */
+  cn: string;
+}
+
+export interface CrowdstrikeInput {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * For more details on last seen, please refer to the Crowdstrike documentation.
+   */
+  last_seen?: string;
+
+  /**
+   * operator
+   */
+  operator?: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * Os Version
+   */
+  os?: string;
+
+  /**
+   * overall
+   */
+  overall?: string;
+
+  /**
+   * SensorConfig
+   */
+  sensor_config?: string;
+
+  /**
+   * For more details on state, please refer to the Crowdstrike documentation.
+   */
+  state?: 'online' | 'offline' | 'unknown';
+
+  /**
+   * Version
+   */
+  version?: string;
+
+  /**
+   * Version Operator
+   */
+  versionOperator?: '<' | '<=' | '>' | '>=' | '==';
+}
+
 /**
  * The value to be checked against.
  */
 export type DeviceInput =
-  | DeviceInput.TeamsDevicesFileInputRequest
-  | DeviceInput.TeamsDevicesUniqueClientIDInputRequest
-  | DeviceInput.TeamsDevicesDomainJoinedInputRequest
-  | DeviceInput.TeamsDevicesOSVersionInputRequest
-  | DeviceInput.TeamsDevicesFirewallInputRequest
-  | DeviceInput.TeamsDevicesSentineloneInputRequest
+  | FileInput
+  | UniqueClientIDInput
+  | DomainJoinedInput
+  | OSVersionInput
+  | FirewallInput
+  | SentineloneInput
   | DeviceInput.TeamsDevicesCarbonblackInputRequest
-  | DeviceInput.TeamsDevicesDiskEncryptionInputRequest
+  | DiskEncryptionInput
   | DeviceInput.TeamsDevicesApplicationInputRequest
-  | DeviceInput.TeamsDevicesClientCertificateInputRequest
-  | DeviceInput.TeamsDevicesWorkspaceOneInputRequest
-  | DeviceInput.TeamsDevicesCrowdstrikeInputRequest
-  | DeviceInput.TeamsDevicesIntuneInputRequest
-  | DeviceInput.TeamsDevicesKolideInputRequest
-  | DeviceInput.TeamsDevicesTaniumInputRequest
-  | DeviceInput.TeamsDevicesSentineloneS2sInputRequest;
+  | ClientCertificateInput
+  | WorkspaceOneInput
+  | CrowdstrikeInput
+  | IntuneInput
+  | KolideInput
+  | TaniumInput
+  | SentineloneS2sInput;
 
 export namespace DeviceInput {
-  export interface TeamsDevicesFileInputRequest {
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
-
-    /**
-     * File path.
-     */
-    path: string;
-
-    /**
-     * Whether or not file exists
-     */
-    exists?: boolean;
-
-    /**
-     * SHA-256.
-     */
-    sha256?: string;
-
-    /**
-     * Signing certificate thumbprint.
-     */
-    thumbprint?: string;
-  }
-
-  export interface TeamsDevicesUniqueClientIDInputRequest {
-    /**
-     * List ID.
-     */
-    id: string;
-
-    /**
-     * Operating System
-     */
-    operating_system: 'android' | 'ios' | 'chromeos';
-  }
-
-  export interface TeamsDevicesDomainJoinedInputRequest {
-    /**
-     * Operating System
-     */
-    operating_system: 'windows';
-
-    /**
-     * Domain
-     */
-    domain?: string;
-  }
-
-  export interface TeamsDevicesOSVersionInputRequest {
-    /**
-     * Operating System
-     */
-    operating_system: 'windows';
-
-    /**
-     * operator
-     */
-    operator: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * Version of OS
-     */
-    version: string;
-
-    /**
-     * Operating System Distribution Name (linux only)
-     */
-    os_distro_name?: string;
-
-    /**
-     * Version of OS Distribution (linux only)
-     */
-    os_distro_revision?: string;
-
-    /**
-     * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
-     * the kernel release version. (Mac, iOS, and Linux only)
-     */
-    os_version_extra?: string;
-  }
-
-  export interface TeamsDevicesFirewallInputRequest {
-    /**
-     * Enabled
-     */
-    enabled: boolean;
-
-    /**
-     * Operating System
-     */
-    operating_system: 'windows' | 'mac';
-  }
-
-  export interface TeamsDevicesSentineloneInputRequest {
-    /**
-     * Operating system
-     */
-    operating_system: 'windows' | 'linux' | 'mac';
-
-    /**
-     * File path.
-     */
-    path: string;
-
-    /**
-     * SHA-256.
-     */
-    sha256?: string;
-
-    /**
-     * Signing certificate thumbprint.
-     */
-    thumbprint?: string;
-  }
-
   export interface TeamsDevicesCarbonblackInputRequest {
     /**
      * Operating system
@@ -254,18 +197,6 @@ export namespace DeviceInput {
     thumbprint?: string;
   }
 
-  export interface TeamsDevicesDiskEncryptionInputRequest {
-    /**
-     * List of volume names to be checked for encryption.
-     */
-    checkDisks?: Array<string>;
-
-    /**
-     * Whether to check all disks for encryption.
-     */
-    requireAll?: boolean;
-  }
-
   export interface TeamsDevicesApplicationInputRequest {
     /**
      * Operating system
@@ -286,170 +217,6 @@ export namespace DeviceInput {
      * Signing certificate thumbprint.
      */
     thumbprint?: string;
-  }
-
-  export interface TeamsDevicesClientCertificateInputRequest {
-    /**
-     * UUID of Cloudflare managed certificate.
-     */
-    certificate_id: string;
-
-    /**
-     * Common Name that is protected by the certificate
-     */
-    cn: string;
-  }
-
-  export interface TeamsDevicesWorkspaceOneInputRequest {
-    /**
-     * Compliance Status
-     */
-    compliance_status: 'compliant' | 'noncompliant' | 'unknown';
-
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-  }
-
-  export interface TeamsDevicesCrowdstrikeInputRequest {
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-
-    /**
-     * For more details on last seen, please refer to the Crowdstrike documentation.
-     */
-    last_seen?: string;
-
-    /**
-     * operator
-     */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * Os Version
-     */
-    os?: string;
-
-    /**
-     * overall
-     */
-    overall?: string;
-
-    /**
-     * SensorConfig
-     */
-    sensor_config?: string;
-
-    /**
-     * For more details on state, please refer to the Crowdstrike documentation.
-     */
-    state?: 'online' | 'offline' | 'unknown';
-
-    /**
-     * Version
-     */
-    version?: string;
-
-    /**
-     * Version Operator
-     */
-    versionOperator?: '<' | '<=' | '>' | '>=' | '==';
-  }
-
-  export interface TeamsDevicesIntuneInputRequest {
-    /**
-     * Compliance Status
-     */
-    compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
-
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-  }
-
-  export interface TeamsDevicesKolideInputRequest {
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-
-    /**
-     * Count Operator
-     */
-    countOperator: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * The Number of Issues.
-     */
-    issue_count: string;
-  }
-
-  export interface TeamsDevicesTaniumInputRequest {
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-
-    /**
-     * For more details on eid last seen, refer to the Tanium documentation.
-     */
-    eid_last_seen?: string;
-
-    /**
-     * Operator to evaluate risk_level or eid_last_seen.
-     */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * For more details on risk level, refer to the Tanium documentation.
-     */
-    risk_level?: 'low' | 'medium' | 'high' | 'critical';
-
-    /**
-     * Score Operator
-     */
-    scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * For more details on total score, refer to the Tanium documentation.
-     */
-    total_score?: number;
-  }
-
-  export interface TeamsDevicesSentineloneS2sInputRequest {
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-
-    /**
-     * The Number of active threats.
-     */
-    active_threats?: number;
-
-    /**
-     * Whether device is infected.
-     */
-    infected?: boolean;
-
-    /**
-     * Whether device is active.
-     */
-    is_active?: boolean;
-
-    /**
-     * Network status of device.
-     */
-    network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
-
-    /**
-     * operator
-     */
-    operator?: '<' | '<=' | '>' | '>=' | '==';
   }
 }
 
@@ -518,6 +285,241 @@ export interface DevicePostureRule {
     | 'intune'
     | 'workspace_one'
     | 'sentinelone_s2s';
+}
+
+export interface DiskEncryptionInput {
+  /**
+   * List of volume names to be checked for encryption.
+   */
+  checkDisks?: Array<CarbonblackInput>;
+
+  /**
+   * Whether to check all disks for encryption.
+   */
+  requireAll?: boolean;
+}
+
+export interface DomainJoinedInput {
+  /**
+   * Operating System
+   */
+  operating_system: 'windows';
+
+  /**
+   * Domain
+   */
+  domain?: string;
+}
+
+export interface FileInput {
+  /**
+   * Operating system
+   */
+  operating_system: 'windows' | 'linux' | 'mac';
+
+  /**
+   * File path.
+   */
+  path: string;
+
+  /**
+   * Whether or not file exists
+   */
+  exists?: boolean;
+
+  /**
+   * SHA-256.
+   */
+  sha256?: string;
+
+  /**
+   * Signing certificate thumbprint.
+   */
+  thumbprint?: string;
+}
+
+export interface FirewallInput {
+  /**
+   * Enabled
+   */
+  enabled: boolean;
+
+  /**
+   * Operating System
+   */
+  operating_system: 'windows' | 'mac';
+}
+
+export interface IntuneInput {
+  /**
+   * Compliance Status
+   */
+  compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
+
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+}
+
+export interface KolideInput {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * Count Operator
+   */
+  countOperator: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * The Number of Issues.
+   */
+  issue_count: string;
+}
+
+export interface OSVersionInput {
+  /**
+   * Operating System
+   */
+  operating_system: 'windows';
+
+  /**
+   * operator
+   */
+  operator: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * Version of OS
+   */
+  version: string;
+
+  /**
+   * Operating System Distribution Name (linux only)
+   */
+  os_distro_name?: string;
+
+  /**
+   * Version of OS Distribution (linux only)
+   */
+  os_distro_revision?: string;
+
+  /**
+   * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+   * the kernel release version. (Mac, iOS, and Linux only)
+   */
+  os_version_extra?: string;
+}
+
+export interface SentineloneInput {
+  /**
+   * Operating system
+   */
+  operating_system: 'windows' | 'linux' | 'mac';
+
+  /**
+   * File path.
+   */
+  path: string;
+
+  /**
+   * SHA-256.
+   */
+  sha256?: string;
+
+  /**
+   * Signing certificate thumbprint.
+   */
+  thumbprint?: string;
+}
+
+export interface SentineloneS2sInput {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * The Number of active threats.
+   */
+  active_threats?: number;
+
+  /**
+   * Whether device is infected.
+   */
+  infected?: boolean;
+
+  /**
+   * Whether device is active.
+   */
+  is_active?: boolean;
+
+  /**
+   * Network status of device.
+   */
+  network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
+
+  /**
+   * operator
+   */
+  operator?: '<' | '<=' | '>' | '>=' | '==';
+}
+
+export interface TaniumInput {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * For more details on eid last seen, refer to the Tanium documentation.
+   */
+  eid_last_seen?: string;
+
+  /**
+   * Operator to evaluate risk_level or eid_last_seen.
+   */
+  operator?: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * For more details on risk level, refer to the Tanium documentation.
+   */
+  risk_level?: 'low' | 'medium' | 'high' | 'critical';
+
+  /**
+   * Score Operator
+   */
+  scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * For more details on total score, refer to the Tanium documentation.
+   */
+  total_score?: number;
+}
+
+export interface UniqueClientIDInput {
+  /**
+   * List ID.
+   */
+  id: string;
+
+  /**
+   * Operating System
+   */
+  operating_system: 'android' | 'ios' | 'chromeos';
+}
+
+export interface WorkspaceOneInput {
+  /**
+   * Compliance Status
+   */
+  compliance_status: 'compliant' | 'noncompliant' | 'unknown';
+
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
 }
 
 export interface PostureDeleteResponse {
@@ -674,9 +676,24 @@ export interface PostureGetParams {
 }
 
 export namespace Posture {
+  export import CarbonblackInput = PostureAPI.CarbonblackInput;
+  export import ClientCertificateInput = PostureAPI.ClientCertificateInput;
+  export import CrowdstrikeInput = PostureAPI.CrowdstrikeInput;
   export import DeviceInput = PostureAPI.DeviceInput;
   export import DeviceMatch = PostureAPI.DeviceMatch;
   export import DevicePostureRule = PostureAPI.DevicePostureRule;
+  export import DiskEncryptionInput = PostureAPI.DiskEncryptionInput;
+  export import DomainJoinedInput = PostureAPI.DomainJoinedInput;
+  export import FileInput = PostureAPI.FileInput;
+  export import FirewallInput = PostureAPI.FirewallInput;
+  export import IntuneInput = PostureAPI.IntuneInput;
+  export import KolideInput = PostureAPI.KolideInput;
+  export import OSVersionInput = PostureAPI.OSVersionInput;
+  export import SentineloneInput = PostureAPI.SentineloneInput;
+  export import SentineloneS2sInput = PostureAPI.SentineloneS2sInput;
+  export import TaniumInput = PostureAPI.TaniumInput;
+  export import UniqueClientIDInput = PostureAPI.UniqueClientIDInput;
+  export import WorkspaceOneInput = PostureAPI.WorkspaceOneInput;
   export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
   export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
   export import PostureCreateParams = PostureAPI.PostureCreateParams;
