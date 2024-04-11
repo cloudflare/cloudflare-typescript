@@ -107,8 +107,6 @@ export interface Peer {
   tsig_id?: string;
 }
 
-export type Peers = unknown;
-
 export interface PeerDeleteResponse {
   id?: string;
 }
@@ -185,7 +183,6 @@ export interface PeerGetParams {
 
 export namespace Peers {
   export import Peer = PeersAPI.Peer;
-  export import Peers = PeersAPI.Peers;
   export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
   export import PeersSinglePage = PeersAPI.PeersSinglePage;
   export import PeerCreateParams = PeersAPI.PeerCreateParams;

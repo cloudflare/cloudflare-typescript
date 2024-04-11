@@ -12,17 +12,58 @@ export class HyperdrivesSinglePage extends SinglePage<Hyperdrive> {}
 
 export interface Configuration {
   /**
-   * The password required to access your origin database. This value is write-only
-   * and never returned by the API.
+   * The name of your origin database.
    */
-  password: string;
+  database: string;
+
+  /**
+   * The host (hostname or IP) of your origin database.
+   */
+  host: string;
+
+  /**
+   * The port (default: 5432 for Postgres) of your origin database.
+   */
+  port: number;
+
+  /**
+   * Specifies the URL scheme used to connect to your origin database.
+   */
+  scheme: 'postgres' | 'postgresql' | 'mysql';
+
+  /**
+   * The user of your origin database.
+   */
+  user: string;
 }
 
 export interface Hyperdrive {
-  /**
-   * Identifier
-   */
-  id?: string;
+  caching?: Hyperdrive.Caching;
+
+  name?: string;
+
+  origin?: Configuration;
+}
+
+export namespace Hyperdrive {
+  export interface Caching {
+    /**
+     * When set to true, disables the caching of SQL responses. (Default: false)
+     */
+    disabled?: boolean;
+
+    /**
+     * When present, specifies max duration for which items should persist in the
+     * cache. (Default: 60)
+     */
+    max_age?: number;
+
+    /**
+     * When present, indicates the number of seconds cache may serve the response after
+     * it becomes stale. (Default: 15)
+     */
+    stale_while_revalidate?: number;
+  }
 }
 
 export namespace HyperdriveResource {
