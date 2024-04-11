@@ -4,7 +4,9 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as AuditLogsAPI from 'cloudflare/resources/user/audit-logs';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Shared from 'cloudflare/resources/shared';
+import { AuditLogsV4PagePaginationArray } from 'cloudflare/resources/shared';
+import { type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class AuditLogs extends APIResource {
   /**
@@ -14,120 +16,16 @@ export class AuditLogs extends APIResource {
   list(
     query?: AuditLogListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AuditLogListResponsesV4PagePaginationArray, AuditLogListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AuditLogListResponsesV4PagePaginationArray, AuditLogListResponse>;
+  ): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>;
   list(
     query: AuditLogListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AuditLogListResponsesV4PagePaginationArray, AuditLogListResponse> {
+  ): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/audit_logs', AuditLogListResponsesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
-  }
-}
-
-export class AuditLogListResponsesV4PagePaginationArray extends V4PagePaginationArray<AuditLogListResponse> {}
-
-export interface AuditLogListResponse {
-  /**
-   * A string that uniquely identifies the audit log.
-   */
-  id?: string;
-
-  action?: AuditLogListResponse.Action;
-
-  actor?: AuditLogListResponse.Actor;
-
-  /**
-   * The source of the event.
-   */
-  interface?: string;
-
-  /**
-   * An object which can lend more context to the action being logged. This is a
-   * flexible value and varies between different actions.
-   */
-  metadata?: unknown;
-
-  /**
-   * The new value of the resource that was modified.
-   */
-  newValue?: string;
-
-  /**
-   * The value of the resource before it was modified.
-   */
-  oldValue?: string;
-
-  owner?: AuditLogListResponse.Owner;
-
-  resource?: AuditLogListResponse.Resource;
-
-  /**
-   * A UTC RFC3339 timestamp that specifies when the action being logged occured.
-   */
-  when?: string;
-}
-
-export namespace AuditLogListResponse {
-  export interface Action {
-    /**
-     * A boolean that indicates if the action attempted was successful.
-     */
-    result?: boolean;
-
-    /**
-     * A short string that describes the action that was performed.
-     */
-    type?: string;
-  }
-
-  export interface Actor {
-    /**
-     * The ID of the actor that performed the action. If a user performed the action,
-     * this will be their User ID.
-     */
-    id?: string;
-
-    /**
-     * The email of the user that performed the action.
-     */
-    email?: string;
-
-    /**
-     * The IP address of the request that performed the action.
-     */
-    ip?: string;
-
-    /**
-     * The type of actor, whether a User, Cloudflare Admin, or an Automated System.
-     */
-    type?: 'user' | 'admin' | 'Cloudflare';
-  }
-
-  export interface Owner {
-    /**
-     * Identifier
-     */
-    id?: string;
-  }
-
-  export interface Resource {
-    /**
-     * An identifier for the resource that was affected by the action.
-     */
-    id?: string;
-
-    /**
-     * A short string that describes the resource that was affected by the action.
-     */
-    type?: string;
+    return this._client.getAPIList('/user/audit_logs', AuditLogsV4PagePaginationArray, { query, ...options });
   }
 }
 
@@ -201,7 +99,7 @@ export namespace AuditLogListParams {
 }
 
 export namespace AuditLogs {
-  export import AuditLogListResponse = AuditLogsAPI.AuditLogListResponse;
-  export import AuditLogListResponsesV4PagePaginationArray = AuditLogsAPI.AuditLogListResponsesV4PagePaginationArray;
   export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
 }
+
+export { AuditLogsV4PagePaginationArray };

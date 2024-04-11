@@ -2,7 +2,9 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">AuditLog</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
+- <code><a href="./src/resources/shared.ts">IamRole</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
@@ -47,12 +49,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
-- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> IamRolesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
 # OriginCACertificates
@@ -113,13 +114,9 @@ Methods:
 
 ## AuditLogs
 
-Types:
-
-- <code><a href="./src/resources/user/audit-logs.ts">AuditLogListResponse</a></code>
-
 Methods:
 
-- <code title="get /user/audit_logs">client.user.auditLogs.<a href="./src/resources/user/audit-logs.ts">list</a>({ ...params }) -> AuditLogListResponsesV4PagePaginationArray</code>
+- <code title="get /user/audit_logs">client.user.auditLogs.<a href="./src/resources/user/audit-logs.ts">list</a>({ ...params }) -> AuditLogsV4PagePaginationArray</code>
 
 ## Billing
 
@@ -175,7 +172,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/user/subscriptions.ts">RatePlan</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">Subscription</a></code>
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionComponent</a></code>
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionComponentValue</a></code>
+- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionZone</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionDeleteResponse</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionEditResponse</a></code>
@@ -2605,6 +2606,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/rulesets/rulesets.ts">RequestRule</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">ResponeRule</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>
@@ -2921,13 +2924,9 @@ Methods:
 
 # AuditLogs
 
-Types:
-
-- <code><a href="./src/resources/audit-logs.ts">AuditLogListResponse</a></code>
-
 Methods:
 
-- <code title="get /accounts/{account_id}/audit_logs">client.auditLogs.<a href="./src/resources/audit-logs.ts">list</a>({ ...params }) -> AuditLogListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/audit_logs">client.auditLogs.<a href="./src/resources/audit-logs.ts">list</a>({ ...params }) -> AuditLogsV4PagePaginationArray</code>
 
 # Billing
 
@@ -4709,6 +4708,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Tunnel</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelConnection</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">WARPConnectorTunnel</a></code>
 
 Methods:
