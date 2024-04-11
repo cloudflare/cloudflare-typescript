@@ -5,7 +5,6 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
-import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 
 export class Rules extends APIResource {
   /**
@@ -694,7 +693,7 @@ export interface RuleCreateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: RulesetsAPI.ResponseRule;
+  rules: Array<BlockRule | ExecuteRule | LogRule | SkipRule>;
 
   /**
    * The version of the ruleset.
@@ -762,7 +761,7 @@ export interface RuleDeleteResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: RulesetsAPI.ResponseRule;
+  rules: Array<BlockRule | ExecuteRule | LogRule | SkipRule>;
 
   /**
    * The version of the ruleset.
@@ -830,7 +829,7 @@ export interface RuleEditResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: RulesetsAPI.ResponseRule;
+  rules: Array<BlockRule | ExecuteRule | LogRule | SkipRule>;
 
   /**
    * The version of the ruleset.
