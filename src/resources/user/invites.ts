@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
+import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Invites extends APIResource {
@@ -85,36 +85,12 @@ export interface Invite {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<Invite.Role>;
+  roles?: Array<AccountsAPI.Role>;
 
   /**
    * Current status of the invitation.
    */
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
-}
-
-export namespace Invite {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<PermissionGroupsAPI.Permission>;
-  }
 }
 
 export type InviteEditResponse = unknown | string | null;

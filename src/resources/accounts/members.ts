@@ -3,20 +3,19 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as Shared from 'cloudflare/resources/shared';
+import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
   /**
    * Add a user to the list of members for this account.
    */
-  create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<MemberWithInviteCode> {
+  create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<UserWithInviteCode> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{
-        result: MemberWithInviteCode;
+        result: UserWithInviteCode;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -28,13 +27,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.User> {
+  ): Core.APIPromise<AccountsAPI.User> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.User }>
+      }) as Core.APIPromise<{ result: AccountsAPI.User }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,11 +76,11 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.User> {
+  ): Core.APIPromise<AccountsAPI.User> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: Shared.User;
+        result: AccountsAPI.User;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -89,54 +88,7 @@ export class Members extends APIResource {
 
 export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
 
-export interface MemberRole {
-  /**
-   * Role identifier tag.
-   */
-  id: string;
-
-  /**
-   * Description of role's permissions.
-   */
-  description: string;
-
-  /**
-   * Role name.
-   */
-  name: string;
-
-  permissions: MemberRole.Permissions;
-}
-
-export namespace MemberRole {
-  export interface Permissions {
-    analytics?: RolesAPI.PermissionGrant;
-
-    billing?: RolesAPI.PermissionGrant;
-
-    cache_purge?: RolesAPI.PermissionGrant;
-
-    dns?: RolesAPI.PermissionGrant;
-
-    dns_records?: RolesAPI.PermissionGrant;
-
-    lb?: RolesAPI.PermissionGrant;
-
-    logs?: RolesAPI.PermissionGrant;
-
-    organization?: RolesAPI.PermissionGrant;
-
-    ssl?: RolesAPI.PermissionGrant;
-
-    waf?: RolesAPI.PermissionGrant;
-
-    zone_settings?: RolesAPI.PermissionGrant;
-
-    zones?: RolesAPI.PermissionGrant;
-  }
-}
-
-export interface MemberWithInviteCode {
+export interface UserWithInviteCode {
   /**
    * Membership identifier tag.
    */
@@ -145,11 +97,11 @@ export interface MemberWithInviteCode {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<MemberRole>;
+  roles: Array<UserWithInviteCode.Role>;
 
   status: unknown;
 
-  user: MemberWithInviteCode.User;
+  user: UserWithInviteCode.User;
 
   /**
    * The unique activation code for the account membership.
@@ -157,7 +109,54 @@ export interface MemberWithInviteCode {
   code?: string;
 }
 
-export namespace MemberWithInviteCode {
+export namespace UserWithInviteCode {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: RolesAPI.PermissionGrant;
+
+      billing?: RolesAPI.PermissionGrant;
+
+      cache_purge?: RolesAPI.PermissionGrant;
+
+      dns?: RolesAPI.PermissionGrant;
+
+      dns_records?: RolesAPI.PermissionGrant;
+
+      lb?: RolesAPI.PermissionGrant;
+
+      logs?: RolesAPI.PermissionGrant;
+
+      organization?: RolesAPI.PermissionGrant;
+
+      ssl?: RolesAPI.PermissionGrant;
+
+      waf?: RolesAPI.PermissionGrant;
+
+      zone_settings?: RolesAPI.PermissionGrant;
+
+      zones?: RolesAPI.PermissionGrant;
+    }
+  }
+
   export interface User {
     /**
      * The contact email address of the user.
@@ -206,36 +205,12 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<MemberListResponse.Role>;
+  roles: Array<AccountsAPI.Role>;
 
   /**
    * A member's status in the organization.
    */
   status: 'accepted' | 'invited';
-}
-
-export namespace MemberListResponse {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role Name.
-     */
-    name: string;
-
-    /**
-     * Access permissions for this User.
-     */
-    permissions: Array<PermissionGroupsAPI.Permission>;
-  }
 }
 
 export interface MemberDeleteResponse {
@@ -276,7 +251,16 @@ export interface MemberUpdateParams {
   /**
    * Body param: Roles assigned to this member.
    */
-  roles: Array<MemberRole>;
+  roles: Array<MemberUpdateParams.Role>;
+}
+
+export namespace MemberUpdateParams {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+  }
 }
 
 export interface MemberListParams extends V4PagePaginationArrayParams {
@@ -318,8 +302,7 @@ export interface MemberGetParams {
 }
 
 export namespace Members {
-  export import MemberRole = MembersAPI.MemberRole;
-  export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
+  export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
