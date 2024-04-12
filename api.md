@@ -10,13 +10,14 @@ Types:
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
-- <code><a href="./src/resources/shared.ts">User</a></code>
 
 # Accounts
 
 Types:
 
 - <code><a href="./src/resources/accounts/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">Role</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">User</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountListResponse</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountGetResponse</a></code>
@@ -31,14 +32,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/members.ts">MemberRole</a></code>
-- <code><a href="./src/resources/accounts/members.ts">MemberWithInviteCode</a></code>
+- <code><a href="./src/resources/accounts/members.ts">UserWithInviteCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> MemberWithInviteCode</code>
+- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> UserWithInviteCode</code>
 - <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> User</code>
 - <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MemberListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
@@ -49,12 +49,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
-- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RolesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
 # OriginCACertificates
