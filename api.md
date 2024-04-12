@@ -9,6 +9,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
+- <code><a href="./src/resources/shared.ts">Tunnel</a></code>
 
 # Accounts
 
@@ -2634,7 +2635,7 @@ Types:
 - <code><a href="./src/resources/rulesets/rules.ts">ChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">CompressResponseRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">JsChallengeRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">JSChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">Logging</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ManagedChallengeRule</a></code>
@@ -4000,7 +4001,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/warp-connector.ts">WARPConnector</a></code>
 - <code><a href="./src/resources/warp-connector.ts">WARPConnectorCreateResponse</a></code>
 - <code><a href="./src/resources/warp-connector.ts">WARPConnectorListResponse</a></code>
 - <code><a href="./src/resources/warp-connector.ts">WARPConnectorDeleteResponse</a></code>
@@ -4738,7 +4738,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Connection</a></code>
-- <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">Tunnel</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/tunnels/tunnels.ts">TunnelDeleteResponse</a></code>

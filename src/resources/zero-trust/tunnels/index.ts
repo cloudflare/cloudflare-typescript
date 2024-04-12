@@ -17,7 +17,6 @@ export {
 } from './configurations';
 export {
   Connection,
-  Tunnel,
   TunnelCreateResponse,
   TunnelListResponse,
   TunnelDeleteResponse,

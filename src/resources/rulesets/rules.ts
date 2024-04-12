@@ -535,7 +535,7 @@ export namespace ExecuteRule {
   }
 }
 
-export interface JsChallengeRule {
+export interface JSChallengeRule {
   /**
    * The timestamp of when the rule was last modified.
    */
@@ -2071,7 +2071,7 @@ export interface RuleCreateResponse {
     | ChallengeRule
     | CompressResponseRule
     | ExecuteRule
-    | JsChallengeRule
+    | JSChallengeRule
     | LogRule
     | ManagedChallengeRule
     | RedirectRule
@@ -2155,7 +2155,7 @@ export interface RuleDeleteResponse {
     | ChallengeRule
     | CompressResponseRule
     | ExecuteRule
-    | JsChallengeRule
+    | JSChallengeRule
     | LogRule
     | ManagedChallengeRule
     | RedirectRule
@@ -2239,7 +2239,7 @@ export interface RuleEditResponse {
     | ChallengeRule
     | CompressResponseRule
     | ExecuteRule
-    | JsChallengeRule
+    | JSChallengeRule
     | LogRule
     | ManagedChallengeRule
     | RedirectRule
@@ -2268,7 +2268,7 @@ export type RuleCreateParams =
   | RuleCreateParams.ChallengeRule
   | RuleCreateParams.CompressResponseRule
   | RuleCreateParams.ExecuteRule
-  | RuleCreateParams.JsChallengeRule
+  | RuleCreateParams.JSChallengeRule
   | RuleCreateParams.LogRule
   | RuleCreateParams.ManagedChallengeRule
   | RuleCreateParams.RedirectRule
@@ -2680,7 +2680,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface JsChallengeRule {
+  export interface JSChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -4056,7 +4056,7 @@ export type RuleEditParams =
   | RuleEditParams.ChallengeRule
   | RuleEditParams.CompressResponseRule
   | RuleEditParams.ExecuteRule
-  | RuleEditParams.JsChallengeRule
+  | RuleEditParams.JSChallengeRule
   | RuleEditParams.LogRule
   | RuleEditParams.ManagedChallengeRule
   | RuleEditParams.RedirectRule
@@ -4468,7 +4468,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface JsChallengeRule {
+  export interface JSChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -5832,7 +5832,7 @@ export namespace Rules {
   export import ChallengeRule = RulesAPI.ChallengeRule;
   export import CompressResponseRule = RulesAPI.CompressResponseRule;
   export import ExecuteRule = RulesAPI.ExecuteRule;
-  export import JsChallengeRule = RulesAPI.JsChallengeRule;
+  export import JSChallengeRule = RulesAPI.JSChallengeRule;
   export import LogRule = RulesAPI.LogRule;
   export import Logging = RulesAPI.Logging;
   export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;

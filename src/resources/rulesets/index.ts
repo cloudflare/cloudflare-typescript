@@ -5,7 +5,7 @@ export {
   ChallengeRule,
   CompressResponseRule,
   ExecuteRule,
-  JsChallengeRule,
+  JSChallengeRule,
   LogRule,
   Logging,
   ManagedChallengeRule,
