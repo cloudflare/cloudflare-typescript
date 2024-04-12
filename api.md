@@ -10,6 +10,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
+- <code><a href="./src/resources/shared.ts">User</a></code>
 
 # Accounts
 
@@ -30,7 +31,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/members.ts">Member</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberRole</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberWithInviteCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
@@ -39,10 +39,10 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> MemberWithInviteCode</code>
-- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> Member</code>
+- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> User</code>
 - <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MemberListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> Member</code>
+- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> User</code>
 
 ## Roles
 

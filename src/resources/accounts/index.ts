@@ -2,7 +2,6 @@
 
 export { Accounts } from './accounts';
 export {
-  Member,
   MemberRole,
   MemberWithInviteCode,
   MemberListResponse,
