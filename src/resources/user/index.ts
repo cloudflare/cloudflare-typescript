@@ -51,4 +51,4 @@ export {
   SubscriptionsSinglePage,
   Subscriptions,
 } from './subscriptions';
-export { UserResource } from './user';
+export { User } from './user';
