@@ -146,7 +146,7 @@ export class Cloudflare extends Core.APIClient {
   originCACertificates: API.OriginCACertificates = new API.OriginCACertificates(this);
   ips: API.IPs = new API.IPs(this);
   memberships: API.Memberships = new API.Memberships(this);
-  user: API.UserResource = new API.UserResource(this);
+  user: API.User = new API.User(this);
   zones: API.Zones = new API.Zones(this);
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
   cache: API.Cache = new API.Cache(this);
@@ -397,7 +397,7 @@ export namespace Cloudflare {
 
   export import Memberships = API.Memberships;
 
-  export import UserResource = API.UserResource;
+  export import User = API.User;
 
   export import Zones = API.Zones;
 
@@ -555,8 +555,12 @@ export namespace Cloudflare {
   export import Identifier = API.Identifier;
   export import LoadBalancerPreview = API.LoadBalancerPreview;
   export import PaginationInfo = API.PaginationInfo;
+  export import Permission = API.Permission;
+  export import PermissionGrant = API.PermissionGrant;
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
+  export import Role = API.Role;
+  export import User = API.User;
 }
 
 export default Cloudflare;

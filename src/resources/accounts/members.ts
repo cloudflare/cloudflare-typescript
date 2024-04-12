@@ -3,8 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as UserAPI from 'cloudflare/resources/user/user';
+import * as Shared from 'cloudflare/resources/shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
@@ -27,13 +26,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserAPI.User> {
+  ): Core.APIPromise<Shared.User> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: UserAPI.User }>
+      }) as Core.APIPromise<{ result: Shared.User }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,11 +75,11 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UserAPI.User> {
+  ): Core.APIPromise<Shared.User> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: UserAPI.User;
+        result: Shared.User;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -131,29 +130,29 @@ export namespace UserWithInviteCode {
 
   export namespace Role {
     export interface Permissions {
-      analytics?: RolesAPI.PermissionGrant;
+      analytics?: Shared.PermissionGrant;
 
-      billing?: RolesAPI.PermissionGrant;
+      billing?: Shared.PermissionGrant;
 
-      cache_purge?: RolesAPI.PermissionGrant;
+      cache_purge?: Shared.PermissionGrant;
 
-      dns?: RolesAPI.PermissionGrant;
+      dns?: Shared.PermissionGrant;
 
-      dns_records?: RolesAPI.PermissionGrant;
+      dns_records?: Shared.PermissionGrant;
 
-      lb?: RolesAPI.PermissionGrant;
+      lb?: Shared.PermissionGrant;
 
-      logs?: RolesAPI.PermissionGrant;
+      logs?: Shared.PermissionGrant;
 
-      organization?: RolesAPI.PermissionGrant;
+      organization?: Shared.PermissionGrant;
 
-      ssl?: RolesAPI.PermissionGrant;
+      ssl?: Shared.PermissionGrant;
 
-      waf?: RolesAPI.PermissionGrant;
+      waf?: Shared.PermissionGrant;
 
-      zone_settings?: RolesAPI.PermissionGrant;
+      zone_settings?: Shared.PermissionGrant;
 
-      zones?: RolesAPI.PermissionGrant;
+      zones?: Shared.PermissionGrant;
     }
   }
 
@@ -205,7 +204,7 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<UserAPI.Role>;
+  roles: Array<Shared.Role>;
 
   /**
    * A member's status in the organization.

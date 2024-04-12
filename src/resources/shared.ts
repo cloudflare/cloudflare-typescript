@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from 'cloudflare/resources/shared';
-import { V4PagePaginationArray } from 'cloudflare/pagination';
+import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
 
 export interface AuditLog {
   /**
@@ -263,6 +263,14 @@ export interface PaginationInfo {
   total_count?: number;
 }
 
+export type Permission = string;
+
+export interface PermissionGrant {
+  read?: boolean;
+
+  write?: boolean;
+}
+
 export interface ResponseInfo {
   code: number;
 
@@ -295,5 +303,122 @@ export namespace Result {
     success: true;
   }
 }
+
+export interface Role {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role Name.
+   */
+  name: string;
+
+  /**
+   * Access permissions for this User.
+   */
+  permissions: Array<Permission>;
+}
+
+export interface User {
+  /**
+   * Membership identifier tag.
+   */
+  id: string;
+
+  /**
+   * Roles assigned to this member.
+   */
+  roles: Array<User.Role>;
+
+  status: unknown;
+
+  user: User.User;
+}
+
+export namespace User {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Shared.PermissionGrant;
+
+      billing?: Shared.PermissionGrant;
+
+      cache_purge?: Shared.PermissionGrant;
+
+      dns?: Shared.PermissionGrant;
+
+      dns_records?: Shared.PermissionGrant;
+
+      lb?: Shared.PermissionGrant;
+
+      logs?: Shared.PermissionGrant;
+
+      organization?: Shared.PermissionGrant;
+
+      ssl?: Shared.PermissionGrant;
+
+      waf?: Shared.PermissionGrant;
+
+      zone_settings?: Shared.PermissionGrant;
+
+      zones?: Shared.PermissionGrant;
+    }
+  }
+
+  export interface User {
+    /**
+     * The contact email address of the user.
+     */
+    email: string;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * User's first name
+     */
+    first_name?: string | null;
+
+    /**
+     * User's last name
+     */
+    last_name?: string | null;
+
+    /**
+     * Indicates whether two-factor authentication is enabled for the user account.
+     * Does not apply to API authentication.
+     */
+    two_factor_authentication_enabled?: boolean;
+  }
+}
+
+export class RolesSinglePage extends SinglePage<Role> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

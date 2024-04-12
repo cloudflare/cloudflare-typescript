@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
-import * as UserAPI from 'cloudflare/resources/user/user';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Invites extends APIResource {
@@ -85,7 +85,7 @@ export interface Invite {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<UserAPI.Role>;
+  roles?: Array<Shared.Role>;
 
   /**
    * Current status of the invitation.
