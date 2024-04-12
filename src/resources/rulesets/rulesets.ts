@@ -323,7 +323,7 @@ export interface RulesetCreateResponse {
     | RulesAPI.ChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JsChallengeRule
+    | RulesAPI.JSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -407,7 +407,7 @@ export interface RulesetUpdateResponse {
     | RulesAPI.ChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JsChallengeRule
+    | RulesAPI.JSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -491,7 +491,7 @@ export interface RulesetGetResponse {
     | RulesAPI.ChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JsChallengeRule
+    | RulesAPI.JSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -562,7 +562,7 @@ export interface RulesetCreateParams {
     | RulesAPI.ChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JsChallengeRule
+    | RulesAPI.JSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -602,7 +602,7 @@ export interface RulesetUpdateParams {
     | RulesAPI.ChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JsChallengeRule
+    | RulesAPI.JSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -718,7 +718,7 @@ export namespace Rulesets {
   export import ChallengeRule = RulesAPI.ChallengeRule;
   export import CompressResponseRule = RulesAPI.CompressResponseRule;
   export import ExecuteRule = RulesAPI.ExecuteRule;
-  export import JsChallengeRule = RulesAPI.JsChallengeRule;
+  export import JSChallengeRule = RulesAPI.JSChallengeRule;
   export import LogRule = RulesAPI.LogRule;
   export import Logging = RulesAPI.Logging;
   export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;

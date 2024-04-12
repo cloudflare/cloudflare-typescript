@@ -208,7 +208,7 @@ export interface VersionGetResponse {
     | RulesAPI.ChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JsChallengeRule
+    | RulesAPI.JSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
