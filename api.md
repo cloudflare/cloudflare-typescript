@@ -4000,6 +4000,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/warp-connector.ts">WARPConnector</a></code>
 - <code><a href="./src/resources/warp-connector.ts">WARPConnectorCreateResponse</a></code>
 - <code><a href="./src/resources/warp-connector.ts">WARPConnectorListResponse</a></code>
 - <code><a href="./src/resources/warp-connector.ts">WARPConnectorDeleteResponse</a></code>
