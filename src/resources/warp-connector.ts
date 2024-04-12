@@ -111,7 +111,7 @@ export class WARPConnectorListResponsesV4PagePaginationArray extends V4PagePagin
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
 export type WARPConnectorCreateResponse =
-  | Shared.Tunnel
+  | Shared.CloudflareTunnel
   | WARPConnectorCreateResponse.TunnelWARPConnectorTunnel;
 
 export namespace WARPConnectorCreateResponse {
@@ -232,7 +232,9 @@ export namespace WARPConnectorCreateResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorListResponse = Shared.Tunnel | WARPConnectorListResponse.TunnelWARPConnectorTunnel;
+export type WARPConnectorListResponse =
+  | Shared.CloudflareTunnel
+  | WARPConnectorListResponse.TunnelWARPConnectorTunnel;
 
 export namespace WARPConnectorListResponse {
   /**
@@ -353,7 +355,7 @@ export namespace WARPConnectorListResponse {
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
 export type WARPConnectorDeleteResponse =
-  | Shared.Tunnel
+  | Shared.CloudflareTunnel
   | WARPConnectorDeleteResponse.TunnelWARPConnectorTunnel;
 
 export namespace WARPConnectorDeleteResponse {
@@ -474,7 +476,9 @@ export namespace WARPConnectorDeleteResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorEditResponse = Shared.Tunnel | WARPConnectorEditResponse.TunnelWARPConnectorTunnel;
+export type WARPConnectorEditResponse =
+  | Shared.CloudflareTunnel
+  | WARPConnectorEditResponse.TunnelWARPConnectorTunnel;
 
 export namespace WARPConnectorEditResponse {
   /**
@@ -594,7 +598,9 @@ export namespace WARPConnectorEditResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type WARPConnectorGetResponse = Shared.Tunnel | WARPConnectorGetResponse.TunnelWARPConnectorTunnel;
+export type WARPConnectorGetResponse =
+  | Shared.CloudflareTunnel
+  | WARPConnectorGetResponse.TunnelWARPConnectorTunnel;
 
 export namespace WARPConnectorGetResponse {
   /**
