@@ -2,14 +2,16 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import * as AuditLogsAPI from 'cloudflare/resources/user/audit-logs';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
 import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
 import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
 import * as BillingAPI from 'cloudflare/resources/user/billing/billing';
 import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
+import { SinglePage } from 'cloudflare/pagination';
 
-export class User extends APIResource {
+export class UserResource extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);
   billing: BillingAPI.Billing = new BillingAPI.Billing(this._client);
   invites: InvitesAPI.Invites = new InvitesAPI.Invites(this._client);
@@ -33,6 +35,125 @@ export class User extends APIResource {
     return (this._client.get('/user', options) as Core.APIPromise<{ result: UserGetResponse }>)._thenUnwrap(
       (obj) => obj.result,
     );
+  }
+}
+
+export class RolesSinglePage extends SinglePage<Role> {}
+
+export type Permission = string;
+
+export interface Role {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role Name.
+   */
+  name: string;
+
+  /**
+   * Access permissions for this User.
+   */
+  permissions: Array<Permission>;
+}
+
+export interface User {
+  /**
+   * Membership identifier tag.
+   */
+  id: string;
+
+  /**
+   * Roles assigned to this member.
+   */
+  roles: Array<User.Role>;
+
+  status: unknown;
+
+  user: User.User;
+}
+
+export namespace User {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: RolesAPI.PermissionGrant;
+
+      billing?: RolesAPI.PermissionGrant;
+
+      cache_purge?: RolesAPI.PermissionGrant;
+
+      dns?: RolesAPI.PermissionGrant;
+
+      dns_records?: RolesAPI.PermissionGrant;
+
+      lb?: RolesAPI.PermissionGrant;
+
+      logs?: RolesAPI.PermissionGrant;
+
+      organization?: RolesAPI.PermissionGrant;
+
+      ssl?: RolesAPI.PermissionGrant;
+
+      waf?: RolesAPI.PermissionGrant;
+
+      zone_settings?: RolesAPI.PermissionGrant;
+
+      zones?: RolesAPI.PermissionGrant;
+    }
+  }
+
+  export interface User {
+    /**
+     * The contact email address of the user.
+     */
+    email: string;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * User's first name
+     */
+    first_name?: string | null;
+
+    /**
+     * User's last name
+     */
+    last_name?: string | null;
+
+    /**
+     * Indicates whether two-factor authentication is enabled for the user account.
+     * Does not apply to API authentication.
+     */
+    two_factor_authentication_enabled?: boolean;
   }
 }
 
@@ -67,7 +188,7 @@ export interface UserEditParams {
   zipcode?: string | null;
 }
 
-export namespace User {
+export namespace UserResource {
   export import AuditLogs = AuditLogsAPI.AuditLogs;
   export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
   export import Billing = BillingAPI.Billing;

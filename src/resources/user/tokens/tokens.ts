@@ -390,7 +390,6 @@ export namespace Tokens {
   export import TokenListParams = TokensAPI.TokenListParams;
   export import TokenDeleteParams = TokensAPI.TokenDeleteParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
-  export import Permission = PermissionGroupsAPI.Permission;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
   export import ValueResource = ValueAPI.ValueResource;

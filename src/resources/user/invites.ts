@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as InvitesAPI from 'cloudflare/resources/user/invites';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
+import * as UserAPI from 'cloudflare/resources/user/user';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Invites extends APIResource {
@@ -85,7 +85,7 @@ export interface Invite {
   /**
    * Roles to be assigned to this user.
    */
-  roles?: Array<AccountsAPI.Role>;
+  roles?: Array<UserAPI.Role>;
 
   /**
    * Current status of the invitation.

@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
-import { RolesSinglePage } from 'cloudflare/resources/accounts/accounts';
+import * as UserAPI from 'cloudflare/resources/user/user';
+import { RolesSinglePage } from 'cloudflare/resources/user/user';
 
 export class Roles extends APIResource {
   /**
@@ -13,7 +13,7 @@ export class Roles extends APIResource {
   list(
     params: RoleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RolesSinglePage, AccountsAPI.Role> {
+  ): Core.PagePromise<RolesSinglePage, UserAPI.Role> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesSinglePage, options);
   }
