@@ -550,13 +550,13 @@ export namespace Cloudflare {
   export import CloudforceOne = API.CloudforceOne;
 
   export import AuditLog = API.AuditLog;
+  export import CloudflareTunnel = API.CloudflareTunnel;
   export import ErrorData = API.ErrorData;
   export import Identifier = API.Identifier;
   export import LoadBalancerPreview = API.LoadBalancerPreview;
   export import PaginationInfo = API.PaginationInfo;
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
-  export import Tunnel = API.Tunnel;
 }
 
 export default Cloudflare;
