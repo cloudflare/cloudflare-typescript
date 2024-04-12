@@ -18,14 +18,17 @@ export class Users extends APIResource {
   /**
    * Gets a list of users for an account.
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<UsersSinglePage, User> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/users`, UsersSinglePage, options);
+  list(
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
+    return this._client.getAPIList(`/accounts/${identifier}/access/users`, AccessUsersSinglePage, options);
   }
 }
 
-export class UsersSinglePage extends SinglePage<User> {}
+export class AccessUsersSinglePage extends SinglePage<AccessUser> {}
 
-export interface User {
+export interface AccessUser {
   /**
    * UUID
    */
@@ -77,8 +80,8 @@ export interface User {
 }
 
 export namespace Users {
-  export import User = UsersAPI.User;
-  export import UsersSinglePage = UsersAPI.UsersSinglePage;
+  export import AccessUser = UsersAPI.AccessUser;
+  export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
