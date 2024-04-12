@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as UserAPI from 'cloudflare/resources/user/user';
-import { RolesSinglePage } from 'cloudflare/resources/user/user';
+import * as Shared from 'cloudflare/resources/shared';
+import { RolesSinglePage } from 'cloudflare/resources/shared';
 
 export class Roles extends APIResource {
   /**
@@ -13,7 +13,7 @@ export class Roles extends APIResource {
   list(
     params: RoleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RolesSinglePage, UserAPI.Role> {
+  ): Core.PagePromise<RolesSinglePage, Shared.Role> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/roles`, RolesSinglePage, options);
   }
@@ -35,12 +35,6 @@ export class Roles extends APIResource {
   }
 }
 
-export interface PermissionGrant {
-  read?: boolean;
-
-  write?: boolean;
-}
-
 export type RoleGetResponse = unknown | string | null;
 
 export interface RoleListParams {
@@ -52,7 +46,6 @@ export interface RoleGetParams {
 }
 
 export namespace Roles {
-  export import PermissionGrant = RolesAPI.PermissionGrant;
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
