@@ -4555,11 +4555,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/users/users.ts">User</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
 
 Methods:
 
-- <code title="get /accounts/{identifier}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>(identifier) -> UsersSinglePage</code>
+- <code title="get /accounts/{identifier}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>(identifier) -> AccessUsersSinglePage</code>
 
 #### ActiveSessions
 

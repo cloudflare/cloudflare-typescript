@@ -23,6 +23,7 @@ export {
   ServiceTokenRule,
   Access,
 } from './access';
+export { AccessUser, AccessUsersSinglePage, Users } from './users/index';
 export {
   AllowedHeadersh,
   AllowedIdpsh,
@@ -92,7 +93,6 @@ export {
   ServiceTokens,
 } from './service-tokens';
 export { Tag, TagDeleteResponse, TagCreateParams, TagUpdateParams, TagsSinglePage, Tags } from './tags';
-export { User, UsersSinglePage, Users } from './users/index';
 export {
   ZeroTrustGroup,
   GroupDeleteResponse,
