@@ -451,8 +451,8 @@ export namespace Access {
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import Logs = LogsAPI.Logs;
   export import Users = UsersAPI.Users;
-  export import User = UsersAPI.User;
-  export import UsersSinglePage = UsersAPI.UsersSinglePage;
+  export import AccessUser = UsersAPI.AccessUser;
+  export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
   export import CustomPages = CustomPagesAPI.CustomPages;
   export import CustomPage = CustomPagesAPI.CustomPage;
   export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
