@@ -3,13 +3,13 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
+- <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
-- <code><a href="./src/resources/shared.ts">Tunnel</a></code>
 
 # Accounts
 
