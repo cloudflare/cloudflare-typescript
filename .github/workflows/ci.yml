@@ -28,3 +28,26 @@ jobs:
       - name: Check types
         run: |
           yarn build
+
+  examples:
+    name: examples
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: |
+          yarn install
+
+      - env: 
+          CLOUDFLARE_ACCOUNT_ID: f037e56e89293a057740de681ac9abbe
+          CLOUDFLARE_EMAIL: terraform-acceptance-test@cfapi.net
+          CLOUDFLARE_ZONE_ID: 0da42c8d2132a9ddaf714f9e7c92011
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+        run: |
+            yarn tsn ./examples/workers/ai/demo.ts
