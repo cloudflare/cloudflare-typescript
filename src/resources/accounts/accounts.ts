@@ -5,8 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
-import { SinglePage, V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Accounts extends APIResource {
   members: MembersAPI.Members = new MembersAPI.Members(this._client);
@@ -59,8 +58,6 @@ export class Accounts extends APIResource {
 }
 
 export class AccountListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountListResponse> {}
-
-export class RolesSinglePage extends SinglePage<Role> {}
 
 export interface Account {
   /**
@@ -116,121 +113,6 @@ export namespace Account {
      * Deprecated in favor of `default_nameservers`.
      */
     use_account_custom_ns_by_default?: boolean;
-  }
-}
-
-export interface Role {
-  /**
-   * Role identifier tag.
-   */
-  id: string;
-
-  /**
-   * Description of role's permissions.
-   */
-  description: string;
-
-  /**
-   * Role Name.
-   */
-  name: string;
-
-  /**
-   * Access permissions for this User.
-   */
-  permissions: Array<PermissionGroupsAPI.Permission>;
-}
-
-export interface User {
-  /**
-   * Membership identifier tag.
-   */
-  id: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles: Array<User.Role>;
-
-  status: unknown;
-
-  user: User.User;
-}
-
-export namespace User {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: RolesAPI.PermissionGrant;
-
-      billing?: RolesAPI.PermissionGrant;
-
-      cache_purge?: RolesAPI.PermissionGrant;
-
-      dns?: RolesAPI.PermissionGrant;
-
-      dns_records?: RolesAPI.PermissionGrant;
-
-      lb?: RolesAPI.PermissionGrant;
-
-      logs?: RolesAPI.PermissionGrant;
-
-      organization?: RolesAPI.PermissionGrant;
-
-      ssl?: RolesAPI.PermissionGrant;
-
-      waf?: RolesAPI.PermissionGrant;
-
-      zone_settings?: RolesAPI.PermissionGrant;
-
-      zones?: RolesAPI.PermissionGrant;
-    }
-  }
-
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
   }
 }
 

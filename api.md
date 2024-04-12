@@ -16,8 +16,6 @@ Types:
 Types:
 
 - <code><a href="./src/resources/accounts/accounts.ts">Account</a></code>
-- <code><a href="./src/resources/accounts/accounts.ts">Role</a></code>
-- <code><a href="./src/resources/accounts/accounts.ts">User</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountListResponse</a></code>
 - <code><a href="./src/resources/accounts/accounts.ts">AccountGetResponse</a></code>
@@ -104,6 +102,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/user/user.ts">Permission</a></code>
+- <code><a href="./src/resources/user/user.ts">Role</a></code>
+- <code><a href="./src/resources/user/user.ts">User</a></code>
 - <code><a href="./src/resources/user/user.ts">UserEditResponse</a></code>
 - <code><a href="./src/resources/user/user.ts">UserGetResponse</a></code>
 
@@ -215,7 +216,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/tokens/permission-groups.ts">Permission</a></code>
 - <code><a href="./src/resources/user/tokens/permission-groups.ts">PermissionGroupListResponse</a></code>
 
 Methods:

@@ -18,7 +18,6 @@ export {
   Tokens,
 } from './tokens';
 export {
-  Permission,
   PermissionGroupListResponse,
   PermissionGroupListResponsesSinglePage,
   PermissionGroups,
