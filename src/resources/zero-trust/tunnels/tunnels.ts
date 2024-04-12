@@ -149,7 +149,7 @@ export interface TunnelCreateResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelListResponse = Shared.Tunnel | TunnelListResponse.TunnelWARPConnectorTunnel;
+export type TunnelListResponse = Shared.CloudflareTunnel | TunnelListResponse.TunnelWARPConnectorTunnel;
 
 export namespace TunnelListResponse {
   /**
@@ -297,7 +297,7 @@ export interface TunnelDeleteResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelEditResponse = Shared.Tunnel | TunnelEditResponse.TunnelWARPConnectorTunnel;
+export type TunnelEditResponse = Shared.CloudflareTunnel | TunnelEditResponse.TunnelWARPConnectorTunnel;
 
 export namespace TunnelEditResponse {
   /**
