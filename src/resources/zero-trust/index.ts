@@ -41,7 +41,6 @@ export {
 } from './identity-providers';
 export {
   Connection,
-  Tunnel,
   TunnelCreateResponse,
   TunnelListResponse,
   TunnelDeleteResponse,

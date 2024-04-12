@@ -318,7 +318,7 @@ export namespace ScanGetResponse {
 
       ip: string;
 
-      js: Page.Js;
+      js: Page.JS;
 
       securityViolations: Array<Page.SecurityViolation>;
 
@@ -370,11 +370,11 @@ export namespace ScanGetResponse {
         priority?: string;
       }
 
-      export interface Js {
-        variables: Array<Js.Variable>;
+      export interface JS {
+        variables: Array<JS.Variable>;
       }
 
-      export namespace Js {
+      export namespace JS {
         export interface Variable {
           name: string;
 

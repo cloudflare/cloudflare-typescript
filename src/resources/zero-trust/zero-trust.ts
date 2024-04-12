@@ -90,7 +90,6 @@ export namespace ZeroTrust {
   export import Percentiles = DEXAPI.Percentiles;
   export import Tunnels = TunnelsAPI.Tunnels;
   export import Connection = TunnelsAPI.Connection;
-  export import Tunnel = TunnelsAPI.Tunnel;
   export import TunnelCreateResponse = TunnelsAPI.TunnelCreateResponse;
   export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
   export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
