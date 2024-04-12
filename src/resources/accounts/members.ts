@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
+import * as UserAPI from 'cloudflare/resources/user/user';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Members extends APIResource {
@@ -27,13 +27,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountsAPI.User> {
+  ): Core.APIPromise<UserAPI.User> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: AccountsAPI.User }>
+      }) as Core.APIPromise<{ result: UserAPI.User }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,11 +76,11 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountsAPI.User> {
+  ): Core.APIPromise<UserAPI.User> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: AccountsAPI.User;
+        result: UserAPI.User;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -205,7 +205,7 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles: Array<AccountsAPI.Role>;
+  roles: Array<UserAPI.Role>;
 
   /**
    * A member's status in the organization.

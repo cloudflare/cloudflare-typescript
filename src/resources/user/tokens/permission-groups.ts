@@ -22,12 +22,9 @@ export class PermissionGroups extends APIResource {
 
 export class PermissionGroupListResponsesSinglePage extends SinglePage<PermissionGroupListResponse> {}
 
-export type Permission = string;
-
 export type PermissionGroupListResponse = unknown;
 
 export namespace PermissionGroups {
-  export import Permission = PermissionGroupsAPI.Permission;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
 }
