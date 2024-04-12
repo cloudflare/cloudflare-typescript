@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as MembersAPI from 'cloudflare/resources/accounts/members';
+import * as Shared from 'cloudflare/resources/shared';
 import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
@@ -27,13 +28,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Member> {
+  ): Core.APIPromise<Shared.User> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Member }>
+      }) as Core.APIPromise<{ result: Shared.User }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -72,63 +73,21 @@ export class Members extends APIResource {
   /**
    * Get information about a specific member of an account.
    */
-  get(memberId: string, params: MemberGetParams, options?: Core.RequestOptions): Core.APIPromise<Member> {
+  get(
+    memberId: string,
+    params: MemberGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.User> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: Member;
+        result: Shared.User;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
-
-export interface Member {
-  /**
-   * Membership identifier tag.
-   */
-  id: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles: Array<MemberRole>;
-
-  status: unknown;
-
-  user: Member.User;
-}
-
-export namespace Member {
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
 
 export interface MemberRole {
   /**
@@ -359,7 +318,6 @@ export interface MemberGetParams {
 }
 
 export namespace Members {
-  export import Member = MembersAPI.Member;
   export import MemberRole = MembersAPI.MemberRole;
   export import MemberWithInviteCode = MembersAPI.MemberWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;

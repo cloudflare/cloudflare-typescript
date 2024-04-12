@@ -557,6 +557,7 @@ export namespace Cloudflare {
   export import PaginationInfo = API.PaginationInfo;
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
+  export import User = API.User;
 }
 
 export default Cloudflare;

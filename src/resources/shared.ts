@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from 'cloudflare/resources/shared';
+import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import { V4PagePaginationArray } from 'cloudflare/pagination';
 
 export interface AuditLog {
@@ -293,6 +294,52 @@ export namespace Result {
      * Whether the API call was successful
      */
     success: true;
+  }
+}
+
+export interface User {
+  /**
+   * Membership identifier tag.
+   */
+  id: string;
+
+  /**
+   * Roles assigned to this member.
+   */
+  roles: Array<MembersAPI.MemberRole>;
+
+  status: unknown;
+
+  user: User.User;
+}
+
+export namespace User {
+  export interface User {
+    /**
+     * The contact email address of the user.
+     */
+    email: string;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * User's first name
+     */
+    first_name?: string | null;
+
+    /**
+     * User's last name
+     */
+    last_name?: string | null;
+
+    /**
+     * Indicates whether two-factor authentication is enabled for the user account.
+     * Does not apply to API authentication.
+     */
+    two_factor_authentication_enabled?: boolean;
   }
 }
 
