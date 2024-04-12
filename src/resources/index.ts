@@ -72,7 +72,7 @@ export { Stream } from './stream/stream';
 export { Subscriptions } from './subscriptions';
 export { URLNormalization } from './url-normalization';
 export { URLScanner } from './url-scanner/url-scanner';
-export { User } from './user/user';
+export { UserResource } from './user/user';
 export { Vectorize } from './vectorize/vectorize';
 export { WARPConnector } from './warp-connector';
 export { WaitingRooms } from './waiting-rooms/waiting-rooms';

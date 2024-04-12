@@ -4,7 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
+import * as UserAPI from 'cloudflare/resources/user/user';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Organizations extends APIResource {
@@ -68,7 +68,7 @@ export interface Organization {
   /**
    * Access permissions for this User.
    */
-  permissions?: Array<PermissionGroupsAPI.Permission>;
+  permissions?: Array<UserAPI.Permission>;
 
   /**
    * List of roles that a user has within an organization.
