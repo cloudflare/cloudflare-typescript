@@ -3,8 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
+import * as Shared from 'cloudflare/resources/shared';
 import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
-import * as RolesAPI from 'cloudflare/resources/accounts/roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Memberships extends APIResource {
@@ -110,29 +110,29 @@ export namespace Membership {
    * All access permissions for the user at the account.
    */
   export interface Permissions {
-    analytics?: RolesAPI.PermissionGrant;
+    analytics?: Shared.PermissionGrant;
 
-    billing?: RolesAPI.PermissionGrant;
+    billing?: Shared.PermissionGrant;
 
-    cache_purge?: RolesAPI.PermissionGrant;
+    cache_purge?: Shared.PermissionGrant;
 
-    dns?: RolesAPI.PermissionGrant;
+    dns?: Shared.PermissionGrant;
 
-    dns_records?: RolesAPI.PermissionGrant;
+    dns_records?: Shared.PermissionGrant;
 
-    lb?: RolesAPI.PermissionGrant;
+    lb?: Shared.PermissionGrant;
 
-    logs?: RolesAPI.PermissionGrant;
+    logs?: Shared.PermissionGrant;
 
-    organization?: RolesAPI.PermissionGrant;
+    organization?: Shared.PermissionGrant;
 
-    ssl?: RolesAPI.PermissionGrant;
+    ssl?: Shared.PermissionGrant;
 
-    waf?: RolesAPI.PermissionGrant;
+    waf?: Shared.PermissionGrant;
 
-    zone_settings?: RolesAPI.PermissionGrant;
+    zone_settings?: Shared.PermissionGrant;
 
-    zones?: RolesAPI.PermissionGrant;
+    zones?: Shared.PermissionGrant;
   }
 }
 

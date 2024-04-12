@@ -8,8 +8,12 @@ Types:
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Permission</a></code>
+- <code><a href="./src/resources/shared.ts">PermissionGrant</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
+- <code><a href="./src/resources/shared.ts">Role</a></code>
+- <code><a href="./src/resources/shared.ts">User</a></code>
 
 # Accounts
 
@@ -46,7 +50,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/roles.ts">PermissionGrant</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
@@ -102,9 +105,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/user.ts">Permission</a></code>
-- <code><a href="./src/resources/user/user.ts">Role</a></code>
-- <code><a href="./src/resources/user/user.ts">User</a></code>
 - <code><a href="./src/resources/user/user.ts">UserEditResponse</a></code>
 - <code><a href="./src/resources/user/user.ts">UserGetResponse</a></code>
 
