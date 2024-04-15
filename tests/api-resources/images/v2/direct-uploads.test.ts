@@ -28,6 +28,7 @@ describe('resource directUploads', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.images.v2.directUploads.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: 'this/is/my-customid',
       expiry: '2021-01-02T02:20:00Z',
       metadata: {},
       requireSignedURLs: true,
