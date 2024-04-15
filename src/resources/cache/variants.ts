@@ -111,67 +111,67 @@ export namespace VariantEditResponse {
      * List of strings with the MIME types of all the variants that should be served
      * for avif.
      */
-    avif?: Array<unknown>;
+    avif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for bmp.
      */
-    bmp?: Array<unknown>;
+    bmp?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for gif.
      */
-    gif?: Array<unknown>;
+    gif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jp2.
      */
-    jp2?: Array<unknown>;
+    jp2?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpeg.
      */
-    jpeg?: Array<unknown>;
+    jpeg?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpg.
      */
-    jpg?: Array<unknown>;
+    jpg?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpg2.
      */
-    jpg2?: Array<unknown>;
+    jpg2?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for png.
      */
-    png?: Array<unknown>;
+    png?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for tif.
      */
-    tif?: Array<unknown>;
+    tif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for tiff.
      */
-    tiff?: Array<unknown>;
+    tiff?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for webp.
      */
-    webp?: Array<unknown>;
+    webp?: Array<string>;
   }
 }
 
@@ -208,67 +208,67 @@ export namespace VariantGetResponse {
      * List of strings with the MIME types of all the variants that should be served
      * for avif.
      */
-    avif?: Array<unknown>;
+    avif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for bmp.
      */
-    bmp?: Array<unknown>;
+    bmp?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for gif.
      */
-    gif?: Array<unknown>;
+    gif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jp2.
      */
-    jp2?: Array<unknown>;
+    jp2?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpeg.
      */
-    jpeg?: Array<unknown>;
+    jpeg?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpg.
      */
-    jpg?: Array<unknown>;
+    jpg?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpg2.
      */
-    jpg2?: Array<unknown>;
+    jpg2?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for png.
      */
-    png?: Array<unknown>;
+    png?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for tif.
      */
-    tif?: Array<unknown>;
+    tif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for tiff.
      */
-    tiff?: Array<unknown>;
+    tiff?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for webp.
      */
-    webp?: Array<unknown>;
+    webp?: Array<string>;
   }
 }
 
@@ -305,67 +305,67 @@ export namespace VariantEditParams {
      * List of strings with the MIME types of all the variants that should be served
      * for avif.
      */
-    avif?: Array<unknown>;
+    avif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for bmp.
      */
-    bmp?: Array<unknown>;
+    bmp?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for gif.
      */
-    gif?: Array<unknown>;
+    gif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jp2.
      */
-    jp2?: Array<unknown>;
+    jp2?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpeg.
      */
-    jpeg?: Array<unknown>;
+    jpeg?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpg.
      */
-    jpg?: Array<unknown>;
+    jpg?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for jpg2.
      */
-    jpg2?: Array<unknown>;
+    jpg2?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for png.
      */
-    png?: Array<unknown>;
+    png?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for tif.
      */
-    tif?: Array<unknown>;
+    tif?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for tiff.
      */
-    tiff?: Array<unknown>;
+    tiff?: Array<string>;
 
     /**
      * List of strings with the MIME types of all the variants that should be served
      * for webp.
      */
-    webp?: Array<unknown>;
+    webp?: Array<string>;
   }
 }
 
