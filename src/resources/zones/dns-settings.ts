@@ -60,7 +60,7 @@ export interface Nameserver {
   /**
    * Nameserver type
    */
-  type: 'cloudflare.standard' | 'cloudflare.foundation_dns';
+  type: 'cloudflare.standard';
 }
 
 export interface DNSSettingEditParams {
