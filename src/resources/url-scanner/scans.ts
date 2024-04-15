@@ -306,7 +306,7 @@ export namespace ScanGetResponse {
 
       console: Array<Page.Console>;
 
-      cookies: Array<Page.Cooky>;
+      cookies: Array<Page.Cookie>;
 
       country: string;
 
@@ -342,7 +342,7 @@ export namespace ScanGetResponse {
         url?: string;
       }
 
-      export interface Cooky {
+      export interface Cookie {
         domain: string;
 
         expires: number;
