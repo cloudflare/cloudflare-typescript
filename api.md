@@ -6357,3 +6357,29 @@ Methods:
 - <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">delete</a>(accountIdentifier, priorityIdentifer) -> PriorityDeleteResponse</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">get</a>(accountIdentifier, priorityIdentifer) -> Item</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/quota">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">quota</a>(accountIdentifier) -> Quota</code>
+
+# EventNotifications
+
+## R2
+
+### Configuration
+
+Types:
+
+- <code><a href="./src/resources/event-notifications/r2/configuration/configuration.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.eventNotifications.r2.configuration.<a href="./src/resources/event-notifications/r2/configuration/configuration.ts">get</a>(bucketName, { ...params }) -> ConfigurationGetResponse</code>
+
+#### Queues
+
+Types:
+
+- <code><a href="./src/resources/event-notifications/r2/configuration/queues.ts">QueueUpdateResponse</a></code>
+- <code><a href="./src/resources/event-notifications/r2/configuration/queues.ts">QueueDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>

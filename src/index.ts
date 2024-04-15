@@ -222,6 +222,7 @@ export class Cloudflare extends Core.APIClient {
   snippets: API.Snippets = new API.Snippets(this);
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
+  eventNotifications: API.EventNotifications = new API.EventNotifications(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -548,6 +549,8 @@ export namespace Cloudflare {
   export import Calls = API.Calls;
 
   export import CloudforceOne = API.CloudforceOne;
+
+  export import EventNotifications = API.EventNotifications;
 
   export import AuditLog = API.AuditLog;
   export import CloudflareTunnel = API.CloudflareTunnel;
