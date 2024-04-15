@@ -74,7 +74,7 @@ export interface Caption {
 
 export type CaptionUpdateResponse = unknown | string | null;
 
-export type CaptionDeleteResponse = unknown | Array<unknown> | string;
+export type CaptionDeleteResponse = string;
 
 export type CaptionGetResponse = Array<Caption>;
 
