@@ -49,6 +49,13 @@ export interface DirectUploadCreateParams {
   account_id: string;
 
   /**
+   * Body param: Optional Image Custom ID. Up to 1024 chars. Can include any number
+   * of subpaths, and utf8 characters. Cannot start nor end with a / (forward slash).
+   * Cannot be a UUID.
+   */
+  id?: string;
+
+  /**
    * Body param: The date after which the upload will not be accepted. Minimum: Now +
    * 2 minutes. Maximum: Now + 6 hours.
    */
