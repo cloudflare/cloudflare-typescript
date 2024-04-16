@@ -458,6 +458,68 @@ export interface CustomHostnameCreateResponse {
    * SSL properties for the custom hostname.
    */
   ssl: CustomHostnameCreateResponse.SSL;
+
+  /**
+   * This is the time the hostname was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  custom_metadata?: CustomHostnameCreateResponse.CustomMetadata;
+
+  /**
+   * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
+   * record.
+   */
+  custom_origin_server?: string;
+
+  /**
+   * A hostname that will be sent to your custom origin server as SNI for TLS
+   * handshake. This can be a valid subdomain of the zone or custom origin server
+   * name or the string ':request_host_header:' which will cause the host header in
+   * the request to be used as SNI. Not configurable with default/fallback origin
+   * server.
+   */
+  custom_origin_sni?: string;
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  ownership_verification?: CustomHostnameCreateResponse.OwnershipVerification;
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  ownership_verification_http?: CustomHostnameCreateResponse.OwnershipVerificationHTTP;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?:
+    | 'active'
+    | 'pending'
+    | 'active_redeploying'
+    | 'moved'
+    | 'pending_deletion'
+    | 'deleted'
+    | 'pending_blocked'
+    | 'pending_migration'
+    | 'pending_provisioned'
+    | 'test_pending'
+    | 'test_active'
+    | 'test_active_apex'
+    | 'test_blocked'
+    | 'test_failed'
+    | 'provisioned'
+    | 'blocked';
+
+  /**
+   * These are errors that were encountered while trying to activate a hostname.
+   */
+  verification_errors?: Array<unknown>;
 }
 
 export namespace CustomHostnameCreateResponse {
@@ -657,6 +719,53 @@ export namespace CustomHostnameCreateResponse {
       txt_value?: string;
     }
   }
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
 }
 
 export interface CustomHostnameListResponse {
@@ -674,6 +783,68 @@ export interface CustomHostnameListResponse {
    * SSL properties for the custom hostname.
    */
   ssl: CustomHostnameListResponse.SSL;
+
+  /**
+   * This is the time the hostname was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  custom_metadata?: CustomHostnameListResponse.CustomMetadata;
+
+  /**
+   * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
+   * record.
+   */
+  custom_origin_server?: string;
+
+  /**
+   * A hostname that will be sent to your custom origin server as SNI for TLS
+   * handshake. This can be a valid subdomain of the zone or custom origin server
+   * name or the string ':request_host_header:' which will cause the host header in
+   * the request to be used as SNI. Not configurable with default/fallback origin
+   * server.
+   */
+  custom_origin_sni?: string;
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  ownership_verification?: CustomHostnameListResponse.OwnershipVerification;
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  ownership_verification_http?: CustomHostnameListResponse.OwnershipVerificationHTTP;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?:
+    | 'active'
+    | 'pending'
+    | 'active_redeploying'
+    | 'moved'
+    | 'pending_deletion'
+    | 'deleted'
+    | 'pending_blocked'
+    | 'pending_migration'
+    | 'pending_provisioned'
+    | 'test_pending'
+    | 'test_active'
+    | 'test_active_apex'
+    | 'test_blocked'
+    | 'test_failed'
+    | 'provisioned'
+    | 'blocked';
+
+  /**
+   * These are errors that were encountered while trying to activate a hostname.
+   */
+  verification_errors?: Array<unknown>;
 }
 
 export namespace CustomHostnameListResponse {
@@ -873,6 +1044,53 @@ export namespace CustomHostnameListResponse {
       txt_value?: string;
     }
   }
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
 }
 
 export interface CustomHostnameDeleteResponse {
@@ -897,6 +1115,68 @@ export interface CustomHostnameEditResponse {
    * SSL properties for the custom hostname.
    */
   ssl: CustomHostnameEditResponse.SSL;
+
+  /**
+   * This is the time the hostname was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  custom_metadata?: CustomHostnameEditResponse.CustomMetadata;
+
+  /**
+   * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
+   * record.
+   */
+  custom_origin_server?: string;
+
+  /**
+   * A hostname that will be sent to your custom origin server as SNI for TLS
+   * handshake. This can be a valid subdomain of the zone or custom origin server
+   * name or the string ':request_host_header:' which will cause the host header in
+   * the request to be used as SNI. Not configurable with default/fallback origin
+   * server.
+   */
+  custom_origin_sni?: string;
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  ownership_verification?: CustomHostnameEditResponse.OwnershipVerification;
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  ownership_verification_http?: CustomHostnameEditResponse.OwnershipVerificationHTTP;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?:
+    | 'active'
+    | 'pending'
+    | 'active_redeploying'
+    | 'moved'
+    | 'pending_deletion'
+    | 'deleted'
+    | 'pending_blocked'
+    | 'pending_migration'
+    | 'pending_provisioned'
+    | 'test_pending'
+    | 'test_active'
+    | 'test_active_apex'
+    | 'test_blocked'
+    | 'test_failed'
+    | 'provisioned'
+    | 'blocked';
+
+  /**
+   * These are errors that were encountered while trying to activate a hostname.
+   */
+  verification_errors?: Array<unknown>;
 }
 
 export namespace CustomHostnameEditResponse {
@@ -1096,6 +1376,53 @@ export namespace CustomHostnameEditResponse {
       txt_value?: string;
     }
   }
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
+  }
 }
 
 export interface CustomHostnameGetResponse {
@@ -1113,6 +1440,68 @@ export interface CustomHostnameGetResponse {
    * SSL properties for the custom hostname.
    */
   ssl: CustomHostnameGetResponse.SSL;
+
+  /**
+   * This is the time the hostname was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  custom_metadata?: CustomHostnameGetResponse.CustomMetadata;
+
+  /**
+   * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
+   * record.
+   */
+  custom_origin_server?: string;
+
+  /**
+   * A hostname that will be sent to your custom origin server as SNI for TLS
+   * handshake. This can be a valid subdomain of the zone or custom origin server
+   * name or the string ':request_host_header:' which will cause the host header in
+   * the request to be used as SNI. Not configurable with default/fallback origin
+   * server.
+   */
+  custom_origin_sni?: string;
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  ownership_verification?: CustomHostnameGetResponse.OwnershipVerification;
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  ownership_verification_http?: CustomHostnameGetResponse.OwnershipVerificationHTTP;
+
+  /**
+   * Status of the hostname's activation.
+   */
+  status?:
+    | 'active'
+    | 'pending'
+    | 'active_redeploying'
+    | 'moved'
+    | 'pending_deletion'
+    | 'deleted'
+    | 'pending_blocked'
+    | 'pending_migration'
+    | 'pending_provisioned'
+    | 'test_pending'
+    | 'test_active'
+    | 'test_active_apex'
+    | 'test_blocked'
+    | 'test_failed'
+    | 'provisioned'
+    | 'blocked';
+
+  /**
+   * These are errors that were encountered while trying to activate a hostname.
+   */
+  verification_errors?: Array<unknown>;
 }
 
 export namespace CustomHostnameGetResponse {
@@ -1311,6 +1700,53 @@ export namespace CustomHostnameGetResponse {
        */
       txt_value?: string;
     }
+  }
+
+  /**
+   * These are per-hostname (customer) settings.
+   */
+  export interface CustomMetadata {
+    /**
+     * Unique metadata for this hostname.
+     */
+    key?: string;
+  }
+
+  /**
+   * This is a record which can be placed to activate a hostname.
+   */
+  export interface OwnershipVerification {
+    /**
+     * DNS Name for record.
+     */
+    name?: string;
+
+    /**
+     * DNS Record type.
+     */
+    type?: 'txt';
+
+    /**
+     * Content for the record.
+     */
+    value?: string;
+  }
+
+  /**
+   * This presents the token to be served by the given http url to activate a
+   * hostname.
+   */
+  export interface OwnershipVerificationHTTP {
+    /**
+     * Token to be served.
+     */
+    http_body?: string;
+
+    /**
+     * The HTTP URL that will be checked during custom hostname verification and where
+     * the customer should host the token.
+     */
+    http_url?: string;
   }
 }
 

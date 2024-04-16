@@ -119,12 +119,38 @@ export interface ConfigCreateParams {
   /**
    * Body param:
    */
-  name: unknown;
+  name: string;
 
   /**
    * Body param:
    */
   origin: HyperdriveAPI.Configuration;
+
+  /**
+   * Body param:
+   */
+  caching?: ConfigCreateParams.Caching;
+}
+
+export namespace ConfigCreateParams {
+  export interface Caching {
+    /**
+     * When set to true, disables the caching of SQL responses. (Default: false)
+     */
+    disabled?: boolean;
+
+    /**
+     * When present, specifies max duration for which items should persist in the
+     * cache. (Default: 60)
+     */
+    max_age?: number;
+
+    /**
+     * When present, indicates the number of seconds cache may serve the response after
+     * it becomes stale. (Default: 15)
+     */
+    stale_while_revalidate?: number;
+  }
 }
 
 export interface ConfigUpdateParams {
@@ -136,12 +162,38 @@ export interface ConfigUpdateParams {
   /**
    * Body param:
    */
-  name: unknown;
+  name: string;
 
   /**
    * Body param:
    */
   origin: HyperdriveAPI.Configuration;
+
+  /**
+   * Body param:
+   */
+  caching?: ConfigUpdateParams.Caching;
+}
+
+export namespace ConfigUpdateParams {
+  export interface Caching {
+    /**
+     * When set to true, disables the caching of SQL responses. (Default: false)
+     */
+    disabled?: boolean;
+
+    /**
+     * When present, specifies max duration for which items should persist in the
+     * cache. (Default: 60)
+     */
+    max_age?: number;
+
+    /**
+     * When present, indicates the number of seconds cache may serve the response after
+     * it becomes stale. (Default: 15)
+     */
+    stale_while_revalidate?: number;
+  }
 }
 
 export interface ConfigListParams {
@@ -167,7 +219,38 @@ export interface ConfigEditParams {
   /**
    * Body param:
    */
+  caching?: ConfigEditParams.Caching;
+
+  /**
+   * Body param:
+   */
+  name?: string;
+
+  /**
+   * Body param:
+   */
   origin?: HyperdriveAPI.Configuration;
+}
+
+export namespace ConfigEditParams {
+  export interface Caching {
+    /**
+     * When set to true, disables the caching of SQL responses. (Default: false)
+     */
+    disabled?: boolean;
+
+    /**
+     * When present, specifies max duration for which items should persist in the
+     * cache. (Default: 60)
+     */
+    max_age?: number;
+
+    /**
+     * When present, indicates the number of seconds cache may serve the response after
+     * it becomes stale. (Default: 15)
+     */
+    stale_while_revalidate?: number;
+  }
 }
 
 export interface ConfigGetParams {
