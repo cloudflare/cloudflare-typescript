@@ -290,12 +290,12 @@ export interface TestListResponse {
 
   messages: Array<Shared.ResponseInfo>;
 
-  result: Tests;
-
   /**
    * Whether the API call was successful
    */
   success: true;
+
+  result?: Tests;
 
   result_info?: TestListResponse.ResultInfo;
 }
