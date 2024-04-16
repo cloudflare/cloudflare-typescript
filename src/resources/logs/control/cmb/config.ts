@@ -54,7 +54,7 @@ export interface CmbConfig {
   regions?: string;
 }
 
-export type ConfigDeleteResponse = unknown | Array<unknown> | string;
+export type ConfigDeleteResponse = unknown;
 
 export interface ConfigCreateParams {
   /**
