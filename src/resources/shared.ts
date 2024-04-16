@@ -225,6 +225,99 @@ export interface ErrorData {
   message?: string;
 }
 
+export interface IamMember {
+  /**
+   * Membership identifier tag.
+   */
+  id: string;
+
+  /**
+   * Roles assigned to this member.
+   */
+  roles: Array<IamMember.Role>;
+
+  status: unknown;
+
+  user: IamMember.User;
+}
+
+export namespace IamMember {
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Shared.PermissionGrant;
+
+      billing?: Shared.PermissionGrant;
+
+      cache_purge?: Shared.PermissionGrant;
+
+      dns?: Shared.PermissionGrant;
+
+      dns_records?: Shared.PermissionGrant;
+
+      lb?: Shared.PermissionGrant;
+
+      logs?: Shared.PermissionGrant;
+
+      organization?: Shared.PermissionGrant;
+
+      ssl?: Shared.PermissionGrant;
+
+      waf?: Shared.PermissionGrant;
+
+      zone_settings?: Shared.PermissionGrant;
+
+      zones?: Shared.PermissionGrant;
+    }
+  }
+
+  export interface User {
+    /**
+     * The contact email address of the user.
+     */
+    email: string;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * User's first name
+     */
+    first_name?: string | null;
+
+    /**
+     * User's last name
+     */
+    last_name?: string | null;
+
+    /**
+     * Indicates whether two-factor authentication is enabled for the user account.
+     * Does not apply to API authentication.
+     */
+    two_factor_authentication_enabled?: boolean;
+  }
+}
+
 export interface Identifier {
   /**
    * Identifier
@@ -324,99 +417,6 @@ export interface Role {
    * Access permissions for this User.
    */
   permissions: Array<Permission>;
-}
-
-export interface User {
-  /**
-   * Membership identifier tag.
-   */
-  id: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles: Array<User.Role>;
-
-  status: unknown;
-
-  user: User.User;
-}
-
-export namespace User {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: Shared.PermissionGrant;
-
-      billing?: Shared.PermissionGrant;
-
-      cache_purge?: Shared.PermissionGrant;
-
-      dns?: Shared.PermissionGrant;
-
-      dns_records?: Shared.PermissionGrant;
-
-      lb?: Shared.PermissionGrant;
-
-      logs?: Shared.PermissionGrant;
-
-      organization?: Shared.PermissionGrant;
-
-      ssl?: Shared.PermissionGrant;
-
-      waf?: Shared.PermissionGrant;
-
-      zone_settings?: Shared.PermissionGrant;
-
-      zones?: Shared.PermissionGrant;
-    }
-  }
-
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
 }
 
 export class RolesSinglePage extends SinglePage<Role> {}

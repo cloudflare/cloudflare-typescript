@@ -237,6 +237,9 @@ export namespace V1 {
   export import V1GetParams = V1API.V1GetParams;
   export import Keys = KeysAPI.Keys;
   export import Key = KeysAPI.Key;
+  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;

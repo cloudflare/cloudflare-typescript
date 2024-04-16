@@ -70,7 +70,7 @@ export {
   DevicesSinglePage,
   Devices,
 } from './devices/index';
-export { DeviceExperienceMonitor, NetworkPath, Percentiles, DEX } from './dex/index';
+export { DeviceExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles, DEX } from './dex/index';
 export {
   GatewayCreateResponse,
   GatewayListResponse,
