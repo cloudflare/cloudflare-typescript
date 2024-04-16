@@ -44,8 +44,11 @@ export class Healthchecks extends APIResource {
     params: HealthcheckListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<HealthchecksSinglePage, Healthcheck> {
-    const { zone_id } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksSinglePage, options);
+    const { zone_id, ...query } = params;
+    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -528,9 +531,19 @@ export interface HealthcheckUpdateParams {
 
 export interface HealthcheckListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Query param: Page number of paginated results.
+   */
+  page?: unknown;
+
+  /**
+   * Query param: Maximum number of results per page. Must be a multiple of 5.
+   */
+  per_page?: unknown;
 }
 
 export interface HealthcheckDeleteParams {
