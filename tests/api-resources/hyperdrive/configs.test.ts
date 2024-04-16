@@ -14,8 +14,14 @@ describe('resource configs', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: {},
-      origin: { password: 'password1234!' },
+      name: 'example-hyperdrive',
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        port: 0,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,8 +36,15 @@ describe('resource configs', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: {},
-      origin: { password: 'password1234!' },
+      name: 'example-hyperdrive',
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        port: 0,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
+      caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
     });
   });
 
@@ -39,8 +52,14 @@ describe('resource configs', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: {},
-      origin: { password: 'password1234!' },
+      name: 'example-hyperdrive',
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        port: 0,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -55,8 +74,15 @@ describe('resource configs', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: {},
-      origin: { password: 'password1234!' },
+      name: 'example-hyperdrive',
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        port: 0,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
+      caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
     });
   });
 
@@ -120,7 +146,15 @@ describe('resource configs', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      origin: { password: 'password1234!' },
+      caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
+      name: 'example-hyperdrive',
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        port: 0,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
     });
   });
 

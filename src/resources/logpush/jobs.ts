@@ -339,7 +339,7 @@ export interface OutputOptions {
   timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
 }
 
-export type JobDeleteResponse = unknown | Array<unknown> | string;
+export type JobDeleteResponse = unknown;
 
 export interface JobCreateParams {
   /**
