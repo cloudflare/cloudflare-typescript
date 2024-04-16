@@ -31,6 +31,59 @@ export interface DeviceExperienceMonitor {
 }
 
 export interface NetworkPath {
+  slots: Array<NetworkPath.Slot>;
+
+  /**
+   * Specifies the sampling applied, if any, to the slots response. When sampled,
+   * results shown represent the first test run to the start of each sampling
+   * interval.
+   */
+  sampling?: NetworkPath.Sampling | null;
+}
+
+export namespace NetworkPath {
+  export interface Slot {
+    /**
+     * API Resource UUID tag.
+     */
+    id: string;
+
+    /**
+     * Round trip time in ms of the client to app mile
+     */
+    clientToAppRttMs: number | null;
+
+    /**
+     * Round trip time in ms of the client to Cloudflare egress mile
+     */
+    clientToCfEgressRttMs: number | null;
+
+    /**
+     * Round trip time in ms of the client to Cloudflare ingress mile
+     */
+    clientToCfIngressRttMs: number | null;
+
+    timestamp: string;
+
+    /**
+     * Round trip time in ms of the client to ISP mile
+     */
+    clientToIspRttMs?: number | null;
+  }
+
+  /**
+   * Specifies the sampling applied, if any, to the slots response. When sampled,
+   * results shown represent the first test run to the start of each sampling
+   * interval.
+   */
+  export interface Sampling {
+    unit: 'hours';
+
+    value: number;
+  }
+}
+
+export interface NetworkPathResponse {
   /**
    * API Resource UUID tag.
    */
@@ -47,67 +100,12 @@ export interface NetworkPath {
 
   name?: string;
 
-  networkPath?: NetworkPath.NetworkPath | null;
+  networkPath?: NetworkPath | null;
 
   /**
    * The host of the Traceroute synthetic application test
    */
   url?: string;
-}
-
-export namespace NetworkPath {
-  export interface NetworkPath {
-    slots: Array<NetworkPath.Slot>;
-
-    /**
-     * Specifies the sampling applied, if any, to the slots response. When sampled,
-     * results shown represent the first test run to the start of each sampling
-     * interval.
-     */
-    sampling?: NetworkPath.Sampling | null;
-  }
-
-  export namespace NetworkPath {
-    export interface Slot {
-      /**
-       * API Resource UUID tag.
-       */
-      id: string;
-
-      /**
-       * Round trip time in ms of the client to app mile
-       */
-      clientToAppRttMs: number | null;
-
-      /**
-       * Round trip time in ms of the client to Cloudflare egress mile
-       */
-      clientToCfEgressRttMs: number | null;
-
-      /**
-       * Round trip time in ms of the client to Cloudflare ingress mile
-       */
-      clientToCfIngressRttMs: number | null;
-
-      timestamp: string;
-
-      /**
-       * Round trip time in ms of the client to ISP mile
-       */
-      clientToIspRttMs?: number | null;
-    }
-
-    /**
-     * Specifies the sampling applied, if any, to the slots response. When sampled,
-     * results shown represent the first test run to the start of each sampling
-     * interval.
-     */
-    export interface Sampling {
-      unit: 'hours';
-
-      value: number;
-    }
-  }
 }
 
 export interface Percentiles {
@@ -135,6 +133,7 @@ export interface Percentiles {
 export namespace DEX {
   export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
+  export import NetworkPathResponse = DEXAPI.NetworkPathResponse;
   export import Percentiles = DEXAPI.Percentiles;
   export import Colos = ColosAPI.Colos;
   export import ColoListResponse = ColosAPI.ColoListResponse;

@@ -87,6 +87,7 @@ export namespace ZeroTrust {
   export import DEX = DEXAPI.DEX;
   export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
+  export import NetworkPathResponse = DEXAPI.NetworkPathResponse;
   export import Percentiles = DEXAPI.Percentiles;
   export import Tunnels = TunnelsAPI.Tunnels;
   export import Connection = TunnelsAPI.Connection;

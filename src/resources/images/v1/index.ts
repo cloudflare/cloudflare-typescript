@@ -13,7 +13,16 @@ export {
   V1ListResponsesV4PagePagination,
   V1,
 } from './v1';
-export { Key, KeyUpdateParams, KeyListParams, KeyDeleteParams, Keys } from './keys';
+export {
+  Key,
+  KeyUpdateResponse,
+  KeyListResponse,
+  KeyDeleteResponse,
+  KeyUpdateParams,
+  KeyListParams,
+  KeyDeleteParams,
+  Keys,
+} from './keys';
 export { Stat, StatGetParams, Stats } from './stats';
 export {
   Variant,
