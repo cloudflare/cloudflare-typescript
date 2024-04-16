@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
+import * as Shared from 'cloudflare/resources/shared';
 
 export class Tail extends APIResource {
   /**
@@ -32,12 +33,10 @@ export class Tail extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailDeleteResponse> {
     const { account_id, body } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: TailDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, {
+      body: body,
+      ...options,
+    });
   }
 
   /**
@@ -86,7 +85,16 @@ export interface TailCreateResponse {
   url?: unknown;
 }
 
-export type TailDeleteResponse = unknown | Array<unknown> | string;
+export interface TailDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface TailGetResponse {
   id?: unknown;
