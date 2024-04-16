@@ -383,6 +383,12 @@ export namespace Application {
     name?: string;
 
     /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
      * Enables cookie paths to scope an application's JWT to the application path. If
      * disabled, the JWT will scope to the hostname by default
      */
@@ -638,6 +644,12 @@ export namespace Application {
     name?: string;
 
     /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
      * Enables cookie paths to scope an application's JWT to the application path. If
      * disabled, the JWT will scope to the hostname by default
      */
@@ -775,6 +787,12 @@ export namespace Application {
      * The name of the application.
      */
     name?: string;
+
+    /**
+     * Allows options preflight requests to bypass Access authentication and go
+     * directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
 
     /**
      * Enables cookie paths to scope an application's JWT to the application path. If
@@ -1299,6 +1317,12 @@ export namespace ApplicationCreateParams {
     name?: string;
 
     /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
      * Body param: Enables cookie paths to scope an application's JWT to the
      * application path. If disabled, the JWT will scope to the hostname by default
      */
@@ -1556,6 +1580,12 @@ export namespace ApplicationCreateParams {
     name?: string;
 
     /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
      * Body param: Enables cookie paths to scope an application's JWT to the
      * application path. If disabled, the JWT will scope to the hostname by default
      */
@@ -1697,6 +1727,12 @@ export namespace ApplicationCreateParams {
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
 
     /**
      * Body param: Enables cookie paths to scope an application's JWT to the
@@ -2013,6 +2049,12 @@ export namespace ApplicationUpdateParams {
     name?: string;
 
     /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
      * Body param: Enables cookie paths to scope an application's JWT to the
      * application path. If disabled, the JWT will scope to the hostname by default
      */
@@ -2270,6 +2312,12 @@ export namespace ApplicationUpdateParams {
     name?: string;
 
     /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
+
+    /**
      * Body param: Enables cookie paths to scope an application's JWT to the
      * application path. If disabled, the JWT will scope to the hostname by default
      */
@@ -2411,6 +2459,12 @@ export namespace ApplicationUpdateParams {
      * Body param: The name of the application.
      */
     name?: string;
+
+    /**
+     * Body param: Allows options preflight requests to bypass Access authentication
+     * and go directly to the origin. Cannot turn on if cors_headers is set.
+     */
+    options_preflight_bypass?: boolean;
 
     /**
      * Body param: Enables cookie paths to scope an application's JWT to the
