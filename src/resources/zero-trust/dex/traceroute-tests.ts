@@ -32,13 +32,13 @@ export class TracerouteTests extends APIResource {
     testId: string,
     params: TracerouteTestNetworkPathParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXAPI.NetworkPath> {
+  ): Core.APIPromise<DEXAPI.NetworkPathResponse> {
     const { account_id, ...query } = params;
     return (
       this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
         query,
         ...options,
-      }) as Core.APIPromise<{ result: DEXAPI.NetworkPath }>
+      }) as Core.APIPromise<{ result: DEXAPI.NetworkPathResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
