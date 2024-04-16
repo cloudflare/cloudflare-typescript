@@ -5,6 +5,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
+- <code><a href="./src/resources/shared.ts">IamMember</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
@@ -13,7 +14,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
 - <code><a href="./src/resources/shared.ts">Role</a></code>
-- <code><a href="./src/resources/shared.ts">User</a></code>
 
 # Accounts
 
@@ -41,10 +41,10 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> UserWithInviteCode</code>
-- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> User</code>
+- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> IamMember</code>
 - <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MemberListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> User</code>
+- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> IamMember</code>
 
 ## Roles
 
@@ -2981,12 +2981,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/images/v1/keys.ts">Key</a></code>
+- <code><a href="./src/resources/images/v1/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/images/v1/keys.ts">KeyListResponse</a></code>
+- <code><a href="./src/resources/images/v1/keys.ts">KeyDeleteResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">update</a>(signingKeyName, { ...params }) -> Key</code>
-- <code title="get /accounts/{account_id}/images/v1/keys">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">list</a>({ ...params }) -> Key</code>
-- <code title="delete /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">delete</a>(signingKeyName, { ...params }) -> Key</code>
+- <code title="put /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">update</a>(signingKeyName, { ...params }) -> KeyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/images/v1/keys">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">list</a>({ ...params }) -> KeyListResponse</code>
+- <code title="delete /accounts/{account_id}/images/v1/keys/{signing_key_name}">client.images.v1.keys.<a href="./src/resources/images/v1/keys.ts">delete</a>(signingKeyName, { ...params }) -> KeyDeleteResponse</code>
 
 ### Stats
 
@@ -4630,6 +4633,7 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">DeviceExperienceMonitor</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPath</a></code>
+- <code><a href="./src/resources/zero-trust/dex/dex.ts">NetworkPathResponse</a></code>
 - <code><a href="./src/resources/zero-trust/dex/dex.ts">Percentiles</a></code>
 
 ### Colos
@@ -4729,7 +4733,7 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">get</a>(testId, { ...params }) -> Traceroute</code>
-- <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/network-path">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">networkPath</a>(testId, { ...params }) -> NetworkPath</code>
+- <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/network-path">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">networkPath</a>(testId, { ...params }) -> NetworkPathResponse</code>
 - <code title="get /accounts/{account_id}/dex/traceroute-tests/{test_id}/percentiles">client.zeroTrust.dex.tracerouteTests.<a href="./src/resources/zero-trust/dex/traceroute-tests.ts">percentiles</a>(testId, { ...params }) -> TracerouteTestPercentilesResponse</code>
 
 ## Tunnels

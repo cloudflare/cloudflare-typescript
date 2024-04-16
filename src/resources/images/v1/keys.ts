@@ -12,23 +12,25 @@ export class Keys extends APIResource {
     signingKeyName: string,
     params: KeyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Key> {
+  ): Core.APIPromise<KeyUpdateResponse> {
     const { account_id } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
         options,
-      ) as Core.APIPromise<{ result: Key }>
+      ) as Core.APIPromise<{ result: KeyUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists your signing keys. These can be found on your Cloudflare Images dashboard.
    */
-  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<Key> {
+  list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{ result: Key }>
+      this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{
+        result: KeyListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -40,33 +42,39 @@ export class Keys extends APIResource {
     signingKeyName: string,
     params: KeyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Key> {
+  ): Core.APIPromise<KeyDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
         options,
-      ) as Core.APIPromise<{ result: Key }>
+      ) as Core.APIPromise<{ result: KeyDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export interface Key {
-  keys?: Array<Key.Key>;
+  /**
+   * Key name.
+   */
+  name?: string;
+
+  /**
+   * Key value.
+   */
+  value?: string;
 }
 
-export namespace Key {
-  export interface Key {
-    /**
-     * Key name.
-     */
-    name?: string;
+export interface KeyUpdateResponse {
+  keys?: Array<Key>;
+}
 
-    /**
-     * Key value.
-     */
-    value?: string;
-  }
+export interface KeyListResponse {
+  keys?: Array<Key>;
+}
+
+export interface KeyDeleteResponse {
+  keys?: Array<Key>;
 }
 
 export interface KeyUpdateParams {
@@ -92,6 +100,9 @@ export interface KeyDeleteParams {
 
 export namespace Keys {
   export import Key = KeysAPI.Key;
+  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export import KeyListResponse = KeysAPI.KeyListResponse;
+  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
   export import KeyListParams = KeysAPI.KeyListParams;
   export import KeyDeleteParams = KeysAPI.KeyDeleteParams;

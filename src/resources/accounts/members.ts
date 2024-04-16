@@ -26,13 +26,13 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.User> {
+  ): Core.APIPromise<Shared.IamMember> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/members/${memberId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: Shared.User }>
+      }) as Core.APIPromise<{ result: Shared.IamMember }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -75,11 +75,11 @@ export class Members extends APIResource {
     memberId: string,
     params: MemberGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Shared.User> {
+  ): Core.APIPromise<Shared.IamMember> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: Shared.User;
+        result: Shared.IamMember;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
