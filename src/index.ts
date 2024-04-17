@@ -10,6 +10,11 @@ import * as API from 'cloudflare/resources/index';
 
 export interface ClientOptions {
   /**
+   * Defaults to process.env['CLOUDFLARE_API_TOKEN'].
+   */
+  apiToken?: string | null | undefined;
+
+  /**
    * Defaults to process.env['CLOUDFLARE_API_KEY'].
    */
   apiKey?: string | null | undefined;
@@ -18,11 +23,6 @@ export interface ClientOptions {
    * Defaults to process.env['CLOUDFLARE_EMAIL'].
    */
   apiEmail?: string | null | undefined;
-
-  /**
-   * Defaults to process.env['CLOUDFLARE_API_TOKEN'].
-   */
-  apiToken?: string | null | undefined;
 
   /**
    * Defaults to process.env['CLOUDFLARE_API_USER_SERVICE_KEY'].
@@ -88,9 +88,9 @@ export interface ClientOptions {
 
 /** API Client for interfacing with the Cloudflare API. */
 export class Cloudflare extends Core.APIClient {
+  apiToken: string | null;
   apiKey: string | null;
   apiEmail: string | null;
-  apiToken: string | null;
   userServiceKey: string | null;
 
   private _options: ClientOptions;
@@ -98,9 +98,9 @@ export class Cloudflare extends Core.APIClient {
   /**
    * API Client for interfacing with the Cloudflare API.
    *
+   * @param {string | null | undefined} [opts.apiToken=process.env['CLOUDFLARE_API_TOKEN'] ?? null]
    * @param {string | null | undefined} [opts.apiKey=process.env['CLOUDFLARE_API_KEY'] ?? null]
    * @param {string | null | undefined} [opts.apiEmail=process.env['CLOUDFLARE_EMAIL'] ?? null]
-   * @param {string | null | undefined} [opts.apiToken=process.env['CLOUDFLARE_API_TOKEN'] ?? null]
    * @param {string | null | undefined} [opts.userServiceKey=process.env['CLOUDFLARE_API_USER_SERVICE_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['CLOUDFLARE_BASE_URL'] ?? https://api.cloudflare.com/client/v4] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -112,16 +112,16 @@ export class Cloudflare extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('CLOUDFLARE_BASE_URL'),
+    apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN') ?? null,
     apiKey = Core.readEnv('CLOUDFLARE_API_KEY') ?? null,
     apiEmail = Core.readEnv('CLOUDFLARE_EMAIL') ?? null,
-    apiToken = Core.readEnv('CLOUDFLARE_API_TOKEN') ?? null,
     userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
     const options: ClientOptions = {
+      apiToken,
       apiKey,
       apiEmail,
-      apiToken,
       userServiceKey,
       ...opts,
       baseURL: baseURL || `https://api.cloudflare.com/client/v4`,
@@ -136,9 +136,9 @@ export class Cloudflare extends Core.APIClient {
     });
     this._options = options;
 
+    this.apiToken = apiToken;
     this.apiKey = apiKey;
     this.apiEmail = apiEmail;
-    this.apiToken = apiToken;
     this.userServiceKey = userServiceKey;
   }
 
