@@ -1,9 +1,178 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IndexesAPI from 'cloudflare/resources/vectorize/indexes';
+import { SinglePage } from 'cloudflare/pagination';
 
-export class Indexes extends APIResource {}
+export class Indexes extends APIResource {
+  /**
+   * Creates and returns a new Vectorize Index.
+   */
+  create(params: IndexCreateParams, options?: Core.RequestOptions): Core.APIPromise<CreateIndex | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/vectorize/indexes`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CreateIndex | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates and returns the specified Vectorize Index.
+   */
+  update(
+    indexName: string,
+    params: IndexUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CreateIndex | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/vectorize/indexes/${indexName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CreateIndex | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns a list of Vectorize Indexes
+   */
+  list(
+    params: IndexListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CreateIndicesSinglePage, CreateIndex> {
+    const { account_id } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/vectorize/indexes`,
+      CreateIndicesSinglePage,
+      options,
+    );
+  }
+
+  /**
+   * Deletes the specified Vectorize Index.
+   */
+  delete(
+    indexName: string,
+    params: IndexDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/vectorize/indexes/${indexName}`,
+        options,
+      ) as Core.APIPromise<{ result: IndexDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Delete a set of vectors from an index by their vector identifiers.
+   */
+  deleteByIds(
+    indexName: string,
+    params: IndexDeleteByIDsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexDeleteVectorsByID | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/delete-by-ids`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexDeleteVectorsByID | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns the specified Vectorize Index.
+   */
+  get(
+    indexName: string,
+    params: IndexGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CreateIndex | null> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/vectorize/indexes/${indexName}`, options) as Core.APIPromise<{
+        result: CreateIndex | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a set of vectors from an index by their vector identifiers.
+   */
+  getByIds(
+    indexName: string,
+    params: IndexGetByIDsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexGetByIDsResponse | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/get-by-ids`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexGetByIDsResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Inserts vectors into the specified index and returns the count of the vectors
+   * successfully inserted.
+   */
+  insert(
+    indexName: string,
+    params: IndexInsertParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexInsert | null> {
+    const { account_id, body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/insert`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexInsert | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Finds vectors closest to a given vector in an index.
+   */
+  query(
+    indexName: string,
+    params: IndexQueryParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexQuery | null> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/query`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexQuery | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Upserts vectors into the specified index, creating them if they do not exist and
+   * returns the count of values and ids successfully inserted.
+   */
+  upsert(
+    indexName: string,
+    params: IndexUpsertParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexUpsert | null> {
+    const { account_id, body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/upsert`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: IndexUpsert | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export class CreateIndicesSinglePage extends SinglePage<CreateIndex> {}
 
 export interface CreateIndex {
   config?: IndexDimensionConfiguration;
@@ -105,6 +274,164 @@ export interface IndexUpsert {
   ids?: Array<string>;
 }
 
+export type IndexDeleteResponse = unknown | string | null;
+
+/**
+ * Array of vectors with matching ids.
+ */
+export type IndexGetByIDsResponse = unknown;
+
+export interface IndexCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Specifies the type of configuration to use for the index.
+   */
+  config: IndexDimensionConfiguration | IndexCreateParams.VectorizeIndexPresetConfiguration;
+
+  /**
+   * Body param:
+   */
+  name: string;
+
+  /**
+   * Body param: Specifies the description of the index.
+   */
+  description?: string;
+}
+
+export namespace IndexCreateParams {
+  export interface VectorizeIndexPresetConfiguration {
+    /**
+     * Specifies the preset to use for the index.
+     */
+    preset:
+      | '@cf/baai/bge-small-en-v1.5'
+      | '@cf/baai/bge-base-en-v1.5'
+      | '@cf/baai/bge-large-en-v1.5'
+      | 'openai/text-embedding-ada-002'
+      | 'cohere/embed-multilingual-v2.0';
+  }
+}
+
+export interface IndexUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Specifies the description of the index.
+   */
+  description: string;
+}
+
+export interface IndexListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IndexDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IndexDeleteByIDsParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A list of vector identifiers to delete from the index indicated by
+   * the path.
+   */
+  ids?: Array<string>;
+}
+
+export interface IndexGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface IndexGetByIDsParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: A list of vector identifiers to retrieve from the index indicated by
+   * the path.
+   */
+  ids?: Array<string>;
+}
+
+export interface IndexInsertParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface IndexQueryParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The search vector that will be used to find the nearest neighbors.
+   */
+  vector: Array<number>;
+
+  /**
+   * Body param: A metadata filter expression used to limit nearest neighbor results.
+   */
+  filter?: unknown;
+
+  /**
+   * Body param: Whether to return the metadata associated with the closest vectors.
+   */
+  returnMetadata?: boolean;
+
+  /**
+   * Body param: Whether to return the values associated with the closest vectors.
+   */
+  returnValues?: boolean;
+
+  /**
+   * Body param: The number of nearest neighbors to find.
+   */
+  topK?: number;
+}
+
+export interface IndexUpsertParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
 export namespace Indexes {
   export import CreateIndex = IndexesAPI.CreateIndex;
   export import IndexDeleteVectorsByID = IndexesAPI.IndexDeleteVectorsByID;
@@ -112,4 +439,17 @@ export namespace Indexes {
   export import IndexInsert = IndexesAPI.IndexInsert;
   export import IndexQuery = IndexesAPI.IndexQuery;
   export import IndexUpsert = IndexesAPI.IndexUpsert;
+  export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
+  export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
+  export import CreateIndicesSinglePage = IndexesAPI.CreateIndicesSinglePage;
+  export import IndexCreateParams = IndexesAPI.IndexCreateParams;
+  export import IndexUpdateParams = IndexesAPI.IndexUpdateParams;
+  export import IndexListParams = IndexesAPI.IndexListParams;
+  export import IndexDeleteParams = IndexesAPI.IndexDeleteParams;
+  export import IndexDeleteByIDsParams = IndexesAPI.IndexDeleteByIDsParams;
+  export import IndexGetParams = IndexesAPI.IndexGetParams;
+  export import IndexGetByIDsParams = IndexesAPI.IndexGetByIDsParams;
+  export import IndexInsertParams = IndexesAPI.IndexInsertParams;
+  export import IndexQueryParams = IndexesAPI.IndexQueryParams;
+  export import IndexUpsertParams = IndexesAPI.IndexUpsertParams;
 }

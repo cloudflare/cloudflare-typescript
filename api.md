@@ -5198,6 +5198,21 @@ Types:
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexInsert</a></code>
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexQuery</a></code>
 - <code><a href="./src/resources/vectorize/indexes.ts">IndexUpsert</a></code>
+- <code><a href="./src/resources/vectorize/indexes.ts">IndexDeleteResponse</a></code>
+- <code><a href="./src/resources/vectorize/indexes.ts">IndexGetByIDsResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/vectorize/indexes">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">create</a>({ ...params }) -> CreateIndex | null</code>
+- <code title="put /accounts/{account_id}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">update</a>(indexName, { ...params }) -> CreateIndex | null</code>
+- <code title="get /accounts/{account_id}/vectorize/indexes">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">list</a>({ ...params }) -> CreateIndicesSinglePage</code>
+- <code title="delete /accounts/{account_id}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">delete</a>(indexName, { ...params }) -> IndexDeleteResponse</code>
+- <code title="post /accounts/{account_id}/vectorize/indexes/{index_name}/delete-by-ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">deleteByIds</a>(indexName, { ...params }) -> IndexDeleteVectorsByID | null</code>
+- <code title="get /accounts/{account_id}/vectorize/indexes/{index_name}">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">get</a>(indexName, { ...params }) -> CreateIndex | null</code>
+- <code title="post /accounts/{account_id}/vectorize/indexes/{index_name}/get-by-ids">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">getByIds</a>(indexName, { ...params }) -> IndexGetByIDsResponse | null</code>
+- <code title="post /accounts/{account_id}/vectorize/indexes/{index_name}/insert">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">insert</a>(indexName, { ...params }) -> IndexInsert | null</code>
+- <code title="post /accounts/{account_id}/vectorize/indexes/{index_name}/query">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">query</a>(indexName, { ...params }) -> IndexQuery | null</code>
+- <code title="post /accounts/{account_id}/vectorize/indexes/{index_name}/upsert">client.vectorize.indexes.<a href="./src/resources/vectorize/indexes.ts">upsert</a>(indexName, { ...params }) -> IndexUpsert | null</code>
 
 # URLScanner
 
