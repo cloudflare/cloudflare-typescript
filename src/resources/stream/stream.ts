@@ -435,9 +435,7 @@ export namespace Stream {
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Watermarks = WatermarksAPI.Watermarks;
   export import Watermaks = WatermarksAPI.Watermaks;
-  export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
   export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
@@ -452,7 +450,6 @@ export namespace Stream {
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
   export import Captions = CaptionsAPI.Captions;
   export import Caption = CaptionsAPI.Caption;
-  export import CaptionUpdateResponse = CaptionsAPI.CaptionUpdateResponse;
   export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
   export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
