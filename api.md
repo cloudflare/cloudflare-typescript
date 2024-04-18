@@ -3779,15 +3779,15 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/stream/watermarks.ts">Watermaks</a></code>
+- <code><a href="./src/resources/stream/watermarks.ts">Watermark</a></code>
 - <code><a href="./src/resources/stream/watermarks.ts">WatermarkDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> Watermaks</code>
-- <code title="get /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">list</a>({ ...params }) -> WatermaksSinglePage</code>
+- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> Watermark</code>
+- <code title="get /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">list</a>({ ...params }) -> WatermarksSinglePage</code>
 - <code title="delete /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">delete</a>(identifier, { ...params }) -> WatermarkDeleteResponse</code>
-- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> Watermaks</code>
+- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> Watermark</code>
 
 ## Webhooks
 

@@ -54,13 +54,13 @@ export { Stream } from './stream';
 export { TokenCreateResponse, TokenCreateParams, Token } from './token';
 export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
-  Watermaks,
+  Watermark,
   WatermarkDeleteResponse,
   WatermarkCreateParams,
   WatermarkListParams,
   WatermarkDeleteParams,
   WatermarkGetParams,
-  WatermaksSinglePage,
+  WatermarksSinglePage,
   Watermarks,
 } from './watermarks';
 export {

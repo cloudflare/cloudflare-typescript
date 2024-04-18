@@ -44,7 +44,7 @@ export interface DirectUploadCreateResponse {
    */
   uploadURL?: string;
 
-  watermark?: WatermarksAPI.Watermaks;
+  watermark?: WatermarksAPI.Watermark;
 }
 
 export interface DirectUploadCreateParams {

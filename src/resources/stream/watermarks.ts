@@ -11,13 +11,13 @@ export class Watermarks extends APIResource {
    * Creates watermark profiles using a single `HTTP POST multipart/form-data`
    * request.
    */
-  create(params: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermaks> {
+  create(params: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermark> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Watermaks }>
+      ) as Core.APIPromise<{ result: Watermark }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -27,9 +27,13 @@ export class Watermarks extends APIResource {
   list(
     params: WatermarkListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WatermaksSinglePage, Watermaks> {
+  ): Core.PagePromise<WatermarksSinglePage, Watermark> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/stream/watermarks`, WatermaksSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/stream/watermarks`,
+      WatermarksSinglePage,
+      options,
+    );
   }
 
   /**
@@ -56,20 +60,20 @@ export class Watermarks extends APIResource {
     identifier: string,
     params: WatermarkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Watermaks> {
+  ): Core.APIPromise<Watermark> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/watermarks/${identifier}`,
         options,
-      ) as Core.APIPromise<{ result: Watermaks }>
+      ) as Core.APIPromise<{ result: Watermark }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WatermaksSinglePage extends SinglePage<Watermaks> {}
+export class WatermarksSinglePage extends SinglePage<Watermark> {}
 
-export interface Watermaks {
+export interface Watermark {
   /**
    * The date and a time a watermark profile was created.
    */
@@ -212,9 +216,9 @@ export interface WatermarkGetParams {
 }
 
 export namespace Watermarks {
-  export import Watermaks = WatermarksAPI.Watermaks;
+  export import Watermark = WatermarksAPI.Watermark;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
+  export import WatermarksSinglePage = WatermarksAPI.WatermarksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
