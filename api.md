@@ -5,9 +5,9 @@ Types:
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
-- <code><a href="./src/resources/shared.ts">IamMember</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
+- <code><a href="./src/resources/shared.ts">Member</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Permission</a></code>
 - <code><a href="./src/resources/shared.ts">PermissionGrant</a></code>
@@ -41,10 +41,10 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> UserWithInviteCode</code>
-- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> IamMember</code>
+- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> Member</code>
 - <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MemberListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> IamMember</code>
+- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> Member</code>
 
 ## Roles
 
