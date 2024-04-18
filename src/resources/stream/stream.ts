@@ -230,7 +230,7 @@ export interface Video {
    */
   uploadExpiry?: string;
 
-  watermark?: WatermarksAPI.Watermaks;
+  watermark?: WatermarksAPI.Watermark;
 }
 
 export namespace Video {
@@ -434,9 +434,9 @@ export namespace Stream {
   export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
   export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Watermarks = WatermarksAPI.Watermarks;
-  export import Watermaks = WatermarksAPI.Watermaks;
+  export import Watermark = WatermarksAPI.Watermark;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
+  export import WatermarksSinglePage = WatermarksAPI.WatermarksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
   export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
