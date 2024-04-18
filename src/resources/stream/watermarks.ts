@@ -11,16 +11,13 @@ export class Watermarks extends APIResource {
    * Creates watermark profiles using a single `HTTP POST multipart/form-data`
    * request.
    */
-  create(
-    params: WatermarkCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkCreateResponse> {
+  create(params: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermaks> {
     const { account_id, ...body } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: WatermarkCreateResponse }>
+      ) as Core.APIPromise<{ result: Watermaks }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,13 +56,13 @@ export class Watermarks extends APIResource {
     identifier: string,
     params: WatermarkGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkGetResponse> {
+  ): Core.APIPromise<Watermaks> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/stream/watermarks/${identifier}`,
         options,
-      ) as Core.APIPromise<{ result: WatermarkGetResponse }>
+      ) as Core.APIPromise<{ result: Watermaks }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -139,11 +136,7 @@ export interface Watermaks {
   width?: number;
 }
 
-export type WatermarkCreateResponse = unknown | string | null;
-
 export type WatermarkDeleteResponse = unknown | string;
-
-export type WatermarkGetResponse = unknown | string | null;
 
 export interface WatermarkCreateParams {
   /**
@@ -220,9 +213,7 @@ export interface WatermarkGetParams {
 
 export namespace Watermarks {
   export import Watermaks = WatermarksAPI.Watermaks;
-  export import WatermarkCreateResponse = WatermarksAPI.WatermarkCreateResponse;
   export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
-  export import WatermarkGetResponse = WatermarksAPI.WatermarkGetResponse;
   export import WatermaksSinglePage = WatermarksAPI.WatermaksSinglePage;
   export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
   export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
