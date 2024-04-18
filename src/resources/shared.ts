@@ -225,7 +225,23 @@ export interface ErrorData {
   message?: string;
 }
 
-export interface IamMember {
+export interface Identifier {
+  /**
+   * Identifier
+   */
+  id?: string;
+}
+
+export interface LoadBalancerPreview {
+  /**
+   * Monitored pool IDs mapped to their respective names.
+   */
+  pools?: Record<string, string>;
+
+  preview_id?: string;
+}
+
+export interface Member {
   /**
    * Membership identifier tag.
    */
@@ -234,14 +250,14 @@ export interface IamMember {
   /**
    * Roles assigned to this member.
    */
-  roles: Array<IamMember.Role>;
+  roles: Array<Member.Role>;
 
   status: unknown;
 
-  user: IamMember.User;
+  user: Member.User;
 }
 
-export namespace IamMember {
+export namespace Member {
   export interface Role {
     /**
      * Role identifier tag.
@@ -316,22 +332,6 @@ export namespace IamMember {
      */
     two_factor_authentication_enabled?: boolean;
   }
-}
-
-export interface Identifier {
-  /**
-   * Identifier
-   */
-  id?: string;
-}
-
-export interface LoadBalancerPreview {
-  /**
-   * Monitored pool IDs mapped to their respective names.
-   */
-  pools?: Record<string, string>;
-
-  preview_id?: string;
 }
 
 export interface PaginationInfo {
