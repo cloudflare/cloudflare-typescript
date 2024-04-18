@@ -555,9 +555,9 @@ export namespace Cloudflare {
   export import AuditLog = API.AuditLog;
   export import CloudflareTunnel = API.CloudflareTunnel;
   export import ErrorData = API.ErrorData;
-  export import IamMember = API.IamMember;
   export import Identifier = API.Identifier;
   export import LoadBalancerPreview = API.LoadBalancerPreview;
+  export import Member = API.Member;
   export import PaginationInfo = API.PaginationInfo;
   export import Permission = API.Permission;
   export import PermissionGrant = API.PermissionGrant;
