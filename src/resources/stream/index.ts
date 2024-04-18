@@ -12,7 +12,6 @@ export {
 } from './audio-tracks';
 export {
   Caption,
-  CaptionUpdateResponse,
   CaptionDeleteResponse,
   CaptionGetResponse,
   CaptionUpdateParams,
@@ -56,9 +55,7 @@ export { TokenCreateResponse, TokenCreateParams, Token } from './token';
 export { VideoStorageUsageResponse, VideoStorageUsageParams, Videos } from './videos';
 export {
   Watermaks,
-  WatermarkCreateResponse,
   WatermarkDeleteResponse,
-  WatermarkGetResponse,
   WatermarkCreateParams,
   WatermarkListParams,
   WatermarkDeleteParams,

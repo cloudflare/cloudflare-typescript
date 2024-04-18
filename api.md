@@ -3780,16 +3780,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/stream/watermarks.ts">Watermaks</a></code>
-- <code><a href="./src/resources/stream/watermarks.ts">WatermarkCreateResponse</a></code>
 - <code><a href="./src/resources/stream/watermarks.ts">WatermarkDeleteResponse</a></code>
-- <code><a href="./src/resources/stream/watermarks.ts">WatermarkGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> WatermarkCreateResponse</code>
+- <code title="post /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">create</a>({ ...params }) -> Watermaks</code>
 - <code title="get /accounts/{account_id}/stream/watermarks">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">list</a>({ ...params }) -> WatermaksSinglePage</code>
 - <code title="delete /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">delete</a>(identifier, { ...params }) -> WatermarkDeleteResponse</code>
-- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> WatermarkGetResponse</code>
+- <code title="get /accounts/{account_id}/stream/watermarks/{identifier}">client.stream.watermarks.<a href="./src/resources/stream/watermarks.ts">get</a>(identifier, { ...params }) -> Watermaks</code>
 
 ## Webhooks
 
@@ -3810,13 +3808,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/stream/captions.ts">Caption</a></code>
-- <code><a href="./src/resources/stream/captions.ts">CaptionUpdateResponse</a></code>
 - <code><a href="./src/resources/stream/captions.ts">CaptionDeleteResponse</a></code>
 - <code><a href="./src/resources/stream/captions.ts">CaptionGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">update</a>(identifier, language, { ...params }) -> CaptionUpdateResponse</code>
+- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">update</a>(identifier, language, { ...params }) -> Caption</code>
 - <code title="delete /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">delete</a>(identifier, language, { ...params }) -> CaptionDeleteResponse</code>
 - <code title="get /accounts/{account_id}/stream/{identifier}/captions">client.stream.captions.<a href="./src/resources/stream/captions.ts">get</a>(identifier, { ...params }) -> CaptionGetResponse</code>
 
