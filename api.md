@@ -3807,15 +3807,34 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/stream/captions.ts">Caption</a></code>
-- <code><a href="./src/resources/stream/captions.ts">CaptionDeleteResponse</a></code>
-- <code><a href="./src/resources/stream/captions.ts">CaptionGetResponse</a></code>
+- <code><a href="./src/resources/stream/captions/captions.ts">Caption</a></code>
+- <code><a href="./src/resources/stream/captions/captions.ts">CaptionGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">update</a>(identifier, language, { ...params }) -> Caption</code>
-- <code title="delete /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.<a href="./src/resources/stream/captions.ts">delete</a>(identifier, language, { ...params }) -> CaptionDeleteResponse</code>
-- <code title="get /accounts/{account_id}/stream/{identifier}/captions">client.stream.captions.<a href="./src/resources/stream/captions.ts">get</a>(identifier, { ...params }) -> CaptionGetResponse</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/captions">client.stream.captions.<a href="./src/resources/stream/captions/captions.ts">get</a>(identifier, { ...params }) -> CaptionGetResponse</code>
+
+### Language
+
+Types:
+
+- <code><a href="./src/resources/stream/captions/language/language.ts">LanguageDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">update</a>(identifier, language, { ...params }) -> Caption</code>
+- <code title="delete /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">delete</a>(identifier, language, { ...params }) -> LanguageDeleteResponse</code>
+- <code title="get /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">get</a>(identifier, language, { ...params }) -> Caption</code>
+
+#### Vtt
+
+Types:
+
+- <code><a href="./src/resources/stream/captions/language/vtt.ts">VttGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/stream/{identifier}/captions/{language}/vtt">client.stream.captions.language.vtt.<a href="./src/resources/stream/captions/language/vtt.ts">get</a>(identifier, language, { ...params }) -> string</code>
 
 ## Downloads
 
@@ -5109,6 +5128,40 @@ Methods:
 - <code title="get /accounts/{account_id}/teamnet/virtual_networks">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">list</a>({ ...params }) -> VirtualNetworksSinglePage</code>
 - <code title="delete /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">delete</a>(virtualNetworkId, { ...params }) -> VirtualNetworkDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">edit</a>(virtualNetworkId, { ...params }) -> VirtualNetworkEditResponse</code>
+
+## RiskScoring
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">RiskScoringGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">RiskScoringResetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_identifier}/zt_risk_scoring/{user_id}">client.zeroTrust.riskScoring.<a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">get</a>(accountIdentifier, userId, { ...params }) -> RiskScoringGetResponse</code>
+- <code title="post /accounts/{account_identifier}/zt_risk_scoring/{user_id}/reset">client.zeroTrust.riskScoring.<a href="./src/resources/zero-trust/risk-scoring/risk-scoring.ts">reset</a>(accountIdentifier, userId) -> RiskScoringResetResponse</code>
+
+### Behaviours
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">BehaviourUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">BehaviourGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_identifier}/zt_risk_scoring/behaviors">client.zeroTrust.riskScoring.behaviours.<a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">update</a>(accountIdentifier, { ...params }) -> BehaviourUpdateResponse</code>
+- <code title="get /accounts/{account_identifier}/zt_risk_scoring/behaviors">client.zeroTrust.riskScoring.behaviours.<a href="./src/resources/zero-trust/risk-scoring/behaviours.ts">get</a>(accountIdentifier) -> BehaviourGetResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/risk-scoring/summary.ts">SummaryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_identifier}/zt_risk_scoring/summary">client.zeroTrust.riskScoring.summary.<a href="./src/resources/zero-trust/risk-scoring/summary.ts">get</a>(accountIdentifier, { ...params }) -> SummaryGetResponse</code>
 
 # Challenges
 

@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
-import * as CaptionsAPI from 'cloudflare/resources/stream/captions';
 import * as ClipAPI from 'cloudflare/resources/stream/clip';
 import * as CopyAPI from 'cloudflare/resources/stream/copy';
 import * as DirectUploadAPI from 'cloudflare/resources/stream/direct-upload';
@@ -14,6 +13,7 @@ import * as TokenAPI from 'cloudflare/resources/stream/token';
 import * as VideosAPI from 'cloudflare/resources/stream/videos';
 import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
 import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
+import * as CaptionsAPI from 'cloudflare/resources/stream/captions/captions';
 import * as LiveInputsAPI from 'cloudflare/resources/stream/live-inputs/live-inputs';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -450,10 +450,7 @@ export namespace Stream {
   export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
   export import Captions = CaptionsAPI.Captions;
   export import Caption = CaptionsAPI.Caption;
-  export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
   export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
-  export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
-  export import CaptionDeleteParams = CaptionsAPI.CaptionDeleteParams;
   export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
   export import Downloads = DownloadsAPI.Downloads;
   export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
