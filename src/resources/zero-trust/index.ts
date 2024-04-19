@@ -89,5 +89,11 @@ export {
   Organizations,
 } from './organizations';
 export { Networks } from './networks/index';
+export {
+  RiskScoringGetResponse,
+  RiskScoringResetResponse,
+  RiskScoringGetParams,
+  RiskScoring,
+} from './risk-scoring/index';
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export { ZeroTrust } from './zero-trust';

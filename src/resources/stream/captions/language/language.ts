@@ -2,10 +2,14 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as CaptionsAPI from 'cloudflare/resources/stream/captions';
+import * as LanguageAPI from 'cloudflare/resources/stream/captions/language/language';
+import * as CaptionsAPI from 'cloudflare/resources/stream/captions/captions';
+import * as VttAPI from 'cloudflare/resources/stream/captions/language/vtt';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 
-export class Captions extends APIResource {
+export class Language extends APIResource {
+  vtt: VttAPI.Vtt = new VttAPI.Vtt(this._client);
+
   /**
    * Uploads the caption or subtitle file to the endpoint for a specific BCP47
    * language. One caption or subtitle file per language is allowed.
@@ -13,15 +17,15 @@ export class Captions extends APIResource {
   update(
     identifier: string,
     language: string,
-    params: CaptionUpdateParams,
+    params: LanguageUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Caption> {
+  ): Core.APIPromise<CaptionsAPI.Caption> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Caption }>
+      ) as Core.APIPromise<{ result: CaptionsAPI.Caption }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,52 +35,40 @@ export class Captions extends APIResource {
   delete(
     identifier: string,
     language: string,
-    params: CaptionDeleteParams,
+    params: LanguageDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionDeleteResponse> {
+  ): Core.APIPromise<LanguageDeleteResponse> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/stream/${identifier}/captions/${language}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: CaptionDeleteResponse }>
+      }) as Core.APIPromise<{ result: LanguageDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Lists the available captions or subtitles for a specific video.
+   * Lists the captions or subtitles for provided language.
    */
   get(
     identifier: string,
-    params: CaptionGetParams,
+    language: string,
+    params: LanguageGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionGetResponse> {
+  ): Core.APIPromise<CaptionsAPI.Caption> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{
-        result: CaptionGetResponse;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
+        options,
+      ) as Core.APIPromise<{ result: CaptionsAPI.Caption }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface Caption {
-  /**
-   * The language label displayed in the native language to users.
-   */
-  label?: string;
+export type LanguageDeleteResponse = string;
 
-  /**
-   * The language tag in BCP 47 format.
-   */
-  language?: string;
-}
-
-export type CaptionDeleteResponse = string;
-
-export type CaptionGetResponse = Array<Caption>;
-
-export interface CaptionUpdateParams {
+export interface LanguageUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -88,7 +80,7 @@ export interface CaptionUpdateParams {
   file: string;
 }
 
-export interface CaptionDeleteParams {
+export interface LanguageDeleteParams {
   /**
    * Path param: Identifier
    */
@@ -100,18 +92,19 @@ export interface CaptionDeleteParams {
   body: unknown;
 }
 
-export interface CaptionGetParams {
+export interface LanguageGetParams {
   /**
    * Identifier
    */
   account_id: string;
 }
 
-export namespace Captions {
-  export import Caption = CaptionsAPI.Caption;
-  export import CaptionDeleteResponse = CaptionsAPI.CaptionDeleteResponse;
-  export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
-  export import CaptionUpdateParams = CaptionsAPI.CaptionUpdateParams;
-  export import CaptionDeleteParams = CaptionsAPI.CaptionDeleteParams;
-  export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
+export namespace Language {
+  export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
+  export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
+  export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
+  export import LanguageGetParams = LanguageAPI.LanguageGetParams;
+  export import Vtt = VttAPI.Vtt;
+  export import VttGetResponse = VttAPI.VttGetResponse;
+  export import VttGetParams = VttAPI.VttGetParams;
 }
