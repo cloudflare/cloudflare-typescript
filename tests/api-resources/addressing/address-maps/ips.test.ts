@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ips', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.addressing.addressMaps.ips.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
@@ -26,8 +25,7 @@ describe('resource ips', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.addressing.addressMaps.ips.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
@@ -35,8 +33,7 @@ describe('resource ips', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.addressing.addressMaps.ips.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
@@ -51,8 +48,7 @@ describe('resource ips', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.addressing.addressMaps.ips.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',

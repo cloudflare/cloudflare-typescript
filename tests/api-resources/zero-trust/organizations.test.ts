@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource organizations', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
@@ -26,8 +25,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
@@ -49,8 +47,7 @@ describe('resource organizations', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test('update', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.update({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -61,8 +58,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,8 +69,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('revokeUsers: only required params', async () => {
+  test('revokeUsers: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
       account_id: 'string',
@@ -88,8 +83,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('revokeUsers: required and optional params', async () => {
+  test('revokeUsers: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
       account_id: 'string',

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource copy', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.stream.copy.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       url: 'https://example.com/myvideo.mp4',
@@ -25,8 +24,7 @@ describe('resource copy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.stream.copy.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       url: 'https://example.com/myvideo.mp4',

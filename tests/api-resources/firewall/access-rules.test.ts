@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource accessRules', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.firewall.accessRules.create({
       configuration: {},
       mode: 'challenge',
@@ -26,8 +25,7 @@ describe('resource accessRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.firewall.accessRules.create({
       configuration: { target: 'ip', value: '198.51.100.4' },
       mode: 'challenge',
@@ -36,8 +34,7 @@ describe('resource accessRules', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.firewall.accessRules.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,8 +45,7 @@ describe('resource accessRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.firewall.accessRules.delete({}, { body: {}, account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -60,13 +56,11 @@ describe('resource accessRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.firewall.accessRules.delete({}, { body: {}, account_id: 'string' });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.firewall.accessRules.edit(
       {},
       { configuration: {}, mode: 'challenge', account_id: 'string' },
@@ -80,8 +74,7 @@ describe('resource accessRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.firewall.accessRules.edit(
       {},
       {
@@ -93,8 +86,7 @@ describe('resource accessRules', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.firewall.accessRules.get({}, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

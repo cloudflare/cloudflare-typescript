@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource tests', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.tests.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
@@ -24,8 +23,7 @@ describe('resource tests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.tests.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       colo: 'string',

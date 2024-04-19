@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource apps', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.spectrum.apps.create('023e105f4ecef8ad9ca31a8372d0c353', {
       dns: {},
       origin_dns: {},
@@ -27,8 +26,7 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.spectrum.apps.create('023e105f4ecef8ad9ca31a8372d0c353', {
       dns: { name: 'ssh.example.com', type: 'CNAME' },
       origin_dns: { name: 'origin.example.com', ttl: 600, type: '' },
@@ -43,8 +41,7 @@ describe('resource apps', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.spectrum.apps.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -59,8 +56,7 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.spectrum.apps.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -79,8 +75,7 @@ describe('resource apps', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.spectrum.apps.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -91,16 +86,14 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.spectrum.apps.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
+  test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.spectrum.apps.list(
@@ -111,8 +104,7 @@ describe('resource apps', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.spectrum.apps.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -127,8 +119,7 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.spectrum.apps.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -136,8 +127,7 @@ describe('resource apps', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.spectrum.apps.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -151,8 +141,7 @@ describe('resource apps', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
+  test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.spectrum.apps.get('023e105f4ecef8ad9ca31a8372d0c353', 'ea95132c15732412d22c1476fa83f27a', {

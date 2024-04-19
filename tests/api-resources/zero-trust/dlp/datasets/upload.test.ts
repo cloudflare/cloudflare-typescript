@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource upload', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.upload.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'string' },
@@ -25,16 +24,14 @@ describe('resource upload', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.upload.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { account_id: 'string' },
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.upload.edit(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
@@ -49,8 +46,7 @@ describe('resource upload', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.upload.edit(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,

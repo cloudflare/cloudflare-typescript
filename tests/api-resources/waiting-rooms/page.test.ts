@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource page', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('preview: only required params', async () => {
+  test('preview: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.page.preview({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       custom_html:
@@ -26,8 +25,7 @@ describe('resource page', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('preview: required and optional params', async () => {
+  test('preview: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.page.preview({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       custom_html:

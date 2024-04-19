@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource configurations', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.configurations.update({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -24,8 +23,7 @@ describe('resource configurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.configurations.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       settings: {
@@ -58,8 +56,7 @@ describe('resource configurations', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.configurations.edit({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -72,8 +69,7 @@ describe('resource configurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.configurations.edit({
       account_id: '699d98642c564d2e855e9661899b7252',
       settings: {
@@ -106,8 +102,7 @@ describe('resource configurations', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.configurations.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -120,8 +115,7 @@ describe('resource configurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.configurations.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

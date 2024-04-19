@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource fleetStatus', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('live: only required params', async () => {
+  test('live: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.fleetStatus.live({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       since_minutes: 10,
@@ -25,16 +24,14 @@ describe('resource fleetStatus', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('live: required and optional params', async () => {
+  test('live: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.fleetStatus.live({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       since_minutes: 10,
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('overTime: only required params', async () => {
+  test('overTime: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.fleetStatus.overTime({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       time_end: '2023-10-11T00:00:00Z',
@@ -49,8 +46,7 @@ describe('resource fleetStatus', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('overTime: required and optional params', async () => {
+  test('overTime: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.fleetStatus.overTime({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       time_end: '2023-10-11T00:00:00Z',
