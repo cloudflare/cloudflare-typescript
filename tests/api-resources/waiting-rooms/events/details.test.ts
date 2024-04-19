@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource details', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.events.details.get(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
@@ -26,8 +25,7 @@ describe('resource details', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.events.details.get(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',

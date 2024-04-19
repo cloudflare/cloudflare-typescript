@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource snippets', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test('update', async () => {
     const responsePromise = cloudflare.snippets.update('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: request options instead of params are passed correctly', async () => {
+  test('update: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.snippets.update('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
@@ -32,8 +30,7 @@ describe('resource snippets', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: request options and params are passed correctly', async () => {
+  test('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.snippets.update(
@@ -48,8 +45,7 @@ describe('resource snippets', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.snippets.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -60,16 +56,14 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.snippets.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test('delete', async () => {
     const responsePromise = cloudflare.snippets.delete('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -80,8 +74,7 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
+  test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.snippets.delete('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
@@ -90,8 +83,7 @@ describe('resource snippets', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.snippets.get('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -102,8 +94,7 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
+  test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.snippets.get('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {

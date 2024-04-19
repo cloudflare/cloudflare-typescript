@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource top', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('ases: only required params', async () => {
+  test('ases: only required params', async () => {
     const responsePromise = cloudflare.radar.dns.top.ases({ domain: ['string', 'string', 'string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('ases: required and optional params', async () => {
+  test('ases: required and optional params', async () => {
     const response = await cloudflare.radar.dns.top.ases({
       domain: ['string', 'string', 'string'],
       asn: ['string', 'string', 'string'],
@@ -38,8 +36,7 @@ describe('resource top', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('locations: only required params', async () => {
+  test('locations: only required params', async () => {
     const responsePromise = cloudflare.radar.dns.top.locations({ domain: ['string', 'string', 'string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,8 +47,7 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('locations: required and optional params', async () => {
+  test('locations: required and optional params', async () => {
     const response = await cloudflare.radar.dns.top.locations({
       domain: ['string', 'string', 'string'],
       asn: ['string', 'string', 'string'],

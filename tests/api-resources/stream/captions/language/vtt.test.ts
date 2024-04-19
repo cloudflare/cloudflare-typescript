@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource vtt', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.stream.captions.language.vtt.get(
       'ea95132c15732412d22c1476fa83f27a',
       'tr',
@@ -26,8 +25,7 @@ describe('resource vtt', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.stream.captions.language.vtt.get(
       'ea95132c15732412d22c1476fa83f27a',
       'tr',

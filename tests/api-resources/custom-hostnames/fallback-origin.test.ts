@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource fallbackOrigin', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.customHostnames.fallbackOrigin.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       origin: 'fallback.example.com',
@@ -25,16 +24,14 @@ describe('resource fallbackOrigin', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.customHostnames.fallbackOrigin.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       origin: 'fallback.example.com',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.customHostnames.fallbackOrigin.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -48,16 +45,14 @@ describe('resource fallbackOrigin', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.customHostnames.fallbackOrigin.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.customHostnames.fallbackOrigin.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -70,8 +65,7 @@ describe('resource fallbackOrigin', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.customHostnames.fallbackOrigin.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

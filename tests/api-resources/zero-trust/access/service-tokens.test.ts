@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource serviceTokens', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
       account_id: 'string',
@@ -25,8 +24,7 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
       account_id: 'string',
@@ -34,8 +32,7 @@ describe('resource serviceTokens', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test('update', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },
@@ -49,8 +46,7 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -61,8 +57,7 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },
@@ -76,8 +71,7 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('refresh', async () => {
+  test('refresh', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.refresh(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -91,8 +85,7 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('refresh: request options instead of params are passed correctly', async () => {
+  test('refresh: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.serviceTokens.refresh(
@@ -103,8 +96,7 @@ describe('resource serviceTokens', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('rotate', async () => {
+  test('rotate', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.rotate(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -118,8 +110,7 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('rotate: request options instead of params are passed correctly', async () => {
+  test('rotate: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.serviceTokens.rotate(

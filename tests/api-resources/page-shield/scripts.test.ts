@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource scripts', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.pageShield.scripts.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.pageShield.scripts.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
@@ -44,8 +42,7 @@ describe('resource scripts', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.pageShield.scripts.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -58,8 +55,7 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.pageShield.scripts.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

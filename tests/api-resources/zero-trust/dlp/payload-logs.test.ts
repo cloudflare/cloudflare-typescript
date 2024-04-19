@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource payloadLogs', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.payloadLogs.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
@@ -25,16 +24,14 @@ describe('resource payloadLogs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.payloadLogs.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.payloadLogs.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,8 +44,7 @@ describe('resource payloadLogs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.payloadLogs.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

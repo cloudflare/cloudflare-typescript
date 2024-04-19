@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource messages', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('ack: only required params', async () => {
+  test('ack: only required params', async () => {
     const responsePromise = cloudflare.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('ack: required and optional params', async () => {
+  test('ack: required and optional params', async () => {
     const response = await cloudflare.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       acks: [
@@ -62,8 +60,7 @@ describe('resource messages', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('pull: only required params', async () => {
+  test('pull: only required params', async () => {
     const responsePromise = cloudflare.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -76,8 +73,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('pull: required and optional params', async () => {
+  test('pull: required and optional params', async () => {
     const response = await cloudflare.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       batch_size: 10,

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource applications', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.create({
       domain: 'test.example.com/admin',
       type: 'self_hosted',
@@ -26,8 +25,7 @@ describe('resource applications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.applications.create({
       domain: 'test.example.com/admin',
       type: 'self_hosted',
@@ -73,8 +71,7 @@ describe('resource applications', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { domain: 'test.example.com/admin', type: 'self_hosted', account_id: 'string' },
@@ -88,8 +85,7 @@ describe('resource applications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.applications.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -138,8 +134,7 @@ describe('resource applications', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -150,8 +145,7 @@ describe('resource applications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: 'string' },
@@ -165,8 +159,7 @@ describe('resource applications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: 'string',
     });
@@ -179,8 +172,7 @@ describe('resource applications', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('revokeTokens', async () => {
+  test('revokeTokens', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.revokeTokens(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: 'string' },
