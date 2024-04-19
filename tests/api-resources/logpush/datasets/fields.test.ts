@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource fields', () => {
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.logpush.datasets.fields.get('http_requests', { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

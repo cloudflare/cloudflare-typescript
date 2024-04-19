@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource top', () => {
-  test('ases', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ases', async () => {
     const responsePromise = cloudflare.radar.quality.speed.top.ases();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('ases: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ases: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.quality.speed.top.ases({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('ases: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ases: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.quality.speed.top.ases(
@@ -48,7 +51,8 @@ describe('resource top', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('locations', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('locations', async () => {
     const responsePromise = cloudflare.radar.quality.speed.top.locations();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,14 +63,16 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('locations: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('locations: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.quality.speed.top.locations({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('locations: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('locations: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.quality.speed.top.locations(

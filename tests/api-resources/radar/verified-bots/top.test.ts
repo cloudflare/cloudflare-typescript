@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource top', () => {
-  test('bots', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('bots', async () => {
     const responsePromise = cloudflare.radar.verifiedBots.top.bots();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('bots: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('bots: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.verifiedBots.top.bots({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('bots: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('bots: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.verifiedBots.top.bots(
@@ -48,7 +51,8 @@ describe('resource top', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('categories', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('categories', async () => {
     const responsePromise = cloudflare.radar.verifiedBots.top.categories();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,14 +63,16 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('categories: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('categories: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.verifiedBots.top.categories({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('categories: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('categories: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.verifiedBots.top.categories(

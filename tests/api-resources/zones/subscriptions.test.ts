@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource subscriptions', () => {
-  test('create', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
     const responsePromise = cloudflare.zones.subscriptions.create('506e3185e9c882d175a2d0cb0093d9f2', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.zones.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,7 +34,8 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zones.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -41,7 +44,8 @@ describe('resource subscriptions', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.zones.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +56,8 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zones.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', {

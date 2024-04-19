@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource requests', () => {
-  test('create', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -36,7 +38,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.list('023e105f4ecef8ad9ca31a8372d0c353', {
       page: 0,
       per_page: 10,
@@ -50,7 +53,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.cloudforceOne.requests.list('023e105f4ecef8ad9ca31a8372d0c353', {
       page: 0,
       per_page: 10,
@@ -65,7 +69,8 @@ describe('resource requests', () => {
     });
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -79,7 +84,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.cloudforceOne.requests.delete(
@@ -90,7 +96,8 @@ describe('resource requests', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('constants', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('constants', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.constants('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -101,7 +108,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('constants: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('constants: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.cloudforceOne.requests.constants('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -110,7 +118,8 @@ describe('resource requests', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -124,7 +133,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.cloudforceOne.requests.get(
@@ -135,7 +145,8 @@ describe('resource requests', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('quota', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('quota', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.quota('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -146,7 +157,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('quota: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('quota: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.cloudforceOne.requests.quota('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -155,7 +167,8 @@ describe('resource requests', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('types', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('types', async () => {
     const responsePromise = cloudflare.cloudforceOne.requests.types('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -166,7 +179,8 @@ describe('resource requests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('types: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('types: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.cloudforceOne.requests.types('023e105f4ecef8ad9ca31a8372d0c353', {

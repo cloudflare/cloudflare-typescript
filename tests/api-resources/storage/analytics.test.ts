@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource analytics', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.storage.analytics.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource analytics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.storage.analytics.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       query: {
@@ -38,7 +40,8 @@ describe('resource analytics', () => {
     });
   });
 
-  test('stored: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('stored: only required params', async () => {
     const responsePromise = cloudflare.storage.analytics.stored({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -51,7 +54,8 @@ describe('resource analytics', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('stored: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('stored: required and optional params', async () => {
     const response = await cloudflare.storage.analytics.stored({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       query: {

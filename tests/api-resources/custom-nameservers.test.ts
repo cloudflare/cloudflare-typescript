@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource customNameservers', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.create({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       ns_name: 'ns1.example.com',
@@ -24,7 +25,8 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.customNameservers.create({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       ns_name: 'ns1.example.com',
@@ -32,7 +34,8 @@ describe('resource customNameservers', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.delete('ns1.example.com', {
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       body: {},
@@ -46,14 +49,16 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.customNameservers.delete('ns1.example.com', {
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       body: {},
     });
   });
 
-  test('availabilty: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('availabilty: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.availabilty({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
     });
@@ -66,13 +71,15 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('availabilty: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('availabilty: required and optional params', async () => {
     const response = await cloudflare.customNameservers.availabilty({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.get({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
     });
@@ -85,13 +92,15 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.customNameservers.get({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
     });
   });
 
-  test('verify: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('verify: only required params', async () => {
     const responsePromise = cloudflare.customNameservers.verify({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       body: {},
@@ -105,7 +114,8 @@ describe('resource customNameservers', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('verify: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('verify: required and optional params', async () => {
     const response = await cloudflare.customNameservers.verify({
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
       body: {},

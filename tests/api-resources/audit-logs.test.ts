@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource auditLogs', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.auditLogs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource auditLogs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.auditLogs.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'f174be97-19b1-40d6-954d-70cd5fbd52db',

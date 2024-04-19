@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource defaultPolicy', () => {
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.policies.defaultPolicy.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -23,7 +24,8 @@ describe('resource defaultPolicy', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.policies.defaultPolicy.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

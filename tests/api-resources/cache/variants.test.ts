@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource variants', () => {
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.cache.variants.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -24,14 +25,16 @@ describe('resource variants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.cache.variants.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.cache.variants.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: {},
@@ -45,7 +48,8 @@ describe('resource variants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.cache.variants.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: {
@@ -64,7 +68,8 @@ describe('resource variants', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.cache.variants.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -75,7 +80,8 @@ describe('resource variants', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.cache.variants.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

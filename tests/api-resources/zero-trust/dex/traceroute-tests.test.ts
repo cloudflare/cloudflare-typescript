@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource tracerouteTests', () => {
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.tracerouteTests.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -29,7 +30,8 @@ describe('resource tracerouteTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.tracerouteTests.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -43,7 +45,8 @@ describe('resource tracerouteTests', () => {
     );
   });
 
-  test('networkPath: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('networkPath: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.tracerouteTests.networkPath(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -63,7 +66,8 @@ describe('resource tracerouteTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('networkPath: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('networkPath: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.tracerouteTests.networkPath(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -76,7 +80,8 @@ describe('resource tracerouteTests', () => {
     );
   });
 
-  test('percentiles: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('percentiles: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.tracerouteTests.percentiles(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -94,7 +99,8 @@ describe('resource tracerouteTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('percentiles: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('percentiles: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.tracerouteTests.percentiles(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {

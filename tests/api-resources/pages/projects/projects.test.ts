@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource projects', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource projects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.pages.projects.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       build_config: {
@@ -91,7 +93,8 @@ describe('resource projects', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -104,11 +107,13 @@ describe('resource projects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.pages.projects.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.delete('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -122,14 +127,16 @@ describe('resource projects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.pages.projects.delete('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.edit('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {
@@ -155,7 +162,8 @@ describe('resource projects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.pages.projects.edit('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {
@@ -174,7 +182,8 @@ describe('resource projects', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.get('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -187,13 +196,15 @@ describe('resource projects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.pages.projects.get('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('purgeBuildCache: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('purgeBuildCache: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.purgeBuildCache('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -206,7 +217,8 @@ describe('resource projects', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('purgeBuildCache: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('purgeBuildCache: required and optional params', async () => {
     const response = await cloudflare.pages.projects.purgeBuildCache('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

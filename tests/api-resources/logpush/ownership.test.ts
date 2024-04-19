@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ownership', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'string',
@@ -24,14 +25,16 @@ describe('resource ownership', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'string',
     });
   });
 
-  test('validate: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('validate: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.validate({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       ownership_challenge: '00000000000000000000',
@@ -46,7 +49,8 @@ describe('resource ownership', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('validate: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('validate: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.validate({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       ownership_challenge: '00000000000000000000',

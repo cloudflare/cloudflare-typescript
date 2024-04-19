@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource rules', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.create('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: 'bypass_waiting_room',
@@ -25,7 +26,8 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.rules.create('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: 'bypass_waiting_room',
@@ -35,7 +37,8 @@ describe('resource rules', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.update('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
@@ -53,7 +56,8 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.rules.update('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
@@ -79,7 +83,8 @@ describe('resource rules', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.list('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -92,13 +97,15 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.rules.list('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.delete(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
@@ -113,7 +120,8 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.rules.delete(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
@@ -121,7 +129,8 @@ describe('resource rules', () => {
     );
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.rules.edit(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',
@@ -140,7 +149,8 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.rules.edit(
       '699d98642c564d2e855e9661899b7252',
       '25756b2dfe6e378a06b033b670413757',

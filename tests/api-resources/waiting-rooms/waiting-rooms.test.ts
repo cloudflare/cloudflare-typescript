@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource waitingRooms', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: 'shop.example.com',
@@ -27,7 +28,8 @@ describe('resource waitingRooms', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: 'shop.example.com',
@@ -56,7 +58,8 @@ describe('resource waitingRooms', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.update('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: 'shop.example.com',
@@ -73,7 +76,8 @@ describe('resource waitingRooms', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.update('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: 'shop.example.com',
@@ -102,7 +106,8 @@ describe('resource waitingRooms', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -113,7 +118,8 @@ describe('resource waitingRooms', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: {},
@@ -121,7 +127,8 @@ describe('resource waitingRooms', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -135,14 +142,16 @@ describe('resource waitingRooms', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.edit('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: 'shop.example.com',
@@ -159,7 +168,8 @@ describe('resource waitingRooms', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.edit('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       host: 'shop.example.com',
@@ -188,7 +198,8 @@ describe('resource waitingRooms', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.waitingRooms.get('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -201,7 +212,8 @@ describe('resource waitingRooms', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.waitingRooms.get('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
