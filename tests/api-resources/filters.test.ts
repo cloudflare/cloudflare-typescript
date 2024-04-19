@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource filters', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.filters.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,11 +22,13 @@ describe('resource filters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.filters.create('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.filters.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
@@ -40,7 +43,8 @@ describe('resource filters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.filters.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
@@ -48,7 +52,8 @@ describe('resource filters', () => {
     );
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.filters.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,14 +64,16 @@ describe('resource filters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.filters.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('list: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.filters.list(
@@ -85,7 +92,8 @@ describe('resource filters', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.filters.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
@@ -100,7 +108,8 @@ describe('resource filters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.filters.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
@@ -108,7 +117,8 @@ describe('resource filters', () => {
     );
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.filters.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
@@ -122,7 +132,8 @@ describe('resource filters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.filters.get('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b61', {

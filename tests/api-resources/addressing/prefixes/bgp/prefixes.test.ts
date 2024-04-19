@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource prefixes', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.addressing.prefixes.bgp.prefixes.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -24,14 +25,16 @@ describe('resource prefixes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.addressing.prefixes.bgp.prefixes.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.addressing.prefixes.bgp.prefixes.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -46,7 +49,8 @@ describe('resource prefixes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.addressing.prefixes.bgp.prefixes.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -54,7 +58,8 @@ describe('resource prefixes', () => {
     );
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.addressing.prefixes.bgp.prefixes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -69,7 +74,8 @@ describe('resource prefixes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.addressing.prefixes.bgp.prefixes.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',

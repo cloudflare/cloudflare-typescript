@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource customPages', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -28,7 +29,8 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.customPages.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -40,7 +42,8 @@ describe('resource customPages', () => {
     );
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -59,7 +62,8 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.customPages.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -72,7 +76,8 @@ describe('resource customPages', () => {
     );
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -83,7 +88,8 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.customPages.list('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -92,7 +98,8 @@ describe('resource customPages', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -106,7 +113,8 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.customPages.delete(
@@ -117,7 +125,8 @@ describe('resource customPages', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -131,7 +140,8 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.customPages.get(

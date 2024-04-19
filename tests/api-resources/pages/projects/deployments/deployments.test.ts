@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource deployments', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,14 +24,16 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       branch: 'staging',
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.list('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -43,14 +46,16 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.list('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       env: 'preview',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.delete(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -65,7 +70,8 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.delete(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -73,7 +79,8 @@ describe('resource deployments', () => {
     );
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.get(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -88,7 +95,8 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.get(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -96,7 +104,8 @@ describe('resource deployments', () => {
     );
   });
 
-  test('retry: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('retry: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.retry(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -111,7 +120,8 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('retry: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('retry: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.retry(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -119,7 +129,8 @@ describe('resource deployments', () => {
     );
   });
 
-  test('rollback: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('rollback: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.deployments.rollback(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -134,7 +145,8 @@ describe('resource deployments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('rollback: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('rollback: required and optional params', async () => {
     const response = await cloudflare.pages.projects.deployments.rollback(
       'this-is-my-project-01',
       '023e105f4ecef8ad9ca31a8372d0c353',

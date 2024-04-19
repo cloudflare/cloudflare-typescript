@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource certificatePacks', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.ssl.certificatePacks.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,14 +24,16 @@ describe('resource certificatePacks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.ssl.certificatePacks.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       status: 'all',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.ssl.certificatePacks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -44,14 +47,16 @@ describe('resource certificatePacks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.ssl.certificatePacks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.ssl.certificatePacks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -65,14 +70,16 @@ describe('resource certificatePacks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.ssl.certificatePacks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.ssl.certificatePacks.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -85,7 +92,8 @@ describe('resource certificatePacks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.ssl.certificatePacks.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

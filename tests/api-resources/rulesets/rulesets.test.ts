@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource rulesets', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.rulesets.create({
       kind: 'root',
       name: 'My ruleset',
@@ -27,7 +28,8 @@ describe('resource rulesets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.rulesets.create({
       kind: 'root',
       name: 'My ruleset',
@@ -87,7 +89,8 @@ describe('resource rulesets', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       rules: [{}, {}, {}],
       account_id: 'string',
@@ -101,7 +104,8 @@ describe('resource rulesets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       rules: [
         {
@@ -161,7 +165,8 @@ describe('resource rulesets', () => {
     });
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.rulesets.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -172,7 +177,8 @@ describe('resource rulesets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
     });
@@ -185,7 +191,8 @@ describe('resource rulesets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
     });

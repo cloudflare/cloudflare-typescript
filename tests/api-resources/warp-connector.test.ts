@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource warpConnector', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.warpConnector.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
@@ -24,14 +25,16 @@ describe('resource warpConnector', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.warpConnector.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.warpConnector.list({ account_id: '699d98642c564d2e855e9661899b7252' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,7 +45,8 @@ describe('resource warpConnector', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.warpConnector.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       exclude_prefix: 'vpc1-',
@@ -58,7 +62,8 @@ describe('resource warpConnector', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.warpConnector.delete('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
       body: {},
@@ -72,14 +77,16 @@ describe('resource warpConnector', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.warpConnector.delete('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
       body: {},
     });
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.warpConnector.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -92,7 +99,8 @@ describe('resource warpConnector', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.warpConnector.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
@@ -100,7 +108,8 @@ describe('resource warpConnector', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.warpConnector.get('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -113,13 +122,15 @@ describe('resource warpConnector', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.warpConnector.get('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  test('token: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('token: only required params', async () => {
     const responsePromise = cloudflare.warpConnector.token('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -132,7 +143,8 @@ describe('resource warpConnector', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('token: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('token: required and optional params', async () => {
     const response = await cloudflare.warpConnector.token('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });

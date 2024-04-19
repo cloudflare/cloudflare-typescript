@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource status', () => {
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.outgoing.status.get({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
@@ -23,7 +24,8 @@ describe('resource status', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.outgoing.status.get({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });

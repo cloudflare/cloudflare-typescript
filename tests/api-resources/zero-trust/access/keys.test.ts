@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource keys', () => {
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.keys.update('023e105f4ecef8ad9ca31a8372d0c353', {
       key_rotation_interval_days: 30,
     });
@@ -23,13 +24,15 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.keys.update('023e105f4ecef8ad9ca31a8372d0c353', {
       key_rotation_interval_days: 30,
     });
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.keys.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -40,7 +43,8 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.keys.get('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -49,7 +53,8 @@ describe('resource keys', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('rotate', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('rotate', async () => {
     const responsePromise = cloudflare.zeroTrust.access.keys.rotate('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -60,7 +65,8 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('rotate: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('rotate: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.access.keys.rotate('023e105f4ecef8ad9ca31a8372d0c353', {

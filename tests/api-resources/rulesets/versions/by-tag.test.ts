@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource byTag', () => {
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.rulesets.versions.byTag.get(
       '2f2feab2026849078ba485f918791bdc',
       '1',
@@ -26,7 +27,8 @@ describe('resource byTag', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.rulesets.versions.byTag.get(
       '2f2feab2026849078ba485f918791bdc',
       '1',

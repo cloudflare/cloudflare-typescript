@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource tsigs', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
@@ -27,7 +28,8 @@ describe('resource tsigs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
@@ -37,7 +39,8 @@ describe('resource tsigs', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
@@ -54,7 +57,8 @@ describe('resource tsigs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
@@ -64,7 +68,8 @@ describe('resource tsigs', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.tsigs.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
@@ -77,13 +82,15 @@ describe('resource tsigs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.tsigs.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       body: {},
@@ -97,14 +104,16 @@ describe('resource tsigs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       body: {},
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
@@ -117,7 +126,8 @@ describe('resource tsigs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });

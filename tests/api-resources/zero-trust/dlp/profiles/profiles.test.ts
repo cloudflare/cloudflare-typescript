@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource profiles', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.profiles.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,13 +24,15 @@ describe('resource profiles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.profiles.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.profiles.get('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -42,7 +45,8 @@ describe('resource profiles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.profiles.get('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

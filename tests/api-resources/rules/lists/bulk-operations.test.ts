@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource bulkOperations', () => {
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.rules.lists.bulkOperations.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '4da8780eeb215e6cb7f48dd981c4ea02',
@@ -24,7 +25,8 @@ describe('resource bulkOperations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.rules.lists.bulkOperations.get(

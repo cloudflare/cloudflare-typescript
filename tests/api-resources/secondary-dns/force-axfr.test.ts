@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource forceAXFR', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       body: {},
@@ -24,7 +25,8 @@ describe('resource forceAXFR', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       body: {},

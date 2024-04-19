@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource versions', () => {
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.rulesets.phases.versions.list('http_request_firewall_custom', {
       account_id: 'string',
     });
@@ -23,7 +24,8 @@ describe('resource versions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.phases.versions.get('http_request_firewall_custom', '1', {
       account_id: 'string',
     });

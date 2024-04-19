@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource lans', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource lans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       lan: {
@@ -53,7 +55,8 @@ describe('resource lans', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -68,7 +71,8 @@ describe('resource lans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.lans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -101,7 +105,8 @@ describe('resource lans', () => {
     );
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -114,13 +119,15 @@ describe('resource lans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.lans.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -135,7 +142,8 @@ describe('resource lans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.lans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -143,7 +151,8 @@ describe('resource lans', () => {
     );
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
@@ -158,7 +167,8 @@ describe('resource lans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.lans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',

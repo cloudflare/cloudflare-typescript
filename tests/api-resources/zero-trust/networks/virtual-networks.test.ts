@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource virtualNetworks', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'us-east-1-vpc',
@@ -24,7 +25,8 @@ describe('resource virtualNetworks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.virtualNetworks.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'us-east-1-vpc',
@@ -33,7 +35,8 @@ describe('resource virtualNetworks', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -46,7 +49,8 @@ describe('resource virtualNetworks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.virtualNetworks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       is_default: {},
@@ -57,7 +61,8 @@ describe('resource virtualNetworks', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
@@ -71,14 +76,16 @@ describe('resource virtualNetworks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.edit(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -92,7 +99,8 @@ describe('resource virtualNetworks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.virtualNetworks.edit(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       {

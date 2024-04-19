@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource v1', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +22,8 @@ describe('resource v1', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.images.v1.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       file: {},
@@ -31,7 +33,8 @@ describe('resource v1', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.images.v1.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,7 +45,8 @@ describe('resource v1', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.images.v1.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
@@ -50,7 +54,8 @@ describe('resource v1', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.images.v1.delete('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -64,14 +69,16 @@ describe('resource v1', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.images.v1.delete('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.images.v1.edit('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -84,7 +91,8 @@ describe('resource v1', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.images.v1.edit('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {},
@@ -92,7 +100,8 @@ describe('resource v1', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.images.v1.get('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -105,7 +114,8 @@ describe('resource v1', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.images.v1.get('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

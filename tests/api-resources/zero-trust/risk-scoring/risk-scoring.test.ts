@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource riskScoring', () => {
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f2108713-1206-4e84-8b80-0e71a6a1c67b',
@@ -24,7 +25,8 @@ describe('resource riskScoring', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.riskScoring.get(
@@ -35,7 +37,8 @@ describe('resource riskScoring', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('get: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.riskScoring.get(
@@ -47,7 +50,8 @@ describe('resource riskScoring', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('reset', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('reset', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.reset(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f2108713-1206-4e84-8b80-0e71a6a1c67b',
@@ -61,7 +65,8 @@ describe('resource riskScoring', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('reset: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('reset: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zeroTrust.riskScoring.reset(

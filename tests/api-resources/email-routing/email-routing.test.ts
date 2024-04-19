@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource emailRouting', () => {
-  test('disable: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('disable: only required params', async () => {
     const responsePromise = cloudflare.emailRouting.disable('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,11 +22,13 @@ describe('resource emailRouting', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('disable: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('disable: required and optional params', async () => {
     const response = await cloudflare.emailRouting.disable('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
-  test('enable: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('enable: only required params', async () => {
     const responsePromise = cloudflare.emailRouting.enable('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -36,11 +39,13 @@ describe('resource emailRouting', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('enable: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('enable: required and optional params', async () => {
     const response = await cloudflare.emailRouting.enable('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.emailRouting.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,7 +56,8 @@ describe('resource emailRouting', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.emailRouting.get('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),

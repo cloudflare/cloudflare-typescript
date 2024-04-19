@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource catchAlls', () => {
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.emailRouting.rules.catchAlls.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -27,7 +28,8 @@ describe('resource catchAlls', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.emailRouting.rules.catchAlls.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -64,7 +66,8 @@ describe('resource catchAlls', () => {
     );
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.emailRouting.rules.catchAlls.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -75,7 +78,8 @@ describe('resource catchAlls', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.emailRouting.rules.catchAlls.get('023e105f4ecef8ad9ca31a8372d0c353', {

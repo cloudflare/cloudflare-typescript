@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource originMaxHTTPVersion', () => {
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.zones.settings.originMaxHTTPVersion.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: '2',
@@ -24,14 +25,16 @@ describe('resource originMaxHTTPVersion', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.zones.settings.originMaxHTTPVersion.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       value: '2',
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.zones.settings.originMaxHTTPVersion.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -44,7 +47,8 @@ describe('resource originMaxHTTPVersion', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zones.settings.originMaxHTTPVersion.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

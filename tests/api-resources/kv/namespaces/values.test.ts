@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource values', () => {
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.values.update(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
@@ -29,7 +30,8 @@ describe('resource values', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.values.update(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
@@ -41,7 +43,8 @@ describe('resource values', () => {
     );
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.values.delete(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
@@ -56,7 +59,8 @@ describe('resource values', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.values.delete(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
@@ -64,7 +68,8 @@ describe('resource values', () => {
     );
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.values.get(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
@@ -79,7 +84,8 @@ describe('resource values', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.values.get('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

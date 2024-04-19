@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource keys', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.keys.list('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.keys.list('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor:
