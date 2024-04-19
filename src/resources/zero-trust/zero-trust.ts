@@ -11,6 +11,7 @@ import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
 import * as DLPAPI from 'cloudflare/resources/zero-trust/dlp/dlp';
 import * as GatewayAPI from 'cloudflare/resources/zero-trust/gateway/gateway';
 import * as NetworksAPI from 'cloudflare/resources/zero-trust/networks/networks';
+import * as RiskScoringAPI from 'cloudflare/resources/zero-trust/risk-scoring/risk-scoring';
 import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
 
 export class ZeroTrust extends APIResource {
@@ -28,6 +29,7 @@ export class ZeroTrust extends APIResource {
   dlp: DLPAPI.DLP = new DLPAPI.DLP(this._client);
   gateway: GatewayAPI.Gateway = new GatewayAPI.Gateway(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
+  riskScoring: RiskScoringAPI.RiskScoring = new RiskScoringAPI.RiskScoring(this._client);
 }
 
 export namespace ZeroTrust {
@@ -114,4 +116,8 @@ export namespace ZeroTrust {
   export import GatewayCreateParams = GatewayAPI.GatewayCreateParams;
   export import GatewayListParams = GatewayAPI.GatewayListParams;
   export import Networks = NetworksAPI.Networks;
+  export import RiskScoring = RiskScoringAPI.RiskScoring;
+  export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
+  export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
+  export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
 }

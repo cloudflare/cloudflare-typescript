@@ -10,15 +10,7 @@ export {
   AudioTrackGetParams,
   AudioTracks,
 } from './audio-tracks';
-export {
-  Caption,
-  CaptionDeleteResponse,
-  CaptionGetResponse,
-  CaptionUpdateParams,
-  CaptionDeleteParams,
-  CaptionGetParams,
-  Captions,
-} from './captions';
+export { Caption, CaptionGetResponse, CaptionGetParams, Captions } from './captions/index';
 export { Clip, ClipCreateParams, ClipResource } from './clip';
 export { CopyCreateParams, Copy } from './copy';
 export { DirectUploadCreateResponse, DirectUploadCreateParams, DirectUpload } from './direct-upload';
