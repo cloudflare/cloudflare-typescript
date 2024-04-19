@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource members', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.accounts.members.create({
       account_id: {},
       email: 'user@example.com',
@@ -30,8 +29,7 @@ describe('resource members', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.accounts.members.create({
       account_id: {},
       email: 'user@example.com',
@@ -44,8 +42,7 @@ describe('resource members', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
       account_id: {},
       roles: [
@@ -63,8 +60,7 @@ describe('resource members', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
       account_id: {},
       roles: [
@@ -75,8 +71,7 @@ describe('resource members', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.accounts.members.list({ account_id: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -87,8 +82,7 @@ describe('resource members', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.accounts.members.list({
       account_id: {},
       direction: 'desc',
@@ -99,8 +93,7 @@ describe('resource members', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
       account_id: {},
       body: {},
@@ -114,16 +107,14 @@ describe('resource members', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
       account_id: {},
       body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
       account_id: {},
     });
@@ -136,8 +127,7 @@ describe('resource members', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
       account_id: {},
     });

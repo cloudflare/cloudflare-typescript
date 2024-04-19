@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource liveInputs', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource liveInputs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       defaultCreator: 'string',
@@ -40,8 +38,7 @@ describe('resource liveInputs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -54,8 +51,7 @@ describe('resource liveInputs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       defaultCreator: 'string',
@@ -70,8 +66,7 @@ describe('resource liveInputs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -84,16 +79,14 @@ describe('resource liveInputs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       include_counts: true,
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -107,16 +100,14 @@ describe('resource liveInputs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.stream.liveInputs.get('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -129,8 +120,7 @@ describe('resource liveInputs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.get('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

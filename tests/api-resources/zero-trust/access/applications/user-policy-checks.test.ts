@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource userPolicyChecks', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.userPolicyChecks.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: 'string' },
