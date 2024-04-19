@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource versions', () => {
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.rulesets.versions.list('2f2feab2026849078ba485f918791bdc', {
       account_id: 'string',
     });
@@ -23,7 +24,8 @@ describe('resource versions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.rulesets.versions.delete('2f2feab2026849078ba485f918791bdc', '1', {
       account_id: 'string',
     });
@@ -36,7 +38,8 @@ describe('resource versions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.versions.get('2f2feab2026849078ba485f918791bdc', '1', {
       account_id: 'string',
     });

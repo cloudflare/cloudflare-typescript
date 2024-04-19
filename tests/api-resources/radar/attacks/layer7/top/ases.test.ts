@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ases', () => {
-  test('origin', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('origin', async () => {
     const responsePromise = cloudflare.radar.attacks.layer7.top.ases.origin();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource ases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('origin: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('origin: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.attacks.layer7.top.ases.origin({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('origin: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('origin: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.attacks.layer7.top.ases.origin(

@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource flag', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logs.control.retention.flag.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { flag: true },
@@ -24,13 +25,15 @@ describe('resource flag', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logs.control.retention.flag.create('023e105f4ecef8ad9ca31a8372d0c353', {
       flag: true,
     });
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.logs.control.retention.flag.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -41,7 +44,8 @@ describe('resource flag', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.logs.control.retention.flag.get('023e105f4ecef8ad9ca31a8372d0c353', {

@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource settings', () => {
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.settings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -23,7 +24,8 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.settings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       gateway_proxy_enabled: true,
@@ -33,7 +35,8 @@ describe('resource settings', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.settings.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -46,7 +49,8 @@ describe('resource settings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.settings.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

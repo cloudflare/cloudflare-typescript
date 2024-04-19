@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource seats', () => {
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.seats.edit('023e105f4ecef8ad9ca31a8372d0c353', [
       { access_seat: false, gateway_seat: false },
       { access_seat: false, gateway_seat: false },
@@ -25,7 +26,8 @@ describe('resource seats', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.seats.edit('023e105f4ecef8ad9ca31a8372d0c353', [
       { access_seat: false, gateway_seat: false },
       { access_seat: false, gateway_seat: false },

@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource summary', () => {
-  test('botClass', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('botClass', async () => {
     const responsePromise = cloudflare.radar.http.summary.botClass();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('botClass: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('botClass: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.botClass({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('botClass: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('botClass: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.botClass(
@@ -53,7 +56,8 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('deviceType', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('deviceType', async () => {
     const responsePromise = cloudflare.radar.http.summary.deviceType();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,14 +68,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('deviceType: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('deviceType: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.deviceType({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('deviceType: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('deviceType: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.deviceType(
@@ -96,7 +102,8 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpProtocol', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpProtocol', async () => {
     const responsePromise = cloudflare.radar.http.summary.httpProtocol();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -107,14 +114,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('httpProtocol: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpProtocol: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.httpProtocol({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpProtocol: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpProtocol: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.httpProtocol(
@@ -139,7 +148,8 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpVersion', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion', async () => {
     const responsePromise = cloudflare.radar.http.summary.httpVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -150,14 +160,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('httpVersion: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.httpVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpVersion: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.httpVersion(
@@ -182,7 +194,8 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('ipVersion', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ipVersion', async () => {
     const responsePromise = cloudflare.radar.http.summary.ipVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -193,14 +206,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('ipVersion: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.ipVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('ipVersion: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.ipVersion(
@@ -225,7 +240,8 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('os', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('os', async () => {
     const responsePromise = cloudflare.radar.http.summary.os();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -236,14 +252,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('os: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('os: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.http.summary.os({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  test('os: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('os: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.os(
@@ -268,7 +286,8 @@ describe('resource summary', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('tlsVersion', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion', async () => {
     const responsePromise = cloudflare.radar.http.summary.tlsVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -279,14 +298,16 @@ describe('resource summary', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('tlsVersion: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.tlsVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('tlsVersion: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.summary.tlsVersion(

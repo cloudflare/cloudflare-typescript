@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource colos', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.colos.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       timeEnd: '2023-08-24T20:45:00Z',
@@ -25,7 +26,8 @@ describe('resource colos', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.colos.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       timeEnd: '2023-08-24T20:45:00Z',

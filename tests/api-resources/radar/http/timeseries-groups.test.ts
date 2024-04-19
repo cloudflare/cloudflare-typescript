@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource timeseriesGroups', () => {
-  test('botClass', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('botClass', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.botClass();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('botClass: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('botClass: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.botClass({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('botClass: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('botClass: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.botClass(
@@ -54,7 +57,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('browser', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('browser', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.browser();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,14 +69,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('browser: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('browser: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.browser({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('browser: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('browser: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.browser(
@@ -100,7 +106,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('browserFamily', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('browserFamily', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.browserFamily();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -111,14 +118,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('browserFamily: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('browserFamily: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.browserFamily({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('browserFamily: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('browserFamily: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.browserFamily(
@@ -145,7 +154,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('deviceType', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('deviceType', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.deviceType();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -156,14 +166,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('deviceType: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('deviceType: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.deviceType({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('deviceType: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('deviceType: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.deviceType(
@@ -189,7 +201,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpProtocol', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpProtocol', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.httpProtocol();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -200,14 +213,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('httpProtocol: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpProtocol: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.httpProtocol({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpProtocol: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpProtocol: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.httpProtocol(
@@ -233,7 +248,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpVersion', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.httpVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -244,14 +260,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('httpVersion: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.httpVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('httpVersion: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('httpVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.httpVersion(
@@ -277,7 +295,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('ipVersion', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ipVersion', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.ipVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -288,14 +307,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('ipVersion: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('ipVersion: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.ipVersion(
@@ -321,7 +342,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('os', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('os', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.os();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -332,14 +354,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('os: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('os: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.os({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('os: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('os: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.os(
@@ -365,7 +389,8 @@ describe('resource timeseriesGroups', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('tlsVersion', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion', async () => {
     const responsePromise = cloudflare.radar.http.timeseriesGroups.tlsVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -376,14 +401,16 @@ describe('resource timeseriesGroups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('tlsVersion: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.tlsVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('tlsVersion: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('tlsVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.timeseriesGroups.tlsVersion(

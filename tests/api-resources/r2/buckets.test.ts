@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource buckets', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.r2.buckets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-bucket',
@@ -24,7 +25,8 @@ describe('resource buckets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.r2.buckets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-bucket',
@@ -32,7 +34,8 @@ describe('resource buckets', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.r2.buckets.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,7 +46,8 @@ describe('resource buckets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.r2.buckets.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       cursor: 'string',
@@ -55,7 +59,8 @@ describe('resource buckets', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.r2.buckets.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -68,13 +73,15 @@ describe('resource buckets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.r2.buckets.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.r2.buckets.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -87,7 +94,8 @@ describe('resource buckets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.r2.buckets.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

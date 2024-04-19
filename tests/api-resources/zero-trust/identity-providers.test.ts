@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource identityProviders', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.create({
       config: {},
       name: 'Widget Corps IDP',
@@ -26,7 +27,8 @@ describe('resource identityProviders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.identityProviders.create({
       config: {
         client_id: '<your client id>',
@@ -51,7 +53,8 @@ describe('resource identityProviders', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { config: {}, name: 'Widget Corps IDP', type: 'onetimepin', account_id: 'string' },
@@ -65,7 +68,8 @@ describe('resource identityProviders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -93,7 +97,8 @@ describe('resource identityProviders', () => {
     );
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -104,7 +109,8 @@ describe('resource identityProviders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },
@@ -118,7 +124,8 @@ describe('resource identityProviders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },

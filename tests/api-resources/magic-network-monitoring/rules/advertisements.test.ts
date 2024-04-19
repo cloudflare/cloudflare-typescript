@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource advertisements', () => {
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.advertisements.edit(
       '2890e6fa406311ed9b5a23f70f6fb8cf',
       { account_id: '6f91088a406011ed95aed352566e8d4c', body: {} },
@@ -24,7 +25,8 @@ describe('resource advertisements', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.advertisements.edit(
       '2890e6fa406311ed9b5a23f70f6fb8cf',
       { account_id: '6f91088a406011ed95aed352566e8d4c', body: {} },

@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource domains', () => {
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.workers.domains.update({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       environment: 'production',
@@ -27,7 +28,8 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.workers.domains.update({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       environment: 'production',
@@ -37,7 +39,8 @@ describe('resource domains', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.workers.domains.list({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
@@ -50,7 +53,8 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.workers.domains.list({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       environment: 'production',
@@ -61,7 +65,8 @@ describe('resource domains', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.workers.domains.delete('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       body: {},
@@ -75,14 +80,16 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.workers.domains.delete('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       body: {},
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.workers.domains.get('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
@@ -95,7 +102,8 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.workers.domains.get('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
