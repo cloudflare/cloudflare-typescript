@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource addresses', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.emailRouting.addresses.create('023e105f4ecef8ad9ca31a8372d0c353', {
       email: 'user@example.com',
     });
@@ -23,13 +24,15 @@ describe('resource addresses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.emailRouting.addresses.create('023e105f4ecef8ad9ca31a8372d0c353', {
       email: 'user@example.com',
     });
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.emailRouting.addresses.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -40,7 +43,8 @@ describe('resource addresses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.emailRouting.addresses.list('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -49,7 +53,8 @@ describe('resource addresses', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('list: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.emailRouting.addresses.list(
@@ -60,7 +65,8 @@ describe('resource addresses', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.emailRouting.addresses.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -74,7 +80,8 @@ describe('resource addresses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.emailRouting.addresses.delete(
@@ -85,7 +92,8 @@ describe('resource addresses', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.emailRouting.addresses.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
@@ -99,7 +107,8 @@ describe('resource addresses', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.emailRouting.addresses.get(

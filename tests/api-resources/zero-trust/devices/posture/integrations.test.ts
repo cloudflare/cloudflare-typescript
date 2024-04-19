@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource integrations', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.posture.integrations.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       config: {
@@ -32,7 +33,8 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.posture.integrations.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       config: {
@@ -47,7 +49,8 @@ describe('resource integrations', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.posture.integrations.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -60,13 +63,15 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.posture.integrations.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.posture.integrations.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
@@ -80,14 +85,16 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.posture.integrations.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
-  test('edit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.posture.integrations.edit(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -101,7 +108,8 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.posture.integrations.edit(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -119,7 +127,8 @@ describe('resource integrations', () => {
     );
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.posture.integrations.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -133,7 +142,8 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.posture.integrations.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },

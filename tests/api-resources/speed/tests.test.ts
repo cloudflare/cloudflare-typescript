@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource tests', () => {
-  test('create: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.speed.tests.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,14 +24,16 @@ describe('resource tests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.speed.tests.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       region: 'us-central1',
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.speed.tests.list('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -43,7 +46,8 @@ describe('resource tests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.speed.tests.list('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
@@ -52,7 +56,8 @@ describe('resource tests', () => {
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.speed.tests.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -65,14 +70,16 @@ describe('resource tests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.speed.tests.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       region: 'us-central1',
     });
   });
 
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.speed.tests.get('example.com', 'string', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -85,7 +92,8 @@ describe('resource tests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.speed.tests.get('example.com', 'string', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

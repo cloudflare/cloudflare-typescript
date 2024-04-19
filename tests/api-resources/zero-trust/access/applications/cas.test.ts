@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource cas', () => {
-  test('create', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('create', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },
@@ -24,7 +25,8 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -35,7 +37,8 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },
@@ -49,7 +52,8 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'string' },

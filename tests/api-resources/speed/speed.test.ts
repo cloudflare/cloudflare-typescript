@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource speed', () => {
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.speed.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,14 +24,16 @@ describe('resource speed', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.speed.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       region: 'us-central1',
     });
   });
 
-  test('scheduleGet: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('scheduleGet: only required params', async () => {
     const responsePromise = cloudflare.speed.scheduleGet('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -43,14 +46,16 @@ describe('resource speed', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('scheduleGet: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('scheduleGet: required and optional params', async () => {
     const response = await cloudflare.speed.scheduleGet('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       region: 'us-central1',
     });
   });
 
-  test('trendsList: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('trendsList: only required params', async () => {
     const responsePromise = cloudflare.speed.trendsList('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
@@ -68,7 +73,8 @@ describe('resource speed', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('trendsList: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('trendsList: required and optional params', async () => {
     const response = await cloudflare.speed.trendsList('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',

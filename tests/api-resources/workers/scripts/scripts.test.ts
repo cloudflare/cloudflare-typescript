@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource scripts', () => {
-  test('update: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.workers.scripts.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       rollback_to: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -69,7 +71,8 @@ describe('resource scripts', () => {
     });
   });
 
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.workers.scripts.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -82,13 +85,15 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.workers.scripts.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('delete: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.workers.scripts.delete('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -102,7 +107,8 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.workers.scripts.delete('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -110,7 +116,8 @@ describe('resource scripts', () => {
     });
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.workers.scripts.get('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

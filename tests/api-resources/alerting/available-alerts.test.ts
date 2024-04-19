@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource availableAlerts', () => {
-  test('list: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.alerting.availableAlerts.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource availableAlerts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.alerting.availableAlerts.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

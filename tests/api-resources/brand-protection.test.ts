@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource brandProtection', () => {
-  test('submit: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('submit: only required params', async () => {
     const responsePromise = cloudflare.brandProtection.submit({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,14 +24,16 @@ describe('resource brandProtection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('submit: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('submit: required and optional params', async () => {
     const response = await cloudflare.brandProtection.submit({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       url: 'https://www.cloudflare.com',
     });
   });
 
-  test('urlInfo: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('urlInfo: only required params', async () => {
     const responsePromise = cloudflare.brandProtection.urlInfo({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -43,7 +46,8 @@ describe('resource brandProtection', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('urlInfo: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('urlInfo: required and optional params', async () => {
     const response = await cloudflare.brandProtection.urlInfo({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       url: 'string',

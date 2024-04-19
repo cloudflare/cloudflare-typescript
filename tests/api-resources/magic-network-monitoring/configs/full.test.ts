@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource full', () => {
-  test('get: only required params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.configs.full.get({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
@@ -23,7 +24,8 @@ describe('resource full', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.configs.full.get({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });

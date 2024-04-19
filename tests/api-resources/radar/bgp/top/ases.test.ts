@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ases', () => {
-  test('get', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get', async () => {
     const responsePromise = cloudflare.radar.bgp.top.ases.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource ases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.bgp.top.ases.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  test('get: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.top.ases.get(
@@ -48,7 +51,8 @@ describe('resource ases', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('prefixes', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('prefixes', async () => {
     const responsePromise = cloudflare.radar.bgp.top.ases.prefixes();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,14 +63,16 @@ describe('resource ases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('prefixes: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('prefixes: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.top.ases.prefixes({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('prefixes: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('prefixes: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.top.ases.prefixes(

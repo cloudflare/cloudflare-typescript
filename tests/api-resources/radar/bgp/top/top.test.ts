@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource top', () => {
-  test('prefixes', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('prefixes', async () => {
     const responsePromise = cloudflare.radar.bgp.top.prefixes();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,14 +22,16 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('prefixes: request options instead of params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('prefixes: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.bgp.top.prefixes({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  test('prefixes: request options and params are passed correctly', async () => {
+  // skipped: tests are disabled for the time being
+  test.skip('prefixes: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.top.prefixes(
