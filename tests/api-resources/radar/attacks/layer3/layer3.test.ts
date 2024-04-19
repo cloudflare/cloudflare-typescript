@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource layer3', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('timeseries', async () => {
+  test('timeseries', async () => {
     const responsePromise = cloudflare.radar.attacks.layer3.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,16 +21,14 @@ describe('resource layer3', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseries: request options instead of params are passed correctly', async () => {
+  test('timeseries: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.attacks.layer3.timeseries({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseries: request options and params are passed correctly', async () => {
+  test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.attacks.layer3.timeseries(

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource routes', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.routes.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       ip_network: '172.16.0.0/16',
@@ -25,8 +24,7 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.routes.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       ip_network: '172.16.0.0/16',
@@ -35,8 +33,7 @@ describe('resource routes', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.routes.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -49,8 +46,7 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.routes.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       comment: 'Example comment for this route.',
@@ -67,8 +63,7 @@ describe('resource routes', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.routes.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -82,16 +77,14 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.routes.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.routes.edit(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -105,8 +98,7 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.routes.edit('f70ff985-a4ef-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
       comment: 'Example comment for this route.',

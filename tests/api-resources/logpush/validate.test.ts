@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource validate', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('destination: only required params', async () => {
+  test('destination: only required params', async () => {
     const responsePromise = cloudflare.logpush.validate.destination({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'string',
@@ -25,16 +24,14 @@ describe('resource validate', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('destination: required and optional params', async () => {
+  test('destination: required and optional params', async () => {
     const response = await cloudflare.logpush.validate.destination({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'string',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('origin: only required params', async () => {
+  test('origin: only required params', async () => {
     const responsePromise = cloudflare.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
       account_id: 'string',
@@ -48,8 +45,7 @@ describe('resource validate', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('origin: required and optional params', async () => {
+  test('origin: required and optional params', async () => {
     const response = await cloudflare.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
       account_id: 'string',

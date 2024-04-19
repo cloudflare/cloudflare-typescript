@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource auditSSHSettings', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.auditSSHSettings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
@@ -25,8 +24,7 @@ describe('resource auditSSHSettings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.auditSSHSettings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
@@ -34,8 +32,7 @@ describe('resource auditSSHSettings', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.auditSSHSettings.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -48,8 +45,7 @@ describe('resource auditSSHSettings', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.auditSSHSettings.get({
       account_id: '699d98642c564d2e855e9661899b7252',
     });

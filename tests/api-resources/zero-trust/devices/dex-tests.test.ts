@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource dexTests', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.dexTests.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       data: {},
@@ -28,8 +27,7 @@ describe('resource dexTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.dexTests.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       data: { host: 'https://dash.cloudflare.com', kind: 'http', method: 'GET' },
@@ -46,8 +44,7 @@ describe('resource dexTests', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.dexTests.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -67,8 +64,7 @@ describe('resource dexTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.dexTests.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
@@ -88,8 +84,7 @@ describe('resource dexTests', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.dexTests.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -102,15 +97,13 @@ describe('resource dexTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.dexTests.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.dexTests.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -124,16 +117,14 @@ describe('resource dexTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.dexTests.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.dexTests.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
@@ -147,8 +138,7 @@ describe('resource dexTests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.dexTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });

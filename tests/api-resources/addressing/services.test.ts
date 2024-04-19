@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource services', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.addressing.services.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource services', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.addressing.services.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
