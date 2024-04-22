@@ -10,7 +10,7 @@ export class Subnets extends APIResource {
    * Get ASN Subnets
    */
   get(
-    asn: ASNAPI.ASN,
+    asn: ASNAPI.IntelASN,
     params: SubnetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubnetGetResponse> {
@@ -20,7 +20,7 @@ export class Subnets extends APIResource {
 }
 
 export interface SubnetGetResponse {
-  asn?: ASNAPI.ASN;
+  asn?: ASNAPI.IntelASN;
 
   /**
    * Total results returned based on your search parameters.
