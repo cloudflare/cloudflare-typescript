@@ -14,9 +14,8 @@ export class Vtt extends APIResource {
     params: VttGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<string> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/stream/${identifier}/captions/${language}/vtt`, {
-      body: body,
       ...options,
       headers: { Accept: 'text/vtt', ...options?.headers },
     });
@@ -27,14 +26,9 @@ export type VttGetResponse = string;
 
 export interface VttGetParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export namespace Vtt {
