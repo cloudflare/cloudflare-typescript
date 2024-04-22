@@ -19,6 +19,7 @@ describe('resource consumers', () => {
         environment: 'production',
         script_name: 'example-consumer',
         settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
+        type: 'worker',
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -39,6 +40,7 @@ describe('resource consumers', () => {
         environment: 'production',
         script_name: 'example-consumer',
         settings: { batch_size: 10, max_retries: 3, max_wait_time_ms: 5000 },
+        type: 'worker',
       },
     });
   });
