@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">ASN</a></code>
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
@@ -3049,13 +3050,9 @@ Methods:
 
 ## ASN
 
-Types:
-
-- <code><a href="./src/resources/intel/asn/asn.ts">IntelASN</a></code>
-
 Methods:
 
-- <code title="get /accounts/{account_id}/intel/asn/{asn}">client.intel.asn.<a href="./src/resources/intel/asn/asn.ts">get</a>(asn, { ...params }) -> IntelASN</code>
+- <code title="get /accounts/{account_id}/intel/asn/{asn}">client.intel.asn.<a href="./src/resources/intel/asn/asn.ts">get</a>(asn, { ...params }) -> ASN</code>
 
 ### Subnets
 
