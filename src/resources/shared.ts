@@ -3,6 +3,8 @@
 import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
 
+export type ASN = number;
+
 export interface AuditLog {
   /**
    * A string that uniquely identifies the audit log.

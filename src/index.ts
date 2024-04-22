@@ -552,6 +552,7 @@ export namespace Cloudflare {
 
   export import EventNotifications = API.EventNotifications;
 
+  export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;
   export import CloudflareTunnel = API.CloudflareTunnel;
   export import ErrorData = API.ErrorData;
