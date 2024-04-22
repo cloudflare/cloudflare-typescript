@@ -517,6 +517,8 @@ export namespace Application {
 
       created_at?: string;
 
+      custom_claims?: AccessOIDCSaasApp.CustomClaims;
+
       /**
        * The OIDC flows supported by this application
        */
@@ -544,6 +546,41 @@ export namespace Application {
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
 
       updated_at?: string;
+    }
+
+    export namespace AccessOIDCSaasApp {
+      export interface CustomClaims {
+        /**
+         * The name of the claim.
+         */
+        name?: string;
+
+        /**
+         * A mapping from IdP ID to claim name.
+         */
+        name_by_idp?: Record<string, string>;
+
+        /**
+         * If the claim is required when building an OIDC token.
+         */
+        required?: boolean;
+
+        /**
+         * The scope of the claim.
+         */
+        scope?: 'groups' | 'profile' | 'email' | 'openid';
+
+        source?: CustomClaims.Source;
+      }
+
+      export namespace CustomClaims {
+        export interface Source {
+          /**
+           * The name of the IdP claim.
+           */
+          name?: string;
+        }
+      }
     }
   }
 
@@ -1104,6 +1141,11 @@ export interface SaasAppSource {
    * The name of the IdP attribute.
    */
   name?: string;
+
+  /**
+   * A mapping from IdP ID to attribute name.
+   */
+  name_by_idp?: Record<string, string>;
 }
 
 export interface SAMLSaasApp {
@@ -1177,6 +1219,11 @@ export interface SAMLSaasApp {
 export namespace SAMLSaasApp {
   export interface CustomAttributes {
     /**
+     * The SAML FriendlyName of the attribute.
+     */
+    friendly_name?: string;
+
+    /**
      * The name of the attribute.
      */
     name?: string;
@@ -1185,6 +1232,11 @@ export namespace SAMLSaasApp {
      * A globally unique name for an identity or service provider.
      */
     name_format?: ApplicationsAPI.SaasAppNameFormat;
+
+    /**
+     * If the attribute is required when building a SAML assertion.
+     */
+    required?: boolean;
 
     source?: ApplicationsAPI.SaasAppSource;
   }
@@ -1450,6 +1502,8 @@ export namespace ApplicationCreateParams {
        */
       client_secret?: string;
 
+      custom_claims?: AccessOIDCSaasApp.CustomClaims;
+
       /**
        * The OIDC flows supported by this application
        */
@@ -1475,6 +1529,41 @@ export namespace ApplicationCreateParams {
        * Define the user information shared with access
        */
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+    }
+
+    export namespace AccessOIDCSaasApp {
+      export interface CustomClaims {
+        /**
+         * The name of the claim.
+         */
+        name?: string;
+
+        /**
+         * A mapping from IdP ID to claim name.
+         */
+        name_by_idp?: Record<string, string>;
+
+        /**
+         * If the claim is required when building an OIDC token.
+         */
+        required?: boolean;
+
+        /**
+         * The scope of the claim.
+         */
+        scope?: 'groups' | 'profile' | 'email' | 'openid';
+
+        source?: CustomClaims.Source;
+      }
+
+      export namespace CustomClaims {
+        export interface Source {
+          /**
+           * The name of the IdP claim.
+           */
+          name?: string;
+        }
+      }
     }
   }
 
@@ -2182,6 +2271,8 @@ export namespace ApplicationUpdateParams {
        */
       client_secret?: string;
 
+      custom_claims?: AccessOIDCSaasApp.CustomClaims;
+
       /**
        * The OIDC flows supported by this application
        */
@@ -2207,6 +2298,41 @@ export namespace ApplicationUpdateParams {
        * Define the user information shared with access
        */
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+    }
+
+    export namespace AccessOIDCSaasApp {
+      export interface CustomClaims {
+        /**
+         * The name of the claim.
+         */
+        name?: string;
+
+        /**
+         * A mapping from IdP ID to claim name.
+         */
+        name_by_idp?: Record<string, string>;
+
+        /**
+         * If the claim is required when building an OIDC token.
+         */
+        required?: boolean;
+
+        /**
+         * The scope of the claim.
+         */
+        scope?: 'groups' | 'profile' | 'email' | 'openid';
+
+        source?: CustomClaims.Source;
+      }
+
+      export namespace CustomClaims {
+        export interface Source {
+          /**
+           * The name of the IdP claim.
+           */
+          name?: string;
+        }
+      }
     }
   }
 
