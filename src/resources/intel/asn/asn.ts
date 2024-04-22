@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
+import * as Shared from 'cloudflare/resources/shared';
 import * as SubnetsAPI from 'cloudflare/resources/intel/asn/subnets';
 
 export class ASN extends APIResource {
@@ -11,17 +12,15 @@ export class ASN extends APIResource {
   /**
    * Get ASN Overview
    */
-  get(asn: IntelASN, params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<IntelASN> {
+  get(asn: Shared.ASN, params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.ASN> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/asn/${asn}`, options) as Core.APIPromise<{
-        result: IntelASN;
+        result: Shared.ASN;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export type IntelASN = number;
 
 export interface ASNGetParams {
   /**
@@ -31,7 +30,6 @@ export interface ASNGetParams {
 }
 
 export namespace ASN {
-  export import IntelASN = ASNAPI.IntelASN;
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import Subnets = SubnetsAPI.Subnets;
   export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;

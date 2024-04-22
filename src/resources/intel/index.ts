@@ -1,5 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { ASNGetParams, ASN } from './asn/index';
 export { AttackSurfaceReport } from './attack-surface-report/index';
 export { DNS, DNSListResponse, DNSListParams, DNSListResponsesV4PagePagination } from './dns';
 export { Domain, DomainGetParams, Domains } from './domains/index';
@@ -26,7 +27,6 @@ export {
   IndicatorFeeds,
 } from './indicator-feeds/index';
 export { Intel } from './intel';
-export { IntelASN, ASNGetParams, ASN } from './asn/index';
 export {
   MiscategorizationCreateResponse,
   MiscategorizationCreateParams,
