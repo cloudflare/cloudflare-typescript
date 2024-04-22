@@ -14,7 +14,7 @@ import * as DomainsAPI from 'cloudflare/resources/intel/domains/domains';
 import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
 
 export class Intel extends APIResource {
-  asn: ASNAPI.ASNResource = new ASNAPI.ASNResource(this._client);
+  asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   domainHistory: DomainHistoryAPI.DomainHistoryResource = new DomainHistoryAPI.DomainHistoryResource(
@@ -33,8 +33,8 @@ export class Intel extends APIResource {
 }
 
 export namespace Intel {
-  export import ASNResource = ASNAPI.ASNResource;
   export import ASN = ASNAPI.ASN;
+  export import IntelASN = ASNAPI.IntelASN;
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import DNS = DNSAPI.DNS;
   export import DNSListResponse = DNSAPI.DNSListResponse;
