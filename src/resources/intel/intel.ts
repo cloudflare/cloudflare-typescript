@@ -34,7 +34,6 @@ export class Intel extends APIResource {
 
 export namespace Intel {
   export import ASN = ASNAPI.ASN;
-  export import IntelASN = ASNAPI.IntelASN;
   export import ASNGetParams = ASNAPI.ASNGetParams;
   export import DNS = DNSAPI.DNS;
   export import DNSListResponse = DNSAPI.DNSListResponse;
