@@ -393,12 +393,12 @@ export namespace Access {
   export import AllowedOriginsh = ApplicationsAPI.AllowedOriginsh;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
-  export import CorsHeaders = ApplicationsAPI.CorsHeaders;
+  export import CORSHeaders = ApplicationsAPI.CORSHeaders;
   export import CustomPagesh = ApplicationsAPI.CustomPagesh;
-  export import SaasAppNameFormat = ApplicationsAPI.SaasAppNameFormat;
-  export import SaasAppNameIDFormat = ApplicationsAPI.SaasAppNameIDFormat;
-  export import SaasAppSource = ApplicationsAPI.SaasAppSource;
-  export import SAMLSaasApp = ApplicationsAPI.SAMLSaasApp;
+  export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
+  export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
+  export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
+  export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
   export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
