@@ -38,7 +38,7 @@ export interface Identity {
 
   iat?: number;
 
-  idp?: Identity.IDP;
+  idp?: Identity.IdP;
 
   ip?: string;
 
@@ -90,7 +90,7 @@ export namespace Identity {
     }
   }
 
-  export interface IDP {
+  export interface IdP {
     id?: string;
 
     type?: string;
