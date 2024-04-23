@@ -3330,6 +3330,7 @@ Types:
 
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACL</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLConfiguration</a></code>
+- <code><a href="./src/resources/magic-transit/sites/acls.ts">AllowedProtocol</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">Subnet</a></code>
 
 Methods:

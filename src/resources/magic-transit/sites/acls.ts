@@ -123,7 +123,7 @@ export interface ACL {
    */
   name?: string;
 
-  protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+  protocols?: Array<AllowedProtocol>;
 }
 
 export interface ACLConfiguration {
@@ -149,6 +149,12 @@ export interface ACLConfiguration {
    */
   subnets?: Array<Subnet>;
 }
+
+/**
+ * Array of allowed communication protocols between configured LANs. If no
+ * protocols are provided, all protocols are allowed.
+ */
+export type AllowedProtocol = 'tcp' | 'udp' | 'icmp';
 
 /**
  * A valid IPv4 address.
@@ -192,7 +198,7 @@ export interface ACLCreateParams {
   /**
    * Body param:
    */
-  protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+  protocols?: Array<AllowedProtocol>;
 }
 
 export interface ACLUpdateParams {
@@ -232,7 +238,7 @@ export interface ACLUpdateParams {
   /**
    * Body param:
    */
-  protocols?: Array<'tcp' | 'udp' | 'icmp'>;
+  protocols?: Array<AllowedProtocol>;
 }
 
 export interface ACLListParams {
@@ -264,6 +270,7 @@ export interface ACLGetParams {
 export namespace ACLs {
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
   export import Subnet = ACLsAPI.Subnet;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
