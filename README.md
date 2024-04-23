@@ -1,8 +1,8 @@
-# Cloudflare Node API Library
+# Cloudflare TypeScript SDK
 
 [![NPM version](https://img.shields.io/npm/v/cloudflare.svg)](https://npmjs.org/package/cloudflare)
 
-This library provides convenient access to the Cloudflare REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the [Cloudflare REST API](https://developers.cloudflare.com/api/) from server-side TypeScript or JavaScript. It uses web standard APIs, and can run in [Cloudflare Workers](https://developers.cloudflare.com/workers/), [Node.js](https://nodejs.org/en) and other server-side JavaScript runtimes.
 
 The REST API documentation can be found [on developers.cloudflare.com](https://developers.cloudflare.com/api). The full API of this library can be found in [api.md](api.md).
 
