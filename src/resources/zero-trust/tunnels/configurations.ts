@@ -46,7 +46,7 @@ export type ConfigurationGetResponse = unknown | Array<unknown> | string;
 
 export interface ConfigurationUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Cloudflare account ID
    */
   account_id: string;
 
@@ -67,7 +67,8 @@ export namespace ConfigurationUpdateParams {
     ingress?: Array<Config.Ingress>;
 
     /**
-     * Configuration parameters of connection between cloudflared and origin server.
+     * Configuration parameters for the public hostname specific connection settings
+     * between cloudflared and origin server.
      */
     originRequest?: Config.OriginRequest;
 
@@ -95,7 +96,8 @@ export namespace ConfigurationUpdateParams {
       service: string;
 
       /**
-       * Configuration parameters of connection between cloudflared and origin server.
+       * Configuration parameters for the public hostname specific connection settings
+       * between cloudflared and origin server.
        */
       originRequest?: Ingress.OriginRequest;
 
@@ -107,7 +109,8 @@ export namespace ConfigurationUpdateParams {
 
     export namespace Ingress {
       /**
-       * Configuration parameters of connection between cloudflared and origin server.
+       * Configuration parameters for the public hostname specific connection settings
+       * between cloudflared and origin server.
        */
       export interface OriginRequest {
         /**
@@ -216,7 +219,8 @@ export namespace ConfigurationUpdateParams {
     }
 
     /**
-     * Configuration parameters of connection between cloudflared and origin server.
+     * Configuration parameters for the public hostname specific connection settings
+     * between cloudflared and origin server.
      */
     export interface OriginRequest {
       /**
@@ -334,7 +338,7 @@ export namespace ConfigurationUpdateParams {
 
 export interface ConfigurationGetParams {
   /**
-   * Identifier
+   * Cloudflare account ID
    */
   account_id: string;
 }

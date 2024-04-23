@@ -15,7 +15,7 @@ describe('resource tunnels', () => {
     const responsePromise = cloudflare.zeroTrust.tunnels.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
-      tunnel_secret: {},
+      tunnel_secret: 'AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +31,7 @@ describe('resource tunnels', () => {
     const response = await cloudflare.zeroTrust.tunnels.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'blog',
-      tunnel_secret: {},
+      tunnel_secret: 'AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=',
     });
   });
 

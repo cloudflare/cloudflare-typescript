@@ -28,7 +28,7 @@ describe('resource ips', () => {
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.routes.ips.get('10.1.0.137', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      virtual_network_id: {},
+      virtual_network_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
   });
 });

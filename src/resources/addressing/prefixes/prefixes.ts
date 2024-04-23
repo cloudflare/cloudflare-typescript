@@ -150,7 +150,7 @@ export interface Prefix {
   on_demand_locked?: boolean;
 }
 
-export type PrefixDeleteResponse = unknown | Array<unknown> | string;
+export type PrefixDeleteResponse = Array<unknown>;
 
 export interface PrefixCreateParams {
   /**

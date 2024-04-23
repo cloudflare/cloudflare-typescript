@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as BindingsAPI from 'cloudflare/resources/addressing/prefixes/bgp/bindings';
+import * as Shared from 'cloudflare/resources/shared';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Bindings extends APIResource {
@@ -57,12 +58,10 @@ export class Bindings extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<BindingDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
-        options,
-      ) as Core.APIPromise<{ result: BindingDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
+      options,
+    );
   }
 
   /**
@@ -126,7 +125,16 @@ export namespace ServiceBinding {
   }
 }
 
-export type BindingDeleteResponse = unknown | Array<unknown> | string;
+export interface BindingDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface BindingCreateParams {
   /**

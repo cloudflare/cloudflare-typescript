@@ -6,6 +6,7 @@ import * as SitesAPI from 'cloudflare/resources/magic-transit/sites/sites';
 import * as ACLsAPI from 'cloudflare/resources/magic-transit/sites/acls';
 import * as LANsAPI from 'cloudflare/resources/magic-transit/sites/lans';
 import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class Sites extends APIResource {
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
@@ -15,11 +16,11 @@ export class Sites extends APIResource {
   /**
    * Creates a new Site
    */
-  create(params: SiteCreateParams, options?: Core.RequestOptions): Core.APIPromise<SiteCreateResponse> {
+  create(params: SiteCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/sites`, { body, ...options }) as Core.APIPromise<{
-        result: SiteCreateResponse;
+        result: Site;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -27,17 +28,13 @@ export class Sites extends APIResource {
   /**
    * Update a specific Site.
    */
-  update(
-    siteId: string,
-    params: SiteUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteUpdateResponse> {
+  update(siteId: string, params: SiteUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SiteUpdateResponse }>
+      }) as Core.APIPromise<{ result: Site }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -46,48 +43,41 @@ export class Sites extends APIResource {
    * return sites where connector_identifier matches either site.ConnectorID or
    * site.SecondaryConnectorID.
    */
-  list(params: SiteListParams, options?: Core.RequestOptions): Core.APIPromise<SiteListResponse> {
+  list(params: SiteListParams, options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/magic/sites`, { query, ...options }) as Core.APIPromise<{
-        result: SiteListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/accounts/${account_id}/magic/sites`, SitesSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Remove a specific Site.
    */
-  delete(
-    siteId: string,
-    params: SiteDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteDeleteResponse> {
+  delete(siteId: string, params: SiteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SiteDeleteResponse }>
+      }) as Core.APIPromise<{ result: Site }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a specific Site.
    */
-  get(
-    siteId: string,
-    params: SiteGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SiteGetResponse> {
+  get(siteId: string, params: SiteGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
-        result: SiteGetResponse;
+        result: Site;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class SitesSinglePage extends SinglePage<Site> {}
 
 export interface Site {
   /**
@@ -139,28 +129,6 @@ export interface SiteLocation {
   lon?: string;
 }
 
-export interface SiteCreateResponse {
-  site?: Site;
-}
-
-export interface SiteUpdateResponse {
-  site?: Site;
-}
-
-export interface SiteListResponse {
-  sites?: Array<Site>;
-}
-
-export interface SiteDeleteResponse {
-  deleted?: boolean;
-
-  deleted_site?: Site;
-}
-
-export interface SiteGetResponse {
-  site?: Site;
-}
-
 export interface SiteCreateParams {
   /**
    * Path param: Identifier
@@ -168,41 +136,36 @@ export interface SiteCreateParams {
   account_id: string;
 
   /**
+   * Body param: The name of the site.
+   */
+  name: string;
+
+  /**
+   * Body param: Magic WAN Connector identifier tag.
+   */
+  connector_id?: string;
+
+  /**
    * Body param:
    */
-  site?: SiteCreateParams.Site;
-}
+  description?: string;
 
-export namespace SiteCreateParams {
-  export interface Site {
-    /**
-     * The name of the site.
-     */
-    name: string;
+  /**
+   * Body param: Site high availability mode. If set to true, the site can have two
+   * connectors and runs in high availability mode.
+   */
+  ha_mode?: boolean;
 
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
+  /**
+   * Body param: Location of site in latitude and longitude.
+   */
+  location?: SiteLocation;
 
-    description?: string;
-
-    /**
-     * Site high availability mode. If set to true, the site can have two connectors
-     * and runs in high availability mode.
-     */
-    ha_mode?: boolean;
-
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: SitesAPI.SiteLocation;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
+  /**
+   * Body param: Magic WAN Connector identifier tag. Used when high availability mode
+   * is on.
+   */
+  secondary_connector_id?: string;
 }
 
 export interface SiteUpdateParams {
@@ -212,35 +175,30 @@ export interface SiteUpdateParams {
   account_id: string;
 
   /**
+   * Body param: Magic WAN Connector identifier tag.
+   */
+  connector_id?: string;
+
+  /**
    * Body param:
    */
-  site?: SiteUpdateParams.Site;
-}
+  description?: string;
 
-export namespace SiteUpdateParams {
-  export interface Site {
-    /**
-     * Magic WAN Connector identifier tag.
-     */
-    connector_id?: string;
+  /**
+   * Body param: Location of site in latitude and longitude.
+   */
+  location?: SiteLocation;
 
-    description?: string;
+  /**
+   * Body param: The name of the site.
+   */
+  name?: string;
 
-    /**
-     * Location of site in latitude and longitude.
-     */
-    location?: SitesAPI.SiteLocation;
-
-    /**
-     * The name of the site.
-     */
-    name?: string;
-
-    /**
-     * Magic WAN Connector identifier tag. Used when high availability mode is on.
-     */
-    secondary_connector_id?: string;
-  }
+  /**
+   * Body param: Magic WAN Connector identifier tag. Used when high availability mode
+   * is on.
+   */
+  secondary_connector_id?: string;
 }
 
 export interface SiteListParams {
@@ -277,11 +235,7 @@ export interface SiteGetParams {
 export namespace Sites {
   export import Site = SitesAPI.Site;
   export import SiteLocation = SitesAPI.SiteLocation;
-  export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
-  export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
-  export import SiteListResponse = SitesAPI.SiteListResponse;
-  export import SiteDeleteResponse = SitesAPI.SiteDeleteResponse;
-  export import SiteGetResponse = SitesAPI.SiteGetResponse;
+  export import SitesSinglePage = SitesAPI.SitesSinglePage;
   export import SiteCreateParams = SitesAPI.SiteCreateParams;
   export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
   export import SiteListParams = SitesAPI.SiteListParams;
@@ -290,13 +244,8 @@ export namespace Sites {
   export import ACLs = ACLsAPI.ACLs;
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
-  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
   export import Subnet = ACLsAPI.Subnet;
-  export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
-  export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
-  export import ACLListResponse = ACLsAPI.ACLListResponse;
-  export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
-  export import ACLGetResponse = ACLsAPI.ACLGetResponse;
+  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;
@@ -310,10 +259,7 @@ export namespace Sites {
   export import Nat = LANsAPI.Nat;
   export import RoutedSubnet = LANsAPI.RoutedSubnet;
   export import LANCreateResponse = LANsAPI.LANCreateResponse;
-  export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
-  export import LANListResponse = LANsAPI.LANListResponse;
-  export import LANDeleteResponse = LANsAPI.LANDeleteResponse;
-  export import LANGetResponse = LANsAPI.LANGetResponse;
+  export import LANsSinglePage = LANsAPI.LANsSinglePage;
   export import LANCreateParams = LANsAPI.LANCreateParams;
   export import LANUpdateParams = LANsAPI.LANUpdateParams;
   export import LANListParams = LANsAPI.LANListParams;
@@ -323,10 +269,7 @@ export namespace Sites {
   export import WAN = WANsAPI.WAN;
   export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
   export import WANCreateResponse = WANsAPI.WANCreateResponse;
-  export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
-  export import WANListResponse = WANsAPI.WANListResponse;
-  export import WANDeleteResponse = WANsAPI.WANDeleteResponse;
-  export import WANGetResponse = WANsAPI.WANGetResponse;
+  export import WANsSinglePage = WANsAPI.WANsSinglePage;
   export import WANCreateParams = WANsAPI.WANCreateParams;
   export import WANUpdateParams = WANsAPI.WANUpdateParams;
   export import WANListParams = WANsAPI.WANListParams;

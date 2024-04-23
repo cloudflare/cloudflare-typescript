@@ -40,9 +40,9 @@ export class Zones extends APIResource {
   }
 }
 
-export type ZoneUpdateResponse = unknown | Array<unknown> | string;
+export type ZoneUpdateResponse = Array<unknown>;
 
-export type ZoneDeleteResponse = unknown | Array<unknown> | string;
+export type ZoneDeleteResponse = Array<unknown>;
 
 export interface ZoneUpdateParams {
   /**

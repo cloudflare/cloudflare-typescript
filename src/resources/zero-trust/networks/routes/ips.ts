@@ -27,11 +27,9 @@ export interface IPGetParams {
   account_id: string;
 
   /**
-   * Query param: UUID of the Tunnel Virtual Network this route belongs to. If no
-   * virtual networks are configured, the route is assigned to the default virtual
-   * network of the account.
+   * Query param: UUID of the virtual network.
    */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 }
 
 export namespace IPs {

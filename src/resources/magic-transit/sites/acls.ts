@@ -3,22 +3,19 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ACLsAPI from 'cloudflare/resources/magic-transit/sites/acls';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class ACLs extends APIResource {
   /**
    * Creates a new Site ACL.
    */
-  create(
-    siteId: string,
-    params: ACLCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLCreateResponse> {
+  create(siteId: string, params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/acls`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLCreateResponse }>
+      }) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -30,13 +27,13 @@ export class ACLs extends APIResource {
     aclIdentifier: string,
     params: ACLUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLUpdateResponse> {
+  ): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLUpdateResponse }>
+      }) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,13 +44,13 @@ export class ACLs extends APIResource {
     siteId: string,
     params: ACLListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLListResponse> {
+  ): Core.PagePromise<ACLsSinglePage, ACL> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/acls`, options) as Core.APIPromise<{
-        result: ACLListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/magic/sites/${siteId}/acls`,
+      ACLsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -64,13 +61,13 @@ export class ACLs extends APIResource {
     aclIdentifier: string,
     params: ACLDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLDeleteResponse> {
+  ): Core.APIPromise<ACL> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ACLDeleteResponse }>
+      }) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,16 +79,18 @@ export class ACLs extends APIResource {
     aclIdentifier: string,
     params: ACLGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLGetResponse> {
+  ): Core.APIPromise<ACL> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: ACLGetResponse }>
+      ) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class ACLsSinglePage extends SinglePage<ACL> {}
 
 /**
  * Bidirectional ACL policy for network traffic within a site.
@@ -124,7 +123,7 @@ export interface ACL {
    */
   name?: string;
 
-  protocols?: Array<AllowedProtocol>;
+  protocols?: Array<'tcp' | 'udp' | 'icmp'>;
 }
 
 export interface ACLConfiguration {
@@ -152,46 +151,9 @@ export interface ACLConfiguration {
 }
 
 /**
- * Array of allowed communication protocols between configured LANs. If no
- * protocols are provided, all protocols are allowed.
- */
-export type AllowedProtocol = 'tcp' | 'udp' | 'icmp';
-
-/**
  * A valid IPv4 address.
  */
 export type Subnet = string | string;
-
-export interface ACLCreateResponse {
-  acls?: Array<ACL>;
-}
-
-export interface ACLUpdateResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  acl?: ACL;
-}
-
-export interface ACLListResponse {
-  acls?: Array<ACL>;
-}
-
-export interface ACLDeleteResponse {
-  deleted?: boolean;
-
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  deleted_acl?: ACL;
-}
-
-export interface ACLGetResponse {
-  /**
-   * Bidirectional ACL policy for network traffic within a site.
-   */
-  acl?: ACL;
-}
 
 export interface ACLCreateParams {
   /**
@@ -202,35 +164,35 @@ export interface ACLCreateParams {
   /**
    * Body param:
    */
-  acl?: ACLCreateParams.ACL;
-}
+  lan_1: ACLConfiguration;
 
-export namespace ACLCreateParams {
-  export interface ACL {
-    lan_1: ACLsAPI.ACLConfiguration;
+  /**
+   * Body param:
+   */
+  lan_2: ACLConfiguration;
 
-    lan_2: ACLsAPI.ACLConfiguration;
+  /**
+   * Body param: The name of the ACL.
+   */
+  name: string;
 
-    /**
-     * The name of the ACL.
-     */
-    name: string;
+  /**
+   * Body param: Description for the ACL.
+   */
+  description?: string;
 
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
+  /**
+   * Body param: The desired forwarding action for this ACL policy. If set to
+   * "false", the policy will forward traffic to Cloudflare. If set to "true", the
+   * policy will forward traffic locally on the Magic WAN Connector. If not included
+   * in request, will default to false.
+   */
+  forward_locally?: boolean;
 
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
-
-    protocols?: Array<ACLsAPI.AllowedProtocol>;
-  }
+  /**
+   * Body param:
+   */
+  protocols?: Array<'tcp' | 'udp' | 'icmp'>;
 }
 
 export interface ACLUpdateParams {
@@ -240,37 +202,37 @@ export interface ACLUpdateParams {
   account_id: string;
 
   /**
+   * Body param: Description for the ACL.
+   */
+  description?: string;
+
+  /**
+   * Body param: The desired forwarding action for this ACL policy. If set to
+   * "false", the policy will forward traffic to Cloudflare. If set to "true", the
+   * policy will forward traffic locally on the Magic WAN Connector. If not included
+   * in request, will default to false.
+   */
+  forward_locally?: boolean;
+
+  /**
    * Body param:
    */
-  acl?: ACLUpdateParams.ACL;
-}
+  lan_1?: ACLConfiguration;
 
-export namespace ACLUpdateParams {
-  export interface ACL {
-    /**
-     * Description for the ACL.
-     */
-    description?: string;
+  /**
+   * Body param:
+   */
+  lan_2?: ACLConfiguration;
 
-    /**
-     * The desired forwarding action for this ACL policy. If set to "false", the policy
-     * will forward traffic to Cloudflare. If set to "true", the policy will forward
-     * traffic locally on the Magic WAN Connector. If not included in request, will
-     * default to false.
-     */
-    forward_locally?: boolean;
+  /**
+   * Body param: The name of the ACL.
+   */
+  name?: string;
 
-    lan_1?: ACLsAPI.ACLConfiguration;
-
-    lan_2?: ACLsAPI.ACLConfiguration;
-
-    /**
-     * The name of the ACL.
-     */
-    name?: string;
-
-    protocols?: Array<ACLsAPI.AllowedProtocol>;
-  }
+  /**
+   * Body param:
+   */
+  protocols?: Array<'tcp' | 'udp' | 'icmp'>;
 }
 
 export interface ACLListParams {
@@ -302,13 +264,8 @@ export interface ACLGetParams {
 export namespace ACLs {
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
-  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
   export import Subnet = ACLsAPI.Subnet;
-  export import ACLCreateResponse = ACLsAPI.ACLCreateResponse;
-  export import ACLUpdateResponse = ACLsAPI.ACLUpdateResponse;
-  export import ACLListResponse = ACLsAPI.ACLListResponse;
-  export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
-  export import ACLGetResponse = ACLsAPI.ACLGetResponse;
+  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;

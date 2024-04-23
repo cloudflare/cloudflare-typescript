@@ -14,6 +14,8 @@ describe('resource wans', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      physport: 1,
+      vlan_tag: 0,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,16 +30,14 @@ describe('resource wans', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      wan: {
-        description: 'string',
-        physport: 1,
-        priority: 0,
-        static_addressing: {
-          address: '192.0.2.0/24',
-          gateway_address: '192.0.2.1',
-          secondary_address: '192.0.2.0/24',
-        },
-        vlan_tag: 0,
+      physport: 1,
+      vlan_tag: 0,
+      name: 'string',
+      priority: 0,
+      static_addressing: {
+        address: '192.0.2.0/24',
+        gateway_address: '192.0.2.1',
+        secondary_address: '192.0.2.0/24',
       },
     });
   });
@@ -65,17 +65,15 @@ describe('resource wans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        wan: {
-          description: 'string',
-          physport: 1,
-          priority: 0,
-          static_addressing: {
-            address: '192.0.2.0/24',
-            gateway_address: '192.0.2.1',
-            secondary_address: '192.0.2.0/24',
-          },
-          vlan_tag: 0,
+        name: 'string',
+        physport: 1,
+        priority: 0,
+        static_addressing: {
+          address: '192.0.2.0/24',
+          gateway_address: '192.0.2.1',
+          secondary_address: '192.0.2.0/24',
         },
+        vlan_tag: 0,
       },
     );
   });

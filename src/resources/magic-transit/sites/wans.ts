@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class WANs extends APIResource {
   /**
@@ -30,13 +31,13 @@ export class WANs extends APIResource {
     wanId: string,
     params: WANUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WANUpdateResponse> {
+  ): Core.APIPromise<WAN> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: WANUpdateResponse }>
+      }) as Core.APIPromise<{ result: WAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -47,13 +48,13 @@ export class WANs extends APIResource {
     siteId: string,
     params: WANListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WANListResponse> {
+  ): Core.PagePromise<WANsSinglePage, WAN> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/wans`, options) as Core.APIPromise<{
-        result: WANListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/magic/sites/${siteId}/wans`,
+      WANsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -64,13 +65,13 @@ export class WANs extends APIResource {
     wanId: string,
     params: WANDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WANDeleteResponse> {
+  ): Core.APIPromise<WAN> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: WANDeleteResponse }>
+      }) as Core.APIPromise<{ result: WAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,16 +83,18 @@ export class WANs extends APIResource {
     wanId: string,
     params: WANGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WANGetResponse> {
+  ): Core.APIPromise<WAN> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
         options,
-      ) as Core.APIPromise<{ result: WANGetResponse }>
+      ) as Core.APIPromise<{ result: WAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class WANsSinglePage extends SinglePage<WAN> {}
 
 export interface WAN {
   /**
@@ -99,7 +102,7 @@ export interface WAN {
    */
   id?: string;
 
-  description?: string;
+  name?: string;
 
   physport?: number;
 
@@ -146,27 +149,7 @@ export interface WANStaticAddressing {
   secondary_address?: string;
 }
 
-export interface WANCreateResponse {
-  wans?: Array<WAN>;
-}
-
-export interface WANUpdateResponse {
-  wan?: WAN;
-}
-
-export interface WANListResponse {
-  wans?: Array<WAN>;
-}
-
-export interface WANDeleteResponse {
-  deleted?: boolean;
-
-  deleted_wan?: WAN;
-}
-
-export interface WANGetResponse {
-  wan?: WAN;
-}
+export type WANCreateResponse = Array<WAN>;
 
 export interface WANCreateParams {
   /**
@@ -177,28 +160,28 @@ export interface WANCreateParams {
   /**
    * Body param:
    */
-  wan?: WANCreateParams.WAN;
-}
+  physport: number;
 
-export namespace WANCreateParams {
-  export interface WAN {
-    physport: number;
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag: number;
 
-    /**
-     * VLAN port number.
-     */
-    vlan_tag: number;
+  /**
+   * Body param:
+   */
+  name?: string;
 
-    description?: string;
+  /**
+   * Body param:
+   */
+  priority?: number;
 
-    priority?: number;
-
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: WANsAPI.WANStaticAddressing;
-  }
+  /**
+   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
+   * is in high availability mode.
+   */
+  static_addressing?: WANStaticAddressing;
 }
 
 export interface WANUpdateParams {
@@ -210,28 +193,28 @@ export interface WANUpdateParams {
   /**
    * Body param:
    */
-  wan?: WANUpdateParams.WAN;
-}
+  name?: string;
 
-export namespace WANUpdateParams {
-  export interface WAN {
-    description?: string;
+  /**
+   * Body param:
+   */
+  physport?: number;
 
-    physport?: number;
+  /**
+   * Body param:
+   */
+  priority?: number;
 
-    priority?: number;
+  /**
+   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
+   * is in high availability mode.
+   */
+  static_addressing?: WANStaticAddressing;
 
-    /**
-     * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
-     * availability mode.
-     */
-    static_addressing?: WANsAPI.WANStaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag?: number;
 }
 
 export interface WANListParams {
@@ -264,10 +247,7 @@ export namespace WANs {
   export import WAN = WANsAPI.WAN;
   export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
   export import WANCreateResponse = WANsAPI.WANCreateResponse;
-  export import WANUpdateResponse = WANsAPI.WANUpdateResponse;
-  export import WANListResponse = WANsAPI.WANListResponse;
-  export import WANDeleteResponse = WANsAPI.WANDeleteResponse;
-  export import WANGetResponse = WANsAPI.WANGetResponse;
+  export import WANsSinglePage = WANsAPI.WANsSinglePage;
   export import WANCreateParams = WANsAPI.WANCreateParams;
   export import WANUpdateParams = WANsAPI.WANUpdateParams;
   export import WANListParams = WANsAPI.WANListParams;

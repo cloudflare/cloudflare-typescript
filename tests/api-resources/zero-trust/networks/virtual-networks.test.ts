@@ -53,11 +53,10 @@ describe('resource virtualNetworks', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.virtualNetworks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
-      is_default: {},
-      is_deleted: {},
+      id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+      is_default: true,
+      is_deleted: true,
       name: 'us-east-1-vpc',
-      vnet_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      vnet_name: 'us-east-1-vpc',
     });
   });
 

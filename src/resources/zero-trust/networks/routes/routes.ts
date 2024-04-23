@@ -78,15 +78,15 @@ export interface NetworkRoute {
   comment?: string;
 
   /**
-   * Timestamp of when the route was created.
+   * Timestamp of when the resource was created.
    */
-  created_at?: unknown;
+  created_at?: string;
 
   /**
-   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
    * deleted.
    */
-  deleted_at?: string | null;
+  deleted_at?: string;
 
   /**
    * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
@@ -94,16 +94,14 @@ export interface NetworkRoute {
   network?: string;
 
   /**
-   * UUID of the Cloudflare Tunnel serving the route.
+   * UUID of the tunnel.
    */
-  tunnel_id?: unknown;
+  tunnel_id?: string;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * UUID of the virtual network.
    */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 }
 
 export interface Route {
@@ -118,15 +116,15 @@ export interface Route {
   comment?: string;
 
   /**
-   * Timestamp of when the route was created.
+   * Timestamp of when the resource was created.
    */
-  created_at?: unknown;
+  created_at?: string;
 
   /**
-   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
    * deleted.
    */
-  deleted_at?: string | null;
+  deleted_at?: string;
 
   /**
    * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
@@ -134,16 +132,14 @@ export interface Route {
   network?: string;
 
   /**
-   * UUID of the Cloudflare Tunnel serving the route.
+   * UUID of the tunnel.
    */
-  tunnel_id?: unknown;
+  tunnel_id?: string;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * UUID of the virtual network.
    */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 }
 
 export interface Teamnet {
@@ -158,15 +154,15 @@ export interface Teamnet {
   comment?: string;
 
   /**
-   * Timestamp of when the route was created.
+   * Timestamp of when the resource was created.
    */
-  created_at?: unknown;
+  created_at?: string;
 
   /**
-   * Timestamp of when the route was deleted. If `null`, the route has not been
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
    * deleted.
    */
-  deleted_at?: string | null;
+  deleted_at?: string;
 
   /**
    * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
@@ -179,21 +175,19 @@ export interface Teamnet {
   tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
 
   /**
-   * UUID of the Cloudflare Tunnel serving the route.
+   * UUID of the tunnel.
    */
-  tunnel_id?: unknown;
+  tunnel_id?: string;
 
   /**
-   * The user-friendly name of the Cloudflare Tunnel serving the route.
+   * A user-friendly name for a tunnel.
    */
-  tunnel_name?: unknown;
+  tunnel_name?: string;
 
   /**
-   * UUID of the Tunnel Virtual Network this route belongs to. If no virtual networks
-   * are configured, the route is assigned to the default virtual network of the
-   * account.
+   * UUID of the virtual network.
    */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 
   /**
    * A user-friendly name for the virtual network.
@@ -211,7 +205,7 @@ export interface RouteCreateParams {
    * Body param: The private IPv4 or IPv6 range connected by the route, in CIDR
    * notation.
    */
-  ip_network: string;
+  network: string;
 
   /**
    * Body param: Optional remark describing the route.
@@ -219,11 +213,9 @@ export interface RouteCreateParams {
   comment?: string;
 
   /**
-   * Body param: UUID of the Tunnel Virtual Network this route belongs to. If no
-   * virtual networks are configured, the route is assigned to the default virtual
-   * network of the account.
+   * Body param: UUID of the virtual network.
    */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 }
 
 export interface RouteListParams extends V4PagePaginationArrayParams {
@@ -238,26 +230,26 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   comment?: string;
 
   /**
-   * Query param: If provided, include only routes that were created (and not
+   * Query param: If provided, include only tunnels that were created (and not
    * deleted) before this time.
    */
-  existed_at?: unknown;
+  existed_at?: string;
 
   /**
    * Query param: If `true`, only include deleted routes. If `false`, exclude deleted
    * routes. If empty, all routes will be included.
    */
-  is_deleted?: unknown;
+  is_deleted?: boolean;
 
   /**
    * Query param: If set, only list routes that are contained within this IP range.
    */
-  network_subset?: unknown;
+  network_subset?: string;
 
   /**
    * Query param: If set, only list routes that contain this IP range.
    */
-  network_superset?: unknown;
+  network_superset?: string;
 
   /**
    * Query param: UUID of the route.
@@ -270,16 +262,14 @@ export interface RouteListParams extends V4PagePaginationArrayParams {
   tun_types?: string;
 
   /**
-   * Query param: UUID of the Cloudflare Tunnel serving the route.
+   * Query param: UUID of the tunnel.
    */
-  tunnel_id?: unknown;
+  tunnel_id?: string;
 
   /**
-   * Query param: UUID of the Tunnel Virtual Network this route belongs to. If no
-   * virtual networks are configured, the route is assigned to the default virtual
-   * network of the account.
+   * Query param: UUID of the virtual network.
    */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 }
 
 export interface RouteDeleteParams {
@@ -307,21 +297,9 @@ export interface RouteEditParams {
   network?: string;
 
   /**
-   * Body param: The type of tunnel.
+   * Body param: UUID of the virtual network.
    */
-  tun_type?: 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
-
-  /**
-   * Body param: UUID of the Cloudflare Tunnel serving the route.
-   */
-  tunnel_id?: unknown;
-
-  /**
-   * Body param: UUID of the Tunnel Virtual Network this route belongs to. If no
-   * virtual networks are configured, the route is assigned to the default virtual
-   * network of the account.
-   */
-  virtual_network_id?: unknown;
+  virtual_network_id?: string;
 }
 
 export namespace Routes {
