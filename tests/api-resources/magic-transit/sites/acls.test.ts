@@ -14,6 +14,9 @@ describe('resource acls', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.acls.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      lan_1: { lan_id: 'string' },
+      lan_2: { lan_id: 'string' },
+      name: 'PIN Pad - Cash Register',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,24 +31,22 @@ describe('resource acls', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.acls.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      acl: {
-        description: 'Allows local traffic between PIN pads and cash register.',
-        forward_locally: true,
-        lan_1: {
-          lan_id: 'string',
-          lan_name: 'string',
-          ports: [1, 1, 1],
-          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-        },
-        lan_2: {
-          lan_id: 'string',
-          lan_name: 'string',
-          ports: [1, 1, 1],
-          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-        },
-        name: 'PIN Pad - Cash Register',
-        protocols: ['tcp', 'udp', 'icmp'],
+      lan_1: {
+        lan_id: 'string',
+        lan_name: 'string',
+        ports: [1, 1, 1],
+        subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
       },
+      lan_2: {
+        lan_id: 'string',
+        lan_name: 'string',
+        ports: [1, 1, 1],
+        subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
+      },
+      name: 'PIN Pad - Cash Register',
+      description: 'Allows local traffic between PIN pads and cash register.',
+      forward_locally: true,
+      protocols: ['tcp', 'udp', 'icmp'],
     });
   });
 
@@ -72,24 +73,22 @@ describe('resource acls', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        acl: {
-          description: 'Allows local traffic between PIN pads and cash register.',
-          forward_locally: true,
-          lan_1: {
-            lan_id: 'string',
-            lan_name: 'string',
-            ports: [1, 1, 1],
-            subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-          },
-          lan_2: {
-            lan_id: 'string',
-            lan_name: 'string',
-            ports: [1, 1, 1],
-            subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-          },
-          name: 'PIN Pad - Cash Register',
-          protocols: ['tcp', 'udp', 'icmp'],
+        description: 'Allows local traffic between PIN pads and cash register.',
+        forward_locally: true,
+        lan_1: {
+          lan_id: 'string',
+          lan_name: 'string',
+          ports: [1, 1, 1],
+          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
         },
+        lan_2: {
+          lan_id: 'string',
+          lan_name: 'string',
+          ports: [1, 1, 1],
+          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
+        },
+        name: 'PIN Pad - Cash Register',
+        protocols: ['tcp', 'udp', 'icmp'],
       },
     );
   });

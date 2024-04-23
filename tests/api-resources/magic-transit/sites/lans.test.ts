@@ -14,6 +14,8 @@ describe('resource lans', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      physport: 1,
+      vlan_tag: 0,
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,29 +30,27 @@ describe('resource lans', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.lans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      lan: {
-        description: 'string',
-        ha_link: true,
-        nat: { static_prefix: '192.0.2.0/24' },
-        physport: 1,
-        routed_subnets: [
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-        ],
-        static_addressing: {
-          address: '192.0.2.0/24',
-          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
-          dhcp_server: {
-            dhcp_pool_end: '192.0.2.1',
-            dhcp_pool_start: '192.0.2.1',
-            dns_server: '192.0.2.1',
-            reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
-          },
-          secondary_address: '192.0.2.0/24',
-          virtual_address: '192.0.2.0/24',
+      physport: 1,
+      vlan_tag: 0,
+      ha_link: true,
+      name: 'string',
+      nat: { static_prefix: '192.0.2.0/24' },
+      routed_subnets: [
+        { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+        { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+        { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+      ],
+      static_addressing: {
+        address: '192.0.2.0/24',
+        dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+        dhcp_server: {
+          dhcp_pool_end: '192.0.2.1',
+          dhcp_pool_start: '192.0.2.1',
+          dns_server: '192.0.2.1',
+          reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
         },
-        vlan_tag: 0,
+        secondary_address: '192.0.2.0/24',
+        virtual_address: '192.0.2.0/24',
       },
     });
   });
@@ -78,29 +78,27 @@ describe('resource lans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        lan: {
-          description: 'string',
-          nat: { static_prefix: '192.0.2.0/24' },
-          physport: 1,
-          routed_subnets: [
-            { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-            { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-            { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
-          ],
-          static_addressing: {
-            address: '192.0.2.0/24',
-            dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
-            dhcp_server: {
-              dhcp_pool_end: '192.0.2.1',
-              dhcp_pool_start: '192.0.2.1',
-              dns_server: '192.0.2.1',
-              reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
-            },
-            secondary_address: '192.0.2.0/24',
-            virtual_address: '192.0.2.0/24',
+        name: 'string',
+        nat: { static_prefix: '192.0.2.0/24' },
+        physport: 1,
+        routed_subnets: [
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+        ],
+        static_addressing: {
+          address: '192.0.2.0/24',
+          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_server: {
+            dhcp_pool_end: '192.0.2.1',
+            dhcp_pool_start: '192.0.2.1',
+            dns_server: '192.0.2.1',
+            reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
           },
-          vlan_tag: 0,
+          secondary_address: '192.0.2.0/24',
+          virtual_address: '192.0.2.0/24',
         },
+        vlan_tag: 0,
       },
     );
   });

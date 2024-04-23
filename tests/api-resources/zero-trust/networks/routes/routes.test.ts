@@ -14,7 +14,7 @@ describe('resource routes', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.networks.routes.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      ip_network: '172.16.0.0/16',
+      network: '172.16.0.0/16',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,9 +29,9 @@ describe('resource routes', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.networks.routes.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      ip_network: '172.16.0.0/16',
+      network: '172.16.0.0/16',
       comment: 'Example comment for this route.',
-      virtual_network_id: {},
+      virtual_network_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
   });
 
@@ -54,16 +54,16 @@ describe('resource routes', () => {
     const response = await cloudflare.zeroTrust.networks.routes.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       comment: 'Example comment for this route.',
-      existed_at: {},
-      is_deleted: {},
-      network_subset: {},
-      network_superset: {},
+      existed_at: '2019-10-12T07:20:50.52Z',
+      is_deleted: true,
+      network_subset: '172.16.0.0/16',
+      network_superset: '172.16.0.0/16',
       page: 1,
       per_page: 1,
       route_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       tun_types: 'cfd_tunnel,warp_connector',
-      tunnel_id: {},
-      virtual_network_id: {},
+      tunnel_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
+      virtual_network_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
   });
 
@@ -111,9 +111,7 @@ describe('resource routes', () => {
       account_id: '699d98642c564d2e855e9661899b7252',
       comment: 'Example comment for this route.',
       network: '172.16.0.0/16',
-      tun_type: 'cfd_tunnel',
-      tunnel_id: {},
-      virtual_network_id: {},
+      virtual_network_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
   });
 });

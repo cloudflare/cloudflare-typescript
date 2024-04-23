@@ -86,9 +86,9 @@ export interface VirtualNetwork {
   comment: string;
 
   /**
-   * Timestamp of when the virtual network was created.
+   * Timestamp of when the resource was created.
    */
-  created_at: unknown;
+  created_at: string;
 
   /**
    * If `true`, this virtual network is the default for the account.
@@ -101,10 +101,10 @@ export interface VirtualNetwork {
   name: string;
 
   /**
-   * Timestamp of when the virtual network was deleted. If `null`, the virtual
-   * network has not been deleted.
+   * Timestamp of when the resource was deleted. If `null`, the resource has not been
+   * deleted.
    */
-  deleted_at?: unknown;
+  deleted_at?: string;
 }
 
 export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
@@ -142,33 +142,28 @@ export interface VirtualNetworkListParams {
   account_id: string;
 
   /**
+   * Query param: UUID of the virtual network.
+   */
+  id?: string;
+
+  /**
    * Query param: If `true`, only include the default virtual network. If `false`,
    * exclude the default virtual network. If empty, all virtual networks will be
    * included.
    */
-  is_default?: unknown;
+  is_default?: boolean;
 
   /**
    * Query param: If `true`, only include deleted virtual networks. If `false`,
    * exclude deleted virtual networks. If empty, all virtual networks will be
    * included.
    */
-  is_deleted?: unknown;
+  is_deleted?: boolean;
 
   /**
    * Query param: A user-friendly name for the virtual network.
    */
   name?: string;
-
-  /**
-   * Query param: UUID of the virtual network.
-   */
-  vnet_id?: string;
-
-  /**
-   * Query param: A user-friendly name for the virtual network.
-   */
-  vnet_name?: string;
 }
 
 export interface VirtualNetworkDeleteParams {

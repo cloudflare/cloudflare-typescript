@@ -91,9 +91,9 @@ export namespace Client {
     id?: string;
 
     /**
-     * UUID of the cloudflared instance.
+     * UUID of the Cloudflare Tunnel connector.
      */
-    client_id?: unknown;
+    client_id?: string;
 
     /**
      * The cloudflared version used to establish this connection.
