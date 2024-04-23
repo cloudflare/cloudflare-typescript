@@ -333,7 +333,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: ApplicationsAPI.CorsHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -476,7 +476,7 @@ export namespace Application {
      */
     name?: string;
 
-    saas_app?: ApplicationsAPI.SAMLSaasApp | SaaSApplication.AccessOIDCSaasApp;
+    saas_app?: ApplicationsAPI.SAMLSaaSApp | SaaSApplication.AccessOIDCSaaSApp;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -493,7 +493,7 @@ export namespace Application {
   }
 
   export namespace SaaSApplication {
-    export interface AccessOIDCSaasApp {
+    export interface AccessOIDCSaaSApp {
       /**
        * The URL where this applications tile redirects users
        */
@@ -517,7 +517,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_claims?: AccessOIDCSaasApp.CustomClaims;
+      custom_claims?: AccessOIDCSaaSApp.CustomClaims;
 
       /**
        * The OIDC flows supported by this application
@@ -548,7 +548,7 @@ export namespace Application {
       updated_at?: string;
     }
 
-    export namespace AccessOIDCSaasApp {
+    export namespace AccessOIDCSaaSApp {
       export interface CustomClaims {
         /**
          * The name of the claim.
@@ -631,7 +631,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: ApplicationsAPI.CorsHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -776,7 +776,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: ApplicationsAPI.CorsHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -1075,7 +1075,7 @@ export namespace Application {
   }
 }
 
-export interface CorsHeaders {
+export interface CORSHeaders {
   /**
    * Allows all HTTP request headers.
    */
@@ -1126,7 +1126,7 @@ export type CustomPagesh = string;
 /**
  * A globally unique name for an identity or service provider.
  */
-export type SaasAppNameFormat =
+export type SaaSAppNameFormat =
   | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
   | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
   | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
@@ -1134,9 +1134,9 @@ export type SaasAppNameFormat =
 /**
  * The format of the name identifier sent to the SaaS application.
  */
-export type SaasAppNameIDFormat = 'id' | 'email';
+export type SaaSAppNameIDFormat = 'id' | 'email';
 
-export interface SaasAppSource {
+export interface SaaSAppSource {
   /**
    * The name of the IdP attribute.
    */
@@ -1148,7 +1148,7 @@ export interface SaasAppSource {
   name_by_idp?: Record<string, string>;
 }
 
-export interface SAMLSaasApp {
+export interface SAMLSaaSApp {
   /**
    * Optional identifier indicating the authentication protocol used for the saas
    * app. Required for OIDC. Default if unset is "saml"
@@ -1163,7 +1163,7 @@ export interface SAMLSaasApp {
 
   created_at?: string;
 
-  custom_attributes?: SAMLSaasApp.CustomAttributes;
+  custom_attributes?: SAMLSaaSApp.CustomAttributes;
 
   /**
    * The URL that the user will be redirected to after a successful login for IDP
@@ -1179,7 +1179,7 @@ export interface SAMLSaasApp {
   /**
    * The format of the name identifier sent to the SaaS application.
    */
-  name_id_format?: SaasAppNameIDFormat;
+  name_id_format?: SaaSAppNameIDFormat;
 
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms an application's
@@ -1216,7 +1216,7 @@ export interface SAMLSaasApp {
   updated_at?: string;
 }
 
-export namespace SAMLSaasApp {
+export namespace SAMLSaaSApp {
   export interface CustomAttributes {
     /**
      * The SAML FriendlyName of the attribute.
@@ -1231,14 +1231,14 @@ export namespace SAMLSaasApp {
     /**
      * A globally unique name for an identity or service provider.
      */
-    name_format?: ApplicationsAPI.SaasAppNameFormat;
+    name_format?: ApplicationsAPI.SaaSAppNameFormat;
 
     /**
      * If the attribute is required when building a SAML assertion.
      */
     required?: boolean;
 
-    source?: ApplicationsAPI.SaasAppSource;
+    source?: ApplicationsAPI.SaaSAppSource;
   }
 }
 
@@ -1320,7 +1320,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: CorsHeaders;
+    cors_headers?: CORSHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -1465,7 +1465,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    saas_app?: SAMLSaasApp | ApplicationCreateParams.SaaSApplication.AccessOIDCSaasApp;
+    saas_app?: SAMLSaaSApp | ApplicationCreateParams.SaaSApplication.AccessOIDCSaaSApp;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -1480,7 +1480,7 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace SaaSApplication {
-    export interface AccessOIDCSaasApp {
+    export interface AccessOIDCSaaSApp {
       /**
        * The URL where this applications tile redirects users
        */
@@ -1502,7 +1502,7 @@ export namespace ApplicationCreateParams {
        */
       client_secret?: string;
 
-      custom_claims?: AccessOIDCSaasApp.CustomClaims;
+      custom_claims?: AccessOIDCSaaSApp.CustomClaims;
 
       /**
        * The OIDC flows supported by this application
@@ -1531,7 +1531,7 @@ export namespace ApplicationCreateParams {
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
     }
 
-    export namespace AccessOIDCSaasApp {
+    export namespace AccessOIDCSaaSApp {
       export interface CustomClaims {
         /**
          * The name of the claim.
@@ -1620,7 +1620,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: CorsHeaders;
+    cors_headers?: CORSHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -1769,7 +1769,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: CorsHeaders;
+    cors_headers?: CORSHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2089,7 +2089,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: CorsHeaders;
+    cors_headers?: CORSHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2234,7 +2234,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    saas_app?: SAMLSaasApp | ApplicationUpdateParams.SaaSApplication.AccessOIDCSaasApp;
+    saas_app?: SAMLSaaSApp | ApplicationUpdateParams.SaaSApplication.AccessOIDCSaaSApp;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -2249,7 +2249,7 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace SaaSApplication {
-    export interface AccessOIDCSaasApp {
+    export interface AccessOIDCSaaSApp {
       /**
        * The URL where this applications tile redirects users
        */
@@ -2271,7 +2271,7 @@ export namespace ApplicationUpdateParams {
        */
       client_secret?: string;
 
-      custom_claims?: AccessOIDCSaasApp.CustomClaims;
+      custom_claims?: AccessOIDCSaaSApp.CustomClaims;
 
       /**
        * The OIDC flows supported by this application
@@ -2300,7 +2300,7 @@ export namespace ApplicationUpdateParams {
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
     }
 
-    export namespace AccessOIDCSaasApp {
+    export namespace AccessOIDCSaaSApp {
       export interface CustomClaims {
         /**
          * The name of the claim.
@@ -2389,7 +2389,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: CorsHeaders;
+    cors_headers?: CORSHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2538,7 +2538,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: CorsHeaders;
+    cors_headers?: CORSHeaders;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -2849,12 +2849,12 @@ export namespace Applications {
   export import AllowedOriginsh = ApplicationsAPI.AllowedOriginsh;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
-  export import CorsHeaders = ApplicationsAPI.CorsHeaders;
+  export import CORSHeaders = ApplicationsAPI.CORSHeaders;
   export import CustomPagesh = ApplicationsAPI.CustomPagesh;
-  export import SaasAppNameFormat = ApplicationsAPI.SaasAppNameFormat;
-  export import SaasAppNameIDFormat = ApplicationsAPI.SaasAppNameIDFormat;
-  export import SaasAppSource = ApplicationsAPI.SaasAppSource;
-  export import SAMLSaasApp = ApplicationsAPI.SAMLSaasApp;
+  export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
+  export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
+  export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
+  export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
   export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
