@@ -339,7 +339,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    image?: Array<number>;
+    image: Array<number>;
 
     /**
      * Body param:
@@ -349,7 +349,30 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    messages?: Array<AIRunParams.ImageToText.Message>;
+
+    /**
+     * Body param:
+     */
     prompt?: string;
+
+    /**
+     * Body param:
+     */
+    raw?: boolean;
+
+    /**
+     * Body param:
+     */
+    temperature?: number;
+  }
+
+  export namespace ImageToText {
+    export interface Message {
+      content: string;
+
+      role: string;
+    }
   }
 }
 
