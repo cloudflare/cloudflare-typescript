@@ -3,6 +3,7 @@
 export {
   ACL,
   ACLConfiguration,
+  AllowedProtocol,
   Subnet,
   ACLCreateParams,
   ACLUpdateParams,
