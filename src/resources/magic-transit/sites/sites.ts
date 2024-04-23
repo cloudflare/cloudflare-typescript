@@ -244,6 +244,7 @@ export namespace Sites {
   export import ACLs = ACLsAPI.ACLs;
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
   export import Subnet = ACLsAPI.Subnet;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
