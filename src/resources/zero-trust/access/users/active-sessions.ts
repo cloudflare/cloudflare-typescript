@@ -95,7 +95,7 @@ export interface ActiveSessionGetResponse {
 
   iat?: number;
 
-  idp?: ActiveSessionGetResponse.IDP;
+  idp?: ActiveSessionGetResponse.IdP;
 
   ip?: string;
 
@@ -149,7 +149,7 @@ export namespace ActiveSessionGetResponse {
     }
   }
 
-  export interface IDP {
+  export interface IdP {
     id?: string;
 
     type?: string;
