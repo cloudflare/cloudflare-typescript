@@ -113,11 +113,7 @@ export namespace MagicTransit {
   export import Sites = SitesAPI.Sites;
   export import Site = SitesAPI.Site;
   export import SiteLocation = SitesAPI.SiteLocation;
-  export import SiteCreateResponse = SitesAPI.SiteCreateResponse;
-  export import SiteUpdateResponse = SitesAPI.SiteUpdateResponse;
-  export import SiteListResponse = SitesAPI.SiteListResponse;
-  export import SiteDeleteResponse = SitesAPI.SiteDeleteResponse;
-  export import SiteGetResponse = SitesAPI.SiteGetResponse;
+  export import SitesSinglePage = SitesAPI.SitesSinglePage;
   export import SiteCreateParams = SitesAPI.SiteCreateParams;
   export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
   export import SiteListParams = SitesAPI.SiteListParams;

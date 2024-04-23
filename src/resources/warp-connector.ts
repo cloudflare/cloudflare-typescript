@@ -138,24 +138,24 @@ export namespace WARPConnectorCreateResponse {
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
      * edge. If `null`, the tunnel is inactive.
      */
-    conns_active_at?: string | null;
+    conns_active_at?: string;
 
     /**
      * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
      * edge). If `null`, the tunnel is active.
      */
-    conns_inactive_at?: string | null;
+    conns_inactive_at?: string;
 
     /**
-     * Timestamp of when the tunnel was created.
+     * Timestamp of when the resource was created.
      */
     created_at?: string;
 
     /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * Timestamp of when the resource was deleted. If `null`, the resource has not been
      * deleted.
      */
-    deleted_at?: string | null;
+    deleted_at?: string;
 
     /**
      * Metadata associated with the tunnel.
@@ -163,7 +163,7 @@ export namespace WARPConnectorCreateResponse {
     metadata?: unknown;
 
     /**
-     * A user-friendly name for the tunnel.
+     * A user-friendly name for a tunnel.
      */
     name?: string;
 
@@ -189,9 +189,9 @@ export namespace WARPConnectorCreateResponse {
       id?: string;
 
       /**
-       * UUID of the cloudflared instance.
+       * UUID of the Cloudflare Tunnel connector.
        */
-      client_id?: unknown;
+      client_id?: string;
 
       /**
        * The cloudflared version used to establish this connection.
@@ -260,24 +260,24 @@ export namespace WARPConnectorListResponse {
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
      * edge. If `null`, the tunnel is inactive.
      */
-    conns_active_at?: string | null;
+    conns_active_at?: string;
 
     /**
      * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
      * edge). If `null`, the tunnel is active.
      */
-    conns_inactive_at?: string | null;
+    conns_inactive_at?: string;
 
     /**
-     * Timestamp of when the tunnel was created.
+     * Timestamp of when the resource was created.
      */
     created_at?: string;
 
     /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * Timestamp of when the resource was deleted. If `null`, the resource has not been
      * deleted.
      */
-    deleted_at?: string | null;
+    deleted_at?: string;
 
     /**
      * Metadata associated with the tunnel.
@@ -285,7 +285,7 @@ export namespace WARPConnectorListResponse {
     metadata?: unknown;
 
     /**
-     * A user-friendly name for the tunnel.
+     * A user-friendly name for a tunnel.
      */
     name?: string;
 
@@ -311,9 +311,9 @@ export namespace WARPConnectorListResponse {
       id?: string;
 
       /**
-       * UUID of the cloudflared instance.
+       * UUID of the Cloudflare Tunnel connector.
        */
-      client_id?: unknown;
+      client_id?: string;
 
       /**
        * The cloudflared version used to establish this connection.
@@ -382,24 +382,24 @@ export namespace WARPConnectorDeleteResponse {
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
      * edge. If `null`, the tunnel is inactive.
      */
-    conns_active_at?: string | null;
+    conns_active_at?: string;
 
     /**
      * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
      * edge). If `null`, the tunnel is active.
      */
-    conns_inactive_at?: string | null;
+    conns_inactive_at?: string;
 
     /**
-     * Timestamp of when the tunnel was created.
+     * Timestamp of when the resource was created.
      */
     created_at?: string;
 
     /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * Timestamp of when the resource was deleted. If `null`, the resource has not been
      * deleted.
      */
-    deleted_at?: string | null;
+    deleted_at?: string;
 
     /**
      * Metadata associated with the tunnel.
@@ -407,7 +407,7 @@ export namespace WARPConnectorDeleteResponse {
     metadata?: unknown;
 
     /**
-     * A user-friendly name for the tunnel.
+     * A user-friendly name for a tunnel.
      */
     name?: string;
 
@@ -433,9 +433,9 @@ export namespace WARPConnectorDeleteResponse {
       id?: string;
 
       /**
-       * UUID of the cloudflared instance.
+       * UUID of the Cloudflare Tunnel connector.
        */
-      client_id?: unknown;
+      client_id?: string;
 
       /**
        * The cloudflared version used to establish this connection.
@@ -504,24 +504,24 @@ export namespace WARPConnectorEditResponse {
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
      * edge. If `null`, the tunnel is inactive.
      */
-    conns_active_at?: string | null;
+    conns_active_at?: string;
 
     /**
      * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
      * edge). If `null`, the tunnel is active.
      */
-    conns_inactive_at?: string | null;
+    conns_inactive_at?: string;
 
     /**
-     * Timestamp of when the tunnel was created.
+     * Timestamp of when the resource was created.
      */
     created_at?: string;
 
     /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * Timestamp of when the resource was deleted. If `null`, the resource has not been
      * deleted.
      */
-    deleted_at?: string | null;
+    deleted_at?: string;
 
     /**
      * Metadata associated with the tunnel.
@@ -529,7 +529,7 @@ export namespace WARPConnectorEditResponse {
     metadata?: unknown;
 
     /**
-     * A user-friendly name for the tunnel.
+     * A user-friendly name for a tunnel.
      */
     name?: string;
 
@@ -555,9 +555,9 @@ export namespace WARPConnectorEditResponse {
       id?: string;
 
       /**
-       * UUID of the cloudflared instance.
+       * UUID of the Cloudflare Tunnel connector.
        */
-      client_id?: unknown;
+      client_id?: string;
 
       /**
        * The cloudflared version used to establish this connection.
@@ -626,24 +626,24 @@ export namespace WARPConnectorGetResponse {
      * Timestamp of when the tunnel established at least one connection to Cloudflare's
      * edge. If `null`, the tunnel is inactive.
      */
-    conns_active_at?: string | null;
+    conns_active_at?: string;
 
     /**
      * Timestamp of when the tunnel became inactive (no connections to Cloudflare's
      * edge). If `null`, the tunnel is active.
      */
-    conns_inactive_at?: string | null;
+    conns_inactive_at?: string;
 
     /**
-     * Timestamp of when the tunnel was created.
+     * Timestamp of when the resource was created.
      */
     created_at?: string;
 
     /**
-     * Timestamp of when the tunnel was deleted. If `null`, the tunnel has not been
+     * Timestamp of when the resource was deleted. If `null`, the resource has not been
      * deleted.
      */
-    deleted_at?: string | null;
+    deleted_at?: string;
 
     /**
      * Metadata associated with the tunnel.
@@ -651,7 +651,7 @@ export namespace WARPConnectorGetResponse {
     metadata?: unknown;
 
     /**
-     * A user-friendly name for the tunnel.
+     * A user-friendly name for a tunnel.
      */
     name?: string;
 
@@ -677,9 +677,9 @@ export namespace WARPConnectorGetResponse {
       id?: string;
 
       /**
-       * UUID of the cloudflared instance.
+       * UUID of the Cloudflare Tunnel connector.
        */
-      client_id?: unknown;
+      client_id?: string;
 
       /**
        * The cloudflared version used to establish this connection.
@@ -726,7 +726,7 @@ export interface WARPConnectorCreateParams {
   account_id: string;
 
   /**
-   * Body param: A user-friendly name for the tunnel.
+   * Body param: A user-friendly name for a tunnel.
    */
   name: string;
 }
@@ -799,7 +799,7 @@ export interface WARPConnectorEditParams {
   account_id: string;
 
   /**
-   * Body param: A user-friendly name for the tunnel.
+   * Body param: A user-friendly name for a tunnel.
    */
   name?: string;
 

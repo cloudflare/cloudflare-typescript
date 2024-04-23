@@ -228,7 +228,7 @@ export namespace AddressMapCreateResponse {
   }
 }
 
-export type AddressMapDeleteResponse = unknown | Array<unknown> | string;
+export type AddressMapDeleteResponse = Array<unknown>;
 
 export interface AddressMapGetResponse {
   /**

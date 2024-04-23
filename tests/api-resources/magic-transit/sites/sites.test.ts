@@ -14,6 +14,7 @@ describe('resource sites', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'site_1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,14 +29,12 @@ describe('resource sites', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      site: {
-        connector_id: 'ac60d3d0435248289d446cedd870bcf4',
-        description: 'string',
-        ha_mode: true,
-        location: { lat: 'string', lon: 'string' },
-        name: 'site_1',
-        secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
-      },
+      name: 'site_1',
+      connector_id: 'ac60d3d0435248289d446cedd870bcf4',
+      description: 'string',
+      ha_mode: true,
+      location: { lat: 'string', lon: 'string' },
+      secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
     });
   });
 
@@ -57,13 +56,11 @@ describe('resource sites', () => {
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.magicTransit.sites.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      site: {
-        connector_id: 'ac60d3d0435248289d446cedd870bcf4',
-        description: 'string',
-        location: { lat: 'string', lon: 'string' },
-        name: 'site_1',
-        secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
-      },
+      connector_id: 'ac60d3d0435248289d446cedd870bcf4',
+      description: 'string',
+      location: { lat: 'string', lon: 'string' },
+      name: 'site_1',
+      secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
     });
   });
 

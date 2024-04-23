@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as LANsAPI from 'cloudflare/resources/magic-transit/sites/lans';
+import { SinglePage } from 'cloudflare/pagination';
 
 export class LANs extends APIResource {
   /**
@@ -31,13 +32,13 @@ export class LANs extends APIResource {
     lanId: string,
     params: LANUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LANUpdateResponse> {
+  ): Core.APIPromise<LAN> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: LANUpdateResponse }>
+      }) as Core.APIPromise<{ result: LAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,13 +49,13 @@ export class LANs extends APIResource {
     siteId: string,
     params: LANListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LANListResponse> {
+  ): Core.PagePromise<LANsSinglePage, LAN> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/lans`, options) as Core.APIPromise<{
-        result: LANListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/magic/sites/${siteId}/lans`,
+      LANsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -65,13 +66,13 @@ export class LANs extends APIResource {
     lanId: string,
     params: LANDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LANDeleteResponse> {
+  ): Core.APIPromise<LAN> {
     const { account_id, body } = params;
     return (
       this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: LANDeleteResponse }>
+      }) as Core.APIPromise<{ result: LAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -83,16 +84,18 @@ export class LANs extends APIResource {
     lanId: string,
     params: LANGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LANGetResponse> {
+  ): Core.APIPromise<LAN> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
         options,
-      ) as Core.APIPromise<{ result: LANGetResponse }>
+      ) as Core.APIPromise<{ result: LAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class LANsSinglePage extends SinglePage<LAN> {}
 
 export interface DHCPRelay {
   /**
@@ -129,13 +132,13 @@ export interface LAN {
    */
   id?: string;
 
-  description?: string;
-
   /**
    * mark true to use this LAN for HA probing. only works for site with HA turned on.
    * only one LAN can be set as the ha_link.
    */
   ha_link?: boolean;
+
+  name?: string;
 
   nat?: Nat;
 
@@ -208,27 +211,7 @@ export interface RoutedSubnet {
   nat?: Nat;
 }
 
-export interface LANCreateResponse {
-  lans?: Array<LAN>;
-}
-
-export interface LANUpdateResponse {
-  lan?: LAN;
-}
-
-export interface LANListResponse {
-  lans?: Array<LAN>;
-}
-
-export interface LANDeleteResponse {
-  deleted?: boolean;
-
-  deleted_lan?: LAN;
-}
-
-export interface LANGetResponse {
-  lan?: LAN;
-}
+export type LANCreateResponse = Array<LAN>;
 
 export interface LANCreateParams {
   /**
@@ -239,37 +222,41 @@ export interface LANCreateParams {
   /**
    * Body param:
    */
-  lan?: LANCreateParams.LAN;
-}
+  physport: number;
 
-export namespace LANCreateParams {
-  export interface LAN {
-    physport: number;
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag: number;
 
-    /**
-     * VLAN port number.
-     */
-    vlan_tag: number;
+  /**
+   * Body param: mark true to use this LAN for HA probing. only works for site with
+   * HA turned on. only one LAN can be set as the ha_link.
+   */
+  ha_link?: boolean;
 
-    description?: string;
+  /**
+   * Body param:
+   */
+  name?: string;
 
-    /**
-     * mark true to use this LAN for HA probing. only works for site with HA turned on.
-     * only one LAN can be set as the ha_link.
-     */
-    ha_link?: boolean;
+  /**
+   * Body param:
+   */
+  nat?: Nat;
 
-    nat?: LANsAPI.Nat;
+  /**
+   * Body param:
+   */
+  routed_subnets?: Array<RoutedSubnet>;
 
-    routed_subnets?: Array<LANsAPI.RoutedSubnet>;
-
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LANsAPI.LANStaticAddressing;
-  }
+  /**
+   * Body param: If the site is not configured in high availability mode, this
+   * configuration is optional (if omitted, use DHCP). However, if in high
+   * availability mode, static_address is required along with secondary and virtual
+   * address.
+   */
+  static_addressing?: LANStaticAddressing;
 }
 
 export interface LANUpdateParams {
@@ -281,31 +268,35 @@ export interface LANUpdateParams {
   /**
    * Body param:
    */
-  lan?: LANUpdateParams.LAN;
-}
+  name?: string;
 
-export namespace LANUpdateParams {
-  export interface LAN {
-    description?: string;
+  /**
+   * Body param:
+   */
+  nat?: Nat;
 
-    nat?: LANsAPI.Nat;
+  /**
+   * Body param:
+   */
+  physport?: number;
 
-    physport?: number;
+  /**
+   * Body param:
+   */
+  routed_subnets?: Array<RoutedSubnet>;
 
-    routed_subnets?: Array<LANsAPI.RoutedSubnet>;
+  /**
+   * Body param: If the site is not configured in high availability mode, this
+   * configuration is optional (if omitted, use DHCP). However, if in high
+   * availability mode, static_address is required along with secondary and virtual
+   * address.
+   */
+  static_addressing?: LANStaticAddressing;
 
-    /**
-     * If the site is not configured in high availability mode, this configuration is
-     * optional (if omitted, use DHCP). However, if in high availability mode,
-     * static_address is required along with secondary and virtual address.
-     */
-    static_addressing?: LANsAPI.LANStaticAddressing;
-
-    /**
-     * VLAN port number.
-     */
-    vlan_tag?: number;
-  }
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag?: number;
 }
 
 export interface LANListParams {
@@ -342,10 +333,7 @@ export namespace LANs {
   export import Nat = LANsAPI.Nat;
   export import RoutedSubnet = LANsAPI.RoutedSubnet;
   export import LANCreateResponse = LANsAPI.LANCreateResponse;
-  export import LANUpdateResponse = LANsAPI.LANUpdateResponse;
-  export import LANListResponse = LANsAPI.LANListResponse;
-  export import LANDeleteResponse = LANsAPI.LANDeleteResponse;
-  export import LANGetResponse = LANsAPI.LANGetResponse;
+  export import LANsSinglePage = LANsAPI.LANsSinglePage;
   export import LANCreateParams = LANsAPI.LANCreateParams;
   export import LANUpdateParams = LANsAPI.LANUpdateParams;
   export import LANListParams = LANsAPI.LANListParams;
