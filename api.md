@@ -4402,12 +4402,12 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedOriginsh</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CorsHeaders</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CustomPagesh</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaasAppNameFormat</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaasAppNameIDFormat</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaasAppSource</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SAMLSaasApp</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameFormat</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameIDFormat</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppSource</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SAMLSaaSApp</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SelfHostedDomainsh</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationDeleteResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationRevokeTokensResponse</a></code>
