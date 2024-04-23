@@ -42,9 +42,9 @@ export class IPs extends APIResource {
   }
 }
 
-export type IPUpdateResponse = unknown | Array<unknown> | string;
+export type IPUpdateResponse = Array<unknown>;
 
-export type IPDeleteResponse = unknown | Array<unknown> | string;
+export type IPDeleteResponse = Array<unknown>;
 
 export interface IPUpdateParams {
   /**

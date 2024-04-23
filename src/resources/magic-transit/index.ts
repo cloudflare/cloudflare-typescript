@@ -60,15 +60,11 @@ export {
 export {
   Site,
   SiteLocation,
-  SiteCreateResponse,
-  SiteUpdateResponse,
-  SiteListResponse,
-  SiteDeleteResponse,
-  SiteGetResponse,
   SiteCreateParams,
   SiteUpdateParams,
   SiteListParams,
   SiteDeleteParams,
   SiteGetParams,
+  SitesSinglePage,
   Sites,
 } from './sites/index';

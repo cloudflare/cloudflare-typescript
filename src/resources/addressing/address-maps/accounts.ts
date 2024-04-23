@@ -40,9 +40,9 @@ export class Accounts extends APIResource {
   }
 }
 
-export type AccountUpdateResponse = unknown | Array<unknown> | string;
+export type AccountUpdateResponse = Array<unknown>;
 
-export type AccountDeleteResponse = unknown | Array<unknown> | string;
+export type AccountDeleteResponse = Array<unknown>;
 
 export interface AccountUpdateParams {
   /**

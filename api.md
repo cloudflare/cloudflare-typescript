@@ -3315,19 +3315,14 @@ Types:
 
 - <code><a href="./src/resources/magic-transit/sites/sites.ts">Site</a></code>
 - <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteLocation</a></code>
-- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteCreateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteUpdateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteDeleteResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/sites.ts">SiteGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">create</a>({ ...params }) -> SiteCreateResponse</code>
-- <code title="put /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">update</a>(siteId, { ...params }) -> SiteUpdateResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">list</a>({ ...params }) -> SiteListResponse</code>
-- <code title="delete /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">delete</a>(siteId, { ...params }) -> SiteDeleteResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">get</a>(siteId, { ...params }) -> SiteGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">create</a>({ ...params }) -> Site</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">update</a>(siteId, { ...params }) -> Site</code>
+- <code title="get /accounts/{account_id}/magic/sites">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">list</a>({ ...params }) -> SitesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">delete</a>(siteId, { ...params }) -> Site</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">get</a>(siteId, { ...params }) -> Site</code>
 
 ### ACLs
 
@@ -3335,21 +3330,15 @@ Types:
 
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACL</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLConfiguration</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">AllowedProtocol</a></code>
 - <code><a href="./src/resources/magic-transit/sites/acls.ts">Subnet</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLCreateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLUpdateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLDeleteResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/acls.ts">ACLGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">create</a>(siteId, { ...params }) -> ACLCreateResponse</code>
-- <code title="put /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">update</a>(siteId, aclIdentifier, { ...params }) -> ACLUpdateResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">list</a>(siteId, { ...params }) -> ACLListResponse</code>
-- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">delete</a>(siteId, aclIdentifier, { ...params }) -> ACLDeleteResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">get</a>(siteId, aclIdentifier, { ...params }) -> ACLGetResponse</code>
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">create</a>(siteId, { ...params }) -> ACL</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">update</a>(siteId, aclIdentifier, { ...params }) -> ACL</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">list</a>(siteId, { ...params }) -> ACLsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">delete</a>(siteId, aclIdentifier, { ...params }) -> ACL</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/acls/{acl_identifier}">client.magicTransit.sites.acls.<a href="./src/resources/magic-transit/sites/acls.ts">get</a>(siteId, aclIdentifier, { ...params }) -> ACL</code>
 
 ### LANs
 
@@ -3362,18 +3351,14 @@ Types:
 - <code><a href="./src/resources/magic-transit/sites/lans.ts">Nat</a></code>
 - <code><a href="./src/resources/magic-transit/sites/lans.ts">RoutedSubnet</a></code>
 - <code><a href="./src/resources/magic-transit/sites/lans.ts">LANCreateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/lans.ts">LANUpdateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/lans.ts">LANListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/lans.ts">LANDeleteResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/lans.ts">LANGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">create</a>(siteId, { ...params }) -> LANCreateResponse</code>
-- <code title="put /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">update</a>(siteId, lanId, { ...params }) -> LANUpdateResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">list</a>(siteId, { ...params }) -> LANListResponse</code>
-- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">delete</a>(siteId, lanId, { ...params }) -> LANDeleteResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">get</a>(siteId, lanId, { ...params }) -> LANGetResponse</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">update</a>(siteId, lanId, { ...params }) -> LAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">list</a>(siteId, { ...params }) -> LANsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">delete</a>(siteId, lanId, { ...params }) -> LAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/lans/{lan_id}">client.magicTransit.sites.lans.<a href="./src/resources/magic-transit/sites/lans.ts">get</a>(siteId, lanId, { ...params }) -> LAN</code>
 
 ### WANs
 
@@ -3382,18 +3367,14 @@ Types:
 - <code><a href="./src/resources/magic-transit/sites/wans.ts">WAN</a></code>
 - <code><a href="./src/resources/magic-transit/sites/wans.ts">WANStaticAddressing</a></code>
 - <code><a href="./src/resources/magic-transit/sites/wans.ts">WANCreateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/wans.ts">WANUpdateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/wans.ts">WANListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/wans.ts">WANDeleteResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/wans.ts">WANGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">create</a>(siteId, { ...params }) -> WANCreateResponse</code>
-- <code title="put /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">update</a>(siteId, wanId, { ...params }) -> WANUpdateResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">list</a>(siteId, { ...params }) -> WANListResponse</code>
-- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(siteId, wanId, { ...params }) -> WANDeleteResponse</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(siteId, wanId, { ...params }) -> WANGetResponse</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">update</a>(siteId, wanId, { ...params }) -> WAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">list</a>(siteId, { ...params }) -> WANsSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(siteId, wanId, { ...params }) -> WAN</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(siteId, wanId, { ...params }) -> WAN</code>
 
 # MagicNetworkMonitoring
 
