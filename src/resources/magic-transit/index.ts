@@ -10,24 +10,6 @@ export {
   CfInterconnects,
 } from './cf-interconnects';
 export {
-  ColoName,
-  ColoRegion,
-  Scope,
-  RouteCreateResponse,
-  RouteUpdateResponse,
-  RouteListResponse,
-  RouteDeleteResponse,
-  RouteEmptyResponse,
-  RouteGetResponse,
-  RouteCreateParams,
-  RouteUpdateParams,
-  RouteListParams,
-  RouteDeleteParams,
-  RouteEmptyParams,
-  RouteGetParams,
-  Routes,
-} from './routes';
-export {
   GRETunnelCreateResponse,
   GRETunnelUpdateResponse,
   GRETunnelListResponse,
@@ -57,6 +39,22 @@ export {
   IPSECTunnelPSKGenerateParams,
   IPSECTunnels,
 } from './ipsec-tunnels';
+export {
+  Scope,
+  RouteCreateResponse,
+  RouteUpdateResponse,
+  RouteListResponse,
+  RouteDeleteResponse,
+  RouteEmptyResponse,
+  RouteGetResponse,
+  RouteCreateParams,
+  RouteUpdateParams,
+  RouteListParams,
+  RouteDeleteParams,
+  RouteEmptyParams,
+  RouteGetParams,
+  Routes,
+} from './routes';
 export {
   Site,
   SiteLocation,

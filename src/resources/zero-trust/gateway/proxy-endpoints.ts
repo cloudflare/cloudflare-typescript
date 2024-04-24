@@ -42,12 +42,12 @@ export class ProxyEndpoints extends APIResource {
     params: ProxyEndpointDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProxyEndpointDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ProxyEndpointDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
+        options,
+      ) as Core.APIPromise<{ result: ProxyEndpointDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -94,6 +94,12 @@ export class ProxyEndpointsSinglePage extends SinglePage<ProxyEndpoint> {}
  */
 export type GatewayIPs = string;
 
+/**
+ * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
+ * CIDRs are limited to a maximum of /25.
+ */
+export type GatewayIPsParam = string;
+
 export interface ProxyEndpoint {
   id?: string;
 
@@ -128,7 +134,7 @@ export interface ProxyEndpointCreateParams {
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
    */
-  ips: Array<GatewayIPs>;
+  ips: Array<GatewayIPsParam>;
 
   /**
    * Body param: The name of the proxy endpoint.
@@ -141,15 +147,7 @@ export interface ProxyEndpointListParams {
 }
 
 export interface ProxyEndpointDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ProxyEndpointEditParams {
@@ -161,7 +159,7 @@ export interface ProxyEndpointEditParams {
   /**
    * Body param: A list of CIDRs to restrict ingress connections.
    */
-  ips?: Array<GatewayIPs>;
+  ips?: Array<GatewayIPsParam>;
 
   /**
    * Body param: The name of the proxy endpoint.

@@ -97,6 +97,26 @@ export interface CertificateSettings {
   hostname: string;
 }
 
+export interface CertificateSettingsParam {
+  /**
+   * Request client certificates for this hostname in China. Can only be set to true
+   * if this zone is china network enabled.
+   */
+  china_network: boolean;
+
+  /**
+   * Client Certificate Forwarding is a feature that takes the client cert provided
+   * by the eyeball to the edge, and forwards it to the origin as a HTTP header to
+   * allow logging on the origin.
+   */
+  client_certificate_forwarding: boolean;
+
+  /**
+   * The hostname that these settings apply to.
+   */
+  hostname: string;
+}
+
 export type SettingUpdateResponse = Array<CertificateSettings>;
 
 export type SettingGetResponse = Array<CertificateSettings>;
@@ -105,7 +125,7 @@ export interface SettingUpdateParams {
   /**
    * Body param:
    */
-  settings: Array<CertificateSettings>;
+  settings: Array<CertificateSettingsParam>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the

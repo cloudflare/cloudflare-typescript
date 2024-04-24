@@ -62,12 +62,12 @@ export class ACLs extends APIResource {
     params: ACLDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ACL }>
+      this._client.delete(
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -150,6 +150,30 @@ export interface ACLConfiguration {
   subnets?: Array<Subnet>;
 }
 
+export interface ACLConfigurationParam {
+  /**
+   * The identifier for the LAN you want to create an ACL policy with.
+   */
+  lan_id: string;
+
+  /**
+   * The name of the LAN based on the provided lan_id.
+   */
+  lan_name?: string;
+
+  /**
+   * Array of ports on the provided LAN that will be included in the ACL. If no ports
+   * are provided, communication on any port on this LAN is allowed.
+   */
+  ports?: Array<number>;
+
+  /**
+   * Array of subnet IPs within the LAN that will be included in the ACL. If no
+   * subnets are provided, communication on any subnets on this LAN are allowed.
+   */
+  subnets?: Array<SubnetParam>;
+}
+
 /**
  * Array of allowed communication protocols between configured LANs. If no
  * protocols are provided, all protocols are allowed.
@@ -157,9 +181,20 @@ export interface ACLConfiguration {
 export type AllowedProtocol = 'tcp' | 'udp' | 'icmp';
 
 /**
+ * Array of allowed communication protocols between configured LANs. If no
+ * protocols are provided, all protocols are allowed.
+ */
+export type AllowedProtocolParam = 'tcp' | 'udp' | 'icmp';
+
+/**
  * A valid IPv4 address.
  */
 export type Subnet = string | string;
+
+/**
+ * A valid IPv4 address.
+ */
+export type SubnetParam = string | string;
 
 export interface ACLCreateParams {
   /**
@@ -170,12 +205,12 @@ export interface ACLCreateParams {
   /**
    * Body param:
    */
-  lan_1: ACLConfiguration;
+  lan_1: ACLConfigurationParam;
 
   /**
    * Body param:
    */
-  lan_2: ACLConfiguration;
+  lan_2: ACLConfigurationParam;
 
   /**
    * Body param: The name of the ACL.
@@ -198,7 +233,7 @@ export interface ACLCreateParams {
   /**
    * Body param:
    */
-  protocols?: Array<AllowedProtocol>;
+  protocols?: Array<AllowedProtocolParam>;
 }
 
 export interface ACLUpdateParams {
@@ -223,12 +258,12 @@ export interface ACLUpdateParams {
   /**
    * Body param:
    */
-  lan_1?: ACLConfiguration;
+  lan_1?: ACLConfigurationParam;
 
   /**
    * Body param:
    */
-  lan_2?: ACLConfiguration;
+  lan_2?: ACLConfigurationParam;
 
   /**
    * Body param: The name of the ACL.
@@ -238,7 +273,7 @@ export interface ACLUpdateParams {
   /**
    * Body param:
    */
-  protocols?: Array<AllowedProtocol>;
+  protocols?: Array<AllowedProtocolParam>;
 }
 
 export interface ACLListParams {
@@ -250,14 +285,9 @@ export interface ACLListParams {
 
 export interface ACLDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ACLGetParams {

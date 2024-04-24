@@ -32,11 +32,8 @@ export class Tail extends APIResource {
     params: TailDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TailDeleteResponse> {
-    const { account_id, body } = params;
-    return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, {
-      body: body,
-      ...options,
-    });
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}/tails/${id}`, options);
   }
 
   /**
@@ -61,6 +58,26 @@ export class Tail extends APIResource {
  * A reference to a script that will consume logs from the attached Worker.
  */
 export interface ConsumerScript {
+  /**
+   * Name of Worker that is to be the consumer.
+   */
+  service: string;
+
+  /**
+   * Optional environment if the Worker utilizes one.
+   */
+  environment?: string;
+
+  /**
+   * Optional dispatch namespace the script belongs to.
+   */
+  namespace?: string;
+}
+
+/**
+ * A reference to a script that will consume logs from the attached Worker.
+ */
+export interface ConsumerScriptParam {
   /**
    * Name of Worker that is to be the consumer.
    */
@@ -118,14 +135,9 @@ export interface TailCreateParams {
 
 export interface TailDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface TailGetParams {

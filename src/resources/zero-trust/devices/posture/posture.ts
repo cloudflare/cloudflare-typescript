@@ -64,12 +64,11 @@ export class Posture extends APIResource {
     params: PostureDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PostureDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: PostureDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
+        result: PostureDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -94,6 +93,8 @@ export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRule> 
 
 export type CarbonblackInput = string;
 
+export type CarbonblackInputParam = string;
+
 export interface ClientCertificateInput {
   /**
    * UUID of Cloudflare managed certificate.
@@ -106,7 +107,66 @@ export interface ClientCertificateInput {
   cn: string;
 }
 
+export interface ClientCertificateInputParam {
+  /**
+   * UUID of Cloudflare managed certificate.
+   */
+  certificate_id: string;
+
+  /**
+   * Common Name that is protected by the certificate
+   */
+  cn: string;
+}
+
 export interface CrowdstrikeInput {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * For more details on last seen, please refer to the Crowdstrike documentation.
+   */
+  last_seen?: string;
+
+  /**
+   * operator
+   */
+  operator?: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * Os Version
+   */
+  os?: string;
+
+  /**
+   * overall
+   */
+  overall?: string;
+
+  /**
+   * SensorConfig
+   */
+  sensor_config?: string;
+
+  /**
+   * For more details on state, please refer to the Crowdstrike documentation.
+   */
+  state?: 'online' | 'offline' | 'unknown';
+
+  /**
+   * Version
+   */
+  version?: string;
+
+  /**
+   * Version Operator
+   */
+  versionOperator?: '<' | '<=' | '>' | '>=' | '==';
+}
+
+export interface CrowdstrikeInputParam {
   /**
    * Posture Integration ID.
    */
@@ -220,7 +280,78 @@ export namespace DeviceInput {
   }
 }
 
+/**
+ * The value to be checked against.
+ */
+export type DeviceInputParam =
+  | FileInputParam
+  | UniqueClientIDInputParam
+  | DomainJoinedInputParam
+  | OSVersionInputParam
+  | FirewallInputParam
+  | SentineloneInputParam
+  | DeviceInputParam.TeamsDevicesCarbonblackInputRequest
+  | DiskEncryptionInputParam
+  | DeviceInputParam.TeamsDevicesApplicationInputRequest
+  | ClientCertificateInputParam
+  | WorkspaceOneInputParam
+  | CrowdstrikeInputParam
+  | IntuneInputParam
+  | KolideInputParam
+  | TaniumInputParam
+  | SentineloneS2sInputParam;
+
+export namespace DeviceInputParam {
+  export interface TeamsDevicesCarbonblackInputRequest {
+    /**
+     * Operating system
+     */
+    operating_system: 'windows' | 'linux' | 'mac';
+
+    /**
+     * File path.
+     */
+    path: string;
+
+    /**
+     * SHA-256.
+     */
+    sha256?: string;
+
+    /**
+     * Signing certificate thumbprint.
+     */
+    thumbprint?: string;
+  }
+
+  export interface TeamsDevicesApplicationInputRequest {
+    /**
+     * Operating system
+     */
+    operating_system: 'windows' | 'linux' | 'mac';
+
+    /**
+     * Path for the application.
+     */
+    path: string;
+
+    /**
+     * SHA-256.
+     */
+    sha256?: string;
+
+    /**
+     * Signing certificate thumbprint.
+     */
+    thumbprint?: string;
+  }
+}
+
 export interface DeviceMatch {
+  platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+}
+
+export interface DeviceMatchParam {
   platform?: 'windows' | 'mac' | 'linux' | 'android' | 'ios';
 }
 
@@ -299,7 +430,31 @@ export interface DiskEncryptionInput {
   requireAll?: boolean;
 }
 
+export interface DiskEncryptionInputParam {
+  /**
+   * List of volume names to be checked for encryption.
+   */
+  checkDisks?: Array<CarbonblackInputParam>;
+
+  /**
+   * Whether to check all disks for encryption.
+   */
+  requireAll?: boolean;
+}
+
 export interface DomainJoinedInput {
+  /**
+   * Operating System
+   */
+  operating_system: 'windows';
+
+  /**
+   * Domain
+   */
+  domain?: string;
+}
+
+export interface DomainJoinedInputParam {
   /**
    * Operating System
    */
@@ -338,6 +493,33 @@ export interface FileInput {
   thumbprint?: string;
 }
 
+export interface FileInputParam {
+  /**
+   * Operating system
+   */
+  operating_system: 'windows' | 'linux' | 'mac';
+
+  /**
+   * File path.
+   */
+  path: string;
+
+  /**
+   * Whether or not file exists
+   */
+  exists?: boolean;
+
+  /**
+   * SHA-256.
+   */
+  sha256?: string;
+
+  /**
+   * Signing certificate thumbprint.
+   */
+  thumbprint?: string;
+}
+
 export interface FirewallInput {
   /**
    * Enabled
@@ -350,7 +532,31 @@ export interface FirewallInput {
   operating_system: 'windows' | 'mac';
 }
 
+export interface FirewallInputParam {
+  /**
+   * Enabled
+   */
+  enabled: boolean;
+
+  /**
+   * Operating System
+   */
+  operating_system: 'windows' | 'mac';
+}
+
 export interface IntuneInput {
+  /**
+   * Compliance Status
+   */
+  compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
+
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+}
+
+export interface IntuneInputParam {
   /**
    * Compliance Status
    */
@@ -379,7 +585,57 @@ export interface KolideInput {
   issue_count: string;
 }
 
+export interface KolideInputParam {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * Count Operator
+   */
+  countOperator: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * The Number of Issues.
+   */
+  issue_count: string;
+}
+
 export interface OSVersionInput {
+  /**
+   * Operating System
+   */
+  operating_system: 'windows';
+
+  /**
+   * operator
+   */
+  operator: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * Version of OS
+   */
+  version: string;
+
+  /**
+   * Operating System Distribution Name (linux only)
+   */
+  os_distro_name?: string;
+
+  /**
+   * Version of OS Distribution (linux only)
+   */
+  os_distro_revision?: string;
+
+  /**
+   * Additional version data. For Mac or iOS, the Product Verison Extra. For Linux,
+   * the kernel release version. (Mac, iOS, and Linux only)
+   */
+  os_version_extra?: string;
+}
+
+export interface OSVersionInputParam {
   /**
    * Operating System
    */
@@ -434,7 +690,61 @@ export interface SentineloneInput {
   thumbprint?: string;
 }
 
+export interface SentineloneInputParam {
+  /**
+   * Operating system
+   */
+  operating_system: 'windows' | 'linux' | 'mac';
+
+  /**
+   * File path.
+   */
+  path: string;
+
+  /**
+   * SHA-256.
+   */
+  sha256?: string;
+
+  /**
+   * Signing certificate thumbprint.
+   */
+  thumbprint?: string;
+}
+
 export interface SentineloneS2sInput {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * The Number of active threats.
+   */
+  active_threats?: number;
+
+  /**
+   * Whether device is infected.
+   */
+  infected?: boolean;
+
+  /**
+   * Whether device is active.
+   */
+  is_active?: boolean;
+
+  /**
+   * Network status of device.
+   */
+  network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
+
+  /**
+   * operator
+   */
+  operator?: '<' | '<=' | '>' | '>=' | '==';
+}
+
+export interface SentineloneS2sInputParam {
   /**
    * Posture Integration ID.
    */
@@ -498,6 +808,38 @@ export interface TaniumInput {
   total_score?: number;
 }
 
+export interface TaniumInputParam {
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+
+  /**
+   * For more details on eid last seen, refer to the Tanium documentation.
+   */
+  eid_last_seen?: string;
+
+  /**
+   * Operator to evaluate risk_level or eid_last_seen.
+   */
+  operator?: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * For more details on risk level, refer to the Tanium documentation.
+   */
+  risk_level?: 'low' | 'medium' | 'high' | 'critical';
+
+  /**
+   * Score Operator
+   */
+  scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
+
+  /**
+   * For more details on total score, refer to the Tanium documentation.
+   */
+  total_score?: number;
+}
+
 export interface UniqueClientIDInput {
   /**
    * List ID.
@@ -510,7 +852,31 @@ export interface UniqueClientIDInput {
   operating_system: 'android' | 'ios' | 'chromeos';
 }
 
+export interface UniqueClientIDInputParam {
+  /**
+   * List ID.
+   */
+  id: string;
+
+  /**
+   * Operating System
+   */
+  operating_system: 'android' | 'ios' | 'chromeos';
+}
+
 export interface WorkspaceOneInput {
+  /**
+   * Compliance Status
+   */
+  compliance_status: 'compliant' | 'noncompliant' | 'unknown';
+
+  /**
+   * Posture Integration ID.
+   */
+  connection_id: string;
+}
+
+export interface WorkspaceOneInputParam {
   /**
    * Compliance Status
    */
@@ -578,12 +944,12 @@ export interface PostureCreateParams {
   /**
    * Body param: The value to be checked against.
    */
-  input?: DeviceInput;
+  input?: DeviceInputParam;
 
   /**
    * Body param: The conditions that the client must match to run the rule.
    */
-  match?: Array<DeviceMatch>;
+  match?: Array<DeviceMatchParam>;
 
   /**
    * Body param: Polling frequency for the WARP client posture check. Default: `5m`
@@ -641,12 +1007,12 @@ export interface PostureUpdateParams {
   /**
    * Body param: The value to be checked against.
    */
-  input?: DeviceInput;
+  input?: DeviceInputParam;
 
   /**
    * Body param: The conditions that the client must match to run the rule.
    */
-  match?: Array<DeviceMatch>;
+  match?: Array<DeviceMatchParam>;
 
   /**
    * Body param: Polling frequency for the WARP client posture check. Default: `5m`
@@ -660,15 +1026,7 @@ export interface PostureListParams {
 }
 
 export interface PostureDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface PostureGetParams {

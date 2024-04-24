@@ -50,12 +50,12 @@ export class CustomCertificates extends APIResource {
     params: CustomCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCertificateDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
+      this._client.delete(
+        `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -197,6 +197,19 @@ export interface GeoRestrictions {
   label?: 'us' | 'eu' | 'highest_security';
 }
 
+/**
+ * Specify the region where your private key can be held locally for optimal TLS
+ * performance. HTTPS connections to any excluded data center will still be fully
+ * encrypted, but will incur some latency while Keyless SSL is used to complete the
+ * handshake with the nearest allowed data center. Options allow distribution to
+ * only to U.S. data centers, only to E.U. data centers, or only to highest
+ * security data centers. Default distribution is to all Cloudflare datacenters,
+ * for optimal performance.
+ */
+export interface GeoRestrictionsParam {
+  label?: 'us' | 'eu' | 'highest_security';
+}
+
 export type CustomCertificateCreateResponse = unknown | string | null;
 
 export interface CustomCertificateDeleteResponse {
@@ -232,7 +245,7 @@ export interface CustomCertificateCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.BundleMethod;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: Specify the region where your private key can be held locally for
@@ -243,7 +256,7 @@ export interface CustomCertificateCreateParams {
    * highest security data centers. Default distribution is to all Cloudflare
    * datacenters, for optimal performance.
    */
-  geo_restrictions?: GeoRestrictions;
+  geo_restrictions?: GeoRestrictionsParam;
 
   /**
    * Body param: Specify the policy that determines the region where your private key
@@ -284,14 +297,9 @@ export interface CustomCertificateListParams extends V4PagePaginationArrayParams
 
 export interface CustomCertificateDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CustomCertificateEditParams {
@@ -306,7 +314,7 @@ export interface CustomCertificateEditParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.BundleMethod;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).
@@ -322,7 +330,7 @@ export interface CustomCertificateEditParams {
    * highest security data centers. Default distribution is to all Cloudflare
    * datacenters, for optimal performance.
    */
-  geo_restrictions?: GeoRestrictions;
+  geo_restrictions?: GeoRestrictionsParam;
 
   /**
    * Body param: Specify the policy that determines the region where your private key

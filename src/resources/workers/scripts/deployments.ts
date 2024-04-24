@@ -51,6 +51,13 @@ export interface Deployment {
   'workers/message'?: string;
 }
 
+export interface DeploymentParam {
+  /**
+   * Human-readable message about the deployment.
+   */
+  'workers/message'?: string;
+}
+
 export interface DeploymentCreateResponse {
   id?: string;
 
@@ -94,7 +101,7 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  annotations?: Deployment;
+  annotations?: DeploymentParam;
 
   /**
    * Body param:

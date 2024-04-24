@@ -64,7 +64,6 @@ describe('resource outgoing', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.outgoing.delete({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -79,7 +78,6 @@ describe('resource outgoing', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.outgoing.delete({
       zone_id: '269d8f4853475ca241c4e730be286b20',
-      body: {},
     });
   });
 

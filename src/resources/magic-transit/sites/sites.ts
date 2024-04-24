@@ -55,12 +55,11 @@ export class Sites extends APIResource {
    * Remove a specific Site.
    */
   delete(siteId: string, params: SiteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: Site }>
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
+        result: Site;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -129,6 +128,21 @@ export interface SiteLocation {
   lon?: string;
 }
 
+/**
+ * Location of site in latitude and longitude.
+ */
+export interface SiteLocationParam {
+  /**
+   * Latitude
+   */
+  lat?: string;
+
+  /**
+   * Longitude
+   */
+  lon?: string;
+}
+
 export interface SiteCreateParams {
   /**
    * Path param: Identifier
@@ -159,7 +173,7 @@ export interface SiteCreateParams {
   /**
    * Body param: Location of site in latitude and longitude.
    */
-  location?: SiteLocation;
+  location?: SiteLocationParam;
 
   /**
    * Body param: Magic WAN Connector identifier tag. Used when high availability mode
@@ -187,7 +201,7 @@ export interface SiteUpdateParams {
   /**
    * Body param: Location of site in latitude and longitude.
    */
-  location?: SiteLocation;
+  location?: SiteLocationParam;
 
   /**
    * Body param: The name of the site.
@@ -215,14 +229,9 @@ export interface SiteListParams {
 
 export interface SiteDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface SiteGetParams {

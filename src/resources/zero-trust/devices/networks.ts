@@ -59,12 +59,12 @@ export class Networks extends APIResource {
     params: NetworkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NetworkDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/devices/networks/${networkId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>
+      this._client.delete(
+        `/accounts/${account_id}/devices/networks/${networkId}`,
+        options,
+      ) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -226,15 +226,7 @@ export interface NetworkListParams {
 }
 
 export interface NetworkDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface NetworkGetParams {

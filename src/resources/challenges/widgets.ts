@@ -172,6 +172,12 @@ export interface Widget {
 export type WidgetDomain = string;
 
 /**
+ * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
+ * only work on these domains, and their subdomains.
+ */
+export type WidgetDomainParam = string;
+
+/**
  * A Turnstile Widgets configuration as it appears in listings
  */
 export interface WidgetListResponse {
@@ -236,7 +242,7 @@ export interface WidgetCreateParams {
   /**
    * Body param:
    */
-  domains: Array<WidgetDomain>;
+  domains: Array<WidgetDomainParam>;
 
   /**
    * Body param: Widget Mode
@@ -303,7 +309,7 @@ export interface WidgetUpdateParams {
   /**
    * Body param:
    */
-  domains: Array<WidgetDomain>;
+  domains: Array<WidgetDomainParam>;
 
   /**
    * Body param: Widget Mode

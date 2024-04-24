@@ -54,10 +54,10 @@ export class Deployments extends APIResource {
     params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
-      { body: body, ...options },
+      options,
     );
   }
 
@@ -146,14 +146,9 @@ export interface DeploymentListParams {
 
 export interface DeploymentDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface DeploymentGetParams {

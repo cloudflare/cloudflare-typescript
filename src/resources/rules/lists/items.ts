@@ -78,12 +78,11 @@ export class Items extends APIResource {
     params: ItemDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ItemDeleteResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ItemDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, options) as Core.APIPromise<{
+        result: ItemDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -177,7 +176,7 @@ export namespace ItemCreateParams {
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: ListsAPI.Hostname;
+    hostname?: ListsAPI.HostnameParam;
 
     /**
      * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
@@ -188,7 +187,7 @@ export namespace ItemCreateParams {
     /**
      * The definition of the redirect.
      */
-    redirect?: ListsAPI.Redirect;
+    redirect?: ListsAPI.RedirectParam;
   }
 }
 
@@ -220,7 +219,7 @@ export namespace ItemUpdateParams {
      * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
      * 0 to 9, wildcards (\*), and the hyphen (-).
      */
-    hostname?: ListsAPI.Hostname;
+    hostname?: ListsAPI.HostnameParam;
 
     /**
      * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
@@ -231,7 +230,7 @@ export namespace ItemUpdateParams {
     /**
      * The definition of the redirect.
      */
-    redirect?: ListsAPI.Redirect;
+    redirect?: ListsAPI.RedirectParam;
   }
 }
 
@@ -251,23 +250,9 @@ export interface ItemListParams extends CursorPaginationParams {
 
 export interface ItemDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  items?: Array<ItemDeleteParams.Item>;
-}
-
-export namespace ItemDeleteParams {
-  export interface Item {
-    /**
-     * The unique ID of the item in the List.
-     */
-    id?: string;
-  }
 }
 
 export namespace Items {

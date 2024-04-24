@@ -30,11 +30,11 @@ export class Accounts extends APIResource {
     params: AccountDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-        { body: body, ...options },
+        options,
       ) as Core.APIPromise<{ result: AccountDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -58,14 +58,9 @@ export interface AccountUpdateParams {
 
 export interface AccountDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export namespace Accounts {

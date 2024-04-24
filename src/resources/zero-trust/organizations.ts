@@ -162,6 +162,33 @@ export interface LoginDesign {
   text_color?: string;
 }
 
+export interface LoginDesignParam {
+  /**
+   * The background color on your login page.
+   */
+  background_color?: string;
+
+  /**
+   * The text at the bottom of your login page.
+   */
+  footer_text?: string;
+
+  /**
+   * The text at the top of your login page.
+   */
+  header_text?: string;
+
+  /**
+   * The URL of the logo on your login page.
+   */
+  logo_path?: string;
+
+  /**
+   * The text color on your login page.
+   */
+  text_color?: string;
+}
+
 export interface Organization {
   /**
    * When set to true, users can authenticate via WARP for any application in your
@@ -289,7 +316,7 @@ export interface OrganizationCreateParams {
   /**
    * Body param:
    */
-  login_design?: LoginDesign;
+  login_design?: LoginDesignParam;
 
   /**
    * Body param: The amount of time that tokens issued for applications will be
@@ -366,7 +393,7 @@ export interface OrganizationUpdateParams {
   /**
    * Body param:
    */
-  login_design?: LoginDesign;
+  login_design?: LoginDesignParam;
 
   /**
    * Body param: The name of your Zero Trust organization.

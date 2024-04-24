@@ -112,11 +112,10 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.spectrum.apps.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'ea95132c15732412d22c1476fa83f27a',
-      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -128,12 +127,15 @@ describe('resource apps', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.spectrum.apps.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'ea95132c15732412d22c1476fa83f27a',
-      {},
-    );
+  test.skip('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.spectrum.apps.delete(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        'ea95132c15732412d22c1476fa83f27a',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

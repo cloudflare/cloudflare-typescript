@@ -9,7 +9,6 @@ export {
   OverrideCreateParams,
   OverrideUpdateParams,
   OverrideListParams,
-  OverrideDeleteParams,
   OverridesV4PagePaginationArray,
   Overrides,
 } from './overrides';

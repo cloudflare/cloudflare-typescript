@@ -4,7 +4,6 @@ export {
   Hostname,
   HostnameDeleteResponse,
   HostnameCreateParams,
-  HostnameDeleteParams,
   HostnameEditParams,
   HostnamesSinglePage,
   Hostnames,

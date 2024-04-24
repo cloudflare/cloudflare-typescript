@@ -66,12 +66,12 @@ export class WANs extends APIResource {
     params: WANDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WAN> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: WAN }>
+      this._client.delete(
+        `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
+        options,
+      ) as Core.APIPromise<{ result: WAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -149,6 +149,27 @@ export interface WANStaticAddressing {
   secondary_address?: string;
 }
 
+/**
+ * (optional) if omitted, use DHCP. Submit secondary_address when site is in high
+ * availability mode.
+ */
+export interface WANStaticAddressingParam {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  address: string;
+
+  /**
+   * A valid IPv4 address.
+   */
+  gateway_address: string;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  secondary_address?: string;
+}
+
 export type WANCreateResponse = Array<WAN>;
 
 export interface WANCreateParams {
@@ -181,7 +202,7 @@ export interface WANCreateParams {
    * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
    * is in high availability mode.
    */
-  static_addressing?: WANStaticAddressing;
+  static_addressing?: WANStaticAddressingParam;
 }
 
 export interface WANUpdateParams {
@@ -209,7 +230,7 @@ export interface WANUpdateParams {
    * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
    * is in high availability mode.
    */
-  static_addressing?: WANStaticAddressing;
+  static_addressing?: WANStaticAddressingParam;
 
   /**
    * Body param: VLAN port number.
@@ -226,14 +247,9 @@ export interface WANListParams {
 
 export interface WANDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface WANGetParams {

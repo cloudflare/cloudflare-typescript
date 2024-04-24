@@ -59,12 +59,11 @@ export class Healthchecks extends APIResource {
     params: HealthcheckDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HealthcheckDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: HealthcheckDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
+        result: HealthcheckDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -112,6 +111,29 @@ export class HealthchecksSinglePage extends SinglePage<Healthcheck> {}
  * and ENTERPRISE customers only).
  */
 export type CheckRegion =
+  | 'WNAM'
+  | 'ENAM'
+  | 'WEU'
+  | 'EEU'
+  | 'NSAM'
+  | 'SSAM'
+  | 'OC'
+  | 'ME'
+  | 'NAF'
+  | 'SAF'
+  | 'IN'
+  | 'SEAS'
+  | 'NEAS'
+  | 'ALL_REGIONS';
+
+/**
+ * WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe,
+ * EEU: Eastern Europe, NSAM: Northern South America, SSAM: Southern South America,
+ * OC: Oceania, ME: Middle East, NAF: North Africa, SAF: South Africa, IN: India,
+ * SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (BUSINESS
+ * and ENTERPRISE customers only).
+ */
+export type CheckRegionParam =
   | 'WNAM'
   | 'ENAM'
   | 'WEU'
@@ -270,6 +292,55 @@ export interface HTTPConfiguration {
   port?: number;
 }
 
+/**
+ * Parameters specific to an HTTP or HTTPS health check.
+ */
+export interface HTTPConfigurationParam {
+  /**
+   * Do not validate the certificate when the health check uses HTTPS.
+   */
+  allow_insecure?: boolean;
+
+  /**
+   * A case-insensitive sub-string to look for in the response body. If this string
+   * is not found, the origin will be marked as unhealthy.
+   */
+  expected_body?: string;
+
+  /**
+   * The expected HTTP response codes (e.g. "200") or code ranges (e.g. "2xx" for all
+   * codes starting with 2) of the health check.
+   */
+  expected_codes?: Array<string> | null;
+
+  /**
+   * Follow redirects if the origin returns a 3xx status code.
+   */
+  follow_redirects?: boolean;
+
+  /**
+   * The HTTP request headers to send in the health check. It is recommended you set
+   * a Host header by default. The User-Agent header cannot be overridden.
+   */
+  header?: unknown | null;
+
+  /**
+   * The HTTP method to use for the health check.
+   */
+  method?: 'GET' | 'HEAD';
+
+  /**
+   * The endpoint path to health check against.
+   */
+  path?: string;
+
+  /**
+   * Port number to connect to for the health check. Defaults to 80 if type is HTTP
+   * or 443 if type is HTTPS.
+   */
+  port?: number;
+}
+
 export interface QueryHealthcheck {
   /**
    * The hostname or IP address of the origin server to run health checks on.
@@ -360,6 +431,21 @@ export interface TCPConfiguration {
   port?: number;
 }
 
+/**
+ * Parameters specific to TCP health check.
+ */
+export interface TCPConfigurationParam {
+  /**
+   * The TCP connection method to use for the health check.
+   */
+  method?: 'connection_established';
+
+  /**
+   * Port number to connect to for the health check. Defaults to 80.
+   */
+  port?: number;
+}
+
 export interface HealthcheckDeleteResponse {
   /**
    * Identifier
@@ -389,7 +475,7 @@ export interface HealthcheckCreateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<CheckRegion> | null;
+  check_regions?: Array<CheckRegionParam> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -411,7 +497,7 @@ export interface HealthcheckCreateParams {
   /**
    * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
-  http_config?: HTTPConfiguration | null;
+  http_config?: HTTPConfigurationParam | null;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may give
@@ -434,7 +520,7 @@ export interface HealthcheckCreateParams {
   /**
    * Body param: Parameters specific to TCP health check.
    */
-  tcp_config?: TCPConfiguration | null;
+  tcp_config?: TCPConfigurationParam | null;
 
   /**
    * Body param: The timeout (in seconds) before marking the health check as failed.
@@ -470,7 +556,7 @@ export interface HealthcheckUpdateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<CheckRegion> | null;
+  check_regions?: Array<CheckRegionParam> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -492,7 +578,7 @@ export interface HealthcheckUpdateParams {
   /**
    * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
-  http_config?: HTTPConfiguration | null;
+  http_config?: HTTPConfigurationParam | null;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may give
@@ -515,7 +601,7 @@ export interface HealthcheckUpdateParams {
   /**
    * Body param: Parameters specific to TCP health check.
    */
-  tcp_config?: TCPConfiguration | null;
+  tcp_config?: TCPConfigurationParam | null;
 
   /**
    * Body param: The timeout (in seconds) before marking the health check as failed.
@@ -548,14 +634,9 @@ export interface HealthcheckListParams {
 
 export interface HealthcheckDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface HealthcheckEditParams {
@@ -580,7 +661,7 @@ export interface HealthcheckEditParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<CheckRegion> | null;
+  check_regions?: Array<CheckRegionParam> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -602,7 +683,7 @@ export interface HealthcheckEditParams {
   /**
    * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
-  http_config?: HTTPConfiguration | null;
+  http_config?: HTTPConfigurationParam | null;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may give
@@ -625,7 +706,7 @@ export interface HealthcheckEditParams {
   /**
    * Body param: Parameters specific to TCP health check.
    */
-  tcp_config?: TCPConfiguration | null;
+  tcp_config?: TCPConfigurationParam | null;
 
   /**
    * Body param: The timeout (in seconds) before marking the health check as failed.

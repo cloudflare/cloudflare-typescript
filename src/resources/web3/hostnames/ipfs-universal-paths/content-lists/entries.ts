@@ -63,13 +63,12 @@ export class Entries extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     contentListEntryIdentifier: string,
-    body: EntryDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EntryDeleteResponse | null> {
     return (
       this._client.delete(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
-        { body, ...options },
+        options,
       ) as Core.APIPromise<{ result: EntryDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -258,8 +257,6 @@ export interface EntryUpdateParams {
   description?: string;
 }
 
-export type EntryDeleteParams = unknown;
-
 export namespace Entries {
   export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
   export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
@@ -268,5 +265,4 @@ export namespace Entries {
   export import EntryGetResponse = EntriesAPI.EntryGetResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
   export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
-  export import EntryDeleteParams = EntriesAPI.EntryDeleteParams;
 }

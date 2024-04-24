@@ -27,12 +27,11 @@ export class CustomNameservers extends APIResource {
     params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomNameserverDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{
+        result: CustomNameserverDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -154,14 +153,9 @@ export interface CustomNameserverCreateParams {
 
 export interface CustomNameserverDeleteParams {
   /**
-   * Path param: Account identifier tag.
+   * Account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CustomNameserverAvailabiltyParams {

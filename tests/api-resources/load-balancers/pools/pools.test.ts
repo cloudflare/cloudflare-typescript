@@ -173,7 +173,6 @@ describe('resource pools', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -188,7 +187,6 @@ describe('resource pools', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 
