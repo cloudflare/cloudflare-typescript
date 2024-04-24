@@ -47,9 +47,31 @@ export interface CatchAllAction {
 }
 
 /**
+ * Action for the catch-all routing rule.
+ */
+export interface CatchAllActionParam {
+  /**
+   * Type of action for catch-all rule.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value?: Array<string>;
+}
+
+/**
  * Matcher for catch-all routing rule.
  */
 export interface CatchAllMatcher {
+  /**
+   * Type of matcher. Default is 'all'.
+   */
+  type: 'all';
+}
+
+/**
+ * Matcher for catch-all routing rule.
+ */
+export interface CatchAllMatcherParam {
   /**
    * Type of matcher. Default is 'all'.
    */
@@ -124,12 +146,12 @@ export interface CatchAllUpdateParams {
   /**
    * List actions for the catch-all routing rule.
    */
-  actions: Array<CatchAllAction>;
+  actions: Array<CatchAllActionParam>;
 
   /**
    * List of matchers for the catch-all routing rule.
    */
-  matchers: Array<CatchAllMatcher>;
+  matchers: Array<CatchAllMatcherParam>;
 
   /**
    * Routing rule status.

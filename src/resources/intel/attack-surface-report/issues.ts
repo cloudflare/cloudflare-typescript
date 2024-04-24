@@ -84,8 +84,6 @@ export class Issues extends APIResource {
 
 export class IssueListResponsesV4PagePagination extends V4PagePagination<IssueListResponse> {}
 
-export type IssueClass = Array<string>;
-
 export type IssueType =
   | 'compliance_violation'
   | 'email_security'
@@ -93,11 +91,16 @@ export type IssueType =
   | 'insecure_configuration'
   | 'weak_authentication';
 
-export type Product = Array<string>;
+export type IssueTypeParam =
+  | 'compliance_violation'
+  | 'email_security'
+  | 'exposed_infrastructure'
+  | 'insecure_configuration'
+  | 'weak_authentication';
 
 export type SeverityQueryParam = 'low' | 'moderate' | 'critical';
 
-export type Subject = Array<string>;
+export type SeverityQueryParamParam = 'low' | 'moderate' | 'critical';
 
 export interface IssueListResponse {
   errors: Array<Shared.ResponseInfo>;
@@ -210,52 +213,52 @@ export interface IssueListParams extends V4PagePaginationParams {
   /**
    * Query param:
    */
-  issue_class?: IssueClass;
+  issue_class?: Array<string>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: IssueClass;
+  'issue_class~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<IssueType>;
+  issue_type?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<IssueType>;
+  'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  product?: Product;
+  product?: Array<string>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Product;
+  'product~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  severity?: Array<SeverityQueryParam>;
+  severity?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<SeverityQueryParam>;
+  'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  subject?: Subject;
+  subject?: Array<string>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Subject;
+  'subject~neq'?: Array<string>;
 }
 
 export interface IssueClassParams {
@@ -272,52 +275,52 @@ export interface IssueClassParams {
   /**
    * Query param:
    */
-  issue_class?: IssueClass;
+  issue_class?: Array<string>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: IssueClass;
+  'issue_class~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<IssueType>;
+  issue_type?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<IssueType>;
+  'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  product?: Product;
+  product?: Array<string>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Product;
+  'product~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  severity?: Array<SeverityQueryParam>;
+  severity?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<SeverityQueryParam>;
+  'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  subject?: Subject;
+  subject?: Array<string>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Subject;
+  'subject~neq'?: Array<string>;
 }
 
 export interface IssueDismissParams {
@@ -346,52 +349,52 @@ export interface IssueSeverityParams {
   /**
    * Query param:
    */
-  issue_class?: IssueClass;
+  issue_class?: Array<string>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: IssueClass;
+  'issue_class~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<IssueType>;
+  issue_type?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<IssueType>;
+  'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  product?: Product;
+  product?: Array<string>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Product;
+  'product~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  severity?: Array<SeverityQueryParam>;
+  severity?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<SeverityQueryParam>;
+  'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  subject?: Subject;
+  subject?: Array<string>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Subject;
+  'subject~neq'?: Array<string>;
 }
 
 export interface IssueTypeParams {
@@ -408,60 +411,57 @@ export interface IssueTypeParams {
   /**
    * Query param:
    */
-  issue_class?: IssueClass;
+  issue_class?: Array<string>;
 
   /**
    * Query param:
    */
-  'issue_class~neq'?: IssueClass;
+  'issue_class~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  issue_type?: Array<IssueType>;
+  issue_type?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  'issue_type~neq'?: Array<IssueType>;
+  'issue_type~neq'?: Array<IssueTypeParam>;
 
   /**
    * Query param:
    */
-  product?: Product;
+  product?: Array<string>;
 
   /**
    * Query param:
    */
-  'product~neq'?: Product;
+  'product~neq'?: Array<string>;
 
   /**
    * Query param:
    */
-  severity?: Array<SeverityQueryParam>;
+  severity?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  'severity~neq'?: Array<SeverityQueryParam>;
+  'severity~neq'?: Array<SeverityQueryParamParam>;
 
   /**
    * Query param:
    */
-  subject?: Subject;
+  subject?: Array<string>;
 
   /**
    * Query param:
    */
-  'subject~neq'?: Subject;
+  'subject~neq'?: Array<string>;
 }
 
 export namespace Issues {
-  export import IssueClass = IssuesAPI.IssueClass;
   export import IssueType = IssuesAPI.IssueType;
-  export import Product = IssuesAPI.Product;
   export import SeverityQueryParam = IssuesAPI.SeverityQueryParam;
-  export import Subject = IssuesAPI.Subject;
   export import IssueListResponse = IssuesAPI.IssueListResponse;
   export import IssueClassResponse = IssuesAPI.IssueClassResponse;
   export import IssueDismissResponse = IssuesAPI.IssueDismissResponse;

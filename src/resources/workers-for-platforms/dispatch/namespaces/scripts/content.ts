@@ -79,7 +79,7 @@ export interface ContentUpdateParams {
    * Body param: JSON encoded metadata about the uploaded parts and Worker
    * configuration.
    */
-  metadata?: WorkersAPI.WorkerMetadata;
+  metadata?: WorkersAPI.WorkerMetadataParam;
 
   /**
    * Header param: The multipart name of a script upload part containing script

@@ -28,12 +28,11 @@ export class Keys extends APIResource {
     params: KeyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeyDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: KeyDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/stream/keys/${identifier}`, options) as Core.APIPromise<{
+        result: KeyDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -104,14 +103,9 @@ export interface KeyCreateParams {
 
 export interface KeyDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface KeyGetParams {

@@ -55,12 +55,12 @@ export class Locations extends APIResource {
     params: LocationDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LocationDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/gateway/locations/${locationId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: LocationDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/gateway/locations/${locationId}`,
+        options,
+      ) as Core.APIPromise<{ result: LocationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -132,6 +132,13 @@ export interface LocationNetwork {
   network: string;
 }
 
+export interface LocationNetworkParam {
+  /**
+   * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
+   */
+  network: string;
+}
+
 export type LocationDeleteResponse = unknown | string | null;
 
 export interface LocationCreateParams {
@@ -159,7 +166,7 @@ export interface LocationCreateParams {
    * Body param: A list of network ranges that requests from this location would
    * originate from.
    */
-  networks?: Array<LocationNetwork>;
+  networks?: Array<LocationNetworkParam>;
 }
 
 export interface LocationUpdateParams {
@@ -187,7 +194,7 @@ export interface LocationUpdateParams {
    * Body param: A list of network ranges that requests from this location would
    * originate from.
    */
-  networks?: Array<LocationNetwork>;
+  networks?: Array<LocationNetworkParam>;
 }
 
 export interface LocationListParams {
@@ -195,15 +202,7 @@ export interface LocationListParams {
 }
 
 export interface LocationDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface LocationGetParams {

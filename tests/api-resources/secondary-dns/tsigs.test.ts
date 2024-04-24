@@ -93,7 +93,6 @@ describe('resource tsigs', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -108,7 +107,6 @@ describe('resource tsigs', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
     });
   });
 

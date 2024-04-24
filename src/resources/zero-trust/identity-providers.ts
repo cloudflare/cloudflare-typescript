@@ -301,6 +301,18 @@ export interface GenericOAuthConfig {
   client_secret?: string;
 }
 
+export interface GenericOAuthConfigParam {
+  /**
+   * Your OAuth Client ID
+   */
+  client_id?: string;
+
+  /**
+   * Your OAuth Client Secret
+   */
+  client_secret?: string;
+}
+
 export type IdentityProvider =
   | AzureAD
   | IdentityProvider.AccessCentrify
@@ -1076,10 +1088,69 @@ export type IdentityProviderType =
   | 'yandex';
 
 /**
+ * The type of identity provider. To determine the value for a specific provider,
+ * refer to our
+ * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+ */
+export type IdentityProviderTypeParam =
+  | 'onetimepin'
+  | 'azureAD'
+  | 'saml'
+  | 'centrify'
+  | 'facebook'
+  | 'github'
+  | 'google-apps'
+  | 'google'
+  | 'linkedin'
+  | 'oidc'
+  | 'okta'
+  | 'onelogin'
+  | 'pingone'
+  | 'yandex';
+
+/**
  * The configuration settings for enabling a System for Cross-Domain Identity
  * Management (SCIM) with the identity provider.
  */
 export interface ScimConfig {
+  /**
+   * A flag to enable or disable SCIM for the identity provider.
+   */
+  enabled?: boolean;
+
+  /**
+   * A flag to revoke a user's session in Access and force a reauthentication on the
+   * user's Gateway session when they have been added or removed from a group in the
+   * Identity Provider.
+   */
+  group_member_deprovision?: boolean;
+
+  /**
+   * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+   * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+   * enabled.
+   */
+  seat_deprovision?: boolean;
+
+  /**
+   * A read-only token generated when the SCIM integration is enabled for the first
+   * time. It is redacted on subsequent requests. If you lose this you will need to
+   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+   */
+  secret?: string;
+
+  /**
+   * A flag to enable revoking a user's session in Access and Gateway when they have
+   * been deprovisioned in the Identity Provider.
+   */
+  user_deprovision?: boolean;
+}
+
+/**
+ * The configuration settings for enabling a System for Cross-Domain Identity
+ * Management (SCIM) with the identity provider.
+ */
+export interface ScimConfigParam {
   /**
    * A flag to enable or disable SCIM for the identity provider.
    */
@@ -1875,7 +1946,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -1893,7 +1964,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AzureAD {
@@ -1970,7 +2041,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -1988,7 +2059,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessCentrify {
@@ -2036,7 +2107,7 @@ export namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2048,7 +2119,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2066,7 +2137,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessGitHub {
@@ -2075,7 +2146,7 @@ export namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2087,7 +2158,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2105,7 +2176,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessGoogle {
@@ -2126,7 +2197,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2144,7 +2215,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessGoogle {
@@ -2194,7 +2265,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2212,7 +2283,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessGoogleApps {
@@ -2255,7 +2326,7 @@ export namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2267,7 +2338,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2285,7 +2356,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessOIDC {
@@ -2306,7 +2377,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2324,7 +2395,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessOIDC {
@@ -2394,7 +2465,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2412,7 +2483,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessOkta {
@@ -2472,7 +2543,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2490,7 +2561,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessOnelogin {
@@ -2545,7 +2616,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2563,7 +2634,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessPingone {
@@ -2618,7 +2689,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2636,7 +2707,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessSAML {
@@ -2706,7 +2777,7 @@ export namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2718,7 +2789,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2736,7 +2807,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessOnetimepin {
@@ -2757,7 +2828,7 @@ export namespace IdentityProviderCreateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2775,7 +2846,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 }
 
@@ -2814,7 +2885,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2832,7 +2903,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AzureAD {
@@ -2909,7 +2980,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2927,7 +2998,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessCentrify {
@@ -2975,7 +3046,7 @@ export namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2987,7 +3058,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3005,7 +3076,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessGitHub {
@@ -3014,7 +3085,7 @@ export namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3026,7 +3097,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3044,7 +3115,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessGoogle {
@@ -3065,7 +3136,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3083,7 +3154,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessGoogle {
@@ -3133,7 +3204,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3151,7 +3222,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessGoogleApps {
@@ -3194,7 +3265,7 @@ export namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3206,7 +3277,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3224,7 +3295,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessOIDC {
@@ -3245,7 +3316,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3263,7 +3334,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessOIDC {
@@ -3333,7 +3404,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3351,7 +3422,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessOkta {
@@ -3411,7 +3482,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3429,7 +3500,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessOnelogin {
@@ -3484,7 +3555,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3502,7 +3573,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessPingone {
@@ -3557,7 +3628,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3575,7 +3646,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export namespace AccessSAML {
@@ -3645,7 +3716,7 @@ export namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: GenericOAuthConfig;
+    config: GenericOAuthConfigParam;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3657,7 +3728,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3675,7 +3746,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 
   export interface AccessOnetimepin {
@@ -3696,7 +3767,7 @@ export namespace IdentityProviderUpdateParams {
      * provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    type: IdentityProviderType;
+    type: IdentityProviderTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3714,7 +3785,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: ScimConfig;
+    scim_config?: ScimConfigParam;
   }
 }
 

@@ -39,6 +39,18 @@ export interface RequestModel {
   enabled?: boolean;
 }
 
+export interface RequestModelParam {
+  /**
+   * Human-readable identifier of the Managed Transform.
+   */
+  id?: string;
+
+  /**
+   * When true, the Managed Transform is enabled.
+   */
+  enabled?: boolean;
+}
+
 export interface ManagedHeaderListResponse {
   managed_request_headers?: Array<RequestModel>;
 
@@ -103,10 +115,10 @@ export interface ManagedHeaderEditParams {
   /**
    * Body param:
    */
-  managed_request_headers: Array<RequestModel>;
+  managed_request_headers: Array<RequestModelParam>;
 
   /**
    * Body param:
    */
-  managed_response_headers: Array<RequestModel>;
+  managed_response_headers: Array<RequestModelParam>;
 }

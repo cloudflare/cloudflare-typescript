@@ -190,7 +190,6 @@ describe('resource items', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.rules.lists.items.delete('2c0fc9fa937b11eaa1b71c4d701ab86e', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      items: [{ id: '34b12448945f11eaa1b71c4d701ab86e' }],
     });
   });
 

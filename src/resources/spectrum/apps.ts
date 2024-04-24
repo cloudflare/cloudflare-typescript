@@ -73,11 +73,10 @@ export class Apps extends APIResource {
   delete(
     zone: string,
     appId: string,
-    body: AppDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppDeleteResponse | null> {
     return (
-      this._client.delete(`/zones/${zone}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
         result: AppDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -274,12 +273,12 @@ export interface AppCreateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns: SpectrumAPI.DNS;
+  dns: SpectrumAPI.DNSParam;
 
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns: SpectrumAPI.OriginDNS;
+  origin_dns: SpectrumAPI.OriginDNSParam;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -288,7 +287,7 @@ export interface AppCreateParams {
    * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
    * range must match the number of ports specified in the "protocol" field.
    */
-  origin_port: SpectrumAPI.OriginPort;
+  origin_port: SpectrumAPI.OriginPortParam;
 
   /**
    * The port configuration at Cloudflare’s edge. May specify a single port, for
@@ -305,7 +304,7 @@ export interface AppCreateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: SpectrumAPI.EdgeIPs;
+  edge_ips?: SpectrumAPI.EdgeIPsParam;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -340,12 +339,12 @@ export interface AppUpdateParams {
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  dns: SpectrumAPI.DNS;
+  dns: SpectrumAPI.DNSParam;
 
   /**
    * The name and type of DNS record for the Spectrum application.
    */
-  origin_dns: SpectrumAPI.OriginDNS;
+  origin_dns: SpectrumAPI.OriginDNSParam;
 
   /**
    * The destination port at the origin. Only specified in conjunction with
@@ -354,7 +353,7 @@ export interface AppUpdateParams {
    * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
    * range must match the number of ports specified in the "protocol" field.
    */
-  origin_port: SpectrumAPI.OriginPort;
+  origin_port: SpectrumAPI.OriginPortParam;
 
   /**
    * The port configuration at Cloudflare’s edge. May specify a single port, for
@@ -371,7 +370,7 @@ export interface AppUpdateParams {
   /**
    * The anycast edge IP configuration for the hostname of this application.
    */
-  edge_ips?: SpectrumAPI.EdgeIPs;
+  edge_ips?: SpectrumAPI.EdgeIPsParam;
 
   /**
    * Enables IP Access Rules for this application. Notes: Only available for TCP
@@ -414,8 +413,6 @@ export interface AppListParams extends V4PagePaginationArrayParams {
   order?: 'protocol' | 'app_id' | 'created_on' | 'modified_on' | 'dns';
 }
 
-export type AppDeleteParams = unknown;
-
 export namespace Apps {
   export import AppCreateResponse = AppsAPI.AppCreateResponse;
   export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
@@ -426,5 +423,4 @@ export namespace Apps {
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
-  export import AppDeleteParams = AppsAPI.AppDeleteParams;
 }

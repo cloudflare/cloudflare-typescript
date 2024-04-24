@@ -9,6 +9,5 @@ export {
   EntryGetResponse,
   EntryCreateParams,
   EntryUpdateParams,
-  EntryDeleteParams,
   Entries,
 } from './entries';

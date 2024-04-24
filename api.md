@@ -71,7 +71,7 @@ Methods:
 
 - <code title="post /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">create</a>({ ...params }) -> OriginCACertificateCreateResponse</code>
 - <code title="get /certificates">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">list</a>({ ...params }) -> OriginCACertificatesSinglePage</code>
-- <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateId, { ...params }) -> OriginCACertificateDeleteResponse</code>
+- <code title="delete /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">delete</a>(certificateId) -> OriginCACertificateDeleteResponse</code>
 - <code title="get /certificates/{certificate_id}">client.originCACertificates.<a href="./src/resources/origin-ca-certificates.ts">get</a>(certificateId) -> OriginCACertificateGetResponse</code>
 
 # IPs
@@ -99,7 +99,7 @@ Methods:
 
 - <code title="put /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(membershipId, { ...params }) -> MembershipUpdateResponse</code>
 - <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsV4PagePaginationArray</code>
-- <code title="delete /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">delete</a>(membershipId, { ...params }) -> MembershipDeleteResponse</code>
+- <code title="delete /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">delete</a>(membershipId) -> MembershipDeleteResponse</code>
 - <code title="get /memberships/{membership_id}">client.memberships.<a href="./src/resources/memberships.ts">get</a>(membershipId) -> MembershipGetResponse</code>
 
 # User
@@ -167,7 +167,7 @@ Types:
 Methods:
 
 - <code title="get /user/organizations">client.user.organizations.<a href="./src/resources/user/organizations.ts">list</a>({ ...params }) -> OrganizationsV4PagePaginationArray</code>
-- <code title="delete /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">delete</a>(organizationId, { ...params }) -> OrganizationDeleteResponse</code>
+- <code title="delete /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">delete</a>(organizationId) -> OrganizationDeleteResponse</code>
 - <code title="get /user/organizations/{organization_id}">client.user.organizations.<a href="./src/resources/user/organizations.ts">get</a>(organizationId) -> OrganizationGetResponse</code>
 
 ## Subscriptions
@@ -186,7 +186,7 @@ Types:
 Methods:
 
 - <code title="put /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">update</a>(identifier, { ...params }) -> SubscriptionUpdateResponse</code>
-- <code title="delete /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">delete</a>(identifier, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="delete /user/subscriptions/{identifier}">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">delete</a>(identifier) -> SubscriptionDeleteResponse</code>
 - <code title="put /zones/{identifier}/subscription">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">edit</a>(identifier, { ...params }) -> SubscriptionEditResponse</code>
 - <code title="get /user/subscriptions">client.user.subscriptions.<a href="./src/resources/user/subscriptions.ts">get</a>() -> SubscriptionGetResponse | null</code>
 
@@ -209,7 +209,7 @@ Methods:
 - <code title="post /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
 - <code title="put /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> TokenUpdateResponse</code>
 - <code title="get /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
-- <code title="delete /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">delete</a>(tokenId, { ...params }) -> TokenDeleteResponse | null</code>
+- <code title="delete /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">delete</a>(tokenId) -> TokenDeleteResponse | null</code>
 - <code title="get /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">get</a>(tokenId) -> TokenGetResponse</code>
 - <code title="get /user/tokens/verify">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">verify</a>() -> TokenVerifyResponse</code>
 
@@ -1176,7 +1176,7 @@ Methods:
 - <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
 - <code title="put /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="get /accounts/{account_identifier}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">list</a>(accountIdentifier) -> SubscriptionsSinglePage</code>
-- <code title="delete /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="delete /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(accountIdentifier, subscriptionIdentifier) -> SubscriptionDeleteResponse</code>
 - <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # ACM
@@ -1552,7 +1552,7 @@ Methods:
 - <code title="post /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">create</a>(zoneIdentifier, { ...params }) -> FilterCreateResponse | null</code>
 - <code title="put /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">update</a>(zoneIdentifier, id, { ...params }) -> FirewallFilter</code>
 - <code title="get /zones/{zone_identifier}/filters">client.filters.<a href="./src/resources/filters.ts">list</a>(zoneIdentifier, { ...params }) -> FirewallFiltersV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(zoneIdentifier, id, { ...params }) -> FirewallFilter</code>
+- <code title="delete /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">delete</a>(zoneIdentifier, id) -> FirewallFilter</code>
 - <code title="get /zones/{zone_identifier}/filters/{id}">client.filters.<a href="./src/resources/filters.ts">get</a>(zoneIdentifier, id) -> FirewallFilter</code>
 
 # Firewall
@@ -1573,7 +1573,7 @@ Methods:
 - <code title="post /zones/{zone_identifier}/firewall/lockdowns">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">create</a>(zoneIdentifier, { ...params }) -> Lockdown</code>
 - <code title="put /zones/{zone_identifier}/firewall/lockdowns/{id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">update</a>(zoneIdentifier, id, { ...params }) -> Lockdown</code>
 - <code title="get /zones/{zone_identifier}/firewall/lockdowns">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">list</a>(zoneIdentifier, { ...params }) -> LockdownsV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/firewall/lockdowns/{id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">delete</a>(zoneIdentifier, id, { ...params }) -> LockdownDeleteResponse</code>
+- <code title="delete /zones/{zone_identifier}/firewall/lockdowns/{id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">delete</a>(zoneIdentifier, id) -> LockdownDeleteResponse</code>
 - <code title="get /zones/{zone_identifier}/firewall/lockdowns/{id}">client.firewall.lockdowns.<a href="./src/resources/firewall/lockdowns.ts">get</a>(zoneIdentifier, id) -> Lockdown</code>
 
 ## Rules
@@ -1591,7 +1591,7 @@ Methods:
 - <code title="post /zones/{zone_identifier}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">create</a>(zoneIdentifier, { ...params }) -> RuleCreateResponse | null</code>
 - <code title="put /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> FirewallRule</code>
 - <code title="get /zones/{zone_identifier}/firewall/rules">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">list</a>(zoneIdentifier, { ...params }) -> FirewallRulesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">delete</a>(zoneIdentifier, id, { ...params }) -> FirewallRule</code>
+- <code title="delete /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">delete</a>(zoneIdentifier, id) -> FirewallRule</code>
 - <code title="patch /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">edit</a>(zoneIdentifier, id, { ...params }) -> RuleEditResponse | null</code>
 - <code title="get /zones/{zone_identifier}/firewall/rules/{id}">client.firewall.rules.<a href="./src/resources/firewall/rules.ts">get</a>(zoneIdentifier, { ...params }) -> FirewallRule</code>
 
@@ -1633,7 +1633,7 @@ Methods:
 - <code title="post /zones/{zone_identifier}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">create</a>(zoneIdentifier, { ...params }) -> UARuleCreateResponse</code>
 - <code title="put /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">update</a>(zoneIdentifier, id, { ...params }) -> UARuleUpdateResponse</code>
 - <code title="get /zones/{zone_identifier}/firewall/ua_rules">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">list</a>(zoneIdentifier, { ...params }) -> UARuleListResponsesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">delete</a>(zoneIdentifier, id, { ...params }) -> UARuleDeleteResponse</code>
+- <code title="delete /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">delete</a>(zoneIdentifier, id) -> UARuleDeleteResponse</code>
 - <code title="get /zones/{zone_identifier}/firewall/ua_rules/{id}">client.firewall.uaRules.<a href="./src/resources/firewall/ua-rules.ts">get</a>(zoneIdentifier, id) -> UARuleGetResponse</code>
 
 ## WAF
@@ -1653,7 +1653,7 @@ Methods:
 - <code title="post /zones/{zone_identifier}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">create</a>(zoneIdentifier, { ...params }) -> Override</code>
 - <code title="put /zones/{zone_identifier}/firewall/waf/overrides/{id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">update</a>(zoneIdentifier, id, { ...params }) -> Override</code>
 - <code title="get /zones/{zone_identifier}/firewall/waf/overrides">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">list</a>(zoneIdentifier, { ...params }) -> OverridesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/firewall/waf/overrides/{id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">delete</a>(zoneIdentifier, id, { ...params }) -> OverrideDeleteResponse</code>
+- <code title="delete /zones/{zone_identifier}/firewall/waf/overrides/{id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">delete</a>(zoneIdentifier, id) -> OverrideDeleteResponse</code>
 - <code title="get /zones/{zone_identifier}/firewall/waf/overrides/{id}">client.firewall.waf.overrides.<a href="./src/resources/firewall/waf/overrides.ts">get</a>(zoneIdentifier, id) -> Override</code>
 
 ### Packages
@@ -1991,7 +1991,7 @@ Methods:
 
 - <code title="post /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">create</a>(zoneIdentifier, { ...params }) -> RateLimitCreateResponse</code>
 - <code title="get /zones/{zone_identifier}/rate_limits">client.rateLimits.<a href="./src/resources/rate-limits.ts">list</a>(zoneIdentifier, { ...params }) -> RateLimitsV4PagePaginationArray</code>
-- <code title="delete /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">delete</a>(zoneIdentifier, id, { ...params }) -> RateLimitDeleteResponse</code>
+- <code title="delete /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">delete</a>(zoneIdentifier, id) -> RateLimitDeleteResponse</code>
 - <code title="put /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">edit</a>(zoneIdentifier, id, { ...params }) -> RateLimitEditResponse</code>
 - <code title="get /zones/{zone_identifier}/rate_limits/{id}">client.rateLimits.<a href="./src/resources/rate-limits.ts">get</a>(zoneIdentifier, id) -> RateLimitGetResponse</code>
 
@@ -2211,7 +2211,7 @@ Methods:
 
 - <code title="post /zones/{zone_identifier}/web3/hostnames">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">create</a>(zoneIdentifier, { ...params }) -> Hostname</code>
 - <code title="get /zones/{zone_identifier}/web3/hostnames">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">list</a>(zoneIdentifier) -> HostnamesSinglePage</code>
-- <code title="delete /zones/{zone_identifier}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">delete</a>(zoneIdentifier, identifier, { ...params }) -> HostnameDeleteResponse | null</code>
+- <code title="delete /zones/{zone_identifier}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">delete</a>(zoneIdentifier, identifier) -> HostnameDeleteResponse | null</code>
 - <code title="patch /zones/{zone_identifier}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">edit</a>(zoneIdentifier, identifier, { ...params }) -> Hostname</code>
 - <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}">client.web3.hostnames.<a href="./src/resources/web3/hostnames/hostnames.ts">get</a>(zoneIdentifier, identifier) -> Hostname</code>
 
@@ -2243,7 +2243,7 @@ Methods:
 - <code title="post /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">create</a>(zoneIdentifier, identifier, { ...params }) -> EntryCreateResponse</code>
 - <code title="put /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">update</a>(zoneIdentifier, identifier, contentListEntryIdentifier, { ...params }) -> EntryUpdateResponse</code>
 - <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">list</a>(zoneIdentifier, identifier) -> EntryListResponse | null</code>
-- <code title="delete /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">delete</a>(zoneIdentifier, identifier, contentListEntryIdentifier, { ...params }) -> EntryDeleteResponse | null</code>
+- <code title="delete /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">delete</a>(zoneIdentifier, identifier, contentListEntryIdentifier) -> EntryDeleteResponse | null</code>
 - <code title="get /zones/{zone_identifier}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}">client.web3.hostnames.ipfsUniversalPaths.contentLists.entries.<a href="./src/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries.ts">get</a>(zoneIdentifier, identifier, contentListEntryIdentifier) -> EntryGetResponse</code>
 
 # Workers
@@ -2421,7 +2421,7 @@ Types:
 Methods:
 
 - <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk">client.kv.namespaces.bulk.<a href="./src/resources/kv/namespaces/bulk.ts">update</a>(namespaceId, [ ...body ]) -> BulkUpdateResponse</code>
-- <code title="delete /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk">client.kv.namespaces.bulk.<a href="./src/resources/kv/namespaces/bulk.ts">delete</a>(namespaceId, [ ...body ]) -> BulkDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk">client.kv.namespaces.bulk.<a href="./src/resources/kv/namespaces/bulk.ts">delete</a>(namespaceId, { ...params }) -> BulkDeleteResponse</code>
 
 ### Keys
 
@@ -2757,7 +2757,7 @@ Methods:
 - <code title="post /zones/{zone}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">create</a>(zone, { ...params }) -> AppCreateResponse | null</code>
 - <code title="put /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">update</a>(zone, appId, { ...params }) -> AppUpdateResponse | null</code>
 - <code title="get /zones/{zone}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">list</a>(zone, { ...params }) -> AppListResponsesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(zone, appId, { ...params }) -> AppDeleteResponse | null</code>
+- <code title="delete /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(zone, appId) -> AppDeleteResponse | null</code>
 - <code title="get /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(zone, appId) -> AppGetResponse</code>
 
 # Addressing
@@ -3206,11 +3206,8 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClass</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueType</a></code>
-- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">Product</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">SeverityQueryParam</a></code>
-- <code><a href="./src/resources/intel/attack-surface-report/issues.ts">Subject</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueListResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueClassResponse</a></code>
 - <code><a href="./src/resources/intel/attack-surface-report/issues.ts">IssueDismissResponse</a></code>
@@ -3290,8 +3287,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/magic-transit/routes.ts">ColoName</a></code>
-- <code><a href="./src/resources/magic-transit/routes.ts">ColoRegion</a></code>
 - <code><a href="./src/resources/magic-transit/routes.ts">Scope</a></code>
 - <code><a href="./src/resources/magic-transit/routes.ts">RouteCreateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/routes.ts">RouteUpdateResponse</a></code>
@@ -4519,7 +4514,7 @@ Methods:
 - <code title="post /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">create</a>(identifier, uuid, { ...params }) -> Bookmark</code>
 - <code title="put /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">update</a>(identifier, uuid, { ...params }) -> Bookmark</code>
 - <code title="get /accounts/{identifier}/access/bookmarks">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">list</a>(identifier) -> BookmarksSinglePage</code>
-- <code title="delete /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">delete</a>(identifier, uuid, { ...params }) -> BookmarkDeleteResponse</code>
+- <code title="delete /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">delete</a>(identifier, uuid) -> BookmarkDeleteResponse</code>
 - <code title="get /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">get</a>(identifier, uuid) -> Bookmark</code>
 
 ### Keys

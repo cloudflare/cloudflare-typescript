@@ -66,7 +66,6 @@ export {
   BookmarkDeleteResponse,
   BookmarkCreateParams,
   BookmarkUpdateParams,
-  BookmarkDeleteParams,
   BookmarksSinglePage,
   Bookmarks,
 } from './bookmarks';

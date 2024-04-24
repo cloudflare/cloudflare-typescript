@@ -502,7 +502,6 @@ describe('resource loadBalancers', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -517,7 +516,6 @@ describe('resource loadBalancers', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
   });
 

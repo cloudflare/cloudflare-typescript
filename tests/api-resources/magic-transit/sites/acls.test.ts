@@ -119,7 +119,7 @@ describe('resource acls', () => {
     const responsePromise = cloudflare.magicTransit.sites.acls.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -135,7 +135,7 @@ describe('resource acls', () => {
     const response = await cloudflare.magicTransit.sites.acls.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 

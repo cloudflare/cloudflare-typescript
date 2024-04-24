@@ -44,12 +44,11 @@ export class WARPConnector extends APIResource {
     params: WARPConnectorDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WARPConnectorDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/warp_connector/${tunnelId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: WARPConnectorDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/warp_connector/${tunnelId}`, options) as Core.APIPromise<{
+        result: WARPConnectorDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -782,14 +781,9 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
 
 export interface WARPConnectorDeleteParams {
   /**
-   * Path param: Cloudflare account ID
+   * Cloudflare account ID
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface WARPConnectorEditParams {

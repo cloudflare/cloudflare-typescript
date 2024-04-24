@@ -90,6 +90,11 @@ export interface Setting {
  */
 export type SettingValue = number | string | Array<string>;
 
+/**
+ * The tls setting value.
+ */
+export type SettingValueParam = number | string | Array<string>;
+
 export interface TLSDeleteResponse {
   /**
    * This is the time the tls setting was originally created for this hostname.
@@ -151,7 +156,7 @@ export interface TLSUpdateParams {
   /**
    * Body param: The tls setting value.
    */
-  value: SettingValue;
+  value: SettingValueParam;
 }
 
 export interface TLSDeleteParams {

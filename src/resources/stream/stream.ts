@@ -78,9 +78,8 @@ export class Stream extends APIResource {
     params: StreamDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, {
-      body: body,
       ...options,
       headers: { Accept: '*/*', ...options?.headers },
     });
@@ -102,6 +101,8 @@ export class Stream extends APIResource {
 export class VideosSinglePage extends SinglePage<Video> {}
 
 export type AllowedOrigins = string;
+
+export type AllowedOriginsParam = string;
 
 export interface Video {
   /**
@@ -382,14 +383,9 @@ export interface StreamListParams {
 
 export interface StreamDeleteParams {
   /**
-   * Path param: The account identifier tag.
+   * The account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface StreamGetParams {

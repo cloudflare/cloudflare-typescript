@@ -83,7 +83,6 @@ export namespace User {
   export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
-  export import OrganizationDeleteParams = OrganizationsAPI.OrganizationDeleteParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import RatePlan = SubscriptionsAPI.RatePlan;
   export import Subscription = SubscriptionsAPI.Subscription;
@@ -94,7 +93,6 @@ export namespace User {
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;
   export import CIDRList = TokensAPI.CIDRList;
@@ -110,5 +108,4 @@ export namespace User {
   export import TokenCreateParams = TokensAPI.TokenCreateParams;
   export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
   export import TokenListParams = TokensAPI.TokenListParams;
-  export import TokenDeleteParams = TokensAPI.TokenDeleteParams;
 }

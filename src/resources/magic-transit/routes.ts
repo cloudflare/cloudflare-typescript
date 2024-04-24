@@ -57,12 +57,12 @@ export class Routes extends APIResource {
     params: RouteDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RouteDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/routes/${routeIdentifier}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: RouteDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/magic/routes/${routeIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: RouteDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -70,9 +70,9 @@ export class Routes extends APIResource {
    * Delete multiple Magic static routes.
    */
   empty(params: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse> {
-    const { account_id, ...body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{
         result: RouteEmptyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -97,28 +97,33 @@ export class Routes extends APIResource {
 }
 
 /**
- * List of colo names for the ECMP scope.
- */
-export type ColoName = Array<string>;
-
-/**
- * List of colo regions for the ECMP scope.
- */
-export type ColoRegion = Array<string>;
-
-/**
  * Used only for ECMP routes.
  */
 export interface Scope {
   /**
    * List of colo names for the ECMP scope.
    */
-  colo_names?: ColoName;
+  colo_names?: Array<string>;
 
   /**
    * List of colo regions for the ECMP scope.
    */
-  colo_regions?: ColoRegion;
+  colo_regions?: Array<string>;
+}
+
+/**
+ * Used only for ECMP routes.
+ */
+export interface ScopeParam {
+  /**
+   * List of colo names for the ECMP scope.
+   */
+  colo_names?: Array<string>;
+
+  /**
+   * List of colo regions for the ECMP scope.
+   */
+  colo_regions?: Array<string>;
 }
 
 export interface RouteCreateResponse {
@@ -290,7 +295,7 @@ export interface RouteUpdateParams {
   /**
    * Body param: Used only for ECMP routes.
    */
-  scope?: Scope;
+  scope?: ScopeParam;
 
   /**
    * Body param: Optional weight of the ECMP scope - if provided.
@@ -307,30 +312,16 @@ export interface RouteListParams {
 
 export interface RouteDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface RouteEmptyParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  routes: Array<RouteEmptyParams.Route>;
-}
-
-export namespace RouteEmptyParams {
-  export interface Route {}
 }
 
 export interface RouteGetParams {
@@ -341,8 +332,6 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
-  export import ColoName = RoutesAPI.ColoName;
-  export import ColoRegion = RoutesAPI.ColoRegion;
   export import Scope = RoutesAPI.Scope;
   export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
   export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;

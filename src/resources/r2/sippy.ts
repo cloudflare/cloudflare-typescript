@@ -54,6 +54,8 @@ export class SippyResource extends APIResource {
 
 export type Provider = 'r2';
 
+export type ProviderParam = 'r2';
+
 export interface Sippy {
   /**
    * Details about the configured destination bucket
@@ -148,7 +150,7 @@ export namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: SippyAPI.Provider;
+      provider?: SippyAPI.ProviderParam;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"
@@ -221,7 +223,7 @@ export namespace SippyUpdateParams {
        */
       accessKeyId?: string;
 
-      provider?: SippyAPI.Provider;
+      provider?: SippyAPI.ProviderParam;
 
       /**
        * Value of a Cloudflare API token. This is the value labelled "Secret Access Key"

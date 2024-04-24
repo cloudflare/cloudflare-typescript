@@ -47,11 +47,11 @@ export class Certificates extends APIResource {
     params: CertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
-        { body: body, ...options },
+        options,
       ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -296,14 +296,9 @@ export interface CertificateListParams {
 
 export interface CertificateDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CertificateGetParams {

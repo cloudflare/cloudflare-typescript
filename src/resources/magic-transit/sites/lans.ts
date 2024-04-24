@@ -67,12 +67,12 @@ export class LANs extends APIResource {
     params: LANDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LAN> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: LAN }>
+      this._client.delete(
+        `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
+        options,
+      ) as Core.APIPromise<{ result: LAN }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -104,7 +104,36 @@ export interface DHCPRelay {
   server_addresses?: Array<string>;
 }
 
+export interface DHCPRelayParam {
+  /**
+   * List of DHCP server IPs.
+   */
+  server_addresses?: Array<string>;
+}
+
 export interface DHCPServer {
+  /**
+   * A valid IPv4 address.
+   */
+  dhcp_pool_end?: string;
+
+  /**
+   * A valid IPv4 address.
+   */
+  dhcp_pool_start?: string;
+
+  /**
+   * A valid IPv4 address.
+   */
+  dns_server?: string;
+
+  /**
+   * Mapping of MAC addresses to IP addresses
+   */
+  reservations?: Record<string, string>;
+}
+
+export interface DHCPServerParam {
   /**
    * A valid IPv4 address.
    */
@@ -190,7 +219,40 @@ export interface LANStaticAddressing {
   virtual_address?: string;
 }
 
+/**
+ * If the site is not configured in high availability mode, this configuration is
+ * optional (if omitted, use DHCP). However, if in high availability mode,
+ * static_address is required along with secondary and virtual address.
+ */
+export interface LANStaticAddressingParam {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  address: string;
+
+  dhcp_relay?: DHCPRelayParam;
+
+  dhcp_server?: DHCPServerParam;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  secondary_address?: string;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  virtual_address?: string;
+}
+
 export interface Nat {
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  static_prefix?: string;
+}
+
+export interface NatParam {
   /**
    * A valid CIDR notation representing an IP range.
    */
@@ -209,6 +271,20 @@ export interface RoutedSubnet {
   prefix: string;
 
   nat?: Nat;
+}
+
+export interface RoutedSubnetParam {
+  /**
+   * A valid IPv4 address.
+   */
+  next_hop: string;
+
+  /**
+   * A valid CIDR notation representing an IP range.
+   */
+  prefix: string;
+
+  nat?: NatParam;
 }
 
 export type LANCreateResponse = Array<LAN>;
@@ -243,12 +319,12 @@ export interface LANCreateParams {
   /**
    * Body param:
    */
-  nat?: Nat;
+  nat?: NatParam;
 
   /**
    * Body param:
    */
-  routed_subnets?: Array<RoutedSubnet>;
+  routed_subnets?: Array<RoutedSubnetParam>;
 
   /**
    * Body param: If the site is not configured in high availability mode, this
@@ -256,7 +332,7 @@ export interface LANCreateParams {
    * availability mode, static_address is required along with secondary and virtual
    * address.
    */
-  static_addressing?: LANStaticAddressing;
+  static_addressing?: LANStaticAddressingParam;
 }
 
 export interface LANUpdateParams {
@@ -273,7 +349,7 @@ export interface LANUpdateParams {
   /**
    * Body param:
    */
-  nat?: Nat;
+  nat?: NatParam;
 
   /**
    * Body param:
@@ -283,7 +359,7 @@ export interface LANUpdateParams {
   /**
    * Body param:
    */
-  routed_subnets?: Array<RoutedSubnet>;
+  routed_subnets?: Array<RoutedSubnetParam>;
 
   /**
    * Body param: If the site is not configured in high availability mode, this
@@ -291,7 +367,7 @@ export interface LANUpdateParams {
    * availability mode, static_address is required along with secondary and virtual
    * address.
    */
-  static_addressing?: LANStaticAddressing;
+  static_addressing?: LANStaticAddressingParam;
 
   /**
    * Body param: VLAN port number.
@@ -308,14 +384,9 @@ export interface LANListParams {
 
 export interface LANDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface LANGetParams {

@@ -87,7 +87,7 @@ describe('resource locations', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.gateway.locations.delete(
       'ed35569b41ce4d1facfe683550f54086',
-      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -102,7 +102,6 @@ describe('resource locations', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.gateway.locations.delete('ed35569b41ce4d1facfe683550f54086', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      body: {},
     });
   });
 

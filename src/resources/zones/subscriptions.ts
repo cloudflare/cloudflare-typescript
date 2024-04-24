@@ -58,7 +58,7 @@ export interface SubscriptionCreateParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionsAPI.SubscriptionComponent>;
+  component_values?: Array<SubscriptionsAPI.SubscriptionComponentParam>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -68,12 +68,12 @@ export interface SubscriptionCreateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionsAPI.RatePlan;
+  rate_plan?: SubscriptionsAPI.RatePlanParam;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionsAPI.SubscriptionZone;
+  zone?: SubscriptionsAPI.SubscriptionZoneParam;
 }
 
 export namespace SubscriptionCreateParams {

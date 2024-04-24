@@ -47,12 +47,12 @@ export class Prefixes extends APIResource {
     params: PrefixDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PrefixDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: PrefixDeleteResponse | null }>
+      this._client.delete(
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
+        options,
+      ) as Core.APIPromise<{ result: PrefixDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -183,14 +183,9 @@ export interface PrefixListParams {
 
 export interface PrefixDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface PrefixEditParams {

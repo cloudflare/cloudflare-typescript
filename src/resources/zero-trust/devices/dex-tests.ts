@@ -163,6 +163,27 @@ export interface SchemaData {
   method?: string;
 }
 
+/**
+ * The configuration object which contains the details for the WARP client to
+ * conduct the test.
+ */
+export interface SchemaDataParam {
+  /**
+   * The desired endpoint to test.
+   */
+  host?: string;
+
+  /**
+   * The type of test.
+   */
+  kind?: string;
+
+  /**
+   * The HTTP request method type.
+   */
+  method?: string;
+}
+
 export interface SchemaHTTP {
   /**
    * The configuration object which contains the details for the WARP client to
@@ -229,7 +250,7 @@ export interface DEXTestCreateParams {
    * Body param: The configuration object which contains the details for the WARP
    * client to conduct the test.
    */
-  data: SchemaData;
+  data: SchemaDataParam;
 
   /**
    * Body param: Determines whether or not the test is active.
@@ -291,7 +312,7 @@ export interface DEXTestUpdateParams {
    * Body param: The configuration object which contains the details for the WARP
    * client to conduct the test.
    */
-  data: SchemaData;
+  data: SchemaDataParam;
 
   /**
    * Body param: Determines whether or not the test is active.

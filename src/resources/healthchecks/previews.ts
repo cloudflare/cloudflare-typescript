@@ -29,12 +29,12 @@ export class Previews extends APIResource {
     params: PreviewDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PreviewDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/healthchecks/preview/${healthcheckId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: PreviewDeleteResponse }>
+      this._client.delete(
+        `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
+        options,
+      ) as Core.APIPromise<{ result: PreviewDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,7 +85,7 @@ export interface PreviewCreateParams {
    * Body param: A list of regions from which to run health checks. Null means
    * Cloudflare will pick a default region.
    */
-  check_regions?: Array<HealthchecksAPI.CheckRegion> | null;
+  check_regions?: Array<HealthchecksAPI.CheckRegionParam> | null;
 
   /**
    * Body param: The number of consecutive fails required from a health check before
@@ -107,7 +107,7 @@ export interface PreviewCreateParams {
   /**
    * Body param: Parameters specific to an HTTP or HTTPS health check.
    */
-  http_config?: HealthchecksAPI.HTTPConfiguration | null;
+  http_config?: HealthchecksAPI.HTTPConfigurationParam | null;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may give
@@ -130,7 +130,7 @@ export interface PreviewCreateParams {
   /**
    * Body param: Parameters specific to TCP health check.
    */
-  tcp_config?: HealthchecksAPI.TCPConfiguration | null;
+  tcp_config?: HealthchecksAPI.TCPConfigurationParam | null;
 
   /**
    * Body param: The timeout (in seconds) before marking the health check as failed.
@@ -146,14 +146,9 @@ export interface PreviewCreateParams {
 
 export interface PreviewDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface PreviewGetParams {

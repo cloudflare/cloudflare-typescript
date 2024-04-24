@@ -48,11 +48,10 @@ export class OriginCACertificates extends APIResource {
    */
   delete(
     certificateId: string,
-    body: OriginCACertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCACertificateDeleteResponse> {
     return (
-      this._client.delete(`/certificates/${certificateId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/certificates/${certificateId}`, options) as Core.APIPromise<{
         result: OriginCACertificateDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -154,5 +153,3 @@ export interface OriginCACertificateListParams {
    */
   identifier?: string;
 }
-
-export type OriginCACertificateDeleteParams = unknown;

@@ -72,17 +72,11 @@ export class Rules extends APIResource {
   /**
    * Deletes an existing firewall rule.
    */
-  delete(
-    zoneIdentifier: string,
-    id: string,
-    body: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallRule> {
+  delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FirewallRule }>
+      this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, options) as Core.APIPromise<{
+        result: FirewallRule;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -209,14 +203,6 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   paused?: boolean;
 }
 
-export interface RuleDeleteParams {
-  /**
-   * When true, indicates that Cloudflare should also delete the associated filter if
-   * there are no other firewall rules referencing the filter.
-   */
-  delete_filter_if_unused?: boolean;
-}
-
 export type RuleEditParams = unknown;
 
 export interface RuleGetParams {
@@ -241,7 +227,6 @@ export namespace Rules {
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
 }

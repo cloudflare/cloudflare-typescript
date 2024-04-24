@@ -42,12 +42,12 @@ export class Custom extends APIResource {
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
+        options,
+      ) as Core.APIPromise<{ result: CustomDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -168,6 +168,22 @@ export interface Pattern {
   validation?: 'luhn';
 }
 
+/**
+ * A pattern that matches an entry
+ */
+export interface PatternParam {
+  /**
+   * The regex pattern.
+   */
+  regex: string;
+
+  /**
+   * Validation algorithm for the pattern. This algorithm will get run on potential
+   * matches, and if it returns false, the entry will not be matched.
+   */
+  validation?: 'luhn';
+}
+
 export type CustomCreateResponse = Array<CustomProfile>;
 
 export type CustomDeleteResponse = unknown | string | null;
@@ -195,7 +211,7 @@ export namespace CustomCreateParams {
      * Scan the context of predefined entries to only return matches surrounded by
      * keywords.
      */
-    context_awareness?: ProfilesAPI.ContextAwareness;
+    context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
     /**
      * The description of the profile.
@@ -236,7 +252,7 @@ export namespace CustomCreateParams {
       /**
        * A pattern that matches an entry
        */
-      pattern: CustomAPI.Pattern;
+      pattern: CustomAPI.PatternParam;
     }
   }
 }
@@ -257,7 +273,7 @@ export interface CustomUpdateParams {
    * Body param: Scan the context of predefined entries to only return matches
    * surrounded by keywords.
    */
-  context_awareness?: ProfilesAPI.ContextAwareness;
+  context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
    * Body param: The description of the profile.
@@ -309,7 +325,7 @@ export namespace CustomUpdateParams {
     /**
      * A pattern that matches an entry
      */
-    pattern?: CustomAPI.Pattern;
+    pattern?: CustomAPI.PatternParam;
 
     /**
      * ID of the parent profile
@@ -340,14 +356,9 @@ export namespace CustomUpdateParams {
 
 export interface CustomDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CustomGetParams {

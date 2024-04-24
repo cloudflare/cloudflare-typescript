@@ -48,10 +48,10 @@ export class Domains extends APIResource {
     params: DomainDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return this._client.delete(
       `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
-      { body: body, ...options },
+      options,
     );
   }
 
@@ -125,14 +125,9 @@ export interface DomainListParams {
 
 export interface DomainDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface DomainEditParams {

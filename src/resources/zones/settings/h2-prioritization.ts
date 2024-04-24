@@ -59,6 +59,23 @@ export interface H2Prioritization {
   modified_on?: string | null;
 }
 
+/**
+ * HTTP/2 Edge Prioritization optimises the delivery of resources served through
+ * HTTP/2 to improve page load performance. It also supports fine control of
+ * content delivery when used in conjunction with Workers.
+ */
+export interface H2PrioritizationParam {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'h2_prioritization';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off' | 'custom';
+}
+
 export interface H2PrioritizationEditParams {
   /**
    * Path param: Identifier
@@ -70,7 +87,7 @@ export interface H2PrioritizationEditParams {
    * served through HTTP/2 to improve page load performance. It also supports fine
    * control of content delivery when used in conjunction with Workers.
    */
-  value: H2Prioritization;
+  value: H2PrioritizationParam;
 }
 
 export interface H2PrioritizationGetParams {
