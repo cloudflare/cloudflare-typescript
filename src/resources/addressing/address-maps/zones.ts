@@ -30,11 +30,11 @@ export class Zones extends APIResource {
     params: ZoneDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZoneDeleteResponse | null> {
-    const { zone_id, account_id, body } = params;
+    const { zone_id, account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
-        { body: body, ...options },
+        options,
       ) as Core.APIPromise<{ result: ZoneDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -63,19 +63,14 @@ export interface ZoneUpdateParams {
 
 export interface ZoneDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
 
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export namespace Zones {

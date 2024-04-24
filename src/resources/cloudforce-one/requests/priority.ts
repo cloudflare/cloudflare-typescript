@@ -86,6 +86,8 @@ export class PriorityResource extends APIResource {
 
 export type Label = string;
 
+export type LabelParam = string;
+
 export interface Priority {
   /**
    * UUID
@@ -151,7 +153,7 @@ export interface PriorityCreateParams {
   /**
    * List of labels
    */
-  labels: Array<Label>;
+  labels: Array<LabelParam>;
 
   /**
    * Priority
@@ -173,7 +175,7 @@ export interface PriorityUpdateParams {
   /**
    * List of labels
    */
-  labels: Array<Label>;
+  labels: Array<LabelParam>;
 
   /**
    * Priority

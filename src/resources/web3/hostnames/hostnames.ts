@@ -42,14 +42,13 @@ export class Hostnames extends APIResource {
   delete(
     zoneIdentifier: string,
     identifier: string,
-    body: HostnameDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<HostnameDeleteResponse | null> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HostnameDeleteResponse | null }>
+      this._client.delete(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}`,
+        options,
+      ) as Core.APIPromise<{ result: HostnameDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -144,8 +143,6 @@ export interface HostnameCreateParams {
   dnslink?: string;
 }
 
-export type HostnameDeleteParams = unknown;
-
 export interface HostnameEditParams {
   /**
    * An optional description of the hostname.
@@ -163,7 +160,6 @@ export namespace Hostnames {
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
   export import HostnamesSinglePage = HostnamesAPI.HostnamesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
-  export import HostnameDeleteParams = HostnamesAPI.HostnameDeleteParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
   export import IPFSUniversalPaths = IPFSUniversalPathsAPI.IPFSUniversalPaths;
 }

@@ -12,12 +12,12 @@ export class SmartTieredCache extends APIResource {
     params: SmartTieredCacheDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SmartTieredCacheDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: SmartTieredCacheDeleteResponse }>
+      this._client.delete(
+        `/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
+        options,
+      ) as Core.APIPromise<{ result: SmartTieredCacheDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -62,14 +62,9 @@ export type SmartTieredCacheGetResponse = unknown | string | null;
 
 export interface SmartTieredCacheDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface SmartTieredCacheEditParams {

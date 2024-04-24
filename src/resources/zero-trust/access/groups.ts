@@ -245,7 +245,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.AccessRule>;
+  include: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: The name of the Access group.
@@ -268,7 +268,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: Whether this is the default group
@@ -279,7 +279,7 @@ export interface GroupCreateParams {
    * Body param: Rules evaluated with an AND logical operator. To match a policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<AccessAPI.AccessRuleParam>;
 }
 
 export interface GroupUpdateParams {
@@ -287,7 +287,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
    * only one of the Include rules.
    */
-  include: Array<AccessAPI.AccessRule>;
+  include: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: The name of the Access group.
@@ -310,7 +310,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with a NOT logical operator. To match a policy, a
    * user cannot meet any of the Exclude rules.
    */
-  exclude?: Array<AccessAPI.AccessRule>;
+  exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: Whether this is the default group
@@ -321,7 +321,7 @@ export interface GroupUpdateParams {
    * Body param: Rules evaluated with an AND logical operator. To match a policy, a
    * user must meet all of the Require rules.
    */
-  require?: Array<AccessAPI.AccessRule>;
+  require?: Array<AccessAPI.AccessRuleParam>;
 }
 
 export interface GroupListParams {

@@ -25,12 +25,11 @@ export class Config extends APIResource {
     params: ConfigDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/logs/control/cmb/config`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConfigDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/logs/control/cmb/config`, options) as Core.APIPromise<{
+        result: ConfigDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -70,14 +69,9 @@ export interface ConfigCreateParams {
 
 export interface ConfigDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ConfigGetParams {

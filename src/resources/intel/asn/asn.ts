@@ -12,7 +12,11 @@ export class ASN extends APIResource {
   /**
    * Get ASN Overview
    */
-  get(asn: Shared.ASN, params: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.ASN> {
+  get(
+    asn: Shared.ASNParam,
+    params: ASNGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Shared.ASN> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/intel/asn/${asn}`, options) as Core.APIPromise<{

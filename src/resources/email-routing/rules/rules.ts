@@ -119,6 +119,18 @@ export interface Action {
   value: Array<string>;
 }
 
+/**
+ * Actions pattern.
+ */
+export interface ActionParam {
+  /**
+   * Type of supported action.
+   */
+  type: 'drop' | 'forward' | 'worker';
+
+  value: Array<string>;
+}
+
 export interface EmailRoutingRule {
   /**
    * Routing rule identifier.
@@ -176,16 +188,36 @@ export interface Matcher {
   value: string;
 }
 
+/**
+ * Matching pattern to forward your actions.
+ */
+export interface MatcherParam {
+  /**
+   * Field for type matcher.
+   */
+  field: 'to';
+
+  /**
+   * Type of matcher.
+   */
+  type: 'literal';
+
+  /**
+   * Value for matcher.
+   */
+  value: string;
+}
+
 export interface RuleCreateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<Action>;
+  actions: Array<ActionParam>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<Matcher>;
+  matchers: Array<MatcherParam>;
 
   /**
    * Routing rule status.
@@ -207,12 +239,12 @@ export interface RuleUpdateParams {
   /**
    * List actions patterns.
    */
-  actions: Array<Action>;
+  actions: Array<ActionParam>;
 
   /**
    * Matching patterns to forward to your actions.
    */
-  matchers: Array<Matcher>;
+  matchers: Array<MatcherParam>;
 
   /**
    * Routing rule status.

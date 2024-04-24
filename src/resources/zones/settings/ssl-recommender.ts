@@ -52,6 +52,23 @@ export interface SSLRecommender {
   enabled?: boolean;
 }
 
+/**
+ * Enrollment in the SSL/TLS Recommender service which tries to detect and
+ * recommend (by sending periodic emails) the most secure SSL/TLS setting your
+ * origin servers support.
+ */
+export interface SSLRecommenderParam {
+  /**
+   * Enrollment value for SSL/TLS Recommender.
+   */
+  id?: 'ssl_recommender';
+
+  /**
+   * ssl-recommender enrollment setting.
+   */
+  enabled?: boolean;
+}
+
 export interface SSLRecommenderEditParams {
   /**
    * Path param: Identifier
@@ -63,7 +80,7 @@ export interface SSLRecommenderEditParams {
    * and recommend (by sending periodic emails) the most secure SSL/TLS setting your
    * origin servers support.
    */
-  value: SSLRecommender;
+  value: SSLRecommenderParam;
 }
 
 export interface SSLRecommenderGetParams {

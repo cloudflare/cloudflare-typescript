@@ -24,12 +24,8 @@ export class Subscriptions extends APIResource {
   /**
    * Deletes a user's subscription.
    */
-  delete(
-    identifier: string,
-    body: SubscriptionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionDeleteResponse> {
-    return this._client.delete(`/user/subscriptions/${identifier}`, { body, ...options });
+  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionDeleteResponse> {
+    return this._client.delete(`/user/subscriptions/${identifier}`, options);
   }
 
   /**
@@ -65,6 +61,46 @@ export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
  * The rate plan applied to the subscription.
  */
 export interface RatePlan {
+  /**
+   * The ID of the rate plan.
+   */
+  id?: string;
+
+  /**
+   * The currency applied to the rate plan subscription.
+   */
+  currency?: string;
+
+  /**
+   * Whether this rate plan is managed externally from Cloudflare.
+   */
+  externally_managed?: boolean;
+
+  /**
+   * Whether a rate plan is enterprise-based (or newly adopted term contract).
+   */
+  is_contract?: boolean;
+
+  /**
+   * The full name of the rate plan.
+   */
+  public_name?: string;
+
+  /**
+   * The scope that this rate plan applies to.
+   */
+  scope?: string;
+
+  /**
+   * The list of sets this rate plan applies to.
+   */
+  sets?: Array<string>;
+}
+
+/**
+ * The rate plan applied to the subscription.
+ */
+export interface RatePlanParam {
   /**
    * The ID of the rate plan.
    */
@@ -191,6 +227,31 @@ export interface SubscriptionComponent {
 }
 
 /**
+ * A component value for a subscription.
+ */
+export interface SubscriptionComponentParam {
+  /**
+   * The default amount assigned.
+   */
+  default?: number;
+
+  /**
+   * The name of the component value.
+   */
+  name?: string;
+
+  /**
+   * The unit price for the component value.
+   */
+  price?: number;
+
+  /**
+   * The amount of the component value assigned.
+   */
+  value?: number;
+}
+
+/**
  * A simple zone object. May have null properties if not a zone subscription.
  */
 export interface SubscriptionZone {
@@ -204,6 +265,11 @@ export interface SubscriptionZone {
    */
   name?: string;
 }
+
+/**
+ * A simple zone object. May have null properties if not a zone subscription.
+ */
+export interface SubscriptionZoneParam {}
 
 export type SubscriptionUpdateResponse = unknown | string | null;
 
@@ -224,7 +290,7 @@ export interface SubscriptionUpdateParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionComponent>;
+  component_values?: Array<SubscriptionComponentParam>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -234,12 +300,12 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: RatePlan;
+  rate_plan?: RatePlanParam;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionZone;
+  zone?: SubscriptionZoneParam;
 }
 
 export namespace SubscriptionUpdateParams {
@@ -251,15 +317,13 @@ export namespace SubscriptionUpdateParams {
   }
 }
 
-export type SubscriptionDeleteParams = unknown;
-
 export interface SubscriptionEditParams {
   app?: SubscriptionEditParams.App;
 
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<SubscriptionComponent>;
+  component_values?: Array<SubscriptionComponentParam>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -269,12 +333,12 @@ export interface SubscriptionEditParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: RatePlan;
+  rate_plan?: RatePlanParam;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: SubscriptionZone;
+  zone?: SubscriptionZoneParam;
 }
 
 export namespace SubscriptionEditParams {
@@ -296,6 +360,5 @@ export namespace Subscriptions {
   export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
 }

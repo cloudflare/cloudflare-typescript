@@ -32,12 +32,8 @@ export class Organizations extends APIResource {
   /**
    * Removes association to an organization.
    */
-  delete(
-    organizationId: string,
-    body: OrganizationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OrganizationDeleteResponse> {
-    return this._client.delete(`/user/organizations/${organizationId}`, { body, ...options });
+  delete(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationDeleteResponse> {
+    return this._client.delete(`/user/organizations/${organizationId}`, options);
   }
 
   /**
@@ -117,13 +113,10 @@ export interface OrganizationListParams extends V4PagePaginationArrayParams {
   status?: 'member' | 'invited';
 }
 
-export type OrganizationDeleteParams = unknown;
-
 export namespace Organizations {
   export import Organization = OrganizationsAPI.Organization;
   export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
   export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
-  export import OrganizationDeleteParams = OrganizationsAPI.OrganizationDeleteParams;
 }

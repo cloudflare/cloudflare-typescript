@@ -220,6 +220,18 @@ export interface IndexDimensionConfiguration {
   metric: 'cosine' | 'euclidean' | 'dot-product';
 }
 
+export interface IndexDimensionConfigurationParam {
+  /**
+   * Specifies the number of dimensions for the index
+   */
+  dimensions: number;
+
+  /**
+   * Specifies the type of metric to use calculating distance.
+   */
+  metric: 'cosine' | 'euclidean' | 'dot-product';
+}
+
 export interface IndexInsert {
   /**
    * Specifies the count of the vectors successfully inserted.
@@ -290,7 +302,7 @@ export interface IndexCreateParams {
   /**
    * Body param: Specifies the type of configuration to use for the index.
    */
-  config: IndexDimensionConfiguration | IndexCreateParams.VectorizeIndexPresetConfiguration;
+  config: IndexDimensionConfigurationParam | IndexCreateParams.VectorizeIndexPresetConfiguration;
 
   /**
    * Body param:

@@ -10,7 +10,7 @@ export class Subnets extends APIResource {
    * Get ASN Subnets
    */
   get(
-    asn: Shared.ASN,
+    asn: Shared.ASNParam,
     params: SubnetGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubnetGetResponse> {

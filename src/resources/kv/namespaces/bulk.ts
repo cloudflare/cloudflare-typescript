@@ -36,12 +36,12 @@ export class Bulk extends APIResource {
     params: BulkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BulkDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: BulkDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`,
+        options,
+      ) as Core.APIPromise<{ result: BulkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -103,14 +103,9 @@ export namespace BulkUpdateParams {
 
 export interface BulkDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: Array<string>;
 }
 
 export namespace Bulk {

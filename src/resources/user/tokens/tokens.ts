@@ -66,13 +66,9 @@ export class Tokens extends APIResource {
   /**
    * Destroy a token.
    */
-  delete(
-    tokenId: unknown,
-    body: TokenDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenDeleteResponse | null> {
+  delete(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
     return (
-      this._client.delete(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
         result: TokenDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -103,6 +99,11 @@ export class TokenListResponsesV4PagePaginationArray extends V4PagePaginationArr
  * IPv4/IPv6 CIDR.
  */
 export type CIDRList = string;
+
+/**
+ * IPv4/IPv6 CIDR.
+ */
+export type CIDRListParam = string;
 
 export interface Policy {
   /**
@@ -142,6 +143,31 @@ export namespace Policy {
      */
     name?: string;
   }
+}
+
+export interface PolicyParam {
+  /**
+   * Allow or deny operations against the resources.
+   */
+  effect: 'allow' | 'deny';
+
+  /**
+   * A set of permission groups that are specified to the policy.
+   */
+  permission_groups: Array<PolicyParam.PermissionGroup>;
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  resources: unknown;
+}
+
+export namespace PolicyParam {
+  /**
+   * A named group of permissions that map to a group of operations against
+   * resources.
+   */
+  export interface PermissionGroup {}
 }
 
 export interface Token {
@@ -267,7 +293,7 @@ export interface TokenCreateParams {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<Policy>;
+  policies: Array<PolicyParam>;
 
   condition?: TokenCreateParams.Condition;
 
@@ -299,12 +325,12 @@ export namespace TokenCreateParams {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensAPI.CIDRList>;
+      in?: Array<TokensAPI.CIDRListParam>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensAPI.CIDRList>;
+      not_in?: Array<TokensAPI.CIDRListParam>;
     }
   }
 }
@@ -318,7 +344,7 @@ export interface TokenUpdateParams {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<Policy>;
+  policies: Array<PolicyParam>;
 
   /**
    * Status of the token.
@@ -355,12 +381,12 @@ export namespace TokenUpdateParams {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensAPI.CIDRList>;
+      in?: Array<TokensAPI.CIDRListParam>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensAPI.CIDRList>;
+      not_in?: Array<TokensAPI.CIDRListParam>;
     }
   }
 }
@@ -371,8 +397,6 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
    */
   direction?: 'asc' | 'desc';
 }
-
-export type TokenDeleteParams = unknown;
 
 export namespace Tokens {
   export import CIDRList = TokensAPI.CIDRList;
@@ -388,7 +412,6 @@ export namespace Tokens {
   export import TokenCreateParams = TokensAPI.TokenCreateParams;
   export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
   export import TokenListParams = TokensAPI.TokenListParams;
-  export import TokenDeleteParams = TokensAPI.TokenDeleteParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;

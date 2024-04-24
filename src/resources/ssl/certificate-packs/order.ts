@@ -105,7 +105,7 @@ export interface OrderCreateParams {
    * Must contain the zone apex, may not contain more than 50 hosts, and may not be
    * empty.
    */
-  hosts: Array<CertificatePacksAPI.Host>;
+  hosts: Array<CertificatePacksAPI.HostParam>;
 
   /**
    * Body param: Type of certificate pack.

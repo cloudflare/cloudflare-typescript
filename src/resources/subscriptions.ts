@@ -58,14 +58,13 @@ export class Subscriptions extends APIResource {
   delete(
     accountIdentifier: string,
     subscriptionIdentifier: string,
-    body: SubscriptionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionDeleteResponse> {
     return (
-      this._client.delete(`/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SubscriptionDeleteResponse }>
+      this._client.delete(
+        `/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: SubscriptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -100,7 +99,7 @@ export interface SubscriptionCreateParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponent>;
+  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponentParam>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -110,12 +109,12 @@ export interface SubscriptionCreateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: UserSubscriptionsAPI.RatePlan;
+  rate_plan?: UserSubscriptionsAPI.RatePlanParam;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: UserSubscriptionsAPI.SubscriptionZone;
+  zone?: UserSubscriptionsAPI.SubscriptionZoneParam;
 }
 
 export namespace SubscriptionCreateParams {
@@ -133,7 +132,7 @@ export interface SubscriptionUpdateParams {
   /**
    * The list of add-ons subscribed to.
    */
-  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponent>;
+  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponentParam>;
 
   /**
    * How often the subscription is renewed automatically.
@@ -143,12 +142,12 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: UserSubscriptionsAPI.RatePlan;
+  rate_plan?: UserSubscriptionsAPI.RatePlanParam;
 
   /**
    * A simple zone object. May have null properties if not a zone subscription.
    */
-  zone?: UserSubscriptionsAPI.SubscriptionZone;
+  zone?: UserSubscriptionsAPI.SubscriptionZoneParam;
 }
 
 export namespace SubscriptionUpdateParams {
@@ -159,7 +158,5 @@ export namespace SubscriptionUpdateParams {
     install_id?: string;
   }
 }
-
-export type SubscriptionDeleteParams = unknown;
 
 export { SubscriptionsSinglePage };

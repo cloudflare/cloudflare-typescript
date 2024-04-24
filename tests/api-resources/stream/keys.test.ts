@@ -37,7 +37,6 @@ describe('resource keys', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.keys.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +51,6 @@ describe('resource keys', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.stream.keys.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 

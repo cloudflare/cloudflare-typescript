@@ -40,6 +40,8 @@ export class HostnameAssociations extends APIResource {
 
 export type HostnameAssociation = string;
 
+export type HostnameAssociationParam = string;
+
 export interface TLSHostnameAssociation {
   hostnames?: Array<HostnameAssociation>;
 
@@ -68,7 +70,7 @@ export interface HostnameAssociationUpdateParams {
   /**
    * Body param:
    */
-  hostnames?: Array<HostnameAssociation>;
+  hostnames?: Array<HostnameAssociationParam>;
 
   /**
    * Body param: The UUID for a certificate that was uploaded to the mTLS Certificate

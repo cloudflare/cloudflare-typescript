@@ -161,7 +161,7 @@ describe('resource custom', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.profiles.custom.delete(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -176,7 +176,7 @@ describe('resource custom', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.profiles.custom.delete(
       '384e129d-25bd-403c-8019-bc19eb7a8a5f',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 

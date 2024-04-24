@@ -120,7 +120,7 @@ export interface PredefinedUpdateParams {
    * Body param: Scan the context of predefined entries to only return matches
    * surrounded by keywords.
    */
-  context_awareness?: ProfilesAPI.ContextAwareness;
+  context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
    * Body param: The entries for this profile.

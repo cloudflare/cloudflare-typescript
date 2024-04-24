@@ -44,12 +44,12 @@ export class KeylessCertificates extends APIResource {
     params: KeylessCertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<KeylessCertificateDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
+      this._client.delete(
+        `/zones/${zone_id}/keyless_certificates/${keylessCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: KeylessCertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -160,6 +160,21 @@ export interface Tunnel {
   vnet_id: string;
 }
 
+/**
+ * Configuration for using Keyless SSL through a Cloudflare Tunnel
+ */
+export interface TunnelParam {
+  /**
+   * Private IP of the Key Server Host
+   */
+  private_ip: string;
+
+  /**
+   * Cloudflare Tunnel Virtual Network ID
+   */
+  vnet_id: string;
+}
+
 export interface KeylessCertificateDeleteResponse {
   /**
    * Identifier
@@ -195,7 +210,7 @@ export interface KeylessCertificateCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.BundleMethod;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: The keyless SSL name.
@@ -205,7 +220,7 @@ export interface KeylessCertificateCreateParams {
   /**
    * Body param: Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: Tunnel;
+  tunnel?: TunnelParam;
 }
 
 export interface KeylessCertificateListParams {
@@ -217,14 +232,9 @@ export interface KeylessCertificateListParams {
 
 export interface KeylessCertificateDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface KeylessCertificateEditParams {
@@ -257,7 +267,7 @@ export interface KeylessCertificateEditParams {
   /**
    * Body param: Configuration for using Keyless SSL through a Cloudflare Tunnel
    */
-  tunnel?: Tunnel;
+  tunnel?: TunnelParam;
 }
 
 export interface KeylessCertificateGetParams {

@@ -45,12 +45,11 @@ export class OutgoingResource extends APIResource {
     params: OutgoingDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OutgoingDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: OutgoingDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
+        result: OutgoingDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -306,15 +305,7 @@ export interface OutgoingUpdateParams {
 }
 
 export interface OutgoingDeleteParams {
-  /**
-   * Path param:
-   */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface OutgoingDisableParams {

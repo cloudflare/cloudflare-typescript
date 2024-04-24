@@ -87,11 +87,10 @@ describe('resource uaRules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test.skip('delete', async () => {
     const responsePromise = cloudflare.firewall.uaRules.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -103,12 +102,15 @@ describe('resource uaRules', () => {
   });
 
   // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.firewall.uaRules.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-      {},
-    );
+  test.skip('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.firewall.uaRules.delete(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        '372e67954025e0ba6aaa6d586b9e0b59',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // skipped: tests are disabled for the time being

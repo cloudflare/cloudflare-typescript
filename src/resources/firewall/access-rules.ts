@@ -94,10 +94,22 @@ export class AccessRules extends APIResource {
    */
   delete(
     identifier: unknown,
-    params: AccessRuleDeleteParams,
+    params?: AccessRuleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleDeleteResponse | null>;
+  delete(
+    identifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleDeleteResponse | null>;
+  delete(
+    identifier: unknown,
+    params: AccessRuleDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null> {
-    const { body, account_id, zone_id } = params;
+    if (isRequestOptions(params)) {
+      return this.delete(identifier, {}, params);
+    }
+    const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -115,10 +127,10 @@ export class AccessRules extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.delete(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${identifier}`,
+        options,
+      ) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -216,7 +228,35 @@ export interface AccessRuleCIDRConfiguration {
   value?: string;
 }
 
+export interface AccessRuleCIDRConfigurationParam {
+  /**
+   * The configuration target. You must set the target to `ip_range` when specifying
+   * an IP address range in the rule.
+   */
+  target?: 'ip_range';
+
+  /**
+   * The IP address range to match. You can only use prefix lengths `/16` and `/24`
+   * for IPv4 ranges, and prefix lengths `/32`, `/48`, and `/64` for IPv6 ranges.
+   */
+  value?: string;
+}
+
 export interface AccessRuleIPConfiguration {
+  /**
+   * The configuration target. You must set the target to `ip` when specifying an IP
+   * address in the rule.
+   */
+  target?: 'ip';
+
+  /**
+   * The IP address to match. This address will be compared to the IP address of
+   * incoming requests.
+   */
+  value?: string;
+}
+
+export interface AccessRuleIPConfigurationParam {
   /**
    * The configuration target. You must set the target to `ip` when specifying an IP
    * address in the rule.
@@ -243,6 +283,19 @@ export interface ASNConfiguration {
   value?: string;
 }
 
+export interface ASNConfigurationParam {
+  /**
+   * The configuration target. You must set the target to `asn` when specifying an
+   * Autonomous System Number (ASN) in the rule.
+   */
+  target?: 'asn';
+
+  /**
+   * The AS number to match.
+   */
+  value?: string;
+}
+
 export interface CountryConfiguration {
   /**
    * The configuration target. You must set the target to `country` when specifying a
@@ -257,7 +310,34 @@ export interface CountryConfiguration {
   value?: string;
 }
 
+export interface CountryConfigurationParam {
+  /**
+   * The configuration target. You must set the target to `country` when specifying a
+   * country code in the rule.
+   */
+  target?: 'country';
+
+  /**
+   * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to
+   * [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
+   */
+  value?: string;
+}
+
 export interface IPV6Configuration {
+  /**
+   * The configuration target. You must set the target to `ip6` when specifying an
+   * IPv6 address in the rule.
+   */
+  target?: 'ip6';
+
+  /**
+   * The IPv6 address to match.
+   */
+  value?: string;
+}
+
+export interface IPV6ConfigurationParam {
   /**
    * The configuration target. You must set the target to `ip6` when specifying an
    * IPv6 address in the rule.
@@ -290,11 +370,11 @@ export interface AccessRuleCreateParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | AccessRuleIPConfiguration
-    | IPV6Configuration
-    | AccessRuleCIDRConfiguration
-    | ASNConfiguration
-    | CountryConfiguration;
+    | AccessRuleIPConfigurationParam
+    | IPV6ConfigurationParam
+    | AccessRuleCIDRConfigurationParam
+    | ASNConfigurationParam
+    | CountryConfigurationParam;
 
   /**
    * Body param: The action to apply to a matched request.
@@ -410,19 +490,12 @@ export namespace AccessRuleListParams {
 
 export interface AccessRuleDeleteParams {
   /**
-   * Body param:
-   */
-  body: unknown;
-
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
   account_id?: string;
 
   /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
    */
   zone_id?: string;
 }
@@ -432,11 +505,11 @@ export interface AccessRuleEditParams {
    * Body param: The rule configuration.
    */
   configuration:
-    | AccessRuleIPConfiguration
-    | IPV6Configuration
-    | AccessRuleCIDRConfiguration
-    | ASNConfiguration
-    | CountryConfiguration;
+    | AccessRuleIPConfigurationParam
+    | IPV6ConfigurationParam
+    | AccessRuleCIDRConfigurationParam
+    | ASNConfigurationParam
+    | CountryConfigurationParam;
 
   /**
    * Body param: The action to apply to a matched request.

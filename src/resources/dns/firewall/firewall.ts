@@ -43,12 +43,12 @@ export class FirewallResource extends APIResource {
     params: FirewallDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FirewallDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: FirewallDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/dns_firewall/${dnsFirewallId}`,
+        options,
+      ) as Core.APIPromise<{ result: FirewallDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,6 +92,22 @@ export class FirewallsV4PagePaginationArray extends V4PagePaginationArray<Firewa
  * Attack mitigation settings.
  */
 export interface AttackMitigation {
+  /**
+   * When enabled, random-prefix attacks are automatically mitigated and the upstream
+   * DNS servers protected.
+   */
+  enabled?: boolean;
+
+  /**
+   * Only mitigate attacks when upstream servers seem unhealthy.
+   */
+  only_when_upstream_unhealthy?: boolean;
+}
+
+/**
+ * Attack mitigation settings.
+ */
+export interface AttackMitigationParam {
   /**
    * When enabled, random-prefix attacks are automatically mitigated and the upstream
    * DNS servers protected.
@@ -173,9 +189,19 @@ export interface Firewall {
 export type FirewallIPs = string | string;
 
 /**
+ * Cloudflare-assigned DNS IPv4 Address.
+ */
+export type FirewallIPsParam = string | string;
+
+/**
  * Upstream DNS Server IPv4 Address.
  */
 export type UpstreamIPs = string | string;
+
+/**
+ * Upstream DNS Server IPv4 Address.
+ */
+export type UpstreamIPsParam = string | string;
 
 export interface FirewallDeleteResponse {
   /**
@@ -198,12 +224,12 @@ export interface FirewallCreateParams {
   /**
    * Body param:
    */
-  upstream_ips: Array<UpstreamIPs>;
+  upstream_ips: Array<UpstreamIPsParam>;
 
   /**
    * Body param: Attack mitigation settings.
    */
-  attack_mitigation?: AttackMitigation | null;
+  attack_mitigation?: AttackMitigationParam | null;
 
   /**
    * Body param: Deprecate the response to ANY requests.
@@ -253,14 +279,9 @@ export interface FirewallListParams extends V4PagePaginationArrayParams {
 
 export interface FirewallDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface FirewallEditParams {
@@ -277,7 +298,7 @@ export interface FirewallEditParams {
   /**
    * Body param:
    */
-  dns_firewall_ips: Array<FirewallIPs>;
+  dns_firewall_ips: Array<FirewallIPsParam>;
 
   /**
    * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
@@ -303,12 +324,12 @@ export interface FirewallEditParams {
   /**
    * Body param:
    */
-  upstream_ips: Array<UpstreamIPs>;
+  upstream_ips: Array<UpstreamIPsParam>;
 
   /**
    * Body param: Attack mitigation settings.
    */
-  attack_mitigation?: AttackMitigation | null;
+  attack_mitigation?: AttackMitigationParam | null;
 
   /**
    * Body param: Negative DNS Cache TTL.

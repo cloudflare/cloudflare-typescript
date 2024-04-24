@@ -57,6 +57,21 @@ export interface ProxyReadTimeout {
   modified_on?: string | null;
 }
 
+/**
+ * Maximum time between two read operations from origin.
+ */
+export interface ProxyReadTimeoutParam {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'proxy_read_timeout';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: number;
+}
+
 export interface ProxyReadTimeoutEditParams {
   /**
    * Path param: Identifier
@@ -66,7 +81,7 @@ export interface ProxyReadTimeoutEditParams {
   /**
    * Body param: Maximum time between two read operations from origin.
    */
-  value: ProxyReadTimeout;
+  value: ProxyReadTimeoutParam;
 }
 
 export interface ProxyReadTimeoutGetParams {

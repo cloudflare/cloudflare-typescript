@@ -83,7 +83,6 @@ describe('resource acls', () => {
   test.skip('delete: only required params', async () => {
     const responsePromise = cloudflare.secondaryDNS.acls.delete('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -98,7 +97,6 @@ describe('resource acls', () => {
   test.skip('delete: required and optional params', async () => {
     const response = await cloudflare.secondaryDNS.acls.delete('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
     });
   });
 

@@ -37,12 +37,11 @@ export class Configs extends APIResource {
    * Delete an existing network monitoring configuration.
    */
   delete(params: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/mnm/config`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: Configuration }>
+      this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
+        result: Configuration;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -112,15 +111,7 @@ export interface ConfigUpdateParams {
 }
 
 export interface ConfigDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ConfigEditParams {

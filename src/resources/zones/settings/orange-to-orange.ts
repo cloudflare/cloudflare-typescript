@@ -60,6 +60,22 @@ export interface OrangeToOrange {
   modified_on?: string | null;
 }
 
+/**
+ * Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other zones also
+ * on Cloudflare.
+ */
+export interface OrangeToOrangeParam {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'orange_to_orange';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+}
+
 export interface OrangeToOrangeEditParams {
   /**
    * Path param: Identifier
@@ -70,7 +86,7 @@ export interface OrangeToOrangeEditParams {
    * Body param: Orange to Orange (O2O) allows zones on Cloudflare to CNAME to other
    * zones also on Cloudflare.
    */
-  value: OrangeToOrange;
+  value: OrangeToOrangeParam;
 }
 
 export interface OrangeToOrangeGetParams {

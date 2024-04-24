@@ -5,6 +5,8 @@ import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
 
 export type ASN = number;
 
+export type ASNParam = number;
+
 export interface AuditLog {
   /**
    * A string that uniquely identifies the audit log.
@@ -361,6 +363,12 @@ export interface PaginationInfo {
 export type Permission = string;
 
 export interface PermissionGrant {
+  read?: boolean;
+
+  write?: boolean;
+}
+
+export interface PermissionGrantParam {
   read?: boolean;
 
   write?: boolean;

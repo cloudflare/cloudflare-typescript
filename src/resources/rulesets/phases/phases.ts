@@ -356,21 +356,21 @@ export interface PhaseUpdateParams {
    * Body param: The list of rules in the ruleset.
    */
   rules: Array<
-    | RulesAPI.BlockRule
-    | RulesAPI.ChallengeRule
-    | RulesAPI.CompressResponseRule
-    | RulesAPI.ExecuteRule
-    | RulesAPI.JSChallengeRule
-    | RulesAPI.LogRule
-    | RulesAPI.ManagedChallengeRule
-    | RulesAPI.RedirectRule
-    | RulesAPI.RewriteRule
-    | RulesAPI.RouteRule
-    | RulesAPI.ScoreRule
-    | RulesAPI.ServeErrorRule
-    | RulesAPI.SetConfigRule
-    | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
+    | RulesAPI.BlockRuleParam
+    | RulesAPI.ChallengeRuleParam
+    | RulesAPI.CompressResponseRuleParam
+    | RulesAPI.ExecuteRuleParam
+    | RulesAPI.JSChallengeRuleParam
+    | RulesAPI.LogRuleParam
+    | RulesAPI.ManagedChallengeRuleParam
+    | RulesAPI.RedirectRuleParam
+    | RulesAPI.RewriteRuleParam
+    | RulesAPI.RouteRuleParam
+    | RulesAPI.ScoreRuleParam
+    | RulesAPI.ServeErrorRuleParam
+    | RulesAPI.SetConfigRuleParam
+    | RulesAPI.SkipRuleParam
+    | RulesAPI.SetCacheSettingsRuleParam
   >;
 
   /**

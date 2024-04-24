@@ -37,6 +37,33 @@ export interface Configuration {
   user: string;
 }
 
+export interface ConfigurationParam {
+  /**
+   * The name of your origin database.
+   */
+  database: string;
+
+  /**
+   * The host (hostname or IP) of your origin database.
+   */
+  host: string;
+
+  /**
+   * The port (default: 5432 for Postgres) of your origin database.
+   */
+  port: number;
+
+  /**
+   * Specifies the URL scheme used to connect to your origin database.
+   */
+  scheme: 'postgres' | 'postgresql' | 'mysql';
+
+  /**
+   * The user of your origin database.
+   */
+  user: string;
+}
+
 export interface Hyperdrive {
   caching?: Hyperdrive.Caching;
 

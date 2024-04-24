@@ -48,7 +48,7 @@ describe('resource values', () => {
     const responsePromise = cloudflare.kv.namespaces.values.delete(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,7 +64,7 @@ describe('resource values', () => {
     const response = await cloudflare.kv.namespaces.values.delete(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 

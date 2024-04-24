@@ -184,7 +184,7 @@ export namespace SettingEditParams {
     /**
      * List of bindings attached to this Worker
      */
-    bindings?: Array<WorkersAPI.Binding>;
+    bindings?: Array<WorkersAPI.BindingParam>;
 
     /**
      * Opt your Worker into changes after this date
@@ -209,9 +209,9 @@ export namespace SettingEditParams {
     /**
      * Migrations to apply for Durable Objects associated with this Worker.
      */
-    migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+    migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
 
-    placement?: WorkersAPI.PlacementConfiguration;
+    placement?: WorkersAPI.PlacementConfigurationParam;
 
     /**
      * Tags to help you manage your Workers
@@ -221,7 +221,7 @@ export namespace SettingEditParams {
     /**
      * List of Workers that will consume logs from the attached Worker.
      */
-    tail_consumers?: Array<TailAPI.ConsumerScript>;
+    tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
 
     /**
      * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').

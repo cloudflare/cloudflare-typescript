@@ -77,6 +77,25 @@ export interface SplitTunnelInclude {
   host?: string;
 }
 
+export interface SplitTunnelIncludeParam {
+  /**
+   * The address in CIDR format to include in the tunnel. If address is present, host
+   * must not be present.
+   */
+  address: string;
+
+  /**
+   * A description of the split tunnel item, displayed in the client UI.
+   */
+  description: string;
+
+  /**
+   * The domain name to include in the tunnel. If host is present, address must not
+   * be present.
+   */
+  host?: string;
+}
+
 export type IncludeUpdateResponse = Array<SplitTunnelInclude>;
 
 export type IncludeGetResponse = Array<SplitTunnelInclude>;
@@ -90,7 +109,7 @@ export interface IncludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<SplitTunnelInclude>;
+  body: Array<SplitTunnelIncludeParam>;
 }
 
 export interface IncludeListParams {
