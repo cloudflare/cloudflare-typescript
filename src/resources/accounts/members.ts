@@ -222,7 +222,7 @@ export interface MemberCreateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: The contact email address of the user.
@@ -244,7 +244,7 @@ export interface MemberUpdateParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Roles assigned to this member.
@@ -265,7 +265,7 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
   /**
    * Path param:
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Query param: Direction to order results.
@@ -284,11 +284,11 @@ export interface MemberListParams extends V4PagePaginationArrayParams {
 }
 
 export interface MemberDeleteParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export interface MemberGetParams {
-  account_id: unknown;
+  account_id: string;
 }
 
 export namespace Members {
