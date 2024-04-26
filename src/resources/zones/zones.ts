@@ -130,13 +130,17 @@ export interface Zone {
   name: string;
 
   /**
+   * The name servers Cloudflare assigns to a zone
+   */
+  name_servers: Array<string>;
+
+  /**
    * DNS host at the time of switching to Cloudflare
    */
   original_dnshost: string | null;
 
   /**
-   * Original name servers before moving to Cloudflare Notes: Is this only available
-   * for full zones?
+   * Original name servers before moving to Cloudflare
    */
   original_name_servers: Array<string> | null;
 
