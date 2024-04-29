@@ -17,8 +17,8 @@ describe('resource tracerouteTests', () => {
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         interval: 'minute',
-        timeEnd: 'string',
-        timeStart: 'string',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -37,8 +37,8 @@ describe('resource tracerouteTests', () => {
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         interval: 'minute',
-        timeEnd: 'string',
-        timeStart: 'string',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
         colo: 'string',
         deviceId: ['string', 'string', 'string'],
       },
@@ -53,8 +53,8 @@ describe('resource tracerouteTests', () => {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         deviceId: 'string',
         interval: 'minute',
-        timeEnd: 'string',
-        timeStart: 'string',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -74,8 +74,8 @@ describe('resource tracerouteTests', () => {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         deviceId: 'string',
         interval: 'minute',
-        timeEnd: 'string',
-        timeStart: 'string',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
       },
     );
   });

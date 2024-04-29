@@ -33,7 +33,7 @@ describe('resource sites', () => {
       connector_id: 'ac60d3d0435248289d446cedd870bcf4',
       description: 'string',
       ha_mode: true,
-      location: { lat: 'string', lon: 'string' },
+      location: { lat: '37.6192', lon: '122.3816' },
       secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
     });
   });
@@ -58,7 +58,7 @@ describe('resource sites', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       connector_id: 'ac60d3d0435248289d446cedd870bcf4',
       description: 'string',
-      location: { lat: 'string', lon: 'string' },
+      location: { lat: '37.6192', lon: '122.3816' },
       name: 'site_1',
       secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
     });

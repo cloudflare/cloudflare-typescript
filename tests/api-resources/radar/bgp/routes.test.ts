@@ -97,7 +97,7 @@ describe('resource routes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.stats(
-        { asn: 0, format: 'JSON', location: 'US' },
+        { asn: 174, format: 'JSON', location: 'US' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -129,7 +129,7 @@ describe('resource routes', () => {
     await expect(
       cloudflare.radar.bgp.routes.timeseries(
         {
-          asn: 0,
+          asn: 174,
           dateEnd: '2023-09-01T11:41:33.782Z',
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',
