@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ai', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('run: only required params', async () => {
+  test('run: only required params', async () => {
     const responsePromise = cloudflare.workers.ai.run('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       text: 'x',
@@ -25,8 +24,7 @@ describe('resource ai', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('run: required and optional params', async () => {
+  test('run: required and optional params', async () => {
     const response = await cloudflare.workers.ai.run('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       text: 'x',

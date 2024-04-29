@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource rules', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
@@ -25,16 +24,14 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
@@ -48,16 +45,14 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.list({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
@@ -70,15 +65,13 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.list({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.delete(
       '2890e6fa406311ed9b5a23f70f6fb8cf',
       { account_id: '6f91088a406011ed95aed352566e8d4c' },
@@ -92,16 +85,14 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.delete(
       '2890e6fa406311ed9b5a23f70f6fb8cf',
       { account_id: '6f91088a406011ed95aed352566e8d4c' },
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
@@ -115,16 +106,14 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.magicNetworkMonitoring.rules.get('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
@@ -137,8 +126,7 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.magicNetworkMonitoring.rules.get('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });

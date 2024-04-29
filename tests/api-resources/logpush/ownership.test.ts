@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ownership', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
@@ -25,7 +25,7 @@ describe('resource ownership', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
@@ -33,7 +33,7 @@ describe('resource ownership', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('validate: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.validate({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
@@ -49,7 +49,7 @@ describe('resource ownership', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('validate: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.validate({
       destination_conf: 's3://mybucket/logs?region=us-west-2',

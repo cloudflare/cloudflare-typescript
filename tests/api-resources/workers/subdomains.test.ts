@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource subdomains', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.workers.subdomains.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: "{'subdomain': 'example-subdomain'}",
@@ -25,16 +24,14 @@ describe('resource subdomains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.workers.subdomains.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: "{'subdomain': 'example-subdomain'}",
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.workers.subdomains.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,8 +44,7 @@ describe('resource subdomains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.workers.subdomains.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

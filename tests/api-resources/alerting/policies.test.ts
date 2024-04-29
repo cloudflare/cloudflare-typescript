@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource policies', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
@@ -28,8 +27,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
@@ -86,8 +84,7 @@ describe('resource policies', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -100,8 +97,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
@@ -158,8 +154,7 @@ describe('resource policies', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -172,15 +167,13 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -193,15 +186,13 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -214,8 +205,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

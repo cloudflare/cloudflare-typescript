@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource activationCheck', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('trigger: only required params', async () => {
+  test('trigger: only required params', async () => {
     const responsePromise = cloudflare.zones.activationCheck.trigger({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource activationCheck', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('trigger: required and optional params', async () => {
+  test('trigger: required and optional params', async () => {
     const response = await cloudflare.zones.activationCheck.trigger({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

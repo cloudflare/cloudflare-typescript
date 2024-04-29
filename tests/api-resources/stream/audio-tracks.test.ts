@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource audioTracks', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.audioTracks.delete(
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
@@ -26,8 +25,7 @@ describe('resource audioTracks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.stream.audioTracks.delete(
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
@@ -35,8 +33,7 @@ describe('resource audioTracks', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('copy: only required params', async () => {
+  test('copy: only required params', async () => {
     const responsePromise = cloudflare.stream.audioTracks.copy('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       label: 'director commentary',
@@ -50,8 +47,7 @@ describe('resource audioTracks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('copy: required and optional params', async () => {
+  test('copy: required and optional params', async () => {
     const response = await cloudflare.stream.audioTracks.copy('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       label: 'director commentary',
@@ -59,8 +55,7 @@ describe('resource audioTracks', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.stream.audioTracks.edit(
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
@@ -75,8 +70,7 @@ describe('resource audioTracks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.stream.audioTracks.edit(
       'ea95132c15732412d22c1476fa83f27a',
       'ea95132c15732412d22c1476fa83f27a',
@@ -84,8 +78,7 @@ describe('resource audioTracks', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.stream.audioTracks.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -98,8 +91,7 @@ describe('resource audioTracks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.stream.audioTracks.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

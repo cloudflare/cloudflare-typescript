@@ -9,7 +9,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource download', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.pcaps.download.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

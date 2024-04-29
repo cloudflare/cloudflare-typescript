@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource order', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.ssl.certificatePacks.order.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       certificate_authority: 'lets_encrypt',
@@ -29,8 +28,7 @@ describe('resource order', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.ssl.certificatePacks.order.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       certificate_authority: 'lets_encrypt',

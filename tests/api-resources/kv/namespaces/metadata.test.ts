@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource metadata', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.metadata.get(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',
@@ -26,8 +25,7 @@ describe('resource metadata', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.metadata.get(
       '0f2ac74b498b48028cb68387c421e279',
       'My-Key',

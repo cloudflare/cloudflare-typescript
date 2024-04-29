@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource records', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -27,7 +27,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -41,7 +41,7 @@ describe('resource records', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -58,7 +58,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -72,8 +72,7 @@ describe('resource records', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.dns.records.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,8 +83,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.dns.records.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: {
@@ -118,8 +116,7 @@ describe('resource records', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.dns.records.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -132,14 +129,13 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.dns.records.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -156,7 +152,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -170,8 +166,7 @@ describe('resource records', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('export: only required params', async () => {
+  test('export: only required params', async () => {
     const responsePromise = cloudflare.dns.records.export({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -182,13 +177,11 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('export: required and optional params', async () => {
+  test('export: required and optional params', async () => {
     const response = await cloudflare.dns.records.export({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.dns.records.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -201,14 +194,13 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.dns.records.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('import: only required params', async () => {
     const responsePromise = cloudflare.dns.records.import({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -223,7 +215,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('import: required and optional params', async () => {
     const response = await cloudflare.dns.records.import({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -232,8 +224,7 @@ describe('resource records', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('scan: only required params', async () => {
+  test('scan: only required params', async () => {
     const responsePromise = cloudflare.dns.records.scan({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
@@ -247,8 +238,7 @@ describe('resource records', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('scan: required and optional params', async () => {
+  test('scan: required and optional params', async () => {
     const response = await cloudflare.dns.records.scan({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},

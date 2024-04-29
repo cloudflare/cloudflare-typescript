@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource certificates', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.create({
       certificate:
@@ -27,7 +27,7 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.certificates.create({
       certificate:
@@ -38,7 +38,7 @@ describe('resource certificates', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -56,7 +56,7 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.certificates.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -68,7 +68,7 @@ describe('resource certificates', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -80,7 +80,7 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -95,7 +95,7 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',

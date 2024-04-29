@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource tags', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.tags.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -26,8 +25,7 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.tags.update(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -35,8 +33,7 @@ describe('resource tags', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.tags.list(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -51,8 +48,7 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.tags.list(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -60,8 +56,7 @@ describe('resource tags', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.tags.delete(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -77,8 +72,7 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.tags.delete(
       'my-dispatch-namespace',
       'this-is_my_script-01',

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource issues', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.intel.attackSurfaceReport.issues.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource issues', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.intel.attackSurfaceReport.issues.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
@@ -44,8 +42,7 @@ describe('resource issues', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('class: only required params', async () => {
+  test('class: only required params', async () => {
     const responsePromise = cloudflare.intel.attackSurfaceReport.issues.class({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -58,8 +55,7 @@ describe('resource issues', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('class: required and optional params', async () => {
+  test('class: required and optional params', async () => {
     const response = await cloudflare.intel.attackSurfaceReport.issues.class({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
@@ -76,8 +72,7 @@ describe('resource issues', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('dismiss: only required params', async () => {
+  test('dismiss: only required params', async () => {
     const responsePromise = cloudflare.intel.attackSurfaceReport.issues.dismiss('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -90,16 +85,14 @@ describe('resource issues', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('dismiss: required and optional params', async () => {
+  test('dismiss: required and optional params', async () => {
     const response = await cloudflare.intel.attackSurfaceReport.issues.dismiss('string', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismiss: true,
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('severity: only required params', async () => {
+  test('severity: only required params', async () => {
     const responsePromise = cloudflare.intel.attackSurfaceReport.issues.severity({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -112,8 +105,7 @@ describe('resource issues', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('severity: required and optional params', async () => {
+  test('severity: required and optional params', async () => {
     const response = await cloudflare.intel.attackSurfaceReport.issues.severity({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
@@ -130,8 +122,7 @@ describe('resource issues', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('type: only required params', async () => {
+  test('type: only required params', async () => {
     const responsePromise = cloudflare.intel.attackSurfaceReport.issues.type({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -144,8 +135,7 @@ describe('resource issues', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('type: required and optional params', async () => {
+  test('type: required and optional params', async () => {
     const response = await cloudflare.intel.attackSurfaceReport.issues.type({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
