@@ -34,7 +34,7 @@ describe('resource connections', () => {
       export: 'csv',
       hosts: 'blog.cloudflare.com,www.example*,*cloudflare.com',
       order_by: 'first_seen_at',
-      page: 'string',
+      page: '2',
       page_url: 'example.com/page,*/checkout,example.com/*,*checkout*',
       per_page: 100,
       prioritize_malicious: true,

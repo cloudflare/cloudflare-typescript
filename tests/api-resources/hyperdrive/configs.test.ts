@@ -18,7 +18,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
-        port: 0,
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
       },
@@ -40,7 +40,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
-        port: 0,
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
       },
@@ -56,7 +56,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
-        port: 0,
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
       },
@@ -78,7 +78,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
-        port: 0,
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
       },
@@ -151,7 +151,7 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
-        port: 0,
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
       },

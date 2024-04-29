@@ -36,7 +36,7 @@ describe('resource trafficAnomalies', () => {
     await expect(
       cloudflare.radar.trafficAnomalies.get(
         {
-          asn: 0,
+          asn: 174,
           dateEnd: '2023-09-01T11:41:33.782Z',
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',
