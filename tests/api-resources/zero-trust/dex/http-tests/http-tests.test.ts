@@ -15,8 +15,8 @@ describe('resource httpTests', () => {
     const responsePromise = cloudflare.zeroTrust.dex.httpTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       interval: 'minute',
-      timeEnd: 'string',
-      timeStart: 'string',
+      timeEnd: '1689606812000',
+      timeStart: '1689520412000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,8 +32,8 @@ describe('resource httpTests', () => {
     const response = await cloudflare.zeroTrust.dex.httpTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       interval: 'minute',
-      timeEnd: 'string',
-      timeStart: 'string',
+      timeEnd: '1689606812000',
+      timeStart: '1689520412000',
       colo: 'string',
       deviceId: ['string', 'string', 'string'],
     });

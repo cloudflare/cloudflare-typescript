@@ -14,7 +14,7 @@ describe('resource pagerules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.pagerules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
+      actions: [{}, {}, {}],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -38,6 +38,20 @@ describe('resource pagerules', () => {
             url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
           },
         },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
       ],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
       priority: 0,
@@ -49,7 +63,7 @@ describe('resource pagerules', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
+      actions: [{}, {}, {}],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,6 +80,20 @@ describe('resource pagerules', () => {
     const response = await cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
         {
           name: 'forward_url',
           value: {
@@ -143,6 +171,20 @@ describe('resource pagerules', () => {
     const response = await cloudflare.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
         {
           name: 'forward_url',
           value: {
