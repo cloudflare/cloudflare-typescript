@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource scripts', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.update(
       'my-dispatch-namespace',
@@ -26,7 +26,7 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.update(
       'my-dispatch-namespace',
@@ -76,8 +76,7 @@ describe('resource scripts', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.delete(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -92,8 +91,7 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.delete(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -101,8 +99,7 @@ describe('resource scripts', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.scripts.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',
@@ -117,8 +114,7 @@ describe('resource scripts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.workersForPlatforms.dispatch.namespaces.scripts.get(
       'my-dispatch-namespace',
       'this-is_my_script-01',

@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource groups', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.groups.create({
       include: [
@@ -30,7 +30,7 @@ describe('resource groups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.groups.create({
       include: [
@@ -54,7 +54,7 @@ describe('resource groups', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.groups.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -77,7 +77,7 @@ describe('resource groups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.groups.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       include: [
@@ -101,7 +101,7 @@ describe('resource groups', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.groups.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -113,7 +113,7 @@ describe('resource groups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.groups.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -128,7 +128,7 @@ describe('resource groups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.groups.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: 'string',
