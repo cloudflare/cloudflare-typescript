@@ -6285,35 +6285,9 @@ Methods:
 
 # Snippets
 
-Types:
-
-- <code><a href="./src/resources/snippets/snippets.ts">Snippet</a></code>
-- <code><a href="./src/resources/snippets/snippets.ts">SnippetDeleteResponse</a></code>
-
-Methods:
-
-- <code title="put /zones/{zone_identifier}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">update</a>(zoneIdentifier, snippetName, { ...params }) -> Snippet</code>
-- <code title="get /zones/{zone_identifier}/snippets">client.snippets.<a href="./src/resources/snippets/snippets.ts">list</a>(zoneIdentifier) -> SnippetsSinglePage</code>
-- <code title="delete /zones/{zone_identifier}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">delete</a>(zoneIdentifier, snippetName) -> SnippetDeleteResponse</code>
-- <code title="get /zones/{zone_identifier}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">get</a>(zoneIdentifier, snippetName) -> Snippet</code>
-
 ## Content
 
-Methods:
-
-- <code title="get /zones/{zone_identifier}/snippets/{snippet_name}/content">client.snippets.content.<a href="./src/resources/snippets/content.ts">get</a>(zoneIdentifier, snippetName) -> Response</code>
-
 ## Rules
-
-Types:
-
-- <code><a href="./src/resources/snippets/rules.ts">RuleUpdateResponse</a></code>
-- <code><a href="./src/resources/snippets/rules.ts">RuleListResponse</a></code>
-
-Methods:
-
-- <code title="put /zones/{zone_identifier}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>(zoneIdentifier, { ...params }) -> RuleUpdateResponse</code>
-- <code title="get /zones/{zone_identifier}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">list</a>(zoneIdentifier) -> RuleListResponsesSinglePage</code>
 
 # Calls
 
