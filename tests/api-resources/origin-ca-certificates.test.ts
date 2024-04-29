@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource originCACertificates', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create', async () => {
+  test('create', async () => {
     const responsePromise = cloudflare.originCACertificates.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource originCACertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.originCACertificates.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -34,16 +32,14 @@ describe('resource originCACertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.originCACertificates.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
+  test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.originCACertificates.list(
@@ -53,8 +49,7 @@ describe('resource originCACertificates', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test('delete', async () => {
     const responsePromise = cloudflare.originCACertificates.delete('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -65,8 +60,7 @@ describe('resource originCACertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
+  test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.originCACertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
@@ -75,8 +69,7 @@ describe('resource originCACertificates', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.originCACertificates.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -87,8 +80,7 @@ describe('resource originCACertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
+  test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.originCACertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {

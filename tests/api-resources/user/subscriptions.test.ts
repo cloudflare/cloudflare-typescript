@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource subscriptions', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
+  test('update', async () => {
     const responsePromise = cloudflare.user.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
+  test('delete', async () => {
     const responsePromise = cloudflare.user.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -34,8 +32,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
+  test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.user.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2', {
@@ -44,8 +41,7 @@ describe('resource subscriptions', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit', async () => {
+  test('edit', async () => {
     const responsePromise = cloudflare.user.subscriptions.edit('506e3185e9c882d175a2d0cb0093d9f2', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,8 +52,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.user.subscriptions.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -68,8 +63,7 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
+  test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.user.subscriptions.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,

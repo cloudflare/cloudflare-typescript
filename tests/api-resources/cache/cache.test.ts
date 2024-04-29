@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource cache', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('purge: only required params', async () => {
+  test('purge: only required params', async () => {
     const responsePromise = cloudflare.cache.purge({ zone_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource cache', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('purge: required and optional params', async () => {
+  test('purge: required and optional params', async () => {
     const response = await cloudflare.cache.purge({ zone_id: 'string', tags: ['some-tag', 'another-tag'] });
   });
 });

@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource loaDocuments', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.addressing.loaDocuments.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -25,7 +25,7 @@ describe('resource loaDocuments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.addressing.loaDocuments.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource jobs', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.logpush.datasets.jobs.get('http_requests', { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();

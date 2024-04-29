@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource phases', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.phases.update('http_request_firewall_custom', {
       rules: [{}, {}, {}],
@@ -25,7 +25,7 @@ describe('resource phases', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.rulesets.phases.update('http_request_firewall_custom', {
       rules: [
@@ -86,7 +86,7 @@ describe('resource phases', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.phases.get('http_request_firewall_custom', {
       account_id: 'string',

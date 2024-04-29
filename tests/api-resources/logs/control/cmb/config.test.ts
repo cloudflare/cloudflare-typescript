@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource config', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.logs.control.cmb.config.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,16 +23,14 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.logs.control.cmb.config.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       regions: 'eu',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.logs.control.cmb.config.delete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -46,15 +43,13 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.logs.control.cmb.config.delete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.logs.control.cmb.config.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -67,8 +62,7 @@ describe('resource config', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.logs.control.cmb.config.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

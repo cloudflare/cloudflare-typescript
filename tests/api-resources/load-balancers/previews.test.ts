@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource previews', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.previews.get('p1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource previews', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.previews.get('p1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

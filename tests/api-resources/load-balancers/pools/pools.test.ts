@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource pools', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'primary-dc-1',
@@ -26,8 +25,7 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'primary-dc-1',
@@ -78,8 +76,7 @@ describe('resource pools', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'primary-dc-1',
@@ -94,8 +91,7 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.update('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'primary-dc-1',
@@ -147,8 +143,7 @@ describe('resource pools', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -161,16 +156,14 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       monitor: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -183,15 +176,13 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.delete('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -204,8 +195,7 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       check_regions: ['WEU', 'ENAM'],
@@ -257,8 +247,7 @@ describe('resource pools', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -271,8 +260,7 @@ describe('resource pools', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.loadBalancers.pools.get('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

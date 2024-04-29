@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource webhooks', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.stream.webhooks.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       notificationUrl: 'https://example.com',
@@ -25,16 +24,14 @@ describe('resource webhooks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.stream.webhooks.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       notificationUrl: 'https://example.com',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.stream.webhooks.delete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,15 +44,13 @@ describe('resource webhooks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.stream.webhooks.delete({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.stream.webhooks.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -68,8 +63,7 @@ describe('resource webhooks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.stream.webhooks.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource organizations', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
@@ -26,7 +26,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
@@ -49,7 +49,7 @@ describe('resource organizations', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.update({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +73,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('revokeUsers: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
@@ -88,7 +88,7 @@ describe('resource organizations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('revokeUsers: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
