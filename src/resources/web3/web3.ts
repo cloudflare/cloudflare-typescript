@@ -9,9 +9,12 @@ export class Web3 extends APIResource {
 
 export namespace Web3 {
   export import Hostnames = HostnamesAPI.Hostnames;
-  export import Hostname = HostnamesAPI.Hostname;
+  export import HostnameCreateResponse = HostnamesAPI.HostnameCreateResponse;
+  export import HostnameListResponse = HostnamesAPI.HostnameListResponse;
   export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
-  export import HostnamesSinglePage = HostnamesAPI.HostnamesSinglePage;
+  export import HostnameEditResponse = HostnamesAPI.HostnameEditResponse;
+  export import HostnameGetResponse = HostnamesAPI.HostnameGetResponse;
+  export import HostnameListResponsesSinglePage = HostnamesAPI.HostnameListResponsesSinglePage;
   export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
   export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
 }

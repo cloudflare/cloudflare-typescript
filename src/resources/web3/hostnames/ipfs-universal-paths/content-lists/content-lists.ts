@@ -16,12 +16,12 @@ export class ContentLists extends APIResource {
     identifier: string,
     body: ContentListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentList> {
+  ): Core.APIPromise<ContentListUpdateResponse> {
     return (
       this._client.put(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: ContentList }>
+      ) as Core.APIPromise<{ result: ContentListUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,17 +32,24 @@ export class ContentLists extends APIResource {
     zoneIdentifier: string,
     identifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContentList> {
+  ): Core.APIPromise<ContentListGetResponse> {
     return (
       this._client.get(
         `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
         options,
-      ) as Core.APIPromise<{ result: ContentList }>
+      ) as Core.APIPromise<{ result: ContentListGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface ContentList {
+export interface ContentListUpdateResponse {
+  /**
+   * Behavior of the content list.
+   */
+  action?: 'block';
+}
+
+export interface ContentListGetResponse {
   /**
    * Behavior of the content list.
    */
@@ -84,7 +91,8 @@ export namespace ContentListUpdateParams {
 }
 
 export namespace ContentLists {
-  export import ContentList = ContentListsAPI.ContentList;
+  export import ContentListUpdateResponse = ContentListsAPI.ContentListUpdateResponse;
+  export import ContentListGetResponse = ContentListsAPI.ContentListGetResponse;
   export import ContentListUpdateParams = ContentListsAPI.ContentListUpdateParams;
   export import Entries = EntriesAPI.Entries;
   export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
