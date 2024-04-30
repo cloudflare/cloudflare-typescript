@@ -33,7 +33,11 @@ describe('resource jobs', () => {
       dataset: 'http_requests',
       enabled: false,
       frequency: 'high',
+      kind: 'edge',
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
+      max_upload_bytes: 5000000,
+      max_upload_interval_seconds: 30,
+      max_upload_records: 1000,
       name: 'example.com',
       output_options: {
         'CVE-2021-4428': true,
