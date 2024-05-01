@@ -1,11 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  ContentListUpdateResponse,
-  ContentListGetResponse,
-  ContentListUpdateParams,
-  ContentLists,
-} from './content-lists';
+export { ContentList, ContentListUpdateParams, ContentLists } from './content-lists';
 export {
   EntryCreateResponse,
   EntryUpdateResponse,

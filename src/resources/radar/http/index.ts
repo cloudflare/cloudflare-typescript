@@ -18,6 +18,7 @@ export {
   SummaryHTTPVersionResponse,
   SummaryIPVersionResponse,
   SummaryOSResponse,
+  SummaryPostQuantumResponse,
   SummaryTLSVersionResponse,
   SummaryBotClassParams,
   SummaryDeviceTypeParams,
@@ -25,6 +26,7 @@ export {
   SummaryHTTPVersionParams,
   SummaryIPVersionParams,
   SummaryOSParams,
+  SummaryPostQuantumParams,
   SummaryTLSVersionParams,
   Summary,
 } from './summary';
@@ -37,6 +39,7 @@ export {
   TimeseriesGroupHTTPVersionResponse,
   TimeseriesGroupIPVersionResponse,
   TimeseriesGroupOSResponse,
+  TimeseriesGroupPostQuantumResponse,
   TimeseriesGroupTLSVersionResponse,
   TimeseriesGroupBotClassParams,
   TimeseriesGroupBrowserParams,
@@ -46,6 +49,7 @@ export {
   TimeseriesGroupHTTPVersionParams,
   TimeseriesGroupIPVersionParams,
   TimeseriesGroupOSParams,
+  TimeseriesGroupPostQuantumParams,
   TimeseriesGroupTLSVersionParams,
   TimeseriesGroups,
 } from './timeseries-groups';
