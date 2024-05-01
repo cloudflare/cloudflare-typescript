@@ -1,4 +1,4 @@
-# Cloudflare Node API Library
+# Cloudflare Typescript API Library
 
 [![NPM version](https://img.shields.io/npm/v/cloudflare.svg)](https://npmjs.org/package/cloudflare)
 
