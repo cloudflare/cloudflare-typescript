@@ -37,6 +37,7 @@ export namespace HTTP {
   export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
   export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
   export import SummaryOSResponse = SummaryAPI.SummaryOSResponse;
+  export import SummaryPostQuantumResponse = SummaryAPI.SummaryPostQuantumResponse;
   export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
   export import SummaryBotClassParams = SummaryAPI.SummaryBotClassParams;
   export import SummaryDeviceTypeParams = SummaryAPI.SummaryDeviceTypeParams;
@@ -44,6 +45,7 @@ export namespace HTTP {
   export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
   export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
   export import SummaryOSParams = SummaryAPI.SummaryOSParams;
+  export import SummaryPostQuantumParams = SummaryAPI.SummaryPostQuantumParams;
   export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
   export import TimeseriesGroupBotClassResponse = TimeseriesGroupsAPI.TimeseriesGroupBotClassResponse;
@@ -54,6 +56,7 @@ export namespace HTTP {
   export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
   export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
   export import TimeseriesGroupOSResponse = TimeseriesGroupsAPI.TimeseriesGroupOSResponse;
+  export import TimeseriesGroupPostQuantumResponse = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumResponse;
   export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
   export import TimeseriesGroupBotClassParams = TimeseriesGroupsAPI.TimeseriesGroupBotClassParams;
   export import TimeseriesGroupBrowserParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserParams;
@@ -63,5 +66,6 @@ export namespace HTTP {
   export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
   export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
   export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
+  export import TimeseriesGroupPostQuantumParams = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumParams;
   export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
 }
