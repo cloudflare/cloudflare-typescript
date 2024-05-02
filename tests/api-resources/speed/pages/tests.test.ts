@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource tests', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.speed.tests.create('example.com', {
+    const responsePromise = cloudflare.speed.pages.tests.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,14 +24,14 @@ describe('resource tests', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.speed.tests.create('example.com', {
+    const response = await cloudflare.speed.pages.tests.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       region: 'us-central1',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.speed.tests.list('example.com', {
+    const responsePromise = cloudflare.speed.pages.tests.list('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource tests', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.speed.tests.list('example.com', {
+    const response = await cloudflare.speed.pages.tests.list('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 20,
@@ -53,7 +53,7 @@ describe('resource tests', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.speed.tests.delete('example.com', {
+    const responsePromise = cloudflare.speed.pages.tests.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,14 +66,14 @@ describe('resource tests', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.speed.tests.delete('example.com', {
+    const response = await cloudflare.speed.pages.tests.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       region: 'us-central1',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.speed.tests.get('example.com', 'string', {
+    const responsePromise = cloudflare.speed.pages.tests.get('example.com', 'string', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -86,7 +86,7 @@ describe('resource tests', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.speed.tests.get('example.com', 'string', {
+    const response = await cloudflare.speed.pages.tests.get('example.com', 'string', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
