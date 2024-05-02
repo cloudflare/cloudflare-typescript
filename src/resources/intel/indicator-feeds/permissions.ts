@@ -73,6 +73,16 @@ export namespace PermissionListResponse {
     description?: string;
 
     /**
+     * Whether the indicator feed can be attributed to a provider
+     */
+    is_attributable?: boolean;
+
+    /**
+     * Whether the indicator feed is exposed to customers
+     */
+    is_public?: boolean;
+
+    /**
      * The name of the indicator feed
      */
     name?: string;
