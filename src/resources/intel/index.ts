@@ -33,4 +33,4 @@ export {
   Miscategorizations,
 } from './miscategorizations';
 export { Sinkhole, SinkholeListParams, SinkholesSinglePage, Sinkholes } from './sinkholes';
-export { Whois } from './whois';
+export { Whois, WhoisGetResponse, WhoisGetParams } from './whois';
