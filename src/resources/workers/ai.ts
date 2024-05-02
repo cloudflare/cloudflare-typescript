@@ -31,6 +31,7 @@ export class AI extends APIResource {
 export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Uploadable
+  | Uploadable
   | Array<number>
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.SpeechRecognition
@@ -339,7 +340,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    image: Array<number>;
+    image: Array<number> | string;
 
     /**
      * Body param:
