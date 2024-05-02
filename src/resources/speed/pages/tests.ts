@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as TestsAPI from 'cloudflare/resources/speed/tests';
+import * as TestsAPI from 'cloudflare/resources/speed/pages/tests';
 import * as Shared from 'cloudflare/resources/shared';
 import * as SpeedAPI from 'cloudflare/resources/speed/speed';
 
