@@ -110,6 +110,16 @@ export interface IndicatorFeedCreateResponse {
   description?: string;
 
   /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
+
+  /**
    * The date and time when the data entry was last modified
    */
   modified_on?: string;
@@ -152,6 +162,16 @@ export interface IndicatorFeedListResponse {
    * The description of the example test
    */
   description?: string;
+
+  /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
 
   /**
    * The date and time when the data entry was last modified
