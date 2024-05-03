@@ -31,7 +31,6 @@ export class AI extends APIResource {
 export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Uploadable
-  | Uploadable
   | Array<number>
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.SpeechRecognition

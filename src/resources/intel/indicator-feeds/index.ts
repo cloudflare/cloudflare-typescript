@@ -23,3 +23,4 @@ export {
   PermissionDeleteParams,
   Permissions,
 } from './permissions';
+export { SnapshotUpdateResponse, SnapshotUpdateParams, Snapshots } from './snapshots';
