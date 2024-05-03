@@ -31,8 +31,7 @@ describe('resource indicatorFeeds', () => {
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.intel.indicatorFeeds.update(12, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -45,11 +44,12 @@ describe('resource indicatorFeeds', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.intel.indicatorFeeds.update(12, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      source: '@/Users/me/test.stix2',
+      feed_description: 'This is an example description',
+      is_attributable: true,
+      is_public: true,
     });
   });
 
