@@ -2,9 +2,9 @@
 
 import { APIResource } from 'cloudflare/resource';
 import * as AccountSettingsAPI from 'cloudflare/resources/workers/account-settings';
-import * as AIAPI from 'cloudflare/resources/workers/ai';
 import * as DomainsAPI from 'cloudflare/resources/workers/domains';
 import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
+import * as AIAPI from 'cloudflare/resources/workers/ai/ai';
 import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
 
 export class Workers extends APIResource {
