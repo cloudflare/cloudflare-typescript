@@ -3,11 +3,10 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as GatewaysAPI from 'cloudflare/resources/workers/ai/gateways/gateways';
-import * as LogsAPI from 'cloudflare/resources/workers/ai/gateways/logs';
+import * as LogsAPI from 'cloudflare/resources/ai-gateway/logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
-export class Gateways extends APIResource {
+export class AIGateway extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
 
   /**
@@ -15,14 +14,14 @@ export class Gateways extends APIResource {
    */
   create(
     accountTag: string,
-    body: GatewayCreateParams,
+    body: AIGatewayCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayCreateResponse> {
+  ): Core.APIPromise<AIGatewayCreateResponse> {
     return (
       this._client.post(`/accounts/${accountTag}/ai-gateway/gateways`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: GatewayCreateResponse }>
+      }) as Core.APIPromise<{ result: AIGatewayCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,14 +31,14 @@ export class Gateways extends APIResource {
   update(
     accountTag: string,
     id: string,
-    body: GatewayUpdateParams,
+    body: AIGatewayUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayUpdateResponse> {
+  ): Core.APIPromise<AIGatewayUpdateResponse> {
     return (
       this._client.put(`/accounts/${accountTag}/ai-gateway/gateways/${id}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: GatewayUpdateResponse }>
+      }) as Core.APIPromise<{ result: AIGatewayUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,24 +47,24 @@ export class Gateways extends APIResource {
    */
   list(
     accountTag: string,
-    query?: GatewayListParams,
+    query?: AIGatewayListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayListResponsesV4PagePaginationArray, GatewayListResponse>;
+  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse>;
   list(
     accountTag: string,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayListResponsesV4PagePaginationArray, GatewayListResponse>;
+  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse>;
   list(
     accountTag: string,
-    query: GatewayListParams | Core.RequestOptions = {},
+    query: AIGatewayListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayListResponsesV4PagePaginationArray, GatewayListResponse> {
+  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse> {
     if (isRequestOptions(query)) {
       return this.list(accountTag, {}, query);
     }
     return this._client.getAPIList(
       `/accounts/${accountTag}/ai-gateway/gateways`,
-      GatewayListResponsesV4PagePaginationArray,
+      AIGatewayListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -77,10 +76,10 @@ export class Gateways extends APIResource {
     accountTag: string,
     id: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayDeleteResponse> {
+  ): Core.APIPromise<AIGatewayDeleteResponse> {
     return (
       this._client.delete(`/accounts/${accountTag}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
-        result: GatewayDeleteResponse;
+        result: AIGatewayDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -88,22 +87,22 @@ export class Gateways extends APIResource {
   /**
    * Fetch a Gateway
    */
-  get(accountTag: string, id: string, options?: Core.RequestOptions): Core.APIPromise<GatewayGetResponse> {
+  get(accountTag: string, id: string, options?: Core.RequestOptions): Core.APIPromise<AIGatewayGetResponse> {
     return (
       this._client.get(`/accounts/${accountTag}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
-        result: GatewayGetResponse;
+        result: AIGatewayGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class GatewayListResponsesV4PagePaginationArray extends V4PagePaginationArray<GatewayListResponse> {}
+export class AIGatewayListResponsesV4PagePaginationArray extends V4PagePaginationArray<AIGatewayListResponse> {}
 
-export interface GatewayCreateResponse {
-  task: GatewayCreateResponse.Task;
+export interface AIGatewayCreateResponse {
+  task: AIGatewayCreateResponse.Task;
 }
 
-export namespace GatewayCreateResponse {
+export namespace AIGatewayCreateResponse {
   export interface Task {
     id: string;
 
@@ -129,7 +128,7 @@ export namespace GatewayCreateResponse {
   }
 }
 
-export interface GatewayUpdateResponse {
+export interface AIGatewayUpdateResponse {
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -153,7 +152,7 @@ export interface GatewayUpdateResponse {
   rate_limiting_technique?: string;
 }
 
-export interface GatewayListResponse {
+export interface AIGatewayListResponse {
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -177,7 +176,7 @@ export interface GatewayListResponse {
   rate_limiting_technique?: string;
 }
 
-export interface GatewayDeleteResponse {
+export interface AIGatewayDeleteResponse {
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -201,7 +200,7 @@ export interface GatewayDeleteResponse {
   rate_limiting_technique?: string;
 }
 
-export interface GatewayGetResponse {
+export interface AIGatewayGetResponse {
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -225,7 +224,7 @@ export interface GatewayGetResponse {
   rate_limiting_technique?: string;
 }
 
-export interface GatewayCreateParams {
+export interface AIGatewayCreateParams {
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number;
@@ -243,7 +242,7 @@ export interface GatewayCreateParams {
   rate_limiting_technique?: string;
 }
 
-export interface GatewayUpdateParams {
+export interface AIGatewayUpdateParams {
   cache_invalidate_on_update: boolean;
 
   cache_ttl: number;
@@ -261,7 +260,7 @@ export interface GatewayUpdateParams {
   rate_limiting_technique?: string;
 }
 
-export interface GatewayListParams extends V4PagePaginationArrayParams {
+export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   id?: string;
 
   /**
@@ -270,16 +269,7 @@ export interface GatewayListParams extends V4PagePaginationArrayParams {
   order_by?: string;
 }
 
-export namespace Gateways {
-  export import GatewayCreateResponse = GatewaysAPI.GatewayCreateResponse;
-  export import GatewayUpdateResponse = GatewaysAPI.GatewayUpdateResponse;
-  export import GatewayListResponse = GatewaysAPI.GatewayListResponse;
-  export import GatewayDeleteResponse = GatewaysAPI.GatewayDeleteResponse;
-  export import GatewayGetResponse = GatewaysAPI.GatewayGetResponse;
-  export import GatewayListResponsesV4PagePaginationArray = GatewaysAPI.GatewayListResponsesV4PagePaginationArray;
-  export import GatewayCreateParams = GatewaysAPI.GatewayCreateParams;
-  export import GatewayUpdateParams = GatewaysAPI.GatewayUpdateParams;
-  export import GatewayListParams = GatewaysAPI.GatewayListParams;
+export namespace AIGateway {
   export import Logs = LogsAPI.Logs;
   export import LogGetResponse = LogsAPI.LogGetResponse;
   export import LogGetParams = LogsAPI.LogGetParams;

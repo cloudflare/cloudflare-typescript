@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource logs', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.workers.ai.gateways.logs.get(
+    const responsePromise = cloudflare.aiGateway.logs.get(
       '0d37909e38d3e99c29fa2cd343ac421a',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -27,7 +27,7 @@ describe('resource logs', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.ai.gateways.logs.get(
+      cloudflare.aiGateway.logs.get(
         '0d37909e38d3e99c29fa2cd343ac421a',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { path: '/_stainless_unknown_path' },
@@ -38,7 +38,7 @@ describe('resource logs', () => {
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.ai.gateways.logs.get(
+      cloudflare.aiGateway.logs.get(
         '0d37909e38d3e99c29fa2cd343ac421a',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {

@@ -9,9 +9,9 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource gateways', () => {
+describe('resource aiGateway', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.workers.ai.gateways.create('0d37909e38d3e99c29fa2cd343ac421a', {
+    const responsePromise = cloudflare.aiGateway.create('0d37909e38d3e99c29fa2cd343ac421a', {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
@@ -28,7 +28,7 @@ describe('resource gateways', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.workers.ai.gateways.create('0d37909e38d3e99c29fa2cd343ac421a', {
+    const response = await cloudflare.aiGateway.create('0d37909e38d3e99c29fa2cd343ac421a', {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
@@ -41,7 +41,7 @@ describe('resource gateways', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.workers.ai.gateways.update(
+    const responsePromise = cloudflare.aiGateway.update(
       '0d37909e38d3e99c29fa2cd343ac421a',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       { cache_invalidate_on_update: true, cache_ttl: 0, collect_logs: true, name: 'string', slug: 'string' },
@@ -56,7 +56,7 @@ describe('resource gateways', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.workers.ai.gateways.update(
+    const response = await cloudflare.aiGateway.update(
       '0d37909e38d3e99c29fa2cd343ac421a',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
@@ -73,7 +73,7 @@ describe('resource gateways', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.workers.ai.gateways.list('0d37909e38d3e99c29fa2cd343ac421a');
+    const responsePromise = cloudflare.aiGateway.list('0d37909e38d3e99c29fa2cd343ac421a');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,16 +86,14 @@ describe('resource gateways', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.ai.gateways.list('0d37909e38d3e99c29fa2cd343ac421a', {
-        path: '/_stainless_unknown_path',
-      }),
+      cloudflare.aiGateway.list('0d37909e38d3e99c29fa2cd343ac421a', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.ai.gateways.list(
+      cloudflare.aiGateway.list(
         '0d37909e38d3e99c29fa2cd343ac421a',
         { id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', order_by: 'string', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
@@ -104,7 +102,7 @@ describe('resource gateways', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.workers.ai.gateways.delete(
+    const responsePromise = cloudflare.aiGateway.delete(
       '0d37909e38d3e99c29fa2cd343ac421a',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -120,7 +118,7 @@ describe('resource gateways', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.ai.gateways.delete(
+      cloudflare.aiGateway.delete(
         '0d37909e38d3e99c29fa2cd343ac421a',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { path: '/_stainless_unknown_path' },
@@ -129,7 +127,7 @@ describe('resource gateways', () => {
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.workers.ai.gateways.get(
+    const responsePromise = cloudflare.aiGateway.get(
       '0d37909e38d3e99c29fa2cd343ac421a',
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     );
@@ -145,11 +143,9 @@ describe('resource gateways', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.workers.ai.gateways.get(
-        '0d37909e38d3e99c29fa2cd343ac421a',
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        { path: '/_stainless_unknown_path' },
-      ),
+      cloudflare.aiGateway.get('0d37909e38d3e99c29fa2cd343ac421a', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });
