@@ -2268,39 +2268,11 @@ Types:
 
 Types:
 
-- <code><a href="./src/resources/workers/ai/ai.ts">AIRunResponse</a></code>
+- <code><a href="./src/resources/workers/ai.ts">AIRunResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.workers.ai.<a href="./src/resources/workers/ai/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
-
-### Gateways
-
-Types:
-
-- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayCreateResponse</a></code>
-- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayUpdateResponse</a></code>
-- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayListResponse</a></code>
-- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayDeleteResponse</a></code>
-- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_tag}/ai-gateway/gateways">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">create</a>(accountTag, { ...params }) -> GatewayCreateResponse</code>
-- <code title="put /accounts/{account_tag}/ai-gateway/gateways/{id}">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">update</a>(accountTag, id, { ...params }) -> GatewayUpdateResponse</code>
-- <code title="get /accounts/{account_tag}/ai-gateway/gateways">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">list</a>(accountTag, { ...params }) -> GatewayListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_tag}/ai-gateway/gateways/{id}">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">delete</a>(accountTag, id) -> GatewayDeleteResponse</code>
-- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">get</a>(accountTag, id) -> GatewayGetResponse</code>
-
-#### Logs
-
-Types:
-
-- <code><a href="./src/resources/workers/ai/gateways/logs.ts">LogGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}/logs">client.workers.ai.gateways.logs.<a href="./src/resources/workers/ai/gateways/logs.ts">get</a>(accountTag, id, { ...params }) -> LogGetResponse</code>
+- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.workers.ai.<a href="./src/resources/workers/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
 
 ## Scripts
 
@@ -6451,3 +6423,31 @@ Methods:
 
 - <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
+
+# AIGateway
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_tag}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">create</a>(accountTag, { ...params }) -> AIGatewayCreateResponse</code>
+- <code title="put /accounts/{account_tag}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">update</a>(accountTag, id, { ...params }) -> AIGatewayUpdateResponse</code>
+- <code title="get /accounts/{account_tag}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">list</a>(accountTag, { ...params }) -> AIGatewayListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_tag}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">delete</a>(accountTag, id) -> AIGatewayDeleteResponse</code>
+- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">get</a>(accountTag, id) -> AIGatewayGetResponse</code>
+
+## Logs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(accountTag, id, { ...params }) -> LogGetResponse</code>

@@ -3,7 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
-import * as LogsAPI from 'cloudflare/resources/workers/ai/gateways/logs';
+import * as LogsAPI from 'cloudflare/resources/ai-gateway/logs';
 
 export class Logs extends APIResource {
   /**
