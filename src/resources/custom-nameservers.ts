@@ -64,22 +64,6 @@ export class CustomNameservers extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Verify Account Custom Nameserver Glue Records
-   */
-  verify(
-    params: CustomNameserverVerifyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverVerifyResponse | null> {
-    const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/custom_ns/verify`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomNameserverVerifyResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 /**
@@ -126,13 +110,11 @@ export namespace CustomNameserver {
   }
 }
 
-export type CustomNameserverDeleteResponse = unknown | Array<unknown> | string;
+export type CustomNameserverDeleteResponse = Array<unknown>;
 
 export type CustomNameserverAvailabiltyResponse = Array<string>;
 
 export type CustomNameserverGetResponse = Array<CustomNameserver>;
-
-export type CustomNameserverVerifyResponse = Array<CustomNameserver>;
 
 export interface CustomNameserverCreateParams {
   /**
@@ -170,16 +152,4 @@ export interface CustomNameserverGetParams {
    * Account identifier tag.
    */
   account_id: string;
-}
-
-export interface CustomNameserverVerifyParams {
-  /**
-   * Path param: Account identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }

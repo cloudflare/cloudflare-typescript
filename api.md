@@ -1344,7 +1344,6 @@ Types:
 - <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverDeleteResponse</a></code>
 - <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverAvailabiltyResponse</a></code>
 - <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverGetResponse</a></code>
-- <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverVerifyResponse</a></code>
 
 Methods:
 
@@ -1352,7 +1351,6 @@ Methods:
 - <code title="delete /accounts/{account_id}/custom_ns/{custom_ns_id}">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">delete</a>(customNSId, { ...params }) -> CustomNameserverDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/custom_ns/availability">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">availabilty</a>({ ...params }) -> CustomNameserverAvailabiltyResponse | null</code>
 - <code title="get /accounts/{account_id}/custom_ns">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">get</a>({ ...params }) -> CustomNameserverGetResponse | null</code>
-- <code title="post /accounts/{account_id}/custom_ns/verify">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">verify</a>({ ...params }) -> CustomNameserverVerifyResponse | null</code>
 
 # DNS
 
