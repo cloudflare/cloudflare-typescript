@@ -6426,28 +6426,4 @@ Methods:
 
 # AIGateway
 
-Types:
-
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayCreateResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayUpdateResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayListResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayDeleteResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_tag}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">create</a>(accountTag, { ...params }) -> AIGatewayCreateResponse</code>
-- <code title="put /accounts/{account_tag}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">update</a>(accountTag, id, { ...params }) -> AIGatewayUpdateResponse</code>
-- <code title="get /accounts/{account_tag}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">list</a>(accountTag, { ...params }) -> AIGatewayListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_tag}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">delete</a>(accountTag, id) -> AIGatewayDeleteResponse</code>
-- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">get</a>(accountTag, id) -> AIGatewayGetResponse</code>
-
 ## Logs
-
-Types:
-
-- <code><a href="./src/resources/ai-gateway/logs.ts">LogGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(accountTag, id, { ...params }) -> LogGetResponse</code>
