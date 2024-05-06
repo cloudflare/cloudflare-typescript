@@ -151,5 +151,5 @@ export interface OriginCACertificateListParams {
   /**
    * Identifier
    */
-  zone_id?: string;
+  identifier?: string;
 }

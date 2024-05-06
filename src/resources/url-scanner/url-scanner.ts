@@ -134,7 +134,7 @@ export interface URLScannerScanParams {
   page_asn?: string;
 
   /**
-   * Filter scans by main page hostname (domain of effective URL).
+   * Filter scans by main page hostname .
    */
   page_hostname?: string;
 
@@ -144,12 +144,12 @@ export interface URLScannerScanParams {
   page_ip?: string;
 
   /**
-   * Filter scans by exact match of effective URL path (also supports suffix search).
+   * Filter scans by exact match URL path (also supports suffix search).
    */
   page_path?: string;
 
   /**
-   * Filter scans by submitted or scanned URL
+   * Filter scans by exact match to scanned URL (_after redirects_)
    */
   page_url?: string;
 
@@ -164,7 +164,7 @@ export interface URLScannerScanParams {
   scanId?: string;
 
   /**
-   * Filter scans by URL of _any_ request made by the webpage
+   * Filter scans by exact match URL of _any_ request made by the webpage
    */
   url?: string;
 }

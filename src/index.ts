@@ -223,7 +223,6 @@ export class Cloudflare extends Core.APIClient {
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   eventNotifications: API.EventNotifications = new API.EventNotifications(this);
-  aiGateway: API.AIGateway = new API.AIGateway(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -551,8 +550,6 @@ export namespace Cloudflare {
   export import CloudforceOne = API.CloudforceOne;
 
   export import EventNotifications = API.EventNotifications;
-
-  export import AIGateway = API.AIGateway;
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;

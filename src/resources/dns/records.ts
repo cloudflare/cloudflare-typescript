@@ -2248,7 +2248,7 @@ export namespace URIRecord {
     /**
      * The record content.
      */
-    target?: string;
+    content?: string;
 
     /**
      * The record weight.
@@ -3552,7 +3552,7 @@ export namespace RecordCreateParams {
       /**
        * The record content.
        */
-      target?: string;
+      content?: string;
 
       /**
        * The record weight.
@@ -4821,7 +4821,7 @@ export namespace RecordUpdateParams {
       /**
        * The record content.
        */
-      target?: string;
+      content?: string;
 
       /**
        * The record weight.
@@ -6267,7 +6267,7 @@ export namespace RecordEditParams {
       /**
        * The record content.
        */
-      target?: string;
+      content?: string;
 
       /**
        * The record weight.

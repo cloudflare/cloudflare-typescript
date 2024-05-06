@@ -2,7 +2,6 @@
 
 export * from './shared';
 export { ACM } from './acm/acm';
-export { AIGateway } from './ai-gateway/ai-gateway';
 export { Accounts } from './accounts/accounts';
 export { Addressing } from './addressing/addressing';
 export { Alerting } from './alerting/alerting';
