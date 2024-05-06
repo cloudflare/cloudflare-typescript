@@ -9,9 +9,11 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource pages', () => {
-  test('list: only required params', async () => {
-    const responsePromise = cloudflare.speed.pages.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+describe('resource speed', () => {
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.speed.delete('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,13 +23,36 @@ describe('resource pages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await cloudflare.speed.pages.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.speed.delete('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      region: 'us-central1',
+    });
+  });
+
+  test('scheduleGet: only required params', async () => {
+    const responsePromise = cloudflare.speed.scheduleGet('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('scheduleGet: required and optional params', async () => {
+    const response = await cloudflare.speed.scheduleGet('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      region: 'us-central1',
+    });
   });
 
   // TODO: investigate broken test
-  test.skip('trend: only required params', async () => {
-    const responsePromise = cloudflare.speed.pages.trend('example.com', {
+  test.skip('trendsList: only required params', async () => {
+    const responsePromise = cloudflare.speed.trendsList('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
@@ -45,8 +70,8 @@ describe('resource pages', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('trend: required and optional params', async () => {
-    const response = await cloudflare.speed.pages.trend('example.com', {
+  test.skip('trendsList: required and optional params', async () => {
+    const response = await cloudflare.speed.trendsList('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',

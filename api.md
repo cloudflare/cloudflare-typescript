@@ -1344,6 +1344,7 @@ Types:
 - <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverDeleteResponse</a></code>
 - <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverAvailabiltyResponse</a></code>
 - <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverGetResponse</a></code>
+- <code><a href="./src/resources/custom-nameservers.ts">CustomNameserverVerifyResponse</a></code>
 
 Methods:
 
@@ -1351,6 +1352,7 @@ Methods:
 - <code title="delete /accounts/{account_id}/custom_ns/{custom_ns_id}">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">delete</a>(customNSId, { ...params }) -> CustomNameserverDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/custom_ns/availability">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">availabilty</a>({ ...params }) -> CustomNameserverAvailabiltyResponse | null</code>
 - <code title="get /accounts/{account_id}/custom_ns">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">get</a>({ ...params }) -> CustomNameserverGetResponse | null</code>
+- <code title="post /accounts/{account_id}/custom_ns/verify">client.customNameservers.<a href="./src/resources/custom-nameservers.ts">verify</a>({ ...params }) -> CustomNameserverVerifyResponse | null</code>
 
 # DNS
 
@@ -3141,11 +3143,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/intel/whois.ts">Whois</a></code>
-- <code><a href="./src/resources/intel/whois.ts">WhoisGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/intel/whois">client.intel.whois.<a href="./src/resources/intel/whois.ts">get</a>({ ...params }) -> WhoisGetResponse</code>
 
 ## IndicatorFeeds
 
@@ -3160,20 +3157,10 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/intel/indicator-feeds">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">create</a>({ ...params }) -> IndicatorFeedCreateResponse</code>
-- <code title="put /accounts/{account_id}/intel/indicator-feeds/{feed_id}">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">update</a>(feedId, { ...params }) -> IndicatorFeedUpdateResponse</code>
+- <code title="put /accounts/{account_id}/intel/indicator-feeds/{feed_id}/snapshot">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">update</a>(feedId, { ...params }) -> IndicatorFeedUpdateResponse</code>
 - <code title="get /accounts/{account_id}/intel/indicator-feeds">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">list</a>({ ...params }) -> IndicatorFeedListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/intel/indicator-feeds/{feed_id}/data">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">data</a>(feedId, { ...params }) -> string</code>
 - <code title="get /accounts/{account_id}/intel/indicator-feeds/{feed_id}">client.intel.indicatorFeeds.<a href="./src/resources/intel/indicator-feeds/indicator-feeds.ts">get</a>(feedId, { ...params }) -> IndicatorFeedGetResponse</code>
-
-### Snapshots
-
-Types:
-
-- <code><a href="./src/resources/intel/indicator-feeds/snapshots.ts">SnapshotUpdateResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/intel/indicator-feeds/{feed_id}/snapshot">client.intel.indicatorFeeds.snapshots.<a href="./src/resources/intel/indicator-feeds/snapshots.ts">update</a>(feedId, { ...params }) -> SnapshotUpdateResponse</code>
 
 ### Permissions
 
@@ -6054,7 +6041,6 @@ Types:
 - <code><a href="./src/resources/radar/http/summary.ts">SummaryHTTPVersionResponse</a></code>
 - <code><a href="./src/resources/radar/http/summary.ts">SummaryIPVersionResponse</a></code>
 - <code><a href="./src/resources/radar/http/summary.ts">SummaryOSResponse</a></code>
-- <code><a href="./src/resources/radar/http/summary.ts">SummaryPostQuantumResponse</a></code>
 - <code><a href="./src/resources/radar/http/summary.ts">SummaryTLSVersionResponse</a></code>
 
 Methods:
@@ -6065,7 +6051,6 @@ Methods:
 - <code title="get /radar/http/summary/http_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">httpVersion</a>({ ...params }) -> SummaryHTTPVersionResponse</code>
 - <code title="get /radar/http/summary/ip_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
 - <code title="get /radar/http/summary/os">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">os</a>({ ...params }) -> SummaryOSResponse</code>
-- <code title="get /radar/http/summary/post_quantum">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">postQuantum</a>({ ...params }) -> SummaryPostQuantumResponse</code>
 - <code title="get /radar/http/summary/tls_version">client.radar.http.summary.<a href="./src/resources/radar/http/summary.ts">tlsVersion</a>({ ...params }) -> SummaryTLSVersionResponse</code>
 
 ### TimeseriesGroups
@@ -6080,7 +6065,6 @@ Types:
 - <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupHTTPVersionResponse</a></code>
 - <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
 - <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupOSResponse</a></code>
-- <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupPostQuantumResponse</a></code>
 - <code><a href="./src/resources/radar/http/timeseries-groups.ts">TimeseriesGroupTLSVersionResponse</a></code>
 
 Methods:
@@ -6093,7 +6077,6 @@ Methods:
 - <code title="get /radar/http/timeseries_groups/http_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">httpVersion</a>({ ...params }) -> TimeseriesGroupHTTPVersionResponse</code>
 - <code title="get /radar/http/timeseries_groups/ip_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
 - <code title="get /radar/http/timeseries_groups/os">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">os</a>({ ...params }) -> TimeseriesGroupOSResponse</code>
-- <code title="get /radar/http/timeseries_groups/post_quantum">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">postQuantum</a>({ ...params }) -> TimeseriesGroupPostQuantumResponse</code>
 - <code title="get /radar/http/timeseries_groups/tls_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">tlsVersion</a>({ ...params }) -> TimeseriesGroupTLSVersionResponse</code>
 
 ## Quality
@@ -6211,6 +6194,28 @@ Types:
 - <code><a href="./src/resources/speed/speed.ts">LabeledRegion</a></code>
 - <code><a href="./src/resources/speed/speed.ts">LighthouseReport</a></code>
 - <code><a href="./src/resources/speed/speed.ts">Trend</a></code>
+- <code><a href="./src/resources/speed/speed.ts">SpeedDeleteResponse</a></code>
+
+Methods:
+
+- <code title="delete /zones/{zone_id}/speed_api/schedule/{url}">client.speed.<a href="./src/resources/speed/speed.ts">delete</a>(url, { ...params }) -> SpeedDeleteResponse</code>
+- <code title="get /zones/{zone_id}/speed_api/schedule/{url}">client.speed.<a href="./src/resources/speed/speed.ts">scheduleGet</a>(url, { ...params }) -> Schedule</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/trend">client.speed.<a href="./src/resources/speed/speed.ts">trendsList</a>(url, { ...params }) -> Trend</code>
+
+## Tests
+
+Types:
+
+- <code><a href="./src/resources/speed/tests.ts">Test</a></code>
+- <code><a href="./src/resources/speed/tests.ts">TestListResponse</a></code>
+- <code><a href="./src/resources/speed/tests.ts">TestDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.tests.<a href="./src/resources/speed/tests.ts">create</a>(url, { ...params }) -> Test</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.tests.<a href="./src/resources/speed/tests.ts">list</a>(url, { ...params }) -> TestListResponse</code>
+- <code title="delete /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.tests.<a href="./src/resources/speed/tests.ts">delete</a>(url, { ...params }) -> TestDeleteResponse</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests/{test_id}">client.speed.tests.<a href="./src/resources/speed/tests.ts">get</a>(url, testId, { ...params }) -> Test</code>
 
 ## Schedule
 
@@ -6218,13 +6223,10 @@ Types:
 
 - <code><a href="./src/resources/speed/schedule.ts">Schedule</a></code>
 - <code><a href="./src/resources/speed/schedule.ts">ScheduleCreateResponse</a></code>
-- <code><a href="./src/resources/speed/schedule.ts">ScheduleDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/speed_api/schedule/{url}">client.speed.schedule.<a href="./src/resources/speed/schedule.ts">create</a>(url, { ...params }) -> ScheduleCreateResponse</code>
-- <code title="delete /zones/{zone_id}/speed_api/schedule/{url}">client.speed.schedule.<a href="./src/resources/speed/schedule.ts">delete</a>(url, { ...params }) -> ScheduleDeleteResponse</code>
-- <code title="get /zones/{zone_id}/speed_api/schedule/{url}">client.speed.schedule.<a href="./src/resources/speed/schedule.ts">get</a>(url, { ...params }) -> Schedule</code>
 
 ## Availabilities
 
@@ -6240,27 +6242,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/speed/pages/pages.ts">PageListResponse</a></code>
+- <code><a href="./src/resources/speed/pages.ts">PageListResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/speed_api/pages">client.speed.pages.<a href="./src/resources/speed/pages/pages.ts">list</a>({ ...params }) -> PageListResponsesSinglePage</code>
-- <code title="get /zones/{zone_id}/speed_api/pages/{url}/trend">client.speed.pages.<a href="./src/resources/speed/pages/pages.ts">trend</a>(url, { ...params }) -> Trend</code>
-
-### Tests
-
-Types:
-
-- <code><a href="./src/resources/speed/pages/tests.ts">Test</a></code>
-- <code><a href="./src/resources/speed/pages/tests.ts">TestListResponse</a></code>
-- <code><a href="./src/resources/speed/pages/tests.ts">TestDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">create</a>(url, { ...params }) -> Test</code>
-- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">list</a>(url, { ...params }) -> TestListResponse</code>
-- <code title="delete /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">delete</a>(url, { ...params }) -> TestDeleteResponse</code>
-- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests/{test_id}">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">get</a>(url, testId, { ...params }) -> Test</code>
+- <code title="get /zones/{zone_id}/speed_api/pages">client.speed.pages.<a href="./src/resources/speed/pages.ts">list</a>({ ...params }) -> PageListResponsesSinglePage</code>
 
 # DCVDelegation
 
@@ -6295,35 +6281,9 @@ Methods:
 
 # Snippets
 
-Types:
-
-- <code><a href="./src/resources/snippets/snippets.ts">Snippet</a></code>
-- <code><a href="./src/resources/snippets/snippets.ts">SnippetDeleteResponse</a></code>
-
-Methods:
-
-- <code title="put /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">update</a>(snippetName, { ...params }) -> Snippet</code>
-- <code title="get /zones/{zone_id}/snippets">client.snippets.<a href="./src/resources/snippets/snippets.ts">list</a>({ ...params }) -> SnippetsSinglePage</code>
-- <code title="delete /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">delete</a>(snippetName, { ...params }) -> SnippetDeleteResponse</code>
-- <code title="get /zones/{zone_id}/snippets/{snippet_name}">client.snippets.<a href="./src/resources/snippets/snippets.ts">get</a>(snippetName, { ...params }) -> Snippet</code>
-
 ## Content
 
-Methods:
-
-- <code title="get /zones/{zone_id}/snippets/{snippet_name}/content">client.snippets.content.<a href="./src/resources/snippets/content.ts">get</a>(snippetName, { ...params }) -> Response</code>
-
 ## Rules
-
-Types:
-
-- <code><a href="./src/resources/snippets/rules.ts">RuleUpdateResponse</a></code>
-- <code><a href="./src/resources/snippets/rules.ts">RuleListResponse</a></code>
-
-Methods:
-
-- <code title="put /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>({ ...params }) -> RuleUpdateResponse</code>
-- <code title="get /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
 
 # Calls
 
@@ -6421,31 +6381,3 @@ Methods:
 
 - <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
 - <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
-
-# AIGateway
-
-Types:
-
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayCreateResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayUpdateResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayListResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayDeleteResponse</a></code>
-- <code><a href="./src/resources/ai-gateway/ai-gateway.ts">AIGatewayGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">create</a>({ ...params }) -> AIGatewayCreateResponse</code>
-- <code title="put /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">update</a>(id, { ...params }) -> AIGatewayUpdateResponse</code>
-- <code title="get /accounts/{account_id}/ai-gateway/gateways">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">list</a>({ ...params }) -> AIGatewayListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">delete</a>(id, { ...params }) -> AIGatewayDeleteResponse</code>
-- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">get</a>(id, { ...params }) -> AIGatewayGetResponse</code>
-
-## Logs
-
-Types:
-
-- <code><a href="./src/resources/ai-gateway/logs.ts">LogGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(id, { ...params }) -> LogGetResponse</code>

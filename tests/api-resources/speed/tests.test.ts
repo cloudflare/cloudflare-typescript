@@ -9,9 +9,9 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource snippets', () => {
-  test('update: only required params', async () => {
-    const responsePromise = cloudflare.snippets.update('snippet_name_01', {
+describe('resource tests', () => {
+  test('create: only required params', async () => {
+    const responsePromise = cloudflare.speed.tests.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,16 +23,17 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
-    const response = await cloudflare.snippets.update('snippet_name_01', {
+  test('create: required and optional params', async () => {
+    const response = await cloudflare.speed.tests.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      files: "export { async function fetch(request, env) {return new Response('some_response') } }",
-      metadata: { main_module: 'main.js' },
+      region: 'us-central1',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = cloudflare.speed.tests.list('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,11 +44,16 @@ describe('resource snippets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await cloudflare.speed.tests.list('example.com', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      page: 1,
+      per_page: 20,
+      region: 'us-central1',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.snippets.delete('snippet_name_01', {
+    const responsePromise = cloudflare.speed.tests.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -60,13 +66,14 @@ describe('resource snippets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.snippets.delete('snippet_name_01', {
+    const response = await cloudflare.speed.tests.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      region: 'us-central1',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.snippets.get('snippet_name_01', {
+    const responsePromise = cloudflare.speed.tests.get('example.com', 'string', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -79,7 +86,7 @@ describe('resource snippets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.snippets.get('snippet_name_01', {
+    const response = await cloudflare.speed.tests.get('example.com', 'string', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

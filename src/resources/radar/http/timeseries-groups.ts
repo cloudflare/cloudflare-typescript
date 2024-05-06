@@ -195,30 +195,6 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per Post Quantum
-   * suport.
-   */
-  postQuantum(
-    query?: TimeseriesGroupPostQuantumParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupPostQuantumResponse>;
-  postQuantum(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupPostQuantumResponse>;
-  postQuantum(
-    query: TimeseriesGroupPostQuantumParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupPostQuantumResponse> {
-    if (isRequestOptions(query)) {
-      return this.postQuantum({}, query);
-    }
-    return (
-      this._client.get('/radar/http/timeseries_groups/post_quantum', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupPostQuantumResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get a time series of the percentage distribution of traffic per TLS protocol
    * version.
    */
@@ -363,22 +339,6 @@ export namespace TimeseriesGroupOSResponse {
   export interface Serie0 {
     timestamps: Array<string>;
     [k: string]: Array<string>;
-  }
-}
-
-export interface TimeseriesGroupPostQuantumResponse {
-  meta: unknown;
-
-  serie_0: TimeseriesGroupPostQuantumResponse.Serie0;
-}
-
-export namespace TimeseriesGroupPostQuantumResponse {
-  export interface Serie0 {
-    NOT_SUPPORTED: Array<string>;
-
-    SUPPORTED: Array<string>;
-
-    timestamps: Array<string>;
   }
 }
 
@@ -1251,115 +1211,6 @@ export interface TimeseriesGroupOSParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export interface TimeseriesGroupPostQuantumParams {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes
-   * or 1 hour intervals). Refer to
-   * [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results.
-   * For example, `-174, 3356` excludes results from AS174, but includes results from
-   * AS3356.
-   */
-  asn?: Array<string>;
-
-  /**
-   * Filter for bot class. Refer to
-   * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
-   */
-  botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
-
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start
-   * with `-` to exclude from results. For example, `-EU,NA` excludes results from
-   * Europe, but includes results from North America.
-   */
-  continent?: Array<string>;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: Array<string>;
-
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous
-   * week. Use this parameter or set specific start and end dates (`dateStart` and
-   * `dateEnd` parameters).
-   */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
-
-  /**
-   * Array of datetimes to filter the start of a series.
-   */
-  dateStart?: Array<string>;
-
-  /**
-   * Filter for device type.
-   */
-  deviceType?: Array<'DESKTOP' | 'MOBILE' | 'OTHER'>;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Filter for http protocol.
-   */
-  httpProtocol?: Array<'HTTP' | 'HTTPS'>;
-
-  /**
-   * Filter for http version.
-   */
-  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
-
-  /**
-   * Filter for ip version.
-   */
-  ipVersion?: Array<'IPv4' | 'IPv6'>;
-
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with
-   * `-` to exclude from results. For example, `-US,PT` excludes results from the US,
-   * but includes results from PT.
-   */
-  location?: Array<string>;
-
-  /**
-   * Array of names that will be used to name the series in responses.
-   */
-  name?: Array<string>;
-
-  /**
-   * Filter for os name.
-   */
-  os?: Array<'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV'>;
-
-  /**
-   * Filter for tls version.
-   */
-  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
-}
-
 export interface TimeseriesGroupTLSVersionParams {
   /**
    * Aggregation interval results should be returned in (for example, in 15 minutes
@@ -1473,7 +1324,6 @@ export namespace TimeseriesGroups {
   export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
   export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
   export import TimeseriesGroupOSResponse = TimeseriesGroupsAPI.TimeseriesGroupOSResponse;
-  export import TimeseriesGroupPostQuantumResponse = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumResponse;
   export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
   export import TimeseriesGroupBotClassParams = TimeseriesGroupsAPI.TimeseriesGroupBotClassParams;
   export import TimeseriesGroupBrowserParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserParams;
@@ -1483,6 +1333,5 @@ export namespace TimeseriesGroups {
   export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
   export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
   export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
-  export import TimeseriesGroupPostQuantumParams = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumParams;
   export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
 }

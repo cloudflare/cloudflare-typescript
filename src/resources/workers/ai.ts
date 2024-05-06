@@ -339,7 +339,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    image: Array<number> | string;
+    image: Array<number>;
 
     /**
      * Body param:

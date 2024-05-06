@@ -40,9 +40,9 @@ export class CustomNameservers extends APIResource {
   }
 }
 
-export type CustomNameserverUpdateResponse = Array<unknown>;
+export type CustomNameserverUpdateResponse = unknown | Array<unknown> | string;
 
-export type CustomNameserverGetResponse = Array<unknown>;
+export type CustomNameserverGetResponse = unknown | Array<unknown> | string;
 
 export interface CustomNameserverUpdateParams {
   /**
