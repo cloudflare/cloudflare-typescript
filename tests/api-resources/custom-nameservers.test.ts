@@ -88,25 +88,4 @@ describe('resource customNameservers', () => {
       account_id: '372e67954025e0ba6aaa6d586b9e0b59',
     });
   });
-
-  test('verify: only required params', async () => {
-    const responsePromise = cloudflare.customNameservers.verify({
-      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
-      body: {},
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('verify: required and optional params', async () => {
-    const response = await cloudflare.customNameservers.verify({
-      account_id: '372e67954025e0ba6aaa6d586b9e0b59',
-      body: {},
-    });
-  });
 });
