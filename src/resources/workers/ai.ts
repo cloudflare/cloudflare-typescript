@@ -2,13 +2,10 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as AIAPI from 'cloudflare/resources/workers/ai/ai';
-import * as GatewaysAPI from 'cloudflare/resources/workers/ai/gateways/gateways';
+import * as AIAPI from 'cloudflare/resources/workers/ai';
 import { type Uploadable } from 'cloudflare/core';
 
 export class AI extends APIResource {
-  gateways: GatewaysAPI.Gateways = new GatewaysAPI.Gateways(this._client);
-
   /**
    * This endpoint provides users with the capability to run specific AI models
    * on-demand.
@@ -382,14 +379,4 @@ export namespace AIRunParams {
 export namespace AI {
   export import AIRunResponse = AIAPI.AIRunResponse;
   export import AIRunParams = AIAPI.AIRunParams;
-  export import Gateways = GatewaysAPI.Gateways;
-  export import GatewayCreateResponse = GatewaysAPI.GatewayCreateResponse;
-  export import GatewayUpdateResponse = GatewaysAPI.GatewayUpdateResponse;
-  export import GatewayListResponse = GatewaysAPI.GatewayListResponse;
-  export import GatewayDeleteResponse = GatewaysAPI.GatewayDeleteResponse;
-  export import GatewayGetResponse = GatewaysAPI.GatewayGetResponse;
-  export import GatewayListResponsesV4PagePaginationArray = GatewaysAPI.GatewayListResponsesV4PagePaginationArray;
-  export import GatewayCreateParams = GatewaysAPI.GatewayCreateParams;
-  export import GatewayUpdateParams = GatewaysAPI.GatewayUpdateParams;
-  export import GatewayListParams = GatewaysAPI.GatewayListParams;
 }
