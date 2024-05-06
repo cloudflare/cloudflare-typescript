@@ -2268,11 +2268,39 @@ Types:
 
 Types:
 
-- <code><a href="./src/resources/workers/ai.ts">AIRunResponse</a></code>
+- <code><a href="./src/resources/workers/ai/ai.ts">AIRunResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.workers.ai.<a href="./src/resources/workers/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
+- <code title="post /accounts/{account_id}/ai/run/{model_name}">client.workers.ai.<a href="./src/resources/workers/ai/ai.ts">run</a>(modelName, { ...params }) -> AIRunResponse</code>
+
+### Gateways
+
+Types:
+
+- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayCreateResponse</a></code>
+- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayUpdateResponse</a></code>
+- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayListResponse</a></code>
+- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayDeleteResponse</a></code>
+- <code><a href="./src/resources/workers/ai/gateways/gateways.ts">GatewayGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_tag}/ai-gateway/gateways">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">create</a>(accountTag, { ...params }) -> GatewayCreateResponse</code>
+- <code title="put /accounts/{account_tag}/ai-gateway/gateways/{id}">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">update</a>(accountTag, id, { ...params }) -> GatewayUpdateResponse</code>
+- <code title="get /accounts/{account_tag}/ai-gateway/gateways">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">list</a>(accountTag, { ...params }) -> GatewayListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_tag}/ai-gateway/gateways/{id}">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">delete</a>(accountTag, id) -> GatewayDeleteResponse</code>
+- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}">client.workers.ai.gateways.<a href="./src/resources/workers/ai/gateways/gateways.ts">get</a>(accountTag, id) -> GatewayGetResponse</code>
+
+#### Logs
+
+Types:
+
+- <code><a href="./src/resources/workers/ai/gateways/logs.ts">LogGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_tag}/ai-gateway/gateways/{id}/logs">client.workers.ai.gateways.logs.<a href="./src/resources/workers/ai/gateways/logs.ts">get</a>(accountTag, id, { ...params }) -> LogGetResponse</code>
 
 ## Scripts
 
