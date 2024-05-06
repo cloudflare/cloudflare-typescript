@@ -219,7 +219,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    audio?: Array<number>;
+    audio: Array<number>;
   }
 
   export interface ImageClassification {
@@ -231,7 +231,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    image?: Array<number>;
+    image: Array<number>;
   }
 
   export interface ObjectDetection {
@@ -339,7 +339,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    image: Array<number> | string;
+    image: Array<number>;
 
     /**
      * Body param:
