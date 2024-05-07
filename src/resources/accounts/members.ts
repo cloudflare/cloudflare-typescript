@@ -86,6 +86,11 @@ export class Members extends APIResource {
 
 export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
 
+/**
+ * Whether the user is a member of the organization or has an inivitation pending.
+ */
+export type MemberStatus = 'member' | 'invited';
+
 export interface UserWithInviteCode {
   /**
    * Membership identifier tag.
@@ -292,6 +297,7 @@ export interface MemberGetParams {
 }
 
 export namespace Members {
+  export import MemberStatus = MembersAPI.MemberStatus;
   export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
