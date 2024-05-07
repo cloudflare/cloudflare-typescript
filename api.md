@@ -4336,16 +4336,19 @@ Types:
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProvider</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderType</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">ScimConfig</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">create</a>({ ...params }) -> IdentityProvider</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">update</a>(uuid, { ...params }) -> IdentityProvider</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">create</a>({ ...params }) -> IdentityProviderCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">update</a>(uuid, { ...params }) -> IdentityProviderUpdateResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponsesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">delete</a>(uuid, { ...params }) -> IdentityProviderDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">get</a>(uuid, { ...params }) -> IdentityProvider</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">get</a>(uuid, { ...params }) -> IdentityProviderGetResponse</code>
 
 ## Organizations
 
