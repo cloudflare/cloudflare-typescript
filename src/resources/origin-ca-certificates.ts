@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
+import * as Shared from 'cloudflare/resources/shared';
 import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -90,7 +91,7 @@ export interface OriginCACertificate {
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
    * or "keyless-certificate" (for Keyless SSL servers).
    */
-  request_type: CertificatePacksAPI.RequestType;
+  request_type: Shared.CertificatePackRequestType;
 
   /**
    * The number of days for which the certificate should be valid.
@@ -140,7 +141,7 @@ export interface OriginCACertificateCreateParams {
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
    * or "keyless-certificate" (for Keyless SSL servers).
    */
-  request_type?: CertificatePacksAPI.RequestTypeParam;
+  request_type?: Shared.CertificatePackRequestTypeParam;
 
   /**
    * The number of days for which the certificate should be valid.

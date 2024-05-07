@@ -105,6 +105,18 @@ export namespace AuditLog {
 }
 
 /**
+ * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+ * or "keyless-certificate" (for Keyless SSL servers).
+ */
+export type CertificatePackRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+
+/**
+ * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+ * or "keyless-certificate" (for Keyless SSL servers).
+ */
+export type CertificatePackRequestTypeParam = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+
+/**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
 export interface CloudflareTunnel {
