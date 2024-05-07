@@ -45,11 +45,8 @@ export namespace ZeroTrust {
   export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
   export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
   export import ScimConfig = IdentityProvidersAPI.ScimConfig;
-  export import IdentityProviderCreateResponse = IdentityProvidersAPI.IdentityProviderCreateResponse;
-  export import IdentityProviderUpdateResponse = IdentityProvidersAPI.IdentityProviderUpdateResponse;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
-  export import IdentityProviderGetResponse = IdentityProvidersAPI.IdentityProviderGetResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
   export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
