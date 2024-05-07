@@ -22,7 +22,6 @@ export namespace SSL {
   export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
   export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
-  export import CertificateAuthority = CertificatePacksAPI.CertificateAuthority;
   export import Host = CertificatePacksAPI.Host;
   export import RequestValidity = CertificatePacksAPI.RequestValidity;
   export import Status = CertificatePacksAPI.Status;

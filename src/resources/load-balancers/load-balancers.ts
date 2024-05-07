@@ -389,7 +389,7 @@ export interface LoadBalancer {
    *   `headers` in `session_affinity_attributes` for additional required
    *   configuration.
    */
-  session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+  session_affinity?: SessionAffinity;
 
   /**
    * Configures attributes for session affinity.
@@ -434,15 +434,7 @@ export interface LoadBalancer {
    * - `""`: Will map to `"geo"` if you use
    *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
    */
-  steering_policy?:
-    | 'off'
-    | 'geo'
-    | 'random'
-    | 'dynamic_latency'
-    | 'proximity'
-    | 'least_outstanding_requests'
-    | 'least_connections'
-    | '""';
+  steering_policy?: SteeringPolicy;
 
   /**
    * Time to live (TTL) of the DNS entry for the IP address returned by this load
@@ -967,7 +959,7 @@ export namespace Rules {
      *   `headers` in `session_affinity_attributes` for additional required
      *   configuration.
      */
-    session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+    session_affinity?: LoadBalancersAPI.SessionAffinity;
 
     /**
      * Configures attributes for session affinity.
@@ -1012,15 +1004,7 @@ export namespace Rules {
      * - `""`: Will map to `"geo"` if you use
      *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
      */
-    steering_policy?:
-      | 'off'
-      | 'geo'
-      | 'random'
-      | 'dynamic_latency'
-      | 'proximity'
-      | 'least_outstanding_requests'
-      | 'least_connections'
-      | '""';
+    steering_policy?: LoadBalancersAPI.SteeringPolicy;
 
     /**
      * Time to live (TTL) of the DNS entry for the IP address returned by this load
@@ -1202,7 +1186,7 @@ export namespace RulesParam {
      *   `headers` in `session_affinity_attributes` for additional required
      *   configuration.
      */
-    session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+    session_affinity?: LoadBalancersAPI.SessionAffinityParam;
 
     /**
      * Configures attributes for session affinity.
@@ -1247,15 +1231,7 @@ export namespace RulesParam {
      * - `""`: Will map to `"geo"` if you use
      *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
      */
-    steering_policy?:
-      | 'off'
-      | 'geo'
-      | 'random'
-      | 'dynamic_latency'
-      | 'proximity'
-      | 'least_outstanding_requests'
-      | 'least_connections'
-      | '""';
+    steering_policy?: LoadBalancersAPI.SteeringPolicyParam;
 
     /**
      * Time to live (TTL) of the DNS entry for the IP address returned by this load
@@ -1264,6 +1240,60 @@ export namespace RulesParam {
     ttl?: number;
   }
 }
+
+/**
+ * Specifies the type of session affinity the load balancer should use unless
+ * specified as `"none"` or "" (default). The supported types are:
+ *
+ * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
+ *   generated, encoding information of which origin the request will be forwarded
+ *   to. Subsequent requests, by the same client to the same load balancer, will be
+ *   sent to the origin server the cookie encodes, for the duration of the cookie
+ *   and as long as the origin server remains healthy. If the cookie has expired or
+ *   the origin server is unhealthy, then a new origin server is calculated and
+ *   used.
+ * - `"ip_cookie"`: Behaves the same as `"cookie"` except the initial origin
+ *   selection is stable and based on the client's ip address.
+ * - `"header"`: On the first request to a proxied load balancer, a session key
+ *   based on the configured HTTP headers (see
+ *   `session_affinity_attributes.headers`) is generated, encoding the request
+ *   headers used for storing in the load balancer session state which origin the
+ *   request will be forwarded to. Subsequent requests to the load balancer with
+ *   the same headers will be sent to the same origin server, for the duration of
+ *   the session and as long as the origin server remains healthy. If the session
+ *   has been idle for the duration of `session_affinity_ttl` seconds or the origin
+ *   server is unhealthy, then a new origin server is calculated and used. See
+ *   `headers` in `session_affinity_attributes` for additional required
+ *   configuration.
+ */
+export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+
+/**
+ * Specifies the type of session affinity the load balancer should use unless
+ * specified as `"none"` or "" (default). The supported types are:
+ *
+ * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
+ *   generated, encoding information of which origin the request will be forwarded
+ *   to. Subsequent requests, by the same client to the same load balancer, will be
+ *   sent to the origin server the cookie encodes, for the duration of the cookie
+ *   and as long as the origin server remains healthy. If the cookie has expired or
+ *   the origin server is unhealthy, then a new origin server is calculated and
+ *   used.
+ * - `"ip_cookie"`: Behaves the same as `"cookie"` except the initial origin
+ *   selection is stable and based on the client's ip address.
+ * - `"header"`: On the first request to a proxied load balancer, a session key
+ *   based on the configured HTTP headers (see
+ *   `session_affinity_attributes.headers`) is generated, encoding the request
+ *   headers used for storing in the load balancer session state which origin the
+ *   request will be forwarded to. Subsequent requests to the load balancer with
+ *   the same headers will be sent to the same origin server, for the duration of
+ *   the session and as long as the origin server remains healthy. If the session
+ *   has been idle for the duration of `session_affinity_ttl` seconds or the origin
+ *   server is unhealthy, then a new origin server is calculated and used. See
+ *   `headers` in `session_affinity_attributes` for additional required
+ *   configuration.
+ */
+export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
 
 /**
  * Configures attributes for session affinity.
@@ -1399,6 +1429,74 @@ export interface SessionAffinityAttributesParam {
   zero_downtime_failover?: 'none' | 'temporary' | 'sticky';
 }
 
+/**
+ * Steering Policy for this load balancer.
+ *
+ * - `"off"`: Use `default_pools`.
+ * - `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied
+ *   requests, the country for `country_pools` is determined by
+ *   `location_strategy`.
+ * - `"random"`: Select a pool randomly.
+ * - `"dynamic_latency"`: Use round trip time to select the closest pool in
+ *   default_pools (requires pool health checks).
+ * - `"proximity"`: Use the pools' latitude and longitude to select the closest
+ *   pool using the Cloudflare PoP location for proxied requests or the location
+ *   determined by `location_strategy` for non-proxied requests.
+ * - `"least_outstanding_requests"`: Select a pool by taking into consideration
+ *   `random_steering` weights, as well as each pool's number of outstanding
+ *   requests. Pools with more pending requests are weighted proportionately less
+ *   relative to others.
+ * - `"least_connections"`: Select a pool by taking into consideration
+ *   `random_steering` weights, as well as each pool's number of open connections.
+ *   Pools with more open connections are weighted proportionately less relative to
+ *   others. Supported for HTTP/1 and HTTP/2 connections.
+ * - `""`: Will map to `"geo"` if you use
+ *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
+ */
+export type SteeringPolicy =
+  | 'off'
+  | 'geo'
+  | 'random'
+  | 'dynamic_latency'
+  | 'proximity'
+  | 'least_outstanding_requests'
+  | 'least_connections'
+  | '""';
+
+/**
+ * Steering Policy for this load balancer.
+ *
+ * - `"off"`: Use `default_pools`.
+ * - `"geo"`: Use `region_pools`/`country_pools`/`pop_pools`. For non-proxied
+ *   requests, the country for `country_pools` is determined by
+ *   `location_strategy`.
+ * - `"random"`: Select a pool randomly.
+ * - `"dynamic_latency"`: Use round trip time to select the closest pool in
+ *   default_pools (requires pool health checks).
+ * - `"proximity"`: Use the pools' latitude and longitude to select the closest
+ *   pool using the Cloudflare PoP location for proxied requests or the location
+ *   determined by `location_strategy` for non-proxied requests.
+ * - `"least_outstanding_requests"`: Select a pool by taking into consideration
+ *   `random_steering` weights, as well as each pool's number of outstanding
+ *   requests. Pools with more pending requests are weighted proportionately less
+ *   relative to others.
+ * - `"least_connections"`: Select a pool by taking into consideration
+ *   `random_steering` weights, as well as each pool's number of open connections.
+ *   Pools with more open connections are weighted proportionately less relative to
+ *   others. Supported for HTTP/1 and HTTP/2 connections.
+ * - `""`: Will map to `"geo"` if you use
+ *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
+ */
+export type SteeringPolicyParam =
+  | 'off'
+  | 'geo'
+  | 'random'
+  | 'dynamic_latency'
+  | 'proximity'
+  | 'least_outstanding_requests'
+  | 'least_connections'
+  | '""';
+
 export interface LoadBalancerDeleteResponse {
   id?: string;
 }
@@ -1521,7 +1619,7 @@ export interface LoadBalancerCreateParams {
    *   `headers` in `session_affinity_attributes` for additional required
    *   configuration.
    */
-  session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+  session_affinity?: SessionAffinityParam;
 
   /**
    * Body param: Configures attributes for session affinity.
@@ -1567,15 +1665,7 @@ export interface LoadBalancerCreateParams {
    * - `""`: Will map to `"geo"` if you use
    *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
    */
-  steering_policy?:
-    | 'off'
-    | 'geo'
-    | 'random'
-    | 'dynamic_latency'
-    | 'proximity'
-    | 'least_outstanding_requests'
-    | 'least_connections'
-    | '""';
+  steering_policy?: SteeringPolicyParam;
 
   /**
    * Body param: Time to live (TTL) of the DNS entry for the IP address returned by
@@ -1708,7 +1798,7 @@ export interface LoadBalancerUpdateParams {
    *   `headers` in `session_affinity_attributes` for additional required
    *   configuration.
    */
-  session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+  session_affinity?: SessionAffinityParam;
 
   /**
    * Body param: Configures attributes for session affinity.
@@ -1754,15 +1844,7 @@ export interface LoadBalancerUpdateParams {
    * - `""`: Will map to `"geo"` if you use
    *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
    */
-  steering_policy?:
-    | 'off'
-    | 'geo'
-    | 'random'
-    | 'dynamic_latency'
-    | 'proximity'
-    | 'least_outstanding_requests'
-    | 'least_connections'
-    | '""';
+  steering_policy?: SteeringPolicyParam;
 
   /**
    * Body param: Time to live (TTL) of the DNS entry for the IP address returned by
@@ -1903,7 +1985,7 @@ export interface LoadBalancerEditParams {
    *   `headers` in `session_affinity_attributes` for additional required
    *   configuration.
    */
-  session_affinity?: 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+  session_affinity?: SessionAffinityParam;
 
   /**
    * Body param: Configures attributes for session affinity.
@@ -1949,15 +2031,7 @@ export interface LoadBalancerEditParams {
    * - `""`: Will map to `"geo"` if you use
    *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
    */
-  steering_policy?:
-    | 'off'
-    | 'geo'
-    | 'random'
-    | 'dynamic_latency'
-    | 'proximity'
-    | 'least_outstanding_requests'
-    | 'least_connections'
-    | '""';
+  steering_policy?: SteeringPolicyParam;
 
   /**
    * Body param: Time to live (TTL) of the DNS entry for the IP address returned by
