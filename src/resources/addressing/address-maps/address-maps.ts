@@ -143,6 +143,11 @@ export interface AddressMap {
   modified_at?: string;
 }
 
+/**
+ * The type of the membership.
+ */
+export type AddressMapKind = 'zone' | 'account';
+
 export interface AddressMapCreateResponse {
   /**
    * Identifier
@@ -224,7 +229,7 @@ export namespace AddressMapCreateResponse {
     /**
      * The type of the membership.
      */
-    kind?: 'zone' | 'account';
+    kind?: AddressMapsAPI.AddressMapKind;
   }
 }
 
@@ -311,7 +316,7 @@ export namespace AddressMapGetResponse {
     /**
      * The type of the membership.
      */
-    kind?: 'zone' | 'account';
+    kind?: AddressMapsAPI.AddressMapKind;
   }
 }
 
@@ -385,6 +390,7 @@ export interface AddressMapGetParams {
 
 export namespace AddressMaps {
   export import AddressMap = AddressMapsAPI.AddressMap;
+  export import AddressMapKind = AddressMapsAPI.AddressMapKind;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;

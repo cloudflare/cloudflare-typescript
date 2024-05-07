@@ -35,6 +35,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/accounts/members.ts">MemberStatus</a></code>
 - <code><a href="./src/resources/accounts/members.ts">UserWithInviteCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
@@ -1190,6 +1191,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSCertificateAuthority</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSCreateResponse</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSGetResponse</a></code>
 
@@ -2780,6 +2782,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMap</a></code>
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapKind</a></code>
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapCreateResponse</a></code>
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapDeleteResponse</a></code>
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapGetResponse</a></code>
