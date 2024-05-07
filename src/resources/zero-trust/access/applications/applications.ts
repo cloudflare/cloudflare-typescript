@@ -264,19 +264,27 @@ export type AllowedIdPs = string;
  */
 export type AllowedIdPsParam = string;
 
-/**
- * Allowed HTTP request methods.
- */
-export type AllowedMethods = Array<
-  'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
->;
+export type AllowedMethods =
+  | 'GET'
+  | 'POST'
+  | 'HEAD'
+  | 'PUT'
+  | 'DELETE'
+  | 'CONNECT'
+  | 'OPTIONS'
+  | 'TRACE'
+  | 'PATCH';
 
-/**
- * Allowed HTTP request methods.
- */
-export type AllowedMethodsParam = Array<
-  'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
->;
+export type AllowedMethodsParam =
+  | 'GET'
+  | 'POST'
+  | 'HEAD'
+  | 'PUT'
+  | 'DELETE'
+  | 'CONNECT'
+  | 'OPTIONS'
+  | 'TRACE'
+  | 'PATCH';
 
 export type AllowedOrigins = string;
 
@@ -1150,7 +1158,7 @@ export interface CORSHeaders {
   /**
    * Allowed HTTP request methods.
    */
-  allowed_methods?: AllowedMethods;
+  allowed_methods?: Array<AllowedMethods>;
 
   /**
    * Allowed origins.
@@ -1193,7 +1201,7 @@ export interface CORSHeadersParam {
   /**
    * Allowed HTTP request methods.
    */
-  allowed_methods?: AllowedMethodsParam;
+  allowed_methods?: Array<AllowedMethodsParam>;
 
   /**
    * Allowed origins.
