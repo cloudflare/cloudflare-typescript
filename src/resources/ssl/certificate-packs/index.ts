@@ -3,7 +3,6 @@
 export {
   CertificateAuthority,
   Host,
-  RequestType,
   RequestValidity,
   Status,
   ValidationMethod,

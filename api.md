@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">ASN</a></code>
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
+- <code><a href="./src/resources/shared.ts">CertificatePackRequestType</a></code>
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
@@ -1096,7 +1097,6 @@ Types:
 
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificateAuthority</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestType</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestValidity</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Status</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">ValidationMethod</a></code>
@@ -1454,6 +1454,10 @@ Methods:
 - <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}">client.dns.firewall.<a href="./src/resources/dns/firewall/firewall.ts">get</a>(dnsFirewallId, { ...params }) -> Firewall</code>
 
 ### Analytics
+
+Types:
+
+- <code><a href="./src/resources/dns/firewall/analytics/analytics.ts">Delta</a></code>
 
 #### Reports
 
