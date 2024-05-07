@@ -82,16 +82,6 @@ export class CertificatePacks extends APIResource {
 
 export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
 
-/**
- * The Certificate Authority that will issue the certificate
- */
-export type CertificateAuthority = 'digicert' | 'google' | 'lets_encrypt';
-
-/**
- * The Certificate Authority that will issue the certificate
- */
-export type CertificateAuthorityParam = 'digicert' | 'google' | 'lets_encrypt';
-
 export type Host = string;
 
 export type HostParam = string;
@@ -233,7 +223,6 @@ export interface CertificatePackGetParams {
 }
 
 export namespace CertificatePacks {
-  export import CertificateAuthority = CertificatePacksAPI.CertificateAuthority;
   export import Host = CertificatePacksAPI.Host;
   export import RequestValidity = CertificatePacksAPI.RequestValidity;
   export import Status = CertificatePacksAPI.Status;

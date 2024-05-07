@@ -2,7 +2,6 @@
 
 export { AnalyzeCreateResponse, AnalyzeCreateParams, Analyze } from './analyze';
 export {
-  CertificateAuthority,
   Host,
   RequestValidity,
   Status,
