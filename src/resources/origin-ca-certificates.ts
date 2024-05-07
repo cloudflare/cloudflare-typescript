@@ -91,7 +91,7 @@ export interface OriginCACertificate {
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
    * or "keyless-certificate" (for Keyless SSL servers).
    */
-  request_type: Shared.CertificatePackRequestType;
+  request_type: Shared.CertificateRequestType;
 
   /**
    * The number of days for which the certificate should be valid.
@@ -141,7 +141,7 @@ export interface OriginCACertificateCreateParams {
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
    * or "keyless-certificate" (for Keyless SSL servers).
    */
-  request_type?: Shared.CertificatePackRequestTypeParam;
+  request_type?: Shared.CertificateRequestTypeParam;
 
   /**
    * The number of days for which the certificate should be valid.

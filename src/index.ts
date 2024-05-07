@@ -556,7 +556,7 @@ export namespace Cloudflare {
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;
-  export import CertificatePackRequestType = API.CertificatePackRequestType;
+  export import CertificateRequestType = API.CertificateRequestType;
   export import CloudflareTunnel = API.CloudflareTunnel;
   export import ErrorData = API.ErrorData;
   export import Identifier = API.Identifier;
