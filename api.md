@@ -1093,6 +1093,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackStatus</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
