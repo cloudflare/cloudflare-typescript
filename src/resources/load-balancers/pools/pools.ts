@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
 import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
+import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
 import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
 import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
 import { SinglePage } from 'cloudflare/pagination';
@@ -101,7 +102,7 @@ export interface Pool {
    * A list of regions from which to run health checks. Null means every Cloudflare
    * data center.
    */
-  check_regions?: Array<LoadBalancersAPI.CheckRegion> | null;
+  check_regions?: RegionsAPI.RegionID | null;
 
   created_on?: string;
 
@@ -299,7 +300,7 @@ export interface PoolUpdateParams {
    * Body param: A list of regions from which to run health checks. Null means every
    * Cloudflare data center.
    */
-  check_regions?: Array<LoadBalancersAPI.CheckRegionParam> | null;
+  check_regions?: RegionsAPI.RegionIDParam | null;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -395,7 +396,7 @@ export interface PoolEditParams {
    * Body param: A list of regions from which to run health checks. Null means every
    * Cloudflare data center.
    */
-  check_regions?: Array<LoadBalancersAPI.CheckRegionParam> | null;
+  check_regions?: RegionsAPI.RegionIDParam | null;
 
   /**
    * Body param: A human-readable description of the pool.
