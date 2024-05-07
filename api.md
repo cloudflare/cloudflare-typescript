@@ -996,7 +996,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/load-balancers/regions.ts">RegionID</a></code>
 - <code><a href="./src/resources/load-balancers/regions.ts">RegionListResponse</a></code>
 - <code><a href="./src/resources/load-balancers/regions.ts">RegionGetResponse</a></code>
 
