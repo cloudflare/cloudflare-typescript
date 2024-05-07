@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as VerificationAPI from 'cloudflare/resources/ssl/verification';
+import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 
 export class VerificationResource extends APIResource {
   /**
@@ -72,7 +73,7 @@ export interface Verification {
   /**
    * Validation method in use for a certificate pack order.
    */
-  validation_method?: 'http' | 'cname' | 'txt';
+  validation_method?: CertificatePacksAPI.CertificatePackValidationMethod;
 
   /**
    * Certificate's required verification information.

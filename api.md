@@ -1093,7 +1093,11 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackCA</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackRequestType</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackRequestValidity</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackStatus</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackValidationMethod</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
