@@ -4,6 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">ASN</a></code>
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
+- <code><a href="./src/resources/shared.ts">CertificateCA</a></code>
 - <code><a href="./src/resources/shared.ts">CertificateRequestType</a></code>
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
@@ -891,7 +892,9 @@ Types:
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">OriginSteering</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">RandomSteering</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">Rules</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">SessionAffinity</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">SessionAffinityAttributes</a></code>
+- <code><a href="./src/resources/load-balancers/load-balancers.ts">SteeringPolicy</a></code>
 - <code><a href="./src/resources/load-balancers/load-balancers.ts">LoadBalancerDeleteResponse</a></code>
 
 Methods:
@@ -1095,7 +1098,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificateAuthority</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestValidity</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Status</a></code>
