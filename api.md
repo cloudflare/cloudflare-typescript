@@ -17,6 +17,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
 - <code><a href="./src/resources/shared.ts">Role</a></code>
+- <code><a href="./src/resources/shared.ts">SortDirection</a></code>
 
 # Accounts
 
@@ -240,6 +241,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zones/zones.ts">Type</a></code>
 - <code><a href="./src/resources/zones/zones.ts">Zone</a></code>
 - <code><a href="./src/resources/zones/zones.ts">ZoneDeleteResponse</a></code>
 
@@ -994,6 +996,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/load-balancers/regions.ts">RegionID</a></code>
 - <code><a href="./src/resources/load-balancers/regions.ts">RegionListResponse</a></code>
 - <code><a href="./src/resources/load-balancers/regions.ts">RegionGetResponse</a></code>
 
@@ -1028,6 +1031,7 @@ Types:
 
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClear</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">State</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
@@ -2603,6 +2607,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/rulesets/rulesets.ts">Kind</a></code>
+- <code><a href="./src/resources/rulesets/rulesets.ts">Phase</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">Ruleset</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetCreateResponse</a></code>
 - <code><a href="./src/resources/rulesets/rulesets.ts">RulesetUpdateResponse</a></code>

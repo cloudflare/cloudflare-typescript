@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
+import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
 
 export class Rules extends APIResource {
   /**
@@ -3463,31 +3464,7 @@ export namespace SkipRule {
      * A list of phases to skip the execution of. This option is incompatible with the
      * ruleset and rulesets options.
      */
-    phases?: Array<
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed'
-    >;
+    phases?: Array<RulesetsAPI.Phase>;
 
     /**
      * A list of legacy security products to skip the execution of.
@@ -3565,31 +3542,7 @@ export namespace SkipRuleParam {
      * A list of phases to skip the execution of. This option is incompatible with the
      * ruleset and rulesets options.
      */
-    phases?: Array<
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed'
-    >;
+    phases?: Array<RulesetsAPI.PhaseParam>;
 
     /**
      * A list of legacy security products to skip the execution of.
@@ -3628,7 +3581,7 @@ export interface RuleCreateResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: RulesetsAPI.Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -3643,30 +3596,7 @@ export interface RuleCreateResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: RulesetsAPI.Phase;
 
   /**
    * The list of rules in the ruleset.
@@ -3712,7 +3642,7 @@ export interface RuleDeleteResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: RulesetsAPI.Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -3727,30 +3657,7 @@ export interface RuleDeleteResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: RulesetsAPI.Phase;
 
   /**
    * The list of rules in the ruleset.
@@ -3796,7 +3703,7 @@ export interface RuleEditResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: RulesetsAPI.Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -3811,30 +3718,7 @@ export interface RuleEditResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: RulesetsAPI.Phase;
 
   /**
    * The list of rules in the ruleset.
@@ -5160,31 +5044,7 @@ export namespace RuleCreateParams {
        * A list of phases to skip the execution of. This option is incompatible with the
        * ruleset and rulesets options.
        */
-      phases?: Array<
-        | 'ddos_l4'
-        | 'ddos_l7'
-        | 'http_config_settings'
-        | 'http_custom_errors'
-        | 'http_log_custom_fields'
-        | 'http_ratelimit'
-        | 'http_request_cache_settings'
-        | 'http_request_dynamic_redirect'
-        | 'http_request_firewall_custom'
-        | 'http_request_firewall_managed'
-        | 'http_request_late_transform'
-        | 'http_request_origin'
-        | 'http_request_redirect'
-        | 'http_request_sanitize'
-        | 'http_request_sbfm'
-        | 'http_request_select_configuration'
-        | 'http_request_transform'
-        | 'http_response_compression'
-        | 'http_response_firewall_managed'
-        | 'http_response_headers_transform'
-        | 'magic_transit'
-        | 'magic_transit_ids_managed'
-        | 'magic_transit_managed'
-      >;
+      phases?: Array<RulesetsAPI.PhaseParam>;
 
       /**
        * A list of legacy security products to skip the execution of.
@@ -6948,31 +6808,7 @@ export namespace RuleEditParams {
        * A list of phases to skip the execution of. This option is incompatible with the
        * ruleset and rulesets options.
        */
-      phases?: Array<
-        | 'ddos_l4'
-        | 'ddos_l7'
-        | 'http_config_settings'
-        | 'http_custom_errors'
-        | 'http_log_custom_fields'
-        | 'http_ratelimit'
-        | 'http_request_cache_settings'
-        | 'http_request_dynamic_redirect'
-        | 'http_request_firewall_custom'
-        | 'http_request_firewall_managed'
-        | 'http_request_late_transform'
-        | 'http_request_origin'
-        | 'http_request_redirect'
-        | 'http_request_sanitize'
-        | 'http_request_sbfm'
-        | 'http_request_select_configuration'
-        | 'http_request_transform'
-        | 'http_response_compression'
-        | 'http_response_firewall_managed'
-        | 'http_response_headers_transform'
-        | 'magic_transit'
-        | 'magic_transit_ids_managed'
-        | 'magic_transit_managed'
-      >;
+      phases?: Array<RulesetsAPI.PhaseParam>;
 
       /**
        * A list of legacy security products to skip the execution of.

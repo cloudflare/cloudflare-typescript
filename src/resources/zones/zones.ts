@@ -86,6 +86,18 @@ export class Zones extends APIResource {
 
 export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {}
 
+/**
+ * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
+ * typically a partner-hosted zone or a CNAME setup.
+ */
+export type Type = 'full' | 'partial' | 'secondary';
+
+/**
+ * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
+ * typically a partner-hosted zone or a CNAME setup.
+ */
+export type TypeParam = 'full' | 'partial' | 'secondary';
+
 export interface Zone {
   /**
    * Identifier
@@ -254,7 +266,7 @@ export interface ZoneCreateParams {
    * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
    * typically a partner-hosted zone or a CNAME setup.
    */
-  type?: 'full' | 'partial' | 'secondary';
+  type?: TypeParam;
 }
 
 export namespace ZoneCreateParams {
