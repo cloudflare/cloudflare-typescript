@@ -83,6 +83,38 @@ export class CertificatePacks extends APIResource {
 export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
 
 /**
+ * The Certificate Authority that will issue the certificate
+ */
+export type CertificatePackCA = 'digicert' | 'google' | 'lets_encrypt';
+
+/**
+ * The Certificate Authority that will issue the certificate
+ */
+export type CertificatePackCAParam = 'digicert' | 'google' | 'lets_encrypt';
+
+/**
+ * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+ * or "keyless-certificate" (for Keyless SSL servers).
+ */
+export type CertificatePackRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+
+/**
+ * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+ * or "keyless-certificate" (for Keyless SSL servers).
+ */
+export type CertificatePackRequestTypeParam = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+
+/**
+ * The number of days for which the certificate should be valid.
+ */
+export type CertificatePackRequestValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+/**
+ * The number of days for which the certificate should be valid.
+ */
+export type CertificatePackRequestValidityParam = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+/**
  * Status of certificate pack.
  */
 export type CertificatePackStatus =
@@ -107,6 +139,11 @@ export type CertificatePackStatus =
   | 'inactive'
   | 'backup_issued'
   | 'holding_deployment';
+
+/**
+ * Validation method in use for a certificate pack order.
+ */
+export type CertificatePackValidationMethod = 'http' | 'cname' | 'txt';
 
 export type Host = string;
 
@@ -208,7 +245,11 @@ export interface CertificatePackGetParams {
 }
 
 export namespace CertificatePacks {
+  export import CertificatePackCA = CertificatePacksAPI.CertificatePackCA;
+  export import CertificatePackRequestType = CertificatePacksAPI.CertificatePackRequestType;
+  export import CertificatePackRequestValidity = CertificatePacksAPI.CertificatePackRequestValidity;
   export import CertificatePackStatus = CertificatePacksAPI.CertificatePackStatus;
+  export import CertificatePackValidationMethod = CertificatePacksAPI.CertificatePackValidationMethod;
   export import Host = CertificatePacksAPI.Host;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;

@@ -2,7 +2,11 @@
 
 export { AnalyzeCreateResponse, AnalyzeCreateParams, Analyze } from './analyze';
 export {
+  CertificatePackCA,
+  CertificatePackRequestType,
+  CertificatePackRequestValidity,
   CertificatePackStatus,
+  CertificatePackValidationMethod,
   Host,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,

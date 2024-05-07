@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
 import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallback-origin';
+import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class CustomHostnames extends APIResource {
@@ -212,7 +213,7 @@ export namespace CustomHostname {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -559,7 +560,7 @@ export namespace CustomHostnameCreateResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -884,7 +885,7 @@ export namespace CustomHostnameListResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1216,7 +1217,7 @@ export namespace CustomHostnameEditResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1541,7 +1542,7 @@ export namespace CustomHostnameGetResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1804,7 +1805,7 @@ export namespace CustomHostnameCreateParams {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCAParam;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1982,7 +1983,7 @@ export namespace CustomHostnameEditParams {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: CertificatePacksAPI.CertificatePackCAParam;
 
     /**
      * If a custom uploaded certificate is used.
