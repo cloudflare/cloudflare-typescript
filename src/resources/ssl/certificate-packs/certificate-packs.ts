@@ -82,6 +82,32 @@ export class CertificatePacks extends APIResource {
 
 export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
 
+/**
+ * Status of certificate pack.
+ */
+export type CertificatePackStatus =
+  | 'initializing'
+  | 'pending_validation'
+  | 'deleted'
+  | 'pending_issuance'
+  | 'pending_deployment'
+  | 'pending_deletion'
+  | 'pending_expiration'
+  | 'expired'
+  | 'active'
+  | 'initializing_timed_out'
+  | 'validation_timed_out'
+  | 'issuance_timed_out'
+  | 'deployment_timed_out'
+  | 'deletion_timed_out'
+  | 'pending_cleanup'
+  | 'staging_deployment'
+  | 'staging_active'
+  | 'deactivating'
+  | 'inactive'
+  | 'backup_issued'
+  | 'holding_deployment';
+
 export type Host = string;
 
 export type HostParam = string;
@@ -123,28 +149,7 @@ export interface CertificatePackEditResponse {
   /**
    * Status of certificate pack.
    */
-  status?:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status?: CertificatePackStatus;
 
   /**
    * Type of certificate pack.
@@ -203,6 +208,7 @@ export interface CertificatePackGetParams {
 }
 
 export namespace CertificatePacks {
+  export import CertificatePackStatus = CertificatePacksAPI.CertificatePackStatus;
   export import Host = CertificatePacksAPI.Host;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
