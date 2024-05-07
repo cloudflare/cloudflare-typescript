@@ -569,6 +569,7 @@ export namespace Cloudflare {
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
   export import Role = API.Role;
+  export import SortDirection = API.SortDirection;
 }
 
 export default Cloudflare;

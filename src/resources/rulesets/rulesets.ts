@@ -201,6 +201,72 @@ export class Rulesets extends APIResource {
 export class RulesetsSinglePage extends SinglePage<Ruleset> {}
 
 /**
+ * The kind of the ruleset.
+ */
+export type Kind = 'managed' | 'custom' | 'root' | 'zone';
+
+/**
+ * The kind of the ruleset.
+ */
+export type KindParam = 'managed' | 'custom' | 'root' | 'zone';
+
+/**
+ * The phase of the ruleset.
+ */
+export type Phase =
+  | 'ddos_l4'
+  | 'ddos_l7'
+  | 'http_config_settings'
+  | 'http_custom_errors'
+  | 'http_log_custom_fields'
+  | 'http_ratelimit'
+  | 'http_request_cache_settings'
+  | 'http_request_dynamic_redirect'
+  | 'http_request_firewall_custom'
+  | 'http_request_firewall_managed'
+  | 'http_request_late_transform'
+  | 'http_request_origin'
+  | 'http_request_redirect'
+  | 'http_request_sanitize'
+  | 'http_request_sbfm'
+  | 'http_request_select_configuration'
+  | 'http_request_transform'
+  | 'http_response_compression'
+  | 'http_response_firewall_managed'
+  | 'http_response_headers_transform'
+  | 'magic_transit'
+  | 'magic_transit_ids_managed'
+  | 'magic_transit_managed';
+
+/**
+ * The phase of the ruleset.
+ */
+export type PhaseParam =
+  | 'ddos_l4'
+  | 'ddos_l7'
+  | 'http_config_settings'
+  | 'http_custom_errors'
+  | 'http_log_custom_fields'
+  | 'http_ratelimit'
+  | 'http_request_cache_settings'
+  | 'http_request_dynamic_redirect'
+  | 'http_request_firewall_custom'
+  | 'http_request_firewall_managed'
+  | 'http_request_late_transform'
+  | 'http_request_origin'
+  | 'http_request_redirect'
+  | 'http_request_sanitize'
+  | 'http_request_sbfm'
+  | 'http_request_select_configuration'
+  | 'http_request_transform'
+  | 'http_response_compression'
+  | 'http_response_firewall_managed'
+  | 'http_response_headers_transform'
+  | 'magic_transit'
+  | 'magic_transit_ids_managed'
+  | 'magic_transit_managed';
+
+/**
  * A ruleset object.
  */
 export interface Ruleset {
@@ -227,7 +293,7 @@ export interface Ruleset {
   /**
    * The kind of the ruleset.
    */
-  kind?: 'managed' | 'custom' | 'root' | 'zone';
+  kind?: Kind;
 
   /**
    * The human-readable name of the ruleset.
@@ -237,30 +303,7 @@ export interface Ruleset {
   /**
    * The phase of the ruleset.
    */
-  phase?:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase?: Phase;
 }
 
 /**
@@ -275,7 +318,7 @@ export interface RulesetCreateResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -290,30 +333,7 @@ export interface RulesetCreateResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: Phase;
 
   /**
    * The list of rules in the ruleset.
@@ -359,7 +379,7 @@ export interface RulesetUpdateResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -374,30 +394,7 @@ export interface RulesetUpdateResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: Phase;
 
   /**
    * The list of rules in the ruleset.
@@ -443,7 +440,7 @@ export interface RulesetGetResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -458,30 +455,7 @@ export interface RulesetGetResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: Phase;
 
   /**
    * The list of rules in the ruleset.
@@ -519,7 +493,7 @@ export interface RulesetCreateParams {
   /**
    * Body param: The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: KindParam;
 
   /**
    * Body param: The human-readable name of the ruleset.
@@ -529,30 +503,7 @@ export interface RulesetCreateParams {
   /**
    * Body param: The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: PhaseParam;
 
   /**
    * Body param: The list of rules in the ruleset.
@@ -635,7 +586,7 @@ export interface RulesetUpdateParams {
   /**
    * Body param: The kind of the ruleset.
    */
-  kind?: 'managed' | 'custom' | 'root' | 'zone';
+  kind?: KindParam;
 
   /**
    * Body param: The human-readable name of the ruleset.
@@ -645,30 +596,7 @@ export interface RulesetUpdateParams {
   /**
    * Body param: The phase of the ruleset.
    */
-  phase?:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase?: PhaseParam;
 }
 
 export interface RulesetListParams {

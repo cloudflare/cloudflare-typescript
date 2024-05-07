@@ -146,6 +146,7 @@ export namespace Cache {
   export import CacheReserveResource = CacheReserveAPI.CacheReserveResource;
   export import CacheReserve = CacheReserveAPI.CacheReserve;
   export import CacheReserveClear = CacheReserveAPI.CacheReserveClear;
+  export import State = CacheReserveAPI.State;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;

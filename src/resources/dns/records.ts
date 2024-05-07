@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RecordsAPI from 'cloudflare/resources/dns/records';
+import * as Shared from 'cloudflare/resources/shared';
 import { multipartFormRequestOptions } from 'cloudflare/core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -4850,7 +4851,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Direction to order DNS records in.
    */
-  direction?: 'asc' | 'desc';
+  direction?: Shared.SortDirectionParam;
 
   /**
    * Query param: Whether to match all search requirements or at least one (any). If
