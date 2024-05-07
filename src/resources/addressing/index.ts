@@ -2,7 +2,7 @@
 
 export {
   AddressMap,
-  AddressMapKind,
+  Kind,
   AddressMapCreateResponse,
   AddressMapDeleteResponse,
   AddressMapGetResponse,

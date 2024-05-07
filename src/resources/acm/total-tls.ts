@@ -36,18 +36,18 @@ export class TotalTLS extends APIResource {
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
  */
-export type TotalTLSCertificateAuthority = 'google' | 'lets_encrypt';
+export type CertificateAuthority = 'google' | 'lets_encrypt';
 
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
  */
-export type TotalTLSCertificateAuthorityParam = 'google' | 'lets_encrypt';
+export type CertificateAuthorityParam = 'google' | 'lets_encrypt';
 
 export interface TotalTLSCreateResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
-  certificate_authority?: TotalTLSCertificateAuthority;
+  certificate_authority?: CertificateAuthority;
 
   /**
    * If enabled, Total TLS will order a hostname specific TLS certificate for any
@@ -65,7 +65,7 @@ export interface TotalTLSGetResponse {
   /**
    * The Certificate Authority that Total TLS certificates will be issued through.
    */
-  certificate_authority?: TotalTLSCertificateAuthority;
+  certificate_authority?: CertificateAuthority;
 
   /**
    * If enabled, Total TLS will order a hostname specific TLS certificate for any
@@ -95,7 +95,7 @@ export interface TotalTLSCreateParams {
    * Body param: The Certificate Authority that Total TLS certificates will be issued
    * through.
    */
-  certificate_authority?: TotalTLSCertificateAuthorityParam;
+  certificate_authority?: CertificateAuthorityParam;
 }
 
 export interface TotalTLSGetParams {
@@ -106,7 +106,7 @@ export interface TotalTLSGetParams {
 }
 
 export namespace TotalTLS {
-  export import TotalTLSCertificateAuthority = TotalTLSAPI.TotalTLSCertificateAuthority;
+  export import CertificateAuthority = TotalTLSAPI.CertificateAuthority;
   export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
   export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;
   export import TotalTLSCreateParams = TotalTLSAPI.TotalTLSCreateParams;

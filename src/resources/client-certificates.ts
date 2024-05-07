@@ -2,6 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class ClientCertificates extends APIResource {
@@ -177,7 +178,7 @@ export interface ClientCertificate {
    * Client Certificates may be active or revoked, and the pending_reactivation or
    * pending_revocation represent in-progress asynchronous transitions
    */
-  status?: 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
+  status?: CustomCertificatesAPI.Status;
 
   /**
    * The number of days the Client Certificate will be valid after the issued_on date

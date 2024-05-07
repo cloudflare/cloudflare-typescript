@@ -75,7 +75,7 @@ export interface Organization {
   /**
    * Whether the user is a member of the organization or has an inivitation pending.
    */
-  status?: MembersAPI.MemberStatus;
+  status?: MembersAPI.Status;
 }
 
 export interface OrganizationDeleteResponse {

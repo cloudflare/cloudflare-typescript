@@ -22,12 +22,12 @@ export namespace SSL {
   export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
   export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
   export import CertificatePacks = CertificatePacksAPI.CertificatePacks;
-  export import CertificatePackCA = CertificatePacksAPI.CertificatePackCA;
-  export import CertificatePackRequestType = CertificatePacksAPI.CertificatePackRequestType;
-  export import CertificatePackRequestValidity = CertificatePacksAPI.CertificatePackRequestValidity;
-  export import CertificatePackStatus = CertificatePacksAPI.CertificatePackStatus;
-  export import CertificatePackValidationMethod = CertificatePacksAPI.CertificatePackValidationMethod;
+  export import CertificateAuthority = CertificatePacksAPI.CertificateAuthority;
   export import Host = CertificatePacksAPI.Host;
+  export import RequestType = CertificatePacksAPI.RequestType;
+  export import RequestValidity = CertificatePacksAPI.RequestValidity;
+  export import Status = CertificatePacksAPI.Status;
+  export import ValidationMethod = CertificatePacksAPI.ValidationMethod;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;

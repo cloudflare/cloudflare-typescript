@@ -48,7 +48,7 @@ export interface OrderCreateResponse {
   /**
    * Status of certificate pack.
    */
-  status?: CertificatePacksAPI.CertificatePackStatus;
+  status?: CertificatePacksAPI.Status;
 
   /**
    * Type of certificate pack.
