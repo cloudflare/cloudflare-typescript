@@ -97,18 +97,6 @@ export type Host = string;
 export type HostParam = string;
 
 /**
- * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
- * or "keyless-certificate" (for Keyless SSL servers).
- */
-export type RequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
-
-/**
- * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
- * or "keyless-certificate" (for Keyless SSL servers).
- */
-export type RequestTypeParam = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
-
-/**
  * The number of days for which the certificate should be valid.
  */
 export type RequestValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
@@ -247,7 +235,6 @@ export interface CertificatePackGetParams {
 export namespace CertificatePacks {
   export import CertificateAuthority = CertificatePacksAPI.CertificateAuthority;
   export import Host = CertificatePacksAPI.Host;
-  export import RequestType = CertificatePacksAPI.RequestType;
   export import RequestValidity = CertificatePacksAPI.RequestValidity;
   export import Status = CertificatePacksAPI.Status;
   export import ValidationMethod = CertificatePacksAPI.ValidationMethod;

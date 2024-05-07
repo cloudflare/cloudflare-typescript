@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Analytics } from './analytics/index';
 export {
   AttackMitigation,
   Firewall,
@@ -15,3 +14,4 @@ export {
   FirewallsV4PagePaginationArray,
   FirewallResource,
 } from './firewall';
+export { Delta, Analytics } from './analytics/index';

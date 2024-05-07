@@ -369,4 +369,5 @@ export namespace FirewallResource {
   export import FirewallEditParams = FirewallAPI.FirewallEditParams;
   export import FirewallGetParams = FirewallAPI.FirewallGetParams;
   export import Analytics = AnalyticsAPI.Analytics;
+  export import Delta = AnalyticsAPI.Delta;
 }

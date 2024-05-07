@@ -4,6 +4,7 @@ import { APIResource } from 'cloudflare/resource';
 import * as RecordsAPI from 'cloudflare/resources/dns/records';
 import * as AnalyticsAPI from 'cloudflare/resources/dns/analytics/analytics';
 import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
+import * as AnalyticsAnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
 
 export class DNS extends APIResource {
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
@@ -40,17 +41,7 @@ export interface DNSAnalyticsQuery {
   /**
    * Unit of time to group data by.
    */
-  time_delta:
-    | 'all'
-    | 'auto'
-    | 'year'
-    | 'quarter'
-    | 'month'
-    | 'week'
-    | 'day'
-    | 'hour'
-    | 'dekaminute'
-    | 'minute';
+  time_delta: AnalyticsAnalyticsAPI.Delta;
 
   /**
    * End date and time of requesting data period in ISO 8601 format.
