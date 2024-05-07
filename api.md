@@ -4,7 +4,7 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">ASN</a></code>
 - <code><a href="./src/resources/shared.ts">AuditLog</a></code>
-- <code><a href="./src/resources/shared.ts">CertificatePackRequestType</a></code>
+- <code><a href="./src/resources/shared.ts">CertificateRequestType</a></code>
 - <code><a href="./src/resources/shared.ts">CloudflareTunnel</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
