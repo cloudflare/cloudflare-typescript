@@ -1788,7 +1788,7 @@ export namespace RouteRule {
     /**
      * Override the Server Name Indication (SNI).
      */
-    sni?: ActionParameters.Sni;
+    sni?: ActionParameters.SNI;
   }
 
   export namespace ActionParameters {
@@ -1810,7 +1810,7 @@ export namespace RouteRule {
     /**
      * Override the Server Name Indication (SNI).
      */
-    export interface Sni {
+    export interface SNI {
       /**
        * The SNI override.
        */
@@ -1879,7 +1879,7 @@ export namespace RouteRuleParam {
     /**
      * Override the Server Name Indication (SNI).
      */
-    sni?: ActionParameters.Sni;
+    sni?: ActionParameters.SNI;
   }
 
   export namespace ActionParameters {
@@ -1901,7 +1901,7 @@ export namespace RouteRuleParam {
     /**
      * Override the Server Name Indication (SNI).
      */
-    export interface Sni {
+    export interface SNI {
       /**
        * The SNI override.
        */
@@ -4765,7 +4765,7 @@ export namespace RuleCreateParams {
       /**
        * Override the Server Name Indication (SNI).
        */
-      sni?: ActionParameters.Sni;
+      sni?: ActionParameters.SNI;
     }
 
     export namespace ActionParameters {
@@ -4787,7 +4787,7 @@ export namespace RuleCreateParams {
       /**
        * Override the Server Name Indication (SNI).
        */
-      export interface Sni {
+      export interface SNI {
         /**
          * The SNI override.
          */
@@ -6553,7 +6553,7 @@ export namespace RuleEditParams {
       /**
        * Override the Server Name Indication (SNI).
        */
-      sni?: ActionParameters.Sni;
+      sni?: ActionParameters.SNI;
     }
 
     export namespace ActionParameters {
@@ -6575,7 +6575,7 @@ export namespace RuleEditParams {
       /**
        * Override the Server Name Indication (SNI).
        */
-      export interface Sni {
+      export interface SNI {
         /**
          * The SNI override.
          */

@@ -5,6 +5,7 @@ import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
 import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
 import * as Shared from 'cloudflare/resources/shared';
+import * as MembersAPI from 'cloudflare/resources/accounts/members';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
 export class Organizations extends APIResource {
@@ -74,7 +75,7 @@ export interface Organization {
   /**
    * Whether the user is a member of the organization or has an inivitation pending.
    */
-  status?: 'member' | 'invited';
+  status?: MembersAPI.MemberStatus;
 }
 
 export interface OrganizationDeleteResponse {
