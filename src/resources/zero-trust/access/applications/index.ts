@@ -2,14 +2,13 @@
 
 export {
   AllowedHeaders,
-  AllowedHTTPMethods,
   AllowedIdPs,
   AllowedMethods,
   AllowedOrigins,
   AppID,
   Application,
+  ApplicationType,
   CORSHeaders,
-  CustomPages,
   SaaSAppNameFormat,
   SaaSAppNameIDFormat,
   SaaSAppSource,

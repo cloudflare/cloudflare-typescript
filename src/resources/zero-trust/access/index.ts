@@ -26,14 +26,13 @@ export {
 export { AccessUser, AccessUsersSinglePage, Users } from './users/index';
 export {
   AllowedHeaders,
-  AllowedHTTPMethods,
   AllowedIdPs,
   AllowedMethods,
   AllowedOrigins,
   AppID,
   Application,
+  ApplicationType,
   CORSHeaders,
-  CustomPages,
   SaaSAppNameFormat,
   SaaSAppNameIDFormat,
   SaaSAppSource,

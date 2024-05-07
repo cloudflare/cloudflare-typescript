@@ -255,16 +255,6 @@ export type AllowedHeaders = string;
 export type AllowedHeadersParam = string;
 
 /**
- * Allowed HTTP request methods.
- */
-export type AllowedHTTPMethods = Array<AllowedMethods>;
-
-/**
- * Allowed HTTP request methods.
- */
-export type AllowedHTTPMethodsParam = Array<AllowedMethodsParam>;
-
-/**
  * The identity providers selected for application.
  */
 export type AllowedIdPs = string;
@@ -274,27 +264,19 @@ export type AllowedIdPs = string;
  */
 export type AllowedIdPsParam = string;
 
-export type AllowedMethods =
-  | 'GET'
-  | 'POST'
-  | 'HEAD'
-  | 'PUT'
-  | 'DELETE'
-  | 'CONNECT'
-  | 'OPTIONS'
-  | 'TRACE'
-  | 'PATCH';
+/**
+ * Allowed HTTP request methods.
+ */
+export type AllowedMethods = Array<
+  'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+>;
 
-export type AllowedMethodsParam =
-  | 'GET'
-  | 'POST'
-  | 'HEAD'
-  | 'PUT'
-  | 'DELETE'
-  | 'CONNECT'
-  | 'OPTIONS'
-  | 'TRACE'
-  | 'PATCH';
+/**
+ * Allowed HTTP request methods.
+ */
+export type AllowedMethodsParam = Array<
+  'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+>;
 
 export type AllowedOrigins = string;
 
@@ -393,7 +375,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPages>;
+    custom_pages?: Array<string>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -499,7 +481,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPages>;
+    custom_pages?: Array<string>;
 
     /**
      * The image URL for the logo shown in the App Launcher dashboard.
@@ -691,7 +673,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPages>;
+    custom_pages?: Array<string>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -836,7 +818,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPages>;
+    custom_pages?: Array<string>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -913,7 +895,7 @@ export namespace Application {
     /**
      * The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID
@@ -964,7 +946,7 @@ export namespace Application {
     /**
      * The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID
@@ -1015,7 +997,7 @@ export namespace Application {
     /**
      * The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationsAPI.ApplicationType;
 
     /**
      * UUID
@@ -1110,6 +1092,34 @@ export namespace Application {
   }
 }
 
+/**
+ * The application type.
+ */
+export type ApplicationType =
+  | 'self_hosted'
+  | 'saas'
+  | 'ssh'
+  | 'vnc'
+  | 'app_launcher'
+  | 'warp'
+  | 'biso'
+  | 'bookmark'
+  | 'dash_sso';
+
+/**
+ * The application type.
+ */
+export type ApplicationTypeParam =
+  | 'self_hosted'
+  | 'saas'
+  | 'ssh'
+  | 'vnc'
+  | 'app_launcher'
+  | 'warp'
+  | 'biso'
+  | 'bookmark'
+  | 'dash_sso';
+
 export interface CORSHeaders {
   /**
    * Allows all HTTP request headers.
@@ -1140,7 +1150,7 @@ export interface CORSHeaders {
   /**
    * Allowed HTTP request methods.
    */
-  allowed_methods?: AllowedHTTPMethods;
+  allowed_methods?: AllowedMethods;
 
   /**
    * Allowed origins.
@@ -1183,7 +1193,7 @@ export interface CORSHeadersParam {
   /**
    * Allowed HTTP request methods.
    */
-  allowed_methods?: AllowedHTTPMethodsParam;
+  allowed_methods?: AllowedMethodsParam;
 
   /**
    * Allowed origins.
@@ -1195,16 +1205,6 @@ export interface CORSHeadersParam {
    */
   max_age?: number;
 }
-
-/**
- * The custom pages selected for application.
- */
-export type CustomPages = string;
-
-/**
- * The custom pages selected for application.
- */
-export type CustomPagesParam = string;
 
 /**
  * A globally unique name for an identity or service provider.
@@ -1547,7 +1547,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1653,7 +1653,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -1847,7 +1847,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1996,7 +1996,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2072,7 +2072,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2110,7 +2110,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2148,7 +2148,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2316,7 +2316,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2422,7 +2422,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -2616,7 +2616,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2765,7 +2765,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPagesParam>;
+    custom_pages?: Array<string>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2841,7 +2841,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2879,7 +2879,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -2917,7 +2917,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: The application type.
      */
-    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
+    type: ApplicationTypeParam;
 
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
@@ -3047,14 +3047,13 @@ export interface ApplicationRevokeTokensParams {
 
 export namespace Applications {
   export import AllowedHeaders = ApplicationsAPI.AllowedHeaders;
-  export import AllowedHTTPMethods = ApplicationsAPI.AllowedHTTPMethods;
   export import AllowedIdPs = ApplicationsAPI.AllowedIdPs;
   export import AllowedMethods = ApplicationsAPI.AllowedMethods;
   export import AllowedOrigins = ApplicationsAPI.AllowedOrigins;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
+  export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
-  export import CustomPages = ApplicationsAPI.CustomPages;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
