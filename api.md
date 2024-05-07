@@ -4403,19 +4403,20 @@ Types:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedHeadersh</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedIdpsh</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedMethodsh</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedOriginsh</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedHeaders</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedHTTPMethods</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedIdPs</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedMethods</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedOrigins</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CustomPagesh</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CustomPages</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameFormat</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameIDFormat</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppSource</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SAMLSaaSApp</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SelfHostedDomainsh</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SelfHostedDomains</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationDeleteResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationRevokeTokensResponse</a></code>
 
