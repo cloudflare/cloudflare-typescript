@@ -9,7 +9,7 @@ export {
 } from './accounts';
 export {
   AddressMap,
-  AddressMapKind,
+  Kind,
   AddressMapCreateResponse,
   AddressMapDeleteResponse,
   AddressMapGetResponse,

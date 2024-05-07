@@ -89,7 +89,7 @@ export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationAr
 /**
  * Whether the user is a member of the organization or has an inivitation pending.
  */
-export type MemberStatus = 'member' | 'invited';
+export type Status = 'member' | 'invited';
 
 export interface UserWithInviteCode {
   /**
@@ -297,7 +297,7 @@ export interface MemberGetParams {
 }
 
 export namespace Members {
-  export import MemberStatus = MembersAPI.MemberStatus;
+  export import Status = MembersAPI.Status;
   export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;

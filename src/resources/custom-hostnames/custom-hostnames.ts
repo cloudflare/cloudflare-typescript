@@ -213,7 +213,7 @@ export namespace CustomHostname {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthority;
 
     /**
      * If a custom uploaded certificate is used.
@@ -560,7 +560,7 @@ export namespace CustomHostnameCreateResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthority;
 
     /**
      * If a custom uploaded certificate is used.
@@ -885,7 +885,7 @@ export namespace CustomHostnameListResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthority;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1217,7 +1217,7 @@ export namespace CustomHostnameEditResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthority;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1542,7 +1542,7 @@ export namespace CustomHostnameGetResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCA;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthority;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1805,7 +1805,7 @@ export namespace CustomHostnameCreateParams {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCAParam;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthorityParam;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1983,7 +1983,7 @@ export namespace CustomHostnameEditParams {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: CertificatePacksAPI.CertificatePackCAParam;
+    certificate_authority?: CertificatePacksAPI.CertificateAuthorityParam;
 
     /**
      * If a custom uploaded certificate is used.

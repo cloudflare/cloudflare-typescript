@@ -210,6 +210,12 @@ export interface GeoRestrictionsParam {
   label?: 'us' | 'eu' | 'highest_security';
 }
 
+/**
+ * Client Certificates may be active or revoked, and the pending_reactivation or
+ * pending_revocation represent in-progress asynchronous transitions
+ */
+export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
+
 export type CustomCertificateCreateResponse = unknown | string | null;
 
 export interface CustomCertificateDeleteResponse {
