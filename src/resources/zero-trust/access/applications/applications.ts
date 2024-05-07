@@ -250,21 +250,31 @@ export class Applications extends APIResource {
 
 export class ApplicationsSinglePage extends SinglePage<Application> {}
 
-export type AllowedHeadersh = string;
+export type AllowedHeaders = string;
 
-export type AllowedHeadershParam = string;
+export type AllowedHeadersParam = string;
+
+/**
+ * Allowed HTTP request methods.
+ */
+export type AllowedHTTPMethods = Array<AllowedMethods>;
+
+/**
+ * Allowed HTTP request methods.
+ */
+export type AllowedHTTPMethodsParam = Array<AllowedMethodsParam>;
 
 /**
  * The identity providers selected for application.
  */
-export type AllowedIdpsh = string;
+export type AllowedIdPs = string;
 
 /**
  * The identity providers selected for application.
  */
-export type AllowedIdpshParam = string;
+export type AllowedIdPsParam = string;
 
-export type AllowedMethodsh =
+export type AllowedMethods =
   | 'GET'
   | 'POST'
   | 'HEAD'
@@ -275,7 +285,7 @@ export type AllowedMethodsh =
   | 'TRACE'
   | 'PATCH';
 
-export type AllowedMethodshParam =
+export type AllowedMethodsParam =
   | 'GET'
   | 'POST'
   | 'HEAD'
@@ -286,9 +296,9 @@ export type AllowedMethodshParam =
   | 'TRACE'
   | 'PATCH';
 
-export type AllowedOriginsh = string;
+export type AllowedOrigins = string;
 
-export type AllowedOriginshParam = string;
+export type AllowedOriginsParam = string;
 
 /**
  * Identifier
@@ -340,7 +350,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Displays the application in the App Launcher.
@@ -383,7 +393,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPagesh>;
+    custom_pages?: Array<ApplicationsAPI.CustomPages>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -428,7 +438,7 @@ export namespace Application {
     /**
      * List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomainsh>;
+    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -466,7 +476,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Displays the application in the App Launcher.
@@ -489,7 +499,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPagesh>;
+    custom_pages?: Array<ApplicationsAPI.CustomPages>;
 
     /**
      * The image URL for the logo shown in the App Launcher dashboard.
@@ -638,7 +648,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Displays the application in the App Launcher.
@@ -681,7 +691,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPagesh>;
+    custom_pages?: Array<ApplicationsAPI.CustomPages>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -726,7 +736,7 @@ export namespace Application {
     /**
      * List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomainsh>;
+    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -783,7 +793,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Displays the application in the App Launcher.
@@ -826,7 +836,7 @@ export namespace Application {
     /**
      * The custom pages that will be displayed when applicable for this application
      */
-    custom_pages?: Array<ApplicationsAPI.CustomPagesh>;
+    custom_pages?: Array<ApplicationsAPI.CustomPages>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -871,7 +881,7 @@ export namespace Application {
     /**
      * List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomainsh>;
+    self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -914,7 +924,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Audience tag.
@@ -965,7 +975,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Audience tag.
@@ -1016,7 +1026,7 @@ export namespace Application {
      * The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<ApplicationsAPI.AllowedIdpsh>;
+    allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
      * Audience tag.
@@ -1125,17 +1135,17 @@ export interface CORSHeaders {
   /**
    * Allowed HTTP request headers.
    */
-  allowed_headers?: Array<AllowedHeadersh>;
+  allowed_headers?: Array<AllowedHeaders>;
 
   /**
    * Allowed HTTP request methods.
    */
-  allowed_methods?: Array<AllowedMethodsh>;
+  allowed_methods?: AllowedHTTPMethods;
 
   /**
    * Allowed origins.
    */
-  allowed_origins?: Array<AllowedOriginsh>;
+  allowed_origins?: Array<AllowedOrigins>;
 
   /**
    * The maximum number of seconds the results of a preflight request can be cached.
@@ -1168,17 +1178,17 @@ export interface CORSHeadersParam {
   /**
    * Allowed HTTP request headers.
    */
-  allowed_headers?: Array<AllowedHeadershParam>;
+  allowed_headers?: Array<AllowedHeadersParam>;
 
   /**
    * Allowed HTTP request methods.
    */
-  allowed_methods?: Array<AllowedMethodshParam>;
+  allowed_methods?: AllowedHTTPMethodsParam;
 
   /**
    * Allowed origins.
    */
-  allowed_origins?: Array<AllowedOriginshParam>;
+  allowed_origins?: Array<AllowedOriginsParam>;
 
   /**
    * The maximum number of seconds the results of a preflight request can be cached.
@@ -1189,12 +1199,12 @@ export interface CORSHeadersParam {
 /**
  * The custom pages selected for application.
  */
-export type CustomPagesh = string;
+export type CustomPages = string;
 
 /**
  * The custom pages selected for application.
  */
-export type CustomPageshParam = string;
+export type CustomPagesParam = string;
 
 /**
  * A globally unique name for an identity or service provider.
@@ -1433,12 +1443,12 @@ export namespace SAMLSaaSAppParam {
 /**
  * A domain that Access will secure.
  */
-export type SelfHostedDomainsh = string;
+export type SelfHostedDomains = string;
 
 /**
  * A domain that Access will secure.
  */
-export type SelfHostedDomainshParam = string;
+export type SelfHostedDomainsParam = string;
 
 export interface ApplicationDeleteResponse {
   /**
@@ -1497,7 +1507,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1537,7 +1547,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1582,7 +1592,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<SelfHostedDomainshParam>;
+    self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -1626,7 +1636,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1643,7 +1653,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -1797,7 +1807,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1837,7 +1847,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -1882,7 +1892,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<SelfHostedDomainshParam>;
+    self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -1946,7 +1956,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -1986,7 +1996,7 @@ export namespace ApplicationCreateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2031,7 +2041,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<SelfHostedDomainshParam>;
+    self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2080,7 +2090,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2118,7 +2128,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2156,7 +2166,7 @@ export namespace ApplicationCreateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2266,7 +2276,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2306,7 +2316,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2351,7 +2361,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<SelfHostedDomainshParam>;
+    self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2395,7 +2405,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2412,7 +2422,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: The image URL for the logo shown in the App Launcher dashboard.
@@ -2566,7 +2576,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2606,7 +2616,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2651,7 +2661,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<SelfHostedDomainshParam>;
+    self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2715,7 +2725,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: Displays the application in the App Launcher.
@@ -2755,7 +2765,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The custom pages that will be displayed when applicable for this
      * application
      */
-    custom_pages?: Array<CustomPageshParam>;
+    custom_pages?: Array<CustomPagesParam>;
 
     /**
      * Body param: Enables the binding cookie, which increases security against
@@ -2800,7 +2810,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param: List of domains that Access will secure.
      */
-    self_hosted_domains?: Array<SelfHostedDomainshParam>;
+    self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
@@ -2849,7 +2859,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2887,7 +2897,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -2925,7 +2935,7 @@ export namespace ApplicationUpdateParams {
      * Body param: The identity providers your users can select when connecting to this
      * application. Defaults to all IdPs configured in your account.
      */
-    allowed_idps?: Array<AllowedIdpshParam>;
+    allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
      * Body param: When set to `true`, users skip the identity provider selection step
@@ -3036,19 +3046,20 @@ export interface ApplicationRevokeTokensParams {
 }
 
 export namespace Applications {
-  export import AllowedHeadersh = ApplicationsAPI.AllowedHeadersh;
-  export import AllowedIdpsh = ApplicationsAPI.AllowedIdpsh;
-  export import AllowedMethodsh = ApplicationsAPI.AllowedMethodsh;
-  export import AllowedOriginsh = ApplicationsAPI.AllowedOriginsh;
+  export import AllowedHeaders = ApplicationsAPI.AllowedHeaders;
+  export import AllowedHTTPMethods = ApplicationsAPI.AllowedHTTPMethods;
+  export import AllowedIdPs = ApplicationsAPI.AllowedIdPs;
+  export import AllowedMethods = ApplicationsAPI.AllowedMethods;
+  export import AllowedOrigins = ApplicationsAPI.AllowedOrigins;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
-  export import CustomPagesh = ApplicationsAPI.CustomPagesh;
+  export import CustomPages = ApplicationsAPI.CustomPages;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
   export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
-  export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
+  export import SelfHostedDomains = ApplicationsAPI.SelfHostedDomains;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
   export import ApplicationsSinglePage = ApplicationsAPI.ApplicationsSinglePage;
