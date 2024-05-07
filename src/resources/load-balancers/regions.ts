@@ -3,7 +3,6 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
-import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
 
 export class Regions extends APIResource {
   /**
@@ -50,18 +49,6 @@ export class Regions extends APIResource {
   }
 }
 
-/**
- * A list of regions from which to run health checks. Null means every Cloudflare
- * data center.
- */
-export type RegionID = Array<LoadBalancersAPI.CheckRegion>;
-
-/**
- * A list of regions from which to run health checks. Null means every Cloudflare
- * data center.
- */
-export type RegionIDParam = Array<LoadBalancersAPI.CheckRegionParam>;
-
 export type RegionListResponse = unknown | string | null;
 
 /**
@@ -99,7 +86,6 @@ export interface RegionGetParams {
 }
 
 export namespace Regions {
-  export import RegionID = RegionsAPI.RegionID;
   export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionGetResponse = RegionsAPI.RegionGetResponse;
   export import RegionListParams = RegionsAPI.RegionListParams;
