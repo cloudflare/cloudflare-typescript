@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { Accounts } from './accounts';
+export { RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
 export {
-  MemberStatus,
+  Status,
   UserWithInviteCode,
   MemberListResponse,
   MemberDeleteResponse,
@@ -14,4 +15,3 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
-export { RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';

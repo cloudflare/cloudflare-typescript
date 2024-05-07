@@ -9,7 +9,7 @@ export class ACM extends APIResource {
 
 export namespace ACM {
   export import TotalTLS = TotalTLSAPI.TotalTLS;
-  export import TotalTLSCertificateAuthority = TotalTLSAPI.TotalTLSCertificateAuthority;
+  export import CertificateAuthority = TotalTLSAPI.CertificateAuthority;
   export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
   export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;
   export import TotalTLSCreateParams = TotalTLSAPI.TotalTLSCreateParams;

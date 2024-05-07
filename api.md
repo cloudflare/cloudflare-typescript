@@ -35,7 +35,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/accounts/members.ts">MemberStatus</a></code>
+- <code><a href="./src/resources/accounts/members.ts">Status</a></code>
 - <code><a href="./src/resources/accounts/members.ts">UserWithInviteCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
@@ -1094,12 +1094,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackCA</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackRequestType</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackRequestValidity</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackStatus</a></code>
-- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackValidationMethod</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificateAuthority</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Host</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestType</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">RequestValidity</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">Status</a></code>
+- <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">ValidationMethod</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackListResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackDeleteResponse</a></code>
 - <code><a href="./src/resources/ssl/certificate-packs/certificate-packs.ts">CertificatePackEditResponse</a></code>
@@ -1191,7 +1191,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/acm/total-tls.ts">TotalTLSCertificateAuthority</a></code>
+- <code><a href="./src/resources/acm/total-tls.ts">CertificateAuthority</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSCreateResponse</a></code>
 - <code><a href="./src/resources/acm/total-tls.ts">TotalTLSGetResponse</a></code>
 
@@ -1284,6 +1284,7 @@ Types:
 
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificate</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">GeoRestrictions</a></code>
+- <code><a href="./src/resources/custom-certificates/custom-certificates.ts">Status</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateCreateResponse</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateDeleteResponse</a></code>
 - <code><a href="./src/resources/custom-certificates/custom-certificates.ts">CustomCertificateEditResponse</a></code>
@@ -2782,7 +2783,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMap</a></code>
-- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapKind</a></code>
+- <code><a href="./src/resources/addressing/address-maps/address-maps.ts">Kind</a></code>
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapCreateResponse</a></code>
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapDeleteResponse</a></code>
 - <code><a href="./src/resources/addressing/address-maps/address-maps.ts">AddressMapGetResponse</a></code>

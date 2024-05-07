@@ -20,7 +20,7 @@ export namespace Addressing {
   export import ServiceListParams = ServicesAPI.ServiceListParams;
   export import AddressMaps = AddressMapsAPI.AddressMaps;
   export import AddressMap = AddressMapsAPI.AddressMap;
-  export import AddressMapKind = AddressMapsAPI.AddressMapKind;
+  export import Kind = AddressMapsAPI.Kind;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;

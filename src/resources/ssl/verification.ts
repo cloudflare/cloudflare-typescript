@@ -73,7 +73,7 @@ export interface Verification {
   /**
    * Validation method in use for a certificate pack order.
    */
-  validation_method?: CertificatePacksAPI.CertificatePackValidationMethod;
+  validation_method?: CertificatePacksAPI.ValidationMethod;
 
   /**
    * Certificate's required verification information.

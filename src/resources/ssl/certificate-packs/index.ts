@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  CertificatePackCA,
-  CertificatePackRequestType,
-  CertificatePackRequestValidity,
-  CertificatePackStatus,
-  CertificatePackValidationMethod,
+  CertificateAuthority,
   Host,
+  RequestType,
+  RequestValidity,
+  Status,
+  ValidationMethod,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
   CertificatePackEditResponse,
