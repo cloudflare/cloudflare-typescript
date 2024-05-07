@@ -4404,14 +4404,13 @@ Types:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedHeaders</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedHTTPMethods</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedIdPs</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedMethods</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedOrigins</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationType</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CustomPages</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameFormat</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppNameIDFormat</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppSource</a></code>

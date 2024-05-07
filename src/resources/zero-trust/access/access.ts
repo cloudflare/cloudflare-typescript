@@ -727,14 +727,13 @@ export namespace Access {
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import Applications = ApplicationsAPI.Applications;
   export import AllowedHeaders = ApplicationsAPI.AllowedHeaders;
-  export import AllowedHTTPMethods = ApplicationsAPI.AllowedHTTPMethods;
   export import AllowedIdPs = ApplicationsAPI.AllowedIdPs;
   export import AllowedMethods = ApplicationsAPI.AllowedMethods;
   export import AllowedOrigins = ApplicationsAPI.AllowedOrigins;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
+  export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
-  export import CustomPages = ApplicationsAPI.CustomPages;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
@@ -792,6 +791,7 @@ export namespace Access {
   export import Users = UsersAPI.Users;
   export import AccessUser = UsersAPI.AccessUser;
   export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
+  export import CustomPages = CustomPagesAPI.CustomPages;
   export import CustomPage = CustomPagesAPI.CustomPage;
   export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
