@@ -143,12 +143,7 @@ export namespace IssueListResponse {
 
       issue_class?: string;
 
-      issue_type?:
-        | 'compliance_violation'
-        | 'email_security'
-        | 'exposed_infrastructure'
-        | 'insecure_configuration'
-        | 'weak_authentication';
+      issue_type?: IssuesAPI.IssueType;
 
       payload?: unknown;
 

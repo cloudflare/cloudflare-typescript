@@ -197,18 +197,18 @@ export namespace RouteParam {
 }
 
 /**
- * A request condition target.
+ * URL target.
  */
 export interface Target {
   /**
    * String constraint.
    */
-  constraint: Target.Constraint;
+  constraint?: Target.Constraint;
 
   /**
    * A target based on the URL of the request.
    */
-  target: 'url';
+  target?: 'url';
 }
 
 export namespace Target {
@@ -230,46 +230,13 @@ export namespace Target {
 }
 
 /**
- * A request condition target.
+ * URL target.
  */
 export interface TargetParam {
   /**
    * String constraint.
    */
-  constraint: TargetParam.Constraint;
-
-  /**
-   * A target based on the URL of the request.
-   */
-  target: 'url';
-}
-
-export namespace TargetParam {
-  /**
-   * String constraint.
-   */
-  export interface Constraint {
-    /**
-     * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
-     */
-    operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
-
-    /**
-     * The URL pattern to match against the current request. The pattern may contain up
-     * to four asterisks ('\*') as placeholders.
-     */
-    value: string;
-  }
-}
-
-/**
- * URL target.
- */
-export interface URLTarget {
-  /**
-   * String constraint.
-   */
-  constraint?: URLTarget.Constraint;
+  constraint?: TargetParam.Constraint;
 
   /**
    * A target based on the URL of the request.
@@ -277,7 +244,7 @@ export interface URLTarget {
   target?: 'url';
 }
 
-export namespace URLTarget {
+export namespace TargetParam {
   /**
    * String constraint.
    */
