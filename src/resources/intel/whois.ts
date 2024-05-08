@@ -39,8 +39,6 @@ export interface Whois {
 }
 
 export interface WhoisGetResponse {
-  dnnsec: unknown;
-
   domain: string;
 
   extension: string;
