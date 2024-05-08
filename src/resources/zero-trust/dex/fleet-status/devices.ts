@@ -35,8 +35,6 @@ export interface DeviceListResponse {
    */
   deviceId: string;
 
-  mode: unknown;
-
   /**
    * Operating system
    */
@@ -46,8 +44,6 @@ export interface DeviceListResponse {
    * Network status
    */
   status: string;
-
-  timestamp: unknown;
 
   /**
    * WARP client version

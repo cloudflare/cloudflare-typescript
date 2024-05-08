@@ -379,8 +379,6 @@ export namespace MigrationStepParam {
 }
 
 export interface MTLSCERTBinding {
-  certificate: unknown;
-
   /**
    * A JavaScript variable name for the binding.
    */
@@ -398,8 +396,6 @@ export interface MTLSCERTBinding {
 }
 
 export interface MTLSCERTBindingParam {
-  certificate: unknown;
-
   /**
    * The class of resource that the binding provides.
    */
