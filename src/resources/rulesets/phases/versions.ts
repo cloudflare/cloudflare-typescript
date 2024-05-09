@@ -14,85 +14,16 @@ export class Versions extends APIResource {
    * Fetches the versions of an account or zone entry point ruleset.
    */
   list(
-    rulesetPhase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed',
+    rulesetPhase: RulesetsAPI.PhaseParam,
     params?: VersionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RulesetsSinglePage, RulesetsAPI.Ruleset>;
   list(
-    rulesetPhase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed',
+    rulesetPhase: RulesetsAPI.PhaseParam,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RulesetsSinglePage, RulesetsAPI.Ruleset>;
   list(
-    rulesetPhase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed',
+    rulesetPhase: RulesetsAPI.PhaseParam,
     params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.PagePromise<RulesetsSinglePage, RulesetsAPI.Ruleset> {
@@ -127,87 +58,18 @@ export class Versions extends APIResource {
    * Fetches a specific version of an account or zone entry point ruleset.
    */
   get(
-    rulesetPhase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed',
+    rulesetPhase: RulesetsAPI.PhaseParam,
     rulesetVersion: string,
     params?: VersionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionGetResponse>;
   get(
-    rulesetPhase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed',
+    rulesetPhase: RulesetsAPI.PhaseParam,
     rulesetVersion: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<VersionGetResponse>;
   get(
-    rulesetPhase:
-      | 'ddos_l4'
-      | 'ddos_l7'
-      | 'http_config_settings'
-      | 'http_custom_errors'
-      | 'http_log_custom_fields'
-      | 'http_ratelimit'
-      | 'http_request_cache_settings'
-      | 'http_request_dynamic_redirect'
-      | 'http_request_firewall_custom'
-      | 'http_request_firewall_managed'
-      | 'http_request_late_transform'
-      | 'http_request_origin'
-      | 'http_request_redirect'
-      | 'http_request_sanitize'
-      | 'http_request_sbfm'
-      | 'http_request_select_configuration'
-      | 'http_request_transform'
-      | 'http_response_compression'
-      | 'http_response_firewall_managed'
-      | 'http_response_headers_transform'
-      | 'magic_transit'
-      | 'magic_transit_ids_managed'
-      | 'magic_transit_managed',
+    rulesetPhase: RulesetsAPI.PhaseParam,
     rulesetVersion: string,
     params: VersionGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
@@ -253,7 +115,7 @@ export interface VersionGetResponse {
   /**
    * The kind of the ruleset.
    */
-  kind: 'managed' | 'custom' | 'root' | 'zone';
+  kind: RulesetsAPI.Kind;
 
   /**
    * The timestamp of when the ruleset was last modified.
@@ -268,30 +130,7 @@ export interface VersionGetResponse {
   /**
    * The phase of the ruleset.
    */
-  phase:
-    | 'ddos_l4'
-    | 'ddos_l7'
-    | 'http_config_settings'
-    | 'http_custom_errors'
-    | 'http_log_custom_fields'
-    | 'http_ratelimit'
-    | 'http_request_cache_settings'
-    | 'http_request_dynamic_redirect'
-    | 'http_request_firewall_custom'
-    | 'http_request_firewall_managed'
-    | 'http_request_late_transform'
-    | 'http_request_origin'
-    | 'http_request_redirect'
-    | 'http_request_sanitize'
-    | 'http_request_sbfm'
-    | 'http_request_select_configuration'
-    | 'http_request_transform'
-    | 'http_response_compression'
-    | 'http_response_firewall_managed'
-    | 'http_response_headers_transform'
-    | 'magic_transit'
-    | 'magic_transit_ids_managed'
-    | 'magic_transit_managed';
+  phase: RulesetsAPI.Phase;
 
   /**
    * The list of rules in the ruleset.

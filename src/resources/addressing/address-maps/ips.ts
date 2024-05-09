@@ -32,11 +32,11 @@ export class IPs extends APIResource {
     params: IPDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
-        { body: body, ...options },
+        options,
       ) as Core.APIPromise<{ result: IPDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -60,14 +60,9 @@ export interface IPUpdateParams {
 
 export interface IPDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export namespace IPs {

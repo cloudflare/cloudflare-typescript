@@ -34,7 +34,7 @@ export interface AnalyzeCreateParams {
    * bundle uses the shortest chain and newest intermediates. And the force bundle
    * verifies the chain, but does not otherwise modify it.
    */
-  bundle_method?: CustomHostnamesAPI.BundleMethod;
+  bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
   /**
    * Body param: The zone's SSL certificate or certificate and the intermediate(s).

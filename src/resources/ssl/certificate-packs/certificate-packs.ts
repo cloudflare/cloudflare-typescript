@@ -34,12 +34,12 @@ export class CertificatePacks extends APIResource {
     params: CertificatePackDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
+      this._client.delete(
+        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -84,6 +84,49 @@ export class CertificatePackListResponsesSinglePage extends SinglePage<Certifica
 
 export type Host = string;
 
+export type HostParam = string;
+
+/**
+ * The number of days for which the certificate should be valid.
+ */
+export type RequestValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+/**
+ * The number of days for which the certificate should be valid.
+ */
+export type RequestValidityParam = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+/**
+ * Status of certificate pack.
+ */
+export type Status =
+  | 'initializing'
+  | 'pending_validation'
+  | 'deleted'
+  | 'pending_issuance'
+  | 'pending_deployment'
+  | 'pending_deletion'
+  | 'pending_expiration'
+  | 'expired'
+  | 'active'
+  | 'initializing_timed_out'
+  | 'validation_timed_out'
+  | 'issuance_timed_out'
+  | 'deployment_timed_out'
+  | 'deletion_timed_out'
+  | 'pending_cleanup'
+  | 'staging_deployment'
+  | 'staging_active'
+  | 'deactivating'
+  | 'inactive'
+  | 'backup_issued'
+  | 'holding_deployment';
+
+/**
+ * Validation method in use for a certificate pack order.
+ */
+export type ValidationMethod = 'http' | 'cname' | 'txt';
+
 export type CertificatePackListResponse = unknown;
 
 export interface CertificatePackDeleteResponse {
@@ -121,28 +164,7 @@ export interface CertificatePackEditResponse {
   /**
    * Status of certificate pack.
    */
-  status?:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status?: Status;
 
   /**
    * Type of certificate pack.
@@ -176,14 +198,9 @@ export interface CertificatePackListParams {
 
 export interface CertificatePackDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CertificatePackEditParams {
@@ -207,6 +224,9 @@ export interface CertificatePackGetParams {
 
 export namespace CertificatePacks {
   export import Host = CertificatePacksAPI.Host;
+  export import RequestValidity = CertificatePacksAPI.RequestValidity;
+  export import Status = CertificatePacksAPI.Status;
+  export import ValidationMethod = CertificatePacksAPI.ValidationMethod;
   export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
   export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
   export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;

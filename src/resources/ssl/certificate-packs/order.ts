@@ -48,28 +48,7 @@ export interface OrderCreateResponse {
   /**
    * Status of certificate pack.
    */
-  status?:
-    | 'initializing'
-    | 'pending_validation'
-    | 'deleted'
-    | 'pending_issuance'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'pending_expiration'
-    | 'expired'
-    | 'active'
-    | 'initializing_timed_out'
-    | 'validation_timed_out'
-    | 'issuance_timed_out'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out'
-    | 'pending_cleanup'
-    | 'staging_deployment'
-    | 'staging_active'
-    | 'deactivating'
-    | 'inactive'
-    | 'backup_issued'
-    | 'holding_deployment';
+  status?: CertificatePacksAPI.Status;
 
   /**
    * Type of certificate pack.
@@ -105,7 +84,7 @@ export interface OrderCreateParams {
    * Must contain the zone apex, may not contain more than 50 hosts, and may not be
    * empty.
    */
-  hosts: Array<CertificatePacksAPI.Host>;
+  hosts: Array<CertificatePacksAPI.HostParam>;
 
   /**
    * Body param: Type of certificate pack.

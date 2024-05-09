@@ -15,7 +15,6 @@ export {
   TokenCreateParams,
   TokenUpdateParams,
   TokenListParams,
-  TokenDeleteParams,
   TokenListResponsesV4PagePaginationArray,
   Tokens,
 } from './tokens/index';
@@ -32,7 +31,6 @@ export {
   OrganizationDeleteResponse,
   OrganizationGetResponse,
   OrganizationListParams,
-  OrganizationDeleteParams,
   OrganizationsV4PagePaginationArray,
   Organizations,
 } from './organizations';
@@ -46,7 +44,6 @@ export {
   SubscriptionEditResponse,
   SubscriptionGetResponse,
   SubscriptionUpdateParams,
-  SubscriptionDeleteParams,
   SubscriptionEditParams,
   SubscriptionsSinglePage,
   Subscriptions,

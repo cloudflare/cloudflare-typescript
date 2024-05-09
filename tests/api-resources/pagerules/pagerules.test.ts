@@ -10,11 +10,10 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource pagerules', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.pagerules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
+      actions: [{}, {}, {}],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,8 +25,7 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.pagerules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
@@ -38,34 +36,13 @@ describe('resource pagerules', () => {
             url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
           },
         },
-      ],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-      priority: 0,
-      status: 'active',
-    });
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
         {
           name: 'forward_url',
           value: {
@@ -80,8 +57,54 @@ describe('resource pagerules', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('update: only required params', async () => {
+    const responsePromise = cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      actions: [{}, {}, {}],
+      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      actions: [
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+      ],
+      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      priority: 0,
+      status: 'active',
+    });
+  });
+
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.pagerules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,8 +115,7 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.pagerules.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'desc',
@@ -103,11 +125,9 @@ describe('resource pagerules', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -118,16 +138,13 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -140,11 +157,24 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
+        {
+          name: 'forward_url',
+          value: {
+            type: 'temporary',
+            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
+          },
+        },
         {
           name: 'forward_url',
           value: {
@@ -159,8 +189,7 @@ describe('resource pagerules', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -173,8 +202,7 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

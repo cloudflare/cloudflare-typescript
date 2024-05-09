@@ -74,12 +74,12 @@ export class Events extends APIResource {
     params: EventDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<EventDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: EventDeleteResponse }>
+      this._client.delete(
+        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
+        options,
+      ) as Core.APIPromise<{ result: EventDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -429,14 +429,9 @@ export interface EventListParams {
 
 export interface EventDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface EventEditParams {

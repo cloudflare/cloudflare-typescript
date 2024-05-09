@@ -12,6 +12,8 @@ export class Events extends APIResource {
 
 export type Dimension = 'event' | 'appID' | 'coloName' | 'ipVersion';
 
+export type DimensionParam = 'event' | 'appID' | 'coloName' | 'ipVersion';
+
 export namespace Events {
   export import Dimension = EventsAPI.Dimension;
   export import Bytimes = BytimesAPI.Bytimes;

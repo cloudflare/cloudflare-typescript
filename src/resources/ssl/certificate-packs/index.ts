@@ -2,6 +2,9 @@
 
 export {
   Host,
+  RequestValidity,
+  Status,
+  ValidationMethod,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
   CertificatePackEditResponse,

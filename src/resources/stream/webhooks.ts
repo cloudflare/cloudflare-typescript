@@ -21,12 +21,11 @@ export class Webhooks extends APIResource {
    * Deletes a webhook.
    */
   delete(params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/stream/webhook`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: WebhookDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
+        result: WebhookDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,14 +62,9 @@ export interface WebhookUpdateParams {
 
 export interface WebhookDeleteParams {
   /**
-   * Path param: The account identifier tag.
+   * The account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface WebhookGetParams {

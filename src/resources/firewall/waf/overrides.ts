@@ -85,14 +85,13 @@ export class Overrides extends APIResource {
   delete(
     zoneIdentifier: string,
     id: string,
-    body: OverrideDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OverrideDeleteResponse> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OverrideDeleteResponse }>
+      this._client.delete(
+        `/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`,
+        options,
+      ) as Core.APIPromise<{ result: OverrideDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -214,8 +213,6 @@ export type OverrideUpdateParams = unknown;
 
 export interface OverrideListParams extends V4PagePaginationArrayParams {}
 
-export type OverrideDeleteParams = unknown;
-
 export namespace Overrides {
   export import Override = OverridesAPI.Override;
   export import OverrideURL = OverridesAPI.OverrideURL;
@@ -226,5 +223,4 @@ export namespace Overrides {
   export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
   export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
   export import OverrideListParams = OverridesAPI.OverrideListParams;
-  export import OverrideDeleteParams = OverridesAPI.OverrideDeleteParams;
 }

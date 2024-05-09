@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource memberships', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.memberships.update('4536bcfad5faccb111b47003c79917fa', {
       status: 'accepted',
     });
@@ -24,15 +23,13 @@ describe('resource memberships', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.memberships.update('4536bcfad5faccb111b47003c79917fa', {
       status: 'accepted',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.memberships.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,16 +40,14 @@ describe('resource memberships', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.memberships.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
+  test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.memberships.list(
@@ -70,9 +65,8 @@ describe('resource memberships', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.memberships.delete('4536bcfad5faccb111b47003c79917fa', {});
+  test('delete', async () => {
+    const responsePromise = cloudflare.memberships.delete('4536bcfad5faccb111b47003c79917fa');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,13 +76,14 @@ describe('resource memberships', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.memberships.delete('4536bcfad5faccb111b47003c79917fa', {});
+  test('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.memberships.delete('4536bcfad5faccb111b47003c79917fa', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
+  test('get', async () => {
     const responsePromise = cloudflare.memberships.get('4536bcfad5faccb111b47003c79917fa');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -99,8 +94,7 @@ describe('resource memberships', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
+  test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.memberships.get('4536bcfad5faccb111b47003c79917fa', { path: '/_stainless_unknown_path' }),

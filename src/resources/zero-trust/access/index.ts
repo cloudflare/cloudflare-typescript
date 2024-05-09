@@ -25,19 +25,19 @@ export {
 } from './access';
 export { AccessUser, AccessUsersSinglePage, Users } from './users/index';
 export {
-  AllowedHeadersh,
-  AllowedIdpsh,
-  AllowedMethodsh,
-  AllowedOriginsh,
+  AllowedHeaders,
+  AllowedIdPs,
+  AllowedMethods,
+  AllowedOrigins,
   AppID,
   Application,
+  ApplicationType,
   CORSHeaders,
-  CustomPagesh,
   SaaSAppNameFormat,
   SaaSAppNameIDFormat,
   SaaSAppSource,
   SAMLSaaSApp,
-  SelfHostedDomainsh,
+  SelfHostedDomains,
   ApplicationDeleteResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
@@ -66,7 +66,6 @@ export {
   BookmarkDeleteResponse,
   BookmarkCreateParams,
   BookmarkUpdateParams,
-  BookmarkDeleteParams,
   BookmarksSinglePage,
   Bookmarks,
 } from './bookmarks';

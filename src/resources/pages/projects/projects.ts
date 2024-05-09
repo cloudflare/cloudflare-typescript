@@ -42,11 +42,8 @@ export class Projects extends APIResource {
     params: ProjectDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<unknown> {
-    const { account_id, body } = params;
-    return this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, {
-      body: body,
-      ...options,
-    });
+    const { account_id } = params;
+    return this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, options);
   }
 
   /**
@@ -212,6 +209,8 @@ export namespace Deployment {
     }
   }
 }
+
+export interface DeploymentParam {}
 
 export interface Project {
   /**
@@ -1088,6 +1087,16 @@ export interface Stage {
   status?: string;
 }
 
+/**
+ * The status of the deployment.
+ */
+export interface StageParam {
+  /**
+   * The current build stage.
+   */
+  name?: string;
+}
+
 export type ProjectCreateResponse = unknown | Array<unknown> | string;
 
 export type ProjectDeleteResponse = unknown;
@@ -1110,7 +1119,7 @@ export interface ProjectCreateParams {
   /**
    * Body param:
    */
-  canonical_deployment?: Deployment;
+  canonical_deployment?: DeploymentParam;
 
   /**
    * Body param: Configs for deployments in a project.
@@ -1120,7 +1129,7 @@ export interface ProjectCreateParams {
   /**
    * Body param:
    */
-  latest_deployment?: Deployment;
+  latest_deployment?: DeploymentParam;
 
   /**
    * Body param: Name of the project.
@@ -1945,14 +1954,9 @@ export interface ProjectListParams {
 
 export interface ProjectDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ProjectEditParams {

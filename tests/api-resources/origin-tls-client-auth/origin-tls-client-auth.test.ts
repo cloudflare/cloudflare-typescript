@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource originTLSClientAuth', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.originTLSClientAuth.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       certificate:
@@ -28,8 +27,7 @@ describe('resource originTLSClientAuth', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.originTLSClientAuth.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       certificate:
@@ -39,8 +37,7 @@ describe('resource originTLSClientAuth', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.originTLSClientAuth.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -53,18 +50,15 @@ describe('resource originTLSClientAuth', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.originTLSClientAuth.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.originTLSClientAuth.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -75,16 +69,13 @@ describe('resource originTLSClientAuth', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.originTLSClientAuth.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.originTLSClientAuth.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -97,8 +88,7 @@ describe('resource originTLSClientAuth', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.originTLSClientAuth.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

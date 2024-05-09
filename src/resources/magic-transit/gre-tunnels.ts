@@ -62,12 +62,12 @@ export class GRETunnels extends APIResource {
     params: GRETunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: GRETunnelDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: GRETunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -283,7 +283,7 @@ export interface GRETunnelUpdateParams {
   /**
    * Body param:
    */
-  health_check?: MagicTransitAPI.HealthCheck;
+  health_check?: MagicTransitAPI.HealthCheckParam;
 
   /**
    * Body param: Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The
@@ -306,14 +306,9 @@ export interface GRETunnelListParams {
 
 export interface GRETunnelDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface GRETunnelGetParams {

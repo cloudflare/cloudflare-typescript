@@ -94,5 +94,4 @@ export namespace ContentLists {
   export import EntryGetResponse = EntriesAPI.EntryGetResponse;
   export import EntryCreateParams = EntriesAPI.EntryCreateParams;
   export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
-  export import EntryDeleteParams = EntriesAPI.EntryDeleteParams;
 }

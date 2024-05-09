@@ -70,12 +70,12 @@ export interface DNSListResponse {
 
   messages: Array<Shared.ResponseInfo>;
 
-  result: DNS;
-
   /**
    * Whether the API call was successful
    */
   success: true;
+
+  result?: DNS;
 }
 
 export interface DNSListParams extends V4PagePaginationParams {

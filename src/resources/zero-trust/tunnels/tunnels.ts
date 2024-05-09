@@ -53,12 +53,11 @@ export class Tunnels extends APIResource {
     params: TunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TunnelDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: TunnelDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}`, options) as Core.APIPromise<{
+        result: TunnelDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -516,14 +515,9 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
 
 export interface TunnelDeleteParams {
   /**
-   * Path param: Cloudflare account ID
+   * Cloudflare account ID
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface TunnelEditParams {

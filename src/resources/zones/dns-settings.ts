@@ -63,6 +63,16 @@ export interface Nameserver {
   type: 'cloudflare.standard';
 }
 
+/**
+ * Settings determining the nameservers through which the zone should be available.
+ */
+export interface NameserverParam {
+  /**
+   * Nameserver type
+   */
+  type: 'cloudflare.standard';
+}
+
 export interface DNSSettingEditParams {
   /**
    * Path param: Identifier
@@ -85,7 +95,7 @@ export interface DNSSettingEditParams {
    * Body param: Settings determining the nameservers through which the zone should
    * be available.
    */
-  nameservers?: Nameserver;
+  nameservers?: NameserverParam;
 
   /**
    * Body param: Allows a Secondary DNS zone to use (proxied) override records and

@@ -86,6 +86,18 @@ export class Zones extends APIResource {
 
 export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {}
 
+/**
+ * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
+ * typically a partner-hosted zone or a CNAME setup.
+ */
+export type Type = 'full' | 'partial' | 'secondary';
+
+/**
+ * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
+ * typically a partner-hosted zone or a CNAME setup.
+ */
+export type TypeParam = 'full' | 'partial' | 'secondary';
+
 export interface Zone {
   /**
    * Identifier
@@ -130,13 +142,17 @@ export interface Zone {
   name: string;
 
   /**
+   * The name servers Cloudflare assigns to a zone
+   */
+  name_servers: Array<string>;
+
+  /**
    * DNS host at the time of switching to Cloudflare
    */
   original_dnshost: string | null;
 
   /**
-   * Original name servers before moving to Cloudflare Notes: Is this only available
-   * for full zones?
+   * Original name servers before moving to Cloudflare
    */
   original_name_servers: Array<string> | null;
 
@@ -250,7 +266,7 @@ export interface ZoneCreateParams {
    * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
    * typically a partner-hosted zone or a CNAME setup.
    */
-  type?: 'full' | 'partial' | 'secondary';
+  type?: TypeParam;
 }
 
 export namespace ZoneCreateParams {

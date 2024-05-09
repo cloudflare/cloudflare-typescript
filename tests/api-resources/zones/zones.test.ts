@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource zones', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.zones.create({ account: {}, name: 'example.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource zones', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.zones.create({
       account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
       name: 'example.com',
@@ -31,8 +29,7 @@ describe('resource zones', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
+  test('list', async () => {
     const responsePromise = cloudflare.zones.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,16 +40,14 @@ describe('resource zones', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
+  test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.zones.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options and params are passed correctly', async () => {
+  test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.zones.list(
@@ -88,8 +83,7 @@ describe('resource zones', () => {
     const response = await cloudflare.zones.delete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -100,8 +94,7 @@ describe('resource zones', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.zones.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       plan: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -110,8 +103,7 @@ describe('resource zones', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -122,8 +114,7 @@ describe('resource zones', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

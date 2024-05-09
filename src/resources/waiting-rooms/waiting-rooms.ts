@@ -67,12 +67,11 @@ export class WaitingRooms extends APIResource {
     params: WaitingRoomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<WaitingRoomDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: WaitingRoomDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{
+        result: WaitingRoomDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -129,11 +128,50 @@ export interface AdditionalRoutes {
   path?: string;
 }
 
+export interface AdditionalRoutesParam {
+  /**
+   * The hostname to which this waiting room will be applied (no wildcards). The
+   * hostname must be the primary domain, subdomain, or custom hostname (if using SSL
+   * for SaaS) of this zone. Please do not include the scheme (http:// or https://).
+   */
+  host?: string;
+
+  /**
+   * Sets the path within the host to enable the waiting room on. The waiting room
+   * will be enabled for all subpaths as well. If there are two waiting rooms on the
+   * same subpath, the waiting room for the most specific path will be chosen.
+   * Wildcards and query parameters are not supported.
+   */
+  path?: string;
+}
+
 /**
  * Configures cookie attributes for the waiting room cookie. This encrypted cookie
  * stores a user's status in the waiting room, such as queue position.
  */
 export interface CookieAttributes {
+  /**
+   * Configures the SameSite attribute on the waiting room cookie. Value `auto` will
+   * be translated to `lax` or `none` depending if **Always Use HTTPS** is enabled.
+   * Note that when using value `none`, the secure attribute cannot be set to
+   * `never`.
+   */
+  samesite?: 'auto' | 'lax' | 'none' | 'strict';
+
+  /**
+   * Configures the Secure attribute on the waiting room cookie. Value `always`
+   * indicates that the Secure attribute will be set in the Set-Cookie header,
+   * `never` indicates that the Secure attribute will not be set, and `auto` will set
+   * the Secure attribute depending if **Always Use HTTPS** is enabled.
+   */
+  secure?: 'auto' | 'always' | 'never';
+}
+
+/**
+ * Configures cookie attributes for the waiting room cookie. This encrypted cookie
+ * stores a user's status in the waiting room, such as queue position.
+ */
+export interface CookieAttributesParam {
   /**
    * Configures the SameSite attribute on the waiting room cookie. Value `auto` will
    * be translated to `lax` or `none` depending if **Always Use HTTPS** is enabled.
@@ -872,14 +910,14 @@ export interface WaitingRoomCreateParams {
    * applied. There is an implied wildcard at the end of the path. The hostname and
    * path combination must be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutes>;
+  additional_routes?: Array<AdditionalRoutesParam>;
 
   /**
    * Body param: Configures cookie attributes for the waiting room cookie. This
    * encrypted cookie stores a user's status in the waiting room, such as queue
    * position.
    */
-  cookie_attributes?: CookieAttributes;
+  cookie_attributes?: CookieAttributesParam;
 
   /**
    * Body param: Appends a '\_' + a custom suffix to the end of Cloudflare Waiting
@@ -1209,14 +1247,14 @@ export interface WaitingRoomUpdateParams {
    * applied. There is an implied wildcard at the end of the path. The hostname and
    * path combination must be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutes>;
+  additional_routes?: Array<AdditionalRoutesParam>;
 
   /**
    * Body param: Configures cookie attributes for the waiting room cookie. This
    * encrypted cookie stores a user's status in the waiting room, such as queue
    * position.
    */
-  cookie_attributes?: CookieAttributes;
+  cookie_attributes?: CookieAttributesParam;
 
   /**
    * Body param: Appends a '\_' + a custom suffix to the end of Cloudflare Waiting
@@ -1522,14 +1560,9 @@ export interface WaitingRoomListParams {
 
 export interface WaitingRoomDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface WaitingRoomEditParams {
@@ -1575,14 +1608,14 @@ export interface WaitingRoomEditParams {
    * applied. There is an implied wildcard at the end of the path. The hostname and
    * path combination must be unique to this and all other waiting rooms.
    */
-  additional_routes?: Array<AdditionalRoutes>;
+  additional_routes?: Array<AdditionalRoutesParam>;
 
   /**
    * Body param: Configures cookie attributes for the waiting room cookie. This
    * encrypted cookie stores a user's status in the waiting room, such as queue
    * position.
    */
-  cookie_attributes?: CookieAttributes;
+  cookie_attributes?: CookieAttributesParam;
 
   /**
    * Body param: Appends a '\_' + a custom suffix to the end of Cloudflare Waiting

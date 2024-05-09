@@ -57,12 +57,11 @@ export class Lists extends APIResource {
     params: ListDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ListDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
+        result: ListDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -97,6 +96,13 @@ export class GatewayListsSinglePage extends SinglePage<GatewayList> {}
 export interface GatewayItem {
   created_at?: string;
 
+  /**
+   * The value of the item in a list.
+   */
+  value?: string;
+}
+
+export interface GatewayItemParam {
   /**
    * The value of the item in a list.
    */
@@ -191,7 +197,7 @@ export interface ListCreateParams {
   /**
    * Body param: The items in the list.
    */
-  items?: Array<GatewayItem>;
+  items?: Array<GatewayItemParam>;
 }
 
 export interface ListUpdateParams {
@@ -216,15 +222,7 @@ export interface ListListParams {
 }
 
 export interface ListDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ListEditParams {
@@ -236,7 +234,7 @@ export interface ListEditParams {
   /**
    * Body param: The items in the list.
    */
-  append?: Array<GatewayItem>;
+  append?: Array<GatewayItemParam>;
 
   /**
    * Body param: A list of the item values you want to remove.

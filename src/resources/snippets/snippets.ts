@@ -2,7 +2,7 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
+import * as Shared from 'cloudflare/resources/shared';
 import * as ContentAPI from 'cloudflare/resources/snippets/content';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
 import { multipartFormRequestOptions } from 'cloudflare/core';
@@ -16,28 +16,14 @@ export class Snippets extends APIResource {
    * Put Snippet
    */
   update(
-    zoneIdentifier: string,
     snippetName: string,
-    body?: SnippetUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet>;
-  update(
-    zoneIdentifier: string,
-    snippetName: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet>;
-  update(
-    zoneIdentifier: string,
-    snippetName: string,
-    body: SnippetUpdateParams | Core.RequestOptions = {},
+    params: SnippetUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Snippet> {
-    if (isRequestOptions(body)) {
-      return this.update(zoneIdentifier, snippetName, {}, body);
-    }
+    const { zone_id, ...body } = params;
     return (
       this._client.put(
-        `/zones/${zoneIdentifier}/snippets/${snippetName}`,
+        `/zones/${zone_id}/snippets/${snippetName}`,
         multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: Snippet }>
     )._thenUnwrap((obj) => obj.result);
@@ -46,31 +32,37 @@ export class Snippets extends APIResource {
   /**
    * All Snippets
    */
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<SnippetsSinglePage, Snippet> {
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/snippets`, SnippetsSinglePage, options);
+  list(
+    params: SnippetListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SnippetsSinglePage, Snippet> {
+    const { zone_id } = params;
+    return this._client.getAPIList(`/zones/${zone_id}/snippets`, SnippetsSinglePage, options);
   }
 
   /**
    * Delete Snippet
    */
   delete(
-    zoneIdentifier: string,
     snippetName: string,
+    params: SnippetDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SnippetDeleteResponse> {
-    return (
-      this._client.delete(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
-        result: SnippetDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/snippets/${snippetName}`, options);
   }
 
   /**
    * Snippet
    */
-  get(zoneIdentifier: string, snippetName: string, options?: Core.RequestOptions): Core.APIPromise<Snippet> {
+  get(
+    snippetName: string,
+    params: SnippetGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Snippet> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/snippets/${snippetName}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{
         result: Snippet;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -99,14 +91,31 @@ export interface Snippet {
   snippet_name?: string;
 }
 
-export type SnippetDeleteResponse = unknown | Array<unknown> | string;
+export interface SnippetDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface SnippetUpdateParams {
   /**
-   * Content files of uploaded snippet
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Content files of uploaded snippet
    */
   files?: string;
 
+  /**
+   * Body param:
+   */
   metadata?: SnippetUpdateParams.Metadata;
 }
 
@@ -119,11 +128,34 @@ export namespace SnippetUpdateParams {
   }
 }
 
+export interface SnippetListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface SnippetDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface SnippetGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Snippets {
   export import Content = ContentAPI.Content;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
   export import Rules = RulesAPI.Rules;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
 }

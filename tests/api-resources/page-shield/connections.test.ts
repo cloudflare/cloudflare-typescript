@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource connections', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.pageShield.connections.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -24,8 +23,7 @@ describe('resource connections', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.pageShield.connections.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
@@ -34,7 +32,7 @@ describe('resource connections', () => {
       export: 'csv',
       hosts: 'blog.cloudflare.com,www.example*,*cloudflare.com',
       order_by: 'first_seen_at',
-      page: 'string',
+      page: '2',
       page_url: 'example.com/page,*/checkout,example.com/*,*checkout*',
       per_page: 100,
       prioritize_malicious: true,
@@ -43,8 +41,7 @@ describe('resource connections', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.pageShield.connections.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -57,8 +54,7 @@ describe('resource connections', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.pageShield.connections.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

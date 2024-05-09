@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource top', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('dnssec', async () => {
+  test('dnssec', async () => {
     const responsePromise = cloudflare.radar.as112.top.dnssec('SUPPORTED');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,16 +21,14 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('dnssec: request options instead of params are passed correctly', async () => {
+  test('dnssec: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.dnssec('SUPPORTED', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('dnssec: request options and params are passed correctly', async () => {
+  test('dnssec: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.dnssec(
@@ -52,8 +49,7 @@ describe('resource top', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edns', async () => {
+  test('edns', async () => {
     const responsePromise = cloudflare.radar.as112.top.edns('SUPPORTED');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,16 +60,14 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edns: request options instead of params are passed correctly', async () => {
+  test('edns: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.edns('SUPPORTED', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edns: request options and params are passed correctly', async () => {
+  test('edns: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.edns(
@@ -94,8 +88,7 @@ describe('resource top', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('ipVersion', async () => {
+  test('ipVersion', async () => {
     const responsePromise = cloudflare.radar.as112.top.ipVersion('IPv4');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,16 +99,14 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('ipVersion: request options instead of params are passed correctly', async () => {
+  test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.ipVersion('IPv4', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('ipVersion: request options and params are passed correctly', async () => {
+  test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.ipVersion(
@@ -136,8 +127,7 @@ describe('resource top', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('locations', async () => {
+  test('locations', async () => {
     const responsePromise = cloudflare.radar.as112.top.locations();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -148,16 +138,14 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('locations: request options instead of params are passed correctly', async () => {
+  test('locations: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.as112.top.locations({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('locations: request options and params are passed correctly', async () => {
+  test('locations: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.as112.top.locations(

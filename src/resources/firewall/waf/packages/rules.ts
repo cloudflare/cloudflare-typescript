@@ -213,8 +213,6 @@ export namespace RuleListResponse {
      */
     allowed_modes: Array<'on' | 'off'>;
 
-    default_mode: unknown;
-
     /**
      * The public description of the WAF rule.
      */
@@ -364,8 +362,6 @@ export namespace RuleEditResponse {
      * Defines the available modes for the current WAF rule.
      */
     allowed_modes: Array<'on' | 'off'>;
-
-    default_mode: unknown;
 
     /**
      * The public description of the WAF rule.

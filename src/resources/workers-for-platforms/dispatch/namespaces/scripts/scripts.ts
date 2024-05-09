@@ -50,10 +50,10 @@ export class Scripts extends APIResource {
     params: ScriptDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<void> {
-    const { account_id, body, force } = params;
+    const { account_id, force } = params;
     return this._client.delete(
       `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-      { query: { force }, body: body, ...options, headers: { Accept: '*/*', ...options?.headers } },
+      { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } },
     );
   }
 
@@ -172,9 +172,9 @@ export namespace ScriptUpdateParams {
       /**
        * Migrations to apply for Durable Objects associated with this Worker.
        */
-      migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
+      migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
 
-      placement?: WorkersAPI.PlacementConfiguration;
+      placement?: WorkersAPI.PlacementConfigurationParam;
 
       /**
        * List of strings to use as tags for this Worker
@@ -184,7 +184,7 @@ export namespace ScriptUpdateParams {
       /**
        * List of Workers that will consume logs from the attached Worker.
        */
-      tail_consumers?: Array<TailAPI.ConsumerScript>;
+      tail_consumers?: Array<TailAPI.ConsumerScriptParam>;
 
       /**
        * Usage model to apply to invocations.
@@ -217,11 +217,6 @@ export interface ScriptDeleteParams {
    * Path param: Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 
   /**
    * Query param: If set to true, delete will not be stopped by associated service

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource routes', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('moas', async () => {
+  test('moas', async () => {
     const responsePromise = cloudflare.radar.bgp.routes.moas();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,16 +21,14 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('moas: request options instead of params are passed correctly', async () => {
+  test('moas: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.bgp.routes.moas({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('moas: request options and params are passed correctly', async () => {
+  test('moas: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.moas(
@@ -41,8 +38,7 @@ describe('resource routes', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('pfx2as', async () => {
+  test('pfx2as', async () => {
     const responsePromise = cloudflare.radar.bgp.routes.pfx2as();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -53,16 +49,14 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('pfx2as: request options instead of params are passed correctly', async () => {
+  test('pfx2as: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.bgp.routes.pfx2as({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('pfx2as: request options and params are passed correctly', async () => {
+  test('pfx2as: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.pfx2as(
@@ -72,8 +66,7 @@ describe('resource routes', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('stats', async () => {
+  test('stats', async () => {
     const responsePromise = cloudflare.radar.bgp.routes.stats();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,27 +77,24 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('stats: request options instead of params are passed correctly', async () => {
+  test('stats: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.bgp.routes.stats({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('stats: request options and params are passed correctly', async () => {
+  test('stats: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.stats(
-        { asn: 0, format: 'JSON', location: 'US' },
+        { asn: 174, format: 'JSON', location: 'US' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseries', async () => {
+  test('timeseries', async () => {
     const responsePromise = cloudflare.radar.bgp.routes.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -115,21 +105,19 @@ describe('resource routes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseries: request options instead of params are passed correctly', async () => {
+  test('timeseries: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.timeseries({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseries: request options and params are passed correctly', async () => {
+  test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.timeseries(
         {
-          asn: 0,
+          asn: 174,
           dateEnd: '2023-09-01T11:41:33.782Z',
           dateRange: '7d',
           dateStart: '2023-09-01T11:41:33.782Z',

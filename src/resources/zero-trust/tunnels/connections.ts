@@ -14,12 +14,12 @@ export class Connections extends APIResource {
     params: ConnectionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConnectionDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}/connections`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/tunnels/${tunnelId}/connections`,
+        options,
+      ) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -136,14 +136,9 @@ export type ConnectionGetResponse = Array<Client>;
 
 export interface ConnectionDeleteParams {
   /**
-   * Path param: Cloudflare account ID
+   * Cloudflare account ID
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ConnectionGetParams {

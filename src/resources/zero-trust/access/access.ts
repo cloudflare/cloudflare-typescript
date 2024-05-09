@@ -43,6 +43,22 @@ export namespace AccessDevicePostureRule {
 }
 
 /**
+ * Enforces a device posture rule has run successfully
+ */
+export interface AccessDevicePostureRuleParam {
+  device_posture: AccessDevicePostureRuleParam.DevicePosture;
+}
+
+export namespace AccessDevicePostureRuleParam {
+  export interface DevicePosture {
+    /**
+     * The ID of a device posture integration.
+     */
+    integration_uid: string;
+  }
+}
+
+/**
  * Matches a specific email.
  */
 export type AccessRule =
@@ -67,9 +83,43 @@ export type AccessRule =
   | AccessDevicePostureRule;
 
 /**
+ * Matches a specific email.
+ */
+export type AccessRuleParam =
+  | EmailRuleParam
+  | EmailListRuleParam
+  | DomainRuleParam
+  | EveryoneRuleParam
+  | IPRuleParam
+  | IPListRuleParam
+  | CertificateRuleParam
+  | GroupRuleParam
+  | AzureGroupRuleParam
+  | GitHubOrganizationRuleParam
+  | GSuiteGroupRuleParam
+  | OktaGroupRuleParam
+  | SAMLGroupRuleParam
+  | ServiceTokenRuleParam
+  | AnyValidServiceTokenRuleParam
+  | ExternalEvaluationRuleParam
+  | CountryRuleParam
+  | AuthenticationMethodRuleParam
+  | AccessDevicePostureRuleParam;
+
+/**
  * Matches any valid Access Service Token
  */
 export interface AnyValidServiceTokenRule {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  any_valid_service_token: unknown;
+}
+
+/**
+ * Matches any valid Access Service Token
+ */
+export interface AnyValidServiceTokenRuleParam {
   /**
    * An empty object which matches on all service tokens.
    */
@@ -84,6 +134,22 @@ export interface AuthenticationMethodRule {
 }
 
 export namespace AuthenticationMethodRule {
+  export interface AuthMethod {
+    /**
+     * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+     */
+    auth_method: string;
+  }
+}
+
+/**
+ * Enforce different MFA options
+ */
+export interface AuthenticationMethodRuleParam {
+  auth_method: AuthenticationMethodRuleParam.AuthMethod;
+}
+
+export namespace AuthenticationMethodRuleParam {
   export interface AuthMethod {
     /**
      * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
@@ -114,9 +180,37 @@ export namespace AzureGroupRule {
 }
 
 /**
+ * Matches an Azure group. Requires an Azure identity provider.
+ */
+export interface AzureGroupRuleParam {
+  azureAD: AzureGroupRuleParam.AzureAD;
+}
+
+export namespace AzureGroupRuleParam {
+  export interface AzureAD {
+    /**
+     * The ID of an Azure group.
+     */
+    id: string;
+
+    /**
+     * The ID of your Azure identity provider.
+     */
+    connection_id: string;
+  }
+}
+
+/**
  * Matches any valid client certificate.
  */
 export interface CertificateRule {
+  certificate: unknown;
+}
+
+/**
+ * Matches any valid client certificate.
+ */
+export interface CertificateRuleParam {
   certificate: unknown;
 }
 
@@ -128,6 +222,22 @@ export interface CountryRule {
 }
 
 export namespace CountryRule {
+  export interface Geo {
+    /**
+     * The country code that should be matched.
+     */
+    country_code: string;
+  }
+}
+
+/**
+ * Matches a specific country
+ */
+export interface CountryRuleParam {
+  geo: CountryRuleParam.Geo;
+}
+
+export namespace CountryRuleParam {
   export interface Geo {
     /**
      * The country code that should be matched.
@@ -153,6 +263,22 @@ export namespace DomainRule {
 }
 
 /**
+ * Match an entire email domain.
+ */
+export interface DomainRuleParam {
+  email_domain: DomainRuleParam.EmailDomain;
+}
+
+export namespace DomainRuleParam {
+  export interface EmailDomain {
+    /**
+     * The email domain to match.
+     */
+    domain: string;
+  }
+}
+
+/**
  * Matches an email address from a list.
  */
 export interface EmailListRule {
@@ -160,6 +286,22 @@ export interface EmailListRule {
 }
 
 export namespace EmailListRule {
+  export interface EmailList {
+    /**
+     * The ID of a previously created email list.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an email address from a list.
+ */
+export interface EmailListRuleParam {
+  email_list: EmailListRuleParam.EmailList;
+}
+
+export namespace EmailListRuleParam {
   export interface EmailList {
     /**
      * The ID of a previously created email list.
@@ -185,9 +327,35 @@ export namespace EmailRule {
 }
 
 /**
+ * Matches a specific email.
+ */
+export interface EmailRuleParam {
+  email: EmailRuleParam.Email;
+}
+
+export namespace EmailRuleParam {
+  export interface Email {
+    /**
+     * The email of the user.
+     */
+    email: string;
+  }
+}
+
+/**
  * Matches everyone.
  */
 export interface EveryoneRule {
+  /**
+   * An empty object which matches on all users.
+   */
+  everyone: unknown;
+}
+
+/**
+ * Matches everyone.
+ */
+export interface EveryoneRuleParam {
   /**
    * An empty object which matches on all users.
    */
@@ -202,6 +370,28 @@ export interface ExternalEvaluationRule {
 }
 
 export namespace ExternalEvaluationRule {
+  export interface ExternalEvaluation {
+    /**
+     * The API endpoint containing your business logic.
+     */
+    evaluate_url: string;
+
+    /**
+     * The API endpoint containing the key that Access uses to verify that the response
+     * came from your API.
+     */
+    keys_url: string;
+  }
+}
+
+/**
+ * Create Allow or Block policies which evaluate the user based on custom criteria.
+ */
+export interface ExternalEvaluationRuleParam {
+  external_evaluation: ExternalEvaluationRuleParam.ExternalEvaluation;
+}
+
+export namespace ExternalEvaluationRuleParam {
   export interface ExternalEvaluation {
     /**
      * The API endpoint containing your business logic.
@@ -238,6 +428,27 @@ export namespace GitHubOrganizationRule {
 }
 
 /**
+ * Matches a Github organization. Requires a Github identity provider.
+ */
+export interface GitHubOrganizationRuleParam {
+  'github-organization': GitHubOrganizationRuleParam.GitHubOrganization;
+}
+
+export namespace GitHubOrganizationRuleParam {
+  export interface GitHubOrganization {
+    /**
+     * The ID of your Github identity provider.
+     */
+    connection_id: string;
+
+    /**
+     * The name of the organization.
+     */
+    name: string;
+  }
+}
+
+/**
  * Matches an Access group.
  */
 export interface GroupRule {
@@ -245,6 +456,22 @@ export interface GroupRule {
 }
 
 export namespace GroupRule {
+  export interface Group {
+    /**
+     * The ID of a previously created Access group.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an Access group.
+ */
+export interface GroupRuleParam {
+  group: GroupRuleParam.Group;
+}
+
+export namespace GroupRuleParam {
   export interface Group {
     /**
      * The ID of a previously created Access group.
@@ -276,6 +503,28 @@ export namespace GSuiteGroupRule {
 }
 
 /**
+ * Matches a group in Google Workspace. Requires a Google Workspace identity
+ * provider.
+ */
+export interface GSuiteGroupRuleParam {
+  gsuite: GSuiteGroupRuleParam.GSuite;
+}
+
+export namespace GSuiteGroupRuleParam {
+  export interface GSuite {
+    /**
+     * The ID of your Google Workspace identity provider.
+     */
+    connection_id: string;
+
+    /**
+     * The email of the Google Workspace group.
+     */
+    email: string;
+  }
+}
+
+/**
  * Matches an IP address from a list.
  */
 export interface IPListRule {
@@ -283,6 +532,22 @@ export interface IPListRule {
 }
 
 export namespace IPListRule {
+  export interface IPList {
+    /**
+     * The ID of a previously created IP list.
+     */
+    id: string;
+  }
+}
+
+/**
+ * Matches an IP address from a list.
+ */
+export interface IPListRuleParam {
+  ip_list: IPListRuleParam.IPList;
+}
+
+export namespace IPListRuleParam {
   export interface IPList {
     /**
      * The ID of a previously created IP list.
@@ -308,6 +573,22 @@ export namespace IPRule {
 }
 
 /**
+ * Matches an IP address block.
+ */
+export interface IPRuleParam {
+  ip: IPRuleParam.IP;
+}
+
+export namespace IPRuleParam {
+  export interface IP {
+    /**
+     * An IPv4 or IPv6 CIDR block.
+     */
+    ip: string;
+  }
+}
+
+/**
  * Matches an Okta group. Requires an Okta identity provider.
  */
 export interface OktaGroupRule {
@@ -315,6 +596,27 @@ export interface OktaGroupRule {
 }
 
 export namespace OktaGroupRule {
+  export interface Okta {
+    /**
+     * The ID of your Okta identity provider.
+     */
+    connection_id: string;
+
+    /**
+     * The email of the Okta group.
+     */
+    email: string;
+  }
+}
+
+/**
+ * Matches an Okta group. Requires an Okta identity provider.
+ */
+export interface OktaGroupRuleParam {
+  okta: OktaGroupRuleParam.Okta;
+}
+
+export namespace OktaGroupRuleParam {
   export interface Okta {
     /**
      * The ID of your Okta identity provider.
@@ -350,6 +652,27 @@ export namespace SAMLGroupRule {
 }
 
 /**
+ * Matches a SAML group. Requires a SAML identity provider.
+ */
+export interface SAMLGroupRuleParam {
+  saml: SAMLGroupRuleParam.SAML;
+}
+
+export namespace SAMLGroupRuleParam {
+  export interface SAML {
+    /**
+     * The name of the SAML attribute.
+     */
+    attribute_name: string;
+
+    /**
+     * The SAML attribute value to look for.
+     */
+    attribute_value: string;
+  }
+}
+
+/**
  * Matches a specific Access Service Token
  */
 export interface ServiceTokenRule {
@@ -357,6 +680,22 @@ export interface ServiceTokenRule {
 }
 
 export namespace ServiceTokenRule {
+  export interface ServiceToken {
+    /**
+     * The ID of a Service Token.
+     */
+    token_id: string;
+  }
+}
+
+/**
+ * Matches a specific Access Service Token
+ */
+export interface ServiceTokenRuleParam {
+  service_token: ServiceTokenRuleParam.ServiceToken;
+}
+
+export namespace ServiceTokenRuleParam {
   export interface ServiceToken {
     /**
      * The ID of a Service Token.
@@ -387,19 +726,19 @@ export namespace Access {
   export import SAMLGroupRule = AccessAPI.SAMLGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import Applications = ApplicationsAPI.Applications;
-  export import AllowedHeadersh = ApplicationsAPI.AllowedHeadersh;
-  export import AllowedIdpsh = ApplicationsAPI.AllowedIdpsh;
-  export import AllowedMethodsh = ApplicationsAPI.AllowedMethodsh;
-  export import AllowedOriginsh = ApplicationsAPI.AllowedOriginsh;
+  export import AllowedHeaders = ApplicationsAPI.AllowedHeaders;
+  export import AllowedIdPs = ApplicationsAPI.AllowedIdPs;
+  export import AllowedMethods = ApplicationsAPI.AllowedMethods;
+  export import AllowedOrigins = ApplicationsAPI.AllowedOrigins;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
+  export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
-  export import CustomPagesh = ApplicationsAPI.CustomPagesh;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
   export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
-  export import SelfHostedDomainsh = ApplicationsAPI.SelfHostedDomainsh;
+  export import SelfHostedDomains = ApplicationsAPI.SelfHostedDomains;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
   export import ApplicationsSinglePage = ApplicationsAPI.ApplicationsSinglePage;
@@ -443,7 +782,6 @@ export namespace Access {
   export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
   export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
-  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
   export import Keys = KeysAPI.Keys;
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;

@@ -58,6 +58,23 @@ export interface ContextAwareness {
   skip: SkipConfiguration;
 }
 
+/**
+ * Scan the context of predefined entries to only return matches surrounded by
+ * keywords.
+ */
+export interface ContextAwarenessParam {
+  /**
+   * If true, scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  enabled: boolean;
+
+  /**
+   * Content types to exclude from context analysis and return all matches.
+   */
+  skip: SkipConfigurationParam;
+}
+
 export type Profile =
   | PredefinedAPI.PredefinedProfile
   | CustomAPI.CustomProfile
@@ -131,6 +148,16 @@ export namespace Profile {
  * Content types to exclude from context analysis and return all matches.
  */
 export interface SkipConfiguration {
+  /**
+   * If the content type is a file, skip context analysis and return all matches.
+   */
+  files: boolean;
+}
+
+/**
+ * Content types to exclude from context analysis and return all matches.
+ */
+export interface SkipConfigurationParam {
   /**
    * If the content type is a file, skip context analysis and return all matches.
    */

@@ -67,14 +67,9 @@ export class Filters extends APIResource {
   /**
    * Deletes an existing filter.
    */
-  delete(
-    zoneIdentifier: string,
-    id: string,
-    body: FilterDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallFilter> {
+  delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, { body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/zones/${zoneIdentifier}/filters/${id}`, options) as Core.APIPromise<{
         result: FirewallFilter;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -154,5 +149,3 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
    */
   ref?: string;
 }
-
-export type FilterDeleteParams = unknown;

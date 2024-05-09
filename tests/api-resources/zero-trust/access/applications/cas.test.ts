@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource cas', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -25,7 +25,7 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -37,7 +37,7 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -52,7 +52,7 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.cas.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',

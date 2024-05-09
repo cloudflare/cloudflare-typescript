@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource ranking', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('timeseriesGroups', async () => {
+  test('timeseriesGroups', async () => {
     const responsePromise = cloudflare.radar.ranking.timeseriesGroups();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,16 +21,14 @@ describe('resource ranking', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseriesGroups: request options instead of params are passed correctly', async () => {
+  test('timeseriesGroups: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.ranking.timeseriesGroups({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseriesGroups: request options and params are passed correctly', async () => {
+  test('timeseriesGroups: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.ranking.timeseriesGroups(
@@ -51,8 +48,7 @@ describe('resource ranking', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('top', async () => {
+  test('top', async () => {
     const responsePromise = cloudflare.radar.ranking.top();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -63,16 +59,14 @@ describe('resource ranking', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('top: request options instead of params are passed correctly', async () => {
+  test('top: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.ranking.top({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('top: request options and params are passed correctly', async () => {
+  test('top: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.ranking.top(

@@ -53,14 +53,12 @@ export class Bookmarks extends APIResource {
   delete(
     identifier: string,
     uuid: string,
-    body: BookmarkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BookmarkDeleteResponse> {
     return (
-      this._client.delete(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: BookmarkDeleteResponse }>
+      this._client.delete(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
+        result: BookmarkDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -120,13 +118,10 @@ export type BookmarkCreateParams = unknown;
 
 export type BookmarkUpdateParams = unknown;
 
-export type BookmarkDeleteParams = unknown;
-
 export namespace Bookmarks {
   export import Bookmark = BookmarksAPI.Bookmark;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
   export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
-  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
 }

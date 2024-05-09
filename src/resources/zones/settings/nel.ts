@@ -65,6 +65,30 @@ export namespace NEL {
   }
 }
 
+/**
+ * Enable Network Error Logging reporting on your zone. (Beta)
+ */
+export interface NELParam {
+  /**
+   * Zone setting identifier.
+   */
+  id: 'nel';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: NELParam.Value;
+}
+
+export namespace NELParam {
+  /**
+   * Current value of the zone setting.
+   */
+  export interface Value {
+    enabled?: boolean;
+  }
+}
+
 export interface NELEditParams {
   /**
    * Path param: Identifier
@@ -74,7 +98,7 @@ export interface NELEditParams {
   /**
    * Body param: Enable Network Error Logging reporting on your zone. (Beta)
    */
-  value: NEL;
+  value: NELParam;
 }
 
 export interface NELGetParams {

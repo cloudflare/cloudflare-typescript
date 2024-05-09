@@ -8,9 +8,9 @@ export class DNSSECResource extends APIResource {
    * Delete DNSSEC.
    */
   delete(params: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/dnssec`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{
         result: DNSSECDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -123,14 +123,9 @@ export type DNSSECDeleteResponse = unknown | string;
 
 export interface DNSSECDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface DNSSECEditParams {

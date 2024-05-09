@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource mtlsCertificates', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.mtlsCertificates.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ca: true,
@@ -27,8 +26,7 @@ describe('resource mtlsCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.mtlsCertificates.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ca: true,
@@ -40,8 +38,7 @@ describe('resource mtlsCertificates', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.mtlsCertificates.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -54,18 +51,15 @@ describe('resource mtlsCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.mtlsCertificates.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.mtlsCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -76,16 +70,13 @@ describe('resource mtlsCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.mtlsCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.mtlsCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -98,8 +89,7 @@ describe('resource mtlsCertificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.mtlsCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

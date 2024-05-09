@@ -55,12 +55,11 @@ export class Queues extends APIResource {
     params: QueueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/queues/${queueId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: QueueDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
+        result: QueueDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -152,14 +151,9 @@ export interface QueueListParams {
 
 export interface QueueDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface QueueGetParams {

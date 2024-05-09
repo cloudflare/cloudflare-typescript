@@ -38,12 +38,12 @@ export class Language extends APIResource {
     params: LanguageDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LanguageDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/stream/${identifier}/captions/${language}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: LanguageDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
+        options,
+      ) as Core.APIPromise<{ result: LanguageDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -82,14 +82,9 @@ export interface LanguageUpdateParams {
 
 export interface LanguageDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface LanguageGetParams {

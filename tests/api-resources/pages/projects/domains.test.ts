@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource domains', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: { name: 'example.com' },
@@ -25,16 +24,14 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: { name: 'example.com' },
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.list('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -47,19 +44,17 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.list('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.delete(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -70,17 +65,15 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.delete(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: only required params', async () => {
+  test('edit: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.edit(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
@@ -95,8 +88,7 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('edit: required and optional params', async () => {
+  test('edit: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.edit(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
@@ -104,8 +96,7 @@ describe('resource domains', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.pages.projects.domains.get(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',
@@ -120,8 +111,7 @@ describe('resource domains', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
+  test('get: required and optional params', async () => {
     const response = await cloudflare.pages.projects.domains.get(
       'this-is-my-project-01',
       'this-is-my-domain-01.com',

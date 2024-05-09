@@ -57,12 +57,12 @@ export class Pools extends APIResource {
     params: PoolDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PoolDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: PoolDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/load_balancers/pools/${poolId}`,
+        options,
+      ) as Core.APIPromise<{ result: PoolDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -210,7 +210,7 @@ export interface PoolCreateParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins: Array<LoadBalancersAPI.Origin>;
+  origins: Array<LoadBalancersAPI.OriginParam>;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -233,7 +233,7 @@ export interface PoolCreateParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadSheddingParam;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -267,13 +267,13 @@ export interface PoolCreateParams {
    * Body param: Filter pool and origin health notifications by resource type or
    * health status. Use null to reset.
    */
-  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilterParam | null;
 
   /**
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteering;
+  origin_steering?: LoadBalancersAPI.OriginSteeringParam;
 }
 
 export interface PoolUpdateParams {
@@ -293,13 +293,13 @@ export interface PoolUpdateParams {
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins: Array<LoadBalancersAPI.Origin>;
+  origins: Array<LoadBalancersAPI.OriginParam>;
 
   /**
    * Body param: A list of regions from which to run health checks. Null means every
    * Cloudflare data center.
    */
-  check_regions?: Array<LoadBalancersAPI.CheckRegion> | null;
+  check_regions?: Array<LoadBalancersAPI.CheckRegionParam> | null;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -322,7 +322,7 @@ export interface PoolUpdateParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadSheddingParam;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -356,13 +356,13 @@ export interface PoolUpdateParams {
    * Body param: Filter pool and origin health notifications by resource type or
    * health status. Use null to reset.
    */
-  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilterParam | null;
 
   /**
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteering;
+  origin_steering?: LoadBalancersAPI.OriginSteeringParam;
 }
 
 export interface PoolListParams {
@@ -380,14 +380,9 @@ export interface PoolListParams {
 
 export interface PoolDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface PoolEditParams {
@@ -400,7 +395,7 @@ export interface PoolEditParams {
    * Body param: A list of regions from which to run health checks. Null means every
    * Cloudflare data center.
    */
-  check_regions?: Array<LoadBalancersAPI.CheckRegion> | null;
+  check_regions?: Array<LoadBalancersAPI.CheckRegionParam> | null;
 
   /**
    * Body param: A human-readable description of the pool.
@@ -423,7 +418,7 @@ export interface PoolEditParams {
   /**
    * Body param: Configures load shedding policies and percentages for the pool.
    */
-  load_shedding?: LoadBalancersAPI.LoadShedding;
+  load_shedding?: LoadBalancersAPI.LoadSheddingParam;
 
   /**
    * Body param: The longitude of the data center containing the origins used in this
@@ -463,20 +458,20 @@ export interface PoolEditParams {
    * Body param: Filter pool and origin health notifications by resource type or
    * health status. Use null to reset.
    */
-  notification_filter?: LoadBalancersAPI.NotificationFilter | null;
+  notification_filter?: LoadBalancersAPI.NotificationFilterParam | null;
 
   /**
    * Body param: Configures origin steering for the pool. Controls how origins are
    * selected for new sessions and traffic without session affinity.
    */
-  origin_steering?: LoadBalancersAPI.OriginSteering;
+  origin_steering?: LoadBalancersAPI.OriginSteeringParam;
 
   /**
    * Body param: The list of origins within this pool. Traffic directed at this pool
    * is balanced across all currently healthy origins, provided the pool itself is
    * healthy.
    */
-  origins?: Array<LoadBalancersAPI.Origin>;
+  origins?: Array<LoadBalancersAPI.OriginParam>;
 }
 
 export interface PoolGetParams {

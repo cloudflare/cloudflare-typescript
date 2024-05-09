@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource urlScanner', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('scan', async () => {
+  test('scan', async () => {
     const responsePromise = cloudflare.urlScanner.scan('string');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,16 +21,14 @@ describe('resource urlScanner', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('scan: request options instead of params are passed correctly', async () => {
+  test('scan: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.urlScanner.scan('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('scan: request options and params are passed correctly', async () => {
+  test('scan: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.urlScanner.scan(

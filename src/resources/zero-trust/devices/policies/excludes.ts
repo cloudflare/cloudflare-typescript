@@ -77,6 +77,25 @@ export interface SplitTunnelExclude {
   host?: string;
 }
 
+export interface SplitTunnelExcludeParam {
+  /**
+   * The address in CIDR format to exclude from the tunnel. If `address` is present,
+   * `host` must not be present.
+   */
+  address: string;
+
+  /**
+   * A description of the Split Tunnel item, displayed in the client UI.
+   */
+  description: string;
+
+  /**
+   * The domain name to exclude from the tunnel. If `host` is present, `address` must
+   * not be present.
+   */
+  host?: string;
+}
+
 export type ExcludeUpdateResponse = Array<SplitTunnelExclude>;
 
 export type ExcludeGetResponse = Array<SplitTunnelExclude>;
@@ -90,7 +109,7 @@ export interface ExcludeUpdateParams {
   /**
    * Body param:
    */
-  body: Array<SplitTunnelExclude>;
+  body: Array<SplitTunnelExcludeParam>;
 }
 
 export interface ExcludeListParams {

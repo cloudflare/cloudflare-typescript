@@ -4,10 +4,11 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
 import * as PermissionsAPI from 'cloudflare/resources/intel/indicator-feeds/permissions';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as SnapshotsAPI from 'cloudflare/resources/intel/indicator-feeds/snapshots';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class IndicatorFeeds extends APIResource {
+  snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
   permissions: PermissionsAPI.Permissions = new PermissionsAPI.Permissions(this._client);
 
   /**
@@ -27,7 +28,7 @@ export class IndicatorFeeds extends APIResource {
   }
 
   /**
-   * Update indicator feed data
+   * Update indicator feed metadata
    */
   update(
     feedId: number,
@@ -36,10 +37,10 @@ export class IndicatorFeeds extends APIResource {
   ): Core.APIPromise<IndicatorFeedUpdateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(
-        `/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`,
-        multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>
+      this._client.put(`/accounts/${account_id}/intel/indicator-feeds/${feedId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -110,6 +111,16 @@ export interface IndicatorFeedCreateResponse {
   description?: string;
 
   /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
+
+  /**
    * The date and time when the data entry was last modified
    */
   modified_on?: string;
@@ -122,19 +133,39 @@ export interface IndicatorFeedCreateResponse {
 
 export interface IndicatorFeedUpdateResponse {
   /**
-   * Feed id
+   * The unique identifier for the indicator feed
    */
-  file_id?: number;
+  id?: number;
 
   /**
-   * Name of the file unified in our system
+   * The date and time when the data entry was created
    */
-  filename?: string;
+  created_on?: string;
 
   /**
-   * Current status of upload, should be unified
+   * The description of the example test
    */
-  status?: string;
+  description?: string;
+
+  /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
+
+  /**
+   * The date and time when the data entry was last modified
+   */
+  modified_on?: string;
+
+  /**
+   * The name of the indicator feed
+   */
+  name?: string;
 }
 
 export interface IndicatorFeedListResponse {
@@ -152,6 +183,16 @@ export interface IndicatorFeedListResponse {
    * The description of the example test
    */
   description?: string;
+
+  /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
 
   /**
    * The date and time when the data entry was last modified
@@ -222,9 +263,19 @@ export interface IndicatorFeedUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The file to upload
+   * Body param: The new description of the feed
    */
-  source?: string;
+  feed_description?: string;
+
+  /**
+   * Body param: The new is_attributable value of the feed
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Body param: The new is_public value of the feed
+   */
+  is_public?: boolean;
 }
 
 export interface IndicatorFeedListParams {
@@ -260,6 +311,9 @@ export namespace IndicatorFeeds {
   export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
   export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
   export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
+  export import Snapshots = SnapshotsAPI.Snapshots;
+  export import SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
+  export import SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
   export import Permissions = PermissionsAPI.Permissions;
   export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
   export import PermissionListResponse = PermissionsAPI.PermissionListResponse;

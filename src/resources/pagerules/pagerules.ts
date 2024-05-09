@@ -59,12 +59,11 @@ export class Pagerules extends APIResource {
     params: PageruleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PageruleDeleteResponse | null> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: PageruleDeleteResponse | null }>
+      this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
+        result: PageruleDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -173,19 +172,43 @@ export namespace Route {
   }
 }
 
+export interface RouteParam {
+  /**
+   * The type of route.
+   */
+  name?: 'forward_url';
+
+  value?: RouteParam.Value;
+}
+
+export namespace RouteParam {
+  export interface Value {
+    /**
+     * The response type for the URL redirect.
+     */
+    type?: 'temporary' | 'permanent';
+
+    /**
+     * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+     * in the constraint value.
+     */
+    url?: string;
+  }
+}
+
 /**
- * A request condition target.
+ * URL target.
  */
 export interface Target {
   /**
    * String constraint.
    */
-  constraint: Target.Constraint;
+  constraint?: Target.Constraint;
 
   /**
    * A target based on the URL of the request.
    */
-  target: 'url';
+  target?: 'url';
 }
 
 export namespace Target {
@@ -209,11 +232,11 @@ export namespace Target {
 /**
  * URL target.
  */
-export interface URLTarget {
+export interface TargetParam {
   /**
    * String constraint.
    */
-  constraint?: URLTarget.Constraint;
+  constraint?: TargetParam.Constraint;
 
   /**
    * A target based on the URL of the request.
@@ -221,7 +244,7 @@ export interface URLTarget {
   target?: 'url';
 }
 
-export namespace URLTarget {
+export namespace TargetParam {
   /**
    * String constraint.
    */
@@ -266,12 +289,12 @@ export interface PageruleCreateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<Route>;
+  actions: Array<RouteParam>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<Target>;
+  targets: Array<TargetParam>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -298,12 +321,12 @@ export interface PageruleUpdateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<Route>;
+  actions: Array<RouteParam>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets: Array<Target>;
+  targets: Array<TargetParam>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -350,14 +373,9 @@ export interface PageruleListParams {
 
 export interface PageruleDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface PageruleEditParams {
@@ -370,7 +388,7 @@ export interface PageruleEditParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions?: Array<Route>;
+  actions?: Array<RouteParam>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -389,7 +407,7 @@ export interface PageruleEditParams {
   /**
    * Body param: The rule targets to evaluate on each request.
    */
-  targets?: Array<Target>;
+  targets?: Array<TargetParam>;
 }
 
 export interface PageruleGetParams {

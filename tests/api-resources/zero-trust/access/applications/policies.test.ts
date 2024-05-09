@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource policies', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -34,7 +34,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.applications.policies.create(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -79,7 +79,7 @@ describe('resource policies', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -104,7 +104,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.applications.policies.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -150,7 +150,7 @@ describe('resource policies', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.list(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -165,7 +165,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -181,7 +181,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',

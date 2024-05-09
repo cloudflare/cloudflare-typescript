@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource top', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('browserFamilies', async () => {
+  test('browserFamilies', async () => {
     const responsePromise = cloudflare.radar.http.top.browserFamilies();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,16 +21,14 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('browserFamilies: request options instead of params are passed correctly', async () => {
+  test('browserFamilies: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.top.browserFamilies({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('browserFamilies: request options and params are passed correctly', async () => {
+  test('browserFamilies: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.top.browserFamilies(
@@ -58,8 +55,7 @@ describe('resource top', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('browsers', async () => {
+  test('browsers', async () => {
     const responsePromise = cloudflare.radar.http.top.browsers();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -70,16 +66,14 @@ describe('resource top', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('browsers: request options instead of params are passed correctly', async () => {
+  test('browsers: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(cloudflare.radar.http.top.browsers({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('browsers: request options and params are passed correctly', async () => {
+  test('browsers: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.http.top.browsers(

@@ -124,7 +124,7 @@ export interface ConfigCreateParams {
   /**
    * Body param:
    */
-  origin: HyperdriveAPI.Configuration;
+  origin: HyperdriveAPI.ConfigurationParam;
 
   /**
    * Body param:
@@ -167,7 +167,7 @@ export interface ConfigUpdateParams {
   /**
    * Body param:
    */
-  origin: HyperdriveAPI.Configuration;
+  origin: HyperdriveAPI.ConfigurationParam;
 
   /**
    * Body param:
@@ -229,7 +229,7 @@ export interface ConfigEditParams {
   /**
    * Body param:
    */
-  origin?: HyperdriveAPI.Configuration;
+  origin?: HyperdriveAPI.ConfigurationParam;
 }
 
 export namespace ConfigEditParams {

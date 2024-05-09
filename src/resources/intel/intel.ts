@@ -58,6 +58,7 @@ export namespace Intel {
   export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
   export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
   export import Whois = WhoisAPI.Whois;
+  export import WhoisGetResponse = WhoisAPI.WhoisGetResponse;
   export import WhoisGetParams = WhoisAPI.WhoisGetParams;
   export import IndicatorFeeds = IndicatorFeedsAPI.IndicatorFeeds;
   export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;

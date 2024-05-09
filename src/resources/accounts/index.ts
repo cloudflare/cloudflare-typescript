@@ -3,6 +3,7 @@
 export { Accounts } from './accounts';
 export { RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
 export {
+  Status,
   UserWithInviteCode,
   MemberListResponse,
   MemberDeleteResponse,

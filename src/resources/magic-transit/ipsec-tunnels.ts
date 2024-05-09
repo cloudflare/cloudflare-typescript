@@ -68,12 +68,12 @@ export class IPSECTunnels extends APIResource {
     params: IPSECTunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IPSECTunnelDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -389,7 +389,7 @@ export interface IPSECTunnelCreateParams {
   /**
    * Body param:
    */
-  health_check?: MagicTransitAPI.HealthCheck;
+  health_check?: MagicTransitAPI.HealthCheckParam;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
@@ -441,7 +441,7 @@ export interface IPSECTunnelUpdateParams {
   /**
    * Body param:
    */
-  health_check?: MagicTransitAPI.HealthCheck;
+  health_check?: MagicTransitAPI.HealthCheckParam;
 
   /**
    * Body param: A randomly generated or provided string for use in the IPsec tunnel.
@@ -464,14 +464,9 @@ export interface IPSECTunnelListParams {
 
 export interface IPSECTunnelDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface IPSECTunnelGetParams {

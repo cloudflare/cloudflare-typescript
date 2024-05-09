@@ -48,12 +48,12 @@ export class TSIGs extends APIResource {
     params: TSIGDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TSIGDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: TSIGDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`,
+        options,
+      ) as Core.APIPromise<{ result: TSIGDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -144,15 +144,7 @@ export interface TSIGListParams {
 }
 
 export interface TSIGDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface TSIGGetParams {

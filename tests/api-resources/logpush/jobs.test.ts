@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource jobs', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
@@ -25,7 +25,7 @@ describe('resource jobs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
@@ -33,7 +33,11 @@ describe('resource jobs', () => {
       dataset: 'http_requests',
       enabled: false,
       frequency: 'high',
+      kind: 'edge',
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
+      max_upload_bytes: 5000000,
+      max_upload_interval_seconds: 30,
+      max_upload_records: 1000,
       name: 'example.com',
       output_options: {
         'CVE-2021-4428': true,
@@ -53,7 +57,7 @@ describe('resource jobs', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('update', async () => {
     const responsePromise = cloudflare.logpush.jobs.update(1, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +69,7 @@ describe('resource jobs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.logpush.jobs.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
@@ -77,9 +81,9 @@ describe('resource jobs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.logpush.jobs.delete(1, { body: {}, account_id: 'string' });
+  // TODO: investigate broken test
+  test.skip('delete', async () => {
+    const responsePromise = cloudflare.logpush.jobs.delete(1, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,12 +93,7 @@ describe('resource jobs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.logpush.jobs.delete(1, { body: {}, account_id: 'string' });
-  });
-
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.logpush.jobs.get(1, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource iqi', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('summary: only required params', async () => {
+  test('summary: only required params', async () => {
     const responsePromise = cloudflare.radar.quality.iqi.summary({ metric: 'BANDWIDTH' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,8 +21,7 @@ describe('resource iqi', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('summary: required and optional params', async () => {
+  test('summary: required and optional params', async () => {
     const response = await cloudflare.radar.quality.iqi.summary({
       metric: 'BANDWIDTH',
       asn: ['string', 'string', 'string'],
@@ -37,8 +35,7 @@ describe('resource iqi', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseriesGroups: only required params', async () => {
+  test('timeseriesGroups: only required params', async () => {
     const responsePromise = cloudflare.radar.quality.iqi.timeseriesGroups({ metric: 'BANDWIDTH' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -49,8 +46,7 @@ describe('resource iqi', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('timeseriesGroups: required and optional params', async () => {
+  test('timeseriesGroups: required and optional params', async () => {
     const response = await cloudflare.radar.quality.iqi.timeseriesGroups({
       metric: 'BANDWIDTH',
       aggInterval: '1h',

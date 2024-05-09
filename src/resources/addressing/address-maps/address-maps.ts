@@ -53,12 +53,12 @@ export class AddressMaps extends APIResource {
     params: AddressMapDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AddressMapDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
+      this._client.delete(
+        `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
+        options,
+      ) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -143,6 +143,11 @@ export interface AddressMap {
   modified_at?: string;
 }
 
+/**
+ * The type of the membership.
+ */
+export type Kind = 'zone' | 'account';
+
 export interface AddressMapCreateResponse {
   /**
    * Identifier
@@ -224,7 +229,7 @@ export namespace AddressMapCreateResponse {
     /**
      * The type of the membership.
      */
-    kind?: 'zone' | 'account';
+    kind?: AddressMapsAPI.Kind;
   }
 }
 
@@ -311,7 +316,7 @@ export namespace AddressMapGetResponse {
     /**
      * The type of the membership.
      */
-    kind?: 'zone' | 'account';
+    kind?: AddressMapsAPI.Kind;
   }
 }
 
@@ -343,14 +348,9 @@ export interface AddressMapListParams {
 
 export interface AddressMapDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface AddressMapEditParams {
@@ -390,6 +390,7 @@ export interface AddressMapGetParams {
 
 export namespace AddressMaps {
   export import AddressMap = AddressMapsAPI.AddressMap;
+  export import Kind = AddressMapsAPI.Kind;
   export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
   export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
   export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;

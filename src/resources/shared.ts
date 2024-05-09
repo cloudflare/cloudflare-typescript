@@ -5,6 +5,8 @@ import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
 
 export type ASN = number;
 
+export type ASNParam = number;
+
 export interface AuditLog {
   /**
    * A string that uniquely identifies the audit log.
@@ -101,6 +103,28 @@ export namespace AuditLog {
     type?: string;
   }
 }
+
+/**
+ * The Certificate Authority that will issue the certificate
+ */
+export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt';
+
+/**
+ * The Certificate Authority that will issue the certificate
+ */
+export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt';
+
+/**
+ * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+ * or "keyless-certificate" (for Keyless SSL servers).
+ */
+export type CertificateRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+
+/**
+ * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+ * or "keyless-certificate" (for Keyless SSL servers).
+ */
+export type CertificateRequestTypeParam = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
 
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
@@ -366,6 +390,12 @@ export interface PermissionGrant {
   write?: boolean;
 }
 
+export interface PermissionGrantParam {
+  read?: boolean;
+
+  write?: boolean;
+}
+
 export interface ResponseInfo {
   code: number;
 
@@ -420,6 +450,16 @@ export interface Role {
    */
   permissions: Array<Permission>;
 }
+
+/**
+ * Direction to order DNS records in.
+ */
+export type SortDirection = 'asc' | 'desc';
+
+/**
+ * Direction to order DNS records in.
+ */
+export type SortDirectionParam = 'asc' | 'desc';
 
 export class RolesSinglePage extends SinglePage<Role> {}
 

@@ -3,6 +3,9 @@
 export { AnalyzeCreateResponse, AnalyzeCreateParams, Analyze } from './analyze';
 export {
   Host,
+  RequestValidity,
+  Status,
+  ValidationMethod,
   CertificatePackListResponse,
   CertificatePackDeleteResponse,
   CertificatePackEditResponse,

@@ -42,12 +42,11 @@ export class IncomingResource extends APIResource {
     params: IncomingDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IncomingDeleteResponse> {
-    const { zone_id, body } = params;
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone_id}/secondary_dns/incoming`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: IncomingDeleteResponse }>
+      this._client.delete(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
+        result: IncomingDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -275,15 +274,7 @@ export interface IncomingUpdateParams {
 }
 
 export interface IncomingDeleteParams {
-  /**
-   * Path param:
-   */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface IncomingGetParams {

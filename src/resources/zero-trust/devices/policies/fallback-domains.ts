@@ -80,6 +80,23 @@ export interface FallbackDomain {
   dns_server?: Array<unknown>;
 }
 
+export interface FallbackDomainParam {
+  /**
+   * The domain suffix to match when resolving locally.
+   */
+  suffix: string;
+
+  /**
+   * A description of the fallback domain, displayed in the client UI.
+   */
+  description?: string;
+
+  /**
+   * A list of IP addresses to handle domain resolution.
+   */
+  dns_server?: Array<unknown>;
+}
+
 export type FallbackDomainPolicy = Array<FallbackDomain>;
 
 export type FallbackDomainUpdateResponse = Array<FallbackDomain>;
@@ -95,7 +112,7 @@ export interface FallbackDomainUpdateParams {
   /**
    * Body param:
    */
-  body: Array<FallbackDomain>;
+  body: Array<FallbackDomainParam>;
 }
 
 export interface FallbackDomainListParams {

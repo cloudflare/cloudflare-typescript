@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
+import * as Shared from 'cloudflare/resources/shared';
 import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallback-origin';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
 
@@ -53,11 +54,8 @@ export class CustomHostnames extends APIResource {
     params: CustomHostnameDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomHostnameDeleteResponse> {
-    const { zone_id, body } = params;
-    return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
-      body: body,
-      ...options,
-    });
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options);
   }
 
   /**
@@ -106,6 +104,14 @@ export class CustomHostnameListResponsesV4PagePaginationArray extends V4PagePagi
  * chain, but does not otherwise modify it.
  */
 export type BundleMethod = 'ubiquitous' | 'optimal' | 'force';
+
+/**
+ * A ubiquitous bundle has the highest probability of being verified everywhere,
+ * even by clients using outdated or unusual trust stores. An optimal bundle uses
+ * the shortest chain and newest intermediates. And the force bundle verifies the
+ * chain, but does not otherwise modify it.
+ */
+export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force';
 
 export interface CustomHostname {
   /**
@@ -207,7 +213,7 @@ export namespace CustomHostname {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -438,10 +444,21 @@ export namespace CustomHostname {
 export type DCVMethod = 'http' | 'txt' | 'email';
 
 /**
+ * Domain control validation (DCV) method used for this hostname.
+ */
+export type DCVMethodParam = 'http' | 'txt' | 'email';
+
+/**
  * Level of validation to be used for this hostname. Domain validation (dv) must be
  * used.
  */
 export type DomainValidationType = 'dv';
+
+/**
+ * Level of validation to be used for this hostname. Domain validation (dv) must be
+ * used.
+ */
+export type DomainValidationTypeParam = 'dv';
 
 export interface CustomHostnameCreateResponse {
   /**
@@ -543,7 +560,7 @@ export namespace CustomHostnameCreateResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -868,7 +885,7 @@ export namespace CustomHostnameListResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1200,7 +1217,7 @@ export namespace CustomHostnameEditResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1525,7 +1542,7 @@ export namespace CustomHostnameGetResponse {
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCA;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1783,12 +1800,12 @@ export namespace CustomHostnameCreateParams {
      * the shortest chain and newest intermediates. And the force bundle verifies the
      * chain, but does not otherwise modify it.
      */
-    bundle_method?: CustomHostnamesAPI.BundleMethod;
+    bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCAParam;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1803,7 +1820,7 @@ export namespace CustomHostnameCreateParams {
     /**
      * Domain control validation (DCV) method used for this hostname.
      */
-    method?: CustomHostnamesAPI.DCVMethod;
+    method?: CustomHostnamesAPI.DCVMethodParam;
 
     /**
      * SSL specific settings.
@@ -1814,7 +1831,7 @@ export namespace CustomHostnameCreateParams {
      * Level of validation to be used for this hostname. Domain validation (dv) must be
      * used.
      */
-    type?: CustomHostnamesAPI.DomainValidationType;
+    type?: CustomHostnamesAPI.DomainValidationTypeParam;
 
     /**
      * Indicates whether the certificate covers a wildcard.
@@ -1903,14 +1920,9 @@ export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
 
 export interface CustomHostnameDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   zone_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CustomHostnameEditParams {
@@ -1966,12 +1978,12 @@ export namespace CustomHostnameEditParams {
      * the shortest chain and newest intermediates. And the force bundle verifies the
      * chain, but does not otherwise modify it.
      */
-    bundle_method?: CustomHostnamesAPI.BundleMethod;
+    bundle_method?: CustomHostnamesAPI.BundleMethodParam;
 
     /**
      * The Certificate Authority that will issue the certificate
      */
-    certificate_authority?: 'digicert' | 'google' | 'lets_encrypt';
+    certificate_authority?: Shared.CertificateCAParam;
 
     /**
      * If a custom uploaded certificate is used.
@@ -1986,7 +1998,7 @@ export namespace CustomHostnameEditParams {
     /**
      * Domain control validation (DCV) method used for this hostname.
      */
-    method?: CustomHostnamesAPI.DCVMethod;
+    method?: CustomHostnamesAPI.DCVMethodParam;
 
     /**
      * SSL specific settings.
@@ -1997,7 +2009,7 @@ export namespace CustomHostnameEditParams {
      * Level of validation to be used for this hostname. Domain validation (dv) must be
      * used.
      */
-    type?: CustomHostnamesAPI.DomainValidationType;
+    type?: CustomHostnamesAPI.DomainValidationTypeParam;
 
     /**
      * Indicates whether the certificate covers a wildcard.

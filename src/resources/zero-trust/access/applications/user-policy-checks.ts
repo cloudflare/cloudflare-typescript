@@ -12,16 +12,16 @@ export class UserPolicyChecks extends APIResource {
    * Tests if a specific user has permission to access an application.
    */
   list(
-    appId: ApplicationsAPI.AppID,
+    appId: ApplicationsAPI.AppIDParam,
     params?: UserPolicyCheckListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserPolicyCheckListResponse>;
   list(
-    appId: ApplicationsAPI.AppID,
+    appId: ApplicationsAPI.AppIDParam,
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserPolicyCheckListResponse>;
   list(
-    appId: ApplicationsAPI.AppID,
+    appId: ApplicationsAPI.AppIDParam,
     params: UserPolicyCheckListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserPolicyCheckListResponse> {

@@ -10,7 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource policies', () => {
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.policies.create({
       account_id: '699d98642c564d2e855e9661899b7252',
@@ -27,7 +27,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.policies.create({
       account_id: '699d98642c564d2e855e9661899b7252',
@@ -51,8 +51,7 @@ describe('resource policies', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.policies.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
@@ -65,18 +64,16 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.policies.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.policies.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -87,15 +84,14 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.policies.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.policies.edit(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -110,7 +106,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.policies.edit(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -135,7 +131,7 @@ describe('resource policies', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.devices.policies.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
@@ -150,7 +146,7 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.devices.policies.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',

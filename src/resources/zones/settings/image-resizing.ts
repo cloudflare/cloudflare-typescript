@@ -66,6 +66,24 @@ export interface ImageResizing {
   modified_on?: string | null;
 }
 
+/**
+ * Image Resizing provides on-demand resizing, conversion and optimisation for
+ * images served through Cloudflare's network. Refer to the
+ * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
+ * more information.
+ */
+export interface ImageResizingParam {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'image_resizing';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off' | 'open';
+}
+
 export interface ImageResizingEditParams {
   /**
    * Path param: Identifier
@@ -78,7 +96,7 @@ export interface ImageResizingEditParams {
    * [Image Resizing documentation](https://developers.cloudflare.com/images/) for
    * more information.
    */
-  value: ImageResizing;
+  value: ImageResizingParam;
 }
 
 export interface ImageResizingGetParams {

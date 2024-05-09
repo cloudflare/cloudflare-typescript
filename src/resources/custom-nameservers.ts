@@ -27,12 +27,11 @@ export class CustomNameservers extends APIResource {
     params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomNameserverDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{
+        result: CustomNameserverDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -63,22 +62,6 @@ export class CustomNameservers extends APIResource {
       this._client.get(`/accounts/${account_id}/custom_ns`, options) as Core.APIPromise<{
         result: CustomNameserverGetResponse | null;
       }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Verify Account Custom Nameserver Glue Records
-   */
-  verify(
-    params: CustomNameserverVerifyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverVerifyResponse | null> {
-    const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/custom_ns/verify`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomNameserverVerifyResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -127,13 +110,11 @@ export namespace CustomNameserver {
   }
 }
 
-export type CustomNameserverDeleteResponse = unknown | Array<unknown> | string;
+export type CustomNameserverDeleteResponse = Array<unknown>;
 
 export type CustomNameserverAvailabiltyResponse = Array<string>;
 
 export type CustomNameserverGetResponse = Array<CustomNameserver>;
-
-export type CustomNameserverVerifyResponse = Array<CustomNameserver>;
 
 export interface CustomNameserverCreateParams {
   /**
@@ -154,14 +135,9 @@ export interface CustomNameserverCreateParams {
 
 export interface CustomNameserverDeleteParams {
   /**
-   * Path param: Account identifier tag.
+   * Account identifier tag.
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface CustomNameserverAvailabiltyParams {
@@ -176,16 +152,4 @@ export interface CustomNameserverGetParams {
    * Account identifier tag.
    */
   account_id: string;
-}
-
-export interface CustomNameserverVerifyParams {
-  /**
-   * Path param: Account identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }

@@ -10,8 +10,7 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource namespaces', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('create: only required params', async () => {
+  test('create: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       title: 'My Own Namespace',
@@ -25,16 +24,14 @@ describe('resource namespaces', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('create: required and optional params', async () => {
+  test('create: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       title: 'My Own Namespace',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: only required params', async () => {
+  test('update: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.update('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       title: 'My Own Namespace',
@@ -48,16 +45,14 @@ describe('resource namespaces', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: required and optional params', async () => {
+  test('update: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.update('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       title: 'My Own Namespace',
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
+  test('list: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -68,8 +63,7 @@ describe('resource namespaces', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
+  test('list: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
@@ -79,11 +73,9 @@ describe('resource namespaces', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: only required params', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.kv.namespaces.delete('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -94,11 +86,9 @@ describe('resource namespaces', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: required and optional params', async () => {
+  test('delete: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.delete('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
     });
   });
 });

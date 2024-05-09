@@ -63,6 +63,26 @@ export interface Polish {
   modified_on?: string | null;
 }
 
+/**
+ * Removes metadata and compresses your images for faster page load times. Basic
+ * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
+ * quality. Basic + JPEG (Lossy): Further reduce the size of JPEG files for faster
+ * image loading. Larger JPEGs are converted to progressive images, loading a
+ * lower-resolution image first and ending in a higher-resolution version. Not
+ * recommended for hi-res photography sites.
+ */
+export interface PolishParam {
+  /**
+   * ID of the zone setting.
+   */
+  id: 'polish';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'off' | 'lossless' | 'lossy';
+}
+
 export interface PolishEditParams {
   /**
    * Path param: Identifier
@@ -77,7 +97,7 @@ export interface PolishEditParams {
    * loading a lower-resolution image first and ending in a higher-resolution
    * version. Not recommended for hi-res photography sites.
    */
-  value: Polish;
+  value: PolishParam;
 }
 
 export interface PolishGetParams {

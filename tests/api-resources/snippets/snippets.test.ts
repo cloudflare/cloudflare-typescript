@@ -10,9 +10,11 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource snippets', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('update', async () => {
-    const responsePromise = cloudflare.snippets.update('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
+  // throwing HTTP 415
+  test.skip('update: only required params', async () => {
+    const responsePromise = cloudflare.snippets.update('snippet_name_01', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,35 +24,17 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.snippets.update('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  // throwing HTTP 415
+  test.skip('update: required and optional params', async () => {
+    const response = await cloudflare.snippets.update('snippet_name_01', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      files: "export { async function fetch(request, env) {return new Response('some_response') } }",
+      metadata: { main_module: 'main.js' },
+    });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.snippets.update(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'snippet_name_01',
-        {
-          files: "export { async function fetch(request, env) {return new Response('some_response') } }",
-          metadata: { main_module: 'main.js' },
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  // skipped: tests are disabled for the time being
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.snippets.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,17 +44,14 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.snippets.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.snippets.delete('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.snippets.delete('snippet_name_01', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,19 +61,16 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.snippets.delete('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.snippets.delete('snippet_name_01', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.snippets.get('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01');
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.snippets.get('snippet_name_01', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,13 +80,9 @@ describe('resource snippets', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.snippets.get('023e105f4ecef8ad9ca31a8372d0c353', 'snippet_name_01', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.snippets.get('snippet_name_01', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

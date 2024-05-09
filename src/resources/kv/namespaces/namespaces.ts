@@ -70,12 +70,12 @@ export class Namespaces extends APIResource {
     params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<NamespaceDeleteResponse> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
+        options,
+      ) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -147,14 +147,9 @@ export interface NamespaceListParams extends V4PagePaginationArrayParams {
 
 export interface NamespaceDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export namespace Namespaces {

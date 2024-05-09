@@ -4,6 +4,7 @@ import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as ReportsBytimesAPI from 'cloudflare/resources/dns/firewall/analytics/reports/bytimes';
 import * as BytimesAPI from 'cloudflare/resources/dns/analytics/reports/bytimes';
+import * as AnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
 
 export class Bytimes extends APIResource {
   /**
@@ -68,17 +69,7 @@ export interface BytimeGetParams {
   /**
    * Query param: Unit of time to group data by.
    */
-  time_delta?:
-    | 'all'
-    | 'auto'
-    | 'year'
-    | 'quarter'
-    | 'month'
-    | 'week'
-    | 'day'
-    | 'hour'
-    | 'dekaminute'
-    | 'minute';
+  time_delta?: AnalyticsAPI.DeltaParam;
 
   /**
    * Query param: End date and time of requesting data period in ISO 8601 format.

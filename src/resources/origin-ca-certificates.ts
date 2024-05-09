@@ -3,6 +3,8 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import { isRequestOptions } from 'cloudflare/core';
+import * as Shared from 'cloudflare/resources/shared';
+import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class OriginCACertificates extends APIResource {
@@ -48,11 +50,10 @@ export class OriginCACertificates extends APIResource {
    */
   delete(
     certificateId: string,
-    body: OriginCACertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OriginCACertificateDeleteResponse> {
     return (
-      this._client.delete(`/certificates/${certificateId}`, { body, ...options }) as Core.APIPromise<{
+      this._client.delete(`/certificates/${certificateId}`, options) as Core.APIPromise<{
         result: OriginCACertificateDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -90,12 +91,12 @@ export interface OriginCACertificate {
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
    * or "keyless-certificate" (for Keyless SSL servers).
    */
-  request_type: 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+  request_type: Shared.CertificateRequestType;
 
   /**
    * The number of days for which the certificate should be valid.
    */
-  requested_validity: 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+  requested_validity: CertificatePacksAPI.RequestValidity;
 
   /**
    * Identifier
@@ -140,19 +141,17 @@ export interface OriginCACertificateCreateParams {
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
    * or "keyless-certificate" (for Keyless SSL servers).
    */
-  request_type?: 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
+  request_type?: Shared.CertificateRequestTypeParam;
 
   /**
    * The number of days for which the certificate should be valid.
    */
-  requested_validity?: 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+  requested_validity?: CertificatePacksAPI.RequestValidityParam;
 }
 
 export interface OriginCACertificateListParams {
   /**
    * Identifier
    */
-  identifier?: string;
+  zone_id?: string;
 }
-
-export type OriginCACertificateDeleteParams = unknown;

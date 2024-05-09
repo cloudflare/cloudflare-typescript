@@ -10,9 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource roles', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.accounts.roles.list({ account_id: {} });
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.accounts.roles.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,14 +21,12 @@ describe('resource roles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.accounts.roles.list({ account_id: {} });
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.accounts.roles.list({ account_id: 'string' });
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.accounts.roles.get({}, { account_id: {} });
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.accounts.roles.get({}, { account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -39,8 +36,7 @@ describe('resource roles', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.accounts.roles.get({}, { account_id: {} });
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.accounts.roles.get({}, { account_id: 'string' });
   });
 });

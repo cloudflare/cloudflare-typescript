@@ -29,7 +29,6 @@ export {
   LockdownCreateParams,
   LockdownUpdateParams,
   LockdownListParams,
-  LockdownDeleteParams,
   LockdownsV4PagePaginationArray,
   Lockdowns,
 } from './lockdowns';
@@ -43,7 +42,6 @@ export {
   RuleCreateParams,
   RuleUpdateParams,
   RuleListParams,
-  RuleDeleteParams,
   RuleEditParams,
   RuleGetParams,
   FirewallRulesV4PagePaginationArray,
@@ -58,7 +56,6 @@ export {
   UARuleCreateParams,
   UARuleUpdateParams,
   UARuleListParams,
-  UARuleDeleteParams,
   UARuleListResponsesV4PagePaginationArray,
   UARules,
 } from './ua-rules';

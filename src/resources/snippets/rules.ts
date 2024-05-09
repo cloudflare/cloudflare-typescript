@@ -2,7 +2,6 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
 import * as RulesAPI from 'cloudflare/resources/snippets/rules';
 import { SinglePage } from 'cloudflare/pagination';
 
@@ -10,25 +9,12 @@ export class Rules extends APIResource {
   /**
    * Put Rules
    */
-  update(
-    zoneIdentifier: string,
-    body?: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse>;
-  update(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse>;
-  update(
-    zoneIdentifier: string,
-    body: RuleUpdateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse> {
-    if (isRequestOptions(body)) {
-      return this.update(zoneIdentifier, {}, body);
-    }
+  update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/snippets/snippet_rules`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
+      this._client.put(`/zones/${zone_id}/snippets/snippet_rules`, { body, ...options }) as Core.APIPromise<{
+        result: RuleUpdateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -36,11 +22,12 @@ export class Rules extends APIResource {
    * Rules
    */
   list(
-    zoneIdentifier: string,
+    params: RuleListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
+    const { zone_id } = params;
     return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/snippets/snippet_rules`,
+      `/zones/${zone_id}/snippets/snippet_rules`,
       RuleListResponsesSinglePage,
       options,
     );
@@ -84,7 +71,12 @@ export interface RuleListResponse {
 
 export interface RuleUpdateParams {
   /**
-   * List of snippet rules
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: List of snippet rules
    */
   rules?: Array<RuleUpdateParams.Rule>;
 }
@@ -104,9 +96,17 @@ export namespace RuleUpdateParams {
   }
 }
 
+export interface RuleListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Rules {
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
 }

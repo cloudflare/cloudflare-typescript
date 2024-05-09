@@ -63,12 +63,11 @@ export class Rules extends APIResource {
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
+      this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
+        result: MagicNetworkMonitoringRule | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -181,15 +180,7 @@ export interface RuleListParams {
 }
 
 export interface RuleDeleteParams {
-  /**
-   * Path param:
-   */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface RuleEditParams {

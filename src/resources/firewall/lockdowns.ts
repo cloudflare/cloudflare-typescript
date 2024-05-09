@@ -74,14 +74,12 @@ export class Lockdowns extends APIResource {
   delete(
     zoneIdentifier: string,
     id: string,
-    body: LockdownDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<LockdownDeleteResponse> {
     return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LockdownDeleteResponse }>
+      this._client.delete(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
+        result: LockdownDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -236,8 +234,6 @@ export interface LockdownListParams extends V4PagePaginationArrayParams {
   uri_search?: string;
 }
 
-export type LockdownDeleteParams = unknown;
-
 export namespace Lockdowns {
   export import Configuration = LockdownsAPI.Configuration;
   export import Lockdown = LockdownsAPI.Lockdown;
@@ -249,5 +245,4 @@ export namespace Lockdowns {
   export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
   export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
-  export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
 }

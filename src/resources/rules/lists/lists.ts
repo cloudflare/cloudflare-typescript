@@ -59,12 +59,11 @@ export class Lists extends APIResource {
     params: ListDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ListDeleteResponse | null> {
-    const { account_id, body } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ListDeleteResponse | null }>
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
+        result: ListDeleteResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,6 +91,14 @@ export class ListsListsSinglePage extends SinglePage<ListsList> {}
  * 0 to 9, wildcards (\*), and the hyphen (-).
  */
 export interface Hostname {
+  url_hostname: string;
+}
+
+/**
+ * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from
+ * 0 to 9, wildcards (\*), and the hyphen (-).
+ */
+export interface HostnameParam {
   url_hostname: string;
 }
 
@@ -142,6 +149,25 @@ export interface ListsList {
  * The definition of the redirect.
  */
 export interface Redirect {
+  source_url: string;
+
+  target_url: string;
+
+  include_subdomains?: boolean;
+
+  preserve_path_suffix?: boolean;
+
+  preserve_query_string?: boolean;
+
+  status_code?: 301 | 302 | 307 | 308;
+
+  subpath_matching?: boolean;
+}
+
+/**
+ * The definition of the redirect.
+ */
+export interface RedirectParam {
   source_url: string;
 
   target_url: string;
@@ -209,14 +235,9 @@ export interface ListListParams {
 
 export interface ListDeleteParams {
   /**
-   * Path param: Identifier
+   * Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
 }
 
 export interface ListGetParams {

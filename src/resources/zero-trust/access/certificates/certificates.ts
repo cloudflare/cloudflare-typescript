@@ -204,6 +204,11 @@ export class CertificatesSinglePage extends SinglePage<Certificate> {}
  */
 export type AssociatedHostnames = string;
 
+/**
+ * A fully-qualified domain name (FQDN).
+ */
+export type AssociatedHostnamesParam = string;
+
 export interface Certificate {
   /**
    * The ID of the application that will use this certificate.
@@ -265,14 +270,14 @@ export interface CertificateCreateParams {
   /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames?: Array<AssociatedHostnames>;
+  associated_hostnames?: Array<AssociatedHostnamesParam>;
 }
 
 export interface CertificateUpdateParams {
   /**
    * Body param: The hostnames of the applications that will use this certificate.
    */
-  associated_hostnames: Array<AssociatedHostnames>;
+  associated_hostnames: Array<AssociatedHostnamesParam>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the

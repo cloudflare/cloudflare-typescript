@@ -192,6 +192,7 @@ export interface AccountGetParams {
 
 export namespace Accounts {
   export import Members = MembersAPI.Members;
+  export import Status = MembersAPI.Status;
   export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
