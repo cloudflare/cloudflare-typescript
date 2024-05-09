@@ -739,9 +739,13 @@ export namespace Access {
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
   export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
   export import SelfHostedDomains = ApplicationsAPI.SelfHostedDomains;
+  export import ApplicationCreateResponse = ApplicationsAPI.ApplicationCreateResponse;
+  export import ApplicationUpdateResponse = ApplicationsAPI.ApplicationUpdateResponse;
+  export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
+  export import ApplicationGetResponse = ApplicationsAPI.ApplicationGetResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
-  export import ApplicationsSinglePage = ApplicationsAPI.ApplicationsSinglePage;
+  export import ApplicationListResponsesSinglePage = ApplicationsAPI.ApplicationListResponsesSinglePage;
   export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
   export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
   export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
