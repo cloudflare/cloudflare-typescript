@@ -35,6 +35,7 @@ describe('resource botClass', () => {
         'LIKELY_AUTOMATED',
         {
           asn: ['string', 'string', 'string'],
+          browserFamily: ['CHROME', 'EDGE', 'FIREFOX'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['1d', '2d', '7d'],

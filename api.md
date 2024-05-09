@@ -4414,16 +4414,20 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SaaSAppSource</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SAMLSaaSApp</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">SelfHostedDomains</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationGetResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationRevokeTokensResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">create</a>({ ...params }) -> Application</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">update</a>(appId, { ...params }) -> Application</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">list</a>({ ...params }) -> ApplicationsSinglePage</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">create</a>({ ...params }) -> ApplicationCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">update</a>(appId, { ...params }) -> ApplicationUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">list</a>({ ...params }) -> ApplicationListResponsesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">delete</a>(appId, { ...params }) -> ApplicationDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">get</a>(appId, { ...params }) -> Application</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">get</a>(appId, { ...params }) -> ApplicationGetResponse</code>
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/revoke_tokens">client.zeroTrust.access.applications.<a href="./src/resources/zero-trust/access/applications/applications.ts">revokeTokens</a>(appId, { ...params }) -> ApplicationRevokeTokensResponse | null</code>
 
 #### CAs
@@ -4459,15 +4463,19 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ApprovalGroup</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">Policy</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(uuid, { ...params }) -> Policy</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(uuid1, uuid, { ...params }) -> Policy</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(uuid, { ...params }) -> PoliciesSinglePage</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(uuid, { ...params }) -> PolicyCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(uuid1, uuid, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(uuid, { ...params }) -> PolicyListResponsesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(uuid1, uuid, { ...params }) -> PolicyDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(uuid1, uuid, { ...params }) -> Policy</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(uuid1, uuid, { ...params }) -> PolicyGetResponse</code>
 
 ### Certificates
 
@@ -6350,12 +6358,13 @@ Types:
 
 - <code><a href="./src/resources/calls.ts">CallsApp</a></code>
 - <code><a href="./src/resources/calls.ts">CallsAppWithSecret</a></code>
+- <code><a href="./src/resources/calls.ts">CallListResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls.ts">create</a>({ ...params }) -> CallsAppWithSecret</code>
 - <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls.ts">update</a>(appId, { ...params }) -> CallsApp</code>
-- <code title="get /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls.ts">list</a>({ ...params }) -> CallsAppsSinglePage</code>
+- <code title="get /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls.ts">list</a>({ ...params }) -> CallListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls.ts">delete</a>(appId, { ...params }) -> CallsApp</code>
 - <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls.ts">get</a>(appId, { ...params }) -> CallsApp</code>
 

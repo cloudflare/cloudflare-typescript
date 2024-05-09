@@ -37,9 +37,13 @@ export class Calls extends APIResource {
   list(
     params: CallListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<CallsAppsSinglePage, CallsApp> {
+  ): Core.PagePromise<CallListResponsesSinglePage, CallListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, CallsAppsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/calls/apps`,
+      CallListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -67,7 +71,7 @@ export class Calls extends APIResource {
   }
 }
 
-export class CallsAppsSinglePage extends SinglePage<CallsApp> {}
+export class CallListResponsesSinglePage extends SinglePage<CallListResponse> {}
 
 export interface CallsApp {
   /**
@@ -108,7 +112,7 @@ export interface CallsAppWithSecret {
   name?: string;
 
   /**
-   * Bearer token to use the Calls API.
+   * Bearer token
    */
   secret?: string;
 
@@ -117,6 +121,11 @@ export interface CallsAppWithSecret {
    */
   uid?: string;
 }
+
+/**
+ * Bearer token
+ */
+export type CallListResponse = string;
 
 export interface CallCreateParams {
   /**

@@ -109,6 +109,11 @@ export interface BotClassGetParams {
   asn?: Array<string>;
 
   /**
+   * Filter for browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start
    * with `-` to exclude from results. For example, `-EU,NA` excludes results from
    * Europe, but includes results from North America.

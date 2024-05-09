@@ -265,7 +265,7 @@ export interface IndicatorFeedUpdateParams {
   /**
    * Body param: The new description of the feed
    */
-  feed_description?: string;
+  description?: string;
 
   /**
    * Body param: The new is_attributable value of the feed

@@ -38,7 +38,11 @@ export {
   SaaSAppSource,
   SAMLSaaSApp,
   SelfHostedDomains,
+  ApplicationCreateResponse,
+  ApplicationUpdateResponse,
+  ApplicationListResponse,
   ApplicationDeleteResponse,
+  ApplicationGetResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
   ApplicationUpdateParams,
@@ -46,7 +50,7 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
-  ApplicationsSinglePage,
+  ApplicationListResponsesSinglePage,
   Applications,
 } from './applications/index';
 export {
