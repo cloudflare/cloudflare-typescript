@@ -64,6 +64,11 @@ describe('resource applications', () => {
       name: 'Admin Site',
       options_preflight_bypass: true,
       path_cookie_attribute: true,
+      policies: [
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+      ],
       same_site_cookie_attribute: 'strict',
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,
@@ -128,6 +133,11 @@ describe('resource applications', () => {
         name: 'Admin Site',
         options_preflight_bypass: true,
         path_cookie_attribute: true,
+        policies: [
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        ],
         same_site_cookie_attribute: 'strict',
         self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
         service_auth_401_redirect: true,
