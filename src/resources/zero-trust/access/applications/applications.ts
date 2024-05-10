@@ -2806,6 +2806,16 @@ export interface CORSHeadersParam {
 }
 
 /**
+ * The action Access will take if a user matches this policy.
+ */
+export type Decision = 'allow' | 'deny' | 'non_identity' | 'bypass';
+
+/**
+ * The action Access will take if a user matches this policy.
+ */
+export type DecisionParam = 'allow' | 'deny' | 'non_identity' | 'bypass';
+
+/**
  * A globally unique name for an identity or service provider.
  */
 export type SaaSAppNameFormat =
@@ -3236,7 +3246,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -3560,7 +3570,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -4075,7 +4085,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -4483,7 +4493,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -4797,7 +4807,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -5111,7 +5121,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -5425,7 +5435,7 @@ export namespace ApplicationCreateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -6079,7 +6089,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -6403,7 +6413,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -6918,7 +6928,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -7326,7 +7336,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -7640,7 +7650,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -7954,7 +7964,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -8268,7 +8278,7 @@ export namespace ApplicationUpdateResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -8922,7 +8932,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -9246,7 +9256,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -9761,7 +9771,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -10169,7 +10179,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -10483,7 +10493,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -10797,7 +10807,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -11111,7 +11121,7 @@ export namespace ApplicationListResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -11772,7 +11782,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -12096,7 +12106,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -12611,7 +12621,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -13019,7 +13029,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -13333,7 +13343,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -13647,7 +13657,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -13961,7 +13971,7 @@ export namespace ApplicationGetResponse {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision?: ApplicationsAPI.Decision;
 
       /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -14623,7 +14633,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -14966,7 +14976,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -15498,7 +15508,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -15927,7 +15937,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -16245,7 +16255,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -16563,7 +16573,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -16881,7 +16891,7 @@ export namespace ApplicationCreateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -17554,7 +17564,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -17897,7 +17907,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -18429,7 +18439,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -18858,7 +18868,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -19176,7 +19186,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -19494,7 +19504,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -19812,7 +19822,7 @@ export namespace ApplicationUpdateParams {
       /**
        * The action Access will take if a user matches this policy.
        */
-      decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+      decision: ApplicationsAPI.DecisionParam;
 
       /**
        * Rules evaluated with an OR logical operator. A user needs to meet only one of
@@ -20349,6 +20359,7 @@ export namespace Applications {
   export import Application = ApplicationsAPI.Application;
   export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
+  export import Decision = ApplicationsAPI.Decision;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;

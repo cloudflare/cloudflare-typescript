@@ -6,6 +6,7 @@ import { isRequestOptions } from 'cloudflare/core';
 import { CloudflareError } from 'cloudflare/error';
 import * as PoliciesAPI from 'cloudflare/resources/zero-trust/access/applications/policies';
 import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
+import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applications/applications';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Policies extends APIResource {
@@ -280,7 +281,7 @@ export interface Policy {
   /**
    * The action Access will take if a user matches this policy.
    */
-  decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision?: ApplicationsAPI.Decision;
 
   /**
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -373,7 +374,7 @@ export interface PolicyCreateResponse {
   /**
    * The action Access will take if a user matches this policy.
    */
-  decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision?: ApplicationsAPI.Decision;
 
   /**
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -447,7 +448,7 @@ export interface PolicyUpdateResponse {
   /**
    * The action Access will take if a user matches this policy.
    */
-  decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision?: ApplicationsAPI.Decision;
 
   /**
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -521,7 +522,7 @@ export interface PolicyListResponse {
   /**
    * The action Access will take if a user matches this policy.
    */
-  decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision?: ApplicationsAPI.Decision;
 
   /**
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -602,7 +603,7 @@ export interface PolicyGetResponse {
   /**
    * The action Access will take if a user matches this policy.
    */
-  decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision?: ApplicationsAPI.Decision;
 
   /**
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -658,7 +659,7 @@ export interface PolicyCreateParams {
   /**
    * Body param: The action Access will take if a user matches this policy.
    */
-  decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision: ApplicationsAPI.DecisionParam;
 
   /**
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
@@ -743,7 +744,7 @@ export interface PolicyUpdateParams {
   /**
    * Body param: The action Access will take if a user matches this policy.
    */
-  decision: 'allow' | 'deny' | 'non_identity' | 'bypass';
+  decision: ApplicationsAPI.DecisionParam;
 
   /**
    * Body param: Rules evaluated with an OR logical operator. A user needs to meet
