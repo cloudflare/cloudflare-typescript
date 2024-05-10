@@ -2,11 +2,11 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
-import * as TurnAPI from 'cloudflare/resources/calls/turn/turn';
+import * as TURNAPI from 'cloudflare/resources/calls/turn/turn';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Calls extends APIResource {
-  turn: TurnAPI.Turn = new TurnAPI.Turn(this._client);
+  turn: TURNAPI.TURN = new TURNAPI.TURN(this._client);
 
   /**
    * Creates a new Cloudflare calls app. An app is an unique enviroment where each
@@ -176,5 +176,5 @@ export interface CallGetParams {
 }
 
 export namespace Calls {
-  export import Turn = TurnAPI.Turn;
+  export import TURN = TURNAPI.TURN;
 }
