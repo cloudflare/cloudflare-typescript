@@ -12,7 +12,7 @@ export { Billing } from './billing/billing';
 export { BotManagement } from './bot-management';
 export { BrandProtection } from './brand-protection';
 export { Cache } from './cache/cache';
-export { Calls } from './calls';
+export { Calls } from './calls/calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
 export { Challenges } from './challenges/challenges';
 export { ClientCertificates } from './client-certificates';
