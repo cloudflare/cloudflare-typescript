@@ -2,9 +2,12 @@
 
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
+import * as TurnAPI from 'cloudflare/resources/calls/turn/turn';
 import { SinglePage } from 'cloudflare/pagination';
 
 export class Calls extends APIResource {
+  turn: TurnAPI.Turn = new TurnAPI.Turn(this._client);
+
   /**
    * Creates a new Cloudflare calls app. An app is an unique enviroment where each
    * Session can access all Tracks within the app.
@@ -170,4 +173,8 @@ export interface CallGetParams {
    * The account identifier tag.
    */
   account_id: string;
+}
+
+export namespace Calls {
+  export import Turn = TurnAPI.Turn;
 }
