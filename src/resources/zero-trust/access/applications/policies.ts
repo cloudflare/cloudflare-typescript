@@ -353,7 +353,7 @@ export namespace Policy {
 
 export interface PolicyCreateResponse {
   /**
-   * The ID of the Access policy.
+   * UUID
    */
   id?: string;
 
@@ -427,7 +427,7 @@ export interface PolicyCreateResponse {
 
 export interface PolicyUpdateResponse {
   /**
-   * The ID of the Access policy.
+   * UUID
    */
   id?: string;
 
@@ -501,7 +501,7 @@ export interface PolicyUpdateResponse {
 
 export interface PolicyListResponse {
   /**
-   * The ID of the Access policy.
+   * UUID
    */
   id?: string;
 
@@ -582,7 +582,7 @@ export interface PolicyDeleteResponse {
 
 export interface PolicyGetResponse {
   /**
-   * The ID of the Access policy.
+   * UUID
    */
   id?: string;
 

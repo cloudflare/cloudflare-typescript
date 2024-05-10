@@ -863,11 +863,6 @@ export namespace Application {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -886,6 +881,11 @@ export namespace Application {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -3216,7 +3216,7 @@ export namespace ApplicationCreateResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -3540,7 +3540,7 @@ export namespace ApplicationCreateResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -3684,11 +3684,6 @@ export namespace ApplicationCreateResponse {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -3707,6 +3702,11 @@ export namespace ApplicationCreateResponse {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -4055,7 +4055,7 @@ export namespace ApplicationCreateResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -4463,7 +4463,7 @@ export namespace ApplicationCreateResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -4777,7 +4777,7 @@ export namespace ApplicationCreateResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -5091,7 +5091,7 @@ export namespace ApplicationCreateResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -5405,7 +5405,7 @@ export namespace ApplicationCreateResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -6059,7 +6059,7 @@ export namespace ApplicationUpdateResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -6383,7 +6383,7 @@ export namespace ApplicationUpdateResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -6527,11 +6527,6 @@ export namespace ApplicationUpdateResponse {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -6550,6 +6545,11 @@ export namespace ApplicationUpdateResponse {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -6898,7 +6898,7 @@ export namespace ApplicationUpdateResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -7306,7 +7306,7 @@ export namespace ApplicationUpdateResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -7620,7 +7620,7 @@ export namespace ApplicationUpdateResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -7934,7 +7934,7 @@ export namespace ApplicationUpdateResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -8248,7 +8248,7 @@ export namespace ApplicationUpdateResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -8902,7 +8902,7 @@ export namespace ApplicationListResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -9226,7 +9226,7 @@ export namespace ApplicationListResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -9370,11 +9370,6 @@ export namespace ApplicationListResponse {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -9393,6 +9388,11 @@ export namespace ApplicationListResponse {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -9741,7 +9741,7 @@ export namespace ApplicationListResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -10149,7 +10149,7 @@ export namespace ApplicationListResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -10463,7 +10463,7 @@ export namespace ApplicationListResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -10777,7 +10777,7 @@ export namespace ApplicationListResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -11091,7 +11091,7 @@ export namespace ApplicationListResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -11752,7 +11752,7 @@ export namespace ApplicationGetResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -12076,7 +12076,7 @@ export namespace ApplicationGetResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -12220,11 +12220,6 @@ export namespace ApplicationGetResponse {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -12243,6 +12238,11 @@ export namespace ApplicationGetResponse {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -12591,7 +12591,7 @@ export namespace ApplicationGetResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -12999,7 +12999,7 @@ export namespace ApplicationGetResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -13313,7 +13313,7 @@ export namespace ApplicationGetResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -13627,7 +13627,7 @@ export namespace ApplicationGetResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -13941,7 +13941,7 @@ export namespace ApplicationGetResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * The ID of the Access policy.
+       * UUID
        */
       id?: string;
 
@@ -14438,7 +14438,7 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.AppLauncherApplication
   | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateParams.BrowserIsolationPermissionsApplication
-  | ApplicationCreateParams.AccessBookmarkProps;
+  | ApplicationCreateParams.BookmarkApplication;
 
 export namespace ApplicationCreateParams {
   export interface SelfHostedApplication {
@@ -14572,6 +14572,12 @@ export namespace ApplicationCreateParams {
     same_site_cookie_attribute?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.SelfHostedApplication.ScimConfig;
+
+    /**
      * Body param: List of domains that Access will secure.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
@@ -14607,11 +14613,6 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
-      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -14634,11 +14635,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -14692,6 +14688,185 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -14758,6 +14933,12 @@ export namespace ApplicationCreateParams {
     saas_app?: SAMLSaaSAppParam | ApplicationCreateParams.SaaSApplication.AccessOIDCSaaSApp;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.SaaSApplication.ScimConfig;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -14774,11 +14955,6 @@ export namespace ApplicationCreateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -14802,11 +14978,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -14930,11 +15101,6 @@ export namespace ApplicationCreateParams {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -14953,6 +15119,11 @@ export namespace ApplicationCreateParams {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -14962,6 +15133,185 @@ export namespace ApplicationCreateParams {
          * m,h,d. Must be longer than 1m.
          */
         lifetime?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
       }
     }
   }
@@ -15097,6 +15447,12 @@ export namespace ApplicationCreateParams {
     same_site_cookie_attribute?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.BrowserSSHApplication.ScimConfig;
+
+    /**
      * Body param: List of domains that Access will secure.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
@@ -15132,11 +15488,6 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
-      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -15159,11 +15510,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15217,6 +15563,185 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -15351,6 +15876,12 @@ export namespace ApplicationCreateParams {
     same_site_cookie_attribute?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.BrowserVncApplication.ScimConfig;
+
+    /**
      * Body param: List of domains that Access will secure.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
@@ -15386,11 +15917,6 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
-      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -15413,11 +15939,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15471,6 +15992,185 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -15516,6 +16216,12 @@ export namespace ApplicationCreateParams {
     >;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.AppLauncherApplication.ScimConfig;
+
+    /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
      * (or µs), ms, s, m, h.
@@ -15528,11 +16234,6 @@ export namespace ApplicationCreateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -15556,11 +16257,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15614,6 +16310,185 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -15659,6 +16534,12 @@ export namespace ApplicationCreateParams {
     >;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.ScimConfig;
+
+    /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
      * (or µs), ms, s, m, h.
@@ -15671,11 +16552,6 @@ export namespace ApplicationCreateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -15699,11 +16575,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15757,6 +16628,185 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -15802,6 +16852,12 @@ export namespace ApplicationCreateParams {
     >;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.ScimConfig;
+
+    /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
      * (or µs), ms, s, m, h.
@@ -15814,11 +16870,6 @@ export namespace ApplicationCreateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -15842,11 +16893,6 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15901,9 +16947,188 @@ export namespace ApplicationCreateParams {
        */
       session_duration?: string;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
+    }
   }
 
-  export interface AccessBookmarkProps {
+  export interface BookmarkApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -15937,6 +17162,12 @@ export namespace ApplicationCreateParams {
     name?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationCreateParams.BookmarkApplication.ScimConfig;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -15946,6 +17177,187 @@ export namespace ApplicationCreateParams {
      * Body param: The application type.
      */
     type?: string;
+  }
+
+  export namespace BookmarkApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
+    }
   }
 }
 
@@ -15957,7 +17369,7 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.AppLauncherApplication
   | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
-  | ApplicationUpdateParams.AccessBookmarkProps;
+  | ApplicationUpdateParams.BookmarkApplication;
 
 export namespace ApplicationUpdateParams {
   export interface SelfHostedApplication {
@@ -16091,6 +17503,12 @@ export namespace ApplicationUpdateParams {
     same_site_cookie_attribute?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.SelfHostedApplication.ScimConfig;
+
+    /**
      * Body param: List of domains that Access will secure.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
@@ -16126,11 +17544,6 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
-      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16153,11 +17566,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16211,6 +17619,185 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -16277,6 +17864,12 @@ export namespace ApplicationUpdateParams {
     saas_app?: SAMLSaaSAppParam | ApplicationUpdateParams.SaaSApplication.AccessOIDCSaaSApp;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.SaaSApplication.ScimConfig;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -16293,11 +17886,6 @@ export namespace ApplicationUpdateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -16321,11 +17909,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16449,11 +18032,6 @@ export namespace ApplicationUpdateParams {
         name?: string;
 
         /**
-         * A mapping from IdP ID to claim name.
-         */
-        name_by_idp?: Record<string, string>;
-
-        /**
          * If the claim is required when building an OIDC token.
          */
         required?: boolean;
@@ -16472,6 +18050,11 @@ export namespace ApplicationUpdateParams {
            * The name of the IdP claim.
            */
           name?: string;
+
+          /**
+           * A mapping from IdP ID to claim name.
+           */
+          name_by_idp?: Record<string, string>;
         }
       }
 
@@ -16481,6 +18064,185 @@ export namespace ApplicationUpdateParams {
          * m,h,d. Must be longer than 1m.
          */
         lifetime?: string;
+      }
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
       }
     }
   }
@@ -16616,6 +18378,12 @@ export namespace ApplicationUpdateParams {
     same_site_cookie_attribute?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.BrowserSSHApplication.ScimConfig;
+
+    /**
      * Body param: List of domains that Access will secure.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
@@ -16651,11 +18419,6 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
-      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16678,11 +18441,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16736,6 +18494,185 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -16870,6 +18807,12 @@ export namespace ApplicationUpdateParams {
     same_site_cookie_attribute?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.BrowserVncApplication.ScimConfig;
+
+    /**
      * Body param: List of domains that Access will secure.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
@@ -16905,11 +18848,6 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
-      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16932,11 +18870,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16990,6 +18923,185 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -17035,6 +19147,12 @@ export namespace ApplicationUpdateParams {
     >;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.AppLauncherApplication.ScimConfig;
+
+    /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
      * (or µs), ms, s, m, h.
@@ -17047,11 +19165,6 @@ export namespace ApplicationUpdateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -17075,11 +19188,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -17133,6 +19241,185 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -17178,6 +19465,12 @@ export namespace ApplicationUpdateParams {
     >;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.ScimConfig;
+
+    /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
      * (or µs), ms, s, m, h.
@@ -17190,11 +19483,6 @@ export namespace ApplicationUpdateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -17218,11 +19506,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -17276,6 +19559,185 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
     }
   }
 
@@ -17321,6 +19783,12 @@ export namespace ApplicationUpdateParams {
     >;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.ScimConfig;
+
+    /**
      * Body param: The amount of time that tokens issued for this application will be
      * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
      * (or µs), ms, s, m, h.
@@ -17333,11 +19801,6 @@ export namespace ApplicationUpdateParams {
      * A JSON that links a reusable policy to an application.
      */
     export interface AccessAppPolicyLink {
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
-
       /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
@@ -17361,11 +19824,6 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
-
-      /**
-       * The ID of the Access policy.
-       */
-      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -17420,9 +19878,188 @@ export namespace ApplicationUpdateParams {
        */
       session_duration?: string;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
+    }
   }
 
-  export interface AccessBookmarkProps {
+  export interface BookmarkApplication {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -17456,6 +20093,12 @@ export namespace ApplicationUpdateParams {
     name?: string;
 
     /**
+     * Body param: Configuration for provisioning to this application via SCIM. This is
+     * currently in closed beta.
+     */
+    scim_config?: ApplicationUpdateParams.BookmarkApplication.ScimConfig;
+
+    /**
      * Body param: The tags you want assigned to an application. Tags are used to
      * filter applications in the App Launcher dashboard.
      */
@@ -17465,6 +20108,187 @@ export namespace ApplicationUpdateParams {
      * Body param: The application type.
      */
     type?: string;
+  }
+
+  export namespace BookmarkApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface ScimConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
+        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
+        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ScimConfig.Mapping>;
+    }
+
+    export namespace ScimConfig {
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationHTTPBasic {
+        /**
+         * Password used to authenticate with the remote SCIM service.
+         */
+        password: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'httpbasic';
+
+        /**
+         * User name used to authenticate with the remote SCIM service.
+         */
+        user: string;
+      }
+
+      /**
+       * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+        /**
+         * Token used to authenticate with the remote SCIM service.
+         */
+        token: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauthbearertoken';
+      }
+
+      /**
+       * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
+       * to an application.
+       */
+      export interface AccessScimConfigAuthenticationOauth2 {
+        /**
+         * URL used to generate the auth code used during token generation.
+         */
+        authorization_url: string;
+
+        /**
+         * Client ID used to authenticate when generating a token for authenticating with
+         * the remote SCIM service.
+         */
+        client_id: string;
+
+        /**
+         * Secret used to authenticate when generating a token for authenticating with the
+         * remove SCIM service.
+         */
+        client_secret: string;
+
+        /**
+         * The authentication scheme to use when making SCIM requests to this application.
+         */
+        scheme: 'oauth2';
+
+        /**
+         * URL used to generate the token used to authenticate with the remote SCIM
+         * service.
+         */
+        token_url: string;
+
+        /**
+         * The authorization scopes to request when generating the token used to
+         * authenticate with the remove SCIM service.
+         */
+        scopes?: Array<string>;
+      }
+
+      /**
+       * Transformations and filters applied to resources before they are provisioned in
+       * the remote SCIM service.
+       */
+      export interface Mapping {
+        /**
+         * Which SCIM resource type this mapping applies to.
+         */
+        schema: string;
+
+        /**
+         * Whether or not this mapping is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * A
+         * [SCIM filter expression](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2)
+         * that matches resources that should be provisioned to this application.
+         */
+        filter?: string;
+
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        operations?: Mapping.Operations;
+
+        /**
+         * A [JSONata](https://jsonata.org/) expression that transforms the resource before
+         * provisioning it in the application.
+         */
+        transform_jsonata?: string;
+      }
+
+      export namespace Mapping {
+        /**
+         * Whether or not this mapping applies to creates, updates, or deletes.
+         */
+        export interface Operations {
+          /**
+           * Whether or not this mapping applies to create (POST) operations.
+           */
+          create?: boolean;
+
+          /**
+           * Whether or not this mapping applies to DELETE operations.
+           */
+          delete?: boolean;
+
+          /**
+           * Whether or not this mapping applies to update (PATCH/PUT) operations.
+           */
+          update?: boolean;
+        }
+      }
+    }
   }
 }
 
