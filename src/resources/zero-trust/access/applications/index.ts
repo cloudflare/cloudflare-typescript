@@ -9,6 +9,7 @@ export {
   Application,
   ApplicationType,
   CORSHeaders,
+  Decision,
   SaaSAppNameFormat,
   SaaSAppNameIDFormat,
   SaaSAppSource,
