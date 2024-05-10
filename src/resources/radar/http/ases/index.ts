@@ -2,6 +2,7 @@
 
 export { AseGetResponse, AseGetParams, Ases } from './ases';
 export { BotClassGetResponse, BotClassGetParams, BotClass } from './bot-class';
+export { BrowserFamilyGetResponse, BrowserFamilyGetParams, BrowserFamily } from './browser-family';
 export { DeviceTypeGetResponse, DeviceTypeGetParams, DeviceType } from './device-type';
 export { HTTPMethodGetResponse, HTTPMethodGetParams, HTTPMethod } from './http-method';
 export { HTTPProtocolGetResponse, HTTPProtocolGetParams, HTTPProtocol } from './http-protocol';
