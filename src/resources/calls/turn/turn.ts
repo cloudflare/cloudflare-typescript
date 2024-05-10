@@ -3,11 +3,11 @@
 import { APIResource } from 'cloudflare/resource';
 import * as KeysAPI from 'cloudflare/resources/calls/turn/keys';
 
-export class Turn extends APIResource {
+export class TURN extends APIResource {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
 }
 
-export namespace Turn {
+export namespace TURN {
   export import Keys = KeysAPI.Keys;
   export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;

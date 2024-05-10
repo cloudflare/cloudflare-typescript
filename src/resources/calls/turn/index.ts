@@ -14,4 +14,4 @@ export {
   KeyListResponsesSinglePage,
   Keys,
 } from './keys';
-export { Turn } from './turn';
+export { TURN } from './turn';
