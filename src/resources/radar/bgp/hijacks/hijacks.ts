@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as EventsAPI from 'cloudflare/resources/radar/bgp/hijacks/events';
+import { APIResource } from '../../../../resource';
+import * as EventsAPI from './events';
 
 export class Hijacks extends APIResource {
   events: EventsAPI.Events = new EventsAPI.Events(this._client);

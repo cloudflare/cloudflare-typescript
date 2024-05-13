@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applications/applications';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import * as CAsAPI from 'cloudflare/resources/zero-trust/access/applications/cas';
-import * as PoliciesAPI from 'cloudflare/resources/zero-trust/access/applications/policies';
-import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { CloudflareError } from '../../../../error';
+import * as ApplicationsAPI from './applications';
+import * as AccessAPI from '../access';
+import * as CAsAPI from './cas';
+import * as PoliciesAPI from './policies';
+import * as UserPolicyChecksAPI from './user-policy-checks';
+import { SinglePage } from '../../../../pagination';
 
 export class Applications extends APIResource {
   cas: CAsAPI.CAs = new CAsAPI.CAs(this._client);

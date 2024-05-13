@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PredefinedAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefined';
-import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as PredefinedAPI from './predefined';
+import * as ProfilesAPI from './profiles';
 
 export class Predefined extends APIResource {
   /**

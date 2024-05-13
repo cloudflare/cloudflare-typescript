@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as NetflowsAPI from 'cloudflare/resources/radar/netflows/netflows';
-import * as TopAPI from 'cloudflare/resources/radar/netflows/top';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as NetflowsAPI from './netflows';
+import * as TopAPI from './top';
 
 export class Netflows extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);

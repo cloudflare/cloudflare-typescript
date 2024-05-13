@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallback-origin';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as FallbackOriginAPI from './fallback-origin';
 
 export class FallbackOrigin extends APIResource {
   /**

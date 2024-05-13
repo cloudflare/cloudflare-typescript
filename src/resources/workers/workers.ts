@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AccountSettingsAPI from 'cloudflare/resources/workers/account-settings';
-import * as AIAPI from 'cloudflare/resources/workers/ai';
-import * as DomainsAPI from 'cloudflare/resources/workers/domains';
-import * as SubdomainsAPI from 'cloudflare/resources/workers/subdomains';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
+import { APIResource } from '../../resource';
+import * as AccountSettingsAPI from './account-settings';
+import * as AIAPI from './ai';
+import * as DomainsAPI from './domains';
+import * as SubdomainsAPI from './subdomains';
+import * as ScriptsAPI from './scripts/scripts';
 
 export class Workers extends APIResource {
   ai: AIAPI.AI = new AIAPI.AI(this._client);

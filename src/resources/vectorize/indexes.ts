@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as IndexesAPI from 'cloudflare/resources/vectorize/indexes';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as IndexesAPI from './indexes';
+import { SinglePage } from '../../pagination';
 
 export class Indexes extends APIResource {
   /**

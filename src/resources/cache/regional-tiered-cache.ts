@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 
 export class RegionalTieredCacheResource extends APIResource {
   /**

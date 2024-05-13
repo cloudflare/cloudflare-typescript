@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as KeylessCertificatesAPI from 'cloudflare/resources/keyless-certificates';
-import * as PrioritizeAPI from 'cloudflare/resources/custom-certificates/prioritize';
-import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as KeylessCertificatesAPI from '../keyless-certificates';
+import * as PrioritizeAPI from './prioritize';
+import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomCertificates extends APIResource {
   prioritize: PrioritizeAPI.Prioritize = new PrioritizeAPI.Prioritize(this._client);

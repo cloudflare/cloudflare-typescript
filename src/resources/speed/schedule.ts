@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ScheduleAPI from 'cloudflare/resources/speed/schedule';
-import * as TestsAPI from 'cloudflare/resources/speed/pages/tests';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ScheduleAPI from './schedule';
+import * as TestsAPI from './pages/tests';
 
 export class ScheduleResource extends APIResource {
   /**

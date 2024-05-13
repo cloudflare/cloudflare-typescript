@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ZeroRTTAPI from 'cloudflare/resources/zones/settings/zero-rtt';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ZeroRTTAPI from './zero-rtt';
 
 export class ZeroRTTResource extends APIResource {
   /**

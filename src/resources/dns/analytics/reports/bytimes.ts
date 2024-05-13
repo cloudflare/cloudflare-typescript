@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BytimesAPI from 'cloudflare/resources/dns/analytics/reports/bytimes';
-import * as DNSAPI from 'cloudflare/resources/dns/dns';
-import * as AnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as BytimesAPI from './bytimes';
+import * as DNSAPI from '../../dns';
+import * as AnalyticsAPI from '../../firewall/analytics/analytics';
 
 export class Bytimes extends APIResource {
   /**

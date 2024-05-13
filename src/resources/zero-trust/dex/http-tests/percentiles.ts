@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as PercentilesAPI from './percentiles';
+import * as DEXAPI from '../dex';
 
 export class Percentiles extends APIResource {
   /**

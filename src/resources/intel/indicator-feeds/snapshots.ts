@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SnapshotsAPI from 'cloudflare/resources/intel/indicator-feeds/snapshots';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SnapshotsAPI from './snapshots';
+import { multipartFormRequestOptions } from '../../../core';
 
 export class Snapshots extends APIResource {
   /**

@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
-import * as PermissionsAPI from 'cloudflare/resources/intel/indicator-feeds/permissions';
-import * as SnapshotsAPI from 'cloudflare/resources/intel/indicator-feeds/snapshots';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as IndicatorFeedsAPI from './indicator-feeds';
+import * as PermissionsAPI from './permissions';
+import * as SnapshotsAPI from './snapshots';
+import { SinglePage } from '../../../pagination';
 
 export class IndicatorFeeds extends APIResource {
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);

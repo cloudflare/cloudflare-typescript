@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TracerouteTestsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TracerouteTestsAPI from './traceroute-tests';
+import * as DEXAPI from './dex';
+import * as PercentilesAPI from './http-tests/percentiles';
 
 export class TracerouteTests extends APIResource {
   /**

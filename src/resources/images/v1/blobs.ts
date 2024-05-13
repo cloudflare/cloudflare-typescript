@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { type Response } from 'cloudflare/_shims/index';
-import * as BlobsAPI from 'cloudflare/resources/images/v1/blobs';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { type Response } from '../../../_shims/index';
+import * as BlobsAPI from './blobs';
 
 export class Blobs extends APIResource {
   /**

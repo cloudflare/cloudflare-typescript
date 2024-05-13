@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConfigsAPI from 'cloudflare/resources/hyperdrive/configs';
-import * as HyperdriveAPI from 'cloudflare/resources/hyperdrive/hyperdrive';
-import { HyperdrivesSinglePage } from 'cloudflare/resources/hyperdrive/hyperdrive';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ConfigsAPI from './configs';
+import * as HyperdriveAPI from './hyperdrive';
+import { HyperdrivesSinglePage } from './hyperdrive';
 
 export class Configs extends APIResource {
   /**

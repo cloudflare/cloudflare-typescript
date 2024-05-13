@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import * as Shared from 'cloudflare/resources/shared';
-import { RolesSinglePage } from 'cloudflare/resources/shared';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as RolesAPI from './roles';
+import * as Shared from '../shared';
+import { RolesSinglePage } from '../shared';
 
 export class Roles extends APIResource {
   /**

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as FullAPI from 'cloudflare/resources/magic-network-monitoring/configs/full';
-import * as ConfigsAPI from 'cloudflare/resources/magic-network-monitoring/configs/configs';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as FullAPI from './full';
+import * as ConfigsAPI from './configs';
 
 export class Full extends APIResource {
   /**

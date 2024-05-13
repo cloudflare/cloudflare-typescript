@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TieredCachingAPI from 'cloudflare/resources/argo/tiered-caching';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as TieredCachingAPI from './tiered-caching';
 
 export class TieredCaching extends APIResource {
   /**

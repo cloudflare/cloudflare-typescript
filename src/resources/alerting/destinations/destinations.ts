@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as EligibleAPI from 'cloudflare/resources/alerting/destinations/eligible';
-import * as PagerdutyAPI from 'cloudflare/resources/alerting/destinations/pagerduty';
-import * as WebhooksAPI from 'cloudflare/resources/alerting/destinations/webhooks';
+import { APIResource } from '../../../resource';
+import * as EligibleAPI from './eligible';
+import * as PagerdutyAPI from './pagerduty';
+import * as WebhooksAPI from './webhooks';
 
 export class Destinations extends APIResource {
   eligible: EligibleAPI.Eligible = new EligibleAPI.Eligible(this._client);

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as OutagesAPI from 'cloudflare/resources/radar/annotations/outages';
+import { APIResource } from '../../../resource';
+import * as OutagesAPI from './outages';
 
 export class Annotations extends APIResource {
   outages: OutagesAPI.Outages = new OutagesAPI.Outages(this._client);

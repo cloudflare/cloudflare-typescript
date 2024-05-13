@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as AsesAPI from 'cloudflare/resources/radar/http/ases/ases';
-import * as BotClassAPI from 'cloudflare/resources/radar/http/ases/bot-class';
-import * as BrowserFamilyAPI from 'cloudflare/resources/radar/http/ases/browser-family';
-import * as DeviceTypeAPI from 'cloudflare/resources/radar/http/ases/device-type';
-import * as HTTPMethodAPI from 'cloudflare/resources/radar/http/ases/http-method';
-import * as HTTPProtocolAPI from 'cloudflare/resources/radar/http/ases/http-protocol';
-import * as IPVersionAPI from 'cloudflare/resources/radar/http/ases/ip-version';
-import * as OSAPI from 'cloudflare/resources/radar/http/ases/os';
-import * as TLSVersionAPI from 'cloudflare/resources/radar/http/ases/tls-version';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as AsesAPI from './ases';
+import * as BotClassAPI from './bot-class';
+import * as BrowserFamilyAPI from './browser-family';
+import * as DeviceTypeAPI from './device-type';
+import * as HTTPMethodAPI from './http-method';
+import * as HTTPProtocolAPI from './http-protocol';
+import * as IPVersionAPI from './ip-version';
+import * as OSAPI from './os';
+import * as TLSVersionAPI from './tls-version';
 
 export class Ases extends APIResource {
   botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);

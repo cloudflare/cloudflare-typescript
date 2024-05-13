@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PseudoIPV4API from 'cloudflare/resources/zones/settings/pseudo-ipv4';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PseudoIPV4API from './pseudo-ipv4';
 
 export class PseudoIPV4Resource extends APIResource {
   /**

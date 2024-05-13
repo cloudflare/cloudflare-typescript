@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AccessRequestsAPI from 'cloudflare/resources/zero-trust/access/logs/access-requests';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as AccessRequestsAPI from './access-requests';
 
 export class AccessRequests extends APIResource {
   /**

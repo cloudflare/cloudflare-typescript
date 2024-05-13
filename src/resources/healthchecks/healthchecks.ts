@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PreviewsAPI from 'cloudflare/resources/healthchecks/previews';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PreviewsAPI from './previews';
+import { SinglePage } from '../../pagination';
 
 export class Healthchecks extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);

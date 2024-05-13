@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as InvitesAPI from 'cloudflare/resources/user/invites';
-import * as Shared from 'cloudflare/resources/shared';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as InvitesAPI from './invites';
+import * as Shared from '../shared';
+import { SinglePage } from '../../pagination';
 
 export class Invites extends APIResource {
   /**

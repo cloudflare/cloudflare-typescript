@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DetailsAPI from 'cloudflare/resources/waiting-rooms/events/details';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as DetailsAPI from './details';
 
 export class Details extends APIResource {
   /**

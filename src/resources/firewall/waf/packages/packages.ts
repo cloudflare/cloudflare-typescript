@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as PackagesAPI from 'cloudflare/resources/firewall/waf/packages/packages';
-import * as Shared from 'cloudflare/resources/shared';
-import * as GroupsAPI from 'cloudflare/resources/firewall/waf/packages/groups';
-import * as RulesAPI from 'cloudflare/resources/firewall/waf/packages/rules';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as PackagesAPI from './packages';
+import * as Shared from '../../../shared';
+import * as GroupsAPI from './groups';
+import * as RulesAPI from './rules';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Packages extends APIResource {
   groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);

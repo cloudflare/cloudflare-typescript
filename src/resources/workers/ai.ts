@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AIAPI from 'cloudflare/resources/workers/ai';
-import { type Uploadable } from 'cloudflare/core';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AIAPI from './ai';
+import { type Uploadable } from '../../core';
 
 export class AI extends APIResource {
   /**

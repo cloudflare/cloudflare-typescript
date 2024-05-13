@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { type Response } from 'cloudflare/_shims/index';
-import * as ScansAPI from 'cloudflare/resources/url-scanner/scans';
-import * as TopAPI from 'cloudflare/resources/radar/http/top';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { type Response } from '../../_shims/index';
+import * as ScansAPI from './scans';
+import * as TopAPI from '../radar/http/top';
 
 export class Scans extends APIResource {
   /**

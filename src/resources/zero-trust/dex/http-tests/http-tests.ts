@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as HTTPTestsAPI from 'cloudflare/resources/zero-trust/dex/http-tests/http-tests';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as HTTPTestsAPI from './http-tests';
+import * as DEXAPI from '../dex';
+import * as PercentilesAPI from './percentiles';
 
 export class HTTPTests extends APIResource {
   percentiles: PercentilesAPI.Percentiles = new PercentilesAPI.Percentiles(this._client);

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as BindingsAPI from 'cloudflare/resources/addressing/prefixes/bgp/bindings';
-import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/bgp/prefixes';
-import * as StatusesAPI from 'cloudflare/resources/addressing/prefixes/bgp/statuses';
+import { APIResource } from '../../../../resource';
+import * as BindingsAPI from './bindings';
+import * as PrefixesAPI from './prefixes';
+import * as StatusesAPI from './statuses';
 
 export class BGP extends APIResource {
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);

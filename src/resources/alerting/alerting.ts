@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AvailableAlertsAPI from 'cloudflare/resources/alerting/available-alerts';
-import * as HistoryAPI from 'cloudflare/resources/alerting/history';
-import * as PoliciesAPI from 'cloudflare/resources/alerting/policies';
-import * as DestinationsAPI from 'cloudflare/resources/alerting/destinations/destinations';
+import { APIResource } from '../../resource';
+import * as AvailableAlertsAPI from './available-alerts';
+import * as HistoryAPI from './history';
+import * as PoliciesAPI from './policies';
+import * as DestinationsAPI from './destinations/destinations';
 
 export class Alerting extends APIResource {
   availableAlerts: AvailableAlertsAPI.AvailableAlerts = new AvailableAlertsAPI.AvailableAlerts(this._client);

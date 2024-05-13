@@ -1,14 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
-import * as PreviewsAPI from 'cloudflare/resources/load-balancers/previews';
-import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
-import * as SearchesAPI from 'cloudflare/resources/load-balancers/searches';
-import * as MonitorsAPI from 'cloudflare/resources/load-balancers/monitors/monitors';
-import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as LoadBalancersAPI from './load-balancers';
+import * as PreviewsAPI from './previews';
+import * as RegionsAPI from './regions';
+import * as SearchesAPI from './searches';
+import * as MonitorsAPI from './monitors/monitors';
+import * as PoolsAPI from './pools/pools';
+import { SinglePage } from '../../pagination';
 
 export class LoadBalancers extends APIResource {
   monitors: MonitorsAPI.Monitors = new MonitorsAPI.Monitors(this._client);

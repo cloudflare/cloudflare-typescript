@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PoliciesAPI from 'cloudflare/resources/zero-trust/devices/policies/policies';
-import * as DefaultPolicyAPI from 'cloudflare/resources/zero-trust/devices/policies/default-policy';
-import * as ExcludesAPI from 'cloudflare/resources/zero-trust/devices/policies/excludes';
-import * as FallbackDomainsAPI from 'cloudflare/resources/zero-trust/devices/policies/fallback-domains';
-import * as IncludesAPI from 'cloudflare/resources/zero-trust/devices/policies/includes';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as PoliciesAPI from './policies';
+import * as DefaultPolicyAPI from './default-policy';
+import * as ExcludesAPI from './excludes';
+import * as FallbackDomainsAPI from './fallback-domains';
+import * as IncludesAPI from './includes';
+import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
   defaultPolicy: DefaultPolicyAPI.DefaultPolicy = new DefaultPolicyAPI.DefaultPolicy(this._client);

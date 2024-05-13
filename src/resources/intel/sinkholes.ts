@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SinkholesAPI from 'cloudflare/resources/intel/sinkholes';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SinkholesAPI from './sinkholes';
+import { SinglePage } from '../../pagination';
 
 export class Sinkholes extends APIResource {
   /**

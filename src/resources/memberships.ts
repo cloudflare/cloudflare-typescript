@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as Shared from 'cloudflare/resources/shared';
-import * as AccountsAPI from 'cloudflare/resources/accounts/accounts';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as Shared from './shared';
+import * as AccountsAPI from './accounts/accounts';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 export class Memberships extends APIResource {
   /**

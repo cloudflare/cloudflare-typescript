@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as IPsAPI from 'cloudflare/resources/addressing/address-maps/ips';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**

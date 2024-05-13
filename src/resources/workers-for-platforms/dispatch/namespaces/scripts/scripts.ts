@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ScriptsScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts';
-import * as WorkersAPI from 'cloudflare/resources/workers/workers';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
-import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
-import * as BindingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings';
-import * as ContentAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/content';
-import * as SecretsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets';
-import * as SettingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/settings';
-import * as TagsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/tags';
-import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../../../core';
+import { APIResource } from '../../../../../resource';
+import * as ScriptsScriptsAPI from './scripts';
+import * as WorkersAPI from '../../../../workers/workers';
+import * as ScriptsAPI from '../../../../workers/scripts/scripts';
+import * as TailAPI from '../../../../workers/scripts/tail';
+import * as BindingsAPI from './bindings';
+import * as ContentAPI from './content';
+import * as SecretsAPI from './secrets';
+import * as SettingsAPI from './settings';
+import * as TagsAPI from './tags';
+import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../../../core';
 
 export class Scripts extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);

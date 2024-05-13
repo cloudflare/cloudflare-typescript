@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
-import * as MagicTransitAPI from 'cloudflare/resources/magic-transit/magic-transit';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as CfInterconnectsAPI from './cf-interconnects';
+import * as MagicTransitAPI from './magic-transit';
 
 export class CfInterconnects extends APIResource {
   /**

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ConfigsAPI from 'cloudflare/resources/magic-network-monitoring/configs/configs';
-import * as RulesAPI from 'cloudflare/resources/magic-network-monitoring/rules/rules';
+import { APIResource } from '../../resource';
+import * as ConfigsAPI from './configs/configs';
+import * as RulesAPI from './rules/rules';
 
 export class MagicNetworkMonitoring extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);

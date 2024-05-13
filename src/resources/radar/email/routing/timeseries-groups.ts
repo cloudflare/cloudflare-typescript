@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/routing/timeseries-groups';
-import * as EmailAPI from 'cloudflare/resources/radar/email/email';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as TimeseriesGroupsAPI from './timeseries-groups';
+import * as EmailAPI from '../email';
 
 export class TimeseriesGroups extends APIResource {
   /**

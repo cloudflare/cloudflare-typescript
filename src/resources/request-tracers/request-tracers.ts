@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as TracesAPI from 'cloudflare/resources/request-tracers/traces';
+import { APIResource } from '../../resource';
+import * as TracesAPI from './traces';
 
 export class RequestTracers extends APIResource {
   traces: TracesAPI.Traces = new TracesAPI.Traces(this._client);

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BrowserCacheTTLAPI from 'cloudflare/resources/zones/settings/browser-cache-ttl';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as BrowserCacheTTLAPI from './browser-cache-ttl';
 
 export class BrowserCacheTTLResource extends APIResource {
   /**

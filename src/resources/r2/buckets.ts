@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BucketsAPI from 'cloudflare/resources/r2/buckets';
-import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as BucketsAPI from './buckets';
+import { CursorPagination, type CursorPaginationParams } from '../../pagination';
 
 export class Buckets extends APIResource {
   /**

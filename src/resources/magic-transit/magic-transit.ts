@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
-import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
-import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
-import * as RoutesAPI from 'cloudflare/resources/magic-transit/routes';
-import * as SitesAPI from 'cloudflare/resources/magic-transit/sites/sites';
+import { APIResource } from '../../resource';
+import * as CfInterconnectsAPI from './cf-interconnects';
+import * as GRETunnelsAPI from './gre-tunnels';
+import * as IPSECTunnelsAPI from './ipsec-tunnels';
+import * as RoutesAPI from './routes';
+import * as SitesAPI from './sites/sites';
 
 export class MagicTransit extends APIResource {
   cfInterconnects: CfInterconnectsAPI.CfInterconnects = new CfInterconnectsAPI.CfInterconnects(this._client);

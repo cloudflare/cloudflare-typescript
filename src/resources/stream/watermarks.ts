@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
-import { multipartFormRequestOptions } from 'cloudflare/core';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as WatermarksAPI from './watermarks';
+import { multipartFormRequestOptions } from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Watermarks extends APIResource {
   /**

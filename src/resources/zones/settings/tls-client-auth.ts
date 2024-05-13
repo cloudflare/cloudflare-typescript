@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TLSClientAuthAPI from 'cloudflare/resources/zones/settings/tls-client-auth';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TLSClientAuthAPI from './tls-client-auth';
 
 export class TLSClientAuthResource extends APIResource {
   /**

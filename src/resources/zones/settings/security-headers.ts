@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SecurityHeadersAPI from 'cloudflare/resources/zones/settings/security-headers';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SecurityHeadersAPI from './security-headers';
 
 export class SecurityHeaders extends APIResource {
   /**

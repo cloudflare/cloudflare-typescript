@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BindingsAPI from 'cloudflare/resources/addressing/prefixes/bgp/bindings';
-import * as Shared from 'cloudflare/resources/shared';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as BindingsAPI from './bindings';
+import * as Shared from '../../../shared';
+import { SinglePage } from '../../../../pagination';
 
 export class Bindings extends APIResource {
   /**

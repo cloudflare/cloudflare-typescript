@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RulesAPI from 'cloudflare/resources/magic-network-monitoring/rules/rules';
-import * as AdvertisementsAPI from 'cloudflare/resources/magic-network-monitoring/rules/advertisements';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as RulesAPI from './rules';
+import * as AdvertisementsAPI from './advertisements';
+import { SinglePage } from '../../../pagination';
 
 export class Rules extends APIResource {
   advertisements: AdvertisementsAPI.Advertisements = new AdvertisementsAPI.Advertisements(this._client);
