@@ -157,6 +157,48 @@ export class ServiceTokens extends APIResource {
   }
 
   /**
+   * Fetches a single service token.
+   */
+  get(
+    uuid: string,
+    params?: ServiceTokenGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken>;
+  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
+  get(
+    uuid: string,
+    params: ServiceTokenGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
+    if (isRequestOptions(params)) {
+      return this.get(uuid, {}, params);
+    }
+    const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceToken }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Refreshes the expiration of a service token.
    */
   refresh(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
@@ -362,6 +404,18 @@ export interface ServiceTokenDeleteParams {
   zone_id?: string;
 }
 
+export interface ServiceTokenGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
 export namespace ServiceTokens {
   export import ServiceToken = ServiceTokensAPI.ServiceToken;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
@@ -371,4 +425,5 @@ export namespace ServiceTokens {
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
   export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
+  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
 }

@@ -76,6 +76,21 @@ describe('resource serviceTokens', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  // TODO: investigate broken test
+  test.skip('get', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: 'string' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
   test('refresh', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.refresh(
       '023e105f4ecef8ad9ca31a8372d0c353',

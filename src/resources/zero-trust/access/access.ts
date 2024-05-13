@@ -781,6 +781,7 @@ export namespace Access {
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
   export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
+  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
   export import Bookmarks = BookmarksAPI.Bookmarks;
   export import Bookmark = BookmarksAPI.Bookmark;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
