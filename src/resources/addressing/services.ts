@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ServicesAPI from 'cloudflare/resources/addressing/services';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ServicesAPI from './services';
+import { SinglePage } from '../../pagination';
 
 export class Services extends APIResource {
   /**

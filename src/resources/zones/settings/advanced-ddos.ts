@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AdvancedDDoSAPI from 'cloudflare/resources/zones/settings/advanced-ddos';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as AdvancedDDoSAPI from './advanced-ddos';
 
 export class AdvancedDDoS extends APIResource {
   /**

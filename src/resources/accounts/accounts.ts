@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as MembersAPI from './members';
+import * as RolesAPI from './roles';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Accounts extends APIResource {
   members: MembersAPI.Members = new MembersAPI.Members(this._client);

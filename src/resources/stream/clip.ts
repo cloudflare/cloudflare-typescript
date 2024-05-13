@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ClipAPI from 'cloudflare/resources/stream/clip';
-import * as StreamAPI from 'cloudflare/resources/stream/stream';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ClipAPI from './clip';
+import * as StreamAPI from './stream';
 
 export class ClipResource extends APIResource {
   /**

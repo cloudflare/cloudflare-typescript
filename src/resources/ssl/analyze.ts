@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AnalyzeAPI from 'cloudflare/resources/ssl/analyze';
-import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AnalyzeAPI from './analyze';
+import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
 
 export class Analyze extends APIResource {
   /**

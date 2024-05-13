@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
-import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SettingsAPI from './settings';
+import * as ScriptsAPI from './scripts';
+import * as TailAPI from './tail';
 
 export class Settings extends APIResource {
   /**

@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AddressMapsAPI from 'cloudflare/resources/addressing/address-maps/address-maps';
-import * as AccountsAPI from 'cloudflare/resources/addressing/address-maps/accounts';
-import * as IPsAPI from 'cloudflare/resources/addressing/address-maps/ips';
-import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as AddressMapsAPI from './address-maps';
+import * as AccountsAPI from './accounts';
+import * as IPsAPI from './ips';
+import * as ZonesAPI from './zones';
+import { SinglePage } from '../../../pagination';
 
 export class AddressMaps extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);

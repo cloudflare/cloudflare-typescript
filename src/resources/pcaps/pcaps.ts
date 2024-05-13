@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PCAPsAPI from 'cloudflare/resources/pcaps/pcaps';
-import * as DownloadAPI from 'cloudflare/resources/pcaps/download';
-import * as OwnershipAPI from 'cloudflare/resources/pcaps/ownership';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PCAPsAPI from './pcaps';
+import * as DownloadAPI from './download';
+import * as OwnershipAPI from './ownership';
+import { SinglePage } from '../../pagination';
 
 export class PCAPs extends APIResource {
   ownership: OwnershipAPI.OwnershipResource = new OwnershipAPI.OwnershipResource(this._client);

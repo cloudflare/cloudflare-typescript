@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as EmbedAPI from 'cloudflare/resources/stream/embed';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as EmbedAPI from './embed';
 
 export class Embed extends APIResource {
   /**

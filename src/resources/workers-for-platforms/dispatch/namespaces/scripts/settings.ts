@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SettingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/settings';
-import * as WorkersAPI from 'cloudflare/resources/workers/workers';
-import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../../../core';
+import { APIResource } from '../../../../../resource';
+import * as SettingsAPI from './settings';
+import * as WorkersAPI from '../../../../workers/workers';
+import * as TailAPI from '../../../../workers/scripts/tail';
+import { multipartFormRequestOptions } from '../../../../../core';
 
 export class Settings extends APIResource {
   /**

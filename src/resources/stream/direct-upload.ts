@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DirectUploadAPI from 'cloudflare/resources/stream/direct-upload';
-import * as StreamAPI from 'cloudflare/resources/stream/stream';
-import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as DirectUploadAPI from './direct-upload';
+import * as StreamAPI from './stream';
+import * as WatermarksAPI from './watermarks';
 
 export class DirectUpload extends APIResource {
   /**

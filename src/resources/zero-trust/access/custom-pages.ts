@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CustomPagesAPI from 'cloudflare/resources/zero-trust/access/custom-pages';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CustomPagesAPI from './custom-pages';
+import { SinglePage } from '../../../pagination';
 
 export class CustomPages extends APIResource {
   /**

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TokenAPI from 'cloudflare/resources/stream/token';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as TokenAPI from './token';
 
 export class Token extends APIResource {
   /**

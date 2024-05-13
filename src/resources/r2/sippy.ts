@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SippyAPI from 'cloudflare/resources/r2/sippy';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SippyAPI from './sippy';
 
 export class SippyResource extends APIResource {
   /**

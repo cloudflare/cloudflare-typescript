@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as MinifyAPI from 'cloudflare/resources/zones/settings/minify';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as MinifyAPI from './minify';
 
 export class MinifyResource extends APIResource {
   /**

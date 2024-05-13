@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PagesAPI from 'cloudflare/resources/speed/pages/pages';
-import * as SpeedAPI from 'cloudflare/resources/speed/speed';
-import * as TestsAPI from 'cloudflare/resources/speed/pages/tests';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PagesAPI from './pages';
+import * as SpeedAPI from '../speed';
+import * as TestsAPI from './tests';
+import { SinglePage } from '../../../pagination';
 
 export class Pages extends APIResource {
   tests: TestsAPI.Tests = new TestsAPI.Tests(this._client);

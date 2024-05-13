@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as MonitorsAPI from 'cloudflare/resources/load-balancers/monitors/monitors';
-import * as PreviewsAPI from 'cloudflare/resources/load-balancers/monitors/previews';
-import * as ReferencesAPI from 'cloudflare/resources/load-balancers/monitors/references';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as MonitorsAPI from './monitors';
+import * as PreviewsAPI from './previews';
+import * as ReferencesAPI from './references';
+import { SinglePage } from '../../../pagination';
 
 export class Monitors extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as MaliciousAPI from 'cloudflare/resources/radar/email/security/top/tlds/malicious';
-import * as TopAPI from 'cloudflare/resources/radar/http/top';
+import * as Core from '../../../../../../core';
+import { APIResource } from '../../../../../../resource';
+import { isRequestOptions } from '../../../../../../core';
+import * as MaliciousAPI from './malicious';
+import * as TopAPI from '../../../../http/top';
 
 export class Malicious extends APIResource {
   /**

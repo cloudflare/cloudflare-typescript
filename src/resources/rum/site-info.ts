@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SiteInfoAPI from 'cloudflare/resources/rum/site-info';
-import * as RulesAPI from 'cloudflare/resources/rum/rules';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SiteInfoAPI from './site-info';
+import * as RulesAPI from './rules';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class SiteInfo extends APIResource {
   /**

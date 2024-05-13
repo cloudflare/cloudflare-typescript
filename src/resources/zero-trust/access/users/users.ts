@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as UsersAPI from 'cloudflare/resources/zero-trust/access/users/users';
-import * as ActiveSessionsAPI from 'cloudflare/resources/zero-trust/access/users/active-sessions';
-import * as FailedLoginsAPI from 'cloudflare/resources/zero-trust/access/users/failed-logins';
-import * as LastSeenIdentityAPI from 'cloudflare/resources/zero-trust/access/users/last-seen-identity';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as UsersAPI from './users';
+import * as ActiveSessionsAPI from './active-sessions';
+import * as FailedLoginsAPI from './failed-logins';
+import * as LastSeenIdentityAPI from './last-seen-identity';
+import { SinglePage } from '../../../../pagination';
 
 export class Users extends APIResource {
   activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);

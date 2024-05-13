@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as NamespacesAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/namespaces';
+import { APIResource } from '../../../resource';
+import * as NamespacesAPI from './namespaces/namespaces';
 
 export class Dispatch extends APIResource {
   namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as V2API from 'cloudflare/resources/images/v2/v2';
-import * as V1API from 'cloudflare/resources/images/v1/v1';
-import * as DirectUploadsAPI from 'cloudflare/resources/images/v2/direct-uploads';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as V2API from './v2';
+import * as V1API from '../v1/v1';
+import * as DirectUploadsAPI from './direct-uploads';
 
 export class V2 extends APIResource {
   directUploads: DirectUploadsAPI.DirectUploads = new DirectUploadsAPI.DirectUploads(this._client);

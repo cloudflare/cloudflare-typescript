@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ManagementAPI from 'cloudflare/resources/zero-trust/tunnels/management';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ManagementAPI from './management';
 
 export class Management extends APIResource {
   /**

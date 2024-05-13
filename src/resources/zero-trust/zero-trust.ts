@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ConnectivitySettingsAPI from 'cloudflare/resources/zero-trust/connectivity-settings';
-import * as IdentityProvidersAPI from 'cloudflare/resources/zero-trust/identity-providers';
-import * as OrganizationsAPI from 'cloudflare/resources/zero-trust/organizations';
-import * as SeatsAPI from 'cloudflare/resources/zero-trust/seats';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import * as DevicesAPI from 'cloudflare/resources/zero-trust/devices/devices';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as DLPAPI from 'cloudflare/resources/zero-trust/dlp/dlp';
-import * as GatewayAPI from 'cloudflare/resources/zero-trust/gateway/gateway';
-import * as NetworksAPI from 'cloudflare/resources/zero-trust/networks/networks';
-import * as RiskScoringAPI from 'cloudflare/resources/zero-trust/risk-scoring/risk-scoring';
-import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
+import { APIResource } from '../../resource';
+import * as ConnectivitySettingsAPI from './connectivity-settings';
+import * as IdentityProvidersAPI from './identity-providers';
+import * as OrganizationsAPI from './organizations';
+import * as SeatsAPI from './seats';
+import * as AccessAPI from './access/access';
+import * as DevicesAPI from './devices/devices';
+import * as DEXAPI from './dex/dex';
+import * as DLPAPI from './dlp/dlp';
+import * as GatewayAPI from './gateway/gateway';
+import * as NetworksAPI from './networks/networks';
+import * as RiskScoringAPI from './risk-scoring/risk-scoring';
+import * as TunnelsAPI from './tunnels/tunnels';
 
 export class ZeroTrust extends APIResource {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);

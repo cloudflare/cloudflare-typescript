@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConsumersAPI from 'cloudflare/resources/queues/consumers';
-import * as MessagesAPI from 'cloudflare/resources/queues/messages';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ConsumersAPI from './consumers';
+import * as MessagesAPI from './messages';
+import { SinglePage } from '../../pagination';
 
 export class Queues extends APIResource {
   consumers: ConsumersAPI.Consumers = new ConsumersAPI.Consumers(this._client);

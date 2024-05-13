@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AlwaysUseHTTPSAPI from 'cloudflare/resources/zones/settings/always-use-https';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as AlwaysUseHTTPSAPI from './always-use-https';
 
 export class AlwaysUseHTTPS extends APIResource {
   /**

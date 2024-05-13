@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AssociationsAPI from 'cloudflare/resources/mtls-certificates/associations';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AssociationsAPI from './associations';
+import { SinglePage } from '../../pagination';
 
 export class MTLSCertificates extends APIResource {
   associations: AssociationsAPI.Associations = new AssociationsAPI.Associations(this._client);

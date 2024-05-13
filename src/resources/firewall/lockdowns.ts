@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as LockdownsAPI from 'cloudflare/resources/firewall/lockdowns';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as LockdownsAPI from './lockdowns';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Lockdowns extends APIResource {
   /**

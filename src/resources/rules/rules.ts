@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ListsAPI from 'cloudflare/resources/rules/lists/lists';
+import { APIResource } from '../../resource';
+import * as ListsAPI from './lists/lists';
 
 export class Rules extends APIResource {
   lists: ListsAPI.Lists = new ListsAPI.Lists(this._client);

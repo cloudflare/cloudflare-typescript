@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PostureAPI from 'cloudflare/resources/zero-trust/devices/posture/posture';
-import * as IntegrationsAPI from 'cloudflare/resources/zero-trust/devices/posture/integrations';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as PostureAPI from './posture';
+import * as IntegrationsAPI from './integrations';
+import { SinglePage } from '../../../../pagination';
 
 export class Posture extends APIResource {
   integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);

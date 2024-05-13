@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
-import * as DetailsAPI from 'cloudflare/resources/waiting-rooms/events/details';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as EventsAPI from './events';
+import * as DetailsAPI from './details';
+import { SinglePage } from '../../../pagination';
 
 export class Events extends APIResource {
   details: DetailsAPI.Details = new DetailsAPI.Details(this._client);

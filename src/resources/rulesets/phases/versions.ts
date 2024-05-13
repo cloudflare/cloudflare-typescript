@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as VersionsAPI from 'cloudflare/resources/rulesets/phases/versions';
-import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
-import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
-import { RulesetsSinglePage } from 'cloudflare/resources/rulesets/rulesets';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { CloudflareError } from '../../../error';
+import * as VersionsAPI from './versions';
+import * as RulesAPI from '../rules';
+import * as RulesetsAPI from '../rulesets';
+import { RulesetsSinglePage } from '../rulesets';
 
 export class Versions extends APIResource {
   /**

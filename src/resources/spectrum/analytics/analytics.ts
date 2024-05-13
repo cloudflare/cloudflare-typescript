@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AggregatesAPI from 'cloudflare/resources/spectrum/analytics/aggregates/aggregates';
-import * as EventsAPI from 'cloudflare/resources/spectrum/analytics/events/events';
+import { APIResource } from '../../../resource';
+import * as AggregatesAPI from './aggregates/aggregates';
+import * as EventsAPI from './events/events';
 
 export class Analytics extends APIResource {
   aggregates: AggregatesAPI.Aggregates = new AggregatesAPI.Aggregates(this._client);

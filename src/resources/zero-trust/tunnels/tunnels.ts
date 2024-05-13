@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
-import * as Shared from 'cloudflare/resources/shared';
-import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/tunnels/configurations';
-import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
-import * as ConnectorsAPI from 'cloudflare/resources/zero-trust/tunnels/connectors';
-import * as ManagementAPI from 'cloudflare/resources/zero-trust/tunnels/management';
-import * as TokenAPI from 'cloudflare/resources/zero-trust/tunnels/token';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TunnelsAPI from './tunnels';
+import * as Shared from '../../shared';
+import * as ConfigurationsAPI from './configurations';
+import * as ConnectionsAPI from './connections';
+import * as ConnectorsAPI from './connectors';
+import * as ManagementAPI from './management';
+import * as TokenAPI from './token';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tunnels extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);

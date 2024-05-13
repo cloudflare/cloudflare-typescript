@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/prefixes';
-import * as DelegationsAPI from 'cloudflare/resources/addressing/prefixes/delegations';
-import * as BGPAPI from 'cloudflare/resources/addressing/prefixes/bgp/bgp';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PrefixesAPI from './prefixes';
+import * as DelegationsAPI from './delegations';
+import * as BGPAPI from './bgp/bgp';
+import { SinglePage } from '../../../pagination';
 
 export class Prefixes extends APIResource {
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);

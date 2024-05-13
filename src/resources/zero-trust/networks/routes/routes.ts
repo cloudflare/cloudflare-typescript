@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RoutesAPI from 'cloudflare/resources/zero-trust/networks/routes/routes';
-import * as IPsAPI from 'cloudflare/resources/zero-trust/networks/routes/ips';
-import * as NetworksAPI from 'cloudflare/resources/zero-trust/networks/routes/networks';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as RoutesAPI from './routes';
+import * as IPsAPI from './ips';
+import * as NetworksAPI from './networks';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Routes extends APIResource {
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);

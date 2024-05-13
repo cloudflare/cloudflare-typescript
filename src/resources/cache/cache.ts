@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
-import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
-import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
-import * as VariantsAPI from 'cloudflare/resources/cache/variants';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as CacheReserveAPI from './cache-reserve';
+import * as RegionalTieredCacheAPI from './regional-tiered-cache';
+import * as SmartTieredCacheAPI from './smart-tiered-cache';
+import * as VariantsAPI from './variants';
 
 export class Cache extends APIResource {
   cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);

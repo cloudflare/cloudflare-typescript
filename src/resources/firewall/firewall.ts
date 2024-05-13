@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AccessRulesAPI from 'cloudflare/resources/firewall/access-rules';
-import * as LockdownsAPI from 'cloudflare/resources/firewall/lockdowns';
-import * as RulesAPI from 'cloudflare/resources/firewall/rules';
-import * as UARulesAPI from 'cloudflare/resources/firewall/ua-rules';
-import * as WAFAPI from 'cloudflare/resources/firewall/waf/waf';
+import { APIResource } from '../../resource';
+import * as AccessRulesAPI from './access-rules';
+import * as LockdownsAPI from './lockdowns';
+import * as RulesAPI from './rules';
+import * as UARulesAPI from './ua-rules';
+import * as WAFAPI from './waf/waf';
 
 export class Firewall extends APIResource {
   lockdowns: LockdownsAPI.Lockdowns = new LockdownsAPI.Lockdowns(this._client);

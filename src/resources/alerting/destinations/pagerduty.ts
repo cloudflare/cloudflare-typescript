@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PagerdutyAPI from 'cloudflare/resources/alerting/destinations/pagerduty';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PagerdutyAPI from './pagerduty';
 
 export class PagerdutyResource extends APIResource {
   /**

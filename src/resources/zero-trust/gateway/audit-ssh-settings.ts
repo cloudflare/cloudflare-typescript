@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AuditSSHSettingsAPI from 'cloudflare/resources/zero-trust/gateway/audit-ssh-settings';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as AuditSSHSettingsAPI from './audit-ssh-settings';
 
 export class AuditSSHSettings extends APIResource {
   /**

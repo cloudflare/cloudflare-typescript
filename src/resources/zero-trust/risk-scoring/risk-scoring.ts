@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as RiskScoringAPI from 'cloudflare/resources/zero-trust/risk-scoring/risk-scoring';
-import * as BehavioursAPI from 'cloudflare/resources/zero-trust/risk-scoring/behaviours';
-import * as SummaryAPI from 'cloudflare/resources/zero-trust/risk-scoring/summary';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as RiskScoringAPI from './risk-scoring';
+import * as BehavioursAPI from './behaviours';
+import * as SummaryAPI from './summary';
 
 export class RiskScoring extends APIResource {
   behaviours: BehavioursAPI.Behaviours = new BehavioursAPI.Behaviours(this._client);

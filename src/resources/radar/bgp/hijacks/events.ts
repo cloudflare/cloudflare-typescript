@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as EventsAPI from 'cloudflare/resources/radar/bgp/hijacks/events';
-import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as EventsAPI from './events';
+import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Events extends APIResource {
   /**

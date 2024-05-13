@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as BucketsAPI from 'cloudflare/resources/r2/buckets';
-import * as SippyAPI from 'cloudflare/resources/r2/sippy';
+import { APIResource } from '../../resource';
+import * as BucketsAPI from './buckets';
+import * as SippyAPI from './sippy';
 
 export class R2 extends APIResource {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);

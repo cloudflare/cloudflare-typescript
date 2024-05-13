@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
-import * as DomainsAPI from 'cloudflare/resources/pages/projects/domains';
-import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ProjectsAPI from './projects';
+import * as DomainsAPI from './domains';
+import * as DeploymentsAPI from './deployments/deployments';
+import { SinglePage } from '../../../pagination';
 
 export class Projects extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);

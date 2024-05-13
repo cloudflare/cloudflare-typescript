@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as HTTP3API from 'cloudflare/resources/zones/settings/http3';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as HTTP3API from './http3';
 
 export class HTTP3Resource extends APIResource {
   /**

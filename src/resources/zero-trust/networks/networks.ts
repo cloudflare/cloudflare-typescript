@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as VirtualNetworksAPI from 'cloudflare/resources/zero-trust/networks/virtual-networks';
-import * as RoutesAPI from 'cloudflare/resources/zero-trust/networks/routes/routes';
+import { APIResource } from '../../../resource';
+import * as VirtualNetworksAPI from './virtual-networks';
+import * as RoutesAPI from './routes/routes';
 
 export class Networks extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);

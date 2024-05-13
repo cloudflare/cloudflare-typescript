@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as StatsAPI from 'cloudflare/resources/images/v1/stats';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as StatsAPI from './stats';
 
 export class Stats extends APIResource {
   /**

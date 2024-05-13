@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AuditLogsAPI from 'cloudflare/resources/user/audit-logs';
-import * as InvitesAPI from 'cloudflare/resources/user/invites';
-import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
-import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
-import * as BillingAPI from 'cloudflare/resources/user/billing/billing';
-import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AuditLogsAPI from './audit-logs';
+import * as InvitesAPI from './invites';
+import * as OrganizationsAPI from './organizations';
+import * as SubscriptionsAPI from './subscriptions';
+import * as BillingAPI from './billing/billing';
+import * as TokensAPI from './tokens/tokens';
 
 export class User extends APIResource {
   auditLogs: AuditLogsAPI.AuditLogs = new AuditLogsAPI.AuditLogs(this._client);

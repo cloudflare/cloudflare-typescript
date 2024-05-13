@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CustomAPI from 'cloudflare/resources/zero-trust/dlp/profiles/custom';
-import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as CustomAPI from './custom';
+import * as ProfilesAPI from './profiles';
 
 export class Custom extends APIResource {
   /**

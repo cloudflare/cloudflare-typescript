@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConfigurationAPI from 'cloudflare/resources/event-notifications/r2/configuration/configuration';
-import * as QueuesAPI from 'cloudflare/resources/event-notifications/r2/configuration/queues';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as ConfigurationAPI from './configuration';
+import * as QueuesAPI from './queues';
 
 export class Configuration extends APIResource {
   queues: QueuesAPI.Queues = new QueuesAPI.Queues(this._client);

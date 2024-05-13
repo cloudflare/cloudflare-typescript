@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import * as BookmarksAPI from 'cloudflare/resources/zero-trust/access/bookmarks';
-import * as CustomPagesAPI from 'cloudflare/resources/zero-trust/access/custom-pages';
-import * as GroupsAPI from 'cloudflare/resources/zero-trust/access/groups';
-import * as KeysAPI from 'cloudflare/resources/zero-trust/access/keys';
-import * as ServiceTokensAPI from 'cloudflare/resources/zero-trust/access/service-tokens';
-import * as TagsAPI from 'cloudflare/resources/zero-trust/access/tags';
-import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applications/applications';
-import * as CertificatesAPI from 'cloudflare/resources/zero-trust/access/certificates/certificates';
-import * as LogsAPI from 'cloudflare/resources/zero-trust/access/logs/logs';
-import * as UsersAPI from 'cloudflare/resources/zero-trust/access/users/users';
+import { APIResource } from '../../../resource';
+import * as AccessAPI from './access';
+import * as BookmarksAPI from './bookmarks';
+import * as CustomPagesAPI from './custom-pages';
+import * as GroupsAPI from './groups';
+import * as KeysAPI from './keys';
+import * as ServiceTokensAPI from './service-tokens';
+import * as TagsAPI from './tags';
+import * as ApplicationsAPI from './applications/applications';
+import * as CertificatesAPI from './certificates/certificates';
+import * as LogsAPI from './logs/logs';
+import * as UsersAPI from './users/users';
 
 export class Access extends APIResource {
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);

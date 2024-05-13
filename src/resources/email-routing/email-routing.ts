@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AddressesAPI from 'cloudflare/resources/email-routing/addresses';
-import * as DNSAPI from 'cloudflare/resources/email-routing/dns';
-import * as RulesAPI from 'cloudflare/resources/email-routing/rules/rules';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AddressesAPI from './addresses';
+import * as DNSAPI from './dns';
+import * as RulesAPI from './rules/rules';
 
 export class EmailRouting extends APIResource {
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);

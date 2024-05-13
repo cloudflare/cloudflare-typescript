@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ProxyReadTimeoutAPI from 'cloudflare/resources/zones/settings/proxy-read-timeout';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ProxyReadTimeoutAPI from './proxy-read-timeout';
 
 export class ProxyReadTimeoutResource extends APIResource {
   /**

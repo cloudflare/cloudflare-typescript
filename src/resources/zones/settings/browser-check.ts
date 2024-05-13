@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BrowserCheckAPI from 'cloudflare/resources/zones/settings/browser-check';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as BrowserCheckAPI from './browser-check';
 
 export class BrowserCheckResource extends APIResource {
   /**

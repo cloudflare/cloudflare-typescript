@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SortQueryStringForCacheAPI from 'cloudflare/resources/zones/settings/sort-query-string-for-cache';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SortQueryStringForCacheAPI from './sort-query-string-for-cache';
 
 export class SortQueryStringForCacheResource extends APIResource {
   /**

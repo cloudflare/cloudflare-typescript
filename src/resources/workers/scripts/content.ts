@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { type Response } from 'cloudflare/_shims/index';
-import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
-import * as WorkersAPI from 'cloudflare/resources/workers/workers';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
-import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { type Response } from '../../../_shims/index';
+import * as ContentAPI from './content';
+import * as WorkersAPI from '../workers';
+import * as ScriptsAPI from './scripts';
+import { type Uploadable, multipartFormRequestOptions } from '../../../core';
 
 export class Content extends APIResource {
   /**

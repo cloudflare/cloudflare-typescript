@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Shared from 'cloudflare/resources/shared';
-import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
+import * as Shared from './shared';
+import { SinglePage, V4PagePaginationArray } from '../pagination';
 
 export type ASN = number;
 

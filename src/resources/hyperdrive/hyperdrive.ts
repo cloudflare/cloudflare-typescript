@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ConfigsAPI from 'cloudflare/resources/hyperdrive/configs';
-import { SinglePage } from 'cloudflare/pagination';
+import { APIResource } from '../../resource';
+import * as ConfigsAPI from './configs';
+import { SinglePage } from '../../pagination';
 
 export class HyperdriveResource extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);

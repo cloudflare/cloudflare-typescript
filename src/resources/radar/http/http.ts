@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as SummaryAPI from 'cloudflare/resources/radar/http/summary';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/http/timeseries-groups';
-import * as TopAPI from 'cloudflare/resources/radar/http/top';
-import * as AsesAPI from 'cloudflare/resources/radar/http/ases/ases';
-import * as LocationsAPI from 'cloudflare/resources/radar/http/locations/locations';
+import { APIResource } from '../../../resource';
+import * as SummaryAPI from './summary';
+import * as TimeseriesGroupsAPI from './timeseries-groups';
+import * as TopAPI from './top';
+import * as AsesAPI from './ases/ases';
+import * as LocationsAPI from './locations/locations';
 
 export class HTTP extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);

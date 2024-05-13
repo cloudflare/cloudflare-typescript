@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CatchAllsAPI from 'cloudflare/resources/email-routing/rules/catch-alls';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CatchAllsAPI from './catch-alls';
 
 export class CatchAlls extends APIResource {
   /**

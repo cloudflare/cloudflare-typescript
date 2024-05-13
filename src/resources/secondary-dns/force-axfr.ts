@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ForceAXFRAPI from 'cloudflare/resources/secondary-dns/force-axfr';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ForceAXFRAPI from './force-axfr';
 
 export class ForceAXFRResource extends APIResource {
   /**

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
-import * as StatusAPI from 'cloudflare/resources/secondary-dns/outgoing/status';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as OutgoingAPI from './outgoing';
+import * as StatusAPI from './status';
 
 export class OutgoingResource extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);

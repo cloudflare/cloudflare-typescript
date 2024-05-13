@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as WANsAPI from './wans';
+import { SinglePage } from '../../../pagination';
 
 export class WANs extends APIResource {
   /**

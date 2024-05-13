@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CertificatesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/certificates';
-import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
-import { AuthenticatedOriginPullsSinglePage } from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CertificatesAPI from './certificates';
+import * as HostnamesAPI from './hostnames';
+import { AuthenticatedOriginPullsSinglePage } from './hostnames';
 
 export class Certificates extends APIResource {
   /**

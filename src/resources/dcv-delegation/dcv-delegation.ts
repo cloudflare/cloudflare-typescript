@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as UUIDAPI from 'cloudflare/resources/dcv-delegation/uuid';
+import { APIResource } from '../../resource';
+import * as UUIDAPI from './uuid';
 
 export class DCVDelegation extends APIResource {
   uuid: UUIDAPI.UUID = new UUIDAPI.UUID(this._client);

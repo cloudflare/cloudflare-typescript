@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as TldsAPI from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
+import { APIResource } from '../../../../../resource';
+import * as TldsAPI from './tlds/tlds';
 
 export class Top extends APIResource {
   tlds: TldsAPI.Tlds = new TldsAPI.Tlds(this._client);

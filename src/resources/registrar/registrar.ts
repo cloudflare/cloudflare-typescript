@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as DomainsAPI from 'cloudflare/resources/registrar/domains';
+import { APIResource } from '../../resource';
+import * as DomainsAPI from './domains';
 
 export class Registrar extends APIResource {
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);

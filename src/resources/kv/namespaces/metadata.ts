@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as MetadataAPI from 'cloudflare/resources/kv/namespaces/metadata';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as MetadataAPI from './metadata';
 
 export class Metadata extends APIResource {
   /**
