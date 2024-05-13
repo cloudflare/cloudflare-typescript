@@ -97,6 +97,9 @@ export interface AIGatewayCreateResponse {
 
 export namespace AIGatewayCreateResponse {
   export interface Task {
+    /**
+     * gateway slug
+     */
     id: string;
 
     cache_invalidate_on_update: boolean;
@@ -109,10 +112,6 @@ export namespace AIGatewayCreateResponse {
 
     modified_at: string;
 
-    name: string;
-
-    slug: string;
-
     rate_limiting_interval?: number;
 
     rate_limiting_limit?: number;
@@ -122,6 +121,9 @@ export namespace AIGatewayCreateResponse {
 }
 
 export interface AIGatewayUpdateResponse {
+  /**
+   * gateway slug
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -133,10 +135,6 @@ export interface AIGatewayUpdateResponse {
   created_at: string;
 
   modified_at: string;
-
-  name: string;
-
-  slug: string;
 
   rate_limiting_interval?: number;
 
@@ -146,6 +144,9 @@ export interface AIGatewayUpdateResponse {
 }
 
 export interface AIGatewayListResponse {
+  /**
+   * gateway slug
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -157,10 +158,6 @@ export interface AIGatewayListResponse {
   created_at: string;
 
   modified_at: string;
-
-  name: string;
-
-  slug: string;
 
   rate_limiting_interval?: number;
 
@@ -170,6 +167,9 @@ export interface AIGatewayListResponse {
 }
 
 export interface AIGatewayDeleteResponse {
+  /**
+   * gateway slug
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -181,10 +181,6 @@ export interface AIGatewayDeleteResponse {
   created_at: string;
 
   modified_at: string;
-
-  name: string;
-
-  slug: string;
 
   rate_limiting_interval?: number;
 
@@ -194,6 +190,9 @@ export interface AIGatewayDeleteResponse {
 }
 
 export interface AIGatewayGetResponse {
+  /**
+   * gateway slug
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
@@ -205,10 +204,6 @@ export interface AIGatewayGetResponse {
   created_at: string;
 
   modified_at: string;
-
-  name: string;
-
-  slug: string;
 
   rate_limiting_interval?: number;
 
@@ -224,6 +219,11 @@ export interface AIGatewayCreateParams {
   account_id: string;
 
   /**
+   * Body param: gateway slug
+   */
+  id: string;
+
+  /**
    * Body param:
    */
   cache_invalidate_on_update: boolean;
@@ -237,16 +237,6 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   collect_logs: boolean;
-
-  /**
-   * Body param:
-   */
-  name: string;
-
-  /**
-   * Body param:
-   */
-  slug: string;
 
   /**
    * Body param:
@@ -288,16 +278,6 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  name: string;
-
-  /**
-   * Body param:
-   */
-  slug: string;
-
-  /**
-   * Body param:
-   */
   rate_limiting_interval?: number;
 
   /**
@@ -318,7 +298,7 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param: gateway slug
    */
   id?: string;
 

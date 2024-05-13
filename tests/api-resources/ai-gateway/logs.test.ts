@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource logs', () => {
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.logs.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const responsePromise = cloudflare.aiGateway.logs.get('my-gateway', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource logs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.aiGateway.logs.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await cloudflare.aiGateway.logs.get('my-gateway', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       cached: true,
       direction: 'asc',
