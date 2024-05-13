@@ -93,6 +93,7 @@ export {
   ServiceTokenUpdateParams,
   ServiceTokenListParams,
   ServiceTokenDeleteParams,
+  ServiceTokenGetParams,
   ServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';

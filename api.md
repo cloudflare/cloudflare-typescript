@@ -3400,6 +3400,22 @@ Methods:
 - <code title="delete /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(siteId, wanId, { ...params }) -> WAN</code>
 - <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(siteId, wanId, { ...params }) -> WAN</code>
 
+## Connectors
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorEditResponse</a></code>
+- <code><a href="./src/resources/magic-transit/connectors.ts">ConnectorGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">update</a>(connectorId, { ...params }) -> ConnectorUpdateResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">list</a>({ ...params }) -> ConnectorListResponsesSinglePage</code>
+- <code title="patch /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">edit</a>(connectorId, { ...params }) -> ConnectorEditResponse</code>
+- <code title="get /accounts/{account_id}/magic/connectors/{connector_id}">client.magicTransit.connectors.<a href="./src/resources/magic-transit/connectors.ts">get</a>(connectorId, { ...params }) -> ConnectorGetResponse</code>
+
 # MagicNetworkMonitoring
 
 ## Configs
@@ -4536,6 +4552,7 @@ Methods:
 - <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">update</a>(uuid, { ...params }) -> ServiceToken</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">list</a>({ ...params }) -> ServiceTokensSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">delete</a>(uuid, { ...params }) -> ServiceToken</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">get</a>(uuid, { ...params }) -> ServiceToken</code>
 - <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/refresh">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">refresh</a>(identifier, uuid) -> ServiceToken</code>
 - <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/rotate">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">rotate</a>(identifier, uuid) -> ServiceTokenRotateResponse</code>
 
