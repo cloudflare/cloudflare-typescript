@@ -3,6 +3,7 @@
 import * as Core from 'cloudflare/core';
 import { APIResource } from 'cloudflare/resource';
 import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/priority';
+import * as Shared from 'cloudflare/resources/shared';
 import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
 
 export class PriorityResource extends APIResource {
@@ -47,12 +48,10 @@ export class PriorityResource extends APIResource {
     priorityIdentifer: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PriorityDeleteResponse> {
-    return (
-      this._client.delete(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
-        options,
-      ) as Core.APIPromise<{ result: PriorityDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
+      options,
+    );
   }
 
   /**
@@ -147,7 +146,16 @@ export interface PriorityEdit {
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
-export type PriorityDeleteResponse = unknown | Array<unknown> | string;
+export interface PriorityDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface PriorityCreateParams {
   /**
