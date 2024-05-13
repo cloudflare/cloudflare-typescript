@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as CfInterconnectsAPI from './cf-interconnects';
+import * as ConnectorsAPI from './connectors';
 import * as GRETunnelsAPI from './gre-tunnels';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import * as RoutesAPI from './routes';
@@ -13,6 +14,7 @@ export class MagicTransit extends APIResource {
   ipsecTunnels: IPSECTunnelsAPI.IPSECTunnels = new IPSECTunnelsAPI.IPSECTunnels(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
+  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
 }
 
 export interface HealthCheck {
@@ -163,4 +165,14 @@ export namespace MagicTransit {
   export import SiteListParams = SitesAPI.SiteListParams;
   export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
   export import SiteGetParams = SitesAPI.SiteGetParams;
+  export import Connectors = ConnectorsAPI.Connectors;
+  export import ConnectorUpdateResponse = ConnectorsAPI.ConnectorUpdateResponse;
+  export import ConnectorListResponse = ConnectorsAPI.ConnectorListResponse;
+  export import ConnectorEditResponse = ConnectorsAPI.ConnectorEditResponse;
+  export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
+  export import ConnectorListResponsesSinglePage = ConnectorsAPI.ConnectorListResponsesSinglePage;
+  export import ConnectorUpdateParams = ConnectorsAPI.ConnectorUpdateParams;
+  export import ConnectorListParams = ConnectorsAPI.ConnectorListParams;
+  export import ConnectorEditParams = ConnectorsAPI.ConnectorEditParams;
+  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
 }

@@ -10,6 +10,18 @@ export {
   CfInterconnects,
 } from './cf-interconnects';
 export {
+  ConnectorUpdateResponse,
+  ConnectorListResponse,
+  ConnectorEditResponse,
+  ConnectorGetResponse,
+  ConnectorUpdateParams,
+  ConnectorListParams,
+  ConnectorEditParams,
+  ConnectorGetParams,
+  ConnectorListResponsesSinglePage,
+  Connectors,
+} from './connectors';
+export {
   GRETunnelCreateResponse,
   GRETunnelUpdateResponse,
   GRETunnelListResponse,
