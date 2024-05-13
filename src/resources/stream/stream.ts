@@ -1,21 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AudioTracksAPI from 'cloudflare/resources/stream/audio-tracks';
-import * as ClipAPI from 'cloudflare/resources/stream/clip';
-import * as CopyAPI from 'cloudflare/resources/stream/copy';
-import * as DirectUploadAPI from 'cloudflare/resources/stream/direct-upload';
-import * as DownloadsAPI from 'cloudflare/resources/stream/downloads';
-import * as EmbedAPI from 'cloudflare/resources/stream/embed';
-import * as KeysAPI from 'cloudflare/resources/stream/keys';
-import * as TokenAPI from 'cloudflare/resources/stream/token';
-import * as VideosAPI from 'cloudflare/resources/stream/videos';
-import * as WatermarksAPI from 'cloudflare/resources/stream/watermarks';
-import * as WebhooksAPI from 'cloudflare/resources/stream/webhooks';
-import * as CaptionsAPI from 'cloudflare/resources/stream/captions/captions';
-import * as LiveInputsAPI from 'cloudflare/resources/stream/live-inputs/live-inputs';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AudioTracksAPI from './audio-tracks';
+import * as ClipAPI from './clip';
+import * as CopyAPI from './copy';
+import * as DirectUploadAPI from './direct-upload';
+import * as DownloadsAPI from './downloads';
+import * as EmbedAPI from './embed';
+import * as KeysAPI from './keys';
+import * as TokenAPI from './token';
+import * as VideosAPI from './videos';
+import * as WatermarksAPI from './watermarks';
+import * as WebhooksAPI from './webhooks';
+import * as CaptionsAPI from './captions/captions';
+import * as LiveInputsAPI from './live-inputs/live-inputs';
+import { SinglePage } from '../../pagination';
 
 export class Stream extends APIResource {
   audioTracks: AudioTracksAPI.AudioTracks = new AudioTracksAPI.AudioTracks(this._client);

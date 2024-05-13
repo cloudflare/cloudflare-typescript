@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RevokeAPI from 'cloudflare/resources/zero-trust/devices/revoke';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as RevokeAPI from './revoke';
 
 export class Revoke extends APIResource {
   /**

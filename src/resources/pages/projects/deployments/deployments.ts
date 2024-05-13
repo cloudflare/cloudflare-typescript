@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
-import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
-import { DeploymentsSinglePage } from 'cloudflare/resources/pages/projects/projects';
-import * as HistoryAPI from 'cloudflare/resources/pages/projects/deployments/history/history';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as DeploymentsAPI from './deployments';
+import * as ProjectsAPI from '../projects';
+import { DeploymentsSinglePage } from '../projects';
+import * as HistoryAPI from './history/history';
+import { multipartFormRequestOptions } from '../../../../core';
 
 export class Deployments extends APIResource {
   history: HistoryAPI.History = new HistoryAPI.History(this._client);

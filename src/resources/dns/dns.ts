@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as RecordsAPI from 'cloudflare/resources/dns/records';
-import * as AnalyticsAPI from 'cloudflare/resources/dns/analytics/analytics';
-import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
-import * as AnalyticsAnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
+import { APIResource } from '../../resource';
+import * as RecordsAPI from './records';
+import * as AnalyticsAPI from './analytics/analytics';
+import * as FirewallAPI from './firewall/firewall';
+import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
 
 export class DNS extends APIResource {
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);

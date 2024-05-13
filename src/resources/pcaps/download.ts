@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { type Response } from 'cloudflare/_shims/index';
-import * as DownloadAPI from 'cloudflare/resources/pcaps/download';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { type Response } from '../../_shims/index';
+import * as DownloadAPI from './download';
 
 export class Download extends APIResource {
   /**

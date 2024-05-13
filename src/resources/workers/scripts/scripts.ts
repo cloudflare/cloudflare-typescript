@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { type Response } from 'cloudflare/_shims/index';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
-import * as WorkersAPI from 'cloudflare/resources/workers/workers';
-import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
-import * as DeploymentsAPI from 'cloudflare/resources/workers/scripts/deployments';
-import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
-import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
-import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
-import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions';
-import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { type Response } from '../../../_shims/index';
+import * as ScriptsAPI from './scripts';
+import * as WorkersAPI from '../workers';
+import * as ContentAPI from './content';
+import * as DeploymentsAPI from './deployments';
+import * as SchedulesAPI from './schedules';
+import * as SettingsAPI from './settings';
+import * as TailAPI from './tail';
+import * as VersionsAPI from './versions';
+import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class Scripts extends APIResource {
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);

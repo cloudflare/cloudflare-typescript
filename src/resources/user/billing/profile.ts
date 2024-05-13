@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ProfileAPI from 'cloudflare/resources/user/billing/profile';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ProfileAPI from './profile';
 
 export class Profile extends APIResource {
   /**

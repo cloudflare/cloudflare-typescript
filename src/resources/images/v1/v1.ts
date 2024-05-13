@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as V1API from 'cloudflare/resources/images/v1/v1';
-import * as Shared from 'cloudflare/resources/shared';
-import * as BlobsAPI from 'cloudflare/resources/images/v1/blobs';
-import * as KeysAPI from 'cloudflare/resources/images/v1/keys';
-import * as StatsAPI from 'cloudflare/resources/images/v1/stats';
-import * as VariantsAPI from 'cloudflare/resources/images/v1/variants';
-import { multipartFormRequestOptions } from 'cloudflare/core';
-import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as V1API from './v1';
+import * as Shared from '../../shared';
+import * as BlobsAPI from './blobs';
+import * as KeysAPI from './keys';
+import * as StatsAPI from './stats';
+import * as VariantsAPI from './variants';
+import { multipartFormRequestOptions } from '../../../core';
+import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class V1 extends APIResource {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);

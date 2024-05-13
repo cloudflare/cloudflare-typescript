@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as MinTLSVersionAPI from 'cloudflare/resources/zones/settings/min-tls-version';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as MinTLSVersionAPI from './min-tls-version';
 
 export class MinTLSVersionResource extends APIResource {
   /**

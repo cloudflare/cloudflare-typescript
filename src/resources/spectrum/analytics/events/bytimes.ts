@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as BytimesAPI from 'cloudflare/resources/spectrum/analytics/events/bytimes';
-import * as EventsAPI from 'cloudflare/resources/spectrum/analytics/events/events';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as BytimesAPI from './bytimes';
+import * as EventsAPI from './events';
 
 export class Bytimes extends APIResource {
   /**

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SmartTieredCacheAPI from './smart-tiered-cache';
 
 export class SmartTieredCache extends APIResource {
   /**

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CustomCertificatesAPI from 'cloudflare/resources/custom-certificates/custom-certificates';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import * as CustomCertificatesAPI from './custom-certificates/custom-certificates';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 export class ClientCertificates extends APIResource {
   /**

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as IPsAPI from 'cloudflare/resources/zero-trust/networks/routes/ips';
-import * as RoutesAPI from 'cloudflare/resources/zero-trust/networks/routes/routes';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as IPsAPI from './ips';
+import * as RoutesAPI from './routes';
 
 export class IPs extends APIResource {
   /**

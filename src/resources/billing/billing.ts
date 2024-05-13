@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ProfilesAPI from 'cloudflare/resources/billing/profiles';
+import { APIResource } from '../../resource';
+import * as ProfilesAPI from './profiles';
 
 export class Billing extends APIResource {
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);

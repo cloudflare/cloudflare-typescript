@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ByTagAPI from 'cloudflare/resources/rulesets/versions/by-tag';
-import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
-import * as RulesetsAPI from 'cloudflare/resources/rulesets/rulesets';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ByTagAPI from './by-tag';
+import * as RulesAPI from '../rules';
+import * as RulesetsAPI from '../rulesets';
 
 export class ByTag extends APIResource {
   /**

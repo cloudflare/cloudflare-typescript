@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TURNAPI from 'cloudflare/resources/calls/turn/turn';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as TURNAPI from './turn/turn';
+import { SinglePage } from '../../pagination';
 
 export class Calls extends APIResource {
   turn: TURNAPI.TURN = new TURNAPI.TURN(this._client);

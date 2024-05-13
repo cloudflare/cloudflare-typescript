@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as DEXTestsAPI from './dex-tests';
+import { SinglePage } from '../../../pagination';
 
 export class DEXTests extends APIResource {
   /**

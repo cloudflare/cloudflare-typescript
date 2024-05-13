@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as HealthAPI from './health';
 
 export class Health extends APIResource {
   /**

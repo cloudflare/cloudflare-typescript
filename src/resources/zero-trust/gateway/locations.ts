@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LocationsAPI from 'cloudflare/resources/zero-trust/gateway/locations';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as LocationsAPI from './locations';
+import { SinglePage } from '../../../pagination';
 
 export class Locations extends APIResource {
   /**

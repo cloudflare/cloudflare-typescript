@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as RulesAPI from 'cloudflare/resources/rulesets/rules';
-import * as PhasesAPI from 'cloudflare/resources/rulesets/phases/phases';
-import * as VersionsAPI from 'cloudflare/resources/rulesets/versions/versions';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { CloudflareError } from '../../error';
+import * as RulesAPI from './rules';
+import * as PhasesAPI from './phases/phases';
+import * as VersionsAPI from './versions/versions';
+import { SinglePage } from '../../pagination';
 
 export class Rulesets extends APIResource {
   phases: PhasesAPI.Phases = new PhasesAPI.Phases(this._client);

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DeploymentsAPI from 'cloudflare/resources/workers/scripts/deployments';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as DeploymentsAPI from './deployments';
 
 export class Deployments extends APIResource {
   /**

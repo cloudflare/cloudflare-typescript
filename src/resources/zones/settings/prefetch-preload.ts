@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PrefetchPreloadAPI from 'cloudflare/resources/zones/settings/prefetch-preload';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PrefetchPreloadAPI from './prefetch-preload';
 
 export class PrefetchPreloadResource extends APIResource {
   /**

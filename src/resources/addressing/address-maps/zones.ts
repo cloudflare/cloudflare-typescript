@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ZonesAPI from './zones';
 
 export class Zones extends APIResource {
   /**

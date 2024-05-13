@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as RateLimitsAPI from 'cloudflare/resources/rate-limits';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../core';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as RateLimitsAPI from './rate-limits';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
 export class RateLimits extends APIResource {
   /**

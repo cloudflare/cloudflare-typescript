@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
-import * as OrderAPI from 'cloudflare/resources/ssl/certificate-packs/order';
-import * as QuotaAPI from 'cloudflare/resources/ssl/certificate-packs/quota';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CertificatePacksAPI from './certificate-packs';
+import * as OrderAPI from './order';
+import * as QuotaAPI from './quota';
+import { SinglePage } from '../../../pagination';
 
 export class CertificatePacks extends APIResource {
   order: OrderAPI.Order = new OrderAPI.Order(this._client);

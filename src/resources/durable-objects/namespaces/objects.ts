@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ObjectsAPI from 'cloudflare/resources/durable-objects/namespaces/objects';
-import { CursorLimitPagination, type CursorLimitPaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ObjectsAPI from './objects';
+import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
 
 export class Objects extends APIResource {
   /**

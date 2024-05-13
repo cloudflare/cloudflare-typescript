@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as PatternsAPI from 'cloudflare/resources/zero-trust/dlp/patterns';
-import * as PayloadLogsAPI from 'cloudflare/resources/zero-trust/dlp/payload-logs';
-import * as DatasetsAPI from 'cloudflare/resources/zero-trust/dlp/datasets/datasets';
-import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
+import { APIResource } from '../../../resource';
+import * as PatternsAPI from './patterns';
+import * as PayloadLogsAPI from './payload-logs';
+import * as DatasetsAPI from './datasets/datasets';
+import * as ProfilesAPI from './profiles/profiles';
 
 export class DLP extends APIResource {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);

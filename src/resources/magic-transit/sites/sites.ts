@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SitesAPI from 'cloudflare/resources/magic-transit/sites/sites';
-import * as ACLsAPI from 'cloudflare/resources/magic-transit/sites/acls';
-import * as LANsAPI from 'cloudflare/resources/magic-transit/sites/lans';
-import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SitesAPI from './sites';
+import * as ACLsAPI from './acls';
+import * as LANsAPI from './lans';
+import * as WANsAPI from './wans';
+import { SinglePage } from '../../../pagination';
 
 export class Sites extends APIResource {
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);

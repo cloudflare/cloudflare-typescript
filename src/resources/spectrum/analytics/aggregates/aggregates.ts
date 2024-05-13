@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as CurrentsAPI from 'cloudflare/resources/spectrum/analytics/aggregates/currents';
+import { APIResource } from '../../../../resource';
+import * as CurrentsAPI from './currents';
 
 export class Aggregates extends APIResource {
   currents: CurrentsAPI.Currents = new CurrentsAPI.Currents(this._client);

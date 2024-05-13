@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
-import * as RoutesAPI from 'cloudflare/resources/radar/bgp/routes';
-import * as HijacksAPI from 'cloudflare/resources/radar/bgp/hijacks/hijacks';
-import * as LeaksAPI from 'cloudflare/resources/radar/bgp/leaks/leaks';
-import * as TopAPI from 'cloudflare/resources/radar/bgp/top/top';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as BGPAPI from './bgp';
+import * as RoutesAPI from './routes';
+import * as HijacksAPI from './hijacks/hijacks';
+import * as LeaksAPI from './leaks/leaks';
+import * as TopAPI from './top/top';
 
 export class BGP extends APIResource {
   leaks: LeaksAPI.Leaks = new LeaksAPI.Leaks(this._client);

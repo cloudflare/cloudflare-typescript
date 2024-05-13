@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as IndexesAPI from 'cloudflare/resources/vectorize/indexes';
+import { APIResource } from '../../resource';
+import * as IndexesAPI from './indexes';
 
 export class Vectorize extends APIResource {
   indexes: IndexesAPI.Indexes = new IndexesAPI.Indexes(this._client);

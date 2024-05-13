@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as FieldsAPI from 'cloudflare/resources/logpush/datasets/fields';
-import * as JobsAPI from 'cloudflare/resources/logpush/datasets/jobs';
+import { APIResource } from '../../../resource';
+import * as FieldsAPI from './fields';
+import * as JobsAPI from './jobs';
 
 export class Datasets extends APIResource {
   fields: FieldsAPI.Fields = new FieldsAPI.Fields(this._client);

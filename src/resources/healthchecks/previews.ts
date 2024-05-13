@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PreviewsAPI from 'cloudflare/resources/healthchecks/previews';
-import * as HealthchecksAPI from 'cloudflare/resources/healthchecks/healthchecks';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PreviewsAPI from './previews';
+import * as HealthchecksAPI from './healthchecks';
 
 export class Previews extends APIResource {
   /**

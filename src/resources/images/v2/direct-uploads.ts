@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DirectUploadsAPI from 'cloudflare/resources/images/v2/direct-uploads';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as DirectUploadsAPI from './direct-uploads';
+import { multipartFormRequestOptions } from '../../../core';
 
 export class DirectUploads extends APIResource {
   /**

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BulkOperationsAPI from 'cloudflare/resources/rules/lists/bulk-operations';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as BulkOperationsAPI from './bulk-operations';
 
 export class BulkOperations extends APIResource {
   /**

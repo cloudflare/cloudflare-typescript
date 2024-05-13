@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as CertificatesAPI from 'cloudflare/resources/zero-trust/access/certificates/certificates';
-import * as SettingsAPI from 'cloudflare/resources/zero-trust/access/certificates/settings';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { CloudflareError } from '../../../../error';
+import * as CertificatesAPI from './certificates';
+import * as SettingsAPI from './settings';
+import { SinglePage } from '../../../../pagination';
 
 export class Certificates extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);

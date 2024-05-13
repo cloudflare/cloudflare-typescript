@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as HostnamesAPI from 'cloudflare/resources/web3/hostnames/hostnames';
+import { APIResource } from '../../resource';
+import * as HostnamesAPI from './hostnames/hostnames';
 
 export class Web3 extends APIResource {
   hostnames: HostnamesAPI.Hostnames = new HostnamesAPI.Hostnames(this._client);

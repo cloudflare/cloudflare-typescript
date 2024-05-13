@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as EdgeAPI from 'cloudflare/resources/logpush/edge';
-import * as JobsAPI from 'cloudflare/resources/logpush/jobs';
-import * as OwnershipAPI from 'cloudflare/resources/logpush/ownership';
-import * as ValidateAPI from 'cloudflare/resources/logpush/validate';
-import * as DatasetsAPI from 'cloudflare/resources/logpush/datasets/datasets';
+import { APIResource } from '../../resource';
+import * as EdgeAPI from './edge';
+import * as JobsAPI from './jobs';
+import * as OwnershipAPI from './ownership';
+import * as ValidateAPI from './validate';
+import * as DatasetsAPI from './datasets/datasets';
 
 export class Logpush extends APIResource {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);

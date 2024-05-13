@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DomainHistoryAPI from 'cloudflare/resources/intel/domain-history';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as DomainHistoryAPI from './domain-history';
 
 export class DomainHistoryResource extends APIResource {
   /**

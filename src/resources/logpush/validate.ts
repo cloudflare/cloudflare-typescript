@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { CloudflareError } from 'cloudflare/error';
-import * as ValidateAPI from 'cloudflare/resources/logpush/validate';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { CloudflareError } from '../../error';
+import * as ValidateAPI from './validate';
 
 export class Validate extends APIResource {
   /**

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RegionsAPI from 'cloudflare/resources/load-balancers/regions';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as RegionsAPI from './regions';
 
 export class Regions extends APIResource {
   /**

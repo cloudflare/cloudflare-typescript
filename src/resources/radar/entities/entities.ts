@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as EntitiesAPI from 'cloudflare/resources/radar/entities/entities';
-import * as ASNsAPI from 'cloudflare/resources/radar/entities/asns';
-import * as LocationsAPI from 'cloudflare/resources/radar/entities/locations';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as EntitiesAPI from './entities';
+import * as ASNsAPI from './asns';
+import * as LocationsAPI from './locations';
 
 export class Entities extends APIResource {
   asns: ASNsAPI.ASNs = new ASNsAPI.ASNs(this._client);

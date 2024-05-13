@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PayloadLogsAPI from 'cloudflare/resources/zero-trust/dlp/payload-logs';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PayloadLogsAPI from './payload-logs';
 
 export class PayloadLogs extends APIResource {
   /**

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SettingsAPI from 'cloudflare/resources/origin-tls-client-auth/settings';
-import * as HostnamesAPI from 'cloudflare/resources/origin-tls-client-auth/hostnames/hostnames';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SettingsAPI from './settings';
+import * as HostnamesAPI from './hostnames/hostnames';
+import { SinglePage } from '../../pagination';
 
 export class OriginTLSClientAuth extends APIResource {
   hostnames: HostnamesAPI.Hostnames = new HostnamesAPI.Hostnames(this._client);

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CustomNameserversAPI from 'cloudflare/resources/zones/custom-nameservers';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as CustomNameserversAPI from './custom-nameservers';
 
 export class CustomNameservers extends APIResource {
   /**

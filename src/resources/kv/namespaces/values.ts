@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ValuesAPI from 'cloudflare/resources/kv/namespaces/values';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ValuesAPI from './values';
+import { multipartFormRequestOptions } from '../../../core';
 
 export class Values extends APIResource {
   /**

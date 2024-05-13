@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ServicesAPI from 'cloudflare/resources/addressing/services';
-import * as AddressMapsAPI from 'cloudflare/resources/addressing/address-maps/address-maps';
-import * as LOADocumentsAPI from 'cloudflare/resources/addressing/loa-documents/loa-documents';
-import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/prefixes';
+import { APIResource } from '../../resource';
+import * as ServicesAPI from './services';
+import * as AddressMapsAPI from './address-maps/address-maps';
+import * as LOADocumentsAPI from './loa-documents/loa-documents';
+import * as PrefixesAPI from './prefixes/prefixes';
 
 export class Addressing extends APIResource {
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);

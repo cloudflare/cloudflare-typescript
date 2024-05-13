@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
-import * as ValueAPI from 'cloudflare/resources/user/tokens/value';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as TokensAPI from './tokens';
+import * as PermissionGroupsAPI from './permission-groups';
+import * as ValueAPI from './value';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(

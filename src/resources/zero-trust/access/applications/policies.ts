@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as PoliciesAPI from 'cloudflare/resources/zero-trust/access/applications/policies';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applications/applications';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { CloudflareError } from '../../../../error';
+import * as PoliciesAPI from './policies';
+import * as AccessAPI from '../access';
+import * as ApplicationsAPI from './applications';
+import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
   /**

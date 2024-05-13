@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SSLRecommenderAPI from 'cloudflare/resources/zones/settings/ssl-recommender';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SSLRecommenderAPI from './ssl-recommender';
 
 export class SSLRecommenderResource extends APIResource {
   /**

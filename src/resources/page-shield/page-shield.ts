@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConnectionsAPI from 'cloudflare/resources/page-shield/connections';
-import * as PoliciesAPI from 'cloudflare/resources/page-shield/policies';
-import * as ScriptsAPI from 'cloudflare/resources/page-shield/scripts';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ConnectionsAPI from './connections';
+import * as PoliciesAPI from './policies';
+import * as ScriptsAPI from './scripts';
 
 export class PageShield extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);

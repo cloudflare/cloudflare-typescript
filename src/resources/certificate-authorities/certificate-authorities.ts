@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as HostnameAssociationsAPI from 'cloudflare/resources/certificate-authorities/hostname-associations';
+import { APIResource } from '../../resource';
+import * as HostnameAssociationsAPI from './hostname-associations';
 
 export class CertificateAuthorities extends APIResource {
   hostnameAssociations: HostnameAssociationsAPI.HostnameAssociations =

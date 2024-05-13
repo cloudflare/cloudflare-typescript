@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as Layer7API from 'cloudflare/resources/radar/attacks/layer7/layer7';
-import * as SummaryAPI from 'cloudflare/resources/radar/attacks/layer7/summary';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/attacks/layer7/timeseries-groups';
-import * as TopAPI from 'cloudflare/resources/radar/attacks/layer7/top/top';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as Layer7API from './layer7';
+import * as SummaryAPI from './summary';
+import * as TimeseriesGroupsAPI from './timeseries-groups';
+import * as TopAPI from './top/top';
 
 export class Layer7 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);

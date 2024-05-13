@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as EntriesAPI from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/content-lists/entries';
+import * as Core from '../../../../../core';
+import { APIResource } from '../../../../../resource';
+import * as EntriesAPI from './entries';
 
 export class Entries extends APIResource {
   /**

@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as GroupsAPI from 'cloudflare/resources/zero-trust/access/groups';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { CloudflareError } from '../../../error';
+import * as GroupsAPI from './groups';
+import * as AccessAPI from './access';
+import { SinglePage } from '../../../pagination';
 
 export class Groups extends APIResource {
   /**

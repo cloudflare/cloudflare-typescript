@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as EventsAPI from 'cloudflare/resources/spectrum/analytics/events/events';
-import * as BytimesAPI from 'cloudflare/resources/spectrum/analytics/events/bytimes';
-import * as SummariesAPI from 'cloudflare/resources/spectrum/analytics/events/summaries';
+import { APIResource } from '../../../../resource';
+import * as EventsAPI from './events';
+import * as BytimesAPI from './bytimes';
+import * as SummariesAPI from './summaries';
 
 export class Events extends APIResource {
   bytimes: BytimesAPI.Bytimes = new BytimesAPI.Bytimes(this._client);

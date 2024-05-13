@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as JobsAPI from 'cloudflare/resources/logpush/jobs';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { CloudflareError } from '../../error';
+import * as JobsAPI from './jobs';
+import { SinglePage } from '../../pagination';
 
 export class Jobs extends APIResource {
   /**

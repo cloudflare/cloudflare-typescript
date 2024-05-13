@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { type Response } from 'cloudflare/_shims/index';
-import * as ContentAPI from 'cloudflare/resources/snippets/content';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { type Response } from '../../_shims/index';
+import * as ContentAPI from './content';
 
 export class Content extends APIResource {
   /**

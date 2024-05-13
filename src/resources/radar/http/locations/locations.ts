@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as LocationsAPI from 'cloudflare/resources/radar/http/locations/locations';
-import * as BotClassAPI from 'cloudflare/resources/radar/http/locations/bot-class';
-import * as BrowserFamilyAPI from 'cloudflare/resources/radar/http/locations/browser-family';
-import * as DeviceTypeAPI from 'cloudflare/resources/radar/http/locations/device-type';
-import * as HTTPMethodAPI from 'cloudflare/resources/radar/http/locations/http-method';
-import * as HTTPProtocolAPI from 'cloudflare/resources/radar/http/locations/http-protocol';
-import * as IPVersionAPI from 'cloudflare/resources/radar/http/locations/ip-version';
-import * as OSAPI from 'cloudflare/resources/radar/http/locations/os';
-import * as TLSVersionAPI from 'cloudflare/resources/radar/http/locations/tls-version';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as LocationsAPI from './locations';
+import * as BotClassAPI from './bot-class';
+import * as BrowserFamilyAPI from './browser-family';
+import * as DeviceTypeAPI from './device-type';
+import * as HTTPMethodAPI from './http-method';
+import * as HTTPProtocolAPI from './http-protocol';
+import * as IPVersionAPI from './ip-version';
+import * as OSAPI from './os';
+import * as TLSVersionAPI from './tls-version';
 
 export class Locations extends APIResource {
   botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as SchedulesAPI from './schedules';
 
 export class Schedules extends APIResource {
   /**

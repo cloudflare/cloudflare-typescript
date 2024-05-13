@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as EmailAPI from 'cloudflare/resources/radar/email/email';
-import * as RoutingAPI from 'cloudflare/resources/radar/email/routing/routing';
-import * as SecurityAPI from 'cloudflare/resources/radar/email/security/security';
+import { APIResource } from '../../../resource';
+import * as EmailAPI from './email';
+import * as RoutingAPI from './routing/routing';
+import * as SecurityAPI from './security/security';
 
 export class Email extends APIResource {
   routing: RoutingAPI.Routing = new RoutingAPI.Routing(this._client);

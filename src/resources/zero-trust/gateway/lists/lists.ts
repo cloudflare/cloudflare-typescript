@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
-import * as ItemsAPI from 'cloudflare/resources/zero-trust/gateway/lists/items';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as ListsAPI from './lists';
+import * as ItemsAPI from './items';
+import { SinglePage } from '../../../../pagination';
 
 export class Lists extends APIResource {
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);

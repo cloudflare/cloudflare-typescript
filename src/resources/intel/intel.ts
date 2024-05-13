@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as DNSAPI from 'cloudflare/resources/intel/dns';
-import * as DomainHistoryAPI from 'cloudflare/resources/intel/domain-history';
-import * as IPListsAPI from 'cloudflare/resources/intel/ip-lists';
-import * as IPsAPI from 'cloudflare/resources/intel/ips';
-import * as MiscategorizationsAPI from 'cloudflare/resources/intel/miscategorizations';
-import * as SinkholesAPI from 'cloudflare/resources/intel/sinkholes';
-import * as WhoisAPI from 'cloudflare/resources/intel/whois';
-import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
-import * as AttackSurfaceReportAPI from 'cloudflare/resources/intel/attack-surface-report/attack-surface-report';
-import * as DomainsAPI from 'cloudflare/resources/intel/domains/domains';
-import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
+import { APIResource } from '../../resource';
+import * as DNSAPI from './dns';
+import * as DomainHistoryAPI from './domain-history';
+import * as IPListsAPI from './ip-lists';
+import * as IPsAPI from './ips';
+import * as MiscategorizationsAPI from './miscategorizations';
+import * as SinkholesAPI from './sinkholes';
+import * as WhoisAPI from './whois';
+import * as ASNAPI from './asn/asn';
+import * as AttackSurfaceReportAPI from './attack-surface-report/attack-surface-report';
+import * as DomainsAPI from './domains/domains';
+import * as IndicatorFeedsAPI from './indicator-feeds/indicator-feeds';
 
 export class Intel extends APIResource {
   asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LastSeenIdentityAPI from 'cloudflare/resources/zero-trust/access/users/last-seen-identity';
-import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as LastSeenIdentityAPI from './last-seen-identity';
+import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 
 export class LastSeenIdentity extends APIResource {
   /**

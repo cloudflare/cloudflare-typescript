@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CaptionsAPI from 'cloudflare/resources/stream/captions/captions';
-import * as LanguageAPI from 'cloudflare/resources/stream/captions/language/language';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CaptionsAPI from './captions';
+import * as LanguageAPI from './language/language';
 
 export class Captions extends APIResource {
   language: LanguageAPI.Language = new LanguageAPI.Language(this._client);

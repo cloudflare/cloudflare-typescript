@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CustomHostnamesAPI from 'cloudflare/resources/custom-hostnames/custom-hostnames';
-import * as Shared from 'cloudflare/resources/shared';
-import * as FallbackOriginAPI from 'cloudflare/resources/custom-hostnames/fallback-origin';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as CustomHostnamesAPI from './custom-hostnames';
+import * as Shared from '../shared';
+import * as FallbackOriginAPI from './fallback-origin';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomHostnames extends APIResource {
   fallbackOrigin: FallbackOriginAPI.FallbackOrigin = new FallbackOriginAPI.FallbackOrigin(this._client);

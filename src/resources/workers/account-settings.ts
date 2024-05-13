@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AccountSettingsAPI from 'cloudflare/resources/workers/account-settings';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AccountSettingsAPI from './account-settings';
 
 export class AccountSettings extends APIResource {
   /**

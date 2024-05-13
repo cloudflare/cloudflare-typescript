@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as HistoryAPI from 'cloudflare/resources/user/billing/history';
-import * as ProfileAPI from 'cloudflare/resources/user/billing/profile';
+import { APIResource } from '../../../resource';
+import * as HistoryAPI from './history';
+import * as ProfileAPI from './profile';
 
 export class Billing extends APIResource {
   history: HistoryAPI.History = new HistoryAPI.History(this._client);

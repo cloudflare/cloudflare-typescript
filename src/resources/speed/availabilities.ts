@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AvailabilitiesAPI from 'cloudflare/resources/speed/availabilities';
-import * as SpeedAPI from 'cloudflare/resources/speed/speed';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as AvailabilitiesAPI from './availabilities';
+import * as SpeedAPI from './speed';
 
 export class Availabilities extends APIResource {
   /**

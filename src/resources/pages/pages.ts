@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
+import { APIResource } from '../../resource';
+import * as ProjectsAPI from './projects/projects';
 
 export class Pages extends APIResource {
   projects: ProjectsAPI.Projects = new ProjectsAPI.Projects(this._client);

@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as Shared from 'cloudflare/resources/shared';
-import * as ContentAPI from 'cloudflare/resources/snippets/content';
-import * as RulesAPI from 'cloudflare/resources/snippets/rules';
-import { multipartFormRequestOptions } from 'cloudflare/core';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as Shared from '../shared';
+import * as ContentAPI from './content';
+import * as RulesAPI from './rules';
+import { multipartFormRequestOptions } from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Snippets extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);

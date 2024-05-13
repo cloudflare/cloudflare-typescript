@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TestsAPI from 'cloudflare/resources/zero-trust/dex/tests/tests';
-import * as Shared from 'cloudflare/resources/shared';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as UniqueDevicesAPI from 'cloudflare/resources/zero-trust/dex/tests/unique-devices';
-import { V4PagePagination, type V4PagePaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as TestsAPI from './tests';
+import * as Shared from '../../../shared';
+import * as DEXAPI from '../dex';
+import * as UniqueDevicesAPI from './unique-devices';
+import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Tests extends APIResource {
   uniqueDevices: UniqueDevicesAPI.UniqueDevices = new UniqueDevicesAPI.UniqueDevices(this._client);

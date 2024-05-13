@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as UniqueDevicesAPI from 'cloudflare/resources/zero-trust/dex/tests/unique-devices';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as UniqueDevicesAPI from './unique-devices';
 
 export class UniqueDevices extends APIResource {
   /**
