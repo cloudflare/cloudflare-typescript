@@ -3,6 +3,7 @@
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import * as IndexesAPI from './indexes';
+import { type Uploadable } from '../../core';
 import { SinglePage } from '../../pagination';
 
 export class Indexes extends APIResource {
@@ -395,9 +396,9 @@ export interface IndexInsertParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: ndjson file containing vectors to insert.
    */
-  body: unknown;
+  body: Uploadable;
 }
 
 export interface IndexQueryParams {
@@ -439,9 +440,9 @@ export interface IndexUpsertParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: ndjson file containing vectors to upsert.
    */
-  body: unknown;
+  body: Uploadable;
 }
 
 export namespace Indexes {
