@@ -185,7 +185,7 @@ export interface EventListParams extends V4PagePaginationParams {
   minConfidence?: number;
 
   /**
-   * The prefix hijacked during a BGP hijack event
+   * Network prefix, IPv4 or IPv6.
    */
   prefix?: string;
 
