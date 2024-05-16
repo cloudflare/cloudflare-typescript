@@ -5,11 +5,8 @@ export {
   QueryResult,
   DatabaseCreateResponse,
   DatabaseListResponse,
-  DatabaseDeleteResponse,
-  DatabaseQueryResponse,
   DatabaseCreateParams,
   DatabaseListParams,
-  DatabaseQueryParams,
   DatabaseListResponsesV4PagePaginationArray,
   Database,
 } from './database';
