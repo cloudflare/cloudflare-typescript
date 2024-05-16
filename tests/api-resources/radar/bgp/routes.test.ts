@@ -32,7 +32,7 @@ describe('resource routes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.radar.bgp.routes.moas(
-        { format: 'JSON', invalid_only: true, origin: 0, prefix: 'string' },
+        { format: 'JSON', invalid_only: true, origin: 0, prefix: '1.1.1.0/24' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

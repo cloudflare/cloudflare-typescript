@@ -163,12 +163,25 @@ export interface BGPTimeseriesParams {
   /**
    * Array of BGP network prefixes.
    */
-  prefix?: Array<string>;
+  prefix?: Array<BGPTimeseriesParams.Prefix>;
 
   /**
    * Array of BGP update types.
    */
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
+}
+
+export namespace BGPTimeseriesParams {
+  export interface Prefix {
+    location: string;
+
+    name: string;
+
+    /**
+     * Network prefix, IPv4 or IPv6.
+     */
+    type?: string;
+  }
 }
 
 export namespace BGP {
