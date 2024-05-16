@@ -3,7 +3,6 @@
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import * as DatabaseAPI from './database';
-import * as D1API from './d1';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Database extends APIResource {
@@ -35,55 +34,6 @@ export class Database extends APIResource {
       DatabaseListResponsesV4PagePaginationArray,
       { query, ...options },
     );
-  }
-
-  /**
-   * Deletes the specified D1 database.
-   */
-  delete(
-    accountIdentifier: string,
-    databaseIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseDeleteResponse> {
-    return (
-      this._client.delete(
-        `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: DatabaseDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns the specified D1 database.
-   */
-  get(
-    accountIdentifier: string,
-    databaseIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<D1API.D1> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: D1API.D1 }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns the query result.
-   */
-  query(
-    accountIdentifier: string,
-    databaseIdentifier: string,
-    body: DatabaseQueryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseQueryResponse> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/d1/database/${databaseIdentifier}/query`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DatabaseQueryResponse }>
-    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -141,10 +91,6 @@ export interface DatabaseListResponse {
   version?: string;
 }
 
-export type DatabaseDeleteResponse = unknown | string | null;
-
-export type DatabaseQueryResponse = Array<QueryResult>;
-
 export interface DatabaseCreateParams {
   /**
    * Path param: Account identifier tag.
@@ -169,20 +115,11 @@ export interface DatabaseListParams extends V4PagePaginationArrayParams {
   name?: string;
 }
 
-export interface DatabaseQueryParams {
-  sql: string;
-
-  params?: Array<string>;
-}
-
 export namespace Database {
   export import QueryResult = DatabaseAPI.QueryResult;
   export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
-  export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
-  export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
   export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
-  export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
 }
