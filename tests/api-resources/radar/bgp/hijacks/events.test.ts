@@ -45,7 +45,7 @@ describe('resource events', () => {
           minConfidence: 0,
           page: 0,
           per_page: 0,
-          prefix: 'string',
+          prefix: '1.1.1.0/24',
           sortBy: 'TIME',
           sortOrder: 'DESC',
           victimAsn: 0,

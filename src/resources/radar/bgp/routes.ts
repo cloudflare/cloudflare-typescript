@@ -256,7 +256,7 @@ export interface RouteMoasParams {
   origin?: number;
 
   /**
-   * Lookup MOASes by prefix
+   * Network prefix, IPv4 or IPv6.
    */
   prefix?: string;
 }
@@ -279,7 +279,7 @@ export interface RoutePfx2asParams {
   origin?: number;
 
   /**
-   * Lookup origin ASNs of the given prefix
+   * Network prefix, IPv4 or IPv6.
    */
   prefix?: string;
 

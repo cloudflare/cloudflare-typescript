@@ -171,12 +171,25 @@ export interface AseGetParams {
   /**
    * Array of BGP network prefixes.
    */
-  prefix?: Array<string>;
+  prefix?: Array<AseGetParams.Prefix>;
 
   /**
    * Array of BGP update types.
    */
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
+}
+
+export namespace AseGetParams {
+  export interface Prefix {
+    location: string;
+
+    name: string;
+
+    /**
+     * Network prefix, IPv4 or IPv6.
+     */
+    type?: string;
+  }
 }
 
 export interface AsePrefixesParams {
