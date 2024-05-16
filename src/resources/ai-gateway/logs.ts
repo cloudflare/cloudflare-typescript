@@ -46,6 +46,8 @@ export namespace LogGetResponse {
     tokens_in: number;
 
     tokens_out: number;
+
+    status_code?: number;
   }
 }
 
