@@ -72,6 +72,24 @@ export class ACLs extends APIResource {
   }
 
   /**
+   * Patch a specific Site ACL.
+   */
+  edit(
+    siteId: string,
+    aclIdentifier: string,
+    params: ACLEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ACL }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get a specific Site ACL.
    */
   get(
@@ -290,6 +308,46 @@ export interface ACLDeleteParams {
   account_id: string;
 }
 
+export interface ACLEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Description for the ACL.
+   */
+  description?: string;
+
+  /**
+   * Body param: The desired forwarding action for this ACL policy. If set to
+   * "false", the policy will forward traffic to Cloudflare. If set to "true", the
+   * policy will forward traffic locally on the Magic WAN Connector. If not included
+   * in request, will default to false.
+   */
+  forward_locally?: boolean;
+
+  /**
+   * Body param:
+   */
+  lan_1?: ACLConfigurationParam;
+
+  /**
+   * Body param:
+   */
+  lan_2?: ACLConfigurationParam;
+
+  /**
+   * Body param: The name of the ACL.
+   */
+  name?: string;
+
+  /**
+   * Body param:
+   */
+  protocols?: Array<AllowedProtocolParam>;
+}
+
 export interface ACLGetParams {
   /**
    * Identifier
@@ -307,5 +365,6 @@ export namespace ACLs {
   export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;
   export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export import ACLEditParams = ACLsAPI.ACLEditParams;
   export import ACLGetParams = ACLsAPI.ACLGetParams;
 }
