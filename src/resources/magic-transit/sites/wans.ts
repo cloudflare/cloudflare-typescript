@@ -76,6 +76,24 @@ export class WANs extends APIResource {
   }
 
   /**
+   * Patch a specific WAN.
+   */
+  edit(
+    siteId: string,
+    wanId: string,
+    params: WANEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WAN }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Get a specific WAN.
    */
   get(
@@ -252,6 +270,39 @@ export interface WANDeleteParams {
   account_id: string;
 }
 
+export interface WANEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  name?: string;
+
+  /**
+   * Body param:
+   */
+  physport?: number;
+
+  /**
+   * Body param:
+   */
+  priority?: number;
+
+  /**
+   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
+   * is in high availability mode.
+   */
+  static_addressing?: WANStaticAddressingParam;
+
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag?: number;
+}
+
 export interface WANGetParams {
   /**
    * Identifier
@@ -268,5 +319,6 @@ export namespace WANs {
   export import WANUpdateParams = WANsAPI.WANUpdateParams;
   export import WANListParams = WANsAPI.WANListParams;
   export import WANDeleteParams = WANsAPI.WANDeleteParams;
+  export import WANEditParams = WANsAPI.WANEditParams;
   export import WANGetParams = WANsAPI.WANGetParams;
 }

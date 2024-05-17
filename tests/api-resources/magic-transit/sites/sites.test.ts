@@ -99,6 +99,30 @@ describe('resource sites', () => {
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      connector_id: 'ac60d3d0435248289d446cedd870bcf4',
+      description: 'string',
+      location: { lat: '37.6192', lon: '122.3816' },
+      name: 'site_1',
+      secondary_connector_id: '8d67040d3835dbcf46ce29da440dc482',
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

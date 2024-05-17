@@ -74,6 +74,7 @@ export {
   SiteUpdateParams,
   SiteListParams,
   SiteDeleteParams,
+  SiteEditParams,
   SiteGetParams,
   SitesSinglePage,
   Sites,
