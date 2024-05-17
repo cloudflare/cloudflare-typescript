@@ -164,6 +164,7 @@ export namespace MagicTransit {
   export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
   export import SiteListParams = SitesAPI.SiteListParams;
   export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
+  export import SiteEditParams = SitesAPI.SiteEditParams;
   export import SiteGetParams = SitesAPI.SiteGetParams;
   export import Connectors = ConnectorsAPI.Connectors;
   export import ConnectorUpdateResponse = ConnectorsAPI.ConnectorUpdateResponse;

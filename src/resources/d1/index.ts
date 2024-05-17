@@ -5,8 +5,13 @@ export {
   QueryResult,
   DatabaseCreateResponse,
   DatabaseListResponse,
+  DatabaseDeleteResponse,
+  DatabaseQueryResponse,
   DatabaseCreateParams,
   DatabaseListParams,
+  DatabaseDeleteParams,
+  DatabaseGetParams,
+  DatabaseQueryParams,
   DatabaseListResponsesV4PagePaginationArray,
   Database,
 } from './database';
