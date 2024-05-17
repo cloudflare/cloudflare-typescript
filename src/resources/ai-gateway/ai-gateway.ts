@@ -98,7 +98,7 @@ export interface AIGatewayCreateResponse {
 export namespace AIGatewayCreateResponse {
   export interface Task {
     /**
-     * gateway slug
+     * gateway id
      */
     id: string;
 
@@ -122,7 +122,7 @@ export namespace AIGatewayCreateResponse {
 
 export interface AIGatewayUpdateResponse {
   /**
-   * gateway slug
+   * gateway id
    */
   id: string;
 
@@ -145,7 +145,7 @@ export interface AIGatewayUpdateResponse {
 
 export interface AIGatewayListResponse {
   /**
-   * gateway slug
+   * gateway id
    */
   id: string;
 
@@ -168,7 +168,7 @@ export interface AIGatewayListResponse {
 
 export interface AIGatewayDeleteResponse {
   /**
-   * gateway slug
+   * gateway id
    */
   id: string;
 
@@ -191,7 +191,7 @@ export interface AIGatewayDeleteResponse {
 
 export interface AIGatewayGetResponse {
   /**
-   * gateway slug
+   * gateway id
    */
   id: string;
 
@@ -219,7 +219,7 @@ export interface AIGatewayCreateParams {
   account_id: string;
 
   /**
-   * Body param: gateway slug
+   * Body param: gateway id
    */
   id: string;
 
@@ -298,7 +298,7 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: gateway slug
+   * Query param: gateway id
    */
   id?: string;
 
