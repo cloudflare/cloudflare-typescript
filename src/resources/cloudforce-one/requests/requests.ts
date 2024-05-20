@@ -3,6 +3,7 @@
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
 import * as RequestsAPI from './requests';
+import * as Shared from '../../shared';
 import * as MessageAPI from './message';
 import * as PriorityAPI from './priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -71,12 +72,10 @@ export class Requests extends APIResource {
     requestIdentifier: string,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RequestDeleteResponse> {
-    return (
-      this._client.delete(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: RequestDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
+      options,
+    );
   }
 
   /**
@@ -280,7 +279,16 @@ export interface RequestConstants {
 
 export type RequestTypes = Array<string>;
 
-export type RequestDeleteResponse = unknown | Array<unknown> | string;
+export interface RequestDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface RequestCreateParams {
   /**
