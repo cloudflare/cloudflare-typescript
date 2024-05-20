@@ -31,8 +31,10 @@ export class Content extends APIResource {
           body,
           ...options,
           headers: {
-            'CF-WORKER-BODY-PART': cfWorkerBodyPart || '',
-            'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart || '',
+            ...(cfWorkerBodyPart != null ? { 'CF-WORKER-BODY-PART': cfWorkerBodyPart } : undefined),
+            ...(cfWorkerMainModulePart != null ?
+              { 'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart }
+            : undefined),
             ...options?.headers,
           },
         }),

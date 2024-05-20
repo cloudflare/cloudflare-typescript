@@ -19,7 +19,10 @@ export class DirectUpload extends APIResource {
       this._client.post(`/accounts/${account_id}/stream/direct_upload`, {
         body,
         ...options,
-        headers: { 'Upload-Creator': uploadCreator || '', ...options?.headers },
+        headers: {
+          ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
+          ...options?.headers,
+        },
       }) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }

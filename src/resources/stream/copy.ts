@@ -21,8 +21,8 @@ export class Copy extends APIResource {
         body,
         ...options,
         headers: {
-          'Upload-Creator': uploadCreator || '',
-          'Upload-Metadata': uploadMetadata || '',
+          ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
+          ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
           ...options?.headers,
         },
       }) as Core.APIPromise<{ result: StreamAPI.Video }>
