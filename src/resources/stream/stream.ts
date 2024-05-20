@@ -54,8 +54,8 @@ export class Stream extends APIResource {
         Accept: '*/*',
         'Tus-Resumable': tusResumable.toString(),
         'Upload-Length': uploadLength.toString(),
-        'Upload-Creator': uploadCreator || '',
-        'Upload-Metadata': uploadMetadata || '',
+        ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
+        ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
         ...options?.headers,
       },
     });
