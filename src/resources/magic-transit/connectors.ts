@@ -197,9 +197,9 @@ export namespace ConnectorGetResponse {
 
 export interface ConnectorUpdateParams {
   /**
-   * Path param: Account identifier
+   * Path param:
    */
-  account_id: string;
+  account_id: number;
 
   /**
    * Body param:
@@ -228,17 +228,14 @@ export interface ConnectorUpdateParams {
 }
 
 export interface ConnectorListParams {
-  /**
-   * Account identifier
-   */
-  account_id: string;
+  account_id: number;
 }
 
 export interface ConnectorEditParams {
   /**
-   * Path param: Account identifier
+   * Path param:
    */
-  account_id: string;
+  account_id: number;
 
   /**
    * Body param:
@@ -267,10 +264,7 @@ export interface ConnectorEditParams {
 }
 
 export interface ConnectorGetParams {
-  /**
-   * Account identifier
-   */
-  account_id: string;
+  account_id: number;
 }
 
 export namespace Connectors {
