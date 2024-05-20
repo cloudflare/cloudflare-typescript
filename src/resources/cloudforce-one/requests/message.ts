@@ -3,7 +3,6 @@
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
 import * as MessageAPI from './message';
-import * as Shared from '../../shared';
 
 export class MessageResource extends APIResource {
   /**
@@ -52,10 +51,12 @@ export class MessageResource extends APIResource {
     messageIdentifer: number,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MessageDeleteResponse> {
-    return this._client.delete(
-      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
-      options,
-    );
+    return (
+      this._client.delete(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
+        options,
+      ) as Core.APIPromise<{ result: MessageDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -108,16 +109,7 @@ export interface Message {
   created?: string;
 }
 
-export interface MessageDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
+export type MessageDeleteResponse = unknown | Array<unknown> | string;
 
 export type MessageGetResponse = Array<Message>;
 
