@@ -7,8 +7,8 @@ import { SinglePage } from '../../../pagination';
 
 export class LANs extends APIResource {
   /**
-   * Creates a new LAN. If the site is in high availability mode, static_addressing
-   * is required along with secondary and virtual address.
+   * Creates a new Site LAN. If the site is in high availability mode,
+   * static_addressing is required along with secondary and virtual address.
    */
   create(
     siteId: string,
@@ -25,7 +25,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Update a specific LAN.
+   * Update a specific Site LAN.
    */
   update(
     siteId: string,
@@ -43,7 +43,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Lists LANs associated with an account and site.
+   * Lists Site LANs associated with an account.
    */
   list(
     siteId: string,
@@ -59,7 +59,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Remove a specific LAN.
+   * Remove a specific Site LAN.
    */
   delete(
     siteId: string,
@@ -77,7 +77,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Patch a specific LAN.
+   * Patch a specific Site LAN.
    */
   edit(
     siteId: string,
@@ -95,7 +95,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Get a specific LAN.
+   * Get a specific Site LAN.
    */
   get(
     siteId: string,
