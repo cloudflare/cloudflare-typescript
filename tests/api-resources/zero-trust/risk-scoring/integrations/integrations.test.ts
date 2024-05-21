@@ -55,7 +55,8 @@ describe('resource integrations', () => {
     );
   });
 
-  test('list: only required params', async () => {
+  // bug in prism where it confuses this method with /zt_risk_scoring/{user_id}
+  test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.list({ account_id: 'string' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -66,7 +67,8 @@ describe('resource integrations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
+  // bug in prism where it confuses this method with /zt_risk_scoring/{user_id}
+  test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.riskScoring.integrations.list({ account_id: 'string' });
   });
 
