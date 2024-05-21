@@ -7,7 +7,7 @@ import { SinglePage } from '../../../pagination';
 
 export class WANs extends APIResource {
   /**
-   * Creates a new WAN.
+   * Creates a new Site WAN.
    */
   create(
     siteId: string,
@@ -24,7 +24,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Update a specific WAN.
+   * Update a specific Site WAN.
    */
   update(
     siteId: string,
@@ -42,7 +42,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Lists WANs associated with an account and site.
+   * Lists Site WANs associated with an account.
    */
   list(
     siteId: string,
@@ -58,7 +58,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Remove a specific WAN.
+   * Remove a specific Site WAN.
    */
   delete(
     siteId: string,
@@ -76,7 +76,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Patch a specific WAN.
+   * Patch a specific Site WAN.
    */
   edit(
     siteId: string,
@@ -94,7 +94,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Get a specific WAN.
+   * Get a specific Site WAN.
    */
   get(
     siteId: string,

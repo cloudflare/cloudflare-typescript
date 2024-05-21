@@ -98,7 +98,7 @@ export interface Site {
   id?: string;
 
   /**
-   * Magic WAN Connector identifier tag.
+   * Magic Connector identifier tag.
    */
   connector_id?: string;
 
@@ -121,7 +121,7 @@ export interface Site {
   name?: string;
 
   /**
-   * Magic WAN Connector identifier tag. Used when high availability mode is on.
+   * Magic Connector identifier tag. Used when high availability mode is on.
    */
   secondary_connector_id?: string;
 }
@@ -168,7 +168,7 @@ export interface SiteCreateParams {
   name: string;
 
   /**
-   * Body param: Magic WAN Connector identifier tag.
+   * Body param: Magic Connector identifier tag.
    */
   connector_id?: string;
 
@@ -189,8 +189,8 @@ export interface SiteCreateParams {
   location?: SiteLocationParam;
 
   /**
-   * Body param: Magic WAN Connector identifier tag. Used when high availability mode
-   * is on.
+   * Body param: Magic Connector identifier tag. Used when high availability mode is
+   * on.
    */
   secondary_connector_id?: string;
 }
@@ -202,7 +202,7 @@ export interface SiteUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Magic WAN Connector identifier tag.
+   * Body param: Magic Connector identifier tag.
    */
   connector_id?: string;
 
@@ -222,8 +222,8 @@ export interface SiteUpdateParams {
   name?: string;
 
   /**
-   * Body param: Magic WAN Connector identifier tag. Used when high availability mode
-   * is on.
+   * Body param: Magic Connector identifier tag. Used when high availability mode is
+   * on.
    */
   secondary_connector_id?: string;
 }
@@ -254,7 +254,7 @@ export interface SiteEditParams {
   account_id: string;
 
   /**
-   * Body param: Magic WAN Connector identifier tag.
+   * Body param: Magic Connector identifier tag.
    */
   connector_id?: string;
 
@@ -274,8 +274,8 @@ export interface SiteEditParams {
   name?: string;
 
   /**
-   * Body param: Magic WAN Connector identifier tag. Used when high availability mode
-   * is on.
+   * Body param: Magic Connector identifier tag. Used when high availability mode is
+   * on.
    */
   secondary_connector_id?: string;
 }
