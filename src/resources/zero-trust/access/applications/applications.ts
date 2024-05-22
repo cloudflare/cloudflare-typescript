@@ -826,12 +826,16 @@ export namespace Application {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint.
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessSchemasOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -887,6 +891,18 @@ export namespace Application {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
@@ -3657,12 +3673,16 @@ export namespace ApplicationCreateResponse {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -3718,6 +3738,18 @@ export namespace ApplicationCreateResponse {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
@@ -6500,12 +6532,16 @@ export namespace ApplicationUpdateResponse {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -6561,6 +6597,18 @@ export namespace ApplicationUpdateResponse {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
@@ -9343,12 +9391,16 @@ export namespace ApplicationListResponse {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -9404,6 +9456,18 @@ export namespace ApplicationListResponse {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
@@ -12193,12 +12257,16 @@ export namespace ApplicationGetResponse {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -12254,6 +12322,18 @@ export namespace ApplicationGetResponse {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
@@ -15076,12 +15156,16 @@ export namespace ApplicationCreateParams {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -15135,6 +15219,18 @@ export namespace ApplicationCreateParams {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
@@ -18007,12 +18103,16 @@ export namespace ApplicationUpdateParams {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
        */
       group_filter_regex?: string;
+
+      hybrid_and_implicit_options?: AccessOIDCSaaSApp.HybridAndImplicitOptions;
 
       /**
        * The Access public certificate that will be used to verify your identity.
@@ -18066,6 +18166,18 @@ export namespace ApplicationUpdateParams {
            */
           name_by_idp?: Record<string, string>;
         }
+      }
+
+      export interface HybridAndImplicitOptions {
+        /**
+         * If an Access Token should be returned from the OIDC Authorization endpoint
+         */
+        return_access_token_from_authorization_endpoint?: boolean;
+
+        /**
+         * If an ID Token should be returned from the OIDC Authorization endpoint
+         */
+        return_id_token_from_authorization_endpoint?: boolean;
       }
 
       export interface RefreshTokenOptions {
