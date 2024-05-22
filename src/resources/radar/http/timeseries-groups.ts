@@ -268,7 +268,7 @@ export interface TimeseriesGroupBrowserResponse {
 export namespace TimeseriesGroupBrowserResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -281,7 +281,7 @@ export interface TimeseriesGroupBrowserFamilyResponse {
 export namespace TimeseriesGroupBrowserFamilyResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -362,7 +362,7 @@ export interface TimeseriesGroupOSResponse {
 export namespace TimeseriesGroupOSResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
