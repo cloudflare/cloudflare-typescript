@@ -36,9 +36,49 @@ export class TieredCaching extends APIResource {
   }
 }
 
-export type TieredCachingEditResponse = unknown | string | null;
+export interface TieredCachingEditResponse {
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
 
-export type TieredCachingGetResponse = unknown | string | null;
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The time when the setting was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The status of the feature being on / off
+   */
+  value: 'on' | 'off';
+}
+
+export interface TieredCachingGetResponse {
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
+
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The time when the setting was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The status of the feature being on / off
+   */
+  value: 'on' | 'off';
+}
 
 export interface TieredCachingEditParams {
   /**
