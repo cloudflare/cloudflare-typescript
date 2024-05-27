@@ -50,7 +50,7 @@ describe('resource projects', () => {
           mtls_certificates: { MTLS: { certificate_id: 'd7cdd17c-916f-4cb7-aabe-585eb382ec4e' } },
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
-          r2_buckets: { R2_BINDING: { name: 'some-bucket' } },
+          r2_buckets: { R2_BINDING: { jurisdiction: 'eu', name: 'some-bucket' } },
           services: {
             SERVICE_BINDING: {
               entrypoint: 'MyHandler',
@@ -74,7 +74,7 @@ describe('resource projects', () => {
           mtls_certificates: { MTLS: { certificate_id: 'd7cdd17c-916f-4cb7-aabe-585eb382ec4e' } },
           placement: { mode: 'smart' },
           queue_producers: { QUEUE_PRODUCER_BINDING: { name: 'some-queue' } },
-          r2_buckets: { R2_BINDING: { name: 'some-bucket' } },
+          r2_buckets: { R2_BINDING: { jurisdiction: 'eu', name: 'some-bucket' } },
           services: {
             SERVICE_BINDING: {
               entrypoint: 'MyHandler',
