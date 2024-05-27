@@ -1843,17 +1843,15 @@ Methods:
 
 ### Retention
 
-#### Flag
-
 Types:
 
-- <code><a href="./src/resources/logs/control/retention/flag.ts">FlagCreateResponse</a></code>
-- <code><a href="./src/resources/logs/control/retention/flag.ts">FlagGetResponse</a></code>
+- <code><a href="./src/resources/logs/control/retention.ts">RetentionCreateResponse</a></code>
+- <code><a href="./src/resources/logs/control/retention.ts">RetentionGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_identifier}/logs/control/retention/flag">client.logs.control.retention.flag.<a href="./src/resources/logs/control/retention/flag.ts">create</a>(zoneIdentifier, { ...params }) -> FlagCreateResponse</code>
-- <code title="get /zones/{zone_identifier}/logs/control/retention/flag">client.logs.control.retention.flag.<a href="./src/resources/logs/control/retention/flag.ts">get</a>(zoneIdentifier) -> FlagGetResponse</code>
+- <code title="post /zones/{zone_identifier}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">create</a>(zoneIdentifier, { ...params }) -> RetentionCreateResponse</code>
+- <code title="get /zones/{zone_identifier}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">get</a>(zoneIdentifier) -> RetentionGetResponse</code>
 
 ### Cmb
 
