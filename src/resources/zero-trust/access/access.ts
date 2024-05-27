@@ -802,7 +802,6 @@ export namespace Access {
   export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
   export import CustomPageWithoutHTMLsSinglePage = CustomPagesAPI.CustomPageWithoutHTMLsSinglePage;
-  export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
   export import Tags = TagsAPI.Tags;
   export import Tag = TagsAPI.Tag;

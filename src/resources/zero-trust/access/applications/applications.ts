@@ -20509,13 +20509,10 @@ export namespace Applications {
   export import Policy = PoliciesAPI.Policy;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

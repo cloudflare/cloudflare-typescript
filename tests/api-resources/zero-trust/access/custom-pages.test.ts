@@ -10,36 +10,6 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource customPages', () => {
-  test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.customPages.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
-        type: 'identity_denied',
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.customPages.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
-        type: 'identity_denied',
-        app_count: 0,
-      },
-    );
-  });
-
   test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.update(
       '023e105f4ecef8ad9ca31a8372d0c353',

@@ -7,22 +7,6 @@ import { SinglePage } from '../../../pagination';
 
 export class CustomPages extends APIResource {
   /**
-   * Create a custom page
-   */
-  create(
-    identifier: string,
-    body: CustomPageCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomPageWithoutHTML> {
-    return (
-      this._client.post(`/accounts/${identifier}/access/custom_pages`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomPageWithoutHTML }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Update a custom page
    */
   update(
@@ -146,28 +130,6 @@ export interface CustomPageDeleteResponse {
   id?: string;
 }
 
-export interface CustomPageCreateParams {
-  /**
-   * Custom page HTML.
-   */
-  custom_html: string;
-
-  /**
-   * Custom page name.
-   */
-  name: string;
-
-  /**
-   * Custom page type.
-   */
-  type: 'identity_denied' | 'forbidden';
-
-  /**
-   * Number of apps the custom page is assigned to.
-   */
-  app_count?: number;
-}
-
 export interface CustomPageUpdateParams {
   /**
    * Custom page HTML.
@@ -195,6 +157,5 @@ export namespace CustomPages {
   export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
   export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
   export import CustomPageWithoutHTMLsSinglePage = CustomPagesAPI.CustomPageWithoutHTMLsSinglePage;
-  export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
 }
