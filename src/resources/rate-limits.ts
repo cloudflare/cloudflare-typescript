@@ -10,6 +10,8 @@ export class RateLimits extends APIResource {
   /**
    * Creates a new rate limit for a zone. Refer to the object definition for a list
    * of required attributes.
+   *
+   * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   create(
     zoneIdentifier: string,
@@ -25,6 +27,8 @@ export class RateLimits extends APIResource {
 
   /**
    * Fetches the rate limits for a zone.
+   *
+   * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   list(
     zoneIdentifier: string,
@@ -51,6 +55,8 @@ export class RateLimits extends APIResource {
 
   /**
    * Deletes an existing rate limit.
+   *
+   * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   delete(
     zoneIdentifier: string,
@@ -66,6 +72,8 @@ export class RateLimits extends APIResource {
 
   /**
    * Updates an existing rate limit.
+   *
+   * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   edit(
     zoneIdentifier: string,
@@ -83,6 +91,8 @@ export class RateLimits extends APIResource {
 
   /**
    * Fetches the details of a rate limit.
+   *
+   * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
   get(
     zoneIdentifier: string,

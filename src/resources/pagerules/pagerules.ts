@@ -9,6 +9,8 @@ export class Pagerules extends APIResource {
 
   /**
    * Creates a new Page Rule.
+   *
+   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   create(
     params: PageruleCreateParams,
@@ -25,6 +27,8 @@ export class Pagerules extends APIResource {
   /**
    * Replaces the configuration of an existing Page Rule. The configuration of the
    * updated Page Rule will exactly match the data passed in the API request.
+   *
+   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   update(
     pageruleId: string,
@@ -41,6 +45,8 @@ export class Pagerules extends APIResource {
 
   /**
    * Fetches Page Rules in a zone.
+   *
+   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   list(params: PageruleListParams, options?: Core.RequestOptions): Core.APIPromise<PageruleListResponse> {
     const { zone_id, ...query } = params;
@@ -53,6 +59,8 @@ export class Pagerules extends APIResource {
 
   /**
    * Deletes an existing Page Rule.
+   *
+   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   delete(
     pageruleId: string,
@@ -69,6 +77,8 @@ export class Pagerules extends APIResource {
 
   /**
    * Updates one or more fields of an existing Page Rule.
+   *
+   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   edit(
     pageruleId: string,
@@ -86,6 +96,8 @@ export class Pagerules extends APIResource {
 
   /**
    * Fetches the details of a Page Rule.
+   *
+   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   get(
     pageruleId: string,
