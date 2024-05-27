@@ -4482,6 +4482,7 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">Policy</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyGetResponse</a></code>
 
@@ -4489,6 +4490,7 @@ Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(uuid, { ...params }) -> PolicyCreateResponse</code>
 - <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(uuid1, uuid, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(uuid, { ...params }) -> PolicyListResponsesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(uuid1, uuid, { ...params }) -> PolicyDeleteResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(uuid1, uuid, { ...params }) -> PolicyGetResponse</code>
 
@@ -4648,6 +4650,7 @@ Types:
 
 Methods:
 
+- <code title="post /accounts/{identifier}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">create</a>(identifier, { ...params }) -> CustomPageWithoutHTML</code>
 - <code title="put /accounts/{identifier}/access/custom_pages/{uuid}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">update</a>(identifier, uuid, { ...params }) -> CustomPageWithoutHTML</code>
 - <code title="get /accounts/{identifier}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">list</a>(identifier) -> CustomPageWithoutHTMLsSinglePage</code>
 - <code title="delete /accounts/{identifier}/access/custom_pages/{uuid}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">delete</a>(identifier, uuid) -> CustomPageDeleteResponse</code>

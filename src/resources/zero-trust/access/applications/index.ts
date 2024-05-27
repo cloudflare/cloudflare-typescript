@@ -35,12 +35,15 @@ export {
   Policy,
   PolicyCreateResponse,
   PolicyUpdateResponse,
+  PolicyListResponse,
   PolicyDeleteResponse,
   PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
+  PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
+  PolicyListResponsesSinglePage,
   Policies,
 } from './policies';
 export {
