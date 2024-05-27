@@ -11,6 +11,8 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Rules extends APIResource {
   /**
    * Create one or more firewall rules.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   create(
     zoneIdentifier: string,
@@ -26,6 +28,8 @@ export class Rules extends APIResource {
 
   /**
    * Updates an existing firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   update(
     zoneIdentifier: string,
@@ -44,6 +48,8 @@ export class Rules extends APIResource {
   /**
    * Fetches firewall rules in a zone. You can filter the results using several
    * optional parameters.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
     zoneIdentifier: string,
@@ -71,6 +77,8 @@ export class Rules extends APIResource {
 
   /**
    * Deletes an existing firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
     return (
@@ -82,6 +90,8 @@ export class Rules extends APIResource {
 
   /**
    * Updates the priority of an existing firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   edit(
     zoneIdentifier: string,
@@ -99,6 +109,8 @@ export class Rules extends APIResource {
 
   /**
    * Fetches the details of a firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   get(
     zoneIdentifier: string,
