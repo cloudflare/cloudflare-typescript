@@ -8,6 +8,8 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagi
 export class Filters extends APIResource {
   /**
    * Creates one or more filters.
+   *
+   * @deprecated Filters are being deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   create(
     zoneIdentifier: string,
@@ -23,6 +25,8 @@ export class Filters extends APIResource {
 
   /**
    * Updates an existing filter.
+   *
+   * @deprecated Filters are being deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   update(
     zoneIdentifier: string,
@@ -40,6 +44,8 @@ export class Filters extends APIResource {
   /**
    * Fetches filters in a zone. You can filter the results using several optional
    * parameters.
+   *
+   * @deprecated Filters are being deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
     zoneIdentifier: string,
@@ -66,6 +72,8 @@ export class Filters extends APIResource {
 
   /**
    * Deletes an existing filter.
+   *
+   * @deprecated Filters are being deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter> {
     return (
@@ -77,6 +85,8 @@ export class Filters extends APIResource {
 
   /**
    * Fetches the details of a filter.
+   *
+   * @deprecated Filters are being deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallFilter> {
     return (
