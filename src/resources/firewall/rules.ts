@@ -160,7 +160,7 @@ export interface FirewallRule {
    */
   priority?: number;
 
-  products?: Array<Products>;
+  products?: Array<Product>;
 
   /**
    * A short reference tag. Allows you to select related firewall rules.
@@ -171,7 +171,7 @@ export interface FirewallRule {
 /**
  * A list of products to bypass for a request when using the `bypass` action.
  */
-export type Products = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
+export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
 
 export interface DeletedFilter {
   /**
@@ -231,7 +231,7 @@ export interface RuleGetParams {
 
 export namespace Rules {
   export import FirewallRule = RulesAPI.FirewallRule;
-  export import Products = RulesAPI.Products;
+  export import Product = RulesAPI.Product;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
