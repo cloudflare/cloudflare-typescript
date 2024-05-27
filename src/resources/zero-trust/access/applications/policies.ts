@@ -7,6 +7,7 @@ import { CloudflareError } from '../../../../error';
 import * as PoliciesAPI from './policies';
 import * as AccessAPI from '../access';
 import * as ApplicationsAPI from './applications';
+import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
   /**
@@ -78,6 +79,51 @@ export class Policies extends APIResource {
         ...options,
       }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists Access policies configured for an application. Returns both exclusively
+   * scoped and reusable policies used by the application.
+   */
+  list(
+    uuid: string,
+    params?: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
+  list(
+    uuid: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse>;
+  list(
+    uuid: string,
+    params: PolicyListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
+    if (isRequestOptions(params)) {
+      return this.list(uuid, {}, params);
+    }
+    const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/policies`,
+      PolicyListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -170,6 +216,8 @@ export class Policies extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
 /**
  * A group of email addresses that can approve a temporary authentication request.
@@ -379,6 +427,80 @@ export interface PolicyCreateResponse {
 }
 
 export interface PolicyUpdateResponse {
+  /**
+   * UUID
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<ApprovalGroup>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  created_at?: string;
+
+  /**
+   * The action Access will take if a user matches this policy.
+   */
+  decision?: ApplicationsAPI.Decision;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessAPI.AccessRule>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessAPI.AccessRule>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessAPI.AccessRule>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+
+  updated_at?: string;
+}
+
+export interface PolicyListResponse {
   /**
    * UUID
    */
@@ -703,6 +825,18 @@ export interface PolicyUpdateParams {
   session_duration?: string;
 }
 
+export interface PolicyListParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
 export interface PolicyDeleteParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
@@ -732,10 +866,13 @@ export namespace Policies {
   export import Policy = PoliciesAPI.Policy;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }
