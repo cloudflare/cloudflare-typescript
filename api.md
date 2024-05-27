@@ -4031,6 +4031,17 @@ Methods:
 - <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">delete</a>(bucketName, { ...params }) -> SippyDeleteResponse</code>
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">get</a>(bucketName, { ...params }) -> Sippy</code>
 
+## TemporaryCredentials
+
+Types:
+
+- <code><a href="./src/resources/r2/temporary-credentials.ts">TemporaryCredential</a></code>
+- <code><a href="./src/resources/r2/temporary-credentials.ts">TemporaryCredentialCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/r2/temp-access-credentials">client.r2.temporaryCredentials.<a href="./src/resources/r2/temporary-credentials.ts">create</a>({ ...params }) -> TemporaryCredentialCreateResponse</code>
+
 # WARPConnector
 
 Types:

@@ -20,3 +20,9 @@ export {
   SippyResource,
 } from './sippy';
 export { R2 } from './r2';
+export {
+  TemporaryCredential,
+  TemporaryCredentialCreateResponse,
+  TemporaryCredentialCreateParams,
+  TemporaryCredentials,
+} from './temporary-credentials';
