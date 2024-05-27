@@ -78,7 +78,6 @@ export {
   CustomPage,
   CustomPageWithoutHTML,
   CustomPageDeleteResponse,
-  CustomPageCreateParams,
   CustomPageUpdateParams,
   CustomPageWithoutHTMLsSinglePage,
   CustomPages,
