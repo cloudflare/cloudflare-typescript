@@ -3,6 +3,7 @@
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
 import * as PagerdutyAPI from './pagerduty';
+import * as Shared from '../../shared';
 
 export class PagerdutyResource extends APIResource {
   /**
@@ -27,29 +28,21 @@ export class PagerdutyResource extends APIResource {
   delete(
     params: PagerdutyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyDeleteResponse | null> {
+  ): Core.APIPromise<PagerdutyDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
-        options,
-      ) as Core.APIPromise<{ result: PagerdutyDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/accounts/${account_id}/alerting/v3/destinations/pagerduty`, options);
   }
 
   /**
    * Get a list of all configured PagerDuty services.
    */
-  get(
-    params: PagerdutyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyGetResponse | null> {
+  get(params: PagerdutyGetParams, options?: Core.RequestOptions): Core.APIPromise<PagerdutyGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
         options,
-      ) as Core.APIPromise<{ result: PagerdutyGetResponse | null }>
+      ) as Core.APIPromise<{ result: PagerdutyGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -90,7 +83,42 @@ export interface PagerdutyCreateResponse {
   id?: string;
 }
 
-export type PagerdutyDeleteResponse = unknown | Array<unknown> | string;
+export interface PagerdutyDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: PagerdutyDeleteResponse.ResultInfo;
+}
+
+export namespace PagerdutyDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
 
 export type PagerdutyGetResponse = Array<Pagerduty>;
 

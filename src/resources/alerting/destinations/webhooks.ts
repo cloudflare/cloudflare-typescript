@@ -3,6 +3,7 @@
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
 import * as WebhooksAPI from './webhooks';
+import * as Shared from '../../shared';
 import { SinglePage } from '../../../pagination';
 
 export class Webhooks extends APIResource {
@@ -58,14 +59,12 @@ export class Webhooks extends APIResource {
     webhookId: string,
     params: WebhookDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<WebhookDeleteResponse | null> {
+  ): Core.APIPromise<WebhookDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
-        options,
-      ) as Core.APIPromise<{ result: WebhookDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(
+      `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
+      options,
+    );
   }
 
   /**
@@ -145,7 +144,42 @@ export interface WebhookUpdateResponse {
   id?: string;
 }
 
-export type WebhookDeleteResponse = unknown | Array<unknown> | string;
+export interface WebhookDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: WebhookDeleteResponse.ResultInfo;
+}
+
+export namespace WebhookDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
 
 export interface WebhookCreateParams {
   /**
