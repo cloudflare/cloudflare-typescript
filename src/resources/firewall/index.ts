@@ -35,7 +35,7 @@ export {
 export { Firewall } from './firewall';
 export {
   FirewallRule,
-  Products,
+  Product,
   DeletedFilter,
   RuleCreateResponse,
   RuleEditResponse,

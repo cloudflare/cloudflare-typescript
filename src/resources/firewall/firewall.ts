@@ -29,7 +29,7 @@ export namespace Firewall {
   export import LockdownListParams = LockdownsAPI.LockdownListParams;
   export import Rules = RulesAPI.Rules;
   export import FirewallRule = RulesAPI.FirewallRule;
-  export import Products = RulesAPI.Products;
+  export import Product = RulesAPI.Product;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
