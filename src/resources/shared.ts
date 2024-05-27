@@ -406,9 +406,9 @@ export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
 
 export namespace Result {
   export interface UnionMember0 {
-    errors?: unknown | null;
+    errors?: Array<Shared.ResponseInfo>;
 
-    messages?: Array<unknown>;
+    messages?: Array<Shared.ResponseInfo>;
 
     result?: Array<Shared.AuditLog>;
 
@@ -419,8 +419,6 @@ export namespace Result {
     errors: Array<Shared.ResponseInfo>;
 
     messages: Array<Shared.ResponseInfo>;
-
-    result: unknown | Array<unknown> | string;
 
     /**
      * Whether the API call was successful

@@ -13,13 +13,6 @@ export class Alerting extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 }
 
-export interface Alert {
-  /**
-   * UUID
-   */
-  id?: string;
-}
-
 export namespace Alerting {
   export import AvailableAlerts = AvailableAlertsAPI.AvailableAlerts;
   export import AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;

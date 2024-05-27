@@ -628,6 +628,11 @@ export namespace Project {
          */
         export interface R2Binding {
           /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
+          /**
            * Name of the R2 bucket.
            */
           name?: string;
@@ -1001,6 +1006,11 @@ export namespace Project {
          * R2 binding.
          */
         export interface R2Binding {
+          /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
           /**
            * Name of the R2 bucket.
            */
@@ -1511,6 +1521,11 @@ export namespace ProjectCreateParams {
          */
         export interface R2Binding {
           /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
+          /**
            * Name of the R2 bucket.
            */
           name?: string;
@@ -1884,6 +1899,11 @@ export namespace ProjectCreateParams {
          * R2 binding.
          */
         export interface R2Binding {
+          /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
           /**
            * Name of the R2 bucket.
            */

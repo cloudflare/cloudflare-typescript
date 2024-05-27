@@ -11,17 +11,45 @@ export class AvailableAlerts extends APIResource {
   list(
     params: AvailableAlertListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AvailableAlertListResponse | null> {
+  ): Core.APIPromise<AvailableAlertListResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/alerting/v3/available_alerts`, options) as Core.APIPromise<{
-        result: AvailableAlertListResponse | null;
+        result: AvailableAlertListResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AvailableAlertListResponse = unknown | Array<unknown> | string;
+export type AvailableAlertListResponse = Record<
+  string,
+  Array<AvailableAlertListResponse.UnnamedSchemaWithMapParent1>
+>;
+
+export namespace AvailableAlertListResponse {
+  export interface UnnamedSchemaWithMapParent1 {
+    /**
+     * Describes the alert type.
+     */
+    description?: string;
+
+    /**
+     * Alert type name.
+     */
+    display_name?: string;
+
+    /**
+     * Format of additional configuration options (filters) for the alert type. Data
+     * type of filters during policy creation: Array of strings.
+     */
+    filter_options?: Array<unknown>;
+
+    /**
+     * Use this value when creating and updating a notification policy.
+     */
+    type?: string;
+  }
+}
 
 export interface AvailableAlertListParams {
   /**
