@@ -6366,15 +6366,13 @@ Methods:
 
 # DCVDelegation
 
-## UUID
-
 Types:
 
-- <code><a href="./src/resources/dcv-delegation/uuid.ts">DCVDelegationUUID</a></code>
+- <code><a href="./src/resources/dcv-delegation.ts">DCVDelegationUUID</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/dcv_delegation/uuid">client.dcvDelegation.uuid.<a href="./src/resources/dcv-delegation/uuid.ts">get</a>({ ...params }) -> DCVDelegationUUID</code>
+- <code title="get /zones/{zone_id}/dcv_delegation/uuid">client.dcvDelegation.<a href="./src/resources/dcv-delegation.ts">get</a>({ ...params }) -> DCVDelegationUUID</code>
 
 # Hostnames
 
