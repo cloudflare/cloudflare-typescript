@@ -13,9 +13,9 @@ describe('resource httpTests', () => {
   test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.httpTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
+      from: '1689520412000',
       interval: 'minute',
-      timeEnd: '1689606812000',
-      timeStart: '1689520412000',
+      to: '1689606812000',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,9 +29,9 @@ describe('resource httpTests', () => {
   test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.httpTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
+      from: '1689520412000',
       interval: 'minute',
-      timeEnd: '1689606812000',
-      timeStart: '1689520412000',
+      to: '1689606812000',
       colo: 'string',
       deviceId: ['string', 'string', 'string'],
     });
