@@ -15,9 +15,9 @@ describe('resource tracerouteTests', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
-        from: '1689520412000',
         interval: 'minute',
-        to: '1689606812000',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -34,9 +34,9 @@ describe('resource tracerouteTests', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
-        from: '1689520412000',
         interval: 'minute',
-        to: '1689606812000',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
         colo: 'string',
         deviceId: ['string', 'string', 'string'],
       },
@@ -49,9 +49,9 @@ describe('resource tracerouteTests', () => {
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         deviceId: 'string',
-        from: '1689520412000',
         interval: 'minute',
-        to: '1689606812000',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -69,9 +69,9 @@ describe('resource tracerouteTests', () => {
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         deviceId: 'string',
-        from: '1689520412000',
         interval: 'minute',
-        to: '1689606812000',
+        timeEnd: '1689606812000',
+        timeStart: '1689520412000',
       },
     );
   });
@@ -81,8 +81,8 @@ describe('resource tracerouteTests', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
-        from: '2023-09-20T17:00:00Z',
-        to: '2023-09-20T17:00:00Z',
+        timeEnd: '2023-09-20T17:00:00Z',
+        timeStart: '2023-09-20T17:00:00Z',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -99,8 +99,8 @@ describe('resource tracerouteTests', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '01a7362d577a6c3019a474fd6f485823',
-        from: '2023-09-20T17:00:00Z',
-        to: '2023-09-20T17:00:00Z',
+        timeEnd: '2023-09-20T17:00:00Z',
+        timeStart: '2023-09-20T17:00:00Z',
         colo: 'string',
         deviceId: ['string', 'string', 'string'],
       },
