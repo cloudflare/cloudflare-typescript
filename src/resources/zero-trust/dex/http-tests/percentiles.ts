@@ -67,14 +67,14 @@ export interface PercentileGetParams {
   account_id: string;
 
   /**
-   * Query param: End time for aggregate metrics in ISO format
-   */
-  timeEnd: string;
-
-  /**
    * Query param: Start time for aggregate metrics in ISO format
    */
-  timeStart: string;
+  from: string;
+
+  /**
+   * Query param: End time for aggregate metrics in ISO format
+   */
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
