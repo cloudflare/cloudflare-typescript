@@ -70,12 +70,21 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Timestamp in ISO format
    */
-  time_end: string;
+  from: string;
+
+  /**
+   * Query param: Source:
+   *
+   * - `hourly` - device details aggregated hourly, up to 7 days prior
+   * - `last_seen` - device details, up to 24 hours prior
+   * - `raw` - device details, up to 7 days prior
+   */
+  source: 'last_seen' | 'hourly' | 'raw';
 
   /**
    * Query param: Timestamp in ISO format
    */
-  time_start: string;
+  to: string;
 
   /**
    * Query param: Cloudflare colo

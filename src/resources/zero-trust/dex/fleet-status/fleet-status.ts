@@ -90,12 +90,12 @@ export interface FleetStatusOverTimeParams {
   /**
    * Query param: Timestamp in ISO format
    */
-  time_end: string;
+  from: string;
 
   /**
    * Query param: Timestamp in ISO format
    */
-  time_start: string;
+  to: string;
 
   /**
    * Query param: Cloudflare colo

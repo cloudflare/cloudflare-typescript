@@ -36,11 +36,6 @@ export interface NetworkPathGetResponse {
   resultId: string;
 
   /**
-   * date time of this traceroute test
-   */
-  time_start: string;
-
-  /**
    * name of the device associated with this network path response
    */
   deviceName?: string;
