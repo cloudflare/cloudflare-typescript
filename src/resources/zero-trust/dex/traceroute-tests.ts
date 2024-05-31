@@ -249,6 +249,11 @@ export interface TracerouteTestGetParams {
   account_id: string;
 
   /**
+   * Query param: Start time for aggregate metrics in ISO ms
+   */
+  from: string;
+
+  /**
    * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
@@ -256,12 +261,7 @@ export interface TracerouteTestGetParams {
   /**
    * Query param: End time for aggregate metrics in ISO ms
    */
-  timeEnd: string;
-
-  /**
-   * Query param: Start time for aggregate metrics in ISO ms
-   */
-  timeStart: string;
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
@@ -288,6 +288,11 @@ export interface TracerouteTestNetworkPathParams {
   deviceId: string;
 
   /**
+   * Query param: Start time for aggregate metrics in ISO ms
+   */
+  from: string;
+
+  /**
    * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
@@ -295,12 +300,7 @@ export interface TracerouteTestNetworkPathParams {
   /**
    * Query param: End time for aggregate metrics in ISO ms
    */
-  timeEnd: string;
-
-  /**
-   * Query param: Start time for aggregate metrics in ISO ms
-   */
-  timeStart: string;
+  to: string;
 }
 
 export interface TracerouteTestPercentilesParams {
@@ -310,14 +310,14 @@ export interface TracerouteTestPercentilesParams {
   account_id: string;
 
   /**
-   * Query param: End time for aggregate metrics in ISO format
-   */
-  timeEnd: string;
-
-  /**
    * Query param: Start time for aggregate metrics in ISO format
    */
-  timeStart: string;
+  from: string;
+
+  /**
+   * Query param: End time for aggregate metrics in ISO format
+   */
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
