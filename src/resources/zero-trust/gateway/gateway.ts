@@ -159,7 +159,7 @@ export namespace Gateway {
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
+  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;
