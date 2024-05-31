@@ -187,11 +187,6 @@ export interface HTTPTestGetParams {
   account_id: string;
 
   /**
-   * Query param: Start time for aggregate metrics in ISO ms
-   */
-  from: string;
-
-  /**
    * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
@@ -199,7 +194,12 @@ export interface HTTPTestGetParams {
   /**
    * Query param: End time for aggregate metrics in ISO ms
    */
-  to: string;
+  timeEnd: string;
+
+  /**
+   * Query param: Start time for aggregate metrics in ISO ms
+   */
+  timeStart: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used

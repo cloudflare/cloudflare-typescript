@@ -14,11 +14,10 @@ describe('resource devices', () => {
   test.skip('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.fleetStatus.devices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      from: '2023-10-11T00:00:00Z',
       page: 1,
       per_page: 10,
-      source: 'last_seen',
-      to: '2023-10-11T00:00:00Z',
+      time_end: '2023-10-11T00:00:00Z',
+      time_start: '2023-10-11T00:00:00Z',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,11 +32,10 @@ describe('resource devices', () => {
   test.skip('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.fleetStatus.devices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      from: '2023-10-11T00:00:00Z',
       page: 1,
       per_page: 10,
-      source: 'last_seen',
-      to: '2023-10-11T00:00:00Z',
+      time_end: '2023-10-11T00:00:00Z',
+      time_start: '2023-10-11T00:00:00Z',
       colo: 'SJC',
       device_id: 'cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7',
       mode: 'proxy',
