@@ -3638,6 +3638,8 @@ export interface RuleCreateResponse {
     | SkipRule
     | SetCacheSettingsRule
     | RuleCreateResponse.RulesetsLogCustomFieldRule
+    | RuleCreateResponse.RulesetsDDoSDynamicRule
+    | RuleCreateResponse.RulesetsForceConnectionCloseRule
   >;
 
   /**
@@ -3762,6 +3764,120 @@ export namespace RuleCreateResponse {
       }
     }
   }
+
+  export interface RulesetsDDoSDynamicRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
+
+  export interface RulesetsForceConnectionCloseRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'force_connection_close';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
 }
 
 /**
@@ -3813,6 +3929,8 @@ export interface RuleDeleteResponse {
     | SkipRule
     | SetCacheSettingsRule
     | RuleDeleteResponse.RulesetsLogCustomFieldRule
+    | RuleDeleteResponse.RulesetsDDoSDynamicRule
+    | RuleDeleteResponse.RulesetsForceConnectionCloseRule
   >;
 
   /**
@@ -3937,6 +4055,120 @@ export namespace RuleDeleteResponse {
       }
     }
   }
+
+  export interface RulesetsDDoSDynamicRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
+
+  export interface RulesetsForceConnectionCloseRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'force_connection_close';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
 }
 
 /**
@@ -3988,6 +4220,8 @@ export interface RuleEditResponse {
     | SkipRule
     | SetCacheSettingsRule
     | RuleEditResponse.RulesetsLogCustomFieldRule
+    | RuleEditResponse.RulesetsDDoSDynamicRule
+    | RuleEditResponse.RulesetsForceConnectionCloseRule
   >;
 
   /**
@@ -4112,6 +4346,120 @@ export namespace RuleEditResponse {
       }
     }
   }
+
+  export interface RulesetsDDoSDynamicRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
+
+  export interface RulesetsForceConnectionCloseRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'force_connection_close';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
 }
 
 export type RuleCreateParams =
@@ -4130,7 +4478,9 @@ export type RuleCreateParams =
   | RuleCreateParams.SetConfigRule
   | RuleCreateParams.SkipRule
   | RuleCreateParams.SetCacheSettingsRule
-  | RuleCreateParams.RulesetsLogCustomFieldRule;
+  | RuleCreateParams.RulesetsLogCustomFieldRule
+  | RuleCreateParams.RulesetsDDoSDynamicRule
+  | RuleCreateParams.RulesetsForceConnectionCloseRule;
 
 export namespace RuleCreateParams {
   export interface BlockRule {
@@ -5983,6 +6333,114 @@ export namespace RuleCreateParams {
       }
     }
   }
+
+  export interface RulesetsDDoSDynamicRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
+
+  export interface RulesetsForceConnectionCloseRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'force_connection_close';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
 }
 
 export interface RuleDeleteParams {
@@ -6013,7 +6471,9 @@ export type RuleEditParams =
   | RuleEditParams.SetConfigRule
   | RuleEditParams.SkipRule
   | RuleEditParams.SetCacheSettingsRule
-  | RuleEditParams.RulesetsLogCustomFieldRule;
+  | RuleEditParams.RulesetsLogCustomFieldRule
+  | RuleEditParams.RulesetsDDoSDynamicRule
+  | RuleEditParams.RulesetsForceConnectionCloseRule;
 
 export namespace RuleEditParams {
   export interface BlockRule {
@@ -7865,6 +8325,114 @@ export namespace RuleEditParams {
         name: string;
       }
     }
+  }
+
+  export interface RulesetsDDoSDynamicRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'ddos_dynamic';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
+
+  export interface RulesetsForceConnectionCloseRule {
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * Body param: The action to perform when the rule matches.
+     */
+    action?: 'force_connection_close';
+
+    /**
+     * Body param: The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * Body param: An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Body param: Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * Body param: The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * Body param: An object configuring the rule's logging behavior.
+     */
+    logging?: LoggingParam;
+
+    /**
+     * Body param: The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
   }
 }
 

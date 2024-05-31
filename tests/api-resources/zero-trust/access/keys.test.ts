@@ -9,13 +9,12 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource cas', () => {
-  // TODO: investigate broken test
-  test.skip('create', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.applications.cas.create(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
+describe('resource keys', () => {
+  test('update: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.keys.update({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      key_rotation_interval_days: 30,
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,9 +24,17 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.applications.cas.list({ account_id: 'string' });
+  test('update: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.keys.update({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      key_rotation_interval_days: 30,
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.keys.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,12 +44,16 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.applications.cas.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.keys.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('rotate: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.keys.rotate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,18 +63,9 @@ describe('resource cas', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.applications.cas.get(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
+  test('rotate: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.keys.rotate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

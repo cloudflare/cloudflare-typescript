@@ -30,8 +30,34 @@ export {
   ApplicationListResponsesSinglePage,
   Applications,
 } from './applications';
-export { ApprovalGroup, Policy, Policies } from './policies';
-export { CA, CAListParams, CAsSinglePage, CAs } from './cas';
+export {
+  ApprovalGroup,
+  Policy,
+  PolicyCreateResponse,
+  PolicyUpdateResponse,
+  PolicyListResponse,
+  PolicyDeleteResponse,
+  PolicyGetResponse,
+  PolicyCreateParams,
+  PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
+  PolicyListResponsesSinglePage,
+  Policies,
+} from './policies';
+export {
+  CA,
+  CACreateResponse,
+  CADeleteResponse,
+  CAGetResponse,
+  CACreateParams,
+  CAListParams,
+  CADeleteParams,
+  CAGetParams,
+  CAsSinglePage,
+  CAs,
+} from './cas';
 export {
   UserPolicyCheckGeo,
   UserPolicyCheckListResponse,

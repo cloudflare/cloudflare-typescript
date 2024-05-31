@@ -3,8 +3,12 @@
 export {
   AssociatedHostnames,
   Certificate,
+  CertificateDeleteResponse,
   CertificateCreateParams,
+  CertificateUpdateParams,
   CertificateListParams,
+  CertificateDeleteParams,
+  CertificateGetParams,
   CertificatesSinglePage,
   Certificates,
 } from './certificates';

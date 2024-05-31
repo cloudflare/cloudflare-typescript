@@ -4485,11 +4485,15 @@ Types:
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderType</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">ScimConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">create</a>({ ...params }) -> IdentityProvider</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">update</a>(identityProviderId, { ...params }) -> IdentityProvider</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponsesSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">delete</a>(identityProviderId, { ...params }) -> IdentityProviderDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{identity_provider_id}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">get</a>(identityProviderId, { ...params }) -> IdentityProvider</code>
 
 ## Organizations
 
@@ -4511,6 +4515,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/seats.ts">Seat</a></code>
+- <code><a href="./src/resources/zero-trust/seats.ts">SeatEditResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/access/seats">client.zeroTrust.seats.<a href="./src/resources/zero-trust/seats.ts">edit</a>([ ...body ]) -> SeatEditResponse | null</code>
 
 ## Access
 
@@ -4576,10 +4585,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CA</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CACreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CADeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CAGetResponse</a></code>
 
 Methods:
 
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">create</a>(appId, { ...params }) -> CACreateResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">list</a>({ ...params }) -> CAsSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">delete</a>(appId, { ...params }) -> CADeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">get</a>(appId, { ...params }) -> CAGetResponse</code>
 
 #### UserPolicyChecks
 
@@ -4598,6 +4613,19 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ApprovalGroup</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">Policy</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(appId, { ...params }) -> PolicyCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(appId, policyId, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(appId, { ...params }) -> PolicyListResponsesSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(appId, policyId, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(appId, policyId, { ...params }) -> PolicyGetResponse</code>
 
 ### Certificates
 
@@ -4605,11 +4633,15 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">AssociatedHostnames</a></code>
 - <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">Certificate</a></code>
+- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">CertificateDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/certificates">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">create</a>({ ...params }) -> Certificate</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/{certificate_id}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">update</a>(certificateId, { ...params }) -> Certificate</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">list</a>({ ...params }) -> CertificatesSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/certificates/{certificate_id}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">delete</a>(certificateId, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/{certificate_id}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">get</a>(certificateId, { ...params }) -> Certificate</code>
 
 #### Settings
 
@@ -4629,11 +4661,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/groups.ts">ZeroTrustGroup</a></code>
+- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">create</a>({ ...params }) -> ZeroTrustGroup</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">update</a>(groupId, { ...params }) -> ZeroTrustGroup</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">list</a>({ ...params }) -> ZeroTrustGroupsSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">delete</a>(groupId, { ...params }) -> GroupDeleteResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{group_id}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">get</a>(groupId, { ...params }) -> ZeroTrustGroup</code>
 
 ### ServiceTokens
 
@@ -4641,19 +4677,46 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceToken</a></code>
 - <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenRotateResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">create</a>({ ...params }) -> ServiceTokenCreateResponse</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{service_token_id}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">update</a>(serviceTokenId, { ...params }) -> ServiceToken</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">list</a>({ ...params }) -> ServiceTokensSinglePage</code>
+- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{service_token_id}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">delete</a>(serviceTokenId, { ...params }) -> ServiceToken</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{service_token_id}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">get</a>(serviceTokenId, { ...params }) -> ServiceToken</code>
+- <code title="post /accounts/{account_id}/access/service_tokens/{service_token_id}/refresh">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">refresh</a>(serviceTokenId, { ...params }) -> ServiceToken</code>
+- <code title="post /accounts/{account_id}/access/service_tokens/{service_token_id}/rotate">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">rotate</a>(serviceTokenId, { ...params }) -> ServiceTokenRotateResponse</code>
 
 ### Bookmarks
 
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/bookmarks.ts">Bookmark</a></code>
+- <code><a href="./src/resources/zero-trust/access/bookmarks.ts">BookmarkDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">create</a>(bookmarkId, { ...params }) -> Bookmark</code>
+- <code title="put /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">update</a>(bookmarkId, { ...params }) -> Bookmark</code>
+- <code title="get /accounts/{account_id}/access/bookmarks">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">list</a>({ ...params }) -> BookmarksSinglePage</code>
+- <code title="delete /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">delete</a>(bookmarkId, { ...params }) -> BookmarkDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/bookmarks/{bookmark_id}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">get</a>(bookmarkId, { ...params }) -> Bookmark</code>
 
 ### Keys
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyRotateResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">update</a>({ ...params }) -> KeyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">get</a>({ ...params }) -> KeyGetResponse</code>
+- <code title="post /accounts/{account_id}/access/keys/rotate">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">rotate</a>({ ...params }) -> KeyRotateResponse</code>
 
 ### Logs
 
@@ -4662,6 +4725,11 @@ Types:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequests</a></code>
+- <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequestListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/logs/access_requests">client.zeroTrust.access.logs.accessRequests.<a href="./src/resources/zero-trust/access/logs/access-requests.ts">list</a>({ ...params }) -> AccessRequestListResponse | null</code>
 
 ### Users
 
@@ -4669,7 +4737,21 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
 
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>({ ...params }) -> AccessUsersSinglePage</code>
+
 #### ActiveSessions
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/users/active-sessions.ts">ActiveSessionListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/users/active-sessions.ts">ActiveSessionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users/{user_id}/active_sessions">client.zeroTrust.access.users.activeSessions.<a href="./src/resources/zero-trust/access/users/active-sessions.ts">list</a>(userId, { ...params }) -> ActiveSessionListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/access/users/{user_id}/active_sessions/{nonce}">client.zeroTrust.access.users.activeSessions.<a href="./src/resources/zero-trust/access/users/active-sessions.ts">get</a>(userId, nonce, { ...params }) -> ActiveSessionGetResponse</code>
 
 #### LastSeenIdentity
 
@@ -4677,7 +4759,19 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/last-seen-identity.ts">Identity</a></code>
 
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users/{user_id}/last_seen_identity">client.zeroTrust.access.users.lastSeenIdentity.<a href="./src/resources/zero-trust/access/users/last-seen-identity.ts">get</a>(userId, { ...params }) -> Identity</code>
+
 #### FailedLogins
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/users/failed-logins.ts">FailedLoginListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/users/{user_id}/failed_logins">client.zeroTrust.access.users.failedLogins.<a href="./src/resources/zero-trust/access/users/failed-logins.ts">list</a>(userId, { ...params }) -> FailedLoginListResponsesSinglePage</code>
 
 ### CustomPages
 
@@ -4685,12 +4779,30 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPage</a></code>
 - <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPageWithoutHTML</a></code>
+- <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPageDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">create</a>({ ...params }) -> CustomPageWithoutHTML</code>
+- <code title="put /accounts/{account_id}/access/custom_pages/{custom_page_id}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">update</a>(customPageId, { ...params }) -> CustomPageWithoutHTML</code>
+- <code title="get /accounts/{account_id}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">list</a>({ ...params }) -> CustomPageWithoutHTMLsSinglePage</code>
+- <code title="delete /accounts/{account_id}/access/custom_pages/{custom_page_id}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">delete</a>(customPageId, { ...params }) -> CustomPageDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/custom_pages/{custom_page_id}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">get</a>(customPageId, { ...params }) -> CustomPage</code>
 
 ### Tags
 
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/tags.ts">Tag</a></code>
+- <code><a href="./src/resources/zero-trust/access/tags.ts">TagDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">create</a>({ ...params }) -> Tag</code>
+- <code title="put /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">update</a>(tagName, { ...params }) -> Tag</code>
+- <code title="get /accounts/{account_id}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">list</a>({ ...params }) -> TagsSinglePage</code>
+- <code title="delete /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">delete</a>(tagName, { ...params }) -> TagDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">get</a>(tagName, { ...params }) -> Tag</code>
 
 ## DEX
 
