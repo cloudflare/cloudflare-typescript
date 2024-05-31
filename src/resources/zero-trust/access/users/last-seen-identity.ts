@@ -1,23 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
 import * as LastSeenIdentityAPI from './last-seen-identity';
 import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
 
-export class LastSeenIdentity extends APIResource {
-  /**
-   * Get last seen identity for a single user.
-   */
-  get(identifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Identity> {
-    return (
-      this._client.get(
-        `/accounts/${identifier}/access/users/${id}/last_seen_identity`,
-        options,
-      ) as Core.APIPromise<{ result: Identity }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class LastSeenIdentity extends APIResource {}
 
 export interface Identity {
   account_id?: string;

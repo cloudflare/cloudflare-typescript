@@ -9,14 +9,11 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource seats', () => {
-  // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.seats.edit('023e105f4ecef8ad9ca31a8372d0c353', [
-      { access_seat: false, gateway_seat: false },
-      { access_seat: false, gateway_seat: false },
-      { access_seat: false, gateway_seat: false },
-    ]);
+describe('resource schemas', () => {
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.apiGateway.schemas.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,12 +23,11 @@ describe('resource seats', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.seats.edit('023e105f4ecef8ad9ca31a8372d0c353', [
-      { access_seat: false, gateway_seat: false },
-      { access_seat: false, gateway_seat: false },
-      { access_seat: false, gateway_seat: false },
-    ]);
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.apiGateway.schemas.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      feature: ['thresholds'],
+      host: ['www.example.com'],
+    });
   });
 });

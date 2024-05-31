@@ -1,74 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
 import * as TagsAPI from './tags';
-import { SinglePage } from '../../../pagination';
 
-export class Tags extends APIResource {
-  /**
-   * Create a tag
-   */
-  create(identifier: string, body: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
-    return (
-      this._client.post(`/accounts/${identifier}/access/tags`, { body, ...options }) as Core.APIPromise<{
-        result: Tag;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Update a tag
-   */
-  update(
-    identifier: string,
-    tagName: string,
-    body: TagUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Tag> {
-    return (
-      this._client.put(`/accounts/${identifier}/access/tags/${tagName}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Tag }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * List tags
-   */
-  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<TagsSinglePage, Tag> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/tags`, TagsSinglePage, options);
-  }
-
-  /**
-   * Delete a tag
-   */
-  delete(
-    identifier: string,
-    name: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TagDeleteResponse> {
-    return (
-      this._client.delete(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
-        result: TagDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Get a tag
-   */
-  get(identifier: string, name: string, options?: Core.RequestOptions): Core.APIPromise<Tag> {
-    return (
-      this._client.get(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
-        result: Tag;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export class TagsSinglePage extends SinglePage<Tag> {}
+export class Tags extends APIResource {}
 
 /**
  * A tag
@@ -89,31 +24,6 @@ export interface Tag {
   updated_at?: string;
 }
 
-export interface TagDeleteResponse {
-  /**
-   * The name of the tag
-   */
-  name?: string;
-}
-
-export interface TagCreateParams {
-  /**
-   * The name of the tag
-   */
-  name: string;
-}
-
-export interface TagUpdateParams {
-  /**
-   * The name of the tag
-   */
-  name: string;
-}
-
 export namespace Tags {
   export import Tag = TagsAPI.Tag;
-  export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
-  export import TagsSinglePage = TagsAPI.TagsSinglePage;
-  export import TagCreateParams = TagsAPI.TagCreateParams;
-  export import TagUpdateParams = TagsAPI.TagUpdateParams;
 }

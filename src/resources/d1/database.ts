@@ -70,7 +70,7 @@ export class Database extends APIResource {
   }
 
   /**
-   * Returns the query result.
+   * Returns the query result as an object.
    */
   query(
     databaseId: string,
@@ -83,6 +83,24 @@ export class Database extends APIResource {
         body,
         ...options,
       }) as Core.APIPromise<{ result: DatabaseQueryResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Returns the query result rows as arrays rather than objects. This is a
+   * performance-optimized version of the /query endpoint.
+   */
+  raw(
+    databaseId: string,
+    params: DatabaseRawParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseRawResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/raw`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatabaseRawResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -145,6 +163,42 @@ export type DatabaseDeleteResponse = unknown | string | null;
 
 export type DatabaseQueryResponse = Array<QueryResult>;
 
+export type DatabaseRawResponse = Array<DatabaseRawResponse.DatabaseRawResponseItem>;
+
+export namespace DatabaseRawResponse {
+  export interface DatabaseRawResponseItem {
+    meta?: DatabaseRawResponseItem.Meta;
+
+    results?: DatabaseRawResponseItem.Results;
+
+    success?: boolean;
+  }
+
+  export namespace DatabaseRawResponseItem {
+    export interface Meta {
+      changed_db?: boolean;
+
+      changes?: number;
+
+      duration?: number;
+
+      last_row_id?: number;
+
+      rows_read?: number;
+
+      rows_written?: number;
+
+      size_after?: number;
+    }
+
+    export interface Results {
+      columns?: Array<string>;
+
+      rows?: Array<Array<number | string | unknown>>;
+    }
+  }
+}
+
 export interface DatabaseCreateParams {
   /**
    * Path param: Account identifier tag.
@@ -200,16 +254,35 @@ export interface DatabaseQueryParams {
   params?: Array<string>;
 }
 
+export interface DatabaseRawParams {
+  /**
+   * Path param: Account identifier tag.
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  sql: string;
+
+  /**
+   * Body param:
+   */
+  params?: Array<string>;
+}
+
 export namespace Database {
   export import QueryResult = DatabaseAPI.QueryResult;
   export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
+  export import DatabaseRawResponse = DatabaseAPI.DatabaseRawResponse;
   export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
   export import DatabaseDeleteParams = DatabaseAPI.DatabaseDeleteParams;
   export import DatabaseGetParams = DatabaseAPI.DatabaseGetParams;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
+  export import DatabaseRawParams = DatabaseAPI.DatabaseRawParams;
 }

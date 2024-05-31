@@ -17,6 +17,9 @@ describe('resource aiGateway', () => {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
+      rate_limiting_interval: 0,
+      rate_limiting_limit: 0,
+      rate_limiting_technique: 'fixed',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -36,7 +39,7 @@ describe('resource aiGateway', () => {
       collect_logs: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
-      rate_limiting_technique: 'string',
+      rate_limiting_technique: 'fixed',
     });
   });
 
@@ -46,6 +49,9 @@ describe('resource aiGateway', () => {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
+      rate_limiting_interval: 0,
+      rate_limiting_limit: 0,
+      rate_limiting_technique: 'fixed',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,7 +70,7 @@ describe('resource aiGateway', () => {
       collect_logs: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
-      rate_limiting_technique: 'string',
+      rate_limiting_technique: 'fixed',
     });
   });
 
@@ -90,7 +96,7 @@ describe('resource aiGateway', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.delete('my-gateway', {
+    const responsePromise = cloudflare.aiGateway.delete('string', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -103,7 +109,7 @@ describe('resource aiGateway', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.aiGateway.delete('my-gateway', {
+    const response = await cloudflare.aiGateway.delete('string', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
   });

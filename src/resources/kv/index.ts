@@ -9,6 +9,7 @@ export {
   NamespaceUpdateParams,
   NamespaceListParams,
   NamespaceDeleteParams,
+  NamespaceGetParams,
   NamespacesV4PagePaginationArray,
   Namespaces,
 } from './namespaces/index';
