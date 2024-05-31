@@ -64,7 +64,11 @@ describe('resource applications', () => {
       name: 'Admin Site',
       options_preflight_bypass: true,
       path_cookie_attribute: true,
-      policies: [{ precedence: 0 }, { precedence: 0 }, { precedence: 0 }],
+      policies: [
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+      ],
       same_site_cookie_attribute: 'strict',
       scim_config: {
         authentication: { password: 'string', scheme: 'httpbasic', user: 'string' },
@@ -162,7 +166,11 @@ describe('resource applications', () => {
         name: 'Admin Site',
         options_preflight_bypass: true,
         path_cookie_attribute: true,
-        policies: [{ precedence: 0 }, { precedence: 0 }, { precedence: 0 }],
+        policies: [
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        ],
         same_site_cookie_attribute: 'strict',
         scim_config: {
           authentication: { password: 'string', scheme: 'httpbasic', user: 'string' },

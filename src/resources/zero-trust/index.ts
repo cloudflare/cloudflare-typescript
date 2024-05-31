@@ -30,8 +30,12 @@ export {
   IdentityProviderType,
   ScimConfig,
   IdentityProviderListResponse,
+  IdentityProviderDeleteResponse,
   IdentityProviderCreateParams,
+  IdentityProviderUpdateParams,
   IdentityProviderListParams,
+  IdentityProviderDeleteParams,
+  IdentityProviderGetParams,
   IdentityProviderListResponsesSinglePage,
   IdentityProviders,
 } from './identity-providers';
@@ -91,5 +95,5 @@ export {
   RiskScoringGetParams,
   RiskScoring,
 } from './risk-scoring/index';
-export { Seat, Seats } from './seats';
+export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export { ZeroTrust } from './zero-trust';

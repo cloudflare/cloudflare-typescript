@@ -3242,7 +3242,7 @@ export namespace ApplicationCreateResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -3566,7 +3566,7 @@ export namespace ApplicationCreateResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -4097,7 +4097,7 @@ export namespace ApplicationCreateResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -4505,7 +4505,7 @@ export namespace ApplicationCreateResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -4819,7 +4819,7 @@ export namespace ApplicationCreateResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -5133,7 +5133,7 @@ export namespace ApplicationCreateResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -5447,7 +5447,7 @@ export namespace ApplicationCreateResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -6101,7 +6101,7 @@ export namespace ApplicationUpdateResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -6425,7 +6425,7 @@ export namespace ApplicationUpdateResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -6956,7 +6956,7 @@ export namespace ApplicationUpdateResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -7364,7 +7364,7 @@ export namespace ApplicationUpdateResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -7678,7 +7678,7 @@ export namespace ApplicationUpdateResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -7992,7 +7992,7 @@ export namespace ApplicationUpdateResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -8306,7 +8306,7 @@ export namespace ApplicationUpdateResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -8960,7 +8960,7 @@ export namespace ApplicationListResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -9284,7 +9284,7 @@ export namespace ApplicationListResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -9815,7 +9815,7 @@ export namespace ApplicationListResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -10223,7 +10223,7 @@ export namespace ApplicationListResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -10537,7 +10537,7 @@ export namespace ApplicationListResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -10851,7 +10851,7 @@ export namespace ApplicationListResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -11165,7 +11165,7 @@ export namespace ApplicationListResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -11826,7 +11826,7 @@ export namespace ApplicationGetResponse {
   export namespace SelfHostedApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -12150,7 +12150,7 @@ export namespace ApplicationGetResponse {
   export namespace SaaSApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -12681,7 +12681,7 @@ export namespace ApplicationGetResponse {
   export namespace BrowserSSHApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -13089,7 +13089,7 @@ export namespace ApplicationGetResponse {
   export namespace BrowserVncApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -13403,7 +13403,7 @@ export namespace ApplicationGetResponse {
   export namespace AppLauncherApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -13717,7 +13717,7 @@ export namespace ApplicationGetResponse {
   export namespace DeviceEnrollmentPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -14031,7 +14031,7 @@ export namespace ApplicationGetResponse {
   export namespace BrowserIsolationPermissionsApplication {
     export interface Policy {
       /**
-       * UUID
+       * The UUID of the policy
        */
       id?: string;
 
@@ -14703,6 +14703,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -14725,6 +14730,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15046,6 +15056,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -15068,6 +15083,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -15594,6 +15614,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -15616,6 +15641,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16023,6 +16053,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16045,6 +16080,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16341,6 +16381,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16363,6 +16408,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16659,6 +16709,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16681,6 +16736,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -16977,6 +17037,11 @@ export namespace ApplicationCreateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -16999,6 +17064,11 @@ export namespace ApplicationCreateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -17650,6 +17720,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -17672,6 +17747,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -17993,6 +18073,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -18015,6 +18100,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -18541,6 +18631,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -18563,6 +18658,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -18970,6 +19070,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -18992,6 +19097,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -19288,6 +19398,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -19310,6 +19425,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -19606,6 +19726,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -19628,6 +19753,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -19924,6 +20054,11 @@ export namespace ApplicationUpdateParams {
      */
     export interface AccessAppPolicyLink {
       /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
        * The order of execution for this policy. Must be unique for each policy within an
        * app.
        */
@@ -19946,6 +20081,11 @@ export namespace ApplicationUpdateParams {
        * The name of the Access policy.
        */
       name: string;
+
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
 
       /**
        * Administrators who can approve a temporary authentication request.
@@ -20492,8 +20632,14 @@ export namespace Applications {
   export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
   export import CAs = CAsAPI.CAs;
   export import CA = CAsAPI.CA;
+  export import CACreateResponse = CAsAPI.CACreateResponse;
+  export import CADeleteResponse = CAsAPI.CADeleteResponse;
+  export import CAGetResponse = CAsAPI.CAGetResponse;
   export import CAsSinglePage = CAsAPI.CAsSinglePage;
+  export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
+  export import CADeleteParams = CAsAPI.CADeleteParams;
+  export import CAGetParams = CAsAPI.CAGetParams;
   export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
   export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
@@ -20501,4 +20647,15 @@ export namespace Applications {
   export import Policies = PoliciesAPI.Policies;
   export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
   export import Policy = PoliciesAPI.Policy;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
+  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }
