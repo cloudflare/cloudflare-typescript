@@ -1,6 +1,6 @@
 # Cloudflare Node API Library
 
-[![NPM version](https://img.shields.io/npm/v/cloudflare.svg)](https://npmjs.org/package/cloudflare)
+[![NPM version](https://img.shields.io/npm/v/cloudflare.svg)](https://npmjs.org/package/cloudflare) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/cloudflare)
 
 This library provides convenient access to the Cloudflare REST API from server-side TypeScript or JavaScript.
 

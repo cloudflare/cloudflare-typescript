@@ -23,7 +23,7 @@ export {
   ServiceTokenRule,
   Access,
 } from './access';
-export { AccessUser, AccessUsersSinglePage, Users } from './users/index';
+export { AccessUser, Users } from './users/index';
 export {
   AllowedHeaders,
   AllowedIdPs,
@@ -57,55 +57,28 @@ export {
 export {
   AssociatedHostnames,
   Certificate,
-  CertificateDeleteResponse,
   CertificateCreateParams,
-  CertificateUpdateParams,
   CertificateListParams,
-  CertificateDeleteParams,
-  CertificateGetParams,
   CertificatesSinglePage,
   Certificates,
 } from './certificates/index';
-export {
-  Bookmark,
-  BookmarkDeleteResponse,
-  BookmarkCreateParams,
-  BookmarkUpdateParams,
-  BookmarksSinglePage,
-  Bookmarks,
-} from './bookmarks';
-export {
-  CustomPage,
-  CustomPageWithoutHTML,
-  CustomPageDeleteResponse,
-  CustomPageCreateParams,
-  CustomPageUpdateParams,
-  CustomPageWithoutHTMLsSinglePage,
-  CustomPages,
-} from './custom-pages';
-export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export { Bookmark, Bookmarks } from './bookmarks';
+export { CustomPage, CustomPageWithoutHTML, CustomPages } from './custom-pages';
+export { Keys } from './keys';
 export { Logs } from './logs/index';
 export {
   ServiceToken,
   ServiceTokenCreateResponse,
-  ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
-  ServiceTokenUpdateParams,
   ServiceTokenListParams,
-  ServiceTokenDeleteParams,
-  ServiceTokenGetParams,
   ServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
-export { Tag, TagDeleteResponse, TagCreateParams, TagUpdateParams, TagsSinglePage, Tags } from './tags';
+export { Tag, Tags } from './tags';
 export {
   ZeroTrustGroup,
-  GroupDeleteResponse,
   GroupCreateParams,
-  GroupUpdateParams,
   GroupListParams,
-  GroupDeleteParams,
-  GroupGetParams,
   ZeroTrustGroupsSinglePage,
   Groups,
 } from './groups';

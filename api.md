@@ -2422,6 +2422,7 @@ Methods:
 - <code title="put /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">update</a>(namespaceId, { ...params }) -> NamespaceUpdateResponse</code>
 - <code title="get /accounts/{account_id}/storage/kv/namespaces">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">list</a>({ ...params }) -> NamespacesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">delete</a>(namespaceId, { ...params }) -> NamespaceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/storage/kv/namespaces/{namespace_id}">client.kv.namespaces.<a href="./src/resources/kv/namespaces/namespaces.ts">get</a>(namespaceId, { ...params }) -> Namespace</code>
 
 ### Bulk
 
@@ -2536,6 +2537,127 @@ Methods:
 
 - <code title="post /accounts/{account_id}/queues/{queue_id}/messages/ack">client.queues.messages.<a href="./src/resources/queues/messages.ts">ack</a>(queueId, { ...params }) -> MessageAckResponse | null</code>
 - <code title="post /accounts/{account_id}/queues/{queue_id}/messages/pull">client.queues.messages.<a href="./src/resources/queues/messages.ts">pull</a>(queueId, { ...params }) -> MessagePullResponse | null</code>
+
+# APIGateway
+
+## Configurations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/configurations.ts">Configuration</a></code>
+- <code><a href="./src/resources/api-gateway/configurations.ts">ConfigurationUpdateResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/configuration">client.apiGateway.configurations.<a href="./src/resources/api-gateway/configurations.ts">get</a>({ ...params }) -> Configuration</code>
+
+## Discovery
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/discovery/discovery.ts">DiscoveryOperation</a></code>
+- <code><a href="./src/resources/api-gateway/discovery/discovery.ts">DiscoveryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/discovery">client.apiGateway.discovery.<a href="./src/resources/api-gateway/discovery/discovery.ts">get</a>({ ...params }) -> DiscoveryGetResponse</code>
+
+### Operations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/discovery/operations.ts">OperationEditResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/discovery/operations">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">list</a>({ ...params }) -> DiscoveryOperationsSinglePage</code>
+- <code title="patch /zones/{zone_id}/api_gateway/discovery/operations/{operation_id}">client.apiGateway.discovery.operations.<a href="./src/resources/api-gateway/discovery/operations.ts">edit</a>(operationId, { ...params }) -> OperationEditResponse</code>
+
+## Operations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">APIShield</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationCreateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">create</a>([ ...body ]) -> OperationCreateResponse | null</code>
+- <code title="get /zones/{zone_id}/api_gateway/operations">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">list</a>({ ...params }) -> APIShieldsSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">delete</a>(operationId, { ...params }) -> OperationDeleteResponse</code>
+- <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}">client.apiGateway.operations.<a href="./src/resources/api-gateway/operations/operations.ts">get</a>(operationId, { ...params }) -> APIShield</code>
+
+### SchemaValidation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SettingsMultipleRequest</a></code>
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationUpdateResponse</a></code>
+- <code><a href="./src/resources/api-gateway/operations/schema-validation.ts">SchemaValidationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">update</a>(operationId, { ...params }) -> SchemaValidationUpdateResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/operations/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">edit</a>({ ...params }) -> SettingsMultipleRequest</code>
+- <code title="get /zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation">client.apiGateway.operations.schemaValidation.<a href="./src/resources/api-gateway/operations/schema-validation.ts">get</a>(operationId, { ...params }) -> SchemaValidationGetResponse</code>
+
+## Schemas
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/schemas.ts">SchemaListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/schemas">client.apiGateway.schemas.<a href="./src/resources/api-gateway/schemas.ts">list</a>({ ...params }) -> SchemaListResponse</code>
+
+## Settings
+
+### SchemaValidation
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/settings/schema-validation.ts">Settings</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">update</a>({ ...params }) -> Settings</code>
+- <code title="get /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">get</a>({ ...params }) -> Settings</code>
+
+## UserSchemas
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">Message</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">PublicSchema</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">SchemaUpload</a></code>
+- <code><a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">UserSchemaDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">create</a>({ ...params }) -> SchemaUpload</code>
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">list</a>({ ...params }) -> PublicSchemasSinglePage</code>
+- <code title="delete /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">delete</a>(schemaId, { ...params }) -> UserSchemaDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">edit</a>(schemaId, { ...params }) -> PublicSchema</code>
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}">client.apiGateway.userSchemas.<a href="./src/resources/api-gateway/user-schemas/user-schemas.ts">get</a>(schemaId, { ...params }) -> PublicSchema</code>
+
+### Operations
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/user-schemas/operations.ts">OperationListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}/operations">client.apiGateway.userSchemas.operations.<a href="./src/resources/api-gateway/user-schemas/operations.ts">list</a>(schemaId, { ...params }) -> OperationListResponsesSinglePage</code>
+
+## SchemaValidation
+
+Methods:
+
+- <code title="patch /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.schemaValidation.<a href="./src/resources/api-gateway/schema-validation.ts">edit</a>({ ...params }) -> Settings</code>
 
 # ManagedHeaders
 
@@ -3992,6 +4114,7 @@ Types:
 - <code><a href="./src/resources/d1/database.ts">DatabaseListResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseDeleteResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseQueryResponse</a></code>
+- <code><a href="./src/resources/d1/database.ts">DatabaseRawResponse</a></code>
 
 Methods:
 
@@ -4000,6 +4123,7 @@ Methods:
 - <code title="delete /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">delete</a>(databaseId, { ...params }) -> DatabaseDeleteResponse</code>
 - <code title="get /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">get</a>(databaseId, { ...params }) -> D1</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/query">client.d1.database.<a href="./src/resources/d1/database.ts">query</a>(databaseId, { ...params }) -> DatabaseQueryResponse</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/raw">client.d1.database.<a href="./src/resources/d1/database.ts">raw</a>(databaseId, { ...params }) -> DatabaseRawResponse</code>
 
 # R2
 
@@ -4361,15 +4485,11 @@ Types:
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderType</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">ScimConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">create</a>({ ...params }) -> IdentityProvider</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">update</a>(uuid, { ...params }) -> IdentityProvider</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">list</a>({ ...params }) -> IdentityProviderListResponsesSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">delete</a>(uuid, { ...params }) -> IdentityProviderDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/identity_providers/{uuid}">client.zeroTrust.identityProviders.<a href="./src/resources/zero-trust/identity-providers.ts">get</a>(uuid, { ...params }) -> IdentityProvider</code>
 
 ## Organizations
 
@@ -4391,11 +4511,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/seats.ts">Seat</a></code>
-- <code><a href="./src/resources/zero-trust/seats.ts">SeatEditResponse</a></code>
-
-Methods:
-
-- <code title="patch /accounts/{identifier}/access/seats">client.zeroTrust.seats.<a href="./src/resources/zero-trust/seats.ts">edit</a>(identifier, [ ...body ]) -> SeatEditResponse | null</code>
 
 ## Access
 
@@ -4461,16 +4576,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CA</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CACreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CADeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/cas.ts">CAGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">create</a>(uuid, { ...params }) -> CACreateResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">list</a>({ ...params }) -> CAsSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">delete</a>(uuid, { ...params }) -> CADeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/ca">client.zeroTrust.access.applications.cas.<a href="./src/resources/zero-trust/access/applications/cas.ts">get</a>(uuid, { ...params }) -> CAGetResponse</code>
 
 #### UserPolicyChecks
 
@@ -4489,19 +4598,6 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ApprovalGroup</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">Policy</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyGetResponse</a></code>
-
-Methods:
-
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(uuid, { ...params }) -> PolicyCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(uuid1, uuid, { ...params }) -> PolicyUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(uuid, { ...params }) -> PolicyListResponsesSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(uuid1, uuid, { ...params }) -> PolicyDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{uuid1}/policies/{uuid}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(uuid1, uuid, { ...params }) -> PolicyGetResponse</code>
 
 ### Certificates
 
@@ -4509,15 +4605,11 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">AssociatedHostnames</a></code>
 - <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">Certificate</a></code>
-- <code><a href="./src/resources/zero-trust/access/certificates/certificates.ts">CertificateDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/certificates">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">create</a>({ ...params }) -> Certificate</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">update</a>(uuid, { ...params }) -> Certificate</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">list</a>({ ...params }) -> CertificatesSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">delete</a>(uuid, { ...params }) -> CertificateDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/certificates/{uuid}">client.zeroTrust.access.certificates.<a href="./src/resources/zero-trust/access/certificates/certificates.ts">get</a>(uuid, { ...params }) -> Certificate</code>
 
 #### Settings
 
@@ -4537,15 +4629,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/groups.ts">ZeroTrustGroup</a></code>
-- <code><a href="./src/resources/zero-trust/access/groups.ts">GroupDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">create</a>({ ...params }) -> ZeroTrustGroup</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">update</a>(uuid, { ...params }) -> ZeroTrustGroup</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">list</a>({ ...params }) -> ZeroTrustGroupsSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">delete</a>(uuid, { ...params }) -> GroupDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/groups/{uuid}">client.zeroTrust.access.groups.<a href="./src/resources/zero-trust/access/groups.ts">get</a>(uuid, { ...params }) -> ZeroTrustGroup</code>
 
 ### ServiceTokens
 
@@ -4553,46 +4641,19 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceToken</a></code>
 - <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/service-tokens.ts">ServiceTokenRotateResponse</a></code>
 
 Methods:
 
 - <code title="post /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">create</a>({ ...params }) -> ServiceTokenCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">update</a>(uuid, { ...params }) -> ServiceToken</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">list</a>({ ...params }) -> ServiceTokensSinglePage</code>
-- <code title="delete /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">delete</a>(uuid, { ...params }) -> ServiceToken</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/service_tokens/{uuid}">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">get</a>(uuid, { ...params }) -> ServiceToken</code>
-- <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/refresh">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">refresh</a>(identifier, uuid) -> ServiceToken</code>
-- <code title="post /accounts/{identifier}/access/service_tokens/{uuid}/rotate">client.zeroTrust.access.serviceTokens.<a href="./src/resources/zero-trust/access/service-tokens.ts">rotate</a>(identifier, uuid) -> ServiceTokenRotateResponse</code>
 
 ### Bookmarks
 
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/bookmarks.ts">Bookmark</a></code>
-- <code><a href="./src/resources/zero-trust/access/bookmarks.ts">BookmarkDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">create</a>(identifier, uuid, { ...params }) -> Bookmark</code>
-- <code title="put /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">update</a>(identifier, uuid, { ...params }) -> Bookmark</code>
-- <code title="get /accounts/{identifier}/access/bookmarks">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">list</a>(identifier) -> BookmarksSinglePage</code>
-- <code title="delete /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">delete</a>(identifier, uuid) -> BookmarkDeleteResponse</code>
-- <code title="get /accounts/{identifier}/access/bookmarks/{uuid}">client.zeroTrust.access.bookmarks.<a href="./src/resources/zero-trust/access/bookmarks.ts">get</a>(identifier, uuid) -> Bookmark</code>
 
 ### Keys
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyGetResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/keys.ts">KeyRotateResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{identifier}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">update</a>(identifier, { ...params }) -> KeyUpdateResponse</code>
-- <code title="get /accounts/{identifier}/access/keys">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">get</a>(identifier) -> KeyGetResponse</code>
-- <code title="post /accounts/{identifier}/access/keys/rotate">client.zeroTrust.access.keys.<a href="./src/resources/zero-trust/access/keys.ts">rotate</a>(identifier) -> KeyRotateResponse</code>
 
 ### Logs
 
@@ -4601,11 +4662,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequests</a></code>
-- <code><a href="./src/resources/zero-trust/access/logs/access-requests.ts">AccessRequestListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{identifier}/access/logs/access_requests">client.zeroTrust.access.logs.accessRequests.<a href="./src/resources/zero-trust/access/logs/access-requests.ts">list</a>(identifier) -> AccessRequestListResponse | null</code>
 
 ### Users
 
@@ -4613,21 +4669,7 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/users.ts">AccessUser</a></code>
 
-Methods:
-
-- <code title="get /accounts/{identifier}/access/users">client.zeroTrust.access.users.<a href="./src/resources/zero-trust/access/users/users.ts">list</a>(identifier) -> AccessUsersSinglePage</code>
-
 #### ActiveSessions
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/users/active-sessions.ts">ActiveSessionListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/users/active-sessions.ts">ActiveSessionGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{identifier}/access/users/{id}/active_sessions">client.zeroTrust.access.users.activeSessions.<a href="./src/resources/zero-trust/access/users/active-sessions.ts">list</a>(identifier, id) -> ActiveSessionListResponsesSinglePage</code>
-- <code title="get /accounts/{identifier}/access/users/{id}/active_sessions/{nonce}">client.zeroTrust.access.users.activeSessions.<a href="./src/resources/zero-trust/access/users/active-sessions.ts">get</a>(identifier, id, nonce) -> ActiveSessionGetResponse</code>
 
 #### LastSeenIdentity
 
@@ -4635,19 +4677,7 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/users/last-seen-identity.ts">Identity</a></code>
 
-Methods:
-
-- <code title="get /accounts/{identifier}/access/users/{id}/last_seen_identity">client.zeroTrust.access.users.lastSeenIdentity.<a href="./src/resources/zero-trust/access/users/last-seen-identity.ts">get</a>(identifier, id) -> Identity</code>
-
 #### FailedLogins
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/access/users/failed-logins.ts">FailedLoginListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{identifier}/access/users/{id}/failed_logins">client.zeroTrust.access.users.failedLogins.<a href="./src/resources/zero-trust/access/users/failed-logins.ts">list</a>(identifier, id) -> FailedLoginListResponsesSinglePage</code>
 
 ### CustomPages
 
@@ -4655,30 +4685,12 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPage</a></code>
 - <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPageWithoutHTML</a></code>
-- <code><a href="./src/resources/zero-trust/access/custom-pages.ts">CustomPageDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{identifier}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">create</a>(identifier, { ...params }) -> CustomPageWithoutHTML</code>
-- <code title="put /accounts/{identifier}/access/custom_pages/{uuid}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">update</a>(identifier, uuid, { ...params }) -> CustomPageWithoutHTML</code>
-- <code title="get /accounts/{identifier}/access/custom_pages">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">list</a>(identifier) -> CustomPageWithoutHTMLsSinglePage</code>
-- <code title="delete /accounts/{identifier}/access/custom_pages/{uuid}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">delete</a>(identifier, uuid) -> CustomPageDeleteResponse</code>
-- <code title="get /accounts/{identifier}/access/custom_pages/{uuid}">client.zeroTrust.access.customPages.<a href="./src/resources/zero-trust/access/custom-pages.ts">get</a>(identifier, uuid) -> CustomPage</code>
 
 ### Tags
 
 Types:
 
 - <code><a href="./src/resources/zero-trust/access/tags.ts">Tag</a></code>
-- <code><a href="./src/resources/zero-trust/access/tags.ts">TagDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{identifier}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">create</a>(identifier, { ...params }) -> Tag</code>
-- <code title="put /accounts/{identifier}/access/tags/{name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">update</a>(identifier, tagName, { ...params }) -> Tag</code>
-- <code title="get /accounts/{identifier}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">list</a>(identifier) -> TagsSinglePage</code>
-- <code title="delete /accounts/{identifier}/access/tags/{name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">delete</a>(identifier, name) -> TagDeleteResponse</code>
-- <code title="get /accounts/{identifier}/access/tags/{name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">get</a>(identifier, name) -> Tag</code>
 
 ## DEX
 
@@ -5435,14 +5447,22 @@ Types:
 - <code><a href="./src/resources/radar/bgp/routes.ts">RouteMoasResponse</a></code>
 - <code><a href="./src/resources/radar/bgp/routes.ts">RoutePfx2asResponse</a></code>
 - <code><a href="./src/resources/radar/bgp/routes.ts">RouteStatsResponse</a></code>
-- <code><a href="./src/resources/radar/bgp/routes.ts">RouteTimeseriesResponse</a></code>
 
 Methods:
 
 - <code title="get /radar/bgp/routes/moas">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">moas</a>({ ...params }) -> RouteMoasResponse</code>
 - <code title="get /radar/bgp/routes/pfx2as">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">pfx2as</a>({ ...params }) -> RoutePfx2asResponse</code>
 - <code title="get /radar/bgp/routes/stats">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">stats</a>({ ...params }) -> RouteStatsResponse</code>
-- <code title="get /radar/bgp/routes/timeseries">client.radar.bgp.routes.<a href="./src/resources/radar/bgp/routes.ts">timeseries</a>({ ...params }) -> RouteTimeseriesResponse</code>
+
+### IPs
+
+Types:
+
+- <code><a href="./src/resources/radar/bgp/ips.ts">IPTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/bgp/ips/timeseries">client.radar.bgp.ips.<a href="./src/resources/radar/bgp/ips.ts">timeseries</a>({ ...params }) -> IPTimeseriesResponse</code>
 
 ## Datasets
 

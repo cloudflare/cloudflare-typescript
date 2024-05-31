@@ -110,4 +110,26 @@ describe('resource database', () => {
       params: ['firstParam', 'secondParam'],
     });
   });
+
+  test('raw: only required params', async () => {
+    const responsePromise = cloudflare.d1.database.raw('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('raw: required and optional params', async () => {
+    const response = await cloudflare.d1.database.raw('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
+      params: ['firstParam', 'secondParam'],
+    });
+  });
 });

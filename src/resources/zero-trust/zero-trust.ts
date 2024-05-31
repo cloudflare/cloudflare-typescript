@@ -46,13 +46,9 @@ export namespace ZeroTrust {
   export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
   export import ScimConfig = IdentityProvidersAPI.ScimConfig;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
-  export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
   export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
-  export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
   export import IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;
-  export import IdentityProviderDeleteParams = IdentityProvidersAPI.IdentityProviderDeleteParams;
-  export import IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
   export import Organizations = OrganizationsAPI.Organizations;
   export import LoginDesign = OrganizationsAPI.LoginDesign;
   export import Organization = OrganizationsAPI.Organization;
@@ -63,8 +59,6 @@ export namespace ZeroTrust {
   export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
   export import Seats = SeatsAPI.Seats;
   export import Seat = SeatsAPI.Seat;
-  export import SeatEditResponse = SeatsAPI.SeatEditResponse;
-  export import SeatEditParams = SeatsAPI.SeatEditParams;
   export import Access = AccessAPI.Access;
   export import AccessDevicePostureRule = AccessAPI.AccessDevicePostureRule;
   export import AccessRule = AccessAPI.AccessRule;

@@ -34,10 +34,12 @@ export namespace D1Resource {
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
+  export import DatabaseRawResponse = DatabaseAPI.DatabaseRawResponse;
   export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
   export import DatabaseDeleteParams = DatabaseAPI.DatabaseDeleteParams;
   export import DatabaseGetParams = DatabaseAPI.DatabaseGetParams;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
+  export import DatabaseRawParams = DatabaseAPI.DatabaseRawParams;
 }

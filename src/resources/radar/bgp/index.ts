@@ -2,16 +2,15 @@
 
 export { BGPTimeseriesResponse, BGPTimeseriesParams, BGP } from './bgp';
 export { Hijacks } from './hijacks/index';
+export { IPTimeseriesResponse, IPTimeseriesParams, IPs } from './ips';
 export { Leaks } from './leaks/index';
 export {
   RouteMoasResponse,
   RoutePfx2asResponse,
   RouteStatsResponse,
-  RouteTimeseriesResponse,
   RouteMoasParams,
   RoutePfx2asParams,
   RouteStatsParams,
-  RouteTimeseriesParams,
   Routes,
 } from './routes';
 export { TopPrefixesResponse, TopPrefixesParams, Top } from './top/index';

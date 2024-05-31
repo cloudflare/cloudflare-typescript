@@ -78,6 +78,23 @@ export class Namespaces extends APIResource {
       ) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get the namespace corresponding to the given ID.
+   */
+  get(
+    namespaceId: string,
+    params: NamespaceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Namespace> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
+        options,
+      ) as Core.APIPromise<{ result: Namespace }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {}
@@ -152,6 +169,13 @@ export interface NamespaceDeleteParams {
   account_id: string;
 }
 
+export interface NamespaceGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Namespaces {
   export import Namespace = NamespacesAPI.Namespace;
   export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
@@ -161,6 +185,7 @@ export namespace Namespaces {
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
+  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
   export import Bulk = BulkAPI.Bulk;
   export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
   export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;

@@ -9,48 +9,6 @@ import { SinglePage } from '../../../../pagination';
 
 export class CAs extends APIResource {
   /**
-   * Generates a new short-lived certificate CA and public key.
-   */
-  create(
-    uuid: string,
-    params?: CACreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CACreateResponse>;
-  create(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CACreateResponse>;
-  create(
-    uuid: string,
-    params: CACreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CACreateResponse> {
-    if (isRequestOptions(params)) {
-      return this.create(uuid, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
-        options,
-      ) as Core.APIPromise<{ result: CACreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists short-lived certificate CAs and their public keys.
    */
   list(params?: CAListParams, options?: Core.RequestOptions): Core.PagePromise<CAsSinglePage, CA>;
@@ -85,86 +43,6 @@ export class CAs extends APIResource {
       options,
     );
   }
-
-  /**
-   * Deletes a short-lived certificate CA.
-   */
-  delete(
-    uuid: string,
-    params?: CADeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CADeleteResponse>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CADeleteResponse>;
-  delete(
-    uuid: string,
-    params: CADeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CADeleteResponse> {
-    if (isRequestOptions(params)) {
-      return this.delete(uuid, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
-        options,
-      ) as Core.APIPromise<{ result: CADeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches a short-lived certificate CA and its public key.
-   */
-  get(uuid: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
-  get(
-    uuid: string,
-    params: CAGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CAGetResponse> {
-    if (isRequestOptions(params)) {
-      return this.get(uuid, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
-        options,
-      ) as Core.APIPromise<{ result: CAGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class CAsSinglePage extends SinglePage<CA> {}
@@ -187,54 +65,7 @@ export interface CA {
   public_key?: string;
 }
 
-export type CACreateResponse = unknown | string | null;
-
-export interface CADeleteResponse {
-  /**
-   * The ID of the CA.
-   */
-  id?: string;
-}
-
-export type CAGetResponse = unknown | string | null;
-
-export interface CACreateParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
 export interface CAListParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
-export interface CADeleteParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
-export interface CAGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -248,12 +79,6 @@ export interface CAGetParams {
 
 export namespace CAs {
   export import CA = CAsAPI.CA;
-  export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import CAGetResponse = CAsAPI.CAGetResponse;
   export import CAsSinglePage = CAsAPI.CAsSinglePage;
-  export import CACreateParams = CAsAPI.CACreateParams;
   export import CAListParams = CAsAPI.CAListParams;
-  export import CADeleteParams = CAsAPI.CADeleteParams;
-  export import CAGetParams = CAsAPI.CAGetParams;
 }

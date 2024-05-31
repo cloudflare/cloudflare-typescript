@@ -81,6 +81,11 @@ export interface Bucket {
    * Name of the bucket
    */
   name?: string;
+
+  /**
+   * Storage class for newly uploaded objects, unless specified otherwise.
+   */
+  storage_class?: 'Standard' | 'InfrequentAccess';
 }
 
 export type BucketDeleteResponse = unknown;
@@ -100,6 +105,12 @@ export interface BucketCreateParams {
    * Body param: Location of the bucket
    */
   locationHint?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+
+  /**
+   * Body param: Storage class for newly uploaded objects, unless specified
+   * otherwise.
+   */
+  storageClass?: 'Standard' | 'InfrequentAccess';
 }
 
 export interface BucketListParams extends CursorPaginationParams {
