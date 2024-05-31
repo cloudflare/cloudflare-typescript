@@ -23,7 +23,7 @@ export {
   ServiceTokenRule,
   Access,
 } from './access';
-export { AccessUser, Users } from './users/index';
+export { AccessUser, UserListParams, AccessUsersSinglePage, Users } from './users/index';
 export {
   AllowedHeaders,
   AllowedIdPs,
@@ -57,28 +57,81 @@ export {
 export {
   AssociatedHostnames,
   Certificate,
+  CertificateDeleteResponse,
   CertificateCreateParams,
+  CertificateUpdateParams,
   CertificateListParams,
+  CertificateDeleteParams,
+  CertificateGetParams,
   CertificatesSinglePage,
   Certificates,
 } from './certificates/index';
-export { Bookmark, Bookmarks } from './bookmarks';
-export { CustomPage, CustomPageWithoutHTML, CustomPages } from './custom-pages';
-export { Keys } from './keys';
+export {
+  Bookmark,
+  BookmarkDeleteResponse,
+  BookmarkCreateParams,
+  BookmarkUpdateParams,
+  BookmarkListParams,
+  BookmarkDeleteParams,
+  BookmarkGetParams,
+  BookmarksSinglePage,
+  Bookmarks,
+} from './bookmarks';
+export {
+  CustomPage,
+  CustomPageWithoutHTML,
+  CustomPageDeleteResponse,
+  CustomPageCreateParams,
+  CustomPageUpdateParams,
+  CustomPageListParams,
+  CustomPageDeleteParams,
+  CustomPageGetParams,
+  CustomPageWithoutHTMLsSinglePage,
+  CustomPages,
+} from './custom-pages';
+export {
+  KeyUpdateResponse,
+  KeyGetResponse,
+  KeyRotateResponse,
+  KeyUpdateParams,
+  KeyGetParams,
+  KeyRotateParams,
+  Keys,
+} from './keys';
 export { Logs } from './logs/index';
 export {
   ServiceToken,
   ServiceTokenCreateResponse,
+  ServiceTokenRotateResponse,
   ServiceTokenCreateParams,
+  ServiceTokenUpdateParams,
   ServiceTokenListParams,
+  ServiceTokenDeleteParams,
+  ServiceTokenGetParams,
+  ServiceTokenRefreshParams,
+  ServiceTokenRotateParams,
   ServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
-export { Tag, Tags } from './tags';
+export {
+  Tag,
+  TagDeleteResponse,
+  TagCreateParams,
+  TagUpdateParams,
+  TagListParams,
+  TagDeleteParams,
+  TagGetParams,
+  TagsSinglePage,
+  Tags,
+} from './tags';
 export {
   ZeroTrustGroup,
+  GroupDeleteResponse,
   GroupCreateParams,
+  GroupUpdateParams,
   GroupListParams,
+  GroupDeleteParams,
+  GroupGetParams,
   ZeroTrustGroupsSinglePage,
   Groups,
 } from './groups';

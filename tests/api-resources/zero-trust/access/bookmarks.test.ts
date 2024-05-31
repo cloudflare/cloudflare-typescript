@@ -9,14 +9,52 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource certificates', () => {
-  // TODO: investigate broken test
-  test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.create({
-      certificate:
-        '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
-      name: 'Allow devs',
-      account_id: 'string',
+describe('resource bookmarks', () => {
+  test('create: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.bookmarks.create(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.create(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+    );
+  });
+
+  test('update: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.bookmarks.update(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.update(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
+    );
+  });
+
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.bookmarks.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,25 +65,16 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.certificates.create({
-      certificate:
-        '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
-      name: 'Allow devs',
-      account_id: 'string',
-      associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.update(
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.bookmarks.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
-        account_id: 'string',
-      },
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -56,35 +85,17 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.certificates.update(
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
-        account_id: 'string',
-        name: 'Allow devs',
-      },
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
-  // TODO: investigate broken test
-  test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.list({ account_id: 'string' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.delete(
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.bookmarks.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -95,18 +106,9 @@ describe('resource certificates', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.get(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });
