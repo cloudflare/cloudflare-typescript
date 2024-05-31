@@ -13,8 +13,8 @@ describe('resource colos', () => {
   test('list: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dex.colos.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      from: '2023-08-20T20:45:00Z',
-      to: '2023-08-24T20:45:00Z',
+      timeEnd: '2023-08-24T20:45:00Z',
+      timeStart: '2023-08-20T20:45:00Z',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,8 +28,8 @@ describe('resource colos', () => {
   test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.colos.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      from: '2023-08-20T20:45:00Z',
-      to: '2023-08-24T20:45:00Z',
+      timeEnd: '2023-08-24T20:45:00Z',
+      timeStart: '2023-08-20T20:45:00Z',
       sortBy: 'fleet-status-usage',
     });
   });
