@@ -50,12 +50,12 @@ export {
   GatewayIPs,
   ProxyEndpoint,
   ProxyEndpointDeleteResponse,
+  ProxyEndpointGetResponse,
   ProxyEndpointCreateParams,
   ProxyEndpointListParams,
   ProxyEndpointDeleteParams,
   ProxyEndpointEditParams,
   ProxyEndpointGetParams,
-  ProxyEndpointsSinglePage,
   ProxyEndpoints,
 } from './proxy-endpoints';
 export {
