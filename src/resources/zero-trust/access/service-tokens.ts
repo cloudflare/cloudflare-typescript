@@ -43,39 +43,6 @@ export class ServiceTokens extends APIResource {
   }
 
   /**
-   * Updates a configured service token.
-   */
-  update(
-    uuid: string,
-    params: ServiceTokenUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceToken> {
-    const { account_id, zone_id, ...body } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ServiceToken }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists all service tokens.
    */
   list(
@@ -112,118 +79,6 @@ export class ServiceTokens extends APIResource {
       ServiceTokensSinglePage,
       options,
     );
-  }
-
-  /**
-   * Deletes a service token.
-   */
-  delete(
-    uuid: string,
-    params?: ServiceTokenDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceToken>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
-  delete(
-    uuid: string,
-    params: ServiceTokenDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceToken> {
-    if (isRequestOptions(params)) {
-      return this.delete(uuid, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
-        options,
-      ) as Core.APIPromise<{ result: ServiceToken }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches a single service token.
-   */
-  get(
-    uuid: string,
-    params?: ServiceTokenGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceToken>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
-  get(
-    uuid: string,
-    params: ServiceTokenGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceToken> {
-    if (isRequestOptions(params)) {
-      return this.get(uuid, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
-        options,
-      ) as Core.APIPromise<{ result: ServiceToken }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Refreshes the expiration of a service token.
-   */
-  refresh(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
-    return (
-      this._client.post(
-        `/accounts/${identifier}/access/service_tokens/${uuid}/refresh`,
-        options,
-      ) as Core.APIPromise<{ result: ServiceToken }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Generates a new Client Secret for a service token and revokes the old one.
-   */
-  rotate(
-    identifier: string,
-    uuid: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ServiceTokenRotateResponse> {
-    return (
-      this._client.post(
-        `/accounts/${identifier}/access/service_tokens/${uuid}/rotate`,
-        options,
-      ) as Core.APIPromise<{ result: ServiceTokenRotateResponse }>
-    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -293,41 +148,6 @@ export interface ServiceTokenCreateResponse {
   updated_at?: string;
 }
 
-export interface ServiceTokenRotateResponse {
-  /**
-   * The ID of the service token.
-   */
-  id?: string;
-
-  /**
-   * The Client ID for the service token. Access will check for this value in the
-   * `CF-Access-Client-ID` request header.
-   */
-  client_id?: string;
-
-  /**
-   * The Client Secret for the service token. Access will check for this value in the
-   * `CF-Access-Client-Secret` request header.
-   */
-  client_secret?: string;
-
-  created_at?: string;
-
-  /**
-   * The duration for how long the service token will be valid. Must be in the format
-   * `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The
-   * default is 1 year in hours (8760h).
-   */
-  duration?: string;
-
-  /**
-   * The name of the service token.
-   */
-  name?: string;
-
-  updated_at?: string;
-}
-
 export interface ServiceTokenCreateParams {
   /**
    * Body param: The name of the service token.
@@ -354,57 +174,7 @@ export interface ServiceTokenCreateParams {
   duration?: string;
 }
 
-export interface ServiceTokenUpdateParams {
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id?: string;
-
-  /**
-   * Body param: The duration for how long the service token will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h. The default is 1 year in hours (8760h).
-   */
-  duration?: string;
-
-  /**
-   * Body param: The name of the service token.
-   */
-  name?: string;
-}
-
 export interface ServiceTokenListParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
-export interface ServiceTokenDeleteParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
-export interface ServiceTokenGetParams {
   /**
    * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
    */
@@ -419,11 +189,7 @@ export interface ServiceTokenGetParams {
 export namespace ServiceTokens {
   export import ServiceToken = ServiceTokensAPI.ServiceToken;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
-  export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
   export import ServiceTokensSinglePage = ServiceTokensAPI.ServiceTokensSinglePage;
   export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
-  export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
-  export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
-  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
 }

@@ -104,7 +104,7 @@ export namespace AIGatewayCreateResponse {
 
     cache_invalidate_on_update: boolean;
 
-    cache_ttl: number;
+    cache_ttl: number | null;
 
     collect_logs: boolean;
 
@@ -112,11 +112,11 @@ export namespace AIGatewayCreateResponse {
 
     modified_at: string;
 
-    rate_limiting_interval?: number;
+    rate_limiting_interval: number | null;
 
-    rate_limiting_limit?: number;
+    rate_limiting_limit: number | null;
 
-    rate_limiting_technique?: string;
+    rate_limiting_technique: 'fixed' | 'sliding';
   }
 }
 
@@ -128,7 +128,7 @@ export interface AIGatewayUpdateResponse {
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -136,11 +136,11 @@ export interface AIGatewayUpdateResponse {
 
   modified_at: string;
 
-  rate_limiting_interval?: number;
+  rate_limiting_interval: number | null;
 
-  rate_limiting_limit?: number;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayListResponse {
@@ -151,7 +151,7 @@ export interface AIGatewayListResponse {
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -159,11 +159,11 @@ export interface AIGatewayListResponse {
 
   modified_at: string;
 
-  rate_limiting_interval?: number;
+  rate_limiting_interval: number | null;
 
-  rate_limiting_limit?: number;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayDeleteResponse {
@@ -174,7 +174,7 @@ export interface AIGatewayDeleteResponse {
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -182,11 +182,11 @@ export interface AIGatewayDeleteResponse {
 
   modified_at: string;
 
-  rate_limiting_interval?: number;
+  rate_limiting_interval: number | null;
 
-  rate_limiting_limit?: number;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayGetResponse {
@@ -197,7 +197,7 @@ export interface AIGatewayGetResponse {
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -205,11 +205,11 @@ export interface AIGatewayGetResponse {
 
   modified_at: string;
 
-  rate_limiting_interval?: number;
+  rate_limiting_interval: number | null;
 
-  rate_limiting_limit?: number;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayCreateParams {
@@ -231,7 +231,7 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   /**
    * Body param:
@@ -241,17 +241,17 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
-  rate_limiting_interval?: number;
+  rate_limiting_interval: number | null;
 
   /**
    * Body param:
    */
-  rate_limiting_limit?: number;
+  rate_limiting_limit: number | null;
 
   /**
    * Body param:
    */
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayUpdateParams {
@@ -268,7 +268,7 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   /**
    * Body param:
@@ -278,17 +278,17 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  rate_limiting_interval?: number;
+  rate_limiting_interval: number | null;
 
   /**
    * Body param:
    */
-  rate_limiting_limit?: number;
+  rate_limiting_limit: number | null;
 
   /**
    * Body param:
    */
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {

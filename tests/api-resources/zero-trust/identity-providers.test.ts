@@ -54,82 +54,8 @@ describe('resource identityProviders', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.identityProviders.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { config: {}, name: 'Widget Corps IDP', type: 'onetimepin', account_id: 'string' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.identityProviders.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        config: {
-          client_id: '<your client id>',
-          client_secret: '<your client secret>',
-          claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
-          email_claim_name: 'custom_claim_name',
-          conditional_access_enabled: true,
-          directory_id: '<your azure directory uuid>',
-          prompt: 'login',
-          support_groups: true,
-        },
-        name: 'Widget Corps IDP',
-        type: 'onetimepin',
-        account_id: 'string',
-        scim_config: {
-          enabled: true,
-          group_member_deprovision: true,
-          seat_deprovision: true,
-          secret: 'string',
-          user_deprovision: true,
-        },
-      },
-    );
-  });
-
-  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.list({ account_id: 'string' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.identityProviders.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.identityProviders.get(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

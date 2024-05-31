@@ -1,12 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
 import * as UsersAPI from './users';
 import * as ActiveSessionsAPI from './active-sessions';
 import * as FailedLoginsAPI from './failed-logins';
 import * as LastSeenIdentityAPI from './last-seen-identity';
-import { SinglePage } from '../../../../pagination';
 
 export class Users extends APIResource {
   activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);
@@ -14,19 +12,7 @@ export class Users extends APIResource {
     this._client,
   );
   failedLogins: FailedLoginsAPI.FailedLogins = new FailedLoginsAPI.FailedLogins(this._client);
-
-  /**
-   * Gets a list of users for an account.
-   */
-  list(
-    identifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/users`, AccessUsersSinglePage, options);
-  }
 }
-
-export class AccessUsersSinglePage extends SinglePage<AccessUser> {}
 
 export interface AccessUser {
   /**
@@ -81,14 +67,8 @@ export interface AccessUser {
 
 export namespace Users {
   export import AccessUser = UsersAPI.AccessUser;
-  export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
-  export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
-  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
-  export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
   export import Identity = LastSeenIdentityAPI.Identity;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
-  export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
-  export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
 }

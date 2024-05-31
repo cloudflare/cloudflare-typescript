@@ -9,12 +9,11 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource failedLogins', () => {
-  test('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.users.failedLogins.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+describe('resource schemaValidation', () => {
+  test('edit: only required params', async () => {
+    const responsePromise = cloudflare.apiGateway.schemaValidation.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +23,11 @@ describe('resource failedLogins', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.users.failedLogins.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('edit: required and optional params', async () => {
+    const response = await cloudflare.apiGateway.schemaValidation.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      validation_default_mitigation_action: 'block',
+      validation_override_mitigation_action: 'none',
+    });
   });
 });

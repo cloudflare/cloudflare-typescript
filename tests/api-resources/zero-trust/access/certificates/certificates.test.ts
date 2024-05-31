@@ -39,68 +39,8 @@ describe('resource certificates', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
-        account_id: 'string',
-      },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.certificates.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
-        account_id: 'string',
-        name: 'Allow devs',
-      },
-    );
-  });
-
-  // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.list({ account_id: 'string' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.get(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
-    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

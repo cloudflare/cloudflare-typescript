@@ -4,6 +4,7 @@ import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as BGPAPI from './bgp';
+import * as IPsAPI from './ips';
 import * as RoutesAPI from './routes';
 import * as HijacksAPI from './hijacks/hijacks';
 import * as LeaksAPI from './leaks/leaks';
@@ -14,6 +15,7 @@ export class BGP extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
   hijacks: HijacksAPI.Hijacks = new HijacksAPI.Hijacks(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
+  ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
 
   /**
    * Gets BGP updates change over time. Raw values are returned. When requesting
@@ -196,9 +198,10 @@ export namespace BGP {
   export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
   export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
   export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
-  export import RouteTimeseriesResponse = RoutesAPI.RouteTimeseriesResponse;
   export import RouteMoasParams = RoutesAPI.RouteMoasParams;
   export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
   export import RouteStatsParams = RoutesAPI.RouteStatsParams;
-  export import RouteTimeseriesParams = RoutesAPI.RouteTimeseriesParams;
+  export import IPs = IPsAPI.IPs;
+  export import IPTimeseriesResponse = IPsAPI.IPTimeseriesResponse;
+  export import IPTimeseriesParams = IPsAPI.IPTimeseriesParams;
 }

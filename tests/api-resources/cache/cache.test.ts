@@ -22,6 +22,9 @@ describe('resource cache', () => {
   });
 
   test('purge: required and optional params', async () => {
-    const response = await cloudflare.cache.purge({ zone_id: 'string', tags: ['some-tag', 'another-tag'] });
+    const response = await cloudflare.cache.purge({
+      zone_id: 'string',
+      tags: ['a-cache-tag', 'another-cache-tag'],
+    });
   });
 });

@@ -9,12 +9,9 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource lastSeenIdentity', () => {
-  test('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.users.lastSeenIdentity.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-    );
+describe('resource ips', () => {
+  test('timeseries', async () => {
+    const responsePromise = cloudflare.radar.bgp.ips.timeseries();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,12 +21,27 @@ describe('resource lastSeenIdentity', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
+  test('timeseries: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(cloudflare.radar.bgp.ips.timeseries({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
+  });
+
+  test('timeseries: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.zeroTrust.access.users.lastSeenIdentity.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      cloudflare.radar.bgp.ips.timeseries(
+        {
+          asn: '174,7922',
+          dateEnd: '2023-09-01T11:41:33.782Z',
+          dateRange: '7d',
+          dateStart: '2023-09-01T11:41:33.782Z',
+          format: 'JSON',
+          includeDelay: true,
+          location: 'US,CA',
+          name: ['string', 'string', 'string'],
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
