@@ -2,19 +2,20 @@
 
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
-import { Sites } from './sites/sites';
 import * as SitesAPI from './sites';
 import * as ACLsAPI from './acls';
+import * as AppConfigurationAPI from './app-configuration';
 import * as LANsAPI from './lans';
 import * as WANsAPI from './wans';
-import * as SitesSitesAPI from './sites/sites';
 import { SinglePage } from '../../../pagination';
 
 export class Sites extends APIResource {
+  appConfiguration: AppConfigurationAPI.AppConfiguration = new AppConfigurationAPI.AppConfiguration(
+    this._client,
+  );
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
   lans: LANsAPI.LANs = new LANsAPI.LANs(this._client);
   wans: WANsAPI.WANs = new WANsAPI.WANs(this._client);
-  sites: SitesSitesAPI.Sites = new SitesSitesAPI.Sites(this._client);
 
   /**
    * Creates a new Site
@@ -300,6 +301,16 @@ export namespace Sites {
   export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
   export import SiteEditParams = SitesAPI.SiteEditParams;
   export import SiteGetParams = SitesAPI.SiteGetParams;
+  export import AppConfiguration = AppConfigurationAPI.AppConfiguration;
+  export import AppConfigurationCreateResponse = AppConfigurationAPI.AppConfigurationCreateResponse;
+  export import AppConfigurationUpdateResponse = AppConfigurationAPI.AppConfigurationUpdateResponse;
+  export import AppConfigurationListResponse = AppConfigurationAPI.AppConfigurationListResponse;
+  export import AppConfigurationDeleteResponse = AppConfigurationAPI.AppConfigurationDeleteResponse;
+  export import AppConfigurationListResponsesSinglePage = AppConfigurationAPI.AppConfigurationListResponsesSinglePage;
+  export import AppConfigurationCreateParams = AppConfigurationAPI.AppConfigurationCreateParams;
+  export import AppConfigurationUpdateParams = AppConfigurationAPI.AppConfigurationUpdateParams;
+  export import AppConfigurationListParams = AppConfigurationAPI.AppConfigurationListParams;
+  export import AppConfigurationDeleteParams = AppConfigurationAPI.AppConfigurationDeleteParams;
   export import ACLs = ACLsAPI.ACLs;
   export import ACL = ACLsAPI.ACL;
   export import ACLConfiguration = ACLsAPI.ACLConfiguration;
@@ -338,5 +349,4 @@ export namespace Sites {
   export import WANDeleteParams = WANsAPI.WANDeleteParams;
   export import WANEditParams = WANsAPI.WANEditParams;
   export import WANGetParams = WANsAPI.WANGetParams;
-  export import Sites = SitesSitesAPI.Sites;
 }
