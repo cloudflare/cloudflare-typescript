@@ -27,4 +27,18 @@ export {
   PrefixesSinglePage,
   Prefixes,
 } from './prefixes/index';
+export {
+  RegionalHostnameCreateResponse,
+  RegionalHostnameListResponse,
+  RegionalHostnameDeleteResponse,
+  RegionalHostnameEditResponse,
+  RegionalHostnameGetResponse,
+  RegionalHostnameCreateParams,
+  RegionalHostnameListParams,
+  RegionalHostnameDeleteParams,
+  RegionalHostnameEditParams,
+  RegionalHostnameGetParams,
+  RegionalHostnameListResponsesSinglePage,
+  RegionalHostnames,
+} from './regional-hostnames/index';
 export { ServiceListResponse, ServiceListParams, ServiceListResponsesSinglePage, Services } from './services';
