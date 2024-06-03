@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource appConfiguration', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.sites.appConfiguration.create(
+    const responsePromise = cloudflare.magicTransit.sites.appConfiguration.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', account_app_id: 'ac60d3d0435248289d446cedd870bcf4' },
     );
@@ -25,14 +25,14 @@ describe('resource appConfiguration', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.sites.appConfiguration.create(
+    const response = await cloudflare.magicTransit.sites.appConfiguration.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', account_app_id: 'ac60d3d0435248289d446cedd870bcf4' },
     );
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.sites.appConfiguration.update(
+    const responsePromise = cloudflare.magicTransit.sites.appConfiguration.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
@@ -47,7 +47,7 @@ describe('resource appConfiguration', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.sites.appConfiguration.update(
+    const response = await cloudflare.magicTransit.sites.appConfiguration.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
@@ -55,7 +55,7 @@ describe('resource appConfiguration', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.sites.appConfiguration.list(
+    const responsePromise = cloudflare.magicTransit.sites.appConfiguration.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -69,14 +69,14 @@ describe('resource appConfiguration', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.sites.appConfiguration.list(
+    const response = await cloudflare.magicTransit.sites.appConfiguration.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.sites.appConfiguration.delete(
+    const responsePromise = cloudflare.magicTransit.sites.appConfiguration.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -91,7 +91,7 @@ describe('resource appConfiguration', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.sites.appConfiguration.delete(
+    const response = await cloudflare.magicTransit.sites.appConfiguration.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
