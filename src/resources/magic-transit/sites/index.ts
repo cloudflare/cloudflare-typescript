@@ -15,6 +15,18 @@ export {
   ACLs,
 } from './acls';
 export {
+  AppConfigurationCreateResponse,
+  AppConfigurationUpdateResponse,
+  AppConfigurationListResponse,
+  AppConfigurationDeleteResponse,
+  AppConfigurationCreateParams,
+  AppConfigurationUpdateParams,
+  AppConfigurationListParams,
+  AppConfigurationDeleteParams,
+  AppConfigurationListResponsesSinglePage,
+  AppConfiguration,
+} from './app-configuration';
+export {
   DHCPRelay,
   DHCPServer,
   LAN,
@@ -43,7 +55,6 @@ export {
   SitesSinglePage,
   Sites,
 } from './sites';
-export { Sites } from './sites/index';
 export {
   WAN,
   WANStaticAddressing,
