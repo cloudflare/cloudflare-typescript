@@ -43,6 +43,7 @@ export {
   SitesSinglePage,
   Sites,
 } from './sites';
+export { Sites } from './sites/index';
 export {
   WAN,
   WANStaticAddressing,

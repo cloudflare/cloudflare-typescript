@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as AppsAPI from './apps';
 import * as CfInterconnectsAPI from './cf-interconnects';
 import * as ConnectorsAPI from './connectors';
 import * as GRETunnelsAPI from './gre-tunnels';
@@ -9,6 +10,7 @@ import * as RoutesAPI from './routes';
 import * as SitesAPI from './sites/sites';
 
 export class MagicTransit extends APIResource {
+  apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
   cfInterconnects: CfInterconnectsAPI.CfInterconnects = new CfInterconnectsAPI.CfInterconnects(this._client);
   greTunnels: GRETunnelsAPI.GRETunnels = new GRETunnelsAPI.GRETunnels(this._client);
   ipsecTunnels: IPSECTunnelsAPI.IPSECTunnels = new IPSECTunnelsAPI.IPSECTunnels(this._client);
@@ -110,6 +112,16 @@ export type HealthCheckType = 'reply' | 'request';
 export type HealthCheckTypeParam = 'reply' | 'request';
 
 export namespace MagicTransit {
+  export import Apps = AppsAPI.Apps;
+  export import AppCreateResponse = AppsAPI.AppCreateResponse;
+  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
+  export import AppListResponse = AppsAPI.AppListResponse;
+  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
+  export import AppListResponsesSinglePage = AppsAPI.AppListResponsesSinglePage;
+  export import AppCreateParams = AppsAPI.AppCreateParams;
+  export import AppUpdateParams = AppsAPI.AppUpdateParams;
+  export import AppListParams = AppsAPI.AppListParams;
+  export import AppDeleteParams = AppsAPI.AppDeleteParams;
   export import CfInterconnects = CfInterconnectsAPI.CfInterconnects;
   export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;

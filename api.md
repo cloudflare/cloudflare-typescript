@@ -2898,6 +2898,34 @@ Methods:
 
 # Addressing
 
+## RegionalHostnames
+
+Types:
+
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameCreateResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameListResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameDeleteResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameEditResponse</a></code>
+- <code><a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">RegionalHostnameGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/addressing/regional_hostnames">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">create</a>({ ...params }) -> RegionalHostnameCreateResponse</code>
+- <code title="get /zones/{zone_id}/addressing/regional_hostnames">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">list</a>({ ...params }) -> RegionalHostnameListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">delete</a>(hostname, { ...params }) -> RegionalHostnameDeleteResponse</code>
+- <code title="patch /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">edit</a>(hostname, { ...params }) -> RegionalHostnameEditResponse</code>
+- <code title="get /zones/{zone_id}/addressing/regional_hostnames/{hostname}">client.addressing.regionalHostnames.<a href="./src/resources/addressing/regional-hostnames/regional-hostnames.ts">get</a>(hostname, { ...params }) -> RegionalHostnameGetResponse</code>
+
+### Regions
+
+Types:
+
+- <code><a href="./src/resources/addressing/regional-hostnames/regions.ts">RegionListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/addressing/regional_hostnames/regions">client.addressing.regionalHostnames.regions.<a href="./src/resources/addressing/regional-hostnames/regions.ts">list</a>({ ...params }) -> RegionListResponsesSinglePage</code>
+
 ## Services
 
 Types:
@@ -3378,6 +3406,22 @@ Types:
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckRate</a></code>
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckType</a></code>
 
+## Apps
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/apps.ts">AppCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/apps.ts">AppDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/apps">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">create</a>({ ...params }) -> AppCreateResponse | null</code>
+- <code title="put /accounts/{account_id}/magic/apps/{account_app_id}">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">update</a>(accountAppId, { ...params }) -> AppUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/magic/apps">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">list</a>({ ...params }) -> AppListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/apps/{account_app_id}">client.magicTransit.apps.<a href="./src/resources/magic-transit/apps.ts">delete</a>(accountAppId, { ...params }) -> AppDeleteResponse | null</code>
+
 ## CfInterconnects
 
 Types:
@@ -3523,6 +3567,24 @@ Methods:
 - <code title="delete /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">delete</a>(siteId, wanId, { ...params }) -> WAN</code>
 - <code title="patch /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">edit</a>(siteId, wanId, { ...params }) -> WAN</code>
 - <code title="get /accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}">client.magicTransit.sites.wans.<a href="./src/resources/magic-transit/sites/wans.ts">get</a>(siteId, wanId, { ...params }) -> WAN</code>
+
+### Sites
+
+#### AppConfiguration
+
+Types:
+
+- <code><a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">AppConfigurationCreateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">AppConfigurationUpdateResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">AppConfigurationListResponse</a></code>
+- <code><a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">AppConfigurationDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/magic/sites/{site_id}/app_configs">client.magicTransit.sites.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">create</a>(siteId, { ...params }) -> AppConfigurationCreateResponse | null</code>
+- <code title="put /accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}">client.magicTransit.sites.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">update</a>(siteId, appConfigId, { ...params }) -> AppConfigurationUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/magic/sites/{site_id}/app_configs">client.magicTransit.sites.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">list</a>(siteId, { ...params }) -> AppConfigurationListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}">client.magicTransit.sites.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/sites/app-configuration.ts">delete</a>(siteId, appConfigId, { ...params }) -> AppConfigurationDeleteResponse | null</code>
 
 ## Connectors
 

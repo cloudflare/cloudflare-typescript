@@ -2,16 +2,19 @@
 
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import { Sites } from './sites/sites';
 import * as SitesAPI from './sites';
 import * as ACLsAPI from './acls';
 import * as LANsAPI from './lans';
 import * as WANsAPI from './wans';
+import * as SitesSitesAPI from './sites/sites';
 import { SinglePage } from '../../../pagination';
 
 export class Sites extends APIResource {
   acls: ACLsAPI.ACLs = new ACLsAPI.ACLs(this._client);
   lans: LANsAPI.LANs = new LANsAPI.LANs(this._client);
   wans: WANsAPI.WANs = new WANsAPI.WANs(this._client);
+  sites: SitesSitesAPI.Sites = new SitesSitesAPI.Sites(this._client);
 
   /**
    * Creates a new Site
@@ -335,4 +338,5 @@ export namespace Sites {
   export import WANDeleteParams = WANsAPI.WANDeleteParams;
   export import WANEditParams = WANsAPI.WANEditParams;
   export import WANGetParams = WANsAPI.WANGetParams;
+  export import Sites = SitesSitesAPI.Sites;
 }
