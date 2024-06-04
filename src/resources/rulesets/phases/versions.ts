@@ -7,7 +7,7 @@ import { CloudflareError } from '../../../error';
 import * as VersionsAPI from './versions';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
-import { RulesetsSinglePage } from '../rulesets';
+import { SinglePage } from '../../../pagination';
 
 export class Versions extends APIResource {
   /**
@@ -17,16 +17,16 @@ export class Versions extends APIResource {
     rulesetPhase: RulesetsAPI.PhaseParam,
     params?: VersionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetsSinglePage, RulesetsAPI.Ruleset>;
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
   list(
     rulesetPhase: RulesetsAPI.PhaseParam,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetsSinglePage, RulesetsAPI.Ruleset>;
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
   list(
     rulesetPhase: RulesetsAPI.PhaseParam,
     params: VersionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetsSinglePage, RulesetsAPI.Ruleset> {
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse> {
     if (isRequestOptions(params)) {
       return this.list(rulesetPhase, {}, params);
     }
@@ -49,7 +49,7 @@ export class Versions extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions`,
-      RulesetsSinglePage,
+      VersionListResponsesSinglePage,
       options,
     );
   }
@@ -101,6 +101,48 @@ export class Versions extends APIResource {
       ) as Core.APIPromise<{ result: VersionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
+
+export class VersionListResponsesSinglePage extends SinglePage<VersionListResponse> {}
+
+/**
+ * A ruleset object.
+ */
+export interface VersionListResponse {
+  /**
+   * The unique ID of the ruleset.
+   */
+  id: string;
+
+  /**
+   * The kind of the ruleset.
+   */
+  kind: RulesetsAPI.Kind;
+
+  /**
+   * The timestamp of when the ruleset was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The human-readable name of the ruleset.
+   */
+  name: string;
+
+  /**
+   * The phase of the ruleset.
+   */
+  phase: RulesetsAPI.Phase;
+
+  /**
+   * The version of the ruleset.
+   */
+  version: string;
+
+  /**
+   * An informative description of the ruleset.
+   */
+  description?: string;
 }
 
 /**
@@ -419,9 +461,9 @@ export interface VersionGetParams {
 }
 
 export namespace Versions {
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
 }
-
-export { RulesetsSinglePage };
