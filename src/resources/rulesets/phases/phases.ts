@@ -714,11 +714,6 @@ export interface PhaseUpdateParams {
   description?: string;
 
   /**
-   * Body param: The kind of the ruleset.
-   */
-  kind?: RulesetsAPI.KindParam;
-
-  /**
    * Body param: The human-readable name of the ruleset.
    */
   name?: string;
@@ -929,7 +924,9 @@ export namespace Phases {
   export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
   export import PhaseGetParams = PhasesAPI.PhaseGetParams;
   export import Versions = VersionsAPI.Versions;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
 }
