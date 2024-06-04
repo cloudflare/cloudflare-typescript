@@ -196,7 +196,8 @@ describe('resource policies', () => {
     });
   });
 
-  test('get: only required params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
+  test.skip('get: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -209,7 +210,8 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
