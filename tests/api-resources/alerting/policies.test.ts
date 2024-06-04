@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource policies', () => {
-  test('create: only required params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
@@ -27,7 +28,8 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
@@ -84,7 +86,8 @@ describe('resource policies', () => {
     });
   });
 
-  test('update: only required params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
+  test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -97,7 +100,8 @@ describe('resource policies', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
+  test.skip('update: required and optional params', async () => {
     const response = await cloudflare.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
