@@ -82,12 +82,12 @@ export class Rulesets extends APIResource {
   list(
     params?: RulesetListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetsSinglePage, Ruleset>;
-  list(options?: Core.RequestOptions): Core.PagePromise<RulesetsSinglePage, Ruleset>;
+  ): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse>;
+  list(options?: Core.RequestOptions): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse>;
   list(
     params: RulesetListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RulesetsSinglePage, Ruleset> {
+  ): Core.PagePromise<RulesetListResponsesSinglePage, RulesetListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -110,7 +110,7 @@ export class Rulesets extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/rulesets`,
-      RulesetsSinglePage,
+      RulesetListResponsesSinglePage,
       options,
     );
   }
@@ -198,7 +198,7 @@ export class Rulesets extends APIResource {
   }
 }
 
-export class RulesetsSinglePage extends SinglePage<Ruleset> {}
+export class RulesetListResponsesSinglePage extends SinglePage<RulesetListResponse> {}
 
 /**
  * The kind of the ruleset.
@@ -289,11 +289,6 @@ export interface Ruleset {
    * An informative description of the ruleset.
    */
   description?: string;
-
-  /**
-   * The kind of the ruleset.
-   */
-  kind?: Kind;
 
   /**
    * The human-readable name of the ruleset.
@@ -886,6 +881,46 @@ export namespace RulesetUpdateResponse {
      */
     ref?: string;
   }
+}
+
+/**
+ * A ruleset object.
+ */
+export interface RulesetListResponse {
+  /**
+   * The unique ID of the ruleset.
+   */
+  id: string;
+
+  /**
+   * The kind of the ruleset.
+   */
+  kind: Kind;
+
+  /**
+   * The timestamp of when the ruleset was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The human-readable name of the ruleset.
+   */
+  name: string;
+
+  /**
+   * The phase of the ruleset.
+   */
+  phase: Phase;
+
+  /**
+   * The version of the ruleset.
+   */
+  version: string;
+
+  /**
+   * An informative description of the ruleset.
+   */
+  description?: string;
 }
 
 /**
@@ -1727,7 +1762,9 @@ export namespace Rulesets {
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
   export import Versions = VersionsAPI.Versions;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
