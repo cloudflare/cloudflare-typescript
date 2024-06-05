@@ -5,9 +5,11 @@ export { Hijacks } from './hijacks/index';
 export { IPTimeseriesResponse, IPTimeseriesParams, IPs } from './ips';
 export { Leaks } from './leaks/index';
 export {
+  RouteAsesResponse,
   RouteMoasResponse,
   RoutePfx2asResponse,
   RouteStatsResponse,
+  RouteAsesParams,
   RouteMoasParams,
   RoutePfx2asParams,
   RouteStatsParams,

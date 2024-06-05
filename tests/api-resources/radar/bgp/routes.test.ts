@@ -10,6 +10,34 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource routes', () => {
+  test('ases', async () => {
+    const responsePromise = cloudflare.radar.bgp.routes.ases();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('ases: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(cloudflare.radar.bgp.routes.ases({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
+  });
+
+  test('ases: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.radar.bgp.routes.ases(
+        { format: 'JSON', limit: 5, location: 'US', sortBy: 'ipv4', sortOrder: 'desc' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('moas', async () => {
     const responsePromise = cloudflare.radar.bgp.routes.moas();
     const rawResponse = await responsePromise.asResponse();
