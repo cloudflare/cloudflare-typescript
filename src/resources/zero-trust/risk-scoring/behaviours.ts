@@ -46,7 +46,7 @@ export namespace BehaviourUpdateResponse {
 
     name?: string;
 
-    risk_level?: 'low' | 'medium' | 'high' | null;
+    risk_level?: 'low' | 'medium' | 'high';
   }
 }
 
@@ -62,7 +62,7 @@ export namespace BehaviourGetResponse {
 
     name?: string;
 
-    risk_level?: 'low' | 'medium' | 'high' | null;
+    risk_level?: 'low' | 'medium' | 'high';
   }
 }
 
@@ -74,7 +74,7 @@ export namespace BehaviourUpdateParams {
   export interface Behaviors {
     enabled: boolean;
 
-    risk_level: 'low' | 'medium' | 'high' | null;
+    risk_level: 'low' | 'medium' | 'high';
   }
 }
 
