@@ -60,7 +60,7 @@ export interface DNSSetting {
   /**
    * Components of the zone's SOA record.
    */
-  soa?: DNSSetting.Soa;
+  soa?: DNSSetting.SOA;
 
   /**
    * Whether the zone mode is a regular or CDN/DNS only zone.
@@ -72,7 +72,7 @@ export namespace DNSSetting {
   /**
    * Components of the zone's SOA record.
    */
-  export interface Soa {
+  export interface SOA {
     /**
      * Time in seconds of being unable to query the primary server after which
      * secondary servers should stop serving the zone.
@@ -172,7 +172,7 @@ export interface DNSSettingEditParams {
   /**
    * Body param: Components of the zone's SOA record.
    */
-  soa?: DNSSettingEditParams.Soa;
+  soa?: DNSSettingEditParams.SOA;
 
   /**
    * Body param: Whether the zone mode is a regular or CDN/DNS only zone.
@@ -184,7 +184,7 @@ export namespace DNSSettingEditParams {
   /**
    * Components of the zone's SOA record.
    */
-  export interface Soa {
+  export interface SOA {
     /**
      * Time in seconds of being unable to query the primary server after which
      * secondary servers should stop serving the zone.
