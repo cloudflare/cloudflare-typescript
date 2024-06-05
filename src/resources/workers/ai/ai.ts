@@ -1,11 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
-import { APIResource } from '../../resource';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
 import * as AIAPI from './ai';
-import { type Uploadable } from '../../core';
+import * as ModelsAPI from './models/models';
+import { type Uploadable } from '../../../core';
 
 export class AI extends APIResource {
+  models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
+
   /**
    * This endpoint provides users with the capability to run specific AI models
    * on-demand.
@@ -379,4 +382,5 @@ export namespace AIRunParams {
 export namespace AI {
   export import AIRunResponse = AIAPI.AIRunResponse;
   export import AIRunParams = AIAPI.AIRunParams;
+  export import Models = ModelsAPI.Models;
 }
