@@ -47,10 +47,71 @@ export interface DNSSetting {
   nameservers?: Nameserver;
 
   /**
+   * The time to live (TTL) of the zone's nameserver (NS) records.
+   */
+  ns_ttl?: number;
+
+  /**
    * Allows a Secondary DNS zone to use (proxied) override records and CNAME
    * flattening at the zone apex.
    */
   secondary_overrides?: boolean;
+
+  /**
+   * Components of the zone's SOA record.
+   */
+  soa?: DNSSetting.Soa;
+
+  /**
+   * Whether the zone mode is a regular or CDN/DNS only zone.
+   */
+  zone_mode?: 'standard' | 'cdn_only' | 'dns_only';
+}
+
+export namespace DNSSetting {
+  /**
+   * Components of the zone's SOA record.
+   */
+  export interface Soa {
+    /**
+     * Time in seconds of being unable to query the primary server after which
+     * secondary servers should stop serving the zone.
+     */
+    expire: number;
+
+    /**
+     * The time to live (TTL) for negative caching of records within the zone.
+     */
+    min_ttl: number;
+
+    /**
+     * The primary nameserver, which may be used for outbound zone transfers.
+     */
+    mname: string;
+
+    /**
+     * Time in seconds after which secondary servers should re-check the SOA record to
+     * see if the zone has been updated.
+     */
+    refresh: number;
+
+    /**
+     * Time in seconds after which secondary servers should retry queries after the
+     * primary server was unresponsive.
+     */
+    retry: number;
+
+    /**
+     * The email address of the zone administrator, with the first label representing
+     * the local part of the email address.
+     */
+    rname: string;
+
+    /**
+     * The time to live (TTL) of the SOA record itself.
+     */
+    ttl: number;
+  }
 }
 
 /**
@@ -98,10 +159,71 @@ export interface DNSSettingEditParams {
   nameservers?: NameserverParam;
 
   /**
+   * Body param: The time to live (TTL) of the zone's nameserver (NS) records.
+   */
+  ns_ttl?: number;
+
+  /**
    * Body param: Allows a Secondary DNS zone to use (proxied) override records and
    * CNAME flattening at the zone apex.
    */
   secondary_overrides?: boolean;
+
+  /**
+   * Body param: Components of the zone's SOA record.
+   */
+  soa?: DNSSettingEditParams.Soa;
+
+  /**
+   * Body param: Whether the zone mode is a regular or CDN/DNS only zone.
+   */
+  zone_mode?: 'standard' | 'cdn_only' | 'dns_only';
+}
+
+export namespace DNSSettingEditParams {
+  /**
+   * Components of the zone's SOA record.
+   */
+  export interface Soa {
+    /**
+     * Time in seconds of being unable to query the primary server after which
+     * secondary servers should stop serving the zone.
+     */
+    expire: number;
+
+    /**
+     * The time to live (TTL) for negative caching of records within the zone.
+     */
+    min_ttl: number;
+
+    /**
+     * The primary nameserver, which may be used for outbound zone transfers.
+     */
+    mname: string;
+
+    /**
+     * Time in seconds after which secondary servers should re-check the SOA record to
+     * see if the zone has been updated.
+     */
+    refresh: number;
+
+    /**
+     * Time in seconds after which secondary servers should retry queries after the
+     * primary server was unresponsive.
+     */
+    retry: number;
+
+    /**
+     * The email address of the zone administrator, with the first label representing
+     * the local part of the email address.
+     */
+    rname: string;
+
+    /**
+     * The time to live (TTL) of the SOA record itself.
+     */
+    ttl: number;
+  }
 }
 
 export interface DNSSettingGetParams {
