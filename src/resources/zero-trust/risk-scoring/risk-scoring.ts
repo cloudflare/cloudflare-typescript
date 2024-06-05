@@ -79,7 +79,7 @@ export namespace RiskScoringGetResponse {
 
     name: string;
 
-    risk_level: 'low' | 'medium' | 'high' | null;
+    risk_level: 'low' | 'medium' | 'high';
 
     timestamp: string;
 
