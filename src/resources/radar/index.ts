@@ -22,7 +22,7 @@ export {
   Datasets,
 } from './datasets';
 export { EntityGetResponse, EntityGetParams, Entities } from './entities/index';
-export { HTTP } from './http/index';
+export { HTTPTimeseriesResponse, HTTPTimeseriesParams, HTTP } from './http/index';
 export { NetflowTimeseriesResponse, NetflowTimeseriesParams, Netflows } from './netflows/index';
 export { Quality } from './quality/index';
 export { Radar } from './radar';

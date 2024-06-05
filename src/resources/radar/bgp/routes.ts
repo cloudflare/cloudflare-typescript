@@ -7,6 +7,25 @@ import * as RoutesAPI from './routes';
 
 export class Routes extends APIResource {
   /**
+   * List all ASes on current global routing tables with routing statistics
+   */
+  ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
+  ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
+  ases(
+    query: RouteAsesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteAsesResponse> {
+    if (isRequestOptions(query)) {
+      return this.ases({}, query);
+    }
+    return (
+      this._client.get('/radar/bgp/routes/ases', { query, ...options }) as Core.APIPromise<{
+        result: RouteAsesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * List all Multi-origin AS (MOAS) prefixes on the global routing tables.
    */
   moas(query?: RouteMoasParams, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
@@ -61,6 +80,80 @@ export class Routes extends APIResource {
         result: RouteStatsResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export interface RouteAsesResponse {
+  asns: Array<RouteAsesResponse.ASN>;
+
+  meta: RouteAsesResponse.Meta;
+}
+
+export namespace RouteAsesResponse {
+  export interface ASN {
+    asn: number;
+
+    /**
+     * AS's customer cone size
+     */
+    coneSize: number;
+
+    /**
+     * 2-letter country code for the AS's registration country
+     */
+    country: string;
+
+    /**
+     * number of IPv4 addresses originated by the AS
+     */
+    ipv4Count: number;
+
+    /**
+     * number of IPv6 addresses originated by the AS
+     */
+    ipv6Count: string;
+
+    /**
+     * name of the AS
+     */
+    name: string;
+
+    /**
+     * number of total IP prefixes originated by the AS
+     */
+    pfxsCount: number;
+
+    /**
+     * number of RPKI invalid prefixes originated by the AS
+     */
+    rpkiInvalid: number;
+
+    /**
+     * number of RPKI unknown prefixes originated by the AS
+     */
+    rpkiUnknown: number;
+
+    /**
+     * number of RPKI valid prefixes originated by the AS
+     */
+    rpkiValid: number;
+  }
+
+  export interface Meta {
+    /**
+     * the timestamp of when the data is generated
+     */
+    dataTime: string;
+
+    /**
+     * the timestamp of the query
+     */
+    queryTime: string;
+
+    /**
+     * total number of route collector peers used to generate this data
+     */
+    totalPeers: number;
   }
 }
 
@@ -176,6 +269,33 @@ export namespace RouteStatsResponse {
   }
 }
 
+export interface RouteAsesParams {
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
+
+  /**
+   * Limit the number of objects in the response.
+   */
+  limit?: number;
+
+  /**
+   * Location Alpha2 code.
+   */
+  location?: string;
+
+  /**
+   * Return order results by given type
+   */
+  sortBy?: 'cone' | 'pfxs' | 'ipv4' | 'ipv6' | 'rpki_valid' | 'rpki_invalid' | 'rpki_unknown';
+
+  /**
+   * Sort by value ascending or descending
+   */
+  sortOrder?: 'asc' | 'desc';
+}
+
 export interface RouteMoasParams {
   /**
    * Format results are returned in.
@@ -244,9 +364,11 @@ export interface RouteStatsParams {
 }
 
 export namespace Routes {
+  export import RouteAsesResponse = RoutesAPI.RouteAsesResponse;
   export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
   export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
   export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
+  export import RouteAsesParams = RoutesAPI.RouteAsesParams;
   export import RouteMoasParams = RoutesAPI.RouteMoasParams;
   export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
   export import RouteStatsParams = RoutesAPI.RouteStatsParams;

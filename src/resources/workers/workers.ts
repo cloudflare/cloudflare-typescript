@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as AccountSettingsAPI from './account-settings';
-import * as AIAPI from './ai';
 import * as DomainsAPI from './domains';
 import * as SubdomainsAPI from './subdomains';
+import * as AIAPI from './ai/ai';
 import * as ScriptsAPI from './scripts/scripts';
 
 export class Workers extends APIResource {

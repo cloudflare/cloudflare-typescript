@@ -76,6 +76,8 @@ export namespace Radar {
   export import EntityGetResponse = EntitiesAPI.EntityGetResponse;
   export import EntityGetParams = EntitiesAPI.EntityGetParams;
   export import HTTP = HTTPAPI.HTTP;
+  export import HTTPTimeseriesResponse = HTTPAPI.HTTPTimeseriesResponse;
+  export import HTTPTimeseriesParams = HTTPAPI.HTTPTimeseriesParams;
   export import Quality = QualityAPI.Quality;
   export import Ranking = RankingAPI.Ranking;
   export import RankingTimeseriesGroupsResponse = RankingAPI.RankingTimeseriesGroupsResponse;
