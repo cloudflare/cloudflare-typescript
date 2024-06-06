@@ -294,11 +294,6 @@ export interface Ruleset {
    * The human-readable name of the ruleset.
    */
   name?: string;
-
-  /**
-   * The phase of the ruleset.
-   */
-  phase?: Phase;
 }
 
 /**

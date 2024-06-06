@@ -717,11 +717,6 @@ export interface PhaseUpdateParams {
    * Body param: The human-readable name of the ruleset.
    */
   name?: string;
-
-  /**
-   * Body param: The phase of the ruleset.
-   */
-  phase?: RulesetsAPI.PhaseParam;
 }
 
 export namespace PhaseUpdateParams {
