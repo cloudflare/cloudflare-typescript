@@ -35,7 +35,7 @@ export class Roles extends APIResource {
   }
 }
 
-export type RoleGetResponse = unknown | string | null;
+export type RoleGetResponse = unknown;
 
 export interface RoleListParams {
   account_id: string;

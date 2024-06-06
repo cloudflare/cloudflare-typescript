@@ -116,11 +116,11 @@ export namespace Account {
   }
 }
 
-export type AccountUpdateResponse = unknown | string | null;
+export type AccountUpdateResponse = unknown;
 
 export type AccountListResponse = unknown;
 
-export type AccountGetResponse = unknown | string | null;
+export type AccountGetResponse = unknown;
 
 export interface AccountUpdateParams {
   /**
@@ -194,9 +194,10 @@ export namespace Accounts {
   export import Members = MembersAPI.Members;
   export import Status = MembersAPI.Status;
   export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
-  export import MemberListResponse = MembersAPI.MemberListResponse;
+  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
+  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
+  export import MemberGetResponse = MembersAPI.MemberGetResponse;
   export import MemberCreateParams = MembersAPI.MemberCreateParams;
   export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
   export import MemberListParams = MembersAPI.MemberListParams;

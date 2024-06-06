@@ -5,13 +5,14 @@ export { RoleGetResponse, RoleListParams, RoleGetParams, Roles } from './roles';
 export {
   Status,
   UserWithInviteCode,
-  MemberListResponse,
+  MemberCreateResponse,
+  MemberUpdateResponse,
   MemberDeleteResponse,
+  MemberGetResponse,
   MemberCreateParams,
   MemberUpdateParams,
   MemberListParams,
   MemberDeleteParams,
   MemberGetParams,
-  MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';
