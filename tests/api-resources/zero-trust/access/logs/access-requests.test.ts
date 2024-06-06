@@ -26,6 +26,10 @@ describe('resource accessRequests', () => {
   test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.logs.accessRequests.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      direction: 'desc',
+      limit: 0,
+      since: '2020-07-01T05:20:00Z',
+      until: '2020-10-01T05:20:00Z',
     });
   });
 });
