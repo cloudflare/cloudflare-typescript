@@ -172,7 +172,7 @@ export namespace WARPConnectorCreateResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -294,7 +294,7 @@ export namespace WARPConnectorListResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -416,7 +416,7 @@ export namespace WARPConnectorDeleteResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -538,7 +538,7 @@ export namespace WARPConnectorEditResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -660,7 +660,7 @@ export namespace WARPConnectorGetResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -762,6 +762,15 @@ export interface WARPConnectorListParams extends V4PagePaginationArrayParams {
    * Query param: A user-friendly name for the tunnel.
    */
   name?: string;
+
+  /**
+   * Query param: The status of the tunnel. Valid values are `inactive` (tunnel has
+   * never been run), `degraded` (tunnel is active and able to serve traffic but in
+   * an unhealthy state), `healthy` (tunnel is active and able to serve traffic), or
+   * `down` (tunnel can not serve traffic as it has no connections to the Cloudflare
+   * Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
   /**
    * Query param: UUID of the tunnel.

@@ -209,7 +209,7 @@ export namespace TunnelListResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -357,7 +357,7 @@ export namespace TunnelEditResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -491,6 +491,15 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
    * Query param: A user-friendly name for the tunnel.
    */
   name?: string;
+
+  /**
+   * Query param: The status of the tunnel. Valid values are `inactive` (tunnel has
+   * never been run), `degraded` (tunnel is active and able to serve traffic but in
+   * an unhealthy state), `healthy` (tunnel is active and able to serve traffic), or
+   * `down` (tunnel can not serve traffic as it has no connections to the Cloudflare
+   * Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
   /**
    * Query param: The types of tunnels to filter separated by a comma.

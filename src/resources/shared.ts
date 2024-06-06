@@ -190,7 +190,7 @@ export interface CloudflareTunnel {
    * state), `healthy` (tunnel is active and able to serve traffic), or `down`
    * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
    */
-  status?: string;
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
   /**
    * The type of tunnel.
