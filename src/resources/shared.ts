@@ -271,16 +271,22 @@ export interface Member {
   /**
    * Membership identifier tag.
    */
-  id: string;
+  id?: string;
 
   /**
    * Roles assigned to this member.
    */
-  roles: Array<Member.Role>;
+  roles?: Array<Member.Role>;
 
-  status: unknown;
+  /**
+   * A member's status in the account.
+   */
+  status?: 'accepted' | 'pending';
 
-  user: Member.User;
+  /**
+   * Details of the user associated to the membership.
+   */
+  user?: Member.User;
 }
 
 export namespace Member {
@@ -331,6 +337,9 @@ export namespace Member {
     }
   }
 
+  /**
+   * Details of the user associated to the membership.
+   */
   export interface User {
     /**
      * The contact email address of the user.
@@ -458,6 +467,8 @@ export type SortDirection = 'asc' | 'desc';
  * Direction to order DNS records in.
  */
 export type SortDirectionParam = 'asc' | 'desc';
+
+export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> {}
 
 export class RolesSinglePage extends SinglePage<Role> {}
 

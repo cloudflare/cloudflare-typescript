@@ -105,71 +105,6 @@ export type CIDRList = string;
  */
 export type CIDRListParam = string;
 
-export interface Policy {
-  /**
-   * Policy identifier.
-   */
-  id: string;
-
-  /**
-   * Allow or deny operations against the resources.
-   */
-  effect: 'allow' | 'deny';
-
-  /**
-   * A set of permission groups that are specified to the policy.
-   */
-  permission_groups: Array<Policy.PermissionGroup>;
-
-  /**
-   * A list of resource names that the policy applies to.
-   */
-  resources: unknown;
-}
-
-export namespace Policy {
-  /**
-   * A named group of permissions that map to a group of operations against
-   * resources.
-   */
-  export interface PermissionGroup {
-    /**
-     * Identifier of the group.
-     */
-    id: string;
-
-    /**
-     * Name of the group.
-     */
-    name?: string;
-  }
-}
-
-export interface PolicyParam {
-  /**
-   * Allow or deny operations against the resources.
-   */
-  effect: 'allow' | 'deny';
-
-  /**
-   * A set of permission groups that are specified to the policy.
-   */
-  permission_groups: Array<PolicyParam.PermissionGroup>;
-
-  /**
-   * A list of resource names that the policy applies to.
-   */
-  resources: unknown;
-}
-
-export namespace PolicyParam {
-  /**
-   * A named group of permissions that map to a group of operations against
-   * resources.
-   */
-  export interface PermissionGroup {}
-}
-
 export interface Token {
   /**
    * Token identifier tag.
@@ -184,7 +119,7 @@ export interface Token {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<Policy>;
+  policies: Array<Token.Policy>;
 
   /**
    * Status of the token.
@@ -216,6 +151,46 @@ export interface Token {
 }
 
 export namespace Token {
+  export interface Policy {
+    /**
+     * Policy identifier.
+     */
+    id: string;
+
+    /**
+     * Allow or deny operations against the resources.
+     */
+    effect: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource names that the policy applies to.
+     */
+    resources: unknown;
+  }
+
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {
+      /**
+       * Identifier of the group.
+       */
+      id: string;
+
+      /**
+       * Name of the group.
+       */
+      name?: string;
+    }
+  }
+
   export interface Condition {
     /**
      * Client IP restrictions.
@@ -248,7 +223,7 @@ export interface TokenCreateResponse {
   value?: ValueAPI.Value;
 }
 
-export type TokenUpdateResponse = unknown | string | null;
+export type TokenUpdateResponse = unknown;
 
 export type TokenListResponse = unknown;
 
@@ -259,7 +234,7 @@ export interface TokenDeleteResponse {
   id: string;
 }
 
-export type TokenGetResponse = unknown | string | null;
+export type TokenGetResponse = unknown;
 
 export interface TokenVerifyResponse {
   /**
@@ -293,7 +268,7 @@ export interface TokenCreateParams {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<PolicyParam>;
+  policies: Array<TokenCreateParams.Policy>;
 
   condition?: TokenCreateParams.Condition;
 
@@ -310,6 +285,31 @@ export interface TokenCreateParams {
 }
 
 export namespace TokenCreateParams {
+  export interface Policy {
+    /**
+     * Allow or deny operations against the resources.
+     */
+    effect: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource names that the policy applies to.
+     */
+    resources: unknown;
+  }
+
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {}
+  }
+
   export interface Condition {
     /**
      * Client IP restrictions.
@@ -344,7 +344,7 @@ export interface TokenUpdateParams {
   /**
    * List of access policies assigned to the token.
    */
-  policies: Array<PolicyParam>;
+  policies: Array<TokenUpdateParams.Policy>;
 
   /**
    * Status of the token.
@@ -366,6 +366,31 @@ export interface TokenUpdateParams {
 }
 
 export namespace TokenUpdateParams {
+  export interface Policy {
+    /**
+     * Allow or deny operations against the resources.
+     */
+    effect: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource names that the policy applies to.
+     */
+    resources: unknown;
+  }
+
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {}
+  }
+
   export interface Condition {
     /**
      * Client IP restrictions.
@@ -400,7 +425,6 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 
 export namespace Tokens {
   export import CIDRList = TokensAPI.CIDRList;
-  export import Policy = TokensAPI.Policy;
   export import Token = TokensAPI.Token;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;

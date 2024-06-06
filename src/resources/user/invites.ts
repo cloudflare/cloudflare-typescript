@@ -93,9 +93,9 @@ export interface Invite {
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
 }
 
-export type InviteEditResponse = unknown | string | null;
+export type InviteEditResponse = unknown;
 
-export type InviteGetResponse = unknown | string | null;
+export type InviteGetResponse = unknown;
 
 export interface InviteEditParams {
   /**

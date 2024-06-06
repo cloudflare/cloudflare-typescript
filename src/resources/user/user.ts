@@ -36,9 +36,9 @@ export class User extends APIResource {
   }
 }
 
-export type UserEditResponse = unknown | string | null;
+export type UserEditResponse = unknown;
 
-export type UserGetResponse = unknown | string | null;
+export type UserGetResponse = unknown;
 
 export interface UserEditParams {
   /**
@@ -96,7 +96,6 @@ export namespace User {
   export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
   export import Tokens = TokensAPI.Tokens;
   export import CIDRList = TokensAPI.CIDRList;
-  export import Policy = TokensAPI.Policy;
   export import Token = TokensAPI.Token;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;

@@ -73,7 +73,7 @@ export interface Organization {
   roles?: Array<string>;
 
   /**
-   * Whether the user is a member of the organization or has an inivitation pending.
+   * Whether the user is a member of the organization or has an invitation pending.
    */
   status?: MembersAPI.Status;
 }
@@ -85,7 +85,7 @@ export interface OrganizationDeleteResponse {
   id?: string;
 }
 
-export type OrganizationGetResponse = unknown | string | null;
+export type OrganizationGetResponse = unknown;
 
 export interface OrganizationListParams extends V4PagePaginationArrayParams {
   /**

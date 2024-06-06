@@ -46,11 +46,6 @@ describe('resource members', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'string',
-      roles: [
-        { id: '3536bcfad5faccb999b47003c79917fb' },
-        { id: '3536bcfad5faccb999b47003c79917fb' },
-        { id: '3536bcfad5faccb999b47003c79917fb' },
-      ],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -2,7 +2,6 @@
 
 export {
   CIDRList,
-  Policy,
   Token,
   TokenCreateResponse,
   TokenUpdateResponse,
