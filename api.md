@@ -264,13 +264,6 @@ Methods:
 
 - <code title="put /zones/{zone_id}/activation_check">client.zones.activationCheck.<a href="./src/resources/zones/activation-check.ts">trigger</a>({ ...params }) -> ActivationCheckTriggerResponse</code>
 
-## DNSSettings
-
-Types:
-
-- <code><a href="./src/resources/zones/dns-settings.ts">DNSSetting</a></code>
-- <code><a href="./src/resources/zones/dns-settings.ts">Nameserver</a></code>
-
 ## Settings
 
 ### ZeroRTT
@@ -1413,6 +1406,20 @@ Methods:
 - <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> Record</code>
 - <code title="post /zones/{zone_id}/dns_records/import">client.dns.records.<a href="./src/resources/dns/records.ts">import</a>({ ...params }) -> RecordImportResponse</code>
 - <code title="post /zones/{zone_id}/dns_records/scan">client.dns.records.<a href="./src/resources/dns/records.ts">scan</a>({ ...params }) -> RecordScanResponse</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/dns/settings.ts">DNSSetting</a></code>
+- <code><a href="./src/resources/dns/settings.ts">Nameserver</a></code>
+- <code><a href="./src/resources/dns/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings.ts">SettingGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /{account_or_zone}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
 
 ## Analytics
 
@@ -4874,6 +4881,24 @@ Methods:
 - <code title="get /accounts/{account_id}/access/tags">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">list</a>({ ...params }) -> TagsSinglePage</code>
 - <code title="delete /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">delete</a>(tagName, { ...params }) -> TagDeleteResponse</code>
 - <code title="get /accounts/{account_id}/access/tags/{tag_name}">client.zeroTrust.access.tags.<a href="./src/resources/zero-trust/access/tags.ts">get</a>(tagName, { ...params }) -> Tag</code>
+
+### Policies
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/policies">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">create</a>({ ...params }) -> PolicyCreateResponse</code>
+- <code title="put /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">update</a>(policyId, { ...params }) -> PolicyUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/policies">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">list</a>({ ...params }) -> PolicyListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">delete</a>(policyId, { ...params }) -> PolicyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/access/policies/{policy_id}">client.zeroTrust.access.policies.<a href="./src/resources/zero-trust/access/policies.ts">get</a>(policyId, { ...params }) -> PolicyGetResponse</code>
 
 ## DEX
 

@@ -12,7 +12,6 @@ export {
   CustomNameserverGetParams,
   CustomNameservers,
 } from './custom-nameservers';
-export { DNSSetting, Nameserver, DNSSettings } from './dns-settings';
 export { Settings } from './settings/index';
 export {
   SubscriptionCreateResponse,

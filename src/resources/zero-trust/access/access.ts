@@ -6,6 +6,7 @@ import * as BookmarksAPI from './bookmarks';
 import * as CustomPagesAPI from './custom-pages';
 import * as GroupsAPI from './groups';
 import * as KeysAPI from './keys';
+import * as PoliciesAPI from './policies';
 import * as ServiceTokensAPI from './service-tokens';
 import * as TagsAPI from './tags';
 import * as ApplicationsAPI from './applications/applications';
@@ -24,6 +25,7 @@ export class Access extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
   customPages: CustomPagesAPI.CustomPages = new CustomPagesAPI.CustomPages(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
+  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 }
 
 /**
@@ -824,4 +826,16 @@ export namespace Access {
   export import TagListParams = TagsAPI.TagListParams;
   export import TagDeleteParams = TagsAPI.TagDeleteParams;
   export import TagGetParams = TagsAPI.TagGetParams;
+  export import Policies = PoliciesAPI.Policies;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
+  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }
