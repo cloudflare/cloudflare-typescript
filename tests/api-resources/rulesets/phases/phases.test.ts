@@ -81,7 +81,6 @@ describe('resource phases', () => {
       account_id: 'string',
       description: 'My ruleset to execute managed rulesets',
       name: 'My ruleset',
-      phase: 'http_request_firewall_custom',
     });
   });
 
