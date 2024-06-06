@@ -40,16 +40,18 @@ Types:
 
 - <code><a href="./src/resources/accounts/members.ts">Status</a></code>
 - <code><a href="./src/resources/accounts/members.ts">UserWithInviteCode</a></code>
-- <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberCreateResponse</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/members.ts">MemberGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> UserWithInviteCode</code>
-- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> Member</code>
-- <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MemberListResponsesV4PagePaginationArray</code>
+- <code title="post /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">create</a>({ ...params }) -> MemberCreateResponse</code>
+- <code title="put /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">update</a>(memberId, { ...params }) -> MemberUpdateResponse</code>
+- <code title="get /accounts/{account_id}/members">client.accounts.members.<a href="./src/resources/accounts/members.ts">list</a>({ ...params }) -> MembersV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">delete</a>(memberId, { ...params }) -> MemberDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> Member</code>
+- <code title="get /accounts/{account_id}/members/{member_id}">client.accounts.members.<a href="./src/resources/accounts/members.ts">get</a>(memberId, { ...params }) -> MemberGetResponse</code>
 
 ## Roles
 
@@ -199,7 +201,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/user/tokens/tokens.ts">CIDRList</a></code>
-- <code><a href="./src/resources/user/tokens/tokens.ts">Policy</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">Token</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenUpdateResponse</a></code>
