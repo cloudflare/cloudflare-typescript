@@ -270,11 +270,6 @@ Types:
 - <code><a href="./src/resources/zones/dns-settings.ts">DNSSetting</a></code>
 - <code><a href="./src/resources/zones/dns-settings.ts">Nameserver</a></code>
 
-Methods:
-
-- <code title="patch /zones/{zone_id}/dns_settings">client.zones.dnsSettings.<a href="./src/resources/zones/dns-settings.ts">edit</a>({ ...params }) -> DNSSetting</code>
-- <code title="get /zones/{zone_id}/dns_settings">client.zones.dnsSettings.<a href="./src/resources/zones/dns-settings.ts">get</a>({ ...params }) -> DNSSetting</code>
-
 ## Settings
 
 ### ZeroRTT

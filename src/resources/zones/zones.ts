@@ -404,8 +404,6 @@ export namespace Zones {
   export import DNSSettings = DNSSettingsAPI.DNSSettings;
   export import DNSSetting = DNSSettingsAPI.DNSSetting;
   export import Nameserver = DNSSettingsAPI.Nameserver;
-  export import DNSSettingEditParams = DNSSettingsAPI.DNSSettingEditParams;
-  export import DNSSettingGetParams = DNSSettingsAPI.DNSSettingGetParams;
   export import Settings = SettingsAPI.Settings;
   export import CustomNameservers = CustomNameserversAPI.CustomNameservers;
   export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
