@@ -709,172 +709,46 @@ export namespace MemberGetResponse {
   }
 }
 
-export type MemberCreateParams =
-  | MemberCreateParams.IamCreateMemberWithRoles
-  | MemberCreateParams.IamCreateMemberWithPolicies;
+export interface MemberCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
 
-export namespace MemberCreateParams {
-  export interface IamCreateMemberWithRoles {
-    /**
-     * Path param:
-     */
-    account_id: string;
+  /**
+   * Body param: The contact email address of the user.
+   */
+  email: string;
 
-    /**
-     * Body param: The contact email address of the user.
-     */
-    email: string;
+  /**
+   * Body param: Array of roles associated with this member.
+   */
+  roles: Array<string>;
 
-    /**
-     * Body param: Array of roles associated with this member.
-     */
-    roles: Array<string>;
-
-    /**
-     * Body param:
-     */
-    status?: 'accepted' | 'pending';
-  }
-
-  export interface IamCreateMemberWithPolicies {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param: The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Body param: Array of policies associated with this member.
-     */
-    policies: Array<MemberCreateParams.IamCreateMemberWithPolicies.Policy>;
-
-    /**
-     * Body param:
-     */
-    status?: 'accepted' | 'pending';
-  }
-
-  export namespace IamCreateMemberWithPolicies {
-    export interface Policy {
-      /**
-       * Allow or deny operations against the resources.
-       */
-      access: 'allow' | 'deny';
-
-      /**
-       * A set of permission groups that are specified to the policy.
-       */
-      permission_groups: Array<Policy.PermissionGroup>;
-
-      /**
-       * A list of resource groups that the policy applies to.
-       */
-      resource_groups: Array<Policy.ResourceGroup>;
-    }
-
-    export namespace Policy {
-      /**
-       * A group of permissions.
-       */
-      export interface PermissionGroup {
-        /**
-         * Identifier of the group.
-         */
-        id: string;
-      }
-
-      /**
-       * A group of scoped resources.
-       */
-      export interface ResourceGroup {
-        /**
-         * Identifier of the group.
-         */
-        id: string;
-      }
-    }
-  }
+  /**
+   * Body param:
+   */
+  status?: 'accepted' | 'pending';
 }
 
-export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IamUpdateMemberWithPolicies;
+export interface MemberUpdateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param: Roles assigned to this member.
+   */
+  roles?: Array<MemberUpdateParams.Role>;
+}
 
 export namespace MemberUpdateParams {
-  export interface Member {
+  export interface Role {
     /**
-     * Path param:
+     * Role identifier tag.
      */
-    account_id: string;
-
-    /**
-     * Body param: Roles assigned to this member.
-     */
-    roles?: Array<MemberUpdateParams.Member.Role>;
-  }
-
-  export namespace Member {
-    export interface Role {
-      /**
-       * Role identifier tag.
-       */
-      id: string;
-    }
-  }
-
-  export interface IamUpdateMemberWithPolicies {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param: Array of policies associated with this member.
-     */
-    policies: Array<MemberUpdateParams.IamUpdateMemberWithPolicies.Policy>;
-  }
-
-  export namespace IamUpdateMemberWithPolicies {
-    export interface Policy {
-      /**
-       * Allow or deny operations against the resources.
-       */
-      access: 'allow' | 'deny';
-
-      /**
-       * A set of permission groups that are specified to the policy.
-       */
-      permission_groups: Array<Policy.PermissionGroup>;
-
-      /**
-       * A list of resource groups that the policy applies to.
-       */
-      resource_groups: Array<Policy.ResourceGroup>;
-    }
-
-    export namespace Policy {
-      /**
-       * A group of permissions.
-       */
-      export interface PermissionGroup {
-        /**
-         * Identifier of the group.
-         */
-        id: string;
-      }
-
-      /**
-       * A group of scoped resources.
-       */
-      export interface ResourceGroup {
-        /**
-         * Identifier of the group.
-         */
-        id: string;
-      }
-    }
+    id: string;
   }
 }
 
