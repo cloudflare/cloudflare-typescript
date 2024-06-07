@@ -3020,13 +3020,9 @@ Methods:
 
 ### Downloads
 
-Types:
-
-- <code><a href="./src/resources/addressing/loa-documents/downloads.ts">DownloadGetResponse</a></code>
-
 Methods:
 
-- <code title="get /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download">client.addressing.loaDocuments.downloads.<a href="./src/resources/addressing/loa-documents/downloads.ts">get</a>(loaDocumentId, { ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download">client.addressing.loaDocuments.downloads.<a href="./src/resources/addressing/loa-documents/downloads.ts">get</a>(loaDocumentId, { ...params }) -> Response</code>
 
 ## Prefixes
 

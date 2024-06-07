@@ -2,6 +2,7 @@
 
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import { type Response } from '../../../_shims/index';
 import * as DownloadsAPI from './downloads';
 
 export class Downloads extends APIResource {
@@ -12,16 +13,14 @@ export class Downloads extends APIResource {
     loaDocumentId: string | null,
     params: DownloadGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<Response> {
     const { account_id } = params;
-    return this._client.get(
-      `/accounts/${account_id}/addressing/loa_documents/${loaDocumentId}/download`,
-      options,
-    );
+    return this._client.get(`/accounts/${account_id}/addressing/loa_documents/${loaDocumentId}/download`, {
+      ...options,
+      __binaryResponse: true,
+    });
   }
 }
-
-export type DownloadGetResponse = unknown;
 
 export interface DownloadGetParams {
   /**
@@ -31,6 +30,5 @@ export interface DownloadGetParams {
 }
 
 export namespace Downloads {
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
   export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

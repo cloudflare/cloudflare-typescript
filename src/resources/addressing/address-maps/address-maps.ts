@@ -148,6 +148,11 @@ export interface AddressMap {
  */
 export type Kind = 'zone' | 'account';
 
+/**
+ * The type of the membership.
+ */
+export type KindParam = 'zone' | 'account';
+
 export interface AddressMapCreateResponse {
   /**
    * Identifier
@@ -222,7 +227,7 @@ export namespace AddressMapCreateResponse {
     created_at?: string;
 
     /**
-     * Identifier
+     * The identifier for the membership (eg. a zone or account tag).
      */
     identifier?: string;
 
@@ -309,7 +314,7 @@ export namespace AddressMapGetResponse {
     created_at?: string;
 
     /**
-     * Identifier
+     * The identifier for the membership (eg. a zone or account tag).
      */
     identifier?: string;
 
@@ -337,6 +342,31 @@ export interface AddressMapCreateParams {
    * respond with IP addresses on an Address Map until the map is enabled.
    */
   enabled?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  ips?: Array<string>;
+
+  /**
+   * Body param: Zones and Accounts which will be assigned IPs on this Address Map. A
+   * zone membership will take priority over an account membership.
+   */
+  memberships?: Array<AddressMapCreateParams.Membership>;
+}
+
+export namespace AddressMapCreateParams {
+  export interface Membership {
+    /**
+     * The identifier for the membership (eg. a zone or account tag).
+     */
+    identifier?: string;
+
+    /**
+     * The type of the membership.
+     */
+    kind?: AddressMapsAPI.KindParam;
+  }
 }
 
 export interface AddressMapListParams {
