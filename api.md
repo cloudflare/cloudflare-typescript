@@ -4561,7 +4561,7 @@ Types:
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">GenericOAuthConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProvider</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderType</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">ScimConfig</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">SCIMConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
 

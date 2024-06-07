@@ -409,7 +409,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SelfHostedApplication.ScimConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -479,7 +479,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -496,9 +496,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -516,15 +516,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -545,7 +545,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -561,7 +561,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -701,7 +701,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SaaSApplication.ScimConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The application type.
@@ -918,7 +918,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -935,9 +935,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -955,15 +955,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -984,7 +984,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -1000,7 +1000,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -1186,7 +1186,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserSSHApplication.ScimConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -1256,7 +1256,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -1273,9 +1273,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -1293,15 +1293,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -1322,7 +1322,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -1338,7 +1338,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -1524,7 +1524,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.ScimConfig;
+    scim_config?: BrowserVncApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -1594,7 +1594,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -1611,9 +1611,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -1631,15 +1631,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -1660,7 +1660,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -1676,7 +1676,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -1814,7 +1814,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: AppLauncherApplication.ScimConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1831,7 +1831,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -1848,9 +1848,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -1868,15 +1868,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -1897,7 +1897,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -1913,7 +1913,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -2051,7 +2051,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -2068,7 +2068,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -2085,9 +2085,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -2105,15 +2105,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -2134,7 +2134,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -2150,7 +2150,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -2288,7 +2288,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -2305,7 +2305,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -2322,9 +2322,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -2342,15 +2342,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -2371,7 +2371,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -2387,7 +2387,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -2520,7 +2520,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BookmarkApplication.ScimConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     updated_at?: string;
   }
@@ -2530,7 +2530,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -2547,9 +2547,9 @@ export namespace Application {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, we propagate DELETE requests to the target application for SCIM
@@ -2567,15 +2567,15 @@ export namespace Application {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -2596,7 +2596,7 @@ export namespace Application {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -2612,7 +2612,7 @@ export namespace Application {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -3206,7 +3206,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SelfHostedApplication.ScimConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -3318,7 +3318,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -3335,9 +3335,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3355,15 +3355,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -3384,7 +3384,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -3400,7 +3400,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -3547,7 +3547,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SaaSApplication.ScimConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -3765,7 +3765,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -3782,9 +3782,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3802,15 +3802,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -3831,7 +3831,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -3847,7 +3847,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -4061,7 +4061,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserSSHApplication.ScimConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -4173,7 +4173,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -4190,9 +4190,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4210,15 +4210,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -4239,7 +4239,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -4255,7 +4255,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -4469,7 +4469,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.ScimConfig;
+    scim_config?: BrowserVncApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -4581,7 +4581,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -4598,9 +4598,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4618,15 +4618,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -4647,7 +4647,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -4663,7 +4663,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -4804,7 +4804,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: AppLauncherApplication.ScimConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -4895,7 +4895,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -4912,9 +4912,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4932,15 +4932,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -4961,7 +4961,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -4977,7 +4977,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -5118,7 +5118,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -5209,7 +5209,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -5226,9 +5226,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5246,15 +5246,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -5275,7 +5275,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -5291,7 +5291,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -5432,7 +5432,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -5523,7 +5523,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -5540,9 +5540,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5560,15 +5560,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -5589,7 +5589,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -5605,7 +5605,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -5736,7 +5736,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BookmarkApplication.ScimConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -5757,7 +5757,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -5774,9 +5774,9 @@ export namespace ApplicationCreateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5794,15 +5794,15 @@ export namespace ApplicationCreateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -5823,7 +5823,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -5839,7 +5839,7 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -6065,7 +6065,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SelfHostedApplication.ScimConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -6177,7 +6177,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -6194,9 +6194,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6214,15 +6214,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -6243,7 +6243,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -6259,7 +6259,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -6406,7 +6406,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SaaSApplication.ScimConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -6624,7 +6624,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -6641,9 +6641,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6661,15 +6661,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -6690,7 +6690,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -6706,7 +6706,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -6920,7 +6920,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserSSHApplication.ScimConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -7032,7 +7032,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -7049,9 +7049,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7069,15 +7069,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -7098,7 +7098,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -7114,7 +7114,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -7328,7 +7328,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.ScimConfig;
+    scim_config?: BrowserVncApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -7440,7 +7440,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -7457,9 +7457,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7477,15 +7477,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -7506,7 +7506,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -7522,7 +7522,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -7663,7 +7663,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: AppLauncherApplication.ScimConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -7754,7 +7754,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -7771,9 +7771,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7791,15 +7791,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -7820,7 +7820,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -7836,7 +7836,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -7977,7 +7977,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -8068,7 +8068,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -8085,9 +8085,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8105,15 +8105,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -8134,7 +8134,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -8150,7 +8150,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -8291,7 +8291,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -8382,7 +8382,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -8399,9 +8399,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8419,15 +8419,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -8448,7 +8448,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -8464,7 +8464,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -8595,7 +8595,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BookmarkApplication.ScimConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -8616,7 +8616,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -8633,9 +8633,9 @@ export namespace ApplicationUpdateResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8653,15 +8653,15 @@ export namespace ApplicationUpdateResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -8682,7 +8682,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -8698,7 +8698,7 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -8924,7 +8924,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SelfHostedApplication.ScimConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -9036,7 +9036,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -9053,9 +9053,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9073,15 +9073,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -9102,7 +9102,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -9118,7 +9118,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -9265,7 +9265,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SaaSApplication.ScimConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -9483,7 +9483,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -9500,9 +9500,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9520,15 +9520,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -9549,7 +9549,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -9565,7 +9565,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -9779,7 +9779,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserSSHApplication.ScimConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -9891,7 +9891,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -9908,9 +9908,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9928,15 +9928,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -9957,7 +9957,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -9973,7 +9973,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -10187,7 +10187,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.ScimConfig;
+    scim_config?: BrowserVncApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -10299,7 +10299,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -10316,9 +10316,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10336,15 +10336,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -10365,7 +10365,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -10381,7 +10381,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -10522,7 +10522,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: AppLauncherApplication.ScimConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -10613,7 +10613,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -10630,9 +10630,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10650,15 +10650,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -10679,7 +10679,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -10695,7 +10695,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -10836,7 +10836,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -10927,7 +10927,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -10944,9 +10944,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10964,15 +10964,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -10993,7 +10993,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -11009,7 +11009,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -11150,7 +11150,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -11241,7 +11241,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -11258,9 +11258,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11278,15 +11278,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -11307,7 +11307,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -11323,7 +11323,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -11454,7 +11454,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BookmarkApplication.ScimConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -11475,7 +11475,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -11492,9 +11492,9 @@ export namespace ApplicationListResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11512,15 +11512,15 @@ export namespace ApplicationListResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -11541,7 +11541,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -11557,7 +11557,7 @@ export namespace ApplicationListResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -11790,7 +11790,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SelfHostedApplication.ScimConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -11902,7 +11902,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -11919,9 +11919,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11939,15 +11939,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -11968,7 +11968,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -11984,7 +11984,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -12131,7 +12131,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: SaaSApplication.ScimConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -12349,7 +12349,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -12366,9 +12366,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -12386,15 +12386,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -12415,7 +12415,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -12431,7 +12431,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -12645,7 +12645,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserSSHApplication.ScimConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -12757,7 +12757,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -12774,9 +12774,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -12794,15 +12794,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -12823,7 +12823,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -12839,7 +12839,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -13053,7 +13053,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.ScimConfig;
+    scim_config?: BrowserVncApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -13165,7 +13165,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -13182,9 +13182,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13202,15 +13202,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -13231,7 +13231,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -13247,7 +13247,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -13388,7 +13388,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: AppLauncherApplication.ScimConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -13479,7 +13479,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -13496,9 +13496,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13516,15 +13516,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -13545,7 +13545,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -13561,7 +13561,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -13702,7 +13702,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -13793,7 +13793,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -13810,9 +13810,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -13830,15 +13830,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -13859,7 +13859,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -13875,7 +13875,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -14016,7 +14016,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -14107,7 +14107,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -14124,9 +14124,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -14144,15 +14144,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -14173,7 +14173,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -14189,7 +14189,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -14320,7 +14320,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BookmarkApplication.ScimConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     /**
      * The tags you want assigned to an application. Tags are used to filter
@@ -14341,7 +14341,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -14358,9 +14358,9 @@ export namespace ApplicationGetResponse {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -14378,15 +14378,15 @@ export namespace ApplicationGetResponse {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -14407,7 +14407,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -14423,7 +14423,7 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -14665,7 +14665,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.SelfHostedApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.SelfHostedApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -14794,7 +14794,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -14811,9 +14811,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -14831,15 +14831,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -14860,7 +14860,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -14876,7 +14876,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -15036,7 +15036,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.SaaSApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.SaaSApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -15266,7 +15266,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -15283,9 +15283,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -15303,15 +15303,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -15332,7 +15332,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -15348,7 +15348,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -15576,7 +15576,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserSSHApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.BrowserSSHApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -15705,7 +15705,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -15722,9 +15722,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -15742,15 +15742,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -15771,7 +15771,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -15787,7 +15787,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -16015,7 +16015,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserVncApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.BrowserVncApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -16144,7 +16144,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -16161,9 +16161,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -16181,15 +16181,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -16210,7 +16210,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -16226,7 +16226,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -16365,7 +16365,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.AppLauncherApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.AppLauncherApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -16472,7 +16472,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -16489,9 +16489,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -16509,15 +16509,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -16538,7 +16538,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -16554,7 +16554,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -16693,7 +16693,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -16800,7 +16800,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -16817,9 +16817,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -16837,15 +16837,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -16866,7 +16866,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -16882,7 +16882,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -17021,7 +17021,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -17128,7 +17128,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -17145,9 +17145,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -17165,15 +17165,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -17194,7 +17194,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -17210,7 +17210,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -17341,7 +17341,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BookmarkApplication.ScimConfig;
+    scim_config?: ApplicationCreateParams.BookmarkApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -17360,7 +17360,7 @@ export namespace ApplicationCreateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -17377,9 +17377,9 @@ export namespace ApplicationCreateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -17397,15 +17397,15 @@ export namespace ApplicationCreateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -17426,7 +17426,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -17442,7 +17442,7 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -17682,7 +17682,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.SelfHostedApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.SelfHostedApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -17811,7 +17811,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -17828,9 +17828,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -17848,15 +17848,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -17877,7 +17877,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -17893,7 +17893,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -18053,7 +18053,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.SaaSApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.SaaSApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -18283,7 +18283,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -18300,9 +18300,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -18320,15 +18320,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -18349,7 +18349,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -18365,7 +18365,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -18593,7 +18593,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserSSHApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.BrowserSSHApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -18722,7 +18722,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -18739,9 +18739,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -18759,15 +18759,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -18788,7 +18788,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -18804,7 +18804,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -19032,7 +19032,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserVncApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.BrowserVncApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -19161,7 +19161,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -19178,9 +19178,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -19198,15 +19198,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -19227,7 +19227,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -19243,7 +19243,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -19382,7 +19382,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.AppLauncherApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.AppLauncherApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -19489,7 +19489,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -19506,9 +19506,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -19526,15 +19526,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -19555,7 +19555,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -19571,7 +19571,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -19710,7 +19710,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -19817,7 +19817,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -19834,9 +19834,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -19854,15 +19854,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -19883,7 +19883,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -19899,7 +19899,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -20038,7 +20038,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * Body param: The amount of time that tokens issued for this application will be
@@ -20145,7 +20145,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -20162,9 +20162,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -20182,15 +20182,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -20211,7 +20211,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -20227,7 +20227,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
@@ -20358,7 +20358,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BookmarkApplication.ScimConfig;
+    scim_config?: ApplicationUpdateParams.BookmarkApplication.SCIMConfig;
 
     /**
      * Body param: The tags you want assigned to an application. Tags are used to
@@ -20377,7 +20377,7 @@ export namespace ApplicationUpdateParams {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    export interface ScimConfig {
+    export interface SCIMConfig {
       /**
        * The UID of the IdP to use as the source for SCIM resources to provision to this
        * application.
@@ -20394,9 +20394,9 @@ export namespace ApplicationUpdateParams {
        * provisioning to an application.
        */
       authentication?:
-        | ScimConfig.AccessScimConfigAuthenticationHTTPBasic
-        | ScimConfig.AccessScimConfigAuthenticationOAuthBearerToken
-        | ScimConfig.AccessScimConfigAuthenticationOauth2;
+        | SCIMConfig.AccessSCIMConfigAuthenticationHTTPBasic
+        | SCIMConfig.AccessSCIMConfigAuthenticationOAuthBearerToken
+        | SCIMConfig.AccessSCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -20414,15 +20414,15 @@ export namespace ApplicationUpdateParams {
        * A list of mappings to apply to SCIM resources before provisioning them in this
        * application. These can transform or filter the resources to be provisioned.
        */
-      mappings?: Array<ScimConfig.Mapping>;
+      mappings?: Array<SCIMConfig.Mapping>;
     }
 
-    export namespace ScimConfig {
+    export namespace SCIMConfig {
       /**
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationHTTPBasic {
+      export interface AccessSCIMConfigAuthenticationHTTPBasic {
         /**
          * Password used to authenticate with the remote SCIM service.
          */
@@ -20443,7 +20443,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM
        * provisioning to an application.
        */
-      export interface AccessScimConfigAuthenticationOAuthBearerToken {
+      export interface AccessSCIMConfigAuthenticationOAuthBearerToken {
         /**
          * Token used to authenticate with the remote SCIM service.
          */
@@ -20459,7 +20459,7 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring OAuth 2 authentication scheme for SCIM provisioning
        * to an application.
        */
-      export interface AccessScimConfigAuthenticationOauth2 {
+      export interface AccessSCIMConfigAuthenticationOauth2 {
         /**
          * URL used to generate the auth code used during token generation.
          */
