@@ -44,7 +44,7 @@ export namespace ZeroTrust {
   export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
   export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
   export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
-  export import ScimConfig = IdentityProvidersAPI.ScimConfig;
+  export import SCIMConfig = IdentityProvidersAPI.SCIMConfig;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
