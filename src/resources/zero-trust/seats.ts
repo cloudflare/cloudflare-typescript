@@ -34,7 +34,7 @@ export interface Seat {
   gateway_seat?: boolean;
 
   /**
-   * Identifier
+   * The unique API identifier for the Zero Trust seat.
    */
   seat_uid?: string;
 
@@ -66,6 +66,11 @@ export namespace SeatEditParams {
      * True if the seat is part of Gateway.
      */
     gateway_seat: boolean;
+
+    /**
+     * The unique API identifier for the Zero Trust seat.
+     */
+    seat_uid: string;
   }
 }
 
