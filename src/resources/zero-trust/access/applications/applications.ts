@@ -793,6 +793,12 @@ export namespace Application {
 
     export interface AccessSchemasOIDCSaaSApp {
       /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
+      /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
        */
@@ -3639,6 +3645,12 @@ export namespace ApplicationCreateResponse {
     }
 
     export interface AccessOIDCSaaSApp {
+      /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
       /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
@@ -6499,6 +6511,12 @@ export namespace ApplicationUpdateResponse {
 
     export interface AccessOIDCSaaSApp {
       /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
+      /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
        */
@@ -9357,6 +9375,12 @@ export namespace ApplicationListResponse {
     }
 
     export interface AccessOIDCSaaSApp {
+      /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
       /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
@@ -12223,6 +12247,12 @@ export namespace ApplicationGetResponse {
     }
 
     export interface AccessOIDCSaaSApp {
+      /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
       /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
@@ -15144,6 +15174,12 @@ export namespace ApplicationCreateParams {
     }
 
     export interface AccessOIDCSaaSApp {
+      /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
       /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
@@ -18161,6 +18197,12 @@ export namespace ApplicationUpdateParams {
     }
 
     export interface AccessOIDCSaaSApp {
+      /**
+       * The lifetime of the OIDC Access Token after creation. Valid units are m,h. Must
+       * be greater than or equal to 1m and less than or equal to 24h.
+       */
+      access_token_lifetime?: string;
+
       /**
        * If client secret should be required on the token endpoint when
        * authorization_code_with_pkce grant is used.
