@@ -133,6 +133,8 @@ export class Indexes extends APIResource {
       this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/insert`, {
         body: body,
         ...options,
+        headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexInsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -168,6 +170,8 @@ export class Indexes extends APIResource {
       this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/upsert`, {
         body: body,
         ...options,
+        headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexUpsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }

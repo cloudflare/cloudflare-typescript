@@ -35,7 +35,11 @@ export class Scripts extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-        maybeMultipartFormRequestOptions({ body, ...options }),
+        maybeMultipartFormRequestOptions({
+          body,
+          ...options,
+          headers: { 'Content-Type': 'application/javascript', ...options?.headers },
+        }),
       ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
     )._thenUnwrap((obj) => obj.result);
   }

@@ -37,6 +37,8 @@ export class Upload extends APIResource {
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
         body: body,
         ...options,
+        headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: DatasetsAPI.Dataset }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -63,7 +65,7 @@ export interface UploadEditParams {
   /**
    * Body param:
    */
-  body: unknown;
+  body: string;
 }
 
 export namespace Upload {

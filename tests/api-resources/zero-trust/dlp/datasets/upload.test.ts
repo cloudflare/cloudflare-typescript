@@ -36,7 +36,7 @@ describe('resource upload', () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.upload.edit(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
-      { account_id: 'string', body: {} },
+      { account_id: 'string', body: 'string' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +52,7 @@ describe('resource upload', () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.upload.edit(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
-      { account_id: 'string', body: {} },
+      { account_id: 'string', body: 'string' },
     );
   });
 });
