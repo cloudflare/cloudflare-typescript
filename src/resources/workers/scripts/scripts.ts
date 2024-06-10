@@ -34,7 +34,12 @@ export class Scripts extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
-        maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options }),
+        maybeMultipartFormRequestOptions({
+          query: { rollback_to },
+          body,
+          ...options,
+          headers: { 'Content-Type': 'application/javascript', ...options?.headers },
+        }),
       ) as Core.APIPromise<{ result: Script }>
     )._thenUnwrap((obj) => obj.result);
   }
