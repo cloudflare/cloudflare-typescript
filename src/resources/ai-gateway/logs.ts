@@ -49,7 +49,11 @@ export namespace LogGetResponse {
 
     metadata?: string;
 
+    request_content_type?: string;
+
     request_type?: string;
+
+    response_content_type?: string;
 
     status_code?: number;
 
