@@ -13,6 +13,11 @@ describe('resource policies', () => {
   test('create: only required params', async () => {
     const responsePromise = cloudflare.pageShield.policies.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      action: 'allow',
+      description: 'Checkout page CSP policy',
+      enabled: true,
+      expression: 'ends_with(http.request.uri.path, "/checkout")',
+      value: "script-src 'none';",
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -35,7 +40,7 @@ describe('resource policies', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.pageShield.policies.update('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const responsePromise = cloudflare.pageShield.policies.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +53,7 @@ describe('resource policies', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.pageShield.policies.update('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const response = await cloudflare.pageShield.policies.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: 'allow',
       description: 'Checkout page CSP policy',
@@ -78,7 +83,7 @@ describe('resource policies', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.pageShield.policies.delete('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const responsePromise = cloudflare.pageShield.policies.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -91,13 +96,13 @@ describe('resource policies', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.pageShield.policies.delete('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const response = await cloudflare.pageShield.policies.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.pageShield.policies.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const responsePromise = cloudflare.pageShield.policies.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -110,7 +115,7 @@ describe('resource policies', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.pageShield.policies.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const response = await cloudflare.pageShield.policies.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
