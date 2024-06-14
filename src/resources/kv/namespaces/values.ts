@@ -2,6 +2,7 @@
 
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import { type Response } from '../../../_shims/index';
 import * as ValuesAPI from './values';
 import { multipartFormRequestOptions } from '../../../core';
 
@@ -19,13 +20,13 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueUpdateResponse> {
+  ): Core.APIPromise<ValueUpdateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
         multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: ValueUpdateResponse }>
+      ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,13 +39,13 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueDeleteResponse> {
+  ): Core.APIPromise<ValueDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
         options,
-      ) as Core.APIPromise<{ result: ValueDeleteResponse }>
+      ) as Core.APIPromise<{ result: ValueDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -60,23 +61,18 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<string> {
+  ): Core.APIPromise<Response> {
     const { account_id } = params;
     return this._client.get(
       `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-      { ...options, headers: { Accept: 'application/json', ...options?.headers } },
+      { ...options, __binaryResponse: true },
     );
   }
 }
 
-export type ValueUpdateResponse = unknown | string;
+export interface ValueUpdateResponse {}
 
-export type ValueDeleteResponse = unknown | string;
-
-/**
- * A byte sequence to be stored, up to 25 MiB in length.
- */
-export type ValueGetResponse = string;
+export interface ValueDeleteResponse {}
 
 export interface ValueUpdateParams {
   /**
@@ -112,7 +108,6 @@ export interface ValueGetParams {
 export namespace Values {
   export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
   export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
-  export import ValueGetResponse = ValuesAPI.ValueGetResponse;
   export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
   export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
   export import ValueGetParams = ValuesAPI.ValueGetParams;

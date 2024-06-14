@@ -185,6 +185,11 @@ export namespace Token {
       id: string;
 
       /**
+       * Attributes associated to the permission group.
+       */
+      meta?: unknown;
+
+      /**
        * Name of the group.
        */
       name?: string;
@@ -307,7 +312,12 @@ export namespace TokenCreateParams {
      * A named group of permissions that map to a group of operations against
      * resources.
      */
-    export interface PermissionGroup {}
+    export interface PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      meta?: unknown;
+    }
   }
 
   export interface Condition {
@@ -388,7 +398,12 @@ export namespace TokenUpdateParams {
      * A named group of permissions that map to a group of operations against
      * resources.
      */
-    export interface PermissionGroup {}
+    export interface PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      meta?: unknown;
+    }
   }
 
   export interface Condition {

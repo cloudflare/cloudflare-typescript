@@ -18,7 +18,6 @@ export {
 export {
   ValueUpdateResponse,
   ValueDeleteResponse,
-  ValueGetResponse,
   ValueUpdateParams,
   ValueDeleteParams,
   ValueGetParams,
