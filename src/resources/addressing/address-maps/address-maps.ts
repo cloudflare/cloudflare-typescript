@@ -357,6 +357,8 @@ export interface AddressMapCreateParams {
 
 export namespace AddressMapCreateParams {
   export interface Membership {
+    created_at?: string;
+
     /**
      * The identifier for the membership (eg. a zone or account tag).
      */

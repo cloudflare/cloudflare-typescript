@@ -7,7 +7,7 @@ import { SinglePage } from '../../../pagination';
 
 export class PermissionGroups extends APIResource {
   /**
-   * Find all available permission groups.
+   * Find all available permission groups for API Tokens
    */
   list(
     options?: Core.RequestOptions,

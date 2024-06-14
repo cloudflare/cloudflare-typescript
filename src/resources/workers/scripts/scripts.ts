@@ -331,6 +331,7 @@ export namespace Scripts {
   export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
   export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
   export import VersionCreateParams = VersionsAPI.VersionCreateParams;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;

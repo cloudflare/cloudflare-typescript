@@ -7,6 +7,7 @@ export {
   UserWithInviteCode,
   MemberCreateResponse,
   MemberUpdateResponse,
+  MemberListResponse,
   MemberDeleteResponse,
   MemberGetResponse,
   MemberCreateParams,
@@ -14,5 +15,6 @@ export {
   MemberListParams,
   MemberDeleteParams,
   MemberGetParams,
+  MemberListResponsesV4PagePaginationArray,
   Members,
 } from './members';

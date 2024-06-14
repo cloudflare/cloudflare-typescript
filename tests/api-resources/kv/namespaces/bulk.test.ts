@@ -33,7 +33,7 @@ describe('resource bulk', () => {
           expiration: 1578435000,
           expiration_ttl: 300,
           key: 'My-Key',
-          metadata: { someMetadataKey: 'someMetadataValue' },
+          metadata: { someMetadataKey: 'bar' },
           value: 'Some string',
         },
         {
@@ -41,7 +41,7 @@ describe('resource bulk', () => {
           expiration: 1578435000,
           expiration_ttl: 300,
           key: 'My-Key',
-          metadata: { someMetadataKey: 'someMetadataValue' },
+          metadata: { someMetadataKey: 'bar' },
           value: 'Some string',
         },
         {
@@ -49,7 +49,7 @@ describe('resource bulk', () => {
           expiration: 1578435000,
           expiration_ttl: 300,
           key: 'My-Key',
-          metadata: { someMetadataKey: 'someMetadataValue' },
+          metadata: { someMetadataKey: 'bar' },
           value: 'Some string',
         },
       ],
