@@ -202,6 +202,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/user/tokens/tokens.ts">CIDRList</a></code>
+- <code><a href="./src/resources/user/tokens/tokens.ts">Policy</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">Token</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenUpdateResponse</a></code>
