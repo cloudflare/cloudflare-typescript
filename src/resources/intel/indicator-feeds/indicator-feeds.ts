@@ -224,6 +224,16 @@ export interface IndicatorFeedGetResponse {
   description?: string;
 
   /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
+
+  /**
    * Status of the latest snapshot uploaded
    */
   latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
@@ -237,6 +247,16 @@ export interface IndicatorFeedGetResponse {
    * The name of the indicator feed
    */
   name?: string;
+
+  /**
+   * The unique identifier for the provider
+   */
+  provider_id?: string;
+
+  /**
+   * The provider of the indicator feed
+   */
+  provider_name?: string;
 }
 
 export interface IndicatorFeedCreateParams {
@@ -276,6 +296,11 @@ export interface IndicatorFeedUpdateParams {
    * Body param: The new is_public value of the feed
    */
   is_public?: boolean;
+
+  /**
+   * Body param: The new name of the feed
+   */
+  name?: string;
 }
 
 export interface IndicatorFeedListParams {

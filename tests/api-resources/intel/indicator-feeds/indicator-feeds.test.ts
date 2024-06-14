@@ -50,6 +50,7 @@ describe('resource indicatorFeeds', () => {
       description: 'This is an example description',
       is_attributable: true,
       is_public: true,
+      name: 'indicator_list',
     });
   });
 
