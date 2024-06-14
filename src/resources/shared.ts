@@ -468,8 +468,6 @@ export type SortDirection = 'asc' | 'desc';
  */
 export type SortDirectionParam = 'asc' | 'desc';
 
-export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> {}
-
 export class RolesSinglePage extends SinglePage<Role> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

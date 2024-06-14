@@ -3,7 +3,6 @@
 import * as Core from '../core';
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
-import * as MembershipsAPI from './memberships';
 import * as Shared from './shared';
 import * as AccountsAPI from './accounts/accounts';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
@@ -17,7 +16,11 @@ export class Memberships extends APIResource {
     body: MembershipUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MembershipUpdateResponse> {
-    return this._client.put(`/memberships/${membershipId}`, { body, ...options });
+    return (
+      this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
+        result: MembershipUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -53,7 +56,11 @@ export class Memberships extends APIResource {
    * Get a specific membership.
    */
   get(membershipId: string, options?: Core.RequestOptions): Core.APIPromise<MembershipGetResponse> {
-    return this._client.get(`/memberships/${membershipId}`, options);
+    return (
+      this._client.get(`/memberships/${membershipId}`, options) as Core.APIPromise<{
+        result: MembershipGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -120,179 +127,168 @@ export namespace Membership {
   }
 }
 
-export type MembershipUpdateResponse =
-  | MembershipUpdateResponse.IamAPIResponseCommon
-  | MembershipUpdateResponse.IamAPIResponseCommon;
+export interface MembershipUpdateResponse {
+  /**
+   * Membership identifier tag.
+   */
+  id?: string;
+
+  account?: AccountsAPI.Account;
+
+  /**
+   * Enterprise only. Indicates whether or not API access is enabled specifically for
+   * this user on a given account.
+   */
+  api_access_enabled?: boolean | null;
+
+  /**
+   * All access permissions for the user at the account.
+   */
+  permissions?: MembershipUpdateResponse.Permissions;
+
+  /**
+   * Access policy for the membership
+   */
+  policies?: Array<MembershipUpdateResponse.Policy>;
+
+  /**
+   * List of role names for the user at the account.
+   */
+  roles?: Array<string>;
+
+  /**
+   * Status of this membership.
+   */
+  status?: 'accepted' | 'pending' | 'rejected';
+}
 
 export namespace MembershipUpdateResponse {
-  export interface IamAPIResponseCommon {
-    result?: MembershipsAPI.Membership;
+  /**
+   * All access permissions for the user at the account.
+   */
+  export interface Permissions {
+    analytics?: Shared.PermissionGrant;
+
+    billing?: Shared.PermissionGrant;
+
+    cache_purge?: Shared.PermissionGrant;
+
+    dns?: Shared.PermissionGrant;
+
+    dns_records?: Shared.PermissionGrant;
+
+    lb?: Shared.PermissionGrant;
+
+    logs?: Shared.PermissionGrant;
+
+    organization?: Shared.PermissionGrant;
+
+    ssl?: Shared.PermissionGrant;
+
+    waf?: Shared.PermissionGrant;
+
+    zone_settings?: Shared.PermissionGrant;
+
+    zones?: Shared.PermissionGrant;
   }
 
-  export interface IamAPIResponseCommon {
-    result?: IamAPIResponseCommon.Result;
+  export interface Policy {
+    /**
+     * Policy identifier.
+     */
+    id?: string;
+
+    /**
+     * Allow or deny operations against the resources.
+     */
+    access?: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups?: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource groups that the policy applies to.
+     */
+    resource_groups?: Array<Policy.ResourceGroup>;
   }
 
-  export namespace IamAPIResponseCommon {
-    export interface Result {
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {
       /**
-       * Membership identifier tag.
+       * Identifier of the group.
        */
-      id?: string;
-
-      account?: AccountsAPI.Account;
-
-      /**
-       * Enterprise only. Indicates whether or not API access is enabled specifically for
-       * this user on a given account.
-       */
-      api_access_enabled?: boolean | null;
+      id: string;
 
       /**
-       * All access permissions for the user at the account.
+       * Attributes associated to the permission group.
        */
-      permissions?: Result.Permissions;
+      meta?: unknown;
 
       /**
-       * Access policy for the membership
+       * Name of the group.
        */
-      policies?: Array<Result.Policy>;
-
-      /**
-       * List of role names for the user at the account.
-       */
-      roles?: Array<string>;
-
-      /**
-       * Status of this membership.
-       */
-      status?: 'accepted' | 'pending' | 'rejected';
+      name?: string;
     }
 
-    export namespace Result {
+    /**
+     * A group of scoped resources.
+     */
+    export interface ResourceGroup {
       /**
-       * All access permissions for the user at the account.
+       * Identifier of the group.
        */
-      export interface Permissions {
-        analytics?: Shared.PermissionGrant;
+      id: string;
 
-        billing?: Shared.PermissionGrant;
+      /**
+       * The scope associated to the resource group
+       */
+      scope: Array<ResourceGroup.Scope>;
 
-        cache_purge?: Shared.PermissionGrant;
+      /**
+       * Attributes associated to the resource group.
+       */
+      meta?: unknown;
 
-        dns?: Shared.PermissionGrant;
+      /**
+       * Name of the resource group.
+       */
+      name?: string;
+    }
 
-        dns_records?: Shared.PermissionGrant;
+    export namespace ResourceGroup {
+      /**
+       * A scope is a combination of scope objects which provides additional context.
+       */
+      export interface Scope {
+        /**
+         * This is a combination of pre-defined resource name and identifier (like Account
+         * ID etc.)
+         */
+        key: string;
 
-        lb?: Shared.PermissionGrant;
-
-        logs?: Shared.PermissionGrant;
-
-        organization?: Shared.PermissionGrant;
-
-        ssl?: Shared.PermissionGrant;
-
-        waf?: Shared.PermissionGrant;
-
-        zone_settings?: Shared.PermissionGrant;
-
-        zones?: Shared.PermissionGrant;
+        /**
+         * A list of scope objects for additional context.
+         */
+        objects: Array<Scope.Object>;
       }
 
-      export interface Policy {
+      export namespace Scope {
         /**
-         * Policy identifier.
+         * A scope object represents any resource that can have actions applied against
+         * invite.
          */
-        id?: string;
-
-        /**
-         * Allow or deny operations against the resources.
-         */
-        access?: 'allow' | 'deny';
-
-        /**
-         * A set of permission groups that are specified to the policy.
-         */
-        permission_groups?: Array<Policy.PermissionGroup>;
-
-        /**
-         * A list of resource groups that the policy applies to.
-         */
-        resource_groups?: Array<Policy.ResourceGroup>;
-      }
-
-      export namespace Policy {
-        /**
-         * A named group of permissions that map to a group of operations against
-         * resources.
-         */
-        export interface PermissionGroup {
+        export interface Object {
           /**
-           * Identifier of the group.
+           * This is a combination of pre-defined resource name and identifier (like Zone ID
+           * etc.)
            */
-          id: string;
-
-          /**
-           * Name of the group.
-           */
-          name?: string;
-        }
-
-        /**
-         * A group of scoped resources.
-         */
-        export interface ResourceGroup {
-          /**
-           * Identifier of the group.
-           */
-          id: string;
-
-          /**
-           * Attributes associated to the resource group.
-           */
-          meta?: unknown;
-
-          /**
-           * Name of the resource group.
-           */
-          name?: string;
-
-          /**
-           * The scope associated to the resource group
-           */
-          scope?: Array<ResourceGroup.Scope>;
-        }
-
-        export namespace ResourceGroup {
-          /**
-           * A scope is a combination of scope objects which provides additional context.
-           */
-          export interface Scope {
-            /**
-             * This is a combination of pre-defined resource name and identifier (like Account
-             * ID etc.)
-             */
-            key: string;
-
-            /**
-             * A list of scope objects for additional context.
-             */
-            objects: Array<Scope.Object>;
-          }
-
-          export namespace Scope {
-            /**
-             * A scope object represents any resource that can have actions applied against
-             * invite.
-             */
-            export interface Object {
-              /**
-               * This is a combination of pre-defined resource name and identifier (like Account
-               * ID etc.)
-               */
-              key: string;
-            }
-          }
+          key: string;
         }
       }
     }
@@ -306,179 +302,168 @@ export interface MembershipDeleteResponse {
   id?: string;
 }
 
-export type MembershipGetResponse =
-  | MembershipGetResponse.IamAPIResponseCommon
-  | MembershipGetResponse.IamAPIResponseCommon;
+export interface MembershipGetResponse {
+  /**
+   * Membership identifier tag.
+   */
+  id?: string;
+
+  account?: AccountsAPI.Account;
+
+  /**
+   * Enterprise only. Indicates whether or not API access is enabled specifically for
+   * this user on a given account.
+   */
+  api_access_enabled?: boolean | null;
+
+  /**
+   * All access permissions for the user at the account.
+   */
+  permissions?: MembershipGetResponse.Permissions;
+
+  /**
+   * Access policy for the membership
+   */
+  policies?: Array<MembershipGetResponse.Policy>;
+
+  /**
+   * List of role names for the user at the account.
+   */
+  roles?: Array<string>;
+
+  /**
+   * Status of this membership.
+   */
+  status?: 'accepted' | 'pending' | 'rejected';
+}
 
 export namespace MembershipGetResponse {
-  export interface IamAPIResponseCommon {
-    result?: MembershipsAPI.Membership;
+  /**
+   * All access permissions for the user at the account.
+   */
+  export interface Permissions {
+    analytics?: Shared.PermissionGrant;
+
+    billing?: Shared.PermissionGrant;
+
+    cache_purge?: Shared.PermissionGrant;
+
+    dns?: Shared.PermissionGrant;
+
+    dns_records?: Shared.PermissionGrant;
+
+    lb?: Shared.PermissionGrant;
+
+    logs?: Shared.PermissionGrant;
+
+    organization?: Shared.PermissionGrant;
+
+    ssl?: Shared.PermissionGrant;
+
+    waf?: Shared.PermissionGrant;
+
+    zone_settings?: Shared.PermissionGrant;
+
+    zones?: Shared.PermissionGrant;
   }
 
-  export interface IamAPIResponseCommon {
-    result?: IamAPIResponseCommon.Result;
+  export interface Policy {
+    /**
+     * Policy identifier.
+     */
+    id?: string;
+
+    /**
+     * Allow or deny operations against the resources.
+     */
+    access?: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups?: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource groups that the policy applies to.
+     */
+    resource_groups?: Array<Policy.ResourceGroup>;
   }
 
-  export namespace IamAPIResponseCommon {
-    export interface Result {
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {
       /**
-       * Membership identifier tag.
+       * Identifier of the group.
        */
-      id?: string;
-
-      account?: AccountsAPI.Account;
-
-      /**
-       * Enterprise only. Indicates whether or not API access is enabled specifically for
-       * this user on a given account.
-       */
-      api_access_enabled?: boolean | null;
+      id: string;
 
       /**
-       * All access permissions for the user at the account.
+       * Attributes associated to the permission group.
        */
-      permissions?: Result.Permissions;
+      meta?: unknown;
 
       /**
-       * Access policy for the membership
+       * Name of the group.
        */
-      policies?: Array<Result.Policy>;
-
-      /**
-       * List of role names for the user at the account.
-       */
-      roles?: Array<string>;
-
-      /**
-       * Status of this membership.
-       */
-      status?: 'accepted' | 'pending' | 'rejected';
+      name?: string;
     }
 
-    export namespace Result {
+    /**
+     * A group of scoped resources.
+     */
+    export interface ResourceGroup {
       /**
-       * All access permissions for the user at the account.
+       * Identifier of the group.
        */
-      export interface Permissions {
-        analytics?: Shared.PermissionGrant;
+      id: string;
 
-        billing?: Shared.PermissionGrant;
+      /**
+       * The scope associated to the resource group
+       */
+      scope: Array<ResourceGroup.Scope>;
 
-        cache_purge?: Shared.PermissionGrant;
+      /**
+       * Attributes associated to the resource group.
+       */
+      meta?: unknown;
 
-        dns?: Shared.PermissionGrant;
+      /**
+       * Name of the resource group.
+       */
+      name?: string;
+    }
 
-        dns_records?: Shared.PermissionGrant;
+    export namespace ResourceGroup {
+      /**
+       * A scope is a combination of scope objects which provides additional context.
+       */
+      export interface Scope {
+        /**
+         * This is a combination of pre-defined resource name and identifier (like Account
+         * ID etc.)
+         */
+        key: string;
 
-        lb?: Shared.PermissionGrant;
-
-        logs?: Shared.PermissionGrant;
-
-        organization?: Shared.PermissionGrant;
-
-        ssl?: Shared.PermissionGrant;
-
-        waf?: Shared.PermissionGrant;
-
-        zone_settings?: Shared.PermissionGrant;
-
-        zones?: Shared.PermissionGrant;
+        /**
+         * A list of scope objects for additional context.
+         */
+        objects: Array<Scope.Object>;
       }
 
-      export interface Policy {
+      export namespace Scope {
         /**
-         * Policy identifier.
+         * A scope object represents any resource that can have actions applied against
+         * invite.
          */
-        id?: string;
-
-        /**
-         * Allow or deny operations against the resources.
-         */
-        access?: 'allow' | 'deny';
-
-        /**
-         * A set of permission groups that are specified to the policy.
-         */
-        permission_groups?: Array<Policy.PermissionGroup>;
-
-        /**
-         * A list of resource groups that the policy applies to.
-         */
-        resource_groups?: Array<Policy.ResourceGroup>;
-      }
-
-      export namespace Policy {
-        /**
-         * A named group of permissions that map to a group of operations against
-         * resources.
-         */
-        export interface PermissionGroup {
+        export interface Object {
           /**
-           * Identifier of the group.
+           * This is a combination of pre-defined resource name and identifier (like Zone ID
+           * etc.)
            */
-          id: string;
-
-          /**
-           * Name of the group.
-           */
-          name?: string;
-        }
-
-        /**
-         * A group of scoped resources.
-         */
-        export interface ResourceGroup {
-          /**
-           * Identifier of the group.
-           */
-          id: string;
-
-          /**
-           * Attributes associated to the resource group.
-           */
-          meta?: unknown;
-
-          /**
-           * Name of the resource group.
-           */
-          name?: string;
-
-          /**
-           * The scope associated to the resource group
-           */
-          scope?: Array<ResourceGroup.Scope>;
-        }
-
-        export namespace ResourceGroup {
-          /**
-           * A scope is a combination of scope objects which provides additional context.
-           */
-          export interface Scope {
-            /**
-             * This is a combination of pre-defined resource name and identifier (like Account
-             * ID etc.)
-             */
-            key: string;
-
-            /**
-             * A list of scope objects for additional context.
-             */
-            objects: Array<Scope.Object>;
-          }
-
-          export namespace Scope {
-            /**
-             * A scope object represents any resource that can have actions applied against
-             * invite.
-             */
-            export interface Object {
-              /**
-               * This is a combination of pre-defined resource name and identifier (like Account
-               * ID etc.)
-               */
-              key: string;
-            }
-          }
+          key: string;
         }
       }
     }

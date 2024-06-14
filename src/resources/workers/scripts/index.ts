@@ -45,5 +45,6 @@ export {
   VersionCreateParams,
   VersionListParams,
   VersionGetParams,
+  VersionListResponsesV4PagePagination,
   Versions,
 } from './versions';

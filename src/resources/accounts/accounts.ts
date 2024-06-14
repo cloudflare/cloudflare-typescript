@@ -196,8 +196,10 @@ export namespace Accounts {
   export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
   export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
   export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
+  export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
   export import MemberGetResponse = MembersAPI.MemberGetResponse;
+  export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
   export import MemberCreateParams = MembersAPI.MemberCreateParams;
   export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
   export import MemberListParams = MembersAPI.MemberListParams;

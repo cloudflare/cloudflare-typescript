@@ -45,7 +45,7 @@ export interface Key {
   /**
    * Arbitrary JSON that is associated with a key.
    */
-  metadata?: unknown;
+  metadata?: Record<string, unknown>;
 }
 
 export interface KeyListParams extends CursorLimitPaginationParams {

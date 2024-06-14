@@ -11,7 +11,9 @@ const cloudflare = new Cloudflare({
 
 describe('resource roles', () => {
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.accounts.roles.list({ account_id: 'string' });
+    const responsePromise = cloudflare.accounts.roles.list({
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,11 +24,14 @@ describe('resource roles', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.accounts.roles.list({ account_id: 'string' });
+    const response = await cloudflare.accounts.roles.list({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.accounts.roles.get({}, { account_id: 'string' });
+    const responsePromise = cloudflare.accounts.roles.get(
+      {},
+      { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,6 +42,9 @@ describe('resource roles', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.accounts.roles.get({}, { account_id: 'string' });
+    const response = await cloudflare.accounts.roles.get(
+      {},
+      { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' },
+    );
   });
 });
