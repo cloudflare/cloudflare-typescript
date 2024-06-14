@@ -27,34 +27,48 @@ export class Connections extends APIResource {
     connectionId: string,
     params: ConnectionGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Connection> {
+  ): Core.APIPromise<Connection | null> {
     const { zone_id } = params;
-    return this._client.get(`/zones/${zone_id}/page_shield/connections/${connectionId}`, options);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/page_shield/connections/${connectionId}`,
+        options,
+      ) as Core.APIPromise<{ result: Connection | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class ConnectionsSinglePage extends SinglePage<Connection> {}
 
 export interface Connection {
-  id?: string;
+  /**
+   * Identifier
+   */
+  id: string;
 
-  added_at?: string;
+  added_at: string;
+
+  first_seen_at: string;
+
+  host: string;
+
+  last_seen_at: string;
+
+  url: string;
+
+  url_contains_cdn_cgi_path: boolean;
 
   domain_reported_malicious?: boolean;
 
   first_page_url?: string;
 
-  first_seen_at?: string;
+  malicious_domain_categories?: Array<string>;
 
-  host?: string;
-
-  last_seen_at?: string;
+  malicious_url_categories?: Array<string>;
 
   page_urls?: Array<string>;
 
-  url?: string;
-
-  url_contains_cdn_cgi_path?: boolean;
+  url_reported_malicious?: boolean;
 }
 
 export interface ConnectionListParams {
