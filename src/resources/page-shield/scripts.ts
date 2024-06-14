@@ -24,76 +24,128 @@ export class Scripts extends APIResource {
     scriptId: string,
     params: ScriptGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptGetResponse> {
+  ): Core.APIPromise<ScriptGetResponse | null> {
     const { zone_id } = params;
-    return this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options);
+    return (
+      this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options) as Core.APIPromise<{
+        result: ScriptGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export class ScriptsSinglePage extends SinglePage<Script> {}
 
 export interface Script {
-  id?: string;
+  /**
+   * Identifier
+   */
+  id: string;
 
-  added_at?: string;
+  added_at: string;
 
-  dataflow_score?: number;
+  first_seen_at: string;
+
+  host: string;
+
+  last_seen_at: string;
+
+  url: string;
+
+  url_contains_cdn_cgi_path: boolean;
+
+  /**
+   * The dataflow score of the JavaScript content.
+   */
+  dataflow_score?: number | null;
 
   domain_reported_malicious?: boolean;
 
-  fetched_at?: string;
+  /**
+   * The timestamp of when the script was last fetched.
+   */
+  fetched_at?: string | null;
 
   first_page_url?: string;
 
-  first_seen_at?: string;
+  /**
+   * The computed hash of the analyzed script.
+   */
+  hash?: string | null;
 
-  hash?: string;
+  /**
+   * The integrity score of the JavaScript content.
+   */
+  js_integrity_score?: number | null;
 
-  host?: string;
+  malicious_domain_categories?: Array<string>;
 
-  js_integrity_score?: number;
+  malicious_url_categories?: Array<string>;
 
-  last_seen_at?: string;
-
-  obfuscation_score?: number;
+  /**
+   * The obfuscation score of the JavaScript content.
+   */
+  obfuscation_score?: number | null;
 
   page_urls?: Array<string>;
 
-  url?: string;
-
-  url_contains_cdn_cgi_path?: boolean;
+  url_reported_malicious?: boolean;
 }
 
 export interface ScriptGetResponse {
-  id?: string;
+  /**
+   * Identifier
+   */
+  id: string;
 
-  added_at?: string;
+  added_at: string;
 
-  dataflow_score?: number;
+  first_seen_at: string;
+
+  host: string;
+
+  last_seen_at: string;
+
+  url: string;
+
+  url_contains_cdn_cgi_path: boolean;
+
+  /**
+   * The dataflow score of the JavaScript content.
+   */
+  dataflow_score?: number | null;
 
   domain_reported_malicious?: boolean;
 
-  fetched_at?: string;
+  /**
+   * The timestamp of when the script was last fetched.
+   */
+  fetched_at?: string | null;
 
   first_page_url?: string;
 
-  first_seen_at?: string;
+  /**
+   * The computed hash of the analyzed script.
+   */
+  hash?: string | null;
 
-  hash?: string;
+  /**
+   * The integrity score of the JavaScript content.
+   */
+  js_integrity_score?: number | null;
 
-  host?: string;
+  malicious_domain_categories?: Array<string>;
 
-  js_integrity_score?: number;
+  malicious_url_categories?: Array<string>;
 
-  last_seen_at?: string;
-
-  obfuscation_score?: number;
+  /**
+   * The obfuscation score of the JavaScript content.
+   */
+  obfuscation_score?: number | null;
 
   page_urls?: Array<string>;
 
-  url?: string;
-
-  url_contains_cdn_cgi_path?: boolean;
+  url_reported_malicious?: boolean;
 
   versions?: Array<ScriptGetResponse.Version> | null;
 }
