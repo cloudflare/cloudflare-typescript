@@ -35,6 +35,7 @@ export { Healthchecks } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
 export { HyperdriveResource } from './hyperdrive/hyperdrive';
 export { IPs } from './ips';
+export { Iam } from './iam/iam';
 export { Images } from './images/images';
 export { Intel } from './intel/intel';
 export { KV } from './kv/kv';

@@ -83,6 +83,34 @@ export class Policies extends APIResource {
 
 export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
+export interface Policy {
+  /**
+   * The action to take if the expression matches
+   */
+  action: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value: string;
+}
+
 export interface PolicyCreateResponse {
   /**
    * Identifier
@@ -303,6 +331,7 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
+  export import Policy = PoliciesAPI.Policy;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
