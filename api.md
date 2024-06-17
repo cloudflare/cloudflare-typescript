@@ -3543,22 +3543,6 @@ Methods:
 - <code title="patch /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">edit</a>(siteId, { ...params }) -> Site</code>
 - <code title="get /accounts/{account_id}/magic/sites/{site_id}">client.magicTransit.sites.<a href="./src/resources/magic-transit/sites/sites.ts">get</a>(siteId, { ...params }) -> Site</code>
 
-### AppConfiguration
-
-Types:
-
-- <code><a href="./src/resources/magic-transit/sites/app-configuration.ts">AppConfigurationCreateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/app-configuration.ts">AppConfigurationUpdateResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/app-configuration.ts">AppConfigurationListResponse</a></code>
-- <code><a href="./src/resources/magic-transit/sites/app-configuration.ts">AppConfigurationDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/magic/sites/{site_id}/app_configs">client.magicTransit.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/app-configuration.ts">create</a>(siteId, { ...params }) -> AppConfigurationCreateResponse | null</code>
-- <code title="put /accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}">client.magicTransit.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/app-configuration.ts">update</a>(siteId, appConfigId, { ...params }) -> AppConfigurationUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/magic/sites/{site_id}/app_configs">client.magicTransit.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/app-configuration.ts">list</a>(siteId, { ...params }) -> AppConfigurationListResponsesSinglePage</code>
-- <code title="delete /accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}">client.magicTransit.sites.appConfiguration.<a href="./src/resources/magic-transit/sites/app-configuration.ts">delete</a>(siteId, appConfigId, { ...params }) -> AppConfigurationDeleteResponse | null</code>
-
 ### ACLs
 
 Types:
