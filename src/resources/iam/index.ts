@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Iam } from './iam';
+export { IAM } from './iam';
 export {
   PermissionGroupListResponse,
   PermissionGroupGetResponse,

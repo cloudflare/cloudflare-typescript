@@ -854,11 +854,11 @@ export namespace MemberGetResponse {
 }
 
 export type MemberCreateParams =
-  | MemberCreateParams.IamCreateMemberWithRoles
-  | MemberCreateParams.IamCreateMemberWithPolicies;
+  | MemberCreateParams.IAMCreateMemberWithRoles
+  | MemberCreateParams.IAMCreateMemberWithPolicies;
 
 export namespace MemberCreateParams {
-  export interface IamCreateMemberWithRoles {
+  export interface IAMCreateMemberWithRoles {
     /**
      * Path param: Account identifier tag.
      */
@@ -880,7 +880,7 @@ export namespace MemberCreateParams {
     status?: 'accepted' | 'pending';
   }
 
-  export interface IamCreateMemberWithPolicies {
+  export interface IAMCreateMemberWithPolicies {
     /**
      * Path param: Account identifier tag.
      */
@@ -894,7 +894,7 @@ export namespace MemberCreateParams {
     /**
      * Body param: Array of policies associated with this member.
      */
-    policies: Array<MemberCreateParams.IamCreateMemberWithPolicies.Policy>;
+    policies: Array<MemberCreateParams.IAMCreateMemberWithPolicies.Policy>;
 
     /**
      * Body param:
@@ -902,7 +902,7 @@ export namespace MemberCreateParams {
     status?: 'accepted' | 'pending';
   }
 
-  export namespace IamCreateMemberWithPolicies {
+  export namespace IAMCreateMemberWithPolicies {
     export interface Policy {
       /**
        * Allow or deny operations against the resources.
@@ -944,7 +944,7 @@ export namespace MemberCreateParams {
   }
 }
 
-export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IamUpdateMemberWithPolicies;
+export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IAMUpdateMemberWithPolicies;
 
 export namespace MemberUpdateParams {
   export interface Member {
@@ -968,7 +968,7 @@ export namespace MemberUpdateParams {
     }
   }
 
-  export interface IamUpdateMemberWithPolicies {
+  export interface IAMUpdateMemberWithPolicies {
     /**
      * Path param: Account identifier tag.
      */
@@ -977,10 +977,10 @@ export namespace MemberUpdateParams {
     /**
      * Body param: Array of policies associated with this member.
      */
-    policies: Array<MemberUpdateParams.IamUpdateMemberWithPolicies.Policy>;
+    policies: Array<MemberUpdateParams.IAMUpdateMemberWithPolicies.Policy>;
   }
 
-  export namespace IamUpdateMemberWithPolicies {
+  export namespace IAMUpdateMemberWithPolicies {
     export interface Policy {
       /**
        * Allow or deny operations against the resources.

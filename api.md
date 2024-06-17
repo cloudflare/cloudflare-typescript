@@ -6823,7 +6823,7 @@ Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(id, { ...params }) -> LogGetResponse</code>
 
-# Iam
+# IAM
 
 ## PermissionGroups
 
