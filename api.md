@@ -2704,6 +2704,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/page-shield/policies.ts">Policy</a></code>
 - <code><a href="./src/resources/page-shield/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/page-shield/policies.ts">PolicyUpdateResponse</a></code>
 - <code><a href="./src/resources/page-shield/policies.ts">PolicyListResponse</a></code>
@@ -2739,6 +2740,18 @@ Methods:
 
 - <code title="get /zones/{zone_id}/page_shield/scripts">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
 - <code title="get /zones/{zone_id}/page_shield/scripts/{script_id}">client.pageShield.scripts.<a href="./src/resources/page-shield/scripts.ts">get</a>(scriptId, { ...params }) -> ScriptGetResponse | null</code>
+
+## Cookies
+
+Types:
+
+- <code><a href="./src/resources/page-shield/cookies.ts">CookieListResponse</a></code>
+- <code><a href="./src/resources/page-shield/cookies.ts">CookieGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/page_shield/cookies">client.pageShield.cookies.<a href="./src/resources/page-shield/cookies.ts">list</a>({ ...params }) -> CookieListResponsesSinglePage</code>
+- <code title="get /zones/{zone_id}/page_shield/cookies/{cookie_id}">client.pageShield.cookies.<a href="./src/resources/page-shield/cookies.ts">get</a>(cookieId, { ...params }) -> CookieGetResponse | null</code>
 
 # Rulesets
 
@@ -6809,3 +6822,35 @@ Types:
 Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(id, { ...params }) -> LogGetResponse</code>
+
+# Iam
+
+## PermissionGroups
+
+Types:
+
+- <code><a href="./src/resources/iam/permission-groups.ts">PermissionGroupListResponse</a></code>
+- <code><a href="./src/resources/iam/permission-groups.ts">PermissionGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/iam/permission_groups">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/iam/permission_groups/{permission_group_id}">client.iam.permissionGroups.<a href="./src/resources/iam/permission-groups.ts">get</a>(permissionGroupId, { ...params }) -> PermissionGroupGetResponse</code>
+
+## ResourceGroups
+
+Types:
+
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupCreateResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupListResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupDeleteResponse</a></code>
+- <code><a href="./src/resources/iam/resource-groups.ts">ResourceGroupGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">create</a>({ ...params }) -> ResourceGroupCreateResponse</code>
+- <code title="put /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">update</a>(resourceGroupId, { ...params }) -> ResourceGroupUpdateResponse</code>
+- <code title="get /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">list</a>({ ...params }) -> ResourceGroupListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">delete</a>(resourceGroupId, { ...params }) -> ResourceGroupDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">get</a>(resourceGroupId, { ...params }) -> ResourceGroupGetResponse</code>

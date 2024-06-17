@@ -3,6 +3,7 @@
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import * as ConnectionsAPI from './connections';
+import * as CookiesAPI from './cookies';
 import * as PoliciesAPI from './policies';
 import * as ScriptsAPI from './scripts';
 
@@ -10,6 +11,7 @@ export class PageShield extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
+  cookies: CookiesAPI.Cookies = new CookiesAPI.Cookies(this._client);
 
   /**
    * Updates Page Shield settings.
@@ -118,6 +120,7 @@ export interface PageShieldGetParams {
 
 export namespace PageShield {
   export import Policies = PoliciesAPI.Policies;
+  export import Policy = PoliciesAPI.Policy;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
@@ -139,4 +142,10 @@ export namespace PageShield {
   export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+  export import Cookies = CookiesAPI.Cookies;
+  export import CookieListResponse = CookiesAPI.CookieListResponse;
+  export import CookieGetResponse = CookiesAPI.CookieGetResponse;
+  export import CookieListResponsesSinglePage = CookiesAPI.CookieListResponsesSinglePage;
+  export import CookieListParams = CookiesAPI.CookieListParams;
+  export import CookieGetParams = CookiesAPI.CookieGetParams;
 }
