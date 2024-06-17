@@ -39,7 +39,7 @@ export type AIRunResponse =
   | AIRunResponse.SpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.Response
+  | AIRunResponse.UnionMember7
   | Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
@@ -104,8 +104,18 @@ export namespace AIRunResponse {
     }
   }
 
-  export interface Response {
+  export interface UnionMember7 {
     response?: string;
+
+    tool_calls?: Array<UnionMember7.ToolCall>;
+  }
+
+  export namespace UnionMember7 {
+    export interface ToolCall {
+      arguments?: unknown;
+
+      name?: string;
+    }
   }
 
   export interface Translation {
