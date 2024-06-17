@@ -87,6 +87,11 @@ export namespace Account {
    */
   export interface Settings {
     /**
+     * Sets an abuse contact email to notify for abuse reports.
+     */
+    abuse_contact_email?: string;
+
+    /**
      * Specifies the default nameservers to be used for new zones added to this
      * account.
      *
@@ -144,6 +149,11 @@ export namespace AccountUpdateParams {
    * Account settings
    */
   export interface Settings {
+    /**
+     * Sets an abuse contact email to notify for abuse reports.
+     */
+    abuse_contact_email?: string;
+
     /**
      * Specifies the default nameservers to be used for new zones added to this
      * account.
