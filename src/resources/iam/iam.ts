@@ -4,14 +4,14 @@ import { APIResource } from '../../resource';
 import * as PermissionGroupsAPI from './permission-groups';
 import * as ResourceGroupsAPI from './resource-groups';
 
-export class Iam extends APIResource {
+export class IAM extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
     this._client,
   );
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
 }
 
-export namespace Iam {
+export namespace IAM {
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
   export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupGetResponse = PermissionGroupsAPI.PermissionGroupGetResponse;
