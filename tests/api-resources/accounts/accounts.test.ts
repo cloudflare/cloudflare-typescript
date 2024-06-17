@@ -26,6 +26,7 @@ describe('resource accounts', () => {
       account_id: {},
       name: 'Demo Account',
       settings: {
+        abuse_contact_email: 'string',
         default_nameservers: 'cloudflare.standard',
         enforce_twofactor: true,
         use_account_custom_ns_by_default: true,
