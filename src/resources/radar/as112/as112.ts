@@ -82,7 +82,7 @@ export namespace AS112TimeseriesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

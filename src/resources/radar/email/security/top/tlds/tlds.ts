@@ -77,7 +77,7 @@ export namespace TldGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

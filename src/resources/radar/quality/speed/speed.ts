@@ -113,7 +113,7 @@ export namespace SpeedSummaryResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

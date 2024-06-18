@@ -181,9 +181,11 @@ export interface AseGetParams {
 
 export namespace AseGetParams {
   export interface Prefix {
-    location: string;
+    in: string;
 
     name: string;
+
+    test: number;
 
     /**
      * Network prefix, IPv4 or IPv6.

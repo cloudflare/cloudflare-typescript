@@ -70,15 +70,4 @@ describe('resource datasets', () => {
       cloudflare.radar.datasets.get('ranking_top_1000', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
-
-  test('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.datasets.get(
-        'ranking_top_1000',
-        { date: 'string' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
 });

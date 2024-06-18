@@ -75,7 +75,7 @@ export interface DomainGetParams {
   /**
    * Array of dates to filter the ranking.
    */
-  date?: Array<string | null>;
+  date?: Array<string>;
 
   /**
    * Format results are returned in.

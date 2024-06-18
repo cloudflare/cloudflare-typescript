@@ -80,7 +80,7 @@ export namespace BotClassGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

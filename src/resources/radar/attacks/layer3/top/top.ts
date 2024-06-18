@@ -113,7 +113,7 @@ export namespace TopAttacksResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -175,7 +175,7 @@ export namespace TopIndustryResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -229,7 +229,7 @@ export namespace TopVerticalResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -321,6 +321,12 @@ export interface TopAttacksParams {
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
+
+  /**
+   * Normalization method applied. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE' | 'MIN_MAX';
 
   /**
    * Array of L3/4 attack types.

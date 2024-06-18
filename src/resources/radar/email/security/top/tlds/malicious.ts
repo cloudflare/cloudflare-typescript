@@ -78,7 +78,7 @@ export namespace MaliciousGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
