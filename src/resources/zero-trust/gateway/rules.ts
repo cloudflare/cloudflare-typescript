@@ -336,6 +336,13 @@ export interface RuleSetting {
   egress?: RuleSetting.Egress;
 
   /**
+   * Set to true, to ignore the category matches at CNAME domains in a response. If
+   * unchecked, the categories in this rule will be checked against all the CNAME
+   * domain categories in a response.
+   */
+  ignore_cname_category_matches?: boolean;
+
+  /**
    * INSECURE - disable DNSSEC validation (for Allow actions).
    */
   insecure_disable_dnssec_validation?: boolean;
@@ -407,27 +414,27 @@ export namespace RuleSetting {
    */
   export interface BisoAdminControls {
     /**
-     * Set to true to enable copy-pasting.
+     * Set to false to enable copy-pasting.
      */
     dcp?: boolean;
 
     /**
-     * Set to true to enable downloading.
+     * Set to false to enable downloading.
      */
     dd?: boolean;
 
     /**
-     * Set to true to enable keyboard usage.
+     * Set to false to enable keyboard usage.
      */
     dk?: boolean;
 
     /**
-     * Set to true to enable printing.
+     * Set to false to enable printing.
      */
     dp?: boolean;
 
     /**
-     * Set to true to enable uploading.
+     * Set to false to enable uploading.
      */
     du?: boolean;
   }
@@ -604,6 +611,13 @@ export interface RuleSettingParam {
   egress?: RuleSettingParam.Egress;
 
   /**
+   * Set to true, to ignore the category matches at CNAME domains in a response. If
+   * unchecked, the categories in this rule will be checked against all the CNAME
+   * domain categories in a response.
+   */
+  ignore_cname_category_matches?: boolean;
+
+  /**
    * INSECURE - disable DNSSEC validation (for Allow actions).
    */
   insecure_disable_dnssec_validation?: boolean;
@@ -675,27 +689,27 @@ export namespace RuleSettingParam {
    */
   export interface BisoAdminControls {
     /**
-     * Set to true to enable copy-pasting.
+     * Set to false to enable copy-pasting.
      */
     dcp?: boolean;
 
     /**
-     * Set to true to enable downloading.
+     * Set to false to enable downloading.
      */
     dd?: boolean;
 
     /**
-     * Set to true to enable keyboard usage.
+     * Set to false to enable keyboard usage.
      */
     dk?: boolean;
 
     /**
-     * Set to true to enable printing.
+     * Set to false to enable printing.
      */
     dp?: boolean;
 
     /**
-     * Set to true to enable uploading.
+     * Set to false to enable uploading.
      */
     du?: boolean;
   }
