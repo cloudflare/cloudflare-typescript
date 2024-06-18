@@ -25,8 +25,8 @@ export class Configurations extends APIResource {
    * Patches the current Zero Trust account configuration. This endpoint can update a
    * single subcollection of settings such as `antivirus`, `tls_decrypt`,
    * `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or
-   * `certificate`, without updating the entire configuration object. Returns an
-   * error if any collection of settings is not properly configured.
+   * `custom_certificate`, without updating the entire configuration object. Returns
+   * an error if any collection of settings is not properly configured.
    */
   edit(
     params: ConfigurationEditParams,
@@ -280,8 +280,7 @@ export interface BrowserIsolationSettingsParam {
 }
 
 /**
- * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
- * by `certificate`)
+ * Custom certificate settings for BYO-PKI.
  */
 export interface CustomCertificateSettings {
   /**
@@ -303,8 +302,7 @@ export interface CustomCertificateSettings {
 }
 
 /**
- * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
- * by `certificate`)
+ * Custom certificate settings for BYO-PKI.
  */
 export interface CustomCertificateSettingsParam {
   /**
@@ -390,14 +388,7 @@ export interface GatewayConfigurationSettings {
   browser_isolation?: BrowserIsolationSettings;
 
   /**
-   * Certificate settings for Gateway TLS interception. If not specified, the
-   * Cloudflare Root CA will be used.
-   */
-  certificate?: GatewayConfigurationSettings.Certificate;
-
-  /**
-   * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
-   * by `certificate`)
+   * Custom certificate settings for BYO-PKI.
    */
   custom_certificate?: CustomCertificateSettings;
 
@@ -420,19 +411,6 @@ export interface GatewayConfigurationSettings {
    * TLS interception settings.
    */
   tls_decrypt?: TLSSettings;
-}
-
-export namespace GatewayConfigurationSettings {
-  /**
-   * Certificate settings for Gateway TLS interception. If not specified, the
-   * Cloudflare Root CA will be used.
-   */
-  export interface Certificate {
-    /**
-     * UUID of certificate to be used for interception.
-     */
-    id: string;
-  }
 }
 
 /**
@@ -465,14 +443,7 @@ export interface GatewayConfigurationSettingsParam {
   browser_isolation?: BrowserIsolationSettingsParam;
 
   /**
-   * Certificate settings for Gateway TLS interception. If not specified, the
-   * Cloudflare Root CA will be used.
-   */
-  certificate?: GatewayConfigurationSettingsParam.Certificate;
-
-  /**
-   * @deprecated: Custom certificate settings for BYO-PKI. (deprecated and replaced
-   * by `certificate`)
+   * Custom certificate settings for BYO-PKI.
    */
   custom_certificate?: CustomCertificateSettingsParam;
 
@@ -495,19 +466,6 @@ export interface GatewayConfigurationSettingsParam {
    * TLS interception settings.
    */
   tls_decrypt?: TLSSettingsParam;
-}
-
-export namespace GatewayConfigurationSettingsParam {
-  /**
-   * Certificate settings for Gateway TLS interception. If not specified, the
-   * Cloudflare Root CA will be used.
-   */
-  export interface Certificate {
-    /**
-     * UUID of certificate to be used for interception.
-     */
-    id: string;
-  }
 }
 
 /**
