@@ -98,7 +98,7 @@ export namespace TopBrowserFamiliesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -152,7 +152,7 @@ export namespace TopBrowsersResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

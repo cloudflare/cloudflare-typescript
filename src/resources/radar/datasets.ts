@@ -47,18 +47,8 @@ export class Datasets extends APIResource {
    * by alias the latest dataset is returned, optionally filtered by the latest
    * available at a given date.
    */
-  get(alias: string, query?: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<string>;
-  get(alias: string, options?: Core.RequestOptions): Core.APIPromise<string>;
-  get(
-    alias: string,
-    query: DatasetGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<string> {
-    if (isRequestOptions(query)) {
-      return this.get(alias, {}, query);
-    }
+  get(alias: string, options?: Core.RequestOptions): Core.APIPromise<string> {
     return this._client.get(`/radar/datasets/${alias}`, {
-      query,
       ...options,
       headers: { Accept: 'text/csv', ...options?.headers },
     });
@@ -131,18 +121,10 @@ export interface DatasetDownloadParams {
   format?: 'JSON' | 'CSV';
 }
 
-export interface DatasetGetParams {
-  /**
-   * Filter dataset alias by date
-   */
-  date?: string | null;
-}
-
 export namespace Datasets {
   export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
   export import DatasetDownloadResponse = DatasetsAPI.DatasetDownloadResponse;
   export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
   export import DatasetDownloadParams = DatasetsAPI.DatasetDownloadParams;
-  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
 }

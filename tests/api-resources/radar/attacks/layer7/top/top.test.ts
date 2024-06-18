@@ -45,6 +45,7 @@ describe('resource top', () => {
           location: ['string', 'string', 'string'],
           magnitude: 'MITIGATED_REQUESTS',
           name: ['string', 'string', 'string'],
+          normalization: 'PERCENTAGE',
         },
         { path: '/_stainless_unknown_path' },
       ),

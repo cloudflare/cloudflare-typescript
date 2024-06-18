@@ -18,7 +18,6 @@ export {
   DatasetGetResponse,
   DatasetListParams,
   DatasetDownloadParams,
-  DatasetGetParams,
   Datasets,
 } from './datasets';
 export { EntityGetResponse, EntityGetParams, Entities } from './entities/index';

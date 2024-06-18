@@ -77,7 +77,7 @@ export namespace NetflowTimeseriesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

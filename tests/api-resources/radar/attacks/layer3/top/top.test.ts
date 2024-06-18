@@ -44,6 +44,7 @@ describe('resource top', () => {
           limitPerLocation: 10,
           location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
+          normalization: 'PERCENTAGE',
           protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },

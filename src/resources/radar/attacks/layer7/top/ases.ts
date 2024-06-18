@@ -70,7 +70,7 @@ export namespace AseOriginResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

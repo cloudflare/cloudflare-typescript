@@ -78,7 +78,7 @@ export namespace TLSVersionGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

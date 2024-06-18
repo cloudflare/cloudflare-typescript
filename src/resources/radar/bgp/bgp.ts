@@ -86,7 +86,7 @@ export namespace BGPTimeseriesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -175,9 +175,11 @@ export interface BGPTimeseriesParams {
 
 export namespace BGPTimeseriesParams {
   export interface Prefix {
-    location: string;
+    in: string;
 
     name: string;
+
+    test: number;
 
     /**
      * Network prefix, IPv4 or IPv6.
