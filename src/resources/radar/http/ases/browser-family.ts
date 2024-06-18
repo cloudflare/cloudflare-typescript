@@ -78,7 +78,7 @@ export namespace BrowserFamilyGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

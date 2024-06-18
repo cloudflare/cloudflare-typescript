@@ -78,7 +78,7 @@ export namespace DeviceTypeGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

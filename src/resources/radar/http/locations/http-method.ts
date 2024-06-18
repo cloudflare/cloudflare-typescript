@@ -78,7 +78,7 @@ export namespace HTTPMethodGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

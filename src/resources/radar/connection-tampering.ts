@@ -94,7 +94,7 @@ export namespace ConnectionTamperingSummaryResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -182,7 +182,7 @@ export namespace ConnectionTamperingTimeseriesGroupsResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
