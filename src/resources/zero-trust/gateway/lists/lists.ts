@@ -45,8 +45,11 @@ export class Lists extends APIResource {
     params: ListListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<GatewayListsSinglePage, GatewayList> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, GatewayListsSinglePage, options);
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, GatewayListsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -103,6 +106,8 @@ export interface GatewayItem {
 }
 
 export interface GatewayItemParam {
+  created_at?: string;
+
   /**
    * The value of the item in a list.
    */
@@ -218,7 +223,15 @@ export interface ListUpdateParams {
 }
 
 export interface ListListParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Query param: The type of list.
+   */
+  type?: 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 }
 
 export interface ListDeleteParams {
