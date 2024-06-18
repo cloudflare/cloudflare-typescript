@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DevicesAPI from 'cloudflare/resources/zero-trust/dex/fleet-status/devices';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as DevicesAPI from './devices';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Devices extends APIResource {
   /**
@@ -70,12 +70,21 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Timestamp in ISO format
    */
-  time_end: string;
+  from: string;
+
+  /**
+   * Query param: Source:
+   *
+   * - `hourly` - device details aggregated hourly, up to 7 days prior
+   * - `last_seen` - device details, up to 24 hours prior
+   * - `raw` - device details, up to 7 days prior
+   */
+  source: 'last_seen' | 'hourly' | 'raw';
 
   /**
    * Query param: Timestamp in ISO format
    */
-  time_start: string;
+  to: string;
 
   /**
    * Query param: Cloudflare colo

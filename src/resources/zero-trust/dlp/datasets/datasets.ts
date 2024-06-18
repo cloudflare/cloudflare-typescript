@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DatasetsAPI from 'cloudflare/resources/zero-trust/dlp/datasets/datasets';
-import * as UploadAPI from 'cloudflare/resources/zero-trust/dlp/datasets/upload';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as DatasetsAPI from './datasets';
+import * as UploadAPI from './upload';
+import { SinglePage } from '../../../../pagination';
 
 export class Datasets extends APIResource {
   upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);

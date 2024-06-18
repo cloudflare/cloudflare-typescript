@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as NamespacesAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/namespaces';
-import * as ScriptsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/scripts';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as NamespacesAPI from './namespaces';
+import * as ScriptsAPI from './scripts/scripts';
+import { SinglePage } from '../../../../pagination';
 
 export class Namespaces extends APIResource {
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);

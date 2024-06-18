@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as NamespacesAPI from 'cloudflare/resources/durable-objects/namespaces/namespaces';
-import * as ObjectsAPI from 'cloudflare/resources/durable-objects/namespaces/objects';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as NamespacesAPI from './namespaces';
+import * as ObjectsAPI from './objects';
+import { SinglePage } from '../../../pagination';
 
 export class Namespaces extends APIResource {
   objects: ObjectsAPI.Objects = new ObjectsAPI.Objects(this._client);

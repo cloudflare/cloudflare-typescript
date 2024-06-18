@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as OpportunisticOnionAPI from 'cloudflare/resources/zones/settings/opportunistic-onion';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as OpportunisticOnionAPI from './opportunistic-onion';
 
 export class OpportunisticOnionResource extends APIResource {
   /**

@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions';
-import { type Uploadable, multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as VersionsAPI from './versions';
+import { type Uploadable, multipartFormRequestOptions } from '../../../core';
+import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Versions extends APIResource {
   /**
@@ -30,14 +31,13 @@ export class Versions extends APIResource {
     scriptName: string,
     params: VersionListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionListResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
-        options,
-      ) as Core.APIPromise<{ result: VersionListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  ): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
+      VersionListResponsesV4PagePagination,
+      { query, ...options },
+    );
   }
 
   /**
@@ -59,6 +59,8 @@ export class Versions extends APIResource {
   }
 }
 
+export class VersionListResponsesV4PagePagination extends V4PagePagination<VersionListResponse> {}
+
 export interface VersionCreateResponse {
   resources: unknown;
 
@@ -70,17 +72,11 @@ export interface VersionCreateResponse {
 }
 
 export interface VersionListResponse {
-  items?: Array<VersionListResponse.Item>;
-}
+  id?: string;
 
-export namespace VersionListResponse {
-  export interface Item {
-    id?: string;
+  metadata?: unknown;
 
-    metadata?: unknown;
-
-    number?: number;
-  }
+  number?: number;
 }
 
 export interface VersionGetResponse {
@@ -170,11 +166,17 @@ export namespace VersionCreateParams {
   }
 }
 
-export interface VersionListParams {
+export interface VersionListParams extends V4PagePaginationParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: Only return versions that can be used in a deployment. Ignores
+   * pagination.
+   */
+  deployable?: boolean;
 }
 
 export interface VersionGetParams {
@@ -188,6 +190,7 @@ export namespace Versions {
   export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
   export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
   export import VersionCreateParams = VersionsAPI.VersionCreateParams;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;

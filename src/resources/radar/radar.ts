@@ -1,22 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ConnectionTamperingAPI from 'cloudflare/resources/radar/connection-tampering';
-import * as DatasetsAPI from 'cloudflare/resources/radar/datasets';
-import * as SearchAPI from 'cloudflare/resources/radar/search';
-import * as AnnotationsAPI from 'cloudflare/resources/radar/annotations/annotations';
-import * as AS112API from 'cloudflare/resources/radar/as112/as112';
-import * as AttacksAPI from 'cloudflare/resources/radar/attacks/attacks';
-import * as BGPAPI from 'cloudflare/resources/radar/bgp/bgp';
-import * as DNSAPI from 'cloudflare/resources/radar/dns/dns';
-import * as EmailAPI from 'cloudflare/resources/radar/email/email';
-import * as EntitiesAPI from 'cloudflare/resources/radar/entities/entities';
-import * as HTTPAPI from 'cloudflare/resources/radar/http/http';
-import * as NetflowsAPI from 'cloudflare/resources/radar/netflows/netflows';
-import * as QualityAPI from 'cloudflare/resources/radar/quality/quality';
-import * as RankingAPI from 'cloudflare/resources/radar/ranking/ranking';
-import * as TrafficAnomaliesAPI from 'cloudflare/resources/radar/traffic-anomalies/traffic-anomalies';
-import * as VerifiedBotsAPI from 'cloudflare/resources/radar/verified-bots/verified-bots';
+import { APIResource } from '../../resource';
+import * as ConnectionTamperingAPI from './connection-tampering';
+import * as DatasetsAPI from './datasets';
+import * as SearchAPI from './search';
+import * as AnnotationsAPI from './annotations/annotations';
+import * as AS112API from './as112/as112';
+import * as AttacksAPI from './attacks/attacks';
+import * as BGPAPI from './bgp/bgp';
+import * as DNSAPI from './dns/dns';
+import * as EmailAPI from './email/email';
+import * as EntitiesAPI from './entities/entities';
+import * as HTTPAPI from './http/http';
+import * as NetflowsAPI from './netflows/netflows';
+import * as QualityAPI from './quality/quality';
+import * as RankingAPI from './ranking/ranking';
+import * as TrafficAnomaliesAPI from './traffic-anomalies/traffic-anomalies';
+import * as VerifiedBotsAPI from './verified-bots/verified-bots';
 
 export class Radar extends APIResource {
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
@@ -76,6 +76,8 @@ export namespace Radar {
   export import EntityGetResponse = EntitiesAPI.EntityGetResponse;
   export import EntityGetParams = EntitiesAPI.EntityGetParams;
   export import HTTP = HTTPAPI.HTTP;
+  export import HTTPTimeseriesResponse = HTTPAPI.HTTPTimeseriesResponse;
+  export import HTTPTimeseriesParams = HTTPAPI.HTTPTimeseriesParams;
   export import Quality = QualityAPI.Quality;
   export import Ranking = RankingAPI.Ranking;
   export import RankingTimeseriesGroupsResponse = RankingAPI.RankingTimeseriesGroupsResponse;

@@ -1,12 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ServicesAPI from 'cloudflare/resources/addressing/services';
-import * as AddressMapsAPI from 'cloudflare/resources/addressing/address-maps/address-maps';
-import * as LOADocumentsAPI from 'cloudflare/resources/addressing/loa-documents/loa-documents';
-import * as PrefixesAPI from 'cloudflare/resources/addressing/prefixes/prefixes';
+import { APIResource } from '../../resource';
+import * as ServicesAPI from './services';
+import * as AddressMapsAPI from './address-maps/address-maps';
+import * as LOADocumentsAPI from './loa-documents/loa-documents';
+import * as PrefixesAPI from './prefixes/prefixes';
+import * as RegionalHostnamesAPI from './regional-hostnames/regional-hostnames';
 
 export class Addressing extends APIResource {
+  regionalHostnames: RegionalHostnamesAPI.RegionalHostnames = new RegionalHostnamesAPI.RegionalHostnames(
+    this._client,
+  );
   services: ServicesAPI.Services = new ServicesAPI.Services(this._client);
   addressMaps: AddressMapsAPI.AddressMaps = new AddressMapsAPI.AddressMaps(this._client);
   loaDocuments: LOADocumentsAPI.LOADocuments = new LOADocumentsAPI.LOADocuments(this._client);
@@ -14,6 +18,18 @@ export class Addressing extends APIResource {
 }
 
 export namespace Addressing {
+  export import RegionalHostnames = RegionalHostnamesAPI.RegionalHostnames;
+  export import RegionalHostnameCreateResponse = RegionalHostnamesAPI.RegionalHostnameCreateResponse;
+  export import RegionalHostnameListResponse = RegionalHostnamesAPI.RegionalHostnameListResponse;
+  export import RegionalHostnameDeleteResponse = RegionalHostnamesAPI.RegionalHostnameDeleteResponse;
+  export import RegionalHostnameEditResponse = RegionalHostnamesAPI.RegionalHostnameEditResponse;
+  export import RegionalHostnameGetResponse = RegionalHostnamesAPI.RegionalHostnameGetResponse;
+  export import RegionalHostnameListResponsesSinglePage = RegionalHostnamesAPI.RegionalHostnameListResponsesSinglePage;
+  export import RegionalHostnameCreateParams = RegionalHostnamesAPI.RegionalHostnameCreateParams;
+  export import RegionalHostnameListParams = RegionalHostnamesAPI.RegionalHostnameListParams;
+  export import RegionalHostnameDeleteParams = RegionalHostnamesAPI.RegionalHostnameDeleteParams;
+  export import RegionalHostnameEditParams = RegionalHostnamesAPI.RegionalHostnameEditParams;
+  export import RegionalHostnameGetParams = RegionalHostnamesAPI.RegionalHostnameGetParams;
   export import Services = ServicesAPI.Services;
   export import ServiceListResponse = ServicesAPI.ServiceListResponse;
   export import ServiceListResponsesSinglePage = ServicesAPI.ServiceListResponsesSinglePage;

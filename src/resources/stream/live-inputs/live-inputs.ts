@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LiveInputsAPI from 'cloudflare/resources/stream/live-inputs/live-inputs';
-import * as OutputsAPI from 'cloudflare/resources/stream/live-inputs/outputs';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as LiveInputsAPI from './live-inputs';
+import * as OutputsAPI from './outputs';
 
 export class LiveInputs extends APIResource {
   outputs: OutputsAPI.Outputs = new OutputsAPI.Outputs(this._client);

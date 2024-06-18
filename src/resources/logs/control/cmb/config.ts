@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConfigAPI from 'cloudflare/resources/logs/control/cmb/config';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as ConfigAPI from './config';
 
 export class Config extends APIResource {
   /**

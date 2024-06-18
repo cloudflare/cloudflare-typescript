@@ -1,29 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as CAsAPI from 'cloudflare/resources/zero-trust/access/applications/cas';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { CloudflareError } from '../../../../error';
+import * as CAsAPI from './cas';
+import { SinglePage } from '../../../../pagination';
 
 export class CAs extends APIResource {
   /**
    * Generates a new short-lived certificate CA and public key.
    */
   create(
-    uuid: string,
+    appId: string,
     params?: CACreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CACreateResponse>;
-  create(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CACreateResponse>;
+  create(appId: string, options?: Core.RequestOptions): Core.APIPromise<CACreateResponse>;
   create(
-    uuid: string,
+    appId: string,
     params: CACreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CACreateResponse> {
     if (isRequestOptions(params)) {
-      return this.create(uuid, {}, params);
+      return this.create(appId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -44,7 +44,7 @@ export class CAs extends APIResource {
         };
     return (
       this._client.post(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
       ) as Core.APIPromise<{ result: CACreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -90,18 +90,18 @@ export class CAs extends APIResource {
    * Deletes a short-lived certificate CA.
    */
   delete(
-    uuid: string,
+    appId: string,
     params?: CADeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CADeleteResponse>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CADeleteResponse>;
+  delete(appId: string, options?: Core.RequestOptions): Core.APIPromise<CADeleteResponse>;
   delete(
-    uuid: string,
+    appId: string,
     params: CADeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CADeleteResponse> {
     if (isRequestOptions(params)) {
-      return this.delete(uuid, {}, params);
+      return this.delete(appId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -122,7 +122,7 @@ export class CAs extends APIResource {
         };
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
       ) as Core.APIPromise<{ result: CADeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -131,15 +131,15 @@ export class CAs extends APIResource {
   /**
    * Fetches a short-lived certificate CA and its public key.
    */
-  get(uuid: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
+  get(appId: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
   get(
-    uuid: string,
+    appId: string,
     params: CAGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CAGetResponse> {
     if (isRequestOptions(params)) {
-      return this.get(uuid, {}, params);
+      return this.get(appId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -160,7 +160,7 @@ export class CAs extends APIResource {
         };
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${uuid}/ca`,
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
       ) as Core.APIPromise<{ result: CAGetResponse }>
     )._thenUnwrap((obj) => obj.result);

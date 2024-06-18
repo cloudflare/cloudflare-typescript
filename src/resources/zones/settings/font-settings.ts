@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as FontSettingsAPI from 'cloudflare/resources/zones/settings/font-settings';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as FontSettingsAPI from './font-settings';
 
 export class FontSettings extends APIResource {
   /**

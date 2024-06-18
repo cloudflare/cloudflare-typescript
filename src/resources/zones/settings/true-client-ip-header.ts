@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TrueClientIPHeaderAPI from 'cloudflare/resources/zones/settings/true-client-ip-header';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TrueClientIPHeaderAPI from './true-client-ip-header';
 
 export class TrueClientIPHeaderResource extends APIResource {
   /**

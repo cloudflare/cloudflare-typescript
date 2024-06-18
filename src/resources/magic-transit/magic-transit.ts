@@ -1,18 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as CfInterconnectsAPI from 'cloudflare/resources/magic-transit/cf-interconnects';
-import * as GRETunnelsAPI from 'cloudflare/resources/magic-transit/gre-tunnels';
-import * as IPSECTunnelsAPI from 'cloudflare/resources/magic-transit/ipsec-tunnels';
-import * as RoutesAPI from 'cloudflare/resources/magic-transit/routes';
-import * as SitesAPI from 'cloudflare/resources/magic-transit/sites/sites';
+import { APIResource } from '../../resource';
+import * as AppsAPI from './apps';
+import * as CfInterconnectsAPI from './cf-interconnects';
+import * as ConnectorsAPI from './connectors';
+import * as GRETunnelsAPI from './gre-tunnels';
+import * as IPSECTunnelsAPI from './ipsec-tunnels';
+import * as RoutesAPI from './routes';
+import * as SitesAPI from './sites/sites';
 
 export class MagicTransit extends APIResource {
+  apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
   cfInterconnects: CfInterconnectsAPI.CfInterconnects = new CfInterconnectsAPI.CfInterconnects(this._client);
   greTunnels: GRETunnelsAPI.GRETunnels = new GRETunnelsAPI.GRETunnels(this._client);
   ipsecTunnels: IPSECTunnelsAPI.IPSECTunnels = new IPSECTunnelsAPI.IPSECTunnels(this._client);
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
+  connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
 }
 
 export interface HealthCheck {
@@ -108,6 +112,16 @@ export type HealthCheckType = 'reply' | 'request';
 export type HealthCheckTypeParam = 'reply' | 'request';
 
 export namespace MagicTransit {
+  export import Apps = AppsAPI.Apps;
+  export import AppCreateResponse = AppsAPI.AppCreateResponse;
+  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
+  export import AppListResponse = AppsAPI.AppListResponse;
+  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
+  export import AppListResponsesSinglePage = AppsAPI.AppListResponsesSinglePage;
+  export import AppCreateParams = AppsAPI.AppCreateParams;
+  export import AppUpdateParams = AppsAPI.AppUpdateParams;
+  export import AppListParams = AppsAPI.AppListParams;
+  export import AppDeleteParams = AppsAPI.AppDeleteParams;
   export import CfInterconnects = CfInterconnectsAPI.CfInterconnects;
   export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
   export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
@@ -162,5 +176,16 @@ export namespace MagicTransit {
   export import SiteUpdateParams = SitesAPI.SiteUpdateParams;
   export import SiteListParams = SitesAPI.SiteListParams;
   export import SiteDeleteParams = SitesAPI.SiteDeleteParams;
+  export import SiteEditParams = SitesAPI.SiteEditParams;
   export import SiteGetParams = SitesAPI.SiteGetParams;
+  export import Connectors = ConnectorsAPI.Connectors;
+  export import ConnectorUpdateResponse = ConnectorsAPI.ConnectorUpdateResponse;
+  export import ConnectorListResponse = ConnectorsAPI.ConnectorListResponse;
+  export import ConnectorEditResponse = ConnectorsAPI.ConnectorEditResponse;
+  export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
+  export import ConnectorListResponsesSinglePage = ConnectorsAPI.ConnectorListResponsesSinglePage;
+  export import ConnectorUpdateParams = ConnectorsAPI.ConnectorUpdateParams;
+  export import ConnectorListParams = ConnectorsAPI.ConnectorListParams;
+  export import ConnectorEditParams = ConnectorsAPI.ConnectorEditParams;
+  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
 }

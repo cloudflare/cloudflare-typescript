@@ -1,13 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as RecordsAPI from 'cloudflare/resources/dns/records';
-import * as AnalyticsAPI from 'cloudflare/resources/dns/analytics/analytics';
-import * as FirewallAPI from 'cloudflare/resources/dns/firewall/firewall';
-import * as AnalyticsAnalyticsAPI from 'cloudflare/resources/dns/firewall/analytics/analytics';
+import { APIResource } from '../../resource';
+import * as RecordsAPI from './records';
+import * as SettingsAPI from './settings';
+import * as AnalyticsAPI from './analytics/analytics';
+import * as FirewallAPI from './firewall/firewall';
+import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
 
 export class DNS extends APIResource {
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
+  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
   firewall: FirewallAPI.FirewallResource = new FirewallAPI.FirewallResource(this._client);
 }
@@ -101,6 +103,13 @@ export namespace DNS {
   export import RecordGetParams = RecordsAPI.RecordGetParams;
   export import RecordImportParams = RecordsAPI.RecordImportParams;
   export import RecordScanParams = RecordsAPI.RecordScanParams;
+  export import Settings = SettingsAPI.Settings;
+  export import DNSSetting = SettingsAPI.DNSSetting;
+  export import Nameserver = SettingsAPI.Nameserver;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import Analytics = AnalyticsAPI.Analytics;
   export import FirewallResource = FirewallAPI.FirewallResource;
   export import AttackMitigation = FirewallAPI.AttackMitigation;

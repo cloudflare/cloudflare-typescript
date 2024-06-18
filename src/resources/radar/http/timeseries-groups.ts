@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/http/timeseries-groups';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -268,7 +268,7 @@ export interface TimeseriesGroupBrowserResponse {
 export namespace TimeseriesGroupBrowserResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -281,7 +281,7 @@ export interface TimeseriesGroupBrowserFamilyResponse {
 export namespace TimeseriesGroupBrowserFamilyResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -362,7 +362,7 @@ export interface TimeseriesGroupOSResponse {
 export namespace TimeseriesGroupOSResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 

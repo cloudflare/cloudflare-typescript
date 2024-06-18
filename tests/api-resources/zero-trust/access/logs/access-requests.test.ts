@@ -10,10 +10,10 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource accessRequests', () => {
-  test('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.logs.accessRequests.list(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.logs.accessRequests.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,12 +23,13 @@ describe('resource accessRequests', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.logs.accessRequests.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.logs.accessRequests.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      direction: 'desc',
+      limit: 0,
+      since: '2020-07-01T05:20:00Z',
+      until: '2020-10-01T05:20:00Z',
+    });
   });
 });

@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as CertificatesAPI from 'cloudflare/resources/zero-trust/access/certificates/certificates';
-import * as SettingsAPI from 'cloudflare/resources/zero-trust/access/certificates/settings';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { CloudflareError } from '../../../../error';
+import * as CertificatesAPI from './certificates';
+import * as SettingsAPI from './settings';
+import { SinglePage } from '../../../../pagination';
 
 export class Certificates extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -44,7 +44,7 @@ export class Certificates extends APIResource {
    * Updates a configured mTLS certificate.
    */
   update(
-    uuid: string,
+    certificateId: string,
     params: CertificateUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Certificate> {
@@ -66,7 +66,7 @@ export class Certificates extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: Certificate }>
@@ -116,18 +116,18 @@ export class Certificates extends APIResource {
    * Deletes an mTLS certificate.
    */
   delete(
-    uuid: string,
+    certificateId: string,
     params?: CertificateDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>;
+  delete(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>;
   delete(
-    uuid: string,
+    certificateId: string,
     params: CertificateDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificateDeleteResponse> {
     if (isRequestOptions(params)) {
-      return this.delete(uuid, {}, params);
+      return this.delete(certificateId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -148,7 +148,7 @@ export class Certificates extends APIResource {
         };
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -158,18 +158,18 @@ export class Certificates extends APIResource {
    * Fetches a single mTLS certificate.
    */
   get(
-    uuid: string,
+    certificateId: string,
     params?: CertificateGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Certificate>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<Certificate>;
+  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<Certificate>;
   get(
-    uuid: string,
+    certificateId: string,
     params: CertificateGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Certificate> {
     if (isRequestOptions(params)) {
-      return this.get(uuid, {}, params);
+      return this.get(certificateId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -190,7 +190,7 @@ export class Certificates extends APIResource {
         };
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`,
         options,
       ) as Core.APIPromise<{ result: Certificate }>
     )._thenUnwrap((obj) => obj.result);

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AutomaticPlatformOptimizationAPI from 'cloudflare/resources/zones/settings/automatic-platform-optimization';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as AutomaticPlatformOptimizationAPI from './automatic-platform-optimization';
 
 export class AutomaticPlatformOptimizationResource extends APIResource {
   /**

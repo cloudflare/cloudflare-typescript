@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as RankingAPI from 'cloudflare/resources/radar/ranking/ranking';
-import * as DomainAPI from 'cloudflare/resources/radar/ranking/domain';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as RankingAPI from './ranking';
+import * as DomainAPI from './domain';
 
 export class Ranking extends APIResource {
   domain: DomainAPI.Domain = new DomainAPI.Domain(this._client);
@@ -81,7 +81,7 @@ export namespace RankingTimeseriesGroupsResponse {
 
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string | number>;
+    [k: string]: Array<string | number> | Array<string> | undefined;
   }
 }
 

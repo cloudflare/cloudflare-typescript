@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as UsersAPI from 'cloudflare/resources/zero-trust/access/users/users';
-import * as ActiveSessionsAPI from 'cloudflare/resources/zero-trust/access/users/active-sessions';
-import * as FailedLoginsAPI from 'cloudflare/resources/zero-trust/access/users/failed-logins';
-import * as LastSeenIdentityAPI from 'cloudflare/resources/zero-trust/access/users/last-seen-identity';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as UsersAPI from './users';
+import * as ActiveSessionsAPI from './active-sessions';
+import * as FailedLoginsAPI from './failed-logins';
+import * as LastSeenIdentityAPI from './last-seen-identity';
+import { SinglePage } from '../../../../pagination';
 
 export class Users extends APIResource {
   activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);
@@ -19,10 +19,11 @@ export class Users extends APIResource {
    * Gets a list of users for an account.
    */
   list(
-    identifier: string,
+    params: UserListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/users`, AccessUsersSinglePage, options);
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/access/users`, AccessUsersSinglePage, options);
   }
 }
 
@@ -79,16 +80,28 @@ export interface AccessUser {
   updated_at?: string;
 }
 
+export interface UserListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Users {
   export import AccessUser = UsersAPI.AccessUser;
   export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
+  export import UserListParams = UsersAPI.UserListParams;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
+  export import ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
+  export import ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
   export import Identity = LastSeenIdentityAPI.Identity;
+  export import LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
   export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
+  export import FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
 }

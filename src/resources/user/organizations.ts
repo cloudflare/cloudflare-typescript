@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as OrganizationsAPI from 'cloudflare/resources/user/organizations';
-import * as Shared from 'cloudflare/resources/shared';
-import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as OrganizationsAPI from './organizations';
+import * as Shared from '../shared';
+import * as MembersAPI from '../accounts/members';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Organizations extends APIResource {
   /**
@@ -73,7 +73,7 @@ export interface Organization {
   roles?: Array<string>;
 
   /**
-   * Whether the user is a member of the organization or has an inivitation pending.
+   * Whether the user is a member of the organization or has an invitation pending.
    */
   status?: MembersAPI.Status;
 }
@@ -85,7 +85,7 @@ export interface OrganizationDeleteResponse {
   id?: string;
 }
 
-export type OrganizationGetResponse = unknown | string | null;
+export type OrganizationGetResponse = unknown;
 
 export interface OrganizationListParams extends V4PagePaginationArrayParams {
   /**

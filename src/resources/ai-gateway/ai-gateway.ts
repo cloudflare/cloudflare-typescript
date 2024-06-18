@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LogsAPI from 'cloudflare/resources/ai-gateway/logs';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as LogsAPI from './logs';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
@@ -97,11 +97,14 @@ export interface AIGatewayCreateResponse {
 
 export namespace AIGatewayCreateResponse {
   export interface Task {
+    /**
+     * gateway id
+     */
     id: string;
 
     cache_invalidate_on_update: boolean;
 
-    cache_ttl: number;
+    cache_ttl: number | null;
 
     collect_logs: boolean;
 
@@ -109,24 +112,23 @@ export namespace AIGatewayCreateResponse {
 
     modified_at: string;
 
-    name: string;
+    rate_limiting_interval: number | null;
 
-    slug: string;
+    rate_limiting_limit: number | null;
 
-    rate_limiting_interval?: number;
-
-    rate_limiting_limit?: number;
-
-    rate_limiting_technique?: string;
+    rate_limiting_technique: 'fixed' | 'sliding';
   }
 }
 
 export interface AIGatewayUpdateResponse {
+  /**
+   * gateway id
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -134,23 +136,22 @@ export interface AIGatewayUpdateResponse {
 
   modified_at: string;
 
-  name: string;
+  rate_limiting_interval: number | null;
 
-  slug: string;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_interval?: number;
-
-  rate_limiting_limit?: number;
-
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayListResponse {
+  /**
+   * gateway id
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -158,23 +159,22 @@ export interface AIGatewayListResponse {
 
   modified_at: string;
 
-  name: string;
+  rate_limiting_interval: number | null;
 
-  slug: string;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_interval?: number;
-
-  rate_limiting_limit?: number;
-
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayDeleteResponse {
+  /**
+   * gateway id
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -182,23 +182,22 @@ export interface AIGatewayDeleteResponse {
 
   modified_at: string;
 
-  name: string;
+  rate_limiting_interval: number | null;
 
-  slug: string;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_interval?: number;
-
-  rate_limiting_limit?: number;
-
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayGetResponse {
+  /**
+   * gateway id
+   */
   id: string;
 
   cache_invalidate_on_update: boolean;
 
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   collect_logs: boolean;
 
@@ -206,15 +205,11 @@ export interface AIGatewayGetResponse {
 
   modified_at: string;
 
-  name: string;
+  rate_limiting_interval: number | null;
 
-  slug: string;
+  rate_limiting_limit: number | null;
 
-  rate_limiting_interval?: number;
-
-  rate_limiting_limit?: number;
-
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayCreateParams {
@@ -224,6 +219,11 @@ export interface AIGatewayCreateParams {
   account_id: string;
 
   /**
+   * Body param: gateway id
+   */
+  id: string;
+
+  /**
    * Body param:
    */
   cache_invalidate_on_update: boolean;
@@ -231,7 +231,7 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   /**
    * Body param:
@@ -241,27 +241,17 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
-  name: string;
+  rate_limiting_interval: number | null;
 
   /**
    * Body param:
    */
-  slug: string;
+  rate_limiting_limit: number | null;
 
   /**
    * Body param:
    */
-  rate_limiting_interval?: number;
-
-  /**
-   * Body param:
-   */
-  rate_limiting_limit?: number;
-
-  /**
-   * Body param:
-   */
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayUpdateParams {
@@ -278,7 +268,7 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  cache_ttl: number;
+  cache_ttl: number | null;
 
   /**
    * Body param:
@@ -288,27 +278,17 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  name: string;
+  rate_limiting_interval: number | null;
 
   /**
    * Body param:
    */
-  slug: string;
+  rate_limiting_limit: number | null;
 
   /**
    * Body param:
    */
-  rate_limiting_interval?: number;
-
-  /**
-   * Body param:
-   */
-  rate_limiting_limit?: number;
-
-  /**
-   * Body param:
-   */
-  rate_limiting_technique?: string;
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
@@ -318,7 +298,7 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param:
+   * Query param: gateway id
    */
   id?: string;
 

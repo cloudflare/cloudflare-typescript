@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as MobileRedirectAPI from 'cloudflare/resources/zones/settings/mobile-redirect';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as MobileRedirectAPI from './mobile-redirect';
 
 export class MobileRedirectResource extends APIResource {
   /**

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TLSVersionAPI from 'cloudflare/resources/radar/http/locations/tls-version';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as TLSVersionAPI from './tls-version';
 
 export class TLSVersion extends APIResource {
   /**
@@ -111,6 +111,11 @@ export interface TLSVersionGetParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filter for browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start

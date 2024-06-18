@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PeersAPI from 'cloudflare/resources/secondary-dns/peers';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PeersAPI from './peers';
+import { SinglePage } from '../../pagination';
 
 export class Peers extends APIResource {
   /**

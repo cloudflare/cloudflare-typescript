@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LOADocumentsAPI from 'cloudflare/resources/addressing/loa-documents/loa-documents';
-import * as DownloadsAPI from 'cloudflare/resources/addressing/loa-documents/downloads';
-import { multipartFormRequestOptions } from 'cloudflare/core';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as LOADocumentsAPI from './loa-documents';
+import * as DownloadsAPI from './downloads';
+import { multipartFormRequestOptions } from '../../../core';
 
 export class LOADocuments extends APIResource {
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
@@ -49,6 +49,5 @@ export namespace LOADocuments {
   export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
   export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
   export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

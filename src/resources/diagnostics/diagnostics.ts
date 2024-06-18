@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as TraceroutesAPI from 'cloudflare/resources/diagnostics/traceroutes';
+import { APIResource } from '../../resource';
+import * as TraceroutesAPI from './traceroutes';
 
 export class Diagnostics extends APIResource {
   traceroutes: TraceroutesAPI.Traceroutes = new TraceroutesAPI.Traceroutes(this._client);

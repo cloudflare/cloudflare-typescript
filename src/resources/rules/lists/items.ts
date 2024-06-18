@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ItemsAPI from 'cloudflare/resources/rules/lists/items';
-import * as ListsAPI from 'cloudflare/resources/rules/lists/lists';
-import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ItemsAPI from './items';
+import * as ListsAPI from './lists';
+import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
 
 export class Items extends APIResource {
   /**

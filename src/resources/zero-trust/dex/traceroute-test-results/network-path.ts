@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as NetworkPathAPI from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/network-path';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as NetworkPathAPI from './network-path';
 
 export class NetworkPath extends APIResource {
   /**
@@ -34,11 +34,6 @@ export interface NetworkPathGetResponse {
    * API Resource UUID tag.
    */
   resultId: string;
-
-  /**
-   * date time of this traceroute test
-   */
-  time_start: string;
 
   /**
    * name of the device associated with this network path response

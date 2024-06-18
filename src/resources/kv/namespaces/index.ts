@@ -11,13 +11,13 @@ export {
   NamespaceUpdateParams,
   NamespaceListParams,
   NamespaceDeleteParams,
+  NamespaceGetParams,
   NamespacesV4PagePaginationArray,
   Namespaces,
 } from './namespaces';
 export {
   ValueUpdateResponse,
   ValueDeleteResponse,
-  ValueGetResponse,
   ValueUpdateParams,
   ValueDeleteParams,
   ValueGetParams,

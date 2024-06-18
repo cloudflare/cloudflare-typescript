@@ -10,7 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource pagerduty', () => {
-  test('create: only required params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4285
+  test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.alerting.destinations.pagerduty.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -23,7 +24,8 @@ describe('resource pagerduty', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4285
+  test.skip('create: required and optional params', async () => {
     const response = await cloudflare.alerting.destinations.pagerduty.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
@@ -67,7 +69,8 @@ describe('resource pagerduty', () => {
     });
   });
 
-  test('link: only required params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4285
+  test.skip('link: only required params', async () => {
     const responsePromise = cloudflare.alerting.destinations.pagerduty.link(
       '8c71e667571b4f61b94d9e4b12158038',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -81,7 +84,8 @@ describe('resource pagerduty', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('link: required and optional params', async () => {
+  // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4285
+  test.skip('link: required and optional params', async () => {
     const response = await cloudflare.alerting.destinations.pagerduty.link(
       '8c71e667571b4f61b94d9e4b12158038',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

@@ -58,3 +58,12 @@ export {
   FirewallResource,
 } from './firewall/index';
 export { DNS } from './dns';
+export {
+  DNSSetting,
+  Nameserver,
+  SettingEditResponse,
+  SettingGetResponse,
+  SettingEditParams,
+  SettingGetParams,
+  Settings,
+} from './settings';

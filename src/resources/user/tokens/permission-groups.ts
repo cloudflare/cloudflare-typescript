@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PermissionGroupsAPI from './permission-groups';
+import { SinglePage } from '../../../pagination';
 
 export class PermissionGroups extends APIResource {
   /**
-   * Find all available permission groups.
+   * Find all available permission groups for API Tokens
    */
   list(
     options?: Core.RequestOptions,

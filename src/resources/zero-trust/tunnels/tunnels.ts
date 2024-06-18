@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TunnelsAPI from 'cloudflare/resources/zero-trust/tunnels/tunnels';
-import * as Shared from 'cloudflare/resources/shared';
-import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/tunnels/configurations';
-import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
-import * as ConnectorsAPI from 'cloudflare/resources/zero-trust/tunnels/connectors';
-import * as ManagementAPI from 'cloudflare/resources/zero-trust/tunnels/management';
-import * as TokenAPI from 'cloudflare/resources/zero-trust/tunnels/token';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TunnelsAPI from './tunnels';
+import * as Shared from '../../shared';
+import * as ConfigurationsAPI from './configurations';
+import * as ConnectionsAPI from './connections';
+import * as ConnectorsAPI from './connectors';
+import * as ManagementAPI from './management';
+import * as TokenAPI from './token';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tunnels extends APIResource {
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
@@ -209,7 +209,7 @@ export namespace TunnelListResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -357,7 +357,7 @@ export namespace TunnelEditResponse {
      * state), `healthy` (tunnel is active and able to serve traffic), or `down`
      * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
      */
-    status?: string;
+    status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
     /**
      * The type of tunnel.
@@ -491,6 +491,15 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
    * Query param: A user-friendly name for the tunnel.
    */
   name?: string;
+
+  /**
+   * Query param: The status of the tunnel. Valid values are `inactive` (tunnel has
+   * never been run), `degraded` (tunnel is active and able to serve traffic but in
+   * an unhealthy state), `healthy` (tunnel is active and able to serve traffic), or
+   * `down` (tunnel can not serve traffic as it has no connections to the Cloudflare
+   * Edge).
+   */
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
   /**
    * Query param: The types of tunnels to filter separated by a comma.

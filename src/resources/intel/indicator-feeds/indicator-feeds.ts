@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as IndicatorFeedsAPI from 'cloudflare/resources/intel/indicator-feeds/indicator-feeds';
-import * as PermissionsAPI from 'cloudflare/resources/intel/indicator-feeds/permissions';
-import * as SnapshotsAPI from 'cloudflare/resources/intel/indicator-feeds/snapshots';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as IndicatorFeedsAPI from './indicator-feeds';
+import * as PermissionsAPI from './permissions';
+import * as SnapshotsAPI from './snapshots';
+import { SinglePage } from '../../../pagination';
 
 export class IndicatorFeeds extends APIResource {
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
@@ -224,6 +224,16 @@ export interface IndicatorFeedGetResponse {
   description?: string;
 
   /**
+   * Whether the indicator feed can be attributed to a provider
+   */
+  is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed is exposed to customers
+   */
+  is_public?: boolean;
+
+  /**
    * Status of the latest snapshot uploaded
    */
   latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
@@ -237,6 +247,16 @@ export interface IndicatorFeedGetResponse {
    * The name of the indicator feed
    */
   name?: string;
+
+  /**
+   * The unique identifier for the provider
+   */
+  provider_id?: string;
+
+  /**
+   * The provider of the indicator feed
+   */
+  provider_name?: string;
 }
 
 export interface IndicatorFeedCreateParams {
@@ -265,7 +285,7 @@ export interface IndicatorFeedUpdateParams {
   /**
    * Body param: The new description of the feed
    */
-  feed_description?: string;
+  description?: string;
 
   /**
    * Body param: The new is_attributable value of the feed
@@ -276,6 +296,11 @@ export interface IndicatorFeedUpdateParams {
    * Body param: The new is_public value of the feed
    */
   is_public?: boolean;
+
+  /**
+   * Body param: The new name of the feed
+   */
+  name?: string;
 }
 
 export interface IndicatorFeedListParams {

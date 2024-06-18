@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
+import { APIResource } from '../../resource';
+import * as RequestsAPI from './requests/requests';
 
 export class CloudforceOne extends APIResource {
   requests: RequestsAPI.Requests = new RequestsAPI.Requests(this._client);

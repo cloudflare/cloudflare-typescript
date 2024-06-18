@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as UploadAPI from 'cloudflare/resources/zero-trust/dlp/datasets/upload';
-import * as DatasetsAPI from 'cloudflare/resources/zero-trust/dlp/datasets/datasets';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as UploadAPI from './upload';
+import * as DatasetsAPI from './datasets';
 
 export class Upload extends APIResource {
   /**
@@ -37,6 +37,8 @@ export class Upload extends APIResource {
       this._client.post(`/accounts/${account_id}/dlp/datasets/${datasetId}/upload/${version}`, {
         body: body,
         ...options,
+        headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: DatasetsAPI.Dataset }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -63,7 +65,7 @@ export interface UploadEditParams {
   /**
    * Body param:
    */
-  body: unknown;
+  body: string;
 }
 
 export namespace Upload {

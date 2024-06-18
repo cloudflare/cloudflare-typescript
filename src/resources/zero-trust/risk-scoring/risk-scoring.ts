@@ -1,15 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as RiskScoringAPI from 'cloudflare/resources/zero-trust/risk-scoring/risk-scoring';
-import * as BehavioursAPI from 'cloudflare/resources/zero-trust/risk-scoring/behaviours';
-import * as SummaryAPI from 'cloudflare/resources/zero-trust/risk-scoring/summary';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as RiskScoringAPI from './risk-scoring';
+import * as BehavioursAPI from './behaviours';
+import * as SummaryAPI from './summary';
+import * as IntegrationsAPI from './integrations/integrations';
 
 export class RiskScoring extends APIResource {
   behaviours: BehavioursAPI.Behaviours = new BehavioursAPI.Behaviours(this._client);
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
+  integrations: IntegrationsAPI.Integrations = new IntegrationsAPI.Integrations(this._client);
 
   /**
    * Get risk event/score information for a specific user
@@ -77,7 +79,7 @@ export namespace RiskScoringGetResponse {
 
     name: string;
 
-    risk_level: 'low' | 'medium' | 'high' | null;
+    risk_level: 'low' | 'medium' | 'high';
 
     timestamp: string;
 
@@ -108,4 +110,16 @@ export namespace RiskScoring {
   export import Summary = SummaryAPI.Summary;
   export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
   export import SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export import Integrations = IntegrationsAPI.Integrations;
+  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
+  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
+  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
+  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
+  export import IntegrationListResponsesSinglePage = IntegrationsAPI.IntegrationListResponsesSinglePage;
+  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
+  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
+  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
+  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
+  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
 }

@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ProjectsAPI from 'cloudflare/resources/pages/projects/projects';
-import * as DomainsAPI from 'cloudflare/resources/pages/projects/domains';
-import * as DeploymentsAPI from 'cloudflare/resources/pages/projects/deployments/deployments';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ProjectsAPI from './projects';
+import * as DomainsAPI from './domains';
+import * as DeploymentsAPI from './deployments/deployments';
+import { SinglePage } from '../../../pagination';
 
 export class Projects extends APIResource {
   deployments: DeploymentsAPI.Deployments = new DeploymentsAPI.Deployments(this._client);
@@ -628,6 +628,11 @@ export namespace Project {
          */
         export interface R2Binding {
           /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
+          /**
            * Name of the R2 bucket.
            */
           name?: string;
@@ -1001,6 +1006,11 @@ export namespace Project {
          * R2 binding.
          */
         export interface R2Binding {
+          /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
           /**
            * Name of the R2 bucket.
            */
@@ -1511,6 +1521,11 @@ export namespace ProjectCreateParams {
          */
         export interface R2Binding {
           /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
+          /**
            * Name of the R2 bucket.
            */
           name?: string;
@@ -1884,6 +1899,11 @@ export namespace ProjectCreateParams {
          * R2 binding.
          */
         export interface R2Binding {
+          /**
+           * Jurisdiction of the R2 bucket.
+           */
+          jurisdiction?: string | null;
+
           /**
            * Name of the R2 bucket.
            */

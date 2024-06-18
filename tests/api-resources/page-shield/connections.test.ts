@@ -42,7 +42,7 @@ describe('resource connections', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.pageShield.connections.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const responsePromise = cloudflare.pageShield.connections.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -55,7 +55,7 @@ describe('resource connections', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.pageShield.connections.get('c9ef84a6bf5e47138c75d95e2f933e8f', {
+    const response = await cloudflare.pageShield.connections.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

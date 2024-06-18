@@ -1,23 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SeatsAPI from 'cloudflare/resources/zero-trust/seats';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SeatsAPI from './seats';
 
 export class Seats extends APIResource {
   /**
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
    */
-  edit(
-    identifier: string,
-    body: SeatEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SeatEditResponse | null> {
+  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse | null> {
+    const { account_id, body } = params;
     return (
-      this._client.patch(`/accounts/${identifier}/access/seats`, { body, ...options }) as Core.APIPromise<{
-        result: SeatEditResponse | null;
-      }>
+      this._client.patch(`/accounts/${account_id}/access/seats`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: SeatEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -36,7 +34,7 @@ export interface Seat {
   gateway_seat?: boolean;
 
   /**
-   * Identifier
+   * The unique API identifier for the Zero Trust seat.
    */
   seat_uid?: string;
 
@@ -45,7 +43,17 @@ export interface Seat {
 
 export type SeatEditResponse = Array<Seat>;
 
-export type SeatEditParams = Array<SeatEditParams.Body>;
+export interface SeatEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Array<SeatEditParams.Body>;
+}
 
 export namespace SeatEditParams {
   export interface Body {
@@ -58,6 +66,11 @@ export namespace SeatEditParams {
      * True if the seat is part of Gateway.
      */
     gateway_seat: boolean;
+
+    /**
+     * The unique API identifier for the Zero Trust seat.
+     */
+    seat_uid: string;
   }
 }
 

@@ -1,14 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LANsAPI from 'cloudflare/resources/magic-transit/sites/lans';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as LANsAPI from './lans';
+import { SinglePage } from '../../../pagination';
 
 export class LANs extends APIResource {
   /**
-   * Creates a new LAN. If the site is in high availability mode, static_addressing
-   * is required along with secondary and virtual address.
+   * Creates a new Site LAN. If the site is in high availability mode,
+   * static_addressing is required along with secondary and virtual address.
    */
   create(
     siteId: string,
@@ -25,7 +25,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Update a specific LAN.
+   * Update a specific Site LAN.
    */
   update(
     siteId: string,
@@ -43,7 +43,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Lists LANs associated with an account and site.
+   * Lists Site LANs associated with an account.
    */
   list(
     siteId: string,
@@ -59,7 +59,7 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Remove a specific LAN.
+   * Remove a specific Site LAN.
    */
   delete(
     siteId: string,
@@ -77,7 +77,25 @@ export class LANs extends APIResource {
   }
 
   /**
-   * Get a specific LAN.
+   * Patch a specific Site LAN.
+   */
+  edit(
+    siteId: string,
+    lanId: string,
+    params: LANEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LAN> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: LAN }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a specific Site LAN.
    */
   get(
     siteId: string,
@@ -389,6 +407,46 @@ export interface LANDeleteParams {
   account_id: string;
 }
 
+export interface LANEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  name?: string;
+
+  /**
+   * Body param:
+   */
+  nat?: NatParam;
+
+  /**
+   * Body param:
+   */
+  physport?: number;
+
+  /**
+   * Body param:
+   */
+  routed_subnets?: Array<RoutedSubnetParam>;
+
+  /**
+   * Body param: If the site is not configured in high availability mode, this
+   * configuration is optional (if omitted, use DHCP). However, if in high
+   * availability mode, static_address is required along with secondary and virtual
+   * address.
+   */
+  static_addressing?: LANStaticAddressingParam;
+
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag?: number;
+}
+
 export interface LANGetParams {
   /**
    * Identifier
@@ -409,5 +467,6 @@ export namespace LANs {
   export import LANUpdateParams = LANsAPI.LANUpdateParams;
   export import LANListParams = LANsAPI.LANListParams;
   export import LANDeleteParams = LANsAPI.LANDeleteParams;
+  export import LANEditParams = LANsAPI.LANEditParams;
   export import LANGetParams = LANsAPI.LANGetParams;
 }

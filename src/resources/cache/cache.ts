@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CacheReserveAPI from 'cloudflare/resources/cache/cache-reserve';
-import * as RegionalTieredCacheAPI from 'cloudflare/resources/cache/regional-tiered-cache';
-import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
-import * as VariantsAPI from 'cloudflare/resources/cache/variants';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as CacheReserveAPI from './cache-reserve';
+import * as RegionalTieredCacheAPI from './regional-tiered-cache';
+import * as SmartTieredCacheAPI from './smart-tiered-cache';
+import * as VariantsAPI from './variants';
 
 export class Cache extends APIResource {
   cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
@@ -21,6 +21,10 @@ export class Cache extends APIResource {
    *
    * Removes ALL files from Cloudflare's cache. All tiers can purge everything.
    *
+   * ```
+   * {"purge_everything": true}
+   * ```
+   *
    * ### Purge Cached Content by URL
    *
    * Granularly removes one or more files from Cloudflare's cache by specifying URLs.
@@ -33,9 +37,23 @@ export class Cache extends APIResource {
    *
    * **NB:** When including the Origin header, be sure to include the **scheme** and
    * **hostname**. The port number can be omitted if it is the default port (80 for
-   * http, 443 for https), but must be included otherwise. **NB:** For Zones on
-   * Free/Pro/Business plan, you may purge up to 30 URLs in one API call. For Zones
-   * on Enterprise plan, you may purge up to 500 URLs in one API call.
+   * http, 443 for https), but must be included otherwise.
+   *
+   * **NB:** For Zones on Free/Pro/Business plan, you may purge up to 30 URLs in one
+   * API call. For Zones on Enterprise plan, you may purge up to 500 URLs in one API
+   * call.
+   *
+   * Single file purge example with files:
+   *
+   * ```
+   * {"files": ["http://www.example.com/css/styles.css", "http://www.example.com/js/index.js"]}
+   * ```
+   *
+   * Single file purge example with url and header pairs:
+   *
+   * ```
+   * {"files": [{url: "http://www.example.com/cat_picture.jpg", headers: { "CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN" }}, {url: "http://www.example.com/dog_picture.jpg", headers: { "CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US" }}]}
+   * ```
    *
    * ### Purge Cached Content by Tag, Host or Prefix
    *
@@ -47,6 +65,24 @@ export class Cache extends APIResource {
    * purge API calls in every 24 hour period. You may purge up to 30 tags, hosts, or
    * prefixes in one API call. This rate limit can be raised for customers who need
    * to purge at higher volume.
+   *
+   * Flex purge with tags:
+   *
+   * ```
+   * {"tags": ["a-cache-tag", "another-cache-tag"]}
+   * ```
+   *
+   * Flex purge with hosts:
+   *
+   * ```
+   * {"hosts": ["www.example.com", "images.example.com"]}
+   * ```
+   *
+   * Flex purge with prefixes:
+   *
+   * ```
+   * {"prefixes": ["www.example.com/foo", "images.example.com/bar/baz"]}
+   * ```
    */
   purge(params: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null> {
     const { zone_id, ...body } = params;
@@ -66,45 +102,50 @@ export interface CachePurgeResponse {
 }
 
 export type CachePurgeParams =
-  | CachePurgeParams.CachePurgeTags
-  | CachePurgeParams.CachePurgeHosts
-  | CachePurgeParams.CachePurgePrefixes
+  | CachePurgeParams.CachePurgeFlexPurgeByTags
+  | CachePurgeParams.CachePurgeFlexPurgeByHostnames
+  | CachePurgeParams.CachePurgeFlexPurgeByPrefixes
   | CachePurgeParams.CachePurgeEverything
-  | CachePurgeParams.CachePurgeFiles;
+  | CachePurgeParams.CachePurgeSingleFile
+  | CachePurgeParams.CachePurgeSingleFileWithURLAndHeaders;
 
 export namespace CachePurgeParams {
-  export interface CachePurgeTags {
+  export interface CachePurgeFlexPurgeByTags {
     /**
      * Path param:
      */
     zone_id: string;
 
     /**
-     * Body param:
+     * Body param: For more information on cache tags and purging by tags, please refer
+     * to
+     * [purge by cache-tags documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-tags/#purge-cache-by-cache-tags-enterprise-only).
      */
     tags?: Array<string>;
   }
 
-  export interface CachePurgeHosts {
+  export interface CachePurgeFlexPurgeByHostnames {
     /**
      * Path param:
      */
     zone_id: string;
 
     /**
-     * Body param:
+     * Body param: For more information purging by hostnames, please refer to
+     * [purge by hostname documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-hostname/).
      */
     hosts?: Array<string>;
   }
 
-  export interface CachePurgePrefixes {
+  export interface CachePurgeFlexPurgeByPrefixes {
     /**
      * Path param:
      */
     zone_id: string;
 
     /**
-     * Body param:
+     * Body param: For more information on purging by prefixes, please refer to
+     * [purge by prefix documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge_by_prefix/).
      */
     prefixes?: Array<string>;
   }
@@ -116,25 +157,41 @@ export namespace CachePurgeParams {
     zone_id: string;
 
     /**
-     * Body param:
+     * Body param: For more information, please refer to
+     * [purge everything documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-everything/).
      */
     purge_everything?: boolean;
   }
 
-  export interface CachePurgeFiles {
+  export interface CachePurgeSingleFile {
     /**
      * Path param:
      */
     zone_id: string;
 
     /**
-     * Body param:
+     * Body param: For more information on purging files, please refer to
+     * [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
      */
-    files?: Array<string | CachePurgeParams.CachePurgeFiles.CachePurgeURLAndHeaders>;
+    files?: Array<string>;
   }
 
-  export namespace CachePurgeFiles {
-    export interface CachePurgeURLAndHeaders {
+  export interface CachePurgeSingleFileWithURLAndHeaders {
+    /**
+     * Path param:
+     */
+    zone_id: string;
+
+    /**
+     * Body param: For more information on purging files with URL and headers, please
+     * refer to
+     * [purge by single-file documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-single-file/).
+     */
+    files?: Array<CachePurgeParams.CachePurgeSingleFileWithURLAndHeaders.File>;
+  }
+
+  export namespace CachePurgeSingleFileWithURLAndHeaders {
+    export interface File {
       headers?: unknown;
 
       url?: string;

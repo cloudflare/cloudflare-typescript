@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as SummaryAPI from 'cloudflare/resources/radar/email/routing/summary';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/routing/timeseries-groups';
+import { APIResource } from '../../../../resource';
+import * as SummaryAPI from './summary';
+import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class Routing extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);

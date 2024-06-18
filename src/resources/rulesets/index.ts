@@ -36,9 +36,11 @@ export {
 } from './phases/index';
 export { Rulesets } from './rulesets';
 export {
+  VersionListResponse,
   VersionGetResponse,
   VersionListParams,
   VersionDeleteParams,
   VersionGetParams,
+  VersionListResponsesSinglePage,
   Versions,
 } from './versions/index';

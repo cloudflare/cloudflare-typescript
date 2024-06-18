@@ -11,7 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource keys', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.keys.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.zeroTrust.access.keys.update({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       key_rotation_interval_days: 30,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,13 +25,16 @@ describe('resource keys', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.keys.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.zeroTrust.access.keys.update({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       key_rotation_interval_days: 30,
     });
   });
 
-  test('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.keys.get('023e105f4ecef8ad9ca31a8372d0c353');
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.keys.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -40,17 +44,16 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.keys.get('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.keys.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
-  test('rotate', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.keys.rotate('023e105f4ecef8ad9ca31a8372d0c353');
+  test('rotate: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.keys.rotate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,12 +63,9 @@ describe('resource keys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('rotate: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.keys.rotate('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('rotate: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.keys.rotate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

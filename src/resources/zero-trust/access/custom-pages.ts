@@ -1,21 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CustomPagesAPI from 'cloudflare/resources/zero-trust/access/custom-pages';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CustomPagesAPI from './custom-pages';
+import { SinglePage } from '../../../pagination';
 
 export class CustomPages extends APIResource {
   /**
    * Create a custom page
    */
   create(
-    identifier: string,
-    body: CustomPageCreateParams,
+    params: CustomPageCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageWithoutHTML> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${identifier}/access/custom_pages`, {
+      this._client.post(`/accounts/${account_id}/access/custom_pages`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CustomPageWithoutHTML }>
@@ -26,13 +26,13 @@ export class CustomPages extends APIResource {
    * Update a custom page
    */
   update(
-    identifier: string,
-    uuid: string,
-    body: CustomPageUpdateParams,
+    customPageId: string,
+    params: CustomPageUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageWithoutHTML> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${identifier}/access/custom_pages/${uuid}`, {
+      this._client.put(`/accounts/${account_id}/access/custom_pages/${customPageId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CustomPageWithoutHTML }>
@@ -43,11 +43,12 @@ export class CustomPages extends APIResource {
    * List custom pages
    */
   list(
-    identifier: string,
+    params: CustomPageListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<CustomPageWithoutHTMLsSinglePage, CustomPageWithoutHTML> {
+    const { account_id } = params;
     return this._client.getAPIList(
-      `/accounts/${identifier}/access/custom_pages`,
+      `/accounts/${account_id}/access/custom_pages`,
       CustomPageWithoutHTMLsSinglePage,
       options,
     );
@@ -57,25 +58,33 @@ export class CustomPages extends APIResource {
    * Delete a custom page
    */
   delete(
-    identifier: string,
-    uuid: string,
+    customPageId: string,
+    params: CustomPageDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomPageDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${identifier}/access/custom_pages/${uuid}`, options) as Core.APIPromise<{
-        result: CustomPageDeleteResponse;
-      }>
+      this._client.delete(
+        `/accounts/${account_id}/access/custom_pages/${customPageId}`,
+        options,
+      ) as Core.APIPromise<{ result: CustomPageDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a custom page and also returns its HTML.
    */
-  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<CustomPage> {
+  get(
+    customPageId: string,
+    params: CustomPageGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomPage> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${identifier}/access/custom_pages/${uuid}`, options) as Core.APIPromise<{
-        result: CustomPage;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/access/custom_pages/${customPageId}`,
+        options,
+      ) as Core.APIPromise<{ result: CustomPage }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -148,46 +157,77 @@ export interface CustomPageDeleteResponse {
 
 export interface CustomPageCreateParams {
   /**
-   * Custom page HTML.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Custom page HTML.
    */
   custom_html: string;
 
   /**
-   * Custom page name.
+   * Body param: Custom page name.
    */
   name: string;
 
   /**
-   * Custom page type.
+   * Body param: Custom page type.
    */
   type: 'identity_denied' | 'forbidden';
 
   /**
-   * Number of apps the custom page is assigned to.
+   * Body param: Number of apps the custom page is assigned to.
    */
   app_count?: number;
 }
 
 export interface CustomPageUpdateParams {
   /**
-   * Custom page HTML.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: Custom page HTML.
    */
   custom_html: string;
 
   /**
-   * Custom page name.
+   * Body param: Custom page name.
    */
   name: string;
 
   /**
-   * Custom page type.
+   * Body param: Custom page type.
    */
   type: 'identity_denied' | 'forbidden';
 
   /**
-   * Number of apps the custom page is assigned to.
+   * Body param: Number of apps the custom page is assigned to.
    */
   app_count?: number;
+}
+
+export interface CustomPageListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface CustomPageDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface CustomPageGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace CustomPages {
@@ -197,4 +237,7 @@ export namespace CustomPages {
   export import CustomPageWithoutHTMLsSinglePage = CustomPagesAPI.CustomPageWithoutHTMLsSinglePage;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
+  export import CustomPageListParams = CustomPagesAPI.CustomPageListParams;
+  export import CustomPageDeleteParams = CustomPagesAPI.CustomPageDeleteParams;
+  export import CustomPageGetParams = CustomPagesAPI.CustomPageGetParams;
 }

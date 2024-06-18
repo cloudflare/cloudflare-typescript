@@ -1,18 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { type Response } from 'cloudflare/_shims/index';
-import * as ScriptsAPI from 'cloudflare/resources/workers/scripts/scripts';
-import * as WorkersAPI from 'cloudflare/resources/workers/workers';
-import * as ContentAPI from 'cloudflare/resources/workers/scripts/content';
-import * as DeploymentsAPI from 'cloudflare/resources/workers/scripts/deployments';
-import * as SchedulesAPI from 'cloudflare/resources/workers/scripts/schedules';
-import * as SettingsAPI from 'cloudflare/resources/workers/scripts/settings';
-import * as TailAPI from 'cloudflare/resources/workers/scripts/tail';
-import * as VersionsAPI from 'cloudflare/resources/workers/scripts/versions';
-import { type Uploadable, maybeMultipartFormRequestOptions } from 'cloudflare/core';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { type Response } from '../../../_shims/index';
+import * as ScriptsAPI from './scripts';
+import * as WorkersAPI from '../workers';
+import * as ContentAPI from './content';
+import * as DeploymentsAPI from './deployments';
+import * as SchedulesAPI from './schedules';
+import * as SettingsAPI from './settings';
+import * as TailAPI from './tail';
+import * as VersionsAPI from './versions';
+import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../core';
+import { SinglePage } from '../../../pagination';
 
 export class Scripts extends APIResource {
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
@@ -34,7 +34,12 @@ export class Scripts extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
-        maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options }),
+        maybeMultipartFormRequestOptions({
+          query: { rollback_to },
+          body,
+          ...options,
+          headers: { 'Content-Type': 'application/javascript', ...options?.headers },
+        }),
       ) as Core.APIPromise<{ result: Script }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -326,6 +331,7 @@ export namespace Scripts {
   export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
   export import VersionListResponse = VersionsAPI.VersionListResponse;
   export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
   export import VersionCreateParams = VersionsAPI.VersionCreateParams;
   export import VersionListParams = VersionsAPI.VersionListParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;

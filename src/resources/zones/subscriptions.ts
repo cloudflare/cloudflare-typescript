@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ZonesSubscriptionsAPI from 'cloudflare/resources/zones/subscriptions';
-import * as SubscriptionsAPI from 'cloudflare/resources/user/subscriptions';
-import { SubscriptionsSinglePage } from 'cloudflare/resources/user/subscriptions';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ZonesSubscriptionsAPI from './subscriptions';
+import * as SubscriptionsAPI from '../user/subscriptions';
+import { SubscriptionsSinglePage } from '../user/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**

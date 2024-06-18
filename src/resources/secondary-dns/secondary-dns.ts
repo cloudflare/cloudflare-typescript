@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as ACLsAPI from 'cloudflare/resources/secondary-dns/acls';
-import * as ForceAXFRAPI from 'cloudflare/resources/secondary-dns/force-axfr';
-import * as IncomingAPI from 'cloudflare/resources/secondary-dns/incoming';
-import * as PeersAPI from 'cloudflare/resources/secondary-dns/peers';
-import * as TSIGsAPI from 'cloudflare/resources/secondary-dns/tsigs';
-import * as OutgoingAPI from 'cloudflare/resources/secondary-dns/outgoing/outgoing';
+import { APIResource } from '../../resource';
+import * as ACLsAPI from './acls';
+import * as ForceAXFRAPI from './force-axfr';
+import * as IncomingAPI from './incoming';
+import * as PeersAPI from './peers';
+import * as TSIGsAPI from './tsigs';
+import * as OutgoingAPI from './outgoing/outgoing';
 
 export class SecondaryDNS extends APIResource {
   forceAXFR: ForceAXFRAPI.ForceAXFRResource = new ForceAXFRAPI.ForceAXFRResource(this._client);

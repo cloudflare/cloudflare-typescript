@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as DatabaseAPI from 'cloudflare/resources/d1/database';
+import { APIResource } from '../../resource';
+import * as DatabaseAPI from './database';
 
 export class D1Resource extends APIResource {
   database: DatabaseAPI.Database = new DatabaseAPI.Database(this._client);
@@ -34,8 +34,12 @@ export namespace D1Resource {
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
+  export import DatabaseRawResponse = DatabaseAPI.DatabaseRawResponse;
   export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
   export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
   export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
+  export import DatabaseDeleteParams = DatabaseAPI.DatabaseDeleteParams;
+  export import DatabaseGetParams = DatabaseAPI.DatabaseGetParams;
   export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
+  export import DatabaseRawParams = DatabaseAPI.DatabaseRawParams;
 }

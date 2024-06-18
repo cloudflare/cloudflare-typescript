@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as HostnamesAPI from 'cloudflare/resources/web3/hostnames/hostnames';
-import * as IPFSUniversalPathsAPI from 'cloudflare/resources/web3/hostnames/ipfs-universal-paths/ipfs-universal-paths';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as HostnamesAPI from './hostnames';
+import * as IPFSUniversalPathsAPI from './ipfs-universal-paths/ipfs-universal-paths';
+import { SinglePage } from '../../../pagination';
 
 export class Hostnames extends APIResource {
   ipfsUniversalPaths: IPFSUniversalPathsAPI.IPFSUniversalPaths = new IPFSUniversalPathsAPI.IPFSUniversalPaths(

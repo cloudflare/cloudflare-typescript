@@ -11,7 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource tags', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = cloudflare.zeroTrust.access.tags.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,17 +25,17 @@ describe('resource tags', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await cloudflare.zeroTrust.access.tags.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'engineers',
-      { name: 'engineers' },
-    );
+    const responsePromise = cloudflare.zeroTrust.access.tags.update('engineers', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'engineers',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,15 +46,16 @@ describe('resource tags', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.tags.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'engineers',
-      { name: 'engineers' },
-    );
+    const response = await cloudflare.zeroTrust.access.tags.update('engineers', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'engineers',
+    });
   });
 
-  test('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.tags.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,20 +65,16 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.tags.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.tags.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
-  test('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'engineers',
-    );
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.tags.delete('engineers', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,20 +84,16 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.tags.delete('023e105f4ecef8ad9ca31a8372d0c353', 'engineers', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.tags.delete('engineers', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
-  test('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.tags.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'engineers',
-    );
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.tags.get('engineers', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,12 +103,9 @@ describe('resource tags', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.tags.get('023e105f4ecef8ad9ca31a8372d0c353', 'engineers', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.tags.get('engineers', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as ServiceTokensAPI from 'cloudflare/resources/zero-trust/access/service-tokens';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { CloudflareError } from '../../../error';
+import * as ServiceTokensAPI from './service-tokens';
+import { SinglePage } from '../../../pagination';
 
 export class ServiceTokens extends APIResource {
   /**
@@ -46,7 +46,7 @@ export class ServiceTokens extends APIResource {
    * Updates a configured service token.
    */
   update(
-    uuid: string,
+    serviceTokenId: string,
     params: ServiceTokenUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceToken> {
@@ -68,7 +68,7 @@ export class ServiceTokens extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ServiceToken }>
@@ -118,18 +118,18 @@ export class ServiceTokens extends APIResource {
    * Deletes a service token.
    */
   delete(
-    uuid: string,
+    serviceTokenId: string,
     params?: ServiceTokenDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceToken>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
+  delete(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
   delete(
-    uuid: string,
+    serviceTokenId: string,
     params: ServiceTokenDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceToken> {
     if (isRequestOptions(params)) {
-      return this.delete(uuid, {}, params);
+      return this.delete(serviceTokenId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -150,7 +150,49 @@ export class ServiceTokens extends APIResource {
         };
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceToken }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches a single service token.
+   */
+  get(
+    serviceTokenId: string,
+    params?: ServiceTokenGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken>;
+  get(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
+  get(
+    serviceTokenId: string,
+    params: ServiceTokenGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
+    if (isRequestOptions(params)) {
+      return this.get(serviceTokenId, {}, params);
+    }
+    const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`,
         options,
       ) as Core.APIPromise<{ result: ServiceToken }>
     )._thenUnwrap((obj) => obj.result);
@@ -159,10 +201,15 @@ export class ServiceTokens extends APIResource {
   /**
    * Refreshes the expiration of a service token.
    */
-  refresh(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
+  refresh(
+    serviceTokenId: string,
+    params: ServiceTokenRefreshParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${identifier}/access/service_tokens/${uuid}/refresh`,
+        `/accounts/${account_id}/access/service_tokens/${serviceTokenId}/refresh`,
         options,
       ) as Core.APIPromise<{ result: ServiceToken }>
     )._thenUnwrap((obj) => obj.result);
@@ -172,13 +219,14 @@ export class ServiceTokens extends APIResource {
    * Generates a new Client Secret for a service token and revokes the old one.
    */
   rotate(
-    identifier: string,
-    uuid: string,
+    serviceTokenId: string,
+    params: ServiceTokenRotateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ServiceTokenRotateResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${identifier}/access/service_tokens/${uuid}/rotate`,
+        `/accounts/${account_id}/access/service_tokens/${serviceTokenId}/rotate`,
         options,
       ) as Core.APIPromise<{ result: ServiceTokenRotateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -191,7 +239,7 @@ export interface ServiceToken {
   /**
    * The ID of the service token.
    */
-  id?: unknown;
+  id?: string;
 
   /**
    * The Client ID for the service token. Access will check for this value in the
@@ -362,6 +410,32 @@ export interface ServiceTokenDeleteParams {
   zone_id?: string;
 }
 
+export interface ServiceTokenGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
+export interface ServiceTokenRefreshParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ServiceTokenRotateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace ServiceTokens {
   export import ServiceToken = ServiceTokensAPI.ServiceToken;
   export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
@@ -371,4 +445,7 @@ export namespace ServiceTokens {
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
   export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
+  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
+  export import ServiceTokenRefreshParams = ServiceTokensAPI.ServiceTokenRefreshParams;
+  export import ServiceTokenRotateParams = ServiceTokensAPI.ServiceTokenRotateParams;
 }

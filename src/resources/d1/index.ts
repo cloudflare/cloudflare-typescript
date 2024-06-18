@@ -7,9 +7,13 @@ export {
   DatabaseListResponse,
   DatabaseDeleteResponse,
   DatabaseQueryResponse,
+  DatabaseRawResponse,
   DatabaseCreateParams,
   DatabaseListParams,
+  DatabaseDeleteParams,
+  DatabaseGetParams,
   DatabaseQueryParams,
+  DatabaseRawParams,
   DatabaseListResponsesV4PagePaginationArray,
   Database,
 } from './database';

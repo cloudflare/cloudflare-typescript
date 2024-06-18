@@ -1,17 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import * as BookmarksAPI from 'cloudflare/resources/zero-trust/access/bookmarks';
-import * as CustomPagesAPI from 'cloudflare/resources/zero-trust/access/custom-pages';
-import * as GroupsAPI from 'cloudflare/resources/zero-trust/access/groups';
-import * as KeysAPI from 'cloudflare/resources/zero-trust/access/keys';
-import * as ServiceTokensAPI from 'cloudflare/resources/zero-trust/access/service-tokens';
-import * as TagsAPI from 'cloudflare/resources/zero-trust/access/tags';
-import * as ApplicationsAPI from 'cloudflare/resources/zero-trust/access/applications/applications';
-import * as CertificatesAPI from 'cloudflare/resources/zero-trust/access/certificates/certificates';
-import * as LogsAPI from 'cloudflare/resources/zero-trust/access/logs/logs';
-import * as UsersAPI from 'cloudflare/resources/zero-trust/access/users/users';
+import { APIResource } from '../../../resource';
+import * as AccessAPI from './access';
+import * as BookmarksAPI from './bookmarks';
+import * as CustomPagesAPI from './custom-pages';
+import * as GroupsAPI from './groups';
+import * as KeysAPI from './keys';
+import * as PoliciesAPI from './policies';
+import * as ServiceTokensAPI from './service-tokens';
+import * as TagsAPI from './tags';
+import * as ApplicationsAPI from './applications/applications';
+import * as CertificatesAPI from './certificates/certificates';
+import * as LogsAPI from './logs/logs';
+import * as UsersAPI from './users/users';
 
 export class Access extends APIResource {
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
@@ -24,6 +25,7 @@ export class Access extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
   customPages: CustomPagesAPI.CustomPages = new CustomPagesAPI.CustomPages(this._client);
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
+  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
 }
 
 /**
@@ -734,14 +736,19 @@ export namespace Access {
   export import Application = ApplicationsAPI.Application;
   export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
+  export import Decision = ApplicationsAPI.Decision;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
   export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
   export import SelfHostedDomains = ApplicationsAPI.SelfHostedDomains;
+  export import ApplicationCreateResponse = ApplicationsAPI.ApplicationCreateResponse;
+  export import ApplicationUpdateResponse = ApplicationsAPI.ApplicationUpdateResponse;
+  export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
   export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
+  export import ApplicationGetResponse = ApplicationsAPI.ApplicationGetResponse;
   export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
-  export import ApplicationsSinglePage = ApplicationsAPI.ApplicationsSinglePage;
+  export import ApplicationListResponsesSinglePage = ApplicationsAPI.ApplicationListResponsesSinglePage;
   export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
   export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
   export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
@@ -776,21 +783,30 @@ export namespace Access {
   export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
   export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
   export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
+  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
+  export import ServiceTokenRefreshParams = ServiceTokensAPI.ServiceTokenRefreshParams;
+  export import ServiceTokenRotateParams = ServiceTokensAPI.ServiceTokenRotateParams;
   export import Bookmarks = BookmarksAPI.Bookmarks;
   export import Bookmark = BookmarksAPI.Bookmark;
   export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
   export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
+  export import BookmarkListParams = BookmarksAPI.BookmarkListParams;
+  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
+  export import BookmarkGetParams = BookmarksAPI.BookmarkGetParams;
   export import Keys = KeysAPI.Keys;
   export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
+  export import KeyGetParams = KeysAPI.KeyGetParams;
+  export import KeyRotateParams = KeysAPI.KeyRotateParams;
   export import Logs = LogsAPI.Logs;
   export import Users = UsersAPI.Users;
   export import AccessUser = UsersAPI.AccessUser;
   export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
+  export import UserListParams = UsersAPI.UserListParams;
   export import CustomPages = CustomPagesAPI.CustomPages;
   export import CustomPage = CustomPagesAPI.CustomPage;
   export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
@@ -798,10 +814,28 @@ export namespace Access {
   export import CustomPageWithoutHTMLsSinglePage = CustomPagesAPI.CustomPageWithoutHTMLsSinglePage;
   export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
   export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
+  export import CustomPageListParams = CustomPagesAPI.CustomPageListParams;
+  export import CustomPageDeleteParams = CustomPagesAPI.CustomPageDeleteParams;
+  export import CustomPageGetParams = CustomPagesAPI.CustomPageGetParams;
   export import Tags = TagsAPI.Tags;
   export import Tag = TagsAPI.Tag;
   export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
   export import TagsSinglePage = TagsAPI.TagsSinglePage;
   export import TagCreateParams = TagsAPI.TagCreateParams;
   export import TagUpdateParams = TagsAPI.TagUpdateParams;
+  export import TagListParams = TagsAPI.TagListParams;
+  export import TagDeleteParams = TagsAPI.TagDeleteParams;
+  export import TagGetParams = TagsAPI.TagGetParams;
+  export import Policies = PoliciesAPI.Policies;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
+  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

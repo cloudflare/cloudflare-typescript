@@ -1,17 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TagsAPI from 'cloudflare/resources/zero-trust/access/tags';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TagsAPI from './tags';
+import { SinglePage } from '../../../pagination';
 
 export class Tags extends APIResource {
   /**
    * Create a tag
    */
-  create(identifier: string, body: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
+  create(params: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${identifier}/access/tags`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/access/tags`, { body, ...options }) as Core.APIPromise<{
         result: Tag;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -20,14 +21,10 @@ export class Tags extends APIResource {
   /**
    * Update a tag
    */
-  update(
-    identifier: string,
-    tagName: string,
-    body: TagUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Tag> {
+  update(tagName: string, params: TagUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${identifier}/access/tags/${tagName}`, {
+      this._client.put(`/accounts/${account_id}/access/tags/${tagName}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: Tag }>
@@ -37,20 +34,22 @@ export class Tags extends APIResource {
   /**
    * List tags
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<TagsSinglePage, Tag> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/tags`, TagsSinglePage, options);
+  list(params: TagListParams, options?: Core.RequestOptions): Core.PagePromise<TagsSinglePage, Tag> {
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/access/tags`, TagsSinglePage, options);
   }
 
   /**
    * Delete a tag
    */
   delete(
-    identifier: string,
-    name: string,
+    tagName: string,
+    params: TagDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TagDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
+      this._client.delete(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{
         result: TagDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -59,9 +58,10 @@ export class Tags extends APIResource {
   /**
    * Get a tag
    */
-  get(identifier: string, name: string, options?: Core.RequestOptions): Core.APIPromise<Tag> {
+  get(tagName: string, params: TagGetParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${identifier}/access/tags/${name}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{
         result: Tag;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -98,16 +98,47 @@ export interface TagDeleteResponse {
 
 export interface TagCreateParams {
   /**
-   * The name of the tag
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The name of the tag
    */
   name: string;
 }
 
 export interface TagUpdateParams {
   /**
-   * The name of the tag
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The name of the tag
    */
   name: string;
+}
+
+export interface TagListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface TagDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface TagGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Tags {
@@ -116,4 +147,7 @@ export namespace Tags {
   export import TagsSinglePage = TagsAPI.TagsSinglePage;
   export import TagCreateParams = TagsAPI.TagCreateParams;
   export import TagUpdateParams = TagsAPI.TagUpdateParams;
+  export import TagListParams = TagsAPI.TagListParams;
+  export import TagDeleteParams = TagsAPI.TagDeleteParams;
+  export import TagGetParams = TagsAPI.TagGetParams;
 }

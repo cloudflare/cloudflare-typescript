@@ -9,7 +9,7 @@ export {
   TopBrowsersParams,
   Top,
 } from './top';
-export { HTTP } from './http';
+export { HTTPTimeseriesResponse, HTTPTimeseriesParams, HTTP } from './http';
 export { LocationGetResponse, LocationGetParams, Locations } from './locations/index';
 export {
   SummaryBotClassResponse,

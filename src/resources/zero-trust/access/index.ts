@@ -23,7 +23,7 @@ export {
   ServiceTokenRule,
   Access,
 } from './access';
-export { AccessUser, AccessUsersSinglePage, Users } from './users/index';
+export { AccessUser, UserListParams, AccessUsersSinglePage, Users } from './users/index';
 export {
   AllowedHeaders,
   AllowedIdPs,
@@ -33,12 +33,17 @@ export {
   Application,
   ApplicationType,
   CORSHeaders,
+  Decision,
   SaaSAppNameFormat,
   SaaSAppNameIDFormat,
   SaaSAppSource,
   SAMLSaaSApp,
   SelfHostedDomains,
+  ApplicationCreateResponse,
+  ApplicationUpdateResponse,
+  ApplicationListResponse,
   ApplicationDeleteResponse,
+  ApplicationGetResponse,
   ApplicationRevokeTokensResponse,
   ApplicationCreateParams,
   ApplicationUpdateParams,
@@ -46,7 +51,7 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
-  ApplicationsSinglePage,
+  ApplicationListResponsesSinglePage,
   Applications,
 } from './applications/index';
 export {
@@ -66,6 +71,9 @@ export {
   BookmarkDeleteResponse,
   BookmarkCreateParams,
   BookmarkUpdateParams,
+  BookmarkListParams,
+  BookmarkDeleteParams,
+  BookmarkGetParams,
   BookmarksSinglePage,
   Bookmarks,
 } from './bookmarks';
@@ -75,11 +83,36 @@ export {
   CustomPageDeleteResponse,
   CustomPageCreateParams,
   CustomPageUpdateParams,
+  CustomPageListParams,
+  CustomPageDeleteParams,
+  CustomPageGetParams,
   CustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
-export { KeyUpdateResponse, KeyGetResponse, KeyRotateResponse, KeyUpdateParams, Keys } from './keys';
+export {
+  KeyUpdateResponse,
+  KeyGetResponse,
+  KeyRotateResponse,
+  KeyUpdateParams,
+  KeyGetParams,
+  KeyRotateParams,
+  Keys,
+} from './keys';
 export { Logs } from './logs/index';
+export {
+  PolicyCreateResponse,
+  PolicyUpdateResponse,
+  PolicyListResponse,
+  PolicyDeleteResponse,
+  PolicyGetResponse,
+  PolicyCreateParams,
+  PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
+  PolicyListResponsesSinglePage,
+  Policies,
+} from './policies';
 export {
   ServiceToken,
   ServiceTokenCreateResponse,
@@ -88,10 +121,23 @@ export {
   ServiceTokenUpdateParams,
   ServiceTokenListParams,
   ServiceTokenDeleteParams,
+  ServiceTokenGetParams,
+  ServiceTokenRefreshParams,
+  ServiceTokenRotateParams,
   ServiceTokensSinglePage,
   ServiceTokens,
 } from './service-tokens';
-export { Tag, TagDeleteResponse, TagCreateParams, TagUpdateParams, TagsSinglePage, Tags } from './tags';
+export {
+  Tag,
+  TagDeleteResponse,
+  TagCreateParams,
+  TagUpdateParams,
+  TagListParams,
+  TagDeleteParams,
+  TagGetParams,
+  TagsSinglePage,
+  Tags,
+} from './tags';
 export {
   ZeroTrustGroup,
   GroupDeleteResponse,

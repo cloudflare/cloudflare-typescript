@@ -1,11 +1,30 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as RoutesAPI from 'cloudflare/resources/radar/bgp/routes';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as RoutesAPI from './routes';
 
 export class Routes extends APIResource {
+  /**
+   * List all ASes on current global routing tables with routing statistics
+   */
+  ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
+  ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
+  ases(
+    query: RouteAsesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteAsesResponse> {
+    if (isRequestOptions(query)) {
+      return this.ases({}, query);
+    }
+    return (
+      this._client.get('/radar/bgp/routes/ases', { query, ...options }) as Core.APIPromise<{
+        result: RouteAsesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
   /**
    * List all Multi-origin AS (MOAS) prefixes on the global routing tables.
    */
@@ -62,28 +81,79 @@ export class Routes extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+}
 
-  /**
-   * Gets time-series data for the announced IP space count, represented as the
-   * number of IPv4 /24s and IPv6 /48s, for a given ASN.
-   */
-  timeseries(
-    query?: RouteTimeseriesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteTimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<RouteTimeseriesResponse>;
-  timeseries(
-    query: RouteTimeseriesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteTimeseriesResponse> {
-    if (isRequestOptions(query)) {
-      return this.timeseries({}, query);
-    }
-    return (
-      this._client.get('/radar/bgp/routes/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: RouteTimeseriesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+export interface RouteAsesResponse {
+  asns: Array<RouteAsesResponse.ASN>;
+
+  meta: RouteAsesResponse.Meta;
+}
+
+export namespace RouteAsesResponse {
+  export interface ASN {
+    asn: number;
+
+    /**
+     * AS's customer cone size
+     */
+    coneSize: number;
+
+    /**
+     * 2-letter country code for the AS's registration country
+     */
+    country: string;
+
+    /**
+     * number of IPv4 addresses originated by the AS
+     */
+    ipv4Count: number;
+
+    /**
+     * number of IPv6 addresses originated by the AS
+     */
+    ipv6Count: string;
+
+    /**
+     * name of the AS
+     */
+    name: string;
+
+    /**
+     * number of total IP prefixes originated by the AS
+     */
+    pfxsCount: number;
+
+    /**
+     * number of RPKI invalid prefixes originated by the AS
+     */
+    rpkiInvalid: number;
+
+    /**
+     * number of RPKI unknown prefixes originated by the AS
+     */
+    rpkiUnknown: number;
+
+    /**
+     * number of RPKI valid prefixes originated by the AS
+     */
+    rpkiValid: number;
+  }
+
+  export interface Meta {
+    /**
+     * the timestamp of when the data is generated
+     */
+    dataTime: string;
+
+    /**
+     * the timestamp of the query
+     */
+    queryTime: string;
+
+    /**
+     * total number of route collector peers used to generate this data
+     */
+    totalPeers: number;
   }
 }
 
@@ -199,44 +269,31 @@ export namespace RouteStatsResponse {
   }
 }
 
-export interface RouteTimeseriesResponse {
-  meta: RouteTimeseriesResponse.Meta;
+export interface RouteAsesParams {
+  /**
+   * Format results are returned in.
+   */
+  format?: 'JSON' | 'CSV';
 
-  serie_ipv4_24s: RouteTimeseriesResponse.SerieIPV4_24s;
+  /**
+   * Limit the number of objects in the response.
+   */
+  limit?: number;
 
-  serie_ipv6_48s: RouteTimeseriesResponse.SerieIPV6_48s;
-}
+  /**
+   * Location Alpha2 code.
+   */
+  location?: string;
 
-export namespace RouteTimeseriesResponse {
-  export interface Meta {
-    dateRange: Array<Meta.DateRange>;
-  }
+  /**
+   * Return order results by given type
+   */
+  sortBy?: 'cone' | 'pfxs' | 'ipv4' | 'ipv6' | 'rpki_valid' | 'rpki_invalid' | 'rpki_unknown';
 
-  export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
-
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
-    }
-  }
-
-  export interface SerieIPV4_24s {
-    timestamps: Array<string>;
-
-    values: Array<number>;
-  }
-
-  export interface SerieIPV6_48s {
-    timestamps: Array<string>;
-
-    values: Array<number>;
-  }
+  /**
+   * Sort by value ascending or descending
+   */
+  sortOrder?: 'asc' | 'desc';
 }
 
 export interface RouteMoasParams {
@@ -256,7 +313,7 @@ export interface RouteMoasParams {
   origin?: number;
 
   /**
-   * Lookup MOASes by prefix
+   * Network prefix, IPv4 or IPv6.
    */
   prefix?: string;
 }
@@ -279,7 +336,7 @@ export interface RoutePfx2asParams {
   origin?: number;
 
   /**
-   * Lookup origin ASNs of the given prefix
+   * Network prefix, IPv4 or IPv6.
    */
   prefix?: string;
 
@@ -306,66 +363,13 @@ export interface RouteStatsParams {
   location?: string;
 }
 
-export interface RouteTimeseriesParams {
-  /**
-   * Single ASN as integer.
-   */
-  asn?: number;
-
-  /**
-   * End of the date range (inclusive).
-   */
-  dateEnd?: string;
-
-  /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
-   */
-  dateRange?:
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl';
-
-  /**
-   * Start of the date range (inclusive).
-   */
-  dateStart?: string;
-
-  /**
-   * Format results are returned in.
-   */
-  format?: 'JSON' | 'CSV';
-
-  /**
-   * Include data delay meta information
-   */
-  includeDelay?: boolean;
-
-  /**
-   * Location Alpha2 code.
-   */
-  location?: string;
-}
-
 export namespace Routes {
+  export import RouteAsesResponse = RoutesAPI.RouteAsesResponse;
   export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
   export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
   export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
-  export import RouteTimeseriesResponse = RoutesAPI.RouteTimeseriesResponse;
+  export import RouteAsesParams = RoutesAPI.RouteAsesParams;
   export import RouteMoasParams = RoutesAPI.RouteMoasParams;
   export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
   export import RouteStatsParams = RoutesAPI.RouteStatsParams;
-  export import RouteTimeseriesParams = RoutesAPI.RouteTimeseriesParams;
 }

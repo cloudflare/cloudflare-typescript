@@ -11,14 +11,12 @@ const cloudflare = new Cloudflare({
 
 describe('resource customPages', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.customPages.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
-        type: 'identity_denied',
-      },
-    );
+    const responsePromise = cloudflare.zeroTrust.access.customPages.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      custom_html: '<html><body><h1>Access Denied</h1></body></html>',
+      name: 'string',
+      type: 'identity_denied',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,22 +27,20 @@ describe('resource customPages', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.customPages.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      {
-        custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
-        type: 'identity_denied',
-        app_count: 0,
-      },
-    );
+    const response = await cloudflare.zeroTrust.access.customPages.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      custom_html: '<html><body><h1>Access Denied</h1></body></html>',
+      name: 'string',
+      type: 'identity_denied',
+      app_count: 0,
+    });
   });
 
   test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         custom_html: '<html><body><h1>Access Denied</h1></body></html>',
         name: 'string',
         type: 'identity_denied',
@@ -61,9 +57,9 @@ describe('resource customPages', () => {
 
   test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.customPages.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         custom_html: '<html><body><h1>Access Denied</h1></body></html>',
         name: 'string',
         type: 'identity_denied',
@@ -72,8 +68,10 @@ describe('resource customPages', () => {
     );
   });
 
-  test('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.customPages.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.customPages.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,19 +81,16 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.customPages.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.customPages.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
-  test('delete', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -106,21 +101,17 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.customPages.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.customPages.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
-  test('get', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -131,14 +122,10 @@ describe('resource customPages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.customPages.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.customPages.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

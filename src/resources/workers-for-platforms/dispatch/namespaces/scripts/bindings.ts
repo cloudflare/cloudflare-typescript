@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BindingsAPI from 'cloudflare/resources/workers-for-platforms/dispatch/namespaces/scripts/bindings';
-import * as WorkersAPI from 'cloudflare/resources/workers/workers';
+import * as Core from '../../../../../core';
+import { APIResource } from '../../../../../resource';
+import * as BindingsAPI from './bindings';
+import * as WorkersAPI from '../../../../workers/workers';
 
 export class Bindings extends APIResource {
   /**

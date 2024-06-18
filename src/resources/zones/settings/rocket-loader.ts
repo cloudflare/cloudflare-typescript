@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RocketLoaderAPI from 'cloudflare/resources/zones/settings/rocket-loader';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as RocketLoaderAPI from './rocket-loader';
 
 export class RocketLoaderResource extends APIResource {
   /**

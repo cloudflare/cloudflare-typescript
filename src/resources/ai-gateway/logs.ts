@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as LogsAPI from 'cloudflare/resources/ai-gateway/logs';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as LogsAPI from './logs';
 
 export class Logs extends APIResource {
   /**
@@ -46,6 +46,18 @@ export namespace LogGetResponse {
     tokens_in: number;
 
     tokens_out: number;
+
+    metadata?: string;
+
+    request_content_type?: string;
+
+    request_type?: string;
+
+    response_content_type?: string;
+
+    status_code?: number;
+
+    step?: number;
   }
 }
 

@@ -1,22 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ActiveSessionsAPI from 'cloudflare/resources/zero-trust/access/users/active-sessions';
-import * as UserPolicyChecksAPI from 'cloudflare/resources/zero-trust/access/applications/user-policy-checks';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as ActiveSessionsAPI from './active-sessions';
+import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
+import { SinglePage } from '../../../../pagination';
 
 export class ActiveSessions extends APIResource {
   /**
    * Get active sessions for a single user.
    */
   list(
-    identifier: string,
-    id: string,
+    userId: string,
+    params: ActiveSessionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse> {
+    const { account_id } = params;
     return this._client.getAPIList(
-      `/accounts/${identifier}/access/users/${id}/active_sessions`,
+      `/accounts/${account_id}/access/users/${userId}/active_sessions`,
       ActiveSessionListResponsesSinglePage,
       options,
     );
@@ -26,14 +27,15 @@ export class ActiveSessions extends APIResource {
    * Get an active session for a single user.
    */
   get(
-    identifier: string,
-    id: string,
+    userId: string,
     nonce: string,
+    params: ActiveSessionGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ActiveSessionGetResponse> {
+    const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${identifier}/access/users/${id}/active_sessions/${nonce}`,
+        `/accounts/${account_id}/access/users/${userId}/active_sessions/${nonce}`,
         options,
       ) as Core.APIPromise<{ result: ActiveSessionGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -168,8 +170,24 @@ export namespace ActiveSessionGetResponse {
   }
 }
 
+export interface ActiveSessionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface ActiveSessionGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace ActiveSessions {
   export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
   export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
+  export import ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
+  export import ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
 }

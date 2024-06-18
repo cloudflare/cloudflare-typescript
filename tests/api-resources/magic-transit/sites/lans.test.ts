@@ -141,6 +141,52 @@ describe('resource lans', () => {
     );
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.sites.lans.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.sites.lans.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      {
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+        name: 'string',
+        nat: { static_prefix: '192.0.2.0/24' },
+        physport: 1,
+        routed_subnets: [
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+          { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
+        ],
+        static_addressing: {
+          address: '192.0.2.0/24',
+          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_server: {
+            dhcp_pool_end: '192.0.2.1',
+            dhcp_pool_start: '192.0.2.1',
+            dns_server: '192.0.2.1',
+            reservations: { '00:11:22:33:44:55': '192.0.2.100', 'AA:BB:CC:DD:EE:FF': '192.168.1.101' },
+          },
+          secondary_address: '192.0.2.0/24',
+          virtual_address: '192.0.2.0/24',
+        },
+        vlan_tag: 0,
+      },
+    );
+  });
+
   test('get: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.sites.lans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',

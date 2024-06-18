@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConnectionsAPI from 'cloudflare/resources/zero-trust/tunnels/connections';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ConnectionsAPI from './connections';
 
 export class Connections extends APIResource {
   /**

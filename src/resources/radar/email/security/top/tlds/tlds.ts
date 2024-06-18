@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TldsAPI from 'cloudflare/resources/radar/email/security/top/tlds/tlds';
-import * as TopAPI from 'cloudflare/resources/radar/http/top';
-import * as MaliciousAPI from 'cloudflare/resources/radar/email/security/top/tlds/malicious';
-import * as SpamAPI from 'cloudflare/resources/radar/email/security/top/tlds/spam';
-import * as SpoofAPI from 'cloudflare/resources/radar/email/security/top/tlds/spoof';
+import * as Core from '../../../../../../core';
+import { APIResource } from '../../../../../../resource';
+import { isRequestOptions } from '../../../../../../core';
+import * as TldsAPI from './tlds';
+import * as TopAPI from '../../../../http/top';
+import * as MaliciousAPI from './malicious';
+import * as SpamAPI from './spam';
+import * as SpoofAPI from './spoof';
 
 export class Tlds extends APIResource {
   malicious: MaliciousAPI.Malicious = new MaliciousAPI.Malicious(this._client);

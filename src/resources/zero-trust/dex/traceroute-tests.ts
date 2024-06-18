@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as TracerouteTestsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as TracerouteTestsAPI from './traceroute-tests';
+import * as DEXAPI from './dex';
+import * as PercentilesAPI from './http-tests/percentiles';
 
 export class TracerouteTests extends APIResource {
   /**
@@ -249,6 +249,11 @@ export interface TracerouteTestGetParams {
   account_id: string;
 
   /**
+   * Query param: Start time for aggregate metrics in ISO ms
+   */
+  from: string;
+
+  /**
    * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
@@ -256,12 +261,7 @@ export interface TracerouteTestGetParams {
   /**
    * Query param: End time for aggregate metrics in ISO ms
    */
-  timeEnd: string;
-
-  /**
-   * Query param: Start time for aggregate metrics in ISO ms
-   */
-  timeStart: string;
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used
@@ -288,6 +288,11 @@ export interface TracerouteTestNetworkPathParams {
   deviceId: string;
 
   /**
+   * Query param: Start time for aggregate metrics in ISO ms
+   */
+  from: string;
+
+  /**
    * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
@@ -295,12 +300,7 @@ export interface TracerouteTestNetworkPathParams {
   /**
    * Query param: End time for aggregate metrics in ISO ms
    */
-  timeEnd: string;
-
-  /**
-   * Query param: Start time for aggregate metrics in ISO ms
-   */
-  timeStart: string;
+  to: string;
 }
 
 export interface TracerouteTestPercentilesParams {
@@ -310,14 +310,14 @@ export interface TracerouteTestPercentilesParams {
   account_id: string;
 
   /**
-   * Query param: End time for aggregate metrics in ISO format
-   */
-  timeEnd: string;
-
-  /**
    * Query param: Start time for aggregate metrics in ISO format
    */
-  timeStart: string;
+  from: string;
+
+  /**
+   * Query param: End time for aggregate metrics in ISO format
+   */
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used

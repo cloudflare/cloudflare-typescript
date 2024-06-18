@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as AsesAPI from 'cloudflare/resources/radar/bgp/top/ases';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
@@ -171,12 +171,25 @@ export interface AseGetParams {
   /**
    * Array of BGP network prefixes.
    */
-  prefix?: Array<string>;
+  prefix?: Array<AseGetParams.Prefix>;
 
   /**
    * Array of BGP update types.
    */
   updateType?: Array<'ANNOUNCEMENT' | 'WITHDRAWAL'>;
+}
+
+export namespace AseGetParams {
+  export interface Prefix {
+    location: string;
+
+    name: string;
+
+    /**
+     * Network prefix, IPv4 or IPv6.
+     */
+    type?: string;
+  }
 }
 
 export interface AsePrefixesParams {

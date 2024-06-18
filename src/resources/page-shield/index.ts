@@ -7,15 +7,27 @@ export {
   ConnectionsSinglePage,
   Connections,
 } from './connections';
+export {
+  CookieListResponse,
+  CookieGetResponse,
+  CookieListParams,
+  CookieGetParams,
+  CookieListResponsesSinglePage,
+  Cookies,
+} from './cookies';
 export { PageShield } from './page-shield';
 export {
   Policy,
+  PolicyCreateResponse,
+  PolicyUpdateResponse,
+  PolicyListResponse,
+  PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
-  PoliciesSinglePage,
+  PolicyListResponsesSinglePage,
   Policies,
 } from './policies';
 export {

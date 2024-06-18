@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as WANsAPI from 'cloudflare/resources/magic-transit/sites/wans';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as WANsAPI from './wans';
+import { SinglePage } from '../../../pagination';
 
 export class WANs extends APIResource {
   /**
-   * Creates a new WAN.
+   * Creates a new Site WAN.
    */
   create(
     siteId: string,
@@ -24,7 +24,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Update a specific WAN.
+   * Update a specific Site WAN.
    */
   update(
     siteId: string,
@@ -42,7 +42,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Lists WANs associated with an account and site.
+   * Lists Site WANs associated with an account.
    */
   list(
     siteId: string,
@@ -58,7 +58,7 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Remove a specific WAN.
+   * Remove a specific Site WAN.
    */
   delete(
     siteId: string,
@@ -76,7 +76,25 @@ export class WANs extends APIResource {
   }
 
   /**
-   * Get a specific WAN.
+   * Patch a specific Site WAN.
+   */
+  edit(
+    siteId: string,
+    wanId: string,
+    params: WANEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WAN }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a specific Site WAN.
    */
   get(
     siteId: string,
@@ -252,6 +270,39 @@ export interface WANDeleteParams {
   account_id: string;
 }
 
+export interface WANEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  name?: string;
+
+  /**
+   * Body param:
+   */
+  physport?: number;
+
+  /**
+   * Body param:
+   */
+  priority?: number;
+
+  /**
+   * Body param: (optional) if omitted, use DHCP. Submit secondary_address when site
+   * is in high availability mode.
+   */
+  static_addressing?: WANStaticAddressingParam;
+
+  /**
+   * Body param: VLAN port number.
+   */
+  vlan_tag?: number;
+}
+
 export interface WANGetParams {
   /**
    * Identifier
@@ -268,5 +319,6 @@ export namespace WANs {
   export import WANUpdateParams = WANsAPI.WANUpdateParams;
   export import WANListParams = WANsAPI.WANListParams;
   export import WANDeleteParams = WANsAPI.WANDeleteParams;
+  export import WANEditParams = WANsAPI.WANEditParams;
   export import WANGetParams = WANsAPI.WANGetParams;
 }

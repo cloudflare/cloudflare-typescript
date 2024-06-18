@@ -5,8 +5,8 @@ import * as Errors from './error';
 import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
 import * as qs from 'qs';
-import * as Pagination from 'cloudflare/pagination';
-import * as API from 'cloudflare/resources/index';
+import * as Pagination from './pagination';
+import * as API from './resources/index';
 
 export interface ClientOptions {
   /**
@@ -180,6 +180,7 @@ export class Cloudflare extends Core.APIClient {
   kv: API.KV = new API.KV(this);
   durableObjects: API.DurableObjects = new API.DurableObjects(this);
   queues: API.Queues = new API.Queues(this);
+  apiGateway: API.APIGateway = new API.APIGateway(this);
   managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
   pageShield: API.PageShield = new API.PageShield(this);
   rulesets: API.Rulesets = new API.Rulesets(this);
@@ -224,6 +225,7 @@ export class Cloudflare extends Core.APIClient {
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
   eventNotifications: API.EventNotifications = new API.EventNotifications(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
+  iam: API.IAM = new API.IAM(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -466,6 +468,8 @@ export namespace Cloudflare {
 
   export import Queues = API.Queues;
 
+  export import APIGateway = API.APIGateway;
+
   export import ManagedHeaders = API.ManagedHeaders;
 
   export import PageShield = API.PageShield;
@@ -553,6 +557,8 @@ export namespace Cloudflare {
   export import EventNotifications = API.EventNotifications;
 
   export import AIGateway = API.AIGateway;
+
+  export import IAM = API.IAM;
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;

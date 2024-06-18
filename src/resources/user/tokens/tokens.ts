@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TokensAPI from 'cloudflare/resources/user/tokens/tokens';
-import * as PermissionGroupsAPI from 'cloudflare/resources/user/tokens/permission-groups';
-import * as ValueAPI from 'cloudflare/resources/user/tokens/value';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as TokensAPI from './tokens';
+import * as PermissionGroupsAPI from './permission-groups';
+import * as ValueAPI from './value';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
@@ -139,6 +139,11 @@ export namespace Policy {
     id: string;
 
     /**
+     * Attributes associated to the permission group.
+     */
+    meta?: unknown;
+
+    /**
      * Name of the group.
      */
     name?: string;
@@ -167,7 +172,12 @@ export namespace PolicyParam {
    * A named group of permissions that map to a group of operations against
    * resources.
    */
-  export interface PermissionGroup {}
+  export interface PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    meta?: unknown;
+  }
 }
 
 export interface Token {
@@ -248,7 +258,7 @@ export interface TokenCreateResponse {
   value?: ValueAPI.Value;
 }
 
-export type TokenUpdateResponse = unknown | string | null;
+export type TokenUpdateResponse = unknown;
 
 export type TokenListResponse = unknown;
 
@@ -259,7 +269,7 @@ export interface TokenDeleteResponse {
   id: string;
 }
 
-export type TokenGetResponse = unknown | string | null;
+export type TokenGetResponse = unknown;
 
 export interface TokenVerifyResponse {
   /**

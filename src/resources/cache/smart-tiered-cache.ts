@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as SmartTieredCacheAPI from 'cloudflare/resources/cache/smart-tiered-cache';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as SmartTieredCacheAPI from './smart-tiered-cache';
 
 export class SmartTieredCache extends APIResource {
   /**
@@ -54,11 +54,71 @@ export class SmartTieredCache extends APIResource {
   }
 }
 
-export type SmartTieredCacheDeleteResponse = unknown | string | null;
+export interface SmartTieredCacheDeleteResponse {
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
 
-export type SmartTieredCacheEditResponse = unknown | string | null;
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
 
-export type SmartTieredCacheGetResponse = unknown | string | null;
+  /**
+   * The time when the setting was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The status of the feature being on / off
+   */
+  value: 'on' | 'off';
+}
+
+export interface SmartTieredCacheEditResponse {
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
+
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The time when the setting was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The status of the feature being on / off
+   */
+  value: 'on' | 'off';
+}
+
+export interface SmartTieredCacheGetResponse {
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
+
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+
+  /**
+   * The time when the setting was last modified
+   */
+  modified_on: string;
+
+  /**
+   * The status of the feature being on / off
+   */
+  value: 'on' | 'off';
+}
 
 export interface SmartTieredCacheDeleteParams {
   /**
@@ -74,7 +134,7 @@ export interface SmartTieredCacheEditParams {
   zone_id: string;
 
   /**
-   * Body param: Enables Tiered Cache.
+   * Body param: Enable or disable the Smart Tiered Cache
    */
   value: 'on' | 'off';
 }

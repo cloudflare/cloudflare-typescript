@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as ColosAPI from 'cloudflare/resources/zero-trust/dex/colos';
-import * as TracerouteTestsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-tests';
-import * as FleetStatusAPI from 'cloudflare/resources/zero-trust/dex/fleet-status/fleet-status';
-import * as HTTPTestsAPI from 'cloudflare/resources/zero-trust/dex/http-tests/http-tests';
-import * as TestsAPI from 'cloudflare/resources/zero-trust/dex/tests/tests';
-import * as TracerouteTestResultsAPI from 'cloudflare/resources/zero-trust/dex/traceroute-test-results/traceroute-test-results';
+import { APIResource } from '../../../resource';
+import * as DEXAPI from './dex';
+import * as ColosAPI from './colos';
+import * as TracerouteTestsAPI from './traceroute-tests';
+import * as FleetStatusAPI from './fleet-status/fleet-status';
+import * as HTTPTestsAPI from './http-tests/http-tests';
+import * as TestsAPI from './tests/tests';
+import * as TracerouteTestResultsAPI from './traceroute-test-results/traceroute-test-results';
 
 export class DEX extends APIResource {
   colos: ColosAPI.Colos = new ColosAPI.Colos(this._client);

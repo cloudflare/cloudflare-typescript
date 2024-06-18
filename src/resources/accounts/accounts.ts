@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as MembersAPI from 'cloudflare/resources/accounts/members';
-import * as RolesAPI from 'cloudflare/resources/accounts/roles';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as MembersAPI from './members';
+import * as RolesAPI from './roles';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Accounts extends APIResource {
   members: MembersAPI.Members = new MembersAPI.Members(this._client);
@@ -87,6 +87,11 @@ export namespace Account {
    */
   export interface Settings {
     /**
+     * Sets an abuse contact email to notify for abuse reports.
+     */
+    abuse_contact_email?: string;
+
+    /**
      * Specifies the default nameservers to be used for new zones added to this
      * account.
      *
@@ -116,11 +121,11 @@ export namespace Account {
   }
 }
 
-export type AccountUpdateResponse = unknown | string | null;
+export type AccountUpdateResponse = unknown;
 
 export type AccountListResponse = unknown;
 
-export type AccountGetResponse = unknown | string | null;
+export type AccountGetResponse = unknown;
 
 export interface AccountUpdateParams {
   /**
@@ -144,6 +149,11 @@ export namespace AccountUpdateParams {
    * Account settings
    */
   export interface Settings {
+    /**
+     * Sets an abuse contact email to notify for abuse reports.
+     */
+    abuse_contact_email?: string;
+
     /**
      * Specifies the default nameservers to be used for new zones added to this
      * account.
@@ -194,8 +204,11 @@ export namespace Accounts {
   export import Members = MembersAPI.Members;
   export import Status = MembersAPI.Status;
   export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
+  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
+  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
   export import MemberListResponse = MembersAPI.MemberListResponse;
   export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
+  export import MemberGetResponse = MembersAPI.MemberGetResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
   export import MemberCreateParams = MembersAPI.MemberCreateParams;
   export import MemberUpdateParams = MembersAPI.MemberUpdateParams;

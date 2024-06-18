@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AppsAPI from 'cloudflare/resources/spectrum/apps';
-import * as AnalyticsAPI from 'cloudflare/resources/spectrum/analytics/analytics';
+import { APIResource } from '../../resource';
+import * as AppsAPI from './apps';
+import * as AnalyticsAPI from './analytics/analytics';
 
 export class Spectrum extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);

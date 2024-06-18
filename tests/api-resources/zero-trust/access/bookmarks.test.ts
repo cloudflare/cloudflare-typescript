@@ -12,9 +12,8 @@ const cloudflare = new Cloudflare({
 describe('resource bookmarks', () => {
   test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.create(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,17 +26,15 @@ describe('resource bookmarks', () => {
 
   test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.bookmarks.create(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
   test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.update(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -50,14 +47,15 @@ describe('resource bookmarks', () => {
 
   test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.bookmarks.update(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {},
+      { account_id: '699d98642c564d2e855e9661899b7252', body: {} },
     );
   });
 
-  test('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.bookmarks.list('699d98642c564d2e855e9661899b7252');
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.access.bookmarks.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,19 +65,16 @@ describe('resource bookmarks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.bookmarks.list('699d98642c564d2e855e9661899b7252', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
-  test('delete', async () => {
+  test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.delete(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -90,21 +85,17 @@ describe('resource bookmarks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.bookmarks.delete(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
   });
 
-  test('get', async () => {
+  test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.bookmarks.get(
-      '699d98642c564d2e855e9661899b7252',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -115,14 +106,9 @@ describe('resource bookmarks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.access.bookmarks.get(
-        '699d98642c564d2e855e9661899b7252',
-        'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.access.bookmarks.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 });

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ReceivedAPI from 'cloudflare/resources/logs/received/received';
-import * as FieldsAPI from 'cloudflare/resources/logs/received/fields';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ReceivedAPI from './received';
+import * as FieldsAPI from './fields';
 
 export class Received extends APIResource {
   fields: FieldsAPI.Fields = new FieldsAPI.Fields(this._client);

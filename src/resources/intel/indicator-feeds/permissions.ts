@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PermissionsAPI from 'cloudflare/resources/intel/indicator-feeds/permissions';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PermissionsAPI from './permissions';
 
 export class Permissions extends APIResource {
   /**

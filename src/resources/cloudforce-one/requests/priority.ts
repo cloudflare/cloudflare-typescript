@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PriorityAPI from 'cloudflare/resources/cloudforce-one/requests/priority';
-import * as Shared from 'cloudflare/resources/shared';
-import * as RequestsAPI from 'cloudflare/resources/cloudforce-one/requests/requests';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PriorityAPI from './priority';
+import * as Shared from '../../shared';
+import * as RequestsAPI from './requests';
 
 export class PriorityResource extends APIResource {
   /**

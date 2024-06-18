@@ -1,17 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PoliciesAPI from 'cloudflare/resources/page-shield/policies';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PoliciesAPI from './policies';
+import { SinglePage } from '../../pagination';
 
 export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
+  create(
+    params: PolicyCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyCreateResponse | null> {
     const { zone_id, ...body } = params;
-    return this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options });
+    return (
+      this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options }) as Core.APIPromise<{
+        result: PolicyCreateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -21,9 +28,14 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Policy> {
+  ): Core.APIPromise<PolicyUpdateResponse | null> {
     const { zone_id, ...body } = params;
-    return this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options });
+    return (
+      this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -32,9 +44,13 @@ export class Policies extends APIResource {
   list(
     params: PolicyListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PoliciesSinglePage, Policy> {
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
     const { zone_id } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/page_shield/policies`, PoliciesSinglePage, options);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/page_shield/policies`,
+      PolicyListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -51,45 +67,180 @@ export class Policies extends APIResource {
   /**
    * Fetches a Page Shield policy by ID.
    */
-  get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
+  get(
+    policyId: string,
+    params: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse | null> {
     const { zone_id } = params;
-    return this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options);
+    return (
+      this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options) as Core.APIPromise<{
+        result: PolicyGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PoliciesSinglePage extends SinglePage<Policy> {}
+export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
 export interface Policy {
   /**
-   * The ID of the policy
-   */
-  id?: string;
-
-  /**
    * The action to take if the expression matches
    */
-  action?: 'allow' | 'log';
+  action: 'allow' | 'log';
 
   /**
    * A description for the policy
    */
-  description?: string;
+  description: string;
 
   /**
    * Whether the policy is enabled
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
    * The expression which must match for the policy to be applied, using the
    * Cloudflare Firewall rule expression syntax
    */
-  expression?: string;
+  expression: string;
 
   /**
    * The policy which will be applied
    */
-  value?: string;
+  value: string;
+}
+
+export interface PolicyCreateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value: string;
+}
+
+export interface PolicyUpdateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value: string;
+}
+
+export interface PolicyListResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value: string;
+}
+
+export interface PolicyGetResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The action to take if the expression matches
+   */
+  action: 'allow' | 'log';
+
+  /**
+   * A description for the policy
+   */
+  description: string;
+
+  /**
+   * Whether the policy is enabled
+   */
+  enabled: boolean;
+
+  /**
+   * The expression which must match for the policy to be applied, using the
+   * Cloudflare Firewall rule expression syntax
+   */
+  expression: string;
+
+  /**
+   * The policy which will be applied
+   */
+  value: string;
 }
 
 export interface PolicyCreateParams {
@@ -101,28 +252,28 @@ export interface PolicyCreateParams {
   /**
    * Body param: The action to take if the expression matches
    */
-  action?: 'allow' | 'log';
+  action: 'allow' | 'log';
 
   /**
    * Body param: A description for the policy
    */
-  description?: string;
+  description: string;
 
   /**
    * Body param: Whether the policy is enabled
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
    * Body param: The expression which must match for the policy to be applied, using
    * the Cloudflare Firewall rule expression syntax
    */
-  expression?: string;
+  expression: string;
 
   /**
    * Body param: The policy which will be applied
    */
-  value?: string;
+  value: string;
 }
 
 export interface PolicyUpdateParams {
@@ -181,7 +332,11 @@ export interface PolicyGetParams {
 
 export namespace Policies {
   export import Policy = PoliciesAPI.Policy;
-  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;

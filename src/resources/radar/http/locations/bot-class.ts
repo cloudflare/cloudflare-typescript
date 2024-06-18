@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as BotClassAPI from 'cloudflare/resources/radar/http/locations/bot-class';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as BotClassAPI from './bot-class';
 
 export class BotClass extends APIResource {
   /**
@@ -107,6 +107,11 @@ export interface BotClassGetParams {
    * AS3356.
    */
   asn?: Array<string>;
+
+  /**
+   * Filter for browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start

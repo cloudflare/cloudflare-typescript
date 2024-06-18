@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ProfilesAPI from 'cloudflare/resources/zero-trust/dlp/profiles/profiles';
-import * as CustomAPI from 'cloudflare/resources/zero-trust/dlp/profiles/custom';
-import * as PredefinedAPI from 'cloudflare/resources/zero-trust/dlp/profiles/predefined';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as ProfilesAPI from './profiles';
+import * as CustomAPI from './custom';
+import * as PredefinedAPI from './predefined';
+import { SinglePage } from '../../../../pagination';
 
 export class Profiles extends APIResource {
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);

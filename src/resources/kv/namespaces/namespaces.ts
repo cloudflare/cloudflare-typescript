@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as NamespacesAPI from 'cloudflare/resources/kv/namespaces/namespaces';
-import * as BulkAPI from 'cloudflare/resources/kv/namespaces/bulk';
-import * as KeysAPI from 'cloudflare/resources/kv/namespaces/keys';
-import * as MetadataAPI from 'cloudflare/resources/kv/namespaces/metadata';
-import * as ValuesAPI from 'cloudflare/resources/kv/namespaces/values';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as NamespacesAPI from './namespaces';
+import * as BulkAPI from './bulk';
+import * as KeysAPI from './keys';
+import * as MetadataAPI from './metadata';
+import * as ValuesAPI from './values';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
   bulk: BulkAPI.Bulk = new BulkAPI.Bulk(this._client);
@@ -37,13 +37,13 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceUpdateResponse> {
+  ): Core.APIPromise<NamespaceUpdateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceUpdateResponse }>
+      }) as Core.APIPromise<{ result: NamespaceUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,13 +69,30 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceDeleteResponse> {
+  ): Core.APIPromise<NamespaceDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
         options,
-      ) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
+      ) as Core.APIPromise<{ result: NamespaceDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get the namespace corresponding to the given ID.
+   */
+  get(
+    namespaceId: string,
+    params: NamespaceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Namespace> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
+        options,
+      ) as Core.APIPromise<{ result: Namespace }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -100,9 +117,9 @@ export interface Namespace {
   supports_url_encoding?: boolean;
 }
 
-export type NamespaceUpdateResponse = unknown | string;
+export interface NamespaceUpdateResponse {}
 
-export type NamespaceDeleteResponse = unknown | string;
+export interface NamespaceDeleteResponse {}
 
 export interface NamespaceCreateParams {
   /**
@@ -152,6 +169,13 @@ export interface NamespaceDeleteParams {
   account_id: string;
 }
 
+export interface NamespaceGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Namespaces {
   export import Namespace = NamespacesAPI.Namespace;
   export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
@@ -161,6 +185,7 @@ export namespace Namespaces {
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
+  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
   export import Bulk = BulkAPI.Bulk;
   export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
   export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
@@ -176,7 +201,6 @@ export namespace Namespaces {
   export import Values = ValuesAPI.Values;
   export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
   export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
-  export import ValueGetResponse = ValuesAPI.ValueGetResponse;
   export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
   export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
   export import ValueGetParams = ValuesAPI.ValueGetParams;

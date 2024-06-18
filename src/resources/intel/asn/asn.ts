@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ASNAPI from 'cloudflare/resources/intel/asn/asn';
-import * as Shared from 'cloudflare/resources/shared';
-import * as SubnetsAPI from 'cloudflare/resources/intel/asn/subnets';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ASNAPI from './asn';
+import * as Shared from '../../shared';
+import * as SubnetsAPI from './subnets';
 
 export class ASN extends APIResource {
   subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);

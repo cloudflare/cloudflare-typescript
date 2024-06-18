@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as HTTPTestsAPI from 'cloudflare/resources/zero-trust/dex/http-tests/http-tests';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
-import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as HTTPTestsAPI from './http-tests';
+import * as DEXAPI from '../dex';
+import * as PercentilesAPI from './percentiles';
 
 export class HTTPTests extends APIResource {
   percentiles: PercentilesAPI.Percentiles = new PercentilesAPI.Percentiles(this._client);
@@ -187,6 +187,11 @@ export interface HTTPTestGetParams {
   account_id: string;
 
   /**
+   * Query param: Start time for aggregate metrics in ISO ms
+   */
+  from: string;
+
+  /**
    * Query param: Time interval for aggregate time slots.
    */
   interval: 'minute' | 'hour';
@@ -194,12 +199,7 @@ export interface HTTPTestGetParams {
   /**
    * Query param: End time for aggregate metrics in ISO ms
    */
-  timeEnd: string;
-
-  /**
-   * Query param: Start time for aggregate metrics in ISO ms
-   */
-  timeStart: string;
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used

@@ -1,20 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as KeysAPI from 'cloudflare/resources/zero-trust/access/keys';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as KeysAPI from './keys';
 
 export class Keys extends APIResource {
   /**
    * Updates the Access key rotation settings for an account.
    */
-  update(
-    identifier: string,
-    body: KeyUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyUpdateResponse> {
+  update(params: KeyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<KeyUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${identifier}/access/keys`, { body, ...options }) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/access/keys`, { body, ...options }) as Core.APIPromise<{
         result: KeyUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -23,9 +20,10 @@ export class Keys extends APIResource {
   /**
    * Gets the Access key rotation settings for an account.
    */
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
+  get(params: KeyGetParams, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${identifier}/access/keys`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/access/keys`, options) as Core.APIPromise<{
         result: KeyGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -34,9 +32,10 @@ export class Keys extends APIResource {
   /**
    * Perfoms a key rotation for an account.
    */
-  rotate(identifier: string, options?: Core.RequestOptions): Core.APIPromise<KeyRotateResponse> {
+  rotate(params: KeyRotateParams, options?: Core.RequestOptions): Core.APIPromise<KeyRotateResponse> {
+    const { account_id } = params;
     return (
-      this._client.post(`/accounts/${identifier}/access/keys/rotate`, options) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/access/keys/rotate`, options) as Core.APIPromise<{
         result: KeyRotateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -51,9 +50,28 @@ export type KeyRotateResponse = unknown | string;
 
 export interface KeyUpdateParams {
   /**
-   * The number of days between key rotations.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The number of days between key rotations.
    */
   key_rotation_interval_days: number;
+}
+
+export interface KeyGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface KeyRotateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export namespace Keys {
@@ -61,4 +79,6 @@ export namespace Keys {
   export import KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
   export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
+  export import KeyGetParams = KeysAPI.KeyGetParams;
+  export import KeyRotateParams = KeysAPI.KeyRotateParams;
 }

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as SpeedAPI from 'cloudflare/resources/radar/quality/speed/speed';
-import * as TopAPI from 'cloudflare/resources/radar/quality/speed/top';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as SpeedAPI from './speed';
+import * as TopAPI from './top';
 
 export class Speed extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);

@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AnalyzeAPI from 'cloudflare/resources/ssl/analyze';
-import * as RecommendationsAPI from 'cloudflare/resources/ssl/recommendations';
-import * as VerificationAPI from 'cloudflare/resources/ssl/verification';
-import * as CertificatePacksAPI from 'cloudflare/resources/ssl/certificate-packs/certificate-packs';
-import * as UniversalAPI from 'cloudflare/resources/ssl/universal/universal';
+import { APIResource } from '../../resource';
+import * as AnalyzeAPI from './analyze';
+import * as RecommendationsAPI from './recommendations';
+import * as VerificationAPI from './verification';
+import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
+import * as UniversalAPI from './universal/universal';
 
 export class SSL extends APIResource {
   analyze: AnalyzeAPI.Analyze = new AnalyzeAPI.Analyze(this._client);

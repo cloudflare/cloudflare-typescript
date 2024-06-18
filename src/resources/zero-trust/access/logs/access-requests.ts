@@ -1,18 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AccessRequestsAPI from 'cloudflare/resources/zero-trust/access/logs/access-requests';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as AccessRequestsAPI from './access-requests';
 
 export class AccessRequests extends APIResource {
   /**
    * Gets a list of Access authentication audit logs for an account.
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.APIPromise<AccessRequestListResponse | null> {
+  list(
+    params: AccessRequestListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRequestListResponse> {
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${identifier}/access/logs/access_requests`, options) as Core.APIPromise<{
-        result: AccessRequestListResponse | null;
-      }>
+      this._client.get(`/accounts/${account_id}/access/logs/access_requests`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: AccessRequestListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -63,7 +68,35 @@ export interface AccessRequests {
 
 export type AccessRequestListResponse = Array<AccessRequests>;
 
+export interface AccessRequestListParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Query param: The chronological sorting order for the logs.
+   */
+  direction?: 'desc' | 'asc';
+
+  /**
+   * Query param: The maximum number of log entries to retrieve.
+   */
+  limit?: number;
+
+  /**
+   * Query param: The earliest event timestamp to query.
+   */
+  since?: string;
+
+  /**
+   * Query param: The latest event timestamp to query.
+   */
+  until?: string;
+}
+
 export namespace AccessRequests {
   export import AccessRequests = AccessRequestsAPI.AccessRequests;
   export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
+  export import AccessRequestListParams = AccessRequestsAPI.AccessRequestListParams;
 }

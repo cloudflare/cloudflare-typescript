@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PoliciesAPI from 'cloudflare/resources/alerting/policies';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PoliciesAPI from './policies';
+import * as Shared from '../shared';
+import { SinglePage } from '../../pagination';
 
 export class Policies extends APIResource {
   /**
@@ -58,14 +59,9 @@ export class Policies extends APIResource {
     policyId: string,
     params: PolicyDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyDeleteResponse | null> {
+  ): Core.APIPromise<PolicyDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
-        options,
-      ) as Core.APIPromise<{ result: PolicyDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, options);
   }
 
   /**
@@ -88,10 +84,10 @@ export class PoliciesSinglePage extends SinglePage<Policy> {}
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent1>>;
+export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent3>>;
 
 export namespace Mechanism {
-  export interface UnnamedSchemaWithMapParent1 {
+  export interface UnnamedSchemaWithMapParent3 {
     /**
      * UUID
      */
@@ -103,10 +99,10 @@ export namespace Mechanism {
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type MechanismParam = Record<string, Array<MechanismParam.UnnamedSchemaWithMapParent1>>;
+export type MechanismParam = Record<string, Array<MechanismParam.UnnamedSchemaWithMapParent3>>;
 
 export namespace MechanismParam {
-  export interface UnnamedSchemaWithMapParent1 {
+  export interface UnnamedSchemaWithMapParent3 {
     /**
      * UUID
      */
@@ -649,7 +645,42 @@ export interface PolicyUpdateResponse {
   id?: string;
 }
 
-export type PolicyDeleteResponse = unknown | Array<unknown> | string;
+export interface PolicyDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: PolicyDeleteResponse.ResultInfo;
+}
+
+export namespace PolicyDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
 
 export interface PolicyCreateParams {
   /**

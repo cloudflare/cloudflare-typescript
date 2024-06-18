@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ColosAPI from 'cloudflare/resources/zero-trust/dex/colos';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ColosAPI from './colos';
+import { SinglePage } from '../../../pagination';
 
 export class Colos extends APIResource {
   /**
@@ -34,14 +34,14 @@ export interface ColoListParams {
   account_id: string;
 
   /**
-   * Query param: End time for connection period in RFC3339 (ISO 8601) format.
-   */
-  timeEnd: string;
-
-  /**
    * Query param: Start time for connection period in RFC3339 (ISO 8601) format.
    */
-  timeStart: string;
+  from: string;
+
+  /**
+   * Query param: End time for connection period in RFC3339 (ISO 8601) format.
+   */
+  to: string;
 
   /**
    * Query param: Type of usage that colos should be sorted by. If unspecified,

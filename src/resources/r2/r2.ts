@@ -1,12 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as BucketsAPI from 'cloudflare/resources/r2/buckets';
-import * as SippyAPI from 'cloudflare/resources/r2/sippy';
+import { APIResource } from '../../resource';
+import * as BucketsAPI from './buckets';
+import * as SippyAPI from './sippy';
+import * as TemporaryCredentialsAPI from './temporary-credentials';
 
 export class R2 extends APIResource {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
+  temporaryCredentials: TemporaryCredentialsAPI.TemporaryCredentials =
+    new TemporaryCredentialsAPI.TemporaryCredentials(this._client);
 }
 
 export namespace R2 {
@@ -25,4 +28,8 @@ export namespace R2 {
   export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
   export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
   export import SippyGetParams = SippyAPI.SippyGetParams;
+  export import TemporaryCredentials = TemporaryCredentialsAPI.TemporaryCredentials;
+  export import TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
+  export import TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
+  export import TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
 }

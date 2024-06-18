@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BehavioursAPI from 'cloudflare/resources/zero-trust/risk-scoring/behaviours';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as BehavioursAPI from './behaviours';
 
 export class Behaviours extends APIResource {
   /**
@@ -46,7 +46,7 @@ export namespace BehaviourUpdateResponse {
 
     name?: string;
 
-    risk_level?: 'low' | 'medium' | 'high' | null;
+    risk_level?: 'low' | 'medium' | 'high';
   }
 }
 
@@ -62,7 +62,7 @@ export namespace BehaviourGetResponse {
 
     name?: string;
 
-    risk_level?: 'low' | 'medium' | 'high' | null;
+    risk_level?: 'low' | 'medium' | 'high';
   }
 }
 
@@ -74,7 +74,7 @@ export namespace BehaviourUpdateParams {
   export interface Behaviors {
     enabled: boolean;
 
-    risk_level: 'low' | 'medium' | 'high' | null;
+    risk_level: 'low' | 'medium' | 'high';
   }
 }
 

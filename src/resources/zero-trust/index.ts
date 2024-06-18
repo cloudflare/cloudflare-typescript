@@ -28,7 +28,7 @@ export {
   GenericOAuthConfig,
   IdentityProvider,
   IdentityProviderType,
-  ScimConfig,
+  SCIMConfig,
   IdentityProviderListResponse,
   IdentityProviderDeleteResponse,
   IdentityProviderCreateParams,

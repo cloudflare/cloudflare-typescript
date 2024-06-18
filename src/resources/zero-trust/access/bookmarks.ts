@@ -1,23 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BookmarksAPI from 'cloudflare/resources/zero-trust/access/bookmarks';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as BookmarksAPI from './bookmarks';
+import { SinglePage } from '../../../pagination';
 
 export class Bookmarks extends APIResource {
   /**
    * Create a new Bookmark application.
    */
   create(
-    identifier: string,
-    uuid: string,
-    body: BookmarkCreateParams,
+    bookmarkId: string,
+    params: BookmarkCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Bookmark> {
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
-        body,
+      this._client.post(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: Bookmark }>
     )._thenUnwrap((obj) => obj.result);
@@ -27,14 +27,14 @@ export class Bookmarks extends APIResource {
    * Updates a configured Bookmark application.
    */
   update(
-    identifier: string,
-    uuid: string,
-    body: BookmarkUpdateParams,
+    bookmarkId: string,
+    params: BookmarkUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Bookmark> {
+    const { account_id, body } = params;
     return (
-      this._client.put(`/accounts/${identifier}/access/bookmarks/${uuid}`, {
-        body,
+      this._client.put(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, {
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: Bookmark }>
     )._thenUnwrap((obj) => obj.result);
@@ -43,31 +43,42 @@ export class Bookmarks extends APIResource {
   /**
    * Lists Bookmark applications.
    */
-  list(identifier: string, options?: Core.RequestOptions): Core.PagePromise<BookmarksSinglePage, Bookmark> {
-    return this._client.getAPIList(`/accounts/${identifier}/access/bookmarks`, BookmarksSinglePage, options);
+  list(
+    params: BookmarkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BookmarksSinglePage, Bookmark> {
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/access/bookmarks`, BookmarksSinglePage, options);
   }
 
   /**
    * Deletes a Bookmark application.
    */
   delete(
-    identifier: string,
-    uuid: string,
+    bookmarkId: string,
+    params: BookmarkDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BookmarkDeleteResponse> {
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
-        result: BookmarkDeleteResponse;
-      }>
+      this._client.delete(
+        `/accounts/${account_id}/access/bookmarks/${bookmarkId}`,
+        options,
+      ) as Core.APIPromise<{ result: BookmarkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Bookmark application.
    */
-  get(identifier: string, uuid: string, options?: Core.RequestOptions): Core.APIPromise<Bookmark> {
+  get(
+    bookmarkId: string,
+    params: BookmarkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Bookmark> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${identifier}/access/bookmarks/${uuid}`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, options) as Core.APIPromise<{
         result: Bookmark;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -114,9 +125,41 @@ export interface BookmarkDeleteResponse {
   id?: string;
 }
 
-export type BookmarkCreateParams = unknown;
+export interface BookmarkCreateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
 
-export type BookmarkUpdateParams = unknown;
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface BookmarkUpdateParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface BookmarkListParams {
+  account_id: string;
+}
+
+export interface BookmarkDeleteParams {
+  account_id: string;
+}
+
+export interface BookmarkGetParams {
+  account_id: string;
+}
 
 export namespace Bookmarks {
   export import Bookmark = BookmarksAPI.Bookmark;
@@ -124,4 +167,7 @@ export namespace Bookmarks {
   export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
   export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
   export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
+  export import BookmarkListParams = BookmarksAPI.BookmarkListParams;
+  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
+  export import BookmarkGetParams = BookmarksAPI.BookmarkGetParams;
 }

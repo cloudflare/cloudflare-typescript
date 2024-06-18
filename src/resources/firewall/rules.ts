@@ -1,16 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as RulesAPI from 'cloudflare/resources/firewall/rules';
-import * as FiltersAPI from 'cloudflare/resources/filters';
-import * as RateLimitsAPI from 'cloudflare/resources/rate-limits';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as RulesAPI from './rules';
+import * as FiltersAPI from '../filters';
+import * as RateLimitsAPI from '../rate-limits';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Rules extends APIResource {
   /**
    * Create one or more firewall rules.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   create(
     zoneIdentifier: string,
@@ -26,6 +28,8 @@ export class Rules extends APIResource {
 
   /**
    * Updates an existing firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   update(
     zoneIdentifier: string,
@@ -44,6 +48,8 @@ export class Rules extends APIResource {
   /**
    * Fetches firewall rules in a zone. You can filter the results using several
    * optional parameters.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   list(
     zoneIdentifier: string,
@@ -71,6 +77,8 @@ export class Rules extends APIResource {
 
   /**
    * Deletes an existing firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
     return (
@@ -82,6 +90,8 @@ export class Rules extends APIResource {
 
   /**
    * Updates the priority of an existing firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   edit(
     zoneIdentifier: string,
@@ -99,6 +109,8 @@ export class Rules extends APIResource {
 
   /**
    * Fetches the details of a firewall rule.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   get(
     zoneIdentifier: string,
@@ -148,7 +160,7 @@ export interface FirewallRule {
    */
   priority?: number;
 
-  products?: Array<Products>;
+  products?: Array<Product>;
 
   /**
    * A short reference tag. Allows you to select related firewall rules.
@@ -159,7 +171,7 @@ export interface FirewallRule {
 /**
  * A list of products to bypass for a request when using the `bypass` action.
  */
-export type Products = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
+export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
 
 export interface DeletedFilter {
   /**
@@ -219,7 +231,7 @@ export interface RuleGetParams {
 
 export namespace Rules {
   export import FirewallRule = RulesAPI.FirewallRule;
-  export import Products = RulesAPI.Products;
+  export import Product = RulesAPI.Product;
   export import DeletedFilter = RulesAPI.DeletedFilter;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;

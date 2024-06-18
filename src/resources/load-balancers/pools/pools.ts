@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PoolsAPI from 'cloudflare/resources/load-balancers/pools/pools';
-import * as LoadBalancersAPI from 'cloudflare/resources/load-balancers/load-balancers';
-import * as HealthAPI from 'cloudflare/resources/load-balancers/pools/health';
-import * as ReferencesAPI from 'cloudflare/resources/load-balancers/pools/references';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as PoolsAPI from './pools';
+import * as LoadBalancersAPI from '../load-balancers';
+import * as HealthAPI from './health';
+import * as ReferencesAPI from './references';
+import { SinglePage } from '../../../pagination';
 
 export class Pools extends APIResource {
   health: HealthAPI.Health = new HealthAPI.Health(this._client);

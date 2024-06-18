@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CopyAPI from 'cloudflare/resources/stream/copy';
-import * as StreamAPI from 'cloudflare/resources/stream/stream';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as CopyAPI from './copy';
+import * as StreamAPI from './stream';
 
 export class Copy extends APIResource {
   /**
@@ -21,8 +21,8 @@ export class Copy extends APIResource {
         body,
         ...options,
         headers: {
-          'Upload-Creator': uploadCreator || '',
-          'Upload-Metadata': uploadMetadata || '',
+          ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
+          ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
           ...options?.headers,
         },
       }) as Core.APIPromise<{ result: StreamAPI.Video }>

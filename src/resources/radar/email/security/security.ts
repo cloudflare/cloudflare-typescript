@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as SummaryAPI from 'cloudflare/resources/radar/email/security/summary';
-import * as TimeseriesGroupsAPI from 'cloudflare/resources/radar/email/security/timeseries-groups';
-import * as TopAPI from 'cloudflare/resources/radar/email/security/top/top';
+import { APIResource } from '../../../../resource';
+import * as SummaryAPI from './summary';
+import * as TimeseriesGroupsAPI from './timeseries-groups';
+import * as TopAPI from './top/top';
 
 export class Security extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);

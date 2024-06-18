@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as IndexesAPI from 'cloudflare/resources/vectorize/indexes';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as IndexesAPI from './indexes';
+import { type Uploadable } from '../../core';
+import { SinglePage } from '../../pagination';
 
 export class Indexes extends APIResource {
   /**
@@ -132,6 +133,8 @@ export class Indexes extends APIResource {
       this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/insert`, {
         body: body,
         ...options,
+        headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexInsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -167,6 +170,8 @@ export class Indexes extends APIResource {
       this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/upsert`, {
         body: body,
         ...options,
+        headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
+        __binaryRequest: true,
       }) as Core.APIPromise<{ result: IndexUpsert | null }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -395,9 +400,9 @@ export interface IndexInsertParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: ndjson file containing vectors to insert.
    */
-  body: unknown;
+  body: Uploadable;
 }
 
 export interface IndexQueryParams {
@@ -439,9 +444,9 @@ export interface IndexUpsertParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: ndjson file containing vectors to upsert.
    */
-  body: unknown;
+  body: Uploadable;
 }
 
 export namespace Indexes {

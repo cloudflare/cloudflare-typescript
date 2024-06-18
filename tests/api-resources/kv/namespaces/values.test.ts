@@ -66,22 +66,8 @@ describe('resource values', () => {
     );
   });
 
-  test('get: only required params', async () => {
-    const responsePromise = cloudflare.kv.namespaces.values.get(
-      '0f2ac74b498b48028cb68387c421e279',
-      'My-Key',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
+  // HTTP 406 from prism
+  test.skip('get: required and optional params', async () => {
     const response = await cloudflare.kv.namespaces.values.get('0f2ac74b498b48028cb68387c421e279', 'My-Key', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });

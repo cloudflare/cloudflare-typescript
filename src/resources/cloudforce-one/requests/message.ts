@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as MessageAPI from 'cloudflare/resources/cloudforce-one/requests/message';
-import * as Shared from 'cloudflare/resources/shared';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as MessageAPI from './message';
+import * as Shared from '../../shared';
 
 export class MessageResource extends APIResource {
   /**

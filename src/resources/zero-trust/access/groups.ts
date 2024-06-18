@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import { CloudflareError } from 'cloudflare/error';
-import * as GroupsAPI from 'cloudflare/resources/zero-trust/access/groups';
-import * as AccessAPI from 'cloudflare/resources/zero-trust/access/access';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { CloudflareError } from '../../../error';
+import * as GroupsAPI from './groups';
+import * as AccessAPI from './access';
+import { SinglePage } from '../../../pagination';
 
 export class Groups extends APIResource {
   /**
@@ -42,7 +42,7 @@ export class Groups extends APIResource {
    * Updates a configured Access group.
    */
   update(
-    uuid: string,
+    groupId: string,
     params: GroupUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustGroup> {
@@ -64,7 +64,7 @@ export class Groups extends APIResource {
           accountOrZoneId: zone_id,
         };
     return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`, {
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ZeroTrustGroup }>
@@ -114,18 +114,18 @@ export class Groups extends APIResource {
    * Deletes an Access group.
    */
   delete(
-    uuid: string,
+    groupId: string,
     params?: GroupDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupDeleteResponse>;
-  delete(uuid: string, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse>;
+  delete(groupId: string, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse>;
   delete(
-    uuid: string,
+    groupId: string,
     params: GroupDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<GroupDeleteResponse> {
     if (isRequestOptions(params)) {
-      return this.delete(uuid, {}, params);
+      return this.delete(groupId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -146,7 +146,7 @@ export class Groups extends APIResource {
         };
     return (
       this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`,
         options,
       ) as Core.APIPromise<{ result: GroupDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -155,15 +155,19 @@ export class Groups extends APIResource {
   /**
    * Fetches a single Access group.
    */
-  get(uuid: string, params?: GroupGetParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>;
-  get(uuid: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>;
   get(
-    uuid: string,
+    groupId: string,
+    params?: GroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZeroTrustGroup>;
+  get(groupId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>;
+  get(
+    groupId: string,
     params: GroupGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ZeroTrustGroup> {
     if (isRequestOptions(params)) {
-      return this.get(uuid, {}, params);
+      return this.get(groupId, {}, params);
     }
     const { account_id, zone_id } = params;
     if (!account_id && !zone_id) {
@@ -184,7 +188,7 @@ export class Groups extends APIResource {
         };
     return (
       this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/groups/${uuid}`,
+        `/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`,
         options,
       ) as Core.APIPromise<{ result: ZeroTrustGroup }>
     )._thenUnwrap((obj) => obj.result);

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as OverridesAPI from 'cloudflare/resources/firewall/waf/overrides';
-import * as PackagesAPI from 'cloudflare/resources/firewall/waf/packages/packages';
+import { APIResource } from '../../../resource';
+import * as OverridesAPI from './overrides';
+import * as PackagesAPI from './packages/packages';
 
 export class WAF extends APIResource {
   overrides: OverridesAPI.Overrides = new OverridesAPI.Overrides(this._client);

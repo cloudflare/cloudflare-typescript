@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as BucketsAPI from 'cloudflare/resources/r2/buckets';
-import { CursorPagination, type CursorPaginationParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as BucketsAPI from './buckets';
+import { CursorPagination, type CursorPaginationParams } from '../../pagination';
 
 export class Buckets extends APIResource {
   /**
@@ -81,6 +81,11 @@ export interface Bucket {
    * Name of the bucket
    */
   name?: string;
+
+  /**
+   * Storage class for newly uploaded objects, unless specified otherwise.
+   */
+  storage_class?: 'Standard' | 'InfrequentAccess';
 }
 
 export type BucketDeleteResponse = unknown;
@@ -100,6 +105,12 @@ export interface BucketCreateParams {
    * Body param: Location of the bucket
    */
   locationHint?: 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+
+  /**
+   * Body param: Storage class for newly uploaded objects, unless specified
+   * otherwise.
+   */
+  storageClass?: 'Standard' | 'InfrequentAccess';
 }
 
 export interface BucketListParams extends CursorPaginationParams {

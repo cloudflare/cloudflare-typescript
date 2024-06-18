@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as GatewayAPI from 'cloudflare/resources/zero-trust/gateway/gateway';
-import * as AppTypesAPI from 'cloudflare/resources/zero-trust/gateway/app-types';
-import * as AuditSSHSettingsAPI from 'cloudflare/resources/zero-trust/gateway/audit-ssh-settings';
-import * as CategoriesAPI from 'cloudflare/resources/zero-trust/gateway/categories';
-import * as ConfigurationsAPI from 'cloudflare/resources/zero-trust/gateway/configurations';
-import * as LocationsAPI from 'cloudflare/resources/zero-trust/gateway/locations';
-import * as LoggingAPI from 'cloudflare/resources/zero-trust/gateway/logging';
-import * as ProxyEndpointsAPI from 'cloudflare/resources/zero-trust/gateway/proxy-endpoints';
-import * as RulesAPI from 'cloudflare/resources/zero-trust/gateway/rules';
-import * as ListsAPI from 'cloudflare/resources/zero-trust/gateway/lists/lists';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as GatewayAPI from './gateway';
+import * as AppTypesAPI from './app-types';
+import * as AuditSSHSettingsAPI from './audit-ssh-settings';
+import * as CategoriesAPI from './categories';
+import * as ConfigurationsAPI from './configurations';
+import * as LocationsAPI from './locations';
+import * as LoggingAPI from './logging';
+import * as ProxyEndpointsAPI from './proxy-endpoints';
+import * as RulesAPI from './rules';
+import * as ListsAPI from './lists/lists';
 
 export class Gateway extends APIResource {
   auditSSHSettings: AuditSSHSettingsAPI.AuditSSHSettings = new AuditSSHSettingsAPI.AuditSSHSettings(
@@ -159,7 +159,7 @@ export namespace Gateway {
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
+  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;

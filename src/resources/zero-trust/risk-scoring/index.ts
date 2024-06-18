@@ -7,6 +7,20 @@ export {
   Behaviours,
 } from './behaviours';
 export {
+  IntegrationCreateResponse,
+  IntegrationUpdateResponse,
+  IntegrationListResponse,
+  IntegrationDeleteResponse,
+  IntegrationGetResponse,
+  IntegrationCreateParams,
+  IntegrationUpdateParams,
+  IntegrationListParams,
+  IntegrationDeleteParams,
+  IntegrationGetParams,
+  IntegrationListResponsesSinglePage,
+  Integrations,
+} from './integrations/index';
+export {
   RiskScoringGetResponse,
   RiskScoringResetResponse,
   RiskScoringGetParams,

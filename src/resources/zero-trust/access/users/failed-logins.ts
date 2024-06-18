@@ -1,21 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as FailedLoginsAPI from 'cloudflare/resources/zero-trust/access/users/failed-logins';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as FailedLoginsAPI from './failed-logins';
+import { SinglePage } from '../../../../pagination';
 
 export class FailedLogins extends APIResource {
   /**
    * Get all failed login attempts for a single user.
    */
   list(
-    identifier: string,
-    id: string,
+    userId: string,
+    params: FailedLoginListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<FailedLoginListResponsesSinglePage, FailedLoginListResponse> {
+    const { account_id } = params;
     return this._client.getAPIList(
-      `/accounts/${identifier}/access/users/${id}/failed_logins`,
+      `/accounts/${account_id}/access/users/${userId}/failed_logins`,
       FailedLoginListResponsesSinglePage,
       options,
     );
@@ -30,7 +31,15 @@ export interface FailedLoginListResponse {
   metadata?: unknown;
 }
 
+export interface FailedLoginListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace FailedLogins {
   export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
   export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
+  export import FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
 }

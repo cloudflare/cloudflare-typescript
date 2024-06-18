@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PercentilesAPI from 'cloudflare/resources/zero-trust/dex/http-tests/percentiles';
-import * as DEXAPI from 'cloudflare/resources/zero-trust/dex/dex';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import * as PercentilesAPI from './percentiles';
+import * as DEXAPI from '../dex';
 
 export class Percentiles extends APIResource {
   /**
@@ -67,14 +67,14 @@ export interface PercentileGetParams {
   account_id: string;
 
   /**
-   * Query param: End time for aggregate metrics in ISO format
-   */
-  timeEnd: string;
-
-  /**
    * Query param: Start time for aggregate metrics in ISO format
    */
-  timeStart: string;
+  from: string;
+
+  /**
+   * Query param: End time for aggregate metrics in ISO format
+   */
+  to: string;
 
   /**
    * Query param: Optionally filter result stats to a Cloudflare colo. Cannot be used

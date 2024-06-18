@@ -47,9 +47,10 @@ describe('resource indicatorFeeds', () => {
   test('update: required and optional params', async () => {
     const response = await cloudflare.intel.indicatorFeeds.update(12, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      feed_description: 'This is an example description',
+      description: 'This is an example description',
       is_attributable: true,
       is_public: true,
+      name: 'indicator_list',
     });
   });
 

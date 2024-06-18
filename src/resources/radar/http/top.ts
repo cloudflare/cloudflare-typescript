@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TopAPI from 'cloudflare/resources/radar/http/top';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as TopAPI from './top';
 
 export class Top extends APIResource {
   /**
@@ -179,6 +179,11 @@ export interface TopBrowserFamiliesParams {
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
 
   /**
+   * Filter for browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
+
+  /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start
    * with `-` to exclude from results. For example, `-EU,NA` excludes results from
    * Europe, but includes results from North America.
@@ -284,6 +289,11 @@ export interface TopBrowsersParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filter for browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start

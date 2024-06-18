@@ -1,17 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as DevicesAPI from 'cloudflare/resources/zero-trust/devices/devices';
-import * as DEXTestsAPI from 'cloudflare/resources/zero-trust/devices/dex-tests';
-import * as NetworksAPI from 'cloudflare/resources/zero-trust/devices/networks';
-import * as OverrideCodesAPI from 'cloudflare/resources/zero-trust/devices/override-codes';
-import * as RevokeAPI from 'cloudflare/resources/zero-trust/devices/revoke';
-import * as SettingsAPI from 'cloudflare/resources/zero-trust/devices/settings';
-import * as UnrevokeAPI from 'cloudflare/resources/zero-trust/devices/unrevoke';
-import * as PoliciesAPI from 'cloudflare/resources/zero-trust/devices/policies/policies';
-import * as PostureAPI from 'cloudflare/resources/zero-trust/devices/posture/posture';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as DevicesAPI from './devices';
+import * as DEXTestsAPI from './dex-tests';
+import * as NetworksAPI from './networks';
+import * as OverrideCodesAPI from './override-codes';
+import * as RevokeAPI from './revoke';
+import * as SettingsAPI from './settings';
+import * as UnrevokeAPI from './unrevoke';
+import * as PoliciesAPI from './policies/policies';
+import * as PostureAPI from './posture/posture';
+import { SinglePage } from '../../../pagination';
 
 export class Devices extends APIResource {
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);

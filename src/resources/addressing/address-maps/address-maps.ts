@@ -1,12 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as AddressMapsAPI from 'cloudflare/resources/addressing/address-maps/address-maps';
-import * as AccountsAPI from 'cloudflare/resources/addressing/address-maps/accounts';
-import * as IPsAPI from 'cloudflare/resources/addressing/address-maps/ips';
-import * as ZonesAPI from 'cloudflare/resources/addressing/address-maps/zones';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as AddressMapsAPI from './address-maps';
+import * as AccountsAPI from './accounts';
+import * as IPsAPI from './ips';
+import * as ZonesAPI from './zones';
+import { SinglePage } from '../../../pagination';
 
 export class AddressMaps extends APIResource {
   accounts: AccountsAPI.Accounts = new AccountsAPI.Accounts(this._client);
@@ -148,6 +148,11 @@ export interface AddressMap {
  */
 export type Kind = 'zone' | 'account';
 
+/**
+ * The type of the membership.
+ */
+export type KindParam = 'zone' | 'account';
+
 export interface AddressMapCreateResponse {
   /**
    * Identifier
@@ -222,7 +227,7 @@ export namespace AddressMapCreateResponse {
     created_at?: string;
 
     /**
-     * Identifier
+     * The identifier for the membership (eg. a zone or account tag).
      */
     identifier?: string;
 
@@ -309,7 +314,7 @@ export namespace AddressMapGetResponse {
     created_at?: string;
 
     /**
-     * Identifier
+     * The identifier for the membership (eg. a zone or account tag).
      */
     identifier?: string;
 
@@ -337,6 +342,33 @@ export interface AddressMapCreateParams {
    * respond with IP addresses on an Address Map until the map is enabled.
    */
   enabled?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  ips?: Array<string>;
+
+  /**
+   * Body param: Zones and Accounts which will be assigned IPs on this Address Map. A
+   * zone membership will take priority over an account membership.
+   */
+  memberships?: Array<AddressMapCreateParams.Membership>;
+}
+
+export namespace AddressMapCreateParams {
+  export interface Membership {
+    created_at?: string;
+
+    /**
+     * The identifier for the membership (eg. a zone or account tag).
+     */
+    identifier?: string;
+
+    /**
+     * The type of the membership.
+     */
+    kind?: AddressMapsAPI.KindParam;
+  }
 }
 
 export interface AddressMapListParams {

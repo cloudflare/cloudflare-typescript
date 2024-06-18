@@ -1,16 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as LocationsAPI from 'cloudflare/resources/radar/http/locations/locations';
-import * as BotClassAPI from 'cloudflare/resources/radar/http/locations/bot-class';
-import * as DeviceTypeAPI from 'cloudflare/resources/radar/http/locations/device-type';
-import * as HTTPMethodAPI from 'cloudflare/resources/radar/http/locations/http-method';
-import * as HTTPProtocolAPI from 'cloudflare/resources/radar/http/locations/http-protocol';
-import * as IPVersionAPI from 'cloudflare/resources/radar/http/locations/ip-version';
-import * as OSAPI from 'cloudflare/resources/radar/http/locations/os';
-import * as TLSVersionAPI from 'cloudflare/resources/radar/http/locations/tls-version';
+import * as Core from '../../../../core';
+import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import * as LocationsAPI from './locations';
+import * as BotClassAPI from './bot-class';
+import * as BrowserFamilyAPI from './browser-family';
+import * as DeviceTypeAPI from './device-type';
+import * as HTTPMethodAPI from './http-method';
+import * as HTTPProtocolAPI from './http-protocol';
+import * as IPVersionAPI from './ip-version';
+import * as OSAPI from './os';
+import * as TLSVersionAPI from './tls-version';
 
 export class Locations extends APIResource {
   botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);
@@ -20,6 +21,7 @@ export class Locations extends APIResource {
   ipVersion: IPVersionAPI.IPVersion = new IPVersionAPI.IPVersion(this._client);
   os: OSAPI.OS = new OSAPI.OS(this._client);
   tlsVersion: TLSVersionAPI.TLSVersion = new TLSVersionAPI.TLSVersion(this._client);
+  browserFamily: BrowserFamilyAPI.BrowserFamily = new BrowserFamilyAPI.BrowserFamily(this._client);
 
   /**
    * Get the top locations by HTTP traffic. Values are a percentage out of the total
@@ -117,6 +119,11 @@ export interface LocationGetParams {
    * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
    */
   botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
+   * Filter for browser family.
+   */
+  browserFamily?: Array<'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI'>;
 
   /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start
@@ -235,4 +242,7 @@ export namespace Locations {
   export import TLSVersion = TLSVersionAPI.TLSVersion;
   export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
   export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
+  export import BrowserFamily = BrowserFamilyAPI.BrowserFamily;
+  export import BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
+  export import BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
 }

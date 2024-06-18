@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as IQIAPI from 'cloudflare/resources/radar/quality/iqi';
-import * as SpeedAPI from 'cloudflare/resources/radar/quality/speed/speed';
+import { APIResource } from '../../../resource';
+import * as IQIAPI from './iqi';
+import * as SpeedAPI from './speed/speed';
 
 export class Quality extends APIResource {
   iqi: IQIAPI.IQI = new IQIAPI.IQI(this._client);

@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as AvailabilitiesAPI from 'cloudflare/resources/speed/availabilities';
-import * as ScheduleAPI from 'cloudflare/resources/speed/schedule';
-import * as PagesAPI from 'cloudflare/resources/speed/pages/pages';
+import { APIResource } from '../../resource';
+import * as AvailabilitiesAPI from './availabilities';
+import * as ScheduleAPI from './schedule';
+import * as PagesAPI from './pages/pages';
 
 export class Speed extends APIResource {
   schedule: ScheduleAPI.ScheduleResource = new ScheduleAPI.ScheduleResource(this._client);

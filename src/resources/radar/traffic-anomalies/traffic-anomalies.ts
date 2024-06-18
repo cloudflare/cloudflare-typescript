@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as TrafficAnomaliesAPI from 'cloudflare/resources/radar/traffic-anomalies/traffic-anomalies';
-import * as LocationsAPI from 'cloudflare/resources/radar/traffic-anomalies/locations';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as TrafficAnomaliesAPI from './traffic-anomalies';
+import * as LocationsAPI from './locations';
 
 export class TrafficAnomalies extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);

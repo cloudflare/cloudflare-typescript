@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as CiphersAPI from 'cloudflare/resources/zones/settings/ciphers';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as CiphersAPI from './ciphers';
 
 export class Ciphers extends APIResource {
   /**

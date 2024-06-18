@@ -64,7 +64,45 @@ describe('resource applications', () => {
       name: 'Admin Site',
       options_preflight_bypass: true,
       path_cookie_attribute: true,
+      policies: [
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+      ],
       same_site_cookie_attribute: 'strict',
+      scim_config: {
+        authentication: { password: 'string', scheme: 'httpbasic', user: 'string' },
+        deactivate_on_delete: true,
+        enabled: true,
+        idp_uid: 'string',
+        mappings: [
+          {
+            enabled: true,
+            filter: 'title pr or userType eq "Intern"',
+            operations: { create: true, delete: true, update: true },
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
+            transform_jsonata:
+              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
+          },
+          {
+            enabled: true,
+            filter: 'title pr or userType eq "Intern"',
+            operations: { create: true, delete: true, update: true },
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
+            transform_jsonata:
+              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
+          },
+          {
+            enabled: true,
+            filter: 'title pr or userType eq "Intern"',
+            operations: { create: true, delete: true, update: true },
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
+            transform_jsonata:
+              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
+          },
+        ],
+        remote_uri: 'string',
+      },
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,
       session_duration: '24h',
@@ -128,7 +166,45 @@ describe('resource applications', () => {
         name: 'Admin Site',
         options_preflight_bypass: true,
         path_cookie_attribute: true,
+        policies: [
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+          { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
+        ],
         same_site_cookie_attribute: 'strict',
+        scim_config: {
+          authentication: { password: 'string', scheme: 'httpbasic', user: 'string' },
+          deactivate_on_delete: true,
+          enabled: true,
+          idp_uid: 'string',
+          mappings: [
+            {
+              enabled: true,
+              filter: 'title pr or userType eq "Intern"',
+              operations: { create: true, delete: true, update: true },
+              schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
+              transform_jsonata:
+                "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
+            },
+            {
+              enabled: true,
+              filter: 'title pr or userType eq "Intern"',
+              operations: { create: true, delete: true, update: true },
+              schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
+              transform_jsonata:
+                "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
+            },
+            {
+              enabled: true,
+              filter: 'title pr or userType eq "Intern"',
+              operations: { create: true, delete: true, update: true },
+              schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
+              transform_jsonata:
+                "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
+            },
+          ],
+          remote_uri: 'string',
+        },
         self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
         service_auth_401_redirect: true,
         session_duration: '24h',

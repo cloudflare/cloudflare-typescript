@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ProxyEndpointsAPI from 'cloudflare/resources/zero-trust/gateway/proxy-endpoints';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as ProxyEndpointsAPI from './proxy-endpoints';
 
 export class ProxyEndpoints extends APIResource {
   /**
@@ -20,18 +19,15 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Fetches a single Zero Trust Gateway proxy endpoint.
+   * Fetches all Zero Trust Gateway proxy endpoints for an account.
    */
-  list(
-    params: ProxyEndpointListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ProxyEndpointsSinglePage, ProxyEndpoint> {
+  list(params: ProxyEndpointListParams, options?: Core.RequestOptions): Core.APIPromise<ProxyEndpoint> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/gateway/proxy_endpoints`,
-      ProxyEndpointsSinglePage,
-      options,
-    );
+    return (
+      this._client.get(`/accounts/${account_id}/gateway/proxy_endpoints`, options) as Core.APIPromise<{
+        result: ProxyEndpoint;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -69,24 +65,22 @@ export class ProxyEndpoints extends APIResource {
   }
 
   /**
-   * Fetches all Zero Trust Gateway proxy endpoints for an account.
+   * Fetches a single Zero Trust Gateway proxy endpoint.
    */
   get(
     proxyEndpointId: string,
     params: ProxyEndpointGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpoint> {
+  ): Core.APIPromise<ProxyEndpointGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
         options,
-      ) as Core.APIPromise<{ result: ProxyEndpoint }>
+      ) as Core.APIPromise<{ result: ProxyEndpointGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class ProxyEndpointsSinglePage extends SinglePage<ProxyEndpoint> {}
 
 /**
  * The IPv4 CIDR or IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /109. IPv4
@@ -124,6 +118,8 @@ export interface ProxyEndpoint {
 }
 
 export type ProxyEndpointDeleteResponse = unknown | string | null;
+
+export type ProxyEndpointGetResponse = Array<ProxyEndpoint>;
 
 export interface ProxyEndpointCreateParams {
   /**
@@ -175,7 +171,7 @@ export namespace ProxyEndpoints {
   export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
   export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
   export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointsSinglePage = ProxyEndpointsAPI.ProxyEndpointsSinglePage;
+  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
   export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
   export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
   export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;

@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as RecordsAPI from 'cloudflare/resources/dns/records';
-import * as Shared from 'cloudflare/resources/shared';
-import { multipartFormRequestOptions } from 'cloudflare/core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as RecordsAPI from './records';
+import * as Shared from '../shared';
+import { multipartFormRequestOptions } from '../../core';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Records extends APIResource {
   /**

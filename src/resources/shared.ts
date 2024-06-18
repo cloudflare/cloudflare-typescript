@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Shared from 'cloudflare/resources/shared';
-import { SinglePage, V4PagePaginationArray } from 'cloudflare/pagination';
+import * as Shared from './shared';
+import { SinglePage, V4PagePaginationArray } from '../pagination';
 
 export type ASN = number;
 
@@ -190,7 +190,7 @@ export interface CloudflareTunnel {
    * state), `healthy` (tunnel is active and able to serve traffic), or `down`
    * (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
    */
-  status?: string;
+  status?: 'inactive' | 'degraded' | 'healthy' | 'down';
 
   /**
    * The type of tunnel.
@@ -271,16 +271,22 @@ export interface Member {
   /**
    * Membership identifier tag.
    */
-  id: string;
+  id?: string;
 
   /**
    * Roles assigned to this member.
    */
-  roles: Array<Member.Role>;
+  roles?: Array<Member.Role>;
 
-  status: unknown;
+  /**
+   * A member's status in the account.
+   */
+  status?: 'accepted' | 'pending';
 
-  user: Member.User;
+  /**
+   * Details of the user associated to the membership.
+   */
+  user?: Member.User;
 }
 
 export namespace Member {
@@ -331,6 +337,9 @@ export namespace Member {
     }
   }
 
+  /**
+   * Details of the user associated to the membership.
+   */
   export interface User {
     /**
      * The contact email address of the user.
@@ -406,9 +415,9 @@ export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
 
 export namespace Result {
   export interface UnionMember0 {
-    errors?: unknown | null;
+    errors?: Array<Shared.ResponseInfo>;
 
-    messages?: Array<unknown>;
+    messages?: Array<Shared.ResponseInfo>;
 
     result?: Array<Shared.AuditLog>;
 
@@ -419,8 +428,6 @@ export namespace Result {
     errors: Array<Shared.ResponseInfo>;
 
     messages: Array<Shared.ResponseInfo>;
-
-    result: unknown | Array<unknown> | string;
 
     /**
      * Whether the API call was successful

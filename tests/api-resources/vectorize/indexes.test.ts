@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
 const cloudflare = new Cloudflare({
@@ -156,7 +156,7 @@ describe('resource indexes', () => {
   test.skip('insert: only required params', async () => {
     const responsePromise = cloudflare.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -171,7 +171,7 @@ describe('resource indexes', () => {
   test.skip('insert: required and optional params', async () => {
     const response = await cloudflare.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
 
@@ -204,7 +204,7 @@ describe('resource indexes', () => {
   test.skip('upsert: only required params', async () => {
     const responsePromise = cloudflare.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -219,7 +219,7 @@ describe('resource indexes', () => {
   test.skip('upsert: required and optional params', async () => {
     const response = await cloudflare.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: {},
+      body: await toFile(Buffer.from('# my file contents'), 'README.md'),
     });
   });
 });

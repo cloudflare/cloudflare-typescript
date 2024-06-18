@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as OrangeToOrangeAPI from 'cloudflare/resources/zones/settings/orange-to-orange';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import * as OrangeToOrangeAPI from './orange-to-orange';
 
 export class OrangeToOrangeResource extends APIResource {
   /**

@@ -1,15 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as ConnectionsAPI from 'cloudflare/resources/page-shield/connections';
-import * as PoliciesAPI from 'cloudflare/resources/page-shield/policies';
-import * as ScriptsAPI from 'cloudflare/resources/page-shield/scripts';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as ConnectionsAPI from './connections';
+import * as CookiesAPI from './cookies';
+import * as PoliciesAPI from './policies';
+import * as ScriptsAPI from './scripts';
 
 export class PageShield extends APIResource {
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
   scripts: ScriptsAPI.Scripts = new ScriptsAPI.Scripts(this._client);
+  cookies: CookiesAPI.Cookies = new CookiesAPI.Cookies(this._client);
 
   /**
    * Updates Page Shield settings.
@@ -29,10 +31,12 @@ export class PageShield extends APIResource {
   /**
    * Fetches the Page Shield settings.
    */
-  get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting> {
+  get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting | null> {
     const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{ result: Setting }>
+      this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{
+        result: Setting | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -41,46 +45,46 @@ export interface Setting {
   /**
    * When true, indicates that Page Shield is enabled.
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
    * The timestamp of when Page Shield was last updated.
    */
-  updated_at?: string;
+  updated_at: string;
 
   /**
    * When true, CSP reports will be sent to
    * https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report
    */
-  use_cloudflare_reporting_endpoint?: boolean;
+  use_cloudflare_reporting_endpoint: boolean;
 
   /**
    * When true, the paths associated with connections URLs will also be analyzed.
    */
-  use_connection_url_path?: boolean;
+  use_connection_url_path: boolean;
 }
 
 export interface PageShieldUpdateResponse {
   /**
    * When true, indicates that Page Shield is enabled.
    */
-  enabled?: boolean;
+  enabled: boolean;
 
   /**
    * The timestamp of when Page Shield was last updated.
    */
-  updated_at?: string;
+  updated_at: string;
 
   /**
    * When true, CSP reports will be sent to
    * https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report
    */
-  use_cloudflare_reporting_endpoint?: boolean;
+  use_cloudflare_reporting_endpoint: boolean;
 
   /**
    * When true, the paths associated with connections URLs will also be analyzed.
    */
-  use_connection_url_path?: boolean;
+  use_connection_url_path: boolean;
 }
 
 export interface PageShieldUpdateParams {
@@ -117,7 +121,11 @@ export interface PageShieldGetParams {
 export namespace PageShield {
   export import Policies = PoliciesAPI.Policies;
   export import Policy = PoliciesAPI.Policy;
-  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
@@ -134,4 +142,10 @@ export namespace PageShield {
   export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+  export import Cookies = CookiesAPI.Cookies;
+  export import CookieListResponse = CookiesAPI.CookieListResponse;
+  export import CookieGetResponse = CookiesAPI.CookieGetResponse;
+  export import CookieListResponsesSinglePage = CookiesAPI.CookieListResponsesSinglePage;
+  export import CookieListParams = CookiesAPI.CookieListParams;
+  export import CookieGetParams = CookiesAPI.CookieGetParams;
 }

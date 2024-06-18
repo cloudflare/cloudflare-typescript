@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import { isRequestOptions } from 'cloudflare/core';
-import * as SummaryAPI from 'cloudflare/resources/zero-trust/risk-scoring/summary';
+import * as Core from '../../../core';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -44,7 +44,7 @@ export namespace SummaryGetResponse {
 
     last_event: string;
 
-    max_risk_level: 'low' | 'medium' | 'high' | null;
+    max_risk_level: 'low' | 'medium' | 'high';
 
     name: string;
 

@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from 'cloudflare/core';
-import { APIResource } from 'cloudflare/resource';
-import * as PageAPI from 'cloudflare/resources/waiting-rooms/page';
-import * as RulesAPI from 'cloudflare/resources/waiting-rooms/rules';
-import * as SettingsAPI from 'cloudflare/resources/waiting-rooms/settings';
-import * as StatusesAPI from 'cloudflare/resources/waiting-rooms/statuses';
-import * as EventsAPI from 'cloudflare/resources/waiting-rooms/events/events';
-import { SinglePage } from 'cloudflare/pagination';
+import * as Core from '../../core';
+import { APIResource } from '../../resource';
+import * as PageAPI from './page';
+import * as RulesAPI from './rules';
+import * as SettingsAPI from './settings';
+import * as StatusesAPI from './statuses';
+import * as EventsAPI from './events/events';
+import { SinglePage } from '../../pagination';
 
 export class WaitingRooms extends APIResource {
   page: PageAPI.Page = new PageAPI.Page(this._client);

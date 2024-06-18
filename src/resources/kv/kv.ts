@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from 'cloudflare/resource';
-import * as NamespacesAPI from 'cloudflare/resources/kv/namespaces/namespaces';
+import { APIResource } from '../../resource';
+import * as NamespacesAPI from './namespaces/namespaces';
 
 export class KV extends APIResource {
   namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
@@ -17,4 +17,5 @@ export namespace KV {
   export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
   export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
+  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
 }
