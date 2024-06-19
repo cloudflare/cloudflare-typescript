@@ -27,6 +27,11 @@ export class Captions extends APIResource {
 
 export interface Caption {
   /**
+   * Whether the caption was generated via AI.
+   */
+  generated?: boolean;
+
+  /**
    * The language label displayed in the native language to users.
    */
   label?: string;
@@ -35,6 +40,11 @@ export interface Caption {
    * The language tag in BCP 47 format.
    */
   language?: string;
+
+  /**
+   * The status of a generated caption.
+   */
+  status?: 'ready' | 'inprogress' | 'error';
 }
 
 export type CaptionGetResponse = Array<Caption>;
