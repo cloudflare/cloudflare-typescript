@@ -2631,15 +2631,16 @@ Methods:
 
 ## Settings
 
-### SchemaValidation
-
 Types:
 
-- <code><a href="./src/resources/api-gateway/settings/schema-validation.ts">Settings</a></code>
+- <code><a href="./src/resources/api-gateway/settings/settings.ts">Settings</a></code>
+
+### SchemaValidation
 
 Methods:
 
 - <code title="put /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">update</a>({ ...params }) -> Settings</code>
+- <code title="patch /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">edit</a>({ ...params }) -> Settings</code>
 - <code title="get /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.settings.schemaValidation.<a href="./src/resources/api-gateway/settings/schema-validation.ts">get</a>({ ...params }) -> Settings</code>
 
 ## UserSchemas
@@ -2668,12 +2669,6 @@ Types:
 Methods:
 
 - <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}/operations">client.apiGateway.userSchemas.operations.<a href="./src/resources/api-gateway/user-schemas/operations.ts">list</a>(schemaId, { ...params }) -> OperationListResponsesSinglePage</code>
-
-## SchemaValidation
-
-Methods:
-
-- <code title="patch /zones/{zone_id}/api_gateway/settings/schema_validation">client.apiGateway.schemaValidation.<a href="./src/resources/api-gateway/schema-validation.ts">edit</a>({ ...params }) -> Settings</code>
 
 # ManagedHeaders
 

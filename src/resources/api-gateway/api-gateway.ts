@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as ConfigurationsAPI from './configurations';
-import * as SchemaValidationAPI from './schema-validation';
 import * as SchemasAPI from './schemas';
 import * as DiscoveryAPI from './discovery/discovery';
 import * as OperationsAPI from './operations/operations';
@@ -16,9 +15,6 @@ export class APIGateway extends APIResource {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   userSchemas: UserSchemasAPI.UserSchemas = new UserSchemasAPI.UserSchemas(this._client);
-  schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
-    this._client,
-  );
 }
 
 export namespace APIGateway {
@@ -55,6 +51,4 @@ export namespace APIGateway {
   export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
   export import UserSchemaEditParams = UserSchemasAPI.UserSchemaEditParams;
   export import UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
-  export import SchemaValidation = SchemaValidationAPI.SchemaValidation;
-  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
 }

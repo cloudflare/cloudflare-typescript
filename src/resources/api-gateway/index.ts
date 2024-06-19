@@ -40,5 +40,4 @@ export {
   UserSchemas,
 } from './user-schemas/index';
 export { SchemaListResponse, SchemaListParams, Schemas } from './schemas';
-export { SchemaValidationEditParams, SchemaValidation } from './schema-validation';
 export { Settings } from './settings/index';
