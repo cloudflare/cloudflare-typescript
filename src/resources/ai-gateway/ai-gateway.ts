@@ -42,7 +42,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * List Gateway's
+   * List Gateways
    */
   list(
     params: AIGatewayListParams,
