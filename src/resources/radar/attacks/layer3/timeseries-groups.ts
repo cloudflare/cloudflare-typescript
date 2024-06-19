@@ -281,7 +281,7 @@ export namespace TimeseriesGroupGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

@@ -78,7 +78,7 @@ export namespace HTTPProtocolGetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

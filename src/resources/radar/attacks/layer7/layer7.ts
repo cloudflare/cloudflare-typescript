@@ -83,7 +83,7 @@ export namespace Layer7TimeseriesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

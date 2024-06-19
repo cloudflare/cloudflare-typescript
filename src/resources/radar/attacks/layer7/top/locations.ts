@@ -99,7 +99,7 @@ export namespace LocationOriginResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -163,7 +163,7 @@ export namespace LocationTargetResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

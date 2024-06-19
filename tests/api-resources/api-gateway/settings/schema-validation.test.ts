@@ -32,6 +32,27 @@ describe('resource schemaValidation', () => {
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = cloudflare.apiGateway.settings.schemaValidation.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await cloudflare.apiGateway.settings.schemaValidation.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      validation_default_mitigation_action: 'block',
+      validation_override_mitigation_action: 'none',
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = cloudflare.apiGateway.settings.schemaValidation.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',

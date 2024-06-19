@@ -234,7 +234,7 @@ export namespace SummaryARCResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -290,7 +290,7 @@ export namespace SummaryDKIMResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -346,7 +346,7 @@ export namespace SummaryDMARCResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -402,7 +402,7 @@ export namespace SummaryMaliciousResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -464,7 +464,7 @@ export namespace SummarySpamResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -526,7 +526,7 @@ export namespace SummarySPFResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -582,7 +582,7 @@ export namespace SummarySpoofResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -644,7 +644,7 @@ export namespace SummaryThreatCategoryResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -710,7 +710,7 @@ export namespace SummaryTLSVersionResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

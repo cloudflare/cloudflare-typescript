@@ -77,7 +77,7 @@ export namespace IQISummaryResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

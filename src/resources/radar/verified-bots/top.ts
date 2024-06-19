@@ -89,7 +89,7 @@ export namespace TopBotsResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -151,7 +151,7 @@ export namespace TopCategoriesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

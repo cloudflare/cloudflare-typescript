@@ -86,7 +86,7 @@ export namespace HTTPTimeseriesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 

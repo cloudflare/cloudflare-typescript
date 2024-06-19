@@ -89,7 +89,7 @@ export namespace TopAsesResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
@@ -165,7 +165,7 @@ export namespace TopLocationsResponse {
 
         eventType: string;
 
-        isInstantaneous: unknown;
+        isInstantaneous: boolean;
 
         endTime?: string;
 
