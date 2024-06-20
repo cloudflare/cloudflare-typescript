@@ -37,23 +37,4 @@ describe('resource logs', () => {
       success: true,
     });
   });
-
-  test('get: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.logs.get('my-gateway', 'string', {
-      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await cloudflare.aiGateway.logs.get('my-gateway', 'string', {
-      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-    });
-  });
 });
