@@ -2,11 +2,11 @@
 
 import * as Core from '../../../../../core';
 import { APIResource } from '../../../../../resource';
-import { type Response } from '../../../../../_shims/index';
 import * as ContentAPI from './content';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import { type Uploadable, multipartFormRequestOptions } from '../../../../../core';
+import { type Response } from '../../../../../_shims/index';
 
 export class Content extends APIResource {
   /**

@@ -2,8 +2,8 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import { type Response } from '../../_shims/index';
 import * as DownloadAPI from './download';
+import { type Response } from '../../_shims/index';
 
 export class Download extends APIResource {
   /**

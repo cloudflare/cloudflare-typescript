@@ -2,7 +2,6 @@
 
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
-import { type Response } from '../../../_shims/index';
 import * as ScriptsAPI from './scripts';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
@@ -13,6 +12,7 @@ import * as TailAPI from './tail';
 import * as VersionsAPI from './versions';
 import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../core';
 import { SinglePage } from '../../../pagination';
+import { type Response } from '../../../_shims/index';
 
 export class Scripts extends APIResource {
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);

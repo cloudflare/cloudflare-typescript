@@ -3,9 +3,9 @@
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { type Response } from '../../_shims/index';
 import * as ScansAPI from './scans';
 import * as TopAPI from '../radar/http/top';
+import { type Response as FetchResponse } from '../../_shims/index';
 
 export class Scans extends APIResource {
   /**
@@ -56,14 +56,18 @@ export class Scans extends APIResource {
     scanId: string,
     query?: ScanScreenshotParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  screenshot(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  ): Core.APIPromise<FetchResponse>;
+  screenshot(
+    accountId: string,
+    scanId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FetchResponse>;
   screenshot(
     accountId: string,
     scanId: string,
     query: ScanScreenshotParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
+  ): Core.APIPromise<FetchResponse> {
     if (isRequestOptions(query)) {
       return this.screenshot(accountId, scanId, {}, query);
     }
