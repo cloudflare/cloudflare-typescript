@@ -100,6 +100,11 @@ export interface GatewayItem {
   created_at?: string;
 
   /**
+   * The description of the list item, if present
+   */
+  description?: string;
+
+  /**
    * The value of the item in a list.
    */
   value?: string;
@@ -107,6 +112,11 @@ export interface GatewayItem {
 
 export interface GatewayItemParam {
   created_at?: string;
+
+  /**
+   * The description of the list item, if present
+   */
+  description?: string;
 
   /**
    * The value of the item in a list.
