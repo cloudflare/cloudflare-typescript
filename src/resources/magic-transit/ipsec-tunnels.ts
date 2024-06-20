@@ -25,25 +25,6 @@ export class IPSECTunnels extends APIResource {
   }
 
   /**
-   * Updates a specific IPsec tunnel associated with an account. Use
-   * `?validate_only=true` as an optional query parameter to only run validation
-   * without persisting changes.
-   */
-  update(
-    tunnelIdentifier: string,
-    params: IPSECTunnelUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPSECTunnelUpdateResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IPSECTunnelUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists IPsec tunnels associated with an account.
    */
   list(
@@ -55,63 +36,6 @@ export class IPSECTunnels extends APIResource {
       this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels`, options) as Core.APIPromise<{
         result: IPSECTunnelListResponse;
       }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Disables and removes a specific static IPsec Tunnel associated with an account.
-   * Use `?validate_only=true` as an optional query parameter to only run validation
-   * without persisting changes.
-   */
-  delete(
-    tunnelIdentifier: string,
-    params: IPSECTunnelDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPSECTunnelDeleteResponse> {
-    const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists details for a specific IPsec tunnel.
-   */
-  get(
-    tunnelIdentifier: string,
-    params: IPSECTunnelGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPSECTunnelGetResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: IPSECTunnelGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Generates a Pre Shared Key for a specific IPsec tunnel used in the IKE session.
-   * Use `?validate_only=true` as an optional query parameter to only run validation
-   * without persisting changes. After a PSK is generated, the PSK is immediately
-   * persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a
-   * safe place.
-   */
-  pskGenerate(
-    tunnelIdentifier: string,
-    params: IPSECTunnelPSKGenerateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
-    const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels/${tunnelIdentifier}/psk_generate`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -222,12 +146,6 @@ export namespace IPSECTunnelCreateResponse {
   }
 }
 
-export interface IPSECTunnelUpdateResponse {
-  modified?: boolean;
-
-  modified_ipsec_tunnel?: unknown;
-}
-
 export interface IPSECTunnelListResponse {
   ipsec_tunnels?: Array<IPSECTunnelListResponse.IPSECTunnel>;
 }
@@ -324,86 +242,7 @@ export namespace IPSECTunnelListResponse {
   }
 }
 
-export interface IPSECTunnelDeleteResponse {
-  deleted?: boolean;
-
-  deleted_ipsec_tunnel?: unknown;
-}
-
-export interface IPSECTunnelGetResponse {
-  ipsec_tunnel?: unknown;
-}
-
-export interface IPSECTunnelPSKGenerateResponse {
-  /**
-   * Identifier
-   */
-  ipsec_tunnel_id?: string;
-
-  /**
-   * A randomly generated or provided string for use in the IPsec tunnel.
-   */
-  psk?: string;
-
-  /**
-   * The PSK metadata that includes when the PSK was generated.
-   */
-  psk_metadata?: PSKMetadata;
-}
-
 export interface IPSECTunnelCreateParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param: The IP address assigned to the Cloudflare side of the IPsec tunnel.
-   */
-  cloudflare_endpoint: string;
-
-  /**
-   * Body param: A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for
-   * each side of the tunnel. Select the subnet from the following private IP space:
-   * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
-   */
-  interface_address: string;
-
-  /**
-   * Body param: The name of the IPsec tunnel. The name cannot share a name with
-   * other tunnels.
-   */
-  name: string;
-
-  /**
-   * Body param: The IP address assigned to the customer side of the IPsec tunnel.
-   * Not required, but must be set for proactive traceroutes to work.
-   */
-  customer_endpoint?: string;
-
-  /**
-   * Body param: An optional description forthe IPsec tunnel.
-   */
-  description?: string;
-
-  /**
-   * Body param:
-   */
-  health_check?: MagicTransitAPI.HealthCheckParam;
-
-  /**
-   * Body param: A randomly generated or provided string for use in the IPsec tunnel.
-   */
-  psk?: string;
-
-  /**
-   * Body param: If `true`, then IPsec replay protection will be supported in the
-   * Cloudflare-to-customer direction.
-   */
-  replay_protection?: boolean;
-}
-
-export interface IPSECTunnelUpdateParams {
   /**
    * Path param: Identifier
    */
@@ -462,44 +301,10 @@ export interface IPSECTunnelListParams {
   account_id: string;
 }
 
-export interface IPSECTunnelDeleteParams {
-  /**
-   * Identifier
-   */
-  account_id: string;
-}
-
-export interface IPSECTunnelGetParams {
-  /**
-   * Identifier
-   */
-  account_id: string;
-}
-
-export interface IPSECTunnelPSKGenerateParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  body: unknown;
-}
-
 export namespace IPSECTunnels {
   export import PSKMetadata = IPSECTunnelsAPI.PSKMetadata;
   export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
-  export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
   export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
-  export import IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
-  export import IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
-  export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
   export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
-  export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
   export import IPSECTunnelListParams = IPSECTunnelsAPI.IPSECTunnelListParams;
-  export import IPSECTunnelDeleteParams = IPSECTunnelsAPI.IPSECTunnelDeleteParams;
-  export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
-  export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
 }
