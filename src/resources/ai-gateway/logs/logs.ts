@@ -26,67 +26,11 @@ export class Logs extends APIResource {
       { query, ...options },
     );
   }
-
-  /**
-   * Get Gateway Log Detail
-   */
-  get(
-    id: string,
-    logId: string,
-    params: LogGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LogGetResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/ai-gateway/gateways/${id}/logs/${logId}`,
-        options,
-      ) as Core.APIPromise<{ result: LogGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class LogListResponsesV4PagePaginationArray extends V4PagePaginationArray<LogListResponse> {}
 
 export interface LogListResponse {
-  id: string;
-
-  cached: boolean;
-
-  created_at: string;
-
-  duration: number;
-
-  model: string;
-
-  path: string;
-
-  provider: string;
-
-  request: string;
-
-  response: string;
-
-  success: boolean;
-
-  tokens_in: number;
-
-  tokens_out: number;
-
-  metadata?: string;
-
-  request_content_type?: string;
-
-  request_type?: string;
-
-  response_content_type?: string;
-
-  status_code?: number;
-
-  step?: number;
-}
-
-export interface LogGetResponse {
   id: string;
 
   cached: boolean;
@@ -166,20 +110,10 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   success?: boolean;
 }
 
-export interface LogGetParams {
-  account_id: string;
-}
-
 export namespace Logs {
   export import LogListResponse = LogsAPI.LogListResponse;
-  export import LogGetResponse = LogsAPI.LogGetResponse;
   export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
   export import LogListParams = LogsAPI.LogListParams;
-  export import LogGetParams = LogsAPI.LogGetParams;
   export import Request = RequestAPI.Request;
-  export import RequestGetResponse = RequestAPI.RequestGetResponse;
-  export import RequestGetParams = RequestAPI.RequestGetParams;
   export import Response = ResponseAPI.Response;
-  export import ResponseGetResponse = ResponseAPI.ResponseGetResponse;
-  export import ResponseGetParams = ResponseAPI.ResponseGetParams;
 }
