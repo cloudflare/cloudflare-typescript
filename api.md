@@ -6814,14 +6814,32 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ai-gateway/logs/logs.ts">LogListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs/logs.ts">LogGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs/logs.ts">list</a>(id, { ...params }) -> LogListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs/{logId}">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs/logs.ts">get</a>(id, logId, { ...params }) -> LogGetResponse</code>
 
 ### Request
 
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs/request.ts">RequestGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs/{logId}/request">client.aiGateway.logs.request.<a href="./src/resources/ai-gateway/logs/request.ts">get</a>(id, logId, { ...params }) -> unknown</code>
+
 ### Response
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs/response.ts">ResponseGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs/{logId}/response">client.aiGateway.logs.response.<a href="./src/resources/ai-gateway/logs/response.ts">get</a>(id, logId, { ...params }) -> unknown</code>
 
 # IAM
 
