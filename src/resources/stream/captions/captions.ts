@@ -62,6 +62,7 @@ export namespace Captions {
   export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
   export import Language = LanguageAPI.Language;
   export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
+  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
   export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
   export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
   export import LanguageGetParams = LanguageAPI.LanguageGetParams;

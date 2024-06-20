@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AIGateway } from './ai-gateway';
 export {
   LogListResponse,
   LogGetResponse,
@@ -8,4 +7,6 @@ export {
   LogGetParams,
   LogListResponsesV4PagePaginationArray,
   Logs,
-} from './logs/index';
+} from './logs';
+export { RequestGetResponse, RequestGetParams, Request } from './request';
+export { ResponseGetResponse, ResponseGetParams, Response } from './response';

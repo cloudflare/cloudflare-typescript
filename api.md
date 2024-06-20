@@ -4034,6 +4034,7 @@ Types:
 
 Methods:
 
+- <code title="post /accounts/{account_id}/stream/{identifier}/captions/{language}/generate">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">create</a>(identifier, language, { ...params }) -> Caption</code>
 - <code title="put /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">update</a>(identifier, language, { ...params }) -> Caption</code>
 - <code title="delete /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">delete</a>(identifier, language, { ...params }) -> LanguageDeleteResponse</code>
 - <code title="get /accounts/{account_id}/stream/{identifier}/captions/{language}">client.stream.captions.language.<a href="./src/resources/stream/captions/language/language.ts">get</a>(identifier, language, { ...params }) -> Caption</code>
@@ -5331,6 +5332,22 @@ Methods:
 - <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> GatewayRule</code>
+
+### Certificates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/gateway/certificates">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
+- <code title="get /accounts/{account_id}/gateway/certificates">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">list</a>({ ...params }) -> CertificateListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">delete</a>(certificateId, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="get /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">get</a>(certificateId, { ...params }) -> CertificateGetResponse</code>
 
 ## Networks
 
@@ -6796,11 +6813,33 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ai-gateway/logs.ts">LogGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs/logs.ts">LogListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs/logs.ts">LogGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(id, { ...params }) -> LogGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs/logs.ts">list</a>(id, { ...params }) -> LogListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs/{logId}">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs/logs.ts">get</a>(id, logId, { ...params }) -> LogGetResponse</code>
+
+### Request
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs/request.ts">RequestGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs/{logId}/request">client.aiGateway.logs.request.<a href="./src/resources/ai-gateway/logs/request.ts">get</a>(id, logId, { ...params }) -> unknown</code>
+
+### Response
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs/response.ts">ResponseGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}/logs/{logId}/response">client.aiGateway.logs.response.<a href="./src/resources/ai-gateway/logs/response.ts">get</a>(id, logId, { ...params }) -> unknown</code>
 
 # IAM
 

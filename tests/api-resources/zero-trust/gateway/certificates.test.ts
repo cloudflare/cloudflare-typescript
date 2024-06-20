@@ -9,13 +9,11 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource language', () => {
+describe('resource certificates', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.captions.language.create(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const responsePromise = cloudflare.zeroTrust.gateway.certificates.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,20 +24,16 @@ describe('resource language', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.stream.captions.language.create(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const response = await cloudflare.zeroTrust.gateway.certificates.create({
+      account_id: '699d98642c564d2e855e9661899b7252',
+      validity_period_days: 1826,
+    });
   });
 
-  // TODO: investigate broken test
-  test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.stream.captions.language.update(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', file: '@/Users/kyle/Desktop/tr.vtt' },
-    );
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.zeroTrust.gateway.certificates.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,20 +43,16 @@ describe('resource language', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.stream.captions.language.update(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', file: '@/Users/kyle/Desktop/tr.vtt' },
-    );
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.zeroTrust.gateway.certificates.list({
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.stream.captions.language.delete(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    const responsePromise = cloudflare.zeroTrust.gateway.certificates.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -74,18 +64,16 @@ describe('resource language', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.stream.captions.language.delete(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    const response = await cloudflare.zeroTrust.gateway.certificates.delete(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.stream.captions.language.get(
-      'ea95132c15732412d22c1476fa83f27a',
-      'tr',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    const responsePromise = cloudflare.zeroTrust.gateway.certificates.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -97,8 +85,9 @@ describe('resource language', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.stream.captions.language.get('ea95132c15732412d22c1476fa83f27a', 'tr', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await cloudflare.zeroTrust.gateway.certificates.get(
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      { account_id: '699d98642c564d2e855e9661899b7252' },
+    );
   });
 });
