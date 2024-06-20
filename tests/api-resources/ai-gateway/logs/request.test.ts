@@ -9,9 +9,9 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource logs', () => {
+describe('resource request', () => {
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.logs.get('my-gateway', {
+    const responsePromise = cloudflare.aiGateway.logs.request.get('my-gateway', 'string', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,17 +24,8 @@ describe('resource logs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.aiGateway.logs.get('my-gateway', {
+    const response = await cloudflare.aiGateway.logs.request.get('my-gateway', 'string', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
-      cached: true,
-      direction: 'asc',
-      end_date: '2019-12-27T18:11:19.117Z',
-      order_by: 'created_at',
-      page: 1,
-      per_page: 5,
-      search: 'string',
-      start_date: '2019-12-27T18:11:19.117Z',
-      success: true,
     });
   });
 });

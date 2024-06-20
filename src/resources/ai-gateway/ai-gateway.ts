@@ -2,7 +2,7 @@
 
 import * as Core from '../../core';
 import { APIResource } from '../../resource';
-import * as LogsAPI from './logs';
+import * as LogsAPI from './logs/logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
@@ -318,6 +318,9 @@ export interface AIGatewayGetParams {
 
 export namespace AIGateway {
   export import Logs = LogsAPI.Logs;
+  export import LogListResponse = LogsAPI.LogListResponse;
   export import LogGetResponse = LogsAPI.LogGetResponse;
+  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
+  export import LogListParams = LogsAPI.LogListParams;
   export import LogGetParams = LogsAPI.LogGetParams;
 }
