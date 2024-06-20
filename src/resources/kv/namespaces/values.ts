@@ -2,9 +2,9 @@
 
 import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
-import { type Response } from '../../../_shims/index';
 import * as ValuesAPI from './values';
 import { multipartFormRequestOptions } from '../../../core';
+import { type Response } from '../../../_shims/index';
 
 export class Values extends APIResource {
   /**
