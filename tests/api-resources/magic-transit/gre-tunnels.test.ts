@@ -33,6 +33,43 @@ describe('resource greTunnels', () => {
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.greTunnels.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_gre_endpoint: '203.0.113.1',
+      customer_gre_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'GRE_1',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.greTunnels.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_gre_endpoint: '203.0.113.1',
+      customer_gre_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'GRE_1',
+      description: 'Tunnel for ISP X',
+      health_check: {
+        direction: 'bidirectional',
+        enabled: true,
+        rate: 'low',
+        target: '203.0.113.1',
+        type: 'request',
+      },
+      mtu: 0,
+      ttl: 0,
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.greTunnels.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -48,6 +85,44 @@ describe('resource greTunnels', () => {
 
   test('list: required and optional params', async () => {
     const response = await cloudflare.magicTransit.greTunnels.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.greTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.greTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.greTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.greTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

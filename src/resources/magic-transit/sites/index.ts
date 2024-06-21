@@ -6,7 +6,11 @@ export {
   AllowedProtocol,
   Subnet,
   ACLCreateParams,
+  ACLUpdateParams,
   ACLListParams,
+  ACLDeleteParams,
+  ACLEditParams,
+  ACLGetParams,
   ACLsSinglePage,
   ACLs,
 } from './acls';
