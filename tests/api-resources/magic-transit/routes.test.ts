@@ -33,6 +33,34 @@ describe('resource routes', () => {
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      nexthop: '203.0.113.1',
+      prefix: '192.0.2.0/24',
+      priority: 0,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      nexthop: '203.0.113.1',
+      prefix: '192.0.2.0/24',
+      priority: 0,
+      description: 'New route for new prefix 203.0.113.1',
+      scope: { colo_names: ['den01', 'den01', 'den01'], colo_regions: ['APAC', 'APAC', 'APAC'] },
+      weight: 0,
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.routes.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -52,6 +80,25 @@ describe('resource routes', () => {
     });
   });
 
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.routes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.routes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
   test('empty: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.routes.empty({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -67,6 +114,25 @@ describe('resource routes', () => {
 
   test('empty: required and optional params', async () => {
     const response = await cloudflare.magicTransit.routes.empty({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.routes.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.routes.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

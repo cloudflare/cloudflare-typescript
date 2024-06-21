@@ -46,6 +46,42 @@ describe('resource ipsecTunnels', () => {
     });
   });
 
+  test('update: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.ipsecTunnels.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'IPsec_1',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.ipsecTunnels.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      cloudflare_endpoint: '203.0.113.1',
+      interface_address: '192.0.2.0/31',
+      name: 'IPsec_1',
+      customer_endpoint: '203.0.113.1',
+      description: 'Tunnel for ISP X',
+      health_check: {
+        direction: 'bidirectional',
+        enabled: true,
+        rate: 'low',
+        target: '203.0.113.1',
+        type: 'request',
+      },
+      psk: 'O3bwKSjnaoCxDoUxjcq4Rk8ZKkezQUiy',
+      replay_protection: false,
+    });
+  });
+
   test('list: only required params', async () => {
     const responsePromise = cloudflare.magicTransit.ipsecTunnels.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -63,5 +99,64 @@ describe('resource ipsecTunnels', () => {
     const response = await cloudflare.magicTransit.ipsecTunnels.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.ipsecTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.ipsecTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.ipsecTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.ipsecTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('pskGenerate: only required params', async () => {
+    const responsePromise = cloudflare.magicTransit.ipsecTunnels.pskGenerate(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+    );
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('pskGenerate: required and optional params', async () => {
+    const response = await cloudflare.magicTransit.ipsecTunnels.pskGenerate(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
+    );
   });
 });
