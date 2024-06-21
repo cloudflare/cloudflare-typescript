@@ -8,6 +8,7 @@ export {
   ScanGetResponse,
   ScanHarResponse,
   ScanCreateParams,
+  ScanGetParams,
   ScanScreenshotParams,
   Scans,
 } from './scans';
