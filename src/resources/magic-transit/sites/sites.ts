@@ -304,7 +304,11 @@ export namespace Sites {
   export import Subnet = ACLsAPI.Subnet;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
   export import ACLCreateParams = ACLsAPI.ACLCreateParams;
+  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
   export import ACLListParams = ACLsAPI.ACLListParams;
+  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export import ACLEditParams = ACLsAPI.ACLEditParams;
+  export import ACLGetParams = ACLsAPI.ACLGetParams;
   export import LANs = LANsAPI.LANs;
   export import DHCPRelay = LANsAPI.DHCPRelay;
   export import DHCPServer = LANsAPI.DHCPServer;
