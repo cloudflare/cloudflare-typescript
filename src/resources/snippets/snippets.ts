@@ -1,11 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as Shared from '../shared';
 import * as ContentAPI from './content';
 import * as RulesAPI from './rules';
-import { multipartFormRequestOptions } from '../../core';
 import { SinglePage } from '../../pagination';
 
 export class Snippets extends APIResource {
@@ -24,7 +23,7 @@ export class Snippets extends APIResource {
     return (
       this._client.put(
         `/zones/${zone_id}/snippets/${snippetName}`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: Snippet }>
     )._thenUnwrap((obj) => obj.result);
   }

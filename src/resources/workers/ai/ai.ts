@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as AIAPI from './ai';
 import * as ModelsAPI from './models/models';
-import { type Uploadable } from '../../../core';
 
 export class AI extends APIResource {
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
@@ -33,14 +32,14 @@ export class AI extends APIResource {
 
 export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
-  | Uploadable
+  | Core.Uploadable
   | Array<number>
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.SpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
   | AIRunResponse.UnionMember7
-  | Uploadable
+  | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText;

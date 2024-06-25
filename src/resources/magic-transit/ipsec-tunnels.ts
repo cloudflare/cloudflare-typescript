@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import * as MagicTransitAPI from './magic-transit';
 

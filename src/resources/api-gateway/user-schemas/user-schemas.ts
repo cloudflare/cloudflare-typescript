@@ -1,11 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as UserSchemasAPI from './user-schemas';
 import * as Shared from '../../shared';
 import * as OperationsAPI from './operations';
-import { type Uploadable, multipartFormRequestOptions } from '../../../core';
 import { SinglePage } from '../../../pagination';
 
 export class UserSchemas extends APIResource {
@@ -19,7 +18,7 @@ export class UserSchemas extends APIResource {
     return (
       this._client.post(
         `/zones/${zone_id}/api_gateway/user_schemas`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: SchemaUpload }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -171,7 +170,7 @@ export interface UserSchemaCreateParams {
   /**
    * Body param: Schema file bytes
    */
-  file: Uploadable;
+  file: Core.Uploadable;
 
   /**
    * Body param: Kind of schema

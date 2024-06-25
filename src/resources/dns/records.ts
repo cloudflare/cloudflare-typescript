@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as RecordsAPI from './records';
 import * as Shared from '../shared';
-import { multipartFormRequestOptions } from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Records extends APIResource {
@@ -145,7 +144,7 @@ export class Records extends APIResource {
     return (
       this._client.post(
         `/zones/${zone_id}/dns_records/import`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: RecordImportResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
