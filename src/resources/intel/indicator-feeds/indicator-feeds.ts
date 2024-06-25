@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as IndicatorFeedsAPI from './indicator-feeds';
 import * as PermissionsAPI from './permissions';
 import * as SnapshotsAPI from './snapshots';

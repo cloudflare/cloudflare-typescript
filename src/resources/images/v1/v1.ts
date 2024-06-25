@@ -1,14 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as V1API from './v1';
 import * as Shared from '../../shared';
 import * as BlobsAPI from './blobs';
 import * as KeysAPI from './keys';
 import * as StatsAPI from './stats';
 import * as VariantsAPI from './variants';
-import { multipartFormRequestOptions } from '../../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class V1 extends APIResource {
@@ -27,7 +26,7 @@ export class V1 extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/images/v1`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: Image }>
     )._thenUnwrap((obj) => obj.result);
   }
