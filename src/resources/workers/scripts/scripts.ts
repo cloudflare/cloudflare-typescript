@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as ScriptsAPI from './scripts';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
@@ -10,7 +10,6 @@ import * as SchedulesAPI from './schedules';
 import * as SettingsAPI from './settings';
 import * as TailAPI from './tail';
 import * as VersionsAPI from './versions';
-import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../core';
 import { SinglePage } from '../../../pagination';
 import { type Response } from '../../../_shims/index';
 
@@ -34,7 +33,7 @@ export class Scripts extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/workers/scripts/${scriptName}`,
-        maybeMultipartFormRequestOptions({
+        Core.maybeMultipartFormRequestOptions({
           query: { rollback_to },
           body,
           ...options,
@@ -160,7 +159,7 @@ export namespace ScriptUpdateParams {
      * `body_part` by part name. Source maps may also be included using the
      * `application/source-map` content type.
      */
-    '<any part name>'?: Array<Uploadable>;
+    '<any part name>'?: Array<Core.Uploadable>;
 
     /**
      * Body param: JSON encoded metadata about the uploaded parts and Worker

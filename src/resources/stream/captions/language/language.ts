@@ -1,11 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as LanguageAPI from './language';
 import * as CaptionsAPI from '../captions';
 import * as VttAPI from './vtt';
-import { multipartFormRequestOptions } from '../../../../core';
 
 export class Language extends APIResource {
   vtt: VttAPI.Vtt = new VttAPI.Vtt(this._client);
@@ -42,7 +41,7 @@ export class Language extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: CaptionsAPI.Caption }>
     )._thenUnwrap((obj) => obj.result);
   }

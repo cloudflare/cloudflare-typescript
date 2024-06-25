@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as ValuesAPI from './values';
-import { multipartFormRequestOptions } from '../../../core';
 import { type Response } from '../../../_shims/index';
 
 export class Values extends APIResource {
@@ -25,7 +24,7 @@ export class Values extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
