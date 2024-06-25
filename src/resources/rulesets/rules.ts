@@ -2477,6 +2477,14 @@ export namespace SetCacheSettingsRule {
           check_presence?: Array<string>;
 
           /**
+           * For each header name and list of values combination, check if the request header
+           * contains any of the values provided. The presence of the request header and
+           * whether any of the values provided are contained in the request header value is
+           * used in building the cache key.
+           */
+          contains?: Record<string, Array<string>>;
+
+          /**
            * Whether or not to include the origin header. A value of true will exclude the
            * origin header in the cache key.
            */
@@ -2895,6 +2903,14 @@ export namespace SetCacheSettingsRuleParam {
            * used in building the cache key.
            */
           check_presence?: Array<string>;
+
+          /**
+           * For each header name and list of values combination, check if the request header
+           * contains any of the values provided. The presence of the request header and
+           * whether any of the values provided are contained in the request header value is
+           * used in building the cache key.
+           */
+          contains?: Record<string, Array<string>>;
 
           /**
            * Whether or not to include the origin header. A value of true will exclude the
@@ -6032,6 +6048,14 @@ export namespace RuleCreateParams {
             check_presence?: Array<string>;
 
             /**
+             * For each header name and list of values combination, check if the request header
+             * contains any of the values provided. The presence of the request header and
+             * whether any of the values provided are contained in the request header value is
+             * used in building the cache key.
+             */
+            contains?: Record<string, Array<string>>;
+
+            /**
              * Whether or not to include the origin header. A value of true will exclude the
              * origin header in the cache key.
              */
@@ -8023,6 +8047,14 @@ export namespace RuleEditParams {
              * used in building the cache key.
              */
             check_presence?: Array<string>;
+
+            /**
+             * For each header name and list of values combination, check if the request header
+             * contains any of the values provided. The presence of the request header and
+             * whether any of the values provided are contained in the request header value is
+             * used in building the cache key.
+             */
+            contains?: Record<string, Array<string>>;
 
             /**
              * Whether or not to include the origin header. A value of true will exclude the
