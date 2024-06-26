@@ -1,45 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as OriginErrorPagePassThruAPI from './origin-error-page-pass-thru';
 
-export class OriginErrorPagePassThruResource extends APIResource {
-  /**
-   * Cloudflare will proxy customer error pages on any 502,504 errors on origin
-   * server instead of showing a default Cloudflare error page. This does not apply
-   * to 522 errors and is limited to Enterprise Zones.
-   */
-  edit(
-    params: OriginErrorPagePassThruEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginErrorPagePassThru> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/origin_error_page_pass_thru`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OriginErrorPagePassThru }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Cloudflare will proxy customer error pages on any 502,504 errors on origin
-   * server instead of showing a default Cloudflare error page. This does not apply
-   * to 522 errors and is limited to Enterprise Zones.
-   */
-  get(
-    params: OriginErrorPagePassThruGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginErrorPagePassThru> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/origin_error_page_pass_thru`, options) as Core.APIPromise<{
-        result: OriginErrorPagePassThru;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class OriginErrorPagePassThruResource extends APIResource {}
 
 /**
  * Cloudflare will proxy customer error pages on any 502,504 errors on origin
@@ -69,27 +33,6 @@ export interface OriginErrorPagePassThru {
   modified_on?: string | null;
 }
 
-export interface OriginErrorPagePassThruEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-export interface OriginErrorPagePassThruGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace OriginErrorPagePassThruResource {
   export import OriginErrorPagePassThru = OriginErrorPagePassThruAPI.OriginErrorPagePassThru;
-  export import OriginErrorPagePassThruEditParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruEditParams;
-  export import OriginErrorPagePassThruGetParams = OriginErrorPagePassThruAPI.OriginErrorPagePassThruGetParams;
 }
