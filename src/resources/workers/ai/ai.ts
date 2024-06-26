@@ -20,10 +20,10 @@ export class AI extends APIResource {
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
   run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
-        body,
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: AIRunResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,9 +31,9 @@ export class AI extends APIResource {
 }
 
 export type AIRunResponse =
+  | unknown
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
-  | Array<number>
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.SpeechRecognition
   | Array<AIRunResponse.ImageClassification>
@@ -131,9 +131,9 @@ export namespace AIRunResponse {
 }
 
 export type AIRunParams =
+  | AIRunParams.DumbPipe
   | AIRunParams.TextClassification
   | AIRunParams.TextToImage
-  | AIRunParams.SentenceSimilarity
   | AIRunParams.TextEmbeddings
   | AIRunParams.SpeechRecognition
   | AIRunParams.ImageClassification
@@ -144,6 +144,18 @@ export type AIRunParams =
   | AIRunParams.ImageToText;
 
 export namespace AIRunParams {
+  export interface DumbPipe {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: unknown;
+  }
+
   export interface TextClassification {
     /**
      * Path param:
@@ -191,23 +203,6 @@ export namespace AIRunParams {
      * Body param:
      */
     strength?: number;
-  }
-
-  export interface SentenceSimilarity {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    sentences: Array<string>;
-
-    /**
-     * Body param:
-     */
-    source: string;
   }
 
   export interface TextEmbeddings {
