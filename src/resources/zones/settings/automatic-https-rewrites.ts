@@ -1,41 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as AutomaticHTTPSRewritesAPI from './automatic-https-rewrites';
 
-export class AutomaticHTTPSRewrites extends APIResource {
-  /**
-   * Enable the Automatic HTTPS Rewrites feature for this zone.
-   */
-  edit(
-    params: AutomaticHTTPSRewriteEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AutomaticHTTPSRewrites> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/automatic_https_rewrites`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AutomaticHTTPSRewrites }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Enable the Automatic HTTPS Rewrites feature for this zone.
-   */
-  get(
-    params: AutomaticHTTPSRewriteGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AutomaticHTTPSRewrites> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/automatic_https_rewrites`, options) as Core.APIPromise<{
-        result: AutomaticHTTPSRewrites;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class AutomaticHTTPSRewrites extends APIResource {}
 
 /**
  * Enable the Automatic HTTPS Rewrites feature for this zone.
@@ -63,28 +31,6 @@ export interface AutomaticHTTPSRewrites {
   modified_on?: string | null;
 }
 
-export interface AutomaticHTTPSRewriteEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting. Notes: Default value depends on the
-   * zone's plan level.
-   */
-  value: 'on' | 'off';
-}
-
-export interface AutomaticHTTPSRewriteGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace AutomaticHTTPSRewrites {
   export import AutomaticHTTPSRewrites = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewrites;
-  export import AutomaticHTTPSRewriteEditParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteEditParams;
-  export import AutomaticHTTPSRewriteGetParams = AutomaticHTTPSRewritesAPI.AutomaticHTTPSRewriteGetParams;
 }

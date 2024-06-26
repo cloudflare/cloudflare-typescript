@@ -1,37 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as EmailObfuscationAPI from './email-obfuscation';
 
-export class EmailObfuscationResource extends APIResource {
-  /**
-   * Encrypt email adresses on your web page from bots, while keeping them visible to
-   * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
-   */
-  edit(params: EmailObfuscationEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailObfuscation> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/email_obfuscation`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: EmailObfuscation }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Encrypt email adresses on your web page from bots, while keeping them visible to
-   * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
-   */
-  get(params: EmailObfuscationGetParams, options?: Core.RequestOptions): Core.APIPromise<EmailObfuscation> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/email_obfuscation`, options) as Core.APIPromise<{
-        result: EmailObfuscation;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class EmailObfuscationResource extends APIResource {}
 
 /**
  * Encrypt email adresses on your web page from bots, while keeping them visible to
@@ -60,27 +32,6 @@ export interface EmailObfuscation {
   modified_on?: string | null;
 }
 
-export interface EmailObfuscationEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-export interface EmailObfuscationGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace EmailObfuscationResource {
   export import EmailObfuscation = EmailObfuscationAPI.EmailObfuscation;
-  export import EmailObfuscationEditParams = EmailObfuscationAPI.EmailObfuscationEditParams;
-  export import EmailObfuscationGetParams = EmailObfuscationAPI.EmailObfuscationGetParams;
 }
