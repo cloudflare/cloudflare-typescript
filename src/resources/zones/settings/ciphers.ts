@@ -1,32 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as CiphersAPI from './ciphers';
 
-export class Ciphers extends APIResource {
-  /**
-   * Changes ciphers setting.
-   */
-  edit(params: CipherEditParams, options?: Core.RequestOptions): Core.APIPromise<Ciphers> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/ciphers`, { body, ...options }) as Core.APIPromise<{
-        result: Ciphers;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Gets ciphers setting.
-   */
-  get(params: CipherGetParams, options?: Core.RequestOptions): Core.APIPromise<Ciphers> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/ciphers`, options) as Core.APIPromise<{ result: Ciphers }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class Ciphers extends APIResource {}
 
 /**
  * An allowlist of ciphers for TLS termination. These ciphers must be in the
@@ -55,27 +32,6 @@ export interface Ciphers {
   modified_on?: string | null;
 }
 
-export interface CipherEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting.
-   */
-  value: Array<string>;
-}
-
-export interface CipherGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace Ciphers {
   export import Ciphers = CiphersAPI.Ciphers;
-  export import CipherEditParams = CiphersAPI.CipherEditParams;
-  export import CipherGetParams = CiphersAPI.CipherGetParams;
 }

@@ -1,43 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as AlwaysOnlineAPI from './always-online';
 
-export class AlwaysOnlineResource extends APIResource {
-  /**
-   * When enabled, Cloudflare serves limited copies of web pages available from the
-   * [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is
-   * offline. Refer to
-   * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
-   * more information.
-   */
-  edit(params: AlwaysOnlineEditParams, options?: Core.RequestOptions): Core.APIPromise<AlwaysOnline> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/always_online`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AlwaysOnline }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * When enabled, Cloudflare serves limited copies of web pages available from the
-   * [Internet Archive's Wayback Machine](https://archive.org/web/) if your server is
-   * offline. Refer to
-   * [Always Online](https://developers.cloudflare.com/cache/about/always-online) for
-   * more information.
-   */
-  get(params: AlwaysOnlineGetParams, options?: Core.RequestOptions): Core.APIPromise<AlwaysOnline> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/always_online`, options) as Core.APIPromise<{
-        result: AlwaysOnline;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class AlwaysOnlineResource extends APIResource {}
 
 /**
  * When enabled, Cloudflare serves limited copies of web pages available from the
@@ -69,27 +35,6 @@ export interface AlwaysOnline {
   modified_on?: string | null;
 }
 
-export interface AlwaysOnlineEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-export interface AlwaysOnlineGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace AlwaysOnlineResource {
   export import AlwaysOnline = AlwaysOnlineAPI.AlwaysOnline;
-  export import AlwaysOnlineEditParams = AlwaysOnlineAPI.AlwaysOnlineEditParams;
-  export import AlwaysOnlineGetParams = AlwaysOnlineAPI.AlwaysOnlineGetParams;
 }

@@ -1,37 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as TLSClientAuthAPI from './tls-client-auth';
 
-export class TLSClientAuthResource extends APIResource {
-  /**
-   * TLS Client Auth requires Cloudflare to connect to your origin server using a
-   * client certificate (Enterprise Only).
-   */
-  edit(params: TLSClientAuthEditParams, options?: Core.RequestOptions): Core.APIPromise<TLSClientAuth> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/tls_client_auth`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TLSClientAuth }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * TLS Client Auth requires Cloudflare to connect to your origin server using a
-   * client certificate (Enterprise Only).
-   */
-  get(params: TLSClientAuthGetParams, options?: Core.RequestOptions): Core.APIPromise<TLSClientAuth> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/tls_client_auth`, options) as Core.APIPromise<{
-        result: TLSClientAuth;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class TLSClientAuthResource extends APIResource {}
 
 /**
  * TLS Client Auth requires Cloudflare to connect to your origin server using a
@@ -60,27 +32,6 @@ export interface TLSClientAuth {
   modified_on?: string | null;
 }
 
-export interface TLSClientAuthEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-export interface TLSClientAuthGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace TLSClientAuthResource {
   export import TLSClientAuth = TLSClientAuthAPI.TLSClientAuth;
-  export import TLSClientAuthEditParams = TLSClientAuthAPI.TLSClientAuthEditParams;
-  export import TLSClientAuthGetParams = TLSClientAuthAPI.TLSClientAuthGetParams;
 }

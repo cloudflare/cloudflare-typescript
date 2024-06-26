@@ -1,41 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as OpportunisticEncryptionAPI from './opportunistic-encryption';
 
-export class OpportunisticEncryptionResource extends APIResource {
-  /**
-   * Changes Opportunistic Encryption setting.
-   */
-  edit(
-    params: OpportunisticEncryptionEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OpportunisticEncryption> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/opportunistic_encryption`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OpportunisticEncryption }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Gets Opportunistic Encryption setting.
-   */
-  get(
-    params: OpportunisticEncryptionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OpportunisticEncryption> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/opportunistic_encryption`, options) as Core.APIPromise<{
-        result: OpportunisticEncryption;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class OpportunisticEncryptionResource extends APIResource {}
 
 /**
  * Enables the Opportunistic Encryption feature for a zone.
@@ -63,28 +31,6 @@ export interface OpportunisticEncryption {
   modified_on?: string | null;
 }
 
-export interface OpportunisticEncryptionEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting. Notes: Default value depends on the
-   * zone's plan level.
-   */
-  value: 'on' | 'off';
-}
-
-export interface OpportunisticEncryptionGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace OpportunisticEncryptionResource {
   export import OpportunisticEncryption = OpportunisticEncryptionAPI.OpportunisticEncryption;
-  export import OpportunisticEncryptionEditParams = OpportunisticEncryptionAPI.OpportunisticEncryptionEditParams;
-  export import OpportunisticEncryptionGetParams = OpportunisticEncryptionAPI.OpportunisticEncryptionGetParams;
 }

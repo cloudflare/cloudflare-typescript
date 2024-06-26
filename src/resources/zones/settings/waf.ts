@@ -1,50 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
 import * as WAFAPI from './waf';
 
-export class WAFResource extends APIResource {
-  /**
-   * The WAF examines HTTP requests to your website. It inspects both GET and POST
-   * requests and applies rules to help filter out illegitimate traffic from
-   * legitimate website visitors. The Cloudflare WAF inspects website addresses or
-   * URLs to detect anything out of the ordinary. If the Cloudflare WAF determines
-   * suspicious user behavior, then the WAF will 'challenge' the web visitor with a
-   * page that asks them to submit a CAPTCHA successfully to continue their action.
-   * If the challenge is failed, the action will be stopped. What this means is that
-   * Cloudflare's WAF will block any traffic identified as illegitimate before it
-   * reaches your origin web server.
-   * (https://support.cloudflare.com/hc/en-us/articles/200172016).
-   */
-  edit(params: WAFEditParams, options?: Core.RequestOptions): Core.APIPromise<WAF> {
-    const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/waf`, { body, ...options }) as Core.APIPromise<{
-        result: WAF;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * The WAF examines HTTP requests to your website. It inspects both GET and POST
-   * requests and applies rules to help filter out illegitimate traffic from
-   * legitimate website visitors. The Cloudflare WAF inspects website addresses or
-   * URLs to detect anything out of the ordinary. If the Cloudflare WAF determines
-   * suspicious user behavior, then the WAF will 'challenge' the web visitor with a
-   * page that asks them to submit a CAPTCHA successfully to continue their action.
-   * If the challenge is failed, the action will be stopped. What this means is that
-   * Cloudflare's WAF will block any traffic identified as illegitimate before it
-   * reaches your origin web server.
-   * (https://support.cloudflare.com/hc/en-us/articles/200172016).
-   */
-  get(params: WAFGetParams, options?: Core.RequestOptions): Core.APIPromise<WAF> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/waf`, options) as Core.APIPromise<{ result: WAF }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class WAFResource extends APIResource {}
 
 /**
  * The WAF examines HTTP requests to your website. It inspects both GET and POST
@@ -81,27 +40,6 @@ export interface WAF {
   modified_on?: string | null;
 }
 
-export interface WAFEditParams {
-  /**
-   * Path param: Identifier
-   */
-  zone_id: string;
-
-  /**
-   * Body param: Value of the zone setting.
-   */
-  value: 'on' | 'off';
-}
-
-export interface WAFGetParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
-}
-
 export namespace WAFResource {
   export import WAF = WAFAPI.WAF;
-  export import WAFEditParams = WAFAPI.WAFEditParams;
-  export import WAFGetParams = WAFAPI.WAFGetParams;
 }
