@@ -268,323 +268,66 @@ Methods:
 
 ## Settings
 
-### ZeroRTT
-
 Types:
 
-- <code><a href="./src/resources/zones/settings/zero-rtt.ts">ZeroRTT</a></code>
-
-### AdvancedDDoS
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/advanced-ddos.ts">AdvancedDDoS</a></code>
-
-### AlwaysOnline
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/always-online.ts">AlwaysOnline</a></code>
-
-### AlwaysUseHTTPS
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/always-use-https.ts">AlwaysUseHTTPS</a></code>
-
-### AutomaticHTTPSRewrites
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/automatic-https-rewrites.ts">AutomaticHTTPSRewrites</a></code>
-
-### AutomaticPlatformOptimization
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/automatic-platform-optimization.ts">AutomaticPlatformOptimization</a></code>
-
-### Brotli
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/brotli.ts">Brotli</a></code>
-
-### BrowserCacheTTL
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/browser-cache-ttl.ts">BrowserCacheTTL</a></code>
-
-### BrowserCheck
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/browser-check.ts">BrowserCheck</a></code>
-
-### CacheLevel
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/cache-level.ts">CacheLevel</a></code>
-
-### ChallengeTTL
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/challenge-ttl.ts">ChallengeTTL</a></code>
-
-### Ciphers
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/ciphers.ts">Ciphers</a></code>
-
-### DevelopmentMode
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/development-mode.ts">DevelopmentMode</a></code>
-
-### EarlyHints
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/early-hints.ts">EarlyHints</a></code>
-
-### EmailObfuscation
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/email-obfuscation.ts">EmailObfuscation</a></code>
-
-### H2Prioritization
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/h2-prioritization.ts">H2Prioritization</a></code>
-
-### HotlinkProtection
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/hotlink-protection.ts">HotlinkProtection</a></code>
-
-### HTTP2
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/http2.ts">HTTP2</a></code>
-
-### HTTP3
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/http3.ts">HTTP3</a></code>
-
-### ImageResizing
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/image-resizing.ts">ImageResizing</a></code>
-
-### IPGeolocation
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/ip-geolocation.ts">IPGeolocation</a></code>
-
-### IPV6
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/ipv6.ts">IPV6</a></code>
-
-### MinTLSVersion
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/min-tls-version.ts">MinTLSVersion</a></code>
-
-### Minify
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/minify.ts">Minify</a></code>
-
-### Mirage
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/mirage.ts">Mirage</a></code>
-
-### MobileRedirect
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/mobile-redirect.ts">MobileRedirect</a></code>
-
-### NEL
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/nel.ts">NEL</a></code>
-
-### OpportunisticEncryption
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/opportunistic-encryption.ts">OpportunisticEncryption</a></code>
-
-### OpportunisticOnion
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/opportunistic-onion.ts">OpportunisticOnion</a></code>
-
-### OrangeToOrange
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/orange-to-orange.ts">OrangeToOrange</a></code>
-
-### OriginErrorPagePassThru
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/origin-error-page-pass-thru.ts">OriginErrorPagePassThru</a></code>
-
-### OriginMaxHTTPVersion
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/origin-max-http-version.ts">OriginMaxHTTPVersion</a></code>
-- <code><a href="./src/resources/zones/settings/origin-max-http-version.ts">OriginMaxHTTPVersionEditResponse</a></code>
-- <code><a href="./src/resources/zones/settings/origin-max-http-version.ts">OriginMaxHTTPVersionGetResponse</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AdvancedDDoS</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AlwaysOnline</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AlwaysUseHTTPS</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AutomaticHTTPSRewrites</a></code>
+- <code><a href="./src/resources/zones/settings.ts">AutomaticPlatformOptimization</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Brotli</a></code>
+- <code><a href="./src/resources/zones/settings.ts">BrowserCacheTTL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">BrowserCheck</a></code>
+- <code><a href="./src/resources/zones/settings.ts">CacheLevel</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ChallengeTTL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Ciphers</a></code>
+- <code><a href="./src/resources/zones/settings.ts">DevelopmentMode</a></code>
+- <code><a href="./src/resources/zones/settings.ts">EarlyHints</a></code>
+- <code><a href="./src/resources/zones/settings.ts">EmailObfuscation</a></code>
+- <code><a href="./src/resources/zones/settings.ts">FontSettings</a></code>
+- <code><a href="./src/resources/zones/settings.ts">H2Prioritization</a></code>
+- <code><a href="./src/resources/zones/settings.ts">HotlinkProtection</a></code>
+- <code><a href="./src/resources/zones/settings.ts">HTTP2</a></code>
+- <code><a href="./src/resources/zones/settings.ts">HTTP3</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ImageResizing</a></code>
+- <code><a href="./src/resources/zones/settings.ts">IPGeolocation</a></code>
+- <code><a href="./src/resources/zones/settings.ts">IPV6</a></code>
+- <code><a href="./src/resources/zones/settings.ts">MinTLSVersion</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Minify</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Mirage</a></code>
+- <code><a href="./src/resources/zones/settings.ts">MobileRedirect</a></code>
+- <code><a href="./src/resources/zones/settings.ts">NEL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OpportunisticEncryption</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OpportunisticOnion</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OrangeToOrange</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OriginErrorPagePassThru</a></code>
+- <code><a href="./src/resources/zones/settings.ts">OriginMaxHTTPVersion</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Polish</a></code>
+- <code><a href="./src/resources/zones/settings.ts">PrefetchPreload</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ProxyReadTimeout</a></code>
+- <code><a href="./src/resources/zones/settings.ts">PseudoIPV4</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ResponseBuffering</a></code>
+- <code><a href="./src/resources/zones/settings.ts">RocketLoader</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SecurityHeaders</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SecurityLevel</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ServerSideExcludes</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SortQueryStringForCache</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SSL</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SSLRecommender</a></code>
+- <code><a href="./src/resources/zones/settings.ts">TLS1_3</a></code>
+- <code><a href="./src/resources/zones/settings.ts">TLSClientAuth</a></code>
+- <code><a href="./src/resources/zones/settings.ts">TrueClientIPHeader</a></code>
+- <code><a href="./src/resources/zones/settings.ts">WAF</a></code>
+- <code><a href="./src/resources/zones/settings.ts">WebP</a></code>
+- <code><a href="./src/resources/zones/settings.ts">Websocket</a></code>
+- <code><a href="./src/resources/zones/settings.ts">ZeroRTT</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/zones/settings.ts">SettingGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /zones/{zone_id}/settings/origin_max_http_version">client.zones.settings.originMaxHTTPVersion.<a href="./src/resources/zones/settings/origin-max-http-version.ts">edit</a>({ ...params }) -> OriginMaxHTTPVersionEditResponse</code>
-- <code title="get /zones/{zone_id}/settings/origin_max_http_version">client.zones.settings.originMaxHTTPVersion.<a href="./src/resources/zones/settings/origin-max-http-version.ts">get</a>({ ...params }) -> OriginMaxHTTPVersionGetResponse</code>
-
-### Polish
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/polish.ts">Polish</a></code>
-
-### PrefetchPreload
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/prefetch-preload.ts">PrefetchPreload</a></code>
-
-### ProxyReadTimeout
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/proxy-read-timeout.ts">ProxyReadTimeout</a></code>
-
-### PseudoIPV4
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/pseudo-ipv4.ts">PseudoIPV4</a></code>
-
-### ResponseBuffering
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/response-buffering.ts">ResponseBuffering</a></code>
-
-### RocketLoader
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/rocket-loader.ts">RocketLoader</a></code>
-
-### SecurityHeaders
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/security-headers.ts">SecurityHeaders</a></code>
-
-### SecurityLevel
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/security-level.ts">SecurityLevel</a></code>
-
-### ServerSideExcludes
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/server-side-excludes.ts">ServerSideExcludes</a></code>
-
-### SortQueryStringForCache
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/sort-query-string-for-cache.ts">SortQueryStringForCache</a></code>
-
-### SSL
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/ssl.ts">SSL</a></code>
-
-### SSLRecommender
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/ssl-recommender.ts">SSLRecommender</a></code>
-
-### TLS1_3
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/tls-1-3.ts">TLS1_3</a></code>
-
-### TLSClientAuth
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/tls-client-auth.ts">TLSClientAuth</a></code>
-
-### TrueClientIPHeader
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/true-client-ip-header.ts">TrueClientIPHeader</a></code>
-
-### WAF
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/waf.ts">WAF</a></code>
-
-### WebP
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/webp.ts">WebP</a></code>
-
-### Websocket
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/websocket.ts">Websocket</a></code>
-
-### FontSettings
-
-Types:
-
-- <code><a href="./src/resources/zones/settings/font-settings.ts">FontSettings</a></code>
-
-Methods:
-
-- <code title="patch /zones/{zone_id}/settings/fonts">client.zones.settings.fontSettings.<a href="./src/resources/zones/settings/font-settings.ts">edit</a>({ ...params }) -> FontSettings</code>
-- <code title="get /zones/{zone_id}/settings/fonts">client.zones.settings.fontSettings.<a href="./src/resources/zones/settings/font-settings.ts">get</a>({ ...params }) -> FontSettings</code>
+- <code title="patch /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">edit</a>(settingId, { ...params }) -> SettingEditResponse</code>
+- <code title="get /zones/{zone_id}/settings/{setting_id}">client.zones.settings.<a href="./src/resources/zones/settings.ts">get</a>(settingId, { ...params }) -> SettingGetResponse</code>
 
 ## CustomNameservers
 
