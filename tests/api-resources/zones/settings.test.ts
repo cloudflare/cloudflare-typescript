@@ -9,11 +9,10 @@ const cloudflare = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource originMaxHTTPVersion', () => {
+describe('resource settings', () => {
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.zones.settings.originMaxHTTPVersion.edit({
+    const responsePromise = cloudflare.zones.settings.edit('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      value: '2',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,14 +24,13 @@ describe('resource originMaxHTTPVersion', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.zones.settings.originMaxHTTPVersion.edit({
+    const response = await cloudflare.zones.settings.edit('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      value: '2',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zones.settings.originMaxHTTPVersion.get({
+    const responsePromise = cloudflare.zones.settings.get('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +43,7 @@ describe('resource originMaxHTTPVersion', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zones.settings.originMaxHTTPVersion.get({
+    const response = await cloudflare.zones.settings.get('always_online', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
