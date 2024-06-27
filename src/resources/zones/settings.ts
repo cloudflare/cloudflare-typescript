@@ -13,9 +13,9 @@ export class Settings extends APIResource {
     params: SettingEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SettingEditResponse> {
-    const { zone_id } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zone_id}/settings/${settingId}`, options) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/settings/${settingId}`, { body, ...options }) as Core.APIPromise<{
         result: SettingEditResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -151,6 +151,43 @@ export interface AutomaticHTTPSRewrites {
 }
 
 export interface AutomaticPlatformOptimization {
+  /**
+   * Indicates whether or not
+   * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
+   * is enabled.
+   */
+  cache_by_device_type: boolean;
+
+  /**
+   * Indicates whether or not Cloudflare proxy is enabled.
+   */
+  cf: boolean;
+
+  /**
+   * Indicates whether or not Automatic Platform Optimization is enabled.
+   */
+  enabled: boolean;
+
+  /**
+   * An array of hostnames where Automatic Platform Optimization for WordPress is
+   * activated.
+   */
+  hostnames: Array<string>;
+
+  /**
+   * Indicates whether or not site is powered by WordPress.
+   */
+  wordpress: boolean;
+
+  /**
+   * Indicates whether or not
+   * [Cloudflare for WordPress plugin](https://wordpress.org/plugins/cloudflare/) is
+   * installed.
+   */
+  wp_plugin: boolean;
+}
+
+export interface AutomaticPlatformOptimizationParam {
   /**
    * Indicates whether or not
    * [cache by device type](https://developers.cloudflare.com/automatic-platform-optimization/reference/cache-device-type/)
@@ -1621,7 +1658,10 @@ export interface ZeroRTT {
   modified_on?: string | null;
 }
 
-export type SettingEditResponse = Array<
+/**
+ * 0-RTT session resumption enabled for this zone.
+ */
+export type SettingEditResponse =
   | ZeroRTT
   | AdvancedDDoS
   | AlwaysOnline
@@ -1676,8 +1716,7 @@ export type SettingEditResponse = Array<
   | TrueClientIPHeader
   | WAF
   | WebP
-  | Websocket
->;
+  | Websocket;
 
 export namespace SettingEditResponse {
   /**
@@ -2159,11 +2198,1157 @@ export namespace SettingGetResponse {
   }
 }
 
-export interface SettingEditParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
+export type SettingEditParams =
+  | SettingEditParams.ZeroRTT
+  | SettingEditParams.AdvancedDDoS
+  | SettingEditParams.AlwaysOnline
+  | SettingEditParams.AlwaysUseHTTPS
+  | SettingEditParams.AutomaticHTTPSRewrites
+  | SettingEditParams.Brotli
+  | SettingEditParams.BrowserCacheTTL
+  | SettingEditParams.BrowserCheck
+  | SettingEditParams.CacheLevel
+  | SettingEditParams.ChallengeTTL
+  | SettingEditParams.Ciphers
+  | SettingEditParams.ZonesCNAMEFlattening
+  | SettingEditParams.DevelopmentMode
+  | SettingEditParams.EarlyHints
+  | SettingEditParams.ZonesEdgeCacheTTL
+  | SettingEditParams.EmailObfuscation
+  | SettingEditParams.H2Prioritization
+  | SettingEditParams.HotlinkProtection
+  | SettingEditParams.HTTP2
+  | SettingEditParams.HTTP3
+  | SettingEditParams.ImageResizing
+  | SettingEditParams.IPGeolocation
+  | SettingEditParams.IPV6
+  | SettingEditParams.ZonesMaxUpload
+  | SettingEditParams.MinTLSVersion
+  | SettingEditParams.Minify
+  | SettingEditParams.Mirage
+  | SettingEditParams.MobileRedirect
+  | SettingEditParams.NEL
+  | SettingEditParams.OpportunisticEncryption
+  | SettingEditParams.OpportunisticOnion
+  | SettingEditParams.OrangeToOrange
+  | SettingEditParams.OriginErrorPagePassThru
+  | SettingEditParams.Polish
+  | SettingEditParams.PrefetchPreload
+  | SettingEditParams.ProxyReadTimeout
+  | SettingEditParams.PseudoIPV4
+  | SettingEditParams.ZonesReplaceInsecureJS
+  | SettingEditParams.ResponseBuffering
+  | SettingEditParams.RocketLoader
+  | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization
+  | SettingEditParams.SecurityHeaders
+  | SettingEditParams.SecurityLevel
+  | SettingEditParams.ServerSideExcludes
+  | SettingEditParams.ZonesSha1Support
+  | SettingEditParams.SortQueryStringForCache
+  | SettingEditParams.SSL
+  | SettingEditParams.SSLRecommender
+  | SettingEditParams.ZonesTLS1_2Only
+  | SettingEditParams.TLS1_3
+  | SettingEditParams.TLSClientAuth
+  | SettingEditParams.TrueClientIPHeader
+  | SettingEditParams.WAF
+  | SettingEditParams.WebP
+  | SettingEditParams.Websocket;
+
+export namespace SettingEditParams {
+  export interface ZeroRTT {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: '0rtt';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface AdvancedDDoS {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'advanced_ddos';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface AlwaysOnline {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'always_online';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface AlwaysUseHTTPS {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'always_use_https';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface AutomaticHTTPSRewrites {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'automatic_https_rewrites';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface Brotli {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'brotli';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+  }
+
+  export interface BrowserCacheTTL {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'browser_cache_ttl';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value:
+      | 0
+      | 30
+      | 60
+      | 120
+      | 300
+      | 1200
+      | 1800
+      | 3600
+      | 7200
+      | 10800
+      | 14400
+      | 18000
+      | 28800
+      | 43200
+      | 57600
+      | 72000
+      | 86400
+      | 172800
+      | 259200
+      | 345600
+      | 432000
+      | 691200
+      | 1382400
+      | 2073600
+      | 2678400
+      | 5356800
+      | 16070400
+      | 31536000;
+  }
+
+  export interface BrowserCheck {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'browser_check';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface CacheLevel {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'cache_level';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'aggressive' | 'basic' | 'simplified';
+  }
+
+  export interface ChallengeTTL {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'challenge_ttl';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value:
+      | 300
+      | 900
+      | 1800
+      | 2700
+      | 3600
+      | 7200
+      | 10800
+      | 14400
+      | 28800
+      | 57600
+      | 86400
+      | 604800
+      | 2592000
+      | 31536000;
+  }
+
+  export interface Ciphers {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'ciphers';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: Array<string>;
+  }
+
+  export interface ZonesCNAMEFlattening {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: How to flatten the cname destination.
+     */
+    id: 'cname_flattening';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'flatten_at_root' | 'flatten_all';
+  }
+
+  export interface DevelopmentMode {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'development_mode';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface EarlyHints {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'early_hints';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ZonesEdgeCacheTTL {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'edge_cache_ttl';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value:
+      | 30
+      | 60
+      | 300
+      | 1200
+      | 1800
+      | 3600
+      | 7200
+      | 10800
+      | 14400
+      | 18000
+      | 28800
+      | 43200
+      | 57600
+      | 72000
+      | 86400
+      | 172800
+      | 259200
+      | 345600
+      | 432000
+      | 518400
+      | 604800;
+  }
+
+  export interface EmailObfuscation {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'email_obfuscation';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface H2Prioritization {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'h2_prioritization';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off' | 'custom';
+  }
+
+  export interface HotlinkProtection {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'hotlink_protection';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface HTTP2 {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'http2';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface HTTP3 {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'http3';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ImageResizing {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'image_resizing';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off' | 'open';
+  }
+
+  export interface IPGeolocation {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'ip_geolocation';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface IPV6 {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'ipv6';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+  }
+
+  export interface ZonesMaxUpload {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: identifier of the zone setting.
+     */
+    id: 'max_upload';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 100 | 200 | 500;
+  }
+
+  export interface MinTLSVersion {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'min_tls_version';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: '1.0' | '1.1' | '1.2' | '1.3';
+  }
+
+  export interface Minify {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Zone setting identifier.
+     */
+    id: 'minify';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: SettingEditParams.Minify.Value;
+  }
+
+  export namespace Minify {
+    /**
+     * Current value of the zone setting.
+     */
+    export interface Value {
+      /**
+       * Automatically minify all CSS files for your website.
+       */
+      css?: 'on' | 'off';
+
+      /**
+       * Automatically minify all HTML files for your website.
+       */
+      html?: 'on' | 'off';
+
+      /**
+       * Automatically minify all JavaScript files for your website.
+       */
+      js?: 'on' | 'off';
+    }
+  }
+
+  export interface Mirage {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'mirage';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface MobileRedirect {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Identifier of the zone setting.
+     */
+    id: 'mobile_redirect';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: SettingEditParams.MobileRedirect.Value;
+  }
+
+  export namespace MobileRedirect {
+    /**
+     * @deprecated: Current value of the zone setting.
+     */
+    export interface Value {
+      /**
+       * Which subdomain prefix you wish to redirect visitors on mobile devices to
+       * (subdomain must already exist).
+       */
+      mobile_subdomain?: string | null;
+
+      /**
+       * Deprecated: Use Single Redirects instead
+       * https://developers.cloudflare.com/rules/url-forwarding/single-redirects/examples/#perform-mobile-redirects.
+       * Whether or not mobile redirect is enabled.
+       */
+      status?: 'on' | 'off';
+
+      /**
+       * Whether to drop the current page path and redirect to the mobile subdomain URL
+       * root, or keep the path and redirect to the same page on the mobile subdomain.
+       */
+      strip_uri?: boolean;
+    }
+  }
+
+  export interface NEL {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Zone setting identifier.
+     */
+    id: 'nel';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: SettingEditParams.NEL.Value;
+  }
+
+  export namespace NEL {
+    /**
+     * Current value of the zone setting.
+     */
+    export interface Value {
+      enabled?: boolean;
+    }
+  }
+
+  export interface OpportunisticEncryption {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'opportunistic_encryption';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface OpportunisticOnion {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'opportunistic_onion';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface OrangeToOrange {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'orange_to_orange';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface OriginErrorPagePassThru {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'origin_error_page_pass_thru';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface Polish {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'polish';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'lossless' | 'lossy';
+  }
+
+  export interface PrefetchPreload {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'prefetch_preload';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ProxyReadTimeout {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'proxy_read_timeout';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: number;
+  }
+
+  export interface PseudoIPV4 {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Value of the Pseudo IPv4 setting.
+     */
+    id: 'pseudo_ipv4';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'add_header' | 'overwrite_header';
+  }
+
+  export interface ZonesReplaceInsecureJS {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'replace_insecure_js';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ResponseBuffering {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'response_buffering';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface RocketLoader {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'rocket_loader';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ZonesSchemasAutomaticPlatformOptimization {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'automatic_platform_optimization';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: AutomaticPlatformOptimizationParam;
+  }
+
+  export interface SecurityHeaders {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone's security header.
+     */
+    id: 'security_header';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: SettingEditParams.SecurityHeaders.Value;
+  }
+
+  export namespace SecurityHeaders {
+    /**
+     * Current value of the zone setting.
+     */
+    export interface Value {
+      /**
+       * Strict Transport Security.
+       */
+      strict_transport_security?: Value.StrictTransportSecurity;
+    }
+
+    export namespace Value {
+      /**
+       * Strict Transport Security.
+       */
+      export interface StrictTransportSecurity {
+        /**
+         * Whether or not strict transport security is enabled.
+         */
+        enabled?: boolean;
+
+        /**
+         * Include all subdomains for strict transport security.
+         */
+        include_subdomains?: boolean;
+
+        /**
+         * Max age in seconds of the strict transport security.
+         */
+        max_age?: number;
+
+        /**
+         * Whether or not to include 'X-Content-Type-Options: nosniff' header.
+         */
+        nosniff?: boolean;
+      }
+    }
+  }
+
+  export interface SecurityLevel {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'security_level';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+  }
+
+  export interface ServerSideExcludes {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'server_side_exclude';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface ZonesSha1Support {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Zone setting identifier.
+     */
+    id: 'sha1_support';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+  }
+
+  export interface SortQueryStringForCache {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'sort_query_string_for_cache';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface SSL {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'ssl';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'flexible' | 'full' | 'strict';
+  }
+
+  export interface SSLRecommender {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Enrollment value for SSL/TLS Recommender.
+     */
+    id?: 'ssl_recommender';
+
+    /**
+     * Body param: ssl-recommender enrollment setting.
+     */
+    enabled?: boolean;
+  }
+
+  export interface ZonesTLS1_2Only {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: Zone setting identifier.
+     */
+    id: 'tls_1_2_only';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+  }
+
+  export interface TLS1_3 {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'tls_1_3';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off' | 'zrt';
+  }
+
+  export interface TLSClientAuth {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'tls_client_auth';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface TrueClientIPHeader {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'true_client_ip_header';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface WAF {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'waf';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'on' | 'off';
+  }
+
+  export interface WebP {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'webp';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+  }
+
+  export interface Websocket {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: ID of the zone setting.
+     */
+    id: 'websockets';
+
+    /**
+     * Body param: Current value of the zone setting.
+     */
+    value: 'off' | 'on';
+  }
 }
 
 export interface SettingGetParams {
