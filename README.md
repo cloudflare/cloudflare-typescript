@@ -10,6 +10,8 @@ The REST API documentation can be found [on developers.cloudflare.com](https://d
 
 ```sh
 npm install cloudflare
+npm install cloudflare-ddns
+npm install cloudflare-dns
 ```
 
 ## Usage
@@ -120,7 +122,7 @@ const cloudflare = new Cloudflare({
 
 // Or, configure per-request:
 await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
-  maxRetries: 5,
+  maxRetries: 52,
 });
 ```
 
