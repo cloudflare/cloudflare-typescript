@@ -35,7 +35,7 @@ export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
   | AIRunResponse.TextEmbeddings
-  | AIRunResponse.AutomaticSpeechRecognition
+  | AIRunResponse.SpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
   | AIRunResponse.UnionMember7
@@ -57,17 +57,17 @@ export namespace AIRunResponse {
     shape?: Array<number>;
   }
 
-  export interface AutomaticSpeechRecognition {
+  export interface SpeechRecognition {
     text: string;
 
     vtt?: string;
 
     word_count?: number;
 
-    words?: Array<AutomaticSpeechRecognition.Word>;
+    words?: Array<SpeechRecognition.Word>;
   }
 
-  export namespace AutomaticSpeechRecognition {
+  export namespace SpeechRecognition {
     export interface Word {
       end?: number;
 
@@ -135,7 +135,7 @@ export type AIRunParams =
   | AIRunParams.TextClassification
   | AIRunParams.TextToImage
   | AIRunParams.TextEmbeddings
-  | AIRunParams.AutomaticSpeechRecognition
+  | AIRunParams.SpeechRecognition
   | AIRunParams.ImageClassification
   | AIRunParams.ObjectDetection
   | AIRunParams.TextGeneration
@@ -217,7 +217,7 @@ export namespace AIRunParams {
     text: string | Array<string>;
   }
 
-  export interface AutomaticSpeechRecognition {
+  export interface SpeechRecognition {
     /**
      * Path param:
      */
