@@ -331,7 +331,7 @@ export class Cloudflare extends Core.APIClient {
   }
 
   protected override stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'repeat' });
+    return qs.stringify(query, { allowDots: true, arrayFormat: 'repeat' });
   }
 
   static Cloudflare = this;
