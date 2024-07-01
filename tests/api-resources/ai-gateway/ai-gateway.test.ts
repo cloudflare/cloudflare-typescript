@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource aiGateway', () => {
   test('create: only required params', async () => {
     const responsePromise = cloudflare.aiGateway.create({
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       id: 'my-gateway',
       cache_invalidate_on_update: true,
       cache_ttl: 0,
@@ -32,7 +32,7 @@ describe('resource aiGateway', () => {
 
   test('create: required and optional params', async () => {
     const response = await cloudflare.aiGateway.create({
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       id: 'my-gateway',
       cache_invalidate_on_update: true,
       cache_ttl: 0,
@@ -45,7 +45,7 @@ describe('resource aiGateway', () => {
 
   test('update: only required params', async () => {
     const responsePromise = cloudflare.aiGateway.update('my-gateway', {
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
@@ -64,7 +64,7 @@ describe('resource aiGateway', () => {
 
   test('update: required and optional params', async () => {
     const response = await cloudflare.aiGateway.update('my-gateway', {
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
@@ -75,7 +75,7 @@ describe('resource aiGateway', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.list({ account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' });
+    const responsePromise = cloudflare.aiGateway.list({ account_id: '0d37909e38d3e99c29fa2cd343ac421a' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -87,7 +87,7 @@ describe('resource aiGateway', () => {
 
   test('list: required and optional params', async () => {
     const response = await cloudflare.aiGateway.list({
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       id: 'my-gateway',
       order_by: 'string',
       page: 1,
@@ -97,7 +97,7 @@ describe('resource aiGateway', () => {
 
   test('delete: only required params', async () => {
     const responsePromise = cloudflare.aiGateway.delete('string', {
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -110,13 +110,13 @@ describe('resource aiGateway', () => {
 
   test('delete: required and optional params', async () => {
     const response = await cloudflare.aiGateway.delete('string', {
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
   });
 
   test('get: only required params', async () => {
     const responsePromise = cloudflare.aiGateway.get('my-gateway', {
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -129,7 +129,7 @@ describe('resource aiGateway', () => {
 
   test('get: required and optional params', async () => {
     const response = await cloudflare.aiGateway.get('my-gateway', {
-      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
   });
 });
