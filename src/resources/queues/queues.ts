@@ -101,7 +101,7 @@ export interface QueueCreated {
 
   modified_on?: unknown;
 
-  queue_id?: unknown;
+  queue_id?: string;
 
   queue_name?: string;
 }
@@ -111,7 +111,7 @@ export interface QueueUpdated {
 
   modified_on?: unknown;
 
-  queue_id?: unknown;
+  queue_id?: string;
 
   queue_name?: string;
 }
