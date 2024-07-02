@@ -43,6 +43,7 @@ describe('resource identityProviders', () => {
       name: 'Widget Corps IDP',
       type: 'onetimepin',
       account_id: 'string',
+      id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       scim_config: {
         enabled: true,
         group_member_deprovision: true,
@@ -86,6 +87,7 @@ describe('resource identityProviders', () => {
         name: 'Widget Corps IDP',
         type: 'onetimepin',
         account_id: 'string',
+        id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         scim_config: {
           enabled: true,
           group_member_deprovision: true,
