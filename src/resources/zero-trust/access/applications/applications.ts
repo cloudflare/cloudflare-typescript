@@ -2994,6 +2994,8 @@ export interface SAMLSaaSAppParam {
    */
   consumer_service_url?: string;
 
+  created_at?: string;
+
   custom_attributes?: SAMLSaaSAppParam.CustomAttributes;
 
   /**
@@ -3043,6 +3045,8 @@ export interface SAMLSaaSAppParam {
    * The endpoint where your SaaS application will send login requests.
    */
   sso_endpoint?: string;
+
+  updated_at?: string;
 }
 
 export namespace SAMLSaaSAppParam {
@@ -15207,6 +15211,8 @@ export namespace ApplicationCreateParams {
        */
       client_secret?: string;
 
+      created_at?: string;
+
       custom_claims?: AccessOIDCSaaSApp.CustomClaims;
 
       /**
@@ -15241,6 +15247,8 @@ export namespace ApplicationCreateParams {
        * automatically enabled if refresh tokens are enabled
        */
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+
+      updated_at?: string;
     }
 
     export namespace AccessOIDCSaaSApp {
@@ -18230,6 +18238,8 @@ export namespace ApplicationUpdateParams {
        */
       client_secret?: string;
 
+      created_at?: string;
+
       custom_claims?: AccessOIDCSaaSApp.CustomClaims;
 
       /**
@@ -18264,6 +18274,8 @@ export namespace ApplicationUpdateParams {
        * automatically enabled if refresh tokens are enabled
        */
       scopes?: Array<'openid' | 'groups' | 'email' | 'profile'>;
+
+      updated_at?: string;
     }
 
     export namespace AccessOIDCSaaSApp {
