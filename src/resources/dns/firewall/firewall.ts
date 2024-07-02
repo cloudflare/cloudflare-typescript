@@ -291,6 +291,11 @@ export interface FirewallEditParams {
   account_id: string;
 
   /**
+   * Body param: Identifier
+   */
+  id: string;
+
+  /**
    * Body param: Deprecate the response to ANY requests.
    */
   deprecate_any_requests: boolean;
