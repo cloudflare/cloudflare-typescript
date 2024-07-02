@@ -33,6 +33,9 @@ describe('resource customPages', () => {
       name: 'string',
       type: 'identity_denied',
       app_count: 0,
+      created_at: '2014-01-01T05:20:00.12345Z',
+      uid: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      updated_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
@@ -64,6 +67,9 @@ describe('resource customPages', () => {
         name: 'string',
         type: 'identity_denied',
         app_count: 0,
+        created_at: '2014-01-01T05:20:00.12345Z',
+        uid: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        updated_at: '2014-01-01T05:20:00.12345Z',
       },
     );
   });
