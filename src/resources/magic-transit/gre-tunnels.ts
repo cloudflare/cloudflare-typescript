@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as GRETunnelsAPI from './gre-tunnels';
 import * as MagicTransitAPI from './magic-transit';
 
@@ -28,13 +28,13 @@ export class GRETunnels extends APIResource {
    * parameter to only run validation without persisting changes.
    */
   update(
-    tunnelIdentifier: string,
+    greTunnelId: string,
     params: GRETunnelUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelUpdateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/gre_tunnels/${greTunnelId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: GRETunnelUpdateResponse }>
@@ -58,14 +58,14 @@ export class GRETunnels extends APIResource {
    * an optional query parameter to only run validation without persisting changes.
    */
   delete(
-    tunnelIdentifier: string,
+    greTunnelId: string,
     params: GRETunnelDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/gre_tunnels/${greTunnelId}`,
         options,
       ) as Core.APIPromise<{ result: GRETunnelDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -75,14 +75,14 @@ export class GRETunnels extends APIResource {
    * Lists informtion for a specific GRE tunnel.
    */
   get(
-    tunnelIdentifier: string,
+    greTunnelId: string,
     params: GRETunnelGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<GRETunnelGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/magic/gre_tunnels/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/gre_tunnels/${greTunnelId}`,
         options,
       ) as Core.APIPromise<{ result: GRETunnelGetResponse }>
     )._thenUnwrap((obj) => obj.result);

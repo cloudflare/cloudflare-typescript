@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as VersionsAPI from './versions';
-import { type Uploadable, multipartFormRequestOptions } from '../../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Versions extends APIResource {
@@ -19,7 +18,7 @@ export class Versions extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: VersionCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -100,7 +99,7 @@ export interface VersionCreateParams {
    * Multiple modules may be provided as separate named parts, but at least one
    * module must be present and referenced in the metadata as `main_module`.
    */
-  '<any part name>'?: Array<Uploadable>;
+  '<any part name>'?: Array<Core.Uploadable>;
 
   /**
    * Body param: JSON encoded metadata about the uploaded parts and Worker

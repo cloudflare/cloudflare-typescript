@@ -50,6 +50,18 @@ describe('resource scans', () => {
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
+  test('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.urlScanner.scans.get(
+        'string',
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { full: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('har', async () => {
     const responsePromise = cloudflare.urlScanner.scans.har('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();

@@ -1,11 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../../core';
 import { APIResource } from '../../../../../resource';
+import * as Core from '../../../../../core';
 import * as SettingsAPI from './settings';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as TailAPI from '../../../../workers/scripts/tail';
-import { multipartFormRequestOptions } from '../../../../../core';
 
 export class Settings extends APIResource {
   /**
@@ -21,7 +20,7 @@ export class Settings extends APIResource {
     return (
       this._client.patch(
         `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: SettingEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }

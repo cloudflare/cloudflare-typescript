@@ -82,6 +82,7 @@ describe('resource firewall', () => {
   test('edit: only required params', async () => {
     const responsePromise = cloudflare.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: '023e105f4ecef8ad9ca31a8372d0c353',
       deprecate_any_requests: true,
       dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
       ecs_fallback: false,
@@ -102,6 +103,7 @@ describe('resource firewall', () => {
   test('edit: required and optional params', async () => {
     const response = await cloudflare.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: '023e105f4ecef8ad9ca31a8372d0c353',
       deprecate_any_requests: true,
       dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
       ecs_fallback: false,

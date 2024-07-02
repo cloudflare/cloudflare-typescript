@@ -1,67 +1,69 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as LogsAPI from './logs';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Logs extends APIResource {
   /**
    * List Gateway Logs
    */
-  get(id: string, params: LogGetParams, options?: Core.RequestOptions): Core.APIPromise<LogGetResponse> {
+  list(
+    id: string,
+    params: LogListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LogListResponsesV4PagePaginationArray, LogListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${id}/logs`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: LogGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai-gateway/gateways/${id}/logs`,
+      LogListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 }
 
-export type LogGetResponse = Array<LogGetResponse.LogGetResponseItem>;
+export class LogListResponsesV4PagePaginationArray extends V4PagePaginationArray<LogListResponse> {}
 
-export namespace LogGetResponse {
-  export interface LogGetResponseItem {
-    id: string;
+export interface LogListResponse {
+  id: string;
 
-    cached: boolean;
+  cached: boolean;
 
-    created_at: string;
+  created_at: string;
 
-    duration: number;
+  duration: number;
 
-    model: string;
+  model: string;
 
-    path: string;
+  path: string;
 
-    provider: string;
+  provider: string;
 
-    request: string;
+  request: string;
 
-    response: string;
+  response: string;
 
-    success: boolean;
+  success: boolean;
 
-    tokens_in: number;
+  tokens_in: number;
 
-    tokens_out: number;
+  tokens_out: number;
 
-    metadata?: string;
+  metadata?: string;
 
-    request_content_type?: string;
+  request_content_type?: string;
 
-    request_type?: string;
+  request_type?: string;
 
-    response_content_type?: string;
+  response_content_type?: string;
 
-    status_code?: number;
+  status_code?: number;
 
-    step?: number;
-  }
+  step?: number;
 }
 
-export interface LogGetParams {
+export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Path param:
    */
@@ -90,16 +92,6 @@ export interface LogGetParams {
   /**
    * Query param:
    */
-  page?: number;
-
-  /**
-   * Query param:
-   */
-  per_page?: number;
-
-  /**
-   * Query param:
-   */
   search?: string;
 
   /**
@@ -114,6 +106,7 @@ export interface LogGetParams {
 }
 
 export namespace Logs {
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogGetParams = LogsAPI.LogGetParams;
+  export import LogListResponse = LogsAPI.LogListResponse;
+  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
+  export import LogListParams = LogsAPI.LogListParams;
 }

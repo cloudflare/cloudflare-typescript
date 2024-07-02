@@ -2,6 +2,7 @@
 
 export {
   LanguageDeleteResponse,
+  LanguageCreateParams,
   LanguageUpdateParams,
   LanguageDeleteParams,
   LanguageGetParams,

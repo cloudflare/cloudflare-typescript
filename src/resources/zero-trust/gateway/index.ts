@@ -24,6 +24,18 @@ export {
 export { AppType, AppTypeListParams, AppTypesSinglePage, AppTypes } from './app-types';
 export { Category, CategoryListParams, CategoriesSinglePage, Categories } from './categories';
 export {
+  CertificateCreateResponse,
+  CertificateListResponse,
+  CertificateDeleteResponse,
+  CertificateGetResponse,
+  CertificateCreateParams,
+  CertificateListParams,
+  CertificateDeleteParams,
+  CertificateGetParams,
+  CertificateListResponsesSinglePage,
+  Certificates,
+} from './certificates';
+export {
   DNSResolverSettingsV4,
   DNSResolverSettingsV6,
   GatewayFilter,

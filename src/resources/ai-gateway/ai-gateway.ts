@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as LogsAPI from './logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -42,7 +42,7 @@ export class AIGateway extends APIResource {
   }
 
   /**
-   * List Gateway's
+   * List Gateways
    */
   list(
     params: AIGatewayListParams,
@@ -318,6 +318,7 @@ export interface AIGatewayGetParams {
 
 export namespace AIGateway {
   export import Logs = LogsAPI.Logs;
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogGetParams = LogsAPI.LogGetParams;
+  export import LogListResponse = LogsAPI.LogListResponse;
+  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
+  export import LogListParams = LogsAPI.LogListParams;
 }

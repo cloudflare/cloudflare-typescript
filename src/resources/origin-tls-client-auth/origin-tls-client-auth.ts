@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as SettingsAPI from './settings';
 import * as HostnamesAPI from './hostnames/hostnames';
 import { SinglePage } from '../../pagination';

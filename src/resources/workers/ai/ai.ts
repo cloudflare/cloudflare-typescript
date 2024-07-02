@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as AIAPI from './ai';
 import * as ModelsAPI from './models/models';
-import { type Uploadable } from '../../../core';
 
 export class AI extends APIResource {
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
@@ -21,10 +20,10 @@ export class AI extends APIResource {
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
   run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
-        body,
+        body: body,
         ...options,
       }) as Core.APIPromise<{ result: AIRunResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -32,15 +31,15 @@ export class AI extends APIResource {
 }
 
 export type AIRunResponse =
+  | unknown
   | Array<AIRunResponse.TextClassification>
-  | Uploadable
-  | Array<number>
+  | Core.Uploadable
   | AIRunResponse.TextEmbeddings
-  | AIRunResponse.SpeechRecognition
+  | AIRunResponse.AutomaticSpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
   | AIRunResponse.UnionMember7
-  | Uploadable
+  | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText;
@@ -58,17 +57,17 @@ export namespace AIRunResponse {
     shape?: Array<number>;
   }
 
-  export interface SpeechRecognition {
+  export interface AutomaticSpeechRecognition {
     text: string;
 
     vtt?: string;
 
     word_count?: number;
 
-    words?: Array<SpeechRecognition.Word>;
+    words?: Array<AutomaticSpeechRecognition.Word>;
   }
 
-  export namespace SpeechRecognition {
+  export namespace AutomaticSpeechRecognition {
     export interface Word {
       end?: number;
 
@@ -132,11 +131,11 @@ export namespace AIRunResponse {
 }
 
 export type AIRunParams =
+  | AIRunParams.DumbPipe
   | AIRunParams.TextClassification
   | AIRunParams.TextToImage
-  | AIRunParams.SentenceSimilarity
   | AIRunParams.TextEmbeddings
-  | AIRunParams.SpeechRecognition
+  | AIRunParams.AutomaticSpeechRecognition
   | AIRunParams.ImageClassification
   | AIRunParams.ObjectDetection
   | AIRunParams.TextGeneration
@@ -145,6 +144,18 @@ export type AIRunParams =
   | AIRunParams.ImageToText;
 
 export namespace AIRunParams {
+  export interface DumbPipe {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    body: unknown;
+  }
+
   export interface TextClassification {
     /**
      * Path param:
@@ -194,23 +205,6 @@ export namespace AIRunParams {
     strength?: number;
   }
 
-  export interface SentenceSimilarity {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    sentences: Array<string>;
-
-    /**
-     * Body param:
-     */
-    source: string;
-  }
-
   export interface TextEmbeddings {
     /**
      * Path param:
@@ -223,7 +217,7 @@ export namespace AIRunParams {
     text: string | Array<string>;
   }
 
-  export interface SpeechRecognition {
+  export interface AutomaticSpeechRecognition {
     /**
      * Path param:
      */

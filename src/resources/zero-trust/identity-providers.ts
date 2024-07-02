@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import * as Core from '../../core';
 import { CloudflareError } from '../../error';
 import * as IdentityProvidersAPI from './identity-providers';
 import { SinglePage } from '../../pagination';
@@ -1964,6 +1964,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2059,6 +2064,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2137,6 +2147,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2176,6 +2191,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2213,6 +2233,11 @@ export namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2281,6 +2306,11 @@ export namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2356,6 +2386,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2393,6 +2428,11 @@ export namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2483,6 +2523,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2561,6 +2606,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2634,6 +2684,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2705,6 +2760,11 @@ export namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2807,6 +2867,11 @@ export namespace IdentityProviderCreateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -2844,6 +2909,11 @@ export namespace IdentityProviderCreateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2901,6 +2971,11 @@ export namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -2998,6 +3073,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3076,6 +3156,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3115,6 +3200,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3152,6 +3242,11 @@ export namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3220,6 +3315,11 @@ export namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3295,6 +3395,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3332,6 +3437,11 @@ export namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3422,6 +3532,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3500,6 +3615,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3573,6 +3693,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3644,6 +3769,11 @@ export namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
@@ -3746,6 +3876,11 @@ export namespace IdentityProviderUpdateParams {
     zone_id?: string;
 
     /**
+     * Body param: UUID
+     */
+    id?: string;
+
+    /**
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
@@ -3783,6 +3918,11 @@ export namespace IdentityProviderUpdateParams {
      * Account ID.
      */
     zone_id?: string;
+
+    /**
+     * Body param: UUID
+     */
+    id?: string;
 
     /**
      * Body param: The configuration settings for enabling a System for Cross-Domain

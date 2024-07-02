@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as IndexesAPI from './indexes';
-import { type Uploadable } from '../../core';
 import { SinglePage } from '../../pagination';
 
 export class Indexes extends APIResource {
@@ -402,7 +401,7 @@ export interface IndexInsertParams {
   /**
    * Body param: ndjson file containing vectors to insert.
    */
-  body: Uploadable;
+  body: Core.Uploadable;
 }
 
 export interface IndexQueryParams {
@@ -446,7 +445,7 @@ export interface IndexUpsertParams {
   /**
    * Body param: ndjson file containing vectors to upsert.
    */
-  body: Uploadable;
+  body: Core.Uploadable;
 }
 
 export namespace Indexes {

@@ -1,14 +1,31 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as LanguageAPI from './language';
 import * as CaptionsAPI from '../captions';
 import * as VttAPI from './vtt';
-import { multipartFormRequestOptions } from '../../../../core';
 
 export class Language extends APIResource {
   vtt: VttAPI.Vtt = new VttAPI.Vtt(this._client);
+
+  /**
+   * Generate captions or subtitles for provided language via AI.
+   */
+  create(
+    identifier: string,
+    language: string,
+    params: LanguageCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptionsAPI.Caption> {
+    const { account_id } = params;
+    return (
+      this._client.post(
+        `/accounts/${account_id}/stream/${identifier}/captions/${language}/generate`,
+        options,
+      ) as Core.APIPromise<{ result: CaptionsAPI.Caption }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * Uploads the caption or subtitle file to the endpoint for a specific BCP47
@@ -24,7 +41,7 @@ export class Language extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/stream/${identifier}/captions/${language}`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: CaptionsAPI.Caption }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -68,6 +85,13 @@ export class Language extends APIResource {
 
 export type LanguageDeleteResponse = string;
 
+export interface LanguageCreateParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export interface LanguageUpdateParams {
   /**
    * Path param: Identifier
@@ -96,6 +120,7 @@ export interface LanguageGetParams {
 
 export namespace Language {
   export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
+  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
   export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
   export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
   export import LanguageGetParams = LanguageAPI.LanguageGetParams;

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import * as Core from '../../core';
 import { CloudflareError } from '../../error';
 import * as AccessRulesAPI from './access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';

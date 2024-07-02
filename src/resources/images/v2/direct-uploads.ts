@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as DirectUploadsAPI from './direct-uploads';
-import { multipartFormRequestOptions } from '../../../core';
 
 export class DirectUploads extends APIResource {
   /**
@@ -23,7 +22,7 @@ export class DirectUploads extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/images/v2/direct_upload`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
