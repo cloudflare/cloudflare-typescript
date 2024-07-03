@@ -110,7 +110,10 @@ export interface APIShield {
 
   features?:
     | APIShield.APIShieldOperationFeatureThresholds
-    | APIShield.APIShieldOperationFeatureParameterSchemas;
+    | APIShield.APIShieldOperationFeatureParameterSchemas
+    | APIShield.APIShieldOperationFeatureAPIRouting
+    | APIShield.APIShieldOperationFeatureConfidenceIntervals
+    | APIShield.APIShieldOperationFeatureSchemaInfo;
 }
 
 export namespace APIShield {
@@ -193,6 +196,163 @@ export namespace APIShield {
          * schema.
          */
         responses?: unknown | null;
+      }
+    }
+  }
+
+  export interface APIShieldOperationFeatureAPIRouting {
+    /**
+     * API Routing settings on endpoint.
+     */
+    api_routing?: APIShieldOperationFeatureAPIRouting.APIRouting;
+  }
+
+  export namespace APIShieldOperationFeatureAPIRouting {
+    /**
+     * API Routing settings on endpoint.
+     */
+    export interface APIRouting {
+      last_updated?: string;
+
+      /**
+       * Target route.
+       */
+      route?: string;
+    }
+  }
+
+  export interface APIShieldOperationFeatureConfidenceIntervals {
+    confidence_intervals?: APIShieldOperationFeatureConfidenceIntervals.ConfidenceIntervals;
+  }
+
+  export namespace APIShieldOperationFeatureConfidenceIntervals {
+    export interface ConfidenceIntervals {
+      last_updated?: string;
+
+      suggested_threshold?: ConfidenceIntervals.SuggestedThreshold;
+    }
+
+    export namespace ConfidenceIntervals {
+      export interface SuggestedThreshold {
+        confidence_intervals?: SuggestedThreshold.ConfidenceIntervals;
+
+        /**
+         * Suggested threshold.
+         */
+        mean?: number;
+      }
+
+      export namespace SuggestedThreshold {
+        export interface ConfidenceIntervals {
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          p90?: ConfidenceIntervals.P90;
+
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          p95?: ConfidenceIntervals.P95;
+
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          p99?: ConfidenceIntervals.P99;
+        }
+
+        export namespace ConfidenceIntervals {
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          export interface P90 {
+            /**
+             * Lower bound for percentile estimate
+             */
+            lower?: number;
+
+            /**
+             * Upper bound for percentile estimate
+             */
+            upper?: number;
+          }
+
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          export interface P95 {
+            /**
+             * Lower bound for percentile estimate
+             */
+            lower?: number;
+
+            /**
+             * Upper bound for percentile estimate
+             */
+            upper?: number;
+          }
+
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          export interface P99 {
+            /**
+             * Lower bound for percentile estimate
+             */
+            lower?: number;
+
+            /**
+             * Upper bound for percentile estimate
+             */
+            upper?: number;
+          }
+        }
+      }
+    }
+  }
+
+  export interface APIShieldOperationFeatureSchemaInfo {
+    schema_info?: APIShieldOperationFeatureSchemaInfo.SchemaInfo;
+  }
+
+  export namespace APIShieldOperationFeatureSchemaInfo {
+    export interface SchemaInfo {
+      /**
+       * Schema active on endpoint.
+       */
+      active_schema?: SchemaInfo.ActiveSchema;
+
+      /**
+       * True if a Cloudflare-provided learned schema is available for this endpoint.
+       */
+      learned_available?: boolean;
+
+      /**
+       * Action taken on requests failing validation.
+       */
+      mitigation_action?: 'none' | 'log' | 'block' | null;
+    }
+
+    export namespace SchemaInfo {
+      /**
+       * Schema active on endpoint.
+       */
+      export interface ActiveSchema {
+        /**
+         * UUID identifier
+         */
+        id?: string;
+
+        created_at?: string;
+
+        /**
+         * True if schema is Cloudflare-provided.
+         */
+        is_learned?: boolean;
+
+        /**
+         * Schema file name.
+         */
+        name?: string;
       }
     }
   }
