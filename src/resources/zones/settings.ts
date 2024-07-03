@@ -1302,6 +1302,11 @@ export namespace SecurityHeaders {
        * Whether or not to include 'X-Content-Type-Options: nosniff' header.
        */
       nosniff?: boolean;
+
+      /**
+       * Enable automatic preload of the HSTS configuration.
+       */
+      preload?: boolean;
     }
   }
 }
@@ -3125,6 +3130,11 @@ export namespace SettingEditParams {
          * Whether or not to include 'X-Content-Type-Options: nosniff' header.
          */
         nosniff?: boolean;
+
+        /**
+         * Enable automatic preload of the HSTS configuration.
+         */
+        preload?: boolean;
       }
     }
   }
