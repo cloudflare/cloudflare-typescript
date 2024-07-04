@@ -259,23 +259,7 @@ export interface TopAttacksParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -352,23 +336,7 @@ export interface TopIndustryParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -426,23 +394,7 @@ export interface TopVerticalParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.

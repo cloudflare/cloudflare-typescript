@@ -265,23 +265,7 @@ export interface TimeseriesGroupDNSSECParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -338,23 +322,7 @@ export interface TimeseriesGroupEdnsParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -411,23 +379,7 @@ export interface TimeseriesGroupIPVersionParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -484,23 +436,7 @@ export interface TimeseriesGroupProtocolParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -557,23 +493,7 @@ export interface TimeseriesGroupQueryTypeParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -630,23 +550,7 @@ export interface TimeseriesGroupResponseCodesParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.

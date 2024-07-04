@@ -395,23 +395,7 @@ export interface TimeseriesGroupGetParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -468,23 +452,7 @@ export interface TimeseriesGroupHTTPMethodParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -570,23 +538,7 @@ export interface TimeseriesGroupHTTPVersionParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -719,23 +671,7 @@ export interface TimeseriesGroupIndustryParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -879,23 +815,7 @@ export interface TimeseriesGroupIPVersionParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1028,23 +948,7 @@ export interface TimeseriesGroupManagedRulesParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1182,23 +1086,7 @@ export interface TimeseriesGroupMitigationProductParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1323,23 +1211,7 @@ export interface TimeseriesGroupVerticalParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
