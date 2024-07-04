@@ -89,22 +89,7 @@ export interface IPTimeseriesParams {
    * Shorthand date ranges for the last X days - use when you don't need specific
    * start and end dates.
    */
-  dateRange?:
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl';
+  dateRange?: string;
 
   /**
    * Start of the date range (inclusive).

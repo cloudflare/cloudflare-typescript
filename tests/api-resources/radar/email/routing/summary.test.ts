@@ -34,7 +34,7 @@ describe('resource summary', () => {
       cloudflare.radar.email.routing.summary.arc(
         {
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dkim: ['PASS', 'NONE', 'FAIL'],
           dmarc: ['PASS', 'NONE', 'FAIL'],
@@ -74,7 +74,7 @@ describe('resource summary', () => {
         {
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dmarc: ['PASS', 'NONE', 'FAIL'],
           encrypted: ['ENCRYPTED', 'NOT_ENCRYPTED'],
@@ -113,7 +113,7 @@ describe('resource summary', () => {
         {
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dkim: ['PASS', 'NONE', 'FAIL'],
           encrypted: ['ENCRYPTED', 'NOT_ENCRYPTED'],
@@ -152,7 +152,7 @@ describe('resource summary', () => {
         {
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dkim: ['PASS', 'NONE', 'FAIL'],
           dmarc: ['PASS', 'NONE', 'FAIL'],
@@ -191,7 +191,7 @@ describe('resource summary', () => {
         {
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dkim: ['PASS', 'NONE', 'FAIL'],
           dmarc: ['PASS', 'NONE', 'FAIL'],
@@ -230,7 +230,7 @@ describe('resource summary', () => {
         {
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dkim: ['PASS', 'NONE', 'FAIL'],
           dmarc: ['PASS', 'NONE', 'FAIL'],

@@ -743,23 +743,7 @@ export interface SummaryARCParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -813,23 +797,7 @@ export interface SummaryDKIMParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -878,23 +846,7 @@ export interface SummaryDMARCParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -943,23 +895,7 @@ export interface SummaryMaliciousParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1013,23 +949,7 @@ export interface SummarySpamParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1083,23 +1003,7 @@ export interface SummarySPFParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1148,23 +1052,7 @@ export interface SummarySpoofParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1218,23 +1106,7 @@ export interface SummaryThreatCategoryParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -1288,23 +1160,7 @@ export interface SummaryTLSVersionParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.

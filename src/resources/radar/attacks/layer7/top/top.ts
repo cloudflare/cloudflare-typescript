@@ -273,23 +273,7 @@ export interface TopAttacksParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -300,6 +284,68 @@ export interface TopAttacksParams {
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Limit the number of objects in the response.
@@ -331,6 +377,19 @@ export interface TopAttacksParams {
    * attacked.
    */
   magnitude?: 'AFFECTED_ZONES' | 'MITIGATED_REQUESTS';
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -369,23 +428,7 @@ export interface TopIndustryParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -398,6 +441,68 @@ export interface TopIndustryParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -408,6 +513,19 @@ export interface TopIndustryParams {
    * but includes results from PT.
    */
   location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -440,23 +558,7 @@ export interface TopVerticalParams {
    * week. Use this parameter or set specific start and end dates (`dateStart` and
    * `dateEnd` parameters).
    */
-  dateRange?: Array<
-    | '1d'
-    | '2d'
-    | '7d'
-    | '14d'
-    | '28d'
-    | '12w'
-    | '24w'
-    | '52w'
-    | '1dControl'
-    | '2dControl'
-    | '7dControl'
-    | '14dControl'
-    | '28dControl'
-    | '12wControl'
-    | '24wControl'
-  >;
+  dateRange?: Array<string>;
 
   /**
    * Array of datetimes to filter the start of a series.
@@ -469,6 +571,68 @@ export interface TopVerticalParams {
   format?: 'JSON' | 'CSV';
 
   /**
+   * Filter for http method.
+   */
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
    * Limit the number of objects in the response.
    */
   limit?: number;
@@ -479,6 +643,19 @@ export interface TopVerticalParams {
    * but includes results from PT.
    */
   location?: Array<string>;
+
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
