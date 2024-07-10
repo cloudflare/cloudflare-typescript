@@ -107,12 +107,12 @@ export interface IssueListResponse {
 
   messages: Array<Shared.ResponseInfo>;
 
-  result: IssueListResponse.Result;
-
   /**
    * Whether the API call was successful
    */
   success: true;
+
+  result?: IssueListResponse.Result;
 }
 
 export namespace IssueListResponse {
