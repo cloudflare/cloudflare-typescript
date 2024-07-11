@@ -13,7 +13,7 @@ describe('resource versions', () => {
   // TODO: investigate broken test
   test.skip('list', async () => {
     const responsePromise = cloudflare.rulesets.phases.versions.list('http_request_firewall_custom', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource versions', () => {
   // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.phases.versions.get('http_request_firewall_custom', '1', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

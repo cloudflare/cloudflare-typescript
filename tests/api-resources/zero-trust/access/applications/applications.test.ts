@@ -15,7 +15,7 @@ describe('resource applications', () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.create({
       domain: 'test.example.com/admin',
       type: 'self_hosted',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +31,7 @@ describe('resource applications', () => {
     const response = await cloudflare.zeroTrust.access.applications.create({
       domain: 'test.example.com/admin',
       type: 'self_hosted',
-      account_id: 'string',
+      account_id: 'account_id',
       allow_authenticate_via_warp: true,
       allowed_idps: [
         '699d98642c564d2e855e9661899b7252',
@@ -50,9 +50,9 @@ describe('resource applications', () => {
         allowed_origins: ['https://example.com'],
         max_age: -1,
       },
-      custom_deny_message: 'string',
-      custom_deny_url: 'string',
-      custom_non_identity_deny_url: 'string',
+      custom_deny_message: 'custom_deny_message',
+      custom_deny_url: 'custom_deny_url',
+      custom_non_identity_deny_url: 'custom_non_identity_deny_url',
       custom_pages: [
         '699d98642c564d2e855e9661899b7252',
         '699d98642c564d2e855e9661899b7252',
@@ -71,10 +71,10 @@ describe('resource applications', () => {
       ],
       same_site_cookie_attribute: 'strict',
       scim_config: {
-        authentication: { password: 'string', scheme: 'httpbasic', user: 'string' },
+        authentication: { password: 'password', scheme: 'httpbasic', user: 'user' },
         deactivate_on_delete: true,
         enabled: true,
-        idp_uid: 'string',
+        idp_uid: 'idp_uid',
         mappings: [
           {
             enabled: true,
@@ -101,7 +101,7 @@ describe('resource applications', () => {
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
         ],
-        remote_uri: 'string',
+        remote_uri: 'remote_uri',
       },
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,
@@ -115,7 +115,7 @@ describe('resource applications', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { domain: 'test.example.com/admin', type: 'self_hosted', account_id: 'string' },
+      { domain: 'test.example.com/admin', type: 'self_hosted', account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -133,7 +133,7 @@ describe('resource applications', () => {
       {
         domain: 'test.example.com/admin',
         type: 'self_hosted',
-        account_id: 'string',
+        account_id: 'account_id',
         allow_authenticate_via_warp: true,
         allowed_idps: [
           '699d98642c564d2e855e9661899b7252',
@@ -152,9 +152,9 @@ describe('resource applications', () => {
           allowed_origins: ['https://example.com'],
           max_age: -1,
         },
-        custom_deny_message: 'string',
-        custom_deny_url: 'string',
-        custom_non_identity_deny_url: 'string',
+        custom_deny_message: 'custom_deny_message',
+        custom_deny_url: 'custom_deny_url',
+        custom_non_identity_deny_url: 'custom_non_identity_deny_url',
         custom_pages: [
           '699d98642c564d2e855e9661899b7252',
           '699d98642c564d2e855e9661899b7252',
@@ -173,10 +173,10 @@ describe('resource applications', () => {
         ],
         same_site_cookie_attribute: 'strict',
         scim_config: {
-          authentication: { password: 'string', scheme: 'httpbasic', user: 'string' },
+          authentication: { password: 'password', scheme: 'httpbasic', user: 'user' },
           deactivate_on_delete: true,
           enabled: true,
-          idp_uid: 'string',
+          idp_uid: 'idp_uid',
           mappings: [
             {
               enabled: true,
@@ -203,7 +203,7 @@ describe('resource applications', () => {
                 "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
             },
           ],
-          remote_uri: 'string',
+          remote_uri: 'remote_uri',
         },
         self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
         service_auth_401_redirect: true,
@@ -216,7 +216,7 @@ describe('resource applications', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.applications.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.access.applications.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -230,7 +230,7 @@ describe('resource applications', () => {
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -244,7 +244,7 @@ describe('resource applications', () => {
   // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -259,7 +259,7 @@ describe('resource applications', () => {
   test.skip('revokeTokens', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.revokeTokens(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

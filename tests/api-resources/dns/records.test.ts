@@ -89,8 +89,8 @@ describe('resource records', () => {
     const response = await cloudflare.dns.records.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: {
-        present: 'string',
-        absent: 'string',
+        present: 'present',
+        absent: 'absent',
         exact: 'Hello, world',
         contains: 'ello, worl',
         startswith: 'Hello, w',

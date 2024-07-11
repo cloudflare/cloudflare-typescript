@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource settings', () => {
   // HTTP 422 from prism
   test.skip('edit', async () => {
-    const responsePromise = cloudflare.dns.settings.edit({ account_id: 'string' });
+    const responsePromise = cloudflare.dns.settings.edit({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +24,7 @@ describe('resource settings', () => {
 
   // HTTP 422 from prism
   test.skip('get', async () => {
-    const responsePromise = cloudflare.dns.settings.get({ account_id: 'string' });
+    const responsePromise = cloudflare.dns.settings.get({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

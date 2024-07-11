@@ -14,7 +14,7 @@ describe('resource jobs', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource jobs', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
-      account_id: 'string',
+      account_id: 'account_id',
       dataset: 'http_requests',
       enabled: false,
       frequency: 'high',
@@ -41,15 +41,15 @@ describe('resource jobs', () => {
       name: 'example.com',
       output_options: {
         'CVE-2021-4428': true,
-        batch_prefix: 'string',
-        batch_suffix: 'string',
-        field_delimiter: 'string',
+        batch_prefix: 'batch_prefix',
+        batch_suffix: 'batch_suffix',
+        field_delimiter: 'field_delimiter',
         field_names: ['ClientIP', 'EdgeStartTimestamp', 'RayID'],
         output_type: 'ndjson',
-        record_delimiter: 'string',
-        record_prefix: 'string',
-        record_suffix: 'string',
-        record_template: 'string',
+        record_delimiter: 'record_delimiter',
+        record_prefix: 'record_prefix',
+        record_suffix: 'record_suffix',
+        record_template: 'record_template',
         sample_rate: 0,
         timestamp_format: 'unixnano',
       },
@@ -59,7 +59,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('update', async () => {
-    const responsePromise = cloudflare.logpush.jobs.update(1, { account_id: 'string' });
+    const responsePromise = cloudflare.logpush.jobs.update(1, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -71,7 +71,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.logpush.jobs.list({ account_id: 'string' });
+    const responsePromise = cloudflare.logpush.jobs.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,7 +83,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.logpush.jobs.delete(1, { account_id: 'string' });
+    const responsePromise = cloudflare.logpush.jobs.delete(1, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,7 +95,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.logpush.jobs.get(1, { account_id: 'string' });
+    const responsePromise = cloudflare.logpush.jobs.get(1, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

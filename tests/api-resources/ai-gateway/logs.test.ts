@@ -32,7 +32,7 @@ describe('resource logs', () => {
       order_by: 'created_at',
       page: 1,
       per_page: 5,
-      search: 'string',
+      search: 'search',
       start_date: '2019-12-27T18:11:19.117Z',
       success: true,
     });

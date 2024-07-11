@@ -39,7 +39,7 @@ describe('resource events', () => {
           eventId: 0,
           format: 'JSON',
           involvedAsn: 0,
-          involvedCountry: 'string',
+          involvedCountry: 'involvedCountry',
           leakAsn: 0,
           page: 0,
           per_page: 0,

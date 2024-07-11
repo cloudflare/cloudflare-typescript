@@ -12,7 +12,9 @@ const cloudflare = new Cloudflare({
 describe('resource jobs', () => {
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.logpush.datasets.jobs.get('http_requests', { account_id: 'string' });
+    const responsePromise = cloudflare.logpush.datasets.jobs.get('http_requests', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

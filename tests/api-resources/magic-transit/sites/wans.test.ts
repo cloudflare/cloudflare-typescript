@@ -30,7 +30,7 @@ describe('resource wans', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
       vlan_tag: 0,
-      name: 'string',
+      name: 'name',
       priority: 0,
       static_addressing: {
         address: '192.0.2.0/24',
@@ -61,7 +61,7 @@ describe('resource wans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        name: 'string',
+        name: 'name',
         physport: 1,
         priority: 0,
         static_addressing: {
@@ -137,7 +137,7 @@ describe('resource wans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        name: 'string',
+        name: 'name',
         physport: 1,
         priority: 0,
         static_addressing: {

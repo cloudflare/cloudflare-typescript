@@ -26,7 +26,7 @@ describe('resource liveInputs', () => {
   test('create: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      defaultCreator: 'string',
+      defaultCreator: 'defaultCreator',
       deleteRecordingAfterDays: 45,
       meta: { name: 'test stream 1' },
       recording: {
@@ -54,7 +54,7 @@ describe('resource liveInputs', () => {
   test('update: required and optional params', async () => {
     const response = await cloudflare.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      defaultCreator: 'string',
+      defaultCreator: 'defaultCreator',
       deleteRecordingAfterDays: 45,
       meta: { name: 'test stream 1' },
       recording: {

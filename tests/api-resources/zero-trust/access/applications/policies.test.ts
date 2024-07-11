@@ -22,7 +22,7 @@ describe('resource policies', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
-        account_id: 'string',
+        account_id: 'account_id',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -46,12 +46,12 @@ describe('resource policies', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
-        account_id: 'string',
+        account_id: 'account_id',
         approval_groups: [
           {
             approvals_needed: 1,
             email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
-            email_list_uuid: 'string',
+            email_list_uuid: 'email_list_uuid',
           },
           {
             approvals_needed: 3,
@@ -92,7 +92,7 @@ describe('resource policies', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
-        account_id: 'string',
+        account_id: 'account_id',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -117,12 +117,12 @@ describe('resource policies', () => {
           { email: { email: 'test@example.com' } },
         ],
         name: 'Allow devs',
-        account_id: 'string',
+        account_id: 'account_id',
         approval_groups: [
           {
             approvals_needed: 1,
             email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
-            email_list_uuid: 'string',
+            email_list_uuid: 'email_list_uuid',
           },
           {
             approvals_needed: 3,
@@ -154,7 +154,7 @@ describe('resource policies', () => {
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.list(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -170,7 +170,7 @@ describe('resource policies', () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -186,7 +186,7 @@ describe('resource policies', () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.policies.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

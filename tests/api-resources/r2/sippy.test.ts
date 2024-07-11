@@ -26,13 +26,13 @@ describe('resource sippy', () => {
   test('update: required and optional params', async () => {
     const response = await cloudflare.r2.sippy.update('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      destination: { accessKeyId: 'string', provider: 'r2', secretAccessKey: 'string' },
+      destination: { accessKeyId: 'accessKeyId', provider: 'r2', secretAccessKey: 'secretAccessKey' },
       source: {
-        accessKeyId: 'string',
-        bucket: 'string',
+        accessKeyId: 'accessKeyId',
+        bucket: 'bucket',
         provider: 'aws',
-        region: 'string',
-        secretAccessKey: 'string',
+        region: 'region',
+        secretAccessKey: 'secretAccessKey',
       },
     });
   });

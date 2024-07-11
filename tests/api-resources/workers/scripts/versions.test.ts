@@ -34,7 +34,7 @@ describe('resource versions', () => {
         await toFile(Buffer.from('# my file contents'), 'README.md'),
       ],
       metadata: {
-        annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'string' },
+        annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
         bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
         compatibility_date: '2023-07-25',
         compatibility_flags: ['string', 'string', 'string'],

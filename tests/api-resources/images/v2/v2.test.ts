@@ -24,7 +24,7 @@ describe('resource v2', () => {
   test('list: required and optional params', async () => {
     const response = await cloudflare.images.v2.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      continuation_token: 'string',
+      continuation_token: 'continuation_token',
       per_page: 10,
       sort_order: 'asc',
     });

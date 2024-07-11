@@ -14,7 +14,7 @@ describe('resource validate', () => {
   test.skip('destination: only required params', async () => {
     const responsePromise = cloudflare.logpush.validate.destination({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource validate', () => {
   test.skip('destination: required and optional params', async () => {
     const response = await cloudflare.logpush.validate.destination({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 
@@ -37,7 +37,7 @@ describe('resource validate', () => {
   test.skip('origin: only required params', async () => {
     const responsePromise = cloudflare.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +52,7 @@ describe('resource validate', () => {
   test.skip('origin: required and optional params', async () => {
     const response = await cloudflare.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 });
