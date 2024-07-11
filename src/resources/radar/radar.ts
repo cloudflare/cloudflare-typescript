@@ -63,10 +63,6 @@ export namespace Radar {
   export import AS112TimeseriesResponse = AS112API.AS112TimeseriesResponse;
   export import AS112TimeseriesParams = AS112API.AS112TimeseriesParams;
   export import ConnectionTampering = ConnectionTamperingAPI.ConnectionTampering;
-  export import ConnectionTamperingSummaryResponse = ConnectionTamperingAPI.ConnectionTamperingSummaryResponse;
-  export import ConnectionTamperingTimeseriesGroupsResponse = ConnectionTamperingAPI.ConnectionTamperingTimeseriesGroupsResponse;
-  export import ConnectionTamperingSummaryParams = ConnectionTamperingAPI.ConnectionTamperingSummaryParams;
-  export import ConnectionTamperingTimeseriesGroupsParams = ConnectionTamperingAPI.ConnectionTamperingTimeseriesGroupsParams;
   export import Email = EmailAPI.Email;
   export import RadarEmailSeries = EmailAPI.RadarEmailSeries;
   export import RadarEmailSummary = EmailAPI.RadarEmailSummary;
