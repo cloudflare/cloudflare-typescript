@@ -187,7 +187,17 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    height?: number;
+
+    /**
+     * Body param:
+     */
     image?: Array<number>;
+
+    /**
+     * Body param:
+     */
+    image_b64?: string;
 
     /**
      * Body param:
@@ -207,12 +217,27 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    negative_prompt?: string;
+
+    /**
+     * Body param:
+     */
     num_steps?: number;
 
     /**
      * Body param:
      */
+    seed?: number;
+
+    /**
+     * Body param:
+     */
     strength?: number;
+
+    /**
+     * Body param:
+     */
+    width?: number;
   }
 
   export interface TextEmbeddings {
