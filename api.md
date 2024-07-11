@@ -5325,16 +5325,6 @@ Methods:
 
 ## ConnectionTampering
 
-Types:
-
-- <code><a href="./src/resources/radar/connection-tampering.ts">ConnectionTamperingSummaryResponse</a></code>
-- <code><a href="./src/resources/radar/connection-tampering.ts">ConnectionTamperingTimeseriesGroupsResponse</a></code>
-
-Methods:
-
-- <code title="get /radar/connection_tampering/summary">client.radar.connectionTampering.<a href="./src/resources/radar/connection-tampering.ts">summary</a>({ ...params }) -> ConnectionTamperingSummaryResponse</code>
-- <code title="get /radar/connection_tampering/timeseries_groups">client.radar.connectionTampering.<a href="./src/resources/radar/connection-tampering.ts">timeseriesGroups</a>({ ...params }) -> ConnectionTamperingTimeseriesGroupsResponse</code>
-
 ## Email
 
 Types:
