@@ -16,7 +16,7 @@ describe('resource identityProviders', () => {
       config: {},
       name: 'Widget Corps IDP',
       type: 'onetimepin',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,13 +42,13 @@ describe('resource identityProviders', () => {
       },
       name: 'Widget Corps IDP',
       type: 'onetimepin',
-      account_id: 'string',
+      account_id: 'account_id',
       id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       scim_config: {
         enabled: true,
         group_member_deprovision: true,
         seat_deprovision: true,
-        secret: 'string',
+        secret: 'secret',
         user_deprovision: true,
       },
     });
@@ -58,7 +58,7 @@ describe('resource identityProviders', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { config: {}, name: 'Widget Corps IDP', type: 'onetimepin', account_id: 'string' },
+      { config: {}, name: 'Widget Corps IDP', type: 'onetimepin', account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -86,13 +86,13 @@ describe('resource identityProviders', () => {
         },
         name: 'Widget Corps IDP',
         type: 'onetimepin',
-        account_id: 'string',
+        account_id: 'account_id',
         id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         scim_config: {
           enabled: true,
           group_member_deprovision: true,
           seat_deprovision: true,
-          secret: 'string',
+          secret: 'secret',
           user_deprovision: true,
         },
       },
@@ -101,7 +101,7 @@ describe('resource identityProviders', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.identityProviders.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.identityProviders.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -115,7 +115,7 @@ describe('resource identityProviders', () => {
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -130,7 +130,7 @@ describe('resource identityProviders', () => {
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.identityProviders.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

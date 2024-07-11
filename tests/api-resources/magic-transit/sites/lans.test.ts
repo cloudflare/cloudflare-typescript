@@ -31,7 +31,7 @@ describe('resource lans', () => {
       physport: 1,
       vlan_tag: 0,
       ha_link: true,
-      name: 'string',
+      name: 'name',
       nat: { static_prefix: '192.0.2.0/24' },
       routed_subnets: [
         { nat: { static_prefix: '192.0.2.0/24' }, next_hop: '192.0.2.1', prefix: '192.0.2.0/24' },
@@ -74,7 +74,7 @@ describe('resource lans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        name: 'string',
+        name: 'name',
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
         routed_subnets: [
@@ -162,7 +162,7 @@ describe('resource lans', () => {
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        name: 'string',
+        name: 'name',
         nat: { static_prefix: '192.0.2.0/24' },
         physport: 1,
         routed_subnets: [

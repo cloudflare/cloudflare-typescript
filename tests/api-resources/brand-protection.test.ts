@@ -46,7 +46,7 @@ describe('resource brandProtection', () => {
   test('urlInfo: required and optional params', async () => {
     const response = await cloudflare.brandProtection.urlInfo({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      url: 'string',
+      url: 'url',
       url_id_param: { url_id: 0 },
     });
   });

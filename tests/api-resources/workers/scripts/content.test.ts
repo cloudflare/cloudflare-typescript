@@ -34,8 +34,8 @@ describe('resource content', () => {
         await toFile(Buffer.from('# my file contents'), 'README.md'),
       ],
       metadata: { body_part: 'worker.js', main_module: 'worker.js' },
-      'CF-WORKER-BODY-PART': 'string',
-      'CF-WORKER-MAIN-MODULE-PART': 'string',
+      'CF-WORKER-BODY-PART': 'CF-WORKER-BODY-PART',
+      'CF-WORKER-MAIN-MODULE-PART': 'CF-WORKER-MAIN-MODULE-PART',
     });
   });
 

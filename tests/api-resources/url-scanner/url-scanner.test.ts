@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource urlScanner', () => {
   test('scan', async () => {
-    const responsePromise = cloudflare.urlScanner.scan('string');
+    const responsePromise = cloudflare.urlScanner.scan('accountId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,32 +23,32 @@ describe('resource urlScanner', () => {
 
   test('scan: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.urlScanner.scan('string', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+    await expect(
+      cloudflare.urlScanner.scan('accountId', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('scan: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.urlScanner.scan(
-        'string',
+        'accountId',
         {
           account_scans: true,
           asn: '13335',
           date_end: '2019-12-27T18:11:19.117Z',
           date_start: '2019-12-27T18:11:19.117Z',
-          hash: 'string',
+          hash: 'hash',
           hostname: 'example.com',
           ip: '1.1.1.1',
           is_malicious: true,
           limit: 100,
-          next_cursor: 'string',
-          page_asn: 'string',
-          page_hostname: 'string',
-          page_ip: 'string',
-          page_path: 'string',
-          page_url: 'string',
+          next_cursor: 'next_cursor',
+          page_asn: 'page_asn',
+          page_hostname: 'page_hostname',
+          page_ip: 'page_ip',
+          page_path: 'page_path',
+          page_url: 'page_url',
           path: '/samples/subresource-integrity/',
           scanId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           url: 'https://example.com/?hello',

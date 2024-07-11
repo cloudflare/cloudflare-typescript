@@ -27,7 +27,7 @@ describe('resource uniqueDevices', () => {
     const response = await cloudflare.zeroTrust.dex.tests.uniqueDevices.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       deviceId: ['string', 'string', 'string'],
-      testName: 'string',
+      testName: 'testName',
     });
   });
 });

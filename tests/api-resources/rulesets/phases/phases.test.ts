@@ -14,7 +14,7 @@ describe('resource phases', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.phases.update('http_request_firewall_custom', {
       rules: [{}, {}, {}],
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,7 +78,7 @@ describe('resource phases', () => {
           ref: 'my_ref',
         },
       ],
-      account_id: 'string',
+      account_id: 'account_id',
       description: 'My ruleset to execute managed rulesets',
       name: 'My ruleset',
     });
@@ -87,7 +87,7 @@ describe('resource phases', () => {
   // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.phases.get('http_request_firewall_custom', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

@@ -14,7 +14,7 @@ describe('resource userPolicyChecks', () => {
   test.skip('list', async () => {
     const responsePromise = cloudflare.zeroTrust.access.applications.userPolicyChecks.list(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

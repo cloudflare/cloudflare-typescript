@@ -73,7 +73,7 @@ describe('resource tests', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.speed.pages.tests.get('example.com', 'string', {
+    const responsePromise = cloudflare.speed.pages.tests.get('example.com', 'test_id', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -86,7 +86,7 @@ describe('resource tests', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.speed.pages.tests.get('example.com', 'string', {
+    const response = await cloudflare.speed.pages.tests.get('example.com', 'test_id', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

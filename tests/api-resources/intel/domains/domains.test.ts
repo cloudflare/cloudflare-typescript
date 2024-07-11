@@ -24,7 +24,7 @@ describe('resource domains', () => {
   test('get: required and optional params', async () => {
     const response = await cloudflare.intel.domains.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domain: 'string',
+      domain: 'domain',
     });
   });
 });

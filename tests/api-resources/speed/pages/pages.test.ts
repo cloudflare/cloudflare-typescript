@@ -33,7 +33,7 @@ describe('resource pages', () => {
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
       region: 'us-central1',
       start: '2014-01-01T05:20:00.12345Z',
-      tz: 'string',
+      tz: 'tz',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -52,7 +52,7 @@ describe('resource pages', () => {
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
       region: 'us-central1',
       start: '2014-01-01T05:20:00.12345Z',
-      tz: 'string',
+      tz: 'tz',
       end: '2014-01-01T05:20:00.12345Z',
     });
   });

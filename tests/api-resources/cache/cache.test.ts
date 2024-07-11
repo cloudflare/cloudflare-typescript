@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource cache', () => {
   test('purge: only required params', async () => {
-    const responsePromise = cloudflare.cache.purge({ zone_id: 'string' });
+    const responsePromise = cloudflare.cache.purge({ zone_id: 'zone_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource cache', () => {
 
   test('purge: required and optional params', async () => {
     const response = await cloudflare.cache.purge({
-      zone_id: 'string',
+      zone_id: 'zone_id',
       tags: ['a-cache-tag', 'another-cache-tag'],
     });
   });
