@@ -89,14 +89,14 @@ describe('resource aiGateway', () => {
     const response = await cloudflare.aiGateway.list({
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       id: 'my-gateway',
-      order_by: 'string',
+      order_by: 'order_by',
       page: 1,
       per_page: 5,
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.delete('string', {
+    const responsePromise = cloudflare.aiGateway.delete('id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -109,7 +109,7 @@ describe('resource aiGateway', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.aiGateway.delete('string', {
+    const response = await cloudflare.aiGateway.delete('id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
   });

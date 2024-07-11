@@ -16,7 +16,7 @@ describe('resource certificates', () => {
       certificate:
         '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
       name: 'Allow devs',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,7 +33,7 @@ describe('resource certificates', () => {
       certificate:
         '-----BEGIN CERTIFICATE-----\nMIIGAjCCA+qgAwIBAgIJAI7kymlF7CWT...N4RI7KKB7nikiuUf8vhULKy5IX10\nDrUtmu/B\n-----END CERTIFICATE-----',
       name: 'Allow devs',
-      account_id: 'string',
+      account_id: 'account_id',
       associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
     });
   });
@@ -44,7 +44,7 @@ describe('resource certificates', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
-        account_id: 'string',
+        account_id: 'account_id',
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -62,7 +62,7 @@ describe('resource certificates', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         associated_hostnames: ['admin.example.com', 'admin.example.com', 'admin.example.com'],
-        account_id: 'string',
+        account_id: 'account_id',
         name: 'Allow devs',
       },
     );
@@ -70,7 +70,7 @@ describe('resource certificates', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.access.certificates.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,7 +84,7 @@ describe('resource certificates', () => {
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -99,7 +99,7 @@ describe('resource certificates', () => {
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.certificates.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

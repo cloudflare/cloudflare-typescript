@@ -42,7 +42,7 @@ describe('resource holds', () => {
   test('delete: required and optional params', async () => {
     const response = await cloudflare.zones.holds.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      hold_after: 'string',
+      hold_after: 'hold_after',
     });
   });
 

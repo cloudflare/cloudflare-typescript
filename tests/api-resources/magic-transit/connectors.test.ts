@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource connectors', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.connectors.update('string', {
+    const responsePromise = cloudflare.magicTransit.connectors.update('connector_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,13 +24,13 @@ describe('resource connectors', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.connectors.update('string', {
+    const response = await cloudflare.magicTransit.connectors.update('connector_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       activated: true,
       interrupt_window_duration_hours: 0,
       interrupt_window_hour_of_day: 0,
-      notes: 'string',
-      timezone: 'string',
+      notes: 'notes',
+      timezone: 'timezone',
     });
   });
 
@@ -54,7 +54,7 @@ describe('resource connectors', () => {
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.connectors.edit('string', {
+    const responsePromise = cloudflare.magicTransit.connectors.edit('connector_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -67,18 +67,18 @@ describe('resource connectors', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.connectors.edit('string', {
+    const response = await cloudflare.magicTransit.connectors.edit('connector_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       activated: true,
       interrupt_window_duration_hours: 0,
       interrupt_window_hour_of_day: 0,
-      notes: 'string',
-      timezone: 'string',
+      notes: 'notes',
+      timezone: 'timezone',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.connectors.get('string', {
+    const responsePromise = cloudflare.magicTransit.connectors.get('connector_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -91,7 +91,7 @@ describe('resource connectors', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.connectors.get('string', {
+    const response = await cloudflare.magicTransit.connectors.get('connector_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

@@ -52,10 +52,10 @@ describe('resource zones', () => {
     await expect(
       cloudflare.zones.list(
         {
-          account: { id: 'string', name: 'string' },
+          account: { id: 'id', name: 'name' },
           direction: 'desc',
           match: 'any',
-          name: 'string',
+          name: 'name',
           order: 'status',
           page: 1,
           per_page: 5,

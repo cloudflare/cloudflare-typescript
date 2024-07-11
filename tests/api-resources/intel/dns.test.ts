@@ -24,7 +24,7 @@ describe('resource dns', () => {
   test('list: required and optional params', async () => {
     const response = await cloudflare.intel.dns.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      ipv4: 'string',
+      ipv4: 'ipv4',
       page: 1,
       per_page: 20,
       start_end_params: { end: '2021-04-30', start: '2021-04-01' },

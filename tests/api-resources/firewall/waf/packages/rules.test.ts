@@ -34,7 +34,7 @@ describe('resource rules', () => {
       order: 'priority',
       page: 1,
       per_page: 5,
-      priority: 'string',
+      priority: 'priority',
     });
   });
 

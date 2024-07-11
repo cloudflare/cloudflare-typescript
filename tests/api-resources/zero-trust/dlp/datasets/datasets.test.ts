@@ -12,8 +12,8 @@ const cloudflare = new Cloudflare({
 describe('resource datasets', () => {
   test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.create({
-      account_id: 'string',
-      name: 'string',
+      account_id: 'account_id',
+      name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,16 +26,16 @@ describe('resource datasets', () => {
 
   test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.create({
-      account_id: 'string',
-      name: 'string',
-      description: 'string',
+      account_id: 'account_id',
+      name: 'name',
+      description: 'description',
       secret: true,
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,14 +48,14 @@ describe('resource datasets', () => {
 
   test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'string',
-      description: 'string',
-      name: 'string',
+      account_id: 'account_id',
+      description: 'description',
+      name: 'name',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.datasets.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.dlp.datasets.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,12 +66,12 @@ describe('resource datasets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.datasets.list({ account_id: 'string' });
+    const response = await cloudflare.zeroTrust.dlp.datasets.list({ account_id: 'account_id' });
   });
 
   test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,13 +84,13 @@ describe('resource datasets', () => {
 
   test('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 
   test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.dlp.datasets.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -103,7 +103,7 @@ describe('resource datasets', () => {
 
   test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dlp.datasets.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 });

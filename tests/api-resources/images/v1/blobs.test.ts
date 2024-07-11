@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 describe('resource blobs', () => {
   // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.images.v1.blobs.get('string', {
+    const response = await cloudflare.images.v1.blobs.get('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

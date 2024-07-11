@@ -15,7 +15,7 @@ describe('resource organizations', () => {
     const responsePromise = cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,7 +31,7 @@ describe('resource organizations', () => {
     const response = await cloudflare.zeroTrust.organizations.create({
       auth_domain: 'test.cloudflareaccess.com',
       name: 'Widget Corps Internal Applications',
-      account_id: 'string',
+      account_id: 'account_id',
       allow_authenticate_via_warp: true,
       auto_redirect_to_identity: true,
       is_ui_read_only: true,
@@ -51,7 +51,7 @@ describe('resource organizations', () => {
 
   // TODO: investigate broken test
   test.skip('update', async () => {
-    const responsePromise = cloudflare.zeroTrust.organizations.update({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.organizations.update({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,7 +63,7 @@ describe('resource organizations', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.organizations.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.organizations.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,7 +77,7 @@ describe('resource organizations', () => {
   test.skip('revokeUsers: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -92,7 +92,7 @@ describe('resource organizations', () => {
   test.skip('revokeUsers: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 });

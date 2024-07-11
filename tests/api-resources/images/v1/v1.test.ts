@@ -53,7 +53,7 @@ describe('resource v1', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.delete('string', {
+    const responsePromise = cloudflare.images.v1.delete('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,13 +66,13 @@ describe('resource v1', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.images.v1.delete('string', {
+    const response = await cloudflare.images.v1.delete('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.edit('string', {
+    const responsePromise = cloudflare.images.v1.edit('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -85,7 +85,7 @@ describe('resource v1', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.images.v1.edit('string', {
+    const response = await cloudflare.images.v1.edit('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {},
       requireSignedURLs: true,
@@ -93,7 +93,7 @@ describe('resource v1', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.get('string', {
+    const responsePromise = cloudflare.images.v1.get('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +106,7 @@ describe('resource v1', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.images.v1.get('string', {
+    const response = await cloudflare.images.v1.get('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

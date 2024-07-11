@@ -18,7 +18,7 @@ describe('resource settings', () => {
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
       ],
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -37,13 +37,15 @@ describe('resource settings', () => {
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
       ],
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.certificates.settings.get({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.access.certificates.settings.get({
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
