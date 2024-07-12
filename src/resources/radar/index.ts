@@ -29,6 +29,13 @@ export {
 } from './ranking/index';
 export { SearchGlobalResponse, SearchGlobalParams, Search } from './search';
 export {
+  TCPResetsTimeoutSummaryResponse,
+  TCPResetsTimeoutTimeseriesGroupsResponse,
+  TCPResetsTimeoutSummaryParams,
+  TCPResetsTimeoutTimeseriesGroupsParams,
+  TCPResetsTimeouts,
+} from './tcp-resets-timeouts';
+export {
   TrafficAnomalyGetResponse,
   TrafficAnomalyGetParams,
   TrafficAnomalies,

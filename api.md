@@ -6015,6 +6015,18 @@ Methods:
 
 - <code title="get /radar/traffic_anomalies/locations">client.radar.trafficAnomalies.locations.<a href="./src/resources/radar/traffic-anomalies/locations.ts">get</a>({ ...params }) -> LocationGetResponse</code>
 
+## TCPResetsTimeouts
+
+Types:
+
+- <code><a href="./src/resources/radar/tcp-resets-timeouts.ts">TCPResetsTimeoutSummaryResponse</a></code>
+- <code><a href="./src/resources/radar/tcp-resets-timeouts.ts">TCPResetsTimeoutTimeseriesGroupsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/tcp_resets_timeouts/summary">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">summary</a>({ ...params }) -> TCPResetsTimeoutSummaryResponse</code>
+- <code title="get /radar/tcp_resets_timeouts/timeseries_groups">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">timeseriesGroups</a>({ ...params }) -> TCPResetsTimeoutTimeseriesGroupsResponse</code>
+
 # BotManagement
 
 Types:
@@ -6339,3 +6351,17 @@ Methods:
 - <code title="get /accounts/{account_id}/iam/resource_groups">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">list</a>({ ...params }) -> ResourceGroupListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">delete</a>(resourceGroupId, { ...params }) -> ResourceGroupDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/iam/resource_groups/{resource_group_id}">client.iam.resourceGroups.<a href="./src/resources/iam/resource-groups.ts">get</a>(resourceGroupId, { ...params }) -> ResourceGroupGetResponse</code>
+
+# CloudConnector
+
+## Rules
+
+Types:
+
+- <code><a href="./src/resources/cloud-connector/rules.ts">RuleUpdateResponse</a></code>
+- <code><a href="./src/resources/cloud-connector/rules.ts">RuleListResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/cloud_connector/rules">client.cloudConnector.rules.<a href="./src/resources/cloud-connector/rules.ts">update</a>([ ...body ]) -> RuleUpdateResponse</code>
+- <code title="get /zones/{zone_id}/cloud_connector/rules">client.cloudConnector.rules.<a href="./src/resources/cloud-connector/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>

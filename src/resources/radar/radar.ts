@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import * as ConnectionTamperingAPI from './connection-tampering';
 import * as DatasetsAPI from './datasets';
 import * as SearchAPI from './search';
+import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
 import * as AnnotationsAPI from './annotations/annotations';
 import * as AS112API from './as112/as112';
 import * as AttacksAPI from './attacks/attacks';
@@ -36,6 +37,9 @@ export class Radar extends APIResource {
   quality: QualityAPI.Quality = new QualityAPI.Quality(this._client);
   ranking: RankingAPI.Ranking = new RankingAPI.Ranking(this._client);
   trafficAnomalies: TrafficAnomaliesAPI.TrafficAnomalies = new TrafficAnomaliesAPI.TrafficAnomalies(
+    this._client,
+  );
+  tcpResetsTimeouts: TCPResetsTimeoutsAPI.TCPResetsTimeouts = new TCPResetsTimeoutsAPI.TCPResetsTimeouts(
     this._client,
   );
 }
@@ -82,4 +86,9 @@ export namespace Radar {
   export import TrafficAnomalies = TrafficAnomaliesAPI.TrafficAnomalies;
   export import TrafficAnomalyGetResponse = TrafficAnomaliesAPI.TrafficAnomalyGetResponse;
   export import TrafficAnomalyGetParams = TrafficAnomaliesAPI.TrafficAnomalyGetParams;
+  export import TCPResetsTimeouts = TCPResetsTimeoutsAPI.TCPResetsTimeouts;
+  export import TCPResetsTimeoutSummaryResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryResponse;
+  export import TCPResetsTimeoutTimeseriesGroupsResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsResponse;
+  export import TCPResetsTimeoutSummaryParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryParams;
+  export import TCPResetsTimeoutTimeseriesGroupsParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsParams;
 }
