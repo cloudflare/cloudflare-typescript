@@ -158,9 +158,9 @@ export namespace Location {
    * remains unchanged.
    */
   export interface Endpoints {
-    doh?: Endpoints.Doh;
+    doh?: Endpoints.DOH;
 
-    dot?: Endpoints.Dot;
+    dot?: Endpoints.DOT;
 
     ipv4?: Endpoints.IPV4;
 
@@ -168,7 +168,7 @@ export namespace Location {
   }
 
   export namespace Endpoints {
-    export interface Doh {
+    export interface DOH {
       /**
        * True if the endpoint is enabled for this location.
        */
@@ -179,7 +179,7 @@ export namespace Location {
        * source IPs are allowed. A non-empty list is only effective if the endpoint is
        * enabled for this location.
        */
-      networks?: Array<Doh.Network>;
+      networks?: Array<DOH.Network>;
 
       /**
        * True if the endpoint requires
@@ -189,7 +189,7 @@ export namespace Location {
       require_token?: boolean;
     }
 
-    export namespace Doh {
+    export namespace DOH {
       export interface Network {
         /**
          * The IP address or IP CIDR.
@@ -198,7 +198,7 @@ export namespace Location {
       }
     }
 
-    export interface Dot {
+    export interface DOT {
       /**
        * True if the endpoint is enabled for this location.
        */
@@ -209,10 +209,10 @@ export namespace Location {
        * source IPs are allowed. A non-empty list is only effective if the endpoint is
        * enabled for this location.
        */
-      networks?: Array<Dot.Network>;
+      networks?: Array<DOT.Network>;
     }
 
-    export namespace Dot {
+    export namespace DOT {
       export interface Network {
         /**
          * The IP address or IP CIDR.
