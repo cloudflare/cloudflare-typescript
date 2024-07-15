@@ -138,7 +138,8 @@ export type AIRunParams =
   | AIRunParams.AutomaticSpeechRecognition
   | AIRunParams.ImageClassification
   | AIRunParams.ObjectDetection
-  | AIRunParams.TextGeneration
+  | AIRunParams.Variant7
+  | AIRunParams.Variant8
   | AIRunParams.Translation
   | AIRunParams.Summarization
   | AIRunParams.ImageToText;
@@ -288,11 +289,21 @@ export namespace AIRunParams {
     image?: Array<number>;
   }
 
-  export interface TextGeneration {
+  export interface Variant7 {
     /**
      * Path param:
      */
     account_id: string;
+
+    /**
+     * Body param:
+     */
+    prompt: string;
+
+    /**
+     * Body param:
+     */
+    frequency_penalty?: number;
 
     /**
      * Body param:
@@ -307,12 +318,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    messages?: Array<AIRunParams.TextGeneration.Message>;
-
-    /**
-     * Body param:
-     */
-    prompt?: string;
+    presence_penalty?: number;
 
     /**
      * Body param:
@@ -322,14 +328,135 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    repetition_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    seed?: number;
+
+    /**
+     * Body param:
+     */
     stream?: boolean;
+
+    /**
+     * Body param:
+     */
+    temperature?: number;
+
+    /**
+     * Body param:
+     */
+    top_k?: number;
+
+    /**
+     * Body param:
+     */
+    top_p?: number;
   }
 
-  export namespace TextGeneration {
+  export interface Variant8 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    messages: Array<AIRunParams.Variant8.Message>;
+
+    /**
+     * Body param:
+     */
+    frequency_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    max_tokens?: number;
+
+    /**
+     * Body param:
+     */
+    presence_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    repetition_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    seed?: number;
+
+    /**
+     * Body param:
+     */
+    stream?: boolean;
+
+    /**
+     * Body param:
+     */
+    temperature?: number;
+
+    /**
+     * Body param:
+     */
+    tools?: Array<AIRunParams.Variant8.Tool>;
+
+    /**
+     * Body param:
+     */
+    top_k?: number;
+
+    /**
+     * Body param:
+     */
+    top_p?: number;
+  }
+
+  export namespace Variant8 {
     export interface Message {
       content: string;
 
       role: string;
+    }
+
+    export interface Tool {
+      function?: Tool.Function;
+
+      type?: string;
+    }
+
+    export namespace Tool {
+      export interface Function {
+        description?: string;
+
+        name?: string;
+
+        parameters?: Function.Parameters;
+      }
+
+      export namespace Function {
+        export interface Parameters {
+          properties?: Record<string, Parameters.Properties>;
+
+          required?: Array<string>;
+
+          type?: string;
+        }
+
+        export namespace Parameters {
+          export interface Properties {
+            description?: string;
+
+            type?: string;
+          }
+        }
+      }
     }
   }
 
