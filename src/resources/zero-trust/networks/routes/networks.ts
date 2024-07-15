@@ -73,6 +73,11 @@ export interface NetworkCreateParams {
   account_id: string;
 
   /**
+   * Body param: UUID of the tunnel.
+   */
+  tunnel_id: string;
+
+  /**
    * Body param: Optional remark describing the route.
    */
   comment?: string;
