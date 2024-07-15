@@ -92,7 +92,6 @@ export {
 } from './audit-ssh-settings';
 export {
   Location,
-  LocationNetwork,
   LocationDeleteResponse,
   LocationCreateParams,
   LocationUpdateParams,

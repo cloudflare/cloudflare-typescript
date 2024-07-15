@@ -4773,7 +4773,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">Location</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationNetwork</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationDeleteResponse</a></code>
 
 Methods:
