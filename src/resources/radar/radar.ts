@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as ConnectionTamperingAPI from './connection-tampering';
 import * as DatasetsAPI from './datasets';
 import * as SearchAPI from './search';
 import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
@@ -28,8 +27,6 @@ export class Radar extends APIResource {
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
   verifiedBots: VerifiedBotsAPI.VerifiedBots = new VerifiedBotsAPI.VerifiedBots(this._client);
   as112: AS112API.AS112 = new AS112API.AS112(this._client);
-  connectionTampering: ConnectionTamperingAPI.ConnectionTampering =
-    new ConnectionTamperingAPI.ConnectionTampering(this._client);
   email: EmailAPI.Email = new EmailAPI.Email(this._client);
   attacks: AttacksAPI.Attacks = new AttacksAPI.Attacks(this._client);
   entities: EntitiesAPI.Entities = new EntitiesAPI.Entities(this._client);
@@ -66,7 +63,6 @@ export namespace Radar {
   export import AS112 = AS112API.AS112;
   export import AS112TimeseriesResponse = AS112API.AS112TimeseriesResponse;
   export import AS112TimeseriesParams = AS112API.AS112TimeseriesParams;
-  export import ConnectionTampering = ConnectionTamperingAPI.ConnectionTampering;
   export import Email = EmailAPI.Email;
   export import RadarEmailSeries = EmailAPI.RadarEmailSeries;
   export import RadarEmailSummary = EmailAPI.RadarEmailSummary;
