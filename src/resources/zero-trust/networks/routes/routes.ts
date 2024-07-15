@@ -208,6 +208,11 @@ export interface RouteCreateParams {
   network: string;
 
   /**
+   * Body param: UUID of the tunnel.
+   */
+  tunnel_id: string;
+
+  /**
    * Body param: Optional remark describing the route.
    */
   comment?: string;
@@ -295,6 +300,11 @@ export interface RouteEditParams {
    * notation.
    */
   network?: string;
+
+  /**
+   * Body param: UUID of the tunnel.
+   */
+  tunnel_id?: string;
 
   /**
    * Body param: UUID of the virtual network.
