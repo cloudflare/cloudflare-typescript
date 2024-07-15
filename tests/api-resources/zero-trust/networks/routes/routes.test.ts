@@ -14,6 +14,7 @@ describe('resource routes', () => {
     const responsePromise = cloudflare.zeroTrust.networks.routes.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       network: '172.16.0.0/16',
+      tunnel_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,6 +29,7 @@ describe('resource routes', () => {
     const response = await cloudflare.zeroTrust.networks.routes.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       network: '172.16.0.0/16',
+      tunnel_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       comment: 'Example comment for this route.',
       virtual_network_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
@@ -103,6 +105,7 @@ describe('resource routes', () => {
       account_id: '699d98642c564d2e855e9661899b7252',
       comment: 'Example comment for this route.',
       network: '172.16.0.0/16',
+      tunnel_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       virtual_network_id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
     });
   });
