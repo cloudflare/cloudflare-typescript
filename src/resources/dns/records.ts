@@ -198,12 +198,6 @@ export interface ARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -268,12 +262,6 @@ export interface AAAARecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -345,12 +333,6 @@ export interface CAARecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -440,12 +422,6 @@ export interface CERTRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -533,12 +509,6 @@ export interface CNAMERecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -608,12 +578,6 @@ export interface DNSKEYRecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -708,12 +672,6 @@ export interface DSRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -806,12 +764,6 @@ export interface HTTPSRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -897,12 +849,6 @@ export interface LOCRecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -1038,12 +984,6 @@ export interface MXRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1107,12 +1047,6 @@ export interface NAPTRRecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -1212,12 +1146,6 @@ export interface NSRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1276,12 +1204,6 @@ export interface PTRRecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -1416,12 +1338,6 @@ export interface SMIMEARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1515,12 +1431,6 @@ export interface SRVRecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -1637,12 +1547,6 @@ export interface SSHFPRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1730,12 +1634,6 @@ export interface SVCBRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1821,12 +1719,6 @@ export interface TLSARecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
@@ -1930,12 +1822,6 @@ export interface TXTRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -2005,12 +1891,6 @@ export interface URIRecord {
    * When the record was created.
    */
   created_on?: string;
-
-  /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
 
   /**
    * Extra Cloudflare-specific information about the record.
