@@ -20,10 +20,10 @@ export class AI extends APIResource {
    * [Cloudflare Docs](https://developers.cloudflare.com/workers-ai/models/).
    */
   run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: AIRunResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,14 +31,13 @@ export class AI extends APIResource {
 }
 
 export type AIRunResponse =
-  | unknown
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.AutomaticSpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.UnionMember7
+  | AIRunResponse.UnionMember6
   | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
@@ -103,13 +102,13 @@ export namespace AIRunResponse {
     }
   }
 
-  export interface UnionMember7 {
+  export interface UnionMember6 {
     response?: string;
 
-    tool_calls?: Array<UnionMember7.ToolCall>;
+    tool_calls?: Array<UnionMember6.ToolCall>;
   }
 
-  export namespace UnionMember7 {
+  export namespace UnionMember6 {
     export interface ToolCall {
       arguments?: unknown;
 
@@ -131,32 +130,19 @@ export namespace AIRunResponse {
 }
 
 export type AIRunParams =
-  | AIRunParams.DumbPipe
   | AIRunParams.TextClassification
   | AIRunParams.TextToImage
   | AIRunParams.TextEmbeddings
   | AIRunParams.AutomaticSpeechRecognition
   | AIRunParams.ImageClassification
   | AIRunParams.ObjectDetection
+  | AIRunParams.Variant6
   | AIRunParams.Variant7
-  | AIRunParams.Variant8
   | AIRunParams.Translation
   | AIRunParams.Summarization
   | AIRunParams.ImageToText;
 
 export namespace AIRunParams {
-  export interface DumbPipe {
-    /**
-     * Path param:
-     */
-    account_id: string;
-
-    /**
-     * Body param:
-     */
-    body: unknown;
-  }
-
   export interface TextClassification {
     /**
      * Path param:
@@ -289,7 +275,7 @@ export namespace AIRunParams {
     image?: Array<number>;
   }
 
-  export interface Variant7 {
+  export interface Variant6 {
     /**
      * Path param:
      */
@@ -356,7 +342,7 @@ export namespace AIRunParams {
     top_p?: number;
   }
 
-  export interface Variant8 {
+  export interface Variant7 {
     /**
      * Path param:
      */
@@ -365,7 +351,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    messages: Array<AIRunParams.Variant8.Message>;
+    messages: Array<AIRunParams.Variant7.Message>;
 
     /**
      * Body param:
@@ -405,7 +391,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    tools?: Array<AIRunParams.Variant8.Tool>;
+    tools?: Array<AIRunParams.Variant7.Tool>;
 
     /**
      * Body param:
@@ -418,7 +404,7 @@ export namespace AIRunParams {
     top_p?: number;
   }
 
-  export namespace Variant8 {
+  export namespace Variant7 {
     export interface Message {
       content: string;
 
