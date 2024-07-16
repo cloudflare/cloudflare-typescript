@@ -28,6 +28,7 @@ describe('resource database', () => {
     const response = await cloudflare.d1.database.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my-database',
+      primary_location_hint: 'wnam',
     });
   });
 
