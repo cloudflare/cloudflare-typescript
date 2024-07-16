@@ -34,8 +34,8 @@ describe('resource operations', () => {
         host: ['api.cloudflare.com'],
         method: ['GET'],
         operation_status: 'new',
-        page: {},
-        per_page: {},
+        page: 1,
+        per_page: 5,
       },
     );
   });

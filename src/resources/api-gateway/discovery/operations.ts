@@ -4,7 +4,8 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as OperationsAPI from './operations';
 import * as DiscoveryAPI from './discovery';
-import { DiscoveryOperationsSinglePage } from './discovery';
+import { DiscoveryOperationsV4PagePaginationArray } from './discovery';
+import { type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
   /**
@@ -13,11 +14,11 @@ export class Operations extends APIResource {
   list(
     params: OperationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<DiscoveryOperationsSinglePage, DiscoveryAPI.DiscoveryOperation> {
+  ): Core.PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/discovery/operations`,
-      DiscoveryOperationsSinglePage,
+      DiscoveryOperationsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -51,7 +52,7 @@ export interface OperationEditResponse {
   state?: 'review' | 'saved' | 'ignored';
 }
 
-export interface OperationListParams {
+export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
@@ -99,16 +100,6 @@ export interface OperationListParams {
   origin?: 'ML' | 'SessionIdentifier';
 
   /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page.
-   */
-  per_page?: unknown;
-
-  /**
    * Query param: Filter results to only include discovery results in a particular
    * state. States are as follows
    *
@@ -142,4 +133,4 @@ export namespace Operations {
   export import OperationEditParams = OperationsAPI.OperationEditParams;
 }
 
-export { DiscoveryOperationsSinglePage };
+export { DiscoveryOperationsV4PagePaginationArray };

@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 import * as UserSchemasAPI from './user-schemas';
 import * as Shared from '../../shared';
 import * as OperationsAPI from './operations';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
@@ -29,12 +29,13 @@ export class UserSchemas extends APIResource {
   list(
     params: UserSchemaListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<PublicSchemasSinglePage, PublicSchema> {
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/api_gateway/user_schemas`, PublicSchemasSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/api_gateway/user_schemas`,
+      PublicSchemasV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -89,7 +90,7 @@ export class UserSchemas extends APIResource {
   }
 }
 
-export class PublicSchemasSinglePage extends SinglePage<PublicSchema> {}
+export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
 
 export type Message = Array<Shared.ResponseInfo>;
 
@@ -107,7 +108,7 @@ export interface PublicSchema {
   name: string;
 
   /**
-   * UUID identifier
+   * UUID
    */
   schema_id: string;
 
@@ -159,7 +160,7 @@ export namespace SchemaUpload {
   }
 }
 
-export type UserSchemaDeleteResponse = unknown | string | null;
+export type UserSchemaDeleteResponse = unknown | string;
 
 export interface UserSchemaCreateParams {
   /**
@@ -188,7 +189,7 @@ export interface UserSchemaCreateParams {
   validation_enabled?: 'true' | 'false';
 }
 
-export interface UserSchemaListParams {
+export interface UserSchemaListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
@@ -198,16 +199,6 @@ export interface UserSchemaListParams {
    * Query param: Omit the source-files of schemas and only retrieve their meta-data.
    */
   omit_source?: boolean;
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page.
-   */
-  per_page?: unknown;
 
   /**
    * Query param: Flag whether schema is enabled for validation.
@@ -251,7 +242,7 @@ export namespace UserSchemas {
   export import PublicSchema = UserSchemasAPI.PublicSchema;
   export import SchemaUpload = UserSchemasAPI.SchemaUpload;
   export import UserSchemaDeleteResponse = UserSchemasAPI.UserSchemaDeleteResponse;
-  export import PublicSchemasSinglePage = UserSchemasAPI.PublicSchemasSinglePage;
+  export import PublicSchemasV4PagePaginationArray = UserSchemasAPI.PublicSchemasV4PagePaginationArray;
   export import UserSchemaCreateParams = UserSchemasAPI.UserSchemaCreateParams;
   export import UserSchemaListParams = UserSchemasAPI.UserSchemaListParams;
   export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
@@ -259,6 +250,6 @@ export namespace UserSchemas {
   export import UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
   export import Operations = OperationsAPI.Operations;
   export import OperationListResponse = OperationsAPI.OperationListResponse;
-  export import OperationListResponsesSinglePage = OperationsAPI.OperationListResponsesSinglePage;
+  export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
   export import OperationListParams = OperationsAPI.OperationListParams;
 }

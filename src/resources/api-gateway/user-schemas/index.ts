@@ -10,12 +10,12 @@ export {
   UserSchemaDeleteParams,
   UserSchemaEditParams,
   UserSchemaGetParams,
-  PublicSchemasSinglePage,
+  PublicSchemasV4PagePaginationArray,
   UserSchemas,
 } from './user-schemas';
 export {
   OperationListResponse,
   OperationListParams,
-  OperationListResponsesSinglePage,
+  OperationListResponsesV4PagePaginationArray,
   Operations,
 } from './operations';
