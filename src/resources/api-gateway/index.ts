@@ -4,12 +4,14 @@ export { APIGateway } from './api-gateway';
 export {
   APIShield,
   OperationCreateResponse,
+  OperationListResponse,
   OperationDeleteResponse,
+  OperationGetResponse,
   OperationCreateParams,
   OperationListParams,
   OperationDeleteParams,
   OperationGetParams,
-  APIShieldsSinglePage,
+  OperationListResponsesV4PagePaginationArray,
   Operations,
 } from './operations/index';
 export {
@@ -23,7 +25,7 @@ export {
   DiscoveryOperation,
   DiscoveryGetResponse,
   DiscoveryGetParams,
-  DiscoveryOperationsSinglePage,
+  DiscoveryOperationsV4PagePaginationArray,
   Discovery,
 } from './discovery/index';
 export {
@@ -36,7 +38,7 @@ export {
   UserSchemaDeleteParams,
   UserSchemaEditParams,
   UserSchemaGetParams,
-  PublicSchemasSinglePage,
+  PublicSchemasV4PagePaginationArray,
   UserSchemas,
 } from './user-schemas/index';
 export { SchemaListResponse, SchemaListParams, Schemas } from './schemas';

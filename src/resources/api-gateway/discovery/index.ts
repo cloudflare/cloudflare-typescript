@@ -4,7 +4,7 @@ export {
   DiscoveryOperation,
   DiscoveryGetResponse,
   DiscoveryGetParams,
-  DiscoveryOperationsSinglePage,
+  DiscoveryOperationsV4PagePaginationArray,
   Discovery,
 } from './discovery';
 export { OperationEditResponse, OperationListParams, OperationEditParams, Operations } from './operations';
