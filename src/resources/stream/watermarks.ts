@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as WatermarksAPI from './watermarks';
-import { multipartFormRequestOptions } from '../../core';
 import { SinglePage } from '../../pagination';
 
 export class Watermarks extends APIResource {
@@ -16,7 +15,7 @@ export class Watermarks extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/stream/watermarks`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: Watermark }>
     )._thenUnwrap((obj) => obj.result);
   }

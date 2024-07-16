@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
-import { type Response } from '../../../_shims/index';
+import * as Core from '../../../core';
 import * as BlobsAPI from './blobs';
+import { type Response } from '../../../_shims/index';
 
 export class Blobs extends APIResource {
   /**

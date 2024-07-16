@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as LOADocumentsAPI from './loa-documents';
 import * as DownloadsAPI from './downloads';
-import { multipartFormRequestOptions } from '../../../core';
 
 export class LOADocuments extends APIResource {
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
@@ -20,7 +19,7 @@ export class LOADocuments extends APIResource {
     return (
       this._client.post(
         `/accounts/${account_id}/addressing/loa_documents`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: LOADocumentCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }

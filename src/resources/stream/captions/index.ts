@@ -3,6 +3,7 @@
 export { Caption, CaptionGetResponse, CaptionGetParams, Captions } from './captions';
 export {
   LanguageDeleteResponse,
+  LanguageCreateParams,
   LanguageUpdateParams,
   LanguageDeleteParams,
   LanguageGetParams,

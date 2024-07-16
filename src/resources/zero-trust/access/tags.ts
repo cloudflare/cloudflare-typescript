@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as TagsAPI from './tags';
 import { SinglePage } from '../../../pagination';
 
@@ -106,6 +106,16 @@ export interface TagCreateParams {
    * Body param: The name of the tag
    */
   name: string;
+
+  /**
+   * Body param:
+   */
+  created_at?: string;
+
+  /**
+   * Body param:
+   */
+  updated_at?: string;
 }
 
 export interface TagUpdateParams {
@@ -118,6 +128,16 @@ export interface TagUpdateParams {
    * Body param: The name of the tag
    */
   name: string;
+
+  /**
+   * Body param:
+   */
+  created_at?: string;
+
+  /**
+   * Body param:
+   */
+  updated_at?: string;
 }
 
 export interface TagListParams {

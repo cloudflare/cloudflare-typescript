@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as RecordsAPI from './records';
 import * as Shared from '../shared';
-import { multipartFormRequestOptions } from '../../core';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Records extends APIResource {
@@ -19,12 +18,11 @@ export class Records extends APIResource {
    *   were used when creating the record.
    */
   create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<Record> {
-    const { path_zone_id, body_zone_id, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${path_zone_id}/dns_records`, {
-        body: { zone_id: body_zone_id, ...body },
-        ...options,
-      }) as Core.APIPromise<{ result: Record }>
+      this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
+        result: Record;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -41,10 +39,10 @@ export class Records extends APIResource {
     params: RecordUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Record> {
-    const { path_zone_id, body_zone_id, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${path_zone_id}/dns_records/${dnsRecordId}`, {
-        body: { zone_id: body_zone_id, ...body },
+      this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
+        body,
         ...options,
       }) as Core.APIPromise<{ result: Record }>
     )._thenUnwrap((obj) => obj.result);
@@ -93,10 +91,10 @@ export class Records extends APIResource {
     params: RecordEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Record> {
-    const { path_zone_id, body_zone_id, ...body } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${path_zone_id}/dns_records/${dnsRecordId}`, {
-        body: { zone_id: body_zone_id, ...body },
+      this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
+        body,
         ...options,
       }) as Core.APIPromise<{ result: Record }>
     )._thenUnwrap((obj) => obj.result);
@@ -146,7 +144,7 @@ export class Records extends APIResource {
     return (
       this._client.post(
         `/zones/${zone_id}/dns_records/import`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: RecordImportResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -200,12 +198,6 @@ export interface ARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -237,16 +229,6 @@ export interface ARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export interface AAAARecord {
@@ -282,12 +264,6 @@ export interface AAAARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -319,16 +295,6 @@ export interface AAAARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export interface CAARecord {
@@ -369,12 +335,6 @@ export interface CAARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -400,16 +360,6 @@ export interface CAARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace CAARecord {
@@ -472,12 +422,6 @@ export interface CERTRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -503,16 +447,6 @@ export interface CERTRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace CERTRecord {
@@ -575,12 +509,6 @@ export interface CNAMERecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -612,16 +540,6 @@ export interface CNAMERecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export interface DNSKEYRecord {
@@ -662,12 +580,6 @@ export interface DNSKEYRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -693,16 +605,6 @@ export interface DNSKEYRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace DNSKEYRecord {
@@ -770,12 +672,6 @@ export interface DSRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -801,16 +697,6 @@ export interface DSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace DSRecord {
@@ -878,12 +764,6 @@ export interface HTTPSRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -909,16 +789,6 @@ export interface HTTPSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace HTTPSRecord {
@@ -981,12 +851,6 @@ export interface LOCRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1012,16 +876,6 @@ export interface LOCRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace LOCRecord {
@@ -1130,12 +984,6 @@ export interface MXRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1161,16 +1009,6 @@ export interface MXRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export interface NAPTRRecord {
@@ -1211,12 +1049,6 @@ export interface NAPTRRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1242,16 +1074,6 @@ export interface NAPTRRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace NAPTRRecord {
@@ -1324,12 +1146,6 @@ export interface NSRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1355,16 +1171,6 @@ export interface NSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export interface PTRRecord {
@@ -1400,12 +1206,6 @@ export interface PTRRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1431,16 +1231,6 @@ export interface PTRRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export type Record =
@@ -1548,12 +1338,6 @@ export interface SMIMEARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1579,16 +1363,6 @@ export interface SMIMEARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace SMIMEARecord {
@@ -1659,12 +1433,6 @@ export interface SRVRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1690,16 +1458,6 @@ export interface SRVRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace SRVRecord {
@@ -1789,12 +1547,6 @@ export interface SSHFPRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1820,16 +1572,6 @@ export interface SSHFPRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace SSHFPRecord {
@@ -1892,12 +1634,6 @@ export interface SVCBRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -1923,16 +1659,6 @@ export interface SVCBRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace SVCBRecord {
@@ -1995,12 +1721,6 @@ export interface TLSARecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -2026,16 +1746,6 @@ export interface TLSARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace TLSARecord {
@@ -2112,12 +1822,6 @@ export interface TXTRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -2143,16 +1847,6 @@ export interface TXTRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export interface URIRecord {
@@ -2199,12 +1893,6 @@ export interface URIRecord {
   created_on?: string;
 
   /**
-   * Whether this record can be modified/deleted (true means it's managed by
-   * Cloudflare).
-   */
-  locked?: boolean;
-
-  /**
    * Extra Cloudflare-specific information about the record.
    */
   meta?: RecordMetadata;
@@ -2230,16 +1918,6 @@ export interface URIRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-
-  /**
-   * Identifier
-   */
-  zone_id?: string;
-
-  /**
-   * The domain of the record.
-   */
-  zone_name?: string;
 }
 
 export namespace URIRecord {
@@ -2322,7 +2000,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid IPv4 address.
@@ -2368,18 +2046,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface AAAARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid IPv6 address.
@@ -2425,18 +2098,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface CAARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a CAA record.
@@ -2476,11 +2144,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace CAARecord {
@@ -2509,7 +2172,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a CERT record.
@@ -2549,11 +2212,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace CERTRecord {
@@ -2587,7 +2245,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid hostname. Must not match the record's name.
@@ -2633,18 +2291,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface DNSKEYRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a DNSKEY record.
@@ -2684,11 +2337,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace DNSKEYRecord {
@@ -2722,7 +2370,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a DS record.
@@ -2762,11 +2410,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace DSRecord {
@@ -2800,7 +2443,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a HTTPS record.
@@ -2840,11 +2483,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace HTTPSRecord {
@@ -2873,7 +2511,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a LOC record.
@@ -2913,11 +2551,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace LOCRecord {
@@ -2991,7 +2624,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid mail server hostname.
@@ -3037,18 +2670,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface NAPTRRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a NAPTR record.
@@ -3088,11 +2716,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace NAPTRRecord {
@@ -3136,7 +2759,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid name server host name.
@@ -3176,18 +2799,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface PTRRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Domain name pointing to the address.
@@ -3227,18 +2845,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface SMIMEARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SMIMEA record.
@@ -3278,11 +2891,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SMIMEARecord {
@@ -3316,7 +2924,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SRV record.
@@ -3358,11 +2966,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SRVRecord {
@@ -3418,7 +3021,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SSHFP record.
@@ -3458,11 +3061,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SSHFPRecord {
@@ -3491,7 +3089,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SVCB record.
@@ -3531,11 +3129,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SVCBRecord {
@@ -3564,7 +3157,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a TLSA record.
@@ -3604,11 +3197,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace TLSARecord {
@@ -3642,7 +3230,7 @@ export namespace RecordCreateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Text content for the record.
@@ -3682,18 +3270,13 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface URIRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a URI record.
@@ -3739,11 +3322,6 @@ export namespace RecordCreateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace URIRecord {
@@ -3791,7 +3369,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid IPv4 address.
@@ -3837,18 +3415,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface AAAARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid IPv6 address.
@@ -3894,18 +3467,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface CAARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a CAA record.
@@ -3945,11 +3513,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace CAARecord {
@@ -3978,7 +3541,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a CERT record.
@@ -4018,11 +3581,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace CERTRecord {
@@ -4056,7 +3614,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid hostname. Must not match the record's name.
@@ -4102,18 +3660,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface DNSKEYRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a DNSKEY record.
@@ -4153,11 +3706,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace DNSKEYRecord {
@@ -4191,7 +3739,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a DS record.
@@ -4231,11 +3779,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace DSRecord {
@@ -4269,7 +3812,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a HTTPS record.
@@ -4309,11 +3852,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace HTTPSRecord {
@@ -4342,7 +3880,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a LOC record.
@@ -4382,11 +3920,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace LOCRecord {
@@ -4460,7 +3993,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid mail server hostname.
@@ -4506,18 +4039,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface NAPTRRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a NAPTR record.
@@ -4557,11 +4085,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace NAPTRRecord {
@@ -4605,7 +4128,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid name server host name.
@@ -4645,18 +4168,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface PTRRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Domain name pointing to the address.
@@ -4696,18 +4214,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface SMIMEARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SMIMEA record.
@@ -4747,11 +4260,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SMIMEARecord {
@@ -4785,7 +4293,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SRV record.
@@ -4827,11 +4335,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SRVRecord {
@@ -4887,7 +4390,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SSHFP record.
@@ -4927,11 +4430,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SSHFPRecord {
@@ -4960,7 +4458,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SVCB record.
@@ -5000,11 +4498,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SVCBRecord {
@@ -5033,7 +4526,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a TLSA record.
@@ -5073,11 +4566,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace TLSARecord {
@@ -5111,7 +4599,7 @@ export namespace RecordUpdateParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Text content for the record.
@@ -5151,18 +4639,13 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface URIRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a URI record.
@@ -5208,11 +4691,6 @@ export namespace RecordUpdateParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace URIRecord {
@@ -5437,7 +4915,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid IPv4 address.
@@ -5483,18 +4961,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface AAAARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid IPv6 address.
@@ -5540,18 +5013,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface CAARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a CAA record.
@@ -5591,11 +5059,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace CAARecord {
@@ -5624,7 +5087,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a CERT record.
@@ -5664,11 +5127,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace CERTRecord {
@@ -5702,7 +5160,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid hostname. Must not match the record's name.
@@ -5748,18 +5206,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface DNSKEYRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a DNSKEY record.
@@ -5799,11 +5252,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace DNSKEYRecord {
@@ -5837,7 +5285,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a DS record.
@@ -5877,11 +5325,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace DSRecord {
@@ -5915,7 +5358,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a HTTPS record.
@@ -5955,11 +5398,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace HTTPSRecord {
@@ -5988,7 +5426,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a LOC record.
@@ -6028,11 +5466,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace LOCRecord {
@@ -6106,7 +5539,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid mail server hostname.
@@ -6152,18 +5585,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface NAPTRRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a NAPTR record.
@@ -6203,11 +5631,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace NAPTRRecord {
@@ -6251,7 +5674,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: A valid name server host name.
@@ -6291,18 +5714,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface PTRRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Domain name pointing to the address.
@@ -6342,18 +5760,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface SMIMEARecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SMIMEA record.
@@ -6393,11 +5806,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SMIMEARecord {
@@ -6431,7 +5839,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SRV record.
@@ -6473,11 +5881,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SRVRecord {
@@ -6533,7 +5936,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SSHFP record.
@@ -6573,11 +5976,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SSHFPRecord {
@@ -6606,7 +6004,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a SVCB record.
@@ -6646,11 +6044,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace SVCBRecord {
@@ -6679,7 +6072,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a TLSA record.
@@ -6719,11 +6112,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace TLSARecord {
@@ -6757,7 +6145,7 @@ export namespace RecordEditParams {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Text content for the record.
@@ -6797,18 +6185,13 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export interface URIRecord {
     /**
      * Path param: Identifier
      */
-    path_zone_id: string;
+    zone_id: string;
 
     /**
      * Body param: Components of a URI record.
@@ -6854,11 +6237,6 @@ export namespace RecordEditParams {
      * for Enterprise zones.
      */
     ttl?: TTLParam;
-
-    /**
-     * Body param: Identifier
-     */
-    body_zone_id?: string;
   }
 
   export namespace URIRecord {

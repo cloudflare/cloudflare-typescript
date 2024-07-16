@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as CfInterconnectsAPI from './cf-interconnects';
 import * as MagicTransitAPI from './magic-transit';
 
@@ -12,13 +12,13 @@ export class CfInterconnects extends APIResource {
    * without persisting changes.
    */
   update(
-    tunnelIdentifier: string,
+    cfInterconnectId: string,
     params: CfInterconnectUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectUpdateResponse> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/magic/cf_interconnects/${tunnelIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CfInterconnectUpdateResponse }>
@@ -44,14 +44,14 @@ export class CfInterconnects extends APIResource {
    * Lists details for a specific interconnect.
    */
   get(
-    tunnelIdentifier: string,
+    cfInterconnectId: string,
     params: CfInterconnectGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/magic/cf_interconnects/${tunnelIdentifier}`,
+        `/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`,
         options,
       ) as Core.APIPromise<{ result: CfInterconnectGetResponse }>
     )._thenUnwrap((obj) => obj.result);

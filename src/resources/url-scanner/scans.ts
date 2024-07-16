@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { type Response } from '../../_shims/index';
+import * as Core from '../../core';
 import * as ScansAPI from './scans';
 import * as TopAPI from '../radar/http/top';
+import { type Response as FetchResponse } from '../../_shims/index';
 
 export class Scans extends APIResource {
   /**
@@ -28,11 +28,27 @@ export class Scans extends APIResource {
   /**
    * Get URL scan by uuid
    */
-  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse> {
+  get(
+    accountId: string,
+    scanId: string,
+    query?: ScanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanGetResponse>;
+  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>;
+  get(
+    accountId: string,
+    scanId: string,
+    query: ScanGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScanGetResponse> {
+    if (isRequestOptions(query)) {
+      return this.get(accountId, scanId, {}, query);
+    }
     return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, options) as Core.APIPromise<{
-        result: ScanGetResponse;
-      }>
+      this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: ScanGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -56,14 +72,18 @@ export class Scans extends APIResource {
     scanId: string,
     query?: ScanScreenshotParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Response>;
-  screenshot(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<Response>;
+  ): Core.APIPromise<FetchResponse>;
+  screenshot(
+    accountId: string,
+    scanId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FetchResponse>;
   screenshot(
     accountId: string,
     scanId: string,
     query: ScanScreenshotParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
+  ): Core.APIPromise<FetchResponse> {
     if (isRequestOptions(query)) {
       return this.screenshot(accountId, scanId, {}, query);
     }
@@ -825,6 +845,13 @@ export interface ScanCreateParams {
   visibility?: 'Public' | 'Unlisted';
 }
 
+export interface ScanGetParams {
+  /**
+   * Whether to return full report (scan summary and network log).
+   */
+  full?: boolean;
+}
+
 export interface ScanScreenshotParams {
   /**
    * Target device type
@@ -839,5 +866,6 @@ export namespace Scans {
   export import ScanGetResponse = ScansAPI.ScanGetResponse;
   export import ScanHarResponse = ScansAPI.ScanHarResponse;
   export import ScanCreateParams = ScansAPI.ScanCreateParams;
+  export import ScanGetParams = ScansAPI.ScanGetParams;
   export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
 }

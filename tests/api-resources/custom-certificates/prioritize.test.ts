@@ -27,7 +27,10 @@ describe('resource prioritize', () => {
   test('update: required and optional params', async () => {
     const response = await cloudflare.customCertificates.prioritize.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      certificates: [{ priority: 2 }, { priority: 1 }],
+      certificates: [
+        { id: '5a7805061c76ada191ed06f989cc3dac', priority: 2 },
+        { id: '9a7806061c88ada191ed06f989cc3dac', priority: 1 },
+      ],
     });
   });
 });

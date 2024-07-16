@@ -1,9 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as SnapshotsAPI from './snapshots';
-import { multipartFormRequestOptions } from '../../../core';
 
 export class Snapshots extends APIResource {
   /**
@@ -18,7 +17,7 @@ export class Snapshots extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`,
-        multipartFormRequestOptions({ body, ...options }),
+        Core.multipartFormRequestOptions({ body, ...options }),
       ) as Core.APIPromise<{ result: SnapshotUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }

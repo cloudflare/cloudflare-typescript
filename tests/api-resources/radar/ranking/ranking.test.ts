@@ -34,7 +34,7 @@ describe('resource ranking', () => {
       cloudflare.radar.ranking.timeseriesGroups(
         {
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['1d', '2d', '7d'],
+          dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           domains: ['string', 'string', 'string'],
           format: 'JSON',

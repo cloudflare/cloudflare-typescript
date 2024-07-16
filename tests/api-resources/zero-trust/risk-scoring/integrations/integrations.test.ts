@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource integrations', () => {
   test('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.create({
-      account_id: 'string',
+      account_id: 'account_id',
       integration_type: 'Okta',
       tenant_url: 'https://example.com',
     });
@@ -27,17 +27,17 @@ describe('resource integrations', () => {
 
   test('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.riskScoring.integrations.create({
-      account_id: 'string',
+      account_id: 'account_id',
       integration_type: 'Okta',
       tenant_url: 'https://example.com',
-      reference_id: 'string',
+      reference_id: 'reference_id',
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'string', active: true, tenant_url: 'https://example.com' },
+      { account_id: 'account_id', active: true, tenant_url: 'https://example.com' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,13 +51,18 @@ describe('resource integrations', () => {
   test('update: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.riskScoring.integrations.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'string', active: true, tenant_url: 'https://example.com', reference_id: 'string' },
+      {
+        account_id: 'account_id',
+        active: true,
+        tenant_url: 'https://example.com',
+        reference_id: 'reference_id',
+      },
     );
   });
 
   // bug in prism where it confuses this method with /zt_risk_scoring/{user_id}
   test.skip('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,13 +74,13 @@ describe('resource integrations', () => {
 
   // bug in prism where it confuses this method with /zt_risk_scoring/{user_id}
   test.skip('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.riskScoring.integrations.list({ account_id: 'string' });
+    const response = await cloudflare.zeroTrust.riskScoring.integrations.list({ account_id: 'account_id' });
   });
 
   test('delete: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -89,14 +94,14 @@ describe('resource integrations', () => {
   test('delete: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.riskScoring.integrations.delete(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
   });
 
   test('get: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -110,7 +115,7 @@ describe('resource integrations', () => {
   test('get: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.riskScoring.integrations.get(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
   });
 });

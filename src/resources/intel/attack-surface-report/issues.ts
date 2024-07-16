@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as IssuesAPI from './issues';
 import * as Shared from '../../shared';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
@@ -107,12 +107,12 @@ export interface IssueListResponse {
 
   messages: Array<Shared.ResponseInfo>;
 
-  result: IssueListResponse.Result;
-
   /**
    * Whether the API call was successful
    */
   success: true;
+
+  result?: IssueListResponse.Result;
 }
 
 export namespace IssueListResponse {

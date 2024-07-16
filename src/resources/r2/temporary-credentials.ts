@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as TemporaryCredentialsAPI from './temporary-credentials';
 
 export class TemporaryCredentials extends APIResource {
@@ -25,7 +25,7 @@ export class TemporaryCredentials extends APIResource {
 
 export interface TemporaryCredential {
   /**
-   * Name of the GCS bucket
+   * Name of the R2 bucket
    */
   bucket: string;
 
@@ -79,7 +79,7 @@ export interface TemporaryCredentialCreateParams {
   account_id: string;
 
   /**
-   * Body param: Name of the GCS bucket
+   * Body param: Name of the R2 bucket
    */
   bucket: string;
 

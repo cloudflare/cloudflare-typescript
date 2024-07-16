@@ -13,7 +13,7 @@ describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.dns.records.create({
-      path_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
       name: 'example.com',
       type: 'A',
@@ -30,7 +30,7 @@ describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.dns.records.create({
-      path_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
       name: 'example.com',
       type: 'A',
@@ -39,14 +39,13 @@ describe('resource records', () => {
       proxied: false,
       tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
       ttl: 3600,
-      body_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      path_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
       name: 'example.com',
       type: 'A',
@@ -63,7 +62,7 @@ describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await cloudflare.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      path_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
       name: 'example.com',
       type: 'A',
@@ -72,7 +71,6 @@ describe('resource records', () => {
       proxied: false,
       tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
       ttl: 3600,
-      body_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
@@ -91,8 +89,8 @@ describe('resource records', () => {
     const response = await cloudflare.dns.records.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       comment: {
-        present: 'string',
-        absent: 'string',
+        present: 'present',
+        absent: 'absent',
         exact: 'Hello, world',
         contains: 'ello, worl',
         startswith: 'Hello, w',
@@ -142,7 +140,7 @@ describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      path_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
       name: 'example.com',
       type: 'A',
@@ -159,7 +157,7 @@ describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('edit: required and optional params', async () => {
     const response = await cloudflare.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      path_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
       name: 'example.com',
       type: 'A',
@@ -168,7 +166,6 @@ describe('resource records', () => {
       proxied: false,
       tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
       ttl: 3600,
-      body_zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 

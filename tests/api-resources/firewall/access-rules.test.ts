@@ -15,7 +15,7 @@ describe('resource accessRules', () => {
     const responsePromise = cloudflare.firewall.accessRules.create({
       configuration: {},
       mode: 'challenge',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,14 +31,14 @@ describe('resource accessRules', () => {
     const response = await cloudflare.firewall.accessRules.create({
       configuration: { target: 'ip', value: '198.51.100.4' },
       mode: 'challenge',
-      account_id: 'string',
+      account_id: 'account_id',
       notes: 'This rule is enabled because of an event that occurred on date X.',
     });
   });
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.firewall.accessRules.list({ account_id: 'string' });
+    const responsePromise = cloudflare.firewall.accessRules.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,7 +50,7 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.firewall.accessRules.delete({}, { account_id: 'string' });
+    const responsePromise = cloudflare.firewall.accessRules.delete({}, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,7 +64,7 @@ describe('resource accessRules', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = cloudflare.firewall.accessRules.edit(
       {},
-      { configuration: {}, mode: 'challenge', account_id: 'string' },
+      { configuration: {}, mode: 'challenge', account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -82,7 +82,7 @@ describe('resource accessRules', () => {
       {
         configuration: { target: 'ip', value: '198.51.100.4' },
         mode: 'challenge',
-        account_id: 'string',
+        account_id: 'account_id',
         notes: 'This rule is enabled because of an event that occurred on date X.',
       },
     );
@@ -90,7 +90,7 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.firewall.accessRules.get({}, { account_id: 'string' });
+    const responsePromise = cloudflare.firewall.accessRules.get({}, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

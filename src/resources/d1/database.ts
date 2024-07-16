@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as DatabaseAPI from './database';
 import * as D1API from './d1';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -209,6 +209,13 @@ export interface DatabaseCreateParams {
    * Body param:
    */
   name: string;
+
+  /**
+   * Body param: Specify the region to create the D1 primary, if available. If this
+   * option is omitted, the D1 will be created as close as possible to the current
+   * user.
+   */
+  primary_location_hint?: 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
 }
 
 export interface DatabaseListParams extends V4PagePaginationArrayParams {
@@ -244,7 +251,8 @@ export interface DatabaseQueryParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
+   * which will be executed as a batch.
    */
   sql: string;
 
@@ -261,7 +269,8 @@ export interface DatabaseRawParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
+   * which will be executed as a batch.
    */
   sql: string;
 

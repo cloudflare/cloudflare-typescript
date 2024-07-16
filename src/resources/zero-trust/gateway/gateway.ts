@@ -1,11 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as GatewayAPI from './gateway';
 import * as AppTypesAPI from './app-types';
 import * as AuditSSHSettingsAPI from './audit-ssh-settings';
 import * as CategoriesAPI from './categories';
+import * as CertificatesAPI from './certificates';
 import * as ConfigurationsAPI from './configurations';
 import * as LocationsAPI from './locations';
 import * as LoggingAPI from './logging';
@@ -25,6 +26,7 @@ export class Gateway extends APIResource {
   logging: LoggingAPI.Logging = new LoggingAPI.Logging(this._client);
   proxyEndpoints: ProxyEndpointsAPI.ProxyEndpoints = new ProxyEndpointsAPI.ProxyEndpoints(this._client);
   rules: RulesAPI.Rules = new RulesAPI.Rules(this._client);
+  certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
 
   /**
    * Creates a Zero Trust account with an existing Cloudflare account.
@@ -143,7 +145,6 @@ export namespace Gateway {
   export import ListGetParams = ListsAPI.ListGetParams;
   export import Locations = LocationsAPI.Locations;
   export import Location = LocationsAPI.Location;
-  export import LocationNetwork = LocationsAPI.LocationNetwork;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
   export import LocationCreateParams = LocationsAPI.LocationCreateParams;
@@ -179,4 +180,14 @@ export namespace Gateway {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
+  export import Certificates = CertificatesAPI.Certificates;
+  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
+  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
+  export import CertificateListResponsesSinglePage = CertificatesAPI.CertificateListResponsesSinglePage;
+  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }

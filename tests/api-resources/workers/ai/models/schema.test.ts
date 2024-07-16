@@ -13,7 +13,7 @@ describe('resource schema', () => {
   test('get: only required params', async () => {
     const responsePromise = cloudflare.workers.ai.models.schema.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      model: 'string',
+      model: 'model',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource schema', () => {
   test('get: required and optional params', async () => {
     const response = await cloudflare.workers.ai.models.schema.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      model: 'string',
+      model: 'model',
     });
   });
 });

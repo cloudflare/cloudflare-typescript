@@ -14,7 +14,7 @@ describe('resource ownership', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.logpush.ownership.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource ownership', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.logpush.ownership.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 
@@ -38,7 +38,7 @@ describe('resource ownership', () => {
     const responsePromise = cloudflare.logpush.ownership.validate({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       ownership_challenge: '00000000000000000000',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,7 +54,7 @@ describe('resource ownership', () => {
     const response = await cloudflare.logpush.ownership.validate({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       ownership_challenge: '00000000000000000000',
-      account_id: 'string',
+      account_id: 'account_id',
     });
   });
 });

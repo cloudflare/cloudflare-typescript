@@ -13,7 +13,7 @@ describe('resource rules', () => {
   // TODO: investigate broken test
   test.skip('create', async () => {
     const responsePromise = cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource rules', () => {
     const responsePromise = cloudflare.rulesets.rules.delete(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -45,7 +45,7 @@ describe('resource rules', () => {
     const responsePromise = cloudflare.rulesets.rules.edit(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

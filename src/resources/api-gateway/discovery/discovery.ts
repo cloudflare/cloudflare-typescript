@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as DiscoveryAPI from './discovery';
 import * as OperationsAPI from './operations';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray } from '../../../pagination';
 
 export class Discovery extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
@@ -23,11 +23,11 @@ export class Discovery extends APIResource {
   }
 }
 
-export class DiscoveryOperationsSinglePage extends SinglePage<DiscoveryOperation> {}
+export class DiscoveryOperationsV4PagePaginationArray extends V4PagePaginationArray<DiscoveryOperation> {}
 
 export interface DiscoveryOperation {
   /**
-   * UUID identifier
+   * UUID
    */
   id: string;
 
@@ -91,9 +91,9 @@ export namespace DiscoveryOperation {
 }
 
 export interface DiscoveryGetResponse {
-  schemas?: Array<unknown>;
+  schemas: Array<unknown>;
 
-  timestamp?: string;
+  timestamp: string;
 }
 
 export interface DiscoveryGetParams {

@@ -14,7 +14,7 @@ describe('resource customPages', () => {
     const responsePromise = cloudflare.zeroTrust.access.customPages.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-      name: 'string',
+      name: 'name',
       type: 'identity_denied',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,9 +30,12 @@ describe('resource customPages', () => {
     const response = await cloudflare.zeroTrust.access.customPages.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-      name: 'string',
+      name: 'name',
       type: 'identity_denied',
       app_count: 0,
+      created_at: '2014-01-01T05:20:00.12345Z',
+      uid: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+      updated_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
@@ -42,7 +45,7 @@ describe('resource customPages', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
+        name: 'name',
         type: 'identity_denied',
       },
     );
@@ -61,9 +64,12 @@ describe('resource customPages', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         custom_html: '<html><body><h1>Access Denied</h1></body></html>',
-        name: 'string',
+        name: 'name',
         type: 'identity_denied',
         app_count: 0,
+        created_at: '2014-01-01T05:20:00.12345Z',
+        uid: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
+        updated_at: '2014-01-01T05:20:00.12345Z',
       },
     );
   });

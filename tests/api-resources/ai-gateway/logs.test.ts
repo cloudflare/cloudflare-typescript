@@ -10,8 +10,8 @@ const cloudflare = new Cloudflare({
 });
 
 describe('resource logs', () => {
-  test('get: only required params', async () => {
-    const responsePromise = cloudflare.aiGateway.logs.get('my-gateway', {
+  test('list: only required params', async () => {
+    const responsePromise = cloudflare.aiGateway.logs.list('my-gateway', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -23,8 +23,8 @@ describe('resource logs', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
-    const response = await cloudflare.aiGateway.logs.get('my-gateway', {
+  test('list: required and optional params', async () => {
+    const response = await cloudflare.aiGateway.logs.list('my-gateway', {
       account_id: '0d37909e38d3e99c29fa2cd343ac421a',
       cached: true,
       direction: 'asc',
@@ -32,7 +32,7 @@ describe('resource logs', () => {
       order_by: 'created_at',
       page: 1,
       per_page: 5,
-      search: 'string',
+      search: 'search',
       start_date: '2019-12-27T18:11:19.117Z',
       success: true,
     });

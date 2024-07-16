@@ -1,10 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as AIAPI from './ai';
 import * as ModelsAPI from './models/models';
-import { type Uploadable } from '../../../core';
 
 export class AI extends APIResource {
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
@@ -33,14 +32,13 @@ export class AI extends APIResource {
 
 export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
-  | Uploadable
-  | Array<number>
+  | Core.Uploadable
   | AIRunResponse.TextEmbeddings
-  | AIRunResponse.SpeechRecognition
+  | AIRunResponse.AutomaticSpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.UnionMember7
-  | Uploadable
+  | AIRunResponse.UnionMember6
+  | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText;
@@ -58,17 +56,17 @@ export namespace AIRunResponse {
     shape?: Array<number>;
   }
 
-  export interface SpeechRecognition {
+  export interface AutomaticSpeechRecognition {
     text: string;
 
     vtt?: string;
 
     word_count?: number;
 
-    words?: Array<SpeechRecognition.Word>;
+    words?: Array<AutomaticSpeechRecognition.Word>;
   }
 
-  export namespace SpeechRecognition {
+  export namespace AutomaticSpeechRecognition {
     export interface Word {
       end?: number;
 
@@ -104,13 +102,13 @@ export namespace AIRunResponse {
     }
   }
 
-  export interface UnionMember7 {
+  export interface UnionMember6 {
     response?: string;
 
-    tool_calls?: Array<UnionMember7.ToolCall>;
+    tool_calls?: Array<UnionMember6.ToolCall>;
   }
 
-  export namespace UnionMember7 {
+  export namespace UnionMember6 {
     export interface ToolCall {
       arguments?: unknown;
 
@@ -134,12 +132,12 @@ export namespace AIRunResponse {
 export type AIRunParams =
   | AIRunParams.TextClassification
   | AIRunParams.TextToImage
-  | AIRunParams.SentenceSimilarity
   | AIRunParams.TextEmbeddings
-  | AIRunParams.SpeechRecognition
+  | AIRunParams.AutomaticSpeechRecognition
   | AIRunParams.ImageClassification
   | AIRunParams.ObjectDetection
-  | AIRunParams.TextGeneration
+  | AIRunParams.Variant6
+  | AIRunParams.Variant7
   | AIRunParams.Translation
   | AIRunParams.Summarization
   | AIRunParams.ImageToText;
@@ -176,7 +174,27 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    height?: number;
+
+    /**
+     * Body param:
+     */
     image?: Array<number>;
+
+    /**
+     * Body param:
+     */
+    image_b64?: string;
+
+    /**
+     * Body param:
+     */
+    lora_weights?: Array<number>;
+
+    /**
+     * Body param:
+     */
+    loras?: Array<string>;
 
     /**
      * Body param:
@@ -186,29 +204,27 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    negative_prompt?: string;
+
+    /**
+     * Body param:
+     */
     num_steps?: number;
 
     /**
      * Body param:
      */
+    seed?: number;
+
+    /**
+     * Body param:
+     */
     strength?: number;
-  }
-
-  export interface SentenceSimilarity {
-    /**
-     * Path param:
-     */
-    account_id: string;
 
     /**
      * Body param:
      */
-    sentences: Array<string>;
-
-    /**
-     * Body param:
-     */
-    source: string;
+    width?: number;
   }
 
   export interface TextEmbeddings {
@@ -223,7 +239,7 @@ export namespace AIRunParams {
     text: string | Array<string>;
   }
 
-  export interface SpeechRecognition {
+  export interface AutomaticSpeechRecognition {
     /**
      * Path param:
      */
@@ -259,11 +275,21 @@ export namespace AIRunParams {
     image?: Array<number>;
   }
 
-  export interface TextGeneration {
+  export interface Variant6 {
     /**
      * Path param:
      */
     account_id: string;
+
+    /**
+     * Body param:
+     */
+    prompt: string;
+
+    /**
+     * Body param:
+     */
+    frequency_penalty?: number;
 
     /**
      * Body param:
@@ -278,12 +304,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    messages?: Array<AIRunParams.TextGeneration.Message>;
-
-    /**
-     * Body param:
-     */
-    prompt?: string;
+    presence_penalty?: number;
 
     /**
      * Body param:
@@ -293,14 +314,135 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    repetition_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    seed?: number;
+
+    /**
+     * Body param:
+     */
     stream?: boolean;
+
+    /**
+     * Body param:
+     */
+    temperature?: number;
+
+    /**
+     * Body param:
+     */
+    top_k?: number;
+
+    /**
+     * Body param:
+     */
+    top_p?: number;
   }
 
-  export namespace TextGeneration {
+  export interface Variant7 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    messages: Array<AIRunParams.Variant7.Message>;
+
+    /**
+     * Body param:
+     */
+    frequency_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    max_tokens?: number;
+
+    /**
+     * Body param:
+     */
+    presence_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    repetition_penalty?: number;
+
+    /**
+     * Body param:
+     */
+    seed?: number;
+
+    /**
+     * Body param:
+     */
+    stream?: boolean;
+
+    /**
+     * Body param:
+     */
+    temperature?: number;
+
+    /**
+     * Body param:
+     */
+    tools?: Array<AIRunParams.Variant7.Tool>;
+
+    /**
+     * Body param:
+     */
+    top_k?: number;
+
+    /**
+     * Body param:
+     */
+    top_p?: number;
+  }
+
+  export namespace Variant7 {
     export interface Message {
       content: string;
 
       role: string;
+    }
+
+    export interface Tool {
+      function?: Tool.Function;
+
+      type?: string;
+    }
+
+    export namespace Tool {
+      export interface Function {
+        description?: string;
+
+        name?: string;
+
+        parameters?: Function.Parameters;
+      }
+
+      export namespace Function {
+        export interface Parameters {
+          properties?: Record<string, Parameters.Properties>;
+
+          required?: Array<string>;
+
+          type?: string;
+        }
+
+        export namespace Parameters {
+          export interface Properties {
+            description?: string;
+
+            type?: string;
+          }
+        }
+      }
     }
   }
 

@@ -31,7 +31,7 @@ describe('resource ips', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.ips.list({ networks: 'string' }, { path: '/_stainless_unknown_path' }),
+      cloudflare.ips.list({ networks: 'networks' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

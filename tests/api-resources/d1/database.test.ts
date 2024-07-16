@@ -28,6 +28,7 @@ describe('resource database', () => {
     const response = await cloudflare.d1.database.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my-database',
+      primary_location_hint: 'wnam',
     });
   });
 
@@ -45,7 +46,7 @@ describe('resource database', () => {
   test('list: required and optional params', async () => {
     const response = await cloudflare.d1.database.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'string',
+      name: 'name',
       page: 1,
       per_page: 10,
     });

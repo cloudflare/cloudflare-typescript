@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as ListsAPI from './lists';
 import * as ItemsAPI from './items';
 import { SinglePage } from '../../../../pagination';
@@ -100,6 +100,11 @@ export interface GatewayItem {
   created_at?: string;
 
   /**
+   * The description of the list item, if present
+   */
+  description?: string;
+
+  /**
    * The value of the item in a list.
    */
   value?: string;
@@ -107,6 +112,11 @@ export interface GatewayItem {
 
 export interface GatewayItemParam {
   created_at?: string;
+
+  /**
+   * The description of the list item, if present
+   */
+  description?: string;
 
   /**
    * The value of the item in a list.

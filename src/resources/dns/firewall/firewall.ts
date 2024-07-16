@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as FirewallAPI from './firewall';
 import * as AnalyticsAPI from './analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -139,12 +139,16 @@ export interface Firewall {
   ecs_fallback: boolean;
 
   /**
-   * Maximum DNS Cache TTL.
+   * Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs for purposes
+   * of caching between DNS Firewall and the upstream servers. Higher TTLs will be
+   * decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Minimum DNS Cache TTL.
+   * Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs for purposes
+   * of caching between DNS Firewall and the upstream servers. Lower TTLs will be
+   * increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl: number;
 
@@ -166,7 +170,8 @@ export interface Firewall {
   attack_mitigation?: AttackMitigation | null;
 
   /**
-   * Negative DNS Cache TTL.
+   * Negative DNS cache TTL. This setting controls how long DNS Firewall should cache
+   * negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl?: number | null;
 
@@ -243,17 +248,22 @@ export interface FirewallCreateParams {
   ecs_fallback?: boolean;
 
   /**
-   * Body param: Maximum DNS Cache TTL.
+   * Body param: Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs
+   * for purposes of caching between DNS Firewall and the upstream servers. Higher
+   * TTLs will be decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl?: number;
 
   /**
-   * Body param: Minimum DNS Cache TTL.
+   * Body param: Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs
+   * for purposes of caching between DNS Firewall and the upstream servers. Lower
+   * TTLs will be increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl?: number;
 
   /**
-   * Body param: Negative DNS Cache TTL.
+   * Body param: Negative DNS cache TTL. This setting controls how long DNS Firewall
+   * should cache negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl?: number | null;
 
@@ -291,6 +301,11 @@ export interface FirewallEditParams {
   account_id: string;
 
   /**
+   * Body param: Identifier
+   */
+  id: string;
+
+  /**
    * Body param: Deprecate the response to ANY requests.
    */
   deprecate_any_requests: boolean;
@@ -307,12 +322,16 @@ export interface FirewallEditParams {
   ecs_fallback: boolean;
 
   /**
-   * Body param: Maximum DNS Cache TTL.
+   * Body param: Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs
+   * for purposes of caching between DNS Firewall and the upstream servers. Higher
+   * TTLs will be decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Body param: Minimum DNS Cache TTL.
+   * Body param: Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs
+   * for purposes of caching between DNS Firewall and the upstream servers. Lower
+   * TTLs will be increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl: number;
 
@@ -332,7 +351,8 @@ export interface FirewallEditParams {
   attack_mitigation?: AttackMitigationParam | null;
 
   /**
-   * Body param: Negative DNS Cache TTL.
+   * Body param: Negative DNS cache TTL. This setting controls how long DNS Firewall
+   * should cache negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl?: number | null;
 

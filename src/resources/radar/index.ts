@@ -4,13 +4,6 @@ export { AS112TimeseriesResponse, AS112TimeseriesParams, AS112 } from './as112/i
 export { Annotations } from './annotations/index';
 export { Attacks } from './attacks/index';
 export { BGPTimeseriesResponse, BGPTimeseriesParams, BGP } from './bgp/index';
-export {
-  ConnectionTamperingSummaryResponse,
-  ConnectionTamperingTimeseriesGroupsResponse,
-  ConnectionTamperingSummaryParams,
-  ConnectionTamperingTimeseriesGroupsParams,
-  ConnectionTampering,
-} from './connection-tampering';
 export { DNS } from './dns/index';
 export {
   DatasetListResponse,
@@ -34,6 +27,13 @@ export {
   Ranking,
 } from './ranking/index';
 export { SearchGlobalResponse, SearchGlobalParams, Search } from './search';
+export {
+  TCPResetsTimeoutSummaryResponse,
+  TCPResetsTimeoutTimeseriesGroupsResponse,
+  TCPResetsTimeoutSummaryParams,
+  TCPResetsTimeoutTimeseriesGroupsParams,
+  TCPResetsTimeouts,
+} from './tcp-resets-timeouts';
 export {
   TrafficAnomalyGetResponse,
   TrafficAnomalyGetParams,

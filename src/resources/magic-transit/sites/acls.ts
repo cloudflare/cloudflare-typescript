@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as ACLsAPI from './acls';
 import { SinglePage } from '../../../pagination';
 
@@ -24,13 +24,13 @@ export class ACLs extends APIResource {
    */
   update(
     siteId: string,
-    aclIdentifier: string,
+    aclId: string,
     params: ACLUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ACL }>
@@ -58,14 +58,14 @@ export class ACLs extends APIResource {
    */
   delete(
     siteId: string,
-    aclIdentifier: string,
+    aclId: string,
     params: ACLDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
     const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`,
         options,
       ) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
@@ -76,13 +76,13 @@ export class ACLs extends APIResource {
    */
   edit(
     siteId: string,
-    aclIdentifier: string,
+    aclId: string,
     params: ACLEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`, {
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: ACL }>
@@ -94,14 +94,14 @@ export class ACLs extends APIResource {
    */
   get(
     siteId: string,
-    aclIdentifier: string,
+    aclId: string,
     params: ACLGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ACL> {
     const { account_id } = params;
     return (
       this._client.get(
-        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclIdentifier}`,
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`,
         options,
       ) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);

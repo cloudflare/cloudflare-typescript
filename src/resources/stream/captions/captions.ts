@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../core';
 import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as CaptionsAPI from './captions';
 import * as LanguageAPI from './language/language';
 
@@ -27,6 +27,11 @@ export class Captions extends APIResource {
 
 export interface Caption {
   /**
+   * Whether the caption was generated via AI.
+   */
+  generated?: boolean;
+
+  /**
    * The language label displayed in the native language to users.
    */
   label?: string;
@@ -35,6 +40,11 @@ export interface Caption {
    * The language tag in BCP 47 format.
    */
   language?: string;
+
+  /**
+   * The status of a generated caption.
+   */
+  status?: 'ready' | 'inprogress' | 'error';
 }
 
 export type CaptionGetResponse = Array<Caption>;
@@ -52,6 +62,7 @@ export namespace Captions {
   export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
   export import Language = LanguageAPI.Language;
   export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
+  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
   export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
   export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
   export import LanguageGetParams = LanguageAPI.LanguageGetParams;

@@ -17,6 +17,7 @@ export { Calls } from './calls/calls';
 export { CertificateAuthorities } from './certificate-authorities/certificate-authorities';
 export { Challenges } from './challenges/challenges';
 export { ClientCertificates } from './client-certificates';
+export { CloudConnector } from './cloud-connector/cloud-connector';
 export { CloudforceOne } from './cloudforce-one/cloudforce-one';
 export { CustomCertificates } from './custom-certificates/custom-certificates';
 export { CustomHostnames } from './custom-hostnames/custom-hostnames';

@@ -24,8 +24,8 @@ describe('resource ips', () => {
   test('get: required and optional params', async () => {
     const response = await cloudflare.intel.ips.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      ipv4: 'string',
-      ipv6: 'string',
+      ipv4: 'ipv4',
+      ipv6: 'ipv6',
     });
   });
 });

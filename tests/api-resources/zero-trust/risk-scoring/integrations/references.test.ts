@@ -11,8 +11,8 @@ const cloudflare = new Cloudflare({
 
 describe('resource references', () => {
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.references.get('string', {
-      account_id: 'string',
+    const responsePromise = cloudflare.zeroTrust.riskScoring.integrations.references.get('reference_id', {
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -24,8 +24,8 @@ describe('resource references', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.riskScoring.integrations.references.get('string', {
-      account_id: 'string',
+    const response = await cloudflare.zeroTrust.riskScoring.integrations.references.get('reference_id', {
+      account_id: 'account_id',
     });
   });
 });

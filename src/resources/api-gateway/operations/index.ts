@@ -3,12 +3,14 @@
 export {
   APIShield,
   OperationCreateResponse,
+  OperationListResponse,
   OperationDeleteResponse,
+  OperationGetResponse,
   OperationCreateParams,
   OperationListParams,
   OperationDeleteParams,
   OperationGetParams,
-  APIShieldsSinglePage,
+  OperationListResponsesV4PagePaginationArray,
   Operations,
 } from './operations';
 export {

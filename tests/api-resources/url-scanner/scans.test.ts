@@ -11,7 +11,9 @@ const cloudflare = new Cloudflare({
 
 describe('resource scans', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.urlScanner.scans.create('string', { url: 'https://www.example.com' });
+    const responsePromise = cloudflare.urlScanner.scans.create('accountId', {
+      url: 'https://www.example.com',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +24,7 @@ describe('resource scans', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.urlScanner.scans.create('string', {
+    const response = await cloudflare.urlScanner.scans.create('accountId', {
       url: 'https://www.example.com',
       customHeaders: { foo: 'string' },
       screenshotsResolutions: ['desktop', 'mobile', 'tablet'],
@@ -31,7 +33,10 @@ describe('resource scans', () => {
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.urlScanner.scans.get('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = cloudflare.urlScanner.scans.get(
+      'accountId',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,14 +49,29 @@ describe('resource scans', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.urlScanner.scans.get('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      cloudflare.urlScanner.scans.get('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
+  test('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      cloudflare.urlScanner.scans.get(
+        'accountId',
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { full: true },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('har', async () => {
-    const responsePromise = cloudflare.urlScanner.scans.har('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = cloudflare.urlScanner.scans.har(
+      'accountId',
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,7 +84,7 @@ describe('resource scans', () => {
   test('har: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.urlScanner.scans.har('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      cloudflare.urlScanner.scans.har('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -73,7 +93,7 @@ describe('resource scans', () => {
   test('screenshot: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.urlScanner.scans.screenshot('string', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      cloudflare.urlScanner.scans.screenshot('accountId', '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -83,7 +103,7 @@ describe('resource scans', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       cloudflare.urlScanner.scans.screenshot(
-        'string',
+        'accountId',
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         { resolution: 'desktop' },
         { path: '/_stainless_unknown_path' },

@@ -17,7 +17,7 @@ describe('resource rulesets', () => {
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
       rules: [{}, {}, {}],
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -84,7 +84,7 @@ describe('resource rulesets', () => {
           ref: 'my_ref',
         },
       ],
-      account_id: 'string',
+      account_id: 'account_id',
       description: 'My ruleset to execute managed rulesets',
     });
   });
@@ -93,7 +93,7 @@ describe('resource rulesets', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       rules: [{}, {}, {}],
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -157,7 +157,7 @@ describe('resource rulesets', () => {
           ref: 'my_ref',
         },
       ],
-      account_id: 'string',
+      account_id: 'account_id',
       description: 'My ruleset to execute managed rulesets',
       kind: 'root',
       name: 'My ruleset',
@@ -167,7 +167,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.rulesets.list({ account_id: 'string' });
+    const responsePromise = cloudflare.rulesets.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -180,7 +180,7 @@ describe('resource rulesets', () => {
   // TODO: investigate broken test
   test.skip('delete', async () => {
     const responsePromise = cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -194,7 +194,7 @@ describe('resource rulesets', () => {
   // TODO: investigate broken test
   test.skip('get', async () => {
     const responsePromise = cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', {
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

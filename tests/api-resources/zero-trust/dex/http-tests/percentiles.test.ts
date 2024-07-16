@@ -35,7 +35,7 @@ describe('resource percentiles', () => {
         account_id: '01a7362d577a6c3019a474fd6f485823',
         from: '2023-09-20T17:00:00Z',
         to: '2023-09-20T17:00:00Z',
-        colo: 'string',
+        colo: 'colo',
         deviceId: ['string', 'string', 'string'],
       },
     );

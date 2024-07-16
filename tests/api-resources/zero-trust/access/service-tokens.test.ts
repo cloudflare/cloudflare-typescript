@@ -14,7 +14,7 @@ describe('resource serviceTokens', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
-      account_id: 'string',
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource serviceTokens', () => {
   test.skip('create: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
-      account_id: 'string',
+      account_id: 'account_id',
       duration: '60m',
     });
   });
@@ -38,7 +38,7 @@ describe('resource serviceTokens', () => {
   test.skip('update', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -51,7 +51,7 @@ describe('resource serviceTokens', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.list({ account_id: 'string' });
+    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,7 +65,7 @@ describe('resource serviceTokens', () => {
   test.skip('delete', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -80,7 +80,7 @@ describe('resource serviceTokens', () => {
   test.skip('get', async () => {
     const responsePromise = cloudflare.zeroTrust.access.serviceTokens.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: 'string' },
+      { account_id: 'account_id' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);

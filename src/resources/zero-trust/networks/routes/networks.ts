@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../../../core';
 import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as NetworksAPI from './networks';
 import * as RoutesAPI from './routes';
 
@@ -71,6 +71,11 @@ export interface NetworkCreateParams {
    * Path param: Cloudflare account ID
    */
   account_id: string;
+
+  /**
+   * Body param: UUID of the tunnel.
+   */
+  tunnel_id: string;
 
   /**
    * Body param: Optional remark describing the route.

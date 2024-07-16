@@ -26,11 +26,11 @@ describe('resource tests', () => {
   test('list: required and optional params', async () => {
     const response = await cloudflare.zeroTrust.dex.tests.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      colo: 'string',
+      colo: 'colo',
       deviceId: ['string', 'string', 'string'],
       page: 1,
       per_page: 1,
-      testName: 'string',
+      testName: 'testName',
     });
   });
 });

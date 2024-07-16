@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from './core';
 import * as Errors from './error';
-import { type Agent } from './_shims/index';
 import * as Uploads from './uploads';
+import { type Agent } from './_shims/index';
 import * as qs from 'qs';
+import * as Core from './core';
 import * as Pagination from './pagination';
 import * as API from './resources/index';
 
@@ -86,7 +86,9 @@ export interface ClientOptions {
   defaultQuery?: Core.DefaultQuery;
 }
 
-/** API Client for interfacing with the Cloudflare API. */
+/**
+ * API Client for interfacing with the Cloudflare API.
+ */
 export class Cloudflare extends Core.APIClient {
   apiToken: string | null;
   apiKey: string | null;
@@ -134,6 +136,7 @@ export class Cloudflare extends Core.APIClient {
       maxRetries: options.maxRetries,
       fetch: options.fetch,
     });
+
     this._options = options;
 
     this.apiToken = apiToken;
@@ -226,6 +229,7 @@ export class Cloudflare extends Core.APIClient {
   eventNotifications: API.EventNotifications = new API.EventNotifications(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
   iam: API.IAM = new API.IAM(this);
+  cloudConnector: API.CloudConnector = new API.CloudConnector(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -328,7 +332,7 @@ export class Cloudflare extends Core.APIClient {
   }
 
   protected override stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'repeat' });
+    return qs.stringify(query, { allowDots: true, arrayFormat: 'repeat' });
   }
 
   static Cloudflare = this;
@@ -559,6 +563,8 @@ export namespace Cloudflare {
   export import AIGateway = API.AIGateway;
 
   export import IAM = API.IAM;
+
+  export import CloudConnector = API.CloudConnector;
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;

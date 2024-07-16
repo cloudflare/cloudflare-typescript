@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as PrioritizeAPI from './prioritize';
 import * as CustomCertificatesAPI from './custom-certificates';
 
@@ -41,6 +41,11 @@ export interface PrioritizeUpdateParams {
 
 export namespace PrioritizeUpdateParams {
   export interface Certificate {
+    /**
+     * Identifier
+     */
+    id?: string;
+
     /**
      * The order/priority in which the certificate will be used in a request. The
      * higher priority will break ties across overlapping 'legacy_custom' certificates,

@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../../core';
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as ConsumersAPI from './consumers';
 import * as MessagesAPI from './messages';
 import { SinglePage } from '../../pagination';
@@ -101,7 +101,7 @@ export interface QueueCreated {
 
   modified_on?: unknown;
 
-  queue_id?: unknown;
+  queue_id?: string;
 
   queue_name?: string;
 }
@@ -111,7 +111,7 @@ export interface QueueUpdated {
 
   modified_on?: unknown;
 
-  queue_id?: unknown;
+  queue_id?: string;
 
   queue_name?: string;
 }

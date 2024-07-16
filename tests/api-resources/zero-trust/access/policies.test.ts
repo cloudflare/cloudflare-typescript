@@ -44,7 +44,7 @@ describe('resource policies', () => {
         {
           approvals_needed: 1,
           email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
-          email_list_uuid: 'string',
+          email_list_uuid: 'email_list_uuid',
         },
         {
           approvals_needed: 3,
@@ -109,7 +109,7 @@ describe('resource policies', () => {
           {
             approvals_needed: 1,
             email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
-            email_list_uuid: 'string',
+            email_list_uuid: 'email_list_uuid',
           },
           {
             approvals_needed: 3,
