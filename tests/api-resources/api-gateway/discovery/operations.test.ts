@@ -33,15 +33,15 @@ describe('resource operations', () => {
       method: ['GET'],
       order: 'method',
       origin: 'ML',
-      page: {},
-      per_page: {},
+      page: 1,
+      per_page: 5,
       state: 'review',
     });
   });
 
   test('edit: only required params', async () => {
     const responsePromise = cloudflare.apiGateway.discovery.operations.edit(
-      '0d9bf70c-92e1-4bb3-9411-34a3bcc59003',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -55,7 +55,7 @@ describe('resource operations', () => {
 
   test('edit: required and optional params', async () => {
     const response = await cloudflare.apiGateway.discovery.operations.edit(
-      '0d9bf70c-92e1-4bb3-9411-34a3bcc59003',
+      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', state: 'review' },
     );
   });

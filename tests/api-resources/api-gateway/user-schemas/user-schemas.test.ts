@@ -52,8 +52,8 @@ describe('resource userSchemas', () => {
     const response = await cloudflare.apiGateway.userSchemas.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       omit_source: true,
-      page: {},
-      per_page: {},
+      page: 1,
+      per_page: 5,
       validation_enabled: true,
     });
   });

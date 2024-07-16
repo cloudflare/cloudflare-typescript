@@ -30,8 +30,10 @@ export namespace APIGateway {
   export import Operations = OperationsAPI.Operations;
   export import APIShield = OperationsAPI.APIShield;
   export import OperationCreateResponse = OperationsAPI.OperationCreateResponse;
+  export import OperationListResponse = OperationsAPI.OperationListResponse;
   export import OperationDeleteResponse = OperationsAPI.OperationDeleteResponse;
-  export import APIShieldsSinglePage = OperationsAPI.APIShieldsSinglePage;
+  export import OperationGetResponse = OperationsAPI.OperationGetResponse;
+  export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
   export import OperationCreateParams = OperationsAPI.OperationCreateParams;
   export import OperationListParams = OperationsAPI.OperationListParams;
   export import OperationDeleteParams = OperationsAPI.OperationDeleteParams;
@@ -45,7 +47,7 @@ export namespace APIGateway {
   export import PublicSchema = UserSchemasAPI.PublicSchema;
   export import SchemaUpload = UserSchemasAPI.SchemaUpload;
   export import UserSchemaDeleteResponse = UserSchemasAPI.UserSchemaDeleteResponse;
-  export import PublicSchemasSinglePage = UserSchemasAPI.PublicSchemasSinglePage;
+  export import PublicSchemasV4PagePaginationArray = UserSchemasAPI.PublicSchemasV4PagePaginationArray;
   export import UserSchemaCreateParams = UserSchemasAPI.UserSchemaCreateParams;
   export import UserSchemaListParams = UserSchemasAPI.UserSchemaListParams;
   export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;

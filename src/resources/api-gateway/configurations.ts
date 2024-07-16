@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as ConfigurationsAPI from './configurations';
+import * as UserSchemasAPI from './user-schemas/user-schemas';
 
 export class Configurations extends APIResource {
   /**
@@ -13,12 +14,7 @@ export class Configurations extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/api_gateway/configuration`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.put(`/zones/${zone_id}/api_gateway/configuration`, { body, ...options });
   }
 
   /**
@@ -36,7 +32,7 @@ export class Configurations extends APIResource {
 }
 
 export interface Configuration {
-  auth_id_characteristics?: Array<
+  auth_id_characteristics: Array<
     Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJwtClaim
   >;
 }
@@ -79,7 +75,16 @@ export namespace Configuration {
   }
 }
 
-export type ConfigurationUpdateResponse = unknown | string | null;
+export interface ConfigurationUpdateResponse {
+  errors: UserSchemasAPI.Message;
+
+  messages: UserSchemasAPI.Message;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface ConfigurationUpdateParams {
   /**
@@ -90,7 +95,7 @@ export interface ConfigurationUpdateParams {
   /**
    * Body param:
    */
-  auth_id_characteristics?: Array<
+  auth_id_characteristics: Array<
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJwtClaim
   >;

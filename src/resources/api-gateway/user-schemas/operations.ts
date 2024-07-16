@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as UserSchemasOperationsAPI from './operations';
 import * as OperationsAPI from '../operations/operations';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
   /**
@@ -15,17 +15,17 @@ export class Operations extends APIResource {
     schemaId: string,
     params: OperationListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<OperationListResponsesSinglePage, OperationListResponse> {
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/api_gateway/user_schemas/${schemaId}/operations`,
-      OperationListResponsesSinglePage,
+      OperationListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
 }
 
-export class OperationListResponsesSinglePage extends SinglePage<OperationListResponse> {}
+export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
 
 export type OperationListResponse = OperationsAPI.APIShield | OperationListResponse.APIShieldBasicOperation;
 
@@ -51,7 +51,7 @@ export namespace OperationListResponse {
   }
 }
 
-export interface OperationListParams {
+export interface OperationListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
@@ -86,20 +86,10 @@ export interface OperationListParams {
    * from the schema that already exist in API Shield Endpoint Management.
    */
   operation_status?: 'new' | 'existing';
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page.
-   */
-  per_page?: unknown;
 }
 
 export namespace Operations {
   export import OperationListResponse = UserSchemasOperationsAPI.OperationListResponse;
-  export import OperationListResponsesSinglePage = UserSchemasOperationsAPI.OperationListResponsesSinglePage;
+  export import OperationListResponsesV4PagePaginationArray = UserSchemasOperationsAPI.OperationListResponsesV4PagePaginationArray;
   export import OperationListParams = UserSchemasOperationsAPI.OperationListParams;
 }
