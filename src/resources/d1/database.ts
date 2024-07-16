@@ -209,6 +209,13 @@ export interface DatabaseCreateParams {
    * Body param:
    */
   name: string;
+
+  /**
+   * Body param: Specify the region to create the D1 primary, if available. If this
+   * option is omitted, the D1 will be created as close as possible to the current
+   * user.
+   */
+  primary_location_hint?: 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
 }
 
 export interface DatabaseListParams extends V4PagePaginationArrayParams {
@@ -244,7 +251,8 @@ export interface DatabaseQueryParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
+   * which will be executed as a batch.
    */
   sql: string;
 
@@ -261,7 +269,8 @@ export interface DatabaseRawParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Your SQL query. Supports multiple statements, joined by semicolons,
+   * which will be executed as a batch.
    */
   sql: string;
 
