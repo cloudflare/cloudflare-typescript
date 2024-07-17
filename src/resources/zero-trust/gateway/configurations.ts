@@ -429,7 +429,8 @@ export namespace GatewayConfigurationSettings {
    */
   export interface Certificate {
     /**
-     * UUID of certificate to be used for interception.
+     * UUID of certificate to be used for interception. Certificate must be active on
+     * the edge.
      */
     id: string;
   }
@@ -504,7 +505,8 @@ export namespace GatewayConfigurationSettingsParam {
    */
   export interface Certificate {
     /**
-     * UUID of certificate to be used for interception.
+     * UUID of certificate to be used for interception. Certificate must be active on
+     * the edge.
      */
     id: string;
   }
