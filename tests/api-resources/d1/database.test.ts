@@ -71,6 +71,29 @@ describe('resource database', () => {
     });
   });
 
+  test('export: only required params', async () => {
+    const responsePromise = cloudflare.d1.database.export('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      output_format: 'polling',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('export: required and optional params', async () => {
+    const response = await cloudflare.d1.database.export('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      output_format: 'polling',
+      current_bookmark: 'current_bookmark',
+      dump_options: { no_data: true, no_schema: true, tables: ['string', 'string', 'string'] },
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = cloudflare.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -87,6 +110,29 @@ describe('resource database', () => {
   test('get: required and optional params', async () => {
     const response = await cloudflare.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('import: only required params', async () => {
+    const responsePromise = cloudflare.d1.database.import('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      action: 'init',
+      etag: 'etag',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('import: required and optional params', async () => {
+    const response = await cloudflare.d1.database.import('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      action: 'init',
+      etag: 'etag',
     });
   });
 

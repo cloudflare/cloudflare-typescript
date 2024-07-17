@@ -3685,6 +3685,8 @@ Types:
 - <code><a href="./src/resources/d1/database.ts">DatabaseCreateResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseListResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseDeleteResponse</a></code>
+- <code><a href="./src/resources/d1/database.ts">DatabaseExportResponse</a></code>
+- <code><a href="./src/resources/d1/database.ts">DatabaseImportResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseQueryResponse</a></code>
 - <code><a href="./src/resources/d1/database.ts">DatabaseRawResponse</a></code>
 
@@ -3693,7 +3695,9 @@ Methods:
 - <code title="post /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database.ts">create</a>({ ...params }) -> DatabaseCreateResponse</code>
 - <code title="get /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database.ts">list</a>({ ...params }) -> DatabaseListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">delete</a>(databaseId, { ...params }) -> DatabaseDeleteResponse</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/export">client.d1.database.<a href="./src/resources/d1/database.ts">export</a>(databaseId, { ...params }) -> DatabaseExportResponse</code>
 - <code title="get /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">get</a>(databaseId, { ...params }) -> D1</code>
+- <code title="post /accounts/{account_id}/d1/database/{database_id}/import">client.d1.database.<a href="./src/resources/d1/database.ts">import</a>(databaseId, { ...params }) -> DatabaseImportResponse</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/query">client.d1.database.<a href="./src/resources/d1/database.ts">query</a>(databaseId, { ...params }) -> DatabaseQueryResponse</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/raw">client.d1.database.<a href="./src/resources/d1/database.ts">raw</a>(databaseId, { ...params }) -> DatabaseRawResponse</code>
 
