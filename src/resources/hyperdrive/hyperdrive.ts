@@ -22,11 +22,6 @@ export interface Configuration {
   host: string;
 
   /**
-   * The port (default: 5432 for Postgres) of your origin database.
-   */
-  port: number;
-
-  /**
    * Specifies the URL scheme used to connect to your origin database.
    */
   scheme: 'postgres' | 'postgresql' | 'mysql';
@@ -35,6 +30,16 @@ export interface Configuration {
    * The user of your origin database.
    */
   user: string;
+
+  /**
+   * The Client ID of the Access token to use when connecting to the origin database
+   */
+  access_client_id?: string;
+
+  /**
+   * The port (default: 5432 for Postgres) of your origin database.
+   */
+  port?: number;
 }
 
 export interface ConfigurationParam {
@@ -49,11 +54,6 @@ export interface ConfigurationParam {
   host: string;
 
   /**
-   * The port (default: 5432 for Postgres) of your origin database.
-   */
-  port: number;
-
-  /**
    * Specifies the URL scheme used to connect to your origin database.
    */
   scheme: 'postgres' | 'postgresql' | 'mysql';
@@ -62,6 +62,16 @@ export interface ConfigurationParam {
    * The user of your origin database.
    */
   user: string;
+
+  /**
+   * The Client ID of the Access token to use when connecting to the origin database
+   */
+  access_client_id?: string;
+
+  /**
+   * The port (default: 5432 for Postgres) of your origin database.
+   */
+  port?: number;
 }
 
 export interface Hyperdrive {
