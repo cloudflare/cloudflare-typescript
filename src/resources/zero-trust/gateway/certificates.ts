@@ -38,8 +38,7 @@ export class Certificates extends APIResource {
   }
 
   /**
-   * Deletes a gateway-managed Zero Trust certificate. A certificate must be
-   * deactivated from the edge (inactive) before it is deleted.
+   * Deletes a gateway-managed Zero Trust certificate.
    */
   delete(
     certificateId: string,
@@ -82,8 +81,7 @@ export interface CertificateCreateResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * The deployment status of the certificate on Cloudflare's edge.
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
@@ -113,8 +111,7 @@ export interface CertificateListResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * The deployment status of the certificate on Cloudflare's edge.
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
@@ -144,8 +141,7 @@ export interface CertificateDeleteResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * The deployment status of the certificate on Cloudflare's edge.
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
@@ -175,8 +171,7 @@ export interface CertificateGetResponse {
   id?: string;
 
   /**
-   * The deployment status of the certificate on Cloudflare's edge. Certificates in
-   * the 'active' state may be used for Gateway TLS interception.
+   * The deployment status of the certificate on Cloudflare's edge.
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
