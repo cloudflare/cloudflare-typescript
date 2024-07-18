@@ -184,10 +184,14 @@ export namespace Gateway {
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
   export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import CertificateActivateResponse = CertificatesAPI.CertificateActivateResponse;
+  export import CertificateDeactivateResponse = CertificatesAPI.CertificateDeactivateResponse;
   export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateListResponsesSinglePage = CertificatesAPI.CertificateListResponsesSinglePage;
   export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
   export import CertificateListParams = CertificatesAPI.CertificateListParams;
   export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateActivateParams = CertificatesAPI.CertificateActivateParams;
+  export import CertificateDeactivateParams = CertificatesAPI.CertificateDeactivateParams;
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }

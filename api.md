@@ -4844,6 +4844,8 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateActivateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateDeactivateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/certificates.ts">CertificateGetResponse</a></code>
 
 Methods:
@@ -4851,6 +4853,8 @@ Methods:
 - <code title="post /accounts/{account_id}/gateway/certificates">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">create</a>({ ...params }) -> CertificateCreateResponse</code>
 - <code title="get /accounts/{account_id}/gateway/certificates">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">list</a>({ ...params }) -> CertificateListResponsesSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">delete</a>(certificateId, { ...params }) -> CertificateDeleteResponse</code>
+- <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/activate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">activate</a>(certificateId, { ...params }) -> CertificateActivateResponse</code>
+- <code title="post /accounts/{account_id}/gateway/certificates/{certificate_id}/deactivate">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">deactivate</a>(certificateId, { ...params }) -> CertificateDeactivateResponse</code>
 - <code title="get /accounts/{account_id}/gateway/certificates/{certificate_id}">client.zeroTrust.gateway.certificates.<a href="./src/resources/zero-trust/gateway/certificates.ts">get</a>(certificateId, { ...params }) -> CertificateGetResponse</code>
 
 ## Networks
