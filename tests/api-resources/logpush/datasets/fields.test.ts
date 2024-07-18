@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource fields', () => {
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.logpush.datasets.fields.get('http_requests', {
+    const responsePromise = cloudflare.logpush.datasets.fields.get('gateway_dns', {
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
