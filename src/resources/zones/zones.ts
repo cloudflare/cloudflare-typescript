@@ -29,7 +29,8 @@ export class Zones extends APIResource {
   }
 
   /**
-   * Lists, searches, sorts, and filters your zones.
+   * Lists, searches, sorts, and filters your zones. Listing zones across more than
+   * 500 accounts is currently not allowed.
    */
   list(
     query?: ZoneListParams,
