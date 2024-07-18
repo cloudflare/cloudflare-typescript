@@ -22,7 +22,7 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
@@ -48,7 +48,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
@@ -116,7 +116,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   maxRetries: 0, // default is 2
 });
 
@@ -133,7 +133,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
@@ -188,7 +188,7 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 
 <!-- prettier-ignore -->
 ```ts
-const cloudflare = new Cloudflare();
+const client = new Cloudflare();
 
 const response = await cloudflare.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
@@ -299,7 +299,7 @@ import http from 'http';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
 });
 
