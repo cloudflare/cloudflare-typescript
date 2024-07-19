@@ -16,9 +16,10 @@ export class Deployments extends APIResource {
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, force, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
+        query: { force },
         body,
         ...options,
       }) as Core.APIPromise<{ result: DeploymentCreateResponse }>
@@ -97,6 +98,13 @@ export interface DeploymentCreateParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: If set to true, the deployment will be created even if normally
+   * blocked by something such rolling back to an older version when a secret has
+   * changed.
+   */
+  force?: boolean;
 
   /**
    * Body param:
