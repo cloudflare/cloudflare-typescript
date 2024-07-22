@@ -734,6 +734,8 @@ export namespace Access {
   export import AllowedOrigins = ApplicationsAPI.AllowedOrigins;
   export import AppID = ApplicationsAPI.AppID;
   export import Application = ApplicationsAPI.Application;
+  export import ApplicationPolicy = ApplicationsAPI.ApplicationPolicy;
+  export import ApplicationSCIMConfig = ApplicationsAPI.ApplicationSCIMConfig;
   export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
   export import Decision = ApplicationsAPI.Decision;
