@@ -144,6 +144,13 @@ export namespace Gateway {
   export import ListEditParams = ListsAPI.ListEditParams;
   export import ListGetParams = ListsAPI.ListGetParams;
   export import Locations = LocationsAPI.Locations;
+  export import DOHEndpoint = LocationsAPI.DOHEndpoint;
+  export import DOTEndpoint = LocationsAPI.DOTEndpoint;
+  export import Endpoint = LocationsAPI.Endpoint;
+  export import IPNetwork = LocationsAPI.IPNetwork;
+  export import IPV4Endpoint = LocationsAPI.IPV4Endpoint;
+  export import IPV6Endpoint = LocationsAPI.IPV6Endpoint;
+  export import IPV6Network = LocationsAPI.IPV6Network;
   export import Location = LocationsAPI.Location;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
