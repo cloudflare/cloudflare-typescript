@@ -159,6 +159,12 @@ export interface HTTPTimeseriesParams {
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
+
+  /**
+   * Normalization method applied. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
 }
 
 export namespace HTTP {
