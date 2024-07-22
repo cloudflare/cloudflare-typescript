@@ -31,6 +31,8 @@ export {
   AllowedOrigins,
   AppID,
   Application,
+  ApplicationPolicy,
+  ApplicationSCIMConfig,
   ApplicationType,
   CORSHeaders,
   Decision,
@@ -56,6 +58,7 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
+  ApplicationPoliciesSinglePage,
   ApplicationListResponsesSinglePage,
   Applications,
 } from './applications/index';

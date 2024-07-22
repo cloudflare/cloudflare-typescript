@@ -7,6 +7,8 @@ export {
   AllowedOrigins,
   AppID,
   Application,
+  ApplicationPolicy,
+  ApplicationSCIMConfig,
   ApplicationType,
   CORSHeaders,
   Decision,
@@ -32,23 +34,19 @@ export {
   ApplicationDeleteParams,
   ApplicationGetParams,
   ApplicationRevokeTokensParams,
+  ApplicationPoliciesSinglePage,
   ApplicationListResponsesSinglePage,
   Applications,
 } from './applications';
 export {
   ApprovalGroup,
   Policy,
-  PolicyCreateResponse,
-  PolicyUpdateResponse,
-  PolicyListResponse,
   PolicyDeleteResponse,
-  PolicyGetResponse,
   PolicyCreateParams,
   PolicyUpdateParams,
   PolicyListParams,
   PolicyDeleteParams,
   PolicyGetParams,
-  PolicyListResponsesSinglePage,
   Policies,
 } from './policies';
 export {
