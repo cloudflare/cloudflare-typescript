@@ -2300,8 +2300,11 @@ Types:
 - <code><a href="./src/resources/rulesets/rules.ts">BlockRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">CompressResponseRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">DDoSDynamicRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">ForceConnectionCloseRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">JSChallengeRule</a></code>
+- <code><a href="./src/resources/rulesets/rules.ts">LogCustomFieldRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">Logging</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ManagedChallengeRule</a></code>
@@ -4058,8 +4061,8 @@ Types:
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">AzureAD</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">GenericOAuthConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProvider</a></code>
+- <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderSCIMConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderType</a></code>
-- <code><a href="./src/resources/zero-trust/identity-providers.ts">SCIMConfig</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/identity-providers.ts">IdentityProviderDeleteResponse</a></code>
 
@@ -4132,6 +4135,8 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AllowedOrigins</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">AppID</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Application</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationPolicy</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationSCIMConfig</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">ApplicationType</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">CORSHeaders</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/applications.ts">Decision</a></code>
@@ -4194,19 +4199,15 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ApprovalGroup</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">Policy</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyCreateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyListResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyGetResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(appId, { ...params }) -> PolicyCreateResponse</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(appId, policyId, { ...params }) -> PolicyUpdateResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(appId, { ...params }) -> PolicyListResponsesSinglePage</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">create</a>(appId, { ...params }) -> ApplicationPolicy</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">update</a>(appId, policyId, { ...params }) -> ApplicationPolicy</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(appId, { ...params }) -> ApplicationPoliciesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(appId, policyId, { ...params }) -> PolicyDeleteResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(appId, policyId, { ...params }) -> PolicyGetResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(appId, policyId, { ...params }) -> ApplicationPolicy</code>
 
 ### Certificates
 

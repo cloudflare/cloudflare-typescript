@@ -233,7 +233,7 @@ export interface AzureAD {
    * The configuration settings for enabling a System for Cross-Domain Identity
    * Management (SCIM) with the identity provider.
    */
-  scim_config?: SCIMConfig;
+  scim_config?: IdentityProviderSCIMConfig;
 }
 
 export namespace AzureAD {
@@ -362,7 +362,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessCentrify {
@@ -433,7 +433,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessGitHub {
@@ -465,7 +465,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessGoogle {
@@ -497,7 +497,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessGoogle {
@@ -558,7 +558,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -624,7 +624,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessOIDC {
@@ -656,7 +656,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessOIDC {
@@ -737,7 +737,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessOkta {
@@ -808,7 +808,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessOnelogin {
@@ -874,7 +874,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessPingone {
@@ -940,7 +940,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessSAML {
@@ -1033,7 +1033,7 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessOnetimepin {
@@ -1065,8 +1065,84 @@ export namespace IdentityProvider {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
+}
+
+/**
+ * The configuration settings for enabling a System for Cross-Domain Identity
+ * Management (SCIM) with the identity provider.
+ */
+export interface IdentityProviderSCIMConfig {
+  /**
+   * A flag to enable or disable SCIM for the identity provider.
+   */
+  enabled?: boolean;
+
+  /**
+   * A flag to revoke a user's session in Access and force a reauthentication on the
+   * user's Gateway session when they have been added or removed from a group in the
+   * Identity Provider.
+   */
+  group_member_deprovision?: boolean;
+
+  /**
+   * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+   * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+   * enabled.
+   */
+  seat_deprovision?: boolean;
+
+  /**
+   * A read-only token generated when the SCIM integration is enabled for the first
+   * time. It is redacted on subsequent requests. If you lose this you will need to
+   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+   */
+  secret?: string;
+
+  /**
+   * A flag to enable revoking a user's session in Access and Gateway when they have
+   * been deprovisioned in the Identity Provider.
+   */
+  user_deprovision?: boolean;
+}
+
+/**
+ * The configuration settings for enabling a System for Cross-Domain Identity
+ * Management (SCIM) with the identity provider.
+ */
+export interface IdentityProviderSCIMConfigParam {
+  /**
+   * A flag to enable or disable SCIM for the identity provider.
+   */
+  enabled?: boolean;
+
+  /**
+   * A flag to revoke a user's session in Access and force a reauthentication on the
+   * user's Gateway session when they have been added or removed from a group in the
+   * Identity Provider.
+   */
+  group_member_deprovision?: boolean;
+
+  /**
+   * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
+   * in the Identity Provider. This cannot be enabled unless user_deprovision is also
+   * enabled.
+   */
+  seat_deprovision?: boolean;
+
+  /**
+   * A read-only token generated when the SCIM integration is enabled for the first
+   * time. It is redacted on subsequent requests. If you lose this you will need to
+   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+   */
+  secret?: string;
+
+  /**
+   * A flag to enable revoking a user's session in Access and Gateway when they have
+   * been deprovisioned in the Identity Provider.
+   */
+  user_deprovision?: boolean;
 }
 
 /**
@@ -1110,82 +1186,6 @@ export type IdentityProviderTypeParam =
   | 'onelogin'
   | 'pingone'
   | 'yandex';
-
-/**
- * The configuration settings for enabling a System for Cross-Domain Identity
- * Management (SCIM) with the identity provider.
- */
-export interface SCIMConfig {
-  /**
-   * A flag to enable or disable SCIM for the identity provider.
-   */
-  enabled?: boolean;
-
-  /**
-   * A flag to revoke a user's session in Access and force a reauthentication on the
-   * user's Gateway session when they have been added or removed from a group in the
-   * Identity Provider.
-   */
-  group_member_deprovision?: boolean;
-
-  /**
-   * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-   * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-   * enabled.
-   */
-  seat_deprovision?: boolean;
-
-  /**
-   * A read-only token generated when the SCIM integration is enabled for the first
-   * time. It is redacted on subsequent requests. If you lose this you will need to
-   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-   */
-  secret?: string;
-
-  /**
-   * A flag to enable revoking a user's session in Access and Gateway when they have
-   * been deprovisioned in the Identity Provider.
-   */
-  user_deprovision?: boolean;
-}
-
-/**
- * The configuration settings for enabling a System for Cross-Domain Identity
- * Management (SCIM) with the identity provider.
- */
-export interface SCIMConfigParam {
-  /**
-   * A flag to enable or disable SCIM for the identity provider.
-   */
-  enabled?: boolean;
-
-  /**
-   * A flag to revoke a user's session in Access and force a reauthentication on the
-   * user's Gateway session when they have been added or removed from a group in the
-   * Identity Provider.
-   */
-  group_member_deprovision?: boolean;
-
-  /**
-   * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
-   * in the Identity Provider. This cannot be enabled unless user_deprovision is also
-   * enabled.
-   */
-  seat_deprovision?: boolean;
-
-  /**
-   * A read-only token generated when the SCIM integration is enabled for the first
-   * time. It is redacted on subsequent requests. If you lose this you will need to
-   * refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
-   */
-  secret?: string;
-
-  /**
-   * A flag to enable revoking a user's session in Access and Gateway when they have
-   * been deprovisioned in the Identity Provider.
-   */
-  user_deprovision?: boolean;
-}
 
 export type IdentityProviderListResponse =
   | AzureAD
@@ -1232,7 +1232,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessCentrify {
@@ -1303,7 +1303,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessGitHub {
@@ -1335,7 +1335,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessGoogle {
@@ -1367,7 +1367,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessGoogle {
@@ -1428,7 +1428,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessGoogleApps {
@@ -1494,7 +1494,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export interface AccessOIDC {
@@ -1526,7 +1526,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessOIDC {
@@ -1607,7 +1607,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessOkta {
@@ -1678,7 +1678,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessOnelogin {
@@ -1744,7 +1744,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessPingone {
@@ -1810,7 +1810,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 
   export namespace AccessSAML {
@@ -1903,7 +1903,7 @@ export namespace IdentityProviderListResponse {
      * The configuration settings for enabling a System for Cross-Domain Identity
      * Management (SCIM) with the identity provider.
      */
-    scim_config?: IdentityProvidersAPI.SCIMConfig;
+    scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
   }
 }
 
@@ -1972,7 +1972,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AzureAD {
@@ -2072,7 +2072,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessCentrify {
@@ -2155,7 +2155,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessGitHub {
@@ -2199,7 +2199,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessGoogle {
@@ -2243,7 +2243,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessGoogle {
@@ -2316,7 +2316,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessGoogleApps {
@@ -2394,7 +2394,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessOIDC {
@@ -2438,7 +2438,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessOIDC {
@@ -2531,7 +2531,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessOkta {
@@ -2614,7 +2614,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessOnelogin {
@@ -2692,7 +2692,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessPingone {
@@ -2770,7 +2770,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessSAML {
@@ -2875,7 +2875,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessOnetimepin {
@@ -2919,7 +2919,7 @@ export namespace IdentityProviderCreateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 }
 
@@ -2981,7 +2981,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AzureAD {
@@ -3081,7 +3081,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessCentrify {
@@ -3164,7 +3164,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessGitHub {
@@ -3208,7 +3208,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessGoogle {
@@ -3252,7 +3252,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessGoogle {
@@ -3325,7 +3325,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessGoogleApps {
@@ -3403,7 +3403,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessOIDC {
@@ -3447,7 +3447,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessOIDC {
@@ -3540,7 +3540,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessOkta {
@@ -3623,7 +3623,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessOnelogin {
@@ -3701,7 +3701,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessPingone {
@@ -3779,7 +3779,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export namespace AccessSAML {
@@ -3884,7 +3884,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 
   export interface AccessOnetimepin {
@@ -3928,7 +3928,7 @@ export namespace IdentityProviderUpdateParams {
      * Body param: The configuration settings for enabling a System for Cross-Domain
      * Identity Management (SCIM) with the identity provider.
      */
-    scim_config?: SCIMConfigParam;
+    scim_config?: IdentityProviderSCIMConfigParam;
   }
 }
 
@@ -3972,8 +3972,8 @@ export namespace IdentityProviders {
   export import AzureAD = IdentityProvidersAPI.AzureAD;
   export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
   export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
+  export import IdentityProviderSCIMConfig = IdentityProvidersAPI.IdentityProviderSCIMConfig;
   export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
-  export import SCIMConfig = IdentityProvidersAPI.SCIMConfig;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
