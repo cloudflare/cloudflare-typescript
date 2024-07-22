@@ -256,8 +256,6 @@ export class Applications extends APIResource {
 
 export class ApplicationListResponsesSinglePage extends SinglePage<ApplicationListResponse> {}
 
-export class PoliciesSinglePage extends SinglePage<Policy> {}
-
 export type AllowedHeaders = string;
 
 export type AllowedHeadersParam = string;
@@ -411,7 +409,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -476,6 +474,50 @@ export namespace Application {
        */
       max_age?: number;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 
   export interface SaaSApplication {
@@ -524,7 +566,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: SaaSApplication.SCIMConfig;
 
     /**
      * The application type.
@@ -742,6 +784,50 @@ export namespace Application {
         lifetime?: string;
       }
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 
   export interface BrowserSSHApplication {
@@ -836,7 +922,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -900,6 +986,50 @@ export namespace Application {
        * The maximum number of seconds the results of a preflight request can be cached.
        */
       max_age?: number;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
     }
   }
 
@@ -995,7 +1125,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: BrowserVncApplication.SCIMConfig;
 
     /**
      * Returns a 401 status code when the request is blocked by a Service Auth policy.
@@ -1060,6 +1190,50 @@ export namespace Application {
        */
       max_age?: number;
     }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 
   export interface AppLauncherApplication {
@@ -1106,7 +1280,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: AppLauncherApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1116,6 +1290,52 @@ export namespace Application {
     session_duration?: string;
 
     updated_at?: string;
+  }
+
+  export namespace AppLauncherApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 
   export interface DeviceEnrollmentPermissionsApplication {
@@ -1162,7 +1382,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: DeviceEnrollmentPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1172,6 +1392,52 @@ export namespace Application {
     session_duration?: string;
 
     updated_at?: string;
+  }
+
+  export namespace DeviceEnrollmentPermissionsApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 
   export interface BrowserIsolationPermissionsApplication {
@@ -1218,7 +1484,7 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: BrowserIsolationPermissionsApplication.SCIMConfig;
 
     /**
      * The amount of time that tokens issued for this application will be valid. Must
@@ -1228,6 +1494,52 @@ export namespace Application {
     session_duration?: string;
 
     updated_at?: string;
+  }
+
+  export namespace BrowserIsolationPermissionsApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 
   export interface BookmarkApplication {
@@ -1269,9 +1581,55 @@ export namespace Application {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: ApplicationsAPI.SCIMConfig;
+    scim_config?: BookmarkApplication.SCIMConfig;
 
     updated_at?: string;
+  }
+
+  export namespace BookmarkApplication {
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, we propagate DELETE requests to the target application for SCIM
+       * resources. If true, we only set `active` to false on the SCIM resource. This is
+       * useful because some targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
   }
 }
 
@@ -1657,80 +2015,6 @@ export namespace OIDCSaaSAppParam {
   }
 }
 
-export interface Policy {
-  /**
-   * The UUID of the policy
-   */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  created_at?: string;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: Decision;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRule>;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
-  updated_at?: string;
-}
-
 /**
  * A globally unique name for an identity or service provider.
  */
@@ -1967,50 +2251,6 @@ export namespace SAMLSaaSAppParam {
 
     source?: ApplicationsAPI.SaaSAppSourceParam;
   }
-}
-
-/**
- * Configuration for provisioning to this application via SCIM. This is currently
- * in closed beta.
- */
-export interface SCIMConfig {
-  /**
-   * The UID of the IdP to use as the source for SCIM resources to provision to this
-   * application.
-   */
-  idp_uid: string;
-
-  /**
-   * The base URI for the application's SCIM-compatible API.
-   */
-  remote_uri: string;
-
-  /**
-   * Attributes for configuring HTTP Basic authentication scheme for SCIM
-   * provisioning to an application.
-   */
-  authentication?:
-    | SCIMConfigAuthenticationHTTPBasic
-    | SCIMConfigAuthenticationOAuthBearerToken
-    | SCIMConfigAuthenticationOauth2;
-
-  /**
-   * If false, we propagate DELETE requests to the target application for SCIM
-   * resources. If true, we only set `active` to false on the SCIM resource. This is
-   * useful because some targets do not support DELETE operations.
-   */
-  deactivate_on_delete?: boolean;
-
-  /**
-   * Whether SCIM provisioning is turned on for this application.
-   */
-  enabled?: boolean;
-
-  /**
-   * A list of mappings to apply to SCIM resources before provisioning them in this
-   * application. These can transform or filter the resources to be provisioned.
-   */
-  mappings?: Array<SCIMConfigMapping>;
 }
 
 /**
@@ -2408,7 +2648,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -2454,6 +2694,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2544,7 +2858,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -2569,6 +2883,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2722,7 +3110,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -2768,6 +3156,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2921,7 +3383,7 @@ export namespace ApplicationCreateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserVncApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -2967,6 +3429,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserVncApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3053,7 +3589,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3072,6 +3608,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace AppLauncherApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3158,7 +3768,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3177,6 +3787,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3263,7 +3947,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3282,6 +3966,80 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3546,7 +4304,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -3592,6 +4350,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3682,7 +4514,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -3707,6 +4539,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3860,7 +4766,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -3906,6 +4812,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4059,7 +5039,7 @@ export namespace ApplicationUpdateResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserVncApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -4105,6 +5085,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserVncApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4191,7 +5245,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -4210,6 +5264,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace AppLauncherApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4296,7 +5424,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -4315,6 +5443,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4401,7 +5603,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -4420,6 +5622,80 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4684,7 +5960,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -4730,6 +6006,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4820,7 +6170,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -4845,6 +6195,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4998,7 +6422,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5044,6 +6468,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5197,7 +6695,7 @@ export namespace ApplicationListResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserVncApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5243,6 +6741,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserVncApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5329,7 +6901,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -5348,6 +6920,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace AppLauncherApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5434,7 +7080,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -5453,6 +7099,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5539,7 +7259,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -5558,6 +7278,80 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5829,7 +7623,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SelfHostedApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -5875,6 +7669,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5965,7 +7833,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<SaaSApplication.Policy>;
 
     saas_app?: ApplicationsAPI.SAMLSaaSApp | ApplicationsAPI.OIDCSaaSApp;
 
@@ -5990,6 +7858,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SaaSApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6143,7 +8085,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserSSHApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -6189,6 +8131,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6342,7 +8358,7 @@ export namespace ApplicationGetResponse {
      */
     path_cookie_attribute?: boolean;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserVncApplication.Policy>;
 
     /**
      * Sets the SameSite cookie setting, which provides increased security against CSRF
@@ -6388,6 +8404,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserVncApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6474,7 +8564,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<AppLauncherApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -6493,6 +8583,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace AppLauncherApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6579,7 +8743,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<DeviceEnrollmentPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -6598,6 +8762,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6684,7 +8922,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.Policy>;
+    policies?: Array<BrowserIsolationPermissionsApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -6703,6 +8941,80 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      /**
+       * Administrators who can approve a temporary authentication request.
+       */
+      approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
+
+      /**
+       * Requires the user to request access from an administrator at the start of each
+       * session.
+       */
+      approval_required?: boolean;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Require this application to be served in an isolated browser for users matching
+       * this policy. 'Client Web Isolation' must be on for the account in order to use
+       * this feature.
+       */
+      isolation_required?: boolean;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * A custom message that will appear on the purpose justification screen.
+       */
+      purpose_justification_prompt?: string;
+
+      /**
+       * Require users to enter a justification when they log in to the application.
+       */
+      purpose_justification_required?: boolean;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The amount of time that tokens issued for the application will be valid. Must be
+       * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+       * m, h.
+       */
+      session_duration?: string;
+
+      updated_at?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -10545,12 +12857,10 @@ export namespace Applications {
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
   export import Decision = ApplicationsAPI.Decision;
   export import OIDCSaaSApp = ApplicationsAPI.OIDCSaaSApp;
-  export import Policy = ApplicationsAPI.Policy;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
   export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
-  export import SCIMConfig = ApplicationsAPI.SCIMConfig;
   export import SCIMConfigAuthenticationHTTPBasic = ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic;
   export import SCIMConfigAuthenticationOAuthBearerToken = ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken;
   export import SCIMConfigAuthenticationOauth2 = ApplicationsAPI.SCIMConfigAuthenticationOauth2;
@@ -10585,7 +12895,13 @@ export namespace Applications {
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = PoliciesAPI.Policies;
   export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
+  export import Policy = PoliciesAPI.Policy;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
   export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
   export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
