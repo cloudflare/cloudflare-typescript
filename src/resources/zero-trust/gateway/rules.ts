@@ -297,7 +297,7 @@ export interface RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSetting.BisoAdminControls;
+  biso_admin_controls?: RuleSetting.BISOAdminControls;
 
   /**
    * Enable the custom block page.
@@ -412,7 +412,7 @@ export namespace RuleSetting {
   /**
    * Configure how browser isolation behaves.
    */
-  export interface BisoAdminControls {
+  export interface BISOAdminControls {
     /**
      * Set to false to enable copy-pasting.
      */
@@ -572,7 +572,7 @@ export interface RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  biso_admin_controls?: RuleSettingParam.BisoAdminControls;
+  biso_admin_controls?: RuleSettingParam.BISOAdminControls;
 
   /**
    * Enable the custom block page.
@@ -687,7 +687,7 @@ export namespace RuleSettingParam {
   /**
    * Configure how browser isolation behaves.
    */
-  export interface BisoAdminControls {
+  export interface BISOAdminControls {
     /**
      * Set to false to enable copy-pasting.
      */
