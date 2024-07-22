@@ -357,7 +357,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: ApplicationsAPI.CORSHeaders;
+    cors_headers?: SelfHostedApplication.CORSHeaders;
 
     created_at?: string;
 
@@ -431,6 +431,51 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+  }
+
+  export namespace SelfHostedApplication {
+    export interface CORSHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
   }
 
   export interface SaaSApplication {
@@ -737,7 +782,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: ApplicationsAPI.CORSHeaders;
+    cors_headers?: BrowserSSHApplication.CORSHeaders;
 
     created_at?: string;
 
@@ -813,6 +858,51 @@ export namespace Application {
     updated_at?: string;
   }
 
+  export namespace BrowserSSHApplication {
+    export interface CORSHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
+  }
+
   export interface BrowserVncApplication {
     /**
      * The domain and path that Access will secure.
@@ -851,7 +941,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: ApplicationsAPI.CORSHeaders;
+    cors_headers?: BrowserVncApplication.CORSHeaders;
 
     created_at?: string;
 
@@ -925,6 +1015,51 @@ export namespace Application {
     skip_interstitial?: boolean;
 
     updated_at?: string;
+  }
+
+  export namespace BrowserVncApplication {
+    export interface CORSHeaders {
+      /**
+       * Allows all HTTP request headers.
+       */
+      allow_all_headers?: boolean;
+
+      /**
+       * Allows all HTTP request methods.
+       */
+      allow_all_methods?: boolean;
+
+      /**
+       * Allows all origins.
+       */
+      allow_all_origins?: boolean;
+
+      /**
+       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+       * client certificates) with requests.
+       */
+      allow_credentials?: boolean;
+
+      /**
+       * Allowed HTTP request headers.
+       */
+      allowed_headers?: Array<unknown>;
+
+      /**
+       * Allowed HTTP request methods.
+       */
+      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
+
+      /**
+       * Allowed origins.
+       */
+      allowed_origins?: Array<unknown>;
+
+      /**
+       * The maximum number of seconds the results of a preflight request can be cached.
+       */
+      max_age?: number;
+    }
   }
 
   export interface AppLauncherApplication {
@@ -1311,7 +1446,7 @@ export interface CORSHeaders {
   /**
    * Allowed HTTP request headers.
    */
-  allowed_headers?: Array<unknown>;
+  allowed_headers?: Array<AllowedHeaders>;
 
   /**
    * Allowed HTTP request methods.
@@ -1321,7 +1456,50 @@ export interface CORSHeaders {
   /**
    * Allowed origins.
    */
-  allowed_origins?: Array<unknown>;
+  allowed_origins?: Array<AllowedOrigins>;
+
+  /**
+   * The maximum number of seconds the results of a preflight request can be cached.
+   */
+  max_age?: number;
+}
+
+export interface CORSHeadersParam {
+  /**
+   * Allows all HTTP request headers.
+   */
+  allow_all_headers?: boolean;
+
+  /**
+   * Allows all HTTP request methods.
+   */
+  allow_all_methods?: boolean;
+
+  /**
+   * Allows all origins.
+   */
+  allow_all_origins?: boolean;
+
+  /**
+   * When set to `true`, includes credentials (cookies, authorization headers, or TLS
+   * client certificates) with requests.
+   */
+  allow_credentials?: boolean;
+
+  /**
+   * Allowed HTTP request headers.
+   */
+  allowed_headers?: Array<AllowedHeadersParam>;
+
+  /**
+   * Allowed HTTP request methods.
+   */
+  allowed_methods?: Array<AllowedMethodsParam>;
+
+  /**
+   * Allowed origins.
+   */
+  allowed_origins?: Array<AllowedOriginsParam>;
 
   /**
    * The maximum number of seconds the results of a preflight request can be cached.
@@ -2169,7 +2347,7 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -2276,49 +2454,6 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2526,7 +2661,7 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -2633,49 +2768,6 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2768,7 +2860,7 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -2875,49 +2967,6 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserVncApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3436,7 +3485,7 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -3543,49 +3592,6 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3793,7 +3799,7 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -3900,49 +3906,6 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4035,7 +3998,7 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -4142,49 +4105,6 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserVncApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4703,7 +4623,7 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -4810,49 +4730,6 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5060,7 +4937,7 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -5167,49 +5044,6 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5302,7 +5136,7 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -5409,49 +5243,6 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserVncApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5977,7 +5768,7 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: SelfHostedApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -6084,49 +5875,6 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6334,7 +6082,7 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserSSHApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -6441,49 +6189,6 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6576,7 +6281,7 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CORSHeaders;
+    cors_headers?: ApplicationsAPI.CORSHeaders;
 
     created_at?: string;
 
@@ -6683,49 +6388,6 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserVncApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeaders>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethods>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOrigins>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -7252,7 +6914,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationCreateParams.SelfHostedApplication.CORSHeaders;
+    cors_headers?: CORSHeadersParam;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -7366,49 +7028,6 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeadersParam>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethodsParam>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOriginsParam>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -7817,7 +7436,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationCreateParams.BrowserSSHApplication.CORSHeaders;
+    cors_headers?: CORSHeadersParam;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -7931,49 +7550,6 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeadersParam>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethodsParam>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOriginsParam>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -8164,7 +7740,7 @@ export namespace ApplicationCreateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationCreateParams.BrowserVncApplication.CORSHeaders;
+    cors_headers?: CORSHeadersParam;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -8278,49 +7854,6 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace BrowserVncApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeadersParam>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethodsParam>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOriginsParam>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -9199,7 +8732,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationUpdateParams.SelfHostedApplication.CORSHeaders;
+    cors_headers?: CORSHeadersParam;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -9313,49 +8846,6 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace SelfHostedApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeadersParam>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethodsParam>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOriginsParam>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -9764,7 +9254,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationUpdateParams.BrowserSSHApplication.CORSHeaders;
+    cors_headers?: CORSHeadersParam;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -9878,49 +9368,6 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserSSHApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeadersParam>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethodsParam>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOriginsParam>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -10111,7 +9558,7 @@ export namespace ApplicationUpdateParams {
     /**
      * Body param:
      */
-    cors_headers?: ApplicationUpdateParams.BrowserVncApplication.CORSHeaders;
+    cors_headers?: CORSHeadersParam;
 
     /**
      * Body param: The custom error message shown to a user when they are denied access
@@ -10225,49 +9672,6 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserVncApplication {
-    export interface CORSHeaders {
-      /**
-       * Allows all HTTP request headers.
-       */
-      allow_all_headers?: boolean;
-
-      /**
-       * Allows all HTTP request methods.
-       */
-      allow_all_methods?: boolean;
-
-      /**
-       * Allows all origins.
-       */
-      allow_all_origins?: boolean;
-
-      /**
-       * When set to `true`, includes credentials (cookies, authorization headers, or TLS
-       * client certificates) with requests.
-       */
-      allow_credentials?: boolean;
-
-      /**
-       * Allowed HTTP request headers.
-       */
-      allowed_headers?: Array<ApplicationsAPI.AllowedHeadersParam>;
-
-      /**
-       * Allowed HTTP request methods.
-       */
-      allowed_methods?: Array<ApplicationsAPI.AllowedMethodsParam>;
-
-      /**
-       * Allowed origins.
-       */
-      allowed_origins?: Array<ApplicationsAPI.AllowedOriginsParam>;
-
-      /**
-       * The maximum number of seconds the results of a preflight request can be cached.
-       */
-      max_age?: number;
-    }
-
     /**
      * A JSON that links a reusable policy to an application.
      */
