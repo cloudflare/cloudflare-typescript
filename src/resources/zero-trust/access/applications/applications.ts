@@ -312,7 +312,7 @@ export type Application =
   | Application.SelfHostedApplication
   | Application.SaaSApplication
   | Application.BrowserSSHApplication
-  | Application.BrowserVncApplication
+  | Application.BrowserVNCApplication
   | Application.AppLauncherApplication
   | Application.DeviceEnrollmentPermissionsApplication
   | Application.BrowserIsolationPermissionsApplication
@@ -903,7 +903,7 @@ export namespace Application {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * The domain and path that Access will secure.
      */
@@ -941,7 +941,7 @@ export namespace Application {
      */
     auto_redirect_to_identity?: boolean;
 
-    cors_headers?: BrowserVncApplication.CORSHeaders;
+    cors_headers?: BrowserVNCApplication.CORSHeaders;
 
     created_at?: string;
 
@@ -1017,7 +1017,7 @@ export namespace Application {
     updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     export interface CORSHeaders {
       /**
        * Allows all HTTP request headers.
@@ -2293,7 +2293,7 @@ export type ApplicationCreateResponse =
   | ApplicationCreateResponse.SelfHostedApplication
   | ApplicationCreateResponse.SaaSApplication
   | ApplicationCreateResponse.BrowserSSHApplication
-  | ApplicationCreateResponse.BrowserVncApplication
+  | ApplicationCreateResponse.BrowserVNCApplication
   | ApplicationCreateResponse.AppLauncherApplication
   | ApplicationCreateResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateResponse.BrowserIsolationPermissionsApplication
@@ -2813,7 +2813,7 @@ export namespace ApplicationCreateResponse {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -2933,7 +2933,7 @@ export namespace ApplicationCreateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.SCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -2966,7 +2966,7 @@ export namespace ApplicationCreateResponse {
     updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3431,7 +3431,7 @@ export type ApplicationUpdateResponse =
   | ApplicationUpdateResponse.SelfHostedApplication
   | ApplicationUpdateResponse.SaaSApplication
   | ApplicationUpdateResponse.BrowserSSHApplication
-  | ApplicationUpdateResponse.BrowserVncApplication
+  | ApplicationUpdateResponse.BrowserVNCApplication
   | ApplicationUpdateResponse.AppLauncherApplication
   | ApplicationUpdateResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateResponse.BrowserIsolationPermissionsApplication
@@ -3951,7 +3951,7 @@ export namespace ApplicationUpdateResponse {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -4071,7 +4071,7 @@ export namespace ApplicationUpdateResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.SCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -4104,7 +4104,7 @@ export namespace ApplicationUpdateResponse {
     updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4569,7 +4569,7 @@ export type ApplicationListResponse =
   | ApplicationListResponse.SelfHostedApplication
   | ApplicationListResponse.SaaSApplication
   | ApplicationListResponse.BrowserSSHApplication
-  | ApplicationListResponse.BrowserVncApplication
+  | ApplicationListResponse.BrowserVNCApplication
   | ApplicationListResponse.AppLauncherApplication
   | ApplicationListResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationListResponse.BrowserIsolationPermissionsApplication
@@ -5089,7 +5089,7 @@ export namespace ApplicationListResponse {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -5209,7 +5209,7 @@ export namespace ApplicationListResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.SCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -5242,7 +5242,7 @@ export namespace ApplicationListResponse {
     updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5714,7 +5714,7 @@ export type ApplicationGetResponse =
   | ApplicationGetResponse.SelfHostedApplication
   | ApplicationGetResponse.SaaSApplication
   | ApplicationGetResponse.BrowserSSHApplication
-  | ApplicationGetResponse.BrowserVncApplication
+  | ApplicationGetResponse.BrowserVNCApplication
   | ApplicationGetResponse.AppLauncherApplication
   | ApplicationGetResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationGetResponse.BrowserIsolationPermissionsApplication
@@ -6234,7 +6234,7 @@ export namespace ApplicationGetResponse {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * The primary hostname and path that Access will secure. If the app is visible in
      * the App Launcher dashboard, this is the domain that will be displayed.
@@ -6354,7 +6354,7 @@ export namespace ApplicationGetResponse {
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
      */
-    scim_config?: BrowserVncApplication.SCIMConfig;
+    scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
      * List of domains that Access will secure.
@@ -6387,7 +6387,7 @@ export namespace ApplicationGetResponse {
     updated_at?: string;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6854,7 +6854,7 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.SelfHostedApplication
   | ApplicationCreateParams.SaaSApplication
   | ApplicationCreateParams.BrowserSSHApplication
-  | ApplicationCreateParams.BrowserVncApplication
+  | ApplicationCreateParams.BrowserVNCApplication
   | ApplicationCreateParams.AppLauncherApplication
   | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateParams.BrowserIsolationPermissionsApplication
@@ -7687,7 +7687,7 @@ export namespace ApplicationCreateParams {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * Body param: The primary hostname and path that Access will secure. If the app is
      * visible in the App Launcher dashboard, this is the domain that will be
@@ -7806,9 +7806,9 @@ export namespace ApplicationCreateParams {
      * exclusive to the application.
      */
     policies?: Array<
-      | ApplicationCreateParams.BrowserVncApplication.AccessAppPolicyLink
+      | ApplicationCreateParams.BrowserVNCApplication.AccessAppPolicyLink
       | string
-      | ApplicationCreateParams.BrowserVncApplication.UnionMember2
+      | ApplicationCreateParams.BrowserVNCApplication.UnionMember2
     >;
 
     /**
@@ -7821,7 +7821,7 @@ export namespace ApplicationCreateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationCreateParams.BrowserVncApplication.SCIMConfig;
+    scim_config?: ApplicationCreateParams.BrowserVNCApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -7853,7 +7853,7 @@ export namespace ApplicationCreateParams {
     tags?: Array<string>;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -8672,7 +8672,7 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.SelfHostedApplication
   | ApplicationUpdateParams.SaaSApplication
   | ApplicationUpdateParams.BrowserSSHApplication
-  | ApplicationUpdateParams.BrowserVncApplication
+  | ApplicationUpdateParams.BrowserVNCApplication
   | ApplicationUpdateParams.AppLauncherApplication
   | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
@@ -9505,7 +9505,7 @@ export namespace ApplicationUpdateParams {
     }
   }
 
-  export interface BrowserVncApplication {
+  export interface BrowserVNCApplication {
     /**
      * Body param: The primary hostname and path that Access will secure. If the app is
      * visible in the App Launcher dashboard, this is the domain that will be
@@ -9624,9 +9624,9 @@ export namespace ApplicationUpdateParams {
      * exclusive to the application.
      */
     policies?: Array<
-      | ApplicationUpdateParams.BrowserVncApplication.AccessAppPolicyLink
+      | ApplicationUpdateParams.BrowserVNCApplication.AccessAppPolicyLink
       | string
-      | ApplicationUpdateParams.BrowserVncApplication.UnionMember2
+      | ApplicationUpdateParams.BrowserVNCApplication.UnionMember2
     >;
 
     /**
@@ -9639,7 +9639,7 @@ export namespace ApplicationUpdateParams {
      * Body param: Configuration for provisioning to this application via SCIM. This is
      * currently in closed beta.
      */
-    scim_config?: ApplicationUpdateParams.BrowserVncApplication.SCIMConfig;
+    scim_config?: ApplicationUpdateParams.BrowserVNCApplication.SCIMConfig;
 
     /**
      * Body param: List of domains that Access will secure.
@@ -9671,7 +9671,7 @@ export namespace ApplicationUpdateParams {
     tags?: Array<string>;
   }
 
-  export namespace BrowserVncApplication {
+  export namespace BrowserVNCApplication {
     /**
      * A JSON that links a reusable policy to an application.
      */
