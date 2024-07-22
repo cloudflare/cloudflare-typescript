@@ -189,6 +189,16 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    lora_weights?: Array<number>;
+
+    /**
+     * Body param:
+     */
+    loras?: Array<string>;
+
+    /**
+     * Body param:
+     */
     mask?: Array<number>;
 
     /**
