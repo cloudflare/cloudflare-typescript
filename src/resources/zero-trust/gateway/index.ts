@@ -56,6 +56,24 @@ export {
   Rules,
 } from './rules';
 export {
+  DOHEndpoint,
+  DOTEndpoint,
+  Endpoint,
+  IPNetwork,
+  IPV4Endpoint,
+  IPV6Endpoint,
+  IPV6Network,
+  Location,
+  LocationDeleteResponse,
+  LocationCreateParams,
+  LocationUpdateParams,
+  LocationListParams,
+  LocationDeleteParams,
+  LocationGetParams,
+  LocationsSinglePage,
+  Locations,
+} from './locations';
+export {
   GatewayCreateResponse,
   GatewayListResponse,
   GatewayCreateParams,
@@ -94,15 +112,4 @@ export {
   AuditSSHSettingGetParams,
   AuditSSHSettings,
 } from './audit-ssh-settings';
-export {
-  Location,
-  LocationDeleteResponse,
-  LocationCreateParams,
-  LocationUpdateParams,
-  LocationListParams,
-  LocationDeleteParams,
-  LocationGetParams,
-  LocationsSinglePage,
-  Locations,
-} from './locations';
 export { LoggingSetting, LoggingUpdateParams, LoggingGetParams, Logging } from './logging';

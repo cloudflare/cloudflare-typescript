@@ -4778,6 +4778,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">DOHEndpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">DOTEndpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">Endpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPNetwork</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPV4Endpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPV6Endpoint</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/locations.ts">IPV6Network</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">Location</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/locations.ts">LocationDeleteResponse</a></code>
 
