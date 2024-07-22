@@ -42,6 +42,7 @@ describe('resource http', () => {
           format: 'JSON',
           location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
+          normalization: 'MIN0_MAX',
         },
         { path: '/_stainless_unknown_path' },
       ),
