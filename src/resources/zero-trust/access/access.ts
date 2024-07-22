@@ -737,10 +737,17 @@ export namespace Access {
   export import ApplicationType = ApplicationsAPI.ApplicationType;
   export import CORSHeaders = ApplicationsAPI.CORSHeaders;
   export import Decision = ApplicationsAPI.Decision;
+  export import OIDCSaaSApp = ApplicationsAPI.OIDCSaaSApp;
+  export import Policy = ApplicationsAPI.Policy;
   export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
   export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
   export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
   export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
+  export import SCIMConfig = ApplicationsAPI.SCIMConfig;
+  export import SCIMConfigAuthenticationHTTPBasic = ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic;
+  export import SCIMConfigAuthenticationOAuthBearerToken = ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken;
+  export import SCIMConfigAuthenticationOauth2 = ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+  export import SCIMConfigMapping = ApplicationsAPI.SCIMConfigMapping;
   export import SelfHostedDomains = ApplicationsAPI.SelfHostedDomains;
   export import ApplicationCreateResponse = ApplicationsAPI.ApplicationCreateResponse;
   export import ApplicationUpdateResponse = ApplicationsAPI.ApplicationUpdateResponse;
