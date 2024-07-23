@@ -40,11 +40,7 @@ describe('resource bgp', () => {
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           name: ['string', 'string', 'string'],
-          prefix: [
-            { in: 'query', name: 'prefix', test: 12, type: '1.1.1.0/24' },
-            { in: 'query', name: 'prefix', test: 12, type: '1.1.1.0/24' },
-            { in: 'query', name: 'prefix', test: 12, type: '1.1.1.0/24' },
-          ],
+          prefix: ['1.1.1.0/24', '1.1.1.0/24', '1.1.1.0/24'],
           updateType: ['ANNOUNCEMENT', 'WITHDRAWAL'],
         },
         { path: '/_stainless_unknown_path' },
