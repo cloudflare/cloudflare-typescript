@@ -3030,6 +3030,11 @@ export namespace ApplicationCreateResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -3040,6 +3045,11 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -3047,6 +3057,21 @@ export namespace ApplicationCreateResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<AppLauncherApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: AppLauncherApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -3068,10 +3093,57 @@ export namespace ApplicationCreateResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3135,6 +3207,11 @@ export namespace ApplicationCreateResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -3145,6 +3222,11 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -3152,6 +3234,21 @@ export namespace ApplicationCreateResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<DeviceEnrollmentPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -3173,10 +3270,57 @@ export namespace ApplicationCreateResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3240,6 +3384,11 @@ export namespace ApplicationCreateResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -3250,6 +3399,11 @@ export namespace ApplicationCreateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -3257,6 +3411,21 @@ export namespace ApplicationCreateResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<BrowserIsolationPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -3278,10 +3447,57 @@ export namespace ApplicationCreateResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4168,6 +4384,11 @@ export namespace ApplicationUpdateResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -4178,6 +4399,11 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -4185,6 +4411,21 @@ export namespace ApplicationUpdateResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<AppLauncherApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: AppLauncherApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -4206,10 +4447,57 @@ export namespace ApplicationUpdateResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4273,6 +4561,11 @@ export namespace ApplicationUpdateResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -4283,6 +4576,11 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -4290,6 +4588,21 @@ export namespace ApplicationUpdateResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<DeviceEnrollmentPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -4311,10 +4624,57 @@ export namespace ApplicationUpdateResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4378,6 +4738,11 @@ export namespace ApplicationUpdateResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -4388,6 +4753,11 @@ export namespace ApplicationUpdateResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -4395,6 +4765,21 @@ export namespace ApplicationUpdateResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<BrowserIsolationPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -4416,10 +4801,57 @@ export namespace ApplicationUpdateResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5306,6 +5738,11 @@ export namespace ApplicationListResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -5316,6 +5753,11 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -5323,6 +5765,21 @@ export namespace ApplicationListResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<AppLauncherApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: AppLauncherApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -5344,10 +5801,57 @@ export namespace ApplicationListResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5411,6 +5915,11 @@ export namespace ApplicationListResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -5421,6 +5930,11 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -5428,6 +5942,21 @@ export namespace ApplicationListResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<DeviceEnrollmentPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -5449,10 +5978,57 @@ export namespace ApplicationListResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5516,6 +6092,11 @@ export namespace ApplicationListResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -5526,6 +6107,11 @@ export namespace ApplicationListResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -5533,6 +6119,21 @@ export namespace ApplicationListResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<BrowserIsolationPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -5554,10 +6155,57 @@ export namespace ApplicationListResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6451,6 +7099,11 @@ export namespace ApplicationGetResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -6461,6 +7114,11 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -6468,6 +7126,21 @@ export namespace ApplicationGetResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<AppLauncherApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: AppLauncherApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -6489,10 +7162,57 @@ export namespace ApplicationGetResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace AppLauncherApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6556,6 +7276,11 @@ export namespace ApplicationGetResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -6566,6 +7291,11 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -6573,6 +7303,21 @@ export namespace ApplicationGetResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<DeviceEnrollmentPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -6594,10 +7339,57 @@ export namespace ApplicationGetResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6661,6 +7453,11 @@ export namespace ApplicationGetResponse {
     allowed_idps?: Array<ApplicationsAPI.AllowedIdPs>;
 
     /**
+     * The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Audience tag.
      */
     aud?: string;
@@ -6671,6 +7468,11 @@ export namespace ApplicationGetResponse {
      */
     auto_redirect_to_identity?: boolean;
 
+    /**
+     * The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
     created_at?: string;
 
     /**
@@ -6678,6 +7480,21 @@ export namespace ApplicationGetResponse {
      * the App Launcher dashboard, this is the domain that will be displayed.
      */
     domain?: string;
+
+    /**
+     * The links in the App Launcher footer.
+     */
+    footer_links?: Array<BrowserIsolationPermissionsApplication.FooterLink>;
+
+    /**
+     * The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    landing_page_design?: BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * The name of the application.
@@ -6699,10 +7516,57 @@ export namespace ApplicationGetResponse {
      */
     session_duration?: string;
 
+    /**
+     * Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
+
     updated_at?: string;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -8016,10 +8880,36 @@ export namespace ApplicationCreateParams {
     allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
+     * Body param: The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Body param: When set to `true`, users skip the identity provider selection step
      * during login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
+    /**
+     * Body param: The links in the App Launcher footer.
+     */
+    footer_links?: Array<ApplicationCreateParams.AppLauncherApplication.FooterLink>;
+
+    /**
+     * Body param: The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * Body param: The design of the App Launcher landing page shown to users when they
+     * log in.
+     */
+    landing_page_design?: ApplicationCreateParams.AppLauncherApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that will apply to the application, in ascending order
@@ -8044,9 +8934,56 @@ export namespace ApplicationCreateParams {
      * (or µs), ms, s, m, h.
      */
     session_duration?: string;
+
+    /**
+     * Body param: Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
   }
 
   export namespace AppLauncherApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -8209,10 +9146,36 @@ export namespace ApplicationCreateParams {
     allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
+     * Body param: The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Body param: When set to `true`, users skip the identity provider selection step
      * during login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
+    /**
+     * Body param: The links in the App Launcher footer.
+     */
+    footer_links?: Array<ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.FooterLink>;
+
+    /**
+     * Body param: The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * Body param: The design of the App Launcher landing page shown to users when they
+     * log in.
+     */
+    landing_page_design?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that will apply to the application, in ascending order
@@ -8237,9 +9200,56 @@ export namespace ApplicationCreateParams {
      * (or µs), ms, s, m, h.
      */
     session_duration?: string;
+
+    /**
+     * Body param: Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -8402,10 +9412,36 @@ export namespace ApplicationCreateParams {
     allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
+     * Body param: The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Body param: When set to `true`, users skip the identity provider selection step
      * during login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
+    /**
+     * Body param: The links in the App Launcher footer.
+     */
+    footer_links?: Array<ApplicationCreateParams.BrowserIsolationPermissionsApplication.FooterLink>;
+
+    /**
+     * Body param: The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * Body param: The design of the App Launcher landing page shown to users when they
+     * log in.
+     */
+    landing_page_design?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that will apply to the application, in ascending order
@@ -8430,9 +9466,56 @@ export namespace ApplicationCreateParams {
      * (or µs), ms, s, m, h.
      */
     session_duration?: string;
+
+    /**
+     * Body param: Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -9834,10 +10917,36 @@ export namespace ApplicationUpdateParams {
     allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
+     * Body param: The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Body param: When set to `true`, users skip the identity provider selection step
      * during login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
+    /**
+     * Body param: The links in the App Launcher footer.
+     */
+    footer_links?: Array<ApplicationUpdateParams.AppLauncherApplication.FooterLink>;
+
+    /**
+     * Body param: The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * Body param: The design of the App Launcher landing page shown to users when they
+     * log in.
+     */
+    landing_page_design?: ApplicationUpdateParams.AppLauncherApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that will apply to the application, in ascending order
@@ -9862,9 +10971,56 @@ export namespace ApplicationUpdateParams {
      * (or µs), ms, s, m, h.
      */
     session_duration?: string;
+
+    /**
+     * Body param: Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
   }
 
   export namespace AppLauncherApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -10027,10 +11183,36 @@ export namespace ApplicationUpdateParams {
     allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
+     * Body param: The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Body param: When set to `true`, users skip the identity provider selection step
      * during login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
+    /**
+     * Body param: The links in the App Launcher footer.
+     */
+    footer_links?: Array<ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.FooterLink>;
+
+    /**
+     * Body param: The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * Body param: The design of the App Launcher landing page shown to users when they
+     * log in.
+     */
+    landing_page_design?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that will apply to the application, in ascending order
@@ -10055,9 +11237,56 @@ export namespace ApplicationUpdateParams {
      * (or µs), ms, s, m, h.
      */
     session_duration?: string;
+
+    /**
+     * Body param: Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
   }
 
   export namespace DeviceEnrollmentPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -10220,10 +11449,36 @@ export namespace ApplicationUpdateParams {
     allowed_idps?: Array<AllowedIdPsParam>;
 
     /**
+     * Body param: The image URL of the logo shown in the App Launcher header.
+     */
+    app_launcher_logo_url?: string;
+
+    /**
      * Body param: When set to `true`, users skip the identity provider selection step
      * during login. You must specify only one identity provider in allowed_idps.
      */
     auto_redirect_to_identity?: boolean;
+
+    /**
+     * Body param: The background color of the App Launcher page.
+     */
+    bg_color?: string;
+
+    /**
+     * Body param: The links in the App Launcher footer.
+     */
+    footer_links?: Array<ApplicationUpdateParams.BrowserIsolationPermissionsApplication.FooterLink>;
+
+    /**
+     * Body param: The background color of the App Launcher header.
+     */
+    header_bg_color?: string;
+
+    /**
+     * Body param: The design of the App Launcher landing page shown to users when they
+     * log in.
+     */
+    landing_page_design?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
      * Body param: The policies that will apply to the application, in ascending order
@@ -10248,9 +11503,56 @@ export namespace ApplicationUpdateParams {
      * (or µs), ms, s, m, h.
      */
     session_duration?: string;
+
+    /**
+     * Body param: Determines when to skip the App Launcher landing page.
+     */
+    skip_app_launcher_login_page?: boolean;
   }
 
   export namespace BrowserIsolationPermissionsApplication {
+    export interface FooterLink {
+      /**
+       * The hypertext in the footer link.
+       */
+      name: string;
+
+      /**
+       * the hyperlink in the footer link.
+       */
+      url: string;
+    }
+
+    /**
+     * The design of the App Launcher landing page shown to users when they log in.
+     */
+    export interface LandingPageDesign {
+      /**
+       * The background color of the log in button on the landing page.
+       */
+      button_color?: string;
+
+      /**
+       * The color of the text in the log in button on the landing page.
+       */
+      button_text_color?: string;
+
+      /**
+       * The URL of the image shown on the landing page.
+       */
+      image_url?: string;
+
+      /**
+       * The message shown on the landing page.
+       */
+      message?: string;
+
+      /**
+       * The title shown on the landing page.
+       */
+      title?: string;
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
