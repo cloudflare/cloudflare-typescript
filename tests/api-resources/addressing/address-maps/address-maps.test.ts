@@ -30,21 +30,9 @@ describe('resource addressMaps', () => {
       enabled: true,
       ips: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
       memberships: [
-        {
-          created_at: '2014-01-01T05:20:00.12345Z',
-          identifier: '023e105f4ecef8ad9ca31a8372d0c353',
-          kind: 'zone',
-        },
-        {
-          created_at: '2014-01-01T05:20:00.12345Z',
-          identifier: '023e105f4ecef8ad9ca31a8372d0c353',
-          kind: 'zone',
-        },
-        {
-          created_at: '2014-01-01T05:20:00.12345Z',
-          identifier: '023e105f4ecef8ad9ca31a8372d0c353',
-          kind: 'zone',
-        },
+        { identifier: '023e105f4ecef8ad9ca31a8372d0c353', kind: 'zone' },
+        { identifier: '023e105f4ecef8ad9ca31a8372d0c353', kind: 'zone' },
+        { identifier: '023e105f4ecef8ad9ca31a8372d0c353', kind: 'zone' },
       ],
     });
   });

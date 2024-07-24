@@ -28,8 +28,6 @@ describe('resource tags', () => {
     const response = await cloudflare.zeroTrust.access.tags.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
-      created_at: '2014-01-01T05:20:00.12345Z',
-      updated_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
@@ -51,8 +49,6 @@ describe('resource tags', () => {
     const response = await cloudflare.zeroTrust.access.tags.update('engineers', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'engineers',
-      created_at: '2014-01-01T05:20:00.12345Z',
-      updated_at: '2014-01-01T05:20:00.12345Z',
     });
   });
 
