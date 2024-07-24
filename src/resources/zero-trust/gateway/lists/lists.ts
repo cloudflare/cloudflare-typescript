@@ -111,8 +111,6 @@ export interface GatewayItem {
 }
 
 export interface GatewayItemParam {
-  created_at?: string;
-
   /**
    * The description of the list item, if present
    */

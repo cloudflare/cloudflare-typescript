@@ -106,16 +106,6 @@ export interface TagCreateParams {
    * Body param: The name of the tag
    */
   name: string;
-
-  /**
-   * Body param:
-   */
-  created_at?: string;
-
-  /**
-   * Body param:
-   */
-  updated_at?: string;
 }
 
 export interface TagUpdateParams {
@@ -128,16 +118,6 @@ export interface TagUpdateParams {
    * Body param: The name of the tag
    */
   name: string;
-
-  /**
-   * Body param:
-   */
-  created_at?: string;
-
-  /**
-   * Body param:
-   */
-  updated_at?: string;
 }
 
 export interface TagListParams {
