@@ -263,7 +263,7 @@ export interface IndexQuery {
 export namespace IndexQuery {
   export interface Match {
     /**
-     * Identifier
+     * Identifier for a Vector
      */
     id?: string;
 
