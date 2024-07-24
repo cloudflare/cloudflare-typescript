@@ -32,9 +32,9 @@ describe('resource lists', () => {
       type: 'SERIAL',
       description: 'The serial numbers for administrators',
       items: [
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
+        { description: 'Austin office IP', value: '8GE8721REF' },
+        { description: 'Austin office IP', value: '8GE8721REF' },
+        { description: 'Austin office IP', value: '8GE8721REF' },
       ],
     });
   });
@@ -118,9 +118,9 @@ describe('resource lists', () => {
     const response = await cloudflare.zeroTrust.gateway.lists.edit('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
       append: [
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
-        { created_at: '2014-01-01T05:20:00.12345Z', description: 'Austin office IP', value: '8GE8721REF' },
+        { description: 'Austin office IP', value: '8GE8721REF' },
+        { description: 'Austin office IP', value: '8GE8721REF' },
+        { description: 'Austin office IP', value: '8GE8721REF' },
       ],
       remove: ['8GE8721REF', '8GE8721REF', '8GE8721REF'],
     });

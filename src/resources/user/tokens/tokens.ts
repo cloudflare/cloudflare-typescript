@@ -308,12 +308,6 @@ export interface TokenCreateParams {
   condition?: TokenCreateParams.Condition;
 
   /**
-   * The expiration time on or after which the JWT MUST NOT be accepted for
-   * processing.
-   */
-  expires_on?: string;
-
-  /**
    * The time before which the token MUST NOT be accepted for processing.
    */
   not_before?: string;
@@ -362,12 +356,6 @@ export interface TokenUpdateParams {
   status: 'active' | 'disabled' | 'expired';
 
   condition?: TokenUpdateParams.Condition;
-
-  /**
-   * The expiration time on or after which the JWT MUST NOT be accepted for
-   * processing.
-   */
-  expires_on?: string;
 
   /**
    * The time before which the token MUST NOT be accepted for processing.
