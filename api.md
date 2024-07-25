@@ -3697,7 +3697,7 @@ Methods:
 
 - <code title="post /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database.ts">create</a>({ ...params }) -> DatabaseCreateResponse</code>
 - <code title="get /accounts/{account_id}/d1/database">client.d1.database.<a href="./src/resources/d1/database.ts">list</a>({ ...params }) -> DatabaseListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">delete</a>(databaseId, { ...params }) -> DatabaseDeleteResponse</code>
+- <code title="delete /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">delete</a>(databaseId, { ...params }) -> DatabaseDeleteResponse | null</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/export">client.d1.database.<a href="./src/resources/d1/database.ts">export</a>(databaseId, { ...params }) -> DatabaseExportResponse</code>
 - <code title="get /accounts/{account_id}/d1/database/{database_id}">client.d1.database.<a href="./src/resources/d1/database.ts">get</a>(databaseId, { ...params }) -> D1</code>
 - <code title="post /accounts/{account_id}/d1/database/{database_id}/import">client.d1.database.<a href="./src/resources/d1/database.ts">import</a>(databaseId, { ...params }) -> DatabaseImportResponse</code>
