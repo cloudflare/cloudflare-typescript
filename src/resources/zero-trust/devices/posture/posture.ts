@@ -227,6 +227,7 @@ export type DeviceInput =
   | DiskEncryptionInput
   | DeviceInput.TeamsDevicesApplicationInputRequest
   | ClientCertificateInput
+  | DeviceInput.TeamsDevicesClientCertificateV2InputRequest
   | WorkspaceOneInput
   | CrowdstrikeInput
   | IntuneInput
@@ -278,6 +279,53 @@ export namespace DeviceInput {
      */
     thumbprint?: string;
   }
+
+  export interface TeamsDevicesClientCertificateV2InputRequest {
+    /**
+     * UUID of Cloudflare managed certificate.
+     */
+    certificate_id: string;
+
+    /**
+     * Confirm the certificate was not imported from another device. We recommend
+     * keeping this enabled unless the certificate was deployed without a private key.
+     */
+    check_private_key: boolean;
+
+    /**
+     * Operating system
+     */
+    operating_system: 'windows' | 'linux' | 'mac';
+
+    /**
+     * Common Name that is protected by the client certificate. This may include one or
+     * more variables in the ${ } notation. Only ${serial_number} and ${hostname} are
+     * valid variables.
+     */
+    cn?: string;
+
+    /**
+     * List of values indicating purposes for which the certificate public key can be
+     * used
+     */
+    extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
+
+    locations?: TeamsDevicesClientCertificateV2InputRequest.Locations;
+  }
+
+  export namespace TeamsDevicesClientCertificateV2InputRequest {
+    export interface Locations {
+      /**
+       * List of paths to check for client certificate on linux.
+       */
+      paths?: Array<string>;
+
+      /**
+       * List of trust stores to check for client certificate.
+       */
+      trust_stores?: Array<'system' | 'user'>;
+    }
+  }
 }
 
 /**
@@ -294,6 +342,7 @@ export type DeviceInputParam =
   | DiskEncryptionInputParam
   | DeviceInputParam.TeamsDevicesApplicationInputRequest
   | ClientCertificateInputParam
+  | DeviceInputParam.TeamsDevicesClientCertificateV2InputRequest
   | WorkspaceOneInputParam
   | CrowdstrikeInputParam
   | IntuneInputParam
@@ -344,6 +393,53 @@ export namespace DeviceInputParam {
      * Signing certificate thumbprint.
      */
     thumbprint?: string;
+  }
+
+  export interface TeamsDevicesClientCertificateV2InputRequest {
+    /**
+     * UUID of Cloudflare managed certificate.
+     */
+    certificate_id: string;
+
+    /**
+     * Confirm the certificate was not imported from another device. We recommend
+     * keeping this enabled unless the certificate was deployed without a private key.
+     */
+    check_private_key: boolean;
+
+    /**
+     * Operating system
+     */
+    operating_system: 'windows' | 'linux' | 'mac';
+
+    /**
+     * Common Name that is protected by the client certificate. This may include one or
+     * more variables in the ${ } notation. Only ${serial_number} and ${hostname} are
+     * valid variables.
+     */
+    cn?: string;
+
+    /**
+     * List of values indicating purposes for which the certificate public key can be
+     * used
+     */
+    extended_key_usage?: Array<'clientAuth' | 'emailProtection'>;
+
+    locations?: TeamsDevicesClientCertificateV2InputRequest.Locations;
+  }
+
+  export namespace TeamsDevicesClientCertificateV2InputRequest {
+    export interface Locations {
+      /**
+       * List of paths to check for client certificate on linux.
+       */
+      paths?: Array<string>;
+
+      /**
+       * List of trust stores to check for client certificate.
+       */
+      trust_stores?: Array<'system' | 'user'>;
+    }
   }
 }
 
@@ -409,6 +505,7 @@ export interface DevicePostureRule {
     | 'os_version'
     | 'domain_joined'
     | 'client_certificate'
+    | 'client_certificate_v2'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
@@ -922,6 +1019,7 @@ export interface PostureCreateParams {
     | 'os_version'
     | 'domain_joined'
     | 'client_certificate'
+    | 'client_certificate_v2'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
@@ -985,6 +1083,7 @@ export interface PostureUpdateParams {
     | 'os_version'
     | 'domain_joined'
     | 'client_certificate'
+    | 'client_certificate_v2'
     | 'unique_client_id'
     | 'kolide'
     | 'tanium_s2s'
