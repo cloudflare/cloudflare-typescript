@@ -10,11 +10,12 @@ export class Tags extends APIResource {
    * Create a tag
    */
   create(params: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
-    const { account_id, ...body } = params;
+    const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/access/tags`, { body, ...options }) as Core.APIPromise<{
-        result: Tag;
-      }>
+      this._client.post(`/accounts/${account_id}/access/tags`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: Tag }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -105,7 +106,7 @@ export interface TagCreateParams {
   /**
    * Body param: The name of the tag
    */
-  name: string;
+  body: string;
 }
 
 export interface TagUpdateParams {
