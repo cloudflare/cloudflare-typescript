@@ -44,11 +44,11 @@ export class Database extends APIResource {
     databaseId: string,
     params: DatabaseDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseDeleteResponse> {
+  ): Core.APIPromise<DatabaseDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{
-        result: DatabaseDeleteResponse;
+        result: DatabaseDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -198,7 +198,7 @@ export interface DatabaseListResponse {
   version?: string;
 }
 
-export type DatabaseDeleteResponse = unknown | string | null;
+export type DatabaseDeleteResponse = unknown;
 
 export interface DatabaseExportResponse {
   /**
