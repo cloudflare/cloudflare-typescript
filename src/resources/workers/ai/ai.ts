@@ -351,6 +351,11 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
+    functions?: Array<AIRunParams.Variant7.Function>;
+
+    /**
+     * Body param:
+     */
     max_tokens?: number;
 
     /**
@@ -381,7 +386,7 @@ export namespace AIRunParams {
     /**
      * Body param:
      */
-    tools?: Array<AIRunParams.Variant7.Tool>;
+    tools?: Array<AIRunParams.Variant7.UnionMember0 | AIRunParams.Variant7.UnionMember1>;
 
     /**
      * Body param:
@@ -401,35 +406,67 @@ export namespace AIRunParams {
       role: string;
     }
 
-    export interface Tool {
-      function?: Tool.Function;
+    export interface Function {
+      code: string;
 
-      type?: string;
+      name: string;
     }
 
-    export namespace Tool {
+    export interface UnionMember0 {
+      description: string;
+
+      name: string;
+
+      parameters: UnionMember0.Parameters;
+    }
+
+    export namespace UnionMember0 {
+      export interface Parameters {
+        properties: Record<string, Parameters.Properties>;
+
+        type: string;
+
+        required?: Array<string>;
+      }
+
+      export namespace Parameters {
+        export interface Properties {
+          description: string;
+
+          type: string;
+        }
+      }
+    }
+
+    export interface UnionMember1 {
+      function: UnionMember1.Function;
+
+      type: string;
+    }
+
+    export namespace UnionMember1 {
       export interface Function {
-        description?: string;
+        description: string;
 
-        name?: string;
+        name: string;
 
-        parameters?: Function.Parameters;
+        parameters: Function.Parameters;
       }
 
       export namespace Function {
         export interface Parameters {
-          properties?: Record<string, Parameters.Properties>;
+          properties: Record<string, Parameters.Properties>;
+
+          type: string;
 
           required?: Array<string>;
-
-          type?: string;
         }
 
         export namespace Parameters {
           export interface Properties {
-            description?: string;
+            description: string;
 
-            type?: string;
+            type: string;
           }
         }
       }
