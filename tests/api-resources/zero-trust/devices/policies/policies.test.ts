@@ -48,6 +48,7 @@ describe('resource policies', () => {
       service_mode_v2: { mode: 'proxy', port: 3000 },
       support_url: 'https://1.1.1.1/help',
       switch_locked: true,
+      tunnel_protocol: 'wireguard',
     });
   });
 
@@ -127,6 +128,7 @@ describe('resource policies', () => {
         service_mode_v2: { mode: 'proxy', port: 3000 },
         support_url: 'https://1.1.1.1/help',
         switch_locked: true,
+        tunnel_protocol: 'wireguard',
       },
     );
   });

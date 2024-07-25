@@ -206,6 +206,11 @@ export interface SettingsPolicy {
   switch_locked?: boolean;
 
   target_tests?: Array<SettingsPolicy.TargetTest>;
+
+  /**
+   * Determines which tunnel protocol to use.
+   */
+  tunnel_protocol?: string;
 }
 
 export namespace SettingsPolicy {
@@ -336,6 +341,11 @@ export interface PolicyCreateParams {
    * the client.
    */
   switch_locked?: boolean;
+
+  /**
+   * Body param: Determines which tunnel protocol to use.
+   */
+  tunnel_protocol?: string;
 }
 
 export namespace PolicyCreateParams {
@@ -446,6 +456,11 @@ export interface PolicyEditParams {
    * the client.
    */
   switch_locked?: boolean;
+
+  /**
+   * Body param: Determines which tunnel protocol to use.
+   */
+  tunnel_protocol?: string;
 }
 
 export namespace PolicyEditParams {
