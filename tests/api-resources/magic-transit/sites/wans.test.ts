@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource wans', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
       vlan_tag: 0,
@@ -26,7 +26,7 @@ describe('resource wans', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.sites.wans.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       physport: 1,
       vlan_tag: 0,
@@ -41,7 +41,7 @@ describe('resource wans', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.update(
+    const responsePromise = client.magicTransit.sites.wans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -56,7 +56,7 @@ describe('resource wans', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.wans.update(
+    const response = await client.magicTransit.sites.wans.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -75,7 +75,7 @@ describe('resource wans', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.sites.wans.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -88,13 +88,13 @@ describe('resource wans', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.wans.list('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.sites.wans.list('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.delete(
+    const responsePromise = client.magicTransit.sites.wans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -109,7 +109,7 @@ describe('resource wans', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.wans.delete(
+    const response = await client.magicTransit.sites.wans.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -117,7 +117,7 @@ describe('resource wans', () => {
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.edit(
+    const responsePromise = client.magicTransit.sites.wans.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -132,7 +132,7 @@ describe('resource wans', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.wans.edit(
+    const response = await client.magicTransit.sites.wans.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       {
@@ -151,7 +151,7 @@ describe('resource wans', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.sites.wans.get(
+    const responsePromise = client.magicTransit.sites.wans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -166,7 +166,7 @@ describe('resource wans', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.sites.wans.get(
+    const response = await client.magicTransit.sites.wans.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

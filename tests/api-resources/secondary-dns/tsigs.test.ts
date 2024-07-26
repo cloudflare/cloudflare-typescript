@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource tsigs', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.create({
+    const responsePromise = client.secondaryDNS.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
       name: 'tsig.customer.cf.',
@@ -28,7 +28,7 @@ describe('resource tsigs', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.create({
+    const response = await client.secondaryDNS.tsigs.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
       name: 'tsig.customer.cf.',
@@ -38,7 +38,7 @@ describe('resource tsigs', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
+    const responsePromise = client.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
       name: 'tsig.customer.cf.',
@@ -55,7 +55,7 @@ describe('resource tsigs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
+    const response = await client.secondaryDNS.tsigs.update('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       algo: 'hmac-sha512.',
       name: 'tsig.customer.cf.',
@@ -65,7 +65,7 @@ describe('resource tsigs', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.list({
+    const responsePromise = client.secondaryDNS.tsigs.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -78,13 +78,11 @@ describe('resource tsigs', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.list({
-      account_id: '01a7362d577a6c3019a474fd6f485823',
-    });
+    const response = await client.secondaryDNS.tsigs.list({ account_id: '01a7362d577a6c3019a474fd6f485823' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
+    const responsePromise = client.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -97,13 +95,13 @@ describe('resource tsigs', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
+    const response = await client.secondaryDNS.tsigs.delete('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
+    const responsePromise = client.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -116,7 +114,7 @@ describe('resource tsigs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
+    const response = await client.secondaryDNS.tsigs.get('69cd1e104af3e6ed3cb344f263fd0d5a', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource filters', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.filters.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = client.filters.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,12 +24,12 @@ describe('resource filters', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.filters.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const response = await client.filters.create('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.filters.update(
+    const responsePromise = client.filters.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
       {},
@@ -45,7 +45,7 @@ describe('resource filters', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.filters.update(
+    const response = await client.filters.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
       {},
@@ -53,7 +53,7 @@ describe('resource filters', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.filters.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.filters.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,14 +66,14 @@ describe('resource filters', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.filters.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+      client.filters.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.filters.list(
+      client.filters.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         {
           id: '372e67954025e0ba6aaa6d586b9e0b61',
@@ -90,7 +90,7 @@ describe('resource filters', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.filters.delete(
+    const responsePromise = client.filters.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
     );
@@ -106,14 +106,14 @@ describe('resource filters', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.filters.delete('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b61', {
+      client.filters.delete('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b61', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.filters.get(
+    const responsePromise = client.filters.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b61',
     );
@@ -129,7 +129,7 @@ describe('resource filters', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.filters.get('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b61', {
+      client.filters.get('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b61', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);

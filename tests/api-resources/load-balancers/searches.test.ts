@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource searches', () => {
   // TODO: investigate broken test
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.searches.get({
+    const responsePromise = client.loadBalancers.searches.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource searches', () => {
 
   // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.searches.get({
+    const response = await client.loadBalancers.searches.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: {},
       per_page: {},

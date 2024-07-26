@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource incoming', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.incoming.create({
+    const responsePromise = client.secondaryDNS.incoming.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       auto_refresh_seconds: 86400,
       name: 'www.example.com.',
@@ -27,7 +27,7 @@ describe('resource incoming', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.incoming.create({
+    const response = await client.secondaryDNS.incoming.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       auto_refresh_seconds: 86400,
       name: 'www.example.com.',
@@ -36,7 +36,7 @@ describe('resource incoming', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.incoming.update({
+    const responsePromise = client.secondaryDNS.incoming.update({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       auto_refresh_seconds: 86400,
       name: 'www.example.com.',
@@ -52,7 +52,7 @@ describe('resource incoming', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.incoming.update({
+    const response = await client.secondaryDNS.incoming.update({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       auto_refresh_seconds: 86400,
       name: 'www.example.com.',
@@ -61,7 +61,7 @@ describe('resource incoming', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.incoming.delete({
+    const responsePromise = client.secondaryDNS.incoming.delete({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -74,15 +74,13 @@ describe('resource incoming', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.incoming.delete({
+    const response = await client.secondaryDNS.incoming.delete({
       zone_id: '269d8f4853475ca241c4e730be286b20',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.incoming.get({
-      zone_id: '269d8f4853475ca241c4e730be286b20',
-    });
+    const responsePromise = client.secondaryDNS.incoming.get({ zone_id: '269d8f4853475ca241c4e730be286b20' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,8 +91,6 @@ describe('resource incoming', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.incoming.get({
-      zone_id: '269d8f4853475ca241c4e730be286b20',
-    });
+    const response = await client.secondaryDNS.incoming.get({ zone_id: '269d8f4853475ca241c4e730be286b20' });
   });
 });

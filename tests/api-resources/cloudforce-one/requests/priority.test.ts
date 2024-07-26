@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource priority', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.priority.create(
+    const responsePromise = client.cloudforceOne.requests.priority.create(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
     );
@@ -25,14 +25,16 @@ describe('resource priority', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.cloudforceOne.requests.priority.create(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
-    );
+    const response = await client.cloudforceOne.requests.priority.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      labels: ['DoS', 'CVE'],
+      priority: 1,
+      requirement: 'DoS attacks carried out by CVEs',
+      tlp: 'clear',
+    });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.priority.update(
+    const responsePromise = client.cloudforceOne.requests.priority.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
@@ -47,7 +49,7 @@ describe('resource priority', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.cloudforceOne.requests.priority.update(
+    const response = await client.cloudforceOne.requests.priority.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { labels: ['DoS', 'CVE'], priority: 1, requirement: 'DoS attacks carried out by CVEs', tlp: 'clear' },
@@ -55,7 +57,7 @@ describe('resource priority', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.priority.delete(
+    const responsePromise = client.cloudforceOne.requests.priority.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
@@ -71,7 +73,7 @@ describe('resource priority', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.priority.delete(
+      client.cloudforceOne.requests.priority.delete(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },
@@ -80,7 +82,7 @@ describe('resource priority', () => {
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.priority.get(
+    const responsePromise = client.cloudforceOne.requests.priority.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     );
@@ -96,7 +98,7 @@ describe('resource priority', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.priority.get(
+      client.cloudforceOne.requests.priority.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
         { path: '/_stainless_unknown_path' },
@@ -105,9 +107,7 @@ describe('resource priority', () => {
   });
 
   test('quota', async () => {
-    const responsePromise = cloudflare.cloudforceOne.requests.priority.quota(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-    );
+    const responsePromise = client.cloudforceOne.requests.priority.quota('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -120,7 +120,7 @@ describe('resource priority', () => {
   test('quota: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.cloudforceOne.requests.priority.quota('023e105f4ecef8ad9ca31a8372d0c353', {
+      client.cloudforceOne.requests.priority.quota('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);

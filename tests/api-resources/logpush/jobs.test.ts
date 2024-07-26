@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource jobs', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.logpush.jobs.create({
+    const responsePromise = client.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'account_id',
     });
@@ -27,7 +27,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.logpush.jobs.create({
+    const response = await client.logpush.jobs.create({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'account_id',
       dataset: 'http_requests',
@@ -59,7 +59,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('update', async () => {
-    const responsePromise = cloudflare.logpush.jobs.update(1, { account_id: 'account_id' });
+    const responsePromise = client.logpush.jobs.update(1, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -71,7 +71,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.logpush.jobs.list({ account_id: 'account_id' });
+    const responsePromise = client.logpush.jobs.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -83,7 +83,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.logpush.jobs.delete(1, { account_id: 'account_id' });
+    const responsePromise = client.logpush.jobs.delete(1, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,7 +95,7 @@ describe('resource jobs', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.logpush.jobs.get(1, { account_id: 'account_id' });
+    const responsePromise = client.logpush.jobs.get(1, { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource rules', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.emailRouting.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.emailRouting.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       actions: [
         {
           type: 'forward',
@@ -54,7 +54,7 @@ describe('resource rules', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.emailRouting.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.emailRouting.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       actions: [
         {
           type: 'forward',
@@ -93,7 +93,7 @@ describe('resource rules', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.emailRouting.rules.update(
+    const responsePromise = client.emailRouting.rules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'a7e6fb77503c41d8a7f3113c6918f10c',
       {
@@ -140,7 +140,7 @@ describe('resource rules', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.emailRouting.rules.update(
+    const response = await client.emailRouting.rules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'a7e6fb77503c41d8a7f3113c6918f10c',
       {
@@ -183,7 +183,7 @@ describe('resource rules', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.emailRouting.rules.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.emailRouting.rules.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -196,7 +196,7 @@ describe('resource rules', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.emailRouting.rules.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      client.emailRouting.rules.list('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -205,7 +205,7 @@ describe('resource rules', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.emailRouting.rules.list(
+      client.emailRouting.rules.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { enabled: true, page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
@@ -214,7 +214,7 @@ describe('resource rules', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.emailRouting.rules.delete(
+    const responsePromise = client.emailRouting.rules.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'a7e6fb77503c41d8a7f3113c6918f10c',
     );
@@ -230,7 +230,7 @@ describe('resource rules', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.emailRouting.rules.delete(
+      client.emailRouting.rules.delete(
         '023e105f4ecef8ad9ca31a8372d0c353',
         'a7e6fb77503c41d8a7f3113c6918f10c',
         { path: '/_stainless_unknown_path' },
@@ -239,7 +239,7 @@ describe('resource rules', () => {
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.emailRouting.rules.get(
+    const responsePromise = client.emailRouting.rules.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       'a7e6fb77503c41d8a7f3113c6918f10c',
     );
@@ -255,11 +255,9 @@ describe('resource rules', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.emailRouting.rules.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'a7e6fb77503c41d8a7f3113c6918f10c',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.emailRouting.rules.get('023e105f4ecef8ad9ca31a8372d0c353', 'a7e6fb77503c41d8a7f3113c6918f10c', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

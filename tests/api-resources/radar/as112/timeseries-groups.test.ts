@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource timeseriesGroups', () => {
   test('dnssec', async () => {
-    const responsePromise = cloudflare.radar.as112.timeseriesGroups.dnssec();
+    const responsePromise = client.radar.as112.timeseriesGroups.dnssec();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +24,14 @@ describe('resource timeseriesGroups', () => {
   test('dnssec: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.dnssec({ path: '/_stainless_unknown_path' }),
+      client.radar.as112.timeseriesGroups.dnssec({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('dnssec: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.dnssec(
+      client.radar.as112.timeseriesGroups.dnssec(
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],
@@ -49,7 +49,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('edns', async () => {
-    const responsePromise = cloudflare.radar.as112.timeseriesGroups.edns();
+    const responsePromise = client.radar.as112.timeseriesGroups.edns();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,14 +62,14 @@ describe('resource timeseriesGroups', () => {
   test('edns: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.edns({ path: '/_stainless_unknown_path' }),
+      client.radar.as112.timeseriesGroups.edns({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('edns: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.edns(
+      client.radar.as112.timeseriesGroups.edns(
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],
@@ -87,7 +87,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('ipVersion', async () => {
-    const responsePromise = cloudflare.radar.as112.timeseriesGroups.ipVersion();
+    const responsePromise = client.radar.as112.timeseriesGroups.ipVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,14 +100,14 @@ describe('resource timeseriesGroups', () => {
   test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
+      client.radar.as112.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.ipVersion(
+      client.radar.as112.timeseriesGroups.ipVersion(
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],
@@ -125,7 +125,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('protocol', async () => {
-    const responsePromise = cloudflare.radar.as112.timeseriesGroups.protocol();
+    const responsePromise = client.radar.as112.timeseriesGroups.protocol();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -138,14 +138,14 @@ describe('resource timeseriesGroups', () => {
   test('protocol: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.protocol({ path: '/_stainless_unknown_path' }),
+      client.radar.as112.timeseriesGroups.protocol({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('protocol: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.protocol(
+      client.radar.as112.timeseriesGroups.protocol(
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],
@@ -163,7 +163,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('queryType', async () => {
-    const responsePromise = cloudflare.radar.as112.timeseriesGroups.queryType();
+    const responsePromise = client.radar.as112.timeseriesGroups.queryType();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -176,14 +176,14 @@ describe('resource timeseriesGroups', () => {
   test('queryType: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.queryType({ path: '/_stainless_unknown_path' }),
+      client.radar.as112.timeseriesGroups.queryType({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('queryType: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.queryType(
+      client.radar.as112.timeseriesGroups.queryType(
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],
@@ -201,7 +201,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('responseCodes', async () => {
-    const responsePromise = cloudflare.radar.as112.timeseriesGroups.responseCodes();
+    const responsePromise = client.radar.as112.timeseriesGroups.responseCodes();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -214,14 +214,14 @@ describe('resource timeseriesGroups', () => {
   test('responseCodes: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.responseCodes({ path: '/_stainless_unknown_path' }),
+      client.radar.as112.timeseriesGroups.responseCodes({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('responseCodes: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.timeseriesGroups.responseCodes(
+      client.radar.as112.timeseriesGroups.responseCodes(
         {
           aggInterval: '1h',
           asn: ['string', 'string', 'string'],

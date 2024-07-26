@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource ips', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.ips.update(
+    const responsePromise = client.addressing.addressMaps.ips.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
@@ -26,7 +26,7 @@ describe('resource ips', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.ips.update(
+    const response = await client.addressing.addressMaps.ips.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
@@ -34,7 +34,7 @@ describe('resource ips', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.ips.delete(
+    const responsePromise = client.addressing.addressMaps.ips.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
@@ -49,7 +49,7 @@ describe('resource ips', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.ips.delete(
+    const response = await client.addressing.addressMaps.ips.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '192.0.2.1',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },

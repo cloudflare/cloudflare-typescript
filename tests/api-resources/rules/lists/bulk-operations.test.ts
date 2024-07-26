@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource bulkOperations', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.rules.lists.bulkOperations.get(
+    const responsePromise = client.rules.lists.bulkOperations.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '4da8780eeb215e6cb7f48dd981c4ea02',
     );
@@ -27,7 +27,7 @@ describe('resource bulkOperations', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.rules.lists.bulkOperations.get(
+      client.rules.lists.bulkOperations.get(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '4da8780eeb215e6cb7f48dd981c4ea02',
         { path: '/_stainless_unknown_path' },

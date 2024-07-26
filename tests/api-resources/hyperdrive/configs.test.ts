@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource configs', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.hyperdrive.configs.create({
+    const responsePromise = client.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-hyperdrive',
       origin: { database: 'postgres', host: 'database.example.com', scheme: 'postgres', user: 'postgres' },
@@ -28,7 +28,7 @@ describe('resource configs', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.hyperdrive.configs.create({
+    const response = await client.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-hyperdrive',
       origin: {
@@ -45,7 +45,7 @@ describe('resource configs', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-hyperdrive',
       origin: { database: 'postgres', host: 'database.example.com', scheme: 'postgres', user: 'postgres' },
@@ -61,7 +61,7 @@ describe('resource configs', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-hyperdrive',
       origin: {
@@ -77,7 +77,7 @@ describe('resource configs', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.hyperdrive.configs.list({
+    const responsePromise = client.hyperdrive.configs.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -90,13 +90,11 @@ describe('resource configs', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.hyperdrive.configs.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.hyperdrive.configs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.hyperdrive.configs.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.hyperdrive.configs.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -109,14 +107,14 @@ describe('resource configs', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.hyperdrive.configs.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.hyperdrive.configs.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
-    const responsePromise = cloudflare.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -130,7 +128,7 @@ describe('resource configs', () => {
 
   // TODO: investigate broken test
   test.skip('edit: required and optional params', async () => {
-    const response = await cloudflare.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
       name: 'example-hyperdrive',
@@ -146,7 +144,7 @@ describe('resource configs', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.hyperdrive.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.hyperdrive.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -159,7 +157,7 @@ describe('resource configs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.hyperdrive.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.hyperdrive.configs.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

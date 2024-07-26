@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource namespaces', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.create({
+    const responsePromise = client.workersForPlatforms.dispatch.namespaces.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,14 +24,14 @@ describe('resource namespaces', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.create({
+    const response = await client.workersForPlatforms.dispatch.namespaces.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my-dispatch-namespace',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.list({
+    const responsePromise = client.workersForPlatforms.dispatch.namespaces.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -44,16 +44,15 @@ describe('resource namespaces', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.list({
+    const response = await client.workersForPlatforms.dispatch.namespaces.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.delete(
-      'my-dispatch-namespace',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const responsePromise = client.workersForPlatforms.dispatch.namespaces.delete('my-dispatch-namespace', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,14 +63,13 @@ describe('resource namespaces', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.delete(
-      'my-dispatch-namespace',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const response = await client.workersForPlatforms.dispatch.namespaces.delete('my-dispatch-namespace', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.workersForPlatforms.dispatch.namespaces.get('my-dispatch-namespace', {
+    const responsePromise = client.workersForPlatforms.dispatch.namespaces.get('my-dispatch-namespace', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -84,7 +82,7 @@ describe('resource namespaces', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.workersForPlatforms.dispatch.namespaces.get('my-dispatch-namespace', {
+    const response = await client.workersForPlatforms.dispatch.namespaces.get('my-dispatch-namespace', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

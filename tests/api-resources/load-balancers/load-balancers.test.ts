@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource loadBalancers', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.create({
+    const responsePromise = client.loadBalancers.create({
       zone_id: '699d98642c564d2e855e9661899b7252',
       default_pools: [
         '17b5962d775c646f3f9725cbc7a53df4',
@@ -31,7 +31,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.create({
+    const response = await client.loadBalancers.create({
       zone_id: '699d98642c564d2e855e9661899b7252',
       default_pools: [
         '17b5962d775c646f3f9725cbc7a53df4',
@@ -244,7 +244,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.update('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = client.loadBalancers.update('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
       default_pools: [
         '17b5962d775c646f3f9725cbc7a53df4',
@@ -264,7 +264,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.update('699d98642c564d2e855e9661899b7252', {
+    const response = await client.loadBalancers.update('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
       default_pools: [
         '17b5962d775c646f3f9725cbc7a53df4',
@@ -478,7 +478,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.list({ zone_id: '699d98642c564d2e855e9661899b7252' });
+    const responsePromise = client.loadBalancers.list({ zone_id: '699d98642c564d2e855e9661899b7252' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -489,11 +489,11 @@ describe('resource loadBalancers', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.list({ zone_id: '699d98642c564d2e855e9661899b7252' });
+    const response = await client.loadBalancers.list({ zone_id: '699d98642c564d2e855e9661899b7252' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.delete('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = client.loadBalancers.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -506,13 +506,13 @@ describe('resource loadBalancers', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.delete('699d98642c564d2e855e9661899b7252', {
+    const response = await client.loadBalancers.delete('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.edit('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = client.loadBalancers.edit('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -525,7 +525,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.edit('699d98642c564d2e855e9661899b7252', {
+    const response = await client.loadBalancers.edit('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
       adaptive_routing: { failover_across_pools: true },
       country_pools: {
@@ -739,7 +739,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.get('699d98642c564d2e855e9661899b7252', {
+    const responsePromise = client.loadBalancers.get('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -752,7 +752,7 @@ describe('resource loadBalancers', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.get('699d98642c564d2e855e9661899b7252', {
+    const response = await client.loadBalancers.get('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
     });
   });
