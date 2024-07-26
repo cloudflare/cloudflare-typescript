@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource configs', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.configs.create({
+    const responsePromise = client.magicNetworkMonitoring.configs.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
@@ -25,14 +25,14 @@ describe('resource configs', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.configs.create({
+    const response = await client.magicNetworkMonitoring.configs.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.configs.update({
+    const responsePromise = client.magicNetworkMonitoring.configs.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
@@ -46,14 +46,14 @@ describe('resource configs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.configs.update({
+    const response = await client.magicNetworkMonitoring.configs.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.configs.delete({
+    const responsePromise = client.magicNetworkMonitoring.configs.delete({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,13 +66,13 @@ describe('resource configs', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.configs.delete({
+    const response = await client.magicNetworkMonitoring.configs.delete({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.configs.edit({
+    const responsePromise = client.magicNetworkMonitoring.configs.edit({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
@@ -86,14 +86,14 @@ describe('resource configs', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.configs.edit({
+    const response = await client.magicNetworkMonitoring.configs.edit({
       account_id: '6f91088a406011ed95aed352566e8d4c',
       body: {},
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.magicNetworkMonitoring.configs.get({
+    const responsePromise = client.magicNetworkMonitoring.configs.get({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +106,7 @@ describe('resource configs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.magicNetworkMonitoring.configs.get({
+    const response = await client.magicNetworkMonitoring.configs.get({
       account_id: '6f91088a406011ed95aed352566e8d4c',
     });
   });

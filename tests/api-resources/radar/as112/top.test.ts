@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource top', () => {
   test('dnssec', async () => {
-    const responsePromise = cloudflare.radar.as112.top.dnssec('SUPPORTED');
+    const responsePromise = client.radar.as112.top.dnssec('SUPPORTED');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +24,14 @@ describe('resource top', () => {
   test('dnssec: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.dnssec('SUPPORTED', { path: '/_stainless_unknown_path' }),
+      client.radar.as112.top.dnssec('SUPPORTED', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('dnssec: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.dnssec(
+      client.radar.as112.top.dnssec(
         'SUPPORTED',
         {
           asn: ['string', 'string', 'string'],
@@ -50,7 +50,7 @@ describe('resource top', () => {
   });
 
   test('edns', async () => {
-    const responsePromise = cloudflare.radar.as112.top.edns('SUPPORTED');
+    const responsePromise = client.radar.as112.top.edns('SUPPORTED');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,14 +63,14 @@ describe('resource top', () => {
   test('edns: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.edns('SUPPORTED', { path: '/_stainless_unknown_path' }),
+      client.radar.as112.top.edns('SUPPORTED', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('edns: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.edns(
+      client.radar.as112.top.edns(
         'SUPPORTED',
         {
           asn: ['string', 'string', 'string'],
@@ -89,7 +89,7 @@ describe('resource top', () => {
   });
 
   test('ipVersion', async () => {
-    const responsePromise = cloudflare.radar.as112.top.ipVersion('IPv4');
+    const responsePromise = client.radar.as112.top.ipVersion('IPv4');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,14 +102,14 @@ describe('resource top', () => {
   test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.ipVersion('IPv4', { path: '/_stainless_unknown_path' }),
+      client.radar.as112.top.ipVersion('IPv4', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.ipVersion(
+      client.radar.as112.top.ipVersion(
         'IPv4',
         {
           asn: ['string', 'string', 'string'],
@@ -128,7 +128,7 @@ describe('resource top', () => {
   });
 
   test('locations', async () => {
-    const responsePromise = cloudflare.radar.as112.top.locations();
+    const responsePromise = client.radar.as112.top.locations();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -140,7 +140,7 @@ describe('resource top', () => {
 
   test('locations: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.radar.as112.top.locations({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.as112.top.locations({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -148,7 +148,7 @@ describe('resource top', () => {
   test('locations: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.as112.top.locations(
+      client.radar.as112.top.locations(
         {
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],

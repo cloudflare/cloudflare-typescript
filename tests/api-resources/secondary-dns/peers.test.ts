@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource peers', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.create({
+    const responsePromise = client.secondaryDNS.peers.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       body: {},
     });
@@ -27,14 +27,14 @@ describe('resource peers', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.create({
+    const response = await client.secondaryDNS.peers.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
       body: {},
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       name: 'my-peer-1',
     });
@@ -48,7 +48,7 @@ describe('resource peers', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.secondaryDNS.peers.update('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
       name: 'my-peer-1',
       ip: '192.0.2.53',
@@ -59,7 +59,7 @@ describe('resource peers', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.list({
+    const responsePromise = client.secondaryDNS.peers.list({
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -72,13 +72,11 @@ describe('resource peers', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.list({
-      account_id: '01a7362d577a6c3019a474fd6f485823',
-    });
+    const response = await client.secondaryDNS.peers.list({ account_id: '01a7362d577a6c3019a474fd6f485823' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -91,13 +89,13 @@ describe('resource peers', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.secondaryDNS.peers.delete('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
+    const responsePromise = client.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -110,7 +108,7 @@ describe('resource peers', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
+    const response = await client.secondaryDNS.peers.get('23ff594956f20c2a721606e94745a8aa', {
       account_id: '01a7362d577a6c3019a474fd6f485823',
     });
   });

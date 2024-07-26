@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource byTag', () => {
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.versions.byTag.get(
+    const responsePromise = client.rulesets.versions.byTag.get(
       '2f2feab2026849078ba485f918791bdc',
       '1',
       'directory-traversal',
@@ -27,7 +27,7 @@ describe('resource byTag', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.rulesets.versions.byTag.get(
+    const response = await client.rulesets.versions.byTag.get(
       '2f2feab2026849078ba485f918791bdc',
       '1',
       'directory-traversal',

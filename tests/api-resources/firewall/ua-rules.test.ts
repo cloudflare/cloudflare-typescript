@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource uaRules', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,12 +24,12 @@ describe('resource uaRules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const response = await client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.firewall.uaRules.update(
+    const responsePromise = client.firewall.uaRules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
       {},
@@ -45,7 +45,7 @@ describe('resource uaRules', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.firewall.uaRules.update(
+    const response = await client.firewall.uaRules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
       {},
@@ -53,7 +53,7 @@ describe('resource uaRules', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.firewall.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.firewall.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,16 +66,14 @@ describe('resource uaRules', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353', {
-        path: '/_stainless_unknown_path',
-      }),
+      client.firewall.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.uaRules.list(
+      client.firewall.uaRules.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         { description: 'abusive', description_search: 'abusive', page: 1, per_page: 1, ua_search: 'Safari' },
         { path: '/_stainless_unknown_path' },
@@ -84,7 +82,7 @@ describe('resource uaRules', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.firewall.uaRules.delete(
+    const responsePromise = client.firewall.uaRules.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
     );
@@ -100,16 +98,14 @@ describe('resource uaRules', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.uaRules.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.firewall.uaRules.delete('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.firewall.uaRules.get(
+    const responsePromise = client.firewall.uaRules.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
     );
@@ -125,11 +121,9 @@ describe('resource uaRules', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.uaRules.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.firewall.uaRules.get('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

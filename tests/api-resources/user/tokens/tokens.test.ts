@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.user.tokens.create({
+    const responsePromise = client.user.tokens.create({
       name: 'readonly token',
       policies: [
         {
@@ -52,7 +52,7 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.user.tokens.create({
+    const response = await client.user.tokens.create({
       name: 'readonly token',
       policies: [
         {
@@ -102,7 +102,7 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.user.tokens.update(
+    const responsePromise = client.user.tokens.update(
       {},
       {
         name: 'readonly token',
@@ -146,7 +146,7 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.user.tokens.update(
+    const response = await client.user.tokens.update(
       {},
       {
         name: 'readonly token',
@@ -199,7 +199,7 @@ describe('resource tokens', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.user.tokens.list();
+    const responsePromise = client.user.tokens.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -211,7 +211,7 @@ describe('resource tokens', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.tokens.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -219,7 +219,7 @@ describe('resource tokens', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.tokens.list(
+      client.user.tokens.list(
         { direction: 'desc', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -227,7 +227,7 @@ describe('resource tokens', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.user.tokens.delete({});
+    const responsePromise = client.user.tokens.delete({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -239,13 +239,13 @@ describe('resource tokens', () => {
 
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.delete({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.tokens.delete({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.user.tokens.get({});
+    const responsePromise = client.user.tokens.get({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -257,13 +257,13 @@ describe('resource tokens', () => {
 
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.get({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.tokens.get({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
 
   test('verify', async () => {
-    const responsePromise = cloudflare.user.tokens.verify();
+    const responsePromise = client.user.tokens.verify();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -275,7 +275,7 @@ describe('resource tokens', () => {
 
   test('verify: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.verify({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.tokens.verify({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });

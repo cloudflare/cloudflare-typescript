@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource clientCertificates', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.clientCertificates.create({
+    const responsePromise = client.clientCertificates.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
       validity_days: 3650,
@@ -26,7 +26,7 @@ describe('resource clientCertificates', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.clientCertificates.create({
+    const response = await client.clientCertificates.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
       validity_days: 3650,
@@ -34,9 +34,7 @@ describe('resource clientCertificates', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.clientCertificates.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.clientCertificates.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +45,7 @@ describe('resource clientCertificates', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.clientCertificates.list({
+    const response = await client.clientCertificates.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       limit: 10,
       offset: 10,
@@ -58,7 +56,7 @@ describe('resource clientCertificates', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.clientCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.clientCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -71,13 +69,13 @@ describe('resource clientCertificates', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.clientCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.clientCertificates.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.clientCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.clientCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -90,13 +88,13 @@ describe('resource clientCertificates', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.clientCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.clientCertificates.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.clientCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.clientCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -109,7 +107,7 @@ describe('resource clientCertificates', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.clientCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.clientCertificates.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

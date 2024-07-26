@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource schemaValidation', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.apiGateway.operations.schemaValidation.update(
+    const responsePromise = client.apiGateway.operations.schemaValidation.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -25,14 +25,14 @@ describe('resource schemaValidation', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.apiGateway.operations.schemaValidation.update(
+    const response = await client.apiGateway.operations.schemaValidation.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', mitigation_action: 'block' },
     );
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.apiGateway.operations.schemaValidation.edit({
+    const responsePromise = client.apiGateway.operations.schemaValidation.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       settings_multiple_request: {
         '3818d821-5901-4147-a474-f5f5aec1d54e': {},
@@ -49,7 +49,7 @@ describe('resource schemaValidation', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.apiGateway.operations.schemaValidation.edit({
+    const response = await client.apiGateway.operations.schemaValidation.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       settings_multiple_request: {
         '3818d821-5901-4147-a474-f5f5aec1d54e': { mitigation_action: 'log' },
@@ -59,7 +59,7 @@ describe('resource schemaValidation', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.apiGateway.operations.schemaValidation.get(
+    const responsePromise = client.apiGateway.operations.schemaValidation.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -73,7 +73,7 @@ describe('resource schemaValidation', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.apiGateway.operations.schemaValidation.get(
+    const response = await client.apiGateway.operations.schemaValidation.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );

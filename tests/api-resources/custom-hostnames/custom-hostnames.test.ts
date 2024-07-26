@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource customHostnames', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.create({
+    const responsePromise = client.customHostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',
       ssl: {},
@@ -26,7 +26,7 @@ describe('resource customHostnames', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.create({
+    const response = await client.customHostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       hostname: 'app.example.com',
       ssl: {
@@ -52,7 +52,7 @@ describe('resource customHostnames', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.customHostnames.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,7 +63,7 @@ describe('resource customHostnames', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.list({
+    const response = await client.customHostnames.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '0d89c70d-ad9f-4843-b99f-6cc0252067e9',
       direction: 'desc',
@@ -76,7 +76,7 @@ describe('resource customHostnames', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customHostnames.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,13 +89,13 @@ describe('resource customHostnames', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customHostnames.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -108,7 +108,7 @@ describe('resource customHostnames', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       custom_metadata: { key: 'value' },
       custom_origin_server: 'origin2.example.com',
@@ -135,7 +135,7 @@ describe('resource customHostnames', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.customHostnames.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -148,7 +148,7 @@ describe('resource customHostnames', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.customHostnames.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

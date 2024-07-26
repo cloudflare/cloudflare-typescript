@@ -3,7 +3,7 @@
 import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource content', () => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.workers.scripts.content.update('this-is_my_script-01', {
+    const responsePromise = client.workers.scripts.content.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource content', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.workers.scripts.content.update('this-is_my_script-01', {
+    const response = await client.workers.scripts.content.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       '<any part name>': [
         await toFile(Buffer.from('# my file contents'), 'README.md'),
@@ -40,7 +40,7 @@ describe('resource content', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.workers.scripts.content.get('this-is_my_script-01', {
+    const response = await client.workers.scripts.content.get('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

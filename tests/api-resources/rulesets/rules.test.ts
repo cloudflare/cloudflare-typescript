@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource rules', () => {
   // TODO: investigate broken test
   test.skip('create', async () => {
-    const responsePromise = cloudflare.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
+    const responsePromise = client.rulesets.rules.create('2f2feab2026849078ba485f918791bdc', {
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource rules', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.rulesets.rules.delete(
+    const responsePromise = client.rulesets.rules.delete(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
       { account_id: 'account_id' },
@@ -42,7 +42,7 @@ describe('resource rules', () => {
 
   // TODO: investigate broken test
   test.skip('edit', async () => {
-    const responsePromise = cloudflare.rulesets.rules.edit(
+    const responsePromise = client.rulesets.rules.edit(
       '2f2feab2026849078ba485f918791bdc',
       '3a03d665bac047339bb530ecb439a90d',
       { account_id: 'account_id' },

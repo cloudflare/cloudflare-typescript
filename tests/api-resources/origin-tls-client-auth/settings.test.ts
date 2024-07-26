@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource settings', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.originTLSClientAuth.settings.update({
+    const responsePromise = client.originTLSClientAuth.settings.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
     });
@@ -25,14 +25,14 @@ describe('resource settings', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.originTLSClientAuth.settings.update({
+    const response = await client.originTLSClientAuth.settings.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.originTLSClientAuth.settings.get({
+    const responsePromise = client.originTLSClientAuth.settings.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ describe('resource settings', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.originTLSClientAuth.settings.get({
+    const response = await client.originTLSClientAuth.settings.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

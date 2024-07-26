@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource locations', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.radar.trafficAnomalies.locations.get();
+    const responsePromise = client.radar.trafficAnomalies.locations.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +24,14 @@ describe('resource locations', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.trafficAnomalies.locations.get({ path: '/_stainless_unknown_path' }),
+      client.radar.trafficAnomalies.locations.get({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.trafficAnomalies.locations.get(
+      client.radar.trafficAnomalies.locations.get(
         {
           dateEnd: '2023-09-01T11:41:33.782Z',
           dateRange: '7d',

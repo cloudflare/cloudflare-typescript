@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource domains', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.workers.domains.update({
+    const responsePromise = client.workers.domains.update({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       environment: 'production',
       hostname: 'foo.example.com',
@@ -28,7 +28,7 @@ describe('resource domains', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.workers.domains.update({
+    const response = await client.workers.domains.update({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       environment: 'production',
       hostname: 'foo.example.com',
@@ -38,9 +38,7 @@ describe('resource domains', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.workers.domains.list({
-      account_id: '9a7806061c88ada191ed06f989cc3dac',
-    });
+    const responsePromise = client.workers.domains.list({ account_id: '9a7806061c88ada191ed06f989cc3dac' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,7 +49,7 @@ describe('resource domains', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.workers.domains.list({
+    const response = await client.workers.domains.list({
       account_id: '9a7806061c88ada191ed06f989cc3dac',
       environment: 'production',
       hostname: 'foo.example.com',
@@ -63,7 +61,7 @@ describe('resource domains', () => {
 
   // TODO: investigate broken test
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.workers.domains.delete('dbe10b4bc17c295377eabd600e1787fd', {
+    const responsePromise = client.workers.domains.delete('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -77,13 +75,13 @@ describe('resource domains', () => {
 
   // TODO: investigate broken test
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.workers.domains.delete('dbe10b4bc17c295377eabd600e1787fd', {
+    const response = await client.workers.domains.delete('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.workers.domains.get('dbe10b4bc17c295377eabd600e1787fd', {
+    const responsePromise = client.workers.domains.get('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -96,7 +94,7 @@ describe('resource domains', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.workers.domains.get('dbe10b4bc17c295377eabd600e1787fd', {
+    const response = await client.workers.domains.get('dbe10b4bc17c295377eabd600e1787fd', {
       account_id: '9a7806061c88ada191ed06f989cc3dac',
     });
   });
