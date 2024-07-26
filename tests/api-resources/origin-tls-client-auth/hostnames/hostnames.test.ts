@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource hostnames', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.originTLSClientAuth.hostnames.update({
+    const responsePromise = client.originTLSClientAuth.hostnames.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       config: [{}, {}, {}],
     });
@@ -25,7 +25,7 @@ describe('resource hostnames', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.originTLSClientAuth.hostnames.update({
+    const response = await client.originTLSClientAuth.hostnames.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       config: [
         { cert_id: '2458ce5a-0c35-4c7f-82c7-8e9487d3ff60', enabled: true, hostname: 'app.example.com' },
@@ -36,7 +36,7 @@ describe('resource hostnames', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.originTLSClientAuth.hostnames.get('app.example.com', {
+    const responsePromise = client.originTLSClientAuth.hostnames.get('app.example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource hostnames', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.originTLSClientAuth.hostnames.get('app.example.com', {
+    const response = await client.originTLSClientAuth.hostnames.get('app.example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource firewall', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.create({
+    const responsePromise = client.dns.firewall.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
       upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
@@ -26,7 +26,7 @@ describe('resource firewall', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.create({
+    const response = await client.dns.firewall.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
       upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
@@ -42,7 +42,7 @@ describe('resource firewall', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.dns.firewall.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,7 +53,7 @@ describe('resource firewall', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.list({
+    const response = await client.dns.firewall.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 1,
@@ -61,7 +61,7 @@ describe('resource firewall', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -74,13 +74,13 @@ describe('resource firewall', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dns.firewall.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       deprecate_any_requests: true,
@@ -101,7 +101,7 @@ describe('resource firewall', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dns.firewall.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       deprecate_any_requests: true,
@@ -119,7 +119,7 @@ describe('resource firewall', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -132,7 +132,7 @@ describe('resource firewall', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.dns.firewall.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

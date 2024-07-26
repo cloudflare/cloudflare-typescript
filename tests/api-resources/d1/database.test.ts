@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource database', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.create({
+    const responsePromise = client.d1.database.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my-database',
     });
@@ -25,7 +25,7 @@ describe('resource database', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.d1.database.create({
+    const response = await client.d1.database.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my-database',
       primary_location_hint: 'wnam',
@@ -33,7 +33,7 @@ describe('resource database', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.d1.database.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,7 +44,7 @@ describe('resource database', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.d1.database.list({
+    const response = await client.d1.database.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'name',
       page: 1,
@@ -53,7 +53,7 @@ describe('resource database', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.delete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const responsePromise = client.d1.database.delete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,13 +66,13 @@ describe('resource database', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.d1.database.delete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const response = await client.d1.database.delete('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('export: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.export('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const responsePromise = client.d1.database.export('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       output_format: 'polling',
     });
@@ -86,7 +86,7 @@ describe('resource database', () => {
   });
 
   test('export: required and optional params', async () => {
-    const response = await cloudflare.d1.database.export('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const response = await client.d1.database.export('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       output_format: 'polling',
       current_bookmark: 'current_bookmark',
@@ -95,7 +95,7 @@ describe('resource database', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const responsePromise = client.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -108,13 +108,13 @@ describe('resource database', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const response = await client.d1.database.get('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('import: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.import('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const responsePromise = client.d1.database.import('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: 'init',
       etag: 'etag',
@@ -129,7 +129,7 @@ describe('resource database', () => {
   });
 
   test('import: required and optional params', async () => {
-    const response = await cloudflare.d1.database.import('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const response = await client.d1.database.import('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       action: 'init',
       etag: 'etag',
@@ -137,7 +137,7 @@ describe('resource database', () => {
   });
 
   test('query: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.query('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const responsePromise = client.d1.database.query('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
     });
@@ -151,7 +151,7 @@ describe('resource database', () => {
   });
 
   test('query: required and optional params', async () => {
-    const response = await cloudflare.d1.database.query('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const response = await client.d1.database.query('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
       params: ['firstParam', 'secondParam'],
@@ -159,7 +159,7 @@ describe('resource database', () => {
   });
 
   test('raw: only required params', async () => {
-    const responsePromise = cloudflare.d1.database.raw('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const responsePromise = client.d1.database.raw('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
     });
@@ -173,7 +173,7 @@ describe('resource database', () => {
   });
 
   test('raw: required and optional params', async () => {
-    const response = await cloudflare.d1.database.raw('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
+    const response = await client.d1.database.raw('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       sql: 'SELECT * FROM myTable WHERE field = ? OR field = ?;',
       params: ['firstParam', 'secondParam'],

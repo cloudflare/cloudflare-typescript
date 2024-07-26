@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource profile', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.user.billing.profile.get();
+    const responsePromise = client.user.billing.profile.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource profile', () => {
 
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.billing.profile.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.billing.profile.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });

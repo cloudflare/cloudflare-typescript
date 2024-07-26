@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource summary', () => {
   test('botClass', async () => {
-    const responsePromise = cloudflare.radar.http.summary.botClass();
+    const responsePromise = client.radar.http.summary.botClass();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,15 +23,15 @@ describe('resource summary', () => {
 
   test('botClass: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.summary.botClass({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.summary.botClass({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('botClass: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.botClass(
+      client.radar.http.summary.botClass(
         {
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
@@ -54,7 +54,7 @@ describe('resource summary', () => {
   });
 
   test('deviceType', async () => {
-    const responsePromise = cloudflare.radar.http.summary.deviceType();
+    const responsePromise = client.radar.http.summary.deviceType();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,15 +66,15 @@ describe('resource summary', () => {
 
   test('deviceType: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.summary.deviceType({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.summary.deviceType({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('deviceType: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.deviceType(
+      client.radar.http.summary.deviceType(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
@@ -97,7 +97,7 @@ describe('resource summary', () => {
   });
 
   test('httpProtocol', async () => {
-    const responsePromise = cloudflare.radar.http.summary.httpProtocol();
+    const responsePromise = client.radar.http.summary.httpProtocol();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -110,14 +110,14 @@ describe('resource summary', () => {
   test('httpProtocol: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.httpProtocol({ path: '/_stainless_unknown_path' }),
+      client.radar.http.summary.httpProtocol({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpProtocol: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.httpProtocol(
+      client.radar.http.summary.httpProtocol(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
@@ -140,7 +140,7 @@ describe('resource summary', () => {
   });
 
   test('httpVersion', async () => {
-    const responsePromise = cloudflare.radar.http.summary.httpVersion();
+    const responsePromise = client.radar.http.summary.httpVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -152,15 +152,15 @@ describe('resource summary', () => {
 
   test('httpVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.summary.httpVersion({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.summary.httpVersion({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('httpVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.httpVersion(
+      client.radar.http.summary.httpVersion(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
@@ -183,7 +183,7 @@ describe('resource summary', () => {
   });
 
   test('ipVersion', async () => {
-    const responsePromise = cloudflare.radar.http.summary.ipVersion();
+    const responsePromise = client.radar.http.summary.ipVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -195,15 +195,15 @@ describe('resource summary', () => {
 
   test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.summary.ipVersion({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.summary.ipVersion({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.ipVersion(
+      client.radar.http.summary.ipVersion(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
@@ -226,7 +226,7 @@ describe('resource summary', () => {
   });
 
   test('os', async () => {
-    const responsePromise = cloudflare.radar.http.summary.os();
+    const responsePromise = client.radar.http.summary.os();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -238,7 +238,7 @@ describe('resource summary', () => {
 
   test('os: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.radar.http.summary.os({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.http.summary.os({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -246,7 +246,7 @@ describe('resource summary', () => {
   test('os: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.os(
+      client.radar.http.summary.os(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
@@ -269,7 +269,7 @@ describe('resource summary', () => {
   });
 
   test('postQuantum', async () => {
-    const responsePromise = cloudflare.radar.http.summary.postQuantum();
+    const responsePromise = client.radar.http.summary.postQuantum();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -281,15 +281,15 @@ describe('resource summary', () => {
 
   test('postQuantum: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.summary.postQuantum({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.summary.postQuantum({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('postQuantum: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.postQuantum(
+      client.radar.http.summary.postQuantum(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
@@ -313,7 +313,7 @@ describe('resource summary', () => {
   });
 
   test('tlsVersion', async () => {
-    const responsePromise = cloudflare.radar.http.summary.tlsVersion();
+    const responsePromise = client.radar.http.summary.tlsVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -325,15 +325,15 @@ describe('resource summary', () => {
 
   test('tlsVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.http.summary.tlsVersion({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.summary.tlsVersion({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('tlsVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.http.summary.tlsVersion(
+      client.radar.http.summary.tlsVersion(
         {
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],

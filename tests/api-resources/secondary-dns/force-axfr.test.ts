@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource forceAXFR', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.secondaryDNS.forceAXFR.create({
+    const responsePromise = client.secondaryDNS.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       body: {},
     });
@@ -25,7 +25,7 @@ describe('resource forceAXFR', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.secondaryDNS.forceAXFR.create({
+    const response = await client.secondaryDNS.forceAXFR.create({
       zone_id: '269d8f4853475ca241c4e730be286b20',
       body: {},
     });

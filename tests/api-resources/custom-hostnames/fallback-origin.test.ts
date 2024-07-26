@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource fallbackOrigin', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.fallbackOrigin.update({
+    const responsePromise = client.customHostnames.fallbackOrigin.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       origin: 'fallback.example.com',
     });
@@ -25,14 +25,14 @@ describe('resource fallbackOrigin', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.fallbackOrigin.update({
+    const response = await client.customHostnames.fallbackOrigin.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       origin: 'fallback.example.com',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.fallbackOrigin.delete({
+    const responsePromise = client.customHostnames.fallbackOrigin.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,13 +45,13 @@ describe('resource fallbackOrigin', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.fallbackOrigin.delete({
+    const response = await client.customHostnames.fallbackOrigin.delete({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.customHostnames.fallbackOrigin.get({
+    const responsePromise = client.customHostnames.fallbackOrigin.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -64,7 +64,7 @@ describe('resource fallbackOrigin', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.customHostnames.fallbackOrigin.get({
+    const response = await client.customHostnames.fallbackOrigin.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

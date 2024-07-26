@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,9 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource siteInfo', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.rum.siteInfo.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.rum.siteInfo.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +22,7 @@ describe('resource siteInfo', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.rum.siteInfo.create({
+    const response = await client.rum.siteInfo.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       auto_install: true,
       host: 'example.com',
@@ -33,7 +31,7 @@ describe('resource siteInfo', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.rum.siteInfo.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.rum.siteInfo.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -46,7 +44,7 @@ describe('resource siteInfo', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.rum.siteInfo.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.rum.siteInfo.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       auto_install: true,
       host: 'example.com',
@@ -55,7 +53,7 @@ describe('resource siteInfo', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.rum.siteInfo.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.rum.siteInfo.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +64,7 @@ describe('resource siteInfo', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.rum.siteInfo.list({
+    const response = await client.rum.siteInfo.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       order_by: 'host',
       page: 1,
@@ -75,7 +73,7 @@ describe('resource siteInfo', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.rum.siteInfo.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.rum.siteInfo.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -88,13 +86,13 @@ describe('resource siteInfo', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.rum.siteInfo.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.rum.siteInfo.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.rum.siteInfo.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.rum.siteInfo.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -107,7 +105,7 @@ describe('resource siteInfo', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.rum.siteInfo.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.rum.siteInfo.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

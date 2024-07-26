@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource routes', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.routes.create({
+    const responsePromise = client.magicTransit.routes.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
@@ -27,14 +27,14 @@ describe('resource routes', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.routes.create({
+    const response = await client.magicTransit.routes.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       nexthop: '203.0.113.1',
       prefix: '192.0.2.0/24',
@@ -50,7 +50,7 @@ describe('resource routes', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.routes.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       nexthop: '203.0.113.1',
       prefix: '192.0.2.0/24',
@@ -62,7 +62,7 @@ describe('resource routes', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.routes.list({
+    const responsePromise = client.magicTransit.routes.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -75,13 +75,13 @@ describe('resource routes', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.routes.list({
+    const response = await client.magicTransit.routes.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.routes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.routes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -94,13 +94,13 @@ describe('resource routes', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.routes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.routes.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('empty: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.routes.empty({
+    const responsePromise = client.magicTransit.routes.empty({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -113,13 +113,13 @@ describe('resource routes', () => {
   });
 
   test('empty: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.routes.empty({
+    const response = await client.magicTransit.routes.empty({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.magicTransit.routes.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.routes.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -132,7 +132,7 @@ describe('resource routes', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.magicTransit.routes.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.routes.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

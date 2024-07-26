@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource v1', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.images.v1.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +24,7 @@ describe('resource v1', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.images.v1.create({
+    const response = await client.images.v1.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       file: {},
       metadata: {},
@@ -34,7 +34,7 @@ describe('resource v1', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.images.v1.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,7 +45,7 @@ describe('resource v1', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.images.v1.list({
+    const response = await client.images.v1.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: 1,
       per_page: 10,
@@ -53,7 +53,7 @@ describe('resource v1', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.delete('image_id', {
+    const responsePromise = client.images.v1.delete('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -66,13 +66,13 @@ describe('resource v1', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.images.v1.delete('image_id', {
+    const response = await client.images.v1.delete('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.edit('image_id', {
+    const responsePromise = client.images.v1.edit('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -85,7 +85,7 @@ describe('resource v1', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.images.v1.edit('image_id', {
+    const response = await client.images.v1.edit('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: {},
       requireSignedURLs: true,
@@ -93,7 +93,7 @@ describe('resource v1', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.images.v1.get('image_id', {
+    const responsePromise = client.images.v1.get('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +106,7 @@ describe('resource v1', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.images.v1.get('image_id', {
+    const response = await client.images.v1.get('image_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

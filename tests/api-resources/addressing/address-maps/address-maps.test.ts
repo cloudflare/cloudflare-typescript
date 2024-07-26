@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource addressMaps', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.create({
+    const responsePromise = client.addressing.addressMaps.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource addressMaps', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.create({
+    const response = await client.addressing.addressMaps.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'My Ecommerce zones',
       enabled: true,
@@ -38,7 +38,7 @@ describe('resource addressMaps', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.list({
+    const responsePromise = client.addressing.addressMaps.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -51,13 +51,13 @@ describe('resource addressMaps', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.list({
+    const response = await client.addressing.addressMaps.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.addressing.addressMaps.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -70,13 +70,13 @@ describe('resource addressMaps', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.addressing.addressMaps.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.addressing.addressMaps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -89,7 +89,7 @@ describe('resource addressMaps', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.addressing.addressMaps.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       default_sni: '*.example.com',
       description: 'My Ecommerce zones',
@@ -98,7 +98,7 @@ describe('resource addressMaps', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.addressing.addressMaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -111,7 +111,7 @@ describe('resource addressMaps', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.addressing.addressMaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

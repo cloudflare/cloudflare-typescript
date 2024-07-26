@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource lockdowns', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.firewall.lockdowns.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = client.firewall.lockdowns.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,12 +24,12 @@ describe('resource lockdowns', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.firewall.lockdowns.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const response = await client.firewall.lockdowns.create('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.firewall.lockdowns.update(
+    const responsePromise = client.firewall.lockdowns.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
       {},
@@ -45,7 +45,7 @@ describe('resource lockdowns', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.firewall.lockdowns.update(
+    const response = await client.firewall.lockdowns.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
       {},
@@ -53,7 +53,7 @@ describe('resource lockdowns', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.firewall.lockdowns.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.firewall.lockdowns.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +66,7 @@ describe('resource lockdowns', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.lockdowns.list('023e105f4ecef8ad9ca31a8372d0c353', {
+      client.firewall.lockdowns.list('023e105f4ecef8ad9ca31a8372d0c353', {
         path: '/_stainless_unknown_path',
       }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -75,7 +75,7 @@ describe('resource lockdowns', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.lockdowns.list(
+      client.firewall.lockdowns.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
         {
           created_on: '2014-01-01T05:20:00.12345Z',
@@ -96,7 +96,7 @@ describe('resource lockdowns', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.firewall.lockdowns.delete(
+    const responsePromise = client.firewall.lockdowns.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
     );
@@ -112,7 +112,7 @@ describe('resource lockdowns', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.lockdowns.delete(
+      client.firewall.lockdowns.delete(
         '023e105f4ecef8ad9ca31a8372d0c353',
         '372e67954025e0ba6aaa6d586b9e0b59',
         { path: '/_stainless_unknown_path' },
@@ -121,7 +121,7 @@ describe('resource lockdowns', () => {
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.firewall.lockdowns.get(
+    const responsePromise = client.firewall.lockdowns.get(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
     );
@@ -137,11 +137,9 @@ describe('resource lockdowns', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.firewall.lockdowns.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.firewall.lockdowns.get('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

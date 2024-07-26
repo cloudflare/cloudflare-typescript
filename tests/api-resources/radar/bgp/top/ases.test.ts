@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource ases', () => {
   test('get', async () => {
-    const responsePromise = cloudflare.radar.bgp.top.ases.get();
+    const responsePromise = client.radar.bgp.top.ases.get();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource ases', () => {
 
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.radar.bgp.top.ases.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.bgp.top.ases.get({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -31,7 +31,7 @@ describe('resource ases', () => {
   test('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.bgp.top.ases.get(
+      client.radar.bgp.top.ases.get(
         {
           asn: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -49,7 +49,7 @@ describe('resource ases', () => {
   });
 
   test('prefixes', async () => {
-    const responsePromise = cloudflare.radar.bgp.top.ases.prefixes();
+    const responsePromise = client.radar.bgp.top.ases.prefixes();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,15 +61,15 @@ describe('resource ases', () => {
 
   test('prefixes: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.bgp.top.ases.prefixes({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.bgp.top.ases.prefixes({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('prefixes: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.bgp.top.ases.prefixes(
+      client.radar.bgp.top.ases.prefixes(
         { country: 'NZ', format: 'JSON', limit: 10 },
         { path: '/_stainless_unknown_path' },
       ),

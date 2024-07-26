@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource members', () => {
   // HTTP 422 error from prism
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.accounts.members.create({
+    const responsePromise = client.accounts.members.create({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       email: 'user@example.com',
       roles: [
@@ -32,7 +32,7 @@ describe('resource members', () => {
 
   // HTTP 422 error from prism
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.accounts.members.create({
+    const response = await client.accounts.members.create({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       email: 'user@example.com',
       roles: [
@@ -46,7 +46,7 @@ describe('resource members', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
+    const responsePromise = client.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -60,7 +60,7 @@ describe('resource members', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
+    const response = await client.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       roles: [
         { id: '3536bcfad5faccb999b47003c79917fb' },
@@ -71,9 +71,7 @@ describe('resource members', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.accounts.members.list({
-      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-    });
+    const responsePromise = client.accounts.members.list({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,7 +82,7 @@ describe('resource members', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.accounts.members.list({
+    const response = await client.accounts.members.list({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       direction: 'desc',
       order: 'status',
@@ -96,7 +94,7 @@ describe('resource members', () => {
 
   // HTTP 422 error from prism
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
+    const responsePromise = client.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -110,14 +108,14 @@ describe('resource members', () => {
 
   // HTTP 422 error from prism
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
+    const response = await client.accounts.members.delete('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
     });
   });
 
   // HTTP 422 error from prism
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
+    const responsePromise = client.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -131,7 +129,7 @@ describe('resource members', () => {
 
   // HTTP 422 error from prism
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
+    const response = await client.accounts.members.get('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
     });
   });

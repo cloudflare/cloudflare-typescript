@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource payloadLogs', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.payloadLogs.update({
+    const responsePromise = client.zeroTrust.dlp.payloadLogs.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
     });
@@ -25,14 +25,14 @@ describe('resource payloadLogs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.payloadLogs.update({
+    const response = await client.zeroTrust.dlp.payloadLogs.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.dlp.payloadLogs.get({
+    const responsePromise = client.zeroTrust.dlp.payloadLogs.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ describe('resource payloadLogs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.dlp.payloadLogs.get({
+    const response = await client.zeroTrust.dlp.payloadLogs.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

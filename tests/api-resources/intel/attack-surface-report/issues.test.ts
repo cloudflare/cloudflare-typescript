@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource issues', () => {
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.intel.attackSurfaceReport.issues.list({
+    const responsePromise = client.intel.attackSurfaceReport.issues.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource issues', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.intel.attackSurfaceReport.issues.list({
+    const response = await client.intel.attackSurfaceReport.issues.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
       issue_class: ['a_record_dangling', 'always_use_https_not_enabled'],
@@ -43,7 +43,7 @@ describe('resource issues', () => {
   });
 
   test('class: only required params', async () => {
-    const responsePromise = cloudflare.intel.attackSurfaceReport.issues.class({
+    const responsePromise = client.intel.attackSurfaceReport.issues.class({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -56,7 +56,7 @@ describe('resource issues', () => {
   });
 
   test('class: required and optional params', async () => {
-    const response = await cloudflare.intel.attackSurfaceReport.issues.class({
+    const response = await client.intel.attackSurfaceReport.issues.class({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
       issue_class: ['a_record_dangling', 'always_use_https_not_enabled'],
@@ -73,7 +73,7 @@ describe('resource issues', () => {
   });
 
   test('dismiss: only required params', async () => {
-    const responsePromise = cloudflare.intel.attackSurfaceReport.issues.dismiss('issue_id', {
+    const responsePromise = client.intel.attackSurfaceReport.issues.dismiss('issue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -86,14 +86,14 @@ describe('resource issues', () => {
   });
 
   test('dismiss: required and optional params', async () => {
-    const response = await cloudflare.intel.attackSurfaceReport.issues.dismiss('issue_id', {
+    const response = await client.intel.attackSurfaceReport.issues.dismiss('issue_id', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismiss: true,
     });
   });
 
   test('severity: only required params', async () => {
-    const responsePromise = cloudflare.intel.attackSurfaceReport.issues.severity({
+    const responsePromise = client.intel.attackSurfaceReport.issues.severity({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -106,7 +106,7 @@ describe('resource issues', () => {
   });
 
   test('severity: required and optional params', async () => {
-    const response = await cloudflare.intel.attackSurfaceReport.issues.severity({
+    const response = await client.intel.attackSurfaceReport.issues.severity({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
       issue_class: ['a_record_dangling', 'always_use_https_not_enabled'],
@@ -123,7 +123,7 @@ describe('resource issues', () => {
   });
 
   test('type: only required params', async () => {
-    const responsePromise = cloudflare.intel.attackSurfaceReport.issues.type({
+    const responsePromise = client.intel.attackSurfaceReport.issues.type({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -136,7 +136,7 @@ describe('resource issues', () => {
   });
 
   test('type: required and optional params', async () => {
-    const response = await cloudflare.intel.attackSurfaceReport.issues.type({
+    const response = await client.intel.attackSurfaceReport.issues.type({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       dismissed: false,
       issue_class: ['a_record_dangling', 'always_use_https_not_enabled'],

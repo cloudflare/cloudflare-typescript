@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource accounts', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.accounts.update({ account_id: {}, name: 'Demo Account' });
+    const responsePromise = client.accounts.update({ account_id: {}, name: 'Demo Account' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource accounts', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.accounts.update({
+    const response = await client.accounts.update({
       account_id: {},
       name: 'Demo Account',
       settings: {
@@ -35,7 +35,7 @@ describe('resource accounts', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.accounts.list();
+    const responsePromise = client.accounts.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +47,7 @@ describe('resource accounts', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.accounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.accounts.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -55,7 +55,7 @@ describe('resource accounts', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.accounts.list(
+      client.accounts.list(
         { direction: 'desc', name: 'example.com', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
@@ -63,7 +63,7 @@ describe('resource accounts', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.accounts.get({ account_id: {} });
+    const responsePromise = client.accounts.get({ account_id: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,6 +74,6 @@ describe('resource accounts', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.accounts.get({ account_id: {} });
+    const response = await client.accounts.get({ account_id: {} });
   });
 });

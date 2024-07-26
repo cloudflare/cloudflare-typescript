@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource subscriptions', () => {
   test('create', async () => {
-    const responsePromise = cloudflare.subscriptions.create('506e3185e9c882d175a2d0cb0093d9f2', {});
+    const responsePromise = client.subscriptions.create('506e3185e9c882d175a2d0cb0093d9f2', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource subscriptions', () => {
   });
 
   test('update', async () => {
-    const responsePromise = cloudflare.subscriptions.update(
+    const responsePromise = client.subscriptions.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '506e3185e9c882d175a2d0cb0093d9f2',
       {},
@@ -37,7 +37,7 @@ describe('resource subscriptions', () => {
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353');
+    const responsePromise = client.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,12 +50,12 @@ describe('resource subscriptions', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+      client.subscriptions.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.subscriptions.delete(
+    const responsePromise = client.subscriptions.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '506e3185e9c882d175a2d0cb0093d9f2',
     );
@@ -71,16 +71,14 @@ describe('resource subscriptions', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.subscriptions.delete(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        '506e3185e9c882d175a2d0cb0093d9f2',
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.subscriptions.delete('023e105f4ecef8ad9ca31a8372d0c353', '506e3185e9c882d175a2d0cb0093d9f2', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
+    const responsePromise = client.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,7 +91,7 @@ describe('resource subscriptions', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', { path: '/_stainless_unknown_path' }),
+      client.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

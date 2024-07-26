@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource networks', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.devices.networks.create({
+    const responsePromise = client.zeroTrust.devices.networks.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       config: { tls_sockaddr: 'foo.bar:1234' },
       name: 'managed-network-1',
@@ -27,7 +27,7 @@ describe('resource networks', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.devices.networks.create({
+    const response = await client.zeroTrust.devices.networks.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       config: {
         sha256: 'b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c',
@@ -39,10 +39,9 @@ describe('resource networks', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.devices.networks.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.devices.networks.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,22 +52,19 @@ describe('resource networks', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.devices.networks.update(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      {
-        account_id: '699d98642c564d2e855e9661899b7252',
-        config: {
-          sha256: 'b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c',
-          tls_sockaddr: 'foo.bar:1234',
-        },
-        name: 'managed-network-1',
-        type: 'tls',
+    const response = await client.zeroTrust.devices.networks.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      config: {
+        sha256: 'b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c',
+        tls_sockaddr: 'foo.bar:1234',
       },
-    );
+      name: 'managed-network-1',
+      type: 'tls',
+    });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.devices.networks.list({
+    const responsePromise = client.zeroTrust.devices.networks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -81,16 +77,15 @@ describe('resource networks', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.devices.networks.list({
+    const response = await client.zeroTrust.devices.networks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.devices.networks.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.devices.networks.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,17 +96,15 @@ describe('resource networks', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.devices.networks.delete(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const response = await client.zeroTrust.devices.networks.delete('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.devices.networks.get(
-      'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.devices.networks.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -122,7 +115,7 @@ describe('resource networks', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.devices.networks.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.devices.networks.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });

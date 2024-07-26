@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource locations', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.locations.create({
+    const responsePromise = client.zeroTrust.gateway.locations.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Austin Office Location',
     });
@@ -25,7 +25,7 @@ describe('resource locations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.locations.create({
+    const response = await client.zeroTrust.gateway.locations.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Austin Office Location',
       client_default: false,
@@ -64,10 +64,10 @@ describe('resource locations', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.locations.update(
-      'ed35569b41ce4d1facfe683550f54086',
-      { account_id: '699d98642c564d2e855e9661899b7252', name: 'Austin Office Location' },
-    );
+    const responsePromise = client.zeroTrust.gateway.locations.update('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+      name: 'Austin Office Location',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,7 +78,7 @@ describe('resource locations', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.locations.update('ed35569b41ce4d1facfe683550f54086', {
+    const response = await client.zeroTrust.gateway.locations.update('ed35569b41ce4d1facfe683550f54086', {
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'Austin Office Location',
       client_default: false,
@@ -117,7 +117,7 @@ describe('resource locations', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.locations.list({
+    const responsePromise = client.zeroTrust.gateway.locations.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -130,16 +130,15 @@ describe('resource locations', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.locations.list({
+    const response = await client.zeroTrust.gateway.locations.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.locations.delete(
-      'ed35569b41ce4d1facfe683550f54086',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
-    );
+    const responsePromise = client.zeroTrust.gateway.locations.delete('ed35569b41ce4d1facfe683550f54086', {
+      account_id: '699d98642c564d2e855e9661899b7252',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -150,13 +149,13 @@ describe('resource locations', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.locations.delete('ed35569b41ce4d1facfe683550f54086', {
+    const response = await client.zeroTrust.gateway.locations.delete('ed35569b41ce4d1facfe683550f54086', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.gateway.locations.get('ed35569b41ce4d1facfe683550f54086', {
+    const responsePromise = client.zeroTrust.gateway.locations.get('ed35569b41ce4d1facfe683550f54086', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -169,7 +168,7 @@ describe('resource locations', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.gateway.locations.get('ed35569b41ce4d1facfe683550f54086', {
+    const response = await client.zeroTrust.gateway.locations.get('ed35569b41ce4d1facfe683550f54086', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });

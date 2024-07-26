@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource validate', () => {
   // TODO: investigate broken test
   test.skip('destination: only required params', async () => {
-    const responsePromise = cloudflare.logpush.validate.destination({
+    const responsePromise = client.logpush.validate.destination({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'account_id',
     });
@@ -27,7 +27,7 @@ describe('resource validate', () => {
 
   // TODO: investigate broken test
   test.skip('destination: required and optional params', async () => {
-    const response = await cloudflare.logpush.validate.destination({
+    const response = await client.logpush.validate.destination({
       destination_conf: 's3://mybucket/logs?region=us-west-2',
       account_id: 'account_id',
     });
@@ -35,7 +35,7 @@ describe('resource validate', () => {
 
   // TODO: investigate broken test
   test.skip('origin: only required params', async () => {
-    const responsePromise = cloudflare.logpush.validate.origin({
+    const responsePromise = client.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
       account_id: 'account_id',
     });
@@ -50,7 +50,7 @@ describe('resource validate', () => {
 
   // TODO: investigate broken test
   test.skip('origin: required and optional params', async () => {
-    const response = await cloudflare.logpush.validate.origin({
+    const response = await client.logpush.validate.origin({
       logpull_options: 'fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339',
       account_id: 'account_id',
     });
