@@ -40,6 +40,7 @@ describe('resource policies', () => {
         webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
       },
       name: 'SSL Notification Event Policy',
+      alert_interval: '30m',
       description: 'Something describing the policy.',
       filters: {
         actions: ['string', 'string', 'string'],
@@ -48,7 +49,7 @@ describe('resource policies', () => {
         affected_locations: ['string', 'string', 'string'],
         airport_code: ['string', 'string', 'string'],
         alert_trigger_preferences: ['string', 'string', 'string'],
-        alert_trigger_preferences_value: ['99.0', '98.0', '97.0'],
+        alert_trigger_preferences_value: ['string', 'string', 'string'],
         enabled: ['string', 'string', 'string'],
         environment: ['string', 'string', 'string'],
         event: ['string', 'string', 'string'],
@@ -104,6 +105,7 @@ describe('resource policies', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      alert_interval: '30m',
       alert_type: 'universal_ssl_event_type',
       description: 'Something describing the policy.',
       enabled: true,
@@ -114,7 +116,7 @@ describe('resource policies', () => {
         affected_locations: ['string', 'string', 'string'],
         airport_code: ['string', 'string', 'string'],
         alert_trigger_preferences: ['string', 'string', 'string'],
-        alert_trigger_preferences_value: ['99.0', '98.0', '97.0'],
+        alert_trigger_preferences_value: ['string', 'string', 'string'],
         enabled: ['string', 'string', 'string'],
         environment: ['string', 'string', 'string'],
         event: ['string', 'string', 'string'],
