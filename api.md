@@ -5111,6 +5111,14 @@ Methods:
 
 ## Annotations
 
+Types:
+
+- <code><a href="./src/resources/radar/annotations/annotations.ts">AnnotationListResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/annotations">client.radar.annotations.<a href="./src/resources/radar/annotations/annotations.ts">list</a>({ ...params }) -> AnnotationListResponse</code>
+
 ### Outages
 
 Types:
@@ -5237,10 +5245,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowSummaryResponse</a></code>
 - <code><a href="./src/resources/radar/netflows/netflows.ts">NetflowTimeseriesResponse</a></code>
 
 Methods:
 
+- <code title="get /radar/netflows/summary">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">summary</a>({ ...params }) -> NetflowSummaryResponse</code>
 - <code title="get /radar/netflows/timeseries">client.radar.netflows.<a href="./src/resources/radar/netflows/netflows.ts">timeseries</a>({ ...params }) -> NetflowTimeseriesResponse</code>
 
 ### Top
