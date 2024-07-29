@@ -46,8 +46,8 @@ describe('resource tests', () => {
   test('list: required and optional params', async () => {
     const response = await client.speed.pages.tests.list('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: 1,
-      per_page: 20,
+      page: 0,
+      per_page: 5,
       region: 'us-central1',
     });
   });
