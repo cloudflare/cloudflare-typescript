@@ -336,6 +336,7 @@ export class Cloudflare extends Core.APIClient {
   }
 
   static Cloudflare = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static CloudflareError = Errors.CloudflareError;
   static APIError = Errors.APIError;
