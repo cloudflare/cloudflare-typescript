@@ -1,35 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as IndexesAPI from './indexes';
-import { SinglePage } from '../../pagination';
+import * as MetadataIndexAPI from './metadata-index';
+import { SinglePage } from '../../../pagination';
 
 export class Indexes extends APIResource {
+  metadataIndex: MetadataIndexAPI.MetadataIndex = new MetadataIndexAPI.MetadataIndex(this._client);
+
   /**
    * Creates and returns a new Vectorize Index.
    */
   create(params: IndexCreateParams, options?: Core.RequestOptions): Core.APIPromise<CreateIndex | null> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/vectorize/indexes`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CreateIndex | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates and returns the specified Vectorize Index.
-   */
-  update(
-    indexName: string,
-    params: IndexUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CreateIndex | null> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/vectorize/indexes/${indexName}`, {
+      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: CreateIndex | null }>
@@ -45,7 +31,7 @@ export class Indexes extends APIResource {
   ): Core.PagePromise<CreateIndicesSinglePage, CreateIndex> {
     const { account_id } = params;
     return this._client.getAPIList(
-      `/accounts/${account_id}/vectorize/indexes`,
+      `/accounts/${account_id}/vectorize/v2/indexes`,
       CreateIndicesSinglePage,
       options,
     );
@@ -62,7 +48,7 @@ export class Indexes extends APIResource {
     const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${account_id}/vectorize/indexes/${indexName}`,
+        `/accounts/${account_id}/vectorize/v2/indexes/${indexName}`,
         options,
       ) as Core.APIPromise<{ result: IndexDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -75,13 +61,13 @@ export class Indexes extends APIResource {
     indexName: string,
     params: IndexDeleteByIDsParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexDeleteVectorsByID | null> {
+  ): Core.APIPromise<IndexDeleteByIDsResponse | null> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/delete-by-ids`, {
+      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/delete_by_ids`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndexDeleteVectorsByID | null }>
+      }) as Core.APIPromise<{ result: IndexDeleteByIDsResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -95,9 +81,10 @@ export class Indexes extends APIResource {
   ): Core.APIPromise<CreateIndex | null> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/vectorize/indexes/${indexName}`, options) as Core.APIPromise<{
-        result: CreateIndex | null;
-      }>
+      this._client.get(
+        `/accounts/${account_id}/vectorize/v2/indexes/${indexName}`,
+        options,
+      ) as Core.APIPromise<{ result: CreateIndex | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -111,7 +98,7 @@ export class Indexes extends APIResource {
   ): Core.APIPromise<IndexGetByIDsResponse | null> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/get-by-ids`, {
+      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/get_by_ids`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: IndexGetByIDsResponse | null }>
@@ -119,22 +106,39 @@ export class Indexes extends APIResource {
   }
 
   /**
-   * Inserts vectors into the specified index and returns the count of the vectors
-   * successfully inserted.
+   * Get information about a vectorize index.
+   */
+  info(
+    indexName: string,
+    params: IndexInfoParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IndexInfoResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/vectorize/v2/indexes/${indexName}/info`,
+        options,
+      ) as Core.APIPromise<{ result: IndexInfoResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Inserts vectors into the specified index and returns a mutation id corresponding
+   * to the vectors enqueued for insertion.
    */
   insert(
     indexName: string,
     params: IndexInsertParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexInsert | null> {
+  ): Core.APIPromise<IndexInsertResponse | null> {
     const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/insert`, {
+      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/insert`, {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
         __binaryRequest: true,
-      }) as Core.APIPromise<{ result: IndexInsert | null }>
+      }) as Core.APIPromise<{ result: IndexInsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -145,33 +149,33 @@ export class Indexes extends APIResource {
     indexName: string,
     params: IndexQueryParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexQuery | null> {
+  ): Core.APIPromise<IndexQueryResponse | null> {
     const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/query`, {
+      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/query`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: IndexQuery | null }>
+      }) as Core.APIPromise<{ result: IndexQueryResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Upserts vectors into the specified index, creating them if they do not exist and
-   * returns the count of values and ids successfully inserted.
+   * returns a mutation id corresponding to the vectors enqueued for upsertion.
    */
   upsert(
     indexName: string,
     params: IndexUpsertParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexUpsert | null> {
+  ): Core.APIPromise<IndexUpsertResponse | null> {
     const { account_id, body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/vectorize/indexes/${indexName}/upsert`, {
+      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/upsert`, {
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
         __binaryRequest: true,
-      }) as Core.APIPromise<{ result: IndexUpsert | null }>
+      }) as Core.APIPromise<{ result: IndexUpsertResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -292,10 +296,85 @@ export interface IndexUpsert {
 
 export type IndexDeleteResponse = unknown | string | null;
 
+export interface IndexDeleteByIDsResponse {
+  /**
+   * The unique identifier for the async mutation operation containing the changeset.
+   */
+  mutationId?: string;
+}
+
 /**
  * Array of vectors with matching ids.
  */
 export type IndexGetByIDsResponse = unknown;
+
+export interface IndexInfoResponse {
+  /**
+   * Specifies the number of dimensions for the index
+   */
+  dimensions?: number;
+
+  /**
+   * Specifies the timestamp the last mutation batch was processed.
+   */
+  processedUpToDatetime?: string | null;
+
+  /**
+   * The unique identifier for the async mutation operation containing the changeset.
+   */
+  processedUpToMutation?: string;
+
+  /**
+   * Specifies the number of vectors present in the index
+   */
+  vectorCount?: number;
+}
+
+export interface IndexInsertResponse {
+  /**
+   * The unique identifier for the async mutation operation containing the changeset.
+   */
+  mutationId?: string;
+}
+
+export interface IndexQueryResponse {
+  /**
+   * Specifies the count of vectors returned by the search
+   */
+  count?: number;
+
+  /**
+   * Array of vectors matched by the search
+   */
+  matches?: Array<IndexQueryResponse.Match>;
+}
+
+export namespace IndexQueryResponse {
+  export interface Match {
+    /**
+     * Identifier for a Vector
+     */
+    id?: string;
+
+    metadata?: unknown | null;
+
+    namespace?: string | null;
+
+    /**
+     * The score of the vector according to the index's distance metric
+     */
+    score?: number;
+
+    values?: Array<number> | null;
+  }
+}
+
+export interface IndexUpsertResponse {
+  /**
+   * The unique identifier for the async mutation operation containing the changeset.
+   */
+  mutationId?: string;
+}
 
 export interface IndexCreateParams {
   /**
@@ -331,18 +410,6 @@ export namespace IndexCreateParams {
       | 'openai/text-embedding-ada-002'
       | 'cohere/embed-multilingual-v2.0';
   }
-}
-
-export interface IndexUpdateParams {
-  /**
-   * Path param: Identifier
-   */
-  account_id: string;
-
-  /**
-   * Body param: Specifies the description of the index.
-   */
-  description: string;
 }
 
 export interface IndexListParams {
@@ -390,6 +457,13 @@ export interface IndexGetByIDsParams {
    * the path.
    */
   ids?: Array<string>;
+}
+
+export interface IndexInfoParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export interface IndexInsertParams {
@@ -456,16 +530,28 @@ export namespace Indexes {
   export import IndexQuery = IndexesAPI.IndexQuery;
   export import IndexUpsert = IndexesAPI.IndexUpsert;
   export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
+  export import IndexDeleteByIDsResponse = IndexesAPI.IndexDeleteByIDsResponse;
   export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
+  export import IndexInfoResponse = IndexesAPI.IndexInfoResponse;
+  export import IndexInsertResponse = IndexesAPI.IndexInsertResponse;
+  export import IndexQueryResponse = IndexesAPI.IndexQueryResponse;
+  export import IndexUpsertResponse = IndexesAPI.IndexUpsertResponse;
   export import CreateIndicesSinglePage = IndexesAPI.CreateIndicesSinglePage;
   export import IndexCreateParams = IndexesAPI.IndexCreateParams;
-  export import IndexUpdateParams = IndexesAPI.IndexUpdateParams;
   export import IndexListParams = IndexesAPI.IndexListParams;
   export import IndexDeleteParams = IndexesAPI.IndexDeleteParams;
   export import IndexDeleteByIDsParams = IndexesAPI.IndexDeleteByIDsParams;
   export import IndexGetParams = IndexesAPI.IndexGetParams;
   export import IndexGetByIDsParams = IndexesAPI.IndexGetByIDsParams;
+  export import IndexInfoParams = IndexesAPI.IndexInfoParams;
   export import IndexInsertParams = IndexesAPI.IndexInsertParams;
   export import IndexQueryParams = IndexesAPI.IndexQueryParams;
   export import IndexUpsertParams = IndexesAPI.IndexUpsertParams;
+  export import MetadataIndex = MetadataIndexAPI.MetadataIndex;
+  export import MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
+  export import MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
+  export import MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
+  export import MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
+  export import MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
+  export import MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
 }
