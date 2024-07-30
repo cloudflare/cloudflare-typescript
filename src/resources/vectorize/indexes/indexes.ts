@@ -131,9 +131,10 @@ export class Indexes extends APIResource {
     params: IndexInsertParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexInsertResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, body, 'unparsable-behavior': unparsableBehavior } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/insert`, {
+        query: { 'unparsable-behavior': unparsableBehavior },
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
@@ -168,9 +169,10 @@ export class Indexes extends APIResource {
     params: IndexUpsertParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<IndexUpsertResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, body, 'unparsable-behavior': unparsableBehavior } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/upsert`, {
+        query: { 'unparsable-behavior': unparsableBehavior },
         body: body,
         ...options,
         headers: { 'Content-Type': 'application/x-ndjson', ...options?.headers },
@@ -476,6 +478,11 @@ export interface IndexInsertParams {
    * Body param: ndjson file containing vectors to insert.
    */
   body: Core.Uploadable;
+
+  /**
+   * Query param: Behavior for ndjson parse failures.
+   */
+  'unparsable-behavior'?: 'error' | 'discard';
 }
 
 export interface IndexQueryParams {
@@ -520,6 +527,11 @@ export interface IndexUpsertParams {
    * Body param: ndjson file containing vectors to upsert.
    */
   body: Core.Uploadable;
+
+  /**
+   * Query param: Behavior for ndjson parse failures.
+   */
+  'unparsable-behavior'?: 'error' | 'discard';
 }
 
 export namespace Indexes {

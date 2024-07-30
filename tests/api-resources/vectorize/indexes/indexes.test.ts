@@ -166,6 +166,7 @@ describe('resource indexes', () => {
     const response = await client.vectorize.indexes.insert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      'unparsable-behavior': 'error',
     });
   });
 
@@ -214,6 +215,7 @@ describe('resource indexes', () => {
     const response = await client.vectorize.indexes.upsert('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      'unparsable-behavior': 'error',
     });
   });
 });
