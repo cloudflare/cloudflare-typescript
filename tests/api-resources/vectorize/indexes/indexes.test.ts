@@ -34,27 +34,6 @@ describe('resource indexes', () => {
     });
   });
 
-  test('update: only required params', async () => {
-    const responsePromise = client.vectorize.indexes.update('example-index', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      description: 'This is my example index.',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: required and optional params', async () => {
-    const response = await client.vectorize.indexes.update('example-index', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      description: 'This is my example index.',
-    });
-  });
-
   test('list: only required params', async () => {
     const responsePromise = client.vectorize.indexes.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -145,6 +124,25 @@ describe('resource indexes', () => {
     const response = await client.vectorize.indexes.getByIds('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       ids: ['5121db81354a40c6aedc3fe1ace51c59', 'f90eb49c2107486abdfd78c67e853430'],
+    });
+  });
+
+  test('info: only required params', async () => {
+    const responsePromise = client.vectorize.indexes.info('example-index', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('info: required and optional params', async () => {
+    const response = await client.vectorize.indexes.info('example-index', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 

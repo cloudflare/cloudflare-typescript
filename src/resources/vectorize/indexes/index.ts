@@ -26,5 +26,13 @@ export {
   IndexUpsertParams,
   CreateIndicesSinglePage,
   Indexes,
-} from './indexes/index';
-export { Vectorize } from './vectorize';
+} from './indexes';
+export {
+  MetadataIndexCreateResponse,
+  MetadataIndexListResponse,
+  MetadataIndexDeleteResponse,
+  MetadataIndexCreateParams,
+  MetadataIndexListParams,
+  MetadataIndexDeleteParams,
+  MetadataIndex,
+} from './metadata-index';
