@@ -678,6 +678,7 @@ export namespace Workers {
   export import Scripts = ScriptsAPI.Scripts;
   export import Script = ScriptsAPI.Script;
   export import ScriptSetting = ScriptsAPI.ScriptSetting;
+  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
