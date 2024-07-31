@@ -12,12 +12,7 @@ const client = new Cloudflare({
 describe('resource rateLimits', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.rateLimits.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      action: {},
-      match: {},
-      period: 900,
-      threshold: 60,
-    });
+    const responsePromise = client.rateLimits.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,24 +24,7 @@ describe('resource rateLimits', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.rateLimits.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      action: {
-        mode: 'challenge',
-        response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
-        timeout: 86400,
-      },
-      match: {
-        headers: [
-          { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-        ],
-        request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
-        response: { origin_traffic: true },
-      },
-      period: 900,
-      threshold: 60,
-    });
+    const response = await client.rateLimits.create('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   test('list', async () => {
@@ -106,7 +84,7 @@ describe('resource rateLimits', () => {
     const responsePromise = client.rateLimits.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      { action: {}, match: {}, period: 900, threshold: 60 },
+      {},
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -122,24 +100,7 @@ describe('resource rateLimits', () => {
     const response = await client.rateLimits.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      {
-        action: {
-          mode: 'challenge',
-          response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
-          timeout: 86400,
-        },
-        match: {
-          headers: [
-            { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-            { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-            { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-          ],
-          request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
-          response: { origin_traffic: true },
-        },
-        period: 900,
-        threshold: 60,
-      },
+      {},
     );
   });
 
