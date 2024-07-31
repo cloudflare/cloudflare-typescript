@@ -29,7 +29,7 @@ export class Scripts extends APIResource {
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.Script> {
+  ): Core.APIPromise<ScriptUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
@@ -39,7 +39,7 @@ export class Scripts extends APIResource {
           ...options,
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
         }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -99,6 +99,50 @@ export interface Script {
   modified_on?: string;
 
   script?: ScriptsAPI.Script;
+}
+
+export interface ScriptUpdateResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
+
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Specifies the placement mode for the Worker (e.g. 'smart').
+   */
+  placement_mode?: string;
+
+  startup_time_ms?: number;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
 }
 
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
@@ -238,6 +282,7 @@ export interface ScriptGetParams {
 
 export namespace Scripts {
   export import Script = ScriptsScriptsAPI.Script;
+  export import ScriptUpdateResponse = ScriptsScriptsAPI.ScriptUpdateResponse;
   export import ScriptUpdateParams = ScriptsScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;
