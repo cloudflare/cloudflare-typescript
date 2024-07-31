@@ -107,12 +107,12 @@ export namespace AuditLog {
 /**
  * The Certificate Authority that will issue the certificate
  */
-export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt';
+export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * The Certificate Authority that will issue the certificate
  */
-export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt';
+export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
