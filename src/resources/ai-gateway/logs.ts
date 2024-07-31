@@ -46,9 +46,9 @@ export interface LogListResponse {
 
   success: boolean;
 
-  tokens_in: number;
+  tokens_in: number | null;
 
-  tokens_out: number;
+  tokens_out: number | null;
 
   cost?: number;
 
