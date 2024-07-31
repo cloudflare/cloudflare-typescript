@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as UARulesAPI from './ua-rules';
-import * as AccessRulesAPI from './access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class UARules extends APIResource {
@@ -157,39 +156,9 @@ export interface UARuleDeleteResponse {
 
 export type UARuleGetResponse = unknown | string | null;
 
-export interface UARuleCreateParams {
-  /**
-   * The rule configuration.
-   */
-  configuration:
-    | AccessRulesAPI.AccessRuleIPConfigurationParam
-    | AccessRulesAPI.IPV6ConfigurationParam
-    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
-    | AccessRulesAPI.ASNConfigurationParam
-    | AccessRulesAPI.CountryConfigurationParam;
+export type UARuleCreateParams = unknown;
 
-  /**
-   * The action to apply to a matched request.
-   */
-  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-}
-
-export interface UARuleUpdateParams {
-  /**
-   * The rule configuration.
-   */
-  configuration:
-    | AccessRulesAPI.AccessRuleIPConfigurationParam
-    | AccessRulesAPI.IPV6ConfigurationParam
-    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
-    | AccessRulesAPI.ASNConfigurationParam
-    | AccessRulesAPI.CountryConfigurationParam;
-
-  /**
-   * The action to apply to a matched request.
-   */
-  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-}
+export type UARuleUpdateParams = unknown;
 
 export interface UARuleListParams extends V4PagePaginationArrayParams {
   /**
