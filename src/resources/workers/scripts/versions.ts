@@ -68,6 +68,8 @@ export interface VersionCreateResponse {
   metadata?: unknown;
 
   number?: number;
+
+  startup_time_ms?: number;
 }
 
 export interface VersionListResponse {
