@@ -81,15 +81,15 @@ export class QueuesSinglePage extends SinglePage<Queue> {}
 export interface Queue {
   consumers?: unknown;
 
-  consumers_total_count?: unknown;
+  consumers_total_count?: number;
 
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   producers?: unknown;
 
-  producers_total_count?: unknown;
+  producers_total_count?: number;
 
   queue_id?: string;
 
@@ -97,9 +97,9 @@ export interface Queue {
 }
 
 export interface QueueCreated {
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   queue_id?: string;
 
@@ -107,9 +107,9 @@ export interface QueueCreated {
 }
 
 export interface QueueUpdated {
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   queue_id?: string;
 
