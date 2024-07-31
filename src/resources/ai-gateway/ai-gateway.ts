@@ -110,10 +110,6 @@ export namespace AIGatewayCreateResponse {
 
     created_at: string;
 
-    improved_logs: boolean;
-
-    logpush: boolean;
-
     modified_at: string;
 
     rate_limiting_interval: number | null;
@@ -121,6 +117,10 @@ export namespace AIGatewayCreateResponse {
     rate_limiting_limit: number | null;
 
     rate_limiting_technique: 'fixed' | 'sliding';
+
+    improved_logs?: boolean;
+
+    logpush?: boolean;
 
     logpush_public_key?: string;
   }
@@ -140,10 +140,6 @@ export interface AIGatewayUpdateResponse {
 
   created_at: string;
 
-  improved_logs: boolean;
-
-  logpush: boolean;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -151,6 +147,10 @@ export interface AIGatewayUpdateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  improved_logs?: boolean;
+
+  logpush?: boolean;
 
   logpush_public_key?: string;
 }
@@ -169,10 +169,6 @@ export interface AIGatewayListResponse {
 
   created_at: string;
 
-  improved_logs: boolean;
-
-  logpush: boolean;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -180,6 +176,10 @@ export interface AIGatewayListResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  improved_logs?: boolean;
+
+  logpush?: boolean;
 
   logpush_public_key?: string;
 }
@@ -198,10 +198,6 @@ export interface AIGatewayDeleteResponse {
 
   created_at: string;
 
-  improved_logs: boolean;
-
-  logpush: boolean;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -209,6 +205,10 @@ export interface AIGatewayDeleteResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  improved_logs?: boolean;
+
+  logpush?: boolean;
 
   logpush_public_key?: string;
 }
@@ -227,10 +227,6 @@ export interface AIGatewayGetResponse {
 
   created_at: string;
 
-  improved_logs: boolean;
-
-  logpush: boolean;
-
   modified_at: string;
 
   rate_limiting_interval: number | null;
@@ -238,6 +234,10 @@ export interface AIGatewayGetResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  improved_logs?: boolean;
+
+  logpush?: boolean;
 
   logpush_public_key?: string;
 }
@@ -271,16 +271,6 @@ export interface AIGatewayCreateParams {
   /**
    * Body param:
    */
-  improved_logs: boolean;
-
-  /**
-   * Body param:
-   */
-  logpush: boolean;
-
-  /**
-   * Body param:
-   */
   rate_limiting_interval: number | null;
 
   /**
@@ -292,6 +282,16 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  improved_logs?: boolean;
+
+  /**
+   * Body param:
+   */
+  logpush?: boolean;
 
   /**
    * Body param:
@@ -323,16 +323,6 @@ export interface AIGatewayUpdateParams {
   /**
    * Body param:
    */
-  improved_logs: boolean;
-
-  /**
-   * Body param:
-   */
-  logpush: boolean;
-
-  /**
-   * Body param:
-   */
   rate_limiting_interval: number | null;
 
   /**
@@ -344,6 +334,16 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  improved_logs?: boolean;
+
+  /**
+   * Body param:
+   */
+  logpush?: boolean;
 
   /**
    * Body param:
