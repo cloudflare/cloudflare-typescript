@@ -50,6 +50,8 @@ export interface LogListResponse {
 
   tokens_out: number;
 
+  cost?: number;
+
   metadata?: string;
 
   request_content_type?: string;

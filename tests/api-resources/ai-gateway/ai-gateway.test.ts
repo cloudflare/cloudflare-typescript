@@ -17,6 +17,8 @@ describe('resource aiGateway', () => {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
+      improved_logs: true,
+      logpush: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
@@ -37,9 +39,12 @@ describe('resource aiGateway', () => {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
+      improved_logs: true,
+      logpush: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
+      logpush_public_key: 'xxxxxxxxxxxxxxxx',
     });
   });
 
@@ -49,6 +54,8 @@ describe('resource aiGateway', () => {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
+      improved_logs: true,
+      logpush: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
@@ -68,9 +75,12 @@ describe('resource aiGateway', () => {
       cache_invalidate_on_update: true,
       cache_ttl: 0,
       collect_logs: true,
+      improved_logs: true,
+      logpush: true,
       rate_limiting_interval: 0,
       rate_limiting_limit: 0,
       rate_limiting_technique: 'fixed',
+      logpush_public_key: 'xxxxxxxxxxxxxxxx',
     });
   });
 
