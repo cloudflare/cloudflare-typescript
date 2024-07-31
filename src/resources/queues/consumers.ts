@@ -76,13 +76,13 @@ export class Consumers extends APIResource {
 }
 
 export interface Consumer {
-  created_on?: unknown;
+  created_on?: string;
 
-  environment?: unknown;
+  environment?: string;
 
-  queue_name?: unknown;
+  queue_name?: string;
 
-  service?: unknown;
+  service?: string;
 
   settings?: Consumer.Settings;
 }
@@ -94,6 +94,9 @@ export namespace Consumer {
      */
     batch_size?: number;
 
+    /**
+     * The maximum number of retries
+     */
     max_retries?: number;
 
     max_wait_time_ms?: number;
@@ -101,15 +104,18 @@ export namespace Consumer {
 }
 
 export interface ConsumerCreateResponse {
-  created_on?: unknown;
+  created_on?: string;
 
+  /**
+   * The name of the dead letter queue
+   */
   dead_letter_queue?: string;
 
-  environment?: unknown;
+  environment?: string;
 
-  queue_name?: unknown;
+  queue_name?: string;
 
-  script_name?: unknown;
+  script_name?: string;
 
   settings?: ConsumerCreateResponse.Settings;
 }
@@ -121,6 +127,9 @@ export namespace ConsumerCreateResponse {
      */
     batch_size?: number;
 
+    /**
+     * The maximum number of retries
+     */
     max_retries?: number;
 
     max_wait_time_ms?: number;
@@ -128,15 +137,15 @@ export namespace ConsumerCreateResponse {
 }
 
 export interface ConsumerUpdateResponse {
-  created_on?: unknown;
+  created_on?: string;
 
   dead_letter_queue?: string;
 
-  environment?: unknown;
+  environment?: string;
 
-  queue_name?: unknown;
+  queue_name?: string;
 
-  script_name?: unknown;
+  script_name?: string;
 
   settings?: ConsumerUpdateResponse.Settings;
 }
@@ -145,6 +154,9 @@ export namespace ConsumerUpdateResponse {
   export interface Settings {
     batch_size?: number;
 
+    /**
+     * The maximum number of retries
+     */
     max_retries?: number;
 
     max_wait_time_ms?: number;
