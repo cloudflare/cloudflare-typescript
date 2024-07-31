@@ -12,7 +12,10 @@ const client = new Cloudflare({
 describe('resource uaRules', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      configuration: {},
+      mode: 'challenge',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +27,10 @@ describe('resource uaRules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const response = await client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      configuration: { target: 'ip', value: '198.51.100.4' },
+      mode: 'challenge',
+    });
   });
 
   // TODO: investigate broken test
@@ -32,7 +38,7 @@ describe('resource uaRules', () => {
     const responsePromise = client.firewall.uaRules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      {},
+      { configuration: {}, mode: 'challenge' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +54,7 @@ describe('resource uaRules', () => {
     const response = await client.firewall.uaRules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      {},
+      { configuration: { target: 'ip', value: '198.51.100.4' }, mode: 'challenge' },
     );
   });
 
