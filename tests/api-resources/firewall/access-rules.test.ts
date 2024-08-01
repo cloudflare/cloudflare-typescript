@@ -50,7 +50,9 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = client.firewall.accessRules.delete({}, { account_id: 'account_id' });
+    const responsePromise = client.firewall.accessRules.delete('de677e5818985db1285d0e80225f06e5', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,10 +64,11 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
-    const responsePromise = client.firewall.accessRules.edit(
-      {},
-      { configuration: {}, mode: 'challenge', account_id: 'account_id' },
-    );
+    const responsePromise = client.firewall.accessRules.edit('de677e5818985db1285d0e80225f06e5', {
+      configuration: {},
+      mode: 'challenge',
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,20 +80,19 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('edit: required and optional params', async () => {
-    const response = await client.firewall.accessRules.edit(
-      {},
-      {
-        configuration: { target: 'ip', value: '198.51.100.4' },
-        mode: 'challenge',
-        account_id: 'account_id',
-        notes: 'This rule is enabled because of an event that occurred on date X.',
-      },
-    );
+    const response = await client.firewall.accessRules.edit('de677e5818985db1285d0e80225f06e5', {
+      configuration: { target: 'ip', value: '198.51.100.4' },
+      mode: 'challenge',
+      account_id: 'account_id',
+      notes: 'This rule is enabled because of an event that occurred on date X.',
+    });
   });
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = client.firewall.accessRules.get({}, { account_id: 'account_id' });
+    const responsePromise = client.firewall.accessRules.get('de677e5818985db1285d0e80225f06e5', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

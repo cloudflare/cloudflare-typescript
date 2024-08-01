@@ -12,7 +12,10 @@ const client = new Cloudflare({
 describe('resource rules', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const responsePromise = client.firewall.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      action: {},
+      filter: {},
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +27,20 @@ describe('resource rules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {});
+    const response = await client.firewall.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+      action: {
+        mode: 'challenge',
+        response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
+        timeout: 86400,
+      },
+      filter: {
+        description: 'Restrict access from these browsers on this address range.',
+        expression:
+          '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+        paused: false,
+        ref: 'FIL-100',
+      },
+    });
   });
 
   // TODO: investigate broken test
@@ -32,7 +48,7 @@ describe('resource rules', () => {
     const responsePromise = client.firewall.rules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b60',
-      {},
+      { action: {}, filter: {} },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +64,20 @@ describe('resource rules', () => {
     const response = await client.firewall.rules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b60',
-      {},
+      {
+        action: {
+          mode: 'challenge',
+          response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
+          timeout: 86400,
+        },
+        filter: {
+          description: 'Restrict access from these browsers on this address range.',
+          expression:
+            '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+          paused: false,
+          ref: 'FIL-100',
+        },
+      },
     );
   });
 
@@ -112,7 +141,7 @@ describe('resource rules', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
+  test.skip('edit', async () => {
     const responsePromise = client.firewall.rules.edit(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b60',
@@ -125,15 +154,6 @@ describe('resource rules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
-    const response = await client.firewall.rules.edit(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b60',
-      {},
-    );
   });
 
   test('get: only required params', async () => {
