@@ -12,9 +12,7 @@ const client = new Cloudflare({
 describe('resource overrides', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
-    });
+    const responsePromise = client.firewall.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,20 +24,16 @@ describe('resource overrides', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
-    });
+    const response = await client.firewall.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {});
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      path_id: 'de677e5818985db1285d0e80225f06e5',
-      body_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      rewrite_action: {},
-      rules: { '100015': 'disable' },
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
-    });
+    const responsePromise = client.firewall.waf.overrides.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,19 +45,11 @@ describe('resource overrides', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      path_id: 'de677e5818985db1285d0e80225f06e5',
-      body_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      rewrite_action: {
-        block: 'challenge',
-        challenge: 'challenge',
-        default: 'challenge',
-        disable: 'challenge',
-        simulate: 'challenge',
-      },
-      rules: { '100015': 'disable' },
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
-    });
+    const response = await client.firewall.waf.overrides.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
+      {},
+    );
   });
 
   test('list', async () => {

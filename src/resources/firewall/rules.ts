@@ -189,135 +189,9 @@ export type RuleCreateResponse = Array<FirewallRule>;
 
 export type RuleEditResponse = Array<FirewallRule>;
 
-export interface RuleCreateParams {
-  /**
-   * The action to perform when the threshold of matched traffic within the
-   * configured period is exceeded.
-   */
-  action: RuleCreateParams.Action;
+export type RuleCreateParams = unknown;
 
-  filter: FiltersAPI.FirewallFilterParam;
-}
-
-export namespace RuleCreateParams {
-  /**
-   * The action to perform when the threshold of matched traffic within the
-   * configured period is exceeded.
-   */
-  export interface Action {
-    /**
-     * The action to perform.
-     */
-    mode?: 'simulate' | 'ban' | 'challenge' | 'js_challenge' | 'managed_challenge';
-
-    /**
-     * A custom content type and reponse to return when the threshold is exceeded. The
-     * custom response configured in this object will override the custom error for the
-     * zone. This object is optional. Notes: If you omit this object, Cloudflare will
-     * use the default HTML error page. If "mode" is "challenge", "managed_challenge",
-     * or "js_challenge", Cloudflare will use the zone challenge pages and you should
-     * not provide the "response" object.
-     */
-    response?: Action.Response;
-
-    /**
-     * The time in seconds during which Cloudflare will perform the mitigation action.
-     * Must be an integer value greater than or equal to the period. Notes: If "mode"
-     * is "challenge", "managed_challenge", or "js_challenge", Cloudflare will use the
-     * zone's Challenge Passage time and you should not provide this value.
-     */
-    timeout?: number;
-  }
-
-  export namespace Action {
-    /**
-     * A custom content type and reponse to return when the threshold is exceeded. The
-     * custom response configured in this object will override the custom error for the
-     * zone. This object is optional. Notes: If you omit this object, Cloudflare will
-     * use the default HTML error page. If "mode" is "challenge", "managed_challenge",
-     * or "js_challenge", Cloudflare will use the zone challenge pages and you should
-     * not provide the "response" object.
-     */
-    export interface Response {
-      /**
-       * The response body to return. The value must conform to the configured content
-       * type.
-       */
-      body?: string;
-
-      /**
-       * The content type of the body. Must be one of the following: `text/plain`,
-       * `text/xml`, or `application/json`.
-       */
-      content_type?: string;
-    }
-  }
-}
-
-export interface RuleUpdateParams {
-  /**
-   * The action to perform when the threshold of matched traffic within the
-   * configured period is exceeded.
-   */
-  action: RuleUpdateParams.Action;
-
-  filter: FiltersAPI.FirewallFilterParam;
-}
-
-export namespace RuleUpdateParams {
-  /**
-   * The action to perform when the threshold of matched traffic within the
-   * configured period is exceeded.
-   */
-  export interface Action {
-    /**
-     * The action to perform.
-     */
-    mode?: 'simulate' | 'ban' | 'challenge' | 'js_challenge' | 'managed_challenge';
-
-    /**
-     * A custom content type and reponse to return when the threshold is exceeded. The
-     * custom response configured in this object will override the custom error for the
-     * zone. This object is optional. Notes: If you omit this object, Cloudflare will
-     * use the default HTML error page. If "mode" is "challenge", "managed_challenge",
-     * or "js_challenge", Cloudflare will use the zone challenge pages and you should
-     * not provide the "response" object.
-     */
-    response?: Action.Response;
-
-    /**
-     * The time in seconds during which Cloudflare will perform the mitigation action.
-     * Must be an integer value greater than or equal to the period. Notes: If "mode"
-     * is "challenge", "managed_challenge", or "js_challenge", Cloudflare will use the
-     * zone's Challenge Passage time and you should not provide this value.
-     */
-    timeout?: number;
-  }
-
-  export namespace Action {
-    /**
-     * A custom content type and reponse to return when the threshold is exceeded. The
-     * custom response configured in this object will override the custom error for the
-     * zone. This object is optional. Notes: If you omit this object, Cloudflare will
-     * use the default HTML error page. If "mode" is "challenge", "managed_challenge",
-     * or "js_challenge", Cloudflare will use the zone challenge pages and you should
-     * not provide the "response" object.
-     */
-    export interface Response {
-      /**
-       * The response body to return. The value must conform to the configured content
-       * type.
-       */
-      body?: string;
-
-      /**
-       * The content type of the body. Must be one of the following: `text/plain`,
-       * `text/xml`, or `application/json`.
-       */
-      content_type?: string;
-    }
-  }
-}
+export type RuleUpdateParams = unknown;
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**
@@ -341,7 +215,7 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   paused?: boolean;
 }
 
-export interface RuleEditParams {}
+export type RuleEditParams = unknown;
 
 export interface RuleGetParams {
   /**
