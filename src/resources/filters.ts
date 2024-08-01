@@ -127,38 +127,9 @@ export interface FirewallFilter {
   ref?: string;
 }
 
-export interface FirewallFilterParam {
-  /**
-   * An informative summary of the filter.
-   */
-  description?: string;
-
-  /**
-   * The filter expression. For more information, refer to
-   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-   */
-  expression?: string;
-
-  /**
-   * When true, indicates that the filter is currently paused.
-   */
-  paused?: boolean;
-
-  /**
-   * A short reference tag. Allows you to select related filters.
-   */
-  ref?: string;
-}
-
 export type FilterCreateResponse = Array<FirewallFilter>;
 
-export interface FilterCreateParams {
-  /**
-   * The filter expression. For more information, refer to
-   * [Expressions](https://developers.cloudflare.com/ruleset-engine/rules-language/expressions/).
-   */
-  expression: string;
-}
+export type FilterCreateParams = unknown;
 
 export type FilterUpdateParams = unknown;
 

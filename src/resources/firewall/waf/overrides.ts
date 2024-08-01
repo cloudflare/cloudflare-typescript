@@ -34,13 +34,13 @@ export class Overrides extends APIResource {
    */
   update(
     zoneIdentifier: string,
-    params: OverrideUpdateParams,
+    id: string,
+    body: OverrideUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Override> {
-    const { path_id, body_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zoneIdentifier}/firewall/waf/overrides/${path_id}`, {
-        body: { id: body_id, ...body },
+      this._client.put(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, {
+        body,
         ...options,
       }) as Core.APIPromise<{ result: Override }>
     )._thenUnwrap((obj) => obj.result);
@@ -169,8 +169,6 @@ export interface Override {
 
 export type OverrideURL = string;
 
-export type OverrideURLParam = string;
-
 /**
  * Specifies that, when a WAF rule matches, its configured action will be replaced
  * by the action configured in this object.
@@ -181,56 +179,16 @@ export interface RewriteAction {
    */
   block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
 
-  /**
-   * The WAF rule action to apply.
-   */
-  challenge?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+  challenge?: string;
 
-  /**
-   * The WAF rule action to apply.
-   */
-  default?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+  default?: string;
 
   /**
    * The WAF rule action to apply.
    */
   disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
 
-  /**
-   * The WAF rule action to apply.
-   */
-  simulate?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
-}
-
-/**
- * Specifies that, when a WAF rule matches, its configured action will be replaced
- * by the action configured in this object.
- */
-export interface RewriteActionParam {
-  /**
-   * The WAF rule action to apply.
-   */
-  block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
-
-  /**
-   * The WAF rule action to apply.
-   */
-  challenge?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
-
-  /**
-   * The WAF rule action to apply.
-   */
-  default?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
-
-  /**
-   * The WAF rule action to apply.
-   */
-  disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
-
-  /**
-   * The WAF rule action to apply.
-   */
-  simulate?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+  simulate?: string;
 }
 
 /**
@@ -242,15 +200,6 @@ export interface RewriteActionParam {
  */
 export type WAFRule = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
 
-/**
- * An object that allows you to override the action of specific WAF rules. Each key
- * of this object must be the ID of a WAF rule, and each value must be a valid WAF
- * action. Unless you are disabling a rule, ensure that you also enable the rule
- * group that this WAF rule belongs to. When creating a new URI-based WAF override,
- * you must provide a `groups` object or a `rules` object.
- */
-export type WAFRuleParam = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
-
 export interface OverrideDeleteResponse {
   /**
    * The unique identifier of the WAF override.
@@ -258,48 +207,9 @@ export interface OverrideDeleteResponse {
   id?: string;
 }
 
-export interface OverrideCreateParams {
-  /**
-   * The URLs to include in the current WAF override. You can use wildcards. Each
-   * entered URL will be escaped before use, which means you can only use simple
-   * wildcard patterns.
-   */
-  urls: Array<OverrideURLParam>;
-}
+export type OverrideCreateParams = unknown;
 
-export interface OverrideUpdateParams {
-  /**
-   * Path param: The unique identifier of the WAF override.
-   */
-  path_id: string;
-
-  /**
-   * Body param: Identifier
-   */
-  body_id: string;
-
-  /**
-   * Body param: Specifies that, when a WAF rule matches, its configured action will
-   * be replaced by the action configured in this object.
-   */
-  rewrite_action: RewriteActionParam;
-
-  /**
-   * Body param: An object that allows you to override the action of specific WAF
-   * rules. Each key of this object must be the ID of a WAF rule, and each value must
-   * be a valid WAF action. Unless you are disabling a rule, ensure that you also
-   * enable the rule group that this WAF rule belongs to. When creating a new
-   * URI-based WAF override, you must provide a `groups` object or a `rules` object.
-   */
-  rules: WAFRuleParam;
-
-  /**
-   * Body param: The URLs to include in the current WAF override. You can use
-   * wildcards. Each entered URL will be escaped before use, which means you can only
-   * use simple wildcard patterns.
-   */
-  urls: Array<OverrideURLParam>;
-}
+export type OverrideUpdateParams = unknown;
 
 export interface OverrideListParams extends V4PagePaginationArrayParams {}
 

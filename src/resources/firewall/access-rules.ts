@@ -93,13 +93,16 @@ export class AccessRules extends APIResource {
    * Note: This operation will affect all zones in the account or zone.
    */
   delete(
-    identifier: string,
+    identifier: unknown,
     params?: AccessRuleDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null>;
-  delete(identifier: string, options?: Core.RequestOptions): Core.APIPromise<AccessRuleDeleteResponse | null>;
   delete(
-    identifier: string,
+    identifier: unknown,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleDeleteResponse | null>;
+  delete(
+    identifier: unknown,
     params: AccessRuleDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleDeleteResponse | null> {
@@ -137,7 +140,7 @@ export class AccessRules extends APIResource {
    * Note: This operation will affect all zones in the account or zone.
    */
   edit(
-    identifier: string,
+    identifier: unknown,
     params: AccessRuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleEditResponse> {
@@ -170,13 +173,13 @@ export class AccessRules extends APIResource {
    * Fetches the details of an IP Access rule defined.
    */
   get(
-    identifier: string,
+    identifier: unknown,
     params?: AccessRuleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleGetResponse>;
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<AccessRuleGetResponse>;
+  get(identifier: unknown, options?: Core.RequestOptions): Core.APIPromise<AccessRuleGetResponse>;
   get(
-    identifier: string,
+    identifier: unknown,
     params: AccessRuleGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccessRuleGetResponse> {
@@ -411,32 +414,19 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
   zone_id?: string;
 
   /**
-   * Query param:
-   */
-  configuration?: AccessRuleListParams.Configuration;
-
-  /**
    * Query param: The direction used to sort returned rules.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: When set to `all`, all the search requirements must match. When set
-   * to `any`, only one of the search requirements has to match.
+   * Query param:
    */
-  match?: 'any' | 'all';
+  'egs-pagination'?: AccessRuleListParams.EgsPagination;
 
   /**
-   * Query param: The action to apply to a matched request.
+   * Query param:
    */
-  mode?: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * Query param: The string to search for in the notes of existing IP Access rules.
-   * Notes: For example, the string 'attack' would match IP Access rules with notes
-   * 'Attack 26/02' and 'Attack 27/02'. The search is case insensitive.
-   */
-  notes?: string;
+  filters?: AccessRuleListParams.Filters;
 
   /**
    * Query param: The field used to sort returned rules.
@@ -445,11 +435,30 @@ export interface AccessRuleListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace AccessRuleListParams {
-  export interface Configuration {
+  export interface EgsPagination {
+    json?: EgsPagination.Json;
+  }
+
+  export namespace EgsPagination {
+    export interface Json {
+      /**
+       * The page number of paginated results.
+       */
+      page?: number;
+
+      /**
+       * The maximum number of results per page. You can only set the value to `1` or to
+       * a multiple of 5 such as `5`, `10`, `15`, or `20`.
+       */
+      per_page?: number;
+    }
+  }
+
+  export interface Filters {
     /**
      * The target to search in existing rules.
      */
-    target?: 'ip' | 'ip_range' | 'asn' | 'country';
+    'configuration.target'?: 'ip' | 'ip_range' | 'asn' | 'country';
 
     /**
      * The target value to search for in existing rules: an IP address, an IP address
@@ -457,7 +466,25 @@ export namespace AccessRuleListParams {
      * Notes: You can search for a single IPv4 address, an IP address range with a
      * subnet of '/16' or '/24', or a two-letter ISO-3166-1 alpha-2 country code.
      */
-    value?: string;
+    'configuration.value'?: string;
+
+    /**
+     * When set to `all`, all the search requirements must match. When set to `any`,
+     * only one of the search requirements has to match.
+     */
+    match?: 'any' | 'all';
+
+    /**
+     * The action to apply to a matched request.
+     */
+    mode?: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+    /**
+     * The string to search for in the notes of existing IP Access rules. Notes: For
+     * example, the string 'attack' would match IP Access rules with notes 'Attack
+     * 26/02' and 'Attack 27/02'. The search is case insensitive.
+     */
+    notes?: string;
   }
 }
 

@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as LockdownsAPI from './lockdowns';
-import * as OverridesAPI from './waf/overrides';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Lockdowns extends APIResource {
@@ -105,13 +104,6 @@ export class LockdownsV4PagePaginationArray extends V4PagePaginationArray<Lockdo
  */
 export type Configuration = LockdownIPConfiguration | LockdownCIDRConfiguration;
 
-/**
- * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
- * specified in the Zone Lockdown rule. You can include any number of `ip` or
- * `ip_range` configurations.
- */
-export type ConfigurationParam = LockdownIPConfigurationParam | LockdownCIDRConfigurationParam;
-
 export interface Lockdown {
   /**
    * The unique identifier of the Zone Lockdown rule.
@@ -166,34 +158,7 @@ export interface LockdownCIDRConfiguration {
   value?: string;
 }
 
-export interface LockdownCIDRConfigurationParam {
-  /**
-   * The configuration target. You must set the target to `ip_range` when specifying
-   * an IP address range in the Zone Lockdown rule.
-   */
-  target?: 'ip_range';
-
-  /**
-   * The IP address range to match. You can only use prefix lengths `/16` and `/24`.
-   */
-  value?: string;
-}
-
 export interface LockdownIPConfiguration {
-  /**
-   * The configuration target. You must set the target to `ip` when specifying an IP
-   * address in the Zone Lockdown rule.
-   */
-  target?: 'ip';
-
-  /**
-   * The IP address to match. This address will be compared to the IP address of
-   * incoming requests.
-   */
-  value?: string;
-}
-
-export interface LockdownIPConfigurationParam {
   /**
    * The configuration target. You must set the target to `ip` when specifying an IP
    * address in the Zone Lockdown rule.
@@ -216,37 +181,9 @@ export interface LockdownDeleteResponse {
   id?: string;
 }
 
-export interface LockdownCreateParams {
-  /**
-   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
-   * specified in the Zone Lockdown rule. You can include any number of `ip` or
-   * `ip_range` configurations.
-   */
-  configurations: ConfigurationParam;
+export type LockdownCreateParams = unknown;
 
-  /**
-   * The URLs to include in the current WAF override. You can use wildcards. Each
-   * entered URL will be escaped before use, which means you can only use simple
-   * wildcard patterns.
-   */
-  urls: Array<OverridesAPI.OverrideURLParam>;
-}
-
-export interface LockdownUpdateParams {
-  /**
-   * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
-   * specified in the Zone Lockdown rule. You can include any number of `ip` or
-   * `ip_range` configurations.
-   */
-  configurations: ConfigurationParam;
-
-  /**
-   * The URLs to include in the current WAF override. You can use wildcards. Each
-   * entered URL will be escaped before use, which means you can only use simple
-   * wildcard patterns.
-   */
-  urls: Array<OverridesAPI.OverrideURLParam>;
-}
+export type LockdownUpdateParams = unknown;
 
 export interface LockdownListParams extends V4PagePaginationArrayParams {
   /**
