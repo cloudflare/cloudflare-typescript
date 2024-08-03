@@ -4,7 +4,6 @@ import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as SpoofAPI from './spoof';
-import * as TopAPI from '../../../../http/top';
 
 export class Spoof extends APIResource {
   /**
@@ -36,7 +35,7 @@ export class Spoof extends APIResource {
 export interface SpoofGetResponse {
   meta: SpoofGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<SpoofGetResponse.Top0>;
 }
 
 export namespace SpoofGetResponse {
@@ -84,6 +83,12 @@ export namespace SpoofGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 

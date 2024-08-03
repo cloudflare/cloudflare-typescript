@@ -83,7 +83,7 @@ export type Profile =
 export namespace Profile {
   export interface DLPIntegrationProfile {
     /**
-     * The ID for this profile
+     * Unique identifier for a DLP profile
      */
     id?: string;
 
@@ -118,7 +118,7 @@ export namespace Profile {
      */
     export interface Entry {
       /**
-       * The ID for this entry
+       * Unique identifier for a DLP entry
        */
       id?: string;
 
@@ -135,9 +135,9 @@ export namespace Profile {
       name?: string;
 
       /**
-       * ID of the parent profile
+       * Unique identifier for a DLP profile
        */
-      profile_id?: unknown;
+      profile_id?: string;
 
       updated_at?: string;
     }
@@ -172,7 +172,7 @@ export type ProfileGetResponse =
 export namespace ProfileGetResponse {
   export interface DLPIntegrationProfile {
     /**
-     * The ID for this profile
+     * Unique identifier for a DLP profile
      */
     id?: string;
 
@@ -207,7 +207,7 @@ export namespace ProfileGetResponse {
      */
     export interface Entry {
       /**
-       * The ID for this entry
+       * Unique identifier for a DLP entry
        */
       id?: string;
 
@@ -224,9 +224,9 @@ export namespace ProfileGetResponse {
       name?: string;
 
       /**
-       * ID of the parent profile
+       * Unique identifier for a DLP profile
        */
-      profile_id?: unknown;
+      profile_id?: string;
 
       updated_at?: string;
     }
