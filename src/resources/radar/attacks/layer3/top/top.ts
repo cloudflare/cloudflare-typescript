@@ -3,8 +3,7 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as TopTopAPI from './top';
-import * as TopAPI from '../../../http/top';
+import * as TopAPI from './top';
 import * as LocationsAPI from './locations';
 
 export class Top extends APIResource {
@@ -136,7 +135,7 @@ export namespace TopAttacksResponse {
 export interface TopIndustryResponse {
   meta: TopIndustryResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<TopIndustryResponse.Top0>;
 }
 
 export namespace TopIndustryResponse {
@@ -185,12 +184,18 @@ export namespace TopIndustryResponse {
       }
     }
   }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
+  }
 }
 
 export interface TopVerticalResponse {
   meta: TopVerticalResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<TopVerticalResponse.Top0>;
 }
 
 export namespace TopVerticalResponse {
@@ -238,6 +243,12 @@ export namespace TopVerticalResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 
@@ -435,12 +446,12 @@ export interface TopVerticalParams {
 }
 
 export namespace Top {
-  export import TopAttacksResponse = TopTopAPI.TopAttacksResponse;
-  export import TopIndustryResponse = TopTopAPI.TopIndustryResponse;
-  export import TopVerticalResponse = TopTopAPI.TopVerticalResponse;
-  export import TopAttacksParams = TopTopAPI.TopAttacksParams;
-  export import TopIndustryParams = TopTopAPI.TopIndustryParams;
-  export import TopVerticalParams = TopTopAPI.TopVerticalParams;
+  export import TopAttacksResponse = TopAPI.TopAttacksResponse;
+  export import TopIndustryResponse = TopAPI.TopIndustryResponse;
+  export import TopVerticalResponse = TopAPI.TopVerticalResponse;
+  export import TopAttacksParams = TopAPI.TopAttacksParams;
+  export import TopIndustryParams = TopAPI.TopIndustryParams;
+  export import TopVerticalParams = TopAPI.TopVerticalParams;
   export import Locations = LocationsAPI.Locations;
   export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
   export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;

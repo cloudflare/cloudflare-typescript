@@ -34,26 +34,26 @@ export interface IPTimeseriesResponse {
   meta: IPTimeseriesResponse.Meta;
 
   serie_174: IPTimeseriesResponse.Serie174;
-
-  serie_cn: IPTimeseriesResponse.SerieCn;
 }
 
 export namespace IPTimeseriesResponse {
   export interface Meta {
-    dateRange: Array<Meta.DateRange>;
+    queries: Array<Meta.Query>;
   }
 
   export namespace Meta {
-    export interface DateRange {
-      /**
-       * Adjusted end of date range.
-       */
-      endTime: string;
+    export interface Query {
+      dateRange: Query.DateRange;
 
-      /**
-       * Adjusted start of date range.
-       */
-      startTime: string;
+      entity: string;
+    }
+
+    export namespace Query {
+      export interface DateRange {
+        endTime: string;
+
+        startTime: string;
+      }
     }
   }
 
@@ -64,37 +64,32 @@ export namespace IPTimeseriesResponse {
 
     timestamps: Array<string>;
   }
-
-  export interface SerieCn {
-    ipv4: Array<string>;
-
-    ipv6: Array<string>;
-
-    timestamps: Array<string>;
-  }
 }
 
 export interface IPTimeseriesParams {
   /**
-   * Comma separated list of ASNs.
+   * Array of comma separated list of ASNs, start with `-` to exclude from results.
+   * For example, `-174, 3356` excludes results from AS174, but includes results from
+   * AS3356.
    */
-  asn?: string;
+  asn?: Array<string>;
 
   /**
    * End of the date range (inclusive).
    */
-  dateEnd?: string;
+  dateEnd?: Array<string>;
 
   /**
-   * Shorthand date ranges for the last X days - use when you don't need specific
-   * start and end dates.
+   * For example, use `7d` and `7dControl` to compare this week with the previous
+   * week. Use this parameter or set specific start and end dates (`dateStart` and
+   * `dateEnd` parameters).
    */
-  dateRange?: string;
+  dateRange?: Array<string>;
 
   /**
-   * Start of the date range (inclusive).
+   * Array of datetimes to filter the start of a series.
    */
-  dateStart?: string;
+  dateStart?: Array<string>;
 
   /**
    * Format results are returned in.
@@ -107,9 +102,14 @@ export interface IPTimeseriesParams {
   includeDelay?: boolean;
 
   /**
-   * Comma separated list of locations.
+   * Filter for ip version.
    */
-  location?: string;
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
+
+  /**
+   * Array of locations (alpha-2 country codes).
+   */
+  location?: Array<string>;
 
   /**
    * Array of names that will be used to name the series in responses.

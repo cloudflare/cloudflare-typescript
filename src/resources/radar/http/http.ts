@@ -171,11 +171,6 @@ export namespace HTTP {
   export import HTTPTimeseriesResponse = HTTPAPI.HTTPTimeseriesResponse;
   export import HTTPTimeseriesParams = HTTPAPI.HTTPTimeseriesParams;
   export import Top = TopAPI.Top;
-  export import Browser = TopAPI.Browser;
-  export import TopBrowserFamiliesResponse = TopAPI.TopBrowserFamiliesResponse;
-  export import TopBrowsersResponse = TopAPI.TopBrowsersResponse;
-  export import TopBrowserFamiliesParams = TopAPI.TopBrowserFamiliesParams;
-  export import TopBrowsersParams = TopAPI.TopBrowsersParams;
   export import Locations = LocationsAPI.Locations;
   export import LocationGetResponse = LocationsAPI.LocationGetResponse;
   export import LocationGetParams = LocationsAPI.LocationGetParams;
