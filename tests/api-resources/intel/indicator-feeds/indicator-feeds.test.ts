@@ -49,6 +49,7 @@ describe('resource indicatorFeeds', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'This is an example description',
       is_attributable: true,
+      is_downloadable: true,
       is_public: true,
       name: 'indicator_list',
     });

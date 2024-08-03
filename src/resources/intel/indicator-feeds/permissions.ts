@@ -78,6 +78,11 @@ export namespace PermissionListResponse {
     is_attributable?: boolean;
 
     /**
+     * Whether the indicator feed can be downloaded
+     */
+    is_downloadable?: boolean;
+
+    /**
      * Whether the indicator feed is exposed to customers
      */
     is_public?: boolean;

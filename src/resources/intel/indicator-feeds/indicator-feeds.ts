@@ -116,6 +116,11 @@ export interface IndicatorFeedCreateResponse {
   is_attributable?: boolean;
 
   /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
+
+  /**
    * Whether the indicator feed is exposed to customers
    */
   is_public?: boolean;
@@ -151,6 +156,11 @@ export interface IndicatorFeedUpdateResponse {
    * Whether the indicator feed can be attributed to a provider
    */
   is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
 
   /**
    * Whether the indicator feed is exposed to customers
@@ -190,6 +200,11 @@ export interface IndicatorFeedListResponse {
   is_attributable?: boolean;
 
   /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
+
+  /**
    * Whether the indicator feed is exposed to customers
    */
   is_public?: boolean;
@@ -227,6 +242,11 @@ export interface IndicatorFeedGetResponse {
    * Whether the indicator feed can be attributed to a provider
    */
   is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
 
   /**
    * Whether the indicator feed is exposed to customers
@@ -291,6 +311,11 @@ export interface IndicatorFeedUpdateParams {
    * Body param: The new is_attributable value of the feed
    */
   is_attributable?: boolean;
+
+  /**
+   * Body param: The new is_downloadable value of the feed
+   */
+  is_downloadable?: boolean;
 
   /**
    * Body param: The new is_public value of the feed

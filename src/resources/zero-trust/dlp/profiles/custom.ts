@@ -71,7 +71,7 @@ export class Custom extends APIResource {
 
 export interface CustomProfile {
   /**
-   * The ID for this profile
+   * Unique identifier for a DLP profile
    */
   id?: string;
 
@@ -122,7 +122,7 @@ export namespace CustomProfile {
    */
   export interface Entry {
     /**
-     * The ID for this entry
+     * Unique identifier for a DLP entry
      */
     id?: string;
 
@@ -144,9 +144,9 @@ export namespace CustomProfile {
     pattern?: CustomAPI.Pattern;
 
     /**
-     * ID of the parent profile
+     * Unique identifier for a DLP profile
      */
-    profile_id?: unknown;
+    profile_id?: string;
 
     updated_at?: string;
   }
@@ -326,11 +326,6 @@ export namespace CustomUpdateParams {
      * A pattern that matches an entry
      */
     pattern?: CustomAPI.PatternParam;
-
-    /**
-     * ID of the parent profile
-     */
-    profile_id?: unknown;
   }
 
   /**

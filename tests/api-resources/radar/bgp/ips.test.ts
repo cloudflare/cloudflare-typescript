@@ -33,13 +33,14 @@ describe('resource ips', () => {
     await expect(
       client.radar.bgp.ips.timeseries(
         {
-          asn: '174,7922',
-          dateEnd: '2023-09-01T11:41:33.782Z',
-          dateRange: '7d',
-          dateStart: '2023-09-01T11:41:33.782Z',
+          asn: ['string', 'string', 'string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d', '7d', '7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           includeDelay: true,
-          location: 'US,CA',
+          ipVersion: ['IPv4', 'IPv6'],
+          location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
         },
         { path: '/_stainless_unknown_path' },
