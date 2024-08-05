@@ -14,7 +14,7 @@ describe('resource firewall', () => {
     const responsePromise = client.dns.firewall.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
-      upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
+      upstream_ips: ['192.0.2.1', '198.51.100.1', 'string'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource firewall', () => {
     const response = await client.dns.firewall.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Awesome DNS Firewall cluster',
-      upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
+      upstream_ips: ['192.0.2.1', '198.51.100.1', 'string'],
       attack_mitigation: { enabled: true, only_when_upstream_unhealthy: false },
       deprecate_any_requests: true,
       ecs_fallback: false,
@@ -84,12 +84,12 @@ describe('resource firewall', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       deprecate_any_requests: true,
-      dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
+      dns_firewall_ips: ['203.0.113.1', '203.0.113.254', 'string', 'string'],
       ecs_fallback: false,
       maximum_cache_ttl: 900,
       minimum_cache_ttl: 60,
       name: 'My Awesome DNS Firewall cluster',
-      upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
+      upstream_ips: ['192.0.2.1', '198.51.100.1', 'string'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -105,12 +105,12 @@ describe('resource firewall', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       deprecate_any_requests: true,
-      dns_firewall_ips: ['203.0.113.1', '203.0.113.254', '2001:DB8:AB::CF', '2001:DB8:CD::CF'],
+      dns_firewall_ips: ['203.0.113.1', '203.0.113.254', 'string', 'string'],
       ecs_fallback: false,
       maximum_cache_ttl: 900,
       minimum_cache_ttl: 60,
       name: 'My Awesome DNS Firewall cluster',
-      upstream_ips: ['192.0.2.1', '198.51.100.1', '2001:DB8:100::CF'],
+      upstream_ips: ['192.0.2.1', '198.51.100.1', 'string'],
       attack_mitigation: { enabled: true, only_when_upstream_unhealthy: false },
       negative_cache_ttl: 900,
       ratelimit: 600,

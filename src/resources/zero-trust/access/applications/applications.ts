@@ -301,12 +301,12 @@ export type AllowedOriginsParam = string;
 /**
  * Identifier
  */
-export type AppID = string | string;
+export type AppID = string;
 
 /**
  * Identifier
  */
-export type AppIDParam = string | string;
+export type AppIDParam = string;
 
 export type Application =
   | Application.SelfHostedApplication

@@ -123,7 +123,7 @@ export interface Image {
   /**
    * Object specifying available variants for an image.
    */
-  variants?: Array<string | string | string>;
+  variants?: Array<string>;
 }
 
 export interface V1ListResponse {

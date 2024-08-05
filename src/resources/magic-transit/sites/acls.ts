@@ -207,12 +207,12 @@ export type AllowedProtocolParam = 'tcp' | 'udp' | 'icmp';
 /**
  * A valid IPv4 address.
  */
-export type Subnet = string | string;
+export type Subnet = string;
 
 /**
  * A valid IPv4 address.
  */
-export type SubnetParam = string | string;
+export type SubnetParam = string;
 
 export interface ACLCreateParams {
   /**
