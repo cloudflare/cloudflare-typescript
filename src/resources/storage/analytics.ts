@@ -47,12 +47,12 @@ export interface Components {
   /**
    * Maximum results for each metric.
    */
-  max: unknown;
+  max: Record<string, number>;
 
   /**
    * Minimum results for each metric.
    */
-  min: unknown;
+  min: Record<string, number>;
 
   /**
    * For specifying result metrics.
@@ -67,7 +67,12 @@ export interface Components {
   /**
    * Total results for metrics across all data.
    */
-  totals: unknown;
+  totals: Record<string, number>;
+
+  /**
+   * Time interval buckets by beginning and ending
+   */
+  time_intervals?: Array<Array<string>>;
 }
 
 export namespace Components {
@@ -75,7 +80,9 @@ export namespace Components {
     /**
      * List of metrics returned by the query.
      */
-    metrics: Array<unknown>;
+    metrics: Array<Array<number>>;
+
+    dimensions?: Array<string>;
   }
 
   /**
@@ -125,7 +132,7 @@ export namespace Components {
      * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed
      * by - (descending) or + (ascending).
      */
-    sort?: Array<unknown>;
+    sort?: Array<string>;
 
     /**
      * End of time interval to query, defaults to current time.
@@ -149,12 +156,12 @@ export interface Schema {
   /**
    * Maximum results for each metric.
    */
-  max: unknown;
+  max: Record<string, number>;
 
   /**
    * Minimum results for each metric.
    */
-  min: unknown;
+  min: Record<string, number>;
 
   /**
    * For specifying result metrics.
@@ -169,7 +176,12 @@ export interface Schema {
   /**
    * Total results for metrics across all data.
    */
-  totals: unknown;
+  totals: Record<string, number>;
+
+  /**
+   * Time interval buckets by beginning and ending
+   */
+  time_intervals?: Array<Array<string>>;
 }
 
 export namespace Schema {
@@ -177,7 +189,9 @@ export namespace Schema {
     /**
      * List of metrics returned by the query.
      */
-    metrics: Array<unknown>;
+    metrics: Array<Array<number>>;
+
+    dimensions?: Array<string>;
   }
 
   /**
@@ -227,7 +241,7 @@ export namespace Schema {
      * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed
      * by - (descending) or + (ascending).
      */
-    sort?: Array<unknown>;
+    sort?: Array<string>;
 
     /**
      * End of time interval to query, defaults to current time.
@@ -296,7 +310,7 @@ export namespace AnalyticsListParams {
      * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed
      * by - (descending) or + (ascending).
      */
-    sort?: Array<unknown>;
+    sort?: Array<string>;
 
     /**
      * End of time interval to query, defaults to current time.
@@ -365,7 +379,7 @@ export namespace AnalyticsStoredParams {
      * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed
      * by - (descending) or + (ascending).
      */
-    sort?: Array<unknown>;
+    sort?: Array<string>;
 
     /**
      * End of time interval to query, defaults to current time.
