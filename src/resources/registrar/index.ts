@@ -3,11 +3,12 @@
 export {
   Domain,
   DomainUpdateResponse,
+  DomainListResponse,
   DomainGetResponse,
   DomainUpdateParams,
   DomainListParams,
   DomainGetParams,
-  DomainsSinglePage,
+  DomainListResponsesSinglePage,
   Domains,
 } from './domains';
 export { Registrar } from './registrar';
