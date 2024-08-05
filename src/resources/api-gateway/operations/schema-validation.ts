@@ -52,16 +52,13 @@ export class SchemaValidation extends APIResource {
   }
 }
 
-export type SettingsMultipleRequest = Record<
-  string,
-  SettingsMultipleRequest.api_shield_operation_schema_validation_settings_multiple_request_entry
->;
+export type SettingsMultipleRequest = Record<string, SettingsMultipleRequest.item>;
 
 export namespace SettingsMultipleRequest {
   /**
    * Operation ID to mitigation action mappings
    */
-  export interface api_shield_operation_schema_validation_settings_multiple_request_entry {
+  export interface item {
     /**
      * When set, this applies a mitigation action to this operation
      *
@@ -76,16 +73,13 @@ export namespace SettingsMultipleRequest {
   }
 }
 
-export type SettingsMultipleRequestParam = Record<
-  string,
-  SettingsMultipleRequestParam.api_shield_operation_schema_validation_settings_multiple_request_entry
->;
+export type SettingsMultipleRequestParam = Record<string, SettingsMultipleRequestParam.item>;
 
 export namespace SettingsMultipleRequestParam {
   /**
    * Operation ID to mitigation action mappings
    */
-  export interface api_shield_operation_schema_validation_settings_multiple_request_entry {
+  export interface item {
     /**
      * When set, this applies a mitigation action to this operation
      *

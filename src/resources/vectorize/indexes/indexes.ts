@@ -317,7 +317,8 @@ export interface IndexInfoResponse {
   dimensions?: number;
 
   /**
-   * Specifies the timestamp the last mutation batch was processed.
+   * Specifies the timestamp the last mutation batch was processed as an ISO8601
+   * string.
    */
   processedUpToDatetime?: string | null;
 

@@ -46,13 +46,13 @@ export class MetadataIndex extends APIResource {
     indexName: string,
     params: MetadataIndexDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MetadataIndexDeleteResponse> {
+  ): Core.APIPromise<MetadataIndexDeleteResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/delete`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MetadataIndexDeleteResponse }>
+      }) as Core.APIPromise<{ result: MetadataIndexDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -85,7 +85,12 @@ export namespace MetadataIndexListResponse {
   }
 }
 
-export type MetadataIndexDeleteResponse = unknown | string | null;
+export interface MetadataIndexDeleteResponse {
+  /**
+   * The unique identifier for the async mutation operation containing the changeset.
+   */
+  mutationId?: string;
+}
 
 export interface MetadataIndexCreateParams {
   /**

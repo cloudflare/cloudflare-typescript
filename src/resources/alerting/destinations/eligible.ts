@@ -19,10 +19,10 @@ export class Eligible extends APIResource {
   }
 }
 
-export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.UnnamedSchemaWithMapParent2>>;
+export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.Item>>;
 
 export namespace EligibleGetResponse {
-  export interface UnnamedSchemaWithMapParent2 {
+  export interface Item {
     /**
      * Determines whether or not the account is eligible for the delivery mechanism.
      */
