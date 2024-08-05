@@ -84,14 +84,14 @@ export interface Mechanism {
   /**
    * UUID
    */
-  id?: string | string;
+  id?: string;
 }
 
 export interface MechanismParam {
   /**
    * UUID
    */
-  id?: string | string;
+  id?: string;
 }
 
 export interface Policy {

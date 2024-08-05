@@ -191,22 +191,22 @@ export interface Firewall {
 /**
  * Cloudflare-assigned DNS IPv4 Address.
  */
-export type FirewallIPs = string | string;
+export type FirewallIPs = string;
 
 /**
  * Cloudflare-assigned DNS IPv4 Address.
  */
-export type FirewallIPsParam = string | string;
+export type FirewallIPsParam = string;
 
 /**
  * Upstream DNS Server IPv4 Address.
  */
-export type UpstreamIPs = string | string;
+export type UpstreamIPs = string;
 
 /**
  * Upstream DNS Server IPv4 Address.
  */
-export type UpstreamIPsParam = string | string;
+export type UpstreamIPsParam = string;
 
 export interface FirewallDeleteResponse {
   /**

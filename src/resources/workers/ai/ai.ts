@@ -38,7 +38,6 @@ export type AIRunResponse =
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
   | AIRunResponse.UnionMember6
-  | Core.Uploadable
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText;
