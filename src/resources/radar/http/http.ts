@@ -6,12 +6,10 @@ import * as Core from '../../../core';
 import * as HTTPAPI from './http';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
-import * as TopAPI from './top';
 import * as AsesAPI from './ases/ases';
 import * as LocationsAPI from './locations/locations';
 
 export class HTTP extends APIResource {
-  top: TopAPI.Top = new TopAPI.Top(this._client);
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
   ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
@@ -170,7 +168,6 @@ export interface HTTPTimeseriesParams {
 export namespace HTTP {
   export import HTTPTimeseriesResponse = HTTPAPI.HTTPTimeseriesResponse;
   export import HTTPTimeseriesParams = HTTPAPI.HTTPTimeseriesParams;
-  export import Top = TopAPI.Top;
   export import Locations = LocationsAPI.Locations;
   export import LocationGetResponse = LocationsAPI.LocationGetResponse;
   export import LocationGetParams = LocationsAPI.LocationGetParams;

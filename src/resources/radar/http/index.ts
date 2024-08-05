@@ -45,4 +45,3 @@ export {
   TimeseriesGroupTLSVersionParams,
   TimeseriesGroups,
 } from './timeseries-groups';
-export { Top } from './top';
