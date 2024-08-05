@@ -80,34 +80,18 @@ export class Policies extends APIResource {
 
 export class PoliciesSinglePage extends SinglePage<Policy> {}
 
-/**
- * List of IDs that will be used when dispatching a notification. IDs for email
- * type will be the email address.
- */
-export type Mechanism = Record<string, Array<Mechanism.UnnamedSchemaWithMapParent3>>;
-
-export namespace Mechanism {
-  export interface UnnamedSchemaWithMapParent3 {
-    /**
-     * UUID
-     */
-    id?: string | string;
-  }
+export interface Mechanism {
+  /**
+   * UUID
+   */
+  id?: string | string;
 }
 
-/**
- * List of IDs that will be used when dispatching a notification. IDs for email
- * type will be the email address.
- */
-export type MechanismParam = Record<string, Array<MechanismParam.UnnamedSchemaWithMapParent3>>;
-
-export namespace MechanismParam {
-  export interface UnnamedSchemaWithMapParent3 {
-    /**
-     * UUID
-     */
-    id?: string | string;
-  }
+export interface MechanismParam {
+  /**
+   * UUID
+   */
+  id?: string | string;
 }
 
 export interface Policy {
@@ -214,7 +198,7 @@ export interface Policy {
    * List of IDs that will be used when dispatching a notification. IDs for email
    * type will be the email address.
    */
-  mechanisms?: Mechanism;
+  mechanisms?: Record<string, Array<Mechanism>>;
 
   modified?: string;
 
@@ -777,7 +761,7 @@ export interface PolicyCreateParams {
    * Body param: List of IDs that will be used when dispatching a notification. IDs
    * for email type will be the email address.
    */
-  mechanisms: MechanismParam;
+  mechanisms: Record<string, Array<MechanismParam>>;
 
   /**
    * Body param: Name of the policy.
@@ -905,7 +889,7 @@ export interface PolicyUpdateParams {
    * Body param: List of IDs that will be used when dispatching a notification. IDs
    * for email type will be the email address.
    */
-  mechanisms?: MechanismParam;
+  mechanisms?: Record<string, Array<MechanismParam>>;
 
   /**
    * Body param: Name of the policy.
