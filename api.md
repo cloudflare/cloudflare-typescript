@@ -5741,8 +5741,6 @@ Methods:
 
 - <code title="get /radar/http/timeseries">client.radar.http.<a href="./src/resources/radar/http/http.ts">timeseries</a>({ ...params }) -> HTTPTimeseriesResponse</code>
 
-### Top
-
 ### Locations
 
 Types:
