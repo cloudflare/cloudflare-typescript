@@ -123,12 +123,12 @@ export interface CertificateCreateResponse {
 
   created_at?: string;
 
+  expires_on?: string;
+
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
-
-  expires_on?: string;
+  in_use?: boolean;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -154,12 +154,12 @@ export interface CertificateListResponse {
 
   created_at?: string;
 
+  expires_on?: string;
+
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
-
-  expires_on?: string;
+  in_use?: boolean;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -185,12 +185,12 @@ export interface CertificateDeleteResponse {
 
   created_at?: string;
 
+  expires_on?: string;
+
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
-
-  expires_on?: string;
+  in_use?: boolean;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -216,12 +216,12 @@ export interface CertificateActivateResponse {
 
   created_at?: string;
 
+  expires_on?: string;
+
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
-
-  expires_on?: string;
+  in_use?: boolean;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -247,12 +247,12 @@ export interface CertificateDeactivateResponse {
 
   created_at?: string;
 
+  expires_on?: string;
+
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
-
-  expires_on?: string;
+  in_use?: boolean;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -278,12 +278,12 @@ export interface CertificateGetResponse {
 
   created_at?: string;
 
+  expires_on?: string;
+
   /**
    * Use this certificate for Gateway TLS interception
    */
-  enabled?: boolean;
-
-  expires_on?: string;
+  in_use?: boolean;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
