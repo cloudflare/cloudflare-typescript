@@ -1929,12 +1929,12 @@ export namespace WaitingRooms {
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import WaitingRoomRulesSinglePage = RulesAPI.WaitingRoomRulesSinglePage;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
   export import Statuses = StatusesAPI.Statuses;
   export import StatusGetResponse = StatusesAPI.StatusGetResponse;
   export import StatusGetParams = StatusesAPI.StatusGetParams;

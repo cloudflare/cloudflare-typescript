@@ -1680,14 +1680,15 @@ Types:
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleUpdateResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleDeleteResponse</a></code>
 - <code><a href="./src/resources/waiting-rooms/rules.ts">RuleEditResponse</a></code>
+- <code><a href="./src/resources/waiting-rooms/rules.ts">RuleGetResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">create</a>(waitingRoomId, { ...params }) -> RuleCreateResponse | null</code>
 - <code title="put /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">update</a>(waitingRoomId, [ ...body ]) -> RuleUpdateResponse | null</code>
-- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">list</a>(waitingRoomId, { ...params }) -> WaitingRoomRulesSinglePage</code>
 - <code title="delete /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">delete</a>(waitingRoomId, ruleId, { ...params }) -> RuleDeleteResponse | null</code>
 - <code title="patch /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">edit</a>(waitingRoomId, ruleId, { ...params }) -> RuleEditResponse | null</code>
+- <code title="get /zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules">client.waitingRooms.rules.<a href="./src/resources/waiting-rooms/rules.ts">get</a>(waitingRoomId, { ...params }) -> RuleGetResponse | null</code>
 
 ## Statuses
 
