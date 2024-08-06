@@ -24,7 +24,10 @@ export interface Availability {
 
   regions?: Array<SpeedAPI.LabeledRegion>;
 
-  regionsPerPlan?: unknown;
+  /**
+   * Available regions.
+   */
+  regionsPerPlan?: Availability.RegionsPerPlan;
 }
 
 export namespace Availability {
@@ -37,7 +40,7 @@ export namespace Availability {
     /**
      * The number of tests available per plan.
      */
-    quotasPerPlan?: Record<string, number>;
+    quotasPerPlan?: Quota.QuotasPerPlan;
 
     /**
      * The number of remaining schedules available.
@@ -52,7 +55,72 @@ export namespace Availability {
     /**
      * The number of schedules available per plan.
      */
-    scheduleQuotasPerPlan?: Record<string, number>;
+    scheduleQuotasPerPlan?: Quota.ScheduleQuotasPerPlan;
+  }
+
+  export namespace Quota {
+    /**
+     * The number of tests available per plan.
+     */
+    export interface QuotasPerPlan {
+      /**
+       * Counts per account plan.
+       */
+      value?: QuotasPerPlan.Value;
+    }
+
+    export namespace QuotasPerPlan {
+      /**
+       * Counts per account plan.
+       */
+      export interface Value {
+        business?: number;
+
+        enterprise?: number;
+
+        free?: number;
+
+        pro?: number;
+      }
+    }
+
+    /**
+     * The number of schedules available per plan.
+     */
+    export interface ScheduleQuotasPerPlan {
+      /**
+       * Counts per account plan.
+       */
+      value?: ScheduleQuotasPerPlan.Value;
+    }
+
+    export namespace ScheduleQuotasPerPlan {
+      /**
+       * Counts per account plan.
+       */
+      export interface Value {
+        business?: number;
+
+        enterprise?: number;
+
+        free?: number;
+
+        pro?: number;
+      }
+    }
+  }
+
+  /**
+   * Available regions.
+   */
+  export interface RegionsPerPlan {
+    business?: Array<SpeedAPI.LabeledRegion>;
+
+    enterprise?: Array<SpeedAPI.LabeledRegion>;
+
+    free?: Array<SpeedAPI.LabeledRegion>;
+
+    pro?: Array<SpeedAPI.LabeledRegion>;
   }
 }
 
