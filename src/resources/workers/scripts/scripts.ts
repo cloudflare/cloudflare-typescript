@@ -22,7 +22,9 @@ export class Scripts extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
-   * Upload a worker module.
+   * Upload a worker module. You can find more about the multipart metadata on our
+   * docs:
+   * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
   update(
     scriptName: string,
