@@ -1347,16 +1347,6 @@ Methods:
 
 ### Retention
 
-Types:
-
-- <code><a href="./src/resources/logs/control/retention.ts">RetentionCreateResponse</a></code>
-- <code><a href="./src/resources/logs/control/retention.ts">RetentionGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone_identifier}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">create</a>(zoneIdentifier, { ...params }) -> RetentionCreateResponse</code>
-- <code title="get /zones/{zone_identifier}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">get</a>(zoneIdentifier) -> RetentionGetResponse</code>
-
 ### Cmb
 
 #### Config
@@ -1374,33 +1364,9 @@ Methods:
 
 ## RayID
 
-Types:
-
-- <code><a href="./src/resources/logs/rayid.ts">RayIDGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_identifier}/logs/rayids/{ray_identifier}">client.logs.RayID.<a href="./src/resources/logs/rayid.ts">get</a>(zoneIdentifier, rayIdentifier, { ...params }) -> RayIDGetResponse</code>
-
 ## Received
 
-Types:
-
-- <code><a href="./src/resources/logs/received/received.ts">ReceivedGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_identifier}/logs/received">client.logs.received.<a href="./src/resources/logs/received/received.ts">get</a>(zoneIdentifier, { ...params }) -> ReceivedGetResponse</code>
-
 ### Fields
-
-Types:
-
-- <code><a href="./src/resources/logs/received/fields.ts">FieldGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_identifier}/logs/received/fields">client.logs.received.fields.<a href="./src/resources/logs/received/fields.ts">get</a>(zoneIdentifier) -> FieldGetResponse</code>
 
 # OriginTLSClientAuth
 
