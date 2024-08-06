@@ -90,7 +90,7 @@ describe('resource tokens', () => {
         },
       ],
       condition: {
-        request_ip: {
+        'request.ip': {
           in: ['123.123.123.0/24', '2606:4700::/32'],
           not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
         },
@@ -187,7 +187,7 @@ describe('resource tokens', () => {
         ],
         status: 'active',
         condition: {
-          request_ip: {
+          'request.ip': {
             in: ['123.123.123.0/24', '2606:4700::/32'],
             not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
           },
