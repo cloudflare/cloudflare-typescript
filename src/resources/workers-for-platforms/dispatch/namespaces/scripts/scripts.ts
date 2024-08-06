@@ -20,9 +20,9 @@ export class Scripts extends APIResource {
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 
   /**
-   * Upload a worker module to a Workers for Platforms namespace. You can find an
-   * example of the metadata on our docs:
-   * https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/reference/metadata/
+   * Upload a worker module to a Workers for Platforms namespace. You can find more
+   * about the multipart metadata on our docs:
+   * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
   update(
     dispatchNamespace: string,
