@@ -11,8 +11,5 @@ export class Control extends APIResource {
 
 export namespace Control {
   export import Retention = RetentionAPI.Retention;
-  export import RetentionCreateResponse = RetentionAPI.RetentionCreateResponse;
-  export import RetentionGetResponse = RetentionAPI.RetentionGetResponse;
-  export import RetentionCreateParams = RetentionAPI.RetentionCreateParams;
   export import Cmb = CmbAPI.Cmb;
 }
