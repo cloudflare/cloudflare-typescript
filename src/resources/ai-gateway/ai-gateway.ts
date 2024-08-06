@@ -92,38 +92,26 @@ export class AIGateway extends APIResource {
 export class AIGatewayListResponsesV4PagePaginationArray extends V4PagePaginationArray<AIGatewayListResponse> {}
 
 export interface AIGatewayCreateResponse {
-  task: AIGatewayCreateResponse.Task;
-}
+  /**
+   * gateway id
+   */
+  id: string;
 
-export namespace AIGatewayCreateResponse {
-  export interface Task {
-    /**
-     * gateway id
-     */
-    id: string;
+  cache_invalidate_on_update: boolean;
 
-    cache_invalidate_on_update: boolean;
+  cache_ttl: number | null;
 
-    cache_ttl: number | null;
+  collect_logs: boolean;
 
-    collect_logs: boolean;
+  created_at: string;
 
-    created_at: string;
+  modified_at: string;
 
-    modified_at: string;
+  rate_limiting_interval: number | null;
 
-    rate_limiting_interval: number | null;
+  rate_limiting_limit: number | null;
 
-    rate_limiting_limit: number | null;
-
-    rate_limiting_technique: 'fixed' | 'sliding';
-
-    improved_logs?: boolean;
-
-    logpush?: boolean;
-
-    logpush_public_key?: string | null;
-  }
+  rate_limiting_technique: 'fixed' | 'sliding';
 }
 
 export interface AIGatewayUpdateResponse {
@@ -147,12 +135,6 @@ export interface AIGatewayUpdateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  improved_logs?: boolean;
-
-  logpush?: boolean;
-
-  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayListResponse {
@@ -176,12 +158,6 @@ export interface AIGatewayListResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  improved_logs?: boolean;
-
-  logpush?: boolean;
-
-  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayDeleteResponse {
@@ -205,12 +181,6 @@ export interface AIGatewayDeleteResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  improved_logs?: boolean;
-
-  logpush?: boolean;
-
-  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayGetResponse {
@@ -234,12 +204,6 @@ export interface AIGatewayGetResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  improved_logs?: boolean;
-
-  logpush?: boolean;
-
-  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayCreateParams {
@@ -282,21 +246,6 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param:
-   */
-  improved_logs?: boolean;
-
-  /**
-   * Body param:
-   */
-  logpush?: boolean;
-
-  /**
-   * Body param:
-   */
-  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayUpdateParams {
@@ -334,21 +283,6 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
-
-  /**
-   * Body param:
-   */
-  improved_logs?: boolean;
-
-  /**
-   * Body param:
-   */
-  logpush?: boolean;
-
-  /**
-   * Body param:
-   */
-  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
