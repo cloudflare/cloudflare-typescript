@@ -14,7 +14,8 @@ describe('resource acls', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.secondaryDNS.acls.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
+      ip_range: '192.0.2.53/28',
+      name: 'my-acl-1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +30,8 @@ describe('resource acls', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.secondaryDNS.acls.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
+      ip_range: '192.0.2.53/28',
+      name: 'my-acl-1',
     });
   });
 
