@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SubscriptionsAPI from './subscriptions';
-import { SinglePage } from '../../pagination';
 
 export class Subscriptions extends APIResource {
   /**
@@ -54,8 +53,6 @@ export class Subscriptions extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
 
 /**
  * The rate plan applied to the subscription.

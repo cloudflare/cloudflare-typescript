@@ -363,7 +363,6 @@ Types:
 Methods:
 
 - <code title="post /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
-- <code title="get /accounts/{account_identifier}/subscriptions">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">list</a>(accountIdentifier) -> SubscriptionsSinglePage</code>
 - <code title="get /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # LoadBalancers
@@ -668,16 +667,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionCreateResponse</a></code>
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionUpdateResponse</a></code>
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionDeleteResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
-- <code title="put /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(accountIdentifier, subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
-- <code title="get /accounts/{account_identifier}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">list</a>(accountIdentifier) -> SubscriptionsSinglePage</code>
-- <code title="delete /accounts/{account_identifier}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(accountIdentifier, subscriptionIdentifier) -> SubscriptionDeleteResponse</code>
 - <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # ACM
@@ -727,21 +721,11 @@ Types:
 
 - <code><a href="./src/resources/plans.ts">AvailableRatePlan</a></code>
 
-Methods:
-
-- <code title="get /zones/{zone_identifier}/available_plans">client.plans.<a href="./src/resources/plans.ts">list</a>(zoneIdentifier) -> AvailableRatePlansSinglePage</code>
-- <code title="get /zones/{zone_identifier}/available_plans/{plan_identifier}">client.plans.<a href="./src/resources/plans.ts">get</a>(zoneIdentifier, planIdentifier) -> AvailableRatePlan</code>
-
 # RatePlans
 
 Types:
 
 - <code><a href="./src/resources/rate-plans.ts">RatePlan</a></code>
-- <code><a href="./src/resources/rate-plans.ts">RatePlanGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_identifier}/available_rate_plans">client.ratePlans.<a href="./src/resources/rate-plans.ts">get</a>(zoneIdentifier) -> RatePlanGetResponse | null</code>
 
 # CertificateAuthorities
 
@@ -2619,14 +2603,6 @@ Methods:
 # Billing
 
 ## Profiles
-
-Types:
-
-- <code><a href="./src/resources/billing/profiles.ts">ProfileGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_identifier}/billing/profile">client.billing.profiles.<a href="./src/resources/billing/profiles.ts">get</a>(accountIdentifier) -> ProfileGetResponse</code>
 
 # BrandProtection
 
