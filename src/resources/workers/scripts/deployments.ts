@@ -60,6 +60,8 @@ export interface DeploymentParam {
 }
 
 export interface DeploymentCreateResponse {
+  strategy: string;
+
   id?: string;
 
   annotations?: Deployment;
@@ -69,8 +71,6 @@ export interface DeploymentCreateResponse {
   created_on?: string;
 
   source?: string;
-
-  strategy?: string;
 }
 
 export interface DeploymentGetResponse {
@@ -79,6 +79,8 @@ export interface DeploymentGetResponse {
 
 export namespace DeploymentGetResponse {
   export interface Deployment {
+    strategy: string;
+
     id?: string;
 
     annotations?: DeploymentsAPI.Deployment;
@@ -88,8 +90,6 @@ export namespace DeploymentGetResponse {
     created_on?: string;
 
     source?: string;
-
-    strategy?: string;
   }
 }
 
@@ -98,6 +98,11 @@ export interface DeploymentCreateParams {
    * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  strategy: string;
 
   /**
    * Query param: If set to true, the deployment will be created even if normally
@@ -110,11 +115,6 @@ export interface DeploymentCreateParams {
    * Body param:
    */
   annotations?: DeploymentParam;
-
-  /**
-   * Body param:
-   */
-  strategy?: string;
 }
 
 export interface DeploymentGetParams {
