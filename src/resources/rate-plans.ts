@@ -1,20 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import * as Core from '../core';
 
-export class RatePlans extends APIResource {
-  /**
-   * Lists all rate plans the zone can subscribe to.
-   */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RatePlanGetResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/available_rate_plans`, options) as Core.APIPromise<{
-        result: RatePlanGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class RatePlans extends APIResource {}
 
 export interface RatePlan {
   /**
@@ -66,5 +54,3 @@ export namespace RatePlan {
     unit_price?: number;
   }
 }
-
-export type RatePlanGetResponse = Array<RatePlan>;

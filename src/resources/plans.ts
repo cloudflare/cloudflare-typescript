@@ -1,42 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import * as Core from '../core';
-import { SinglePage } from '../pagination';
 
-export class Plans extends APIResource {
-  /**
-   * Lists available plans the zone can subscribe to.
-   */
-  list(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/available_plans`,
-      AvailableRatePlansSinglePage,
-      options,
-    );
-  }
-
-  /**
-   * Details of the available plan that the zone can subscribe to.
-   */
-  get(
-    zoneIdentifier: string,
-    planIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AvailableRatePlan> {
-    return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/available_plans/${planIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: AvailableRatePlan }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
-
-export class AvailableRatePlansSinglePage extends SinglePage<AvailableRatePlan> {}
+export class Plans extends APIResource {}
 
 export interface AvailableRatePlan {
   /**
