@@ -2,5 +2,5 @@
 
 export { Control } from './control/index';
 export { Logs } from './logs';
-export { RayID } from './rayid';
-export { Received } from './received/index';
+export { RayIDGetResponse, RayIDGetParams, RayID } from './rayid';
+export { ReceivedGetResponse, ReceivedGetParams, Received } from './received/index';
