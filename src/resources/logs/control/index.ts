@@ -2,4 +2,10 @@
 
 export { Cmb } from './cmb/index';
 export { Control } from './control';
-export { Retention } from './retention';
+export {
+  RetentionCreateResponse,
+  RetentionGetResponse,
+  RetentionCreateParams,
+  RetentionGetParams,
+  Retention,
+} from './retention';

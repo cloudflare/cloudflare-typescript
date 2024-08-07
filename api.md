@@ -1347,6 +1347,16 @@ Methods:
 
 ### Retention
 
+Types:
+
+- <code><a href="./src/resources/logs/control/retention.ts">RetentionCreateResponse</a></code>
+- <code><a href="./src/resources/logs/control/retention.ts">RetentionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">create</a>({ ...params }) -> RetentionCreateResponse | null</code>
+- <code title="get /zones/{zone_id}/logs/control/retention/flag">client.logs.control.retention.<a href="./src/resources/logs/control/retention.ts">get</a>({ ...params }) -> RetentionGetResponse | null</code>
+
 ### Cmb
 
 #### Config
@@ -1364,9 +1374,33 @@ Methods:
 
 ## RayID
 
+Types:
+
+- <code><a href="./src/resources/logs/rayid.ts">RayIDGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/logs/rayids/{ray_id}">client.logs.RayID.<a href="./src/resources/logs/rayid.ts">get</a>(RayID, { ...params }) -> RayIDGetResponse</code>
+
 ## Received
 
+Types:
+
+- <code><a href="./src/resources/logs/received/received.ts">ReceivedGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/logs/received">client.logs.received.<a href="./src/resources/logs/received/received.ts">get</a>({ ...params }) -> ReceivedGetResponse</code>
+
 ### Fields
+
+Types:
+
+- <code><a href="./src/resources/logs/received/fields.ts">FieldGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/logs/received/fields">client.logs.received.fields.<a href="./src/resources/logs/received/fields.ts">get</a>({ ...params }) -> FieldGetResponse</code>
 
 # OriginTLSClientAuth
 
@@ -2853,6 +2887,16 @@ Methods:
 - <code title="put /accounts/{account_id}/intel/indicator-feeds/permissions/add">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">create</a>({ ...params }) -> PermissionCreateResponse</code>
 - <code title="get /accounts/{account_id}/intel/indicator-feeds/permissions/view">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">list</a>({ ...params }) -> PermissionListResponse</code>
 - <code title="put /accounts/{account_id}/intel/indicator-feeds/permissions/remove">client.intel.indicatorFeeds.permissions.<a href="./src/resources/intel/indicator-feeds/permissions.ts">delete</a>({ ...params }) -> PermissionDeleteResponse</code>
+
+### Downloads
+
+Types:
+
+- <code><a href="./src/resources/intel/indicator-feeds/downloads.ts">DownloadGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/intel/indicator_feeds/{feed_id}/download">client.intel.indicatorFeeds.downloads.<a href="./src/resources/intel/indicator-feeds/downloads.ts">get</a>(feedId, { ...params }) -> DownloadGetResponse</code>
 
 ## Sinkholes
 
