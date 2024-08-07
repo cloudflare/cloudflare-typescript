@@ -13,6 +13,7 @@ describe('resource deployments', () => {
   test('create: only required params', async () => {
     const responsePromise = client.workers.scripts.deployments.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      strategy: 'strategy',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,9 +27,9 @@ describe('resource deployments', () => {
   test('create: required and optional params', async () => {
     const response = await client.workers.scripts.deployments.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      strategy: 'strategy',
       force: true,
       annotations: { 'workers/message': 'Deploy bug fix.' },
-      strategy: 'strategy',
     });
   });
 
