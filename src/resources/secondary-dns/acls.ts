@@ -10,10 +10,10 @@ export class ACLs extends APIResource {
    * Create ACL.
    */
   create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/acls`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: ACL }>
     )._thenUnwrap((obj) => obj.result);
@@ -100,9 +100,18 @@ export interface ACLCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: Allowed IPv4/IPv6 address range of primary or secondary nameservers.
+   * This will be applied for the entire account. The IP range is used to allow
+   * additional NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR
+   * requests from for primary zones. CIDRs are limited to a maximum of /24 for IPv4
+   * and /64 for IPv6 respectively.
    */
-  body: unknown;
+  ip_range: string;
+
+  /**
+   * Body param: The name of the acl.
+   */
+  name: string;
 }
 
 export interface ACLUpdateParams {

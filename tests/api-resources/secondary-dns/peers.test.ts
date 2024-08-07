@@ -14,7 +14,7 @@ describe('resource peers', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.secondaryDNS.peers.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
+      name: 'my-peer-1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource peers', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.secondaryDNS.peers.create({
       account_id: '01a7362d577a6c3019a474fd6f485823',
-      body: {},
+      name: 'my-peer-1',
     });
   });
 

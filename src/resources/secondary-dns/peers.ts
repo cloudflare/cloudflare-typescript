@@ -10,10 +10,10 @@ export class Peers extends APIResource {
    * Create Peer.
    */
   create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: Peer }>
     )._thenUnwrap((obj) => obj.result);
@@ -118,9 +118,9 @@ export interface PeerCreateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The name of the peer.
    */
-  body: unknown;
+  name: string;
 }
 
 export interface PeerUpdateParams {
