@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as ZonesSubscriptionsAPI from './subscriptions';
 import * as SubscriptionsAPI from '../user/subscriptions';
-import { SubscriptionsSinglePage } from '../user/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
@@ -20,20 +19,6 @@ export class Subscriptions extends APIResource {
         result: SubscriptionCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all of an account's subscriptions.
-   */
-  list(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubscriptionsSinglePage, SubscriptionsAPI.Subscription> {
-    return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/subscriptions`,
-      SubscriptionsSinglePage,
-      options,
-    );
   }
 
   /**
@@ -90,5 +75,3 @@ export namespace Subscriptions {
   export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
 }
-
-export { SubscriptionsSinglePage };
