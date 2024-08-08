@@ -1,8 +1,43 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import * as Core from '../core';
+import { SinglePage } from '../pagination';
 
-export class Plans extends APIResource {}
+export class Plans extends APIResource {
+  /**
+   * Lists available plans the zone can subscribe to.
+   */
+  list(
+    params: PlanListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
+    const { zone_id } = params;
+    return this._client.getAPIList(
+      `/zones/${zone_id}/available_plans`,
+      AvailableRatePlansSinglePage,
+      options,
+    );
+  }
+
+  /**
+   * Details of the available plan that the zone can subscribe to.
+   */
+  get(
+    planIdentifier: string,
+    params: PlanGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AvailableRatePlan> {
+    const { zone_id } = params;
+    return (
+      this._client.get(`/zones/${zone_id}/available_plans/${planIdentifier}`, options) as Core.APIPromise<{
+        result: AvailableRatePlan;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export class AvailableRatePlansSinglePage extends SinglePage<AvailableRatePlan> {}
 
 export interface AvailableRatePlan {
   /**
@@ -54,4 +89,18 @@ export interface AvailableRatePlan {
    * The amount you will be billed for this plan.
    */
   price?: number;
+}
+
+export interface PlanListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface PlanGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }

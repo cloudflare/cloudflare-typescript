@@ -6,6 +6,7 @@ import * as Core from '../../../core';
 import * as HTTPAPI from './http';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
+import * as TopAPI from './top';
 import * as AsesAPI from './ases/ases';
 import * as LocationsAPI from './locations/locations';
 
@@ -16,6 +17,7 @@ export class HTTP extends APIResource {
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
     this._client,
   );
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
    * Get HTTP requests over time.
@@ -212,4 +214,9 @@ export namespace HTTP {
   export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
   export import TimeseriesGroupPostQuantumParams = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumParams;
   export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
+  export import Top = TopAPI.Top;
+  export import TopBrowserResponse = TopAPI.TopBrowserResponse;
+  export import TopBrowserFamilyResponse = TopAPI.TopBrowserFamilyResponse;
+  export import TopBrowserParams = TopAPI.TopBrowserParams;
+  export import TopBrowserFamilyParams = TopAPI.TopBrowserFamilyParams;
 }

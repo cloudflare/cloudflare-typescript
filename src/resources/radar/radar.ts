@@ -55,6 +55,8 @@ export namespace Radar {
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
   export import DatasetDownloadParams = DatasetsAPI.DatasetDownloadParams;
   export import DNS = DNSAPI.DNS;
+  export import DNSTimeseriesResponse = DNSAPI.DNSTimeseriesResponse;
+  export import DNSTimeseriesParams = DNSAPI.DNSTimeseriesParams;
   export import Netflows = NetflowsAPI.Netflows;
   export import NetflowSummaryResponse = NetflowsAPI.NetflowSummaryResponse;
   export import NetflowTimeseriesResponse = NetflowsAPI.NetflowTimeseriesResponse;
