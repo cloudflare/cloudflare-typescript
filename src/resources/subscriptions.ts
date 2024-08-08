@@ -3,6 +3,7 @@
 import { APIResource } from '../resource';
 import * as Core from '../core';
 import * as UserSubscriptionsAPI from './user/subscriptions';
+import { SubscriptionsSinglePage } from './user/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
@@ -21,6 +22,51 @@ export class Subscriptions extends APIResource {
   }
 
   /**
+   * Updates an account subscription.
+   */
+  update(
+    subscriptionIdentifier: string,
+    params: SubscriptionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SubscriptionUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists all of an account's subscriptions.
+   */
+  list(
+    params: SubscriptionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SubscriptionsSinglePage, UserSubscriptionsAPI.Subscription> {
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
+  }
+
+  /**
+   * Deletes an account's subscription.
+   */
+  delete(
+    subscriptionIdentifier: string,
+    params: SubscriptionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: SubscriptionDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists zone subscription details.
    */
   get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse> {
@@ -33,6 +79,15 @@ export class Subscriptions extends APIResource {
 }
 
 export type SubscriptionCreateResponse = unknown | string | null;
+
+export type SubscriptionUpdateResponse = unknown | string | null;
+
+export interface SubscriptionDeleteResponse {
+  /**
+   * Subscription identifier tag.
+   */
+  subscription_id?: string;
+}
 
 export type SubscriptionGetResponse = unknown | string | null;
 
@@ -68,3 +123,61 @@ export namespace SubscriptionCreateParams {
     install_id?: string;
   }
 }
+
+export interface SubscriptionUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  app?: SubscriptionUpdateParams.App;
+
+  /**
+   * Body param: The list of add-ons subscribed to.
+   */
+  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponentParam>;
+
+  /**
+   * Body param: How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * Body param: The rate plan applied to the subscription.
+   */
+  rate_plan?: UserSubscriptionsAPI.RatePlanParam;
+
+  /**
+   * Body param: A simple zone object. May have null properties if not a zone
+   * subscription.
+   */
+  zone?: UserSubscriptionsAPI.SubscriptionZoneParam;
+}
+
+export namespace SubscriptionUpdateParams {
+  export interface App {
+    /**
+     * app install id.
+     */
+    install_id?: string;
+  }
+}
+
+export interface SubscriptionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface SubscriptionDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export { SubscriptionsSinglePage };
