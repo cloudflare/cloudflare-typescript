@@ -363,6 +363,7 @@ Types:
 Methods:
 
 - <code title="post /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
+- <code title="get /accounts/{account_id}/subscriptions">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">list</a>({ ...params }) -> SubscriptionsSinglePage</code>
 - <code title="get /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # LoadBalancers
@@ -667,11 +668,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/subscriptions.ts">SubscriptionDeleteResponse</a></code>
 - <code><a href="./src/resources/subscriptions.ts">SubscriptionGetResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
+- <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="get /accounts/{account_id}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">list</a>({ ...params }) -> SubscriptionsSinglePage</code>
+- <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
 - <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # ACM
@@ -721,11 +727,21 @@ Types:
 
 - <code><a href="./src/resources/plans.ts">AvailableRatePlan</a></code>
 
+Methods:
+
+- <code title="get /zones/{zone_id}/available_plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> AvailableRatePlansSinglePage</code>
+- <code title="get /zones/{zone_id}/available_plans/{plan_identifier}">client.plans.<a href="./src/resources/plans.ts">get</a>(planIdentifier, { ...params }) -> AvailableRatePlan</code>
+
 # RatePlans
 
 Types:
 
 - <code><a href="./src/resources/rate-plans.ts">RatePlan</a></code>
+- <code><a href="./src/resources/rate-plans.ts">RatePlanGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/available_rate_plans">client.ratePlans.<a href="./src/resources/rate-plans.ts">get</a>({ ...params }) -> RatePlanGetResponse | null</code>
 
 # CertificateAuthorities
 
@@ -976,6 +992,126 @@ Methods:
 - <code title="delete /zones/{zone_id}/dnssec">client.dnssec.<a href="./src/resources/dnssec.ts">delete</a>({ ...params }) -> DNSSECDeleteResponse</code>
 - <code title="patch /zones/{zone_id}/dnssec">client.dnssec.<a href="./src/resources/dnssec.ts">edit</a>({ ...params }) -> DNSSEC</code>
 - <code title="get /zones/{zone_id}/dnssec">client.dnssec.<a href="./src/resources/dnssec.ts">get</a>({ ...params }) -> DNSSEC</code>
+
+# EmailSecurity
+
+## Investigate
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate.ts">InvestigateListResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate.ts">InvestigateDetectionsResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate.ts">InvestigateGetResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate.ts">InvestigatePreviewResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate.ts">InvestigateRawResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate.ts">InvestigateTraceResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">list</a>({ ...params }) -> InvestigateListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/detections">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">detections</a>(postfixId, { ...params }) -> InvestigateDetectionsResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">get</a>(postfixId, { ...params }) -> InvestigateGetResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/preview">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">preview</a>(postfixId, { ...params }) -> InvestigatePreviewResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/raw">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">raw</a>(postfixId, { ...params }) -> InvestigateRawResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/trace">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">trace</a>(postfixId, { ...params }) -> InvestigateTraceResponse</code>
+
+## Phishguard
+
+Types:
+
+- <code><a href="./src/resources/email-security/phishguard.ts">PhishguardListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/phishguard/reports">client.emailSecurity.phishguard.<a href="./src/resources/email-security/phishguard.ts">list</a>({ ...params }) -> PhishguardListResponsesSinglePage</code>
+
+## Settings
+
+### AllowPatterns
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/allow_patterns">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">create</a>({ ...params }) -> AllowPatternCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/allow_patterns">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">list</a>({ ...params }) -> AllowPatternListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/allow_patterns/{pattern_id}">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">delete</a>(patternId, { ...params }) -> AllowPatternDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/allow_patterns/{pattern_id}">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">edit</a>(patternId, { ...params }) -> AllowPatternEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/allow_patterns/{pattern_id}">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">get</a>(patternId, { ...params }) -> AllowPatternGetResponse</code>
+
+### BlockSenders
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/block-senders.ts">BlockSenderGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/block_senders">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">create</a>({ ...params }) -> BlockSenderCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/block_senders">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">list</a>({ ...params }) -> BlockSenderListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">delete</a>(patternId, { ...params }) -> BlockSenderDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">edit</a>(patternId, { ...params }) -> BlockSenderEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/block_senders/{pattern_id}">client.emailSecurity.settings.blockSenders.<a href="./src/resources/email-security/settings/block-senders.ts">get</a>(patternId, { ...params }) -> BlockSenderGetResponse</code>
+
+### Domains
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainEditResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">list</a>({ ...params }) -> DomainListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">delete</a>(domainId, { ...params }) -> DomainDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">edit</a>(domainId, { ...params }) -> DomainEditResponse</code>
+
+### ImpersonationRegistry
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/impersonation-registry.ts">ImpersonationRegistryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">create</a>({ ...params }) -> ImpersonationRegistryCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">list</a>({ ...params }) -> ImpersonationRegistryListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">delete</a>(displayNameId, { ...params }) -> ImpersonationRegistryDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">edit</a>(displayNameId, { ...params }) -> ImpersonationRegistryEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}">client.emailSecurity.settings.impersonationRegistry.<a href="./src/resources/email-security/settings/impersonation-registry.ts">get</a>(displayNameId, { ...params }) -> ImpersonationRegistryGetResponse</code>
+
+### TrustedDomains
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/trusted-domains.ts">TrustedDomainGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/trusted_domains">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">create</a>({ ...params }) -> TrustedDomainCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/trusted_domains">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">list</a>({ ...params }) -> TrustedDomainListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/trusted_domains/{pattern_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">delete</a>(patternId, { ...params }) -> TrustedDomainDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/trusted_domains/{pattern_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">edit</a>(patternId, { ...params }) -> TrustedDomainEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/trusted_domains/{pattern_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">get</a>(patternId, { ...params }) -> TrustedDomainGetResponse</code>
 
 # EmailRouting
 
@@ -2603,6 +2739,14 @@ Methods:
 # Billing
 
 ## Profiles
+
+Types:
+
+- <code><a href="./src/resources/billing/profiles.ts">ProfileGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/billing/profile">client.billing.profiles.<a href="./src/resources/billing/profiles.ts">get</a>({ ...params }) -> ProfileGetResponse</code>
 
 # BrandProtection
 
@@ -5238,6 +5382,14 @@ Methods:
 
 ## DNS
 
+Types:
+
+- <code><a href="./src/resources/radar/dns/dns.ts">DNSTimeseriesResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/timeseries">client.radar.dns.<a href="./src/resources/radar/dns/dns.ts">timeseries</a>({ ...params }) -> DNSTimeseriesResponse</code>
+
 ### Top
 
 Types:
@@ -5249,6 +5401,62 @@ Methods:
 
 - <code title="get /radar/dns/top/ases">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
 - <code title="get /radar/dns/top/locations">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
+
+### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryCacheHitResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECAwareResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryDNSSECE2EResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryMatchingAnswerResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseCodesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseTTLResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/summary/cache_hit">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">cacheHit</a>({ ...params }) -> SummaryCacheHitResponse</code>
+- <code title="get /radar/dns/summary/dnssec">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssec</a>({ ...params }) -> SummaryDNSSECResponse</code>
+- <code title="get /radar/dns/summary/dnssec_aware">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssecAware</a>({ ...params }) -> SummaryDNSSECAwareResponse</code>
+- <code title="get /radar/dns/summary/dnssec_e2e">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">dnssecE2E</a>({ ...params }) -> SummaryDNSSECE2EResponse</code>
+- <code title="get /radar/dns/summary/ip_version">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">ipVersion</a>({ ...params }) -> SummaryIPVersionResponse</code>
+- <code title="get /radar/dns/summary/matching_answer">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">matchingAnswer</a>({ ...params }) -> SummaryMatchingAnswerResponse</code>
+- <code title="get /radar/dns/summary/protocol">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
+- <code title="get /radar/dns/summary/query_type">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
+- <code title="get /radar/dns/summary/response_codes">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseCodes</a>({ ...params }) -> SummaryResponseCodesResponse</code>
+- <code title="get /radar/dns/summary/response_ttl">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseTTL</a>({ ...params }) -> SummaryResponseTTLResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupCacheHitResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECAwareResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupDNSSECE2EResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupIPVersionResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupMatchingAnswerResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupProtocolResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupQueryTypeResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupResponseCodesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/timeseries-groups.ts">TimeseriesGroupResponseTTLResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/dns/timeseries_groups/cache_hit">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">cacheHit</a>({ ...params }) -> TimeseriesGroupCacheHitResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssec</a>({ ...params }) -> TimeseriesGroupDNSSECResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec_aware">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssecAware</a>({ ...params }) -> TimeseriesGroupDNSSECAwareResponse</code>
+- <code title="get /radar/dns/timeseries_groups/dnssec_e2e">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">dnssecE2E</a>({ ...params }) -> TimeseriesGroupDNSSECE2EResponse</code>
+- <code title="get /radar/dns/timeseries_groups/ip_version">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">ipVersion</a>({ ...params }) -> TimeseriesGroupIPVersionResponse</code>
+- <code title="get /radar/dns/timeseries_groups/matching_answer">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">matchingAnswer</a>({ ...params }) -> TimeseriesGroupMatchingAnswerResponse</code>
+- <code title="get /radar/dns/timeseries_groups/protocol">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">protocol</a>({ ...params }) -> TimeseriesGroupProtocolResponse</code>
+- <code title="get /radar/dns/timeseries_groups/query_type">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">queryType</a>({ ...params }) -> TimeseriesGroupQueryTypeResponse</code>
+- <code title="get /radar/dns/timeseries_groups/response_codes">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">responseCodes</a>({ ...params }) -> TimeseriesGroupResponseCodesResponse</code>
+- <code title="get /radar/dns/timeseries_groups/response_ttl">client.radar.dns.timeseriesGroups.<a href="./src/resources/radar/dns/timeseries-groups.ts">responseTTL</a>({ ...params }) -> TimeseriesGroupResponseTTLResponse</code>
 
 ## Netflows
 
@@ -5960,6 +6168,18 @@ Methods:
 - <code title="get /radar/http/timeseries_groups/os">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">os</a>({ ...params }) -> TimeseriesGroupOSResponse</code>
 - <code title="get /radar/http/timeseries_groups/post_quantum">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">postQuantum</a>({ ...params }) -> TimeseriesGroupPostQuantumResponse</code>
 - <code title="get /radar/http/timeseries_groups/tls_version">client.radar.http.timeseriesGroups.<a href="./src/resources/radar/http/timeseries-groups.ts">tlsVersion</a>({ ...params }) -> TimeseriesGroupTLSVersionResponse</code>
+
+### Top
+
+Types:
+
+- <code><a href="./src/resources/radar/http/top.ts">TopBrowserResponse</a></code>
+- <code><a href="./src/resources/radar/http/top.ts">TopBrowserFamilyResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/http/top/browser">client.radar.http.top.<a href="./src/resources/radar/http/top.ts">browser</a>({ ...params }) -> TopBrowserResponse</code>
+- <code title="get /radar/http/top/browser_family">client.radar.http.top.<a href="./src/resources/radar/http/top.ts">browserFamily</a>({ ...params }) -> TopBrowserFamilyResponse</code>
 
 ## Quality
 

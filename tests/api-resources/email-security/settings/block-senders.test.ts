@@ -9,21 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource subscriptions', () => {
-  test('create', async () => {
-    const responsePromise = client.subscriptions.create('506e3185e9c882d175a2d0cb0093d9f2', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: only required params', async () => {
-    const responsePromise = client.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {
+describe('resource blockSenders', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.blockSenders.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      is_regex: false,
+      pattern: 'test@example.com',
+      pattern_type: 'EMAIL',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -34,31 +26,20 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
-    const response = await client.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {
+  test('create: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.blockSenders.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app: { install_id: 'install_id' },
-      component_values: [
-        { default: 5, name: 'page_rules', price: 5, value: 20 },
-        { default: 5, name: 'page_rules', price: 5, value: 20 },
-        { default: 5, name: 'page_rules', price: 5, value: 20 },
-      ],
-      frequency: 'monthly',
-      rate_plan: {
-        currency: 'USD',
-        externally_managed: false,
-        id: 'free',
-        is_contract: false,
-        public_name: 'Business Plan',
-        scope: 'zone',
-        sets: ['string', 'string', 'string'],
-      },
-      zone: {},
+      is_regex: false,
+      pattern: 'test@example.com',
+      pattern_type: 'EMAIL',
+      comments: 'block sender with email test@example.com',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.subscriptions.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.emailSecurity.settings.blockSenders.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,11 +50,19 @@ describe('resource subscriptions', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.subscriptions.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.emailSecurity.settings.blockSenders.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      direction: 'asc',
+      order: 'pattern',
+      page: 1,
+      pattern_type: 'EMAIL',
+      per_page: 1,
+      search: 'search',
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2', {
+    const responsePromise = client.emailSecurity.settings.blockSenders.delete(2402, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -86,13 +75,15 @@ describe('resource subscriptions', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.subscriptions.delete('506e3185e9c882d175a2d0cb0093d9f2', {
+    const response = await client.emailSecurity.settings.blockSenders.delete(2402, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('get', async () => {
-    const responsePromise = client.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
+  test('edit: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.blockSenders.edit(2402, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,10 +93,32 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('edit: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.blockSenders.edit(2402, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      comments: 'comments',
+      is_regex: true,
+      pattern: 'x',
+      pattern_type: 'EMAIL',
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.blockSenders.get(2402, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.blockSenders.get(2402, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

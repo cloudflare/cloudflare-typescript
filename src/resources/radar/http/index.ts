@@ -45,3 +45,10 @@ export {
   TimeseriesGroupTLSVersionParams,
   TimeseriesGroups,
 } from './timeseries-groups';
+export {
+  TopBrowserResponse,
+  TopBrowserFamilyResponse,
+  TopBrowserParams,
+  TopBrowserFamilyParams,
+  Top,
+} from './top';

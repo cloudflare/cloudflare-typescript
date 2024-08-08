@@ -45,6 +45,7 @@ export {
   SubscriptionGetResponse,
   SubscriptionUpdateParams,
   SubscriptionEditParams,
+  SubscriptionsSinglePage,
   Subscriptions,
 } from './subscriptions';
 export { User } from './user';

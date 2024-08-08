@@ -9,20 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource subscriptions', () => {
-  test('create', async () => {
-    const responsePromise = client.zones.subscriptions.create('506e3185e9c882d175a2d0cb0093d9f2', {});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
+describe('resource domains', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.zones.subscriptions.list({
+    const responsePromise = client.emailSecurity.settings.domains.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -35,13 +24,22 @@ describe('resource subscriptions', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.zones.subscriptions.list({
+    const response = await client.emailSecurity.settings.domains.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      allowed_delivery_mode: 'DIRECT',
+      direction: 'asc',
+      domain: ['string', 'string', 'string'],
+      order: 'domain',
+      page: 1,
+      per_page: 1,
+      search: 'search',
     });
   });
 
-  test('get', async () => {
-    const responsePromise = client.zones.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
+  test('delete: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.delete(2400, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,12 +49,30 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.zones.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.delete(2400, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
+  test('edit: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.edit(2400, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.edit(2400, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      domain: 'domain',
+      lookback_hops: 0,
+    });
   });
 });
