@@ -6349,13 +6349,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/speed/pages/tests.ts">Test</a></code>
-- <code><a href="./src/resources/speed/pages/tests.ts">TestListResponse</a></code>
 - <code><a href="./src/resources/speed/pages/tests.ts">TestDeleteResponse</a></code>
 
 Methods:
 
 - <code title="post /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">create</a>(url, { ...params }) -> Test</code>
-- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">list</a>(url, { ...params }) -> TestListResponse</code>
+- <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">list</a>(url, { ...params }) -> TestsV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/speed_api/pages/{url}/tests">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">delete</a>(url, { ...params }) -> TestDeleteResponse</code>
 - <code title="get /zones/{zone_id}/speed_api/pages/{url}/tests/{test_id}">client.speed.pages.tests.<a href="./src/resources/speed/pages/tests.ts">get</a>(url, testId, { ...params }) -> Test</code>
 
