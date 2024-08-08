@@ -60,7 +60,9 @@ export interface DeploymentParam {
 }
 
 export interface DeploymentCreateResponse {
-  strategy: string;
+  strategy: 'percentage';
+
+  versions: Array<DeploymentCreateResponse.Version>;
 
   id?: string;
 
@@ -73,13 +75,23 @@ export interface DeploymentCreateResponse {
   source?: string;
 }
 
+export namespace DeploymentCreateResponse {
+  export interface Version {
+    percentage: number;
+
+    version_id: string;
+  }
+}
+
 export interface DeploymentGetResponse {
   deployments?: Array<DeploymentGetResponse.Deployment>;
 }
 
 export namespace DeploymentGetResponse {
   export interface Deployment {
-    strategy: string;
+    strategy: 'percentage';
+
+    versions: Array<Deployment.Version>;
 
     id?: string;
 
@@ -90,6 +102,14 @@ export namespace DeploymentGetResponse {
     created_on?: string;
 
     source?: string;
+  }
+
+  export namespace Deployment {
+    export interface Version {
+      percentage: number;
+
+      version_id: string;
+    }
   }
 }
 
@@ -102,7 +122,12 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  strategy: string;
+  strategy: 'percentage';
+
+  /**
+   * Body param:
+   */
+  versions: Array<DeploymentCreateParams.Version>;
 
   /**
    * Query param: If set to true, the deployment will be created even if normally
@@ -115,6 +140,14 @@ export interface DeploymentCreateParams {
    * Body param:
    */
   annotations?: DeploymentParam;
+}
+
+export namespace DeploymentCreateParams {
+  export interface Version {
+    percentage: number;
+
+    version_id: string;
+  }
 }
 
 export interface DeploymentGetParams {

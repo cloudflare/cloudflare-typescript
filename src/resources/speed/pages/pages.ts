@@ -132,8 +132,8 @@ export namespace Pages {
   export import PageTrendParams = PagesAPI.PageTrendParams;
   export import Tests = TestsAPI.Tests;
   export import Test = TestsAPI.Test;
-  export import TestListResponse = TestsAPI.TestListResponse;
   export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
+  export import TestsV4PagePaginationArray = TestsAPI.TestsV4PagePaginationArray;
   export import TestCreateParams = TestsAPI.TestCreateParams;
   export import TestListParams = TestsAPI.TestListParams;
   export import TestDeleteParams = TestsAPI.TestDeleteParams;

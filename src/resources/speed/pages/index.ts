@@ -9,11 +9,11 @@ export {
 } from './pages';
 export {
   Test,
-  TestListResponse,
   TestDeleteResponse,
   TestCreateParams,
   TestListParams,
   TestDeleteParams,
   TestGetParams,
+  TestsV4PagePaginationArray,
   Tests,
 } from './tests';
