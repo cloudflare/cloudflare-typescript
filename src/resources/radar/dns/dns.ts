@@ -180,7 +180,6 @@ export namespace DNS {
   export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
   export import SummaryQueryTypeResponse = SummaryAPI.SummaryQueryTypeResponse;
   export import SummaryResponseCodesResponse = SummaryAPI.SummaryResponseCodesResponse;
-  export import SummaryResponseTTLResponse = SummaryAPI.SummaryResponseTTLResponse;
   export import SummaryCacheHitParams = SummaryAPI.SummaryCacheHitParams;
   export import SummaryDNSSECParams = SummaryAPI.SummaryDNSSECParams;
   export import SummaryDNSSECAwareParams = SummaryAPI.SummaryDNSSECAwareParams;
@@ -190,7 +189,6 @@ export namespace DNS {
   export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
   export import SummaryQueryTypeParams = SummaryAPI.SummaryQueryTypeParams;
   export import SummaryResponseCodesParams = SummaryAPI.SummaryResponseCodesParams;
-  export import SummaryResponseTTLParams = SummaryAPI.SummaryResponseTTLParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
   export import TimeseriesGroupCacheHitResponse = TimeseriesGroupsAPI.TimeseriesGroupCacheHitResponse;
   export import TimeseriesGroupDNSSECResponse = TimeseriesGroupsAPI.TimeseriesGroupDNSSECResponse;

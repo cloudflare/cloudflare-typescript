@@ -5415,7 +5415,6 @@ Types:
 - <code><a href="./src/resources/radar/dns/summary.ts">SummaryProtocolResponse</a></code>
 - <code><a href="./src/resources/radar/dns/summary.ts">SummaryQueryTypeResponse</a></code>
 - <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseCodesResponse</a></code>
-- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseTTLResponse</a></code>
 
 Methods:
 
@@ -5428,7 +5427,6 @@ Methods:
 - <code title="get /radar/dns/summary/protocol">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
 - <code title="get /radar/dns/summary/query_type">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
 - <code title="get /radar/dns/summary/response_codes">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseCodes</a>({ ...params }) -> SummaryResponseCodesResponse</code>
-- <code title="get /radar/dns/summary/response_ttl">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseTTL</a>({ ...params }) -> SummaryResponseTTLResponse</code>
 
 ### TimeseriesGroups
 

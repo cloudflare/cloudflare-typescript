@@ -11,7 +11,6 @@ export {
   SummaryProtocolResponse,
   SummaryQueryTypeResponse,
   SummaryResponseCodesResponse,
-  SummaryResponseTTLResponse,
   SummaryCacheHitParams,
   SummaryDNSSECParams,
   SummaryDNSSECAwareParams,
@@ -21,7 +20,6 @@ export {
   SummaryProtocolParams,
   SummaryQueryTypeParams,
   SummaryResponseCodesParams,
-  SummaryResponseTTLParams,
   Summary,
 } from './summary';
 export {
