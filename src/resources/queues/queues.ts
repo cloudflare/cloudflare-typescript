@@ -14,9 +14,9 @@ export class Queues extends APIResource {
    * Creates a new queue.
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<QueueCreated | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/queues`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
         result: QueueCreated | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -120,19 +120,19 @@ export type QueueDeleteResponse = unknown | Array<unknown> | string;
 
 export interface QueueCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: unknown;
+  queue_name: string;
 }
 
 export interface QueueUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -144,21 +144,21 @@ export interface QueueUpdateParams {
 
 export interface QueueListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface QueueDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface QueueGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
