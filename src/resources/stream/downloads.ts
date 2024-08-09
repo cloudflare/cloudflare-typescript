@@ -56,11 +56,11 @@ export class Downloads extends APIResource {
   }
 }
 
-export type DownloadCreateResponse = unknown | string | null;
+export type DownloadCreateResponse = unknown;
 
-export type DownloadDeleteResponse = unknown | string;
+export type DownloadDeleteResponse = string;
 
-export type DownloadGetResponse = unknown | string | null;
+export type DownloadGetResponse = unknown;
 
 export interface DownloadCreateParams {
   /**
