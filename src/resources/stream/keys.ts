@@ -71,7 +71,7 @@ export interface Keys {
   pem?: string;
 }
 
-export type KeyDeleteResponse = string;
+export type KeyDeleteResponse = unknown | string;
 
 export type KeyGetResponse = Array<KeyGetResponse.KeyGetResponseItem>;
 
