@@ -24,3 +24,4 @@ jobs:
           bash ./bin/check-release-environment
         env:
           NPM_TOKEN: ${{ secrets.CLOUDFLARE_NPM_TOKEN || secrets.NPM_TOKEN }}
+
