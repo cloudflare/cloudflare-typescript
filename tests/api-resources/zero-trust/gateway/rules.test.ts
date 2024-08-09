@@ -37,7 +37,7 @@ describe('resource rules', () => {
       identity: 'any(identity.groups.name[*] in {"finance"})',
       precedence: 0,
       rule_settings: {
-        add_headers: { 'My-Next-Header': ['foo', 'bar'], 'X-Custom-Header-Name': ['somecustomvalue'] },
+        add_headers: { foo: 'string' },
         allow_child_bypass: false,
         audit_ssh: { command_logging: false },
         biso_admin_controls: { dcp: false, dd: false, dk: false, dp: false, du: false },
@@ -142,7 +142,7 @@ describe('resource rules', () => {
       identity: 'any(identity.groups.name[*] in {"finance"})',
       precedence: 0,
       rule_settings: {
-        add_headers: { 'My-Next-Header': ['foo', 'bar'], 'X-Custom-Header-Name': ['somecustomvalue'] },
+        add_headers: { foo: 'string' },
         allow_child_bypass: false,
         audit_ssh: { command_logging: false },
         biso_admin_controls: { dcp: false, dd: false, dk: false, dp: false, du: false },
