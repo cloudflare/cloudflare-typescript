@@ -71,13 +71,13 @@ export class ProxyEndpoints extends APIResource {
     proxyEndpointId: string,
     params: ProxyEndpointGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProxyEndpointGetResponse | null> {
+  ): Core.APIPromise<ProxyEndpointGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/gateway/proxy_endpoints/${proxyEndpointId}`,
         options,
-      ) as Core.APIPromise<{ result: ProxyEndpointGetResponse | null }>
+      ) as Core.APIPromise<{ result: ProxyEndpointGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -117,7 +117,7 @@ export interface ProxyEndpoint {
   updated_at?: string;
 }
 
-export type ProxyEndpointDeleteResponse = unknown | string | null;
+export type ProxyEndpointDeleteResponse = unknown;
 
 export type ProxyEndpointGetResponse = Array<ProxyEndpoint>;
 
