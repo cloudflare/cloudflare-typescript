@@ -90,7 +90,7 @@ export interface Consumer {
 export namespace Consumer {
   export interface Settings {
     /**
-     * The maximum number of messages to include in a batch
+     * The maximum number of messages to include in a batch.
      */
     batch_size?: number;
 
@@ -107,7 +107,7 @@ export interface ConsumerCreateResponse {
   created_on?: string;
 
   /**
-   * The name of the dead letter queue
+   * The name of the dead letter queue.
    */
   dead_letter_queue?: string;
 
@@ -123,7 +123,7 @@ export interface ConsumerCreateResponse {
 export namespace ConsumerCreateResponse {
   export interface Settings {
     /**
-     * The maximum number of messages to include in a batch
+     * The maximum number of messages to include in a batch.
      */
     batch_size?: number;
 
@@ -169,7 +169,7 @@ export type ConsumerGetResponse = Array<Consumer>;
 
 export interface ConsumerCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -181,7 +181,7 @@ export interface ConsumerCreateParams {
 
 export interface ConsumerUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -193,14 +193,14 @@ export interface ConsumerUpdateParams {
 
 export interface ConsumerDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ConsumerGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

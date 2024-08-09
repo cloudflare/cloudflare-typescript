@@ -13,7 +13,7 @@ describe('resource queues', () => {
   test('create: only required params', async () => {
     const responsePromise = client.queues.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { queue_name: 'example-queue' },
+      queue_name: 'queue_name',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource queues', () => {
   test('create: required and optional params', async () => {
     const response = await client.queues.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { queue_name: 'example-queue' },
+      queue_name: 'queue_name',
     });
   });
 

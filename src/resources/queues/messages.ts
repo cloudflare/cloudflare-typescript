@@ -42,12 +42,12 @@ export class Messages extends APIResource {
 
 export interface MessageAckResponse {
   /**
-   * The number of messages that were succesfully acknowledged
+   * The number of messages that were succesfully acknowledged.
    */
   ackCount?: number;
 
   /**
-   * The number of messages that were succesfully retried
+   * The number of messages that were succesfully retried.
    */
   retryCount?: number;
 
@@ -74,7 +74,7 @@ export namespace MessagePullResponse {
 
 export interface MessageAckParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -113,12 +113,12 @@ export namespace MessageAckParams {
 
 export interface MessagePullParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
-   * Body param: The maximum number of messages to include in a batch
+   * Body param: The maximum number of messages to include in a batch.
    */
   batch_size?: number;
 
