@@ -19,3 +19,4 @@ if [[ lenErrors -gt 0 ]]; then
 fi
 
 echo "The environment is ready to push releases!"
+
