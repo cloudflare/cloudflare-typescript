@@ -102,7 +102,7 @@ export interface Audio {
   uid?: string;
 }
 
-export type AudioTrackDeleteResponse = string;
+export type AudioTrackDeleteResponse = unknown | string;
 
 export type AudioTrackGetResponse = Array<Audio>;
 
