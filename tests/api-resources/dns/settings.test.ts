@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource settings', () => {
   // HTTP 422 from prism
   test.skip('edit', async () => {
-    const responsePromise = cloudflare.dns.settings.edit({ account_id: 'account_id' });
+    const responsePromise = client.dns.settings.edit({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +24,7 @@ describe('resource settings', () => {
 
   // HTTP 422 from prism
   test.skip('get', async () => {
-    const responsePromise = cloudflare.dns.settings.get({ account_id: 'account_id' });
+    const responsePromise = client.dns.settings.get({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

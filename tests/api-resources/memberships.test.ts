@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource memberships', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.memberships.update('4536bcfad5faccb111b47003c79917fa', {
+    const responsePromise = client.memberships.update('4536bcfad5faccb111b47003c79917fa', {
       status: 'accepted',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,13 +24,13 @@ describe('resource memberships', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.memberships.update('4536bcfad5faccb111b47003c79917fa', {
+    const response = await client.memberships.update('4536bcfad5faccb111b47003c79917fa', {
       status: 'accepted',
     });
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.memberships.list();
+    const responsePromise = client.memberships.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,7 +42,7 @@ describe('resource memberships', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.memberships.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.memberships.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -50,7 +50,7 @@ describe('resource memberships', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.memberships.list(
+      client.memberships.list(
         {
           account: { name: 'Demo Account' },
           direction: 'desc',
@@ -66,7 +66,7 @@ describe('resource memberships', () => {
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.memberships.delete('4536bcfad5faccb111b47003c79917fa');
+    const responsePromise = client.memberships.delete('4536bcfad5faccb111b47003c79917fa');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -79,12 +79,12 @@ describe('resource memberships', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.memberships.delete('4536bcfad5faccb111b47003c79917fa', { path: '/_stainless_unknown_path' }),
+      client.memberships.delete('4536bcfad5faccb111b47003c79917fa', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.memberships.get('4536bcfad5faccb111b47003c79917fa');
+    const responsePromise = client.memberships.get('4536bcfad5faccb111b47003c79917fa');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -97,7 +97,7 @@ describe('resource memberships', () => {
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.memberships.get('4536bcfad5faccb111b47003c79917fa', { path: '/_stainless_unknown_path' }),
+      client.memberships.get('4536bcfad5faccb111b47003c79917fa', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });

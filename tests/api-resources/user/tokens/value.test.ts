@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource value', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.user.tokens.value.update({}, {});
+    const responsePromise = client.user.tokens.value.update({}, {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,6 +22,6 @@ describe('resource value', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.user.tokens.value.update({}, {});
+    const response = await client.user.tokens.value.update({}, {});
   });
 });

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource timeseriesGroups', () => {
   test('arc', async () => {
-    const responsePromise = cloudflare.radar.email.routing.timeseriesGroups.arc();
+    const responsePromise = client.radar.email.routing.timeseriesGroups.arc();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +24,14 @@ describe('resource timeseriesGroups', () => {
   test('arc: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.arc({ path: '/_stainless_unknown_path' }),
+      client.radar.email.routing.timeseriesGroups.arc({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('arc: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.arc(
+      client.radar.email.routing.timeseriesGroups.arc(
         {
           aggInterval: '1h',
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -51,7 +51,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('dkim', async () => {
-    const responsePromise = cloudflare.radar.email.routing.timeseriesGroups.dkim();
+    const responsePromise = client.radar.email.routing.timeseriesGroups.dkim();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -64,14 +64,14 @@ describe('resource timeseriesGroups', () => {
   test('dkim: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.dkim({ path: '/_stainless_unknown_path' }),
+      client.radar.email.routing.timeseriesGroups.dkim({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('dkim: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.dkim(
+      client.radar.email.routing.timeseriesGroups.dkim(
         {
           aggInterval: '1h',
           arc: ['PASS', 'NONE', 'FAIL'],
@@ -91,7 +91,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('dmarc', async () => {
-    const responsePromise = cloudflare.radar.email.routing.timeseriesGroups.dmarc();
+    const responsePromise = client.radar.email.routing.timeseriesGroups.dmarc();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -104,14 +104,14 @@ describe('resource timeseriesGroups', () => {
   test('dmarc: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.dmarc({ path: '/_stainless_unknown_path' }),
+      client.radar.email.routing.timeseriesGroups.dmarc({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('dmarc: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.dmarc(
+      client.radar.email.routing.timeseriesGroups.dmarc(
         {
           aggInterval: '1h',
           arc: ['PASS', 'NONE', 'FAIL'],
@@ -131,7 +131,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('encrypted', async () => {
-    const responsePromise = cloudflare.radar.email.routing.timeseriesGroups.encrypted();
+    const responsePromise = client.radar.email.routing.timeseriesGroups.encrypted();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -144,14 +144,14 @@ describe('resource timeseriesGroups', () => {
   test('encrypted: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.encrypted({ path: '/_stainless_unknown_path' }),
+      client.radar.email.routing.timeseriesGroups.encrypted({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('encrypted: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.encrypted(
+      client.radar.email.routing.timeseriesGroups.encrypted(
         {
           aggInterval: '1h',
           arc: ['PASS', 'NONE', 'FAIL'],
@@ -171,7 +171,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('ipVersion', async () => {
-    const responsePromise = cloudflare.radar.email.routing.timeseriesGroups.ipVersion();
+    const responsePromise = client.radar.email.routing.timeseriesGroups.ipVersion();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -184,14 +184,14 @@ describe('resource timeseriesGroups', () => {
   test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
+      client.radar.email.routing.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.ipVersion(
+      client.radar.email.routing.timeseriesGroups.ipVersion(
         {
           aggInterval: '1h',
           arc: ['PASS', 'NONE', 'FAIL'],
@@ -211,7 +211,7 @@ describe('resource timeseriesGroups', () => {
   });
 
   test('spf', async () => {
-    const responsePromise = cloudflare.radar.email.routing.timeseriesGroups.spf();
+    const responsePromise = client.radar.email.routing.timeseriesGroups.spf();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -224,14 +224,14 @@ describe('resource timeseriesGroups', () => {
   test('spf: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.spf({ path: '/_stainless_unknown_path' }),
+      client.radar.email.routing.timeseriesGroups.spf({ path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('spf: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.email.routing.timeseriesGroups.spf(
+      client.radar.email.routing.timeseriesGroups.spf(
         {
           aggInterval: '1h',
           arc: ['PASS', 'NONE', 'FAIL'],

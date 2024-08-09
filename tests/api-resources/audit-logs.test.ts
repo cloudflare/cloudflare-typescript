@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource auditLogs', () => {
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.auditLogs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.auditLogs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource auditLogs', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.auditLogs.list({
+    const response = await client.auditLogs.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'f174be97-19b1-40d6-954d-70cd5fbd52db',
       action: { type: 'add' },

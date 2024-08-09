@@ -4,7 +4,6 @@ import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as SpamAPI from './spam';
-import * as TopAPI from '../../../../http/top';
 
 export class Spam extends APIResource {
   /**
@@ -36,7 +35,7 @@ export class Spam extends APIResource {
 export interface SpamGetResponse {
   meta: SpamGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<SpamGetResponse.Top0>;
 }
 
 export namespace SpamGetResponse {
@@ -84,6 +83,12 @@ export namespace SpamGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 

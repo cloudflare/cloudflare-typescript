@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource messages', () => {
   test('ack: only required params', async () => {
-    const responsePromise = cloudflare.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource messages', () => {
   });
 
   test('ack: required and optional params', async () => {
-    const response = await cloudflare.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.queues.messages.ack('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       acks: [
         {
@@ -61,7 +61,7 @@ describe('resource messages', () => {
   });
 
   test('pull: only required params', async () => {
-    const responsePromise = cloudflare.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -74,7 +74,7 @@ describe('resource messages', () => {
   });
 
   test('pull: required and optional params', async () => {
-    const response = await cloudflare.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       batch_size: 10,
       visibility_timeout_ms: 1000,

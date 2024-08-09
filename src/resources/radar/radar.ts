@@ -43,6 +43,8 @@ export class Radar extends APIResource {
 
 export namespace Radar {
   export import Annotations = AnnotationsAPI.Annotations;
+  export import AnnotationListResponse = AnnotationsAPI.AnnotationListResponse;
+  export import AnnotationListParams = AnnotationsAPI.AnnotationListParams;
   export import BGP = BGPAPI.BGP;
   export import BGPTimeseriesResponse = BGPAPI.BGPTimeseriesResponse;
   export import BGPTimeseriesParams = BGPAPI.BGPTimeseriesParams;
@@ -53,8 +55,12 @@ export namespace Radar {
   export import DatasetListParams = DatasetsAPI.DatasetListParams;
   export import DatasetDownloadParams = DatasetsAPI.DatasetDownloadParams;
   export import DNS = DNSAPI.DNS;
+  export import DNSTimeseriesResponse = DNSAPI.DNSTimeseriesResponse;
+  export import DNSTimeseriesParams = DNSAPI.DNSTimeseriesParams;
   export import Netflows = NetflowsAPI.Netflows;
+  export import NetflowSummaryResponse = NetflowsAPI.NetflowSummaryResponse;
   export import NetflowTimeseriesResponse = NetflowsAPI.NetflowTimeseriesResponse;
+  export import NetflowSummaryParams = NetflowsAPI.NetflowSummaryParams;
   export import NetflowTimeseriesParams = NetflowsAPI.NetflowTimeseriesParams;
   export import Search = SearchAPI.Search;
   export import SearchGlobalResponse = SearchAPI.SearchGlobalResponse;

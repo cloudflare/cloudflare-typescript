@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource serviceTokens', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.create({
+    const responsePromise = client.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
       account_id: 'account_id',
     });
@@ -27,7 +27,7 @@ describe('resource serviceTokens', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.serviceTokens.create({
+    const response = await client.zeroTrust.access.serviceTokens.create({
       name: 'CI/CD token',
       account_id: 'account_id',
       duration: '60m',
@@ -36,7 +36,7 @@ describe('resource serviceTokens', () => {
 
   // TODO: investigate broken test
   test.skip('update', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.update(
+    const responsePromise = client.zeroTrust.access.serviceTokens.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'account_id' },
     );
@@ -51,7 +51,7 @@ describe('resource serviceTokens', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.list({ account_id: 'account_id' });
+    const responsePromise = client.zeroTrust.access.serviceTokens.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,7 +63,7 @@ describe('resource serviceTokens', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.delete(
+    const responsePromise = client.zeroTrust.access.serviceTokens.delete(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'account_id' },
     );
@@ -78,7 +78,7 @@ describe('resource serviceTokens', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.get(
+    const responsePromise = client.zeroTrust.access.serviceTokens.get(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: 'account_id' },
     );
@@ -92,7 +92,7 @@ describe('resource serviceTokens', () => {
   });
 
   test('refresh: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.refresh(
+    const responsePromise = client.zeroTrust.access.serviceTokens.refresh(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -106,14 +106,14 @@ describe('resource serviceTokens', () => {
   });
 
   test('refresh: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.serviceTokens.refresh(
+    const response = await client.zeroTrust.access.serviceTokens.refresh(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 
   test('rotate: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.access.serviceTokens.rotate(
+    const responsePromise = client.zeroTrust.access.serviceTokens.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -127,7 +127,7 @@ describe('resource serviceTokens', () => {
   });
 
   test('rotate: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.access.serviceTokens.rotate(
+    const response = await client.zeroTrust.access.serviceTokens.rotate(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );

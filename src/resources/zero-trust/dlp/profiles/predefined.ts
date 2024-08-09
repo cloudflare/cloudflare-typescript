@@ -41,7 +41,7 @@ export class Predefined extends APIResource {
 
 export interface PredefinedProfile {
   /**
-   * The ID for this profile
+   * Unique identifier for a DLP profile
    */
   id?: string;
 
@@ -83,7 +83,7 @@ export namespace PredefinedProfile {
    */
   export interface Entry {
     /**
-     * The ID for this entry
+     * Unique identifier for a DLP entry
      */
     id?: string;
 
@@ -98,9 +98,9 @@ export namespace PredefinedProfile {
     name?: string;
 
     /**
-     * ID of the parent profile
+     * Unique identifier for a DLP profile
      */
-    profile_id?: unknown;
+    profile_id?: string;
   }
 }
 

@@ -20,13 +20,13 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const zone = await cloudflare.zones.create({
+  const zone = await client.zones.create({
     account: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
     name: 'example.com',
     type: 'full',
@@ -46,7 +46,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Cloudflare from 'cloudflare';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiEmail: process.env['CLOUDFLARE_EMAIL'], // This is the default and can be omitted
   apiKey: process.env['CLOUDFLARE_API_KEY'], // This is the default and can be omitted
 });
@@ -57,7 +57,7 @@ async function main() {
     name: 'example.com',
     type: 'full',
   };
-  const zone: Cloudflare.Zone = await cloudflare.zones.create(params);
+  const zone: Cloudflare.Zone = await client.zones.create(params);
 }
 
 main();
@@ -74,17 +74,15 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const zone = await cloudflare.zones
-    .get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' })
-    .catch(async (err) => {
-      if (err instanceof Cloudflare.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
+  const zone = await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }).catch(async (err) => {
+    if (err instanceof Cloudflare.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 }
 
 main();
@@ -114,12 +112,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await cloudflare.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.zones.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   maxRetries: 5,
 });
 ```
@@ -131,12 +129,12 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await cloudflare.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
+await client.zones.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -154,7 +152,7 @@ You can use `for await … of` syntax to iterate through items across all pages:
 async function fetchAllAccounts(params) {
   const allAccounts = [];
   // Automatically fetches more pages as needed.
-  for await (const accountListResponse of cloudflare.accounts.list()) {
+  for await (const accountListResponse of client.accounts.list()) {
     allAccounts.push(accountListResponse);
   }
   return allAccounts;
@@ -164,7 +162,7 @@ async function fetchAllAccounts(params) {
 Alternatively, you can make request a single page at a time:
 
 ```ts
-let page = await cloudflare.accounts.list();
+let page = await client.accounts.list();
 for (const accountListResponse of page.result) {
   console.log(accountListResponse);
 }
@@ -186,15 +184,15 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 
 <!-- prettier-ignore -->
 ```ts
-const cloudflare = new Cloudflare();
+const client = new Cloudflare();
 
-const response = await cloudflare.zones
+const response = await client.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: zone, response: raw } = await cloudflare.zones
+const { data: zone, response: raw } = await client.zones
   .create({ account: { id: '023e105f4ecef8ad9ca31a8372d0c353' }, name: 'example.com', type: 'full' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
@@ -297,12 +295,12 @@ import http from 'http';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
 // Configure the default for all requests:
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   httpAgent: new HttpsProxyAgent(process.env.PROXY_URL),
 });
 
 // Override per-request:
-await cloudflare.zones.delete(
+await client.zones.delete(
   { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),

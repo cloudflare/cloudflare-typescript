@@ -14,5 +14,6 @@ export namespace Control {
   export import RetentionCreateResponse = RetentionAPI.RetentionCreateResponse;
   export import RetentionGetResponse = RetentionAPI.RetentionGetResponse;
   export import RetentionCreateParams = RetentionAPI.RetentionCreateParams;
+  export import RetentionGetParams = RetentionAPI.RetentionGetParams;
   export import Cmb = CmbAPI.Cmb;
 }

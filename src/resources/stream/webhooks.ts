@@ -42,11 +42,11 @@ export class Webhooks extends APIResource {
   }
 }
 
-export type WebhookUpdateResponse = unknown | string | null;
+export type WebhookUpdateResponse = unknown;
 
-export type WebhookDeleteResponse = unknown | string;
+export type WebhookDeleteResponse = string;
 
-export type WebhookGetResponse = unknown | string | null;
+export type WebhookGetResponse = unknown;
 
 export interface WebhookUpdateParams {
   /**

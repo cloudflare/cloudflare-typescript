@@ -8,9 +8,10 @@ export class Profiles extends APIResource {
   /**
    * Gets the current billing profile for the account.
    */
-  get(accountIdentifier: unknown, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
+  get(params: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/billing/profile`, options) as Core.APIPromise<{
+      this._client.get(`/accounts/${account_id}/billing/profile`, options) as Core.APIPromise<{
         result: ProfileGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -19,6 +20,11 @@ export class Profiles extends APIResource {
 
 export type ProfileGetResponse = unknown | string | null;
 
+export interface ProfileGetParams {
+  account_id: unknown;
+}
+
 export namespace Profiles {
   export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
+  export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
 }

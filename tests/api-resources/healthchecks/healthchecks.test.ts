@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource healthchecks', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.healthchecks.create({
+    const responsePromise = client.healthchecks.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address: 'www.example.com',
       name: 'server-1',
@@ -26,7 +26,7 @@ describe('resource healthchecks', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.healthchecks.create({
+    const response = await client.healthchecks.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address: 'www.example.com',
       name: 'server-1',
@@ -54,7 +54,7 @@ describe('resource healthchecks', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.healthchecks.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.healthchecks.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address: 'www.example.com',
       name: 'server-1',
@@ -69,7 +69,7 @@ describe('resource healthchecks', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.healthchecks.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.healthchecks.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address: 'www.example.com',
       name: 'server-1',
@@ -97,7 +97,7 @@ describe('resource healthchecks', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.healthchecks.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.healthchecks.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -108,7 +108,7 @@ describe('resource healthchecks', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.healthchecks.list({
+    const response = await client.healthchecks.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       page: {},
       per_page: {},
@@ -116,7 +116,7 @@ describe('resource healthchecks', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.healthchecks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.healthchecks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -129,13 +129,13 @@ describe('resource healthchecks', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.healthchecks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.healthchecks.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.healthchecks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.healthchecks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address: 'www.example.com',
       name: 'server-1',
@@ -150,7 +150,7 @@ describe('resource healthchecks', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.healthchecks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.healthchecks.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       address: 'www.example.com',
       name: 'server-1',
@@ -178,7 +178,7 @@ describe('resource healthchecks', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.healthchecks.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.healthchecks.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -191,7 +191,7 @@ describe('resource healthchecks', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.healthchecks.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.healthchecks.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

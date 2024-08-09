@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource stream', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.create({
+    const responsePromise = client.stream.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
       'Tus-Resumable': '1.0.0',
@@ -29,7 +29,7 @@ describe('resource stream', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.stream.create({
+    const response = await client.stream.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
       'Tus-Resumable': '1.0.0',
@@ -41,7 +41,7 @@ describe('resource stream', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.stream.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.stream.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,7 +52,7 @@ describe('resource stream', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.stream.list({
+    const response = await client.stream.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       asc: true,
       creator: 'creator-id_abcde12345',
@@ -67,7 +67,7 @@ describe('resource stream', () => {
 
   // TODO: investigate broken test
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.stream.delete('ea95132c15732412d22c1476fa83f27a', {
+    const responsePromise = client.stream.delete('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -81,13 +81,13 @@ describe('resource stream', () => {
 
   // TODO: investigate broken test
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.stream.delete('ea95132c15732412d22c1476fa83f27a', {
+    const response = await client.stream.delete('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.stream.get('ea95132c15732412d22c1476fa83f27a', {
+    const responsePromise = client.stream.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -100,7 +100,7 @@ describe('resource stream', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.stream.get('ea95132c15732412d22c1476fa83f27a', {
+    const response = await client.stream.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

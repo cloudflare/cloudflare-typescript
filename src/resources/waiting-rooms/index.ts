@@ -30,12 +30,12 @@ export {
   RuleUpdateResponse,
   RuleDeleteResponse,
   RuleEditResponse,
+  RuleGetResponse,
   RuleCreateParams,
   RuleUpdateParams,
-  RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
-  WaitingRoomRulesSinglePage,
+  RuleGetParams,
   Rules,
 } from './rules';
 export { WaitingRooms } from './waiting-rooms';

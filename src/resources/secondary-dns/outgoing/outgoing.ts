@@ -145,7 +145,7 @@ export interface Outgoing {
   /**
    * A list of peer tags.
    */
-  peers?: Array<unknown>;
+  peers?: Array<string>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -184,7 +184,7 @@ export interface OutgoingCreateResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<unknown>;
+  peers?: Array<string>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -218,7 +218,7 @@ export interface OutgoingUpdateResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<unknown>;
+  peers?: Array<string>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -262,7 +262,7 @@ export interface OutgoingGetResponse {
   /**
    * A list of peer tags.
    */
-  peers?: Array<unknown>;
+  peers?: Array<string>;
 
   /**
    * The serial number of the SOA for the given zone.
@@ -284,7 +284,7 @@ export interface OutgoingCreateParams {
   /**
    * Body param: A list of peer tags.
    */
-  peers: Array<unknown>;
+  peers: Array<string>;
 }
 
 export interface OutgoingUpdateParams {
@@ -301,7 +301,7 @@ export interface OutgoingUpdateParams {
   /**
    * Body param: A list of peer tags.
    */
-  peers: Array<unknown>;
+  peers: Array<string>;
 }
 
 export interface OutgoingDeleteParams {

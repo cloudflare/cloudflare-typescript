@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource traceroutes', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.diagnostics.traceroutes.create({
+    const responsePromise = client.diagnostics.traceroutes.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       targets: ['203.0.113.1', 'cloudflare.com'],
     });
@@ -25,7 +25,7 @@ describe('resource traceroutes', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.diagnostics.traceroutes.create({
+    const response = await client.diagnostics.traceroutes.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       targets: ['203.0.113.1', 'cloudflare.com'],
       colos: ['den', 'sin'],

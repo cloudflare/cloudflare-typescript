@@ -7,9 +7,10 @@ export class RatePlans extends APIResource {
   /**
    * Lists all rate plans the zone can subscribe to.
    */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RatePlanGetResponse | null> {
+  get(params: RatePlanGetParams, options?: Core.RequestOptions): Core.APIPromise<RatePlanGetResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zoneIdentifier}/available_rate_plans`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/available_rate_plans`, options) as Core.APIPromise<{
         result: RatePlanGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -68,3 +69,10 @@ export namespace RatePlan {
 }
 
 export type RatePlanGetResponse = Array<RatePlan>;
+
+export interface RatePlanGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}

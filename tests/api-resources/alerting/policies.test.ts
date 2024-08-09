@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource policies', () => {
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.alerting.policies.create({
+    const responsePromise = client.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
       enabled: true,
@@ -30,7 +30,7 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.alerting.policies.create({
+    const response = await client.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_type: 'universal_ssl_event_type',
       enabled: true,
@@ -40,6 +40,7 @@ describe('resource policies', () => {
         webhooks: [{ id: '14cc1190-5d2b-4b98-a696-c424cb2ad05f' }],
       },
       name: 'SSL Notification Event Policy',
+      alert_interval: '30m',
       description: 'Something describing the policy.',
       filters: {
         actions: ['string', 'string', 'string'],
@@ -48,7 +49,7 @@ describe('resource policies', () => {
         affected_locations: ['string', 'string', 'string'],
         airport_code: ['string', 'string', 'string'],
         alert_trigger_preferences: ['string', 'string', 'string'],
-        alert_trigger_preferences_value: ['99.0', '98.0', '97.0'],
+        alert_trigger_preferences_value: ['string', 'string', 'string'],
         enabled: ['string', 'string', 'string'],
         environment: ['string', 'string', 'string'],
         event: ['string', 'string', 'string'],
@@ -88,7 +89,7 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const responsePromise = client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -102,8 +103,9 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const response = await client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      alert_interval: '30m',
       alert_type: 'universal_ssl_event_type',
       description: 'Something describing the policy.',
       enabled: true,
@@ -114,7 +116,7 @@ describe('resource policies', () => {
         affected_locations: ['string', 'string', 'string'],
         airport_code: ['string', 'string', 'string'],
         alert_trigger_preferences: ['string', 'string', 'string'],
-        alert_trigger_preferences_value: ['99.0', '98.0', '97.0'],
+        alert_trigger_preferences_value: ['string', 'string', 'string'],
         enabled: ['string', 'string', 'string'],
         environment: ['string', 'string', 'string'],
         event: ['string', 'string', 'string'],
@@ -159,9 +161,7 @@ describe('resource policies', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.alerting.policies.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.alerting.policies.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -172,13 +172,11 @@ describe('resource policies', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.alerting.policies.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.alerting.policies.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const responsePromise = client.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -191,14 +189,14 @@ describe('resource policies', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const response = await client.alerting.policies.delete('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('get: only required params', async () => {
-    const responsePromise = cloudflare.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const responsePromise = client.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -212,7 +210,7 @@ describe('resource policies', () => {
 
   // prism errors - https://github.com/cloudflare/cloudflare-python/actions/runs/9327225061/job/25676826349?pr=482#step:5:4274
   test.skip('get: required and optional params', async () => {
-    const response = await cloudflare.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
+    const response = await client.alerting.policies.get('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

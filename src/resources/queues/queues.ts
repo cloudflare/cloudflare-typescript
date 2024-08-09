@@ -14,9 +14,9 @@ export class Queues extends APIResource {
    * Creates a new queue.
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<QueueCreated | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/queues`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
         result: QueueCreated | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -81,15 +81,15 @@ export class QueuesSinglePage extends SinglePage<Queue> {}
 export interface Queue {
   consumers?: unknown;
 
-  consumers_total_count?: unknown;
+  consumers_total_count?: number;
 
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   producers?: unknown;
 
-  producers_total_count?: unknown;
+  producers_total_count?: number;
 
   queue_id?: string;
 
@@ -97,9 +97,9 @@ export interface Queue {
 }
 
 export interface QueueCreated {
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   queue_id?: string;
 
@@ -107,9 +107,9 @@ export interface QueueCreated {
 }
 
 export interface QueueUpdated {
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   queue_id?: string;
 
@@ -127,7 +127,7 @@ export interface QueueCreateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  queue_name: string;
 }
 
 export interface QueueUpdateParams {

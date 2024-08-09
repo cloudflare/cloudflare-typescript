@@ -21,13 +21,10 @@ export class AvailableAlerts extends APIResource {
   }
 }
 
-export type AvailableAlertListResponse = Record<
-  string,
-  Array<AvailableAlertListResponse.UnnamedSchemaWithMapParent1>
->;
+export type AvailableAlertListResponse = Record<string, Array<AvailableAlertListResponse.Item>>;
 
 export namespace AvailableAlertListResponse {
-  export interface UnnamedSchemaWithMapParent1 {
+  export interface Item {
     /**
      * Describes the alert type.
      */

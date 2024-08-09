@@ -4,7 +4,6 @@ import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as TldsAPI from './tlds';
-import * as TopAPI from '../../../../http/top';
 import * as MaliciousAPI from './malicious';
 import * as SpamAPI from './spam';
 import * as SpoofAPI from './spoof';
@@ -38,7 +37,7 @@ export class Tlds extends APIResource {
 export interface TldGetResponse {
   meta: TldGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<TldGetResponse.Top0>;
 }
 
 export namespace TldGetResponse {
@@ -86,6 +85,12 @@ export namespace TldGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 

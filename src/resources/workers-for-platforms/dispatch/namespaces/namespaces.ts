@@ -235,6 +235,7 @@ export namespace Namespaces {
   export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
   export import Scripts = ScriptsAPI.Scripts;
   export import Script = ScriptsAPI.Script;
+  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
   export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;

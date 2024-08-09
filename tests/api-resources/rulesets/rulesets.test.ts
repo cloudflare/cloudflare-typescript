@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource rulesets', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.create({
+    const responsePromise = client.rulesets.create({
       kind: 'root',
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
@@ -30,7 +30,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.rulesets.create({
+    const response = await client.rulesets.create({
       kind: 'root',
       name: 'My ruleset',
       phase: 'http_request_firewall_custom',
@@ -91,7 +91,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
+    const responsePromise = client.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       rules: [{}, {}, {}],
       account_id: 'account_id',
     });
@@ -106,7 +106,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.rulesets.update('2f2feab2026849078ba485f918791bdc', {
+    const response = await client.rulesets.update('2f2feab2026849078ba485f918791bdc', {
       rules: [
         {
           action: 'block',
@@ -167,7 +167,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('list', async () => {
-    const responsePromise = cloudflare.rulesets.list({ account_id: 'account_id' });
+    const responsePromise = client.rulesets.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -179,7 +179,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('delete', async () => {
-    const responsePromise = cloudflare.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
+    const responsePromise = client.rulesets.delete('2f2feab2026849078ba485f918791bdc', {
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -193,7 +193,7 @@ describe('resource rulesets', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = cloudflare.rulesets.get('2f2feab2026849078ba485f918791bdc', {
+    const responsePromise = client.rulesets.get('2f2feab2026849078ba485f918791bdc', {
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();

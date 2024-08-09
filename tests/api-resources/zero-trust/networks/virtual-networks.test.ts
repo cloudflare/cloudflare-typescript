@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource virtualNetworks', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.create({
+    const responsePromise = client.zeroTrust.networks.virtualNetworks.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'us-east-1-vpc',
     });
@@ -25,7 +25,7 @@ describe('resource virtualNetworks', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.networks.virtualNetworks.create({
+    const response = await client.zeroTrust.networks.virtualNetworks.create({
       account_id: '699d98642c564d2e855e9661899b7252',
       name: 'us-east-1-vpc',
       comment: 'Staging VPC for data science',
@@ -34,7 +34,7 @@ describe('resource virtualNetworks', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.list({
+    const responsePromise = client.zeroTrust.networks.virtualNetworks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -47,7 +47,7 @@ describe('resource virtualNetworks', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.networks.virtualNetworks.list({
+    const response = await client.zeroTrust.networks.virtualNetworks.list({
       account_id: '699d98642c564d2e855e9661899b7252',
       id: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       is_default: true,
@@ -57,7 +57,7 @@ describe('resource virtualNetworks', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.delete(
+    const responsePromise = client.zeroTrust.networks.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
@@ -71,14 +71,14 @@ describe('resource virtualNetworks', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.networks.virtualNetworks.delete(
+    const response = await client.zeroTrust.networks.virtualNetworks.delete(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.zeroTrust.networks.virtualNetworks.edit(
+    const responsePromise = client.zeroTrust.networks.virtualNetworks.edit(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       { account_id: '699d98642c564d2e855e9661899b7252' },
     );
@@ -92,7 +92,7 @@ describe('resource virtualNetworks', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.zeroTrust.networks.virtualNetworks.edit(
+    const response = await client.zeroTrust.networks.virtualNetworks.edit(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '699d98642c564d2e855e9661899b7252',

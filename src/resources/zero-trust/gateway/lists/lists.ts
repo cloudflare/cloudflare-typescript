@@ -111,8 +111,6 @@ export interface GatewayItem {
 }
 
 export interface GatewayItemParam {
-  created_at?: string;
-
   /**
    * The description of the list item, if present
    */
@@ -186,7 +184,7 @@ export interface ListCreateResponse {
   updated_at?: string;
 }
 
-export type ListDeleteResponse = unknown | string | null;
+export type ListDeleteResponse = unknown;
 
 export interface ListCreateParams {
   /**

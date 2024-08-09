@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource accounts', () => {
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.accounts.update(
+    const responsePromise = client.addressing.addressMaps.accounts.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
     );
@@ -25,14 +25,14 @@ describe('resource accounts', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.accounts.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: {} },
-    );
+    const response = await client.addressing.addressMaps.accounts.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.addressing.addressMaps.accounts.delete(
+    const responsePromise = client.addressing.addressMaps.accounts.delete(
       '023e105f4ecef8ad9ca31a8372d0c353',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
@@ -46,9 +46,8 @@ describe('resource accounts', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.addressing.addressMaps.accounts.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
-    );
+    const response = await client.addressing.addressMaps.accounts.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource liveInputs', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.create({
+    const responsePromise = client.stream.liveInputs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource liveInputs', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.stream.liveInputs.create({
+    const response = await client.stream.liveInputs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       defaultCreator: 'defaultCreator',
       deleteRecordingAfterDays: 45,
@@ -39,7 +39,7 @@ describe('resource liveInputs', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
+    const responsePromise = client.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -52,7 +52,7 @@ describe('resource liveInputs', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
+    const response = await client.stream.liveInputs.update('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       defaultCreator: 'defaultCreator',
       deleteRecordingAfterDays: 45,
@@ -67,9 +67,7 @@ describe('resource liveInputs', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.stream.liveInputs.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,7 +78,7 @@ describe('resource liveInputs', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.stream.liveInputs.list({
+    const response = await client.stream.liveInputs.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       include_counts: true,
     });
@@ -88,7 +86,7 @@ describe('resource liveInputs', () => {
 
   // TODO: investigate broken test
   test.skip('delete: only required params', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
+    const responsePromise = client.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -102,13 +100,13 @@ describe('resource liveInputs', () => {
 
   // TODO: investigate broken test
   test.skip('delete: required and optional params', async () => {
-    const response = await cloudflare.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
+    const response = await client.stream.liveInputs.delete('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.stream.liveInputs.get('66be4bf738797e01e1fca35a7bdecdcd', {
+    const responsePromise = client.stream.liveInputs.get('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -121,7 +119,7 @@ describe('resource liveInputs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.stream.liveInputs.get('66be4bf738797e01e1fca35a7bdecdcd', {
+    const response = await client.stream.liveInputs.get('66be4bf738797e01e1fca35a7bdecdcd', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

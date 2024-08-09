@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource pagerules', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.create({
+    const responsePromise = client.pagerules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{}, {}, {}],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
@@ -26,7 +26,7 @@ describe('resource pagerules', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.pagerules.create({
+    const response = await client.pagerules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
         {
@@ -58,7 +58,7 @@ describe('resource pagerules', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [{}, {}, {}],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
@@ -73,7 +73,7 @@ describe('resource pagerules', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
         {
@@ -105,7 +105,7 @@ describe('resource pagerules', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.pagerules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,7 +116,7 @@ describe('resource pagerules', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.pagerules.list({
+    const response = await client.pagerules.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'desc',
       match: 'any',
@@ -126,7 +126,7 @@ describe('resource pagerules', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -139,13 +139,13 @@ describe('resource pagerules', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -158,7 +158,7 @@ describe('resource pagerules', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
         {
@@ -190,7 +190,7 @@ describe('resource pagerules', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -203,7 +203,7 @@ describe('resource pagerules', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

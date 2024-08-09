@@ -110,7 +110,7 @@ export namespace CustomNameserver {
   }
 }
 
-export type CustomNameserverDeleteResponse = Array<unknown>;
+export type CustomNameserverDeleteResponse = Array<string>;
 
 export type CustomNameserverAvailabiltyResponse = Array<string>;
 

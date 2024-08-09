@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ScansAPI from './scans';
-import * as TopAPI from '../radar/http/top';
 import { type Response as FetchResponse } from '../../_shims/index';
 
 export class Scans extends APIResource {
@@ -334,7 +333,7 @@ export namespace ScanGetResponse {
 
       domain: string;
 
-      headers: Array<TopAPI.Browser>;
+      headers: Array<Page.Header>;
 
       ip: string;
 
@@ -388,6 +387,12 @@ export namespace ScanGetResponse {
         value: string;
 
         priority?: string;
+      }
+
+      export interface Header {
+        name: string;
+
+        value: string;
       }
 
       export interface JS {
@@ -759,7 +764,7 @@ export namespace ScanHarResponse {
         export interface Request {
           bodySize: number;
 
-          headers: Array<TopAPI.Browser>;
+          headers: Array<Request.Header>;
 
           headersSize: number;
 
@@ -770,6 +775,14 @@ export namespace ScanHarResponse {
           url: string;
         }
 
+        export namespace Request {
+          export interface Header {
+            name: string;
+
+            value: string;
+          }
+        }
+
         export interface Response {
           _transferSize: number;
 
@@ -777,7 +790,7 @@ export namespace ScanHarResponse {
 
           content: Response.Content;
 
-          headers: Array<TopAPI.Browser>;
+          headers: Array<Response.Header>;
 
           headersSize: number;
 
@@ -797,6 +810,12 @@ export namespace ScanHarResponse {
             size: number;
 
             compression?: number;
+          }
+
+          export interface Header {
+            name: string;
+
+            value: string;
           }
         }
       }

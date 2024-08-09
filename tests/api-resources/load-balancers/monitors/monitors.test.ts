@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource monitors', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.create({
+    const responsePromise = client.loadBalancers.monitors.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_codes: '2xx',
     });
@@ -25,7 +25,7 @@ describe('resource monitors', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.create({
+    const response = await client.loadBalancers.monitors.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_codes: '2xx',
       allow_insecure: true,
@@ -47,7 +47,7 @@ describe('resource monitors', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.update('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const responsePromise = client.loadBalancers.monitors.update('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_codes: '2xx',
     });
@@ -61,7 +61,7 @@ describe('resource monitors', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.update('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const response = await client.loadBalancers.monitors.update('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_codes: '2xx',
       allow_insecure: true,
@@ -83,7 +83,7 @@ describe('resource monitors', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.list({
+    const responsePromise = client.loadBalancers.monitors.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -96,13 +96,13 @@ describe('resource monitors', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.list({
+    const response = await client.loadBalancers.monitors.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.delete('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const responsePromise = client.loadBalancers.monitors.delete('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -115,13 +115,13 @@ describe('resource monitors', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.delete('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const response = await client.loadBalancers.monitors.delete('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.edit('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const responsePromise = client.loadBalancers.monitors.edit('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_codes: '2xx',
     });
@@ -135,7 +135,7 @@ describe('resource monitors', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.edit('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const response = await client.loadBalancers.monitors.edit('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       expected_codes: '2xx',
       allow_insecure: true,
@@ -157,7 +157,7 @@ describe('resource monitors', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.loadBalancers.monitors.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const responsePromise = client.loadBalancers.monitors.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -170,7 +170,7 @@ describe('resource monitors', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.loadBalancers.monitors.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
+    const response = await client.loadBalancers.monitors.get('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

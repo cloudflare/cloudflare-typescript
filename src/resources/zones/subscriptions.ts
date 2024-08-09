@@ -26,14 +26,11 @@ export class Subscriptions extends APIResource {
    * Lists all of an account's subscriptions.
    */
   list(
-    accountIdentifier: string,
+    params: SubscriptionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubscriptionsSinglePage, SubscriptionsAPI.Subscription> {
-    return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/subscriptions`,
-      SubscriptionsSinglePage,
-      options,
-    );
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
   }
 
   /**
@@ -85,10 +82,18 @@ export namespace SubscriptionCreateParams {
   }
 }
 
+export interface SubscriptionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
 export namespace Subscriptions {
   export import SubscriptionCreateResponse = ZonesSubscriptionsAPI.SubscriptionCreateResponse;
   export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionListParams = ZonesSubscriptionsAPI.SubscriptionListParams;
 }
 
 export { SubscriptionsSinglePage };

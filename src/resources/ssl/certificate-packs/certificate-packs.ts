@@ -147,7 +147,7 @@ export interface CertificatePackEditResponse {
    * authority specific details or restrictions
    * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
    */
-  certificate_authority?: 'google' | 'lets_encrypt';
+  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
   /**
    * Whether or not to add Cloudflare Branding for the order. This will add
