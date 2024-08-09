@@ -480,7 +480,7 @@ export interface CNAMERecord {
   /**
    * A valid hostname. Must not match the record's name.
    */
-  content: unknown;
+  content: string;
 
   /**
    * DNS record name (or @ for the zone apex) in Punycode.
@@ -2250,7 +2250,7 @@ export namespace RecordCreateParams {
     /**
      * Body param: A valid hostname. Must not match the record's name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -3619,7 +3619,7 @@ export namespace RecordUpdateParams {
     /**
      * Body param: A valid hostname. Must not match the record's name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -5165,7 +5165,7 @@ export namespace RecordEditParams {
     /**
      * Body param: A valid hostname. Must not match the record's name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
