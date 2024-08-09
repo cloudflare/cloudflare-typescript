@@ -282,7 +282,7 @@ export interface RuleSetting {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: unknown;
+  add_headers?: Record<string, string>;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -557,7 +557,7 @@ export interface RuleSettingParam {
    * Add custom headers to allowed requests, in the form of key-value pairs. Keys are
    * header names, pointing to an array with its header value(s).
    */
-  add_headers?: unknown;
+  add_headers?: Record<string, string>;
 
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
@@ -956,7 +956,7 @@ export interface ScheduleParam {
   wed?: string;
 }
 
-export type RuleDeleteResponse = unknown | string | null;
+export type RuleDeleteResponse = unknown;
 
 export interface RuleCreateParams {
   /**

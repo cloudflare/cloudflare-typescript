@@ -139,7 +139,7 @@ export interface Watermark {
   width?: number;
 }
 
-export type WatermarkDeleteResponse = unknown | string;
+export type WatermarkDeleteResponse = string;
 
 export interface WatermarkCreateParams {
   /**

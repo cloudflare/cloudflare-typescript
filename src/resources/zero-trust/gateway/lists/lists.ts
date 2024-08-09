@@ -184,7 +184,7 @@ export interface ListCreateResponse {
   updated_at?: string;
 }
 
-export type ListDeleteResponse = unknown | string | null;
+export type ListDeleteResponse = unknown;
 
 export interface ListCreateParams {
   /**

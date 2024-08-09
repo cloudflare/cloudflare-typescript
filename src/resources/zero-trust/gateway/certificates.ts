@@ -121,14 +121,34 @@ export interface CertificateCreateResponse {
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
   created_at?: string;
 
   expires_on?: string;
 
   /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
    * Use this certificate for Gateway TLS interception
    */
   in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -152,14 +172,34 @@ export interface CertificateListResponse {
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
   created_at?: string;
 
   expires_on?: string;
 
   /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
    * Use this certificate for Gateway TLS interception
    */
   in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -183,14 +223,34 @@ export interface CertificateDeleteResponse {
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
   created_at?: string;
 
   expires_on?: string;
 
   /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
    * Use this certificate for Gateway TLS interception
    */
   in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -214,14 +274,34 @@ export interface CertificateActivateResponse {
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
   created_at?: string;
 
   expires_on?: string;
 
   /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
    * Use this certificate for Gateway TLS interception
    */
   in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -245,14 +325,34 @@ export interface CertificateDeactivateResponse {
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
   created_at?: string;
 
   expires_on?: string;
 
   /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
    * Use this certificate for Gateway TLS interception
    */
   in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
@@ -276,14 +376,34 @@ export interface CertificateGetResponse {
    */
   binding_status?: 'pending_deployment' | 'active' | 'pending_deletion' | 'inactive';
 
+  /**
+   * The CA certificate
+   */
+  certificate?: string;
+
   created_at?: string;
 
   expires_on?: string;
 
   /**
+   * The SHA256 fingerprint of the certificate.
+   */
+  fingerprint?: string;
+
+  /**
    * Use this certificate for Gateway TLS interception
    */
   in_use?: boolean;
+
+  /**
+   * The organization that issued the certificate.
+   */
+  issuer_org?: string;
+
+  /**
+   * The entire issuer field of the certificate.
+   */
+  issuer_raw?: string;
 
   /**
    * The type of certificate, either BYO-PKI (custom) or Gateway-managed.

@@ -330,7 +330,7 @@ export namespace Location {
   }
 }
 
-export type LocationDeleteResponse = unknown | string | null;
+export type LocationDeleteResponse = unknown;
 
 export interface LocationCreateParams {
   /**
