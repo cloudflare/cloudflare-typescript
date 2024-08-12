@@ -41,11 +41,15 @@ export class Schedules extends APIResource {
 }
 
 export interface Schedule {
-  created_on?: unknown;
+  created_on?: string;
 
-  cron?: unknown;
+  cron?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
+}
+
+export interface ScheduleParam {
+  cron?: string;
 }
 
 export interface ScheduleUpdateResponse {
@@ -65,7 +69,7 @@ export interface ScheduleUpdateParams {
   /**
    * Body param:
    */
-  body: string;
+  body: Array<ScheduleParam>;
 }
 
 export interface ScheduleGetParams {
