@@ -33,7 +33,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.bitrate(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -74,7 +74,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.duration(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -115,7 +115,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.get(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -153,7 +153,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.industry(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -195,7 +195,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.ipVersion(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -235,7 +235,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.protocol(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -275,7 +275,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.vector(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -317,7 +317,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.attacks.layer3.timeseriesGroups.vertical(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],

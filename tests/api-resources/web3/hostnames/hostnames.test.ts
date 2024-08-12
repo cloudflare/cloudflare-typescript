@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource hostnames', () => {
   test('create: only required params', async () => {
     const responsePromise = client.web3.hostnames.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      target: 'ipfs',
+      target: 'ethereum',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource hostnames', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.web3.hostnames.create('023e105f4ecef8ad9ca31a8372d0c353', {
-      target: 'ipfs',
+      target: 'ethereum',
       description: 'This is my IPFS gateway.',
       dnslink: '/ipns/onboarding.ipfs.cloudflare.com',
     });

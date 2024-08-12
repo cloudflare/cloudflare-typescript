@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource phases', () => {
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = client.rulesets.phases.update('http_request_firewall_custom', {
+    const responsePromise = client.rulesets.phases.update('ddos_l4', {
       rules: [{}, {}, {}],
       account_id: 'account_id',
     });
@@ -27,9 +27,10 @@ describe('resource phases', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await client.rulesets.phases.update('http_request_firewall_custom', {
+    const response = await client.rulesets.phases.update('ddos_l4', {
       rules: [
         {
+          id: '3a03d665bac047339bb530ecb439a90d',
           action: 'block',
           action_parameters: {
             response: {
@@ -41,11 +42,11 @@ describe('resource phases', () => {
           description: 'Block when the IP address is not 1.1.1.1',
           enabled: true,
           expression: 'ip.src ne 1.1.1.1',
-          id: '3a03d665bac047339bb530ecb439a90d',
           logging: { enabled: true },
           ref: 'my_ref',
         },
         {
+          id: '3a03d665bac047339bb530ecb439a90d',
           action: 'block',
           action_parameters: {
             response: {
@@ -57,11 +58,11 @@ describe('resource phases', () => {
           description: 'Block when the IP address is not 1.1.1.1',
           enabled: true,
           expression: 'ip.src ne 1.1.1.1',
-          id: '3a03d665bac047339bb530ecb439a90d',
           logging: { enabled: true },
           ref: 'my_ref',
         },
         {
+          id: '3a03d665bac047339bb530ecb439a90d',
           action: 'block',
           action_parameters: {
             response: {
@@ -73,7 +74,6 @@ describe('resource phases', () => {
           description: 'Block when the IP address is not 1.1.1.1',
           enabled: true,
           expression: 'ip.src ne 1.1.1.1',
-          id: '3a03d665bac047339bb530ecb439a90d',
           logging: { enabled: true },
           ref: 'my_ref',
         },
@@ -86,9 +86,7 @@ describe('resource phases', () => {
 
   // TODO: investigate broken test
   test.skip('get', async () => {
-    const responsePromise = client.rulesets.phases.get('http_request_firewall_custom', {
-      account_id: 'account_id',
-    });
+    const responsePromise = client.rulesets.phases.get('ddos_l4', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

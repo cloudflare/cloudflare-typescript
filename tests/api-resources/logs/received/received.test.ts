@@ -32,7 +32,7 @@ describe('resource received', () => {
       fields: 'ClientIP,RayID,EdgeStartTimestamp',
       sample: 0.1,
       start: '2018-05-20T10:00:00Z',
-      timestamps: 'unixnano',
+      timestamps: 'unix',
     });
   });
 });

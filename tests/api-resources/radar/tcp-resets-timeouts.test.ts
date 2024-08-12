@@ -70,7 +70,7 @@ describe('resource tcpResetsTimeouts', () => {
     await expect(
       client.radar.tcpResetsTimeouts.timeseriesGroups(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

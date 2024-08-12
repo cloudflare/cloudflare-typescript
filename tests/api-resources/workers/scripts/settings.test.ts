@@ -28,9 +28,9 @@ describe('resource settings', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       logpush: false,
       tail_consumers: [
-        { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-        { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-        { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+        { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+        { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+        { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
       ],
     });
   });

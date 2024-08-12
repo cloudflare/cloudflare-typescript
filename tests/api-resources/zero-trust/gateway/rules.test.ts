@@ -13,7 +13,7 @@ describe('resource rules', () => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.rules.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource rules', () => {
   test('create: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.rules.create({
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
       description: 'Block bad websites based on their host name.',
       device_posture: 'any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})',
@@ -98,7 +98,7 @@ describe('resource rules', () => {
         override_ips: ['1.1.1.1', '2.2.2.2'],
         payload_log: { enabled: true },
         resolve_dns_through_cloudflare: true,
-        untrusted_cert: { action: 'error' },
+        untrusted_cert: { action: 'pass_through' },
       },
       schedule: {
         fri: '08:00-12:30,13:30-17:00',
@@ -118,7 +118,7 @@ describe('resource rules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -133,7 +133,7 @@ describe('resource rules', () => {
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.gateway.rules.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '699d98642c564d2e855e9661899b7252',
-      action: 'allow',
+      action: 'on',
       name: 'block bad websites',
       description: 'Block bad websites based on their host name.',
       device_posture: 'any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})',
@@ -203,7 +203,7 @@ describe('resource rules', () => {
         override_ips: ['1.1.1.1', '2.2.2.2'],
         payload_log: { enabled: true },
         resolve_dns_through_cloudflare: true,
-        untrusted_cert: { action: 'error' },
+        untrusted_cert: { action: 'pass_through' },
       },
       schedule: {
         fri: '08:00-12:30,13:30-17:00',

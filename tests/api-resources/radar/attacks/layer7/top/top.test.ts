@@ -46,7 +46,7 @@ describe('resource top', () => {
           limitDirection: 'ORIGIN',
           limitPerLocation: 10,
           location: ['string', 'string', 'string'],
-          magnitude: 'MITIGATED_REQUESTS',
+          magnitude: 'AFFECTED_ZONES',
           mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
           name: ['string', 'string', 'string'],
           normalization: 'PERCENTAGE',

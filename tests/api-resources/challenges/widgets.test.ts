@@ -14,7 +14,7 @@ describe('resource widgets', () => {
     const responsePromise = client.challenges.widgets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,14 +30,14 @@ describe('resource widgets', () => {
     const response = await client.challenges.widgets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
       direction: 'asc',
       order: 'id',
       page: 1,
       per_page: 5,
       bot_fight_mode: false,
-      clearance_level: 'interactive',
+      clearance_level: 'no_clearance',
       offlabel: false,
       region: 'world',
     });
@@ -47,7 +47,7 @@ describe('resource widgets', () => {
     const responsePromise = client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -63,10 +63,10 @@ describe('resource widgets', () => {
     const response = await client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
       bot_fight_mode: false,
-      clearance_level: 'interactive',
+      clearance_level: 'no_clearance',
       offlabel: false,
     });
   });

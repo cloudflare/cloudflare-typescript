@@ -33,7 +33,7 @@ describe('resource layer3', () => {
     await expect(
       client.radar.attacks.layer3.timeseries(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -45,7 +45,7 @@ describe('resource layer3', () => {
           location: ['string', 'string', 'string'],
           metric: 'BYTES',
           name: ['string', 'string', 'string'],
-          normalization: 'MIN0_MAX',
+          normalization: 'PERCENTAGE_CHANGE',
           protocol: ['UDP', 'TCP', 'ICMP'],
         },
         { path: '/_stainless_unknown_path' },

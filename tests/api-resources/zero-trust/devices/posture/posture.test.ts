@@ -33,9 +33,9 @@ describe('resource posture', () => {
       description: 'The rule for admin serial numbers',
       expiration: '1h',
       input: {
-        exists: true,
-        operating_system: 'linux',
+        operating_system: 'windows',
         path: '/bin/cat',
+        exists: true,
         sha256: 'https://api.us-2.crowdstrike.com',
         thumbprint: '0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e',
       },
@@ -67,9 +67,9 @@ describe('resource posture', () => {
       description: 'The rule for admin serial numbers',
       expiration: '1h',
       input: {
-        exists: true,
-        operating_system: 'linux',
+        operating_system: 'windows',
         path: '/bin/cat',
+        exists: true,
         sha256: 'https://api.us-2.crowdstrike.com',
         thumbprint: '0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e',
       },
