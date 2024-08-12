@@ -66,7 +66,7 @@ export namespace ConfigurationGetResponse {
 
 export interface ConfigurationGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
