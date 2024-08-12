@@ -12,12 +12,11 @@ export class Subdomains extends APIResource {
     params: SubdomainUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubdomainUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/workers/subdomain`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: SubdomainUpdateResponse }>
+      this._client.put(`/accounts/${account_id}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{
+        result: SubdomainUpdateResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -35,11 +34,11 @@ export class Subdomains extends APIResource {
 }
 
 export interface SubdomainUpdateResponse {
-  name?: unknown;
+  subdomain?: string;
 }
 
 export interface SubdomainGetResponse {
-  name?: unknown;
+  subdomain?: string;
 }
 
 export interface SubdomainUpdateParams {
@@ -51,7 +50,7 @@ export interface SubdomainUpdateParams {
   /**
    * Body param:
    */
-  body: string;
+  subdomain?: string;
 }
 
 export interface SubdomainGetParams {

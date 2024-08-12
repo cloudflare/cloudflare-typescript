@@ -13,7 +13,6 @@ describe('resource accountSettings', () => {
   test('update: only required params', async () => {
     const responsePromise = client.workers.accountSettings.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: "{'default_usage_model': 'unbound'}",
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +26,8 @@ describe('resource accountSettings', () => {
   test('update: required and optional params', async () => {
     const response = await client.workers.accountSettings.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: "{'default_usage_model': 'unbound'}",
+      default_usage_model: 'default_usage_model',
+      green_compute: true,
     });
   });
 

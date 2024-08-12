@@ -13,7 +13,6 @@ describe('resource subdomains', () => {
   test('update: only required params', async () => {
     const responsePromise = client.workers.subdomains.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: "{'subdomain': 'example-subdomain'}",
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +26,7 @@ describe('resource subdomains', () => {
   test('update: required and optional params', async () => {
     const response = await client.workers.subdomains.update({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: "{'subdomain': 'example-subdomain'}",
+      subdomain: 'example-subdomain',
     });
   });
 
