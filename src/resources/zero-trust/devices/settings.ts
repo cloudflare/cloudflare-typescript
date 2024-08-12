@@ -32,6 +32,12 @@ export class Settings extends APIResource {
 
 export interface DeviceSettings {
   /**
+   * Sets the time limit, in seconds, that a user can use an override code to bypass
+   * WARP.
+   */
+  disable_for_time?: number;
+
+  /**
    * Enable gateway proxy filtering on TCP.
    */
   gateway_proxy_enabled?: boolean;
@@ -57,6 +63,12 @@ export interface SettingUpdateParams {
    * Path param:
    */
   account_id: string;
+
+  /**
+   * Body param: Sets the time limit, in seconds, that a user can use an override
+   * code to bypass WARP.
+   */
+  disable_for_time?: number;
 
   /**
    * Body param: Enable gateway proxy filtering on TCP.
