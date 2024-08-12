@@ -47,12 +47,7 @@ export class UserSchemas extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<UserSchemaDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`,
-        options,
-      ) as Core.APIPromise<{ result: UserSchemaDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, options);
   }
 
   /**
@@ -160,7 +155,16 @@ export namespace SchemaUpload {
   }
 }
 
-export type UserSchemaDeleteResponse = unknown | string;
+export interface UserSchemaDeleteResponse {
+  errors: Message;
+
+  messages: Message;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface UserSchemaCreateParams {
   /**
