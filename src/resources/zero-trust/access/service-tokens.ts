@@ -256,6 +256,8 @@ export interface ServiceToken {
    */
   duration?: string;
 
+  expires_at?: string;
+
   /**
    * The name of the service token.
    */
