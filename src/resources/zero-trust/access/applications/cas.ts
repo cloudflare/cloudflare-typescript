@@ -187,7 +187,7 @@ export interface CA {
   public_key?: string;
 }
 
-export type CACreateResponse = unknown | string | null;
+export type CACreateResponse = unknown;
 
 export interface CADeleteResponse {
   /**
@@ -196,7 +196,7 @@ export interface CADeleteResponse {
   id?: string;
 }
 
-export type CAGetResponse = unknown | string | null;
+export type CAGetResponse = unknown;
 
 export interface CACreateParams {
   /**

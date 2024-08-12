@@ -9,13 +9,13 @@ export class Seats extends APIResource {
    * Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat`
    * are set to false.
    */
-  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse | null> {
+  edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse> {
     const { account_id, body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/access/seats`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: SeatEditResponse | null }>
+      }) as Core.APIPromise<{ result: SeatEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

@@ -42,11 +42,56 @@ export class Keys extends APIResource {
   }
 }
 
-export type KeyUpdateResponse = unknown | string;
+export interface KeyUpdateResponse {
+  /**
+   * The number of days until the next key rotation.
+   */
+  days_until_next_rotation?: number;
 
-export type KeyGetResponse = unknown | string;
+  /**
+   * The number of days between key rotations.
+   */
+  key_rotation_interval_days?: number;
 
-export type KeyRotateResponse = unknown | string;
+  /**
+   * The timestamp of the previous key rotation.
+   */
+  last_key_rotation_at?: string;
+}
+
+export interface KeyGetResponse {
+  /**
+   * The number of days until the next key rotation.
+   */
+  days_until_next_rotation?: number;
+
+  /**
+   * The number of days between key rotations.
+   */
+  key_rotation_interval_days?: number;
+
+  /**
+   * The timestamp of the previous key rotation.
+   */
+  last_key_rotation_at?: string;
+}
+
+export interface KeyRotateResponse {
+  /**
+   * The number of days until the next key rotation.
+   */
+  days_until_next_rotation?: number;
+
+  /**
+   * The number of days between key rotations.
+   */
+  key_rotation_interval_days?: number;
+
+  /**
+   * The timestamp of the previous key rotation.
+   */
+  last_key_rotation_at?: string;
+}
 
 export interface KeyUpdateParams {
   /**
