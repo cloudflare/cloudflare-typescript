@@ -13,7 +13,7 @@ describe('resource schedules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.workers.scripts.schedules.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: "[{'cron': '*/30 * * * *'}]",
+      body: [{}, {}, {}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource schedules', () => {
   test('update: required and optional params', async () => {
     const response = await client.workers.scripts.schedules.update('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: "[{'cron': '*/30 * * * *'}]",
+      body: [{ cron: '*/30 * * * *' }, { cron: '*/30 * * * *' }, { cron: '*/30 * * * *' }],
     });
   });
 
