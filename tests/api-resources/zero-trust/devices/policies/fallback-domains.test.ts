@@ -35,17 +35,17 @@ describe('resource fallbackDomains', () => {
         body: [
           {
             description: 'Domain bypass for local development',
-            dns_server: [{}, {}, {}],
+            dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
             suffix: 'example.com',
           },
           {
             description: 'Domain bypass for local development',
-            dns_server: [{}, {}, {}],
+            dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
             suffix: 'example.com',
           },
           {
             description: 'Domain bypass for local development',
-            dns_server: [{}, {}, {}],
+            dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
             suffix: 'example.com',
           },
         ],
