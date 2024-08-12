@@ -26,7 +26,7 @@ describe('resource schedule', () => {
   test('create: required and optional params', async () => {
     const response = await client.speed.schedule.create('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      region: 'us-central1',
+      region: 'asia-east1',
     });
   });
 
@@ -46,7 +46,7 @@ describe('resource schedule', () => {
   test('delete: required and optional params', async () => {
     const response = await client.speed.schedule.delete('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      region: 'us-central1',
+      region: 'asia-east1',
     });
   });
 
@@ -66,7 +66,7 @@ describe('resource schedule', () => {
   test('get: required and optional params', async () => {
     const response = await client.speed.schedule.get('example.com', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      region: 'us-central1',
+      region: 'asia-east1',
     });
   });
 });

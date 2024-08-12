@@ -59,21 +59,21 @@ describe('resource rules', () => {
       body: [
         {
           action: 'bypass_waiting_room',
+          expression: 'ip.src in {10.20.30.40}',
           description: 'allow all traffic from 10.20.30.40',
           enabled: true,
-          expression: 'ip.src in {10.20.30.40}',
         },
         {
           action: 'bypass_waiting_room',
+          expression: 'ip.src in {10.20.30.40}',
           description: 'allow all traffic from 10.20.30.40',
           enabled: true,
-          expression: 'ip.src in {10.20.30.40}',
         },
         {
           action: 'bypass_waiting_room',
+          expression: 'ip.src in {10.20.30.40}',
           description: 'allow all traffic from 10.20.30.40',
           enabled: true,
-          expression: 'ip.src in {10.20.30.40}',
         },
       ],
     });

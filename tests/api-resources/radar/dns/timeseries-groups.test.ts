@@ -33,7 +33,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.cacheHit(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -72,7 +72,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.dnssec(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -111,7 +111,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.dnssecAware(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -150,7 +150,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.dnssecE2E(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -189,7 +189,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.ipVersion(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -228,7 +228,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.matchingAnswer(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -267,7 +267,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.protocol(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -306,7 +306,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.queryType(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -345,7 +345,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.responseCodes(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -384,7 +384,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.dns.timeseriesGroups.responseTTL(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

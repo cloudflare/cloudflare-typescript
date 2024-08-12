@@ -31,12 +31,12 @@ describe('resource identityProviders', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.zeroTrust.identityProviders.create({
       config: {
+        claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
         client_id: '<your client id>',
         client_secret: '<your client secret>',
-        claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
-        email_claim_name: 'custom_claim_name',
         conditional_access_enabled: true,
         directory_id: '<your azure directory uuid>',
+        email_claim_name: 'custom_claim_name',
         prompt: 'login',
         support_groups: true,
       },
@@ -73,12 +73,12 @@ describe('resource identityProviders', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.zeroTrust.identityProviders.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       config: {
+        claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
         client_id: '<your client id>',
         client_secret: '<your client secret>',
-        claims: ['email_verified', 'preferred_username', 'custom_claim_name'],
-        email_claim_name: 'custom_claim_name',
         conditional_access_enabled: true,
         directory_id: '<your azure directory uuid>',
+        email_claim_name: 'custom_claim_name',
         prompt: 'login',
         support_groups: true,
       },

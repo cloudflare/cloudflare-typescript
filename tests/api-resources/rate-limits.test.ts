@@ -31,15 +31,15 @@ describe('resource rateLimits', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.rateLimits.create('023e105f4ecef8ad9ca31a8372d0c353', {
       action: {
-        mode: 'challenge',
+        mode: 'simulate',
         response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
         timeout: 86400,
       },
       match: {
         headers: [
-          { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
+          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
+          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
+          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
         ],
         request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
         response: { origin_traffic: true },
@@ -124,15 +124,15 @@ describe('resource rateLimits', () => {
       '372e67954025e0ba6aaa6d586b9e0b59',
       {
         action: {
-          mode: 'challenge',
+          mode: 'simulate',
           response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
           timeout: 86400,
         },
         match: {
           headers: [
-            { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-            { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
-            { name: 'Cf-Cache-Status', op: 'ne', value: 'HIT' },
+            { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
+            { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
+            { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
           ],
           request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
           response: { origin_traffic: true },

@@ -33,7 +33,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.arc(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
           dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -72,7 +72,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.dkim(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -111,7 +111,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.dmarc(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -150,7 +150,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.malicious(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -190,7 +190,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.spam(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -230,7 +230,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.spf(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -269,7 +269,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.spoof(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -309,7 +309,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.threatCategory(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -349,7 +349,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.email.security.timeseriesGroups.tlsVersion(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           arc: ['PASS', 'NONE', 'FAIL'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],

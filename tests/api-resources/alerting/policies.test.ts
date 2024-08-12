@@ -14,7 +14,7 @@ describe('resource policies', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      alert_type: 'universal_ssl_event_type',
+      alert_type: 'access_custom_certificate_expiration_type',
       enabled: true,
       mechanisms: { email: [{}], pagerduty: [{}], webhooks: [{}] },
       name: 'SSL Notification Event Policy',
@@ -32,7 +32,7 @@ describe('resource policies', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.alerting.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      alert_type: 'universal_ssl_event_type',
+      alert_type: 'access_custom_certificate_expiration_type',
       enabled: true,
       mechanisms: {
         email: [{ id: 'test@example.com' }],
@@ -106,7 +106,7 @@ describe('resource policies', () => {
     const response = await client.alerting.policies.update('0da2b59e-f118-439d-8097-bdfb215203c9', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       alert_interval: '30m',
-      alert_type: 'universal_ssl_event_type',
+      alert_type: 'access_custom_certificate_expiration_type',
       description: 'Something describing the policy.',
       enabled: true,
       filters: {

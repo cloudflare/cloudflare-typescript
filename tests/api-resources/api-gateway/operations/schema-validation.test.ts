@@ -27,7 +27,7 @@ describe('resource schemaValidation', () => {
   test('update: required and optional params', async () => {
     const response = await client.apiGateway.operations.schemaValidation.update(
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', mitigation_action: 'block' },
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', mitigation_action: 'log' },
     );
   });
 
@@ -53,7 +53,7 @@ describe('resource schemaValidation', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       settings_multiple_request: {
         '3818d821-5901-4147-a474-f5f5aec1d54e': { mitigation_action: 'log' },
-        'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': { mitigation_action: 'block' },
+        'b17c8043-99a0-4202-b7d9-8f7cdbee02cd': { mitigation_action: 'log' },
       },
     });
   });

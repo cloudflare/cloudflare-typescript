@@ -14,7 +14,7 @@ describe('resource uaRules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       configuration: {},
-      mode: 'challenge',
+      mode: 'block',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource uaRules', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'challenge',
+      mode: 'block',
     });
   });
 
@@ -38,7 +38,7 @@ describe('resource uaRules', () => {
     const responsePromise = client.firewall.uaRules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      { configuration: {}, mode: 'challenge' },
+      { configuration: {}, mode: 'block' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -54,7 +54,7 @@ describe('resource uaRules', () => {
     const response = await client.firewall.uaRules.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
       '372e67954025e0ba6aaa6d586b9e0b59',
-      { configuration: { target: 'ip', value: '198.51.100.4' }, mode: 'challenge' },
+      { configuration: { target: 'ip', value: '198.51.100.4' }, mode: 'block' },
     );
   });
 

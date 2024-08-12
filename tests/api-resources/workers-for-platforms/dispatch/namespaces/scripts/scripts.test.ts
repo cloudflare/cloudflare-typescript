@@ -47,10 +47,10 @@ describe('resource scripts', () => {
           logpush: false,
           main_module: 'worker.js',
           migrations: {
-            new_tag: 'v2',
-            old_tag: 'v1',
             deleted_classes: ['string', 'string', 'string'],
             new_classes: ['string', 'string', 'string'],
+            new_tag: 'v2',
+            old_tag: 'v1',
             renamed_classes: [
               { from: 'from', to: 'to' },
               { from: 'from', to: 'to' },
@@ -65,9 +65,9 @@ describe('resource scripts', () => {
           placement: { mode: 'smart' },
           tags: ['string', 'string', 'string'],
           tail_consumers: [
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
           ],
           usage_model: 'bundled',
           version_tags: {},

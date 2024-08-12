@@ -180,7 +180,56 @@ export namespace RouteCreateResponse {
 export interface RouteUpdateResponse {
   modified?: boolean;
 
-  modified_route?: unknown;
+  modified_route?: RouteUpdateResponse.ModifiedRoute;
+}
+
+export namespace RouteUpdateResponse {
+  export interface ModifiedRoute {
+    /**
+     * The next-hop IP Address for the static route.
+     */
+    nexthop: string;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    prefix: string;
+
+    /**
+     * Priority of the static route.
+     */
+    priority: number;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * When the route was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional human provided description of the static route.
+     */
+    description?: string;
+
+    /**
+     * When the route was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Used only for ECMP routes.
+     */
+    scope?: RoutesAPI.Scope;
+
+    /**
+     * Optional weight of the ECMP scope - if provided.
+     */
+    weight?: number;
+  }
 }
 
 export interface RouteListResponse {
@@ -239,17 +288,164 @@ export namespace RouteListResponse {
 export interface RouteDeleteResponse {
   deleted?: boolean;
 
-  deleted_route?: unknown;
+  deleted_route?: RouteDeleteResponse.DeletedRoute;
+}
+
+export namespace RouteDeleteResponse {
+  export interface DeletedRoute {
+    /**
+     * The next-hop IP Address for the static route.
+     */
+    nexthop: string;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    prefix: string;
+
+    /**
+     * Priority of the static route.
+     */
+    priority: number;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * When the route was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional human provided description of the static route.
+     */
+    description?: string;
+
+    /**
+     * When the route was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Used only for ECMP routes.
+     */
+    scope?: RoutesAPI.Scope;
+
+    /**
+     * Optional weight of the ECMP scope - if provided.
+     */
+    weight?: number;
+  }
 }
 
 export interface RouteEmptyResponse {
   deleted?: boolean;
 
-  deleted_routes?: unknown;
+  deleted_routes?: Array<RouteEmptyResponse.DeletedRoute>;
+}
+
+export namespace RouteEmptyResponse {
+  export interface DeletedRoute {
+    /**
+     * The next-hop IP Address for the static route.
+     */
+    nexthop: string;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    prefix: string;
+
+    /**
+     * Priority of the static route.
+     */
+    priority: number;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * When the route was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional human provided description of the static route.
+     */
+    description?: string;
+
+    /**
+     * When the route was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Used only for ECMP routes.
+     */
+    scope?: RoutesAPI.Scope;
+
+    /**
+     * Optional weight of the ECMP scope - if provided.
+     */
+    weight?: number;
+  }
 }
 
 export interface RouteGetResponse {
-  route?: unknown;
+  route?: RouteGetResponse.Route;
+}
+
+export namespace RouteGetResponse {
+  export interface Route {
+    /**
+     * The next-hop IP Address for the static route.
+     */
+    nexthop: string;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    prefix: string;
+
+    /**
+     * Priority of the static route.
+     */
+    priority: number;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * When the route was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional human provided description of the static route.
+     */
+    description?: string;
+
+    /**
+     * When the route was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Used only for ECMP routes.
+     */
+    scope?: RoutesAPI.Scope;
+
+    /**
+     * Optional weight of the ECMP scope - if provided.
+     */
+    weight?: number;
+  }
 }
 
 export interface RouteCreateParams {

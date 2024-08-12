@@ -36,7 +36,7 @@ describe('resource apps', () => {
       edge_ips: { connectivity: 'all', type: 'dynamic' },
       ip_firewall: true,
       proxy_protocol: 'off',
-      tls: 'full',
+      tls: 'off',
       traffic_type: 'direct',
     });
   });
@@ -69,7 +69,7 @@ describe('resource apps', () => {
         edge_ips: { connectivity: 'all', type: 'dynamic' },
         ip_firewall: true,
         proxy_protocol: 'off',
-        tls: 'full',
+        tls: 'off',
         traffic_type: 'direct',
       },
     );
@@ -98,7 +98,7 @@ describe('resource apps', () => {
     await expect(
       client.spectrum.apps.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
-        { direction: 'desc', order: 'protocol', page: 1, per_page: 1 },
+        { direction: 'asc', order: 'protocol', page: 1, per_page: 1 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

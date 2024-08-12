@@ -32,7 +32,7 @@ describe('resource routes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.bgp.routes.ases(
-        { format: 'JSON', limit: 5, location: 'US', sortBy: 'ipv4', sortOrder: 'desc' },
+        { format: 'JSON', limit: 5, location: 'US', sortBy: 'cone', sortOrder: 'asc' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
@@ -88,7 +88,7 @@ describe('resource routes', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.radar.bgp.routes.pfx2as(
-        { format: 'JSON', longestPrefixMatch: true, origin: 0, prefix: '1.1.1.0/24', rpkiStatus: 'INVALID' },
+        { format: 'JSON', longestPrefixMatch: true, origin: 0, prefix: '1.1.1.0/24', rpkiStatus: 'VALID' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

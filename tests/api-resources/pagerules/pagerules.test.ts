@@ -118,7 +118,7 @@ describe('resource pagerules', () => {
   test('list: required and optional params', async () => {
     const response = await client.pagerules.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'desc',
+      direction: 'asc',
       match: 'any',
       order: 'status',
       status: 'active',

@@ -13,7 +13,7 @@ describe('resource verification', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.ssl.verification.edit('a77f8bd7-3b47-46b4-a6f1-75cf98109948', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      validation_method: 'txt',
+      validation_method: 'http',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource verification', () => {
   test('edit: required and optional params', async () => {
     const response = await client.ssl.verification.edit('a77f8bd7-3b47-46b4-a6f1-75cf98109948', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      validation_method: 'txt',
+      validation_method: 'http',
     });
   });
 

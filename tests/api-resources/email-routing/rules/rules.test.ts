@@ -14,7 +14,7 @@ describe('resource rules', () => {
     const responsePromise = client.emailRouting.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       actions: [
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -22,7 +22,7 @@ describe('resource rules', () => {
           ],
         },
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -30,7 +30,7 @@ describe('resource rules', () => {
           ],
         },
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -57,7 +57,7 @@ describe('resource rules', () => {
     const response = await client.emailRouting.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       actions: [
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -65,7 +65,7 @@ describe('resource rules', () => {
           ],
         },
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -73,7 +73,7 @@ describe('resource rules', () => {
           ],
         },
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -99,7 +99,7 @@ describe('resource rules', () => {
       {
         actions: [
           {
-            type: 'forward',
+            type: 'drop',
             value: [
               'destinationaddress@example.net',
               'destinationaddress@example.net',
@@ -107,7 +107,7 @@ describe('resource rules', () => {
             ],
           },
           {
-            type: 'forward',
+            type: 'drop',
             value: [
               'destinationaddress@example.net',
               'destinationaddress@example.net',
@@ -115,7 +115,7 @@ describe('resource rules', () => {
             ],
           },
           {
-            type: 'forward',
+            type: 'drop',
             value: [
               'destinationaddress@example.net',
               'destinationaddress@example.net',
@@ -146,7 +146,7 @@ describe('resource rules', () => {
       {
         actions: [
           {
-            type: 'forward',
+            type: 'drop',
             value: [
               'destinationaddress@example.net',
               'destinationaddress@example.net',
@@ -154,7 +154,7 @@ describe('resource rules', () => {
             ],
           },
           {
-            type: 'forward',
+            type: 'drop',
             value: [
               'destinationaddress@example.net',
               'destinationaddress@example.net',
@@ -162,7 +162,7 @@ describe('resource rules', () => {
             ],
           },
           {
-            type: 'forward',
+            type: 'drop',
             value: [
               'destinationaddress@example.net',
               'destinationaddress@example.net',

@@ -31,7 +31,7 @@ describe('resource pages', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
-      region: 'us-central1',
+      region: 'asia-east1',
       start: '2014-01-01T05:20:00.12345Z',
       tz: 'tz',
     });
@@ -50,7 +50,7 @@ describe('resource pages', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       deviceType: 'DESKTOP',
       metrics: 'performanceScore,ttfb,fcp,si,lcp,tti,tbt,cls',
-      region: 'us-central1',
+      region: 'asia-east1',
       start: '2014-01-01T05:20:00.12345Z',
       tz: 'tz',
       end: '2014-01-01T05:20:00.12345Z',

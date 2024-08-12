@@ -71,37 +71,37 @@ describe('resource applications', () => {
       ],
       same_site_cookie_attribute: 'strict',
       scim_config: {
+        idp_uid: 'idp_uid',
+        remote_uri: 'remote_uri',
         authentication: { password: 'password', scheme: 'httpbasic', user: 'user' },
         deactivate_on_delete: true,
         enabled: true,
-        idp_uid: 'idp_uid',
         mappings: [
           {
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
           {
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
           {
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
         ],
-        remote_uri: 'remote_uri',
       },
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,
@@ -172,37 +172,37 @@ describe('resource applications', () => {
       ],
       same_site_cookie_attribute: 'strict',
       scim_config: {
+        idp_uid: 'idp_uid',
+        remote_uri: 'remote_uri',
         authentication: { password: 'password', scheme: 'httpbasic', user: 'user' },
         deactivate_on_delete: true,
         enabled: true,
-        idp_uid: 'idp_uid',
         mappings: [
           {
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
           {
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
           {
+            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
         ],
-        remote_uri: 'remote_uri',
       },
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,

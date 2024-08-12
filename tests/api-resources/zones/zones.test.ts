@@ -53,10 +53,10 @@ describe('resource zones', () => {
       client.zones.list(
         {
           account: { id: 'id', name: 'name' },
-          direction: 'desc',
+          direction: 'asc',
           match: 'any',
           name: 'name',
-          order: 'status',
+          order: 'name',
           page: 1,
           per_page: 5,
           status: 'initializing',

@@ -33,7 +33,7 @@ describe('resource layer7', () => {
     await expect(
       client.radar.attacks.layer7.timeseries(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           attack: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
           continent: ['string', 'string', 'string'],
@@ -47,7 +47,7 @@ describe('resource layer7', () => {
           location: ['string', 'string', 'string'],
           mitigationProduct: ['DDOS', 'WAF', 'BOT_MANAGEMENT'],
           name: ['string', 'string', 'string'],
-          normalization: 'MIN0_MAX',
+          normalization: 'PERCENTAGE_CHANGE',
         },
         { path: '/_stainless_unknown_path' },
       ),

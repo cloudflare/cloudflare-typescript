@@ -28,20 +28,15 @@ describe('resource token', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'ab0d4ef71g4425f8dcba9041231813000',
       accessRules: [
-        {
-          action: 'block',
-          country: ['US', 'MX'],
-          ip: ['string', 'string', 'string'],
-          type: 'ip.geoip.country',
-        },
+        { action: 'allow', country: ['US', 'MX'], ip: ['string', 'string', 'string'], type: 'any' },
         {
           action: 'allow',
           country: ['string', 'string', 'string'],
           ip: ['93.184.216.0/24', '2400:cb00::/32'],
-          type: 'ip.src',
+          type: 'any',
         },
         {
-          action: 'block',
+          action: 'allow',
           country: ['string', 'string', 'string'],
           ip: ['string', 'string', 'string'],
           type: 'any',

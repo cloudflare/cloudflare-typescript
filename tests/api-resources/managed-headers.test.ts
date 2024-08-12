@@ -44,14 +44,14 @@ describe('resource managedHeaders', () => {
     const response = await client.managedHeaders.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       managed_request_headers: [
-        { enabled: true, id: 'add_cf-bot-score_header' },
-        { enabled: true, id: 'add_cf-bot-score_header' },
-        { enabled: true, id: 'add_cf-bot-score_header' },
+        { id: 'add_cf-bot-score_header', enabled: true },
+        { id: 'add_cf-bot-score_header', enabled: true },
+        { id: 'add_cf-bot-score_header', enabled: true },
       ],
       managed_response_headers: [
-        { enabled: true, id: 'add_cf-bot-score_header' },
-        { enabled: true, id: 'add_cf-bot-score_header' },
-        { enabled: true, id: 'add_cf-bot-score_header' },
+        { id: 'add_cf-bot-score_header', enabled: true },
+        { id: 'add_cf-bot-score_header', enabled: true },
+        { id: 'add_cf-bot-score_header', enabled: true },
       ],
     });
   });

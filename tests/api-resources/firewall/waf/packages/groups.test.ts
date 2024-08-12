@@ -26,7 +26,7 @@ describe('resource groups', () => {
   test('list: required and optional params', async () => {
     const response = await client.firewall.waf.packages.groups.list('a25a9a7e9c00afc1fb2e0245519d725b', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'desc',
+      direction: 'asc',
       match: 'any',
       mode: 'on',
       name: 'Project Honey Pot',

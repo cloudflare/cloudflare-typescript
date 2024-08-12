@@ -40,9 +40,9 @@ describe('resource jobs', () => {
       max_upload_records: 1000,
       name: 'example.com',
       output_options: {
-        'CVE-2021-4428': true,
         batch_prefix: 'batch_prefix',
         batch_suffix: 'batch_suffix',
+        'CVE-2021-4428': true,
         field_delimiter: 'field_delimiter',
         field_names: ['ClientIP', 'EdgeStartTimestamp', 'RayID'],
         output_type: 'ndjson',

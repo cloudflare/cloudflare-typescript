@@ -27,7 +27,7 @@ describe('resource RayID', () => {
     const response = await client.logs.RayID.get('41ddf1740f67442d', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       fields: 'ClientIP,RayID,EdgeStartTimestamp',
-      timestamps: 'unixnano',
+      timestamps: 'unix',
     });
   });
 });

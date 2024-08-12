@@ -33,7 +33,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.botClass(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -77,7 +77,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.browser(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -123,7 +123,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.browserFamily(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -168,7 +168,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.deviceType(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -212,7 +212,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.httpProtocol(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -256,7 +256,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.httpVersion(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -300,7 +300,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.ipVersion(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -344,7 +344,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.os(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -388,7 +388,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.postQuantum(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],
@@ -433,7 +433,7 @@ describe('resource timeseriesGroups', () => {
     await expect(
       client.radar.http.timeseriesGroups.tlsVersion(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
           continent: ['string', 'string', 'string'],

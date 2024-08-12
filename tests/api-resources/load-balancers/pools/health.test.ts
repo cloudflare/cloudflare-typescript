@@ -42,7 +42,7 @@ describe('resource health', () => {
       probe_zone: 'example.com',
       retries: 0,
       timeout: 0,
-      type: 'https',
+      type: 'http',
     });
   });
 

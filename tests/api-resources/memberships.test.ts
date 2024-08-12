@@ -53,9 +53,9 @@ describe('resource memberships', () => {
       client.memberships.list(
         {
           account: { name: 'Demo Account' },
-          direction: 'desc',
+          direction: 'asc',
           name: 'Demo Account',
-          order: 'status',
+          order: 'id',
           page: 1,
           per_page: 5,
           status: 'accepted',

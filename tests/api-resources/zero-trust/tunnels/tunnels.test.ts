@@ -54,7 +54,7 @@ describe('resource tunnels', () => {
       name: 'blog',
       page: 1,
       per_page: 1,
-      status: 'healthy',
+      status: 'inactive',
       tun_types: 'cfd_tunnel,warp_connector',
       uuid: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       was_active_at: '2009-11-10T23:00:00Z',

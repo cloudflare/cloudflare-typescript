@@ -27,11 +27,11 @@ describe('resource operations', () => {
     const response = await client.apiGateway.discovery.operations.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       diff: true,
-      direction: 'desc',
+      direction: 'asc',
       endpoint: '/api/v1',
       host: ['api.cloudflare.com'],
       method: ['GET'],
-      order: 'method',
+      order: 'host',
       origin: 'ML',
       page: 1,
       per_page: 5,

@@ -52,7 +52,7 @@ describe('resource warpConnector', () => {
       name: 'blog',
       page: 1,
       per_page: 1,
-      status: 'healthy',
+      status: 'inactive',
       uuid: 'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       was_active_at: '2009-11-10T23:00:00Z',
       was_inactive_at: '2009-11-10T23:00:00Z',

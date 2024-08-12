@@ -14,7 +14,7 @@ describe('resource accessRules', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.firewall.accessRules.create({
       configuration: {},
-      mode: 'challenge',
+      mode: 'block',
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource accessRules', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.firewall.accessRules.create({
       configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'challenge',
+      mode: 'block',
       account_id: 'account_id',
       notes: 'This rule is enabled because of an event that occurred on date X.',
     });
@@ -66,7 +66,7 @@ describe('resource accessRules', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = client.firewall.accessRules.edit('de677e5818985db1285d0e80225f06e5', {
       configuration: {},
-      mode: 'challenge',
+      mode: 'block',
       account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -82,7 +82,7 @@ describe('resource accessRules', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.firewall.accessRules.edit('de677e5818985db1285d0e80225f06e5', {
       configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'challenge',
+      mode: 'block',
       account_id: 'account_id',
       notes: 'This rule is enabled because of an event that occurred on date X.',
     });

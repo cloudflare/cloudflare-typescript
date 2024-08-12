@@ -121,7 +121,7 @@ describe('resource pools', () => {
           weight: 0.6,
         },
       ],
-      check_regions: ['WEU', 'ENAM'],
+      check_regions: ['WNAM', 'ENAM'],
       description: 'Primary data center - Provider XYZ',
       enabled: false,
       latitude: 0,
@@ -198,7 +198,7 @@ describe('resource pools', () => {
   test('edit: required and optional params', async () => {
     const response = await client.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      check_regions: ['WEU', 'ENAM'],
+      check_regions: ['WNAM', 'ENAM'],
       description: 'Primary data center - Provider XYZ',
       enabled: false,
       latitude: 0,
