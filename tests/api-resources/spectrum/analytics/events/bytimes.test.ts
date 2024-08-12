@@ -41,7 +41,7 @@ describe('resource bytimes', () => {
           metrics: ['count', 'bytesIngress'],
           since: '2014-01-02T02:20:00Z',
           sort: ['+count', '-bytesIngress'],
-          time_delta: 'minute',
+          time_delta: 'year',
           until: '2014-01-02T03:20:00Z',
         },
         { path: '/_stainless_unknown_path' },

@@ -26,7 +26,7 @@ describe('resource auditLogs', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'f174be97-19b1-40d6-954d-70cd5fbd52db',
       action: { type: 'add' },
-      actor: { ip: '17.168.228.63', email: 'alice@example.com' },
+      actor: { email: 'alice@example.com', ip: '17.168.228.63' },
       before: '2019-04-30T01:12:20Z',
       direction: 'desc',
       export: true,

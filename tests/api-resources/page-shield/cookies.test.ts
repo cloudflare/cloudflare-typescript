@@ -35,7 +35,7 @@ describe('resource cookies', () => {
       page_url: 'example.com/page,*/checkout,example.com/*,*checkout*',
       path: '/',
       per_page: 100,
-      same_site: 'strict',
+      same_site: 'lax',
       secure: true,
       type: 'first_party',
     });

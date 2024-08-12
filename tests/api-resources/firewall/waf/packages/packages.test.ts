@@ -38,7 +38,7 @@ describe('resource packages', () => {
     await expect(
       client.firewall.waf.packages.list(
         '023e105f4ecef8ad9ca31a8372d0c353',
-        { direction: 'desc', match: 'any', name: 'USER', order: 'name', page: 1, per_page: 5 },
+        { direction: 'asc', match: 'any', name: 'USER', order: 'name', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

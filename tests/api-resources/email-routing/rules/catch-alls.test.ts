@@ -12,7 +12,7 @@ const client = new Cloudflare({
 describe('resource catchAlls', () => {
   test('update: only required params', async () => {
     const responsePromise = client.emailRouting.rules.catchAlls.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      actions: [{ type: 'forward' }, { type: 'forward' }, { type: 'forward' }],
+      actions: [{ type: 'drop' }, { type: 'drop' }, { type: 'drop' }],
       matchers: [{ type: 'all' }, { type: 'all' }, { type: 'all' }],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource catchAlls', () => {
     const response = await client.emailRouting.rules.catchAlls.update('023e105f4ecef8ad9ca31a8372d0c353', {
       actions: [
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -36,7 +36,7 @@ describe('resource catchAlls', () => {
           ],
         },
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',
@@ -44,7 +44,7 @@ describe('resource catchAlls', () => {
           ],
         },
         {
-          type: 'forward',
+          type: 'drop',
           value: [
             'destinationaddress@example.net',
             'destinationaddress@example.net',

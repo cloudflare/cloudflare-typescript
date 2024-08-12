@@ -37,7 +37,7 @@ describe('resource overrides', () => {
       path_id: 'de677e5818985db1285d0e80225f06e5',
       body_id: '023e105f4ecef8ad9ca31a8372d0c353',
       rewrite_action: {},
-      rules: { '100015': 'disable' },
+      rules: { '100015': 'challenge' },
       urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource overrides', () => {
         disable: 'challenge',
         simulate: 'challenge',
       },
-      rules: { '100015': 'disable' },
+      rules: { '100015': 'challenge' },
       urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
     });
   });

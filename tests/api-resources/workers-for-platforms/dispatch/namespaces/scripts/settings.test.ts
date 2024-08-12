@@ -44,10 +44,10 @@ describe('resource settings', () => {
           limits: { cpu_ms: 50 },
           logpush: false,
           migrations: {
-            new_tag: 'v2',
-            old_tag: 'v1',
             deleted_classes: ['string', 'string', 'string'],
             new_classes: ['string', 'string', 'string'],
+            new_tag: 'v2',
+            old_tag: 'v1',
             renamed_classes: [
               { from: 'from', to: 'to' },
               { from: 'from', to: 'to' },
@@ -62,9 +62,9 @@ describe('resource settings', () => {
           placement: { mode: 'smart' },
           tags: ['my-tag', 'my-tag', 'my-tag'],
           tail_consumers: [
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
-            { environment: 'production', namespace: 'my-namespace', service: 'my-log-consumer' },
+            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
+            { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
           ],
           usage_model: 'unbound',
         },

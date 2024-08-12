@@ -70,7 +70,7 @@ describe('resource netflows', () => {
     await expect(
       client.radar.netflows.timeseries(
         {
-          aggInterval: '1h',
+          aggInterval: '15m',
           asn: ['string', 'string', 'string'],
           continent: ['string', 'string', 'string'],
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
@@ -79,7 +79,7 @@ describe('resource netflows', () => {
           format: 'JSON',
           location: ['string', 'string', 'string'],
           name: ['string', 'string', 'string'],
-          normalization: 'MIN0_MAX',
+          normalization: 'PERCENTAGE_CHANGE',
           product: ['HTTP', 'ALL'],
         },
         { path: '/_stainless_unknown_path' },

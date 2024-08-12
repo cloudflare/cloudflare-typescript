@@ -49,7 +49,7 @@ describe('resource iqi', () => {
   test('timeseriesGroups: required and optional params', async () => {
     const response = await client.radar.quality.iqi.timeseriesGroups({
       metric: 'BANDWIDTH',
-      aggInterval: '1h',
+      aggInterval: '15m',
       asn: ['string', 'string', 'string'],
       continent: ['string', 'string', 'string'],
       dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],

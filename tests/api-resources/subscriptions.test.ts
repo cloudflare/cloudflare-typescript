@@ -43,11 +43,11 @@ describe('resource subscriptions', () => {
         { default: 5, name: 'page_rules', price: 5, value: 20 },
         { default: 5, name: 'page_rules', price: 5, value: 20 },
       ],
-      frequency: 'monthly',
+      frequency: 'weekly',
       rate_plan: {
+        id: 'free',
         currency: 'USD',
         externally_managed: false,
-        id: 'free',
         is_contract: false,
         public_name: 'Business Plan',
         scope: 'zone',

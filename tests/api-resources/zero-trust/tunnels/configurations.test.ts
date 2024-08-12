@@ -33,8 +33,9 @@ describe('resource configurations', () => {
           ingress: [
             {
               hostname: 'tunnel.example.com',
+              service: 'https://localhost:8001',
               originRequest: {
-                access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'teamName' },
+                access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
                 caPool: 'caPool',
                 connectTimeout: 0,
                 disableChunkedEncoding: true,
@@ -50,12 +51,12 @@ describe('resource configurations', () => {
                 tlsTimeout: 0,
               },
               path: 'subpath',
-              service: 'https://localhost:8001',
             },
             {
               hostname: 'tunnel.example.com',
+              service: 'https://localhost:8001',
               originRequest: {
-                access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'teamName' },
+                access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
                 caPool: 'caPool',
                 connectTimeout: 0,
                 disableChunkedEncoding: true,
@@ -71,12 +72,12 @@ describe('resource configurations', () => {
                 tlsTimeout: 0,
               },
               path: 'subpath',
-              service: 'https://localhost:8001',
             },
             {
               hostname: 'tunnel.example.com',
+              service: 'https://localhost:8001',
               originRequest: {
-                access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'teamName' },
+                access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
                 caPool: 'caPool',
                 connectTimeout: 0,
                 disableChunkedEncoding: true,
@@ -92,11 +93,10 @@ describe('resource configurations', () => {
                 tlsTimeout: 0,
               },
               path: 'subpath',
-              service: 'https://localhost:8001',
             },
           ],
           originRequest: {
-            access: { audTag: ['string', 'string', 'string'], required: true, teamName: 'teamName' },
+            access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
             caPool: 'caPool',
             connectTimeout: 0,
             disableChunkedEncoding: true,

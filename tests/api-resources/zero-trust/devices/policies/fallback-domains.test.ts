@@ -34,19 +34,19 @@ describe('resource fallbackDomains', () => {
         account_id: '699d98642c564d2e855e9661899b7252',
         body: [
           {
+            suffix: 'example.com',
             description: 'Domain bypass for local development',
             dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
-            suffix: 'example.com',
           },
           {
+            suffix: 'example.com',
             description: 'Domain bypass for local development',
             dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
-            suffix: 'example.com',
           },
           {
+            suffix: 'example.com',
             description: 'Domain bypass for local development',
             dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
-            suffix: 'example.com',
           },
         ],
       },
