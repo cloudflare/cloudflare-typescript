@@ -25,7 +25,7 @@ export class Secrets extends APIResource {
   }
 
   /**
-   * Fetch secrets from a script uploaded to a Workers for Platforms namespace.
+   * List secrets from a script uploaded to a Workers for Platforms namespace.
    */
   list(
     dispatchNamespace: string,
@@ -46,24 +46,26 @@ export class SecretListResponsesSinglePage extends SinglePage<SecretListResponse
 
 export interface SecretUpdateResponse {
   /**
-   * The name of this secret, this is what will be to access it inside the Worker.
+   * The name of this secret, this is what will be used to access it inside the
+   * Worker.
    */
   name?: string;
 
   /**
-   * The type of secret to put.
+   * The type of secret.
    */
   type?: 'secret_text';
 }
 
 export interface SecretListResponse {
   /**
-   * The name of this secret, this is what will be to access it inside the Worker.
+   * The name of this secret, this is what will be used to access it inside the
+   * Worker.
    */
   name?: string;
 
   /**
-   * The type of secret to put.
+   * The type of secret.
    */
   type?: 'secret_text';
 }
@@ -75,8 +77,8 @@ export interface SecretUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The name of this secret, this is what will be to access it inside
-   * the Worker.
+   * Body param: The name of this secret, this is what will be used to access it
+   * inside the Worker.
    */
   name?: string;
 
