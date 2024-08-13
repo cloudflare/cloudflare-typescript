@@ -120,7 +120,7 @@ export type QueueDeleteResponse = unknown | Array<unknown> | string;
 
 export interface QueueCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -132,7 +132,7 @@ export interface QueueCreateParams {
 
 export interface QueueUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -144,21 +144,21 @@ export interface QueueUpdateParams {
 
 export interface QueueListParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface QueueDeleteParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface QueueGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
