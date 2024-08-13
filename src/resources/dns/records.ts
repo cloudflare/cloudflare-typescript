@@ -193,6 +193,11 @@ export interface ARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -222,6 +227,11 @@ export interface ARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -259,6 +269,11 @@ export interface AAAARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -288,6 +303,11 @@ export interface AAAARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -325,6 +345,11 @@ export interface CAARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted CAA content. See 'data' to set CAA properties.
    */
   content?: string;
@@ -353,6 +378,11 @@ export interface CAARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -412,6 +442,11 @@ export interface CERTRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted CERT content. See 'data' to set CERT properties.
    */
   content?: string;
@@ -440,6 +475,11 @@ export interface CERTRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -504,6 +544,11 @@ export interface CNAMERecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -533,6 +578,11 @@ export interface CNAMERecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -570,6 +620,11 @@ export interface DNSKEYRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted DNSKEY content. See 'data' to set DNSKEY properties.
    */
   content?: string;
@@ -598,6 +653,11 @@ export interface DNSKEYRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -662,6 +722,11 @@ export interface DSRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted DS content. See 'data' to set DS properties.
    */
   content?: string;
@@ -690,6 +755,11 @@ export interface DSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -754,6 +824,11 @@ export interface HTTPSRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted HTTPS content. See 'data' to set HTTPS properties.
    */
   content?: string;
@@ -782,6 +857,11 @@ export interface HTTPSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -841,6 +921,11 @@ export interface LOCRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted LOC content. See 'data' to set LOC properties.
    */
   content?: string;
@@ -869,6 +954,11 @@ export interface LOCRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -979,6 +1069,11 @@ export interface MXRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1002,6 +1097,11 @@ export interface MXRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1039,6 +1139,11 @@ export interface NAPTRRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted NAPTR content. See 'data' to set NAPTR properties.
    */
   content?: string;
@@ -1067,6 +1172,11 @@ export interface NAPTRRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1141,6 +1251,11 @@ export interface NSRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1164,6 +1279,11 @@ export interface NSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1201,6 +1321,11 @@ export interface PTRRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1224,6 +1349,11 @@ export interface PTRRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1328,6 +1458,11 @@ export interface SMIMEARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted SMIMEA content. See 'data' to set SMIMEA properties.
    */
   content?: string;
@@ -1356,6 +1491,11 @@ export interface SMIMEARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1422,6 +1562,11 @@ export interface SRVRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Priority, weight, port, and SRV target. See 'data' for setting the individual
    * component values.
    */
@@ -1451,6 +1596,11 @@ export interface SRVRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1537,6 +1687,11 @@ export interface SSHFPRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted SSHFP content. See 'data' to set SSHFP properties.
    */
   content?: string;
@@ -1565,6 +1720,11 @@ export interface SSHFPRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1624,6 +1784,11 @@ export interface SVCBRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted SVCB content. See 'data' to set SVCB properties.
    */
   content?: string;
@@ -1652,6 +1817,11 @@ export interface SVCBRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1711,6 +1881,11 @@ export interface TLSARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted TLSA content. See 'data' to set TLSA properties.
    */
   content?: string;
@@ -1739,6 +1914,11 @@ export interface TLSARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1817,6 +1997,11 @@ export interface TXTRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1840,6 +2025,11 @@ export interface TXTRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1883,6 +2073,11 @@ export interface URIRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted URI content. See 'data' to set URI properties.
    */
   content?: string;
@@ -1911,6 +2106,11 @@ export interface URIRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
