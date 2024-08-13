@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as AddressMapsAPI from './address-maps';
+import * as Shared from '../../shared';
 import * as AccountsAPI from './accounts';
 import * as IPsAPI from './ips';
 import * as ZonesAPI from './zones';
@@ -52,14 +53,9 @@ export class AddressMaps extends APIResource {
     addressMapId: string,
     params: AddressMapDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapDeleteResponse | null> {
+  ): Core.APIPromise<AddressMapDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
-        options,
-      ) as Core.APIPromise<{ result: AddressMapDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, options);
   }
 
   /**
@@ -238,7 +234,42 @@ export namespace AddressMapCreateResponse {
   }
 }
 
-export type AddressMapDeleteResponse = Array<unknown>;
+export interface AddressMapDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: AddressMapDeleteResponse.ResultInfo;
+}
+
+export namespace AddressMapDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
 
 export interface AddressMapGetResponse {
   /**
