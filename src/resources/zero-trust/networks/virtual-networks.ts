@@ -9,16 +9,13 @@ export class VirtualNetworks extends APIResource {
   /**
    * Adds a new virtual network to an account.
    */
-  create(
-    params: VirtualNetworkCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkCreateResponse> {
+  create(params: VirtualNetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/teamnet/virtual_networks`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkCreateResponse }>
+      }) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -44,13 +41,13 @@ export class VirtualNetworks extends APIResource {
     virtualNetworkId: string,
     params: VirtualNetworkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkDeleteResponse> {
+  ): Core.APIPromise<VirtualNetwork> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
         options,
-      ) as Core.APIPromise<{ result: VirtualNetworkDeleteResponse }>
+      ) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -61,13 +58,13 @@ export class VirtualNetworks extends APIResource {
     virtualNetworkId: string,
     params: VirtualNetworkEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetworkEditResponse> {
+  ): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: VirtualNetworkEditResponse }>
+      }) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -106,12 +103,6 @@ export interface VirtualNetwork {
    */
   deleted_at?: string;
 }
-
-export type VirtualNetworkCreateResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkDeleteResponse = unknown | Array<unknown> | string;
-
-export type VirtualNetworkEditResponse = unknown | Array<unknown> | string;
 
 export interface VirtualNetworkCreateParams {
   /**
@@ -197,9 +188,6 @@ export interface VirtualNetworkEditParams {
 
 export namespace VirtualNetworks {
   export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
-  export import VirtualNetworkCreateResponse = VirtualNetworksAPI.VirtualNetworkCreateResponse;
-  export import VirtualNetworkDeleteResponse = VirtualNetworksAPI.VirtualNetworkDeleteResponse;
-  export import VirtualNetworkEditResponse = VirtualNetworksAPI.VirtualNetworkEditResponse;
   export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
   export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;

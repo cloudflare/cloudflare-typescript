@@ -14,9 +14,6 @@ export {
 export { Networks } from './networks';
 export {
   VirtualNetwork,
-  VirtualNetworkCreateResponse,
-  VirtualNetworkDeleteResponse,
-  VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
   VirtualNetworkListParams,
   VirtualNetworkDeleteParams,

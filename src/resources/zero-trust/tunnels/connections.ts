@@ -6,24 +6,6 @@ import * as ConnectionsAPI from './connections';
 
 export class Connections extends APIResource {
   /**
-   * Removes connections that are in a disconnected or pending reconnect state. We
-   * recommend running this command after shutting down a tunnel.
-   */
-  delete(
-    tunnelId: string,
-    params: ConnectionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionDeleteResponse> {
-    const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/tunnels/${tunnelId}/connections`,
-        options,
-      ) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Fetches connection details for a Cloudflare Tunnel.
    */
   get(
@@ -130,16 +112,7 @@ export namespace Client {
   }
 }
 
-export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
-
 export type ConnectionGetResponse = Array<Client>;
-
-export interface ConnectionDeleteParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id: string;
-}
 
 export interface ConnectionGetParams {
   /**
@@ -150,8 +123,6 @@ export interface ConnectionGetParams {
 
 export namespace Connections {
   export import Client = ConnectionsAPI.Client;
-  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
-  export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }
