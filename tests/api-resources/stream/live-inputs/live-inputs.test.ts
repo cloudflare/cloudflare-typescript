@@ -31,6 +31,7 @@ describe('resource liveInputs', () => {
       meta: { name: 'test stream 1' },
       recording: {
         allowedOrigins: ['example.com'],
+        hideLiveViewerCount: false,
         mode: 'off',
         requireSignedURLs: false,
         timeoutSeconds: 0,
@@ -59,6 +60,7 @@ describe('resource liveInputs', () => {
       meta: { name: 'test stream 1' },
       recording: {
         allowedOrigins: ['example.com'],
+        hideLiveViewerCount: false,
         mode: 'off',
         requireSignedURLs: false,
         timeoutSeconds: 0,
