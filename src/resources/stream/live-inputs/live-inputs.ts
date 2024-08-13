@@ -188,6 +188,12 @@ export namespace LiveInput {
     allowedOrigins?: Array<string>;
 
     /**
+     * Disables reporting the number of live viewers when this property is set to
+     * `true`.
+     */
+    hideLiveViewerCount?: boolean;
+
+    /**
      * Specifies the recording behavior for the live input. Set this value to `off` to
      * prevent a recording. Set the value to `automatic` to begin a recording and
      * transition to on-demand after Stream Live stops receiving input.
@@ -397,6 +403,12 @@ export namespace LiveInputCreateParams {
     allowedOrigins?: Array<string>;
 
     /**
+     * Disables reporting the number of live viewers when this property is set to
+     * `true`.
+     */
+    hideLiveViewerCount?: boolean;
+
+    /**
      * Specifies the recording behavior for the live input. Set this value to `off` to
      * prevent a recording. Set the value to `automatic` to begin a recording and
      * transition to on-demand after Stream Live stops receiving input.
@@ -466,6 +478,12 @@ export namespace LiveInputUpdateParams {
      * array allows videos to be viewed on any origin.
      */
     allowedOrigins?: Array<string>;
+
+    /**
+     * Disables reporting the number of live viewers when this property is set to
+     * `true`.
+     */
+    hideLiveViewerCount?: boolean;
 
     /**
      * Specifies the recording behavior for the live input. Set this value to `off` to
