@@ -41,16 +41,10 @@ export {
 } from './identity-providers';
 export {
   Connection,
-  TunnelCreateResponse,
   TunnelListResponse,
-  TunnelDeleteResponse,
   TunnelEditResponse,
-  TunnelGetResponse,
-  TunnelCreateParams,
   TunnelListParams,
-  TunnelDeleteParams,
   TunnelEditParams,
-  TunnelGetParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels/index';

@@ -19,18 +19,6 @@ export class Tunnels extends APIResource {
   management: ManagementAPI.Management = new ManagementAPI.Management(this._client);
 
   /**
-   * Creates a new Argo Tunnel in an account.
-   */
-  create(params: TunnelCreateParams, options?: Core.RequestOptions): Core.APIPromise<TunnelCreateResponse> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/tunnels`, { body, ...options }) as Core.APIPromise<{
-        result: TunnelCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists and filters all types of Tunnels in an account.
    */
   list(
@@ -43,22 +31,6 @@ export class Tunnels extends APIResource {
       TunnelListResponsesV4PagePaginationArray,
       { query, ...options },
     );
-  }
-
-  /**
-   * Deletes an Argo Tunnel from an account.
-   */
-  delete(
-    tunnelId: string,
-    params: TunnelDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelDeleteResponse> {
-    const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/tunnels/${tunnelId}`, options) as Core.APIPromise<{
-        result: TunnelDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -75,22 +47,6 @@ export class Tunnels extends APIResource {
         body,
         ...options,
       }) as Core.APIPromise<{ result: TunnelEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches a single Argo Tunnel.
-   */
-  get(
-    tunnelId: string,
-    params: TunnelGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelGetResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/tunnels/${tunnelId}`, options) as Core.APIPromise<{
-        result: TunnelGetResponse;
-      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -115,34 +71,6 @@ export interface Connection {
    * UUID of the Cloudflare Tunnel connection.
    */
   uuid?: string;
-}
-
-export interface TunnelCreateResponse {
-  /**
-   * UUID of the tunnel.
-   */
-  id: string;
-
-  /**
-   * The tunnel connections between your origin and Cloudflare's edge.
-   */
-  connections: Array<Connection>;
-
-  /**
-   * Timestamp of when the resource was created.
-   */
-  created_at: string;
-
-  /**
-   * A user-friendly name for a tunnel.
-   */
-  name: string;
-
-  /**
-   * Timestamp of when the resource was deleted. If `null`, the resource has not been
-   * deleted.
-   */
-  deleted_at?: string;
 }
 
 /**
@@ -265,34 +193,6 @@ export namespace TunnelListResponse {
   }
 }
 
-export interface TunnelDeleteResponse {
-  /**
-   * UUID of the tunnel.
-   */
-  id: string;
-
-  /**
-   * The tunnel connections between your origin and Cloudflare's edge.
-   */
-  connections: Array<Connection>;
-
-  /**
-   * Timestamp of when the resource was created.
-   */
-  created_at: string;
-
-  /**
-   * A user-friendly name for a tunnel.
-   */
-  name: string;
-
-  /**
-   * Timestamp of when the resource was deleted. If `null`, the resource has not been
-   * deleted.
-   */
-  deleted_at?: string;
-}
-
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
@@ -413,52 +313,6 @@ export namespace TunnelEditResponse {
   }
 }
 
-export interface TunnelGetResponse {
-  /**
-   * UUID of the tunnel.
-   */
-  id: string;
-
-  /**
-   * The tunnel connections between your origin and Cloudflare's edge.
-   */
-  connections: Array<Connection>;
-
-  /**
-   * Timestamp of when the resource was created.
-   */
-  created_at: string;
-
-  /**
-   * A user-friendly name for a tunnel.
-   */
-  name: string;
-
-  /**
-   * Timestamp of when the resource was deleted. If `null`, the resource has not been
-   * deleted.
-   */
-  deleted_at?: string;
-}
-
-export interface TunnelCreateParams {
-  /**
-   * Path param: Cloudflare account ID
-   */
-  account_id: string;
-
-  /**
-   * Body param: A user-friendly name for a tunnel.
-   */
-  name: string;
-
-  /**
-   * Body param: Sets the password required to run a locally-managed tunnel. Must be
-   * at least 32 bytes and encoded as a base64 string.
-   */
-  tunnel_secret: string;
-}
-
 export interface TunnelListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Cloudflare account ID
@@ -522,13 +376,6 @@ export interface TunnelListParams extends V4PagePaginationArrayParams {
   was_inactive_at?: string;
 }
 
-export interface TunnelDeleteParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id: string;
-}
-
 export interface TunnelEditParams {
   /**
    * Path param: Cloudflare account ID
@@ -547,26 +394,13 @@ export interface TunnelEditParams {
   tunnel_secret?: string;
 }
 
-export interface TunnelGetParams {
-  /**
-   * Cloudflare account ID
-   */
-  account_id: string;
-}
-
 export namespace Tunnels {
   export import Connection = TunnelsAPI.Connection;
-  export import TunnelCreateResponse = TunnelsAPI.TunnelCreateResponse;
   export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
-  export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
   export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
-  export import TunnelGetResponse = TunnelsAPI.TunnelGetResponse;
   export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
-  export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
-  export import TunnelDeleteParams = TunnelsAPI.TunnelDeleteParams;
   export import TunnelEditParams = TunnelsAPI.TunnelEditParams;
-  export import TunnelGetParams = TunnelsAPI.TunnelGetParams;
   export import Configurations = ConfigurationsAPI.Configurations;
   export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
   export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
@@ -574,9 +408,7 @@ export namespace Tunnels {
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import Connections = ConnectionsAPI.Connections;
   export import Client = ConnectionsAPI.Client;
-  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
-  export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
   export import Token = TokenAPI.Token;
   export import TokenGetResponse = TokenAPI.TokenGetResponse;
