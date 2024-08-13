@@ -1,13 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Client,
-  ConnectionDeleteResponse,
-  ConnectionGetResponse,
-  ConnectionDeleteParams,
-  ConnectionGetParams,
-  Connections,
-} from './connections';
+export { Client, ConnectionGetResponse, ConnectionGetParams, Connections } from './connections';
 export {
   ConfigurationUpdateResponse,
   ConfigurationGetResponse,
@@ -17,16 +10,10 @@ export {
 } from './configurations';
 export {
   Connection,
-  TunnelCreateResponse,
   TunnelListResponse,
-  TunnelDeleteResponse,
   TunnelEditResponse,
-  TunnelGetResponse,
-  TunnelCreateParams,
   TunnelListParams,
-  TunnelDeleteParams,
   TunnelEditParams,
-  TunnelGetParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels';
