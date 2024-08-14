@@ -52,11 +52,107 @@ export class FallbackOrigin extends APIResource {
   }
 }
 
-export type FallbackOriginUpdateResponse = unknown | string | null;
+export interface FallbackOriginUpdateResponse {
+  /**
+   * This is the time the fallback origin was created.
+   */
+  created_at?: string;
 
-export type FallbackOriginDeleteResponse = unknown | string | null;
+  /**
+   * These are errors that were encountered while trying to activate a fallback
+   * origin.
+   */
+  errors?: Array<string>;
 
-export type FallbackOriginGetResponse = unknown | string | null;
+  /**
+   * Your origin hostname that requests to your custom hostnames will be sent to.
+   */
+  origin?: string;
+
+  /**
+   * Status of the fallback origin's activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the fallback origin was updated.
+   */
+  updated_at?: string;
+}
+
+export interface FallbackOriginDeleteResponse {
+  /**
+   * This is the time the fallback origin was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are errors that were encountered while trying to activate a fallback
+   * origin.
+   */
+  errors?: Array<string>;
+
+  /**
+   * Your origin hostname that requests to your custom hostnames will be sent to.
+   */
+  origin?: string;
+
+  /**
+   * Status of the fallback origin's activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the fallback origin was updated.
+   */
+  updated_at?: string;
+}
+
+export interface FallbackOriginGetResponse {
+  /**
+   * This is the time the fallback origin was created.
+   */
+  created_at?: string;
+
+  /**
+   * These are errors that were encountered while trying to activate a fallback
+   * origin.
+   */
+  errors?: Array<string>;
+
+  /**
+   * Your origin hostname that requests to your custom hostnames will be sent to.
+   */
+  origin?: string;
+
+  /**
+   * Status of the fallback origin's activation.
+   */
+  status?:
+    | 'initializing'
+    | 'pending_deployment'
+    | 'pending_deletion'
+    | 'active'
+    | 'deployment_timed_out'
+    | 'deletion_timed_out';
+
+  /**
+   * This is the time the fallback origin was updated.
+   */
+  updated_at?: string;
+}
 
 export interface FallbackOriginUpdateParams {
   /**

@@ -19,13 +19,13 @@ export class Hostnames extends APIResource {
   update(
     params: HostnameUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameUpdateResponse | null> {
+  ): Core.APIPromise<HostnameUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/origin_tls_client_auth/hostnames`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: HostnameUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: HostnameUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 

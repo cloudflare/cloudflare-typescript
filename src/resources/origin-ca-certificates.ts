@@ -15,10 +15,10 @@ export class OriginCACertificates extends APIResource {
   create(
     body: OriginCACertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCACertificateCreateResponse> {
+  ): Core.APIPromise<OriginCACertificate> {
     return (
       this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{
-        result: OriginCACertificateCreateResponse;
+        result: OriginCACertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -64,10 +64,10 @@ export class OriginCACertificates extends APIResource {
    * Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
    */
-  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificateGetResponse> {
+  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
     return (
       this._client.get(`/certificates/${certificateId}`, options) as Core.APIPromise<{
-        result: OriginCACertificateGetResponse;
+        result: OriginCACertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -85,7 +85,7 @@ export interface OriginCACertificate {
    * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
    * certificate.
    */
-  hostnames: Array<unknown>;
+  hostnames: Array<string>;
 
   /**
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
@@ -114,16 +114,44 @@ export interface OriginCACertificate {
   expires_on?: string;
 }
 
-export type OriginCACertificateCreateResponse = unknown | string | null;
-
 export interface OriginCACertificateDeleteResponse {
+  /**
+   * The Certificate Signing Request (CSR). Must be newline-encoded.
+   */
+  csr: string;
+
+  /**
+   * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
+   * certificate.
+   */
+  hostnames: Array<string>;
+
+  /**
+   * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+   * or "keyless-certificate" (for Keyless SSL servers).
+   */
+  request_type: Shared.CertificateRequestType;
+
+  /**
+   * The number of days for which the certificate should be valid.
+   */
+  requested_validity: CertificatePacksAPI.RequestValidity;
+
   /**
    * Identifier
    */
   id?: string;
-}
 
-export type OriginCACertificateGetResponse = unknown | string | null;
+  /**
+   * The Origin CA certificate. Will be newline-encoded.
+   */
+  certificate?: string;
+
+  /**
+   * When the certificate will expire.
+   */
+  expires_on?: string;
+}
 
 export interface OriginCACertificateCreateParams {
   /**
@@ -135,7 +163,7 @@ export interface OriginCACertificateCreateParams {
    * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
    * certificate.
    */
-  hostnames?: Array<unknown>;
+  hostnames?: Array<string>;
 
   /**
    * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),

@@ -12,13 +12,13 @@ export class Associations extends APIResource {
     mtlsCertificateId: string,
     params: AssociationGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AssociationGetResponse | null> {
+  ): Core.APIPromise<AssociationGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}/associations`,
         options,
-      ) as Core.APIPromise<{ result: AssociationGetResponse | null }>
+      ) as Core.APIPromise<{ result: AssociationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

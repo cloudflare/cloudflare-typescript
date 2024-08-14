@@ -182,7 +182,7 @@ export interface CertificatePackEditResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
-export type CertificatePackGetResponse = unknown | string | null;
+export type CertificatePackGetResponse = unknown;
 
 export interface CertificatePackListParams {
   /**

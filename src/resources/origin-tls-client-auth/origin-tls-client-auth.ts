@@ -20,11 +20,11 @@ export class OriginTLSClientAuth extends APIResource {
   create(
     params: OriginTLSClientAuthCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthCreateResponse> {
+  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
-        result: OriginTLSClientAuthCreateResponse;
+        result: ZoneAuthenticatedOriginPull;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -51,13 +51,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthDeleteResponse> {
+  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: OriginTLSClientAuthDeleteResponse }>
+      ) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -68,13 +68,13 @@ export class OriginTLSClientAuth extends APIResource {
     certificateId: string,
     params: OriginTLSClientAuthGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginTLSClientAuthGetResponse> {
+  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
         options,
-      ) as Core.APIPromise<{ result: OriginTLSClientAuthGetResponse }>
+      ) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -124,12 +124,6 @@ export interface ZoneAuthenticatedOriginPull {
    */
   uploaded_on?: string;
 }
-
-export type OriginTLSClientAuthCreateResponse = unknown | string | null;
-
-export type OriginTLSClientAuthDeleteResponse = unknown | string | null;
-
-export type OriginTLSClientAuthGetResponse = unknown | string | null;
 
 export interface OriginTLSClientAuthCreateParams {
   /**
