@@ -189,7 +189,7 @@ export interface CustomHostname {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostname {
@@ -238,7 +238,7 @@ export namespace CustomHostname {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -363,7 +363,7 @@ export namespace CustomHostname {
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -536,7 +536,7 @@ export interface CustomHostnameCreateResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameCreateResponse {
@@ -585,7 +585,7 @@ export namespace CustomHostnameCreateResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -710,7 +710,7 @@ export namespace CustomHostnameCreateResponse {
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -861,7 +861,7 @@ export interface CustomHostnameListResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameListResponse {
@@ -910,7 +910,7 @@ export namespace CustomHostnameListResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -1035,7 +1035,7 @@ export namespace CustomHostnameListResponse {
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -1193,7 +1193,7 @@ export interface CustomHostnameEditResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameEditResponse {
@@ -1242,7 +1242,7 @@ export namespace CustomHostnameEditResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -1367,7 +1367,7 @@ export namespace CustomHostnameEditResponse {
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the
@@ -1518,7 +1518,7 @@ export interface CustomHostnameGetResponse {
   /**
    * These are errors that were encountered while trying to activate a hostname.
    */
-  verification_errors?: Array<unknown>;
+  verification_errors?: Array<string>;
 }
 
 export namespace CustomHostnameGetResponse {
@@ -1567,7 +1567,7 @@ export namespace CustomHostnameGetResponse {
     /**
      * A list of Hostnames on a custom uploaded certificate.
      */
-    hosts?: Array<unknown>;
+    hosts?: Array<string>;
 
     /**
      * The issuer on a custom uploaded certificate.
@@ -1692,7 +1692,7 @@ export namespace CustomHostnameGetResponse {
        * The set of email addresses that the certificate authority (CA) will use to
        * complete domain validation.
        */
-      emails?: Array<unknown>;
+      emails?: Array<string>;
 
       /**
        * The content that the certificate authority (CA) will expect to find at the

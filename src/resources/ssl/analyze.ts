@@ -20,7 +20,7 @@ export class Analyze extends APIResource {
   }
 }
 
-export type AnalyzeCreateResponse = unknown | string | null;
+export type AnalyzeCreateResponse = unknown;
 
 export interface AnalyzeCreateParams {
   /**
