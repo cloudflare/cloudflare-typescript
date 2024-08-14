@@ -126,7 +126,7 @@ export interface KeylessCertificate {
    * Available permissions for the Keyless SSL for the current user requesting the
    * item.
    */
-  permissions: Array<unknown>;
+  permissions: Array<string>;
 
   /**
    * The keyless SSL port used to communicate between Cloudflare and the client's
