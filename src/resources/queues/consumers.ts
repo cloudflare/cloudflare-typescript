@@ -169,7 +169,7 @@ export type ConsumerGetResponse = Array<Consumer>;
 
 export interface ConsumerCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -181,7 +181,7 @@ export interface ConsumerCreateParams {
 
 export interface ConsumerUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -193,14 +193,14 @@ export interface ConsumerUpdateParams {
 
 export interface ConsumerDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface ConsumerGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
