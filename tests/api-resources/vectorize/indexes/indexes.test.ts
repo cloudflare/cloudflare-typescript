@@ -189,7 +189,7 @@ describe('resource indexes', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       vector: [0.5, 0.5, 0.5],
       filter: { has_viewed: { $ne: true }, streaming_platform: 'netflix' },
-      returnMetadata: true,
+      returnMetadata: 'none',
       returnValues: true,
       topK: 5,
     });

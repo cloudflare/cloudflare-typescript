@@ -8,10 +8,10 @@ export class DNS extends APIResource {
   /**
    * Show the DNS records needed to configure your Email Routing zone.
    */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse | null> {
+  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse> {
     return (
       this._client.get(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{
-        result: DNSGetResponse | null;
+        result: DNSGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

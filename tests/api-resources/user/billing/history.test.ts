@@ -34,7 +34,6 @@ describe('resource history', () => {
       client.user.billing.history.list(
         {
           action: 'subscription',
-          occured_at: '2014-03-01T12:21:59.3456Z',
           occurred_at: '2014-03-01T12:21:59.3456Z',
           order: 'type',
           page: 1,

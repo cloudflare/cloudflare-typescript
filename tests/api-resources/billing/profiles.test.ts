@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource profiles', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.billing.profiles.get({ account_id: {} });
+    const responsePromise = client.billing.profiles.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,6 +22,6 @@ describe('resource profiles', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.billing.profiles.get({ account_id: {} });
+    const response = await client.billing.profiles.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });
