@@ -158,7 +158,7 @@ export interface Monitor {
    * a Host header by default. The User-Agent header cannot be overridden. This
    * parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * The interval between each health check. Shorter intervals may improve failover
@@ -268,7 +268,7 @@ export interface MonitorCreateParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may
@@ -374,7 +374,7 @@ export interface MonitorUpdateParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may
@@ -494,7 +494,7 @@ export interface MonitorEditParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may

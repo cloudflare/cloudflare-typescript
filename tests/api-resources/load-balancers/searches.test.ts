@@ -28,8 +28,8 @@ describe('resource searches', () => {
   test.skip('get: required and optional params', async () => {
     const response = await client.loadBalancers.searches.get({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: {},
-      per_page: {},
+      page: 1,
+      per_page: 1,
       search_params: { query: 'primary', references: '' },
     });
   });

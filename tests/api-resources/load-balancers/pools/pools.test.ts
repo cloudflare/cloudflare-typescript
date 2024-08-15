@@ -66,7 +66,7 @@ describe('resource pools', () => {
       },
       longitude: 0,
       minimum_origins: 0,
-      monitor: {},
+      monitor: 'monitor',
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },
@@ -133,7 +133,7 @@ describe('resource pools', () => {
       },
       longitude: 0,
       minimum_origins: 0,
-      monitor: {},
+      monitor: 'monitor',
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {
         origin: { disable: true, healthy: true },
@@ -159,7 +159,7 @@ describe('resource pools', () => {
   test('list: required and optional params', async () => {
     const response = await client.loadBalancers.pools.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      monitor: {},
+      monitor: 'monitor',
     });
   });
 
@@ -210,7 +210,7 @@ describe('resource pools', () => {
       },
       longitude: 0,
       minimum_origins: 0,
-      monitor: {},
+      monitor: 'monitor',
       name: 'primary-dc-1',
       notification_email: 'someone@example.com,sometwo@example.com',
       notification_filter: {

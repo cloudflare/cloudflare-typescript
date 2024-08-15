@@ -12,13 +12,13 @@ export class References extends APIResource {
     poolId: string,
     params: ReferenceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceGetResponse | null> {
+  ): Core.APIPromise<ReferenceGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/load_balancers/pools/${poolId}/references`,
         options,
-      ) as Core.APIPromise<{ result: ReferenceGetResponse | null }>
+      ) as Core.APIPromise<{ result: ReferenceGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

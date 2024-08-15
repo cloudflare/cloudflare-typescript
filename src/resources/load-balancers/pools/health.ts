@@ -54,7 +54,61 @@ export interface HealthCreateResponse {
  * A list of regions from which to run health checks. Null means every Cloudflare
  * data center.
  */
-export type HealthGetResponse = unknown | string | null;
+export interface HealthGetResponse {
+  /**
+   * Pool ID
+   */
+  pool_id?: string;
+
+  /**
+   * List of regions and associated health status.
+   */
+  pop_health?: HealthGetResponse.PopHealth;
+}
+
+export namespace HealthGetResponse {
+  /**
+   * List of regions and associated health status.
+   */
+  export interface PopHealth {
+    /**
+     * Whether health check in region is healthy.
+     */
+    healthy?: boolean;
+
+    origins?: Array<PopHealth.Origin>;
+  }
+
+  export namespace PopHealth {
+    export interface Origin {
+      ip?: Origin.IP;
+    }
+
+    export namespace Origin {
+      export interface IP {
+        /**
+         * Failure reason.
+         */
+        failure_reason?: string;
+
+        /**
+         * Origin health status.
+         */
+        healthy?: boolean;
+
+        /**
+         * Response code from origin health check.
+         */
+        response_code?: number;
+
+        /**
+         * Origin RTT (Round Trip Time) response.
+         */
+        rtt?: string;
+      }
+    }
+  }
+}
 
 export interface HealthCreateParams {
   /**
@@ -109,7 +163,7 @@ export interface HealthCreateParams {
    * recommended you set a Host header by default. The User-Agent header cannot be
    * overridden. This parameter is only valid for HTTP and HTTPS monitors.
    */
-  header?: unknown;
+  header?: Record<string, Array<string>>;
 
   /**
    * Body param: The interval between each health check. Shorter intervals may
