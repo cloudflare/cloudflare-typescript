@@ -3,7 +3,6 @@
 export { D1Resource } from './d1';
 export {
   QueryResult,
-  DatabaseCreateResponse,
   DatabaseListResponse,
   DatabaseDeleteResponse,
   DatabaseExportResponse,

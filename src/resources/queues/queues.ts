@@ -87,13 +87,21 @@ export interface Queue {
 
   modified_on?: string;
 
-  producers?: Array<unknown>;
+  producers?: Array<Queue.Producer>;
 
   producers_total_count?: number;
 
   queue_id?: string;
 
   queue_name?: string;
+}
+
+export namespace Queue {
+  export interface Producer {
+    environment?: string;
+
+    service?: string;
+  }
 }
 
 export interface QueueCreated {

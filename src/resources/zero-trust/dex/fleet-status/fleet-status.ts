@@ -71,7 +71,7 @@ export namespace FleetStatusLiveResponse {
 
 export interface FleetStatusLiveParams {
   /**
-   * Path param:
+   * Path param: Unique identifier for account
    */
   account_id: string;
 
@@ -83,17 +83,17 @@ export interface FleetStatusLiveParams {
 
 export interface FleetStatusOverTimeParams {
   /**
-   * Path param:
+   * Path param: Unique identifier for account
    */
   account_id: string;
 
   /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range beginning in ISO format
    */
   from: string;
 
   /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range end in ISO format
    */
   to: string;
 
