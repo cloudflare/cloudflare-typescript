@@ -30,7 +30,6 @@ export interface D1 {
 export namespace D1Resource {
   export import Database = DatabaseAPI.Database;
   export import QueryResult = DatabaseAPI.QueryResult;
-  export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseExportResponse = DatabaseAPI.DatabaseExportResponse;

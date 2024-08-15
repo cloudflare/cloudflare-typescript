@@ -44,8 +44,8 @@ describe('resource brandProtection', () => {
   test('urlInfo: required and optional params', async () => {
     const response = await client.brandProtection.urlInfo({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      url: 'url',
-      url_id_param: { url_id: 0 },
+      url: ['string', 'string', 'string'],
+      url_id: [0, 0, 0],
     });
   });
 });

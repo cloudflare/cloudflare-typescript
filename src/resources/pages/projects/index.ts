@@ -2,11 +2,11 @@
 
 export {
   Deployment,
-  Project,
   Stage,
   ProjectCreateResponse,
   ProjectDeleteResponse,
   ProjectEditResponse,
+  ProjectGetResponse,
   ProjectPurgeBuildCacheResponse,
   ProjectCreateParams,
   ProjectListParams,

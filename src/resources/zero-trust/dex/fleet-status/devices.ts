@@ -63,26 +63,17 @@ export interface DeviceListResponse {
 
 export interface DeviceListParams extends V4PagePaginationArrayParams {
   /**
-   * Path param:
+   * Path param: Unique identifier for account
    */
   account_id: string;
 
   /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range beginning in ISO format
    */
   from: string;
 
   /**
-   * Query param: Source:
-   *
-   * - `hourly` - device details aggregated hourly, up to 7 days prior
-   * - `last_seen` - device details, up to 24 hours prior
-   * - `raw` - device details, up to 7 days prior
-   */
-  source: 'last_seen' | 'hourly' | 'raw';
-
-  /**
-   * Query param: Timestamp in ISO format
+   * Query param: Time range end in ISO format
    */
   to: string;
 
@@ -110,6 +101,15 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
    * Query param: Dimension to sort results by
    */
   sort_by?: 'colo' | 'device_id' | 'mode' | 'platform' | 'status' | 'timestamp' | 'version';
+
+  /**
+   * Query param: Source:
+   *
+   * - `hourly` - device details aggregated hourly, up to 7 days prior
+   * - `last_seen` - device details, up to 24 hours prior
+   * - `raw` - device details, up to 7 days prior
+   */
+  source?: 'last_seen' | 'hourly' | 'raw';
 
   /**
    * Query param: Network status

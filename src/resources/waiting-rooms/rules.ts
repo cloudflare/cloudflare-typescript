@@ -13,13 +13,13 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse | null> {
+  ): Core.APIPromise<RuleCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleCreateResponse | null }>
+      }) as Core.APIPromise<{ result: RuleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -31,13 +31,13 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse | null> {
+  ): Core.APIPromise<RuleUpdateResponse> {
     const { zone_id, body } = params;
     return (
       this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -49,13 +49,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse | null> {
+  ): Core.APIPromise<RuleDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`,
         options,
-      ) as Core.APIPromise<{ result: RuleDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -67,13 +67,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleEditResponse | null> {
+  ): Core.APIPromise<RuleEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
+      }) as Core.APIPromise<{ result: RuleEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -84,11 +84,11 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse | null> {
+  ): Core.APIPromise<RuleGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, options) as Core.APIPromise<{
-        result: RuleGetResponse | null;
+        result: RuleGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }

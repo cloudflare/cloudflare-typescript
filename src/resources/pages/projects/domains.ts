@@ -14,10 +14,10 @@ export class Domains extends APIResource {
     params: DomainCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DomainCreateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/domains`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: DomainCreateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -47,12 +47,14 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<unknown> {
+  ): Core.APIPromise<DomainDeleteResponse | null> {
     const { account_id } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
-      options,
-    );
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -94,15 +96,167 @@ export class Domains extends APIResource {
 
 export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
 
-export type DomainCreateResponse = unknown | Array<unknown> | string;
+export interface DomainCreateResponse {
+  id?: string;
 
-export type DomainListResponse = unknown;
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainCreateResponse.ValidationData;
+
+  verification_data?: DomainCreateResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainCreateResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
+
+export interface DomainListResponse {
+  id?: string;
+
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainListResponse.ValidationData;
+
+  verification_data?: DomainListResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainListResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
 
 export type DomainDeleteResponse = unknown;
 
-export type DomainEditResponse = unknown | Array<unknown> | string;
+export interface DomainEditResponse {
+  id?: string;
 
-export type DomainGetResponse = unknown | Array<unknown> | string;
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainEditResponse.ValidationData;
+
+  verification_data?: DomainEditResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainEditResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
+
+export interface DomainGetResponse {
+  id?: string;
+
+  certificate_authority?: 'google' | 'lets_encrypt';
+
+  created_on?: string;
+
+  domain_id?: string;
+
+  name?: string;
+
+  status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+
+  validation_data?: DomainGetResponse.ValidationData;
+
+  verification_data?: DomainGetResponse.VerificationData;
+
+  zone_tag?: string;
+}
+
+export namespace DomainGetResponse {
+  export interface ValidationData {
+    error_message?: string;
+
+    method?: 'http' | 'txt';
+
+    status?: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error';
+
+    txt_name?: string;
+
+    txt_value?: string;
+  }
+
+  export interface VerificationData {
+    error_message?: string;
+
+    status?: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error';
+  }
+}
 
 export interface DomainCreateParams {
   /**
@@ -113,7 +267,7 @@ export interface DomainCreateParams {
   /**
    * Body param:
    */
-  body: unknown;
+  name?: string;
 }
 
 export interface DomainListParams {

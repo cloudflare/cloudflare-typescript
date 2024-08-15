@@ -74,7 +74,7 @@ export interface BillingHistory {
 
 export namespace BillingHistory {
   export interface Zone {
-    name?: unknown;
+    name?: string;
   }
 }
 
@@ -87,17 +87,12 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
   /**
    * When the billing item was created.
    */
-  occured_at?: string;
-
-  /**
-   * When the billing item was created.
-   */
   occurred_at?: string;
 
   /**
    * Field to order billing history by.
    */
-  order?: 'type' | 'occured_at' | 'action';
+  order?: 'type' | 'occurred_at' | 'action';
 
   /**
    * The billing item type.

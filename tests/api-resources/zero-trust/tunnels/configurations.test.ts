@@ -13,7 +13,7 @@ describe('resource configurations', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.tunnels.configurations.update(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,51 +28,9 @@ describe('resource configurations', () => {
     const response = await client.zeroTrust.tunnels.configurations.update(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
       {
-        account_id: '699d98642c564d2e855e9661899b7252',
+        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         config: {
           ingress: [
-            {
-              hostname: 'tunnel.example.com',
-              service: 'https://localhost:8001',
-              originRequest: {
-                access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
-                caPool: 'caPool',
-                connectTimeout: 0,
-                disableChunkedEncoding: true,
-                http2Origin: true,
-                httpHostHeader: 'httpHostHeader',
-                keepAliveConnections: 0,
-                keepAliveTimeout: 0,
-                noHappyEyeballs: true,
-                noTLSVerify: true,
-                originServerName: 'originServerName',
-                proxyType: 'proxyType',
-                tcpKeepAlive: 0,
-                tlsTimeout: 0,
-              },
-              path: 'subpath',
-            },
-            {
-              hostname: 'tunnel.example.com',
-              service: 'https://localhost:8001',
-              originRequest: {
-                access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
-                caPool: 'caPool',
-                connectTimeout: 0,
-                disableChunkedEncoding: true,
-                http2Origin: true,
-                httpHostHeader: 'httpHostHeader',
-                keepAliveConnections: 0,
-                keepAliveTimeout: 0,
-                noHappyEyeballs: true,
-                noTLSVerify: true,
-                originServerName: 'originServerName',
-                proxyType: 'proxyType',
-                tcpKeepAlive: 0,
-                tlsTimeout: 0,
-              },
-              path: 'subpath',
-            },
             {
               hostname: 'tunnel.example.com',
               service: 'https://localhost:8001',
@@ -111,7 +69,6 @@ describe('resource configurations', () => {
             tcpKeepAlive: 0,
             tlsTimeout: 0,
           },
-          'warp-routing': { enabled: true },
         },
       },
     );
@@ -120,7 +77,7 @@ describe('resource configurations', () => {
   test('get: only required params', async () => {
     const responsePromise = client.zeroTrust.tunnels.configurations.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -134,7 +91,7 @@ describe('resource configurations', () => {
   test('get: required and optional params', async () => {
     const response = await client.zeroTrust.tunnels.configurations.get(
       'f70ff985-a4ef-4643-bbbc-4a0ed4fc8415',
-      { account_id: '699d98642c564d2e855e9661899b7252' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 });

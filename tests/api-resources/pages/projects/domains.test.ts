@@ -13,7 +13,6 @@ describe('resource domains', () => {
   test('create: only required params', async () => {
     const responsePromise = client.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { name: 'example.com' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +26,7 @@ describe('resource domains', () => {
   test('create: required and optional params', async () => {
     const response = await client.pages.projects.domains.create('this-is-my-project-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { name: 'example.com' },
+      name: 'example.com',
     });
   });
 

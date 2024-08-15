@@ -10,14 +10,11 @@ export class Database extends APIResource {
   /**
    * Returns the created D1 database.
    */
-  create(
-    params: DatabaseCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DatabaseCreateResponse> {
+  create(params: DatabaseCreateParams, options?: Core.RequestOptions): Core.APIPromise<D1API.D1> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/d1/database`, { body, ...options }) as Core.APIPromise<{
-        result: DatabaseCreateResponse;
+        result: D1API.D1;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -170,19 +167,6 @@ export namespace QueryResult {
 
     size_after?: number;
   }
-}
-
-export interface DatabaseCreateResponse {
-  /**
-   * Specifies the timestamp the resource was created as an ISO8601 string.
-   */
-  created_at?: string;
-
-  name?: string;
-
-  uuid?: string;
-
-  version?: string;
 }
 
 export interface DatabaseListResponse {
@@ -560,7 +544,6 @@ export interface DatabaseRawParams {
 
 export namespace Database {
   export import QueryResult = DatabaseAPI.QueryResult;
-  export import DatabaseCreateResponse = DatabaseAPI.DatabaseCreateResponse;
   export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
   export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
   export import DatabaseExportResponse = DatabaseAPI.DatabaseExportResponse;

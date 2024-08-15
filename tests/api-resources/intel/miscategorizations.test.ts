@@ -29,7 +29,7 @@ describe('resource miscategorizations', () => {
       content_adds: [82],
       content_removes: [155],
       indicator_type: 'domain',
-      ip: {},
+      ip: 'ip',
       security_adds: [117, 131],
       security_removes: [83],
       url: 'url',

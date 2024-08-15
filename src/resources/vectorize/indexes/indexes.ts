@@ -503,9 +503,10 @@ export interface IndexQueryParams {
   filter?: unknown;
 
   /**
-   * Body param: Whether to return the metadata associated with the closest vectors.
+   * Body param: Whether to return no metadata, indexed metadata or all metadata
+   * associated with the closest vectors.
    */
-  returnMetadata?: boolean;
+  returnMetadata?: 'none' | 'indexed' | 'all';
 
   /**
    * Body param: Whether to return the values associated with the closest vectors.
