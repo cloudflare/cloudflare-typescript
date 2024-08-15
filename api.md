@@ -2492,14 +2492,6 @@ Types:
 
 #### Currents
 
-Types:
-
-- <code><a href="./src/resources/spectrum/analytics/aggregates/currents.ts">CurrentGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone}/spectrum/analytics/aggregate/current">client.spectrum.analytics.aggregates.currents.<a href="./src/resources/spectrum/analytics/aggregates/currents.ts">get</a>(zone, { ...params }) -> CurrentGetResponse</code>
-
 ### Events
 
 Types:
@@ -2508,41 +2500,9 @@ Types:
 
 #### Bytimes
 
-Types:
-
-- <code><a href="./src/resources/spectrum/analytics/events/bytimes.ts">BytimeGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone}/spectrum/analytics/events/bytime">client.spectrum.analytics.events.bytimes.<a href="./src/resources/spectrum/analytics/events/bytimes.ts">get</a>(zone, { ...params }) -> BytimeGetResponse | null</code>
-
 #### Summaries
 
-Types:
-
-- <code><a href="./src/resources/spectrum/analytics/events/summaries.ts">SummaryGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone}/spectrum/analytics/events/summary">client.spectrum.analytics.events.summaries.<a href="./src/resources/spectrum/analytics/events/summaries.ts">get</a>(zone, { ...params }) -> SummaryGetResponse | null</code>
-
 ## Apps
-
-Types:
-
-- <code><a href="./src/resources/spectrum/apps.ts">AppCreateResponse</a></code>
-- <code><a href="./src/resources/spectrum/apps.ts">AppUpdateResponse</a></code>
-- <code><a href="./src/resources/spectrum/apps.ts">AppListResponse</a></code>
-- <code><a href="./src/resources/spectrum/apps.ts">AppDeleteResponse</a></code>
-- <code><a href="./src/resources/spectrum/apps.ts">AppGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{zone}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">create</a>(zone, { ...params }) -> AppCreateResponse | null</code>
-- <code title="put /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">update</a>(zone, appId, { ...params }) -> AppUpdateResponse | null</code>
-- <code title="get /zones/{zone}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">list</a>(zone, { ...params }) -> AppListResponsesV4PagePaginationArray</code>
-- <code title="delete /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(zone, appId) -> AppDeleteResponse | null</code>
-- <code title="get /zones/{zone}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(zone, appId) -> AppGetResponse</code>
 
 # Addressing
 
