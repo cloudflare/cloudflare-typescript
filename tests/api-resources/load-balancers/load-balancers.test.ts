@@ -18,7 +18,7 @@ describe('resource loadBalancers', () => {
         '9290f38c5d07c2e2f4df57b1f61d4196',
         '00920f38ce07c2e2f4df50b1f61d4194',
       ],
-      fallback_pool: {},
+      fallback_pool: 'fallback_pool',
       name: 'www.example.com',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -38,29 +38,16 @@ describe('resource loadBalancers', () => {
         '9290f38c5d07c2e2f4df57b1f61d4196',
         '00920f38ce07c2e2f4df50b1f61d4194',
       ],
-      fallback_pool: {},
+      fallback_pool: 'fallback_pool',
       name: 'www.example.com',
       adaptive_routing: { failover_across_pools: true },
-      country_pools: {
-        GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-        US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-      },
+      country_pools: { country_code: ['string', 'string', 'string'] },
       description: 'Load Balancer for www.example.com',
       location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-      pop_pools: {
-        LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-        LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-        SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-      },
+      pop_pools: { pop: ['string', 'string', 'string'] },
       proxied: true,
-      random_steering: {
-        default_weight: 0.2,
-        pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
-      },
-      region_pools: {
-        ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-        WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-      },
+      random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+      region_pools: { region_code: ['string', 'string', 'string'] },
       rules: [
         {
           condition: 'http.request.uri.path contains "/testing"',
@@ -74,33 +61,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -129,33 +100,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -184,33 +139,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -251,7 +190,7 @@ describe('resource loadBalancers', () => {
         '9290f38c5d07c2e2f4df57b1f61d4196',
         '00920f38ce07c2e2f4df50b1f61d4194',
       ],
-      fallback_pool: {},
+      fallback_pool: 'fallback_pool',
       name: 'www.example.com',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -271,30 +210,17 @@ describe('resource loadBalancers', () => {
         '9290f38c5d07c2e2f4df57b1f61d4196',
         '00920f38ce07c2e2f4df50b1f61d4194',
       ],
-      fallback_pool: {},
+      fallback_pool: 'fallback_pool',
       name: 'www.example.com',
       adaptive_routing: { failover_across_pools: true },
-      country_pools: {
-        GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-        US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-      },
+      country_pools: { country_code: ['string', 'string', 'string'] },
       description: 'Load Balancer for www.example.com',
       enabled: true,
       location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-      pop_pools: {
-        LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-        LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-        SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-      },
+      pop_pools: { pop: ['string', 'string', 'string'] },
       proxied: true,
-      random_steering: {
-        default_weight: 0.2,
-        pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
-      },
-      region_pools: {
-        ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-        WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-      },
+      random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+      region_pools: { region_code: ['string', 'string', 'string'] },
       rules: [
         {
           condition: 'http.request.uri.path contains "/testing"',
@@ -308,33 +234,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -363,33 +273,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -418,33 +312,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -528,10 +406,7 @@ describe('resource loadBalancers', () => {
     const response = await client.loadBalancers.edit('699d98642c564d2e855e9661899b7252', {
       zone_id: '699d98642c564d2e855e9661899b7252',
       adaptive_routing: { failover_across_pools: true },
-      country_pools: {
-        GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-        US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-      },
+      country_pools: { country_code: ['string', 'string', 'string'] },
       default_pools: [
         '17b5962d775c646f3f9725cbc7a53df4',
         '9290f38c5d07c2e2f4df57b1f61d4196',
@@ -539,23 +414,13 @@ describe('resource loadBalancers', () => {
       ],
       description: 'Load Balancer for www.example.com',
       enabled: true,
-      fallback_pool: {},
+      fallback_pool: 'fallback_pool',
       location_strategy: { mode: 'pop', prefer_ecs: 'always' },
       name: 'www.example.com',
-      pop_pools: {
-        LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-        LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-        SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-      },
+      pop_pools: { pop: ['string', 'string', 'string'] },
       proxied: true,
-      random_steering: {
-        default_weight: 0.2,
-        pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
-      },
-      region_pools: {
-        ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-        WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-      },
+      random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+      region_pools: { region_code: ['string', 'string', 'string'] },
       rules: [
         {
           condition: 'http.request.uri.path contains "/testing"',
@@ -569,33 +434,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -624,33 +473,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
@@ -679,33 +512,17 @@ describe('resource loadBalancers', () => {
           name: 'route the path /testing to testing datacenter.',
           overrides: {
             adaptive_routing: { failover_across_pools: true },
-            country_pools: {
-              GB: ['abd90f38ced07c2e2f4df50b1f61d4194'],
-              US: ['de90f38ced07c2e2f4df50b1f61d4194', '00920f38ce07c2e2f4df50b1f61d4194'],
-            },
+            country_pools: { country_code: ['string', 'string', 'string'] },
             default_pools: [
               '17b5962d775c646f3f9725cbc7a53df4',
               '9290f38c5d07c2e2f4df57b1f61d4196',
               '00920f38ce07c2e2f4df50b1f61d4194',
             ],
-            fallback_pool: {},
+            fallback_pool: 'fallback_pool',
             location_strategy: { mode: 'pop', prefer_ecs: 'always' },
-            pop_pools: {
-              LAX: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-              LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
-              SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
-            },
-            random_steering: {
-              default_weight: 0.2,
-              pool_weights: {
-                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
-                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
-              },
-            },
-            region_pools: {
-              ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
-              WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
-            },
+            pop_pools: { pop: ['string', 'string', 'string'] },
+            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            region_pools: { region_code: ['string', 'string', 'string'] },
             session_affinity: 'none',
             session_affinity_attributes: {
               drain_duration: 100,
