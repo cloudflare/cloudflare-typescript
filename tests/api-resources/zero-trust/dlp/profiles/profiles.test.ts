@@ -11,9 +11,7 @@ const client = new Cloudflare({
 
 describe('resource profiles', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.zeroTrust.dlp.profiles.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,14 +22,12 @@ describe('resource profiles', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.zeroTrust.dlp.profiles.list({ account_id: 'account_id' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.get('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.zeroTrust.dlp.profiles.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,8 +39,8 @@ describe('resource profiles', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.get('384e129d-25bd-403c-8019-bc19eb7a8a5f', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.zeroTrust.dlp.profiles.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
     });
   });
 });

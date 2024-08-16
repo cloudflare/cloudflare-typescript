@@ -2,12 +2,12 @@
 
 export {
   ContextAwareness,
-  Profile,
   SkipConfiguration,
+  ProfileListResponse,
   ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
-  ProfilesSinglePage,
+  ProfileListResponsesSinglePage,
   Profiles,
 } from './profiles/index';
 export { DLP } from './dlp';
@@ -23,7 +23,7 @@ export {
   DatasetsSinglePage,
   Datasets,
 } from './datasets/index';
-export { PatternValidateParams, Patterns } from './patterns';
+export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';
 export {
   PayloadLogUpdateResponse,
   PayloadLogGetResponse,
