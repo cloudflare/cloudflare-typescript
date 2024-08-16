@@ -97,7 +97,6 @@ export namespace User {
   export import Tokens = TokensAPI.Tokens;
   export import CIDRList = TokensAPI.CIDRList;
   export import Policy = TokensAPI.Policy;
-  export import Token = TokensAPI.Token;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;

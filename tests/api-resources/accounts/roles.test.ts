@@ -26,7 +26,9 @@ describe('resource roles', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.accounts.roles.get({}, { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const responsePromise = client.accounts.roles.get('3536bcfad5faccb999b47003c79917fb', {
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,6 +39,8 @@ describe('resource roles', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.accounts.roles.get({}, { account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
+    const response = await client.accounts.roles.get('3536bcfad5faccb999b47003c79917fb', {
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+    });
   });
 });

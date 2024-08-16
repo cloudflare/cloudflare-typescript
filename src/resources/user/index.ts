@@ -5,7 +5,6 @@ export { Billing } from './billing/index';
 export {
   CIDRList,
   Policy,
-  Token,
   TokenCreateResponse,
   TokenUpdateResponse,
   TokenListResponse,
