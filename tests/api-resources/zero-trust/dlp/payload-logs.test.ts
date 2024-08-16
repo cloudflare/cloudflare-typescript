@@ -11,10 +11,7 @@ const client = new Cloudflare({
 
 describe('resource payloadLogs', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.payloadLogs.update({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
-    });
+    const responsePromise = client.zeroTrust.dlp.payloadLogs.update({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,15 +23,13 @@ describe('resource payloadLogs', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.payloadLogs.update({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      public_key: 'EmpOvSXw8BfbrGCi0fhGiD/3yXk2SiV1Nzg2lru3oj0=',
+      account_id: 'account_id',
+      public_key: 'public_key',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.payloadLogs.get({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.zeroTrust.dlp.payloadLogs.get({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,8 +40,6 @@ describe('resource payloadLogs', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.payloadLogs.get({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.zeroTrust.dlp.payloadLogs.get({ account_id: 'account_id' });
   });
 });

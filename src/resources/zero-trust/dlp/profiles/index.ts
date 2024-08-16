@@ -2,23 +2,29 @@
 
 export {
   ContextAwareness,
-  Profile,
   SkipConfiguration,
+  ProfileListResponse,
   ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
-  ProfilesSinglePage,
+  ProfileListResponsesSinglePage,
   Profiles,
 } from './profiles';
 export {
-  CustomProfile,
-  Pattern,
   CustomCreateResponse,
+  CustomUpdateResponse,
   CustomDeleteResponse,
+  CustomGetResponse,
   CustomCreateParams,
   CustomUpdateParams,
   CustomDeleteParams,
   CustomGetParams,
   Custom,
 } from './custom';
-export { PredefinedProfile, PredefinedUpdateParams, PredefinedGetParams, Predefined } from './predefined';
+export {
+  PredefinedUpdateResponse,
+  PredefinedGetResponse,
+  PredefinedUpdateParams,
+  PredefinedGetParams,
+  Predefined,
+} from './predefined';

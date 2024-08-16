@@ -12,8 +12,8 @@ const client = new Cloudflare({
 describe('resource patterns', () => {
   test('validate: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.patterns.validate({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      regex: '^4[0-9]{6,}$',
+      account_id: 'account_id',
+      regex: 'regex',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,8 +26,8 @@ describe('resource patterns', () => {
 
   test('validate: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.patterns.validate({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      regex: '^4[0-9]{6,}$',
+      account_id: 'account_id',
+      regex: 'regex',
     });
   });
 });

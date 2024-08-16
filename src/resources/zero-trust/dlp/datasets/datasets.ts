@@ -10,7 +10,7 @@ export class Datasets extends APIResource {
   upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
 
   /**
-   * Create a new dataset.
+   * Create a new dataset
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
     const { account_id, ...body } = params;
@@ -22,7 +22,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Update details about a dataset.
+   * Update details about a dataset
    */
   update(
     datasetId: string,
@@ -39,7 +39,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch all datasets with information about available versions.
+   * Fetch all datasets
    */
   list(
     params: DatasetListParams,
@@ -50,8 +50,6 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Delete a dataset.
-   *
    * This deletes all versions of the dataset.
    */
   delete(
@@ -67,7 +65,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Fetch a specific dataset with information about available versions.
+   * Fetch a specific dataset
    */
   get(datasetId: string, params: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
     const { account_id } = params;
@@ -84,7 +82,11 @@ export class DatasetsSinglePage extends SinglePage<Dataset> {}
 export interface Dataset {
   id: string;
 
+  columns: Array<Dataset.Column>;
+
   created_at: string;
+
+  encoding_version: number;
 
   name: string;
 
@@ -92,20 +94,33 @@ export interface Dataset {
 
   secret: boolean;
 
-  status: 'empty' | 'uploading' | 'failed' | 'complete';
+  status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 
   updated_at: string;
 
   uploads: Array<Dataset.Upload>;
 
+  /**
+   * The description of the dataset
+   */
   description?: string | null;
 }
 
 export namespace Dataset {
+  export interface Column {
+    entry_id: string;
+
+    header_name: string;
+
+    num_cells: number;
+
+    upload_status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+  }
+
   export interface Upload {
     num_cells: number;
 
-    status: 'empty' | 'uploading' | 'failed' | 'complete';
+    status: 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 
     version: number;
   }
@@ -115,6 +130,11 @@ export type DatasetArray = Array<Dataset>;
 
 export interface DatasetCreation {
   dataset: Dataset;
+
+  /**
+   * Encoding version to use for dataset
+   */
+  encoding_version: number;
 
   max_cells: number;
 
@@ -142,9 +162,19 @@ export interface DatasetCreateParams {
   name: string;
 
   /**
-   * Body param:
+   * Body param: The description of the dataset
    */
   description?: string | null;
+
+  /**
+   * Body param: Dataset encoding version
+   *
+   * Non-secret custom word lists with no header are always version 1. Secret EDM
+   * lists with no header are version 1. Multicolumn CSV with headers are version 2.
+   * Omitting this field provides the default value 0, which is interpreted the same
+   * as 1.
+   */
+  encoding_version?: number;
 
   /**
    * Body param: Generate a secret dataset.
@@ -162,12 +192,12 @@ export interface DatasetUpdateParams {
   account_id: string;
 
   /**
-   * Body param:
+   * Body param: The description of the dataset
    */
   description?: string | null;
 
   /**
-   * Body param:
+   * Body param: The name of the dataset, must be unique
    */
   name?: string | null;
 }
