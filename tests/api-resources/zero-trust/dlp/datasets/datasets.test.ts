@@ -26,6 +26,7 @@ describe('resource datasets', () => {
       account_id: 'account_id',
       name: 'name',
       description: 'description',
+      encoding_version: 0,
       secret: true,
     });
   });

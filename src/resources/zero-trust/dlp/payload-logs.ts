@@ -6,58 +6,50 @@ import * as PayloadLogsAPI from './payload-logs';
 
 export class PayloadLogs extends APIResource {
   /**
-   * Updates the DLP payload log settings for this account.
+   * Set payload log settings
    */
   update(
     params: PayloadLogUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<PayloadLogUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/dlp/payload_log`, { body, ...options }) as Core.APIPromise<{
-        result: PayloadLogUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.put(`/accounts/${account_id}/dlp/payload_log`, { body, ...options });
   }
 
   /**
-   * Gets the current DLP payload log settings for this account.
+   * Get payload log settings
    */
   get(params: PayloadLogGetParams, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dlp/payload_log`, options) as Core.APIPromise<{
-        result: PayloadLogGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.get(`/accounts/${account_id}/dlp/payload_log`, options);
   }
 }
 
 export interface PayloadLogUpdateResponse {
-  public_key: string | null;
+  updated_at: string;
+
+  public_key?: string | null;
 }
 
 export interface PayloadLogGetResponse {
-  public_key: string | null;
+  updated_at: string;
+
+  public_key?: string | null;
 }
 
 export interface PayloadLogUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param:
    */
   account_id: string;
 
   /**
-   * Body param: The public key to use when encrypting extracted payloads, as a
-   * base64 string
+   * Body param:
    */
-  public_key: string | null;
+  public_key?: string | null;
 }
 
 export interface PayloadLogGetParams {
-  /**
-   * Identifier
-   */
   account_id: string;
 }
 

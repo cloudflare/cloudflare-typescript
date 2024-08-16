@@ -111,7 +111,4 @@ export namespace ZeroTrust {
   export import GatewayListParams = GatewayAPI.GatewayListParams;
   export import Networks = NetworksAPI.Networks;
   export import RiskScoring = RiskScoringAPI.RiskScoring;
-  export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
-  export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
-  export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
 }
