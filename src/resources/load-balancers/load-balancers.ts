@@ -286,7 +286,7 @@ export interface LoadBalancer {
    * back to using the corresponding region_pool mapping if it exists else to
    * default_pools.
    */
-  country_pools?: LoadBalancer.CountryPools;
+  country_pools?: Record<string, Array<string>>;
 
   created_on?: string;
 
@@ -332,7 +332,7 @@ export interface LoadBalancer {
    * explicitly defined will fall back to using the corresponding country_pool, then
    * region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: LoadBalancer.PopPools;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Whether the hostname should be gray clouded (false) or orange clouded (true).
@@ -356,7 +356,7 @@ export interface LoadBalancer {
    * priority) for the given region. Any regions not explicitly defined will fall
    * back to using default_pools.
    */
-  region_pools?: LoadBalancer.RegionPools;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * BETA Field Not General Access: A list of rules for this load balancer to
@@ -441,37 +441,6 @@ export interface LoadBalancer {
    * balancer. This only applies to gray-clouded (unproxied) load balancers.
    */
   ttl?: number;
-}
-
-export namespace LoadBalancer {
-  /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
-   */
-  export interface CountryPools {
-    country_code?: Array<string>;
-  }
-
-  /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
-   */
-  export interface PopPools {
-    pop?: Array<string>;
-  }
-
-  /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
-   */
-  export interface RegionPools {
-    region_code?: Array<string>;
-  }
 }
 
 /**
@@ -955,7 +924,7 @@ export namespace Rules {
      * back to using the corresponding region_pool mapping if it exists else to
      * default_pools.
      */
-    country_pools?: Overrides.CountryPools;
+    country_pools?: Record<string, Array<string>>;
 
     /**
      * A list of pool IDs ordered by their failover priority. Pools defined here are
@@ -980,7 +949,7 @@ export namespace Rules {
      * explicitly defined will fall back to using the corresponding country_pool, then
      * region_pool mapping if it exists else to default_pools.
      */
-    pop_pools?: Overrides.PopPools;
+    pop_pools?: Record<string, Array<string>>;
 
     /**
      * Configures pool weights.
@@ -999,7 +968,7 @@ export namespace Rules {
      * priority) for the given region. Any regions not explicitly defined will fall
      * back to using default_pools.
      */
-    region_pools?: Overrides.RegionPools;
+    region_pools?: Record<string, Array<string>>;
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
@@ -1078,37 +1047,6 @@ export namespace Rules {
      * balancer. This only applies to gray-clouded (unproxied) load balancers.
      */
     ttl?: number;
-  }
-
-  export namespace Overrides {
-    /**
-     * A mapping of country codes to a list of pool IDs (ordered by their failover
-     * priority) for the given country. Any country not explicitly defined will fall
-     * back to using the corresponding region_pool mapping if it exists else to
-     * default_pools.
-     */
-    export interface CountryPools {
-      country_code?: Array<string>;
-    }
-
-    /**
-     * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-     * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-     * explicitly defined will fall back to using the corresponding country_pool, then
-     * region_pool mapping if it exists else to default_pools.
-     */
-    export interface PopPools {
-      pop?: Array<string>;
-    }
-
-    /**
-     * A mapping of region codes to a list of pool IDs (ordered by their failover
-     * priority) for the given region. Any regions not explicitly defined will fall
-     * back to using default_pools.
-     */
-    export interface RegionPools {
-      region_code?: Array<string>;
-    }
   }
 }
 
@@ -1213,7 +1151,7 @@ export namespace RulesParam {
      * back to using the corresponding region_pool mapping if it exists else to
      * default_pools.
      */
-    country_pools?: Overrides.CountryPools;
+    country_pools?: Record<string, Array<string>>;
 
     /**
      * A list of pool IDs ordered by their failover priority. Pools defined here are
@@ -1238,7 +1176,7 @@ export namespace RulesParam {
      * explicitly defined will fall back to using the corresponding country_pool, then
      * region_pool mapping if it exists else to default_pools.
      */
-    pop_pools?: Overrides.PopPools;
+    pop_pools?: Record<string, Array<string>>;
 
     /**
      * Configures pool weights.
@@ -1257,7 +1195,7 @@ export namespace RulesParam {
      * priority) for the given region. Any regions not explicitly defined will fall
      * back to using default_pools.
      */
-    region_pools?: Overrides.RegionPools;
+    region_pools?: Record<string, Array<string>>;
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
@@ -1336,37 +1274,6 @@ export namespace RulesParam {
      * balancer. This only applies to gray-clouded (unproxied) load balancers.
      */
     ttl?: number;
-  }
-
-  export namespace Overrides {
-    /**
-     * A mapping of country codes to a list of pool IDs (ordered by their failover
-     * priority) for the given country. Any country not explicitly defined will fall
-     * back to using the corresponding region_pool mapping if it exists else to
-     * default_pools.
-     */
-    export interface CountryPools {
-      country_code?: Array<string>;
-    }
-
-    /**
-     * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-     * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-     * explicitly defined will fall back to using the corresponding country_pool, then
-     * region_pool mapping if it exists else to default_pools.
-     */
-    export interface PopPools {
-      pop?: Array<string>;
-    }
-
-    /**
-     * A mapping of region codes to a list of pool IDs (ordered by their failover
-     * priority) for the given region. Any regions not explicitly defined will fall
-     * back to using default_pools.
-     */
-    export interface RegionPools {
-      region_code?: Array<string>;
-    }
   }
 }
 
@@ -1671,7 +1578,7 @@ export interface LoadBalancerCreateParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: LoadBalancerCreateParams.CountryPools;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Object description.
@@ -1690,7 +1597,7 @@ export interface LoadBalancerCreateParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: LoadBalancerCreateParams.PopPools;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1715,7 +1622,7 @@ export interface LoadBalancerCreateParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: LoadBalancerCreateParams.RegionPools;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -1802,37 +1709,6 @@ export interface LoadBalancerCreateParams {
    * balancers.
    */
   ttl?: number;
-}
-
-export namespace LoadBalancerCreateParams {
-  /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
-   */
-  export interface CountryPools {
-    country_code?: Array<string>;
-  }
-
-  /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
-   */
-  export interface PopPools {
-    pop?: Array<string>;
-  }
-
-  /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
-   */
-  export interface RegionPools {
-    region_code?: Array<string>;
-  }
 }
 
 export interface LoadBalancerUpdateParams {
@@ -1876,7 +1752,7 @@ export interface LoadBalancerUpdateParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: LoadBalancerUpdateParams.CountryPools;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Object description.
@@ -1900,7 +1776,7 @@ export interface LoadBalancerUpdateParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: LoadBalancerUpdateParams.PopPools;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1925,7 +1801,7 @@ export interface LoadBalancerUpdateParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: LoadBalancerUpdateParams.RegionPools;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -2014,37 +1890,6 @@ export interface LoadBalancerUpdateParams {
   ttl?: number;
 }
 
-export namespace LoadBalancerUpdateParams {
-  /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
-   */
-  export interface CountryPools {
-    country_code?: Array<string>;
-  }
-
-  /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
-   */
-  export interface PopPools {
-    pop?: Array<string>;
-  }
-
-  /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
-   */
-  export interface RegionPools {
-    region_code?: Array<string>;
-  }
-}
-
 export interface LoadBalancerListParams {
   zone_id: string;
 }
@@ -2075,7 +1920,7 @@ export interface LoadBalancerEditParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: LoadBalancerEditParams.CountryPools;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -2118,7 +1963,7 @@ export interface LoadBalancerEditParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: LoadBalancerEditParams.PopPools;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -2143,7 +1988,7 @@ export interface LoadBalancerEditParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: LoadBalancerEditParams.RegionPools;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -2230,37 +2075,6 @@ export interface LoadBalancerEditParams {
    * balancers.
    */
   ttl?: number;
-}
-
-export namespace LoadBalancerEditParams {
-  /**
-   * A mapping of country codes to a list of pool IDs (ordered by their failover
-   * priority) for the given country. Any country not explicitly defined will fall
-   * back to using the corresponding region_pool mapping if it exists else to
-   * default_pools.
-   */
-  export interface CountryPools {
-    country_code?: Array<string>;
-  }
-
-  /**
-   * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
-   * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
-   * explicitly defined will fall back to using the corresponding country_pool, then
-   * region_pool mapping if it exists else to default_pools.
-   */
-  export interface PopPools {
-    pop?: Array<string>;
-  }
-
-  /**
-   * A mapping of region codes to a list of pool IDs (ordered by their failover
-   * priority) for the given region. Any regions not explicitly defined will fall
-   * back to using default_pools.
-   */
-  export interface RegionPools {
-    region_code?: Array<string>;
-  }
 }
 
 export interface LoadBalancerGetParams {
