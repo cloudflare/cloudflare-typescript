@@ -2412,12 +2412,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/rulesets/rules.ts">BlockRule</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">ChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">CompressResponseRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">DDoSDynamicRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ExecuteRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">ForceConnectionCloseRule</a></code>
-- <code><a href="./src/resources/rulesets/rules.ts">JSChallengeRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">LogCustomFieldRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">LogRule</a></code>
 - <code><a href="./src/resources/rulesets/rules.ts">Logging</a></code>
@@ -2492,6 +2490,14 @@ Types:
 
 #### Currents
 
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/aggregates/currents.ts">CurrentGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/analytics/aggregate/current">client.spectrum.analytics.aggregates.currents.<a href="./src/resources/spectrum/analytics/aggregates/currents.ts">get</a>({ ...params }) -> CurrentGetResponse</code>
+
 ### Events
 
 Types:
@@ -2500,9 +2506,41 @@ Types:
 
 #### Bytimes
 
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/events/bytimes.ts">BytimeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/analytics/events/bytime">client.spectrum.analytics.events.bytimes.<a href="./src/resources/spectrum/analytics/events/bytimes.ts">get</a>({ ...params }) -> BytimeGetResponse</code>
+
 #### Summaries
 
+Types:
+
+- <code><a href="./src/resources/spectrum/analytics/events/summaries.ts">SummaryGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/spectrum/analytics/events/summary">client.spectrum.analytics.events.summaries.<a href="./src/resources/spectrum/analytics/events/summaries.ts">get</a>({ ...params }) -> SummaryGetResponse</code>
+
 ## Apps
+
+Types:
+
+- <code><a href="./src/resources/spectrum/apps.ts">AppCreateResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppUpdateResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppListResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppDeleteResponse</a></code>
+- <code><a href="./src/resources/spectrum/apps.ts">AppGetResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">create</a>({ ...params }) -> AppCreateResponse</code>
+- <code title="put /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">update</a>(appId, { ...params }) -> AppUpdateResponse</code>
+- <code title="get /zones/{zone_id}/spectrum/apps">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">list</a>({ ...params }) -> AppListResponse</code>
+- <code title="delete /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">delete</a>(appId, { ...params }) -> AppDeleteResponse | null</code>
+- <code title="get /zones/{zone_id}/spectrum/apps/{app_id}">client.spectrum.apps.<a href="./src/resources/spectrum/apps.ts">get</a>(appId, { ...params }) -> AppGetResponse</code>
 
 # Addressing
 
@@ -3277,20 +3315,18 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/pages/projects/projects.ts">Deployment</a></code>
+- <code><a href="./src/resources/pages/projects/projects.ts">Project</a></code>
 - <code><a href="./src/resources/pages/projects/projects.ts">Stage</a></code>
-- <code><a href="./src/resources/pages/projects/projects.ts">ProjectCreateResponse</a></code>
 - <code><a href="./src/resources/pages/projects/projects.ts">ProjectDeleteResponse</a></code>
-- <code><a href="./src/resources/pages/projects/projects.ts">ProjectEditResponse</a></code>
-- <code><a href="./src/resources/pages/projects/projects.ts">ProjectGetResponse</a></code>
 - <code><a href="./src/resources/pages/projects/projects.ts">ProjectPurgeBuildCacheResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">create</a>({ ...params }) -> ProjectCreateResponse</code>
+- <code title="post /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">create</a>({ ...params }) -> Project</code>
 - <code title="get /accounts/{account_id}/pages/projects">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">list</a>({ ...params }) -> DeploymentsSinglePage</code>
 - <code title="delete /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">delete</a>(projectName, { ...params }) -> ProjectDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">edit</a>(projectName, { ...params }) -> ProjectEditResponse</code>
-- <code title="get /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">get</a>(projectName, { ...params }) -> ProjectGetResponse</code>
+- <code title="patch /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">edit</a>(projectName, { ...params }) -> Project</code>
+- <code title="get /accounts/{account_id}/pages/projects/{project_name}">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">get</a>(projectName, { ...params }) -> Project</code>
 - <code title="post /accounts/{account_id}/pages/projects/{project_name}/purge_build_cache">client.pages.projects.<a href="./src/resources/pages/projects/projects.ts">purgeBuildCache</a>(projectName, { ...params }) -> ProjectPurgeBuildCacheResponse | null</code>
 
 ### Deployments
