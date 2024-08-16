@@ -9,4 +9,6 @@ export class Aggregates extends APIResource {
 
 export namespace Aggregates {
   export import Currents = CurrentsAPI.Currents;
+  export import CurrentGetResponse = CurrentsAPI.CurrentGetResponse;
+  export import CurrentGetParams = CurrentsAPI.CurrentGetParams;
 }

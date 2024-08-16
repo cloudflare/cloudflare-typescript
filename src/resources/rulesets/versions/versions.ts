@@ -224,10 +224,10 @@ export interface VersionGetResponse {
    */
   rules: Array<
     | RulesAPI.BlockRule
-    | RulesAPI.ChallengeRule
+    | VersionGetResponse.RulesetsChallengeRule
     | RulesAPI.CompressResponseRule
     | RulesAPI.ExecuteRule
-    | RulesAPI.JSChallengeRule
+    | VersionGetResponse.RulesetsJSChallengeRule
     | RulesAPI.LogRule
     | RulesAPI.ManagedChallengeRule
     | RulesAPI.RedirectRule
@@ -252,6 +252,122 @@ export interface VersionGetResponse {
    * An informative description of the ruleset.
    */
   description?: string;
+}
+
+export namespace VersionGetResponse {
+  export interface RulesetsChallengeRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'challenge';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
+
+  export interface RulesetsJSChallengeRule {
+    /**
+     * The timestamp of when the rule was last modified.
+     */
+    last_updated: string;
+
+    /**
+     * The version of the rule.
+     */
+    version: string;
+
+    /**
+     * The unique ID of the rule.
+     */
+    id?: string;
+
+    /**
+     * The action to perform when the rule matches.
+     */
+    action?: 'js_challenge';
+
+    /**
+     * The parameters configuring the rule's action.
+     */
+    action_parameters?: unknown;
+
+    /**
+     * The categories of the rule.
+     */
+    categories?: Array<string>;
+
+    /**
+     * An informative description of the rule.
+     */
+    description?: string;
+
+    /**
+     * Whether the rule should be executed.
+     */
+    enabled?: boolean;
+
+    /**
+     * The expression defining which traffic will match the rule.
+     */
+    expression?: string;
+
+    /**
+     * An object configuring the rule's logging behavior.
+     */
+    logging?: RulesAPI.Logging;
+
+    /**
+     * The reference of the rule (the rule ID by default).
+     */
+    ref?: string;
+  }
 }
 
 export interface VersionListParams {
