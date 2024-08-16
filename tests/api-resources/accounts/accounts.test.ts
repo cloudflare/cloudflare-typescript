@@ -11,7 +11,10 @@ const client = new Cloudflare({
 
 describe('resource accounts', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.accounts.update({ account_id: {}, name: 'Demo Account' });
+    const responsePromise = client.accounts.update({
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
+      name: 'Demo Account',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +26,7 @@ describe('resource accounts', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.accounts.update({
-      account_id: {},
+      account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       name: 'Demo Account',
       settings: {
         abuse_contact_email: 'abuse_contact_email',
@@ -63,7 +66,7 @@ describe('resource accounts', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.accounts.get({ account_id: {} });
+    const responsePromise = client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,6 +77,6 @@ describe('resource accounts', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.accounts.get({ account_id: {} });
+    const response = await client.accounts.get({ account_id: 'eb78d65290b24279ba6f44721b3ea3c4' });
   });
 });
