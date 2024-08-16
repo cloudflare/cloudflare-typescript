@@ -17,10 +17,13 @@ export class Tokens extends APIResource {
   /**
    * Create a new access token.
    */
-  create(body: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
+  create(
+    body: TokenCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenCreateResponse | null> {
     return (
       this._client.post('/user/tokens', { body, ...options }) as Core.APIPromise<{
-        result: TokenCreateResponse;
+        result: TokenCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -29,13 +32,13 @@ export class Tokens extends APIResource {
    * Update an existing token.
    */
   update(
-    tokenId: unknown,
+    tokenId: string,
     body: TokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUpdateResponse> {
+  ): Core.APIPromise<TokenUpdateResponse | null> {
     return (
       this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
-        result: TokenUpdateResponse;
+        result: TokenUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -66,7 +69,7 @@ export class Tokens extends APIResource {
   /**
    * Destroy a token.
    */
-  delete(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
+  delete(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
     return (
       this._client.delete(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
         result: TokenDeleteResponse | null;
@@ -77,9 +80,11 @@ export class Tokens extends APIResource {
   /**
    * Get information about a specific token.
    */
-  get(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse> {
+  get(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse | null> {
     return (
-      this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{ result: TokenGetResponse }>
+      this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
+        result: TokenGetResponse | null;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -180,28 +185,17 @@ export namespace PolicyParam {
   }
 }
 
-export interface Token {
+export type TokenCreateResponse = Array<unknown>;
+
+export type TokenUpdateResponse = Array<unknown>;
+
+export interface TokenListResponse {
   /**
    * Token identifier tag.
    */
-  id: string;
+  id?: string;
 
-  /**
-   * Token name.
-   */
-  name: string;
-
-  /**
-   * List of access policies assigned to the token.
-   */
-  policies: Array<Policy>;
-
-  /**
-   * Status of the token.
-   */
-  status: 'active' | 'disabled' | 'expired';
-
-  condition?: Token.Condition;
+  condition?: TokenListResponse.Condition;
 
   /**
    * The expiration time on or after which the JWT MUST NOT be accepted for
@@ -215,17 +209,37 @@ export interface Token {
   issued_on?: string;
 
   /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
    * Last time the token was modified.
    */
   modified_on?: string;
 
   /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
    * The time before which the token MUST NOT be accepted for processing.
    */
   not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<Policy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
 }
 
-export namespace Token {
+export namespace TokenListResponse {
   export interface Condition {
     /**
      * Client IP restrictions.
@@ -251,17 +265,6 @@ export namespace Token {
   }
 }
 
-export interface TokenCreateResponse {
-  /**
-   * The token value.
-   */
-  value?: ValueAPI.Value;
-}
-
-export type TokenUpdateResponse = unknown;
-
-export type TokenListResponse = unknown;
-
 export interface TokenDeleteResponse {
   /**
    * Identifier
@@ -269,7 +272,7 @@ export interface TokenDeleteResponse {
   id: string;
 }
 
-export type TokenGetResponse = unknown;
+export type TokenGetResponse = Array<unknown>;
 
 export interface TokenVerifyResponse {
   /**
@@ -411,7 +414,6 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 export namespace Tokens {
   export import CIDRList = TokensAPI.CIDRList;
   export import Policy = TokensAPI.Policy;
-  export import Token = TokensAPI.Token;
   export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
   export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
   export import TokenListResponse = TokensAPI.TokenListResponse;

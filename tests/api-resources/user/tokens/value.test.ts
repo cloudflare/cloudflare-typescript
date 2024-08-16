@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource value', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.user.tokens.value.update({}, {});
+    const responsePromise = client.user.tokens.value.update('ed17574386854bf78a67040be0a770b0', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,6 +22,6 @@ describe('resource value', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.user.tokens.value.update({}, {});
+    const response = await client.user.tokens.value.update('ed17574386854bf78a67040be0a770b0', {});
   });
 });

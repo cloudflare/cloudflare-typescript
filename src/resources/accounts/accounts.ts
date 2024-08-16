@@ -129,9 +129,9 @@ export type AccountGetResponse = unknown;
 
 export interface AccountUpdateParams {
   /**
-   * Path param:
+   * Path param: Account identifier tag.
    */
-  account_id: unknown;
+  account_id: string;
 
   /**
    * Body param: Account name
@@ -197,7 +197,10 @@ export interface AccountListParams extends V4PagePaginationArrayParams {
 }
 
 export interface AccountGetParams {
-  account_id: unknown;
+  /**
+   * Account identifier tag.
+   */
+  account_id: string;
 }
 
 export namespace Accounts {
