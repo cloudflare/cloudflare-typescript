@@ -23,23 +23,6 @@ export class MetadataIndex extends APIResource {
   }
 
   /**
-   * List Metadata Indexes for the specified Vectorize Index.
-   */
-  list(
-    indexName: string,
-    params: MetadataIndexListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MetadataIndexListResponse | null> {
-    const { account_id } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/list`,
-        options,
-      ) as Core.APIPromise<{ result: MetadataIndexListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Allow Vectorize to delete the specified metadata index.
    */
   delete(
@@ -62,27 +45,6 @@ export interface MetadataIndexCreateResponse {
    * The unique identifier for the async mutation operation containing the changeset.
    */
   mutationId?: string;
-}
-
-export interface MetadataIndexListResponse {
-  /**
-   * Array of indexed metadata properties.
-   */
-  metadataIndexes?: Array<MetadataIndexListResponse.MetadataIndex>;
-}
-
-export namespace MetadataIndexListResponse {
-  export interface MetadataIndex {
-    /**
-     * Specifies the type of indexed metadata property.
-     */
-    indexType?: 'string' | 'number' | 'boolean';
-
-    /**
-     * Specifies the indexed metadata property.
-     */
-    propertyName?: string;
-  }
 }
 
 export interface MetadataIndexDeleteResponse {
@@ -109,13 +71,6 @@ export interface MetadataIndexCreateParams {
   propertyName: string;
 }
 
-export interface MetadataIndexListParams {
-  /**
-   * Identifier
-   */
-  account_id: string;
-}
-
 export interface MetadataIndexDeleteParams {
   /**
    * Path param: Identifier
@@ -130,9 +85,7 @@ export interface MetadataIndexDeleteParams {
 
 export namespace MetadataIndex {
   export import MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
-  export import MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
   export import MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
   export import MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
-  export import MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
   export import MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
 }

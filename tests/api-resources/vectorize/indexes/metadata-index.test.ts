@@ -33,25 +33,6 @@ describe('resource metadataIndex', () => {
     });
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.vectorize.indexes.metadataIndex.list('example-index', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: required and optional params', async () => {
-    const response = await client.vectorize.indexes.metadataIndex.list('example-index', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
   test('delete: only required params', async () => {
     const responsePromise = client.vectorize.indexes.metadataIndex.delete('example-index', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
