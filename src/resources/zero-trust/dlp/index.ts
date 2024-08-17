@@ -2,12 +2,11 @@
 
 export {
   ContextAwareness,
+  Profile,
   SkipConfiguration,
-  ProfileListResponse,
-  ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
-  ProfileListResponsesSinglePage,
+  ProfilesSinglePage,
   Profiles,
 } from './profiles/index';
 export { DLP } from './dlp';
