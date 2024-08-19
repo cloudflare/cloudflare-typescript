@@ -9,8 +9,8 @@ import { type Response as FetchResponse } from '../../_shims/index';
 export class Scans extends APIResource {
   /**
    * Submit a URL to scan. You can also set some options, like the visibility level
-   * and custom headers. Accounts are limited to 1 new scan every 10 seconds and 8000
-   * per month. If you need more, please reach out.
+   * and custom headers. Check limits at
+   * https://developers.cloudflare.com/security-center/investigate/scan-limits/.
    */
   create(
     accountId: string,
