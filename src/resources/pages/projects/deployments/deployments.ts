@@ -52,13 +52,13 @@ export class Deployments extends APIResource {
     deploymentId: string,
     params: DeploymentDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeploymentDeleteResponse | null> {
+  ): Core.APIPromise<DeploymentDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}/deployments/${deploymentId}`,
         options,
-      ) as Core.APIPromise<{ result: DeploymentDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: DeploymentDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
