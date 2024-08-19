@@ -366,8 +366,6 @@ export interface TimeseriesGroupResponseCodesResponse {
 
 export namespace TimeseriesGroupResponseCodesResponse {
   export interface Serie0 {
-    FORMERR: Array<string>;
-
     NOERROR: Array<string>;
 
     NOTIMP: Array<string>;

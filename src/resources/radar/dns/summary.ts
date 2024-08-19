@@ -768,8 +768,6 @@ export namespace SummaryResponseCodesResponse {
   }
 
   export interface Summary0 {
-    FORMERR: string;
-
     NOERROR: string;
 
     NOTIMP: string;
