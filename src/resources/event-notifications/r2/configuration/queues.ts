@@ -52,7 +52,7 @@ export type QueueDeleteResponse = unknown | Array<unknown> | string;
 
 export interface QueueUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -85,7 +85,7 @@ export namespace QueueUpdateParams {
 
 export interface QueueDeleteParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
