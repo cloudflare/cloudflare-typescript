@@ -62,13 +62,13 @@ export class Configs extends APIResource {
     hyperdriveId: string,
     params: ConfigDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigDeleteResponse | null> {
+  ): Core.APIPromise<ConfigDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
         options,
-      ) as Core.APIPromise<{ result: ConfigDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: ConfigDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -108,7 +108,7 @@ export class Configs extends APIResource {
   }
 }
 
-export type ConfigDeleteResponse = unknown | string;
+export type ConfigDeleteResponse = unknown | string | null;
 
 export interface ConfigCreateParams {
   /**
