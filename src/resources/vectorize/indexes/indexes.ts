@@ -563,7 +563,9 @@ export namespace Indexes {
   export import IndexUpsertParams = IndexesAPI.IndexUpsertParams;
   export import MetadataIndex = MetadataIndexAPI.MetadataIndex;
   export import MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
+  export import MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
   export import MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
   export import MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
+  export import MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
   export import MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
 }

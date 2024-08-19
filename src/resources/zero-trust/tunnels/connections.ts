@@ -6,6 +6,26 @@ import * as ConnectionsAPI from './connections';
 
 export class Connections extends APIResource {
   /**
+   * Removes a connection (aka Cloudflare Tunnel Connector) from a Cloudflare Tunnel
+   * independently of its current state. If no connector id (client_id) is provided
+   * all connectors will be removed. We recommend running this command after rotating
+   * tokens.
+   */
+  delete(
+    tunnelId: string,
+    params: ConnectionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectionDeleteResponse | null> {
+    const { account_id, client_id } = params;
+    return (
+      this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`, {
+        query: { client_id },
+        ...options,
+      }) as Core.APIPromise<{ result: ConnectionDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches connection details for a Cloudflare Tunnel.
    */
   get(
@@ -112,7 +132,21 @@ export namespace Client {
   }
 }
 
+export type ConnectionDeleteResponse = unknown;
+
 export type ConnectionGetResponse = Array<Client>;
+
+export interface ConnectionDeleteParams {
+  /**
+   * Path param: Cloudflare account ID
+   */
+  account_id: string;
+
+  /**
+   * Query param: UUID of the Cloudflare Tunnel connector.
+   */
+  client_id?: string;
+}
 
 export interface ConnectionGetParams {
   /**
@@ -123,6 +157,8 @@ export interface ConnectionGetParams {
 
 export namespace Connections {
   export import Client = ConnectionsAPI.Client;
+  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
   export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
+  export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
   export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }
