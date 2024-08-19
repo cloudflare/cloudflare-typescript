@@ -93,11 +93,17 @@ export namespace ZeroTrust {
   export import Percentiles = DEXAPI.Percentiles;
   export import Tunnels = TunnelsAPI.Tunnels;
   export import Connection = TunnelsAPI.Connection;
+  export import TunnelCreateResponse = TunnelsAPI.TunnelCreateResponse;
   export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
+  export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
   export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
+  export import TunnelGetResponse = TunnelsAPI.TunnelGetResponse;
   export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
+  export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
   export import TunnelListParams = TunnelsAPI.TunnelListParams;
+  export import TunnelDeleteParams = TunnelsAPI.TunnelDeleteParams;
   export import TunnelEditParams = TunnelsAPI.TunnelEditParams;
+  export import TunnelGetParams = TunnelsAPI.TunnelGetParams;
   export import ConnectivitySettings = ConnectivitySettingsAPI.ConnectivitySettings;
   export import ConnectivitySettingEditResponse = ConnectivitySettingsAPI.ConnectivitySettingEditResponse;
   export import ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
@@ -111,4 +117,8 @@ export namespace ZeroTrust {
   export import GatewayListParams = GatewayAPI.GatewayListParams;
   export import Networks = NetworksAPI.Networks;
   export import RiskScoring = RiskScoringAPI.RiskScoring;
+  export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
+  export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
+  export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
+  export import RiskScoringResetParams = RiskScoringAPI.RiskScoringResetParams;
 }

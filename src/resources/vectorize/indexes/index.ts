@@ -29,8 +29,10 @@ export {
 } from './indexes';
 export {
   MetadataIndexCreateResponse,
+  MetadataIndexListResponse,
   MetadataIndexDeleteResponse,
   MetadataIndexCreateParams,
+  MetadataIndexListParams,
   MetadataIndexDeleteParams,
   MetadataIndex,
 } from './metadata-index';

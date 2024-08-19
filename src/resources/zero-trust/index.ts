@@ -41,10 +41,16 @@ export {
 } from './identity-providers';
 export {
   Connection,
+  TunnelCreateResponse,
   TunnelListResponse,
+  TunnelDeleteResponse,
   TunnelEditResponse,
+  TunnelGetResponse,
+  TunnelCreateParams,
   TunnelListParams,
+  TunnelDeleteParams,
   TunnelEditParams,
+  TunnelGetParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
 } from './tunnels/index';
@@ -83,6 +89,12 @@ export {
   Organizations,
 } from './organizations';
 export { Networks } from './networks/index';
-export { RiskScoring } from './risk-scoring/index';
+export {
+  RiskScoringGetResponse,
+  RiskScoringResetResponse,
+  RiskScoringGetParams,
+  RiskScoringResetParams,
+  RiskScoring,
+} from './risk-scoring/index';
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export { ZeroTrust } from './zero-trust';
