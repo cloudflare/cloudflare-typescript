@@ -51,12 +51,23 @@ export interface PermissionGroupGetResponse {
   /**
    * Attributes associated to the permission group.
    */
-  meta?: unknown;
+  meta?: PermissionGroupGetResponse.Meta;
 
   /**
    * Name of the group.
    */
   name?: string;
+}
+
+export namespace PermissionGroupGetResponse {
+  /**
+   * Attributes associated to the permission group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
+  }
 }
 
 export interface PermissionGroupListParams extends V4PagePaginationArrayParams {

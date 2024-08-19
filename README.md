@@ -152,8 +152,8 @@ You can use `for await … of` syntax to iterate through items across all pages:
 async function fetchAllAccounts(params) {
   const allAccounts = [];
   // Automatically fetches more pages as needed.
-  for await (const accountListResponse of client.accounts.list()) {
-    allAccounts.push(accountListResponse);
+  for await (const account of client.accounts.list()) {
+    allAccounts.push(account);
   }
   return allAccounts;
 }
@@ -163,8 +163,8 @@ Alternatively, you can make request a single page at a time:
 
 ```ts
 let page = await client.accounts.list();
-for (const accountListResponse of page.result) {
-  console.log(accountListResponse);
+for (const account of page.result) {
+  console.log(account);
 }
 
 // Convenience methods are provided for manually paginating:

@@ -15,30 +15,9 @@ describe('resource tokens', () => {
     const responsePromise = client.user.tokens.create({
       name: 'readonly token',
       policies: [
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -58,35 +37,26 @@ describe('resource tokens', () => {
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
       ],
       condition: {
@@ -105,30 +75,9 @@ describe('resource tokens', () => {
     const responsePromise = client.user.tokens.update('ed17574386854bf78a67040be0a770b0', {
       name: 'readonly token',
       policies: [
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
       ],
       status: 'active',
     });
@@ -149,35 +98,26 @@ describe('resource tokens', () => {
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
       ],
       status: 'active',

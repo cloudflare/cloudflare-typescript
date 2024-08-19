@@ -14,11 +14,11 @@ export class Accounts extends APIResource {
   /**
    * Update an existing account.
    */
-  update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AccountUpdateResponse> {
+  update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}`, { body, ...options }) as Core.APIPromise<{
-        result: AccountUpdateResponse;
+        result: Account;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -29,35 +29,30 @@ export class Accounts extends APIResource {
   list(
     query?: AccountListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccountListResponsesV4PagePaginationArray, AccountListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AccountListResponsesV4PagePaginationArray, AccountListResponse>;
+  ): Core.PagePromise<AccountsV4PagePaginationArray, Account>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AccountsV4PagePaginationArray, Account>;
   list(
     query: AccountListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<AccountListResponsesV4PagePaginationArray, AccountListResponse> {
+  ): Core.PagePromise<AccountsV4PagePaginationArray, Account> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/accounts', AccountListResponsesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList('/accounts', AccountsV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Get information about a specific account that you are a member of.
    */
-  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountGetResponse> {
+  get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
     const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: AccountGetResponse }>
+      this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: Account }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AccountListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccountListResponse> {}
+export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {}
 
 export interface Account {
   /**
@@ -120,12 +115,6 @@ export namespace Account {
     use_account_custom_ns_by_default?: boolean;
   }
 }
-
-export type AccountUpdateResponse = unknown;
-
-export type AccountListResponse = unknown;
-
-export type AccountGetResponse = unknown;
 
 export interface AccountUpdateParams {
   /**
