@@ -9,7 +9,7 @@ export {
   EventDeleteParams,
   EventEditParams,
   EventGetParams,
-  EventsSinglePage,
+  EventsV4PagePaginationArray,
   Events,
 } from './events';
 export { EventQuery, DetailGetResponse, DetailGetParams, Details } from './details';
