@@ -44,13 +44,13 @@ export class Indexes extends APIResource {
     indexName: string,
     params: IndexDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IndexDeleteResponse> {
+  ): Core.APIPromise<IndexDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/vectorize/v2/indexes/${indexName}`,
         options,
-      ) as Core.APIPromise<{ result: IndexDeleteResponse }>
+      ) as Core.APIPromise<{ result: IndexDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -273,7 +273,7 @@ export namespace IndexQuery {
      */
     id?: string;
 
-    metadata?: unknown | null;
+    metadata?: unknown;
 
     /**
      * The score of the vector according to the index's distance metric
@@ -296,7 +296,7 @@ export interface IndexUpsert {
   ids?: Array<string>;
 }
 
-export type IndexDeleteResponse = unknown | string | null;
+export type IndexDeleteResponse = unknown | string;
 
 export interface IndexDeleteByIDsResponse {
   /**
@@ -359,7 +359,7 @@ export namespace IndexQueryResponse {
      */
     id?: string;
 
-    metadata?: unknown | null;
+    metadata?: unknown;
 
     namespace?: string | null;
 
