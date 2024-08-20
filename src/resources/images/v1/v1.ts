@@ -145,7 +145,7 @@ export namespace V1ListResponse {
   }
 }
 
-export type V1DeleteResponse = unknown | string;
+export type V1DeleteResponse = unknown | string | null;
 
 export interface V1CreateParams {
   /**
