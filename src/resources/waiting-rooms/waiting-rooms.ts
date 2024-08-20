@@ -7,7 +7,7 @@ import * as RulesAPI from './rules';
 import * as SettingsAPI from './settings';
 import * as StatusesAPI from './statuses';
 import * as EventsAPI from './events/events';
-import { SinglePage } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class WaitingRooms extends APIResource {
   page: PageAPI.Page = new PageAPI.Page(this._client);
@@ -51,9 +51,9 @@ export class WaitingRooms extends APIResource {
   list(
     params: WaitingRoomListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomsSinglePage, WaitingRoom> {
+  ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsSinglePage, {
+    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -109,7 +109,7 @@ export class WaitingRooms extends APIResource {
   }
 }
 
-export class WaitingRoomsSinglePage extends SinglePage<WaitingRoom> {}
+export class WaitingRoomsV4PagePaginationArray extends V4PagePaginationArray<WaitingRoom> {}
 
 export interface AdditionalRoutes {
   /**
@@ -303,6 +303,11 @@ export interface Query {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * Only available for the Waiting Room Advanced subscription. If `true`, requests
@@ -605,6 +610,11 @@ export interface WaitingRoom {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * The host name to which the waiting room will be applied (no wildcards). Please
@@ -990,6 +1000,11 @@ export interface WaitingRoomCreateParams {
   disable_session_renewal?: boolean;
 
   /**
+   * Body param: A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
+
+  /**
    * Body param: Only available for the Waiting Room Advanced subscription. If
    * `true`, requests to the waiting room with the header `Accept: application/json`
    * will receive a JSON response object with information on the user's status in the
@@ -1327,6 +1342,11 @@ export interface WaitingRoomUpdateParams {
   disable_session_renewal?: boolean;
 
   /**
+   * Body param: A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
+
+  /**
    * Body param: Only available for the Waiting Room Advanced subscription. If
    * `true`, requests to the waiting room with the header `Accept: application/json`
    * will receive a JSON response object with information on the user's status in the
@@ -1541,21 +1561,11 @@ export interface WaitingRoomUpdateParams {
   suspended?: boolean;
 }
 
-export interface WaitingRoomListParams {
+export interface WaitingRoomListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page. Must be a multiple of 5.
-   */
-  per_page?: unknown;
 }
 
 export interface WaitingRoomDeleteParams {
@@ -1686,6 +1696,11 @@ export interface WaitingRoomEditParams {
    * automatically renewed on every request.
    */
   disable_session_renewal?: boolean;
+
+  /**
+   * Body param: A list of enabled origin commands.
+   */
+  enabled_origin_commands?: Array<'revoke'>;
 
   /**
    * Body param: Only available for the Waiting Room Advanced subscription. If
@@ -1916,7 +1931,7 @@ export namespace WaitingRooms {
   export import Events = EventsAPI.Events;
   export import Event = EventsAPI.Event;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
-  export import EventsSinglePage = EventsAPI.EventsSinglePage;
+  export import EventsV4PagePaginationArray = EventsAPI.EventsV4PagePaginationArray;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventListParams = EventsAPI.EventListParams;

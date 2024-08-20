@@ -106,8 +106,8 @@ describe('resource events', () => {
   test('list: required and optional params', async () => {
     const response = await client.waitingRooms.events.list('699d98642c564d2e855e9661899b7252', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: {},
-      per_page: {},
+      page: 1,
+      per_page: 5,
     });
   });
 

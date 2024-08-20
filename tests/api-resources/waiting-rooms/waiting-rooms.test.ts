@@ -46,6 +46,7 @@ describe('resource waitingRooms', () => {
       default_template_language: 'en-US',
       description: 'Production - DO NOT MODIFY',
       disable_session_renewal: false,
+      enabled_origin_commands: ['revoke'],
       json_response_enabled: false,
       path: '/shop/checkout',
       queue_all: true,
@@ -92,6 +93,7 @@ describe('resource waitingRooms', () => {
       default_template_language: 'en-US',
       description: 'Production - DO NOT MODIFY',
       disable_session_renewal: false,
+      enabled_origin_commands: ['revoke'],
       json_response_enabled: false,
       path: '/shop/checkout',
       queue_all: true,
@@ -116,8 +118,8 @@ describe('resource waitingRooms', () => {
   test('list: required and optional params', async () => {
     const response = await client.waitingRooms.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: {},
-      per_page: {},
+      page: 1,
+      per_page: 5,
     });
   });
 
@@ -176,6 +178,7 @@ describe('resource waitingRooms', () => {
       default_template_language: 'en-US',
       description: 'Production - DO NOT MODIFY',
       disable_session_renewal: false,
+      enabled_origin_commands: ['revoke'],
       json_response_enabled: false,
       path: '/shop/checkout',
       queue_all: true,

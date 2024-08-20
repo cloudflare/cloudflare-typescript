@@ -9,7 +9,7 @@ export {
   EventDeleteParams,
   EventEditParams,
   EventGetParams,
-  EventsSinglePage,
+  EventsV4PagePaginationArray,
   Events,
 } from './events/index';
 export { PagePreviewResponse, PagePreviewParams, Page } from './page';
