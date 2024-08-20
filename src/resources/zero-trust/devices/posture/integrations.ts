@@ -44,13 +44,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse> {
+  ): Core.APIPromise<IntegrationDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: IntegrationDeleteResponse }>
+      ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -141,7 +141,7 @@ export namespace Integration {
   }
 }
 
-export type IntegrationDeleteResponse = unknown | string | null;
+export type IntegrationDeleteResponse = unknown | string;
 
 export interface IntegrationCreateParams {
   /**
