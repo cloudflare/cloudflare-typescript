@@ -222,7 +222,7 @@ export namespace ScriptUpdateParams {
       /**
        * List of bindings available to the worker.
        */
-      bindings?: Array<unknown>;
+      bindings?: Array<Metadata.Binding>;
 
       /**
        * Name of the part in the multipart request that contains the script (e.g. the
@@ -285,7 +285,23 @@ export namespace ScriptUpdateParams {
       /**
        * Key-value pairs to use as tags for this version of this Worker
        */
-      version_tags?: unknown;
+      version_tags?: Record<string, string>;
+    }
+
+    export namespace Metadata {
+      export interface Binding {
+        /**
+         * Name of the binding variable.
+         */
+        name?: string;
+
+        /**
+         * Type of binding. You can find more about bindings on our docs:
+         * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+         */
+        type?: string;
+        [k: string]: unknown;
+      }
     }
   }
 

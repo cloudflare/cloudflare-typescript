@@ -35,7 +35,7 @@ describe('resource scripts', () => {
         await toFile(Buffer.from('# my file contents'), 'README.md'),
       ],
       metadata: {
-        bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
+        bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
         body_part: 'worker.js',
         compatibility_date: '2023-07-25',
         compatibility_flags: ['string', 'string', 'string'],
@@ -66,7 +66,7 @@ describe('resource scripts', () => {
           { service: 'my-log-consumer', environment: 'production', namespace: 'my-namespace' },
         ],
         usage_model: 'bundled',
-        version_tags: {},
+        version_tags: { foo: 'string' },
       },
     });
   });
