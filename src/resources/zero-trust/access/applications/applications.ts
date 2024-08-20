@@ -215,16 +215,16 @@ export class Applications extends APIResource {
     appId: AppIDParam,
     params?: ApplicationRevokeTokensParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationRevokeTokensResponse>;
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
   revokeTokens(
     appId: AppIDParam,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationRevokeTokensResponse>;
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
   revokeTokens(
     appId: AppIDParam,
     params: ApplicationRevokeTokensParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationRevokeTokensResponse> {
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null> {
     if (isRequestOptions(params)) {
       return this.revokeTokens(appId, {}, params);
     }
@@ -249,7 +249,7 @@ export class Applications extends APIResource {
       this._client.post(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/revoke_tokens`,
         options,
-      ) as Core.APIPromise<{ result: ApplicationRevokeTokensResponse }>
+      ) as Core.APIPromise<{ result: ApplicationRevokeTokensResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
