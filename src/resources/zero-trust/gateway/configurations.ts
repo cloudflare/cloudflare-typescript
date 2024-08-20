@@ -430,7 +430,7 @@ export namespace GatewayConfigurationSettings {
   export interface Certificate {
     /**
      * UUID of certificate to be used for interception. Certificate must be active on
-     * the edge.
+     * the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
      */
     id: string;
   }
@@ -506,7 +506,7 @@ export namespace GatewayConfigurationSettingsParam {
   export interface Certificate {
     /**
      * UUID of certificate to be used for interception. Certificate must be active on
-     * the edge.
+     * the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
      */
     id: string;
   }
