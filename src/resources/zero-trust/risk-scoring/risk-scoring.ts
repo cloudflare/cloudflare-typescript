@@ -31,13 +31,13 @@ export class RiskScoring extends APIResource {
     userId: string,
     params: RiskScoringResetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringResetResponse | null> {
+  ): Core.APIPromise<RiskScoringResetResponse> {
     const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/zt_risk_scoring/${userId}/reset`,
         options,
-      ) as Core.APIPromise<{ result: RiskScoringResetResponse | null }>
+      ) as Core.APIPromise<{ result: RiskScoringResetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
