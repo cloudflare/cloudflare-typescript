@@ -110,8 +110,8 @@ describe('resource healthchecks', () => {
   test('list: required and optional params', async () => {
     const response = await client.healthchecks.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: {},
-      per_page: {},
+      page: 1,
+      per_page: 5,
     });
   });
 

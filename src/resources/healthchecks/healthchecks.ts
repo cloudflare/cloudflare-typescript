@@ -3,7 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as PreviewsAPI from './previews';
-import { SinglePage } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Healthchecks extends APIResource {
   previews: PreviewsAPI.Previews = new PreviewsAPI.Previews(this._client);
@@ -43,9 +43,9 @@ export class Healthchecks extends APIResource {
   list(
     params: HealthcheckListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<HealthchecksSinglePage, Healthcheck> {
+  ): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksSinglePage, {
+    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksV4PagePaginationArray, {
       query,
       ...options,
     });
@@ -101,7 +101,7 @@ export class Healthchecks extends APIResource {
   }
 }
 
-export class HealthchecksSinglePage extends SinglePage<Healthcheck> {}
+export class HealthchecksV4PagePaginationArray extends V4PagePaginationArray<Healthcheck> {}
 
 /**
  * WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe,
@@ -615,21 +615,11 @@ export interface HealthcheckUpdateParams {
   type?: string;
 }
 
-export interface HealthcheckListParams {
+export interface HealthcheckListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page. Must be a multiple of 5.
-   */
-  per_page?: unknown;
 }
 
 export interface HealthcheckDeleteParams {
