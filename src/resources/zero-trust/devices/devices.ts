@@ -38,11 +38,11 @@ export class Devices extends APIResource {
     deviceId: string,
     params: DeviceGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceGetResponse | null> {
+  ): Core.APIPromise<DeviceGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
-        result: DeviceGetResponse | null;
+        result: DeviceGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -165,7 +165,7 @@ export namespace Device {
   }
 }
 
-export type DeviceGetResponse = unknown | string;
+export type DeviceGetResponse = unknown | string | null;
 
 export interface DeviceListParams {
   account_id: string;
