@@ -74,7 +74,7 @@ export namespace MessagePullResponse {
 
 export interface MessageAckParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -113,7 +113,7 @@ export namespace MessageAckParams {
 
 export interface MessagePullParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -126,7 +126,7 @@ export interface MessagePullParams {
    * Body param: The number of milliseconds that a message is exclusively leased.
    * After the timeout, the message becomes available for another attempt.
    */
-  visibility_timeout?: number;
+  visibility_timeout_ms?: number;
 }
 
 export namespace Messages {

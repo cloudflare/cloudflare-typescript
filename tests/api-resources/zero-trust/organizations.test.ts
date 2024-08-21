@@ -44,7 +44,7 @@ describe('resource organizations', () => {
       },
       session_duration: '24h',
       ui_read_only_toggle_reason: 'Temporarily turn off the UI read only lock to make a change via the UI',
-      user_seat_expiration_inactive_time: '730h',
+      user_seat_expiration_inactive_time: '720h',
       warp_auth_session_duration: '24h',
     });
   });
