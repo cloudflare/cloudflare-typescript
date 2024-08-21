@@ -42,13 +42,13 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomDeleteResponse> {
+  ): Core.APIPromise<CustomDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
-      ) as Core.APIPromise<{ result: CustomDeleteResponse }>
+      ) as Core.APIPromise<{ result: CustomDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
