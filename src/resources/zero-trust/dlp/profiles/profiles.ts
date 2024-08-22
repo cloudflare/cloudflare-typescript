@@ -18,8 +18,11 @@ export class Profiles extends APIResource {
     params: ProfileListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ProfilesSinglePage, Profile> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, options);
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -216,6 +219,9 @@ export namespace Profile {
 
     ocr_enabled?: boolean;
 
+    /**
+     * Whether this profile can be accessed by anyone
+     */
     open_access?: boolean;
   }
 
@@ -420,7 +426,16 @@ export interface SkipConfiguration {
 }
 
 export interface ProfileListParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Query param: Return all profiles, including those that current account does not
+   * have access to.
+   */
+  all?: boolean;
 }
 
 export interface ProfileGetParams {
