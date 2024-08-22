@@ -13,7 +13,11 @@ export class PayloadLogs extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<PayloadLogUpdateResponse> {
     const { account_id, ...body } = params;
-    return this._client.put(`/accounts/${account_id}/dlp/payload_log`, { body, ...options });
+    return (
+      this._client.put(`/accounts/${account_id}/dlp/payload_log`, { body, ...options }) as Core.APIPromise<{
+        result: PayloadLogUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -21,7 +25,11 @@ export class PayloadLogs extends APIResource {
    */
   get(params: PayloadLogGetParams, options?: Core.RequestOptions): Core.APIPromise<PayloadLogGetResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/dlp/payload_log`, options);
+    return (
+      this._client.get(`/accounts/${account_id}/dlp/payload_log`, options) as Core.APIPromise<{
+        result: PayloadLogGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

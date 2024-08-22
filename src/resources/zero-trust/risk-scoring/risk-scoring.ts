@@ -21,7 +21,11 @@ export class RiskScoring extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<RiskScoringGetResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options);
+    return (
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options) as Core.APIPromise<{
+        result: RiskScoringGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,13 +35,13 @@ export class RiskScoring extends APIResource {
     userId: string,
     params: RiskScoringResetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringResetResponse> {
+  ): Core.APIPromise<RiskScoringResetResponse | null> {
     const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/zt_risk_scoring/${userId}/reset`,
         options,
-      ) as Core.APIPromise<{ result: RiskScoringResetResponse }>
+      ) as Core.APIPromise<{ result: RiskScoringResetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

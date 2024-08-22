@@ -13,7 +13,12 @@ export class Behaviours extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<BehaviourUpdateResponse> {
     const { account_id, ...body } = params;
-    return this._client.put(`/accounts/${account_id}/zt_risk_scoring/behaviors`, { body, ...options });
+    return (
+      this._client.put(`/accounts/${account_id}/zt_risk_scoring/behaviors`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BehaviourUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -21,7 +26,11 @@ export class Behaviours extends APIResource {
    */
   get(params: BehaviourGetParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/zt_risk_scoring/behaviors`, options);
+    return (
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/behaviors`, options) as Core.APIPromise<{
+        result: BehaviourGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
