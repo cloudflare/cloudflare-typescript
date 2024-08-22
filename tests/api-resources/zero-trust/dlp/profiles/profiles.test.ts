@@ -22,7 +22,7 @@ describe('resource profiles', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.list({ account_id: 'account_id' });
+    const response = await client.zeroTrust.dlp.profiles.list({ account_id: 'account_id', all: true });
   });
 
   test('get: only required params', async () => {

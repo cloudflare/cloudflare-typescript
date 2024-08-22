@@ -16,7 +16,12 @@ export class Patterns extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<PatternValidateResponse> {
     const { account_id, ...body } = params;
-    return this._client.post(`/accounts/${account_id}/dlp/patterns/validate`, { body, ...options });
+    return (
+      this._client.post(`/accounts/${account_id}/dlp/patterns/validate`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PatternValidateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

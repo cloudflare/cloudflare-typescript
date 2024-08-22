@@ -10,7 +10,11 @@ export class Summary extends APIResource {
    */
   get(params: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/zt_risk_scoring/summary`, options);
+    return (
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/summary`, options) as Core.APIPromise<{
+        result: SummaryGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

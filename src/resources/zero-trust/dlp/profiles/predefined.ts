@@ -71,6 +71,9 @@ export interface PredefinedProfile {
 
   ocr_enabled?: boolean;
 
+  /**
+   * Whether this profile can be accessed by anyone
+   */
   open_access?: boolean;
 }
 
