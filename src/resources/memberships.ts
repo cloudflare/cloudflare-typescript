@@ -2,7 +2,9 @@
 
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as MembershipsAPI from './memberships';
 import * as Shared from './shared';
 import * as AccountsAPI from './accounts/accounts';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
@@ -11,30 +13,16 @@ export class Memberships extends APIResource {
   /**
    * Accept or reject this account invitation.
    */
-  update(
-    membershipId: string,
-    body: MembershipUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MembershipUpdateResponse> {
-    return (
-      this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{
-        result: MembershipUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  update(membershipId: string, body: MembershipUpdateParams, options?: Core.RequestOptions): Core.APIPromise<MembershipUpdateResponse> {
+    return (this._client.put(`/memberships/${membershipId}`, { body, ...options }) as Core.APIPromise<{ result: MembershipUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List memberships of accounts the user can access.
    */
-  list(
-    query?: MembershipListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>;
-  list(options?: Core.RequestOptions): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>;
-  list(
-    query: MembershipListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MembershipsV4PagePaginationArray, Membership> {
+  list(query?: MembershipListParams, options?: Core.RequestOptions): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>
+  list(options?: Core.RequestOptions): Core.PagePromise<MembershipsV4PagePaginationArray, Membership>
+  list(query: MembershipListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<MembershipsV4PagePaginationArray, Membership> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -45,26 +33,19 @@ export class Memberships extends APIResource {
    * Remove the associated member from an account.
    */
   delete(membershipId: string, options?: Core.RequestOptions): Core.APIPromise<MembershipDeleteResponse> {
-    return (
-      this._client.delete(`/memberships/${membershipId}`, options) as Core.APIPromise<{
-        result: MembershipDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/memberships/${membershipId}`, options) as Core.APIPromise<{ result: MembershipDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a specific membership.
    */
   get(membershipId: string, options?: Core.RequestOptions): Core.APIPromise<MembershipGetResponse> {
-    return (
-      this._client.get(`/memberships/${membershipId}`, options) as Core.APIPromise<{
-        result: MembershipGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/memberships/${membershipId}`, options) as Core.APIPromise<{ result: MembershipGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MembershipsV4PagePaginationArray extends V4PagePaginationArray<Membership> {}
+export class MembershipsV4PagePaginationArray extends V4PagePaginationArray<Membership> {
+}
 
 export interface Membership {
   /**

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TrustedDomainsAPI from './trusted-domains';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -9,91 +11,48 @@ export class TrustedDomains extends APIResource {
   /**
    * Create a trusted email domain
    */
-  create(
-    params: TrustedDomainCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TrustedDomainCreateResponse> {
+  create(params: TrustedDomainCreateParams, options?: Core.RequestOptions): Core.APIPromise<TrustedDomainCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/settings/trusted_domains`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TrustedDomainCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/email-security/settings/trusted_domains`, { body, ...options }) as Core.APIPromise<{ result: TrustedDomainCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List, search, and sort an account's trusted email domains.
    */
-  list(
-    params: TrustedDomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TrustedDomainListResponsesV4PagePaginationArray, TrustedDomainListResponse> {
+  list(params: TrustedDomainListParams, options?: Core.RequestOptions): Core.PagePromise<TrustedDomainListResponsesV4PagePaginationArray, TrustedDomainListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/settings/trusted_domains`,
-      TrustedDomainListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/email-security/settings/trusted_domains`, TrustedDomainListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Delete a trusted email domain
    */
-  delete(
-    patternId: number,
-    params: TrustedDomainDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TrustedDomainDeleteResponse> {
+  delete(patternId: number, params: TrustedDomainDeleteParams, options?: Core.RequestOptions): Core.APIPromise<TrustedDomainDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/email-security/settings/trusted_domains/${patternId}`,
-        options,
-      ) as Core.APIPromise<{ result: TrustedDomainDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/email-security/settings/trusted_domains/${patternId}`, options) as Core.APIPromise<{ result: TrustedDomainDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a trusted email domain
    */
-  edit(
-    patternId: number,
-    params: TrustedDomainEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TrustedDomainEditResponse> {
+  edit(patternId: number, params: TrustedDomainEditParams, options?: Core.RequestOptions): Core.APIPromise<TrustedDomainEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/email-security/settings/trusted_domains/${patternId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TrustedDomainEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/email-security/settings/trusted_domains/${patternId}`, { body, ...options }) as Core.APIPromise<{ result: TrustedDomainEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a trusted email domain
    */
-  get(
-    patternId: number,
-    params: TrustedDomainGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TrustedDomainGetResponse> {
+  get(patternId: number, params: TrustedDomainGetParams, options?: Core.RequestOptions): Core.APIPromise<TrustedDomainGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/settings/trusted_domains/${patternId}`,
-        options,
-      ) as Core.APIPromise<{ result: TrustedDomainGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/settings/trusted_domains/${patternId}`, options) as Core.APIPromise<{ result: TrustedDomainGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TrustedDomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<TrustedDomainListResponse> {}
+export class TrustedDomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<TrustedDomainListResponse> {
+}
 
-export type TrustedDomainCreateResponse =
-  | TrustedDomainCreateResponse.EmailSecurityTrustedDomain
-  | Array<TrustedDomainCreateResponse.UnionMember1>;
+export type TrustedDomainCreateResponse = TrustedDomainCreateResponse.EmailSecurityTrustedDomain | Array<TrustedDomainCreateResponse.UnionMember1>
 
 export namespace TrustedDomainCreateResponse {
   export interface EmailSecurityTrustedDomain {
@@ -191,9 +150,7 @@ export interface TrustedDomainGetResponse {
   comments?: string | null;
 }
 
-export type TrustedDomainCreateParams =
-  | TrustedDomainCreateParams.EmailSecurityCreateTrustedDomain
-  | TrustedDomainCreateParams.Variant1;
+export type TrustedDomainCreateParams = TrustedDomainCreateParams.EmailSecurityCreateTrustedDomain | TrustedDomainCreateParams.Variant1
 
 export namespace TrustedDomainCreateParams {
   export interface EmailSecurityCreateTrustedDomain {

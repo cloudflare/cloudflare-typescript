@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as OverrideCodesAPI from './override-codes';
 
@@ -9,18 +11,9 @@ export class OverrideCodes extends APIResource {
    * Fetches a one-time use admin override code for a device. This relies on the
    * **Admin Override** setting being enabled in your device configuration.
    */
-  list(
-    deviceId: string,
-    params: OverrideCodeListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OverrideCodeListResponse | null> {
+  list(deviceId: string, params: OverrideCodeListParams, options?: Core.RequestOptions): Core.APIPromise<OverrideCodeListResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/devices/${deviceId}/override_codes`,
-        options,
-      ) as Core.APIPromise<{ result: OverrideCodeListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/devices/${deviceId}/override_codes`, options) as Core.APIPromise<{ result: OverrideCodeListResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

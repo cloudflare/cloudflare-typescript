@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as AccountsAPI from './accounts';
 import * as Shared from '../../shared';
@@ -9,31 +11,17 @@ export class Accounts extends APIResource {
   /**
    * Add an account as a member of a particular address map.
    */
-  update(
-    addressMapId: string,
-    params: AccountUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountUpdateResponse> {
+  update(addressMapId: string, params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AccountUpdateResponse> {
     const { account_id, body } = params;
-    return this._client.put(
-      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-      { body: body, ...options },
-    );
+    return this._client.put(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`, { body: body, ...options });
   }
 
   /**
    * Remove an account as a member of a particular address map.
    */
-  delete(
-    addressMapId: string,
-    params: AccountDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountDeleteResponse> {
+  delete(addressMapId: string, params: AccountDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AccountDeleteResponse> {
     const { account_id } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-      options,
-    );
+    return this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`, options);
   }
 }
 

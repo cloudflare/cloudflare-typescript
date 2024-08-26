@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as WidgetsAPI from './widgets';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -11,62 +13,31 @@ export class Widgets extends APIResource {
    */
   create(params: WidgetCreateParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id, direction, order, page, per_page, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/challenges/widgets`, {
-        query: { direction, order, page, per_page },
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Widget }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/challenges/widgets`, { query: { direction, order, page, per_page }, body, ...options }) as Core.APIPromise<{ result: Widget }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update the configuration of a widget.
    */
-  update(
-    sitekey: string,
-    params: WidgetUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Widget> {
+  update(sitekey: string, params: WidgetUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/challenges/widgets/${sitekey}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Widget }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/challenges/widgets/${sitekey}`, { body, ...options }) as Core.APIPromise<{ result: Widget }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all turnstile widgets of an account.
    */
-  list(
-    params: WidgetListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
+  list(params: WidgetListParams, options?: Core.RequestOptions): Core.PagePromise<WidgetListResponsesV4PagePaginationArray, WidgetListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/challenges/widgets`,
-      WidgetListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/challenges/widgets`, WidgetListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Destroy a Turnstile Widget.
    */
-  delete(
-    sitekey: string,
-    params: WidgetDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Widget> {
+  delete(sitekey: string, params: WidgetDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/challenges/widgets/${sitekey}`,
-        options,
-      ) as Core.APIPromise<{ result: Widget }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as Core.APIPromise<{ result: Widget }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -74,11 +45,7 @@ export class Widgets extends APIResource {
    */
   get(sitekey: string, params: WidgetGetParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as Core.APIPromise<{
-        result: Widget;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/challenges/widgets/${sitekey}`, options) as Core.APIPromise<{ result: Widget }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -87,22 +54,14 @@ export class Widgets extends APIResource {
    *
    * Note that secrets cannot be rotated again during the grace period.
    */
-  rotateSecret(
-    sitekey: string,
-    params: WidgetRotateSecretParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Widget> {
+  rotateSecret(sitekey: string, params: WidgetRotateSecretParams, options?: Core.RequestOptions): Core.APIPromise<Widget> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Widget }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/challenges/widgets/${sitekey}/rotate_secret`, { body, ...options }) as Core.APIPromise<{ result: Widget }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WidgetListResponsesV4PagePaginationArray extends V4PagePaginationArray<WidgetListResponse> {}
+export class WidgetListResponsesV4PagePaginationArray extends V4PagePaginationArray<WidgetListResponse> {
+}
 
 /**
  * A Turnstile widget's detailed configuration
@@ -169,13 +128,13 @@ export interface Widget {
  * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
  * only work on these domains, and their subdomains.
  */
-export type WidgetDomain = string;
+export type WidgetDomain = string
 
 /**
  * Hosts as a hostname or IPv4/IPv6 address represented by strings. The widget will
  * only work on these domains, and their subdomains.
  */
-export type WidgetDomainParam = string;
+export type WidgetDomainParam = string
 
 /**
  * A Turnstile Widgets configuration as it appears in listings

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 
@@ -12,234 +13,128 @@ export class TimeseriesGroups extends APIResource {
    * https://developers.cloudflare.com/radar/concepts/bot-classes/ for more
    * information.
    */
-  botClass(
-    query?: TimeseriesGroupBotClassParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBotClassResponse>;
-  botClass(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBotClassResponse>;
-  botClass(
-    query: TimeseriesGroupBotClassParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBotClassResponse> {
+  botClass(query?: TimeseriesGroupBotClassParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBotClassResponse>
+  botClass(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBotClassResponse>
+  botClass(query: TimeseriesGroupBotClassParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBotClassResponse> {
     if (isRequestOptions(query)) {
       return this.botClass({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/bot_class', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupBotClassResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/bot_class', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupBotClassResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic of the top user
    * agents.
    */
-  browser(
-    query?: TimeseriesGroupBrowserParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBrowserResponse>;
-  browser(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserResponse>;
-  browser(
-    query: TimeseriesGroupBrowserParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBrowserResponse> {
+  browser(query?: TimeseriesGroupBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserResponse>
+  browser(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserResponse>
+  browser(query: TimeseriesGroupBrowserParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserResponse> {
     if (isRequestOptions(query)) {
       return this.browser({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/browser', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupBrowserResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/browser', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupBrowserResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic of the top user
    * agents aggregated in families.
    */
-  browserFamily(
-    query?: TimeseriesGroupBrowserFamilyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBrowserFamilyResponse>;
-  browserFamily(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserFamilyResponse>;
-  browserFamily(
-    query: TimeseriesGroupBrowserFamilyParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupBrowserFamilyResponse> {
+  browserFamily(query?: TimeseriesGroupBrowserFamilyParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserFamilyResponse>
+  browserFamily(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserFamilyResponse>
+  browserFamily(query: TimeseriesGroupBrowserFamilyParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBrowserFamilyResponse> {
     if (isRequestOptions(query)) {
       return this.browserFamily({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/browser_family', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupBrowserFamilyResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/browser_family', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupBrowserFamilyResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic per device type.
    */
-  deviceType(
-    query?: TimeseriesGroupDeviceTypeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDeviceTypeResponse>;
-  deviceType(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDeviceTypeResponse>;
-  deviceType(
-    query: TimeseriesGroupDeviceTypeParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDeviceTypeResponse> {
+  deviceType(query?: TimeseriesGroupDeviceTypeParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDeviceTypeResponse>
+  deviceType(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDeviceTypeResponse>
+  deviceType(query: TimeseriesGroupDeviceTypeParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDeviceTypeResponse> {
     if (isRequestOptions(query)) {
       return this.deviceType({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/device_type', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDeviceTypeResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/device_type', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDeviceTypeResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic per HTTP protocol.
    */
-  httpProtocol(
-    query?: TimeseriesGroupHTTPProtocolParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPProtocolResponse>;
-  httpProtocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPProtocolResponse>;
-  httpProtocol(
-    query: TimeseriesGroupHTTPProtocolParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPProtocolResponse> {
+  httpProtocol(query?: TimeseriesGroupHTTPProtocolParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPProtocolResponse>
+  httpProtocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPProtocolResponse>
+  httpProtocol(query: TimeseriesGroupHTTPProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.httpProtocol({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/http_protocol', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupHTTPProtocolResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/http_protocol', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupHTTPProtocolResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic per HTTP protocol
    * version.
    */
-  httpVersion(
-    query?: TimeseriesGroupHTTPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>;
-  httpVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>;
-  httpVersion(
-    query: TimeseriesGroupHTTPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPVersionResponse> {
+  httpVersion(query?: TimeseriesGroupHTTPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>
+  httpVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>
+  httpVersion(query: TimeseriesGroupHTTPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.httpVersion({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/http_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupHTTPVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/http_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupHTTPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic per IP protocol
    * version.
    */
-  ipVersion(
-    query?: TimeseriesGroupIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(
-    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
+  ipVersion(query?: TimeseriesGroupIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupIPVersionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic of the top operating
    * systems.
    */
-  os(
-    query?: TimeseriesGroupOSParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupOSResponse>;
-  os(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupOSResponse>;
-  os(
-    query: TimeseriesGroupOSParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupOSResponse> {
+  os(query?: TimeseriesGroupOSParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupOSResponse>
+  os(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupOSResponse>
+  os(query: TimeseriesGroupOSParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupOSResponse> {
     if (isRequestOptions(query)) {
       return this.os({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/os', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupOSResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/os', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupOSResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic per Post Quantum
    * suport.
    */
-  postQuantum(
-    query?: TimeseriesGroupPostQuantumParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupPostQuantumResponse>;
-  postQuantum(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupPostQuantumResponse>;
-  postQuantum(
-    query: TimeseriesGroupPostQuantumParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupPostQuantumResponse> {
+  postQuantum(query?: TimeseriesGroupPostQuantumParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupPostQuantumResponse>
+  postQuantum(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupPostQuantumResponse>
+  postQuantum(query: TimeseriesGroupPostQuantumParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupPostQuantumResponse> {
     if (isRequestOptions(query)) {
       return this.postQuantum({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/post_quantum', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupPostQuantumResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/post_quantum', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupPostQuantumResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series of the percentage distribution of traffic per TLS protocol
    * version.
    */
-  tlsVersion(
-    query?: TimeseriesGroupTLSVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupTLSVersionResponse>;
-  tlsVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>;
-  tlsVersion(
-    query: TimeseriesGroupTLSVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupTLSVersionResponse> {
+  tlsVersion(query?: TimeseriesGroupTLSVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>
+  tlsVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>
+  tlsVersion(query: TimeseriesGroupTLSVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse> {
     if (isRequestOptions(query)) {
       return this.tlsVersion({}, query);
     }
-    return (
-      this._client.get('/radar/http/timeseries_groups/tls_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupTLSVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/timeseries_groups/tls_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupTLSVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -268,7 +163,7 @@ export interface TimeseriesGroupBrowserResponse {
 export namespace TimeseriesGroupBrowserResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
+  [k: string]: Array<string> | undefined
   }
 }
 
@@ -281,7 +176,7 @@ export interface TimeseriesGroupBrowserFamilyResponse {
 export namespace TimeseriesGroupBrowserFamilyResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
+  [k: string]: Array<string> | undefined
   }
 }
 
@@ -362,7 +257,7 @@ export interface TimeseriesGroupOSResponse {
 export namespace TimeseriesGroupOSResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
+  [k: string]: Array<string> | undefined
   }
 }
 

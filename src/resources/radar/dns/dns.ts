@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Top } from './top';
+import { Summary } from './summary';
+import { TimeseriesGroups } from './timeseries-groups';
 import * as DNSAPI from './dns';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
@@ -11,30 +15,18 @@ import * as TopAPI from './top';
 export class DNS extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(this._client);
 
   /**
    * Get DNS queries change over time.
    */
-  timeseries(
-    query?: DNSTimeseriesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSTimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<DNSTimeseriesResponse>;
-  timeseries(
-    query: DNSTimeseriesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DNSTimeseriesResponse> {
+  timeseries(query?: DNSTimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<DNSTimeseriesResponse>
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<DNSTimeseriesResponse>
+  timeseries(query: DNSTimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<DNSTimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: DNSTimeseriesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries', { query, ...options }) as Core.APIPromise<{ result: DNSTimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

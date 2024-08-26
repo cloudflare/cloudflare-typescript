@@ -1,18 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { CloudflareError } from '../../error'
 import * as ValidateAPI from './validate';
 
 export class Validate extends APIResource {
   /**
    * Checks if there is an existing job with a destination.
    */
-  destination(
-    params: ValidateDestinationParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ValidateDestinationResponse | null> {
+  destination(params: ValidateDestinationParams, options?: Core.RequestOptions): Core.APIPromise<ValidateDestinationResponse | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -20,31 +19,20 @@ export class Validate extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination/exists`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ValidateDestinationResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/destination/exists`, { body, ...options }) as Core.APIPromise<{ result: ValidateDestinationResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Validates logpull origin with logpull_options.
    */
-  origin(
-    params: ValidateOriginParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ValidateOriginResponse | null> {
+  origin(params: ValidateOriginParams, options?: Core.RequestOptions): Core.APIPromise<ValidateOriginResponse | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -52,22 +40,14 @@ export class Validate extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/origin`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ValidateOriginResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/validate/origin`, { body, ...options }) as Core.APIPromise<{ result: ValidateOriginResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

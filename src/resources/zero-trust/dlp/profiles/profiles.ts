@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { Predefined } from './predefined';
 import * as ProfilesAPI from './profiles';
 import * as CustomAPI from './custom';
 import * as PredefinedAPI from './predefined';
@@ -14,15 +17,9 @@ export class Profiles extends APIResource {
   /**
    * Lists all DLP profiles in an account.
    */
-  list(
-    params: ProfileListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ProfilesSinglePage, Profile> {
+  list(params: ProfileListParams, options?: Core.RequestOptions): Core.PagePromise<ProfilesSinglePage, Profile> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, { query, ...options });
   }
 
   /**
@@ -30,15 +27,12 @@ export class Profiles extends APIResource {
    */
   get(profileId: string, params: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<Profile> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dlp/profiles/${profileId}`, options) as Core.APIPromise<{
-        result: Profile;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/dlp/profiles/${profileId}`, options) as Core.APIPromise<{ result: Profile }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ProfilesSinglePage extends SinglePage<Profile> {}
+export class ProfilesSinglePage extends SinglePage<Profile> {
+}
 
 /**
  * Scan the context of predefined entries to only return matches surrounded by
@@ -57,7 +51,7 @@ export interface ContextAwareness {
   skip: SkipConfiguration;
 }
 
-export type Profile = Profile.Custom | Profile.Predefined | Profile.Integration;
+export type Profile = Profile.Custom | Profile.Predefined | Profile.Integration
 
 export namespace Profile {
   export interface Custom {
@@ -82,9 +76,7 @@ export namespace Profile {
      */
     created_at: string;
 
-    entries: Array<
-      Custom.Custom | Custom.Predefined | Custom.Integration | Custom.ExactData | Custom.WordList
-    >;
+    entries: Array<Custom.Custom | Custom.Predefined | Custom.Integration | Custom.ExactData | Custom.WordList>;
 
     /**
      * The name of the profile
@@ -196,13 +188,7 @@ export namespace Profile {
 
     allowed_match_count: number;
 
-    entries: Array<
-      | Predefined.Custom
-      | Predefined.Predefined
-      | Predefined.Integration
-      | Predefined.ExactData
-      | Predefined.WordList
-    >;
+    entries: Array<Predefined.Custom | Predefined.Predefined | Predefined.Integration | Predefined.ExactData | Predefined.WordList>;
 
     /**
      * The name of the predefined profile
@@ -312,13 +298,7 @@ export namespace Profile {
 
     created_at: string;
 
-    entries: Array<
-      | Integration.Custom
-      | Integration.Predefined
-      | Integration.Integration
-      | Integration.ExactData
-      | Integration.WordList
-    >;
+    entries: Array<Integration.Custom | Integration.Predefined | Integration.Integration | Integration.ExactData | Integration.WordList>;
 
     name: string;
 

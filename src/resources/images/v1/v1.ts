@@ -1,8 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Keys } from './keys';
+import { Stats } from './stats';
+import { Variants } from './variants';
+import { Blobs } from './blobs';
 import * as V1API from './v1';
+import { multipartFormRequestOptions } from '../../../core';
 import * as Shared from '../../shared';
 import * as BlobsAPI from './blobs';
 import * as KeysAPI from './keys';
@@ -23,44 +30,25 @@ export class V1 extends APIResource {
    */
   create(params: V1CreateParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/images/v1`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Image }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/images/v1`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: Image }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List up to 100 images with one request. Use the optional parameters below to get
    * a specific range of images.
    */
-  list(
-    params: V1ListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
+  list(params: V1ListParams, options?: Core.RequestOptions): Core.PagePromise<V1ListResponsesV4PagePagination, V1ListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/images/v1`, V1ListResponsesV4PagePagination, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/accounts/${account_id}/images/v1`, V1ListResponsesV4PagePagination, { query, ...options });
   }
 
   /**
    * Delete an image on Cloudflare Images. On success, all copies of the image are
    * deleted and purged from cache.
    */
-  delete(
-    imageId: string,
-    params: V1DeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<V1DeleteResponse> {
+  delete(imageId: string, params: V1DeleteParams, options?: Core.RequestOptions): Core.APIPromise<V1DeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
-        result: V1DeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{ result: V1DeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -69,12 +57,7 @@ export class V1 extends APIResource {
    */
   edit(imageId: string, params: V1EditParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/images/v1/${imageId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Image }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/images/v1/${imageId}`, { body, ...options }) as Core.APIPromise<{ result: Image }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -82,15 +65,12 @@ export class V1 extends APIResource {
    */
   get(imageId: string, params: V1GetParams, options?: Core.RequestOptions): Core.APIPromise<Image> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{
-        result: Image;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/images/v1/${imageId}`, options) as Core.APIPromise<{ result: Image }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class V1ListResponsesV4PagePagination extends V4PagePagination<V1ListResponse> {}
+export class V1ListResponsesV4PagePagination extends V4PagePagination<V1ListResponse> {
+}
 
 export interface Image {
   /**
@@ -145,7 +125,7 @@ export namespace V1ListResponse {
   }
 }
 
-export type V1DeleteResponse = unknown | string;
+export type V1DeleteResponse = unknown | string
 
 export interface V1CreateParams {
   /**

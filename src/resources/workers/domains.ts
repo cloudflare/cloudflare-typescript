@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DomainsAPI from './domains';
 import { SinglePage } from '../../pagination';
@@ -11,11 +13,7 @@ export class Domains extends APIResource {
    */
   update(params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/workers/domains`, { body, ...options }) as Core.APIPromise<{
-        result: Domain;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/workers/domains`, { body, ...options }) as Core.APIPromise<{ result: Domain }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -23,10 +21,7 @@ export class Domains extends APIResource {
    */
   list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, DomainsSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/accounts/${account_id}/workers/domains`, DomainsSinglePage, { query, ...options });
   }
 
   /**
@@ -34,10 +29,7 @@ export class Domains extends APIResource {
    */
   delete(domainId: string, params: DomainDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return this._client.delete(`/accounts/${account_id}/workers/domains/${domainId}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
   }
 
   /**
@@ -45,15 +37,12 @@ export class Domains extends APIResource {
    */
   get(domainId: string, params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{
-        result: Domain;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/workers/domains/${domainId}`, options) as Core.APIPromise<{ result: Domain }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DomainsSinglePage extends SinglePage<Domain> {}
+export class DomainsSinglePage extends SinglePage<Domain> {
+}
 
 export interface Domain {
   /**

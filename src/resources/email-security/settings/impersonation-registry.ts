@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ImpersonationRegistryAPI from './impersonation-registry';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -9,94 +11,48 @@ export class ImpersonationRegistry extends APIResource {
   /**
    * Create an entry in impersonation registry
    */
-  create(
-    params: ImpersonationRegistryCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryCreateResponse> {
+  create(params: ImpersonationRegistryCreateParams, options?: Core.RequestOptions): Core.APIPromise<ImpersonationRegistryCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/settings/impersonation_registry`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ImpersonationRegistryCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/email-security/settings/impersonation_registry`, { body, ...options }) as Core.APIPromise<{ result: ImpersonationRegistryCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List, search, and sort entries in impersonation registry.
    */
-  list(
-    params: ImpersonationRegistryListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<
-    ImpersonationRegistryListResponsesV4PagePaginationArray,
-    ImpersonationRegistryListResponse
-  > {
+  list(params: ImpersonationRegistryListParams, options?: Core.RequestOptions): Core.PagePromise<ImpersonationRegistryListResponsesV4PagePaginationArray, ImpersonationRegistryListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/settings/impersonation_registry`,
-      ImpersonationRegistryListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/email-security/settings/impersonation_registry`, ImpersonationRegistryListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Delete an entry from impersonation registry
    */
-  delete(
-    displayNameId: number,
-    params: ImpersonationRegistryDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryDeleteResponse> {
+  delete(displayNameId: number, params: ImpersonationRegistryDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ImpersonationRegistryDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`,
-        options,
-      ) as Core.APIPromise<{ result: ImpersonationRegistryDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`, options) as Core.APIPromise<{ result: ImpersonationRegistryDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update an entry in impersonation registry
    */
-  edit(
-    displayNameId: number,
-    params: ImpersonationRegistryEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryEditResponse> {
+  edit(displayNameId: number, params: ImpersonationRegistryEditParams, options?: Core.RequestOptions): Core.APIPromise<ImpersonationRegistryEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(
-        `/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: ImpersonationRegistryEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`, { body, ...options }) as Core.APIPromise<{ result: ImpersonationRegistryEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get an entry in impersonation registry
    */
-  get(
-    displayNameId: number,
-    params: ImpersonationRegistryGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ImpersonationRegistryGetResponse> {
+  get(displayNameId: number, params: ImpersonationRegistryGetParams, options?: Core.RequestOptions): Core.APIPromise<ImpersonationRegistryGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`,
-        options,
-      ) as Core.APIPromise<{ result: ImpersonationRegistryGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/settings/impersonation_registry/${displayNameId}`, options) as Core.APIPromise<{ result: ImpersonationRegistryGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ImpersonationRegistryListResponsesV4PagePaginationArray extends V4PagePaginationArray<ImpersonationRegistryListResponse> {}
+export class ImpersonationRegistryListResponsesV4PagePaginationArray extends V4PagePaginationArray<ImpersonationRegistryListResponse> {
+}
 
-export type ImpersonationRegistryCreateResponse =
-  | ImpersonationRegistryCreateResponse.EmailSecurityDisplayName
-  | Array<ImpersonationRegistryCreateResponse.UnionMember1>;
+export type ImpersonationRegistryCreateResponse = ImpersonationRegistryCreateResponse.EmailSecurityDisplayName | Array<ImpersonationRegistryCreateResponse.UnionMember1>
 
 export namespace ImpersonationRegistryCreateResponse {
   export interface EmailSecurityDisplayName {
@@ -214,9 +170,7 @@ export interface ImpersonationRegistryGetResponse {
   provenance?: string | null;
 }
 
-export type ImpersonationRegistryCreateParams =
-  | ImpersonationRegistryCreateParams.EmailSecurityCreateDisplayName
-  | ImpersonationRegistryCreateParams.Variant1;
+export type ImpersonationRegistryCreateParams = ImpersonationRegistryCreateParams.EmailSecurityCreateDisplayName | ImpersonationRegistryCreateParams.Variant1
 
 export namespace ImpersonationRegistryCreateParams {
   export interface EmailSecurityCreateDisplayName {

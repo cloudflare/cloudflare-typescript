@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as VideosAPI from './videos';
 
@@ -8,17 +10,9 @@ export class Videos extends APIResource {
   /**
    * Returns information about an account's storage use.
    */
-  storageUsage(
-    params: VideoStorageUsageParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VideoStorageUsageResponse> {
+  storageUsage(params: VideoStorageUsageParams, options?: Core.RequestOptions): Core.APIPromise<VideoStorageUsageResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/storage-usage`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: VideoStorageUsageResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/stream/storage-usage`, { query, ...options }) as Core.APIPromise<{ result: VideoStorageUsageResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -149,8 +149,9 @@ async function getBytes(value: ToFileInput): Promise<Array<BlobPart>> {
     }
   } else {
     throw new Error(
-      `Unexpected data type: ${typeof value}; constructor: ${value?.constructor
-        ?.name}; props: ${propsForError(value)}`,
+      `Unexpected data type: ${typeof value}; constructor: ${
+        value?.constructor?.name
+      }; props: ${propsForError(value)}`,
     );
   }
 

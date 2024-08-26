@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as AllowPatternsAPI from './allow-patterns';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -9,91 +11,48 @@ export class AllowPatterns extends APIResource {
   /**
    * Create an email allow pattern
    */
-  create(
-    params: AllowPatternCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AllowPatternCreateResponse> {
+  create(params: AllowPatternCreateParams, options?: Core.RequestOptions): Core.APIPromise<AllowPatternCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/email-security/settings/allow_patterns`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AllowPatternCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/email-security/settings/allow_patterns`, { body, ...options }) as Core.APIPromise<{ result: AllowPatternCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List, search, and sort an accounts's email allow patterns.
    */
-  list(
-    params: AllowPatternListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AllowPatternListResponsesV4PagePaginationArray, AllowPatternListResponse> {
+  list(params: AllowPatternListParams, options?: Core.RequestOptions): Core.PagePromise<AllowPatternListResponsesV4PagePaginationArray, AllowPatternListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/settings/allow_patterns`,
-      AllowPatternListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/email-security/settings/allow_patterns`, AllowPatternListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Delete an email allow pattern
    */
-  delete(
-    patternId: number,
-    params: AllowPatternDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AllowPatternDeleteResponse> {
+  delete(patternId: number, params: AllowPatternDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AllowPatternDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/email-security/settings/allow_patterns/${patternId}`,
-        options,
-      ) as Core.APIPromise<{ result: AllowPatternDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/email-security/settings/allow_patterns/${patternId}`, options) as Core.APIPromise<{ result: AllowPatternDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update an email allow pattern
    */
-  edit(
-    patternId: number,
-    params: AllowPatternEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AllowPatternEditResponse> {
+  edit(patternId: number, params: AllowPatternEditParams, options?: Core.RequestOptions): Core.APIPromise<AllowPatternEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/email-security/settings/allow_patterns/${patternId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AllowPatternEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/email-security/settings/allow_patterns/${patternId}`, { body, ...options }) as Core.APIPromise<{ result: AllowPatternEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get an email allow pattern
    */
-  get(
-    patternId: number,
-    params: AllowPatternGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AllowPatternGetResponse> {
+  get(patternId: number, params: AllowPatternGetParams, options?: Core.RequestOptions): Core.APIPromise<AllowPatternGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/settings/allow_patterns/${patternId}`,
-        options,
-      ) as Core.APIPromise<{ result: AllowPatternGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/settings/allow_patterns/${patternId}`, options) as Core.APIPromise<{ result: AllowPatternGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AllowPatternListResponsesV4PagePaginationArray extends V4PagePaginationArray<AllowPatternListResponse> {}
+export class AllowPatternListResponsesV4PagePaginationArray extends V4PagePaginationArray<AllowPatternListResponse> {
+}
 
-export type AllowPatternCreateResponse =
-  | AllowPatternCreateResponse.EmailSecurityAllowPattern
-  | Array<AllowPatternCreateResponse.UnionMember1>;
+export type AllowPatternCreateResponse = AllowPatternCreateResponse.EmailSecurityAllowPattern | Array<AllowPatternCreateResponse.UnionMember1>
 
 export namespace AllowPatternCreateResponse {
   export interface EmailSecurityAllowPattern {
@@ -221,9 +180,7 @@ export interface AllowPatternGetResponse {
   comments?: string | null;
 }
 
-export type AllowPatternCreateParams =
-  | AllowPatternCreateParams.EmailSecurityCreateAllowPattern
-  | AllowPatternCreateParams.Variant1;
+export type AllowPatternCreateParams = AllowPatternCreateParams.EmailSecurityCreateAllowPattern | AllowPatternCreateParams.Variant1
 
 export namespace AllowPatternCreateParams {
   export interface EmailSecurityCreateAllowPattern {

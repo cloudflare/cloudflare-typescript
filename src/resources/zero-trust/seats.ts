@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SeatsAPI from './seats';
 
@@ -11,12 +13,7 @@ export class Seats extends APIResource {
    */
   edit(params: SeatEditParams, options?: Core.RequestOptions): Core.APIPromise<SeatEditResponse> {
     const { account_id, body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/access/seats`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: SeatEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/access/seats`, { body: body, ...options }) as Core.APIPromise<{ result: SeatEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -41,7 +38,7 @@ export interface Seat {
   updated_at?: string;
 }
 
-export type SeatEditResponse = Array<Seat>;
+export type SeatEditResponse = Array<Seat>
 
 export interface SeatEditParams {
   /**

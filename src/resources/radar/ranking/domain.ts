@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DomainAPI from './domain';
 
@@ -12,25 +13,13 @@ export class Domain extends APIResource {
    * thousand, top one million, etc.. These are available through Radar datasets
    * endpoints.
    */
-  get(
-    domain: string,
-    query?: DomainGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse>;
-  get(domain: string, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>;
-  get(
-    domain: string,
-    query: DomainGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse> {
+  get(domain: string, query?: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>
+  get(domain: string, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse>
+  get(domain: string, query: DomainGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(domain, {}, query);
     }
-    return (
-      this._client.get(`/radar/ranking/domain/${domain}`, { query, ...options }) as Core.APIPromise<{
-        result: DomainGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/ranking/domain/${domain}`, { query, ...options }) as Core.APIPromise<{ result: DomainGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

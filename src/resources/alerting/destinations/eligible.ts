@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as EligibleAPI from './eligible';
 
@@ -10,16 +12,11 @@ export class Eligible extends APIResource {
    */
   get(params: EligibleGetParams, options?: Core.RequestOptions): Core.APIPromise<EligibleGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/alerting/v3/destinations/eligible`,
-        options,
-      ) as Core.APIPromise<{ result: EligibleGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/alerting/v3/destinations/eligible`, options) as Core.APIPromise<{ result: EligibleGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.Item>>;
+export type EligibleGetResponse = Record<string, Array<EligibleGetResponse.Item>>
 
 export namespace EligibleGetResponse {
   export interface Item {

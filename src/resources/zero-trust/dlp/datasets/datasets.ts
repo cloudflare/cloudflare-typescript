@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { Upload } from './upload';
+import { Versions } from './versions/versions';
 import * as DatasetsAPI from './datasets';
 import * as UploadAPI from './upload';
 import { SinglePage } from '../../../../pagination';
@@ -14,37 +18,21 @@ export class Datasets extends APIResource {
    */
   create(params: DatasetCreateParams, options?: Core.RequestOptions): Core.APIPromise<DatasetCreation> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as Core.APIPromise<{
-        result: DatasetCreation;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/dlp/datasets`, { body, ...options }) as Core.APIPromise<{ result: DatasetCreation }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update details about a dataset
    */
-  update(
-    datasetId: string,
-    params: DatasetUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Dataset> {
+  update(datasetId: string, params: DatasetUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Dataset }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/dlp/datasets/${datasetId}`, { body, ...options }) as Core.APIPromise<{ result: Dataset }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch all datasets
    */
-  list(
-    params: DatasetListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DatasetsSinglePage, Dataset> {
+  list(params: DatasetListParams, options?: Core.RequestOptions): Core.PagePromise<DatasetsSinglePage, Dataset> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/dlp/datasets`, DatasetsSinglePage, options);
   }
@@ -52,16 +40,9 @@ export class Datasets extends APIResource {
   /**
    * This deletes all versions of the dataset.
    */
-  delete(
-    datasetId: string,
-    params: DatasetDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  delete(datasetId: string, params: DatasetDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/dlp/datasets/${datasetId}`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return this._client.delete(`/accounts/${account_id}/dlp/datasets/${datasetId}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
   }
 
   /**
@@ -69,15 +50,12 @@ export class Datasets extends APIResource {
    */
   get(datasetId: string, params: DatasetGetParams, options?: Core.RequestOptions): Core.APIPromise<Dataset> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{
-        result: Dataset;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/dlp/datasets/${datasetId}`, options) as Core.APIPromise<{ result: Dataset }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DatasetsSinglePage extends SinglePage<Dataset> {}
+export class DatasetsSinglePage extends SinglePage<Dataset> {
+}
 
 export interface Dataset {
   id: string;
@@ -126,7 +104,7 @@ export namespace Dataset {
   }
 }
 
-export type DatasetArray = Array<Dataset>;
+export type DatasetArray = Array<Dataset>
 
 export interface DatasetCreation {
   dataset: Dataset;

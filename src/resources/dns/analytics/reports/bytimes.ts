@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BytimesAPI from './bytimes';
 import * as DNSAPI from '../../dns';
@@ -16,12 +18,7 @@ export class Bytimes extends APIResource {
    */
   get(params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<ByTime> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/dns_analytics/report/bytime`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ByTime }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/dns_analytics/report/bytime`, { query, ...options }) as Core.APIPromise<{ result: ByTime }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

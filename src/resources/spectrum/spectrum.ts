@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
+import * as Core from '../../core';
+import { Analytics } from './analytics/analytics';
+import { Apps } from './apps';
 import * as AppsAPI from './apps';
 import * as AnalyticsAPI from './analytics/analytics';
 
@@ -42,7 +47,7 @@ export interface DNSParam {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPs = EdgeIPs.UnionMember0 | EdgeIPs.UnionMember1;
+export type EdgeIPs = EdgeIPs.UnionMember0 | EdgeIPs.UnionMember1
 
 export namespace EdgeIPs {
   export interface UnionMember0 {
@@ -78,7 +83,7 @@ export namespace EdgeIPs {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPsParam = EdgeIPsParam.UnionMember0 | EdgeIPsParam.UnionMember1;
+export type EdgeIPsParam = EdgeIPsParam.UnionMember0 | EdgeIPsParam.UnionMember1
 
 export namespace EdgeIPsParam {
   export interface UnionMember0 {
@@ -160,7 +165,7 @@ export interface OriginDNSParam {
  * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
  * range must match the number of ports specified in the "protocol" field.
  */
-export type OriginPort = number | string;
+export type OriginPort = number | string
 
 /**
  * The destination port at the origin. Only specified in conjunction with
@@ -169,7 +174,7 @@ export type OriginPort = number | string;
  * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
  * range must match the number of ports specified in the "protocol" field.
  */
-export type OriginPortParam = number | string;
+export type OriginPortParam = number | string
 
 export namespace Spectrum {
   export import Analytics = AnalyticsAPI.Analytics;

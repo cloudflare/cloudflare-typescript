@@ -1,114 +1,66 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ConfigsAPI from './configs';
 import * as HyperdriveAPI from './hyperdrive';
 import { HyperdrivesSinglePage } from './hyperdrive';
+import { SinglePage } from '../../pagination';
 
 export class Configs extends APIResource {
   /**
    * Creates and returns a new Hyperdrive configuration.
    */
-  create(
-    params: ConfigCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
+  create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/hyperdrive/configs`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/hyperdrive/configs`, { body, ...options }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates and returns the specified Hyperdrive configuration.
    */
-  update(
-    hyperdriveId: string,
-    params: ConfigUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
+  update(hyperdriveId: string, params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, { body, ...options }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns a list of Hyperdrives
    */
-  list(
-    params: ConfigListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
+  list(params: ConfigListParams, options?: Core.RequestOptions): Core.PagePromise<HyperdrivesSinglePage, HyperdriveAPI.Hyperdrive> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/hyperdrive/configs`,
-      HyperdrivesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/hyperdrive/configs`, HyperdrivesSinglePage, options);
   }
 
   /**
    * Deletes the specified Hyperdrive.
    */
-  delete(
-    hyperdriveId: string,
-    params: ConfigDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConfigDeleteResponse | null> {
+  delete(hyperdriveId: string, params: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ConfigDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
-        options,
-      ) as Core.APIPromise<{ result: ConfigDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, options) as Core.APIPromise<{ result: ConfigDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patches and returns the specified Hyperdrive configuration. Updates to the
    * origin and caching settings are applied with an all-or-nothing approach.
    */
-  edit(
-    hyperdriveId: string,
-    params: ConfigEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
+  edit(hyperdriveId: string, params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, { body, ...options }) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the specified Hyperdrive configuration.
    */
-  get(
-    hyperdriveId: string,
-    params: ConfigGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
+  get(hyperdriveId: string, params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<HyperdriveAPI.Hyperdrive | null> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`,
-        options,
-      ) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/hyperdrive/configs/${hyperdriveId}`, options) as Core.APIPromise<{ result: HyperdriveAPI.Hyperdrive | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type ConfigDeleteResponse = unknown | string;
+export type ConfigDeleteResponse = unknown | string
 
 export interface ConfigCreateParams {
   /**
@@ -270,4 +222,4 @@ export namespace Configs {
   export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
 }
 
-export { HyperdrivesSinglePage };
+export { HyperdrivesSinglePage }

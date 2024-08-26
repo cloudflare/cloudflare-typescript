@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import * as EmailAPI from '../email';
@@ -10,139 +11,73 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Percentage distribution of emails classified per Arc validation over time.
    */
-  arc(
-    query?: TimeseriesGroupARCParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupARCResponse>;
-  arc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>;
-  arc(
-    query: TimeseriesGroupARCParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupARCResponse> {
+  arc(query?: TimeseriesGroupARCParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>
+  arc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>
+  arc(query: TimeseriesGroupARCParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse> {
     if (isRequestOptions(query)) {
       return this.arc({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/timeseries_groups/arc', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupARCResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/timeseries_groups/arc', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupARCResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per DKIM validation over time.
    */
-  dkim(
-    query?: TimeseriesGroupDKIMParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDKIMResponse>;
-  dkim(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse>;
-  dkim(
-    query: TimeseriesGroupDKIMParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDKIMResponse> {
+  dkim(query?: TimeseriesGroupDKIMParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse>
+  dkim(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse>
+  dkim(query: TimeseriesGroupDKIMParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse> {
     if (isRequestOptions(query)) {
       return this.dkim({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/timeseries_groups/dkim', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDKIMResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/timeseries_groups/dkim', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDKIMResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per DMARC validation over time.
    */
-  dmarc(
-    query?: TimeseriesGroupDMARCParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDMARCResponse>;
-  dmarc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>;
-  dmarc(
-    query: TimeseriesGroupDMARCParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDMARCResponse> {
+  dmarc(query?: TimeseriesGroupDMARCParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>
+  dmarc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>
+  dmarc(query: TimeseriesGroupDMARCParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse> {
     if (isRequestOptions(query)) {
       return this.dmarc({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/timeseries_groups/dmarc', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDMARCResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/timeseries_groups/dmarc', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDMARCResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails by Encrypted over time.
    */
-  encrypted(
-    query?: TimeseriesGroupEncryptedParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupEncryptedResponse>;
-  encrypted(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEncryptedResponse>;
-  encrypted(
-    query: TimeseriesGroupEncryptedParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupEncryptedResponse> {
+  encrypted(query?: TimeseriesGroupEncryptedParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEncryptedResponse>
+  encrypted(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEncryptedResponse>
+  encrypted(query: TimeseriesGroupEncryptedParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEncryptedResponse> {
     if (isRequestOptions(query)) {
       return this.encrypted({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/timeseries_groups/encrypted', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupEncryptedResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/timeseries_groups/encrypted', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupEncryptedResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails by Ip Version over time.
    */
-  ipVersion(
-    query?: TimeseriesGroupIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(
-    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
+  ipVersion(query?: TimeseriesGroupIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/timeseries_groups/ip_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per SPF validation over time.
    */
-  spf(
-    query?: TimeseriesGroupSPFParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSPFResponse>;
-  spf(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse>;
-  spf(
-    query: TimeseriesGroupSPFParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSPFResponse> {
+  spf(query?: TimeseriesGroupSPFParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse>
+  spf(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse>
+  spf(query: TimeseriesGroupSPFParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse> {
     if (isRequestOptions(query)) {
       return this.spf({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/timeseries_groups/spf', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupSPFResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/timeseries_groups/spf', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupSPFResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

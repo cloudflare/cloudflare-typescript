@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DEXTestsAPI from './dex-tests';
 import { SinglePage } from '../../../pagination';
@@ -11,82 +13,45 @@ export class DEXTests extends APIResource {
    */
   create(params: DEXTestCreateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaHTTP | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/devices/dex_tests`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SchemaHTTP | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/devices/dex_tests`, { body, ...options }) as Core.APIPromise<{ result: SchemaHTTP | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a DEX test.
    */
-  update(
-    dexTestId: string,
-    params: DEXTestUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SchemaHTTP | null> {
+  update(dexTestId: string, params: DEXTestUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaHTTP | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: SchemaHTTP | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, { body, ...options }) as Core.APIPromise<{ result: SchemaHTTP | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch all DEX tests.
    */
-  list(
-    params: DEXTestListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SchemaHTTPSSinglePage, SchemaHTTP> {
+  list(params: DEXTestListParams, options?: Core.RequestOptions): Core.PagePromise<SchemaHTTPSSinglePage, SchemaHTTP> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/dex_tests`,
-      SchemaHTTPSSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/devices/dex_tests`, SchemaHTTPSSinglePage, options);
   }
 
   /**
    * Delete a Device DEX test. Returns the remaining device dex tests for the
    * account.
    */
-  delete(
-    dexTestId: string,
-    params: DEXTestDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestDeleteResponse | null> {
+  delete(dexTestId: string, params: DEXTestDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DEXTestDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/devices/dex_tests/${dexTestId}`,
-        options,
-      ) as Core.APIPromise<{ result: DEXTestDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{ result: DEXTestDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a single DEX test.
    */
-  get(
-    dexTestId: string,
-    params: DEXTestGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SchemaHTTP | null> {
+  get(dexTestId: string, params: DEXTestGetParams, options?: Core.RequestOptions): Core.APIPromise<SchemaHTTP | null> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{
-        result: SchemaHTTP | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/devices/dex_tests/${dexTestId}`, options) as Core.APIPromise<{ result: SchemaHTTP | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SchemaHTTPSSinglePage extends SinglePage<SchemaHTTP> {}
+export class SchemaHTTPSSinglePage extends SinglePage<SchemaHTTP> {
+}
 
 export interface DEXTest {
   /**
@@ -238,7 +203,7 @@ export namespace SchemaHTTP {
   }
 }
 
-export type DEXTestDeleteResponse = Array<SchemaHTTP>;
+export type DEXTestDeleteResponse = Array<SchemaHTTP>
 
 export interface DEXTestCreateParams {
   /**

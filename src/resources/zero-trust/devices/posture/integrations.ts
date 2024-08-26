@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as IntegrationsAPI from './integrations';
 import { SinglePage } from '../../../../pagination';
@@ -9,87 +11,46 @@ export class Integrations extends APIResource {
   /**
    * Create a new device posture integration.
    */
-  create(
-    params: IntegrationCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Integration | null> {
+  create(params: IntegrationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Integration | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/devices/posture/integration`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Integration | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/devices/posture/integration`, { body, ...options }) as Core.APIPromise<{ result: Integration | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the list of device posture integrations for an account.
    */
-  list(
-    params: IntegrationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IntegrationsSinglePage, Integration> {
+  list(params: IntegrationListParams, options?: Core.RequestOptions): Core.PagePromise<IntegrationsSinglePage, Integration> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/posture/integration`,
-      IntegrationsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/devices/posture/integration`, IntegrationsSinglePage, options);
   }
 
   /**
    * Delete a configured device posture integration.
    */
-  delete(
-    integrationId: string,
-    params: IntegrationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse | null> {
+  delete(integrationId: string, params: IntegrationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<IntegrationDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
-        options,
-      ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, options) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured device posture integration.
    */
-  edit(
-    integrationId: string,
-    params: IntegrationEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Integration | null> {
+  edit(integrationId: string, params: IntegrationEditParams, options?: Core.RequestOptions): Core.APIPromise<Integration | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Integration | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, { body, ...options }) as Core.APIPromise<{ result: Integration | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches details for a single device posture integration.
    */
-  get(
-    integrationId: string,
-    params: IntegrationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Integration | null> {
+  get(integrationId: string, params: IntegrationGetParams, options?: Core.RequestOptions): Core.APIPromise<Integration | null> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/devices/posture/integration/${integrationId}`,
-        options,
-      ) as Core.APIPromise<{ result: Integration | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/devices/posture/integration/${integrationId}`, options) as Core.APIPromise<{ result: Integration | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class IntegrationsSinglePage extends SinglePage<Integration> {}
+export class IntegrationsSinglePage extends SinglePage<Integration> {
+}
 
 export interface Integration {
   /**
@@ -141,7 +102,7 @@ export namespace Integration {
   }
 }
 
-export type IntegrationDeleteResponse = unknown | string;
+export type IntegrationDeleteResponse = unknown | string
 
 export interface IntegrationCreateParams {
   /**
@@ -153,14 +114,7 @@ export interface IntegrationCreateParams {
    * Body param: The configuration object containing third-party integration
    * information.
    */
-  config:
-    | IntegrationCreateParams.TeamsDevicesWorkspaceOneConfigRequest
-    | IntegrationCreateParams.TeamsDevicesCrowdstrikeConfigRequest
-    | IntegrationCreateParams.TeamsDevicesUptycsConfigRequest
-    | IntegrationCreateParams.TeamsDevicesIntuneConfigRequest
-    | IntegrationCreateParams.TeamsDevicesKolideConfigRequest
-    | IntegrationCreateParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest;
+  config: IntegrationCreateParams.TeamsDevicesWorkspaceOneConfigRequest | IntegrationCreateParams.TeamsDevicesCrowdstrikeConfigRequest | IntegrationCreateParams.TeamsDevicesUptycsConfigRequest | IntegrationCreateParams.TeamsDevicesIntuneConfigRequest | IntegrationCreateParams.TeamsDevicesKolideConfigRequest | IntegrationCreateParams.TeamsDevicesTaniumConfigRequest | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest;
 
   /**
    * Body param: The interval between each posture check with the third-party API.
@@ -330,14 +284,7 @@ export interface IntegrationEditParams {
    * Body param: The configuration object containing third-party integration
    * information.
    */
-  config?:
-    | IntegrationEditParams.TeamsDevicesWorkspaceOneConfigRequest
-    | IntegrationEditParams.TeamsDevicesCrowdstrikeConfigRequest
-    | IntegrationEditParams.TeamsDevicesUptycsConfigRequest
-    | IntegrationEditParams.TeamsDevicesIntuneConfigRequest
-    | IntegrationEditParams.TeamsDevicesKolideConfigRequest
-    | IntegrationEditParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest;
+  config?: IntegrationEditParams.TeamsDevicesWorkspaceOneConfigRequest | IntegrationEditParams.TeamsDevicesCrowdstrikeConfigRequest | IntegrationEditParams.TeamsDevicesUptycsConfigRequest | IntegrationEditParams.TeamsDevicesIntuneConfigRequest | IntegrationEditParams.TeamsDevicesKolideConfigRequest | IntegrationEditParams.TeamsDevicesTaniumConfigRequest | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest;
 
   /**
    * Body param: The interval between each posture check with the third-party API.

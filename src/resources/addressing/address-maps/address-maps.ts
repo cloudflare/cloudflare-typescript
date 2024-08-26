@@ -1,7 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Accounts } from './accounts';
+import { IPs } from './ips';
+import { Zones } from './zones';
 import * as AddressMapsAPI from './address-maps';
 import * as Shared from '../../shared';
 import * as AccountsAPI from './accounts';
@@ -17,43 +22,24 @@ export class AddressMaps extends APIResource {
   /**
    * Create a new address map under the account.
    */
-  create(
-    params: AddressMapCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapCreateResponse> {
+  create(params: AddressMapCreateParams, options?: Core.RequestOptions): Core.APIPromise<AddressMapCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/addressing/address_maps`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AddressMapCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/addressing/address_maps`, { body, ...options }) as Core.APIPromise<{ result: AddressMapCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all address maps owned by the account.
    */
-  list(
-    params: AddressMapListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AddressMapsSinglePage, AddressMap> {
+  list(params: AddressMapListParams, options?: Core.RequestOptions): Core.PagePromise<AddressMapsSinglePage, AddressMap> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/addressing/address_maps`,
-      AddressMapsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/addressing/address_maps`, AddressMapsSinglePage, options);
   }
 
   /**
    * Delete a particular address map owned by the account. An Address Map must be
    * disabled before it can be deleted.
    */
-  delete(
-    addressMapId: string,
-    params: AddressMapDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapDeleteResponse> {
+  delete(addressMapId: string, params: AddressMapDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AddressMapDeleteResponse> {
     const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, options);
   }
@@ -61,39 +47,22 @@ export class AddressMaps extends APIResource {
   /**
    * Modify properties of an address map owned by the account.
    */
-  edit(
-    addressMapId: string,
-    params: AddressMapEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMap> {
+  edit(addressMapId: string, params: AddressMapEditParams, options?: Core.RequestOptions): Core.APIPromise<AddressMap> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AddressMap }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, { body, ...options }) as Core.APIPromise<{ result: AddressMap }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Show a particular address map owned by the account.
    */
-  get(
-    addressMapId: string,
-    params: AddressMapGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AddressMapGetResponse> {
+  get(addressMapId: string, params: AddressMapGetParams, options?: Core.RequestOptions): Core.APIPromise<AddressMapGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}`,
-        options,
-      ) as Core.APIPromise<{ result: AddressMapGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/addressing/address_maps/${addressMapId}`, options) as Core.APIPromise<{ result: AddressMapGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AddressMapsSinglePage extends SinglePage<AddressMap> {}
+export class AddressMapsSinglePage extends SinglePage<AddressMap> {
+}
 
 export interface AddressMap {
   /**
@@ -142,12 +111,12 @@ export interface AddressMap {
 /**
  * The type of the membership.
  */
-export type Kind = 'zone' | 'account';
+export type Kind = 'zone' | 'account'
 
 /**
  * The type of the membership.
  */
-export type KindParam = 'zone' | 'account';
+export type KindParam = 'zone' | 'account'
 
 export interface AddressMapCreateResponse {
   /**

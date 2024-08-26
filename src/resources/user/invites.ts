@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as InvitesAPI from './invites';
 import * as Shared from '../shared';
@@ -17,29 +19,20 @@ export class Invites extends APIResource {
   /**
    * Responds to an invitation.
    */
-  edit(
-    inviteId: string,
-    body: InviteEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InviteEditResponse> {
-    return (
-      this._client.patch(`/user/invites/${inviteId}`, { body, ...options }) as Core.APIPromise<{
-        result: InviteEditResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  edit(inviteId: string, body: InviteEditParams, options?: Core.RequestOptions): Core.APIPromise<InviteEditResponse> {
+    return (this._client.patch(`/user/invites/${inviteId}`, { body, ...options }) as Core.APIPromise<{ result: InviteEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets the details of an invitation.
    */
   get(inviteId: string, options?: Core.RequestOptions): Core.APIPromise<InviteGetResponse> {
-    return (
-      this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: InviteGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: InviteGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class InvitesSinglePage extends SinglePage<Invite> {}
+export class InvitesSinglePage extends SinglePage<Invite> {
+}
 
 export interface Invite {
   /**
@@ -93,9 +86,9 @@ export interface Invite {
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
 }
 
-export type InviteEditResponse = unknown;
+export type InviteEditResponse = unknown
 
-export type InviteGetResponse = unknown;
+export type InviteGetResponse = unknown
 
 export interface InviteEditParams {
   /**

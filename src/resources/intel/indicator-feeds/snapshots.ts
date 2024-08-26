@@ -1,25 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SnapshotsAPI from './snapshots';
+import { multipartFormRequestOptions } from '../../../core';
 
 export class Snapshots extends APIResource {
   /**
    * Update indicator feed data
    */
-  update(
-    feedId: number,
-    params: SnapshotUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnapshotUpdateResponse> {
+  update(feedId: number, params: SnapshotUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SnapshotUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(
-        `/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: SnapshotUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/intel/indicator-feeds/${feedId}/snapshot`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: SnapshotUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

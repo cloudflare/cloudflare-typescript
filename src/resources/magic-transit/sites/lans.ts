@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as LANsAPI from './lans';
 import { SinglePage } from '../../../pagination';
@@ -10,110 +12,54 @@ export class LANs extends APIResource {
    * Creates a new Site LAN. If the site is in high availability mode,
    * static_addressing is required along with secondary and virtual address.
    */
-  create(
-    siteId: string,
-    params: LANCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LANCreateResponse> {
+  create(siteId: string, params: LANCreateParams, options?: Core.RequestOptions): Core.APIPromise<LANCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/lans`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LANCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/lans`, { body, ...options }) as Core.APIPromise<{ result: LANCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a specific Site LAN.
    */
-  update(
-    siteId: string,
-    lanId: string,
-    params: LANUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LAN> {
+  update(siteId: string, lanId: string, params: LANUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LAN> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LAN }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, { body, ...options }) as Core.APIPromise<{ result: LAN }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Site LANs associated with an account.
    */
-  list(
-    siteId: string,
-    params: LANListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LANsSinglePage, LAN> {
+  list(siteId: string, params: LANListParams, options?: Core.RequestOptions): Core.PagePromise<LANsSinglePage, LAN> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/magic/sites/${siteId}/lans`,
-      LANsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/lans`, LANsSinglePage, options);
   }
 
   /**
    * Remove a specific Site LAN.
    */
-  delete(
-    siteId: string,
-    lanId: string,
-    params: LANDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LAN> {
+  delete(siteId: string, lanId: string, params: LANDeleteParams, options?: Core.RequestOptions): Core.APIPromise<LAN> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
-        options,
-      ) as Core.APIPromise<{ result: LAN }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, options) as Core.APIPromise<{ result: LAN }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patch a specific Site LAN.
    */
-  edit(
-    siteId: string,
-    lanId: string,
-    params: LANEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LAN> {
+  edit(siteId: string, lanId: string, params: LANEditParams, options?: Core.RequestOptions): Core.APIPromise<LAN> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LAN }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, { body, ...options }) as Core.APIPromise<{ result: LAN }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a specific Site LAN.
    */
-  get(
-    siteId: string,
-    lanId: string,
-    params: LANGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LAN> {
+  get(siteId: string, lanId: string, params: LANGetParams, options?: Core.RequestOptions): Core.APIPromise<LAN> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`,
-        options,
-      ) as Core.APIPromise<{ result: LAN }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/lans/${lanId}`, options) as Core.APIPromise<{ result: LAN }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LANsSinglePage extends SinglePage<LAN> {}
+export class LANsSinglePage extends SinglePage<LAN> {
+}
 
 export interface DHCPRelay {
   /**
@@ -305,7 +251,7 @@ export interface RoutedSubnetParam {
   nat?: NatParam;
 }
 
-export type LANCreateResponse = Array<LAN>;
+export type LANCreateResponse = Array<LAN>
 
 export interface LANCreateParams {
   /**

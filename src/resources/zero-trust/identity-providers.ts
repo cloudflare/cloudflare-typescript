@@ -2,8 +2,9 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { CloudflareError } from '../../error'
 import * as IdentityProvidersAPI from './identity-providers';
 import { SinglePage } from '../../pagination';
 
@@ -11,10 +12,7 @@ export class IdentityProviders extends APIResource {
   /**
    * Adds a new identity provider to Access.
    */
-  create(
-    params: IdentityProviderCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProvider> {
+  create(params: IdentityProviderCreateParams, options?: Core.RequestOptions): Core.APIPromise<IdentityProvider> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -22,32 +20,20 @@ export class IdentityProviders extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IdentityProvider }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, { body, ...options }) as Core.APIPromise<{ result: IdentityProvider }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured identity provider.
    */
-  update(
-    identityProviderId: string,
-    params: IdentityProviderUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProvider> {
+  update(identityProviderId: string, params: IdentityProviderUpdateParams, options?: Core.RequestOptions): Core.APIPromise<IdentityProvider> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -55,38 +41,22 @@ export class IdentityProviders extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(
-        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${identityProviderId}`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: IdentityProvider }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${identityProviderId}`, { body, ...options }) as Core.APIPromise<{ result: IdentityProvider }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all configured identity providers.
    */
-  list(
-    params?: IdentityProviderListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
-  list(
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>;
-  list(
-    params: IdentityProviderListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse> {
+  list(params?: IdentityProviderListParams, options?: Core.RequestOptions): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>
+  list(options?: Core.RequestOptions): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse>
+  list(params: IdentityProviderListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<IdentityProviderListResponsesSinglePage, IdentityProviderListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -97,40 +67,22 @@ export class IdentityProviders extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/access/identity_providers`,
-      IdentityProviderListResponsesSinglePage,
-      options,
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers`, IdentityProviderListResponsesSinglePage, options);
   }
 
   /**
    * Deletes an identity provider from Access.
    */
-  delete(
-    identityProviderId: string,
-    params?: IdentityProviderDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderDeleteResponse>;
-  delete(
-    identityProviderId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderDeleteResponse>;
-  delete(
-    identityProviderId: string,
-    params: IdentityProviderDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProviderDeleteResponse> {
+  delete(identityProviderId: string, params?: IdentityProviderDeleteParams, options?: Core.RequestOptions): Core.APIPromise<IdentityProviderDeleteResponse>
+  delete(identityProviderId: string, options?: Core.RequestOptions): Core.APIPromise<IdentityProviderDeleteResponse>
+  delete(identityProviderId: string, params: IdentityProviderDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<IdentityProviderDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(identityProviderId, {}, params);
     }
@@ -141,38 +93,22 @@ export class IdentityProviders extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${identityProviderId}`,
-        options,
-      ) as Core.APIPromise<{ result: IdentityProviderDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${identityProviderId}`, options) as Core.APIPromise<{ result: IdentityProviderDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a configured identity provider.
    */
-  get(
-    identityProviderId: string,
-    params?: IdentityProviderGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProvider>;
-  get(identityProviderId: string, options?: Core.RequestOptions): Core.APIPromise<IdentityProvider>;
-  get(
-    identityProviderId: string,
-    params: IdentityProviderGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IdentityProvider> {
+  get(identityProviderId: string, params?: IdentityProviderGetParams, options?: Core.RequestOptions): Core.APIPromise<IdentityProvider>
+  get(identityProviderId: string, options?: Core.RequestOptions): Core.APIPromise<IdentityProvider>
+  get(identityProviderId: string, params: IdentityProviderGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<IdentityProvider> {
     if (isRequestOptions(params)) {
       return this.get(identityProviderId, {}, params);
     }
@@ -183,26 +119,19 @@ export class IdentityProviders extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${identityProviderId}`,
-        options,
-      ) as Core.APIPromise<{ result: IdentityProvider }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/identity_providers/${identityProviderId}`, options) as Core.APIPromise<{ result: IdentityProvider }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {}
+export class IdentityProviderListResponsesSinglePage extends SinglePage<IdentityProviderListResponse> {
+}
 
 export interface AzureAD {
   /**
@@ -316,21 +245,7 @@ export interface GenericOAuthConfigParam {
   client_secret?: string;
 }
 
-export type IdentityProvider =
-  | AzureAD
-  | IdentityProvider.AccessCentrify
-  | IdentityProvider.AccessFacebook
-  | IdentityProvider.AccessGitHub
-  | IdentityProvider.AccessGoogle
-  | IdentityProvider.AccessGoogleApps
-  | IdentityProvider.AccessLinkedin
-  | IdentityProvider.AccessOIDC
-  | IdentityProvider.AccessOkta
-  | IdentityProvider.AccessOnelogin
-  | IdentityProvider.AccessPingone
-  | IdentityProvider.AccessSAML
-  | IdentityProvider.AccessYandex
-  | IdentityProvider.AccessOnetimepin;
+export type IdentityProvider = AzureAD | IdentityProvider.AccessCentrify | IdentityProvider.AccessFacebook | IdentityProvider.AccessGitHub | IdentityProvider.AccessGoogle | IdentityProvider.AccessGoogleApps | IdentityProvider.AccessLinkedin | IdentityProvider.AccessOIDC | IdentityProvider.AccessOkta | IdentityProvider.AccessOnelogin | IdentityProvider.AccessPingone | IdentityProvider.AccessSAML | IdentityProvider.AccessYandex | IdentityProvider.AccessOnetimepin
 
 export namespace IdentityProvider {
   export interface AccessCentrify {
@@ -1150,57 +1065,16 @@ export interface IdentityProviderSCIMConfigParam {
  * refer to our
  * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
  */
-export type IdentityProviderType =
-  | 'onetimepin'
-  | 'azureAD'
-  | 'saml'
-  | 'centrify'
-  | 'facebook'
-  | 'github'
-  | 'google-apps'
-  | 'google'
-  | 'linkedin'
-  | 'oidc'
-  | 'okta'
-  | 'onelogin'
-  | 'pingone'
-  | 'yandex';
+export type IdentityProviderType = 'onetimepin' | 'azureAD' | 'saml' | 'centrify' | 'facebook' | 'github' | 'google-apps' | 'google' | 'linkedin' | 'oidc' | 'okta' | 'onelogin' | 'pingone' | 'yandex'
 
 /**
  * The type of identity provider. To determine the value for a specific provider,
  * refer to our
  * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
  */
-export type IdentityProviderTypeParam =
-  | 'onetimepin'
-  | 'azureAD'
-  | 'saml'
-  | 'centrify'
-  | 'facebook'
-  | 'github'
-  | 'google-apps'
-  | 'google'
-  | 'linkedin'
-  | 'oidc'
-  | 'okta'
-  | 'onelogin'
-  | 'pingone'
-  | 'yandex';
+export type IdentityProviderTypeParam = 'onetimepin' | 'azureAD' | 'saml' | 'centrify' | 'facebook' | 'github' | 'google-apps' | 'google' | 'linkedin' | 'oidc' | 'okta' | 'onelogin' | 'pingone' | 'yandex'
 
-export type IdentityProviderListResponse =
-  | AzureAD
-  | IdentityProviderListResponse.AccessCentrify
-  | IdentityProviderListResponse.AccessFacebook
-  | IdentityProviderListResponse.AccessGitHub
-  | IdentityProviderListResponse.AccessGoogle
-  | IdentityProviderListResponse.AccessGoogleApps
-  | IdentityProviderListResponse.AccessLinkedin
-  | IdentityProviderListResponse.AccessOIDC
-  | IdentityProviderListResponse.AccessOkta
-  | IdentityProviderListResponse.AccessOnelogin
-  | IdentityProviderListResponse.AccessPingone
-  | IdentityProviderListResponse.AccessSAML
-  | IdentityProviderListResponse.AccessYandex;
+export type IdentityProviderListResponse = AzureAD | IdentityProviderListResponse.AccessCentrify | IdentityProviderListResponse.AccessFacebook | IdentityProviderListResponse.AccessGitHub | IdentityProviderListResponse.AccessGoogle | IdentityProviderListResponse.AccessGoogleApps | IdentityProviderListResponse.AccessLinkedin | IdentityProviderListResponse.AccessOIDC | IdentityProviderListResponse.AccessOkta | IdentityProviderListResponse.AccessOnelogin | IdentityProviderListResponse.AccessPingone | IdentityProviderListResponse.AccessSAML | IdentityProviderListResponse.AccessYandex
 
 export namespace IdentityProviderListResponse {
   export interface AccessCentrify {
@@ -1914,21 +1788,7 @@ export interface IdentityProviderDeleteResponse {
   id?: string;
 }
 
-export type IdentityProviderCreateParams =
-  | IdentityProviderCreateParams.AzureAD
-  | IdentityProviderCreateParams.AccessCentrify
-  | IdentityProviderCreateParams.AccessFacebook
-  | IdentityProviderCreateParams.AccessGitHub
-  | IdentityProviderCreateParams.AccessGoogle
-  | IdentityProviderCreateParams.AccessGoogleApps
-  | IdentityProviderCreateParams.AccessLinkedin
-  | IdentityProviderCreateParams.AccessOIDC
-  | IdentityProviderCreateParams.AccessOkta
-  | IdentityProviderCreateParams.AccessOnelogin
-  | IdentityProviderCreateParams.AccessPingone
-  | IdentityProviderCreateParams.AccessSAML
-  | IdentityProviderCreateParams.AccessYandex
-  | IdentityProviderCreateParams.AccessOnetimepin;
+export type IdentityProviderCreateParams = IdentityProviderCreateParams.AzureAD | IdentityProviderCreateParams.AccessCentrify | IdentityProviderCreateParams.AccessFacebook | IdentityProviderCreateParams.AccessGitHub | IdentityProviderCreateParams.AccessGoogle | IdentityProviderCreateParams.AccessGoogleApps | IdentityProviderCreateParams.AccessLinkedin | IdentityProviderCreateParams.AccessOIDC | IdentityProviderCreateParams.AccessOkta | IdentityProviderCreateParams.AccessOnelogin | IdentityProviderCreateParams.AccessPingone | IdentityProviderCreateParams.AccessSAML | IdentityProviderCreateParams.AccessYandex | IdentityProviderCreateParams.AccessOnetimepin
 
 export namespace IdentityProviderCreateParams {
   export interface AzureAD {
@@ -2923,21 +2783,7 @@ export namespace IdentityProviderCreateParams {
   }
 }
 
-export type IdentityProviderUpdateParams =
-  | IdentityProviderUpdateParams.AzureAD
-  | IdentityProviderUpdateParams.AccessCentrify
-  | IdentityProviderUpdateParams.AccessFacebook
-  | IdentityProviderUpdateParams.AccessGitHub
-  | IdentityProviderUpdateParams.AccessGoogle
-  | IdentityProviderUpdateParams.AccessGoogleApps
-  | IdentityProviderUpdateParams.AccessLinkedin
-  | IdentityProviderUpdateParams.AccessOIDC
-  | IdentityProviderUpdateParams.AccessOkta
-  | IdentityProviderUpdateParams.AccessOnelogin
-  | IdentityProviderUpdateParams.AccessPingone
-  | IdentityProviderUpdateParams.AccessSAML
-  | IdentityProviderUpdateParams.AccessYandex
-  | IdentityProviderUpdateParams.AccessOnetimepin;
+export type IdentityProviderUpdateParams = IdentityProviderUpdateParams.AzureAD | IdentityProviderUpdateParams.AccessCentrify | IdentityProviderUpdateParams.AccessFacebook | IdentityProviderUpdateParams.AccessGitHub | IdentityProviderUpdateParams.AccessGoogle | IdentityProviderUpdateParams.AccessGoogleApps | IdentityProviderUpdateParams.AccessLinkedin | IdentityProviderUpdateParams.AccessOIDC | IdentityProviderUpdateParams.AccessOkta | IdentityProviderUpdateParams.AccessOnelogin | IdentityProviderUpdateParams.AccessPingone | IdentityProviderUpdateParams.AccessSAML | IdentityProviderUpdateParams.AccessYandex | IdentityProviderUpdateParams.AccessOnetimepin
 
 export namespace IdentityProviderUpdateParams {
   export interface AzureAD {

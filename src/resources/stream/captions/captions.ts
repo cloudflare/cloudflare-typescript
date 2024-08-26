@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Language } from './language/language';
 import * as CaptionsAPI from './captions';
 import * as LanguageAPI from './language/language';
 
@@ -11,17 +14,9 @@ export class Captions extends APIResource {
   /**
    * Lists the available captions or subtitles for a specific video.
    */
-  get(
-    identifier: string,
-    params: CaptionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CaptionGetResponse> {
+  get(identifier: string, params: CaptionGetParams, options?: Core.RequestOptions): Core.APIPromise<CaptionGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{
-        result: CaptionGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/stream/${identifier}/captions`, options) as Core.APIPromise<{ result: CaptionGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -47,7 +42,7 @@ export interface Caption {
   status?: 'ready' | 'inprogress' | 'error';
 }
 
-export type CaptionGetResponse = Array<Caption>;
+export type CaptionGetResponse = Array<Caption>
 
 export interface CaptionGetParams {
   /**

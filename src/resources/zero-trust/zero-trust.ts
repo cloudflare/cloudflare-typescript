@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
+import * as Core from '../../core';
+import { Devices } from './devices/devices';
+import { IdentityProviders } from './identity-providers';
+import { Organizations } from './organizations';
+import { Seats } from './seats';
+import { Access } from './access/access';
+import { DEX } from './dex/dex';
+import { Tunnels } from './tunnels/tunnels';
+import { ConnectivitySettings } from './connectivity-settings';
+import { DLP } from './dlp/dlp';
+import { Gateway } from './gateway/gateway';
+import { Networks } from './networks/networks';
+import { RiskScoring } from './risk-scoring/risk-scoring';
 import * as ConnectivitySettingsAPI from './connectivity-settings';
 import * as IdentityProvidersAPI from './identity-providers';
 import * as OrganizationsAPI from './organizations';
@@ -16,16 +31,13 @@ import * as TunnelsAPI from './tunnels/tunnels';
 
 export class ZeroTrust extends APIResource {
   devices: DevicesAPI.Devices = new DevicesAPI.Devices(this._client);
-  identityProviders: IdentityProvidersAPI.IdentityProviders = new IdentityProvidersAPI.IdentityProviders(
-    this._client,
-  );
+  identityProviders: IdentityProvidersAPI.IdentityProviders = new IdentityProvidersAPI.IdentityProviders(this._client);
   organizations: OrganizationsAPI.Organizations = new OrganizationsAPI.Organizations(this._client);
   seats: SeatsAPI.Seats = new SeatsAPI.Seats(this._client);
   access: AccessAPI.Access = new AccessAPI.Access(this._client);
   dex: DEXAPI.DEX = new DEXAPI.DEX(this._client);
   tunnels: TunnelsAPI.Tunnels = new TunnelsAPI.Tunnels(this._client);
-  connectivitySettings: ConnectivitySettingsAPI.ConnectivitySettings =
-    new ConnectivitySettingsAPI.ConnectivitySettings(this._client);
+  connectivitySettings: ConnectivitySettingsAPI.ConnectivitySettings = new ConnectivitySettingsAPI.ConnectivitySettings(this._client);
   dlp: DLPAPI.DLP = new DLPAPI.DLP(this._client);
   gateway: GatewayAPI.Gateway = new GatewayAPI.Gateway(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);

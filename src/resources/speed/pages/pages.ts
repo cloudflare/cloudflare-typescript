@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as PagesAPI from './pages';
 import * as SpeedAPI from '../speed';
@@ -13,10 +15,7 @@ export class Pages extends APIResource {
   /**
    * Lists all webpages which have been tested.
    */
-  list(
-    params: PageListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PageListResponsesSinglePage, PageListResponse> {
+  list(params: PageListParams, options?: Core.RequestOptions): Core.PagePromise<PageListResponsesSinglePage, PageListResponse> {
     const { zone_id } = params;
     return this._client.getAPIList(`/zones/${zone_id}/speed_api/pages`, PageListResponsesSinglePage, options);
   }
@@ -24,22 +23,14 @@ export class Pages extends APIResource {
   /**
    * Lists the core web vital metrics trend over time for a specific page.
    */
-  trend(
-    url: string,
-    params: PageTrendParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedAPI.Trend> {
+  trend(url: string, params: PageTrendParams, options?: Core.RequestOptions): Core.APIPromise<SpeedAPI.Trend> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/trend`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SpeedAPI.Trend }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/speed_api/pages/${url}/trend`, { query, ...options }) as Core.APIPromise<{ result: SpeedAPI.Trend }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PageListResponsesSinglePage extends SinglePage<PageListResponse> {}
+export class PageListResponsesSinglePage extends SinglePage<PageListResponse> {
+}
 
 export interface PageListResponse {
   /**
@@ -86,28 +77,7 @@ export interface PageTrendParams {
   /**
    * Query param: A test region.
    */
-  region:
-    | 'asia-east1'
-    | 'asia-northeast1'
-    | 'asia-northeast2'
-    | 'asia-south1'
-    | 'asia-southeast1'
-    | 'australia-southeast1'
-    | 'europe-north1'
-    | 'europe-southwest1'
-    | 'europe-west1'
-    | 'europe-west2'
-    | 'europe-west3'
-    | 'europe-west4'
-    | 'europe-west8'
-    | 'europe-west9'
-    | 'me-west1'
-    | 'southamerica-east1'
-    | 'us-central1'
-    | 'us-east1'
-    | 'us-east4'
-    | 'us-south1'
-    | 'us-west1';
+  region: 'asia-east1' | 'asia-northeast1' | 'asia-northeast2' | 'asia-south1' | 'asia-southeast1' | 'australia-southeast1' | 'europe-north1' | 'europe-southwest1' | 'europe-west1' | 'europe-west2' | 'europe-west3' | 'europe-west4' | 'europe-west8' | 'europe-west9' | 'me-west1' | 'southamerica-east1' | 'us-central1' | 'us-east1' | 'us-east4' | 'us-south1' | 'us-west1';
 
   /**
    * Query param:

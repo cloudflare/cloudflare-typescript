@@ -2,8 +2,10 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
+import { Settings } from './settings';
+import { CloudflareError } from '../../../../error'
 import * as CertificatesAPI from './certificates';
 import * as SettingsAPI from './settings';
 import { SinglePage } from '../../../../pagination';
@@ -22,32 +24,20 @@ export class Certificates extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Certificate }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, { body, ...options }) as Core.APIPromise<{ result: Certificate }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured mTLS certificate.
    */
-  update(
-    certificateId: string,
-    params: CertificateUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Certificate> {
+  update(certificateId: string, params: CertificateUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Certificate> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -55,36 +45,22 @@ export class Certificates extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Certificate }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`, { body, ...options }) as Core.APIPromise<{ result: Certificate }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all mTLS root certificates.
    */
-  list(
-    params?: CertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatesSinglePage, Certificate>;
-  list(options?: Core.RequestOptions): Core.PagePromise<CertificatesSinglePage, Certificate>;
-  list(
-    params: CertificateListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CertificatesSinglePage, Certificate> {
+  list(params?: CertificateListParams, options?: Core.RequestOptions): Core.PagePromise<CertificatesSinglePage, Certificate>
+  list(options?: Core.RequestOptions): Core.PagePromise<CertificatesSinglePage, Certificate>
+  list(params: CertificateListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<CertificatesSinglePage, Certificate> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -95,37 +71,22 @@ export class Certificates extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/access/certificates`,
-      CertificatesSinglePage,
-      options,
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/access/certificates`, CertificatesSinglePage, options);
   }
 
   /**
    * Deletes an mTLS certificate.
    */
-  delete(
-    certificateId: string,
-    params?: CertificateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateDeleteResponse>;
-  delete(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>;
-  delete(
-    certificateId: string,
-    params: CertificateDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateDeleteResponse> {
+  delete(certificateId: string, params?: CertificateDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>
+  delete(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse>
+  delete(certificateId: string, params: CertificateDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(certificateId, {}, params);
     }
@@ -136,38 +97,22 @@ export class Certificates extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`, options) as Core.APIPromise<{ result: CertificateDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single mTLS certificate.
    */
-  get(
-    certificateId: string,
-    params?: CertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Certificate>;
-  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<Certificate>;
-  get(
-    certificateId: string,
-    params: CertificateGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Certificate> {
+  get(certificateId: string, params?: CertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<Certificate>
+  get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<Certificate>
+  get(certificateId: string, params: CertificateGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<Certificate> {
     if (isRequestOptions(params)) {
       return this.get(certificateId, {}, params);
     }
@@ -178,36 +123,29 @@ export class Certificates extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: Certificate }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/certificates/${certificateId}`, options) as Core.APIPromise<{ result: Certificate }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CertificatesSinglePage extends SinglePage<Certificate> {}
+export class CertificatesSinglePage extends SinglePage<Certificate> {
+}
 
 /**
  * A fully-qualified domain name (FQDN).
  */
-export type AssociatedHostnames = string;
+export type AssociatedHostnames = string
 
 /**
  * A fully-qualified domain name (FQDN).
  */
-export type AssociatedHostnamesParam = string;
+export type AssociatedHostnamesParam = string
 
 export interface Certificate {
   /**

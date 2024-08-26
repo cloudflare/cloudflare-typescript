@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as LocationsAPI from './locations';
 
@@ -9,20 +10,13 @@ export class Locations extends APIResource {
   /**
    * Get a list of locations.
    */
-  list(query?: LocationListParams, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>;
-  list(
-    query: LocationListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LocationListResponse> {
+  list(query?: LocationListParams, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>
+  list(options?: Core.RequestOptions): Core.APIPromise<LocationListResponse>
+  list(query: LocationListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/radar/entities/locations', { query, ...options }) as Core.APIPromise<{
-        result: LocationListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/entities/locations', { query, ...options }) as Core.APIPromise<{ result: LocationListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,25 +24,13 @@ export class Locations extends APIResource {
    * low level of confidence in the traffic data - normally this happens because
    * Cloudflare has a small amount of traffic from/to this location).
    */
-  get(
-    location: string,
-    query?: LocationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LocationGetResponse>;
-  get(location: string, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
-  get(
-    location: string,
-    query: LocationGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LocationGetResponse> {
+  get(location: string, query?: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>
+  get(location: string, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>
+  get(location: string, query: LocationGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(location, {}, query);
     }
-    return (
-      this._client.get(`/radar/entities/locations/${location}`, { query, ...options }) as Core.APIPromise<{
-        result: LocationGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/entities/locations/${location}`, { query, ...options }) as Core.APIPromise<{ result: LocationGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

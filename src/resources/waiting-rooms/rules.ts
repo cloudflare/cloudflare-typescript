@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RulesAPI from './rules';
 
@@ -9,88 +11,42 @@ export class Rules extends APIResource {
    * Only available for the Waiting Room Advanced subscription. Creates a rule for a
    * waiting room.
    */
-  create(
-    waitingRoomId: string,
-    params: RuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse> {
+  create(waitingRoomId: string, params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, { body, ...options }) as Core.APIPromise<{ result: RuleCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Only available for the Waiting Room Advanced subscription. Replaces all rules
    * for a waiting room.
    */
-  update(
-    waitingRoomId: string,
-    params: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse> {
+  update(waitingRoomId: string, params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
     const { zone_id, body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, { body: body, ...options }) as Core.APIPromise<{ result: RuleUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes a rule for a waiting room.
    */
-  delete(
-    waitingRoomId: string,
-    ruleId: string,
-    params: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse> {
+  delete(waitingRoomId: string, ruleId: string, params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`,
-        options,
-      ) as Core.APIPromise<{ result: RuleDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, options) as Core.APIPromise<{ result: RuleDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patches a rule for a waiting room.
    */
-  edit(
-    waitingRoomId: string,
-    ruleId: string,
-    params: RuleEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleEditResponse> {
+  edit(waitingRoomId: string, ruleId: string, params: RuleEditParams, options?: Core.RequestOptions): Core.APIPromise<RuleEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, { body, ...options }) as Core.APIPromise<{ result: RuleEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists rules for a waiting room.
    */
-  get(
-    waitingRoomId: string,
-    params: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleGetResponse> {
+  get(waitingRoomId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<RuleGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, options) as Core.APIPromise<{
-        result: RuleGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, options) as Core.APIPromise<{ result: RuleGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -128,15 +84,15 @@ export interface WaitingRoomRule {
   version?: string;
 }
 
-export type RuleCreateResponse = Array<WaitingRoomRule>;
+export type RuleCreateResponse = Array<WaitingRoomRule>
 
-export type RuleUpdateResponse = Array<WaitingRoomRule>;
+export type RuleUpdateResponse = Array<WaitingRoomRule>
 
-export type RuleDeleteResponse = Array<WaitingRoomRule>;
+export type RuleDeleteResponse = Array<WaitingRoomRule>
 
-export type RuleEditResponse = Array<WaitingRoomRule>;
+export type RuleEditResponse = Array<WaitingRoomRule>
 
-export type RuleGetResponse = Array<WaitingRoomRule>;
+export type RuleGetResponse = Array<WaitingRoomRule>
 
 export interface RuleCreateParams {
   /**

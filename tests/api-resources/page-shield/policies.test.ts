@@ -1,24 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({
-  apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'user@example.com',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource policies', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.pageShield.policies.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action: 'allow',
-      description: 'Checkout page CSP policy',
-      enabled: true,
-      expression: 'ends_with(http.request.uri.path, "/checkout")',
-      value: "script-src 'none';",
-    });
+    const responsePromise = client.pageShield.policies.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'allow', description: 'Checkout page CSP policy', enabled: true, expression: 'ends_with(http.request.uri.path, "/checkout")', value: 'script-src \'none\';' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -29,20 +18,11 @@ describe('resource policies', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.pageShield.policies.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action: 'allow',
-      description: 'Checkout page CSP policy',
-      enabled: true,
-      expression: 'ends_with(http.request.uri.path, "/checkout")',
-      value: "script-src 'none';",
-    });
+    const response = await client.pageShield.policies.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'allow', description: 'Checkout page CSP policy', enabled: true, expression: 'ends_with(http.request.uri.path, "/checkout")', value: 'script-src \'none\';' });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.pageShield.policies.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.pageShield.policies.update('023e105f4ecef8ad9ca31a8372d0c353', { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,14 +33,7 @@ describe('resource policies', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.pageShield.policies.update('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action: 'allow',
-      description: 'Checkout page CSP policy',
-      enabled: true,
-      expression: 'ends_with(http.request.uri.path, "/checkout")',
-      value: "script-src 'none';",
-    });
+    const response = await client.pageShield.policies.update('023e105f4ecef8ad9ca31a8372d0c353', { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'allow', description: 'Checkout page CSP policy', enabled: true, expression: 'ends_with(http.request.uri.path, "/checkout")', value: 'script-src \'none\';' });
   });
 
   test('list: only required params', async () => {
@@ -79,9 +52,7 @@ describe('resource policies', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.pageShield.policies.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.pageShield.policies.delete('023e105f4ecef8ad9ca31a8372d0c353', { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -92,15 +63,11 @@ describe('resource policies', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.pageShield.policies.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.pageShield.policies.delete('023e105f4ecef8ad9ca31a8372d0c353', { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pageShield.policies.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.pageShield.policies.get('023e105f4ecef8ad9ca31a8372d0c353', { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -111,8 +78,6 @@ describe('resource policies', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pageShield.policies.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.pageShield.policies.get('023e105f4ecef8ad9ca31a8372d0c353', { zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as OriginPostQuantumEncryptionAPI from './origin-post-quantum-encryption';
 
 export class OriginPostQuantumEncryption extends APIResource {
   /**
@@ -12,17 +15,9 @@ export class OriginPostQuantumEncryption extends APIResource {
    * algorithms are advertised but only used when requested by the origin, and off
    * means that PQ algorithms are not advertised
    */
-  update(
-    params: OriginPostQuantumEncryptionUpdateParams,
-    options?: Core.RequestOptions,
   ): Core.APIPromise<OriginPostQuantumEncryptionUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OriginPostQuantumEncryptionUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, { body, ...options }) as Core.APIPromise<{ result: OriginPostQuantumEncryptionUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -33,16 +28,9 @@ export class OriginPostQuantumEncryption extends APIResource {
    * algorithms are advertised but only used when requested by the origin, and off
    * means that PQ algorithms are not advertised
    */
-  get(
-    params: OriginPostQuantumEncryptionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
+  get(params: OriginPostQuantumEncryptionGetParams, options?: Core.RequestOptions): Core.APIPromise<OriginPostQuantumEncryptionGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{
-        result: OriginPostQuantumEncryptionGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/cache/origin_post_quantum_encryption`, options) as Core.APIPromise<{ result: OriginPostQuantumEncryptionGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

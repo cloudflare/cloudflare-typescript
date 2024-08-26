@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as RevokeAPI from './revoke';
 
@@ -8,21 +10,13 @@ export class Revoke extends APIResource {
   /**
    * Revokes a list of devices.
    */
-  create(
-    params: RevokeCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RevokeCreateResponse | null> {
+  create(params: RevokeCreateParams, options?: Core.RequestOptions): Core.APIPromise<RevokeCreateResponse | null> {
     const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/devices/revoke`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: RevokeCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/devices/revoke`, { body: body, ...options }) as Core.APIPromise<{ result: RevokeCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type RevokeCreateResponse = unknown | string;
+export type RevokeCreateResponse = unknown | string
 
 export interface RevokeCreateParams {
   /**

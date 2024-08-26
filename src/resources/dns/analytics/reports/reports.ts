@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { Bytimes } from './bytimes';
 import * as ReportsAPI from './reports';
 import * as BytimesAPI from './bytimes';
 
@@ -17,11 +20,7 @@ export class Reports extends APIResource {
    */
   get(params: ReportGetParams, options?: Core.RequestOptions): Core.APIPromise<Report> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/dns_analytics/report`, { query, ...options }) as Core.APIPromise<{
-        result: Report;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/dns_analytics/report`, { query, ...options }) as Core.APIPromise<{ result: Report }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

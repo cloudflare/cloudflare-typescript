@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as BulkAPI from './bulk';
 
@@ -13,42 +15,24 @@ export class Bulk extends APIResource {
    * set, `expiration_ttl` is used and `expiration` is ignored. The entire request
    * size must be 100 megabytes or less.
    */
-  update(
-    namespaceId: string,
-    params: BulkUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkUpdateResponse> {
+  update(namespaceId: string, params: BulkUpdateParams, options?: Core.RequestOptions): Core.APIPromise<BulkUpdateResponse> {
     const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: BulkUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, { body: body, ...options }) as Core.APIPromise<{ result: BulkUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Remove multiple KV pairs from the namespace. Body should be an array of up to
    * 10,000 keys to be removed.
    */
-  delete(
-    namespaceId: string,
-    params: BulkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkDeleteResponse> {
+  delete(namespaceId: string, params: BulkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<BulkDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`,
-        options,
-      ) as Core.APIPromise<{ result: BulkDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, options) as Core.APIPromise<{ result: BulkDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type BulkUpdateResponse = unknown;
+export type BulkUpdateResponse = unknown
 
-export type BulkDeleteResponse = unknown;
+export type BulkDeleteResponse = unknown
 
 export interface BulkUpdateParams {
   /**

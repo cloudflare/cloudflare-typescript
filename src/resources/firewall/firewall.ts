@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
+import * as Core from '../../core';
+import { Lockdowns } from './lockdowns';
+import { Rules } from './rules';
+import { AccessRules } from './access-rules';
+import { UARules } from './ua-rules';
+import { WAF } from './waf/waf';
 import * as AccessRulesAPI from './access-rules';
 import * as LockdownsAPI from './lockdowns';
 import * as RulesAPI from './rules';

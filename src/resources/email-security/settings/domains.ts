@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DomainsAPI from './domains';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -9,54 +11,30 @@ export class Domains extends APIResource {
   /**
    * List, search, and sort an account's email domains.
    */
-  list(
-    params: DomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DomainListResponsesV4PagePaginationArray, DomainListResponse> {
+  list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainListResponsesV4PagePaginationArray, DomainListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/settings/domains`,
-      DomainListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/email-security/settings/domains`, DomainListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Unprotect an email domain
    */
-  delete(
-    domainId: number,
-    params: DomainDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainDeleteResponse> {
+  delete(domainId: number, params: DomainDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DomainDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/email-security/settings/domains/${domainId}`,
-        options,
-      ) as Core.APIPromise<{ result: DomainDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/email-security/settings/domains/${domainId}`, options) as Core.APIPromise<{ result: DomainDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update an email domain
    */
-  edit(
-    domainId: number,
-    params: DomainEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainEditResponse> {
+  edit(domainId: number, params: DomainEditParams, options?: Core.RequestOptions): Core.APIPromise<DomainEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/email-security/settings/domains/${domainId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DomainEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/email-security/settings/domains/${domainId}`, { body, ...options }) as Core.APIPromise<{ result: DomainEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<DomainListResponse> {}
+export class DomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<DomainListResponse> {
+}
 
 export interface DomainListResponse {
   /**

@@ -2,14 +2,4 @@
 
 export { IPGetParams, IPs } from './ips';
 export { NetworkCreateParams, NetworkDeleteParams, NetworkEditParams, Networks } from './networks';
-export {
-  NetworkRoute,
-  Route,
-  Teamnet,
-  RouteCreateParams,
-  RouteListParams,
-  RouteDeleteParams,
-  RouteEditParams,
-  TeamnetsV4PagePaginationArray,
-  Routes,
-} from './routes';
+export { NetworkRoute, Route, Teamnet, RouteCreateParams, RouteListParams, RouteDeleteParams, RouteEditParams, RouteGetParams, TeamnetsV4PagePaginationArray, Routes } from './routes';

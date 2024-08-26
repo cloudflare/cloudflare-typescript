@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as PercentilesAPI from './percentiles';
 import * as DEXAPI from '../dex';
@@ -10,18 +12,9 @@ export class Percentiles extends APIResource {
    * Get percentiles for an http test for a given time period between 1 hour and 7
    * days.
    */
-  get(
-    testId: string,
-    params: PercentileGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTPDetailsPercentiles> {
+  get(testId: string, params: PercentileGetParams, options?: Core.RequestOptions): Core.APIPromise<HTTPDetailsPercentiles> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}/percentiles`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: HTTPDetailsPercentiles }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}/percentiles`, { query, ...options }) as Core.APIPromise<{ result: HTTPDetailsPercentiles }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

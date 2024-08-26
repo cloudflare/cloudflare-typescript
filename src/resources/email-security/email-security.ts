@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
+import * as Core from '../../core';
+import { Investigate } from './investigate';
+import { Phishguard } from './phishguard';
+import { Settings } from './settings/settings';
 import * as InvestigateAPI from './investigate';
 import * as PhishguardAPI from './phishguard';
 import * as SettingsAPI from './settings/settings';

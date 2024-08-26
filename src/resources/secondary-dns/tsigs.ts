@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as TSIGsAPI from './tsigs';
 import { SinglePage } from '../../pagination';
@@ -11,12 +13,7 @@ export class TSIGs extends APIResource {
    */
   create(params: TSIGCreateParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/secondary_dns/tsigs`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TSIG }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/secondary_dns/tsigs`, { body, ...options }) as Core.APIPromise<{ result: TSIG }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -24,12 +21,7 @@ export class TSIGs extends APIResource {
    */
   update(tsigId: string, params: TSIGUpdateParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TSIG }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, { body, ...options }) as Core.APIPromise<{ result: TSIG }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -43,18 +35,9 @@ export class TSIGs extends APIResource {
   /**
    * Delete TSIG.
    */
-  delete(
-    tsigId: string,
-    params: TSIGDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TSIGDeleteResponse> {
+  delete(tsigId: string, params: TSIGDeleteParams, options?: Core.RequestOptions): Core.APIPromise<TSIGDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`,
-        options,
-      ) as Core.APIPromise<{ result: TSIGDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{ result: TSIGDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -62,15 +45,12 @@ export class TSIGs extends APIResource {
    */
   get(tsigId: string, params: TSIGGetParams, options?: Core.RequestOptions): Core.APIPromise<TSIG> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{
-        result: TSIG;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/secondary_dns/tsigs/${tsigId}`, options) as Core.APIPromise<{ result: TSIG }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TSIGsSinglePage extends SinglePage<TSIG> {}
+export class TSIGsSinglePage extends SinglePage<TSIG> {
+}
 
 export interface TSIG {
   id: string;

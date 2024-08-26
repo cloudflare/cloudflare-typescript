@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as VirtualNetworksAPI from './virtual-networks';
 import { SinglePage } from '../../../pagination';
@@ -11,65 +13,44 @@ export class VirtualNetworks extends APIResource {
    */
   create(params: VirtualNetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/teamnet/virtual_networks`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VirtualNetwork }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/teamnet/virtual_networks`, { body, ...options }) as Core.APIPromise<{ result: VirtualNetwork }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists and filters virtual networks in an account.
    */
-  list(
-    params: VirtualNetworkListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VirtualNetworksSinglePage, VirtualNetwork> {
+  list(params: VirtualNetworkListParams, options?: Core.RequestOptions): Core.PagePromise<VirtualNetworksSinglePage, VirtualNetwork> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/teamnet/virtual_networks`,
-      VirtualNetworksSinglePage,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/teamnet/virtual_networks`, VirtualNetworksSinglePage, { query, ...options });
   }
 
   /**
    * Deletes an existing virtual network.
    */
-  delete(
-    virtualNetworkId: string,
-    params: VirtualNetworkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetwork> {
+  delete(virtualNetworkId: string, params: VirtualNetworkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
-        options,
-      ) as Core.APIPromise<{ result: VirtualNetwork }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, options) as Core.APIPromise<{ result: VirtualNetwork }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an existing virtual network.
    */
-  edit(
-    virtualNetworkId: string,
-    params: VirtualNetworkEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VirtualNetwork> {
+  edit(virtualNetworkId: string, params: VirtualNetworkEditParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VirtualNetwork }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, { body, ...options }) as Core.APIPromise<{ result: VirtualNetwork }>)._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a virtual network.
+   */
+  get(virtualNetworkId: string, params: VirtualNetworkGetParams, options?: Core.RequestOptions): Core.APIPromise<VirtualNetwork> {
+    const { account_id } = params;
+    return (this._client.get(`/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`, options) as Core.APIPromise<{ result: VirtualNetwork }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class VirtualNetworksSinglePage extends SinglePage<VirtualNetwork> {}
+export class VirtualNetworksSinglePage extends SinglePage<VirtualNetwork> {
+}
 
 export interface VirtualNetwork {
   /**
@@ -186,6 +167,13 @@ export interface VirtualNetworkEditParams {
   name?: string;
 }
 
+export interface VirtualNetworkGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export namespace VirtualNetworks {
   export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
   export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
@@ -193,4 +181,5 @@ export namespace VirtualNetworks {
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
   export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
+  export import VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
 }

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RulesAPI from './rules';
 import * as FiltersAPI from '../filters';
@@ -14,16 +15,8 @@ export class Rules extends APIResource {
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  create(
-    zoneIdentifier: string,
-    body: RuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse | null> {
-    return (
-      this._client.post(`/zones/${zoneIdentifier}/firewall/rules`, { body, ...options }) as Core.APIPromise<{
-        result: RuleCreateResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  create(zoneIdentifier: string, body: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse | null> {
+    return (this._client.post(`/zones/${zoneIdentifier}/firewall/rules`, { body, ...options }) as Core.APIPromise<{ result: RuleCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,18 +24,8 @@ export class Rules extends APIResource {
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  update(
-    zoneIdentifier: string,
-    id: string,
-    body: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallRule> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FirewallRule }>
-    )._thenUnwrap((obj) => obj.result);
+  update(zoneIdentifier: string, id: string, body: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
+    return (this._client.put(`/zones/${zoneIdentifier}/firewall/rules/${id}`, { body, ...options }) as Core.APIPromise<{ result: FirewallRule }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -51,28 +34,13 @@ export class Rules extends APIResource {
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  list(
-    zoneIdentifier: string,
-    query?: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
-  list(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>;
-  list(
-    zoneIdentifier: string,
-    query: RuleListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule> {
+  list(zoneIdentifier: string, query?: RuleListParams, options?: Core.RequestOptions): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>
+  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule>
+  list(zoneIdentifier: string, query: RuleListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<FirewallRulesV4PagePaginationArray, FirewallRule> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/firewall/rules`,
-      FirewallRulesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/firewall/rules`, FirewallRulesV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -81,11 +49,7 @@ export class Rules extends APIResource {
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
   delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
-    return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, options) as Core.APIPromise<{
-        result: FirewallRule;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zoneIdentifier}/firewall/rules/${id}`, options) as Core.APIPromise<{ result: FirewallRule }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -93,18 +57,8 @@ export class Rules extends APIResource {
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  edit(
-    zoneIdentifier: string,
-    id: string,
-    body: RuleEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleEditResponse | null> {
-    return (
-      this._client.patch(`/zones/${zoneIdentifier}/firewall/rules/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+  edit(zoneIdentifier: string, id: string, body: RuleEditParams, options?: Core.RequestOptions): Core.APIPromise<RuleEditResponse | null> {
+    return (this._client.patch(`/zones/${zoneIdentifier}/firewall/rules/${id}`, { body, ...options }) as Core.APIPromise<{ result: RuleEditResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -112,22 +66,14 @@ export class Rules extends APIResource {
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
    */
-  get(
-    zoneIdentifier: string,
-    params: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FirewallRule> {
+  get(zoneIdentifier: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<FirewallRule> {
     const { path_id, query_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${path_id}`, {
-        query: { id: query_id, ...query },
-        ...options,
-      }) as Core.APIPromise<{ result: FirewallRule }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zoneIdentifier}/firewall/rules/${path_id}`, { query: { id: query_id, ...query }, ...options }) as Core.APIPromise<{ result: FirewallRule }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FirewallRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallRule> {}
+export class FirewallRulesV4PagePaginationArray extends V4PagePaginationArray<FirewallRule> {
+}
 
 export interface FirewallRule {
   /**
@@ -171,7 +117,7 @@ export interface FirewallRule {
 /**
  * A list of products to bypass for a request when using the `bypass` action.
  */
-export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf';
+export type Product = 'zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'securityLevel' | 'rateLimit' | 'waf'
 
 export interface DeletedFilter {
   /**
@@ -185,9 +131,9 @@ export interface DeletedFilter {
   deleted: boolean;
 }
 
-export type RuleCreateResponse = Array<FirewallRule>;
+export type RuleCreateResponse = Array<FirewallRule>
 
-export type RuleEditResponse = Array<FirewallRule>;
+export type RuleEditResponse = Array<FirewallRule>
 
 export interface RuleCreateParams {
   /**
@@ -341,7 +287,8 @@ export interface RuleListParams extends V4PagePaginationArrayParams {
   paused?: boolean;
 }
 
-export interface RuleEditParams {}
+export interface RuleEditParams {
+}
 
 export interface RuleGetParams {
   /**

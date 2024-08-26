@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Top } from './top';
 import * as NetflowsAPI from './netflows';
 import * as TopAPI from './top';
 
@@ -13,46 +15,26 @@ export class Netflows extends APIResource {
    * Percentage distribution of HTTP vs other protocols traffic over a given time
    * period.
    */
-  summary(
-    query?: NetflowSummaryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryResponse>;
-  summary(options?: Core.RequestOptions): Core.APIPromise<NetflowSummaryResponse>;
-  summary(
-    query: NetflowSummaryParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowSummaryResponse> {
+  summary(query?: NetflowSummaryParams, options?: Core.RequestOptions): Core.APIPromise<NetflowSummaryResponse>
+  summary(options?: Core.RequestOptions): Core.APIPromise<NetflowSummaryResponse>
+  summary(query: NetflowSummaryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<NetflowSummaryResponse> {
     if (isRequestOptions(query)) {
       return this.summary({}, query);
     }
-    return (
-      this._client.get('/radar/netflows/summary', { query, ...options }) as Core.APIPromise<{
-        result: NetflowSummaryResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/netflows/summary', { query, ...options }) as Core.APIPromise<{ result: NetflowSummaryResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get network traffic change over time. Visit
    * https://en.wikipedia.org/wiki/NetFlow for more information on NetFlows.
    */
-  timeseries(
-    query?: NetflowTimeseriesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<NetflowTimeseriesResponse>;
-  timeseries(
-    query: NetflowTimeseriesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetflowTimeseriesResponse> {
+  timeseries(query?: NetflowTimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<NetflowTimeseriesResponse>
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<NetflowTimeseriesResponse>
+  timeseries(query: NetflowTimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<NetflowTimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (
-      this._client.get('/radar/netflows/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: NetflowTimeseriesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/netflows/timeseries', { query, ...options }) as Core.APIPromise<{ result: NetflowTimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

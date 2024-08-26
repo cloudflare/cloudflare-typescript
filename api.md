@@ -4031,6 +4031,19 @@ Methods:
 - <code title="patch /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">edit</a>(policyId, { ...params }) -> SettingsPolicy | null</code>
 - <code title="get /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">get</a>(policyId, { ...params }) -> SettingsPolicy | null</code>
 
+#### Certificates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/certificates.ts">DevicePolicyCertificates</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/certificates.ts">CertificateUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/certificates.ts">CertificateGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.certificates.<a href="./src/resources/zero-trust/devices/policies/certificates.ts">update</a>(zoneTag, { ...params }) -> CertificateUpdateResponse | null</code>
+- <code title="get /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.certificates.<a href="./src/resources/zero-trust/devices/policies/certificates.ts">get</a>(zoneTag) -> CertificateGetResponse | null</code>
+
 #### DefaultPolicy
 
 Types:
@@ -4866,6 +4879,14 @@ Types:
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationEditResponse</a></code>
 - <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="patch /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">edit</a>({ ...params }) -> ConfigurationEditResponse</code>
+- <code title="get /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">get</a>({ ...params }) -> ConfigurationGetResponse</code>
+
+#### CustomCertificate
 
 Methods:
 

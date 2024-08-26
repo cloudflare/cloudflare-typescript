@@ -1,76 +1,46 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as CertificatesAPI from './certificates';
 import * as HostnamesAPI from './hostnames';
 import { AuthenticatedOriginPullsSinglePage } from './hostnames';
+import { SinglePage } from '../../../pagination';
 
 export class Certificates extends APIResource {
   /**
    * Upload a certificate to be used for client authentication on a hostname. 10
    * hostname certificates per zone are allowed.
    */
-  create(
-    params: CertificateCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateCreateResponse> {
+  create(params: CertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<CertificateCreateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CertificateCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, { body, ...options }) as Core.APIPromise<{ result: CertificateCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Certificates
    */
-  list(
-    params: CertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AuthenticatedOriginPullsSinglePage, HostnamesAPI.AuthenticatedOriginPull> {
+  list(params: CertificateListParams, options?: Core.RequestOptions): Core.PagePromise<AuthenticatedOriginPullsSinglePage, HostnamesAPI.AuthenticatedOriginPull> {
     const { zone_id } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`,
-      AuthenticatedOriginPullsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates`, AuthenticatedOriginPullsSinglePage, options);
   }
 
   /**
    * Delete Hostname Client Certificate
    */
-  delete(
-    certificateId: string,
-    params: CertificateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateDeleteResponse> {
+  delete(certificateId: string, params: CertificateDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`, options) as Core.APIPromise<{ result: CertificateDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the certificate by ID to be used for client authentication on a hostname.
    */
-  get(
-    certificateId: string,
-    params: CertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateGetResponse> {
+  get(certificateId: string, params: CertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<CertificateGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: CertificateGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/origin_tls_client_auth/hostnames/certificates/${certificateId}`, options) as Core.APIPromise<{ result: CertificateGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -108,14 +78,7 @@ export interface Certificate {
   /**
    * Status of the certificate or the association.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * The time when the certificate was uploaded.
@@ -157,14 +120,7 @@ export interface CertificateCreateResponse {
   /**
    * Status of the certificate or the association.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * The time when the certificate was uploaded.
@@ -206,14 +162,7 @@ export interface CertificateDeleteResponse {
   /**
    * Status of the certificate or the association.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * The time when the certificate was uploaded.
@@ -255,14 +204,7 @@ export interface CertificateGetResponse {
   /**
    * Status of the certificate or the association.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * The time when the certificate was uploaded.
@@ -319,4 +261,4 @@ export namespace Certificates {
   export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }
 
-export { AuthenticatedOriginPullsSinglePage };
+export { AuthenticatedOriginPullsSinglePage }

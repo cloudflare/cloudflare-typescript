@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DirectUploadAPI from './direct-upload';
 import * as StreamAPI from './stream';
@@ -10,21 +12,9 @@ export class DirectUpload extends APIResource {
   /**
    * Creates a direct upload that allows video uploads without an API key.
    */
-  create(
-    params: DirectUploadCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DirectUploadCreateResponse> {
+  create(params: DirectUploadCreateParams, options?: Core.RequestOptions): Core.APIPromise<DirectUploadCreateResponse> {
     const { account_id, 'Upload-Creator': uploadCreator, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/stream/direct_upload`, {
-        body,
-        ...options,
-        headers: {
-          ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/stream/direct_upload`, { body, ...options, headers: { ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined), ...options?.headers } }) as Core.APIPromise<{ result: DirectUploadCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

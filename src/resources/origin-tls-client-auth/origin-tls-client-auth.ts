@@ -1,7 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Hostnames } from './hostnames/hostnames';
+import { Settings } from './settings';
+import * as OriginTLSClientAuthAPI from './origin-tls-client-auth';
 import * as SettingsAPI from './settings';
 import * as HostnamesAPI from './hostnames/hostnames';
 import { SinglePage } from '../../pagination';
@@ -17,69 +22,38 @@ export class OriginTLSClientAuth extends APIResource {
    * zone-level authenticated origin pulls by making a PUT call to settings endpoint
    * to see the uploaded certificate in use.
    */
-  create(
-    params: OriginTLSClientAuthCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
+  create(params: OriginTLSClientAuthCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneAuthenticatedOriginPull> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{
-        result: ZoneAuthenticatedOriginPull;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/origin_tls_client_auth`, { body, ...options }) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Certificates
    */
-  list(
-    params: OriginTLSClientAuthListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZoneAuthenticatedOriginPullsSinglePage, ZoneAuthenticatedOriginPull> {
+  list(params: OriginTLSClientAuthListParams, options?: Core.RequestOptions): Core.PagePromise<ZoneAuthenticatedOriginPullsSinglePage, ZoneAuthenticatedOriginPull> {
     const { zone_id } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/origin_tls_client_auth`,
-      ZoneAuthenticatedOriginPullsSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/origin_tls_client_auth`, ZoneAuthenticatedOriginPullsSinglePage, options);
   }
 
   /**
    * Delete Certificate
    */
-  delete(
-    certificateId: string,
-    params: OriginTLSClientAuthDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
+  delete(certificateId: string, params: OriginTLSClientAuthDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneAuthenticatedOriginPull> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/origin_tls_client_auth/${certificateId}`, options) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Certificate Details
    */
-  get(
-    certificateId: string,
-    params: OriginTLSClientAuthGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneAuthenticatedOriginPull> {
+  get(certificateId: string, params: OriginTLSClientAuthGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneAuthenticatedOriginPull> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/origin_tls_client_auth/${certificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/origin_tls_client_auth/${certificateId}`, options) as Core.APIPromise<{ result: ZoneAuthenticatedOriginPull }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZoneAuthenticatedOriginPullsSinglePage extends SinglePage<ZoneAuthenticatedOriginPull> {}
+export class ZoneAuthenticatedOriginPullsSinglePage extends SinglePage<ZoneAuthenticatedOriginPull> {
+}
 
 export interface ZoneAuthenticatedOriginPull {
   /**
@@ -110,14 +84,7 @@ export interface ZoneAuthenticatedOriginPull {
   /**
    * Status of the certificate activation.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * This is the time the certificate was uploaded.

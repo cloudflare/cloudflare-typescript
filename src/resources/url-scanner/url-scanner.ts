@@ -2,7 +2,10 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Scans } from './scans';
+import * as URLScannerAPI from './url-scanner';
 import * as ScansAPI from './scans';
 
 export class URLScanner extends APIResource {
@@ -16,25 +19,13 @@ export class URLScanner extends APIResource {
    * results, unless searching by `scanId`. Please take into account that older scans
    * may be removed from the search index at an unspecified time.
    */
-  scan(
-    accountId: string,
-    query?: URLScannerScanParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLScannerScanResponse>;
-  scan(accountId: string, options?: Core.RequestOptions): Core.APIPromise<URLScannerScanResponse>;
-  scan(
-    accountId: string,
-    query: URLScannerScanParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLScannerScanResponse> {
+  scan(accountId: string, query?: URLScannerScanParams, options?: Core.RequestOptions): Core.APIPromise<URLScannerScanResponse>
+  scan(accountId: string, options?: Core.RequestOptions): Core.APIPromise<URLScannerScanResponse>
+  scan(accountId: string, query: URLScannerScanParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<URLScannerScanResponse> {
     if (isRequestOptions(query)) {
       return this.scan(accountId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan`, { query, ...options }) as Core.APIPromise<{
-        result: URLScannerScanResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${accountId}/urlscanner/scan`, { query, ...options }) as Core.APIPromise<{ result: URLScannerScanResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

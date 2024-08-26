@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as VariantsAPI from './variants';
 
@@ -14,11 +16,7 @@ export class Variants extends APIResource {
    */
   delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariant> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
-        result: CacheVariant;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{ result: CacheVariant }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,11 +28,7 @@ export class Variants extends APIResource {
    */
   edit(params: VariantEditParams, options?: Core.RequestOptions): Core.APIPromise<VariantEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/cache/variants`, { body, ...options }) as Core.APIPromise<{
-        result: VariantEditResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/cache/variants`, { body, ...options }) as Core.APIPromise<{ result: VariantEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -46,11 +40,7 @@ export class Variants extends APIResource {
    */
   get(params: VariantGetParams, options?: Core.RequestOptions): Core.APIPromise<VariantGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
-        result: VariantGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{ result: VariantGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -76,7 +66,7 @@ export interface CacheVariant {
 /**
  * ID of the zone setting.
  */
-export type CacheVariantIdentifier = 'variants';
+export type CacheVariantIdentifier = 'variants'
 
 /**
  * Variant support enables caching variants of images with certain file extensions

@@ -1,69 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AllowedHeaders,
-  AllowedIdPs,
-  AllowedMethods,
-  AllowedOrigins,
-  AppID,
-  Application,
-  ApplicationPolicy,
-  ApplicationSCIMConfig,
-  ApplicationType,
-  CORSHeaders,
-  Decision,
-  OIDCSaaSApp,
-  SaaSAppNameFormat,
-  SaaSAppNameIDFormat,
-  SaaSAppSource,
-  SAMLSaaSApp,
-  SCIMConfigAuthenticationHTTPBasic,
-  SCIMConfigAuthenticationOAuthBearerToken,
-  SCIMConfigAuthenticationOauth2,
-  SCIMConfigMapping,
-  SelfHostedDomains,
-  ApplicationCreateResponse,
-  ApplicationUpdateResponse,
-  ApplicationListResponse,
-  ApplicationDeleteResponse,
-  ApplicationGetResponse,
-  ApplicationRevokeTokensResponse,
-  ApplicationCreateParams,
-  ApplicationUpdateParams,
-  ApplicationListParams,
-  ApplicationDeleteParams,
-  ApplicationGetParams,
-  ApplicationRevokeTokensParams,
-  ApplicationPoliciesSinglePage,
-  ApplicationListResponsesSinglePage,
-  Applications,
-} from './applications';
-export {
-  ApprovalGroup,
-  Policy,
-  PolicyDeleteResponse,
-  PolicyCreateParams,
-  PolicyUpdateParams,
-  PolicyListParams,
-  PolicyDeleteParams,
-  PolicyGetParams,
-  Policies,
-} from './policies';
-export {
-  CA,
-  CACreateResponse,
-  CADeleteResponse,
-  CAGetResponse,
-  CACreateParams,
-  CAListParams,
-  CADeleteParams,
-  CAGetParams,
-  CAsSinglePage,
-  CAs,
-} from './cas';
-export {
-  UserPolicyCheckGeo,
-  UserPolicyCheckListResponse,
-  UserPolicyCheckListParams,
-  UserPolicyChecks,
-} from './user-policy-checks';
+export { AllowedHeaders, AllowedIdPs, AllowedMethods, AllowedOrigins, AppID, Application, ApplicationPolicy, ApplicationSCIMConfig, ApplicationType, CORSHeaders, Decision, OIDCSaaSApp, SaaSAppNameFormat, SaaSAppNameIDFormat, SaaSAppSource, SAMLSaaSApp, SCIMConfigAuthenticationHTTPBasic, SCIMConfigAuthenticationOAuthBearerToken, SCIMConfigAuthenticationOauth2, SCIMConfigMapping, SelfHostedDomains, ApplicationCreateResponse, ApplicationUpdateResponse, ApplicationListResponse, ApplicationDeleteResponse, ApplicationGetResponse, ApplicationRevokeTokensResponse, ApplicationCreateParams, ApplicationUpdateParams, ApplicationListParams, ApplicationDeleteParams, ApplicationGetParams, ApplicationRevokeTokensParams, ApplicationPoliciesSinglePage, ApplicationListResponsesSinglePage, Applications } from './applications';
+export { ApprovalGroup, Policy, PolicyDeleteResponse, PolicyCreateParams, PolicyUpdateParams, PolicyListParams, PolicyDeleteParams, PolicyGetParams, Policies } from './policies';
+export { CA, CACreateResponse, CADeleteResponse, CAGetResponse, CACreateParams, CAListParams, CADeleteParams, CAGetParams, CAsSinglePage, CAs } from './cas';
+export { PolicyTestCreateResponse, PolicyTestGetResponse, PolicyTestCreateParams, PolicyTestGetParams, PolicyTests } from './policy-tests/index';
+export { UserPolicyCheckGeo, UserPolicyCheckListResponse, UserPolicyCheckListParams, UserPolicyChecks } from './user-policy-checks';

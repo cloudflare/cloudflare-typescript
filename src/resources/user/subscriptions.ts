@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SubscriptionsAPI from './subscriptions';
 import { SinglePage } from '../../pagination';
@@ -9,16 +11,8 @@ export class Subscriptions extends APIResource {
   /**
    * Updates a user's subscriptions.
    */
-  update(
-    identifier: string,
-    body: SubscriptionUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionUpdateResponse> {
-    return (
-      this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  update(identifier: string, body: SubscriptionUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SubscriptionUpdateResponse> {
+    return (this._client.put(`/user/subscriptions/${identifier}`, { body, ...options }) as Core.APIPromise<{ result: SubscriptionUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,31 +25,20 @@ export class Subscriptions extends APIResource {
   /**
    * Updates zone subscriptions, either plan or add-ons.
    */
-  edit(
-    identifier: string,
-    body: SubscriptionEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionEditResponse> {
-    return (
-      this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionEditResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  edit(identifier: string, body: SubscriptionEditParams, options?: Core.RequestOptions): Core.APIPromise<SubscriptionEditResponse> {
+    return (this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{ result: SubscriptionEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all of a user's subscriptions.
    */
   get(options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse | null> {
-    return (
-      this._client.get('/user/subscriptions', options) as Core.APIPromise<{
-        result: SubscriptionGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/user/subscriptions', options) as Core.APIPromise<{ result: SubscriptionGetResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SubscriptionsSinglePage extends SinglePage<Subscription> {}
+export class SubscriptionsSinglePage extends SinglePage<Subscription> {
+}
 
 /**
  * The rate plan applied to the subscription.
@@ -269,9 +252,10 @@ export interface SubscriptionZone {
 /**
  * A simple zone object. May have null properties if not a zone subscription.
  */
-export interface SubscriptionZoneParam {}
+export interface SubscriptionZoneParam {
+}
 
-export type SubscriptionUpdateResponse = unknown | string | null;
+export type SubscriptionUpdateResponse = unknown | string | null
 
 export interface SubscriptionDeleteResponse {
   /**
@@ -280,9 +264,9 @@ export interface SubscriptionDeleteResponse {
   subscription_id?: string;
 }
 
-export type SubscriptionEditResponse = unknown | string | null;
+export type SubscriptionEditResponse = unknown | string | null
 
-export type SubscriptionGetResponse = Array<Subscription>;
+export type SubscriptionGetResponse = Array<Subscription>
 
 export interface SubscriptionUpdateParams {
   app?: SubscriptionUpdateParams.App;

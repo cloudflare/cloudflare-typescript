@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { IPs } from './ips';
+import { Networks } from './networks';
 import * as RoutesAPI from './routes';
 import * as IPsAPI from './ips';
 import * as NetworksAPI from './networks';
@@ -16,25 +20,15 @@ export class Routes extends APIResource {
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/teamnet/routes`, { body, ...options }) as Core.APIPromise<{
-        result: Route;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/teamnet/routes`, { body, ...options }) as Core.APIPromise<{ result: Route }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists and filters private network routes in an account.
    */
-  list(
-    params: RouteListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TeamnetsV4PagePaginationArray, Teamnet> {
+  list(params: RouteListParams, options?: Core.RequestOptions): Core.PagePromise<TeamnetsV4PagePaginationArray, Teamnet> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/teamnet/routes`, TeamnetsV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/accounts/${account_id}/teamnet/routes`, TeamnetsV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -42,11 +36,7 @@ export class Routes extends APIResource {
    */
   delete(routeId: string, params: RouteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
-        result: Route;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{ result: Route }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -55,16 +45,20 @@ export class Routes extends APIResource {
    */
   edit(routeId: string, params: RouteEditParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/teamnet/routes/${routeId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Route }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/teamnet/routes/${routeId}`, { body, ...options }) as Core.APIPromise<{ result: Route }>)._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a private network route in an account.
+   */
+  get(routeId: string, params: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
+    const { account_id } = params;
+    return (this._client.get(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{ result: Route }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TeamnetsV4PagePaginationArray extends V4PagePaginationArray<Teamnet> {}
+export class TeamnetsV4PagePaginationArray extends V4PagePaginationArray<Teamnet> {
+}
 
 export interface NetworkRoute {
   /**
@@ -312,6 +306,13 @@ export interface RouteEditParams {
   virtual_network_id?: string;
 }
 
+export interface RouteGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export namespace Routes {
   export import NetworkRoute = RoutesAPI.NetworkRoute;
   export import Route = RoutesAPI.Route;
@@ -321,6 +322,7 @@ export namespace Routes {
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import IPs = IPsAPI.IPs;
   export import IPGetParams = IPsAPI.IPGetParams;
   export import Networks = NetworksAPI.Networks;

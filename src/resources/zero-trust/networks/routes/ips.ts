@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as IPsAPI from './ips';
 import * as RoutesAPI from './routes';
@@ -11,12 +13,7 @@ export class IPs extends APIResource {
    */
   get(ip: string, params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Teamnet> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/teamnet/routes/ip/${ip}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.Teamnet }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/teamnet/routes/ip/${ip}`, { query, ...options }) as Core.APIPromise<{ result: RoutesAPI.Teamnet }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

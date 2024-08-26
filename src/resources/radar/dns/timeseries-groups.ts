@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 
@@ -9,226 +10,122 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Percentage breakdown of DNS queries/responses per Cache Hit status over time.
    */
-  cacheHit(
-    query?: TimeseriesGroupCacheHitParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupCacheHitResponse>;
-  cacheHit(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupCacheHitResponse>;
-  cacheHit(
-    query: TimeseriesGroupCacheHitParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupCacheHitResponse> {
+  cacheHit(query?: TimeseriesGroupCacheHitParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupCacheHitResponse>
+  cacheHit(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupCacheHitResponse>
+  cacheHit(query: TimeseriesGroupCacheHitParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupCacheHitResponse> {
     if (isRequestOptions(query)) {
       return this.cacheHit({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/cache_hit', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupCacheHitResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/cache_hit', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupCacheHitResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS responses by DNSSEC support over time.
    */
-  dnssec(
-    query?: TimeseriesGroupDNSSECParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDNSSECResponse>;
-  dnssec(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse>;
-  dnssec(
-    query: TimeseriesGroupDNSSECParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDNSSECResponse> {
+  dnssec(query?: TimeseriesGroupDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse>
+  dnssec(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse>
+  dnssec(query: TimeseriesGroupDNSSECParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse> {
     if (isRequestOptions(query)) {
       return this.dnssec({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/dnssec', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupDNSSECResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/dnssec', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDNSSECResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries by DNSSEC awareness over time.
    */
-  dnssecAware(
-    query?: TimeseriesGroupDNSSECAwareParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDNSSECAwareResponse>;
-  dnssecAware(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECAwareResponse>;
-  dnssecAware(
-    query: TimeseriesGroupDNSSECAwareParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDNSSECAwareResponse> {
+  dnssecAware(query?: TimeseriesGroupDNSSECAwareParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECAwareResponse>
+  dnssecAware(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECAwareResponse>
+  dnssecAware(query: TimeseriesGroupDNSSECAwareParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECAwareResponse> {
     if (isRequestOptions(query)) {
       return this.dnssecAware({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/dnssec_aware', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDNSSECAwareResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/dnssec_aware', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDNSSECAwareResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries/responses per end-to-end security status
    * over time.
    */
-  dnssecE2E(
-    query?: TimeseriesGroupDNSSECE2EParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDNSSECE2EResponse>;
-  dnssecE2E(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECE2EResponse>;
-  dnssecE2E(
-    query: TimeseriesGroupDNSSECE2EParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDNSSECE2EResponse> {
+  dnssecE2E(query?: TimeseriesGroupDNSSECE2EParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECE2EResponse>
+  dnssecE2E(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECE2EResponse>
+  dnssecE2E(query: TimeseriesGroupDNSSECE2EParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECE2EResponse> {
     if (isRequestOptions(query)) {
       return this.dnssecE2E({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/dnssec_e2e', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupDNSSECE2EResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/dnssec_e2e', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDNSSECE2EResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries per IP version used over time.
    */
-  ipVersion(
-    query?: TimeseriesGroupIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(
-    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
+  ipVersion(query?: TimeseriesGroupIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupIPVersionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries with/without matching answers over time.
    */
-  matchingAnswer(
-    query?: TimeseriesGroupMatchingAnswerParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMatchingAnswerResponse>;
-  matchingAnswer(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMatchingAnswerResponse>;
-  matchingAnswer(
-    query: TimeseriesGroupMatchingAnswerParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMatchingAnswerResponse> {
+  matchingAnswer(query?: TimeseriesGroupMatchingAnswerParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMatchingAnswerResponse>
+  matchingAnswer(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMatchingAnswerResponse>
+  matchingAnswer(query: TimeseriesGroupMatchingAnswerParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMatchingAnswerResponse> {
     if (isRequestOptions(query)) {
       return this.matchingAnswer({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/matching_answer', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupMatchingAnswerResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/matching_answer', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupMatchingAnswerResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries per DNS transport protocol used over time.
    */
-  protocol(
-    query?: TimeseriesGroupProtocolParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupProtocolResponse>;
-  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>;
-  protocol(
-    query: TimeseriesGroupProtocolParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupProtocolResponse> {
+  protocol(query?: TimeseriesGroupProtocolParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>
+  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>
+  protocol(query: TimeseriesGroupProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.protocol({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/protocol', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupProtocolResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/protocol', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupProtocolResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries per query type over time.
    */
-  queryType(
-    query?: TimeseriesGroupQueryTypeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupQueryTypeResponse>;
-  queryType(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse>;
-  queryType(
-    query: TimeseriesGroupQueryTypeParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupQueryTypeResponse> {
+  queryType(query?: TimeseriesGroupQueryTypeParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse>
+  queryType(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse>
+  queryType(query: TimeseriesGroupQueryTypeParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse> {
     if (isRequestOptions(query)) {
       return this.queryType({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/query_type', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupQueryTypeResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/query_type', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupQueryTypeResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS responses per response code over time.
    */
-  responseCodes(
-    query?: TimeseriesGroupResponseCodesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupResponseCodesResponse>;
-  responseCodes(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse>;
-  responseCodes(
-    query: TimeseriesGroupResponseCodesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupResponseCodesResponse> {
+  responseCodes(query?: TimeseriesGroupResponseCodesParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse>
+  responseCodes(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse>
+  responseCodes(query: TimeseriesGroupResponseCodesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse> {
     if (isRequestOptions(query)) {
       return this.responseCodes({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/response_codes', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupResponseCodesResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/response_codes', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupResponseCodesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries per minimum answer TTL over time.
    */
-  responseTTL(
-    query?: TimeseriesGroupResponseTTLParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupResponseTTLResponse>;
-  responseTTL(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseTTLResponse>;
-  responseTTL(
-    query: TimeseriesGroupResponseTTLParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupResponseTTLResponse> {
+  responseTTL(query?: TimeseriesGroupResponseTTLParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseTTLResponse>
+  responseTTL(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseTTLResponse>
+  responseTTL(query: TimeseriesGroupResponseTTLParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseTTLResponse> {
     if (isRequestOptions(query)) {
       return this.responseTTL({}, query);
     }
-    return (
-      this._client.get('/radar/dns/timeseries_groups/response_ttl', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupResponseTTLResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/dns/timeseries_groups/response_ttl', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupResponseTTLResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

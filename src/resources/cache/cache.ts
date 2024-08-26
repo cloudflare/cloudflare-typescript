@@ -1,7 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { CacheReserveResource } from './cache-reserve';
+import { SmartTieredCache } from './smart-tiered-cache';
+import { Variants } from './variants';
+import { RegionalTieredCacheResource } from './regional-tiered-cache';
+import * as CacheAPI from './cache';
 import * as CacheReserveAPI from './cache-reserve';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 import * as SmartTieredCacheAPI from './smart-tiered-cache';
@@ -9,12 +16,9 @@ import * as VariantsAPI from './variants';
 
 export class Cache extends APIResource {
   cacheReserve: CacheReserveAPI.CacheReserveResource = new CacheReserveAPI.CacheReserveResource(this._client);
-  smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(
-    this._client,
-  );
+  smartTieredCache: SmartTieredCacheAPI.SmartTieredCache = new SmartTieredCacheAPI.SmartTieredCache(this._client);
   variants: VariantsAPI.Variants = new VariantsAPI.Variants(this._client);
-  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource =
-    new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
+  regionalTieredCache: RegionalTieredCacheAPI.RegionalTieredCacheResource = new RegionalTieredCacheAPI.RegionalTieredCacheResource(this._client);
 
   /**
    * ### Purge All Cached Content
@@ -86,11 +90,7 @@ export class Cache extends APIResource {
    */
   purge(params: CachePurgeParams, options?: Core.RequestOptions): Core.APIPromise<CachePurgeResponse | null> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/purge_cache`, { body, ...options }) as Core.APIPromise<{
-        result: CachePurgeResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/purge_cache`, { body, ...options }) as Core.APIPromise<{ result: CachePurgeResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -101,13 +101,7 @@ export interface CachePurgeResponse {
   id: string;
 }
 
-export type CachePurgeParams =
-  | CachePurgeParams.CachePurgeFlexPurgeByTags
-  | CachePurgeParams.CachePurgeFlexPurgeByHostnames
-  | CachePurgeParams.CachePurgeFlexPurgeByPrefixes
-  | CachePurgeParams.CachePurgeEverything
-  | CachePurgeParams.CachePurgeSingleFile
-  | CachePurgeParams.CachePurgeSingleFileWithURLAndHeaders;
+export type CachePurgeParams = CachePurgeParams.CachePurgeFlexPurgeByTags | CachePurgeParams.CachePurgeFlexPurgeByHostnames | CachePurgeParams.CachePurgeFlexPurgeByPrefixes | CachePurgeParams.CachePurgeEverything | CachePurgeParams.CachePurgeSingleFile | CachePurgeParams.CachePurgeSingleFileWithURLAndHeaders
 
 export namespace CachePurgeParams {
   export interface CachePurgeFlexPurgeByTags {

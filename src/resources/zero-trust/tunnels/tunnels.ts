@@ -1,7 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Configurations } from './configurations';
+import { Connections } from './connections';
+import { Token } from './token';
+import { Connectors } from './connectors';
+import { Management } from './management';
 import * as TunnelsAPI from './tunnels';
 import * as Shared from '../../shared';
 import * as ConfigurationsAPI from './configurations';
@@ -23,79 +30,44 @@ export class Tunnels extends APIResource {
    */
   create(params: TunnelCreateParams, options?: Core.RequestOptions): Core.APIPromise<TunnelCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/cfd_tunnel`, { body, ...options }) as Core.APIPromise<{
-        result: TunnelCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/cfd_tunnel`, { body, ...options }) as Core.APIPromise<{ result: TunnelCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists and filters Cloudflare Tunnels in an account.
    */
-  list(
-    params: TunnelListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse> {
+  list(params: TunnelListParams, options?: Core.RequestOptions): Core.PagePromise<TunnelListResponsesV4PagePaginationArray, TunnelListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/cfd_tunnel`,
-      TunnelListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/cfd_tunnel`, TunnelListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Deletes a Cloudflare Tunnel from an account.
    */
-  delete(
-    tunnelId: string,
-    params: TunnelDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelDeleteResponse> {
+  delete(tunnelId: string, params: TunnelDeleteParams, options?: Core.RequestOptions): Core.APIPromise<TunnelDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{
-        result: TunnelDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{ result: TunnelDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an existing Cloudflare Tunnel.
    */
-  edit(
-    tunnelId: string,
-    params: TunnelEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelEditResponse> {
+  edit(tunnelId: string, params: TunnelEditParams, options?: Core.RequestOptions): Core.APIPromise<TunnelEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TunnelEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, { body, ...options }) as Core.APIPromise<{ result: TunnelEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Cloudflare Tunnel.
    */
-  get(
-    tunnelId: string,
-    params: TunnelGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TunnelGetResponse> {
+  get(tunnelId: string, params: TunnelGetParams, options?: Core.RequestOptions): Core.APIPromise<TunnelGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{
-        result: TunnelGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/cfd_tunnel/${tunnelId}`, options) as Core.APIPromise<{ result: TunnelGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TunnelListResponsesV4PagePaginationArray extends V4PagePaginationArray<TunnelListResponse> {}
+export class TunnelListResponsesV4PagePaginationArray extends V4PagePaginationArray<TunnelListResponse> {
+}
 
 export interface Connection {
   /**
@@ -120,7 +92,7 @@ export interface Connection {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelCreateResponse = Shared.CloudflareTunnel | TunnelCreateResponse.TunnelWARPConnectorTunnel;
+export type TunnelCreateResponse = Shared.CloudflareTunnel | TunnelCreateResponse.TunnelWARPConnectorTunnel
 
 export namespace TunnelCreateResponse {
   /**
@@ -240,7 +212,7 @@ export namespace TunnelCreateResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelListResponse = Shared.CloudflareTunnel | TunnelListResponse.TunnelWARPConnectorTunnel;
+export type TunnelListResponse = Shared.CloudflareTunnel | TunnelListResponse.TunnelWARPConnectorTunnel
 
 export namespace TunnelListResponse {
   /**
@@ -360,7 +332,7 @@ export namespace TunnelListResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelDeleteResponse = Shared.CloudflareTunnel | TunnelDeleteResponse.TunnelWARPConnectorTunnel;
+export type TunnelDeleteResponse = Shared.CloudflareTunnel | TunnelDeleteResponse.TunnelWARPConnectorTunnel
 
 export namespace TunnelDeleteResponse {
   /**
@@ -480,7 +452,7 @@ export namespace TunnelDeleteResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelEditResponse = Shared.CloudflareTunnel | TunnelEditResponse.TunnelWARPConnectorTunnel;
+export type TunnelEditResponse = Shared.CloudflareTunnel | TunnelEditResponse.TunnelWARPConnectorTunnel
 
 export namespace TunnelEditResponse {
   /**
@@ -600,7 +572,7 @@ export namespace TunnelEditResponse {
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
  */
-export type TunnelGetResponse = Shared.CloudflareTunnel | TunnelGetResponse.TunnelWARPConnectorTunnel;
+export type TunnelGetResponse = Shared.CloudflareTunnel | TunnelGetResponse.TunnelWARPConnectorTunnel
 
 export namespace TunnelGetResponse {
   /**

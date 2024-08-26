@@ -1,8 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Models } from './models/models';
 import * as AIAPI from './ai';
+import { type Uploadable } from '../../../core';
 import * as ModelsAPI from './models/models';
 
 export class AI extends APIResource {
@@ -21,26 +25,11 @@ export class AI extends APIResource {
    */
   run(modelName: string, params: AIRunParams, options?: Core.RequestOptions): Core.APIPromise<AIRunResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: AIRunResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/ai/run/${modelName}`, { body, ...options }) as Core.APIPromise<{ result: AIRunResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AIRunResponse =
-  | Array<AIRunResponse.TextClassification>
-  | Core.Uploadable
-  | AIRunResponse.TextEmbeddings
-  | AIRunResponse.AutomaticSpeechRecognition
-  | Array<AIRunResponse.ImageClassification>
-  | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.UnionMember6
-  | AIRunResponse.Translation
-  | AIRunResponse.Summarization
-  | AIRunResponse.ImageToText;
+export type AIRunResponse = Array<AIRunResponse.TextClassification> | Core.Uploadable | AIRunResponse.TextEmbeddings | AIRunResponse.AutomaticSpeechRecognition | Array<AIRunResponse.ImageClassification> | Array<AIRunResponse.ObjectDetection> | AIRunResponse.UnionMember6 | AIRunResponse.Translation | AIRunResponse.Summarization | AIRunResponse.ImageToText
 
 export namespace AIRunResponse {
   export interface TextClassification {
@@ -128,18 +117,7 @@ export namespace AIRunResponse {
   }
 }
 
-export type AIRunParams =
-  | AIRunParams.TextClassification
-  | AIRunParams.TextToImage
-  | AIRunParams.TextEmbeddings
-  | AIRunParams.AutomaticSpeechRecognition
-  | AIRunParams.ImageClassification
-  | AIRunParams.ObjectDetection
-  | AIRunParams.Variant6
-  | AIRunParams.Variant7
-  | AIRunParams.Translation
-  | AIRunParams.Summarization
-  | AIRunParams.ImageToText;
+export type AIRunParams = AIRunParams.TextClassification | AIRunParams.TextToImage | AIRunParams.TextEmbeddings | AIRunParams.AutomaticSpeechRecognition | AIRunParams.ImageClassification | AIRunParams.ObjectDetection | AIRunParams.Variant6 | AIRunParams.Variant7 | AIRunParams.Translation | AIRunParams.Summarization | AIRunParams.ImageToText
 
 export namespace AIRunParams {
   export interface TextClassification {

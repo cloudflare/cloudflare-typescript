@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as CatchAllsAPI from './catch-alls';
 
@@ -9,28 +11,15 @@ export class CatchAlls extends APIResource {
    * Enable or disable catch-all routing rule, or change action to forward to
    * specific destination address.
    */
-  update(
-    zoneIdentifier: string,
-    body: CatchAllUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CatchAllUpdateResponse> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CatchAllUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+  update(zoneIdentifier: string, body: CatchAllUpdateParams, options?: Core.RequestOptions): Core.APIPromise<CatchAllUpdateResponse> {
+    return (this._client.put(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, { body, ...options }) as Core.APIPromise<{ result: CatchAllUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information on the default catch-all routing rule.
    */
   get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<CatchAllGetResponse> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, options) as Core.APIPromise<{
-        result: CatchAllGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zoneIdentifier}/email/routing/rules/catch_all`, options) as Core.APIPromise<{ result: CatchAllGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

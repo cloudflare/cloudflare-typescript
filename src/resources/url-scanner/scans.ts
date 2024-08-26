@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ScansAPI from './scans';
 import { type Response as FetchResponse } from '../../_shims/index';
@@ -12,43 +13,20 @@ export class Scans extends APIResource {
    * and custom headers. Check limits at
    * https://developers.cloudflare.com/security-center/investigate/scan-limits/.
    */
-  create(
-    accountId: string,
-    body: ScanCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanCreateResponse> {
-    return (
-      this._client.post(`/accounts/${accountId}/urlscanner/scan`, { body, ...options }) as Core.APIPromise<{
-        result: ScanCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  create(accountId: string, body: ScanCreateParams, options?: Core.RequestOptions): Core.APIPromise<ScanCreateResponse> {
+    return (this._client.post(`/accounts/${accountId}/urlscanner/scan`, { body, ...options }) as Core.APIPromise<{ result: ScanCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get URL scan by uuid
    */
-  get(
-    accountId: string,
-    scanId: string,
-    query?: ScanGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanGetResponse>;
-  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>;
-  get(
-    accountId: string,
-    scanId: string,
-    query: ScanGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScanGetResponse> {
+  get(accountId: string, scanId: string, query?: ScanGetParams, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>
+  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse>
+  get(accountId: string, scanId: string, query: ScanGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ScanGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(accountId, scanId, {}, query);
     }
-    return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: ScanGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}`, { query, ...options }) as Core.APIPromise<{ result: ScanGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -56,41 +34,19 @@ export class Scans extends APIResource {
    * http://www.softwareishard.com/blog/har-12-spec/.
    */
   har(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHarResponse> {
-    return (
-      this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/har`, options) as Core.APIPromise<{
-        result: ScanHarResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/har`, options) as Core.APIPromise<{ result: ScanHarResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get scan's screenshot by resolution (desktop/mobile/tablet).
    */
-  screenshot(
-    accountId: string,
-    scanId: string,
-    query?: ScanScreenshotParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FetchResponse>;
-  screenshot(
-    accountId: string,
-    scanId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FetchResponse>;
-  screenshot(
-    accountId: string,
-    scanId: string,
-    query: ScanScreenshotParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FetchResponse> {
+  screenshot(accountId: string, scanId: string, query?: ScanScreenshotParams, options?: Core.RequestOptions): Core.APIPromise<FetchResponse>
+  screenshot(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<FetchResponse>
+  screenshot(accountId: string, scanId: string, query: ScanScreenshotParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<FetchResponse> {
     if (isRequestOptions(query)) {
       return this.screenshot(accountId, scanId, {}, query);
     }
-    return this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/screenshot`, {
-      query,
-      ...options,
-      __binaryResponse: true,
-    });
+    return this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/screenshot`, { query, ...options, __binaryResponse: true });
   }
 }
 

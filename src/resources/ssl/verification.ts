@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as VerificationAPI from './verification';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
@@ -12,33 +14,17 @@ export class VerificationResource extends APIResource {
    * If a validation method is provided, the validation will be immediately attempted
    * using that method.
    */
-  edit(
-    certificatePackId: string,
-    params: VerificationEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VerificationEditResponse> {
+  edit(certificatePackId: string, params: VerificationEditParams, options?: Core.RequestOptions): Core.APIPromise<VerificationEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/ssl/verification/${certificatePackId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: VerificationEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/ssl/verification/${certificatePackId}`, { body, ...options }) as Core.APIPromise<{ result: VerificationEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get SSL Verification Info for a Zone.
    */
-  get(
-    params: VerificationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VerificationGetResponse> {
+  get(params: VerificationGetParams, options?: Core.RequestOptions): Core.APIPromise<VerificationGetResponse> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/ssl/verification`, { query, ...options }) as Core.APIPromise<{
-        result: VerificationGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/ssl/verification`, { query, ...options }) as Core.APIPromise<{ result: VerificationGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -46,14 +32,7 @@ export interface Verification {
   /**
    * Current status of certificate.
    */
-  certificate_status:
-    | 'initializing'
-    | 'authorizing'
-    | 'active'
-    | 'expired'
-    | 'issuing'
-    | 'timing_out'
-    | 'pending_deployment';
+  certificate_status: 'initializing' | 'authorizing' | 'active' | 'expired' | 'issuing' | 'timing_out' | 'pending_deployment';
 
   /**
    * Certificate Authority is manually reviewing the order.
@@ -121,7 +100,7 @@ export interface VerificationEditResponse {
   validation_method?: 'http' | 'cname' | 'txt' | 'email';
 }
 
-export type VerificationGetResponse = Array<Verification>;
+export type VerificationGetResponse = Array<Verification>
 
 export interface VerificationEditParams {
   /**

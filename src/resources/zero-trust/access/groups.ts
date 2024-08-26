@@ -2,8 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
+import { CloudflareError } from '../../../error'
 import * as GroupsAPI from './groups';
 import * as AccessAPI from './access';
 import { SinglePage } from '../../../pagination';
@@ -20,32 +21,20 @@ export class Groups extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGroup }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/groups`, { body, ...options }) as Core.APIPromise<{ result: ZeroTrustGroup }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured Access group.
    */
-  update(
-    groupId: string,
-    params: GroupUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGroup> {
+  update(groupId: string, params: GroupUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -53,36 +42,22 @@ export class Groups extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ZeroTrustGroup }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`, { body, ...options }) as Core.APIPromise<{ result: ZeroTrustGroup }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all Access groups.
    */
-  list(
-    params?: GroupListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup>;
-  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup>;
-  list(
-    params: GroupListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup> {
+  list(params?: GroupListParams, options?: Core.RequestOptions): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup>
+  list(options?: Core.RequestOptions): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup>
+  list(params: GroupListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<ZeroTrustGroupsSinglePage, ZeroTrustGroup> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -93,37 +68,22 @@ export class Groups extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/access/groups`,
-      ZeroTrustGroupsSinglePage,
-      options,
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/access/groups`, ZeroTrustGroupsSinglePage, options);
   }
 
   /**
    * Deletes an Access group.
    */
-  delete(
-    groupId: string,
-    params?: GroupDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupDeleteResponse>;
-  delete(groupId: string, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse>;
-  delete(
-    groupId: string,
-    params: GroupDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GroupDeleteResponse> {
+  delete(groupId: string, params?: GroupDeleteParams, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse>
+  delete(groupId: string, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse>
+  delete(groupId: string, params: GroupDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<GroupDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(groupId, {}, params);
     }
@@ -134,38 +94,22 @@ export class Groups extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`,
-        options,
-      ) as Core.APIPromise<{ result: GroupDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`, options) as Core.APIPromise<{ result: GroupDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Access group.
    */
-  get(
-    groupId: string,
-    params?: GroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGroup>;
-  get(groupId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>;
-  get(
-    groupId: string,
-    params: GroupGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZeroTrustGroup> {
+  get(groupId: string, params?: GroupGetParams, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>
+  get(groupId: string, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup>
+  get(groupId: string, params: GroupGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ZeroTrustGroup> {
     if (isRequestOptions(params)) {
       return this.get(groupId, {}, params);
     }
@@ -176,26 +120,19 @@ export class Groups extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`,
-        options,
-      ) as Core.APIPromise<{ result: ZeroTrustGroup }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/groups/${groupId}`, options) as Core.APIPromise<{ result: ZeroTrustGroup }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ZeroTrustGroupsSinglePage extends SinglePage<ZeroTrustGroup> {}
+export class ZeroTrustGroupsSinglePage extends SinglePage<ZeroTrustGroup> {
+}
 
 export interface ZeroTrustGroup {
   /**

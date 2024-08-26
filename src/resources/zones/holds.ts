@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as HoldsAPI from './holds';
 
@@ -11,12 +13,7 @@ export class Holds extends APIResource {
    */
   create(params: HoldCreateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, include_subdomains } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/hold`, {
-        query: { include_subdomains },
-        ...options,
-      }) as Core.APIPromise<{ result: ZoneHold }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/hold`, { query: { include_subdomains }, ...options }) as Core.APIPromise<{ result: ZoneHold }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -25,12 +22,7 @@ export class Holds extends APIResource {
    */
   delete(params: HoldDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id, hold_after } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/hold`, {
-        query: { hold_after },
-        ...options,
-      }) as Core.APIPromise<{ result: ZoneHold }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/hold`, { query: { hold_after }, ...options }) as Core.APIPromise<{ result: ZoneHold }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -39,9 +31,7 @@ export class Holds extends APIResource {
    */
   get(params: HoldGetParams, options?: Core.RequestOptions): Core.APIPromise<ZoneHold> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/hold`, options) as Core.APIPromise<{ result: ZoneHold }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/hold`, options) as Core.APIPromise<{ result: ZoneHold }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

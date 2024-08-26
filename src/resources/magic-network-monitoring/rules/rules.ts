@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Advertisements } from './advertisements';
 import * as RulesAPI from './rules';
 import * as AdvertisementsAPI from './advertisements';
 import { SinglePage } from '../../../pagination';
@@ -13,99 +16,54 @@ export class Rules extends APIResource {
    * Create network monitoring rules for account. Currently only supports creating a
    * single rule per API request.
    */
-  create(
-    params: RuleCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update network monitoring rules for account.
    */
-  update(
-    params: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists network monitoring rules for account.
    */
-  list(
-    params: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MagicNetworkMonitoringRulesSinglePage, MagicNetworkMonitoringRule | null> {
+  list(params: RuleListParams, options?: Core.RequestOptions): Core.PagePromise<MagicNetworkMonitoringRulesSinglePage, MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/mnm/rules`,
-      MagicNetworkMonitoringRulesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/mnm/rules`, MagicNetworkMonitoringRulesSinglePage, options);
   }
 
   /**
    * Delete a network monitoring rule for account.
    */
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  delete(ruleId: string, params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a network monitoring rule for account.
    */
-  edit(
-    ruleId: string,
-    params: RuleEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  edit(ruleId: string, params: RuleEditParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id, body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, { body: body, ...options }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List a single network monitoring rule for account.
    */
-  get(
-    ruleId: string,
-    params: RuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<MagicNetworkMonitoringRule | null> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule | null> {}
+export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule | null> {
+}
 
 export interface MagicNetworkMonitoringRule {
   /**
