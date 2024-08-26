@@ -4056,23 +4056,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/default-policy/default-policy.ts">DefaultPolicyGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default-policy.ts">DefaultPolicyGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.defaultPolicy.<a href="./src/resources/zero-trust/devices/policies/default-policy/default-policy.ts">get</a>({ ...params }) -> DefaultPolicyGetResponse | null</code>
-
-##### Certificates
-
-Types:
-
-- <code><a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">CertificateListResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">CertificateEditResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.defaultPolicy.certificates.<a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">list</a>(zoneTag) -> CertificateListResponse</code>
-- <code title="patch /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.defaultPolicy.certificates.<a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">edit</a>(zoneTag, { ...params }) -> CertificateEditResponse</code>
+- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.defaultPolicy.<a href="./src/resources/zero-trust/devices/policies/default-policy.ts">get</a>({ ...params }) -> DefaultPolicyGetResponse | null</code>
 
 #### Excludes
 
