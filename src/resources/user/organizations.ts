@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as OrganizationsAPI from './organizations';
 import * as Shared from '../shared';
@@ -12,22 +13,13 @@ export class Organizations extends APIResource {
   /**
    * Lists organizations the user is associated with.
    */
-  list(
-    query?: OrganizationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization>;
-  list(options?: Core.RequestOptions): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization>;
-  list(
-    query: OrganizationListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization> {
+  list(query?: OrganizationListParams, options?: Core.RequestOptions): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization>
+  list(options?: Core.RequestOptions): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization>
+  list(query: OrganizationListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<OrganizationsV4PagePaginationArray, Organization> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/organizations', OrganizationsV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList('/user/organizations', OrganizationsV4PagePaginationArray, { query, ...options });
   }
 
   /**
@@ -41,15 +33,12 @@ export class Organizations extends APIResource {
    * Gets a specific organization the user is associated with.
    */
   get(organizationId: string, options?: Core.RequestOptions): Core.APIPromise<OrganizationGetResponse> {
-    return (
-      this._client.get(`/user/organizations/${organizationId}`, options) as Core.APIPromise<{
-        result: OrganizationGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/user/organizations/${organizationId}`, options) as Core.APIPromise<{ result: OrganizationGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class OrganizationsV4PagePaginationArray extends V4PagePaginationArray<Organization> {}
+export class OrganizationsV4PagePaginationArray extends V4PagePaginationArray<Organization> {
+}
 
 export interface Organization {
   /**
@@ -85,7 +74,7 @@ export interface OrganizationDeleteResponse {
   id?: string;
 }
 
-export type OrganizationGetResponse = unknown;
+export type OrganizationGetResponse = unknown
 
 export interface OrganizationListParams extends V4PagePaginationArrayParams {
   /**

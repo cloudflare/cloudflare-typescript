@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SettingsAPI from './settings';
 import * as ScriptsAPI from './scripts';
@@ -12,18 +14,9 @@ export class Settings extends APIResource {
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Includes Logpush and Tail Consumers.
    */
-  edit(
-    scriptName: string,
-    params: SettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
+  edit(scriptName: string, params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<ScriptsAPI.ScriptSetting> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, { body, ...options }) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,18 +24,9 @@ export class Settings extends APIResource {
    * [Worker Versions](https://developers.cloudflare.com/api/operations/worker-versions-list-versions).
    * Includes Logpush and Tail Consumers.
    */
-  get(
-    scriptName: string,
-    params: SettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.ScriptSetting> {
+  get(scriptName: string, params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<ScriptsAPI.ScriptSetting> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`,
-        options,
-      ) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/script-settings`, options) as Core.APIPromise<{ result: ScriptsAPI.ScriptSetting }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

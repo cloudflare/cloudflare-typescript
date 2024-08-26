@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SummaryAPI from './summary';
 
@@ -9,127 +10,73 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of DNS queries to AS112 by DNSSEC support.
    */
-  dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
-  dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
-  dnssec(
-    query: SummaryDNSSECParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryDNSSECResponse> {
+  dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>
+  dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>
+  dnssec(query: SummaryDNSSECParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse> {
     if (isRequestOptions(query)) {
       return this.dnssec({}, query);
     }
-    return (
-      this._client.get('/radar/as112/summary/dnssec', { query, ...options }) as Core.APIPromise<{
-        result: SummaryDNSSECResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/summary/dnssec', { query, ...options }) as Core.APIPromise<{ result: SummaryDNSSECResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries, to AS112, by EDNS support.
    */
-  edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
-  edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
-  edns(
-    query: SummaryEdnsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryEdnsResponse> {
+  edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>
+  edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>
+  edns(query: SummaryEdnsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse> {
     if (isRequestOptions(query)) {
       return this.edns({}, query);
     }
-    return (
-      this._client.get('/radar/as112/summary/edns', { query, ...options }) as Core.APIPromise<{
-        result: SummaryEdnsResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/summary/edns', { query, ...options }) as Core.APIPromise<{ result: SummaryEdnsResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries to AS112 per IP Version.
    */
-  ipVersion(
-    query?: SummaryIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>;
-  ipVersion(
-    query: SummaryIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryIPVersionResponse> {
+  ipVersion(query?: SummaryIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
+  ipVersion(query: SummaryIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/as112/summary/ip_version', { query, ...options }) as Core.APIPromise<{
-        result: SummaryIPVersionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/summary/ip_version', { query, ...options }) as Core.APIPromise<{ result: SummaryIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries to AS112 per protocol.
    */
-  protocol(
-    query?: SummaryProtocolParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryProtocolResponse>;
-  protocol(options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>;
-  protocol(
-    query: SummaryProtocolParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryProtocolResponse> {
+  protocol(query?: SummaryProtocolParams, options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>
+  protocol(options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>
+  protocol(query: SummaryProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.protocol({}, query);
     }
-    return (
-      this._client.get('/radar/as112/summary/protocol', { query, ...options }) as Core.APIPromise<{
-        result: SummaryProtocolResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/summary/protocol', { query, ...options }) as Core.APIPromise<{ result: SummaryProtocolResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries to AS112 by Query Type.
    */
-  queryType(
-    query?: SummaryQueryTypeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryQueryTypeResponse>;
-  queryType(options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse>;
-  queryType(
-    query: SummaryQueryTypeParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryQueryTypeResponse> {
+  queryType(query?: SummaryQueryTypeParams, options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse>
+  queryType(options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse>
+  queryType(query: SummaryQueryTypeParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse> {
     if (isRequestOptions(query)) {
       return this.queryType({}, query);
     }
-    return (
-      this._client.get('/radar/as112/summary/query_type', { query, ...options }) as Core.APIPromise<{
-        result: SummaryQueryTypeResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/summary/query_type', { query, ...options }) as Core.APIPromise<{ result: SummaryQueryTypeResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of AS112 dns requests classified per Response Codes.
    */
-  responseCodes(
-    query?: SummaryResponseCodesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryResponseCodesResponse>;
-  responseCodes(options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse>;
-  responseCodes(
-    query: SummaryResponseCodesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryResponseCodesResponse> {
+  responseCodes(query?: SummaryResponseCodesParams, options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse>
+  responseCodes(options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse>
+  responseCodes(query: SummaryResponseCodesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse> {
     if (isRequestOptions(query)) {
       return this.responseCodes({}, query);
     }
-    return (
-      this._client.get('/radar/as112/summary/response_codes', { query, ...options }) as Core.APIPromise<{
-        result: SummaryResponseCodesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/summary/response_codes', { query, ...options }) as Core.APIPromise<{ result: SummaryResponseCodesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

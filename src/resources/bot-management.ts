@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as BotManagementAPI from './bot-management';
 
 export class BotManagement extends APIResource {
   /**
@@ -16,31 +19,17 @@ export class BotManagement extends APIResource {
    * See [Bot Plans](https://developers.cloudflare.com/bots/plans/) for more
    * information on the different plans
    */
-  update(
-    params: BotManagementUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BotManagementUpdateResponse> {
+  update(params: BotManagementUpdateParams, options?: Core.RequestOptions): Core.APIPromise<BotManagementUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/bot_management`, { body, ...options }) as Core.APIPromise<{
-        result: BotManagementUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/bot_management`, { body, ...options }) as Core.APIPromise<{ result: BotManagementUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieve a zone's Bot Management Config
    */
-  get(
-    params: BotManagementGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BotManagementGetResponse> {
+  get(params: BotManagementGetParams, options?: Core.RequestOptions): Core.APIPromise<BotManagementGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/bot_management`, options) as Core.APIPromise<{
-        result: BotManagementGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/bot_management`, options) as Core.APIPromise<{ result: BotManagementGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -167,23 +156,11 @@ export interface SuperBotFightModeLikelyConfiguration {
   using_latest_model?: boolean;
 }
 
-export type BotManagementUpdateResponse =
-  | BotFightModeConfiguration
-  | SuperBotFightModeDefinitelyConfiguration
-  | SuperBotFightModeLikelyConfiguration
-  | SubscriptionConfiguration;
+export type BotManagementUpdateResponse = BotFightModeConfiguration | SuperBotFightModeDefinitelyConfiguration | SuperBotFightModeLikelyConfiguration | SubscriptionConfiguration
 
-export type BotManagementGetResponse =
-  | BotFightModeConfiguration
-  | SuperBotFightModeDefinitelyConfiguration
-  | SuperBotFightModeLikelyConfiguration
-  | SubscriptionConfiguration;
+export type BotManagementGetResponse = BotFightModeConfiguration | SuperBotFightModeDefinitelyConfiguration | SuperBotFightModeLikelyConfiguration | SubscriptionConfiguration
 
-export type BotManagementUpdateParams =
-  | BotManagementUpdateParams.BotFightModeConfiguration
-  | BotManagementUpdateParams.SuperBotFightModeDefinitelyConfiguration
-  | BotManagementUpdateParams.SuperBotFightModeLikelyConfiguration
-  | BotManagementUpdateParams.SubscriptionConfiguration;
+export type BotManagementUpdateParams = BotManagementUpdateParams.BotFightModeConfiguration | BotManagementUpdateParams.SuperBotFightModeDefinitelyConfiguration | BotManagementUpdateParams.SuperBotFightModeLikelyConfiguration | BotManagementUpdateParams.SubscriptionConfiguration
 
 export namespace BotManagementUpdateParams {
   export interface BotFightModeConfiguration {

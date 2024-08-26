@@ -1,13 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({
-  apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'user@example.com',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource timeseriesGroups', () => {
   test('botClass', async () => {
@@ -23,35 +19,16 @@ describe('resource timeseriesGroups', () => {
 
   test('botClass: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.botClass({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.botClass({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('botClass: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.botClass(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.botClass({ aggInterval: '15m', asn: ['string', 'string', 'string'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('browser', async () => {
@@ -67,37 +44,16 @@ describe('resource timeseriesGroups', () => {
 
   test('browser: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.browser({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.browser({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('browser: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.browser(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          limitPerGroup: 4,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.browser({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], limitPerGroup: 4, location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('browserFamily', async () => {
@@ -113,36 +69,16 @@ describe('resource timeseriesGroups', () => {
 
   test('browserFamily: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.browserFamily({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.browserFamily({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('browserFamily: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.browserFamily(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.browserFamily({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('deviceType', async () => {
@@ -158,35 +94,16 @@ describe('resource timeseriesGroups', () => {
 
   test('deviceType: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.deviceType({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.deviceType({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('deviceType: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.deviceType(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.deviceType({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpProtocol', async () => {
@@ -202,35 +119,16 @@ describe('resource timeseriesGroups', () => {
 
   test('httpProtocol: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.httpProtocol({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.httpProtocol({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpProtocol: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.httpProtocol(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.httpProtocol({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpVersion', async () => {
@@ -246,35 +144,16 @@ describe('resource timeseriesGroups', () => {
 
   test('httpVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.httpVersion({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.httpVersion({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('httpVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.httpVersion(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.httpVersion({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('ipVersion', async () => {
@@ -290,35 +169,16 @@ describe('resource timeseriesGroups', () => {
 
   test('ipVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.ipVersion({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('ipVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.ipVersion(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.ipVersion({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('os', async () => {
@@ -334,35 +194,16 @@ describe('resource timeseriesGroups', () => {
 
   test('os: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.radar.http.timeseriesGroups.os({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+    await expect(client.radar.http.timeseriesGroups.os({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('os: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.os(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.os({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('postQuantum', async () => {
@@ -378,36 +219,16 @@ describe('resource timeseriesGroups', () => {
 
   test('postQuantum: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.postQuantum({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.postQuantum({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('postQuantum: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.postQuantum(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-          tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.postQuantum({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'], tlsVersion: ['TLSv1_0', 'TLSv1_1', 'TLSv1_2'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('tlsVersion', async () => {
@@ -423,34 +244,15 @@ describe('resource timeseriesGroups', () => {
 
   test('tlsVersion: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.tlsVersion({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.tlsVersion({ path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 
   test('tlsVersion: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.radar.http.timeseriesGroups.tlsVersion(
-        {
-          aggInterval: '15m',
-          asn: ['string', 'string', 'string'],
-          botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          deviceType: ['DESKTOP', 'MOBILE', 'OTHER'],
-          format: 'JSON',
-          httpProtocol: ['HTTP', 'HTTPS'],
-          httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'],
-          ipVersion: ['IPv4', 'IPv6'],
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
-          os: ['WINDOWS', 'MACOSX', 'IOS'],
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.http.timeseriesGroups.tlsVersion({ aggInterval: '15m', asn: ['string', 'string', 'string'], botClass: ['LIKELY_AUTOMATED', 'LIKELY_HUMAN'], continent: ['string', 'string', 'string'], dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], dateRange: ['7d', '7d', '7d'], dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'], deviceType: ['DESKTOP', 'MOBILE', 'OTHER'], format: 'JSON', httpProtocol: ['HTTP', 'HTTPS'], httpVersion: ['HTTPv1', 'HTTPv2', 'HTTPv3'], ipVersion: ['IPv4', 'IPv6'], location: ['string', 'string', 'string'], name: ['string', 'string', 'string'], os: ['WINDOWS', 'MACOSX', 'IOS'] }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Cloudflare.NotFoundError);
   });
 });

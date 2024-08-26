@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as MembersAPI from './members';
 import * as Shared from '../shared';
@@ -12,84 +14,49 @@ export class Members extends APIResource {
    */
   create(params: MemberCreateParams, options?: Core.RequestOptions): Core.APIPromise<MemberCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{
-        result: MemberCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/members`, { body, ...options }) as Core.APIPromise<{ result: MemberCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify an account member.
    */
-  update(
-    memberId: string,
-    params: MemberUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberUpdateResponse> {
+  update(memberId: string, params: MemberUpdateParams, options?: Core.RequestOptions): Core.APIPromise<MemberUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/members/${memberId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MemberUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/members/${memberId}`, { body, ...options }) as Core.APIPromise<{ result: MemberUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all members of an account.
    */
-  list(
-    params: MemberListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
+  list(params: MemberListParams, options?: Core.RequestOptions): Core.PagePromise<MemberListResponsesV4PagePaginationArray, MemberListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/members`,
-      MemberListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/members`, MemberListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Remove a member from an account.
    */
-  delete(
-    memberId: string,
-    params: MemberDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberDeleteResponse | null> {
+  delete(memberId: string, params: MemberDeleteParams, options?: Core.RequestOptions): Core.APIPromise<MemberDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: MemberDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{ result: MemberDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information about a specific member of an account.
    */
-  get(
-    memberId: string,
-    params: MemberGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MemberGetResponse> {
+  get(memberId: string, params: MemberGetParams, options?: Core.RequestOptions): Core.APIPromise<MemberGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{
-        result: MemberGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/members/${memberId}`, options) as Core.APIPromise<{ result: MemberGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {}
+export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationArray<MemberListResponse> {
+}
 
 /**
  * Whether the user is a member of the organization or has an invitation pending.
  */
-export type Status = 'member' | 'invited';
+export type Status = 'member' | 'invited'
 
 export interface UserWithInviteCode {
   /**
@@ -933,9 +900,7 @@ export namespace MemberGetResponse {
   }
 }
 
-export type MemberCreateParams =
-  | MemberCreateParams.IAMCreateMemberWithRoles
-  | MemberCreateParams.IAMCreateMemberWithPolicies;
+export type MemberCreateParams = MemberCreateParams.IAMCreateMemberWithRoles | MemberCreateParams.IAMCreateMemberWithPolicies
 
 export namespace MemberCreateParams {
   export interface IAMCreateMemberWithRoles {
@@ -1024,7 +989,7 @@ export namespace MemberCreateParams {
   }
 }
 
-export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IAMUpdateMemberWithPolicies;
+export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IAMUpdateMemberWithPolicies
 
 export namespace MemberUpdateParams {
   export interface Member {

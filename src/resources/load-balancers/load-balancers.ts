@@ -1,7 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Monitors } from './monitors/monitors';
+import { Pools } from './pools/pools';
+import { Previews } from './previews';
+import { Regions } from './regions';
+import { Searches } from './searches';
 import * as LoadBalancersAPI from './load-balancers';
 import * as PreviewsAPI from './previews';
 import * as RegionsAPI from './regions';
@@ -22,37 +29,21 @@ export class LoadBalancers extends APIResource {
    */
   create(params: LoadBalancerCreateParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/load_balancers`, { body, ...options }) as Core.APIPromise<{
-        result: LoadBalancer;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/load_balancers`, { body, ...options }) as Core.APIPromise<{ result: LoadBalancer }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a configured load balancer.
    */
-  update(
-    loadBalancerId: string,
-    params: LoadBalancerUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancer> {
+  update(loadBalancerId: string, params: LoadBalancerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LoadBalancer }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, { body, ...options }) as Core.APIPromise<{ result: LoadBalancer }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List configured load balancers.
    */
-  list(
-    params: LoadBalancerListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LoadBalancersSinglePage, LoadBalancer> {
+  list(params: LoadBalancerListParams, options?: Core.RequestOptions): Core.PagePromise<LoadBalancersSinglePage, LoadBalancer> {
     const { zone_id } = params;
     return this._client.getAPIList(`/zones/${zone_id}/load_balancers`, LoadBalancersSinglePage, options);
   }
@@ -60,54 +51,30 @@ export class LoadBalancers extends APIResource {
   /**
    * Delete a configured load balancer.
    */
-  delete(
-    loadBalancerId: string,
-    params: LoadBalancerDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancerDeleteResponse> {
+  delete(loadBalancerId: string, params: LoadBalancerDeleteParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancerDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
-        result: LoadBalancerDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{ result: LoadBalancerDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Apply changes to an existing load balancer, overwriting the supplied properties.
    */
-  edit(
-    loadBalancerId: string,
-    params: LoadBalancerEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancer> {
+  edit(loadBalancerId: string, params: LoadBalancerEditParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LoadBalancer }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, { body, ...options }) as Core.APIPromise<{ result: LoadBalancer }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a single configured load balancer.
    */
-  get(
-    loadBalancerId: string,
-    params: LoadBalancerGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LoadBalancer> {
+  get(loadBalancerId: string, params: LoadBalancerGetParams, options?: Core.RequestOptions): Core.APIPromise<LoadBalancer> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{
-        result: LoadBalancer;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/load_balancers/${loadBalancerId}`, options) as Core.APIPromise<{ result: LoadBalancer }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LoadBalancersSinglePage extends SinglePage<LoadBalancer> {}
+export class LoadBalancersSinglePage extends SinglePage<LoadBalancer> {
+}
 
 /**
  * Controls features that modify the routing of requests to pools and origins in
@@ -156,21 +123,7 @@ export interface AdaptiveRoutingParam {
  * Southern Asia, SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all
  * regions (ENTERPRISE customers only).
  */
-export type CheckRegion =
-  | 'WNAM'
-  | 'ENAM'
-  | 'WEU'
-  | 'EEU'
-  | 'NSAM'
-  | 'SSAM'
-  | 'OC'
-  | 'ME'
-  | 'NAF'
-  | 'SAF'
-  | 'SAS'
-  | 'SEAS'
-  | 'NEAS'
-  | 'ALL_REGIONS';
+export type CheckRegion = 'WNAM' | 'ENAM' | 'WEU' | 'EEU' | 'NSAM' | 'SSAM' | 'OC' | 'ME' | 'NAF' | 'SAF' | 'SAS' | 'SEAS' | 'NEAS' | 'ALL_REGIONS'
 
 /**
  * WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe,
@@ -179,31 +132,17 @@ export type CheckRegion =
  * Southern Asia, SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all
  * regions (ENTERPRISE customers only).
  */
-export type CheckRegionParam =
-  | 'WNAM'
-  | 'ENAM'
-  | 'WEU'
-  | 'EEU'
-  | 'NSAM'
-  | 'SSAM'
-  | 'OC'
-  | 'ME'
-  | 'NAF'
-  | 'SAF'
-  | 'SAS'
-  | 'SEAS'
-  | 'NEAS'
-  | 'ALL_REGIONS';
+export type CheckRegionParam = 'WNAM' | 'ENAM' | 'WEU' | 'EEU' | 'NSAM' | 'SSAM' | 'OC' | 'ME' | 'NAF' | 'SAF' | 'SAS' | 'SEAS' | 'NEAS' | 'ALL_REGIONS'
 
 /**
  * A pool ID.
  */
-export type DefaultPools = string;
+export type DefaultPools = string
 
 /**
  * A pool ID.
  */
-export type DefaultPoolsParam = string;
+export type DefaultPoolsParam = string
 
 /**
  * Filter options for a particular resource type (pool or origin). Use null to
@@ -263,9 +202,9 @@ export interface HeaderParam {
   Host?: Array<HostParam>;
 }
 
-export type Host = string;
+export type Host = string
 
-export type HostParam = string;
+export type HostParam = string
 
 export interface LoadBalancer {
   id?: string;
@@ -1302,7 +1241,7 @@ export namespace RulesParam {
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""'
 
 /**
  * Specifies the type of session affinity the load balancer should use unless
@@ -1329,7 +1268,7 @@ export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""'
 
 /**
  * Configures attributes for session affinity.
@@ -1489,15 +1428,7 @@ export interface SessionAffinityAttributesParam {
  * - `""`: Will map to `"geo"` if you use
  *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
  */
-export type SteeringPolicy =
-  | 'off'
-  | 'geo'
-  | 'random'
-  | 'dynamic_latency'
-  | 'proximity'
-  | 'least_outstanding_requests'
-  | 'least_connections'
-  | '""';
+export type SteeringPolicy = 'off' | 'geo' | 'random' | 'dynamic_latency' | 'proximity' | 'least_outstanding_requests' | 'least_connections' | '""'
 
 /**
  * Steering Policy for this load balancer.
@@ -1523,15 +1454,7 @@ export type SteeringPolicy =
  * - `""`: Will map to `"geo"` if you use
  *   `region_pools`/`country_pools`/`pop_pools` otherwise `"off"`.
  */
-export type SteeringPolicyParam =
-  | 'off'
-  | 'geo'
-  | 'random'
-  | 'dynamic_latency'
-  | 'proximity'
-  | 'least_outstanding_requests'
-  | 'least_connections'
-  | '""';
+export type SteeringPolicyParam = 'off' | 'geo' | 'random' | 'dynamic_latency' | 'proximity' | 'least_outstanding_requests' | 'least_connections' | '""'
 
 export interface LoadBalancerDeleteResponse {
   id?: string;

@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { Top } from './top';
 import * as SpeedAPI from './speed';
 import * as TopAPI from './top';
 
@@ -13,43 +15,26 @@ export class Speed extends APIResource {
    * Get an histogram from the previous 90 days of Cloudflare Speed Test data, split
    * into fixed bandwidth (Mbps), latency (ms) or jitter (ms) buckets.
    */
-  histogram(
-    query?: SpeedHistogramParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedHistogramResponse>;
-  histogram(options?: Core.RequestOptions): Core.APIPromise<SpeedHistogramResponse>;
-  histogram(
-    query: SpeedHistogramParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedHistogramResponse> {
+  histogram(query?: SpeedHistogramParams, options?: Core.RequestOptions): Core.APIPromise<SpeedHistogramResponse>
+  histogram(options?: Core.RequestOptions): Core.APIPromise<SpeedHistogramResponse>
+  histogram(query: SpeedHistogramParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SpeedHistogramResponse> {
     if (isRequestOptions(query)) {
       return this.histogram({}, query);
     }
-    return (
-      this._client.get('/radar/quality/speed/histogram', { query, ...options }) as Core.APIPromise<{
-        result: SpeedHistogramResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/quality/speed/histogram', { query, ...options }) as Core.APIPromise<{ result: SpeedHistogramResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a summary of bandwidth, latency, jitter and packet loss, from the previous
    * 90 days of Cloudflare Speed Test data.
    */
-  summary(query?: SpeedSummaryParams, options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>;
-  summary(options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>;
-  summary(
-    query: SpeedSummaryParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SpeedSummaryResponse> {
+  summary(query?: SpeedSummaryParams, options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>
+  summary(options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse>
+  summary(query: SpeedSummaryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SpeedSummaryResponse> {
     if (isRequestOptions(query)) {
       return this.summary({}, query);
     }
-    return (
-      this._client.get('/radar/quality/speed/summary', { query, ...options }) as Core.APIPromise<{
-        result: SpeedSummaryResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/quality/speed/summary', { query, ...options }) as Core.APIPromise<{ result: SpeedSummaryResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

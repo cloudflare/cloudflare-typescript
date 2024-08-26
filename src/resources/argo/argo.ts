@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
+import * as Core from '../../core';
+import { SmartRouting } from './smart-routing';
+import { TieredCaching } from './tiered-caching';
 import * as SmartRoutingAPI from './smart-routing';
 import * as TieredCachingAPI from './tiered-caching';
 

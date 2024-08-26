@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 
@@ -10,184 +11,97 @@ export class TimeseriesGroups extends APIResource {
    * Get a time series of the percentual distribution of mitigation techniques, over
    * time.
    */
-  get(
-    query?: TimeseriesGroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>;
-  get(
-    query: TimeseriesGroupGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupGetResponse> {
+  get(query?: TimeseriesGroupGetParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>
+  get(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>
+  get(query: TimeseriesGroupGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups', { query, ...options }) as Core.APIPromise<{
-        result: TimeseriesGroupGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by http method used over time.
    */
-  httpMethod(
-    query?: TimeseriesGroupHTTPMethodParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPMethodResponse>;
-  httpMethod(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPMethodResponse>;
-  httpMethod(
-    query: TimeseriesGroupHTTPMethodParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPMethodResponse> {
+  httpMethod(query?: TimeseriesGroupHTTPMethodParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPMethodResponse>
+  httpMethod(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPMethodResponse>
+  httpMethod(query: TimeseriesGroupHTTPMethodParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPMethodResponse> {
     if (isRequestOptions(query)) {
       return this.httpMethod({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/http_method', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupHTTPMethodResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/http_method', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupHTTPMethodResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by http version used over time.
    */
-  httpVersion(
-    query?: TimeseriesGroupHTTPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>;
-  httpVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>;
-  httpVersion(
-    query: TimeseriesGroupHTTPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupHTTPVersionResponse> {
+  httpVersion(query?: TimeseriesGroupHTTPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>
+  httpVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse>
+  httpVersion(query: TimeseriesGroupHTTPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupHTTPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.httpVersion({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/http_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupHTTPVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/http_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupHTTPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by industry used over time.
    */
-  industry(
-    query?: TimeseriesGroupIndustryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIndustryResponse>;
-  industry(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse>;
-  industry(
-    query: TimeseriesGroupIndustryParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIndustryResponse> {
+  industry(query?: TimeseriesGroupIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse>
+  industry(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse>
+  industry(query: TimeseriesGroupIndustryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse> {
     if (isRequestOptions(query)) {
       return this.industry({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/industry', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupIndustryResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/industry', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIndustryResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by ip version used over time.
    */
-  ipVersion(
-    query?: TimeseriesGroupIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
-  ipVersion(
-    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
+  ipVersion(query?: TimeseriesGroupIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
+  ipVersion(query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/ip_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by managed rules used over time.
    */
-  managedRules(
-    query?: TimeseriesGroupManagedRulesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupManagedRulesResponse>;
-  managedRules(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupManagedRulesResponse>;
-  managedRules(
-    query: TimeseriesGroupManagedRulesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupManagedRulesResponse> {
+  managedRules(query?: TimeseriesGroupManagedRulesParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupManagedRulesResponse>
+  managedRules(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupManagedRulesResponse>
+  managedRules(query: TimeseriesGroupManagedRulesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupManagedRulesResponse> {
     if (isRequestOptions(query)) {
       return this.managedRules({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/managed_rules', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupManagedRulesResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/managed_rules', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupManagedRulesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by mitigation product used over time.
    */
-  mitigationProduct(
-    query?: TimeseriesGroupMitigationProductParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMitigationProductResponse>;
-  mitigationProduct(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMitigationProductResponse>;
-  mitigationProduct(
-    query: TimeseriesGroupMitigationProductParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMitigationProductResponse> {
+  mitigationProduct(query?: TimeseriesGroupMitigationProductParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMitigationProductResponse>
+  mitigationProduct(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMitigationProductResponse>
+  mitigationProduct(query: TimeseriesGroupMitigationProductParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMitigationProductResponse> {
     if (isRequestOptions(query)) {
       return this.mitigationProduct({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/mitigation_product', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupMitigationProductResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/mitigation_product', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupMitigationProductResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by vertical used over time.
    */
-  vertical(
-    query?: TimeseriesGroupVerticalParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupVerticalResponse>;
-  vertical(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse>;
-  vertical(
-    query: TimeseriesGroupVerticalParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupVerticalResponse> {
+  vertical(query?: TimeseriesGroupVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse>
+  vertical(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse>
+  vertical(query: TimeseriesGroupVerticalParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse> {
     if (isRequestOptions(query)) {
       return this.vertical({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries_groups/vertical', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupVerticalResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries_groups/vertical', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupVerticalResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -302,7 +216,7 @@ export interface TimeseriesGroupIndustryResponse {
 export namespace TimeseriesGroupIndustryResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
+  [k: string]: Array<string> | undefined
   }
 }
 
@@ -359,7 +273,7 @@ export interface TimeseriesGroupVerticalResponse {
 export namespace TimeseriesGroupVerticalResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-    [k: string]: Array<string> | undefined;
+  [k: string]: Array<string> | undefined
   }
 }
 
@@ -484,15 +398,7 @@ export interface TimeseriesGroupHTTPMethodParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -553,54 +459,7 @@ export interface TimeseriesGroupHTTPVersionParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for ip version.
@@ -617,15 +476,7 @@ export interface TimeseriesGroupHTTPVersionParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -686,54 +537,7 @@ export interface TimeseriesGroupIndustryParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -761,15 +565,7 @@ export interface TimeseriesGroupIndustryParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -830,54 +626,7 @@ export interface TimeseriesGroupIPVersionParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -894,15 +643,7 @@ export interface TimeseriesGroupIPVersionParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -963,54 +704,7 @@ export interface TimeseriesGroupManagedRulesParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -1032,15 +726,7 @@ export interface TimeseriesGroupManagedRulesParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -1101,54 +787,7 @@ export interface TimeseriesGroupMitigationProductParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -1226,54 +865,7 @@ export interface TimeseriesGroupVerticalParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -1301,15 +893,7 @@ export interface TimeseriesGroupVerticalParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as CookiesAPI from './cookies';
 import { SinglePage } from '../../pagination';
@@ -9,35 +11,22 @@ export class Cookies extends APIResource {
   /**
    * Lists all cookies collected by Page Shield.
    */
-  list(
-    params: CookieListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CookieListResponsesSinglePage, CookieListResponse> {
+  list(params: CookieListParams, options?: Core.RequestOptions): Core.PagePromise<CookieListResponsesSinglePage, CookieListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/page_shield/cookies`, CookieListResponsesSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/cookies`, CookieListResponsesSinglePage, { query, ...options });
   }
 
   /**
    * Fetches a cookie collected by Page Shield by cookie ID.
    */
-  get(
-    cookieId: string,
-    params: CookieGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CookieGetResponse | null> {
+  get(cookieId: string, params: CookieGetParams, options?: Core.RequestOptions): Core.APIPromise<CookieGetResponse | null> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/page_shield/cookies/${cookieId}`, options) as Core.APIPromise<{
-        result: CookieGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/page_shield/cookies/${cookieId}`, options) as Core.APIPromise<{ result: CookieGetResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CookieListResponsesSinglePage extends SinglePage<CookieListResponse> {}
+export class CookieListResponsesSinglePage extends SinglePage<CookieListResponse> {
+}
 
 export interface CookieListResponse {
   /**

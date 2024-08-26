@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as HTTPProtocolAPI from './http-protocol';
 
@@ -10,29 +11,13 @@ export class HTTPProtocol extends APIResource {
    * Get the top locations, by HTTP traffic, of the requested HTTP protocol. Values
    * are a percentage out of the total traffic.
    */
-  get(
-    httpProtocol: 'HTTP' | 'HTTPS',
-    query?: HTTPProtocolGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTPProtocolGetResponse>;
-  get(
-    httpProtocol: 'HTTP' | 'HTTPS',
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTPProtocolGetResponse>;
-  get(
-    httpProtocol: 'HTTP' | 'HTTPS',
-    query: HTTPProtocolGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTPProtocolGetResponse> {
+  get(httpProtocol: 'HTTP' | 'HTTPS', query?: HTTPProtocolGetParams, options?: Core.RequestOptions): Core.APIPromise<HTTPProtocolGetResponse>
+  get(httpProtocol: 'HTTP' | 'HTTPS', options?: Core.RequestOptions): Core.APIPromise<HTTPProtocolGetResponse>
+  get(httpProtocol: 'HTTP' | 'HTTPS', query: HTTPProtocolGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<HTTPProtocolGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(httpProtocol, {}, query);
     }
-    return (
-      this._client.get(`/radar/http/top/locations/http_protocol/${httpProtocol}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: HTTPProtocolGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/http/top/locations/http_protocol/${httpProtocol}`, { query, ...options }) as Core.APIPromise<{ result: HTTPProtocolGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AppsAPI from './apps';
 import { SinglePage } from '../../pagination';
@@ -11,37 +13,21 @@ export class Apps extends APIResource {
    */
   create(params: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<AppCreateResponse | null> {
     const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/magic/apps`, { body: body, ...options }) as Core.APIPromise<{
-        result: AppCreateResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/magic/apps`, { body: body, ...options }) as Core.APIPromise<{ result: AppCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an Account App
    */
-  update(
-    accountAppId: string,
-    params: AppUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AppUpdateResponse | null> {
+  update(accountAppId: string, params: AppUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AppUpdateResponse | null> {
     const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/magic/apps/${accountAppId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: AppUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/magic/apps/${accountAppId}`, { body: body, ...options }) as Core.APIPromise<{ result: AppUpdateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Apps associated with an account.
    */
-  list(
-    params: AppListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AppListResponsesSinglePage, AppListResponse> {
+  list(params: AppListParams, options?: Core.RequestOptions): Core.PagePromise<AppListResponsesSinglePage, AppListResponse> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/magic/apps`, AppListResponsesSinglePage, options);
   }
@@ -49,21 +35,14 @@ export class Apps extends APIResource {
   /**
    * Deletes specific Account App.
    */
-  delete(
-    accountAppId: string,
-    params: AppDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AppDeleteResponse | null> {
+  delete(accountAppId: string, params: AppDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AppDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/magic/apps/${accountAppId}`, options) as Core.APIPromise<{
-        result: AppDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/magic/apps/${accountAppId}`, options) as Core.APIPromise<{ result: AppDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AppListResponsesSinglePage extends SinglePage<AppListResponse> {}
+export class AppListResponsesSinglePage extends SinglePage<AppListResponse> {
+}
 
 /**
  * Custom app defined for an account.
@@ -128,7 +107,7 @@ export interface AppUpdateResponse {
 /**
  * Collection of Hostnames and/or IP Subnets to associate with traffic decisions.
  */
-export type AppListResponse = AppListResponse.MagicAccountApp | AppListResponse.MagicManagedApp;
+export type AppListResponse = AppListResponse.MagicAccountApp | AppListResponse.MagicManagedApp
 
 export namespace AppListResponse {
   /**
@@ -222,7 +201,7 @@ export interface AppDeleteResponse {
   type?: string;
 }
 
-export type AppCreateParams = AppCreateParams.Hostnames | AppCreateParams.Subnets;
+export type AppCreateParams = AppCreateParams.Hostnames | AppCreateParams.Subnets
 
 export namespace AppCreateParams {
   export interface Hostnames {
@@ -250,11 +229,7 @@ export namespace AppCreateParams {
   }
 }
 
-export type AppUpdateParams =
-  | AppUpdateParams.UpdateAppName
-  | AppUpdateParams.UpdateAppType
-  | AppUpdateParams.UpdateAppHostnames
-  | AppUpdateParams.UpdateAppSubnets;
+export type AppUpdateParams = AppUpdateParams.UpdateAppName | AppUpdateParams.UpdateAppType | AppUpdateParams.UpdateAppHostnames | AppUpdateParams.UpdateAppSubnets
 
 export namespace AppUpdateParams {
   export interface UpdateAppName {

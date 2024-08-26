@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as NetworksAPI from './networks';
 import * as RoutesAPI from './routes';
@@ -10,18 +12,9 @@ export class Networks extends APIResource {
    * Routes a private network through a Cloudflare Tunnel. The CIDR in
    * `ip_network_encoded` must be written in URL-encoded format.
    */
-  create(
-    ipNetworkEncoded: string,
-    params: NetworkCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.Route> {
+  create(ipNetworkEncoded: string, params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Route> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.Route }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, { body, ...options }) as Core.APIPromise<{ result: RoutesAPI.Route }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -33,36 +26,18 @@ export class Networks extends APIResource {
    * it will delete the route from that tunnel, otherwise it will delete the route
    * based on the vnet and tun_type.
    */
-  delete(
-    ipNetworkEncoded: string,
-    params: NetworkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.Route> {
+  delete(ipNetworkEncoded: string, params: NetworkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Route> {
     const { account_id, tun_type, tunnel_id, virtual_network_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, {
-        query: { tun_type, tunnel_id, virtual_network_id },
-        ...options,
-      }) as Core.APIPromise<{ result: RoutesAPI.Route }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, { query: { tun_type, tunnel_id, virtual_network_id }, ...options }) as Core.APIPromise<{ result: RoutesAPI.Route }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an existing private network route in an account. The CIDR in
    * `ip_network_encoded` must be written in URL-encoded format.
    */
-  edit(
-    ipNetworkEncoded: string,
-    params: NetworkEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutesAPI.Route> {
+  edit(ipNetworkEncoded: string, params: NetworkEditParams, options?: Core.RequestOptions): Core.APIPromise<RoutesAPI.Route> {
     const { account_id } = params;
-    return (
-      this._client.patch(
-        `/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`,
-        options,
-      ) as Core.APIPromise<{ result: RoutesAPI.Route }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/teamnet/routes/network/${ipNetworkEncoded}`, options) as Core.APIPromise<{ result: RoutesAPI.Route }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DetailsAPI from './details';
 
@@ -9,19 +11,9 @@ export class Details extends APIResource {
    * Previews an event's configuration as if it was active. Inherited fields from the
    * waiting room will be displayed with their current values.
    */
-  get(
-    waitingRoomId: string,
-    eventId: string,
-    params: DetailGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DetailGetResponse> {
+  get(waitingRoomId: string, eventId: string, params: DetailGetParams, options?: Core.RequestOptions): Core.APIPromise<DetailGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}/details`,
-        options,
-      ) as Core.APIPromise<{ result: DetailGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}/details`, options) as Core.APIPromise<{ result: DetailGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

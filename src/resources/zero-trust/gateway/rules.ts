@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as RulesAPI from './rules';
 import { SinglePage } from '../../../pagination';
@@ -11,37 +13,21 @@ export class Rules extends APIResource {
    */
   create(params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/gateway/rules`, { body, ...options }) as Core.APIPromise<{
-        result: GatewayRule;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/gateway/rules`, { body, ...options }) as Core.APIPromise<{ result: GatewayRule }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured Zero Trust Gateway rule.
    */
-  update(
-    ruleId: string,
-    params: RuleUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayRule> {
+  update(ruleId: string, params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/gateway/rules/${ruleId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: GatewayRule }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/gateway/rules/${ruleId}`, { body, ...options }) as Core.APIPromise<{ result: GatewayRule }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the Zero Trust Gateway rules for an account.
    */
-  list(
-    params: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
+  list(params: RuleListParams, options?: Core.RequestOptions): Core.PagePromise<GatewayRulesSinglePage, GatewayRule> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/gateway/rules`, GatewayRulesSinglePage, options);
   }
@@ -49,17 +35,9 @@ export class Rules extends APIResource {
   /**
    * Deletes a Zero Trust Gateway rule.
    */
-  delete(
-    ruleId: string,
-    params: RuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse> {
+  delete(ruleId: string, params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: RuleDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{ result: RuleDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -67,15 +45,12 @@ export class Rules extends APIResource {
    */
   get(ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayRule> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: GatewayRule;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/gateway/rules/${ruleId}`, options) as Core.APIPromise<{ result: GatewayRule }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class GatewayRulesSinglePage extends SinglePage<GatewayRule> {}
+export class GatewayRulesSinglePage extends SinglePage<GatewayRule> {
+}
 
 export interface DNSResolverSettingsV4 {
   /**
@@ -176,12 +151,12 @@ export interface DNSResolverSettingsV6Param {
 /**
  * The protocol or layer to use.
  */
-export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress';
+export type GatewayFilter = 'http' | 'dns' | 'l4' | 'egress'
 
 /**
  * The protocol or layer to use.
  */
-export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress';
+export type GatewayFilterParam = 'http' | 'dns' | 'l4' | 'egress'
 
 export interface GatewayRule {
   /**
@@ -193,22 +168,7 @@ export interface GatewayRule {
    * The action to preform when the associated traffic, identity, and device posture
    * expressions are either absent or evaluate to `true`.
    */
-  action?:
-    | 'on'
-    | 'off'
-    | 'allow'
-    | 'block'
-    | 'scan'
-    | 'noscan'
-    | 'safesearch'
-    | 'ytrestricted'
-    | 'isolate'
-    | 'noisolate'
-    | 'override'
-    | 'l4_override'
-    | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
+  action?: 'on' | 'off' | 'allow' | 'block' | 'scan' | 'noscan' | 'safesearch' | 'ytrestricted' | 'isolate' | 'noisolate' | 'override' | 'l4_override' | 'egress' | 'audit_ssh' | 'resolve';
 
   created_at?: string;
 
@@ -956,7 +916,7 @@ export interface ScheduleParam {
   wed?: string;
 }
 
-export type RuleDeleteResponse = unknown;
+export type RuleDeleteResponse = unknown
 
 export interface RuleCreateParams {
   /**
@@ -968,22 +928,7 @@ export interface RuleCreateParams {
    * Body param: The action to preform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
-  action:
-    | 'on'
-    | 'off'
-    | 'allow'
-    | 'block'
-    | 'scan'
-    | 'noscan'
-    | 'safesearch'
-    | 'ytrestricted'
-    | 'isolate'
-    | 'noisolate'
-    | 'override'
-    | 'l4_override'
-    | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
+  action: 'on' | 'off' | 'allow' | 'block' | 'scan' | 'noscan' | 'safesearch' | 'ytrestricted' | 'isolate' | 'noisolate' | 'override' | 'l4_override' | 'egress' | 'audit_ssh' | 'resolve';
 
   /**
    * Body param: The name of the rule.
@@ -1050,22 +995,7 @@ export interface RuleUpdateParams {
    * Body param: The action to preform when the associated traffic, identity, and
    * device posture expressions are either absent or evaluate to `true`.
    */
-  action:
-    | 'on'
-    | 'off'
-    | 'allow'
-    | 'block'
-    | 'scan'
-    | 'noscan'
-    | 'safesearch'
-    | 'ytrestricted'
-    | 'isolate'
-    | 'noisolate'
-    | 'override'
-    | 'l4_override'
-    | 'egress'
-    | 'audit_ssh'
-    | 'resolve';
+  action: 'on' | 'off' | 'allow' | 'block' | 'scan' | 'noscan' | 'safesearch' | 'ytrestricted' | 'isolate' | 'noisolate' | 'override' | 'l4_override' | 'egress' | 'audit_ssh' | 'resolve';
 
   /**
    * Body param: The name of the rule.

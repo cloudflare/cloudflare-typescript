@@ -2,26 +2,21 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AuditLogsAPI from './audit-logs';
 import * as Shared from '../shared';
 import { AuditLogsV4PagePaginationArray } from '../shared';
-import { type V4PagePaginationArrayParams } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AuditLogs extends APIResource {
   /**
    * Gets a list of audit logs for a user account. Can be filtered by who made the
    * change, on which zone, and the timeframe of the change.
    */
-  list(
-    query?: AuditLogListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>;
-  list(options?: Core.RequestOptions): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>;
-  list(
-    query: AuditLogListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog> {
+  list(query?: AuditLogListParams, options?: Core.RequestOptions): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>
+  list(options?: Core.RequestOptions): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog>
+  list(query: AuditLogListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<AuditLogsV4PagePaginationArray, Shared.AuditLog> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -102,4 +97,4 @@ export namespace AuditLogs {
   export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
 }
 
-export { AuditLogsV4PagePaginationArray };
+export { AuditLogsV4PagePaginationArray }

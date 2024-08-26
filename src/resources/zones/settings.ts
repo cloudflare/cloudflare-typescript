@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
 
@@ -8,33 +10,17 @@ export class Settings extends APIResource {
   /**
    * Updates a single zone setting by the identifier
    */
-  edit(
-    settingId: string,
-    params: SettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingEditResponse> {
+  edit(settingId: string, params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/settings/${settingId}`, { body, ...options }) as Core.APIPromise<{
-        result: SettingEditResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/settings/${settingId}`, { body, ...options }) as Core.APIPromise<{ result: SettingEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a single zone setting by name
    */
-  get(
-    settingId: string,
-    params: SettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingGetResponse> {
+  get(settingId: string, params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/settings/${settingId}`, options) as Core.APIPromise<{
-        result: SettingGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/settings/${settingId}`, options) as Core.APIPromise<{ result: SettingGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -266,35 +252,7 @@ export interface BrowserCacheTTL {
   /**
    * Current value of the zone setting.
    */
-  value:
-    | 0
-    | 30
-    | 60
-    | 120
-    | 300
-    | 1200
-    | 1800
-    | 3600
-    | 7200
-    | 10800
-    | 14400
-    | 18000
-    | 28800
-    | 43200
-    | 57600
-    | 72000
-    | 86400
-    | 172800
-    | 259200
-    | 345600
-    | 432000
-    | 691200
-    | 1382400
-    | 2073600
-    | 2678400
-    | 5356800
-    | 16070400
-    | 31536000;
+  value: 0 | 30 | 60 | 120 | 300 | 1200 | 1800 | 3600 | 7200 | 10800 | 14400 | 18000 | 28800 | 43200 | 57600 | 72000 | 86400 | 172800 | 259200 | 345600 | 432000 | 691200 | 1382400 | 2073600 | 2678400 | 5356800 | 16070400 | 31536000;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -384,21 +342,7 @@ export interface ChallengeTTL {
   /**
    * Current value of the zone setting.
    */
-  value:
-    | 300
-    | 900
-    | 1800
-    | 2700
-    | 3600
-    | 7200
-    | 10800
-    | 14400
-    | 28800
-    | 57600
-    | 86400
-    | 604800
-    | 2592000
-    | 31536000;
+  value: 300 | 900 | 1800 | 2700 | 3600 | 7200 | 10800 | 14400 | 28800 | 57600 | 86400 | 604800 | 2592000 | 31536000;
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -1065,7 +1009,7 @@ export interface OriginErrorPagePassThru {
 /**
  * Value of the zone setting.
  */
-export type OriginMaxHTTPVersion = 'origin_max_http_version';
+export type OriginMaxHTTPVersion = 'origin_max_http_version'
 
 /**
  * Removes metadata and compresses your images for faster page load times. Basic
@@ -1666,62 +1610,7 @@ export interface ZeroRTT {
 /**
  * 0-RTT session resumption enabled for this zone.
  */
-export type SettingEditResponse =
-  | ZeroRTT
-  | AdvancedDDoS
-  | AlwaysOnline
-  | AlwaysUseHTTPS
-  | AutomaticHTTPSRewrites
-  | Brotli
-  | BrowserCacheTTL
-  | BrowserCheck
-  | CacheLevel
-  | ChallengeTTL
-  | Ciphers
-  | SettingEditResponse.ZonesCNAMEFlattening
-  | DevelopmentMode
-  | EarlyHints
-  | SettingEditResponse.ZonesEdgeCacheTTL
-  | EmailObfuscation
-  | H2Prioritization
-  | HotlinkProtection
-  | HTTP2
-  | HTTP3
-  | ImageResizing
-  | IPGeolocation
-  | IPV6
-  | SettingEditResponse.ZonesMaxUpload
-  | MinTLSVersion
-  | Minify
-  | Mirage
-  | MobileRedirect
-  | NEL
-  | OpportunisticEncryption
-  | OpportunisticOnion
-  | OrangeToOrange
-  | OriginErrorPagePassThru
-  | Polish
-  | PrefetchPreload
-  | ProxyReadTimeout
-  | PseudoIPV4
-  | SettingEditResponse.ZonesReplaceInsecureJS
-  | ResponseBuffering
-  | RocketLoader
-  | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization
-  | SecurityHeaders
-  | SecurityLevel
-  | ServerSideExcludes
-  | SettingEditResponse.ZonesSha1Support
-  | SortQueryStringForCache
-  | SSL
-  | SSLRecommender
-  | SettingEditResponse.ZonesTLS1_2Only
-  | TLS1_3
-  | TLSClientAuth
-  | TrueClientIPHeader
-  | WAF
-  | WebP
-  | Websocket;
+export type SettingEditResponse = ZeroRTT | AdvancedDDoS | AlwaysOnline | AlwaysUseHTTPS | AutomaticHTTPSRewrites | Brotli | BrowserCacheTTL | BrowserCheck | CacheLevel | ChallengeTTL | Ciphers | SettingEditResponse.ZonesCNAMEFlattening | DevelopmentMode | EarlyHints | SettingEditResponse.ZonesEdgeCacheTTL | EmailObfuscation | H2Prioritization | HotlinkProtection | HTTP2 | HTTP3 | ImageResizing | IPGeolocation | IPV6 | SettingEditResponse.ZonesMaxUpload | MinTLSVersion | Minify | Mirage | MobileRedirect | NEL | OpportunisticEncryption | OpportunisticOnion | OrangeToOrange | OriginErrorPagePassThru | Polish | PrefetchPreload | ProxyReadTimeout | PseudoIPV4 | SettingEditResponse.ZonesReplaceInsecureJS | ResponseBuffering | RocketLoader | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization | SecurityHeaders | SecurityLevel | ServerSideExcludes | SettingEditResponse.ZonesSha1Support | SortQueryStringForCache | SSL | SSLRecommender | SettingEditResponse.ZonesTLS1_2Only | TLS1_3 | TLSClientAuth | TrueClientIPHeader | WAF | WebP | Websocket
 
 export namespace SettingEditResponse {
   /**
@@ -1763,28 +1652,7 @@ export namespace SettingEditResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 30
-      | 60
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 518400
-      | 604800;
+    value: 30 | 60 | 300 | 1200 | 1800 | 3600 | 7200 | 10800 | 14400 | 18000 | 28800 | 43200 | 57600 | 72000 | 86400 | 172800 | 259200 | 345600 | 432000 | 518400 | 604800;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -1936,62 +1804,7 @@ export namespace SettingEditResponse {
 /**
  * 0-RTT session resumption enabled for this zone.
  */
-export type SettingGetResponse =
-  | ZeroRTT
-  | AdvancedDDoS
-  | AlwaysOnline
-  | AlwaysUseHTTPS
-  | AutomaticHTTPSRewrites
-  | Brotli
-  | BrowserCacheTTL
-  | BrowserCheck
-  | CacheLevel
-  | ChallengeTTL
-  | Ciphers
-  | SettingGetResponse.ZonesCNAMEFlattening
-  | DevelopmentMode
-  | EarlyHints
-  | SettingGetResponse.ZonesEdgeCacheTTL
-  | EmailObfuscation
-  | H2Prioritization
-  | HotlinkProtection
-  | HTTP2
-  | HTTP3
-  | ImageResizing
-  | IPGeolocation
-  | IPV6
-  | SettingGetResponse.ZonesMaxUpload
-  | MinTLSVersion
-  | Minify
-  | Mirage
-  | MobileRedirect
-  | NEL
-  | OpportunisticEncryption
-  | OpportunisticOnion
-  | OrangeToOrange
-  | OriginErrorPagePassThru
-  | Polish
-  | PrefetchPreload
-  | ProxyReadTimeout
-  | PseudoIPV4
-  | SettingGetResponse.ZonesReplaceInsecureJS
-  | ResponseBuffering
-  | RocketLoader
-  | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization
-  | SecurityHeaders
-  | SecurityLevel
-  | ServerSideExcludes
-  | SettingGetResponse.ZonesSha1Support
-  | SortQueryStringForCache
-  | SSL
-  | SSLRecommender
-  | SettingGetResponse.ZonesTLS1_2Only
-  | TLS1_3
-  | TLSClientAuth
-  | TrueClientIPHeader
-  | WAF
-  | WebP
-  | Websocket;
+export type SettingGetResponse = ZeroRTT | AdvancedDDoS | AlwaysOnline | AlwaysUseHTTPS | AutomaticHTTPSRewrites | Brotli | BrowserCacheTTL | BrowserCheck | CacheLevel | ChallengeTTL | Ciphers | SettingGetResponse.ZonesCNAMEFlattening | DevelopmentMode | EarlyHints | SettingGetResponse.ZonesEdgeCacheTTL | EmailObfuscation | H2Prioritization | HotlinkProtection | HTTP2 | HTTP3 | ImageResizing | IPGeolocation | IPV6 | SettingGetResponse.ZonesMaxUpload | MinTLSVersion | Minify | Mirage | MobileRedirect | NEL | OpportunisticEncryption | OpportunisticOnion | OrangeToOrange | OriginErrorPagePassThru | Polish | PrefetchPreload | ProxyReadTimeout | PseudoIPV4 | SettingGetResponse.ZonesReplaceInsecureJS | ResponseBuffering | RocketLoader | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization | SecurityHeaders | SecurityLevel | ServerSideExcludes | SettingGetResponse.ZonesSha1Support | SortQueryStringForCache | SSL | SSLRecommender | SettingGetResponse.ZonesTLS1_2Only | TLS1_3 | TLSClientAuth | TrueClientIPHeader | WAF | WebP | Websocket
 
 export namespace SettingGetResponse {
   /**
@@ -2033,28 +1846,7 @@ export namespace SettingGetResponse {
     /**
      * Current value of the zone setting.
      */
-    value:
-      | 30
-      | 60
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 518400
-      | 604800;
+    value: 30 | 60 | 300 | 1200 | 1800 | 3600 | 7200 | 10800 | 14400 | 18000 | 28800 | 43200 | 57600 | 72000 | 86400 | 172800 | 259200 | 345600 | 432000 | 518400 | 604800;
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2203,62 +1995,7 @@ export namespace SettingGetResponse {
   }
 }
 
-export type SettingEditParams =
-  | SettingEditParams.ZeroRTT
-  | SettingEditParams.AdvancedDDoS
-  | SettingEditParams.AlwaysOnline
-  | SettingEditParams.AlwaysUseHTTPS
-  | SettingEditParams.AutomaticHTTPSRewrites
-  | SettingEditParams.Brotli
-  | SettingEditParams.BrowserCacheTTL
-  | SettingEditParams.BrowserCheck
-  | SettingEditParams.CacheLevel
-  | SettingEditParams.ChallengeTTL
-  | SettingEditParams.Ciphers
-  | SettingEditParams.ZonesCNAMEFlattening
-  | SettingEditParams.DevelopmentMode
-  | SettingEditParams.EarlyHints
-  | SettingEditParams.ZonesEdgeCacheTTL
-  | SettingEditParams.EmailObfuscation
-  | SettingEditParams.H2Prioritization
-  | SettingEditParams.HotlinkProtection
-  | SettingEditParams.HTTP2
-  | SettingEditParams.HTTP3
-  | SettingEditParams.ImageResizing
-  | SettingEditParams.IPGeolocation
-  | SettingEditParams.IPV6
-  | SettingEditParams.ZonesMaxUpload
-  | SettingEditParams.MinTLSVersion
-  | SettingEditParams.Minify
-  | SettingEditParams.Mirage
-  | SettingEditParams.MobileRedirect
-  | SettingEditParams.NEL
-  | SettingEditParams.OpportunisticEncryption
-  | SettingEditParams.OpportunisticOnion
-  | SettingEditParams.OrangeToOrange
-  | SettingEditParams.OriginErrorPagePassThru
-  | SettingEditParams.Polish
-  | SettingEditParams.PrefetchPreload
-  | SettingEditParams.ProxyReadTimeout
-  | SettingEditParams.PseudoIPV4
-  | SettingEditParams.ZonesReplaceInsecureJS
-  | SettingEditParams.ResponseBuffering
-  | SettingEditParams.RocketLoader
-  | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization
-  | SettingEditParams.SecurityHeaders
-  | SettingEditParams.SecurityLevel
-  | SettingEditParams.ServerSideExcludes
-  | SettingEditParams.ZonesSha1Support
-  | SettingEditParams.SortQueryStringForCache
-  | SettingEditParams.SSL
-  | SettingEditParams.SSLRecommender
-  | SettingEditParams.ZonesTLS1_2Only
-  | SettingEditParams.TLS1_3
-  | SettingEditParams.TLSClientAuth
-  | SettingEditParams.TrueClientIPHeader
-  | SettingEditParams.WAF
-  | SettingEditParams.WebP
-  | SettingEditParams.Websocket;
+export type SettingEditParams = SettingEditParams.ZeroRTT | SettingEditParams.AdvancedDDoS | SettingEditParams.AlwaysOnline | SettingEditParams.AlwaysUseHTTPS | SettingEditParams.AutomaticHTTPSRewrites | SettingEditParams.Brotli | SettingEditParams.BrowserCacheTTL | SettingEditParams.BrowserCheck | SettingEditParams.CacheLevel | SettingEditParams.ChallengeTTL | SettingEditParams.Ciphers | SettingEditParams.ZonesCNAMEFlattening | SettingEditParams.DevelopmentMode | SettingEditParams.EarlyHints | SettingEditParams.ZonesEdgeCacheTTL | SettingEditParams.EmailObfuscation | SettingEditParams.H2Prioritization | SettingEditParams.HotlinkProtection | SettingEditParams.HTTP2 | SettingEditParams.HTTP3 | SettingEditParams.ImageResizing | SettingEditParams.IPGeolocation | SettingEditParams.IPV6 | SettingEditParams.ZonesMaxUpload | SettingEditParams.MinTLSVersion | SettingEditParams.Minify | SettingEditParams.Mirage | SettingEditParams.MobileRedirect | SettingEditParams.NEL | SettingEditParams.OpportunisticEncryption | SettingEditParams.OpportunisticOnion | SettingEditParams.OrangeToOrange | SettingEditParams.OriginErrorPagePassThru | SettingEditParams.Polish | SettingEditParams.PrefetchPreload | SettingEditParams.ProxyReadTimeout | SettingEditParams.PseudoIPV4 | SettingEditParams.ZonesReplaceInsecureJS | SettingEditParams.ResponseBuffering | SettingEditParams.RocketLoader | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization | SettingEditParams.SecurityHeaders | SettingEditParams.SecurityLevel | SettingEditParams.ServerSideExcludes | SettingEditParams.ZonesSha1Support | SettingEditParams.SortQueryStringForCache | SettingEditParams.SSL | SettingEditParams.SSLRecommender | SettingEditParams.ZonesTLS1_2Only | SettingEditParams.TLS1_3 | SettingEditParams.TLSClientAuth | SettingEditParams.TrueClientIPHeader | SettingEditParams.WAF | SettingEditParams.WebP | SettingEditParams.Websocket
 
 export namespace SettingEditParams {
   export interface ZeroRTT {
@@ -2377,35 +2114,7 @@ export namespace SettingEditParams {
     /**
      * Body param: Current value of the zone setting.
      */
-    value:
-      | 0
-      | 30
-      | 60
-      | 120
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 691200
-      | 1382400
-      | 2073600
-      | 2678400
-      | 5356800
-      | 16070400
-      | 31536000;
+    value: 0 | 30 | 60 | 120 | 300 | 1200 | 1800 | 3600 | 7200 | 10800 | 14400 | 18000 | 28800 | 43200 | 57600 | 72000 | 86400 | 172800 | 259200 | 345600 | 432000 | 691200 | 1382400 | 2073600 | 2678400 | 5356800 | 16070400 | 31536000;
   }
 
   export interface BrowserCheck {
@@ -2456,21 +2165,7 @@ export namespace SettingEditParams {
     /**
      * Body param: Current value of the zone setting.
      */
-    value:
-      | 300
-      | 900
-      | 1800
-      | 2700
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 28800
-      | 57600
-      | 86400
-      | 604800
-      | 2592000
-      | 31536000;
+    value: 300 | 900 | 1800 | 2700 | 3600 | 7200 | 10800 | 14400 | 28800 | 57600 | 86400 | 604800 | 2592000 | 31536000;
   }
 
   export interface Ciphers {
@@ -2555,28 +2250,7 @@ export namespace SettingEditParams {
     /**
      * Body param: Current value of the zone setting.
      */
-    value:
-      | 30
-      | 60
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 518400
-      | 604800;
+    value: 30 | 60 | 300 | 1200 | 1800 | 3600 | 7200 | 10800 | 14400 | 18000 | 28800 | 43200 | 57600 | 72000 | 86400 | 172800 | 259200 | 345600 | 432000 | 518400 | 604800;
   }
 
   export interface EmailObfuscation {

@@ -1,7 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Policies } from './policies';
+import { Connections } from './connections';
+import { Scripts } from './scripts';
+import { Cookies } from './cookies';
+import * as PageShieldAPI from './page-shield';
 import * as ConnectionsAPI from './connections';
 import * as CookiesAPI from './cookies';
 import * as PoliciesAPI from './policies';
@@ -16,16 +23,9 @@ export class PageShield extends APIResource {
   /**
    * Updates Page Shield settings.
    */
-  update(
-    params: PageShieldUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PageShieldUpdateResponse> {
+  update(params: PageShieldUpdateParams, options?: Core.RequestOptions): Core.APIPromise<PageShieldUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/page_shield`, { body, ...options }) as Core.APIPromise<{
-        result: PageShieldUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/page_shield`, { body, ...options }) as Core.APIPromise<{ result: PageShieldUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -33,11 +33,7 @@ export class PageShield extends APIResource {
    */
   get(params: PageShieldGetParams, options?: Core.RequestOptions): Core.APIPromise<Setting | null> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{
-        result: Setting | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/page_shield`, options) as Core.APIPromise<{ result: Setting | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

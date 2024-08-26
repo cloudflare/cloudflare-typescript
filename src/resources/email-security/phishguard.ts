@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as PhishguardAPI from './phishguard';
 import { SinglePage } from '../../pagination';
@@ -9,37 +11,21 @@ export class Phishguard extends APIResource {
   /**
    * Get PhishGuard reports
    */
-  list(
-    params: PhishguardListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PhishguardListResponsesSinglePage, PhishguardListResponse> {
+  list(params: PhishguardListParams, options?: Core.RequestOptions): Core.PagePromise<PhishguardListResponsesSinglePage, PhishguardListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/phishguard/reports`,
-      PhishguardListResponsesSinglePage,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/email-security/phishguard/reports`, PhishguardListResponsesSinglePage, { query, ...options });
   }
 }
 
-export class PhishguardListResponsesSinglePage extends SinglePage<PhishguardListResponse> {}
+export class PhishguardListResponsesSinglePage extends SinglePage<PhishguardListResponse> {
+}
 
 export interface PhishguardListResponse {
   id: number;
 
   content: string;
 
-  disposition:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE';
+  disposition: 'MALICIOUS' | 'MALICIOUS-BEC' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'ENCRYPTED' | 'EXTERNAL' | 'UNKNOWN' | 'NONE';
 
   fields: PhishguardListResponse.Fields;
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ColosAPI from './colos';
 import { SinglePage } from '../../../pagination';
@@ -11,21 +13,16 @@ export class Colos extends APIResource {
    * period, sorted by usage starting from the most used colo. Colos without traffic
    * are also returned and sorted alphabetically.
    */
-  list(
-    params: ColoListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ColoListResponsesSinglePage, ColoListResponse> {
+  list(params: ColoListParams, options?: Core.RequestOptions): Core.PagePromise<ColoListResponsesSinglePage, ColoListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dex/colos`, ColoListResponsesSinglePage, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/accounts/${account_id}/dex/colos`, ColoListResponsesSinglePage, { query, ...options });
   }
 }
 
-export class ColoListResponsesSinglePage extends SinglePage<ColoListResponse> {}
+export class ColoListResponsesSinglePage extends SinglePage<ColoListResponse> {
+}
 
-export type ColoListResponse = unknown;
+export type ColoListResponse = unknown
 
 export interface ColoListParams {
   /**

@@ -1,43 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as OperationsAPI from './operations';
 import * as DiscoveryAPI from './discovery';
 import { DiscoveryOperationsV4PagePaginationArray } from './discovery';
-import { type V4PagePaginationArrayParams } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
   /**
    * Retrieve the most up to date view of discovered operations
    */
-  list(
-    params: OperationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation> {
+  list(params: OperationListParams, options?: Core.RequestOptions): Core.PagePromise<DiscoveryOperationsV4PagePaginationArray, DiscoveryAPI.DiscoveryOperation> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/api_gateway/discovery/operations`,
-      DiscoveryOperationsV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/api_gateway/discovery/operations`, DiscoveryOperationsV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Update the `state` on a discovered operation
    */
-  edit(
-    operationId: string,
-    params: OperationEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationEditResponse> {
+  edit(operationId: string, params: OperationEditParams, options?: Core.RequestOptions): Core.APIPromise<OperationEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/api_gateway/discovery/operations/${operationId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OperationEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/api_gateway/discovery/operations/${operationId}`, { body, ...options }) as Core.APIPromise<{ result: OperationEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -133,4 +119,4 @@ export namespace Operations {
   export import OperationEditParams = OperationsAPI.OperationEditParams;
 }
 
-export { DiscoveryOperationsV4PagePaginationArray };
+export { DiscoveryOperationsV4PagePaginationArray }

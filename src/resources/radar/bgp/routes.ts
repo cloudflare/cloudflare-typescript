@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as RoutesAPI from './routes';
 
@@ -9,77 +10,49 @@ export class Routes extends APIResource {
   /**
    * List all ASes on current global routing tables with routing statistics
    */
-  ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
-  ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
-  ases(
-    query: RouteAsesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteAsesResponse> {
+  ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>
+  ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>
+  ases(query: RouteAsesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse> {
     if (isRequestOptions(query)) {
       return this.ases({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/routes/ases', { query, ...options }) as Core.APIPromise<{
-        result: RouteAsesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/routes/ases', { query, ...options }) as Core.APIPromise<{ result: RouteAsesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all Multi-origin AS (MOAS) prefixes on the global routing tables.
    */
-  moas(query?: RouteMoasParams, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
-  moas(options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
-  moas(
-    query: RouteMoasParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteMoasResponse> {
+  moas(query?: RouteMoasParams, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>
+  moas(options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>
+  moas(query: RouteMoasParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse> {
     if (isRequestOptions(query)) {
       return this.moas({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/routes/moas', { query, ...options }) as Core.APIPromise<{
-        result: RouteMoasResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/routes/moas', { query, ...options }) as Core.APIPromise<{ result: RouteMoasResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lookup prefix-to-ASN mapping on global routing tables.
    */
-  pfx2as(query?: RoutePfx2asParams, options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>;
-  pfx2as(options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>;
-  pfx2as(
-    query: RoutePfx2asParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RoutePfx2asResponse> {
+  pfx2as(query?: RoutePfx2asParams, options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>
+  pfx2as(options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse>
+  pfx2as(query: RoutePfx2asParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RoutePfx2asResponse> {
     if (isRequestOptions(query)) {
       return this.pfx2as({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/routes/pfx2as', { query, ...options }) as Core.APIPromise<{
-        result: RoutePfx2asResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/routes/pfx2as', { query, ...options }) as Core.APIPromise<{ result: RoutePfx2asResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the BGP routing table stats (Beta).
    */
-  stats(query?: RouteStatsParams, options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>;
-  stats(options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>;
-  stats(
-    query: RouteStatsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RouteStatsResponse> {
+  stats(query?: RouteStatsParams, options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>
+  stats(options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse>
+  stats(query: RouteStatsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RouteStatsResponse> {
     if (isRequestOptions(query)) {
       return this.stats({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/routes/stats', { query, ...options }) as Core.APIPromise<{
-        result: RouteStatsResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/routes/stats', { query, ...options }) as Core.APIPromise<{ result: RouteStatsResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

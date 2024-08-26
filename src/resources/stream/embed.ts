@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as EmbedAPI from './embed';
 
@@ -12,14 +14,11 @@ export class Embed extends APIResource {
    */
   get(identifier: string, params: EmbedGetParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, {
-      ...options,
-      headers: { Accept: 'application/json', ...options?.headers },
-    });
+    return this._client.get(`/accounts/${account_id}/stream/${identifier}/embed`, { ...options, headers: { Accept: 'application/json', ...options?.headers } });
   }
 }
 
-export type EmbedGetResponse = string;
+export type EmbedGetResponse = string
 
 export interface EmbedGetParams {
   /**

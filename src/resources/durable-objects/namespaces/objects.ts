@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ObjectsAPI from './objects';
 import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
@@ -9,21 +11,14 @@ export class Objects extends APIResource {
   /**
    * Returns the Durable Objects in a given namespace.
    */
-  list(
-    id: string,
-    params: ObjectListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DurableObjectsCursorLimitPagination, DurableObject> {
+  list(id: string, params: ObjectListParams, options?: Core.RequestOptions): Core.PagePromise<DurableObjectsCursorLimitPagination, DurableObject> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`,
-      DurableObjectsCursorLimitPagination,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/workers/durable_objects/namespaces/${id}/objects`, DurableObjectsCursorLimitPagination, { query, ...options });
   }
 }
 
-export class DurableObjectsCursorLimitPagination extends CursorLimitPagination<DurableObject> {}
+export class DurableObjectsCursorLimitPagination extends CursorLimitPagination<DurableObject> {
+}
 
 export interface DurableObject {
   /**

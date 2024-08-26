@@ -2,7 +2,16 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { BotClass } from './bot-class';
+import { DeviceType } from './device-type';
+import { HTTPProtocol } from './http-protocol';
+import { HTTPMethod } from './http-method';
+import { IPVersion } from './ip-version';
+import { OS } from './os';
+import { TLSVersion } from './tls-version';
+import { BrowserFamily } from './browser-family';
 import * as AsesAPI from './ases';
 import * as BotClassAPI from './bot-class';
 import * as BrowserFamilyAPI from './browser-family';
@@ -27,20 +36,13 @@ export class Ases extends APIResource {
    * Get the top autonomous systems by HTTP traffic. Values are a percentage out of
    * the total traffic.
    */
-  get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
-  get(
-    query: AseGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AseGetResponse> {
+  get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>
+  get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>
+  get(query: AseGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (
-      this._client.get('/radar/http/top/ases', { query, ...options }) as Core.APIPromise<{
-        result: AseGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/http/top/ases', { query, ...options }) as Core.APIPromise<{ result: AseGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as CategoriesAPI from './categories';
 import { SinglePage } from '../../../pagination';
@@ -9,20 +11,14 @@ export class Categories extends APIResource {
   /**
    * Fetches a list of all categories.
    */
-  list(
-    params: CategoryListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CategoriesSinglePage, Category> {
+  list(params: CategoryListParams, options?: Core.RequestOptions): Core.PagePromise<CategoriesSinglePage, Category> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/gateway/categories`,
-      CategoriesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/gateway/categories`, CategoriesSinglePage, options);
   }
 }
 
-export class CategoriesSinglePage extends SinglePage<Category> {}
+export class CategoriesSinglePage extends SinglePage<Category> {
+}
 
 export interface Category {
   /**

@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
+import * as Core from '../../../core';
+import { Overrides } from './overrides';
+import { Packages } from './packages/packages';
 import * as OverridesAPI from './overrides';
 import * as PackagesAPI from './packages/packages';
 

@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
+import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as SettingsAPI from './settings';
+import { multipartFormRequestOptions } from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as TailAPI from '../../../../workers/scripts/tail';
 
@@ -10,37 +13,17 @@ export class Settings extends APIResource {
   /**
    * Patch script metadata, such as bindings
    */
-  edit(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: SettingEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingEditResponse> {
+  edit(dispatchNamespace: string, scriptName: string, params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: SettingEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: SettingEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get script settings from a script uploaded to a Workers for Platforms namespace.
    */
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: SettingGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SettingGetResponse> {
+  get(dispatchNamespace: string, scriptName: string, params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`,
-        options,
-      ) as Core.APIPromise<{ result: SettingGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/settings`, options) as Core.APIPromise<{ result: SettingGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

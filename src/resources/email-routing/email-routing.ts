@@ -1,7 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { DNS } from './dns';
+import { Rules } from './rules/rules';
+import { Addresses } from './addresses';
+import * as EmailRoutingAPI from './email-routing';
 import * as AddressesAPI from './addresses';
 import * as DNSAPI from './dns';
 import * as RulesAPI from './rules/rules';
@@ -15,44 +21,22 @@ export class EmailRouting extends APIResource {
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
    */
-  disable(
-    zoneIdentifier: string,
-    body: EmailRoutingDisableParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Settings> {
-    return (
-      this._client.post(`/zones/${zoneIdentifier}/email/routing/disable`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Settings }>
-    )._thenUnwrap((obj) => obj.result);
+  disable(zoneIdentifier: string, body: EmailRoutingDisableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
+    return (this._client.post(`/zones/${zoneIdentifier}/email/routing/disable`, { body, ...options }) as Core.APIPromise<{ result: Settings }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    */
-  enable(
-    zoneIdentifier: string,
-    body: EmailRoutingEnableParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Settings> {
-    return (
-      this._client.post(`/zones/${zoneIdentifier}/email/routing/enable`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Settings }>
-    )._thenUnwrap((obj) => obj.result);
+  enable(zoneIdentifier: string, body: EmailRoutingEnableParams, options?: Core.RequestOptions): Core.APIPromise<Settings> {
+    return (this._client.post(`/zones/${zoneIdentifier}/email/routing/enable`, { body, ...options }) as Core.APIPromise<{ result: Settings }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information about the settings for your Email Routing zone.
    */
   get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<Settings> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/email/routing`, options) as Core.APIPromise<{
-        result: Settings;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zoneIdentifier}/email/routing`, options) as Core.APIPromise<{ result: Settings }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -99,9 +83,9 @@ export interface Settings {
   tag?: string;
 }
 
-export type EmailRoutingDisableParams = unknown;
+export type EmailRoutingDisableParams = unknown
 
-export type EmailRoutingEnableParams = unknown;
+export type EmailRoutingEnableParams = unknown
 
 export namespace EmailRouting {
   export import DNS = DNSAPI.DNS;

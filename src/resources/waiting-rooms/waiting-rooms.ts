@@ -1,7 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Page } from './page';
+import { Events } from './events/events';
+import { Rules } from './rules';
+import { Statuses } from './statuses';
+import { Settings } from './settings';
+import * as WaitingRoomsAPI from './waiting-rooms';
 import * as PageAPI from './page';
 import * as RulesAPI from './rules';
 import * as SettingsAPI from './settings';
@@ -21,95 +29,52 @@ export class WaitingRooms extends APIResource {
    */
   create(params: WaitingRoomCreateParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/waiting_rooms`, { body, ...options }) as Core.APIPromise<{
-        result: WaitingRoom;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/waiting_rooms`, { body, ...options }) as Core.APIPromise<{ result: WaitingRoom }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured waiting room.
    */
-  update(
-    waitingRoomId: string,
-    params: WaitingRoomUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoom> {
+  update(waitingRoomId: string, params: WaitingRoomUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: WaitingRoom }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, { body, ...options }) as Core.APIPromise<{ result: WaitingRoom }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists waiting rooms.
    */
-  list(
-    params: WaitingRoomListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
+  list(params: WaitingRoomListParams, options?: Core.RequestOptions): Core.PagePromise<WaitingRoomsV4PagePaginationArray, WaitingRoom> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms`, WaitingRoomsV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Deletes a waiting room.
    */
-  delete(
-    waitingRoomId: string,
-    params: WaitingRoomDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoomDeleteResponse> {
+  delete(waitingRoomId: string, params: WaitingRoomDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoomDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{
-        result: WaitingRoomDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{ result: WaitingRoomDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patches a configured waiting room.
    */
-  edit(
-    waitingRoomId: string,
-    params: WaitingRoomEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoom> {
+  edit(waitingRoomId: string, params: WaitingRoomEditParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: WaitingRoom }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, { body, ...options }) as Core.APIPromise<{ result: WaitingRoom }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single configured waiting room.
    */
-  get(
-    waitingRoomId: string,
-    params: WaitingRoomGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WaitingRoom> {
+  get(waitingRoomId: string, params: WaitingRoomGetParams, options?: Core.RequestOptions): Core.APIPromise<WaitingRoom> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{
-        result: WaitingRoom;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}`, options) as Core.APIPromise<{ result: WaitingRoom }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WaitingRoomsV4PagePaginationArray extends V4PagePaginationArray<WaitingRoom> {}
+export class WaitingRoomsV4PagePaginationArray extends V4PagePaginationArray<WaitingRoom> {
+}
 
 export interface AdditionalRoutes {
   /**
@@ -271,24 +236,7 @@ export interface Query {
    * The language of the default page template. If no default_template_language is
    * provided, then `en-US` (English) will be used.
    */
-  default_template_language?:
-    | 'en-US'
-    | 'es-ES'
-    | 'de-DE'
-    | 'fr-FR'
-    | 'it-IT'
-    | 'ja-JP'
-    | 'ko-KR'
-    | 'pt-BR'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'nl-NL'
-    | 'pl-PL'
-    | 'id-ID'
-    | 'tr-TR'
-    | 'ar-EG'
-    | 'ru-RU'
-    | 'fa-IR';
+  default_template_language?: 'en-US' | 'es-ES' | 'de-DE' | 'fr-FR' | 'it-IT' | 'ja-JP' | 'ko-KR' | 'pt-BR' | 'zh-CN' | 'zh-TW' | 'nl-NL' | 'pl-PL' | 'id-ID' | 'tr-TR' | 'ar-EG' | 'ru-RU' | 'fa-IR';
 
   /**
    * A note that you can use to add more details about the waiting room.
@@ -578,24 +526,7 @@ export interface WaitingRoom {
    * The language of the default page template. If no default_template_language is
    * provided, then `en-US` (English) will be used.
    */
-  default_template_language?:
-    | 'en-US'
-    | 'es-ES'
-    | 'de-DE'
-    | 'fr-FR'
-    | 'it-IT'
-    | 'ja-JP'
-    | 'ko-KR'
-    | 'pt-BR'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'nl-NL'
-    | 'pl-PL'
-    | 'id-ID'
-    | 'tr-TR'
-    | 'ar-EG'
-    | 'ru-RU'
-    | 'fa-IR';
+  default_template_language?: 'en-US' | 'es-ES' | 'de-DE' | 'fr-FR' | 'it-IT' | 'ja-JP' | 'ko-KR' | 'pt-BR' | 'zh-CN' | 'zh-TW' | 'nl-NL' | 'pl-PL' | 'id-ID' | 'tr-TR' | 'ar-EG' | 'ru-RU' | 'fa-IR';
 
   /**
    * A note that you can use to add more details about the waiting room.
@@ -966,24 +897,7 @@ export interface WaitingRoomCreateParams {
    * Body param: The language of the default page template. If no
    * default_template_language is provided, then `en-US` (English) will be used.
    */
-  default_template_language?:
-    | 'en-US'
-    | 'es-ES'
-    | 'de-DE'
-    | 'fr-FR'
-    | 'it-IT'
-    | 'ja-JP'
-    | 'ko-KR'
-    | 'pt-BR'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'nl-NL'
-    | 'pl-PL'
-    | 'id-ID'
-    | 'tr-TR'
-    | 'ar-EG'
-    | 'ru-RU'
-    | 'fa-IR';
+  default_template_language?: 'en-US' | 'es-ES' | 'de-DE' | 'fr-FR' | 'it-IT' | 'ja-JP' | 'ko-KR' | 'pt-BR' | 'zh-CN' | 'zh-TW' | 'nl-NL' | 'pl-PL' | 'id-ID' | 'tr-TR' | 'ar-EG' | 'ru-RU' | 'fa-IR';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -1308,24 +1222,7 @@ export interface WaitingRoomUpdateParams {
    * Body param: The language of the default page template. If no
    * default_template_language is provided, then `en-US` (English) will be used.
    */
-  default_template_language?:
-    | 'en-US'
-    | 'es-ES'
-    | 'de-DE'
-    | 'fr-FR'
-    | 'it-IT'
-    | 'ja-JP'
-    | 'ko-KR'
-    | 'pt-BR'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'nl-NL'
-    | 'pl-PL'
-    | 'id-ID'
-    | 'tr-TR'
-    | 'ar-EG'
-    | 'ru-RU'
-    | 'fa-IR';
+  default_template_language?: 'en-US' | 'es-ES' | 'de-DE' | 'fr-FR' | 'it-IT' | 'ja-JP' | 'ko-KR' | 'pt-BR' | 'zh-CN' | 'zh-TW' | 'nl-NL' | 'pl-PL' | 'id-ID' | 'tr-TR' | 'ar-EG' | 'ru-RU' | 'fa-IR';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -1664,24 +1561,7 @@ export interface WaitingRoomEditParams {
    * Body param: The language of the default page template. If no
    * default_template_language is provided, then `en-US` (English) will be used.
    */
-  default_template_language?:
-    | 'en-US'
-    | 'es-ES'
-    | 'de-DE'
-    | 'fr-FR'
-    | 'it-IT'
-    | 'ja-JP'
-    | 'ko-KR'
-    | 'pt-BR'
-    | 'zh-CN'
-    | 'zh-TW'
-    | 'nl-NL'
-    | 'pl-PL'
-    | 'id-ID'
-    | 'tr-TR'
-    | 'ar-EG'
-    | 'ru-RU'
-    | 'fa-IR';
+  default_template_language?: 'en-US' | 'es-ES' | 'de-DE' | 'fr-FR' | 'it-IT' | 'ja-JP' | 'ko-KR' | 'pt-BR' | 'zh-CN' | 'zh-TW' | 'nl-NL' | 'pl-PL' | 'id-ID' | 'tr-TR' | 'ar-EG' | 'ru-RU' | 'fa-IR';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.

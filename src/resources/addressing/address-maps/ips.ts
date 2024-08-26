@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as IPsAPI from './ips';
 import * as Shared from '../../shared';
@@ -9,33 +11,17 @@ export class IPs extends APIResource {
   /**
    * Add an IP from a prefix owned by the account to a particular address map.
    */
-  update(
-    addressMapId: string,
-    ipAddress: string,
-    params: IPUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPUpdateResponse> {
+  update(addressMapId: string, ipAddress: string, params: IPUpdateParams, options?: Core.RequestOptions): Core.APIPromise<IPUpdateResponse> {
     const { account_id, body } = params;
-    return this._client.put(
-      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
-      { body: body, ...options },
-    );
+    return this._client.put(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`, { body: body, ...options });
   }
 
   /**
    * Remove an IP from a particular address map.
    */
-  delete(
-    addressMapId: string,
-    ipAddress: string,
-    params: IPDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IPDeleteResponse> {
+  delete(addressMapId: string, ipAddress: string, params: IPDeleteParams, options?: Core.RequestOptions): Core.APIPromise<IPDeleteResponse> {
     const { account_id } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`,
-      options,
-    );
+    return this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/ips/${ipAddress}`, options);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as DevicesAPI from './devices';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -9,20 +11,14 @@ export class Devices extends APIResource {
   /**
    * List details for devices using WARP
    */
-  list(
-    params: DeviceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeviceListResponsesV4PagePaginationArray, DeviceListResponse> {
+  list(params: DeviceListParams, options?: Core.RequestOptions): Core.PagePromise<DeviceListResponsesV4PagePaginationArray, DeviceListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/dex/fleet-status/devices`,
-      DeviceListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/dex/fleet-status/devices`, DeviceListResponsesV4PagePaginationArray, { query, ...options });
   }
 }
 
-export class DeviceListResponsesV4PagePaginationArray extends V4PagePaginationArray<DeviceListResponse> {}
+export class DeviceListResponsesV4PagePaginationArray extends V4PagePaginationArray<DeviceListResponse> {
+}
 
 export interface DeviceListResponse {
   /**

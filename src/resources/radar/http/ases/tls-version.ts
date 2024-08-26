@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TLSVersionAPI from './tls-version';
 
@@ -10,29 +11,13 @@ export class TLSVersion extends APIResource {
    * Get the top autonomous systems (AS), by HTTP traffic, of the requested TLS
    * protocol version. Values are a percentage out of the total traffic.
    */
-  get(
-    tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC',
-    query?: TLSVersionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSVersionGetResponse>;
-  get(
-    tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC',
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSVersionGetResponse>;
-  get(
-    tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC',
-    query: TLSVersionGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSVersionGetResponse> {
+  get(tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC', query?: TLSVersionGetParams, options?: Core.RequestOptions): Core.APIPromise<TLSVersionGetResponse>
+  get(tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC', options?: Core.RequestOptions): Core.APIPromise<TLSVersionGetResponse>
+  get(tlsVersion: 'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC', query: TLSVersionGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TLSVersionGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(tlsVersion, {}, query);
     }
-    return (
-      this._client.get(`/radar/http/top/ases/tls_version/${tlsVersion}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TLSVersionGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/http/top/ases/tls_version/${tlsVersion}`, { query, ...options }) as Core.APIPromise<{ result: TLSVersionGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

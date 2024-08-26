@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
 import * as EmailRoutingAPI from './email-routing';
@@ -10,11 +12,7 @@ export class DNS extends APIResource {
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    */
   create(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    return (
-      this._client.post(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{
-        result: EmailRoutingAPI.Settings;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{ result: EmailRoutingAPI.Settings }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -22,33 +20,21 @@ export class DNS extends APIResource {
    * required for Email Routing to work.
    */
   delete(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    return (
-      this._client.delete(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{
-        result: EmailRoutingAPI.Settings;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{ result: EmailRoutingAPI.Settings }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Unlock MX Records previously locked by Email Routing.
    */
   edit(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    return (
-      this._client.patch(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{
-        result: EmailRoutingAPI.Settings;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{ result: EmailRoutingAPI.Settings }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Show the DNS records needed to configure your Email Routing zone.
    */
   get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{
-        result: DNSGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{ result: DNSGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -81,28 +67,10 @@ export interface DNSRecord {
   /**
    * DNS record type.
    */
-  type?:
-    | 'A'
-    | 'AAAA'
-    | 'CNAME'
-    | 'HTTPS'
-    | 'TXT'
-    | 'SRV'
-    | 'LOC'
-    | 'MX'
-    | 'NS'
-    | 'CERT'
-    | 'DNSKEY'
-    | 'DS'
-    | 'NAPTR'
-    | 'SMIMEA'
-    | 'SSHFP'
-    | 'SVCB'
-    | 'TLSA'
-    | 'URI';
+  type?: 'A' | 'AAAA' | 'CNAME' | 'HTTPS' | 'TXT' | 'SRV' | 'LOC' | 'MX' | 'NS' | 'CERT' | 'DNSKEY' | 'DS' | 'NAPTR' | 'SMIMEA' | 'SSHFP' | 'SVCB' | 'TLSA' | 'URI';
 }
 
-export type DNSGetResponse = Array<DNSRecord>;
+export type DNSGetResponse = Array<DNSRecord>
 
 export namespace DNS {
   export import DNSRecord = DNSAPI.DNSRecord;

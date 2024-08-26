@@ -1,22 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({
-  apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'user@example.com',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource widgets', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.challenges.widgets.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
-      name: 'blog.cloudflare.com login form',
-    });
+    const responsePromise = client.challenges.widgets.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353', domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'], mode: 'non-interactive', name: 'blog.cloudflare.com login form' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,29 +18,11 @@ describe('resource widgets', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.challenges.widgets.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
-      name: 'blog.cloudflare.com login form',
-      direction: 'asc',
-      order: 'id',
-      page: 1,
-      per_page: 5,
-      bot_fight_mode: false,
-      clearance_level: 'no_clearance',
-      offlabel: false,
-      region: 'world',
-    });
+    const response = await client.challenges.widgets.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353', domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'], mode: 'non-interactive', name: 'blog.cloudflare.com login form', direction: 'asc', order: 'id', page: 1, per_page: 5, bot_fight_mode: false, clearance_level: 'no_clearance', offlabel: false, region: 'world' });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
-      name: 'blog.cloudflare.com login form',
-    });
+    const responsePromise = client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353', domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'], mode: 'non-interactive', name: 'blog.cloudflare.com login form' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,21 +33,11 @@ describe('resource widgets', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'non-interactive',
-      name: 'blog.cloudflare.com login form',
-      bot_fight_mode: false,
-      clearance_level: 'no_clearance',
-      offlabel: false,
-    });
+    const response = await client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353', domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'], mode: 'non-interactive', name: 'blog.cloudflare.com login form', bot_fight_mode: false, clearance_level: 'no_clearance', offlabel: false });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.challenges.widgets.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.challenges.widgets.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,19 +48,11 @@ describe('resource widgets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.challenges.widgets.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'asc',
-      order: 'id',
-      page: 1,
-      per_page: 5,
-    });
+    const response = await client.challenges.widgets.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353', direction: 'asc', order: 'id', page: 1, per_page: 5 });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -108,15 +63,11 @@ describe('resource widgets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -127,15 +78,11 @@ describe('resource widgets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('rotateSecret: only required params', async () => {
-    const responsePromise = client.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -146,9 +93,6 @@ describe('resource widgets', () => {
   });
 
   test('rotateSecret: required and optional params', async () => {
-    const response = await client.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      invalidate_immediately: true,
-    });
+    const response = await client.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', { account_id: '023e105f4ecef8ad9ca31a8372d0c353', invalidate_immediately: true });
   });
 });

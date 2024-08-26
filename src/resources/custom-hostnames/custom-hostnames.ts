@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { FallbackOrigin } from './fallback-origin';
 import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
 import * as FallbackOriginAPI from './fallback-origin';
@@ -19,41 +22,23 @@ export class CustomHostnames extends APIResource {
    * and the domain is not already pointing to the Managed CNAME host, the PATCH
    * method must be used once it is (to complete validation).
    */
-  create(
-    params: CustomHostnameCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomHostnameCreateResponse> {
+  create(params: CustomHostnameCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomHostnameCreateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/custom_hostnames`, { body, ...options }) as Core.APIPromise<{
-        result: CustomHostnameCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/custom_hostnames`, { body, ...options }) as Core.APIPromise<{ result: CustomHostnameCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List, search, sort, and filter all of your custom hostnames.
    */
-  list(
-    params: CustomHostnameListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse> {
+  list(params: CustomHostnameListParams, options?: Core.RequestOptions): Core.PagePromise<CustomHostnameListResponsesV4PagePaginationArray, CustomHostnameListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/custom_hostnames`,
-      CustomHostnameListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/custom_hostnames`, CustomHostnameListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Delete Custom Hostname (and any issued SSL certificates)
    */
-  delete(
-    customHostnameId: string,
-    params: CustomHostnameDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomHostnameDeleteResponse> {
+  delete(customHostnameId: string, params: CustomHostnameDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CustomHostnameDeleteResponse> {
     const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options);
   }
@@ -64,38 +49,22 @@ export class CustomHostnames extends APIResource {
    * control validation (DCV). Can also be used to change validation type, e.g., from
    * 'http' to 'email'.
    */
-  edit(
-    customHostnameId: string,
-    params: CustomHostnameEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomHostnameEditResponse> {
+  edit(customHostnameId: string, params: CustomHostnameEditParams, options?: Core.RequestOptions): Core.APIPromise<CustomHostnameEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomHostnameEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, { body, ...options }) as Core.APIPromise<{ result: CustomHostnameEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Custom Hostname Details
    */
-  get(
-    customHostnameId: string,
-    params: CustomHostnameGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomHostnameGetResponse> {
+  get(customHostnameId: string, params: CustomHostnameGetParams, options?: Core.RequestOptions): Core.APIPromise<CustomHostnameGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options) as Core.APIPromise<{
-        result: CustomHostnameGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/custom_hostnames/${customHostnameId}`, options) as Core.APIPromise<{ result: CustomHostnameGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CustomHostnameListResponsesV4PagePaginationArray extends V4PagePaginationArray<CustomHostnameListResponse> {}
+export class CustomHostnameListResponsesV4PagePaginationArray extends V4PagePaginationArray<CustomHostnameListResponse> {
+}
 
 /**
  * A ubiquitous bundle has the highest probability of being verified everywhere,
@@ -103,7 +72,7 @@ export class CustomHostnameListResponsesV4PagePaginationArray extends V4PagePagi
  * the shortest chain and newest intermediates. And the force bundle verifies the
  * chain, but does not otherwise modify it.
  */
-export type BundleMethod = 'ubiquitous' | 'optimal' | 'force';
+export type BundleMethod = 'ubiquitous' | 'optimal' | 'force'
 
 /**
  * A ubiquitous bundle has the highest probability of being verified everywhere,
@@ -111,7 +80,7 @@ export type BundleMethod = 'ubiquitous' | 'optimal' | 'force';
  * the shortest chain and newest intermediates. And the force bundle verifies the
  * chain, but does not otherwise modify it.
  */
-export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force';
+export type BundleMethodParam = 'ubiquitous' | 'optimal' | 'force'
 
 export interface CustomHostname {
   /**
@@ -168,23 +137,7 @@ export interface CustomHostname {
   /**
    * Status of the hostname's activation.
    */
-  status?:
-    | 'active'
-    | 'pending'
-    | 'active_redeploying'
-    | 'moved'
-    | 'pending_deletion'
-    | 'deleted'
-    | 'pending_blocked'
-    | 'pending_migration'
-    | 'pending_provisioned'
-    | 'test_pending'
-    | 'test_active'
-    | 'test_active_apex'
-    | 'test_blocked'
-    | 'test_failed'
-    | 'provisioned'
-    | 'blocked';
+  status?: 'active' | 'pending' | 'active_redeploying' | 'moved' | 'pending_deletion' | 'deleted' | 'pending_blocked' | 'pending_migration' | 'pending_provisioned' | 'test_pending' | 'test_active' | 'test_active_apex' | 'test_blocked' | 'test_failed' | 'provisioned' | 'blocked';
 
   /**
    * These are errors that were encountered while trying to activate a hostname.
@@ -268,28 +221,7 @@ export namespace CustomHostname {
     /**
      * Status of the hostname's SSL certificates.
      */
-    status?:
-      | 'initializing'
-      | 'pending_validation'
-      | 'deleted'
-      | 'pending_issuance'
-      | 'pending_deployment'
-      | 'pending_deletion'
-      | 'pending_expiration'
-      | 'expired'
-      | 'active'
-      | 'initializing_timed_out'
-      | 'validation_timed_out'
-      | 'issuance_timed_out'
-      | 'deployment_timed_out'
-      | 'deletion_timed_out'
-      | 'pending_cleanup'
-      | 'staging_deployment'
-      | 'staging_active'
-      | 'deactivating'
-      | 'inactive'
-      | 'backup_issued'
-      | 'holding_deployment';
+    status?: 'initializing' | 'pending_validation' | 'deleted' | 'pending_issuance' | 'pending_deployment' | 'pending_deletion' | 'pending_expiration' | 'expired' | 'active' | 'initializing_timed_out' | 'validation_timed_out' | 'issuance_timed_out' | 'deployment_timed_out' | 'deletion_timed_out' | 'pending_cleanup' | 'staging_deployment' | 'staging_active' | 'deactivating' | 'inactive' | 'backup_issued' | 'holding_deployment';
 
     /**
      * Level of validation to be used for this hostname. Domain validation (dv) must be
@@ -441,24 +373,24 @@ export namespace CustomHostname {
 /**
  * Domain control validation (DCV) method used for this hostname.
  */
-export type DCVMethod = 'http' | 'txt' | 'email';
+export type DCVMethod = 'http' | 'txt' | 'email'
 
 /**
  * Domain control validation (DCV) method used for this hostname.
  */
-export type DCVMethodParam = 'http' | 'txt' | 'email';
+export type DCVMethodParam = 'http' | 'txt' | 'email'
 
 /**
  * Level of validation to be used for this hostname. Domain validation (dv) must be
  * used.
  */
-export type DomainValidationType = 'dv';
+export type DomainValidationType = 'dv'
 
 /**
  * Level of validation to be used for this hostname. Domain validation (dv) must be
  * used.
  */
-export type DomainValidationTypeParam = 'dv';
+export type DomainValidationTypeParam = 'dv'
 
 export interface CustomHostnameCreateResponse {
   /**
@@ -515,23 +447,7 @@ export interface CustomHostnameCreateResponse {
   /**
    * Status of the hostname's activation.
    */
-  status?:
-    | 'active'
-    | 'pending'
-    | 'active_redeploying'
-    | 'moved'
-    | 'pending_deletion'
-    | 'deleted'
-    | 'pending_blocked'
-    | 'pending_migration'
-    | 'pending_provisioned'
-    | 'test_pending'
-    | 'test_active'
-    | 'test_active_apex'
-    | 'test_blocked'
-    | 'test_failed'
-    | 'provisioned'
-    | 'blocked';
+  status?: 'active' | 'pending' | 'active_redeploying' | 'moved' | 'pending_deletion' | 'deleted' | 'pending_blocked' | 'pending_migration' | 'pending_provisioned' | 'test_pending' | 'test_active' | 'test_active_apex' | 'test_blocked' | 'test_failed' | 'provisioned' | 'blocked';
 
   /**
    * These are errors that were encountered while trying to activate a hostname.
@@ -615,28 +531,7 @@ export namespace CustomHostnameCreateResponse {
     /**
      * Status of the hostname's SSL certificates.
      */
-    status?:
-      | 'initializing'
-      | 'pending_validation'
-      | 'deleted'
-      | 'pending_issuance'
-      | 'pending_deployment'
-      | 'pending_deletion'
-      | 'pending_expiration'
-      | 'expired'
-      | 'active'
-      | 'initializing_timed_out'
-      | 'validation_timed_out'
-      | 'issuance_timed_out'
-      | 'deployment_timed_out'
-      | 'deletion_timed_out'
-      | 'pending_cleanup'
-      | 'staging_deployment'
-      | 'staging_active'
-      | 'deactivating'
-      | 'inactive'
-      | 'backup_issued'
-      | 'holding_deployment';
+    status?: 'initializing' | 'pending_validation' | 'deleted' | 'pending_issuance' | 'pending_deployment' | 'pending_deletion' | 'pending_expiration' | 'expired' | 'active' | 'initializing_timed_out' | 'validation_timed_out' | 'issuance_timed_out' | 'deployment_timed_out' | 'deletion_timed_out' | 'pending_cleanup' | 'staging_deployment' | 'staging_active' | 'deactivating' | 'inactive' | 'backup_issued' | 'holding_deployment';
 
     /**
      * Level of validation to be used for this hostname. Domain validation (dv) must be
@@ -840,23 +735,7 @@ export interface CustomHostnameListResponse {
   /**
    * Status of the hostname's activation.
    */
-  status?:
-    | 'active'
-    | 'pending'
-    | 'active_redeploying'
-    | 'moved'
-    | 'pending_deletion'
-    | 'deleted'
-    | 'pending_blocked'
-    | 'pending_migration'
-    | 'pending_provisioned'
-    | 'test_pending'
-    | 'test_active'
-    | 'test_active_apex'
-    | 'test_blocked'
-    | 'test_failed'
-    | 'provisioned'
-    | 'blocked';
+  status?: 'active' | 'pending' | 'active_redeploying' | 'moved' | 'pending_deletion' | 'deleted' | 'pending_blocked' | 'pending_migration' | 'pending_provisioned' | 'test_pending' | 'test_active' | 'test_active_apex' | 'test_blocked' | 'test_failed' | 'provisioned' | 'blocked';
 
   /**
    * These are errors that were encountered while trying to activate a hostname.
@@ -940,28 +819,7 @@ export namespace CustomHostnameListResponse {
     /**
      * Status of the hostname's SSL certificates.
      */
-    status?:
-      | 'initializing'
-      | 'pending_validation'
-      | 'deleted'
-      | 'pending_issuance'
-      | 'pending_deployment'
-      | 'pending_deletion'
-      | 'pending_expiration'
-      | 'expired'
-      | 'active'
-      | 'initializing_timed_out'
-      | 'validation_timed_out'
-      | 'issuance_timed_out'
-      | 'deployment_timed_out'
-      | 'deletion_timed_out'
-      | 'pending_cleanup'
-      | 'staging_deployment'
-      | 'staging_active'
-      | 'deactivating'
-      | 'inactive'
-      | 'backup_issued'
-      | 'holding_deployment';
+    status?: 'initializing' | 'pending_validation' | 'deleted' | 'pending_issuance' | 'pending_deployment' | 'pending_deletion' | 'pending_expiration' | 'expired' | 'active' | 'initializing_timed_out' | 'validation_timed_out' | 'issuance_timed_out' | 'deployment_timed_out' | 'deletion_timed_out' | 'pending_cleanup' | 'staging_deployment' | 'staging_active' | 'deactivating' | 'inactive' | 'backup_issued' | 'holding_deployment';
 
     /**
      * Level of validation to be used for this hostname. Domain validation (dv) must be
@@ -1172,23 +1030,7 @@ export interface CustomHostnameEditResponse {
   /**
    * Status of the hostname's activation.
    */
-  status?:
-    | 'active'
-    | 'pending'
-    | 'active_redeploying'
-    | 'moved'
-    | 'pending_deletion'
-    | 'deleted'
-    | 'pending_blocked'
-    | 'pending_migration'
-    | 'pending_provisioned'
-    | 'test_pending'
-    | 'test_active'
-    | 'test_active_apex'
-    | 'test_blocked'
-    | 'test_failed'
-    | 'provisioned'
-    | 'blocked';
+  status?: 'active' | 'pending' | 'active_redeploying' | 'moved' | 'pending_deletion' | 'deleted' | 'pending_blocked' | 'pending_migration' | 'pending_provisioned' | 'test_pending' | 'test_active' | 'test_active_apex' | 'test_blocked' | 'test_failed' | 'provisioned' | 'blocked';
 
   /**
    * These are errors that were encountered while trying to activate a hostname.
@@ -1272,28 +1114,7 @@ export namespace CustomHostnameEditResponse {
     /**
      * Status of the hostname's SSL certificates.
      */
-    status?:
-      | 'initializing'
-      | 'pending_validation'
-      | 'deleted'
-      | 'pending_issuance'
-      | 'pending_deployment'
-      | 'pending_deletion'
-      | 'pending_expiration'
-      | 'expired'
-      | 'active'
-      | 'initializing_timed_out'
-      | 'validation_timed_out'
-      | 'issuance_timed_out'
-      | 'deployment_timed_out'
-      | 'deletion_timed_out'
-      | 'pending_cleanup'
-      | 'staging_deployment'
-      | 'staging_active'
-      | 'deactivating'
-      | 'inactive'
-      | 'backup_issued'
-      | 'holding_deployment';
+    status?: 'initializing' | 'pending_validation' | 'deleted' | 'pending_issuance' | 'pending_deployment' | 'pending_deletion' | 'pending_expiration' | 'expired' | 'active' | 'initializing_timed_out' | 'validation_timed_out' | 'issuance_timed_out' | 'deployment_timed_out' | 'deletion_timed_out' | 'pending_cleanup' | 'staging_deployment' | 'staging_active' | 'deactivating' | 'inactive' | 'backup_issued' | 'holding_deployment';
 
     /**
      * Level of validation to be used for this hostname. Domain validation (dv) must be
@@ -1497,23 +1318,7 @@ export interface CustomHostnameGetResponse {
   /**
    * Status of the hostname's activation.
    */
-  status?:
-    | 'active'
-    | 'pending'
-    | 'active_redeploying'
-    | 'moved'
-    | 'pending_deletion'
-    | 'deleted'
-    | 'pending_blocked'
-    | 'pending_migration'
-    | 'pending_provisioned'
-    | 'test_pending'
-    | 'test_active'
-    | 'test_active_apex'
-    | 'test_blocked'
-    | 'test_failed'
-    | 'provisioned'
-    | 'blocked';
+  status?: 'active' | 'pending' | 'active_redeploying' | 'moved' | 'pending_deletion' | 'deleted' | 'pending_blocked' | 'pending_migration' | 'pending_provisioned' | 'test_pending' | 'test_active' | 'test_active_apex' | 'test_blocked' | 'test_failed' | 'provisioned' | 'blocked';
 
   /**
    * These are errors that were encountered while trying to activate a hostname.
@@ -1597,28 +1402,7 @@ export namespace CustomHostnameGetResponse {
     /**
      * Status of the hostname's SSL certificates.
      */
-    status?:
-      | 'initializing'
-      | 'pending_validation'
-      | 'deleted'
-      | 'pending_issuance'
-      | 'pending_deployment'
-      | 'pending_deletion'
-      | 'pending_expiration'
-      | 'expired'
-      | 'active'
-      | 'initializing_timed_out'
-      | 'validation_timed_out'
-      | 'issuance_timed_out'
-      | 'deployment_timed_out'
-      | 'deletion_timed_out'
-      | 'pending_cleanup'
-      | 'staging_deployment'
-      | 'staging_active'
-      | 'deactivating'
-      | 'inactive'
-      | 'backup_issued'
-      | 'holding_deployment';
+    status?: 'initializing' | 'pending_validation' | 'deleted' | 'pending_issuance' | 'pending_deployment' | 'pending_deletion' | 'pending_expiration' | 'expired' | 'active' | 'initializing_timed_out' | 'validation_timed_out' | 'issuance_timed_out' | 'deployment_timed_out' | 'deletion_timed_out' | 'pending_cleanup' | 'staging_deployment' | 'staging_active' | 'deactivating' | 'inactive' | 'backup_issued' | 'holding_deployment';
 
     /**
      * Level of validation to be used for this hostname. Domain validation (dv) must be

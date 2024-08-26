@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { TURN } from './turn/turn';
+import * as CallsAPI from './calls';
 import * as TURNAPI from './turn/turn';
 import { SinglePage } from '../../pagination';
 
@@ -14,11 +18,7 @@ export class Calls extends APIResource {
    */
   create(params: CallCreateParams, options?: Core.RequestOptions): Core.APIPromise<CallsAppWithSecret> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/calls/apps`, { body, ...options }) as Core.APIPromise<{
-        result: CallsAppWithSecret;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/calls/apps`, { body, ...options }) as Core.APIPromise<{ result: CallsAppWithSecret }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -26,27 +26,15 @@ export class Calls extends APIResource {
    */
   update(appId: string, params: CallUpdateParams, options?: Core.RequestOptions): Core.APIPromise<CallsApp> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/calls/apps/${appId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CallsApp }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/calls/apps/${appId}`, { body, ...options }) as Core.APIPromise<{ result: CallsApp }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all apps in the Cloudflare account
    */
-  list(
-    params: CallListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CallListResponsesSinglePage, CallListResponse> {
+  list(params: CallListParams, options?: Core.RequestOptions): Core.PagePromise<CallListResponsesSinglePage, CallListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/calls/apps`,
-      CallListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, CallListResponsesSinglePage, options);
   }
 
   /**
@@ -54,11 +42,7 @@ export class Calls extends APIResource {
    */
   delete(appId: string, params: CallDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CallsApp> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
-        result: CallsApp;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{ result: CallsApp }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -66,15 +50,12 @@ export class Calls extends APIResource {
    */
   get(appId: string, params: CallGetParams, options?: Core.RequestOptions): Core.APIPromise<CallsApp> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
-        result: CallsApp;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{ result: CallsApp }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CallListResponsesSinglePage extends SinglePage<CallListResponse> {}
+export class CallListResponsesSinglePage extends SinglePage<CallListResponse> {
+}
 
 export interface CallsApp {
   /**
@@ -128,7 +109,7 @@ export interface CallsAppWithSecret {
 /**
  * Bearer token
  */
-export type CallListResponse = string;
+export type CallListResponse = string
 
 export interface CallCreateParams {
   /**

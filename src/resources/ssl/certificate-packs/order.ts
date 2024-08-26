@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as OrderAPI from './order';
 import * as CertificatePacksAPI from './certificate-packs';
@@ -11,12 +13,7 @@ export class Order extends APIResource {
    */
   create(params: OrderCreateParams, options?: Core.RequestOptions): Core.APIPromise<OrderCreateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/ssl/certificate_packs/order`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OrderCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/ssl/certificate_packs/order`, { body, ...options }) as Core.APIPromise<{ result: OrderCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SchemasAPI from './schemas';
 
@@ -10,11 +12,7 @@ export class Schemas extends APIResource {
    */
   list(params: SchemaListParams, options?: Core.RequestOptions): Core.APIPromise<SchemaListResponse> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/api_gateway/schemas`, { query, ...options }) as Core.APIPromise<{
-        result: SchemaListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/api_gateway/schemas`, { query, ...options }) as Core.APIPromise<{ result: SchemaListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

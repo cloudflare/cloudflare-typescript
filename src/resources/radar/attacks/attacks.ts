@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
+import * as Core from '../../../core';
+import { Layer3 } from './layer3/layer3';
+import { Layer7 } from './layer7/layer7';
 import * as Layer3API from './layer3/layer3';
 import * as Layer7API from './layer7/layer7';
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CurrentsAPI from './currents';
 
@@ -11,16 +13,11 @@ export class Currents extends APIResource {
    */
   get(params: CurrentGetParams, options?: Core.RequestOptions): Core.APIPromise<CurrentGetResponse> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/spectrum/analytics/aggregate/current`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: CurrentGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/spectrum/analytics/aggregate/current`, { query, ...options }) as Core.APIPromise<{ result: CurrentGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type CurrentGetResponse = Array<CurrentGetResponse.CurrentGetResponseItem>;
+export type CurrentGetResponse = Array<CurrentGetResponse.CurrentGetResponseItem>
 
 export namespace CurrentGetResponse {
   export interface CurrentGetResponseItem {

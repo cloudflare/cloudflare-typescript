@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { DirectUploads } from './direct-uploads';
 import * as V2API from './v2';
 import * as V1API from '../v1/v1';
 import * as DirectUploadsAPI from './direct-uploads';
@@ -16,11 +19,7 @@ export class V2 extends APIResource {
    */
   list(params: V2ListParams, options?: Core.RequestOptions): Core.APIPromise<V2ListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/images/v2`, { query, ...options }) as Core.APIPromise<{
-        result: V2ListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/images/v2`, { query, ...options }) as Core.APIPromise<{ result: V2ListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as DCVDelegationAPI from './dcv-delegation';
 
 export class DCVDelegation extends APIResource {
   /**
@@ -10,11 +13,7 @@ export class DCVDelegation extends APIResource {
    */
   get(params: DCVDelegationGetParams, options?: Core.RequestOptions): Core.APIPromise<DCVDelegationUUID> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/dcv_delegation/uuid`, options) as Core.APIPromise<{
-        result: DCVDelegationUUID;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/dcv_delegation/uuid`, options) as Core.APIPromise<{ result: DCVDelegationUUID }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as CacheReserveAPI from './cache-reserve';
 
@@ -11,17 +13,9 @@ export class CacheReserveResource extends APIResource {
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
    */
-  clear(
-    params: CacheReserveClearParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveClearResponse> {
+  clear(params: CacheReserveClearParams, options?: Core.RequestOptions): Core.APIPromise<CacheReserveClearResponse> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/cache/cache_reserve_clear`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: CacheReserveClearResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/cache/cache_reserve_clear`, { body: body, ...options }) as Core.APIPromise<{ result: CacheReserveClearResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -32,16 +26,9 @@ export class CacheReserveResource extends APIResource {
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
    */
-  edit(
-    params: CacheReserveEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveEditResponse> {
+  edit(params: CacheReserveEditParams, options?: Core.RequestOptions): Core.APIPromise<CacheReserveEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/cache/cache_reserve`, { body, ...options }) as Core.APIPromise<{
-        result: CacheReserveEditResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/cache/cache_reserve`, { body, ...options }) as Core.APIPromise<{ result: CacheReserveEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -52,16 +39,9 @@ export class CacheReserveResource extends APIResource {
    * [developer docs](https://developers.cloudflare.com/cache/about/cache-reserve)
    * for more information.
    */
-  get(
-    params: CacheReserveGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveGetResponse> {
+  get(params: CacheReserveGetParams, options?: Core.RequestOptions): Core.APIPromise<CacheReserveGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/cache/cache_reserve`, options) as Core.APIPromise<{
-        result: CacheReserveGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/cache/cache_reserve`, options) as Core.APIPromise<{ result: CacheReserveGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -70,33 +50,26 @@ export class CacheReserveResource extends APIResource {
    * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
    * that you cannot undo or cancel this operation.
    */
-  status(
-    params: CacheReserveStatusParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CacheReserveStatusResponse> {
+  status(params: CacheReserveStatusParams, options?: Core.RequestOptions): Core.APIPromise<CacheReserveStatusResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/cache/cache_reserve_clear`, options) as Core.APIPromise<{
-        result: CacheReserveStatusResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/cache/cache_reserve_clear`, options) as Core.APIPromise<{ result: CacheReserveStatusResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
 /**
  * ID of the zone setting.
  */
-export type CacheReserve = 'cache_reserve';
+export type CacheReserve = 'cache_reserve'
 
 /**
  * ID of the zone setting.
  */
-export type CacheReserveClear = 'cache_reserve_clear';
+export type CacheReserveClear = 'cache_reserve_clear'
 
 /**
  * The current state of the Cache Reserve Clear operation.
  */
-export type State = 'In-progress' | 'Completed';
+export type State = 'In-progress' | 'Completed'
 
 /**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first

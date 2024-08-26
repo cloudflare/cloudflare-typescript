@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as NetworksAPI from './networks';
 import { SinglePage } from '../../../pagination';
@@ -11,81 +13,45 @@ export class Networks extends APIResource {
    */
   create(params: NetworkCreateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{
-        result: DeviceNetwork | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/devices/networks`, { body, ...options }) as Core.APIPromise<{ result: DeviceNetwork | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured device managed network.
    */
-  update(
-    networkId: string,
-    params: NetworkUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceNetwork | null> {
+  update(networkId: string, params: NetworkUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DeviceNetwork | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/devices/networks/${networkId}`, { body, ...options }) as Core.APIPromise<{ result: DeviceNetwork | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a list of managed networks for an account.
    */
-  list(
-    params: NetworkListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
+  list(params: NetworkListParams, options?: Core.RequestOptions): Core.PagePromise<DeviceNetworksSinglePage, DeviceNetwork> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/networks`,
-      DeviceNetworksSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/devices/networks`, DeviceNetworksSinglePage, options);
   }
 
   /**
    * Deletes a device managed network and fetches a list of the remaining device
    * managed networks for an account.
    */
-  delete(
-    networkId: string,
-    params: NetworkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<NetworkDeleteResponse | null> {
+  delete(networkId: string, params: NetworkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<NetworkDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/devices/networks/${networkId}`,
-        options,
-      ) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{ result: NetworkDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches details for a single managed network.
    */
-  get(
-    networkId: string,
-    params: NetworkGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DeviceNetwork | null> {
+  get(networkId: string, params: NetworkGetParams, options?: Core.RequestOptions): Core.APIPromise<DeviceNetwork | null> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{
-        result: DeviceNetwork | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/devices/networks/${networkId}`, options) as Core.APIPromise<{ result: DeviceNetwork | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DeviceNetworksSinglePage extends SinglePage<DeviceNetwork> {}
+export class DeviceNetworksSinglePage extends SinglePage<DeviceNetwork> {
+}
 
 export interface DeviceNetwork {
   /**
@@ -131,7 +97,7 @@ export namespace DeviceNetwork {
   }
 }
 
-export type NetworkDeleteResponse = Array<DeviceNetwork>;
+export type NetworkDeleteResponse = Array<DeviceNetwork>
 
 export interface NetworkCreateParams {
   /**

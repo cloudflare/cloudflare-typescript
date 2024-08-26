@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as URLNormalizationAPI from './url-normalization';
 
 export class URLNormalization extends APIResource {
   /**
    * Updates the URL normalization settings.
    */
-  update(
-    params: URLNormalizationUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLNormalizationUpdateResponse> {
+  update(params: URLNormalizationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<URLNormalizationUpdateResponse> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/url_normalization`, { body, ...options });
   }
@@ -18,10 +18,7 @@ export class URLNormalization extends APIResource {
   /**
    * Fetches the current URL normalization settings.
    */
-  get(
-    params: URLNormalizationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<URLNormalizationGetResponse> {
+  get(params: URLNormalizationGetParams, options?: Core.RequestOptions): Core.APIPromise<URLNormalizationGetResponse> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/url_normalization`, options);
   }

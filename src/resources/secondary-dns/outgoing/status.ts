@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as StatusAPI from './status';
 import * as OutgoingAPI from './outgoing';
@@ -11,11 +13,7 @@ export class Status extends APIResource {
    */
   get(params: StatusGetParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingAPI.EnableTransfer> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/secondary_dns/outgoing/status`, options) as Core.APIPromise<{
-        result: OutgoingAPI.EnableTransfer;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/secondary_dns/outgoing/status`, options) as Core.APIPromise<{ result: OutgoingAPI.EnableTransfer }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

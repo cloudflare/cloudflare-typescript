@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
 
@@ -10,47 +11,26 @@ export class TCPResetsTimeouts extends APIResource {
    * Percentage distribution by connection stage of TCP connections terminated within
    * the first 10 packets by a reset or timeout, for a given time period.
    */
-  summary(
-    query?: TCPResetsTimeoutSummaryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TCPResetsTimeoutSummaryResponse>;
-  summary(options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutSummaryResponse>;
-  summary(
-    query: TCPResetsTimeoutSummaryParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TCPResetsTimeoutSummaryResponse> {
+  summary(query?: TCPResetsTimeoutSummaryParams, options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutSummaryResponse>
+  summary(options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutSummaryResponse>
+  summary(query: TCPResetsTimeoutSummaryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutSummaryResponse> {
     if (isRequestOptions(query)) {
       return this.summary({}, query);
     }
-    return (
-      this._client.get('/radar/tcp_resets_timeouts/summary', { query, ...options }) as Core.APIPromise<{
-        result: TCPResetsTimeoutSummaryResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/tcp_resets_timeouts/summary', { query, ...options }) as Core.APIPromise<{ result: TCPResetsTimeoutSummaryResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution by connection stage of TCP connections terminated within
    * the first 10 packets by a reset or timeout, over time.
    */
-  timeseriesGroups(
-    query?: TCPResetsTimeoutTimeseriesGroupsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TCPResetsTimeoutTimeseriesGroupsResponse>;
-  timeseriesGroups(options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutTimeseriesGroupsResponse>;
-  timeseriesGroups(
-    query: TCPResetsTimeoutTimeseriesGroupsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TCPResetsTimeoutTimeseriesGroupsResponse> {
+  timeseriesGroups(query?: TCPResetsTimeoutTimeseriesGroupsParams, options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutTimeseriesGroupsResponse>
+  timeseriesGroups(options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutTimeseriesGroupsResponse>
+  timeseriesGroups(query: TCPResetsTimeoutTimeseriesGroupsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TCPResetsTimeoutTimeseriesGroupsResponse> {
     if (isRequestOptions(query)) {
       return this.timeseriesGroups({}, query);
     }
-    return (
-      this._client.get('/radar/tcp_resets_timeouts/timeseries_groups', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TCPResetsTimeoutTimeseriesGroupsResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/tcp_resets_timeouts/timeseries_groups', { query, ...options }) as Core.APIPromise<{ result: TCPResetsTimeoutTimeseriesGroupsResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

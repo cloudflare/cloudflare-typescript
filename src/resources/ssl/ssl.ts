@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
+import * as Core from '../../core';
+import { Analyze } from './analyze';
+import { CertificatePacks } from './certificate-packs/certificate-packs';
+import { Recommendations } from './recommendations';
+import { Universal } from './universal/universal';
+import { VerificationResource } from './verification';
 import * as AnalyzeAPI from './analyze';
 import * as RecommendationsAPI from './recommendations';
 import * as VerificationAPI from './verification';
@@ -9,9 +17,7 @@ import * as UniversalAPI from './universal/universal';
 
 export class SSL extends APIResource {
   analyze: AnalyzeAPI.Analyze = new AnalyzeAPI.Analyze(this._client);
-  certificatePacks: CertificatePacksAPI.CertificatePacks = new CertificatePacksAPI.CertificatePacks(
-    this._client,
-  );
+  certificatePacks: CertificatePacksAPI.CertificatePacks = new CertificatePacksAPI.CertificatePacks(this._client);
   recommendations: RecommendationsAPI.Recommendations = new RecommendationsAPI.Recommendations(this._client);
   universal: UniversalAPI.Universal = new UniversalAPI.Universal(this._client);
   verification: VerificationAPI.VerificationResource = new VerificationAPI.VerificationResource(this._client);

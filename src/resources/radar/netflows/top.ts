@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TopAPI from './top';
 
@@ -10,40 +11,26 @@ export class Top extends APIResource {
    * Get the top autonomous systems (AS) by network traffic (NetFlows) over a given
    * time period. Visit https://en.wikipedia.org/wiki/NetFlow for more information.
    */
-  ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
-  ases(options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
-  ases(
-    query: TopAsesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopAsesResponse> {
+  ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>
+  ases(options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>
+  ases(query: TopAsesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse> {
     if (isRequestOptions(query)) {
       return this.ases({}, query);
     }
-    return (
-      this._client.get('/radar/netflows/top/ases', { query, ...options }) as Core.APIPromise<{
-        result: TopAsesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/netflows/top/ases', { query, ...options }) as Core.APIPromise<{ result: TopAsesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the top locations by network traffic (NetFlows) over a given time period.
    * Visit https://en.wikipedia.org/wiki/NetFlow for more information.
    */
-  locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
-  locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
-  locations(
-    query: TopLocationsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLocationsResponse> {
+  locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>
+  locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>
+  locations(query: TopLocationsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse> {
     if (isRequestOptions(query)) {
       return this.locations({}, query);
     }
-    return (
-      this._client.get('/radar/netflows/top/locations', { query, ...options }) as Core.APIPromise<{
-        result: TopLocationsResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/netflows/top/locations', { query, ...options }) as Core.APIPromise<{ result: TopLocationsResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as PermissionsAPI from './permissions';
 
@@ -8,17 +10,9 @@ export class Permissions extends APIResource {
   /**
    * Grant permission to indicator feed
    */
-  create(
-    params: PermissionCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PermissionCreateResponse> {
+  create(params: PermissionCreateParams, options?: Core.RequestOptions): Core.APIPromise<PermissionCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/add`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PermissionCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/add`, { body, ...options }) as Core.APIPromise<{ result: PermissionCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -26,28 +20,15 @@ export class Permissions extends APIResource {
    */
   list(params: PermissionListParams, options?: Core.RequestOptions): Core.APIPromise<PermissionListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/intel/indicator-feeds/permissions/view`,
-        options,
-      ) as Core.APIPromise<{ result: PermissionListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/intel/indicator-feeds/permissions/view`, options) as Core.APIPromise<{ result: PermissionListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Revoke permission to indicator feed
    */
-  delete(
-    params: PermissionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PermissionDeleteResponse> {
+  delete(params: PermissionDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PermissionDeleteResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/remove`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PermissionDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/intel/indicator-feeds/permissions/remove`, { body, ...options }) as Core.APIPromise<{ result: PermissionDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -58,7 +39,7 @@ export interface PermissionCreateResponse {
   success?: boolean;
 }
 
-export type PermissionListResponse = Array<PermissionListResponse.PermissionListResponseItem>;
+export type PermissionListResponse = Array<PermissionListResponse.PermissionListResponseItem>
 
 export namespace PermissionListResponse {
   export interface PermissionListResponseItem {

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ZonesAPI from './zones';
 import * as Shared from '../../shared';
@@ -9,31 +11,17 @@ export class Zones extends APIResource {
   /**
    * Add a zone as a member of a particular address map.
    */
-  update(
-    addressMapId: string,
-    params: ZoneUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneUpdateResponse> {
+  update(addressMapId: string, params: ZoneUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ZoneUpdateResponse> {
     const { zone_id, account_id, body } = params;
-    return this._client.put(
-      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
-      { body: body, ...options },
-    );
+    return this._client.put(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`, { body: body, ...options });
   }
 
   /**
    * Remove a zone as a member of a particular address map.
    */
-  delete(
-    addressMapId: string,
-    params: ZoneDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ZoneDeleteResponse> {
+  delete(addressMapId: string, params: ZoneDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneDeleteResponse> {
     const { zone_id, account_id } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`,
-      options,
-    );
+    return this._client.delete(`/accounts/${account_id}/addressing/address_maps/${addressMapId}/zones/${zone_id}`, options);
   }
 }
 

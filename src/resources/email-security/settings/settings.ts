@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
+import * as Core from '../../../core';
+import { AllowPatterns } from './allow-patterns';
+import { BlockSenders } from './block-senders';
+import { Domains } from './domains';
+import { ImpersonationRegistry } from './impersonation-registry';
+import { TrustedDomains } from './trusted-domains';
 import * as AllowPatternsAPI from './allow-patterns';
 import * as BlockSendersAPI from './block-senders';
 import * as DomainsAPI from './domains';
@@ -11,8 +19,7 @@ export class Settings extends APIResource {
   allowPatterns: AllowPatternsAPI.AllowPatterns = new AllowPatternsAPI.AllowPatterns(this._client);
   blockSenders: BlockSendersAPI.BlockSenders = new BlockSendersAPI.BlockSenders(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  impersonationRegistry: ImpersonationRegistryAPI.ImpersonationRegistry =
-    new ImpersonationRegistryAPI.ImpersonationRegistry(this._client);
+  impersonationRegistry: ImpersonationRegistryAPI.ImpersonationRegistry = new ImpersonationRegistryAPI.ImpersonationRegistry(this._client);
   trustedDomains: TrustedDomainsAPI.TrustedDomains = new TrustedDomainsAPI.TrustedDomains(this._client);
 }
 

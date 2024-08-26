@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as PoliciesAPI from './policies';
 import * as Shared from '../shared';
@@ -12,54 +14,29 @@ export class Policies extends APIResource {
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/alerting/v3/policies`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PolicyCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/alerting/v3/policies`, { body, ...options }) as Core.APIPromise<{ result: PolicyCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a Notification policy.
    */
-  update(
-    policyId: string,
-    params: PolicyUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyUpdateResponse> {
+  update(policyId: string, params: PolicyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, { body, ...options }) as Core.APIPromise<{ result: PolicyUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a list of all Notification policies.
    */
-  list(
-    params: PolicyListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PoliciesSinglePage, Policy> {
+  list(params: PolicyListParams, options?: Core.RequestOptions): Core.PagePromise<PoliciesSinglePage, Policy> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/alerting/v3/policies`,
-      PoliciesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/alerting/v3/policies`, PoliciesSinglePage, options);
   }
 
   /**
    * Delete a Notification policy.
    */
-  delete(
-    policyId: string,
-    params: PolicyDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyDeleteResponse> {
+  delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse> {
     const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, options);
   }
@@ -69,22 +46,18 @@ export class Policies extends APIResource {
    */
   get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<Policy> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/alerting/v3/policies/${policyId}`,
-        options,
-      ) as Core.APIPromise<{ result: Policy }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/alerting/v3/policies/${policyId}`, options) as Core.APIPromise<{ result: Policy }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PoliciesSinglePage extends SinglePage<Policy> {}
+export class PoliciesSinglePage extends SinglePage<Policy> {
+}
 
 /**
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type Mechanism = Record<string, Array<Mechanism.Item>>;
+export type Mechanism = Record<string, Array<Mechanism.Item>>
 
 export namespace Mechanism {
   export interface Item {
@@ -99,7 +72,7 @@ export namespace Mechanism {
  * List of IDs that will be used when dispatching a notification. IDs for email
  * type will be the email address.
  */
-export type MechanismParam = Record<string, Array<MechanismParam.Item>>;
+export type MechanismParam = Record<string, Array<MechanismParam.Item>>
 
 export namespace MechanismParam {
   export interface Item {
@@ -127,69 +100,7 @@ export interface Policy {
    * endpoint to get available alert types which then will give you a list of
    * possible values.
    */
-  alert_type?:
-    | 'access_custom_certificate_expiration_type'
-    | 'advanced_ddos_attack_l4_alert'
-    | 'advanced_ddos_attack_l7_alert'
-    | 'advanced_http_alert_error'
-    | 'bgp_hijack_notification'
-    | 'billing_usage_alert'
-    | 'block_notification_block_removed'
-    | 'block_notification_new_block'
-    | 'block_notification_review_rejected'
-    | 'brand_protection_alert'
-    | 'brand_protection_digest'
-    | 'clickhouse_alert_fw_anomaly'
-    | 'clickhouse_alert_fw_ent_anomaly'
-    | 'cloudforce_one_request_notification'
-    | 'custom_analytics'
-    | 'custom_ssl_certificate_event_type'
-    | 'dedicated_ssl_certificate_event_type'
-    | 'device_connectivity_anomaly_alert'
-    | 'dos_attack_l4'
-    | 'dos_attack_l7'
-    | 'expiring_service_token_alert'
-    | 'failing_logpush_job_disabled_alert'
-    | 'fbm_auto_advertisement'
-    | 'fbm_dosd_attack'
-    | 'fbm_volumetric_attack'
-    | 'health_check_status_notification'
-    | 'hostname_aop_custom_certificate_expiration_type'
-    | 'http_alert_edge_error'
-    | 'http_alert_origin_error'
-    | 'incident_alert'
-    | 'load_balancing_health_alert'
-    | 'load_balancing_pool_enablement_alert'
-    | 'logo_match_alert'
-    | 'magic_tunnel_health_check_event'
-    | 'magic_wan_tunnel_health'
-    | 'maintenance_event_notification'
-    | 'mtls_certificate_store_certificate_expiration_type'
-    | 'pages_event_alert'
-    | 'radar_notification'
-    | 'real_origin_monitoring'
-    | 'scriptmonitor_alert_new_code_change_detections'
-    | 'scriptmonitor_alert_new_hosts'
-    | 'scriptmonitor_alert_new_malicious_hosts'
-    | 'scriptmonitor_alert_new_malicious_scripts'
-    | 'scriptmonitor_alert_new_malicious_url'
-    | 'scriptmonitor_alert_new_max_length_resource_url'
-    | 'scriptmonitor_alert_new_resources'
-    | 'secondary_dns_all_primaries_failing'
-    | 'secondary_dns_primaries_failing'
-    | 'secondary_dns_warning'
-    | 'secondary_dns_zone_successfully_updated'
-    | 'secondary_dns_zone_validation_warning'
-    | 'sentinel_alert'
-    | 'stream_live_notifications'
-    | 'synthetic_test_latency_alert'
-    | 'synthetic_test_low_availability_alert'
-    | 'traffic_anomalies_alert'
-    | 'tunnel_health_event'
-    | 'tunnel_update_event'
-    | 'universal_ssl_event_type'
-    | 'web_analytics_metrics_update'
-    | 'zone_aop_custom_certificate_expiration_type';
+  alert_type?: 'access_custom_certificate_expiration_type' | 'advanced_ddos_attack_l4_alert' | 'advanced_ddos_attack_l7_alert' | 'advanced_http_alert_error' | 'bgp_hijack_notification' | 'billing_usage_alert' | 'block_notification_block_removed' | 'block_notification_new_block' | 'block_notification_review_rejected' | 'brand_protection_alert' | 'brand_protection_digest' | 'clickhouse_alert_fw_anomaly' | 'clickhouse_alert_fw_ent_anomaly' | 'cloudforce_one_request_notification' | 'custom_analytics' | 'custom_ssl_certificate_event_type' | 'dedicated_ssl_certificate_event_type' | 'device_connectivity_anomaly_alert' | 'dos_attack_l4' | 'dos_attack_l7' | 'expiring_service_token_alert' | 'failing_logpush_job_disabled_alert' | 'fbm_auto_advertisement' | 'fbm_dosd_attack' | 'fbm_volumetric_attack' | 'health_check_status_notification' | 'hostname_aop_custom_certificate_expiration_type' | 'http_alert_edge_error' | 'http_alert_origin_error' | 'incident_alert' | 'load_balancing_health_alert' | 'load_balancing_pool_enablement_alert' | 'logo_match_alert' | 'magic_tunnel_health_check_event' | 'magic_wan_tunnel_health' | 'maintenance_event_notification' | 'mtls_certificate_store_certificate_expiration_type' | 'pages_event_alert' | 'radar_notification' | 'real_origin_monitoring' | 'scriptmonitor_alert_new_code_change_detections' | 'scriptmonitor_alert_new_hosts' | 'scriptmonitor_alert_new_malicious_hosts' | 'scriptmonitor_alert_new_malicious_scripts' | 'scriptmonitor_alert_new_malicious_url' | 'scriptmonitor_alert_new_max_length_resource_url' | 'scriptmonitor_alert_new_resources' | 'secondary_dns_all_primaries_failing' | 'secondary_dns_primaries_failing' | 'secondary_dns_warning' | 'secondary_dns_zone_successfully_updated' | 'secondary_dns_zone_validation_warning' | 'sentinel_alert' | 'stream_live_notifications' | 'synthetic_test_latency_alert' | 'synthetic_test_low_availability_alert' | 'traffic_anomalies_alert' | 'tunnel_health_event' | 'tunnel_update_event' | 'universal_ssl_event_type' | 'web_analytics_metrics_update' | 'zone_aop_custom_certificate_expiration_type';
 
   created?: string;
 
@@ -303,9 +214,7 @@ export interface PolicyFilter {
   /**
    * Used for configuring incident_alert
    */
-  incident_impact?: Array<
-    'INCIDENT_IMPACT_NONE' | 'INCIDENT_IMPACT_MINOR' | 'INCIDENT_IMPACT_MAJOR' | 'INCIDENT_IMPACT_CRITICAL'
-  >;
+  incident_impact?: Array<'INCIDENT_IMPACT_NONE' | 'INCIDENT_IMPACT_MINOR' | 'INCIDENT_IMPACT_MAJOR' | 'INCIDENT_IMPACT_CRITICAL'>;
 
   /**
    * Used for configuring stream_live_notifications
@@ -512,9 +421,7 @@ export interface PolicyFilterParam {
   /**
    * Used for configuring incident_alert
    */
-  incident_impact?: Array<
-    'INCIDENT_IMPACT_NONE' | 'INCIDENT_IMPACT_MINOR' | 'INCIDENT_IMPACT_MAJOR' | 'INCIDENT_IMPACT_CRITICAL'
-  >;
+  incident_impact?: Array<'INCIDENT_IMPACT_NONE' | 'INCIDENT_IMPACT_MINOR' | 'INCIDENT_IMPACT_MAJOR' | 'INCIDENT_IMPACT_CRITICAL'>;
 
   /**
    * Used for configuring stream_live_notifications
@@ -704,69 +611,7 @@ export interface PolicyCreateParams {
    * use the endpoint to get available alert types which then will give you a list of
    * possible values.
    */
-  alert_type:
-    | 'access_custom_certificate_expiration_type'
-    | 'advanced_ddos_attack_l4_alert'
-    | 'advanced_ddos_attack_l7_alert'
-    | 'advanced_http_alert_error'
-    | 'bgp_hijack_notification'
-    | 'billing_usage_alert'
-    | 'block_notification_block_removed'
-    | 'block_notification_new_block'
-    | 'block_notification_review_rejected'
-    | 'brand_protection_alert'
-    | 'brand_protection_digest'
-    | 'clickhouse_alert_fw_anomaly'
-    | 'clickhouse_alert_fw_ent_anomaly'
-    | 'cloudforce_one_request_notification'
-    | 'custom_analytics'
-    | 'custom_ssl_certificate_event_type'
-    | 'dedicated_ssl_certificate_event_type'
-    | 'device_connectivity_anomaly_alert'
-    | 'dos_attack_l4'
-    | 'dos_attack_l7'
-    | 'expiring_service_token_alert'
-    | 'failing_logpush_job_disabled_alert'
-    | 'fbm_auto_advertisement'
-    | 'fbm_dosd_attack'
-    | 'fbm_volumetric_attack'
-    | 'health_check_status_notification'
-    | 'hostname_aop_custom_certificate_expiration_type'
-    | 'http_alert_edge_error'
-    | 'http_alert_origin_error'
-    | 'incident_alert'
-    | 'load_balancing_health_alert'
-    | 'load_balancing_pool_enablement_alert'
-    | 'logo_match_alert'
-    | 'magic_tunnel_health_check_event'
-    | 'magic_wan_tunnel_health'
-    | 'maintenance_event_notification'
-    | 'mtls_certificate_store_certificate_expiration_type'
-    | 'pages_event_alert'
-    | 'radar_notification'
-    | 'real_origin_monitoring'
-    | 'scriptmonitor_alert_new_code_change_detections'
-    | 'scriptmonitor_alert_new_hosts'
-    | 'scriptmonitor_alert_new_malicious_hosts'
-    | 'scriptmonitor_alert_new_malicious_scripts'
-    | 'scriptmonitor_alert_new_malicious_url'
-    | 'scriptmonitor_alert_new_max_length_resource_url'
-    | 'scriptmonitor_alert_new_resources'
-    | 'secondary_dns_all_primaries_failing'
-    | 'secondary_dns_primaries_failing'
-    | 'secondary_dns_warning'
-    | 'secondary_dns_zone_successfully_updated'
-    | 'secondary_dns_zone_validation_warning'
-    | 'sentinel_alert'
-    | 'stream_live_notifications'
-    | 'synthetic_test_latency_alert'
-    | 'synthetic_test_low_availability_alert'
-    | 'traffic_anomalies_alert'
-    | 'tunnel_health_event'
-    | 'tunnel_update_event'
-    | 'universal_ssl_event_type'
-    | 'web_analytics_metrics_update'
-    | 'zone_aop_custom_certificate_expiration_type';
+  alert_type: 'access_custom_certificate_expiration_type' | 'advanced_ddos_attack_l4_alert' | 'advanced_ddos_attack_l7_alert' | 'advanced_http_alert_error' | 'bgp_hijack_notification' | 'billing_usage_alert' | 'block_notification_block_removed' | 'block_notification_new_block' | 'block_notification_review_rejected' | 'brand_protection_alert' | 'brand_protection_digest' | 'clickhouse_alert_fw_anomaly' | 'clickhouse_alert_fw_ent_anomaly' | 'cloudforce_one_request_notification' | 'custom_analytics' | 'custom_ssl_certificate_event_type' | 'dedicated_ssl_certificate_event_type' | 'device_connectivity_anomaly_alert' | 'dos_attack_l4' | 'dos_attack_l7' | 'expiring_service_token_alert' | 'failing_logpush_job_disabled_alert' | 'fbm_auto_advertisement' | 'fbm_dosd_attack' | 'fbm_volumetric_attack' | 'health_check_status_notification' | 'hostname_aop_custom_certificate_expiration_type' | 'http_alert_edge_error' | 'http_alert_origin_error' | 'incident_alert' | 'load_balancing_health_alert' | 'load_balancing_pool_enablement_alert' | 'logo_match_alert' | 'magic_tunnel_health_check_event' | 'magic_wan_tunnel_health' | 'maintenance_event_notification' | 'mtls_certificate_store_certificate_expiration_type' | 'pages_event_alert' | 'radar_notification' | 'real_origin_monitoring' | 'scriptmonitor_alert_new_code_change_detections' | 'scriptmonitor_alert_new_hosts' | 'scriptmonitor_alert_new_malicious_hosts' | 'scriptmonitor_alert_new_malicious_scripts' | 'scriptmonitor_alert_new_malicious_url' | 'scriptmonitor_alert_new_max_length_resource_url' | 'scriptmonitor_alert_new_resources' | 'secondary_dns_all_primaries_failing' | 'secondary_dns_primaries_failing' | 'secondary_dns_warning' | 'secondary_dns_zone_successfully_updated' | 'secondary_dns_zone_validation_warning' | 'sentinel_alert' | 'stream_live_notifications' | 'synthetic_test_latency_alert' | 'synthetic_test_low_availability_alert' | 'traffic_anomalies_alert' | 'tunnel_health_event' | 'tunnel_update_event' | 'universal_ssl_event_type' | 'web_analytics_metrics_update' | 'zone_aop_custom_certificate_expiration_type';
 
   /**
    * Body param: Whether or not the Notification policy is enabled.
@@ -820,69 +665,7 @@ export interface PolicyUpdateParams {
    * use the endpoint to get available alert types which then will give you a list of
    * possible values.
    */
-  alert_type?:
-    | 'access_custom_certificate_expiration_type'
-    | 'advanced_ddos_attack_l4_alert'
-    | 'advanced_ddos_attack_l7_alert'
-    | 'advanced_http_alert_error'
-    | 'bgp_hijack_notification'
-    | 'billing_usage_alert'
-    | 'block_notification_block_removed'
-    | 'block_notification_new_block'
-    | 'block_notification_review_rejected'
-    | 'brand_protection_alert'
-    | 'brand_protection_digest'
-    | 'clickhouse_alert_fw_anomaly'
-    | 'clickhouse_alert_fw_ent_anomaly'
-    | 'cloudforce_one_request_notification'
-    | 'custom_analytics'
-    | 'custom_ssl_certificate_event_type'
-    | 'dedicated_ssl_certificate_event_type'
-    | 'device_connectivity_anomaly_alert'
-    | 'dos_attack_l4'
-    | 'dos_attack_l7'
-    | 'expiring_service_token_alert'
-    | 'failing_logpush_job_disabled_alert'
-    | 'fbm_auto_advertisement'
-    | 'fbm_dosd_attack'
-    | 'fbm_volumetric_attack'
-    | 'health_check_status_notification'
-    | 'hostname_aop_custom_certificate_expiration_type'
-    | 'http_alert_edge_error'
-    | 'http_alert_origin_error'
-    | 'incident_alert'
-    | 'load_balancing_health_alert'
-    | 'load_balancing_pool_enablement_alert'
-    | 'logo_match_alert'
-    | 'magic_tunnel_health_check_event'
-    | 'magic_wan_tunnel_health'
-    | 'maintenance_event_notification'
-    | 'mtls_certificate_store_certificate_expiration_type'
-    | 'pages_event_alert'
-    | 'radar_notification'
-    | 'real_origin_monitoring'
-    | 'scriptmonitor_alert_new_code_change_detections'
-    | 'scriptmonitor_alert_new_hosts'
-    | 'scriptmonitor_alert_new_malicious_hosts'
-    | 'scriptmonitor_alert_new_malicious_scripts'
-    | 'scriptmonitor_alert_new_malicious_url'
-    | 'scriptmonitor_alert_new_max_length_resource_url'
-    | 'scriptmonitor_alert_new_resources'
-    | 'secondary_dns_all_primaries_failing'
-    | 'secondary_dns_primaries_failing'
-    | 'secondary_dns_warning'
-    | 'secondary_dns_zone_successfully_updated'
-    | 'secondary_dns_zone_validation_warning'
-    | 'sentinel_alert'
-    | 'stream_live_notifications'
-    | 'synthetic_test_latency_alert'
-    | 'synthetic_test_low_availability_alert'
-    | 'traffic_anomalies_alert'
-    | 'tunnel_health_event'
-    | 'tunnel_update_event'
-    | 'universal_ssl_event_type'
-    | 'web_analytics_metrics_update'
-    | 'zone_aop_custom_certificate_expiration_type';
+  alert_type?: 'access_custom_certificate_expiration_type' | 'advanced_ddos_attack_l4_alert' | 'advanced_ddos_attack_l7_alert' | 'advanced_http_alert_error' | 'bgp_hijack_notification' | 'billing_usage_alert' | 'block_notification_block_removed' | 'block_notification_new_block' | 'block_notification_review_rejected' | 'brand_protection_alert' | 'brand_protection_digest' | 'clickhouse_alert_fw_anomaly' | 'clickhouse_alert_fw_ent_anomaly' | 'cloudforce_one_request_notification' | 'custom_analytics' | 'custom_ssl_certificate_event_type' | 'dedicated_ssl_certificate_event_type' | 'device_connectivity_anomaly_alert' | 'dos_attack_l4' | 'dos_attack_l7' | 'expiring_service_token_alert' | 'failing_logpush_job_disabled_alert' | 'fbm_auto_advertisement' | 'fbm_dosd_attack' | 'fbm_volumetric_attack' | 'health_check_status_notification' | 'hostname_aop_custom_certificate_expiration_type' | 'http_alert_edge_error' | 'http_alert_origin_error' | 'incident_alert' | 'load_balancing_health_alert' | 'load_balancing_pool_enablement_alert' | 'logo_match_alert' | 'magic_tunnel_health_check_event' | 'magic_wan_tunnel_health' | 'maintenance_event_notification' | 'mtls_certificate_store_certificate_expiration_type' | 'pages_event_alert' | 'radar_notification' | 'real_origin_monitoring' | 'scriptmonitor_alert_new_code_change_detections' | 'scriptmonitor_alert_new_hosts' | 'scriptmonitor_alert_new_malicious_hosts' | 'scriptmonitor_alert_new_malicious_scripts' | 'scriptmonitor_alert_new_malicious_url' | 'scriptmonitor_alert_new_max_length_resource_url' | 'scriptmonitor_alert_new_resources' | 'secondary_dns_all_primaries_failing' | 'secondary_dns_primaries_failing' | 'secondary_dns_warning' | 'secondary_dns_zone_successfully_updated' | 'secondary_dns_zone_validation_warning' | 'sentinel_alert' | 'stream_live_notifications' | 'synthetic_test_latency_alert' | 'synthetic_test_low_availability_alert' | 'traffic_anomalies_alert' | 'tunnel_health_event' | 'tunnel_update_event' | 'universal_ssl_event_type' | 'web_analytics_metrics_update' | 'zone_aop_custom_certificate_expiration_type';
 
   /**
    * Body param: Optional description for the Notification policy.

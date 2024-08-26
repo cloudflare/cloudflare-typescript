@@ -1,8 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Downloads } from './downloads';
 import * as LOADocumentsAPI from './loa-documents';
+import { multipartFormRequestOptions } from '../../../core';
 import * as DownloadsAPI from './downloads';
 
 export class LOADocuments extends APIResource {
@@ -11,17 +15,9 @@ export class LOADocuments extends APIResource {
   /**
    * Submit LOA document (pdf format) under the account.
    */
-  create(
-    params: LOADocumentCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LOADocumentCreateResponse> {
+  create(params: LOADocumentCreateParams, options?: Core.RequestOptions): Core.APIPromise<LOADocumentCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/addressing/loa_documents`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: LOADocumentCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/addressing/loa_documents`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: LOADocumentCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -3,7 +3,8 @@
 import { castToError, Headers } from './core';
 import * as Shared from './resources/shared';
 
-export class CloudflareError extends Error {}
+export class CloudflareError extends Error {
+}
 
 export class APIError extends CloudflareError {
   readonly status: number | undefined;
@@ -12,12 +13,9 @@ export class APIError extends CloudflareError {
 
   readonly errors: Array<Shared.ErrorData>;
 
-  constructor(
-    status: number | undefined,
-    error: Object | undefined,
-    message: string | undefined,
-    headers: Headers | undefined,
-  ) {
+  ;
+
+  constructor(status: number | undefined, error: Object | undefined, message: string | undefined, headers: Headers | undefined) {
     super(`${APIError.makeMessage(status, error, message)}`);
     this.status = status;
     this.headers = headers;
@@ -30,8 +28,7 @@ export class APIError extends CloudflareError {
   private static makeMessage(status: number | undefined, error: any, message: string | undefined) {
     const msg =
       error?.message ?
-        typeof error.message === 'string' ?
-          error.message
+        typeof error.message === 'string' ? error.message
         : JSON.stringify(error.message)
       : error ? JSON.stringify(error)
       : message;
@@ -48,12 +45,7 @@ export class APIError extends CloudflareError {
     return '(no status code or body)';
   }
 
-  static generate(
-    status: number | undefined,
-    errorResponse: Object | undefined,
-    message: string | undefined,
-    headers: Headers | undefined,
-  ) {
+  static generate(status: number | undefined, errorResponse: Object | undefined, message: string | undefined, headers: Headers | undefined) {
     if (!status) {
       return new APIConnectionError({ cause: castToError(errorResponse) });
     }
@@ -149,4 +141,5 @@ export class RateLimitError extends APIError {
   override readonly status: 429 = 429;
 }
 
-export class InternalServerError extends APIError {}
+export class InternalServerError extends APIError {
+}

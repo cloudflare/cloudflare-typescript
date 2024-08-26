@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as TracesAPI from './traces';
 
@@ -10,16 +12,11 @@ export class Traces extends APIResource {
    */
   create(params: TraceCreateParams, options?: Core.RequestOptions): Core.APIPromise<TraceCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/request-tracer/trace`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TraceCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/request-tracer/trace`, { body, ...options }) as Core.APIPromise<{ result: TraceCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type Trace = Array<TraceItem>;
+export type Trace = Array<TraceItem>
 
 /**
  * List of steps acting on request/response
