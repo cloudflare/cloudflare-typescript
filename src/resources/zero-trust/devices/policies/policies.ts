@@ -4,10 +4,10 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as PoliciesAPI from './policies';
 import * as CertificatesAPI from './certificates';
+import * as DefaultPolicyAPI from './default-policy';
 import * as ExcludesAPI from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
 import * as IncludesAPI from './includes';
-import * as DefaultPolicyAPI from './default-policy/default-policy';
 import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
