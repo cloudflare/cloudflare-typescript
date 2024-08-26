@@ -15,8 +15,8 @@ export class R2 extends APIResource {
 export namespace R2 {
   export import Buckets = BucketsAPI.Buckets;
   export import Bucket = BucketsAPI.Bucket;
+  export import BucketListResponse = BucketsAPI.BucketListResponse;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import BucketsCursorPagination = BucketsAPI.BucketsCursorPagination;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
   export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;

@@ -2,12 +2,12 @@
 
 export {
   Bucket,
+  BucketListResponse,
   BucketDeleteResponse,
   BucketCreateParams,
   BucketListParams,
   BucketDeleteParams,
   BucketGetParams,
-  BucketsCursorPagination,
   Buckets,
 } from './buckets';
 export {
