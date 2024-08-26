@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as UsersAPI from './users';
 
@@ -10,7 +8,11 @@ export class Users extends APIResource {
   /**
    * Fetches a single page of user results from an Access policy test.
    */
-  list(policyTestId: string, params: UserListParams, options?: Core.RequestOptions): Core.APIPromise<UserListResponse> {
+  list(
+    policyTestId: string,
+    params: UserListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserListResponse> {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/access/policy-tests/${policyTestId}/users`, options);
   }
@@ -19,7 +21,7 @@ export class Users extends APIResource {
 /**
  * Page of processed users.
  */
-export type UserListResponse = Array<UserListResponse.UserListResponseItem>
+export type UserListResponse = Array<UserListResponse.UserListResponseItem>;
 
 export namespace UserListResponse {
   export interface UserListResponseItem {

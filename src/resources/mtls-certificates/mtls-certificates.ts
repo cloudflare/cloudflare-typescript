@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { Associations } from './associations';
-import * as MTLSCertificatesAPI from './mtls-certificates';
 import * as AssociationsAPI from './associations';
 import { SinglePage } from '../../pagination';
 
@@ -15,39 +11,71 @@ export class MTLSCertificates extends APIResource {
   /**
    * Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
    */
-  create(params: MTLSCertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<MTLSCertificateCreateResponse> {
+  create(
+    params: MTLSCertificateCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MTLSCertificateCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/mtls_certificates`, { body, ...options }) as Core.APIPromise<{ result: MTLSCertificateCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/mtls_certificates`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MTLSCertificateCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all mTLS certificates.
    */
-  list(params: MTLSCertificateListParams, options?: Core.RequestOptions): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
+  list(
+    params: MTLSCertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MTLSCertificatesSinglePage, MTLSCertificate> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/mtls_certificates`, MTLSCertificatesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/mtls_certificates`,
+      MTLSCertificatesSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes the mTLS certificate unless the certificate is in use by one or more
    * Cloudflare services.
    */
-  delete(mtlsCertificateId: string, params: MTLSCertificateDeleteParams, options?: Core.RequestOptions): Core.APIPromise<MTLSCertificate> {
+  delete(
+    mtlsCertificateId: string,
+    params: MTLSCertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MTLSCertificate> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`, options) as Core.APIPromise<{ result: MTLSCertificate }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: MTLSCertificate }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single mTLS certificate.
    */
-  get(mtlsCertificateId: string, params: MTLSCertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<MTLSCertificate> {
+  get(
+    mtlsCertificateId: string,
+    params: MTLSCertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MTLSCertificate> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`, options) as Core.APIPromise<{ result: MTLSCertificate }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/mtls_certificates/${mtlsCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: MTLSCertificate }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MTLSCertificatesSinglePage extends SinglePage<MTLSCertificate> {
-}
+export class MTLSCertificatesSinglePage extends SinglePage<MTLSCertificate> {}
 
 export interface MTLSCertificate {
   /**

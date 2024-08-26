@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as WebhooksAPI from './webhooks';
 
@@ -12,7 +10,11 @@ export class Webhooks extends APIResource {
    */
   update(params: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/stream/webhook`, { body, ...options }) as Core.APIPromise<{ result: WebhookUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/stream/webhook`, { body, ...options }) as Core.APIPromise<{
+        result: WebhookUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +22,11 @@ export class Webhooks extends APIResource {
    */
   delete(params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{ result: WebhookDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
+        result: WebhookDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,15 +34,19 @@ export class Webhooks extends APIResource {
    */
   get(params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<WebhookGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{ result: WebhookGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/stream/webhook`, options) as Core.APIPromise<{
+        result: WebhookGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type WebhookUpdateResponse = unknown
+export type WebhookUpdateResponse = unknown;
 
-export type WebhookDeleteResponse = string
+export type WebhookDeleteResponse = string;
 
-export type WebhookGetResponse = unknown
+export type WebhookGetResponse = unknown;
 
 export interface WebhookUpdateParams {
   /**

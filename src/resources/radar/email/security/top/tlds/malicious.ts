@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
-import { APIPromise } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as MaliciousAPI from './malicious';
 
@@ -10,13 +9,29 @@ export class Malicious extends APIResource {
   /**
    * Get the TLDs by emails classified as malicious or not.
    */
-  get(malicious: 'MALICIOUS' | 'NOT_MALICIOUS', query?: MaliciousGetParams, options?: Core.RequestOptions): Core.APIPromise<MaliciousGetResponse>
-  get(malicious: 'MALICIOUS' | 'NOT_MALICIOUS', options?: Core.RequestOptions): Core.APIPromise<MaliciousGetResponse>
-  get(malicious: 'MALICIOUS' | 'NOT_MALICIOUS', query: MaliciousGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<MaliciousGetResponse> {
+  get(
+    malicious: 'MALICIOUS' | 'NOT_MALICIOUS',
+    query?: MaliciousGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MaliciousGetResponse>;
+  get(
+    malicious: 'MALICIOUS' | 'NOT_MALICIOUS',
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MaliciousGetResponse>;
+  get(
+    malicious: 'MALICIOUS' | 'NOT_MALICIOUS',
+    query: MaliciousGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MaliciousGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(malicious, {}, query);
     }
-    return (this._client.get(`/radar/email/security/top/tlds/malicious/${malicious}`, { query, ...options }) as Core.APIPromise<{ result: MaliciousGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/email/security/top/tlds/malicious/${malicious}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: MaliciousGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

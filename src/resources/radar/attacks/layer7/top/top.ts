@@ -2,10 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
-import { Locations } from './locations';
-import { Ases } from './ases';
 import * as TopAPI from './top';
 import * as AsesAPI from './ases';
 import * as LocationsAPI from './locations';
@@ -21,37 +18,58 @@ export class Top extends APIResource {
    * You can optionally limit the number of attacks per origin/target location
    * (useful if all the top attacks are from or to the same location).
    */
-  attacks(query?: TopAttacksParams, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>
-  attacks(options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>
-  attacks(query: TopAttacksParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse> {
+  attacks(query?: TopAttacksParams, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
+  attacks(options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
+  attacks(
+    query: TopAttacksParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopAttacksResponse> {
     if (isRequestOptions(query)) {
       return this.attacks({}, query);
     }
-    return (this._client.get('/radar/attacks/layer7/top/attacks', { query, ...options }) as Core.APIPromise<{ result: TopAttacksResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer7/top/attacks', { query, ...options }) as Core.APIPromise<{
+        result: TopAttacksResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the Industry of attacks.
    */
-  industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>
-  industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>
-  industry(query: TopIndustryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse> {
+  industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
+  industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
+  industry(
+    query: TopIndustryParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopIndustryResponse> {
     if (isRequestOptions(query)) {
       return this.industry({}, query);
     }
-    return (this._client.get('/radar/attacks/layer7/top/industry', { query, ...options }) as Core.APIPromise<{ result: TopIndustryResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer7/top/industry', { query, ...options }) as Core.APIPromise<{
+        result: TopIndustryResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the Verticals of attacks.
    */
-  vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>
-  vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>
-  vertical(query: TopVerticalParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse> {
+  vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
+  vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
+  vertical(
+    query: TopVerticalParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopVerticalResponse> {
     if (isRequestOptions(query)) {
       return this.vertical({}, query);
     }
-    return (this._client.get('/radar/attacks/layer7/top/vertical', { query, ...options }) as Core.APIPromise<{ result: TopVerticalResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer7/top/vertical', { query, ...options }) as Core.APIPromise<{
+        result: TopVerticalResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -281,7 +299,54 @@ export interface TopAttacksParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
 
   /**
    * Filter for http version.
@@ -327,7 +392,15 @@ export interface TopAttacksParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -381,7 +454,54 @@ export interface TopIndustryParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
 
   /**
    * Filter for http version.
@@ -408,7 +528,15 @@ export interface TopIndustryParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -456,7 +584,54 @@ export interface TopVerticalParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
 
   /**
    * Filter for http version.
@@ -483,7 +658,15 @@ export interface TopVerticalParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { AbstractPage, Response, APIClient, FinalRequestOptions, coerceInteger, coerceFloat, coerceBoolean, ensurePresent, PageInfo } from './core';
-import { type Result, type ResultInfo } from './resources/stainless-page-resource';
-import * as Core from './core';
+import { AbstractPage, Response, APIClient, FinalRequestOptions, PageInfo } from './core';
 
 export interface V4PagePaginationResponse<Item> {
   result: V4PagePaginationResponse.Result<Item>;
@@ -33,7 +31,12 @@ export class V4PagePagination<Item> extends AbstractPage<Item> implements V4Page
 
   result_info: V4PagePaginationResponse.ResultInfo;
 
-  constructor(client: APIClient, response: Response, body: V4PagePaginationResponse<Item>, options: FinalRequestOptions) {
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: V4PagePaginationResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
     super(client, response, body, options);
 
     this.result = body.result || {};
@@ -82,12 +85,20 @@ export interface V4PagePaginationArrayParams {
   per_page?: number;
 }
 
-export class V4PagePaginationArray<Item> extends AbstractPage<Item> implements V4PagePaginationArrayResponse<Item> {
+export class V4PagePaginationArray<Item>
+  extends AbstractPage<Item>
+  implements V4PagePaginationArrayResponse<Item>
+{
   result: Array<Item>;
 
   result_info: V4PagePaginationArrayResponse.ResultInfo;
 
-  constructor(client: APIClient, response: Response, body: V4PagePaginationArrayResponse<Item>, options: FinalRequestOptions) {
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: V4PagePaginationArrayResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
     super(client, response, body, options);
 
     this.result = body.result || [];
@@ -143,7 +154,12 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
 
   result_info: CursorPaginationResponse.ResultInfo;
 
-  constructor(client: APIClient, response: Response, body: CursorPaginationResponse<Item>, options: FinalRequestOptions) {
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: CursorPaginationResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
     super(client, response, body, options);
 
     this.result = body.result || [];
@@ -165,15 +181,15 @@ export class CursorPagination<Item> extends AbstractPage<Item> implements Cursor
   }
 
   nextPageInfo(): PageInfo | null {
-    const cursor = this.result_info?.cursor
+    const cursor = this.result_info?.cursor;
     if (!cursor) {
       return null;
     }
 
     return {
       params: {
-        cursor: cursor
-      }
+        cursor: cursor,
+      },
     };
   }
 }
@@ -200,12 +216,20 @@ export interface CursorLimitPaginationParams {
   cursor?: string;
 }
 
-export class CursorLimitPagination<Item> extends AbstractPage<Item> implements CursorLimitPaginationResponse<Item> {
+export class CursorLimitPagination<Item>
+  extends AbstractPage<Item>
+  implements CursorLimitPaginationResponse<Item>
+{
   result: Array<Item>;
 
   result_info: CursorLimitPaginationResponse.ResultInfo;
 
-  constructor(client: APIClient, response: Response, body: CursorLimitPaginationResponse<Item>, options: FinalRequestOptions) {
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: CursorLimitPaginationResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
     super(client, response, body, options);
 
     this.result = body.result || [];
@@ -227,15 +251,15 @@ export class CursorLimitPagination<Item> extends AbstractPage<Item> implements C
   }
 
   nextPageInfo(): PageInfo | null {
-    const cursor = this.result_info?.cursor
+    const cursor = this.result_info?.cursor;
     if (!cursor) {
       return null;
     }
 
     return {
       params: {
-        cursor: cursor
-      }
+        cursor: cursor,
+      },
     };
   }
 }
@@ -247,7 +271,12 @@ export interface SinglePageResponse<Item> {
 export class SinglePage<Item> extends AbstractPage<Item> implements SinglePageResponse<Item> {
   result: Array<Item>;
 
-  constructor(client: APIClient, response: Response, body: SinglePageResponse<Item>, options: FinalRequestOptions) {
+  constructor(
+    client: APIClient,
+    response: Response,
+    body: SinglePageResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
     super(client, response, body, options);
 
     this.result = body.result || [];

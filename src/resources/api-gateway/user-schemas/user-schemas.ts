@@ -1,12 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Operations } from './operations';
 import * as UserSchemasAPI from './user-schemas';
-import { type Uploadable, multipartFormRequestOptions } from '../../../core';
 import * as Shared from '../../shared';
 import * as OperationsAPI from './operations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -19,21 +15,37 @@ export class UserSchemas extends APIResource {
    */
   create(params: UserSchemaCreateParams, options?: Core.RequestOptions): Core.APIPromise<SchemaUpload> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/api_gateway/user_schemas`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: SchemaUpload }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(
+        `/zones/${zone_id}/api_gateway/user_schemas`,
+        Core.multipartFormRequestOptions({ body, ...options }),
+      ) as Core.APIPromise<{ result: SchemaUpload }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieve information about all schemas on a zone
    */
-  list(params: UserSchemaListParams, options?: Core.RequestOptions): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
+  list(
+    params: UserSchemaListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PublicSchemasV4PagePaginationArray, PublicSchema> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/api_gateway/user_schemas`, PublicSchemasV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/api_gateway/user_schemas`,
+      PublicSchemasV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Delete a schema
    */
-  delete(schemaId: string, params: UserSchemaDeleteParams, options?: Core.RequestOptions): Core.APIPromise<UserSchemaDeleteResponse> {
+  delete(
+    schemaId: string,
+    params: UserSchemaDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserSchemaDeleteResponse> {
     const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, options);
   }
@@ -41,24 +53,41 @@ export class UserSchemas extends APIResource {
   /**
    * Enable validation for a schema
    */
-  edit(schemaId: string, params: UserSchemaEditParams, options?: Core.RequestOptions): Core.APIPromise<PublicSchema> {
+  edit(
+    schemaId: string,
+    params: UserSchemaEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PublicSchema> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, { body, ...options }) as Core.APIPromise<{ result: PublicSchema }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PublicSchema }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieve information about a specific schema on a zone
    */
-  get(schemaId: string, params: UserSchemaGetParams, options?: Core.RequestOptions): Core.APIPromise<PublicSchema> {
+  get(
+    schemaId: string,
+    params: UserSchemaGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PublicSchema> {
     const { zone_id, ...query } = params;
-    return (this._client.get(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, { query, ...options }) as Core.APIPromise<{ result: PublicSchema }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: PublicSchema }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {
-}
+export class PublicSchemasV4PagePaginationArray extends V4PagePaginationArray<PublicSchema> {}
 
-export type Message = Array<Shared.ResponseInfo>
+export type Message = Array<Shared.ResponseInfo>;
 
 export interface PublicSchema {
   created_at: string;

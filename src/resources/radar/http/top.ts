@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TopAPI from './top';
 
@@ -11,26 +10,43 @@ export class Top extends APIResource {
    * Get the top user agents by HTTP traffic. Values are a percentage out of the
    * total traffic.
    */
-  browser(query?: TopBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>
-  browser(options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>
-  browser(query: TopBrowserParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse> {
+  browser(query?: TopBrowserParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
+  browser(options?: Core.RequestOptions): Core.APIPromise<TopBrowserResponse>;
+  browser(
+    query: TopBrowserParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopBrowserResponse> {
     if (isRequestOptions(query)) {
       return this.browser({}, query);
     }
-    return (this._client.get('/radar/http/top/browser', { query, ...options }) as Core.APIPromise<{ result: TopBrowserResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/http/top/browser', { query, ...options }) as Core.APIPromise<{
+        result: TopBrowserResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the top user agents aggregated in families by HTTP traffic. Values are a
    * percentage out of the total traffic.
    */
-  browserFamily(query?: TopBrowserFamilyParams, options?: Core.RequestOptions): Core.APIPromise<TopBrowserFamilyResponse>
-  browserFamily(options?: Core.RequestOptions): Core.APIPromise<TopBrowserFamilyResponse>
-  browserFamily(query: TopBrowserFamilyParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopBrowserFamilyResponse> {
+  browserFamily(
+    query?: TopBrowserFamilyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopBrowserFamilyResponse>;
+  browserFamily(options?: Core.RequestOptions): Core.APIPromise<TopBrowserFamilyResponse>;
+  browserFamily(
+    query: TopBrowserFamilyParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopBrowserFamilyResponse> {
     if (isRequestOptions(query)) {
       return this.browserFamily({}, query);
     }
-    return (this._client.get('/radar/http/top/browser_family', { query, ...options }) as Core.APIPromise<{ result: TopBrowserFamilyResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/http/top/browser_family', { query, ...options }) as Core.APIPromise<{
+        result: TopBrowserFamilyResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

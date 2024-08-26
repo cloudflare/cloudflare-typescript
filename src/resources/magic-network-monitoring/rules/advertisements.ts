@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as AdvertisementsAPI from './advertisements';
 
@@ -10,9 +8,18 @@ export class Advertisements extends APIResource {
   /**
    * Update advertisement for rule.
    */
-  edit(ruleId: string, params: AdvertisementEditParams, options?: Core.RequestOptions): Core.APIPromise<Advertisement | null> {
+  edit(
+    ruleId: string,
+    params: AdvertisementEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Advertisement | null> {
     const { account_id, body } = params;
-    return (this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`, { body: body, ...options }) as Core.APIPromise<{ result: Advertisement | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}/advertisement`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: Advertisement | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

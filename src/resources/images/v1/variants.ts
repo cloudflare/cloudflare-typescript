@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as VariantsAPI from './variants';
 
@@ -12,7 +10,12 @@ export class Variants extends APIResource {
    */
   create(params: VariantCreateParams, options?: Core.RequestOptions): Core.APIPromise<VariantCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/images/v1/variants`, { body, ...options }) as Core.APIPromise<{ result: VariantCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/images/v1/variants`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VariantCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,31 +23,62 @@ export class Variants extends APIResource {
    */
   list(params: VariantListParams, options?: Core.RequestOptions): Core.APIPromise<Variant> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/images/v1/variants`, options) as Core.APIPromise<{ result: Variant }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/images/v1/variants`, options) as Core.APIPromise<{
+        result: Variant;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deleting a variant purges the cache for all images associated with the variant.
    */
-  delete(variantId: string, params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
+  delete(
+    variantId: string,
+    params: VariantDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VariantDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/images/v1/variants/${variantId}`, options) as Core.APIPromise<{ result: VariantDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/images/v1/variants/${variantId}`,
+        options,
+      ) as Core.APIPromise<{ result: VariantDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updating a variant purges the cache for all images associated with the variant.
    */
-  edit(variantId: string, params: VariantEditParams, options?: Core.RequestOptions): Core.APIPromise<VariantEditResponse> {
+  edit(
+    variantId: string,
+    params: VariantEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VariantEditResponse> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/images/v1/variants/${variantId}`, { body, ...options }) as Core.APIPromise<{ result: VariantEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/images/v1/variants/${variantId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: VariantEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch details for a single variant.
    */
-  get(variantId: string, params: VariantGetParams, options?: Core.RequestOptions): Core.APIPromise<VariantGetResponse> {
+  get(
+    variantId: string,
+    params: VariantGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VariantGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/images/v1/variants/${variantId}`, options) as Core.APIPromise<{ result: VariantGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/images/v1/variants/${variantId}`,
+        options,
+      ) as Core.APIPromise<{ result: VariantGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -152,7 +186,7 @@ export namespace VariantCreateResponse {
   }
 }
 
-export type VariantDeleteResponse = unknown | string
+export type VariantDeleteResponse = unknown | string | null;
 
 export interface VariantEditResponse {
   variant?: VariantEditResponse.Variant;

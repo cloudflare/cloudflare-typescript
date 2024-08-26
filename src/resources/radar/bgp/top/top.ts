@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Ases } from './ases';
 import * as TopAPI from './top';
 import * as AsesAPI from './ases';
 
@@ -15,13 +13,20 @@ export class Top extends APIResource {
    * Get the top network prefixes by BGP updates. Values are a percentage out of the
    * total BGP updates.
    */
-  prefixes(query?: TopPrefixesParams, options?: Core.RequestOptions): Core.APIPromise<TopPrefixesResponse>
-  prefixes(options?: Core.RequestOptions): Core.APIPromise<TopPrefixesResponse>
-  prefixes(query: TopPrefixesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopPrefixesResponse> {
+  prefixes(query?: TopPrefixesParams, options?: Core.RequestOptions): Core.APIPromise<TopPrefixesResponse>;
+  prefixes(options?: Core.RequestOptions): Core.APIPromise<TopPrefixesResponse>;
+  prefixes(
+    query: TopPrefixesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopPrefixesResponse> {
     if (isRequestOptions(query)) {
       return this.prefixes({}, query);
     }
-    return (this._client.get('/radar/bgp/top/prefixes', { query, ...options }) as Core.APIPromise<{ result: TopPrefixesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/bgp/top/prefixes', { query, ...options }) as Core.APIPromise<{
+        result: TopPrefixesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

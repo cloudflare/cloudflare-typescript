@@ -1,42 +1,68 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
-import { APIPromise } from '../core';
 import * as Core from '../core';
-import * as CustomNameserversAPI from './custom-nameservers';
 
 export class CustomNameservers extends APIResource {
   /**
    * Add Account Custom Nameserver
    */
-  create(params: CustomNameserverCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomNameserver> {
+  create(
+    params: CustomNameserverCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomNameserver> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{ result: CustomNameserver }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/custom_ns`, { body, ...options }) as Core.APIPromise<{
+        result: CustomNameserver;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete Account Custom Nameserver
    */
-  delete(customNSId: string, params: CustomNameserverDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CustomNameserverDeleteResponse | null> {
+  delete(
+    customNSId: string,
+    params: CustomNameserverDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{ result: CustomNameserverDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{
+        result: CustomNameserverDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Eligible Zones for Account Custom Nameservers
    */
-  availabilty(params: CustomNameserverAvailabiltyParams, options?: Core.RequestOptions): Core.APIPromise<CustomNameserverAvailabiltyResponse | null> {
+  availabilty(
+    params: CustomNameserverAvailabiltyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomNameserverAvailabiltyResponse | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/custom_ns/availability`, options) as Core.APIPromise<{ result: CustomNameserverAvailabiltyResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/custom_ns/availability`, options) as Core.APIPromise<{
+        result: CustomNameserverAvailabiltyResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List an account's custom nameservers.
    */
-  get(params: CustomNameserverGetParams, options?: Core.RequestOptions): Core.APIPromise<CustomNameserverGetResponse | null> {
+  get(
+    params: CustomNameserverGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomNameserverGetResponse | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/custom_ns`, options) as Core.APIPromise<{ result: CustomNameserverGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/custom_ns`, options) as Core.APIPromise<{
+        result: CustomNameserverGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -84,11 +110,11 @@ export namespace CustomNameserver {
   }
 }
 
-export type CustomNameserverDeleteResponse = Array<string>
+export type CustomNameserverDeleteResponse = Array<string>;
 
-export type CustomNameserverAvailabiltyResponse = Array<string>
+export type CustomNameserverAvailabiltyResponse = Array<string>;
 
-export type CustomNameserverGetResponse = Array<CustomNameserver>
+export type CustomNameserverGetResponse = Array<CustomNameserver>;
 
 export interface CustomNameserverCreateParams {
   /**

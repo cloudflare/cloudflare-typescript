@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { Logs } from './logs';
-import * as AIGatewayAPI from './ai-gateway';
 import * as LogsAPI from './logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -15,46 +11,85 @@ export class AIGateway extends APIResource {
   /**
    * Create a new Gateway
    */
-  create(params: AIGatewayCreateParams, options?: Core.RequestOptions): Core.APIPromise<AIGatewayCreateResponse> {
+  create(
+    params: AIGatewayCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIGatewayCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/ai-gateway/gateways`, { body, ...options }) as Core.APIPromise<{ result: AIGatewayCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/ai-gateway/gateways`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AIGatewayCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a Gateway
    */
-  update(id: string, params: AIGatewayUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AIGatewayUpdateResponse> {
+  update(
+    id: string,
+    params: AIGatewayUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIGatewayUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/ai-gateway/gateways/${id}`, { body, ...options }) as Core.APIPromise<{ result: AIGatewayUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/ai-gateway/gateways/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AIGatewayUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Gateways
    */
-  list(params: AIGatewayListParams, options?: Core.RequestOptions): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse> {
+  list(
+    params: AIGatewayListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AIGatewayListResponsesV4PagePaginationArray, AIGatewayListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/ai-gateway/gateways`, AIGatewayListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/ai-gateway/gateways`,
+      AIGatewayListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Delete a Gateway
    */
-  delete(id: string, params: AIGatewayDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AIGatewayDeleteResponse> {
+  delete(
+    id: string,
+    params: AIGatewayDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIGatewayDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{ result: AIGatewayDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
+        result: AIGatewayDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a Gateway
    */
-  get(id: string, params: AIGatewayGetParams, options?: Core.RequestOptions): Core.APIPromise<AIGatewayGetResponse> {
+  get(
+    id: string,
+    params: AIGatewayGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AIGatewayGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{ result: AIGatewayGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/ai-gateway/gateways/${id}`, options) as Core.APIPromise<{
+        result: AIGatewayGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AIGatewayListResponsesV4PagePaginationArray extends V4PagePaginationArray<AIGatewayListResponse> {
-}
+export class AIGatewayListResponsesV4PagePaginationArray extends V4PagePaginationArray<AIGatewayListResponse> {}
 
 export interface AIGatewayCreateResponse {
   /**

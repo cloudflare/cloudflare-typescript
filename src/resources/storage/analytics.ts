@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AnalyticsAPI from './analytics';
 
@@ -12,7 +10,12 @@ export class Analytics extends APIResource {
    */
   list(params: AnalyticsListParams, options?: Core.RequestOptions): Core.APIPromise<Schema> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/storage/analytics`, { query, ...options }) as Core.APIPromise<{ result: Schema }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/storage/analytics`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: Schema }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +23,12 @@ export class Analytics extends APIResource {
    */
   stored(params: AnalyticsStoredParams, options?: Core.RequestOptions): Core.APIPromise<Components> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/storage/analytics/stored`, { query, ...options }) as Core.APIPromise<{ result: Components }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/storage/analytics/stored`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: Components }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

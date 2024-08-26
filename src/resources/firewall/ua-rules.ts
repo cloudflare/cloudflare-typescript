@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as UARulesAPI from './ua-rules';
 import * as AccessRulesAPI from './access-rules';
@@ -12,51 +11,96 @@ export class UARules extends APIResource {
   /**
    * Creates a new User Agent Blocking rule in a zone.
    */
-  create(zoneIdentifier: string, body: UARuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<UARuleCreateResponse> {
-    return (this._client.post(`/zones/${zoneIdentifier}/firewall/ua_rules`, { body, ...options }) as Core.APIPromise<{ result: UARuleCreateResponse }>)._thenUnwrap((obj) => obj.result);
+  create(
+    zoneIdentifier: string,
+    body: UARuleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UARuleCreateResponse> {
+    return (
+      this._client.post(`/zones/${zoneIdentifier}/firewall/ua_rules`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: UARuleCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an existing User Agent Blocking rule.
    */
-  update(zoneIdentifier: string, id: string, body: UARuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<UARuleUpdateResponse> {
-    return (this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, { body, ...options }) as Core.APIPromise<{ result: UARuleUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+  update(
+    zoneIdentifier: string,
+    id: string,
+    body: UARuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UARuleUpdateResponse> {
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: UARuleUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches User Agent Blocking rules in a zone. You can filter the results using
    * several optional parameters.
    */
-  list(zoneIdentifier: string, query?: UARuleListParams, options?: Core.RequestOptions): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>
-  list(zoneIdentifier: string, query: UARuleListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse> {
+  list(
+    zoneIdentifier: string,
+    query?: UARuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse>;
+  list(
+    zoneIdentifier: string,
+    query: UARuleListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<UARuleListResponsesV4PagePaginationArray, UARuleListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/firewall/ua_rules`, UARuleListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/firewall/ua_rules`,
+      UARuleListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Deletes an existing User Agent Blocking rule.
    */
-  delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<UARuleDeleteResponse> {
-    return (this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{ result: UARuleDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+  delete(
+    zoneIdentifier: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UARuleDeleteResponse> {
+    return (
+      this._client.delete(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
+        result: UARuleDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the details of a User Agent Blocking rule.
    */
   get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<UARuleGetResponse> {
-    return (this._client.get(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{ result: UARuleGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zoneIdentifier}/firewall/ua_rules/${id}`, options) as Core.APIPromise<{
+        result: UARuleGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {
-}
+export class UARuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<UARuleListResponse> {}
 
-export type UARuleCreateResponse = unknown | string | null
+export type UARuleCreateResponse = unknown | string | null;
 
-export type UARuleUpdateResponse = unknown | string | null
+export type UARuleUpdateResponse = unknown | string | null;
 
 export interface UARuleListResponse {
   /**
@@ -111,13 +155,18 @@ export interface UARuleDeleteResponse {
   id?: string;
 }
 
-export type UARuleGetResponse = unknown | string | null
+export type UARuleGetResponse = unknown | string | null;
 
 export interface UARuleCreateParams {
   /**
    * The rule configuration.
    */
-  configuration: AccessRulesAPI.AccessRuleIPConfigurationParam | AccessRulesAPI.IPV6ConfigurationParam | AccessRulesAPI.AccessRuleCIDRConfigurationParam | AccessRulesAPI.ASNConfigurationParam | AccessRulesAPI.CountryConfigurationParam;
+  configuration:
+    | AccessRulesAPI.AccessRuleIPConfigurationParam
+    | AccessRulesAPI.IPV6ConfigurationParam
+    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
+    | AccessRulesAPI.ASNConfigurationParam
+    | AccessRulesAPI.CountryConfigurationParam;
 
   /**
    * The action to apply to a matched request.
@@ -129,7 +178,12 @@ export interface UARuleUpdateParams {
   /**
    * The rule configuration.
    */
-  configuration: AccessRulesAPI.AccessRuleIPConfigurationParam | AccessRulesAPI.IPV6ConfigurationParam | AccessRulesAPI.AccessRuleCIDRConfigurationParam | AccessRulesAPI.ASNConfigurationParam | AccessRulesAPI.CountryConfigurationParam;
+  configuration:
+    | AccessRulesAPI.AccessRuleIPConfigurationParam
+    | AccessRulesAPI.IPV6ConfigurationParam
+    | AccessRulesAPI.AccessRuleCIDRConfigurationParam
+    | AccessRulesAPI.ASNConfigurationParam
+    | AccessRulesAPI.CountryConfigurationParam;
 
   /**
    * The action to apply to a matched request.

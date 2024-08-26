@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as WebhooksAPI from './webhooks';
 import * as Shared from '../../shared';
@@ -14,31 +12,59 @@ export class Webhooks extends APIResource {
    */
   create(params: WebhookCreateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/alerting/v3/destinations/webhooks`, { body, ...options }) as Core.APIPromise<{ result: WebhookCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/alerting/v3/destinations/webhooks`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WebhookCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a webhook destination.
    */
-  update(webhookId: string, params: WebhookUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WebhookUpdateResponse> {
+  update(
+    webhookId: string,
+    params: WebhookUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`, { body, ...options }) as Core.APIPromise<{ result: WebhookUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WebhookUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets a list of all configured webhook destinations.
    */
-  list(params: WebhookListParams, options?: Core.RequestOptions): Core.PagePromise<WebhooksSinglePage, Webhooks> {
+  list(
+    params: WebhookListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WebhooksSinglePage, Webhooks> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/alerting/v3/destinations/webhooks`, WebhooksSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/alerting/v3/destinations/webhooks`,
+      WebhooksSinglePage,
+      options,
+    );
   }
 
   /**
    * Delete a configured webhook destination.
    */
-  delete(webhookId: string, params: WebhookDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WebhookDeleteResponse> {
+  delete(
+    webhookId: string,
+    params: WebhookDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WebhookDeleteResponse> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`, options);
+    return this._client.delete(
+      `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
+      options,
+    );
   }
 
   /**
@@ -46,12 +72,16 @@ export class Webhooks extends APIResource {
    */
   get(webhookId: string, params: WebhookGetParams, options?: Core.RequestOptions): Core.APIPromise<Webhooks> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`, options) as Core.APIPromise<{ result: Webhooks }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/alerting/v3/destinations/webhooks/${webhookId}`,
+        options,
+      ) as Core.APIPromise<{ result: Webhooks }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WebhooksSinglePage extends SinglePage<Webhooks> {
-}
+export class WebhooksSinglePage extends SinglePage<Webhooks> {}
 
 export interface Webhooks {
   /**

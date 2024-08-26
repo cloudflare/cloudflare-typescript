@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as OSAPI from './os';
 
@@ -11,13 +10,28 @@ export class OS extends APIResource {
    * Get the top locations, by HTTP traffic, of the requested operating systems.
    * Values are a percentage out of the total traffic.
    */
-  get(os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV', query?: OSGetParams, options?: Core.RequestOptions): Core.APIPromise<OSGetResponse>
-  get(os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV', options?: Core.RequestOptions): Core.APIPromise<OSGetResponse>
-  get(os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV', query: OSGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<OSGetResponse> {
+  get(
+    os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',
+    query?: OSGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OSGetResponse>;
+  get(
+    os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OSGetResponse>;
+  get(
+    os: 'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV',
+    query: OSGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OSGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(os, {}, query);
     }
-    return (this._client.get(`/radar/http/top/locations/os/${os}`, { query, ...options }) as Core.APIPromise<{ result: OSGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/http/top/locations/os/${os}`, { query, ...options }) as Core.APIPromise<{
+        result: OSGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

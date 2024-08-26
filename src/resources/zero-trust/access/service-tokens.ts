@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error'
+import { CloudflareError } from '../../../error';
 import * as ServiceTokensAPI from './service-tokens';
 import { SinglePage } from '../../../pagination';
 
@@ -14,7 +13,10 @@ export class ServiceTokens extends APIResource {
    * Client Secret. If you lose the Client Secret, you will have to rotate the Client
    * Secret or create a new service token.
    */
-  create(params: ServiceTokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<ServiceTokenCreateResponse> {
+  create(
+    params: ServiceTokenCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceTokenCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -22,20 +24,32 @@ export class ServiceTokens extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens`, { body, ...options }) as Core.APIPromise<{ result: ServiceTokenCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ServiceTokenCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured service token.
    */
-  update(serviceTokenId: string, params: ServiceTokenUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
+  update(
+    serviceTokenId: string,
+    params: ServiceTokenUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -43,22 +57,36 @@ export class ServiceTokens extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`, { body, ...options }) as Core.APIPromise<{ result: ServiceToken }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ServiceToken }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all service tokens.
    */
-  list(params?: ServiceTokenListParams, options?: Core.RequestOptions): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>
-  list(options?: Core.RequestOptions): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>
-  list(params: ServiceTokenListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<ServiceTokensSinglePage, ServiceToken> {
+  list(
+    params?: ServiceTokenListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ServiceTokensSinglePage, ServiceToken>;
+  list(
+    params: ServiceTokenListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceTokensSinglePage, ServiceToken> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -69,22 +97,37 @@ export class ServiceTokens extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens`, ServiceTokensSinglePage, options);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/service_tokens`,
+      ServiceTokensSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes a service token.
    */
-  delete(serviceTokenId: string, params?: ServiceTokenDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>
-  delete(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>
-  delete(serviceTokenId: string, params: ServiceTokenDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
+  delete(
+    serviceTokenId: string,
+    params?: ServiceTokenDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken>;
+  delete(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
+  delete(
+    serviceTokenId: string,
+    params: ServiceTokenDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
     if (isRequestOptions(params)) {
       return this.delete(serviceTokenId, {}, params);
     }
@@ -95,22 +138,38 @@ export class ServiceTokens extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`, options) as Core.APIPromise<{ result: ServiceToken }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceToken }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single service token.
    */
-  get(serviceTokenId: string, params?: ServiceTokenGetParams, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>
-  get(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>
-  get(serviceTokenId: string, params: ServiceTokenGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
+  get(
+    serviceTokenId: string,
+    params?: ServiceTokenGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken>;
+  get(serviceTokenId: string, options?: Core.RequestOptions): Core.APIPromise<ServiceToken>;
+  get(
+    serviceTokenId: string,
+    params: ServiceTokenGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
     if (isRequestOptions(params)) {
       return this.get(serviceTokenId, {}, params);
     }
@@ -121,35 +180,60 @@ export class ServiceTokens extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`, options) as Core.APIPromise<{ result: ServiceToken }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/service_tokens/${serviceTokenId}`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceToken }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Refreshes the expiration of a service token.
    */
-  refresh(serviceTokenId: string, params: ServiceTokenRefreshParams, options?: Core.RequestOptions): Core.APIPromise<ServiceToken> {
+  refresh(
+    serviceTokenId: string,
+    params: ServiceTokenRefreshParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceToken> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/access/service_tokens/${serviceTokenId}/refresh`, options) as Core.APIPromise<{ result: ServiceToken }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(
+        `/accounts/${account_id}/access/service_tokens/${serviceTokenId}/refresh`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceToken }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Generates a new Client Secret for a service token and revokes the old one.
    */
-  rotate(serviceTokenId: string, params: ServiceTokenRotateParams, options?: Core.RequestOptions): Core.APIPromise<ServiceTokenRotateResponse> {
+  rotate(
+    serviceTokenId: string,
+    params: ServiceTokenRotateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceTokenRotateResponse> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/access/service_tokens/${serviceTokenId}/rotate`, options) as Core.APIPromise<{ result: ServiceTokenRotateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(
+        `/accounts/${account_id}/access/service_tokens/${serviceTokenId}/rotate`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceTokenRotateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ServiceTokensSinglePage extends SinglePage<ServiceToken> {
-}
+export class ServiceTokensSinglePage extends SinglePage<ServiceToken> {}
 
 export interface ServiceToken {
   /**

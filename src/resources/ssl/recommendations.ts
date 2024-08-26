@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RecommendationsAPI from './recommendations';
 
@@ -10,8 +8,15 @@ export class Recommendations extends APIResource {
   /**
    * Retrieve the SSL/TLS Recommender's recommendation for a zone.
    */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RecommendationGetResponse | null> {
-    return (this._client.get(`/zones/${zoneIdentifier}/ssl/recommendation`, options) as Core.APIPromise<{ result: RecommendationGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+  get(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RecommendationGetResponse | null> {
+    return (
+      this._client.get(`/zones/${zoneIdentifier}/ssl/recommendation`, options) as Core.APIPromise<{
+        result: RecommendationGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as LocationsAPI from './locations';
 
@@ -10,25 +9,47 @@ export class Locations extends APIResource {
   /**
    * Get the origin locations of attacks.
    */
-  origin(query?: LocationOriginParams, options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse>
-  origin(options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse>
-  origin(query: LocationOriginParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse> {
+  origin(
+    query?: LocationOriginParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationOriginResponse>;
+  origin(options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse>;
+  origin(
+    query: LocationOriginParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationOriginResponse> {
     if (isRequestOptions(query)) {
       return this.origin({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/top/locations/origin', { query, ...options }) as Core.APIPromise<{ result: LocationOriginResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/top/locations/origin', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: LocationOriginResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the target locations of attacks.
    */
-  target(query?: LocationTargetParams, options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse>
-  target(options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse>
-  target(query: LocationTargetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse> {
+  target(
+    query?: LocationTargetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationTargetResponse>;
+  target(options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse>;
+  target(
+    query: LocationTargetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationTargetResponse> {
     if (isRequestOptions(query)) {
       return this.target({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/top/locations/target', { query, ...options }) as Core.APIPromise<{ result: LocationTargetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/top/locations/target', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: LocationTargetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

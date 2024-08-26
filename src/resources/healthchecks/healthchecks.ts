@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { Previews } from './previews';
-import * as HealthchecksAPI from './healthchecks';
 import * as PreviewsAPI from './previews';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -17,52 +13,95 @@ export class Healthchecks extends APIResource {
    */
   create(params: HealthcheckCreateParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/healthchecks`, { body, ...options }) as Core.APIPromise<{ result: Healthcheck }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/healthchecks`, { body, ...options }) as Core.APIPromise<{
+        result: Healthcheck;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a configured health check.
    */
-  update(healthcheckId: string, params: HealthcheckUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
+  update(
+    healthcheckId: string,
+    params: HealthcheckUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/healthchecks/${healthcheckId}`, { body, ...options }) as Core.APIPromise<{ result: Healthcheck }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Healthcheck }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List configured health checks.
    */
-  list(params: HealthcheckListParams, options?: Core.RequestOptions): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck> {
+  list(
+    params: HealthcheckListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HealthchecksV4PagePaginationArray, Healthcheck> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(`/zones/${zone_id}/healthchecks`, HealthchecksV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Delete a health check.
    */
-  delete(healthcheckId: string, params: HealthcheckDeleteParams, options?: Core.RequestOptions): Core.APIPromise<HealthcheckDeleteResponse> {
+  delete(
+    healthcheckId: string,
+    params: HealthcheckDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HealthcheckDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{ result: HealthcheckDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
+        result: HealthcheckDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patch a configured health check.
    */
-  edit(healthcheckId: string, params: HealthcheckEditParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
+  edit(
+    healthcheckId: string,
+    params: HealthcheckEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Healthcheck> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/healthchecks/${healthcheckId}`, { body, ...options }) as Core.APIPromise<{ result: Healthcheck }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/healthchecks/${healthcheckId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Healthcheck }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a single configured health check.
    */
-  get(healthcheckId: string, params: HealthcheckGetParams, options?: Core.RequestOptions): Core.APIPromise<Healthcheck> {
+  get(
+    healthcheckId: string,
+    params: HealthcheckGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Healthcheck> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{ result: Healthcheck }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/healthchecks/${healthcheckId}`, options) as Core.APIPromise<{
+        result: Healthcheck;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class HealthchecksV4PagePaginationArray extends V4PagePaginationArray<Healthcheck> {
-}
+export class HealthchecksV4PagePaginationArray extends V4PagePaginationArray<Healthcheck> {}
 
 /**
  * WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe,
@@ -71,7 +110,21 @@ export class HealthchecksV4PagePaginationArray extends V4PagePaginationArray<Hea
  * SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (BUSINESS
  * and ENTERPRISE customers only).
  */
-export type CheckRegion = 'WNAM' | 'ENAM' | 'WEU' | 'EEU' | 'NSAM' | 'SSAM' | 'OC' | 'ME' | 'NAF' | 'SAF' | 'IN' | 'SEAS' | 'NEAS' | 'ALL_REGIONS'
+export type CheckRegion =
+  | 'WNAM'
+  | 'ENAM'
+  | 'WEU'
+  | 'EEU'
+  | 'NSAM'
+  | 'SSAM'
+  | 'OC'
+  | 'ME'
+  | 'NAF'
+  | 'SAF'
+  | 'IN'
+  | 'SEAS'
+  | 'NEAS'
+  | 'ALL_REGIONS';
 
 /**
  * WNAM: Western North America, ENAM: Eastern North America, WEU: Western Europe,
@@ -80,7 +133,21 @@ export type CheckRegion = 'WNAM' | 'ENAM' | 'WEU' | 'EEU' | 'NSAM' | 'SSAM' | 'O
  * SEAS: South East Asia, NEAS: North East Asia, ALL_REGIONS: all regions (BUSINESS
  * and ENTERPRISE customers only).
  */
-export type CheckRegionParam = 'WNAM' | 'ENAM' | 'WEU' | 'EEU' | 'NSAM' | 'SSAM' | 'OC' | 'ME' | 'NAF' | 'SAF' | 'IN' | 'SEAS' | 'NEAS' | 'ALL_REGIONS'
+export type CheckRegionParam =
+  | 'WNAM'
+  | 'ENAM'
+  | 'WEU'
+  | 'EEU'
+  | 'NSAM'
+  | 'SSAM'
+  | 'OC'
+  | 'ME'
+  | 'NAF'
+  | 'SAF'
+  | 'IN'
+  | 'SEAS'
+  | 'NEAS'
+  | 'ALL_REGIONS';
 
 export interface Healthcheck {
   /**

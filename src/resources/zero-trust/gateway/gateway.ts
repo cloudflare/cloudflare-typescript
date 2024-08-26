@@ -1,19 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { AuditSSHSettings } from './audit-ssh-settings';
-import { Categories } from './categories';
-import { AppTypes } from './app-types';
-import { Configurations } from './configurations/configurations';
-import { Lists } from './lists/lists';
-import { Locations } from './locations';
-import { Logging } from './logging';
-import { ProxyEndpoints } from './proxy-endpoints';
-import { Rules } from './rules';
-import { Certificates } from './certificates';
 import * as GatewayAPI from './gateway';
 import * as AppTypesAPI from './app-types';
 import * as AuditSSHSettingsAPI from './audit-ssh-settings';
@@ -27,7 +15,9 @@ import * as RulesAPI from './rules';
 import * as ListsAPI from './lists/lists';
 
 export class Gateway extends APIResource {
-  auditSSHSettings: AuditSSHSettingsAPI.AuditSSHSettings = new AuditSSHSettingsAPI.AuditSSHSettings(this._client);
+  auditSSHSettings: AuditSSHSettingsAPI.AuditSSHSettings = new AuditSSHSettingsAPI.AuditSSHSettings(
+    this._client,
+  );
   categories: CategoriesAPI.Categories = new CategoriesAPI.Categories(this._client);
   appTypes: AppTypesAPI.AppTypes = new AppTypesAPI.AppTypes(this._client);
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
@@ -43,7 +33,11 @@ export class Gateway extends APIResource {
    */
   create(params: GatewayCreateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayCreateResponse> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{ result: GatewayCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{
+        result: GatewayCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -51,7 +45,11 @@ export class Gateway extends APIResource {
    */
   list(params: GatewayListParams, options?: Core.RequestOptions): Core.APIPromise<GatewayListResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{ result: GatewayListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/gateway`, options) as Core.APIPromise<{
+        result: GatewayListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

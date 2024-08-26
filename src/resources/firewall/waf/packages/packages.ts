@@ -2,10 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Groups } from './groups';
-import { Rules } from './rules';
 import * as PackagesAPI from './packages';
 import * as Shared from '../../../shared';
 import * as GroupsAPI from './groups';
@@ -22,13 +19,28 @@ export class Packages extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  list(zoneIdentifier: string, query?: PackageListParams, options?: Core.RequestOptions): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>
-  list(zoneIdentifier: string, query: PackageListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse> {
+  list(
+    zoneIdentifier: string,
+    query?: PackageListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>;
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse>;
+  list(
+    zoneIdentifier: string,
+    query: PackageListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PackageListResponsesV4PagePaginationArray, PackageListResponse> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/firewall/waf/packages`, PackageListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/firewall/waf/packages`,
+      PackageListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -37,15 +49,20 @@ export class Packages extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  get(zoneIdentifier: string, identifier: string, options?: Core.RequestOptions): Core.APIPromise<PackageGetResponse> {
+  get(
+    zoneIdentifier: string,
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PackageGetResponse> {
     return this._client.get(`/zones/${zoneIdentifier}/firewall/waf/packages/${identifier}`, options);
   }
 }
 
-export class PackageListResponsesV4PagePaginationArray extends V4PagePaginationArray<PackageListResponse> {
-}
+export class PackageListResponsesV4PagePaginationArray extends V4PagePaginationArray<PackageListResponse> {}
 
-export type PackageListResponse = PackageListResponse.FirewallAPIResponseCollection | PackageListResponse.Result
+export type PackageListResponse =
+  | PackageListResponse.FirewallAPIResponseCollection
+  | PackageListResponse.Result;
 
 export namespace PackageListResponse {
   export interface FirewallAPIResponseCollection {
@@ -180,7 +197,7 @@ export namespace PackageListResponse {
   }
 }
 
-export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | PackageGetResponse.Result
+export type PackageGetResponse = PackageGetResponse.FirewallAPIResponseSingle | PackageGetResponse.Result;
 
 export namespace PackageGetResponse {
   export interface FirewallAPIResponseSingle {

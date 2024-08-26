@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SearchesAPI from './searches';
 
@@ -12,7 +10,12 @@ export class Searches extends APIResource {
    */
   get(params: SearchGetParams, options?: Core.RequestOptions): Core.APIPromise<SearchGetResponse> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/load_balancers/search`, { query, ...options }) as Core.APIPromise<{ result: SearchGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/load_balancers/search`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: SearchGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

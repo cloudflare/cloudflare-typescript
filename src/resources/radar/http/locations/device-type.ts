@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as DeviceTypeAPI from './device-type';
 
@@ -11,13 +10,29 @@ export class DeviceType extends APIResource {
    * Get the top locations, by HTTP traffic, of the requested device type. Values are
    * a percentage out of the total traffic.
    */
-  get(deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER', query?: DeviceTypeGetParams, options?: Core.RequestOptions): Core.APIPromise<DeviceTypeGetResponse>
-  get(deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER', options?: Core.RequestOptions): Core.APIPromise<DeviceTypeGetResponse>
-  get(deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER', query: DeviceTypeGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<DeviceTypeGetResponse> {
+  get(
+    deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER',
+    query?: DeviceTypeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeviceTypeGetResponse>;
+  get(
+    deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER',
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeviceTypeGetResponse>;
+  get(
+    deviceType: 'DESKTOP' | 'MOBILE' | 'OTHER',
+    query: DeviceTypeGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeviceTypeGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(deviceType, {}, query);
     }
-    return (this._client.get(`/radar/http/top/locations/device_type/${deviceType}`, { query, ...options }) as Core.APIPromise<{ result: DeviceTypeGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/http/top/locations/device_type/${deviceType}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: DeviceTypeGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

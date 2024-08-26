@@ -1,26 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { AI } from './ai/ai';
-import { Annotations } from './annotations/annotations';
-import { BGP } from './bgp/bgp';
-import { Datasets } from './datasets';
-import { DNS } from './dns/dns';
-import { Netflows } from './netflows/netflows';
-import { Search } from './search';
-import { VerifiedBots } from './verified-bots/verified-bots';
-import { AS112 } from './as112/as112';
-import { Email } from './email/email';
-import { Attacks } from './attacks/attacks';
-import { Entities } from './entities/entities';
-import { HTTP } from './http/http';
-import { Quality } from './quality/quality';
-import { Ranking } from './ranking/ranking';
-import { TrafficAnomalies } from './traffic-anomalies/traffic-anomalies';
-import { TCPResetsTimeouts } from './tcp-resets-timeouts';
 import * as DatasetsAPI from './datasets';
 import * as SearchAPI from './search';
 import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
@@ -53,8 +33,12 @@ export class Radar extends APIResource {
   http: HTTPAPI.HTTP = new HTTPAPI.HTTP(this._client);
   quality: QualityAPI.Quality = new QualityAPI.Quality(this._client);
   ranking: RankingAPI.Ranking = new RankingAPI.Ranking(this._client);
-  trafficAnomalies: TrafficAnomaliesAPI.TrafficAnomalies = new TrafficAnomaliesAPI.TrafficAnomalies(this._client);
-  tcpResetsTimeouts: TCPResetsTimeoutsAPI.TCPResetsTimeouts = new TCPResetsTimeoutsAPI.TCPResetsTimeouts(this._client);
+  trafficAnomalies: TrafficAnomaliesAPI.TrafficAnomalies = new TrafficAnomaliesAPI.TrafficAnomalies(
+    this._client,
+  );
+  tcpResetsTimeouts: TCPResetsTimeoutsAPI.TCPResetsTimeouts = new TCPResetsTimeoutsAPI.TCPResetsTimeouts(
+    this._client,
+  );
 }
 
 export namespace Radar {

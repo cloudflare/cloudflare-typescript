@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error'
+import { CloudflareError } from '../../../error';
 import * as VersionsAPI from './versions';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
@@ -14,9 +13,20 @@ export class Versions extends APIResource {
   /**
    * Fetches the versions of an account or zone entry point ruleset.
    */
-  list(rulesetPhase: RulesetsAPI.PhaseParam, params?: VersionListParams, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>
-  list(rulesetPhase: RulesetsAPI.PhaseParam, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>
-  list(rulesetPhase: RulesetsAPI.PhaseParam, params: VersionListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse> {
+  list(
+    rulesetPhase: RulesetsAPI.PhaseParam,
+    params?: VersionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
+  list(
+    rulesetPhase: RulesetsAPI.PhaseParam,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
+  list(
+    rulesetPhase: RulesetsAPI.PhaseParam,
+    params: VersionListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse> {
     if (isRequestOptions(params)) {
       return this.list(rulesetPhase, {}, params);
     }
@@ -27,22 +37,43 @@ export class Versions extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions`, VersionListResponsesSinglePage, options);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions`,
+      VersionListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Fetches a specific version of an account or zone entry point ruleset.
    */
-  get(rulesetPhase: RulesetsAPI.PhaseParam, rulesetVersion: string, params?: VersionGetParams, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse>
-  get(rulesetPhase: RulesetsAPI.PhaseParam, rulesetVersion: string, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse>
-  get(rulesetPhase: RulesetsAPI.PhaseParam, rulesetVersion: string, params: VersionGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse> {
+  get(
+    rulesetPhase: RulesetsAPI.PhaseParam,
+    rulesetVersion: string,
+    params?: VersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse>;
+  get(
+    rulesetPhase: RulesetsAPI.PhaseParam,
+    rulesetVersion: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse>;
+  get(
+    rulesetPhase: RulesetsAPI.PhaseParam,
+    rulesetVersion: string,
+    params: VersionGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VersionGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(rulesetPhase, rulesetVersion, {}, params);
     }
@@ -53,19 +84,26 @@ export class Versions extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions/${rulesetVersion}`, options) as Core.APIPromise<{ result: VersionGetResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint/versions/${rulesetVersion}`,
+        options,
+      ) as Core.APIPromise<{ result: VersionGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class VersionListResponsesSinglePage extends SinglePage<VersionListResponse> {
-}
+export class VersionListResponsesSinglePage extends SinglePage<VersionListResponse> {}
 
 /**
  * A ruleset object.
@@ -139,7 +177,26 @@ export interface VersionGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<RulesAPI.BlockRule | VersionGetResponse.RulesetsChallengeRule | RulesAPI.CompressResponseRule | RulesAPI.ExecuteRule | VersionGetResponse.RulesetsJSChallengeRule | RulesAPI.LogRule | RulesAPI.ManagedChallengeRule | RulesAPI.RedirectRule | RulesAPI.RewriteRule | RulesAPI.RouteRule | RulesAPI.ScoreRule | RulesAPI.ServeErrorRule | RulesAPI.SetConfigRule | RulesAPI.SkipRule | RulesAPI.SetCacheSettingsRule | RulesAPI.LogCustomFieldRule | RulesAPI.DDoSDynamicRule | RulesAPI.ForceConnectionCloseRule>;
+  rules: Array<
+    | RulesAPI.BlockRule
+    | VersionGetResponse.RulesetsChallengeRule
+    | RulesAPI.CompressResponseRule
+    | RulesAPI.ExecuteRule
+    | VersionGetResponse.RulesetsJSChallengeRule
+    | RulesAPI.LogRule
+    | RulesAPI.ManagedChallengeRule
+    | RulesAPI.RedirectRule
+    | RulesAPI.RewriteRule
+    | RulesAPI.RouteRule
+    | RulesAPI.ScoreRule
+    | RulesAPI.ServeErrorRule
+    | RulesAPI.SetConfigRule
+    | RulesAPI.SkipRule
+    | RulesAPI.SetCacheSettingsRule
+    | RulesAPI.LogCustomFieldRule
+    | RulesAPI.DDoSDynamicRule
+    | RulesAPI.ForceConnectionCloseRule
+  >;
 
   /**
    * The version of the ruleset.

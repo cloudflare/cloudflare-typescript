@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TopAPI from './top';
 
@@ -10,26 +9,43 @@ export class Top extends APIResource {
   /**
    * Get top verified bots by HTTP requests, with owner and category.
    */
-  bots(query?: TopBotsParams, options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>
-  bots(options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>
-  bots(query: TopBotsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse> {
+  bots(query?: TopBotsParams, options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>;
+  bots(options?: Core.RequestOptions): Core.APIPromise<TopBotsResponse>;
+  bots(
+    query: TopBotsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopBotsResponse> {
     if (isRequestOptions(query)) {
       return this.bots({}, query);
     }
-    return (this._client.get('/radar/verified_bots/top/bots', { query, ...options }) as Core.APIPromise<{ result: TopBotsResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/verified_bots/top/bots', { query, ...options }) as Core.APIPromise<{
+        result: TopBotsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get top verified bot categories by HTTP requests, along with their corresponding
    * percentage, over the total verified bot HTTP requests.
    */
-  categories(query?: TopCategoriesParams, options?: Core.RequestOptions): Core.APIPromise<TopCategoriesResponse>
-  categories(options?: Core.RequestOptions): Core.APIPromise<TopCategoriesResponse>
-  categories(query: TopCategoriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopCategoriesResponse> {
+  categories(
+    query?: TopCategoriesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopCategoriesResponse>;
+  categories(options?: Core.RequestOptions): Core.APIPromise<TopCategoriesResponse>;
+  categories(
+    query: TopCategoriesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopCategoriesResponse> {
     if (isRequestOptions(query)) {
       return this.categories({}, query);
     }
-    return (this._client.get('/radar/verified_bots/top/categories', { query, ...options }) as Core.APIPromise<{ result: TopCategoriesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/verified_bots/top/categories', { query, ...options }) as Core.APIPromise<{
+        result: TopCategoriesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

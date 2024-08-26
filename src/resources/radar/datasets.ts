@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DatasetsAPI from './datasets';
 
@@ -10,21 +9,37 @@ export class Datasets extends APIResource {
   /**
    * Get a list of datasets.
    */
-  list(query?: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>
-  list(options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>
-  list(query: DatasetListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse> {
+  list(query?: DatasetListParams, options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<DatasetListResponse>;
+  list(
+    query: DatasetListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (this._client.get('/radar/datasets', { query, ...options }) as Core.APIPromise<{ result: DatasetListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/datasets', { query, ...options }) as Core.APIPromise<{
+        result: DatasetListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a url to download a single dataset.
    */
-  download(params: DatasetDownloadParams, options?: Core.RequestOptions): Core.APIPromise<DatasetDownloadResponse> {
+  download(
+    params: DatasetDownloadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatasetDownloadResponse> {
     const { format, ...body } = params;
-    return (this._client.post('/radar/datasets/download', { query: { format }, body, ...options }) as Core.APIPromise<{ result: DatasetDownloadResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post('/radar/datasets/download', {
+        query: { format },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatasetDownloadResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -33,7 +48,10 @@ export class Datasets extends APIResource {
    * available at a given date.
    */
   get(alias: string, options?: Core.RequestOptions): Core.APIPromise<string> {
-    return this._client.get(`/radar/datasets/${alias}`, { ...options, headers: { Accept: 'text/csv', ...options?.headers } });
+    return this._client.get(`/radar/datasets/${alias}`, {
+      ...options,
+      headers: { Accept: 'text/csv', ...options?.headers },
+    });
   }
 }
 
@@ -67,7 +85,7 @@ export namespace DatasetDownloadResponse {
   }
 }
 
-export type DatasetGetResponse = string
+export type DatasetGetResponse = string;
 
 export interface DatasetListParams {
   /**

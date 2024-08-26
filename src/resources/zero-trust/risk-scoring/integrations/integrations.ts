@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { References } from './references';
 import * as IntegrationsAPI from './integrations';
 import * as ReferencesAPI from './references';
 import { SinglePage } from '../../../../pagination';
@@ -15,46 +12,87 @@ export class Integrations extends APIResource {
   /**
    * Create new risk score integration.
    */
-  create(params: IntegrationCreateParams, options?: Core.RequestOptions): Core.APIPromise<IntegrationCreateResponse> {
+  create(
+    params: IntegrationCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/zt_risk_scoring/integrations`, { body, ...options }) as Core.APIPromise<{ result: IntegrationCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/zt_risk_scoring/integrations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IntegrationCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Overwrite the reference_id, tenant_url, and active values with the ones provided
    */
-  update(integrationId: string, params: IntegrationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<IntegrationUpdateResponse> {
+  update(
+    integrationId: string,
+    params: IntegrationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`, { body, ...options }) as Core.APIPromise<{ result: IntegrationUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IntegrationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all risk score integrations for the account.
    */
-  list(params: IntegrationListParams, options?: Core.RequestOptions): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
+  list(
+    params: IntegrationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<IntegrationListResponsesSinglePage, IntegrationListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/zt_risk_scoring/integrations`, IntegrationListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/zt_risk_scoring/integrations`,
+      IntegrationListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Delete a risk score integration.
    */
-  delete(integrationId: string, params: IntegrationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<IntegrationDeleteResponse> {
+  delete(
+    integrationId: string,
+    params: IntegrationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`, options) as Core.APIPromise<{ result: IntegrationDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`,
+        options,
+      ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get risk score integration by id.
    */
-  get(integrationId: string, params: IntegrationGetParams, options?: Core.RequestOptions): Core.APIPromise<IntegrationGetResponse> {
+  get(
+    integrationId: string,
+    params: IntegrationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IntegrationGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`, options) as Core.APIPromise<{ result: IntegrationGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`,
+        options,
+      ) as Core.APIPromise<{ result: IntegrationGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class IntegrationListResponsesSinglePage extends SinglePage<IntegrationListResponse> {
-}
+export class IntegrationListResponsesSinglePage extends SinglePage<IntegrationListResponse> {}
 
 export interface IntegrationCreateResponse {
   /**
@@ -185,7 +223,7 @@ export interface IntegrationListResponse {
   well_known_url: string;
 }
 
-export type IntegrationDeleteResponse = unknown
+export type IntegrationDeleteResponse = unknown;
 
 export interface IntegrationGetResponse {
   /**

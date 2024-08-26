@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DomainsAPI from './domains';
 import * as Shared from '../shared';
@@ -12,30 +10,54 @@ export class Domains extends APIResource {
   /**
    * Update individual domain.
    */
-  update(domainName: string, params: DomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DomainUpdateResponse | null> {
+  update(
+    domainName: string,
+    params: DomainUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainUpdateResponse | null> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, { body, ...options }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List domains handled by Registrar.
    */
-  list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
+  list(
+    params: DomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/registrar/domains`, DomainListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/registrar/domains`,
+      DomainListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Show individual domain.
    */
-  get(domainName: string, params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<DomainGetResponse | null> {
+  get(
+    domainName: string,
+    params: DomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/registrar/domains/${domainName}`, options) as Core.APIPromise<{ result: DomainGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/registrar/domains/${domainName}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {
-}
+export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
 
 export interface Domain {
   /**
@@ -210,7 +232,7 @@ export namespace Domain {
   }
 }
 
-export type DomainUpdateResponse = unknown | Array<unknown> | string
+export type DomainUpdateResponse = unknown | Array<unknown> | string;
 
 export interface DomainListResponse {
   errors: Array<Shared.ResponseInfo>;
@@ -251,7 +273,7 @@ export namespace DomainListResponse {
   }
 }
 
-export type DomainGetResponse = unknown | Array<unknown> | string
+export type DomainGetResponse = unknown | Array<unknown> | string;
 
 export interface DomainUpdateParams {
   /**

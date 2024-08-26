@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DomainHistoryAPI from './domain-history';
 
@@ -10,9 +8,17 @@ export class DomainHistoryResource extends APIResource {
   /**
    * Get Domain History
    */
-  get(params: DomainHistoryGetParams, options?: Core.RequestOptions): Core.APIPromise<DomainHistoryGetResponse | null> {
+  get(
+    params: DomainHistoryGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainHistoryGetResponse | null> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/intel/domain-history`, { query, ...options }) as Core.APIPromise<{ result: DomainHistoryGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/intel/domain-history`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: DomainHistoryGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -32,7 +38,7 @@ export namespace DomainHistory {
   }
 }
 
-export type DomainHistoryGetResponse = Array<DomainHistory>
+export type DomainHistoryGetResponse = Array<DomainHistory>;
 
 export interface DomainHistoryGetParams {
   /**

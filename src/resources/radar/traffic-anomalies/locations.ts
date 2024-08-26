@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as LocationsAPI from './locations';
 
@@ -12,13 +11,20 @@ export class Locations extends APIResource {
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the sum of alerts grouped by location.
    */
-  get(query?: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>
-  get(options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>
-  get(query: LocationGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse> {
+  get(query?: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<LocationGetResponse>;
+  get(
+    query: LocationGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (this._client.get('/radar/traffic_anomalies/locations', { query, ...options }) as Core.APIPromise<{ result: LocationGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/traffic_anomalies/locations', { query, ...options }) as Core.APIPromise<{
+        result: LocationGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

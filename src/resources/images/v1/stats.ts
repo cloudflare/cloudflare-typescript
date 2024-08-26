@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as StatsAPI from './stats';
 
@@ -12,7 +10,11 @@ export class Stats extends APIResource {
    */
   get(params: StatGetParams, options?: Core.RequestOptions): Core.APIPromise<Stat> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/images/v1/stats`, options) as Core.APIPromise<{ result: Stat }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/images/v1/stats`, options) as Core.APIPromise<{
+        result: Stat;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

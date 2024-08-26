@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SummariesAPI from './summaries';
 import * as EventsAPI from './events';
@@ -13,7 +11,12 @@ export class Summaries extends APIResource {
    */
   get(params: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse> {
     const { zone_id, ...query } = params;
-    return (this._client.get(`/zones/${zone_id}/spectrum/analytics/events/summary`, { query, ...options }) as Core.APIPromise<{ result: SummaryGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/spectrum/analytics/events/summary`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: SummaryGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -114,7 +117,15 @@ export namespace SummaryGetResponse {
      * | duration90th   | 90th percentile connection duration | 1.0     | Time in milliseconds  |
      * | duration99th   | 99th percentile connection duration | 1.0     | Time in milliseconds. |
      */
-    metrics?: Array<'count' | 'bytesIngress' | 'bytesEgress' | 'durationAvg' | 'durationMedian' | 'duration90th' | 'duration99th'>;
+    metrics?: Array<
+      | 'count'
+      | 'bytesIngress'
+      | 'bytesEgress'
+      | 'durationAvg'
+      | 'durationMedian'
+      | 'duration90th'
+      | 'duration99th'
+    >;
 
     /**
      * Start of time interval to query, defaults to `until` - 6 hours. Timestamp must
@@ -188,7 +199,15 @@ export interface SummaryGetParams {
    * | duration90th   | 90th percentile connection duration | 1.0     | Time in milliseconds  |
    * | duration99th   | 99th percentile connection duration | 1.0     | Time in milliseconds. |
    */
-  metrics?: Array<'count' | 'bytesIngress' | 'bytesEgress' | 'durationAvg' | 'durationMedian' | 'duration90th' | 'duration99th'>;
+  metrics?: Array<
+    | 'count'
+    | 'bytesIngress'
+    | 'bytesEgress'
+    | 'durationAvg'
+    | 'durationMedian'
+    | 'duration90th'
+    | 'duration99th'
+  >;
 
   /**
    * Query param: Start of time interval to query, defaults to `until` - 6 hours.

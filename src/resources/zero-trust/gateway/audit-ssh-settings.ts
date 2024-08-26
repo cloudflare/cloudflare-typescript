@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as AuditSSHSettingsAPI from './audit-ssh-settings';
 
@@ -10,9 +8,17 @@ export class AuditSSHSettings extends APIResource {
   /**
    * Updates Zero Trust Audit SSH settings.
    */
-  update(params: AuditSSHSettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<GatewaySettings> {
+  update(
+    params: AuditSSHSettingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewaySettings> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/gateway/audit_ssh_settings`, { body, ...options }) as Core.APIPromise<{ result: GatewaySettings }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/gateway/audit_ssh_settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GatewaySettings }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +26,11 @@ export class AuditSSHSettings extends APIResource {
    */
   get(params: AuditSSHSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewaySettings> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{ result: GatewaySettings }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/gateway/audit_ssh_settings`, options) as Core.APIPromise<{
+        result: GatewaySettings;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

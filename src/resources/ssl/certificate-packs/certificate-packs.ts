@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Order } from './order';
-import { Quota } from './quota';
 import * as CertificatePacksAPI from './certificate-packs';
 import * as OrderAPI from './order';
 import * as QuotaAPI from './quota';
@@ -18,17 +14,33 @@ export class CertificatePacks extends APIResource {
   /**
    * For a given zone, list all active certificate packs.
    */
-  list(params: CertificatePackListParams, options?: Core.RequestOptions): Core.PagePromise<CertificatePackListResponsesSinglePage, CertificatePackListResponse> {
+  list(
+    params: CertificatePackListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CertificatePackListResponsesSinglePage, CertificatePackListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/ssl/certificate_packs`, CertificatePackListResponsesSinglePage, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/ssl/certificate_packs`,
+      CertificatePackListResponsesSinglePage,
+      { query, ...options },
+    );
   }
 
   /**
    * For a given zone, delete an advanced certificate pack.
    */
-  delete(certificatePackId: string, params: CertificatePackDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CertificatePackDeleteResponse> {
+  delete(
+    certificatePackId: string,
+    params: CertificatePackDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, options) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificatePackDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -36,48 +48,86 @@ export class CertificatePacks extends APIResource {
    * only a validation operation for a Certificate Pack in a validation_timed_out
    * status.
    */
-  edit(certificatePackId: string, params: CertificatePackEditParams, options?: Core.RequestOptions): Core.APIPromise<CertificatePackEditResponse> {
+  edit(
+    certificatePackId: string,
+    params: CertificatePackEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackEditResponse> {
     const { zone_id, body } = params;
-    return (this._client.patch(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, { body: body, ...options }) as Core.APIPromise<{ result: CertificatePackEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificatePackEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * For a given zone, get a certificate pack.
    */
-  get(certificatePackId: string, params: CertificatePackGetParams, options?: Core.RequestOptions): Core.APIPromise<CertificatePackGetResponse> {
+  get(
+    certificatePackId: string,
+    params: CertificatePackGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, options) as Core.APIPromise<{ result: CertificatePackGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificatePackGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {
-}
+export class CertificatePackListResponsesSinglePage extends SinglePage<CertificatePackListResponse> {}
 
-export type Host = string
+export type Host = string;
 
-export type HostParam = string
-
-/**
- * The number of days for which the certificate should be valid.
- */
-export type RequestValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475
+export type HostParam = string;
 
 /**
  * The number of days for which the certificate should be valid.
  */
-export type RequestValidityParam = 7 | 30 | 90 | 365 | 730 | 1095 | 5475
+export type RequestValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
+
+/**
+ * The number of days for which the certificate should be valid.
+ */
+export type RequestValidityParam = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
 
 /**
  * Status of certificate pack.
  */
-export type Status = 'initializing' | 'pending_validation' | 'deleted' | 'pending_issuance' | 'pending_deployment' | 'pending_deletion' | 'pending_expiration' | 'expired' | 'active' | 'initializing_timed_out' | 'validation_timed_out' | 'issuance_timed_out' | 'deployment_timed_out' | 'deletion_timed_out' | 'pending_cleanup' | 'staging_deployment' | 'staging_active' | 'deactivating' | 'inactive' | 'backup_issued' | 'holding_deployment'
+export type Status =
+  | 'initializing'
+  | 'pending_validation'
+  | 'deleted'
+  | 'pending_issuance'
+  | 'pending_deployment'
+  | 'pending_deletion'
+  | 'pending_expiration'
+  | 'expired'
+  | 'active'
+  | 'initializing_timed_out'
+  | 'validation_timed_out'
+  | 'issuance_timed_out'
+  | 'deployment_timed_out'
+  | 'deletion_timed_out'
+  | 'pending_cleanup'
+  | 'staging_deployment'
+  | 'staging_active'
+  | 'deactivating'
+  | 'inactive'
+  | 'backup_issued'
+  | 'holding_deployment';
 
 /**
  * Validation method in use for a certificate pack order.
  */
-export type ValidationMethod = 'http' | 'cname' | 'txt'
+export type ValidationMethod = 'http' | 'cname' | 'txt';
 
-export type CertificatePackListResponse = unknown
+export type CertificatePackListResponse = unknown;
 
 export interface CertificatePackDeleteResponse {
   /**
@@ -132,7 +182,7 @@ export interface CertificatePackEditResponse {
   validity_days?: 14 | 30 | 90 | 365;
 }
 
-export type CertificatePackGetResponse = unknown
+export type CertificatePackGetResponse = unknown;
 
 export interface CertificatePackListParams {
   /**

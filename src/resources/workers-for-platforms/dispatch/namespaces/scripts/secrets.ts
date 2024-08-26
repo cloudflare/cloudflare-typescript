@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as SecretsAPI from './secrets';
 import { SinglePage } from '../../../../../pagination';
@@ -11,30 +9,59 @@ export class Secrets extends APIResource {
   /**
    * Put secrets to a script uploaded to a Workers for Platforms namespace.
    */
-  update(dispatchNamespace: string, scriptName: string, params: SecretUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SecretUpdateResponse> {
+  update(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: SecretUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets`, { body, ...options }) as Core.APIPromise<{ result: SecretUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: SecretUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List secrets from a script uploaded to a Workers for Platforms namespace.
    */
-  list(dispatchNamespace: string, scriptName: string, params: SecretListParams, options?: Core.RequestOptions): Core.PagePromise<SecretListResponsesSinglePage, SecretListResponse> {
+  list(
+    dispatchNamespace: string,
+    scriptName: string,
+    params: SecretListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SecretListResponsesSinglePage, SecretListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets`, SecretListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets`,
+      SecretListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Get secret from a script uploaded to a Workers for Platforms namespace.
    */
-  get(dispatchNamespace: string, scriptName: string, secretName: string, params: SecretGetParams, options?: Core.RequestOptions): Core.APIPromise<SecretGetResponse> {
+  get(
+    dispatchNamespace: string,
+    scriptName: string,
+    secretName: string,
+    params: SecretGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SecretGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets/${secretName}`, options) as Core.APIPromise<{ result: SecretGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/secrets/${secretName}`,
+        options,
+      ) as Core.APIPromise<{ result: SecretGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SecretListResponsesSinglePage extends SinglePage<SecretListResponse> {
-}
+export class SecretListResponsesSinglePage extends SinglePage<SecretListResponse> {}
 
 export interface SecretUpdateResponse {
   /**

@@ -2,8 +2,7 @@
 
 import * as Errors from './error';
 import * as Uploads from './uploads';
-import { isRequestOptions } from './core';
-import { type Agent, type RequestInit } from './_shims/index';
+import { type Agent } from './_shims/index';
 import * as qs from 'qs';
 import * as Core from './core';
 import * as Pagination from './pagination';
@@ -88,7 +87,7 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Cloudflare API. 
+ * API Client for interfacing with the Cloudflare API.
  */
 export class Cloudflare extends Core.APIClient {
   apiToken: string | null;
@@ -121,7 +120,6 @@ export class Cloudflare extends Core.APIClient {
     userServiceKey = Core.readEnv('CLOUDFLARE_API_USER_SERVICE_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
-
     const options: ClientOptions = {
       apiToken,
       apiKey,
@@ -235,7 +233,7 @@ export class Cloudflare extends Core.APIClient {
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
-    return this._options.defaultQuery
+    return this._options.defaultQuery;
   }
 
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
@@ -276,17 +274,24 @@ export class Cloudflare extends Core.APIClient {
       return;
     }
 
-    throw new Error('Could not resolve authentication method. Expected one of apiEmail, apiKey, apiToken or userServiceKey to be set. Or for one of the "X-Auth-Email", "X-Auth-Key", "Authorization" or "X-Auth-User-Service-Key" headers to be explicitly omitted')
+    throw new Error(
+      'Could not resolve authentication method. Expected one of apiEmail, apiKey, apiToken or userServiceKey to be set. Or for one of the "X-Auth-Email", "X-Auth-Key", "Authorization" or "X-Auth-User-Service-Key" headers to be explicitly omitted',
+    );
   }
 
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    const apiEmailAuth = this.apiEmailAuth(opts)
-    const apiKeyAuth = this.apiKeyAuth(opts)
-    const apiTokenAuth = this.apiTokenAuth(opts)
-    const userServiceKeyAuth = this.userServiceKeyAuth(opts)
+    const apiEmailAuth = this.apiEmailAuth(opts);
+    const apiKeyAuth = this.apiKeyAuth(opts);
+    const apiTokenAuth = this.apiTokenAuth(opts);
+    const userServiceKeyAuth = this.userServiceKeyAuth(opts);
 
-    if (apiEmailAuth != null && !Core.isEmptyObj(apiEmailAuth) && apiKeyAuth != null && !Core.isEmptyObj(apiKeyAuth)) {
-      return {...apiEmailAuth, ...apiKeyAuth};
+    if (
+      apiEmailAuth != null &&
+      !Core.isEmptyObj(apiEmailAuth) &&
+      apiKeyAuth != null &&
+      !Core.isEmptyObj(apiKeyAuth)
+    ) {
+      return { ...apiEmailAuth, ...apiKeyAuth };
     }
 
     if (apiTokenAuth != null && !Core.isEmptyObj(apiTokenAuth)) {
@@ -328,11 +333,11 @@ export class Cloudflare extends Core.APIClient {
   }
 
   protected override stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { allowDots: true, arrayFormat: 'repeat' })
+    return qs.stringify(query, { allowDots: true, arrayFormat: 'repeat' });
   }
 
   static Cloudflare = this;
-  static DEFAULT_TIMEOUT = 60000 // 1 minute
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static CloudflareError = Errors.CloudflareError;
   static APIError = Errors.APIError;
@@ -352,7 +357,21 @@ export class Cloudflare extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const { CloudflareError, APIError, APIConnectionError, APIConnectionTimeoutError, APIUserAbortError, NotFoundError, ConflictError, RateLimitError, BadRequestError, AuthenticationError, InternalServerError, PermissionDeniedError, UnprocessableEntityError } = Errors
+export const {
+  CloudflareError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} = Errors;
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;

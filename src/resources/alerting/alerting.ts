@@ -1,13 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { AvailableAlerts } from './available-alerts';
-import { Destinations } from './destinations/destinations';
-import { HistoryResource } from './history';
-import { Policies } from './policies';
 import * as AvailableAlertsAPI from './available-alerts';
 import * as HistoryAPI from './history';
 import * as PoliciesAPI from './policies';

@@ -1,16 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Schedules } from './schedules';
-import { Content } from './content';
-import { Settings } from './settings';
-import { Deployments } from './deployments';
-import { Versions } from './versions';
 import * as ScriptsAPI from './scripts';
-import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../core';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
 import * as DeploymentsAPI from './deployments';
@@ -34,9 +26,23 @@ export class Scripts extends APIResource {
    * docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
-  update(scriptName: string, params: ScriptUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ScriptUpdateResponse> {
+  update(
+    scriptName: string,
+    params: ScriptUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptUpdateResponse> {
     const { account_id, rollback_to, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}`, Core.maybeMultipartFormRequestOptions({ query: { rollback_to }, body, ...options, headers: { 'Content-Type': 'application/javascript', ...options?.headers } })) as Core.APIPromise<{ result: ScriptUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(
+        `/accounts/${account_id}/workers/scripts/${scriptName}`,
+        Core.maybeMultipartFormRequestOptions({
+          query: { rollback_to },
+          body,
+          ...options,
+          headers: { 'Content-Type': 'application/javascript', ...options?.headers },
+        }),
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -50,9 +56,17 @@ export class Scripts extends APIResource {
   /**
    * Delete your worker. This call has no response body on a successful delete.
    */
-  delete(scriptName: string, params: ScriptDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+  delete(
+    scriptName: string,
+    params: ScriptDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
     const { account_id, force } = params;
-    return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}`, { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } });
+    return this._client.delete(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
+      query: { force },
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 
   /**
@@ -61,12 +75,14 @@ export class Scripts extends APIResource {
    */
   get(scriptName: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}`, { ...options, __binaryResponse: true });
+    return this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}`, {
+      ...options,
+      __binaryResponse: true,
+    });
   }
 }
 
-export class ScriptsSinglePage extends SinglePage<Script> {
-}
+export class ScriptsSinglePage extends SinglePage<Script> {}
 
 export interface Script {
   /**
@@ -166,7 +182,7 @@ export interface ScriptUpdateResponse {
   usage_model?: string;
 }
 
-export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1
+export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
 
 export namespace ScriptUpdateParams {
   export interface Variant0 {
@@ -284,7 +300,7 @@ export namespace ScriptUpdateParams {
          * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
          */
         type?: string;
-      [k: string]: unknown
+        [k: string]: unknown;
       }
     }
   }

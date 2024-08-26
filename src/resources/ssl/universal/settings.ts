@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SettingsAPI from './settings';
 
@@ -12,7 +10,12 @@ export class Settings extends APIResource {
    */
   edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/ssl/universal/settings`, { body, ...options }) as Core.APIPromise<{ result: UniversalSSLSettings }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/ssl/universal/settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: UniversalSSLSettings }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +23,11 @@ export class Settings extends APIResource {
    */
   get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<UniversalSSLSettings> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/ssl/universal/settings`, options) as Core.APIPromise<{ result: UniversalSSLSettings }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/ssl/universal/settings`, options) as Core.APIPromise<{
+        result: UniversalSSLSettings;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

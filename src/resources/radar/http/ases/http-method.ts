@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as HTTPMethodAPI from './http-method';
 
@@ -11,13 +10,29 @@ export class HTTPMethod extends APIResource {
    * Get the top autonomous systems (AS), by HTTP traffic, of the requested HTTP
    * protocol version. Values are a percentage out of the total traffic.
    */
-  get(httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3', query?: HTTPMethodGetParams, options?: Core.RequestOptions): Core.APIPromise<HTTPMethodGetResponse>
-  get(httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3', options?: Core.RequestOptions): Core.APIPromise<HTTPMethodGetResponse>
-  get(httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3', query: HTTPMethodGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<HTTPMethodGetResponse> {
+  get(
+    httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3',
+    query?: HTTPMethodGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HTTPMethodGetResponse>;
+  get(
+    httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3',
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HTTPMethodGetResponse>;
+  get(
+    httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3',
+    query: HTTPMethodGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HTTPMethodGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(httpVersion, {}, query);
     }
-    return (this._client.get(`/radar/http/top/ases/http_version/${httpVersion}`, { query, ...options }) as Core.APIPromise<{ result: HTTPMethodGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/http/top/ases/http_version/${httpVersion}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: HTTPMethodGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

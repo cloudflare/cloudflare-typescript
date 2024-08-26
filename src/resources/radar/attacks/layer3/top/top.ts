@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
-import { Locations } from './locations';
 import * as TopAPI from './top';
 import * as LocationsAPI from './locations';
 
@@ -17,37 +15,58 @@ export class Top extends APIResource {
    * the number of attacks per origin/target location (useful if all the top attacks
    * are from or to the same location).
    */
-  attacks(query?: TopAttacksParams, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>
-  attacks(options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>
-  attacks(query: TopAttacksParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse> {
+  attacks(query?: TopAttacksParams, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
+  attacks(options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
+  attacks(
+    query: TopAttacksParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopAttacksResponse> {
     if (isRequestOptions(query)) {
       return this.attacks({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/top/attacks', { query, ...options }) as Core.APIPromise<{ result: TopAttacksResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/top/attacks', { query, ...options }) as Core.APIPromise<{
+        result: TopAttacksResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the Industry of attacks.
    */
-  industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>
-  industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>
-  industry(query: TopIndustryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse> {
+  industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
+  industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
+  industry(
+    query: TopIndustryParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopIndustryResponse> {
     if (isRequestOptions(query)) {
       return this.industry({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/top/industry', { query, ...options }) as Core.APIPromise<{ result: TopIndustryResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/top/industry', { query, ...options }) as Core.APIPromise<{
+        result: TopIndustryResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the Verticals of attacks.
    */
-  vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>
-  vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>
-  vertical(query: TopVerticalParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse> {
+  vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
+  vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
+  vertical(
+    query: TopVerticalParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopVerticalResponse> {
     if (isRequestOptions(query)) {
       return this.vertical({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/top/vertical', { query, ...options }) as Core.APIPromise<{ result: TopVerticalResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/top/vertical', { query, ...options }) as Core.APIPromise<{
+        result: TopVerticalResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

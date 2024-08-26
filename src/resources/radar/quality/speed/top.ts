@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TopAPI from './top';
 
@@ -11,26 +10,40 @@ export class Top extends APIResource {
    * Get the top autonomous systems by bandwidth, latency, jitter or packet loss,
    * from the previous 90 days of Cloudflare Speed Test data.
    */
-  ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>
-  ases(options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>
-  ases(query: TopAsesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse> {
+  ases(query?: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
+  ases(options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse>;
+  ases(
+    query: TopAsesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopAsesResponse> {
     if (isRequestOptions(query)) {
       return this.ases({}, query);
     }
-    return (this._client.get('/radar/quality/speed/top/ases', { query, ...options }) as Core.APIPromise<{ result: TopAsesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/quality/speed/top/ases', { query, ...options }) as Core.APIPromise<{
+        result: TopAsesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the top locations by bandwidth, latency, jitter or packet loss, from the
    * previous 90 days of Cloudflare Speed Test data.
    */
-  locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>
-  locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>
-  locations(query: TopLocationsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse> {
+  locations(query?: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
+  locations(options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse>;
+  locations(
+    query: TopLocationsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLocationsResponse> {
     if (isRequestOptions(query)) {
       return this.locations({}, query);
     }
-    return (this._client.get('/radar/quality/speed/top/locations', { query, ...options }) as Core.APIPromise<{ result: TopLocationsResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/quality/speed/top/locations', { query, ...options }) as Core.APIPromise<{
+        result: TopLocationsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -231,7 +244,13 @@ export interface TopAsesParams {
   /**
    * Metric to order the results by.
    */
-  orderBy?: 'BANDWIDTH_DOWNLOAD' | 'BANDWIDTH_UPLOAD' | 'LATENCY_IDLE' | 'LATENCY_LOADED' | 'JITTER_IDLE' | 'JITTER_LOADED';
+  orderBy?:
+    | 'BANDWIDTH_DOWNLOAD'
+    | 'BANDWIDTH_UPLOAD'
+    | 'LATENCY_IDLE'
+    | 'LATENCY_LOADED'
+    | 'JITTER_IDLE'
+    | 'JITTER_LOADED';
 
   /**
    * Reverse the order of results.
@@ -284,7 +303,13 @@ export interface TopLocationsParams {
   /**
    * Metric to order the results by.
    */
-  orderBy?: 'BANDWIDTH_DOWNLOAD' | 'BANDWIDTH_UPLOAD' | 'LATENCY_IDLE' | 'LATENCY_LOADED' | 'JITTER_IDLE' | 'JITTER_LOADED';
+  orderBy?:
+    | 'BANDWIDTH_DOWNLOAD'
+    | 'BANDWIDTH_UPLOAD'
+    | 'LATENCY_IDLE'
+    | 'LATENCY_LOADED'
+    | 'JITTER_IDLE'
+    | 'JITTER_LOADED';
 
   /**
    * Reverse the order of results.

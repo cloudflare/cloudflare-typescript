@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as WANsAPI from './wans';
 import { SinglePage } from '../../../pagination';
@@ -11,54 +9,110 @@ export class WANs extends APIResource {
   /**
    * Creates a new Site WAN.
    */
-  create(siteId: string, params: WANCreateParams, options?: Core.RequestOptions): Core.APIPromise<WANCreateResponse> {
+  create(
+    siteId: string,
+    params: WANCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WANCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/wans`, { body, ...options }) as Core.APIPromise<{ result: WANCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/wans`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WANCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a specific Site WAN.
    */
-  update(siteId: string, wanId: string, params: WANUpdateParams, options?: Core.RequestOptions): Core.APIPromise<WAN> {
+  update(
+    siteId: string,
+    wanId: string,
+    params: WANUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, { body, ...options }) as Core.APIPromise<{ result: WAN }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WAN }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Site WANs associated with an account.
    */
-  list(siteId: string, params: WANListParams, options?: Core.RequestOptions): Core.PagePromise<WANsSinglePage, WAN> {
+  list(
+    siteId: string,
+    params: WANListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<WANsSinglePage, WAN> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/wans`, WANsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/magic/sites/${siteId}/wans`,
+      WANsSinglePage,
+      options,
+    );
   }
 
   /**
    * Remove a specific Site WAN.
    */
-  delete(siteId: string, wanId: string, params: WANDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WAN> {
+  delete(
+    siteId: string,
+    wanId: string,
+    params: WANDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, options) as Core.APIPromise<{ result: WAN }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
+        options,
+      ) as Core.APIPromise<{ result: WAN }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patch a specific Site WAN.
    */
-  edit(siteId: string, wanId: string, params: WANEditParams, options?: Core.RequestOptions): Core.APIPromise<WAN> {
+  edit(
+    siteId: string,
+    wanId: string,
+    params: WANEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, { body, ...options }) as Core.APIPromise<{ result: WAN }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: WAN }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a specific Site WAN.
    */
-  get(siteId: string, wanId: string, params: WANGetParams, options?: Core.RequestOptions): Core.APIPromise<WAN> {
+  get(
+    siteId: string,
+    wanId: string,
+    params: WANGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<WAN> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`, options) as Core.APIPromise<{ result: WAN }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/magic/sites/${siteId}/wans/${wanId}`,
+        options,
+      ) as Core.APIPromise<{ result: WAN }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WANsSinglePage extends SinglePage<WAN> {
-}
+export class WANsSinglePage extends SinglePage<WAN> {}
 
 export interface WAN {
   /**
@@ -134,7 +188,7 @@ export interface WANStaticAddressingParam {
   secondary_address?: string;
 }
 
-export type WANCreateResponse = Array<WAN>
+export type WANCreateResponse = Array<WAN>;
 
 export interface WANCreateParams {
   /**

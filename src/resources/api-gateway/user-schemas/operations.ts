@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as UserSchemasOperationsAPI from './operations';
 import * as OperationsAPI from '../operations/operations';
@@ -13,16 +11,23 @@ export class Operations extends APIResource {
    * Retrieves all operations from the schema. Operations that already exist in API
    * Shield Endpoint Management will be returned as full operations.
    */
-  list(schemaId: string, params: OperationListParams, options?: Core.RequestOptions): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
+  list(
+    schemaId: string,
+    params: OperationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/api_gateway/user_schemas/${schemaId}/operations`, OperationListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/api_gateway/user_schemas/${schemaId}/operations`,
+      OperationListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 }
 
-export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {
-}
+export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
 
-export type OperationListResponse = OperationsAPI.APIShield | OperationListResponse.APIShieldBasicOperation
+export type OperationListResponse = OperationsAPI.APIShield | OperationListResponse.APIShieldBasicOperation;
 
 export namespace OperationListResponse {
   export interface APIShieldBasicOperation {

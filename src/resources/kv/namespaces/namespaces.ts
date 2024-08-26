@@ -1,13 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Bulk } from './bulk';
-import { Keys } from './keys';
-import { Metadata } from './metadata';
-import { Values } from './values';
 import * as NamespacesAPI from './namespaces';
 import * as BulkAPI from './bulk';
 import * as KeysAPI from './keys';
@@ -28,44 +22,82 @@ export class Namespaces extends APIResource {
    */
   create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<Namespace> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/storage/kv/namespaces`, { body, ...options }) as Core.APIPromise<{ result: Namespace }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/storage/kv/namespaces`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Namespace }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modifies a namespace's title.
    */
-  update(namespaceId: string, params: NamespaceUpdateParams, options?: Core.RequestOptions): Core.APIPromise<NamespaceUpdateResponse> {
+  update(
+    namespaceId: string,
+    params: NamespaceUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceUpdateResponse | null> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, { body, ...options }) as Core.APIPromise<{ result: NamespaceUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: NamespaceUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the namespaces owned by an account.
    */
-  list(params: NamespaceListParams, options?: Core.RequestOptions): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
+  list(
+    params: NamespaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<NamespacesV4PagePaginationArray, Namespace> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/storage/kv/namespaces`, NamespacesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/storage/kv/namespaces`,
+      NamespacesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Deletes the namespace corresponding to the given ID.
    */
-  delete(namespaceId: string, params: NamespaceDeleteParams, options?: Core.RequestOptions): Core.APIPromise<NamespaceDeleteResponse> {
+  delete(
+    namespaceId: string,
+    params: NamespaceDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, options) as Core.APIPromise<{ result: NamespaceDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
+        options,
+      ) as Core.APIPromise<{ result: NamespaceDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the namespace corresponding to the given ID.
    */
-  get(namespaceId: string, params: NamespaceGetParams, options?: Core.RequestOptions): Core.APIPromise<Namespace> {
+  get(
+    namespaceId: string,
+    params: NamespaceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Namespace> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, options) as Core.APIPromise<{ result: Namespace }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
+        options,
+      ) as Core.APIPromise<{ result: Namespace }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {
-}
+export class NamespacesV4PagePaginationArray extends V4PagePaginationArray<Namespace> {}
 
 export interface Namespace {
   /**
@@ -85,9 +117,9 @@ export interface Namespace {
   supports_url_encoding?: boolean;
 }
 
-export type NamespaceUpdateResponse = unknown
+export interface NamespaceUpdateResponse {}
 
-export type NamespaceDeleteResponse = unknown
+export interface NamespaceDeleteResponse {}
 
 export interface NamespaceCreateParams {
   /**

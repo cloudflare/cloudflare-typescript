@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as KeysAPI from './keys';
 
@@ -12,7 +10,11 @@ export class Keys extends APIResource {
    */
   update(params: KeyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<KeyUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/access/keys`, { body, ...options }) as Core.APIPromise<{ result: KeyUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/access/keys`, { body, ...options }) as Core.APIPromise<{
+        result: KeyUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +22,11 @@ export class Keys extends APIResource {
    */
   get(params: KeyGetParams, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/access/keys`, options) as Core.APIPromise<{ result: KeyGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/access/keys`, options) as Core.APIPromise<{
+        result: KeyGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,7 +34,11 @@ export class Keys extends APIResource {
    */
   rotate(params: KeyRotateParams, options?: Core.RequestOptions): Core.APIPromise<KeyRotateResponse> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/access/keys/rotate`, options) as Core.APIPromise<{ result: KeyRotateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/access/keys/rotate`, options) as Core.APIPromise<{
+        result: KeyRotateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TLSAPI from './tls';
 
@@ -10,25 +8,53 @@ export class TLS extends APIResource {
   /**
    * Update the tls setting value for the hostname.
    */
-  update(settingId: 'ciphers' | 'min_tls_version' | 'http2', hostname: string, params: TLSUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Setting> {
+  update(
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
+    hostname: string,
+    params: TLSUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Setting> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, { body, ...options }) as Core.APIPromise<{ result: Setting }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Setting }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete the tls setting value for the hostname.
    */
-  delete(settingId: 'ciphers' | 'min_tls_version' | 'http2', hostname: string, params: TLSDeleteParams, options?: Core.RequestOptions): Core.APIPromise<TLSDeleteResponse> {
+  delete(
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
+    hostname: string,
+    params: TLSDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TLSDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`, options) as Core.APIPromise<{ result: TLSDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/zones/${zone_id}/hostnames/settings/${settingId}/${hostname}`,
+        options,
+      ) as Core.APIPromise<{ result: TLSDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List the requested TLS setting for the hostnames under this zone.
    */
-  get(settingId: 'ciphers' | 'min_tls_version' | 'http2', params: TLSGetParams, options?: Core.RequestOptions): Core.APIPromise<TLSGetResponse> {
+  get(
+    settingId: 'ciphers' | 'min_tls_version' | 'http2',
+    params: TLSGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TLSGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{ result: TLSGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
+        result: TLSGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -62,12 +88,12 @@ export interface Setting {
 /**
  * The tls setting value.
  */
-export type SettingValue = number | string | Array<string>
+export type SettingValue = number | string | Array<string>;
 
 /**
  * The tls setting value.
  */
-export type SettingValueParam = number | string | Array<string>
+export type SettingValueParam = number | string | Array<string>;
 
 export interface TLSDeleteResponse {
   /**
@@ -96,7 +122,7 @@ export interface TLSDeleteResponse {
   value?: SettingValue;
 }
 
-export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>
+export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;
 
 export namespace TLSGetResponse {
   export interface TLSGetResponseItem {

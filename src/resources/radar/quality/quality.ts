@@ -1,11 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
-import * as Core from '../../../core';
-import { IQI } from './iqi';
-import { Speed } from './speed/speed';
 import * as IQIAPI from './iqi';
 import * as SpeedAPI from './speed/speed';
 

@@ -1,15 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
-import * as Core from '../../../core';
-import { Colos } from './colos';
-import { FleetStatus } from './fleet-status/fleet-status';
-import { HTTPTests } from './http-tests/http-tests';
-import { Tests } from './tests/tests';
-import { TracerouteTestResults } from './traceroute-test-results/traceroute-test-results';
-import { TracerouteTests } from './traceroute-tests';
 import * as DEXAPI from './dex';
 import * as ColosAPI from './colos';
 import * as TracerouteTestsAPI from './traceroute-tests';
@@ -23,7 +14,8 @@ export class DEX extends APIResource {
   fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   httpTests: HTTPTestsAPI.HTTPTests = new HTTPTestsAPI.HTTPTests(this._client);
   tests: TestsAPI.Tests = new TestsAPI.Tests(this._client);
-  tracerouteTestResults: TracerouteTestResultsAPI.TracerouteTestResults = new TracerouteTestResultsAPI.TracerouteTestResults(this._client);
+  tracerouteTestResults: TracerouteTestResultsAPI.TracerouteTestResults =
+    new TracerouteTestResultsAPI.TracerouteTestResults(this._client);
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 

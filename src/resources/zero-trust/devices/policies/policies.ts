@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Certificates } from './certificates';
-import { DefaultPolicy } from './default-policy';
 import * as PoliciesAPI from './policies';
 import * as DefaultPolicyAPI from './default-policy';
 import * as ExcludesAPI from './excludes';
@@ -25,45 +21,80 @@ export class Policies extends APIResource {
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<SettingsPolicy | null> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{ result: SettingsPolicy | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/devices/policy`, { body, ...options }) as Core.APIPromise<{
+        result: SettingsPolicy | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a list of the device settings profiles for an account.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.PagePromise<SettingsPoliciesSinglePage, SettingsPolicy> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SettingsPoliciesSinglePage, SettingsPolicy> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/devices/policies`, SettingsPoliciesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policies`,
+      SettingsPoliciesSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes a device settings profile and fetches a list of the remaining profiles
    * for an account.
    */
-  delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse | null> {
+  delete(
+    policyId: string,
+    params: PolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{ result: PolicyDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
+        result: PolicyDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured device settings profile.
    */
-  edit(policyId: string, params: PolicyEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingsPolicy | null> {
+  edit(
+    policyId: string,
+    params: PolicyEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingsPolicy | null> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, { body, ...options }) as Core.APIPromise<{ result: SettingsPolicy | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/devices/policy/${policyId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SettingsPolicy | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a device settings profile by ID.
    */
-  get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingsPolicy | null> {
+  get(
+    policyId: string,
+    params: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingsPolicy | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{ result: SettingsPolicy | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/devices/policy/${policyId}`, options) as Core.APIPromise<{
+        result: SettingsPolicy | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SettingsPoliciesSinglePage extends SinglePage<SettingsPolicy> {
-}
+export class SettingsPoliciesSinglePage extends SinglePage<SettingsPolicy> {}
 
 export interface SettingsPolicy {
   /**
@@ -208,7 +239,7 @@ export namespace SettingsPolicy {
   }
 }
 
-export type PolicyDeleteResponse = Array<SettingsPolicy>
+export type PolicyDeleteResponse = Array<SettingsPolicy>;
 
 export interface PolicyCreateParams {
   /**

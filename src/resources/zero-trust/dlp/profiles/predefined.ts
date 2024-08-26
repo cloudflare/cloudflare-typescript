@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as PredefinedAPI from './predefined';
 import * as CustomAPI from './custom';
@@ -12,17 +10,35 @@ export class Predefined extends APIResource {
   /**
    * Updates a DLP predefined profile. Only supports enabling/disabling entries.
    */
-  update(profileId: string, params: PredefinedUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
+  update(
+    profileId: string,
+    params: PredefinedUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;
-    return (this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}`, options) as Core.APIPromise<{ result: ProfilesAPI.Profile }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(
+        `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
+        options,
+      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a predefined DLP profile by id.
    */
-  get(profileId: string, params: PredefinedGetParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
+  get(
+    profileId: string,
+    params: PredefinedGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}`, options) as Core.APIPromise<{ result: ProfilesAPI.Profile }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
+        options,
+      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -34,7 +50,13 @@ export interface PredefinedProfile {
 
   allowed_match_count: number;
 
-  entries: Array<PredefinedProfile.Custom | PredefinedProfile.Predefined | PredefinedProfile.Integration | PredefinedProfile.ExactData | PredefinedProfile.WordList>;
+  entries: Array<
+    | PredefinedProfile.Custom
+    | PredefinedProfile.Predefined
+    | PredefinedProfile.Integration
+    | PredefinedProfile.ExactData
+    | PredefinedProfile.WordList
+  >;
 
   /**
    * The name of the predefined profile

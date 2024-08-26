@@ -1,12 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { ActiveSessions } from './active-sessions';
-import { LastSeenIdentity } from './last-seen-identity';
-import { FailedLogins } from './failed-logins';
 import * as UsersAPI from './users';
 import * as ActiveSessionsAPI from './active-sessions';
 import * as FailedLoginsAPI from './failed-logins';
@@ -15,20 +10,24 @@ import { SinglePage } from '../../../../pagination';
 
 export class Users extends APIResource {
   activeSessions: ActiveSessionsAPI.ActiveSessions = new ActiveSessionsAPI.ActiveSessions(this._client);
-  lastSeenIdentity: LastSeenIdentityAPI.LastSeenIdentity = new LastSeenIdentityAPI.LastSeenIdentity(this._client);
+  lastSeenIdentity: LastSeenIdentityAPI.LastSeenIdentity = new LastSeenIdentityAPI.LastSeenIdentity(
+    this._client,
+  );
   failedLogins: FailedLoginsAPI.FailedLogins = new FailedLoginsAPI.FailedLogins(this._client);
 
   /**
    * Gets a list of users for an account.
    */
-  list(params: UserListParams, options?: Core.RequestOptions): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
+  list(
+    params: UserListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/access/users`, AccessUsersSinglePage, options);
   }
 }
 
-export class AccessUsersSinglePage extends SinglePage<AccessUser> {
-}
+export class AccessUsersSinglePage extends SinglePage<AccessUser> {}
 
 export interface AccessUser {
   /**

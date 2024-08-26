@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as RulesAPI from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -14,9 +12,17 @@ export class Rules extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  list(packageId: string, params: RuleListParams, options?: Core.RequestOptions): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
+  list(
+    packageId: string,
+    params: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleListResponsesV4PagePaginationArray, RuleListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules`, RuleListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules`,
+      RuleListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -25,9 +31,19 @@ export class Rules extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  edit(packageId: string, ruleId: string, params: RuleEditParams, options?: Core.RequestOptions): Core.APIPromise<RuleEditResponse> {
+  edit(
+    packageId: string,
+    ruleId: string,
+    params: RuleEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleEditResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`, { body, ...options }) as Core.APIPromise<{ result: RuleEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -36,20 +52,29 @@ export class Rules extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  get(packageId: string, ruleId: string, params: RuleGetParams, options?: Core.RequestOptions): Core.APIPromise<RuleGetResponse> {
+  get(
+    packageId: string,
+    ruleId: string,
+    params: RuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`, options) as Core.APIPromise<{ result: RuleGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/firewall/waf/packages/${packageId}/rules/${ruleId}`,
+        options,
+      ) as Core.APIPromise<{ result: RuleGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {
-}
+export class RuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<RuleListResponse> {}
 
 /**
  * When set to `on`, the current WAF rule will be used when evaluating the request.
  * Applies to anomaly detection WAF rules.
  */
-export type AllowedModesAnomaly = 'on' | 'off'
+export type AllowedModesAnomaly = 'on' | 'off';
 
 /**
  * The rule group to which the current WAF rule belongs.
@@ -72,7 +97,10 @@ export interface WAFRuleGroup {
  * configure the total scoring threshold through the 'sensitivity' property of the
  * WAF package.
  */
-export type RuleListResponse = RuleListResponse.WAFManagedRulesAnomalyRule | RuleListResponse.WAFManagedRulesTraditionalDenyRule | RuleListResponse.WAFManagedRulesTraditionalAllowRule
+export type RuleListResponse =
+  | RuleListResponse.WAFManagedRulesAnomalyRule
+  | RuleListResponse.WAFManagedRulesTraditionalDenyRule
+  | RuleListResponse.WAFManagedRulesTraditionalAllowRule;
 
 export namespace RuleListResponse {
   /**
@@ -219,7 +247,10 @@ export namespace RuleListResponse {
  * configure the total scoring threshold through the 'sensitivity' property of the
  * WAF package.
  */
-export type RuleEditResponse = RuleEditResponse.WAFManagedRulesAnomalyRule | RuleEditResponse.WAFManagedRulesTraditionalDenyRule | RuleEditResponse.WAFManagedRulesTraditionalAllowRule
+export type RuleEditResponse =
+  | RuleEditResponse.WAFManagedRulesAnomalyRule
+  | RuleEditResponse.WAFManagedRulesTraditionalDenyRule
+  | RuleEditResponse.WAFManagedRulesTraditionalAllowRule;
 
 export namespace RuleEditResponse {
   /**
@@ -360,7 +391,7 @@ export namespace RuleEditResponse {
   }
 }
 
-export type RuleGetResponse = unknown | string | null
+export type RuleGetResponse = unknown | string | null;
 
 export interface RuleListParams extends V4PagePaginationArrayParams {
   /**

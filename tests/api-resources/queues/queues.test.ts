@@ -1,13 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Cloudflare({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource queues', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.queues.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353', queue_name: 'example-queue' });
+    const responsePromise = client.queues.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      queue_name: 'example-queue',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,11 +25,17 @@ describe('resource queues', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.queues.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353', queue_name: 'example-queue' });
+    const response = await client.queues.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      queue_name: 'example-queue',
+    });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: { queue_name: 'renamed-example-queue' } });
+    const responsePromise = client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: { queue_name: 'renamed-example-queue' },
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -33,7 +46,10 @@ describe('resource queues', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', { account_id: '023e105f4ecef8ad9ca31a8372d0c353', body: { queue_name: 'renamed-example-queue' } });
+    const response = await client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: { queue_name: 'renamed-example-queue' },
+    });
   });
 
   test('list: only required params', async () => {
@@ -52,7 +68,9 @@ describe('resource queues', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.queues.delete('023e105f4ecef8ad9ca31a8372d0c353', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.queues.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,11 +81,15 @@ describe('resource queues', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.queues.delete('023e105f4ecef8ad9ca31a8372d0c353', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.queues.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.queues.get('023e105f4ecef8ad9ca31a8372d0c353', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.queues.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,6 +100,8 @@ describe('resource queues', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.queues.get('023e105f4ecef8ad9ca31a8372d0c353', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.queues.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 
@@ -10,37 +9,70 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Percentage distribution of unique accounts per model over time.
    */
-  model(query?: TimeseriesGroupModelParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupModelResponse>
-  model(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupModelResponse>
-  model(query: TimeseriesGroupModelParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupModelResponse> {
+  model(
+    query?: TimeseriesGroupModelParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupModelResponse>;
+  model(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupModelResponse>;
+  model(
+    query: TimeseriesGroupModelParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupModelResponse> {
     if (isRequestOptions(query)) {
       return this.model({}, query);
     }
-    return (this._client.get('/radar/ai/inference/timeseries_groups/model', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupModelResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ai/inference/timeseries_groups/model', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupModelResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of unique accounts per provider over time.
    */
-  provider(query?: TimeseriesGroupProviderParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProviderResponse>
-  provider(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProviderResponse>
-  provider(query: TimeseriesGroupProviderParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProviderResponse> {
+  provider(
+    query?: TimeseriesGroupProviderParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupProviderResponse>;
+  provider(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProviderResponse>;
+  provider(
+    query: TimeseriesGroupProviderParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupProviderResponse> {
     if (isRequestOptions(query)) {
       return this.provider({}, query);
     }
-    return (this._client.get('/radar/ai/gateway/timeseries_groups/provider', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupProviderResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ai/gateway/timeseries_groups/provider', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupProviderResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of unique accounts per task over time.
    */
-  task(query?: TimeseriesGroupTaskParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTaskResponse>
-  task(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTaskResponse>
-  task(query: TimeseriesGroupTaskParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTaskResponse> {
+  task(
+    query?: TimeseriesGroupTaskParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupTaskResponse>;
+  task(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTaskResponse>;
+  task(
+    query: TimeseriesGroupTaskParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupTaskResponse> {
     if (isRequestOptions(query)) {
       return this.task({}, query);
     }
-    return (this._client.get('/radar/ai/inference/timeseries_groups/task', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupTaskResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ai/inference/timeseries_groups/task', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupTaskResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -53,7 +85,7 @@ export interface TimeseriesGroupModelResponse {
 export namespace TimeseriesGroupModelResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string> | undefined
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -66,7 +98,7 @@ export interface TimeseriesGroupProviderResponse {
 export namespace TimeseriesGroupProviderResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string> | undefined
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -79,7 +111,7 @@ export interface TimeseriesGroupTaskResponse {
 export namespace TimeseriesGroupTaskResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string> | undefined
+    [k: string]: Array<string> | undefined;
   }
 }
 

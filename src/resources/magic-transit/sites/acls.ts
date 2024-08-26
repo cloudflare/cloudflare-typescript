@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ACLsAPI from './acls';
 import { SinglePage } from '../../../pagination';
@@ -13,52 +11,104 @@ export class ACLs extends APIResource {
    */
   create(siteId: string, params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/acls`, { body, ...options }) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/magic/sites/${siteId}/acls`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ACL }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a specific Site ACL.
    */
-  update(siteId: string, aclId: string, params: ACLUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
+  update(
+    siteId: string,
+    aclId: string,
+    params: ACLUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, { body, ...options }) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ACL }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Site ACLs associated with an account.
    */
-  list(siteId: string, params: ACLListParams, options?: Core.RequestOptions): Core.PagePromise<ACLsSinglePage, ACL> {
+  list(
+    siteId: string,
+    params: ACLListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ACLsSinglePage, ACL> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/magic/sites/${siteId}/acls`, ACLsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/magic/sites/${siteId}/acls`,
+      ACLsSinglePage,
+      options,
+    );
   }
 
   /**
    * Remove a specific Site ACL.
    */
-  delete(siteId: string, aclId: string, params: ACLDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
+  delete(
+    siteId: string,
+    aclId: string,
+    params: ACLDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, options) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`,
+        options,
+      ) as Core.APIPromise<{ result: ACL }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patch a specific Site ACL.
    */
-  edit(siteId: string, aclId: string, params: ACLEditParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
+  edit(
+    siteId: string,
+    aclId: string,
+    params: ACLEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, { body, ...options }) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ACL }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a specific Site ACL.
    */
-  get(siteId: string, aclId: string, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
+  get(
+    siteId: string,
+    aclId: string,
+    params: ACLGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ACL> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`, options) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/magic/sites/${siteId}/acls/${aclId}`,
+        options,
+      ) as Core.APIPromise<{ result: ACL }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ACLsSinglePage extends SinglePage<ACL> {
-}
+export class ACLsSinglePage extends SinglePage<ACL> {}
 
 /**
  * Bidirectional ACL policy for network traffic within a site.
@@ -146,23 +196,23 @@ export interface ACLConfigurationParam {
  * Array of allowed communication protocols between configured LANs. If no
  * protocols are provided, all protocols are allowed.
  */
-export type AllowedProtocol = 'tcp' | 'udp' | 'icmp'
+export type AllowedProtocol = 'tcp' | 'udp' | 'icmp';
 
 /**
  * Array of allowed communication protocols between configured LANs. If no
  * protocols are provided, all protocols are allowed.
  */
-export type AllowedProtocolParam = 'tcp' | 'udp' | 'icmp'
+export type AllowedProtocolParam = 'tcp' | 'udp' | 'icmp';
 
 /**
  * A valid IPv4 address.
  */
-export type Subnet = string
+export type Subnet = string;
 
 /**
  * A valid IPv4 address.
  */
-export type SubnetParam = string
+export type SubnetParam = string;
 
 export interface ACLCreateParams {
   /**

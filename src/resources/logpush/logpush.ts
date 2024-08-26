@@ -1,14 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { Datasets } from './datasets/datasets';
-import { Edge } from './edge';
-import { Jobs } from './jobs';
-import { Ownership } from './ownership';
-import { Validate } from './validate';
 import * as EdgeAPI from './edge';
 import * as JobsAPI from './jobs';
 import * as OwnershipAPI from './ownership';

@@ -1,15 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { AI } from './ai/ai';
-import { Scripts } from './scripts/scripts';
-import { AccountSettings } from './account-settings';
-import { Domains } from './domains';
-import { Subdomains } from './subdomains';
-import * as WorkersAPI from './workers';
 import * as AccountSettingsAPI from './account-settings';
 import * as DomainsAPI from './domains';
 import * as SubdomainsAPI from './subdomains';
@@ -27,7 +18,15 @@ export class Workers extends APIResource {
 /**
  * A binding to allow the Worker to communicate with resources
  */
-export type Binding = KVNamespaceBinding | ServiceBinding | DurableObjectBinding | R2Binding | Binding.WorkersQueueBinding | D1Binding | DispatchNamespaceBinding | MTLSCERTBinding
+export type Binding =
+  | KVNamespaceBinding
+  | ServiceBinding
+  | DurableObjectBinding
+  | R2Binding
+  | Binding.WorkersQueueBinding
+  | D1Binding
+  | DispatchNamespaceBinding
+  | MTLSCERTBinding;
 
 export namespace Binding {
   export interface WorkersQueueBinding {
@@ -51,7 +50,15 @@ export namespace Binding {
 /**
  * A binding to allow the Worker to communicate with resources
  */
-export type BindingParam = KVNamespaceBindingParam | ServiceBindingParam | DurableObjectBindingParam | R2BindingParam | BindingParam.WorkersQueueBinding | D1BindingParam | DispatchNamespaceBindingParam | MTLSCERTBindingParam
+export type BindingParam =
+  | KVNamespaceBindingParam
+  | ServiceBindingParam
+  | DurableObjectBindingParam
+  | R2BindingParam
+  | BindingParam.WorkersQueueBinding
+  | D1BindingParam
+  | DispatchNamespaceBindingParam
+  | MTLSCERTBindingParam;
 
 export namespace BindingParam {
   export interface WorkersQueueBinding {
