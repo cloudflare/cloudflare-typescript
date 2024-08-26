@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
-import { Entries } from './entries';
 import * as ContentListsAPI from './content-lists';
 import * as EntriesAPI from './entries';
 
@@ -14,15 +11,34 @@ export class ContentLists extends APIResource {
   /**
    * Update IPFS Universal Path Gateway Content List
    */
-  update(zoneIdentifier: string, identifier: string, body: ContentListUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ContentList> {
-    return (this._client.put(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`, { body, ...options }) as Core.APIPromise<{ result: ContentList }>)._thenUnwrap((obj) => obj.result);
+  update(
+    zoneIdentifier: string,
+    identifier: string,
+    body: ContentListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ContentList> {
+    return (
+      this._client.put(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: ContentList }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * IPFS Universal Path Gateway Content List Details
    */
-  get(zoneIdentifier: string, identifier: string, options?: Core.RequestOptions): Core.APIPromise<ContentList> {
-    return (this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`, options) as Core.APIPromise<{ result: ContentList }>)._thenUnwrap((obj) => obj.result);
+  get(
+    zoneIdentifier: string,
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ContentList> {
+    return (
+      this._client.get(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list`,
+        options,
+      ) as Core.APIPromise<{ result: ContentList }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ConnectionsAPI from './connections';
 import { SinglePage } from '../../pagination';
@@ -11,22 +9,36 @@ export class Connections extends APIResource {
   /**
    * Lists all connections detected by Page Shield.
    */
-  list(params: ConnectionListParams, options?: Core.RequestOptions): Core.PagePromise<ConnectionsSinglePage, Connection> {
+  list(
+    params: ConnectionListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ConnectionsSinglePage, Connection> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/page_shield/connections`, ConnectionsSinglePage, { query, ...options });
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/connections`, ConnectionsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Fetches a connection detected by Page Shield by connection ID.
    */
-  get(connectionId: string, params: ConnectionGetParams, options?: Core.RequestOptions): Core.APIPromise<Connection | null> {
+  get(
+    connectionId: string,
+    params: ConnectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Connection | null> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/page_shield/connections/${connectionId}`, options) as Core.APIPromise<{ result: Connection | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/page_shield/connections/${connectionId}`,
+        options,
+      ) as Core.APIPromise<{ result: Connection | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ConnectionsSinglePage extends SinglePage<Connection> {
-}
+export class ConnectionsSinglePage extends SinglePage<Connection> {}
 
 export interface Connection {
   /**

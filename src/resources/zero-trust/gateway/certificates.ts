@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as CertificatesAPI from './certificates';
 import { SinglePage } from '../../../pagination';
@@ -11,55 +9,105 @@ export class Certificates extends APIResource {
   /**
    * Creates a new Zero Trust certificate.
    */
-  create(params: CertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<CertificateCreateResponse> {
+  create(
+    params: CertificateCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/gateway/certificates`, { body, ...options }) as Core.APIPromise<{ result: CertificateCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/certificates`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches all Zero Trust certificates for an account.
    */
-  list(params: CertificateListParams, options?: Core.RequestOptions): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse> {
+  list(
+    params: CertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<CertificateListResponsesSinglePage, CertificateListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/gateway/certificates`, CertificateListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/gateway/certificates`,
+      CertificateListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes a gateway-managed Zero Trust certificate. A certificate must be
    * deactivated from the edge (inactive) before it is deleted.
    */
-  delete(certificateId: string, params: CertificateDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CertificateDeleteResponse> {
+  delete(
+    certificateId: string,
+    params: CertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/gateway/certificates/${certificateId}`, options) as Core.APIPromise<{ result: CertificateDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/gateway/certificates/${certificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificateDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Binds a single Zero Trust certificate to the edge.
    */
-  activate(certificateId: string, params: CertificateActivateParams, options?: Core.RequestOptions): Core.APIPromise<CertificateActivateResponse> {
+  activate(
+    certificateId: string,
+    params: CertificateActivateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateActivateResponse> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/activate`, { body: body, ...options }) as Core.APIPromise<{ result: CertificateActivateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/activate`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateActivateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Unbinds a single Zero Trust certificate from the edge
    */
-  deactivate(certificateId: string, params: CertificateDeactivateParams, options?: Core.RequestOptions): Core.APIPromise<CertificateDeactivateResponse> {
+  deactivate(
+    certificateId: string,
+    params: CertificateDeactivateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateDeactivateResponse> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/deactivate`, { body: body, ...options }) as Core.APIPromise<{ result: CertificateDeactivateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/certificates/${certificateId}/deactivate`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificateDeactivateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Zero Trust certificate.
    */
-  get(certificateId: string, params: CertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<CertificateGetResponse> {
+  get(
+    certificateId: string,
+    params: CertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificateGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/gateway/certificates/${certificateId}`, options) as Core.APIPromise<{ result: CertificateGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/gateway/certificates/${certificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: CertificateGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CertificateListResponsesSinglePage extends SinglePage<CertificateListResponse> {
-}
+export class CertificateListResponsesSinglePage extends SinglePage<CertificateListResponse> {}
 
 export interface CertificateCreateResponse {
   /**

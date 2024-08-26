@@ -1,11 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
-import * as Core from '../../../../core';
-import { Bytimes } from './bytimes';
-import { Summaries } from './summaries';
 import * as EventsAPI from './events';
 import * as BytimesAPI from './bytimes';
 import * as SummariesAPI from './summaries';
@@ -15,9 +10,9 @@ export class Events extends APIResource {
   summaries: SummariesAPI.Summaries = new SummariesAPI.Summaries(this._client);
 }
 
-export type Dimension = 'event' | 'appID' | 'coloName' | 'ipVersion'
+export type Dimension = 'event' | 'appID' | 'coloName' | 'ipVersion';
 
-export type DimensionParam = 'event' | 'appID' | 'coloName' | 'ipVersion'
+export type DimensionParam = 'event' | 'appID' | 'coloName' | 'ipVersion';
 
 export namespace Events {
   export import Dimension = EventsAPI.Dimension;

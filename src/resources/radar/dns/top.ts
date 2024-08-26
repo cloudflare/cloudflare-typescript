@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TopAPI from './top';
 
@@ -12,14 +10,22 @@ export class Top extends APIResource {
    * resolver.
    */
   ases(query: TopAsesParams, options?: Core.RequestOptions): Core.APIPromise<TopAsesResponse> {
-    return (this._client.get('/radar/dns/top/ases', { query, ...options }) as Core.APIPromise<{ result: TopAsesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/top/ases', { query, ...options }) as Core.APIPromise<{
+        result: TopAsesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get top locations by DNS queries made to Cloudflare's public DNS resolver.
    */
   locations(query: TopLocationsParams, options?: Core.RequestOptions): Core.APIPromise<TopLocationsResponse> {
-    return (this._client.get('/radar/dns/top/locations', { query, ...options }) as Core.APIPromise<{ result: TopLocationsResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/top/locations', { query, ...options }) as Core.APIPromise<{
+        result: TopLocationsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

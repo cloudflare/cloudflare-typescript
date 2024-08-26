@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as IQIAPI from './iqi';
 
@@ -12,15 +10,26 @@ export class IQI extends APIResource {
    * Radar Internet Quality Index (IQI).
    */
   summary(query: IQISummaryParams, options?: Core.RequestOptions): Core.APIPromise<IQISummaryResponse> {
-    return (this._client.get('/radar/quality/iqi/summary', { query, ...options }) as Core.APIPromise<{ result: IQISummaryResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/quality/iqi/summary', { query, ...options }) as Core.APIPromise<{
+        result: IQISummaryResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a time series (percentiles) of bandwidth, latency or DNS response time from
    * the Radar Internet Quality Index (IQI).
    */
-  timeseriesGroups(query: IQITimeseriesGroupsParams, options?: Core.RequestOptions): Core.APIPromise<IQITimeseriesGroupsResponse> {
-    return (this._client.get('/radar/quality/iqi/timeseries_groups', { query, ...options }) as Core.APIPromise<{ result: IQITimeseriesGroupsResponse }>)._thenUnwrap((obj) => obj.result);
+  timeseriesGroups(
+    query: IQITimeseriesGroupsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IQITimeseriesGroupsResponse> {
+    return (
+      this._client.get('/radar/quality/iqi/timeseries_groups', { query, ...options }) as Core.APIPromise<{
+        result: IQITimeseriesGroupsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SippyAPI from './sippy';
 
@@ -10,17 +8,35 @@ export class SippyResource extends APIResource {
   /**
    * Sets configuration for Sippy for an existing R2 bucket.
    */
-  update(bucketName: string, params: SippyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Sippy> {
+  update(
+    bucketName: string,
+    params: SippyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Sippy> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, { body, ...options }) as Core.APIPromise<{ result: Sippy }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Sippy }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Disables Sippy on this bucket
    */
-  delete(bucketName: string, params: SippyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<SippyDeleteResponse> {
+  delete(
+    bucketName: string,
+    params: SippyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SippyDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{ result: SippyDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/r2/buckets/${bucketName}/sippy`,
+        options,
+      ) as Core.APIPromise<{ result: SippyDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,13 +44,17 @@ export class SippyResource extends APIResource {
    */
   get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<Sippy> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{ result: Sippy }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{
+        result: Sippy;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type Provider = 'r2'
+export type Provider = 'r2';
 
-export type ProviderParam = 'r2'
+export type ProviderParam = 'r2';
 
 export interface Sippy {
   /**
@@ -95,7 +115,7 @@ export interface SippyDeleteResponse {
   enabled?: false;
 }
 
-export type SippyUpdateParams = SippyUpdateParams.R2EnableSippyAws | SippyUpdateParams.R2EnableSippyGcs
+export type SippyUpdateParams = SippyUpdateParams.R2EnableSippyAws | SippyUpdateParams.R2EnableSippyGcs;
 
 export namespace SippyUpdateParams {
   export interface R2EnableSippyAws {

@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error'
+import { CloudflareError } from '../../error';
 import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
@@ -19,22 +18,33 @@ export class Settings extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.patch(`/${accountOrZone}/${accountOrZoneId}/dns_settings`, { body, ...options }) as Core.APIPromise<{ result: SettingEditResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.patch(`/${accountOrZone}/${accountOrZoneId}/dns_settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SettingEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Show DNS settings for an account or zone
    */
-  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>
-  get(options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>
-  get(params: SettingGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
+  get(params?: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse>;
+  get(
+    params: SettingGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingGetResponse> {
     if (isRequestOptions(params)) {
       return this.get({}, params);
     }
@@ -45,14 +55,21 @@ export class Settings extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/dns_settings`, options) as Core.APIPromise<{ result: SettingGetResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(`/${accountOrZone}/${accountOrZoneId}/dns_settings`, options) as Core.APIPromise<{
+        result: SettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

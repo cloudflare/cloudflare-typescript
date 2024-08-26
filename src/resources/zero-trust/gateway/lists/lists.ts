@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Items } from './items';
 import * as ListsAPI from './lists';
 import * as ItemsAPI from './items';
 import { SinglePage } from '../../../../pagination';
@@ -17,31 +14,58 @@ export class Lists extends APIResource {
    */
   create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/gateway/lists`, { body, ...options }) as Core.APIPromise<{ result: ListCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/lists`, { body, ...options }) as Core.APIPromise<{
+        result: ListCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured Zero Trust list.
    */
-  update(listId: string, params: ListUpdateParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
+  update(
+    listId: string,
+    params: ListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewayList> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, { body, ...options }) as Core.APIPromise<{ result: GatewayList }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/gateway/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GatewayList }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches all Zero Trust lists for an account.
    */
-  list(params: ListListParams, options?: Core.RequestOptions): Core.PagePromise<GatewayListsSinglePage, GatewayList> {
+  list(
+    params: ListListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GatewayListsSinglePage, GatewayList> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, GatewayListsSinglePage, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/gateway/lists`, GatewayListsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Deletes a Zero Trust list.
    */
-  delete(listId: string, params: ListDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ListDeleteResponse> {
+  delete(
+    listId: string,
+    params: ListDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{ result: ListDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
+        result: ListDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -49,7 +73,12 @@ export class Lists extends APIResource {
    */
   edit(listId: string, params: ListEditParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, { body, ...options }) as Core.APIPromise<{ result: GatewayList }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/gateway/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GatewayList }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -57,12 +86,15 @@ export class Lists extends APIResource {
    */
   get(listId: string, params: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewayList> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{ result: GatewayList }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/gateway/lists/${listId}`, options) as Core.APIPromise<{
+        result: GatewayList;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class GatewayListsSinglePage extends SinglePage<GatewayList> {
-}
+export class GatewayListsSinglePage extends SinglePage<GatewayList> {}
 
 export interface GatewayItem {
   created_at?: string;
@@ -152,7 +184,7 @@ export interface ListCreateResponse {
   updated_at?: string;
 }
 
-export type ListDeleteResponse = unknown
+export type ListDeleteResponse = unknown;
 
 export interface ListCreateParams {
   /**

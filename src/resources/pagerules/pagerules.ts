@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { Settings } from './settings';
-import * as PagerulesAPI from './pagerules';
 import * as SettingsAPI from './settings';
 
 export class Pagerules extends APIResource {
@@ -16,9 +12,16 @@ export class Pagerules extends APIResource {
    *
    * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
-  create(params: PageruleCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageruleCreateResponse> {
+  create(
+    params: PageruleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageruleCreateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{ result: PageruleCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/pagerules`, { body, ...options }) as Core.APIPromise<{
+        result: PageruleCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -27,9 +30,17 @@ export class Pagerules extends APIResource {
    *
    * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
-  update(pageruleId: string, params: PageruleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<PageruleUpdateResponse> {
+  update(
+    pageruleId: string,
+    params: PageruleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageruleUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{ result: PageruleUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{
+        result: PageruleUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -39,7 +50,11 @@ export class Pagerules extends APIResource {
    */
   list(params: PageruleListParams, options?: Core.RequestOptions): Core.APIPromise<PageruleListResponse> {
     const { zone_id, ...query } = params;
-    return (this._client.get(`/zones/${zone_id}/pagerules`, { query, ...options }) as Core.APIPromise<{ result: PageruleListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/pagerules`, { query, ...options }) as Core.APIPromise<{
+        result: PageruleListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -47,9 +62,17 @@ export class Pagerules extends APIResource {
    *
    * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
-  delete(pageruleId: string, params: PageruleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PageruleDeleteResponse | null> {
+  delete(
+    pageruleId: string,
+    params: PageruleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageruleDeleteResponse | null> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{ result: PageruleDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
+        result: PageruleDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -57,9 +80,18 @@ export class Pagerules extends APIResource {
    *
    * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
-  edit(pageruleId: string, params: PageruleEditParams, options?: Core.RequestOptions): Core.APIPromise<PageruleEditResponse> {
+  edit(
+    pageruleId: string,
+    params: PageruleEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageruleEditResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/pagerules/${pageruleId}`, { body, ...options }) as Core.APIPromise<{ result: PageruleEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/pagerules/${pageruleId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PageruleEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -67,9 +99,17 @@ export class Pagerules extends APIResource {
    *
    * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
-  get(pageruleId: string, params: PageruleGetParams, options?: Core.RequestOptions): Core.APIPromise<PageruleGetResponse> {
+  get(
+    pageruleId: string,
+    params: PageruleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PageruleGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{ result: PageruleGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/pagerules/${pageruleId}`, options) as Core.APIPromise<{
+        result: PageruleGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -234,11 +274,11 @@ export namespace TargetParam {
   }
 }
 
-export type PageruleCreateResponse = unknown | string
+export type PageruleCreateResponse = unknown | string | null;
 
-export type PageruleUpdateResponse = unknown | string
+export type PageruleUpdateResponse = unknown | string | null;
 
-export type PageruleListResponse = Array<PageRule>
+export type PageruleListResponse = Array<PageRule>;
 
 export interface PageruleDeleteResponse {
   /**
@@ -247,9 +287,9 @@ export interface PageruleDeleteResponse {
   id: string;
 }
 
-export type PageruleEditResponse = unknown | string
+export type PageruleEditResponse = unknown | string | null;
 
-export type PageruleGetResponse = unknown | string
+export type PageruleGetResponse = unknown | string | null;
 
 export interface PageruleCreateParams {
   /**

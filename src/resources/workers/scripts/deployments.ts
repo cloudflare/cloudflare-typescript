@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DeploymentsAPI from './deployments';
 
@@ -13,18 +11,37 @@ export class Deployments extends APIResource {
    * are deployed to traffic. A deployment can consist of one or two versions of a
    * Worker.
    */
-  create(scriptName: string, params: DeploymentCreateParams, options?: Core.RequestOptions): Core.APIPromise<DeploymentCreateResponse> {
+  create(
+    scriptName: string,
+    params: DeploymentCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentCreateResponse> {
     const { account_id, force, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, { query: { force }, body, ...options }) as Core.APIPromise<{ result: DeploymentCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
+        query: { force },
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DeploymentCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List of Worker Deployments. The first deployment in the list is the latest
    * deployment actively serving traffic.
    */
-  get(scriptName: string, params: DeploymentGetParams, options?: Core.RequestOptions): Core.APIPromise<DeploymentGetResponse> {
+  get(
+    scriptName: string,
+    params: DeploymentGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeploymentGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, options) as Core.APIPromise<{ result: DeploymentGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/scripts/${scriptName}/deployments`,
+        options,
+      ) as Core.APIPromise<{ result: DeploymentGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

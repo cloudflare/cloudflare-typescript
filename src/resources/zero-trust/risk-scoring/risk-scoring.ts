@@ -1,12 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Behaviours } from './behaviours';
-import { Summary } from './summary';
-import { Integrations } from './integrations/integrations';
 import * as RiskScoringAPI from './risk-scoring';
 import * as BehavioursAPI from './behaviours';
 import * as SummaryAPI from './summary';
@@ -20,17 +15,34 @@ export class RiskScoring extends APIResource {
   /**
    * Get risk event/score information for a specific user
    */
-  get(userId: string, params: RiskScoringGetParams, options?: Core.RequestOptions): Core.APIPromise<RiskScoringGetResponse> {
+  get(
+    userId: string,
+    params: RiskScoringGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RiskScoringGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options) as Core.APIPromise<{ result: RiskScoringGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options) as Core.APIPromise<{
+        result: RiskScoringGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Clear the risk score for a particular user
    */
-  reset(userId: string, params: RiskScoringResetParams, options?: Core.RequestOptions): Core.APIPromise<RiskScoringResetResponse> {
+  reset(
+    userId: string,
+    params: RiskScoringResetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RiskScoringResetResponse | null> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/zt_risk_scoring/${userId}/reset`, options) as Core.APIPromise<{ result: RiskScoringResetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(
+        `/accounts/${account_id}/zt_risk_scoring/${userId}/reset`,
+        options,
+      ) as Core.APIPromise<{ result: RiskScoringResetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -60,7 +72,7 @@ export namespace RiskScoringGetResponse {
   }
 }
 
-export type RiskScoringResetResponse = unknown
+export type RiskScoringResetResponse = unknown;
 
 export interface RiskScoringGetParams {
   account_id: string;

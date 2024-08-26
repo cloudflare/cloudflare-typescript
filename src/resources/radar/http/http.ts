@@ -2,13 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Locations } from './locations/locations';
-import { Ases } from './ases/ases';
-import { Summary } from './summary';
-import { TimeseriesGroups } from './timeseries-groups';
-import { Top } from './top';
 import * as HTTPAPI from './http';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
@@ -20,19 +14,31 @@ export class HTTP extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
   ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
    * Get HTTP requests over time.
    */
-  timeseries(query?: HTTPTimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<HTTPTimeseriesResponse>
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<HTTPTimeseriesResponse>
-  timeseries(query: HTTPTimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<HTTPTimeseriesResponse> {
+  timeseries(
+    query?: HTTPTimeseriesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HTTPTimeseriesResponse>;
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<HTTPTimeseriesResponse>;
+  timeseries(
+    query: HTTPTimeseriesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HTTPTimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (this._client.get('/radar/http/timeseries', { query, ...options }) as Core.APIPromise<{ result: HTTPTimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/http/timeseries', { query, ...options }) as Core.APIPromise<{
+        result: HTTPTimeseriesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

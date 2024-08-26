@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import * as MagicTransitAPI from './magic-transit';
@@ -13,9 +11,17 @@ export class IPSECTunnels extends APIResource {
    * as an optional query parameter to only run validation without persisting
    * changes.
    */
-  create(params: IPSECTunnelCreateParams, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelCreateResponse> {
+  create(
+    params: IPSECTunnelCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels`, { body, ...options }) as Core.APIPromise<{ result: IPSECTunnelCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPSECTunnelCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -23,17 +29,33 @@ export class IPSECTunnels extends APIResource {
    * `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
    */
-  update(ipsecTunnelId: string, params: IPSECTunnelUpdateParams, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelUpdateResponse> {
+  update(
+    ipsecTunnelId: string,
+    params: IPSECTunnelUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, { body, ...options }) as Core.APIPromise<{ result: IPSECTunnelUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPSECTunnelUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists IPsec tunnels associated with an account.
    */
-  list(params: IPSECTunnelListParams, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelListResponse> {
+  list(
+    params: IPSECTunnelListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelListResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels`, options) as Core.APIPromise<{ result: IPSECTunnelListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels`, options) as Core.APIPromise<{
+        result: IPSECTunnelListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -41,17 +63,35 @@ export class IPSECTunnels extends APIResource {
    * Use `?validate_only=true` as an optional query parameter to only run validation
    * without persisting changes.
    */
-  delete(ipsecTunnelId: string, params: IPSECTunnelDeleteParams, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelDeleteResponse> {
+  delete(
+    ipsecTunnelId: string,
+    params: IPSECTunnelDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, options) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`,
+        options,
+      ) as Core.APIPromise<{ result: IPSECTunnelDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists details for a specific IPsec tunnel.
    */
-  get(ipsecTunnelId: string, params: IPSECTunnelGetParams, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelGetResponse> {
+  get(
+    ipsecTunnelId: string,
+    params: IPSECTunnelGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`, options) as Core.APIPromise<{ result: IPSECTunnelGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}`,
+        options,
+      ) as Core.APIPromise<{ result: IPSECTunnelGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -61,9 +101,18 @@ export class IPSECTunnels extends APIResource {
    * persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a
    * safe place.
    */
-  pskGenerate(ipsecTunnelId: string, params: IPSECTunnelPSKGenerateParams, options?: Core.RequestOptions): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
+  pskGenerate(
+    ipsecTunnelId: string,
+    params: IPSECTunnelPSKGenerateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPSECTunnelPSKGenerateResponse> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}/psk_generate`, { body: body, ...options }) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/magic/ipsec_tunnels/${ipsecTunnelId}/psk_generate`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: IPSECTunnelPSKGenerateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

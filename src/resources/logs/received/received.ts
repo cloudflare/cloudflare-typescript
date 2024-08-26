@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Fields } from './fields';
 import * as ReceivedAPI from './received';
 import * as FieldsAPI from './fields';
 
@@ -27,7 +24,7 @@ export class Received extends APIResource {
   }
 }
 
-export type ReceivedGetResponse = string | unknown
+export type ReceivedGetResponse = string | unknown;
 
 export interface ReceivedGetParams {
   /**

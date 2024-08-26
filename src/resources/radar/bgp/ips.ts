@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as IPsAPI from './ips';
 
@@ -11,13 +10,23 @@ export class IPs extends APIResource {
    * Gets time-series data for the announced IP space count, represented as the
    * number of IPv4 /24s and IPv6 /48s, for a given ASN.
    */
-  timeseries(query?: IPTimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<IPTimeseriesResponse>
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<IPTimeseriesResponse>
-  timeseries(query: IPTimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<IPTimeseriesResponse> {
+  timeseries(
+    query?: IPTimeseriesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPTimeseriesResponse>;
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<IPTimeseriesResponse>;
+  timeseries(
+    query: IPTimeseriesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPTimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (this._client.get('/radar/bgp/ips/timeseries', { query, ...options }) as Core.APIPromise<{ result: IPTimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/bgp/ips/timeseries', { query, ...options }) as Core.APIPromise<{
+        result: IPTimeseriesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

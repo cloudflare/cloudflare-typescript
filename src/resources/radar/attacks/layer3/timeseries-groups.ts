@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 
@@ -10,98 +9,185 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Percentage distribution of attacks by bitrate over time.
    */
-  bitrate(query?: TimeseriesGroupBitrateParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBitrateResponse>
-  bitrate(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBitrateResponse>
-  bitrate(query: TimeseriesGroupBitrateParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBitrateResponse> {
+  bitrate(
+    query?: TimeseriesGroupBitrateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupBitrateResponse>;
+  bitrate(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupBitrateResponse>;
+  bitrate(
+    query: TimeseriesGroupBitrateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupBitrateResponse> {
     if (isRequestOptions(query)) {
       return this.bitrate({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/bitrate', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupBitrateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/bitrate', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupBitrateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by duration over time.
    */
-  duration(query?: TimeseriesGroupDurationParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDurationResponse>
-  duration(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDurationResponse>
-  duration(query: TimeseriesGroupDurationParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDurationResponse> {
+  duration(
+    query?: TimeseriesGroupDurationParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupDurationResponse>;
+  duration(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDurationResponse>;
+  duration(
+    query: TimeseriesGroupDurationParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupDurationResponse> {
     if (isRequestOptions(query)) {
       return this.duration({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/duration', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDurationResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/duration', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupDurationResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a timeseries of the percentage distribution of network protocols in Layer
    * 3/4 attacks.
    */
-  get(query?: TimeseriesGroupGetParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>
-  get(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>
-  get(query: TimeseriesGroupGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse> {
+  get(
+    query?: TimeseriesGroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupGetResponse>;
+  get(
+    query: TimeseriesGroupGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups', { query, ...options }) as Core.APIPromise<{
+        result: TimeseriesGroupGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by industry used over time.
    */
-  industry(query?: TimeseriesGroupIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse>
-  industry(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse>
-  industry(query: TimeseriesGroupIndustryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse> {
+  industry(
+    query?: TimeseriesGroupIndustryParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupIndustryResponse>;
+  industry(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIndustryResponse>;
+  industry(
+    query: TimeseriesGroupIndustryParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupIndustryResponse> {
     if (isRequestOptions(query)) {
       return this.industry({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/industry', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIndustryResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/industry', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupIndustryResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by ip version used over time.
    */
-  ipVersion(query?: TimeseriesGroupIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
-  ipVersion(query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
+  ipVersion(
+    query?: TimeseriesGroupIPVersionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
+  ipVersion(
+    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/ip_version', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by protocol used over time.
    */
-  protocol(query?: TimeseriesGroupProtocolParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>
-  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>
-  protocol(query: TimeseriesGroupProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse> {
+  protocol(
+    query?: TimeseriesGroupProtocolParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupProtocolResponse>;
+  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>;
+  protocol(
+    query: TimeseriesGroupProtocolParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.protocol({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/protocol', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupProtocolResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/protocol', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupProtocolResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by vector used over time.
    */
-  vector(query?: TimeseriesGroupVectorParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVectorResponse>
-  vector(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVectorResponse>
-  vector(query: TimeseriesGroupVectorParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVectorResponse> {
+  vector(
+    query?: TimeseriesGroupVectorParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupVectorResponse>;
+  vector(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVectorResponse>;
+  vector(
+    query: TimeseriesGroupVectorParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupVectorResponse> {
     if (isRequestOptions(query)) {
       return this.vector({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/vector', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupVectorResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/vector', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupVectorResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by vertical used over time.
    */
-  vertical(query?: TimeseriesGroupVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse>
-  vertical(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse>
-  vertical(query: TimeseriesGroupVerticalParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse> {
+  vertical(
+    query?: TimeseriesGroupVerticalParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupVerticalResponse>;
+  vertical(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupVerticalResponse>;
+  vertical(
+    query: TimeseriesGroupVerticalParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupVerticalResponse> {
     if (isRequestOptions(query)) {
       return this.vertical({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries_groups/vertical', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupVerticalResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries_groups/vertical', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupVerticalResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -228,7 +314,7 @@ export interface TimeseriesGroupIndustryResponse {
 export namespace TimeseriesGroupIndustryResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string> | undefined
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -277,7 +363,7 @@ export interface TimeseriesGroupVectorResponse {
 export namespace TimeseriesGroupVectorResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string> | undefined
+    [k: string]: Array<string> | undefined;
   }
 }
 
@@ -290,7 +376,7 @@ export interface TimeseriesGroupVerticalResponse {
 export namespace TimeseriesGroupVerticalResponse {
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string> | undefined
+    [k: string]: Array<string> | undefined;
   }
 }
 

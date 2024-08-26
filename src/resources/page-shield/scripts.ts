@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ScriptsAPI from './scripts';
 import { SinglePage } from '../../pagination';
@@ -13,20 +11,30 @@ export class Scripts extends APIResource {
    */
   list(params: ScriptListParams, options?: Core.RequestOptions): Core.PagePromise<ScriptsSinglePage, Script> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/page_shield/scripts`, ScriptsSinglePage, { query, ...options });
+    return this._client.getAPIList(`/zones/${zone_id}/page_shield/scripts`, ScriptsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Fetches a script detected by Page Shield by script ID.
    */
-  get(scriptId: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<ScriptGetResponse | null> {
+  get(
+    scriptId: string,
+    params: ScriptGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScriptGetResponse | null> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options) as Core.APIPromise<{ result: ScriptGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/page_shield/scripts/${scriptId}`, options) as Core.APIPromise<{
+        result: ScriptGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ScriptsSinglePage extends SinglePage<Script> {
-}
+export class ScriptsSinglePage extends SinglePage<Script> {}
 
 export interface Script {
   /**

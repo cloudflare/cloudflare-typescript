@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RulesAPI from './rules';
 import { SinglePage } from '../../pagination';
@@ -13,25 +11,36 @@ export class Rules extends APIResource {
    */
   update(params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RuleUpdateResponse> {
     const { zone_id, body } = params;
-    return (this._client.put(`/zones/${zone_id}/cloud_connector/rules`, { body: body, ...options }) as Core.APIPromise<{ result: RuleUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/cloud_connector/rules`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Rules
    */
-  list(params: RuleListParams, options?: Core.RequestOptions): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
+  list(
+    params: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse> {
     const { zone_id } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/cloud_connector/rules`, RuleListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/cloud_connector/rules`,
+      RuleListResponsesSinglePage,
+      options,
+    );
   }
 }
 
-export class RuleListResponsesSinglePage extends SinglePage<RuleListResponse> {
-}
+export class RuleListResponsesSinglePage extends SinglePage<RuleListResponse> {}
 
 /**
  * List of Cloud Connector rules
  */
-export type RuleUpdateResponse = Array<RuleUpdateResponse.RuleUpdateResponseItem>
+export type RuleUpdateResponse = Array<RuleUpdateResponse.RuleUpdateResponseItem>;
 
 export namespace RuleUpdateResponse {
   export interface RuleUpdateResponseItem {

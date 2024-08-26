@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SummaryAPI from './summary';
 
@@ -10,37 +9,61 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of unique accounts per model.
    */
-  model(query?: SummaryModelParams, options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>
-  model(options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>
-  model(query: SummaryModelParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse> {
+  model(query?: SummaryModelParams, options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
+  model(options?: Core.RequestOptions): Core.APIPromise<SummaryModelResponse>;
+  model(
+    query: SummaryModelParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryModelResponse> {
     if (isRequestOptions(query)) {
       return this.model({}, query);
     }
-    return (this._client.get('/radar/ai/inference/summary/model', { query, ...options }) as Core.APIPromise<{ result: SummaryModelResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ai/inference/summary/model', { query, ...options }) as Core.APIPromise<{
+        result: SummaryModelResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of unique accounts per provider.
    */
-  provider(query?: SummaryProviderParams, options?: Core.RequestOptions): Core.APIPromise<SummaryProviderResponse>
-  provider(options?: Core.RequestOptions): Core.APIPromise<SummaryProviderResponse>
-  provider(query: SummaryProviderParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryProviderResponse> {
+  provider(
+    query?: SummaryProviderParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryProviderResponse>;
+  provider(options?: Core.RequestOptions): Core.APIPromise<SummaryProviderResponse>;
+  provider(
+    query: SummaryProviderParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryProviderResponse> {
     if (isRequestOptions(query)) {
       return this.provider({}, query);
     }
-    return (this._client.get('/radar/ai/gateway/summary/provider', { query, ...options }) as Core.APIPromise<{ result: SummaryProviderResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ai/gateway/summary/provider', { query, ...options }) as Core.APIPromise<{
+        result: SummaryProviderResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of unique accounts per task.
    */
-  task(query?: SummaryTaskParams, options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>
-  task(options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>
-  task(query: SummaryTaskParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse> {
+  task(query?: SummaryTaskParams, options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
+  task(options?: Core.RequestOptions): Core.APIPromise<SummaryTaskResponse>;
+  task(
+    query: SummaryTaskParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryTaskResponse> {
     if (isRequestOptions(query)) {
       return this.task({}, query);
     }
-    return (this._client.get('/radar/ai/inference/summary/task', { query, ...options }) as Core.APIPromise<{ result: SummaryTaskResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ai/inference/summary/task', { query, ...options }) as Core.APIPromise<{
+        result: SummaryTaskResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as PrefixesAPI from './prefixes';
 import { SinglePage } from '../../../../pagination';
@@ -14,31 +12,58 @@ export class Prefixes extends APIResource {
    * advertise subnets more specific than an IP Prefix by creating more specific BGP
    * Prefixes.
    */
-  list(prefixId: string, params: PrefixListParams, options?: Core.RequestOptions): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix> {
+  list(
+    prefixId: string,
+    params: PrefixListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BGPPrefixesSinglePage, BGPPrefix> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`, BGPPrefixesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes`,
+      BGPPrefixesSinglePage,
+      options,
+    );
   }
 
   /**
    * Update the properties of a BGP Prefix, such as the on demand advertisement
    * status (advertised or withdrawn).
    */
-  edit(prefixId: string, bgpPrefixId: string, params: PrefixEditParams, options?: Core.RequestOptions): Core.APIPromise<BGPPrefix> {
+  edit(
+    prefixId: string,
+    bgpPrefixId: string,
+    params: PrefixEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BGPPrefix> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`, { body, ...options }) as Core.APIPromise<{ result: BGPPrefix }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: BGPPrefix }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieve a single BGP Prefix according to its identifier
    */
-  get(prefixId: string, bgpPrefixId: string, params: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<BGPPrefix> {
+  get(
+    prefixId: string,
+    bgpPrefixId: string,
+    params: PrefixGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BGPPrefix> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`, options) as Core.APIPromise<{ result: BGPPrefix }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bgp/prefixes/${bgpPrefixId}`,
+        options,
+      ) as Core.APIPromise<{ result: BGPPrefix }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class BGPPrefixesSinglePage extends SinglePage<BGPPrefix> {
-}
+export class BGPPrefixesSinglePage extends SinglePage<BGPPrefix> {}
 
 export interface BGPPrefix {
   /**

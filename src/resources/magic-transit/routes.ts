@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RoutesAPI from './routes';
 
@@ -13,16 +11,30 @@ export class Routes extends APIResource {
    */
   create(params: RouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<RouteCreateResponse> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/magic/routes`, { body: body, ...options }) as Core.APIPromise<{ result: RouteCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/magic/routes`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a specific Magic static route. Use `?validate_only=true` as an optional
    * query parameter to run validation only without persisting changes.
    */
-  update(routeId: string, params: RouteUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RouteUpdateResponse> {
+  update(
+    routeId: string,
+    params: RouteUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/magic/routes/${routeId}`, { body, ...options }) as Core.APIPromise<{ result: RouteUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/magic/routes/${routeId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RouteUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,15 +42,27 @@ export class Routes extends APIResource {
    */
   list(params: RouteListParams, options?: Core.RequestOptions): Core.APIPromise<RouteListResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{ result: RouteListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{
+        result: RouteListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Disable and remove a specific Magic static route.
    */
-  delete(routeId: string, params: RouteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RouteDeleteResponse> {
+  delete(
+    routeId: string,
+    params: RouteDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/magic/routes/${routeId}`, options) as Core.APIPromise<{ result: RouteDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/magic/routes/${routeId}`, options) as Core.APIPromise<{
+        result: RouteDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -46,15 +70,27 @@ export class Routes extends APIResource {
    */
   empty(params: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{ result: RouteEmptyResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/magic/routes`, options) as Core.APIPromise<{
+        result: RouteEmptyResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a specific Magic static route.
    */
-  get(routeId: string, params: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<RouteGetResponse> {
+  get(
+    routeId: string,
+    params: RouteGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/routes/${routeId}`, options) as Core.APIPromise<{ result: RouteGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/magic/routes/${routeId}`, options) as Core.APIPromise<{
+        result: RouteGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

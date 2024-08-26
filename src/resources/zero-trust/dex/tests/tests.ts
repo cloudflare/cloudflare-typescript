@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { UniqueDevices } from './unique-devices';
 import * as TestsAPI from './tests';
 import * as Shared from '../../../shared';
 import * as DEXAPI from '../dex';
@@ -17,14 +14,19 @@ export class Tests extends APIResource {
   /**
    * List DEX tests
    */
-  list(params: TestListParams, options?: Core.RequestOptions): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse> {
+  list(
+    params: TestListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dex/tests`, TestListResponsesV4PagePagination, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/dex/tests`, TestListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
 
-export class TestListResponsesV4PagePagination extends V4PagePagination<TestListResponse> {
-}
+export class TestListResponsesV4PagePagination extends V4PagePagination<TestListResponse> {}
 
 export interface AggregateTimePeriod {
   units: 'hours' | 'days' | 'testRuns';

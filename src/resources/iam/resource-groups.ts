@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ResourceGroupsAPI from './resource-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -11,7 +9,10 @@ export class ResourceGroups extends APIResource {
   /**
    * Create a new Resource Group under the specified account.
    */
-  create(params: ResourceGroupCreateParams, options?: Core.RequestOptions): Core.APIPromise<ResourceGroupCreateResponse> {
+  create(
+    params: ResourceGroupCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupCreateResponse> {
     const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/iam/resource_groups`, { body, ...options });
   }
@@ -19,38 +20,64 @@ export class ResourceGroups extends APIResource {
   /**
    * Modify an existing resource group.
    */
-  update(resourceGroupId: string, params: ResourceGroupUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ResourceGroupUpdateResponse> {
+  update(
+    resourceGroupId: string,
+    params: ResourceGroupUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupUpdateResponse> {
     const { account_id, ...body } = params;
-    return this._client.put(`/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`, { body, ...options });
+    return this._client.put(`/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`, {
+      body,
+      ...options,
+    });
   }
 
   /**
    * List all the resource groups for an account.
    */
-  list(params: ResourceGroupListParams, options?: Core.RequestOptions): Core.PagePromise<ResourceGroupListResponsesV4PagePaginationArray, ResourceGroupListResponse> {
+  list(
+    params: ResourceGroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ResourceGroupListResponsesV4PagePaginationArray, ResourceGroupListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/iam/resource_groups`, ResourceGroupListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/iam/resource_groups`,
+      ResourceGroupListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Remove a resource group from an account.
    */
-  delete(resourceGroupId: string, params: ResourceGroupDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ResourceGroupDeleteResponse | null> {
+  delete(
+    resourceGroupId: string,
+    params: ResourceGroupDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`, options) as Core.APIPromise<{ result: ResourceGroupDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`,
+        options,
+      ) as Core.APIPromise<{ result: ResourceGroupDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information about a specific resource group in an account.
    */
-  get(resourceGroupId: string, params: ResourceGroupGetParams, options?: Core.RequestOptions): Core.APIPromise<ResourceGroupGetResponse> {
+  get(
+    resourceGroupId: string,
+    params: ResourceGroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceGroupGetResponse> {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/iam/resource_groups/${resourceGroupId}`, options);
   }
 }
 
-export class ResourceGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<ResourceGroupListResponse> {
-}
+export class ResourceGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<ResourceGroupListResponse> {}
 
 /**
  * A group of scoped resources.
@@ -171,7 +198,7 @@ export namespace ResourceGroupUpdateResponse {
   }
 }
 
-export type ResourceGroupListResponse = unknown
+export type ResourceGroupListResponse = unknown;
 
 export interface ResourceGroupDeleteResponse {
   /**

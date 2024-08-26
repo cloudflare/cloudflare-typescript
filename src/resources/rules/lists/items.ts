@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ItemsAPI from './items';
 import * as ListsAPI from './lists';
@@ -16,9 +14,18 @@ export class Items extends APIResource {
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
    */
-  create(listId: string, params: ItemCreateParams, options?: Core.RequestOptions): Core.APIPromise<ItemCreateResponse | null> {
+  create(
+    listId: string,
+    params: ItemCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemCreateResponse | null> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/rules/lists/${listId}/items`, { body: body, ...options }) as Core.APIPromise<{ result: ItemCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/rules/lists/${listId}/items`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ItemCreateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -29,17 +36,34 @@ export class Items extends APIResource {
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
    */
-  update(listId: string, params: ItemUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ItemUpdateResponse | null> {
+  update(
+    listId: string,
+    params: ItemUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemUpdateResponse | null> {
     const { account_id, body } = params;
-    return (this._client.put(`/accounts/${account_id}/rules/lists/${listId}/items`, { body: body, ...options }) as Core.APIPromise<{ result: ItemUpdateResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/rules/lists/${listId}/items`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ItemUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches all the items in the list.
    */
-  list(listId: string, params: ItemListParams, options?: Core.RequestOptions): Core.PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
+  list(
+    listId: string,
+    params: ItemListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ItemListResponsesCursorPagination, ItemListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/rules/lists/${listId}/items`, ItemListResponsesCursorPagination, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/rules/lists/${listId}/items`,
+      ItemListResponsesCursorPagination,
+      { query, ...options },
+    );
   }
 
   /**
@@ -49,21 +73,38 @@ export class Items extends APIResource {
    * [Get bulk operation status](/operations/lists-get-bulk-operation-status)
    * endpoint with the returned `operation_id`.
    */
-  delete(listId: string, params: ItemDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ItemDeleteResponse | null> {
+  delete(
+    listId: string,
+    params: ItemDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, options) as Core.APIPromise<{ result: ItemDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, options) as Core.APIPromise<{
+        result: ItemDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a list item in the list.
    */
-  get(accountIdentifier: string, listId: string, itemId: string, options?: Core.RequestOptions): Core.APIPromise<ItemGetResponse | null> {
-    return (this._client.get(`/accounts/${accountIdentifier}/rules/lists/${listId}/items/${itemId}`, options) as Core.APIPromise<{ result: ItemGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+  get(
+    accountIdentifier: string,
+    listId: string,
+    itemId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ItemGetResponse | null> {
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/rules/lists/${listId}/items/${itemId}`,
+        options,
+      ) as Core.APIPromise<{ result: ItemGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {
-}
+export class ItemListResponsesCursorPagination extends CursorPagination<ItemListResponse> {}
 
 export interface ListCursor {
   after?: string;
@@ -92,7 +133,7 @@ export interface ItemUpdateResponse {
   operation_id?: string;
 }
 
-export type ItemListResponse = unknown
+export type ItemListResponse = unknown;
 
 export interface ItemDeleteResponse {
   /**
@@ -105,7 +146,7 @@ export interface ItemDeleteResponse {
  * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
  * maximum of /64.
  */
-export type ItemGetResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number
+export type ItemGetResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number;
 
 export interface ItemCreateParams {
   /**

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as BlockSendersAPI from './block-senders';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -11,48 +9,91 @@ export class BlockSenders extends APIResource {
   /**
    * Create a blocked email sender
    */
-  create(params: BlockSenderCreateParams, options?: Core.RequestOptions): Core.APIPromise<BlockSenderCreateResponse> {
+  create(
+    params: BlockSenderCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/email-security/settings/block_senders`, { body, ...options }) as Core.APIPromise<{ result: BlockSenderCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/email-security/settings/block_senders`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BlockSenderCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List blocked email senders
    */
-  list(params: BlockSenderListParams, options?: Core.RequestOptions): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse> {
+  list(
+    params: BlockSenderListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BlockSenderListResponsesV4PagePaginationArray, BlockSenderListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/email-security/settings/block_senders`, BlockSenderListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/email-security/settings/block_senders`,
+      BlockSenderListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Delete a blocked email sender
    */
-  delete(patternId: number, params: BlockSenderDeleteParams, options?: Core.RequestOptions): Core.APIPromise<BlockSenderDeleteResponse> {
+  delete(
+    patternId: number,
+    params: BlockSenderDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, options) as Core.APIPromise<{ result: BlockSenderDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
+        options,
+      ) as Core.APIPromise<{ result: BlockSenderDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a blocked email sender
    */
-  edit(patternId: number, params: BlockSenderEditParams, options?: Core.RequestOptions): Core.APIPromise<BlockSenderEditResponse> {
+  edit(
+    patternId: number,
+    params: BlockSenderEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderEditResponse> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, { body, ...options }) as Core.APIPromise<{ result: BlockSenderEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BlockSenderEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a blocked email sender
    */
-  get(patternId: number, params: BlockSenderGetParams, options?: Core.RequestOptions): Core.APIPromise<BlockSenderGetResponse> {
+  get(
+    patternId: number,
+    params: BlockSenderGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BlockSenderGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/email-security/settings/block_senders/${patternId}`, options) as Core.APIPromise<{ result: BlockSenderGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/email-security/settings/block_senders/${patternId}`,
+        options,
+      ) as Core.APIPromise<{ result: BlockSenderGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class BlockSenderListResponsesV4PagePaginationArray extends V4PagePaginationArray<BlockSenderListResponse> {
-}
+export class BlockSenderListResponsesV4PagePaginationArray extends V4PagePaginationArray<BlockSenderListResponse> {}
 
-export type BlockSenderCreateResponse = BlockSenderCreateResponse.EmailSecurityBlockedSender | Array<BlockSenderCreateResponse.UnionMember1>
+export type BlockSenderCreateResponse =
+  | BlockSenderCreateResponse.EmailSecurityBlockedSender
+  | Array<BlockSenderCreateResponse.UnionMember1>;
 
 export namespace BlockSenderCreateResponse {
   export interface EmailSecurityBlockedSender {
@@ -140,7 +181,9 @@ export interface BlockSenderGetResponse {
   comments?: string | null;
 }
 
-export type BlockSenderCreateParams = BlockSenderCreateParams.EmailSecurityCreateBlockedSender | BlockSenderCreateParams.Variant1
+export type BlockSenderCreateParams =
+  | BlockSenderCreateParams.EmailSecurityCreateBlockedSender
+  | BlockSenderCreateParams.Variant1;
 
 export namespace BlockSenderCreateParams {
   export interface EmailSecurityCreateBlockedSender {

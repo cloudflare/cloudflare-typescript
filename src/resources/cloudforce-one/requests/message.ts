@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as MessageAPI from './message';
 import * as Shared from '../../shared';
@@ -13,29 +11,68 @@ export class MessageResource extends APIResource {
    * In addition to the content, a short title, type, priority, and releasability
    * should be provided. If one is not provided a default will be assigned.
    */
-  create(accountIdentifier: string, requestIdentifier: string, body: MessageCreateParams, options?: Core.RequestOptions): Core.APIPromise<Message> {
-    return (this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/new`, { body, ...options }) as Core.APIPromise<{ result: Message }>)._thenUnwrap((obj) => obj.result);
+  create(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    body: MessageCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Message> {
+    return (
+      this._client.post(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/new`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: Message }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a Request Message
    */
-  update(accountIdentifier: string, requestIdentifier: string, messageIdentifer: number, body: MessageUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Message> {
-    return (this._client.put(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`, { body, ...options }) as Core.APIPromise<{ result: Message }>)._thenUnwrap((obj) => obj.result);
+  update(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    messageIdentifer: number,
+    body: MessageUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Message> {
+    return (
+      this._client.put(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: Message }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete a Request Message
    */
-  delete(accountIdentifier: string, requestIdentifier: string, messageIdentifer: number, options?: Core.RequestOptions): Core.APIPromise<MessageDeleteResponse> {
-    return this._client.delete(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`, options);
+  delete(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    messageIdentifer: number,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageDeleteResponse> {
+    return this._client.delete(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
+      options,
+    );
   }
 
   /**
    * List Request Messages
    */
-  get(accountIdentifier: string, requestIdentifier: string, body: MessageGetParams, options?: Core.RequestOptions): Core.APIPromise<MessageGetResponse> {
-    return (this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message`, { body, ...options }) as Core.APIPromise<{ result: MessageGetResponse }>)._thenUnwrap((obj) => obj.result);
+  get(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    body: MessageGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageGetResponse> {
+    return (
+      this._client.post(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: MessageGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -82,7 +119,7 @@ export interface MessageDeleteResponse {
   success: true;
 }
 
-export type MessageGetResponse = Array<Message>
+export type MessageGetResponse = Array<Message>;
 
 export interface MessageCreateParams {
   /**

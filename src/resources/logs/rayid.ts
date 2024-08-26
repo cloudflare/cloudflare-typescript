@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RayIDAPI from './rayid';
 
@@ -11,13 +9,17 @@ export class RayID extends APIResource {
    * The `/rayids` api route allows lookups by specific rayid. The rayids route will
    * return zero, one, or more records (ray ids are not unique).
    */
-  get(RayID: string, params: RayIDGetParams, options?: Core.RequestOptions): Core.APIPromise<RayIDGetResponse> {
+  get(
+    RayID: string,
+    params: RayIDGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RayIDGetResponse> {
     const { zone_id, ...query } = params;
     return this._client.get(`/zones/${zone_id}/logs/rayids/${RayID}`, { query, ...options });
   }
 }
 
-export type RayIDGetResponse = string | unknown
+export type RayIDGetResponse = string | unknown;
 
 export interface RayIDGetParams {
   /**

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as MessagesAPI from './messages';
 
@@ -10,17 +8,35 @@ export class Messages extends APIResource {
   /**
    * Acknowledge + Retry messages from a Queue.
    */
-  ack(queueId: string, params: MessageAckParams, options?: Core.RequestOptions): Core.APIPromise<MessageAckResponse | null> {
+  ack(
+    queueId: string,
+    params: MessageAckParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessageAckResponse | null> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/ack`, { body, ...options }) as Core.APIPromise<{ result: MessageAckResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/ack`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessageAckResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Pull a batch of messages from a Queue.
    */
-  pull(queueId: string, params: MessagePullParams, options?: Core.RequestOptions): Core.APIPromise<MessagePullResponse | null> {
+  pull(
+    queueId: string,
+    params: MessagePullParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MessagePullResponse | null> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, { body, ...options }) as Core.APIPromise<{ result: MessagePullResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: MessagePullResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -38,7 +54,7 @@ export interface MessageAckResponse {
   warnings?: Array<string>;
 }
 
-export type MessagePullResponse = Array<MessagePullResponse.MessagePullResponseItem>
+export type MessagePullResponse = Array<MessagePullResponse.MessagePullResponseItem>;
 
 export namespace MessagePullResponse {
   export interface MessagePullResponseItem {
@@ -58,7 +74,7 @@ export namespace MessagePullResponse {
 
 export interface MessageAckParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -97,7 +113,7 @@ export namespace MessageAckParams {
 
 export interface MessagePullParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 

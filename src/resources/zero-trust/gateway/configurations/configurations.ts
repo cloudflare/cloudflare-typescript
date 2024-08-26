@@ -1,22 +1,29 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { CustomCertificate } from './custom-certificate';
 import * as ConfigurationsAPI from './configurations';
 import * as CustomCertificateAPI from './custom-certificate';
 
 export class Configurations extends APIResource {
-  customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(this._client);
+  customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(
+    this._client,
+  );
 
   /**
    * Updates the current Zero Trust account configuration.
    */
-  update(params: ConfigurationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ConfigurationUpdateResponse> {
+  update(
+    params: ConfigurationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/gateway/configuration`, { body, ...options }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/gateway/configuration`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -26,17 +33,32 @@ export class Configurations extends APIResource {
    * `certificate`, without updating the entire configuration object. Returns an
    * error if any collection of settings is not properly configured.
    */
-  edit(params: ConfigurationEditParams, options?: Core.RequestOptions): Core.APIPromise<ConfigurationEditResponse> {
+  edit(
+    params: ConfigurationEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationEditResponse> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/gateway/configuration`, { body, ...options }) as Core.APIPromise<{ result: ConfigurationEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/gateway/configuration`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConfigurationEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the current Zero Trust account configuration.
    */
-  get(params: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigurationGetResponse> {
+  get(
+    params: ConfigurationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/gateway/configuration`, options) as Core.APIPromise<{ result: ConfigurationGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/gateway/configuration`, options) as Core.APIPromise<{
+        result: ConfigurationGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

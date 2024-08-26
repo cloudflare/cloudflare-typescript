@@ -1,13 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { Records } from './records';
-import { Settings } from './settings';
-import { Analytics } from './analytics/analytics';
-import { FirewallResource } from './firewall/firewall';
 import * as RecordsAPI from './records';
 import * as SettingsAPI from './settings';
 import * as AnalyticsAPI from './analytics/analytics';
@@ -24,7 +17,7 @@ export class DNS extends APIResource {
 /**
  * Nominal metric values, broken down by time interval.
  */
-export type DNSAnalyticsNominalMetric = Array<unknown>
+export type DNSAnalyticsNominalMetric = Array<unknown>;
 
 export interface DNSAnalyticsQuery {
   /**

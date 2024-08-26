@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Domain } from './domain';
 import * as RankingAPI from './ranking';
 import * as DomainAPI from './domain';
 
@@ -14,13 +12,23 @@ export class Ranking extends APIResource {
   /**
    * Gets Domains Rank updates change over time. Raw values are returned.
    */
-  timeseriesGroups(query?: RankingTimeseriesGroupsParams, options?: Core.RequestOptions): Core.APIPromise<RankingTimeseriesGroupsResponse>
-  timeseriesGroups(options?: Core.RequestOptions): Core.APIPromise<RankingTimeseriesGroupsResponse>
-  timeseriesGroups(query: RankingTimeseriesGroupsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RankingTimeseriesGroupsResponse> {
+  timeseriesGroups(
+    query?: RankingTimeseriesGroupsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RankingTimeseriesGroupsResponse>;
+  timeseriesGroups(options?: Core.RequestOptions): Core.APIPromise<RankingTimeseriesGroupsResponse>;
+  timeseriesGroups(
+    query: RankingTimeseriesGroupsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RankingTimeseriesGroupsResponse> {
     if (isRequestOptions(query)) {
       return this.timeseriesGroups({}, query);
     }
-    return (this._client.get('/radar/ranking/timeseries_groups', { query, ...options }) as Core.APIPromise<{ result: RankingTimeseriesGroupsResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ranking/timeseries_groups', { query, ...options }) as Core.APIPromise<{
+        result: RankingTimeseriesGroupsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -29,13 +37,20 @@ export class Ranking extends APIResource {
    * that are generating a surge in interest. For more information on top domains,
    * see https://blog.cloudflare.com/radar-domain-rankings/.
    */
-  top(query?: RankingTopParams, options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>
-  top(options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>
-  top(query: RankingTopParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse> {
+  top(query?: RankingTopParams, options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>;
+  top(options?: Core.RequestOptions): Core.APIPromise<RankingTopResponse>;
+  top(
+    query: RankingTopParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RankingTopResponse> {
     if (isRequestOptions(query)) {
       return this.top({}, query);
     }
-    return (this._client.get('/radar/ranking/top', { query, ...options }) as Core.APIPromise<{ result: RankingTopResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/ranking/top', { query, ...options }) as Core.APIPromise<{
+        result: RankingTopResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -66,7 +81,7 @@ export namespace RankingTimeseriesGroupsResponse {
 
   export interface Serie0 {
     timestamps: Array<string>;
-  [k: string]: Array<string | number> | Array<string> | undefined
+    [k: string]: Array<string | number> | Array<string> | undefined;
   }
 }
 

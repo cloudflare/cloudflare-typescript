@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Full } from './full';
 import * as ConfigsAPI from './configs';
 import * as FullAPI from './full';
 
@@ -16,7 +13,11 @@ export class Configs extends APIResource {
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{ result: Configuration }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
+        result: Configuration;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -25,7 +26,11 @@ export class Configs extends APIResource {
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
-    return (this._client.put(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{ result: Configuration }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
+        result: Configuration;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -33,7 +38,11 @@ export class Configs extends APIResource {
    */
   delete(params: ConfigDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{ result: Configuration }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
+        result: Configuration;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -41,7 +50,12 @@ export class Configs extends APIResource {
    */
   edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id, body } = params;
-    return (this._client.patch(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{ result: Configuration }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/mnm/config`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: Configuration }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -49,7 +63,11 @@ export class Configs extends APIResource {
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{ result: Configuration }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/mnm/config`, options) as Core.APIPromise<{
+        result: Configuration;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

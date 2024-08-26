@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AppsAPI from './apps';
 import * as SpectrumAPI from './spectrum';
@@ -14,16 +12,28 @@ export class Apps extends APIResource {
    */
   create(params: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<AppCreateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/spectrum/apps`, { body, ...options }) as Core.APIPromise<{ result: AppCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/spectrum/apps`, { body, ...options }) as Core.APIPromise<{
+        result: AppCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a previously existing application's configuration that uses a name for
    * the origin.
    */
-  update(appId: string, params: AppUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AppUpdateResponse> {
+  update(
+    appId: string,
+    params: AppUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{ result: AppUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
+        result: AppUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,15 +41,27 @@ export class Apps extends APIResource {
    */
   list(params: AppListParams, options?: Core.RequestOptions): Core.APIPromise<AppListResponse> {
     const { zone_id, ...query } = params;
-    return (this._client.get(`/zones/${zone_id}/spectrum/apps`, { query, ...options }) as Core.APIPromise<{ result: AppListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/spectrum/apps`, { query, ...options }) as Core.APIPromise<{
+        result: AppListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes a previously existing application.
    */
-  delete(appId: string, params: AppDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AppDeleteResponse | null> {
+  delete(
+    appId: string,
+    params: AppDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AppDeleteResponse | null> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/spectrum/apps/${appId}`, options) as Core.APIPromise<{ result: AppDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/zones/${zone_id}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
+        result: AppDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -47,11 +69,17 @@ export class Apps extends APIResource {
    */
   get(appId: string, params: AppGetParams, options?: Core.RequestOptions): Core.APIPromise<AppGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/spectrum/apps/${appId}`, options) as Core.APIPromise<{ result: AppGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
+        result: AppGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AppCreateResponse = AppCreateResponse.SpectrumConfigAppConfig | AppCreateResponse.SpectrumConfigPaygoAppConfig
+export type AppCreateResponse =
+  | AppCreateResponse.SpectrumConfigAppConfig
+  | AppCreateResponse.SpectrumConfigPaygoAppConfig;
 
 export namespace AppCreateResponse {
   export interface SpectrumConfigAppConfig {
@@ -176,7 +204,9 @@ export namespace AppCreateResponse {
   }
 }
 
-export type AppUpdateResponse = AppUpdateResponse.SpectrumConfigAppConfig | AppUpdateResponse.SpectrumConfigPaygoAppConfig
+export type AppUpdateResponse =
+  | AppUpdateResponse.SpectrumConfigAppConfig
+  | AppUpdateResponse.SpectrumConfigPaygoAppConfig;
 
 export namespace AppUpdateResponse {
   export interface SpectrumConfigAppConfig {
@@ -301,7 +331,7 @@ export namespace AppUpdateResponse {
   }
 }
 
-export type AppListResponse = Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>
+export type AppListResponse = Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
 
 export namespace AppListResponse {
   export interface UnionMember0 {
@@ -433,7 +463,9 @@ export interface AppDeleteResponse {
   id: string;
 }
 
-export type AppGetResponse = AppGetResponse.SpectrumConfigAppConfig | AppGetResponse.SpectrumConfigPaygoAppConfig
+export type AppGetResponse =
+  | AppGetResponse.SpectrumConfigAppConfig
+  | AppGetResponse.SpectrumConfigPaygoAppConfig;
 
 export namespace AppGetResponse {
   export interface SpectrumConfigAppConfig {
@@ -558,7 +590,9 @@ export namespace AppGetResponse {
   }
 }
 
-export type AppCreateParams = AppCreateParams.SpectrumConfigAppConfig | AppCreateParams.SpectrumConfigPaygoAppConfig
+export type AppCreateParams =
+  | AppCreateParams.SpectrumConfigAppConfig
+  | AppCreateParams.SpectrumConfigPaygoAppConfig;
 
 export namespace AppCreateParams {
   export interface SpectrumConfigAppConfig {
@@ -666,7 +700,9 @@ export namespace AppCreateParams {
   }
 }
 
-export type AppUpdateParams = AppUpdateParams.SpectrumConfigAppConfig | AppUpdateParams.SpectrumConfigPaygoAppConfig
+export type AppUpdateParams =
+  | AppUpdateParams.SpectrumConfigAppConfig
+  | AppUpdateParams.SpectrumConfigPaygoAppConfig;
 
 export namespace AppUpdateParams {
   export interface SpectrumConfigAppConfig {

@@ -1,12 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Core from '../core'
 import * as Shared from './shared';
 import { SinglePage, V4PagePaginationArray } from '../pagination';
 
-export type ASN = number
+export type ASN = number;
 
-export type ASNParam = number
+export type ASNParam = number;
 
 export interface AuditLog {
   /**
@@ -108,24 +107,24 @@ export namespace AuditLog {
 /**
  * The Certificate Authority that will issue the certificate
  */
-export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com'
+export type CertificateCA = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * The Certificate Authority that will issue the certificate
  */
-export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com'
+export type CertificateCAParam = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
  * or "keyless-certificate" (for Keyless SSL servers).
  */
-export type CertificateRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate'
+export type CertificateRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
 
 /**
  * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
  * or "keyless-certificate" (for Keyless SSL servers).
  */
-export type CertificateRequestTypeParam = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate'
+export type CertificateRequestTypeParam = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
 
 /**
  * A Cloudflare Tunnel that connects your origin to Cloudflare's edge.
@@ -392,7 +391,7 @@ export interface PaginationInfo {
   total_count?: number;
 }
 
-export type Permission = string
+export type Permission = string;
 
 export interface PermissionGrant {
   read?: boolean;
@@ -412,7 +411,7 @@ export interface ResponseInfo {
   message: string;
 }
 
-export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon
+export type Result = Result.UnionMember0 | Result.AaaAPIResponseCommon;
 
 export namespace Result {
   export interface UnionMember0 {
@@ -462,15 +461,13 @@ export interface Role {
 /**
  * Direction to order DNS records in.
  */
-export type SortDirection = 'asc' | 'desc'
+export type SortDirection = 'asc' | 'desc';
 
 /**
  * Direction to order DNS records in.
  */
-export type SortDirectionParam = 'asc' | 'desc'
+export type SortDirectionParam = 'asc' | 'desc';
 
-export class RolesSinglePage extends SinglePage<Role> {
-}
+export class RolesSinglePage extends SinglePage<Role> {}
 
-export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {
-}
+export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

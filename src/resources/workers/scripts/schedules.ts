@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SchedulesAPI from './schedules';
 
@@ -10,17 +8,35 @@ export class Schedules extends APIResource {
   /**
    * Updates Cron Triggers for a Worker.
    */
-  update(scriptName: string, params: ScheduleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ScheduleUpdateResponse> {
+  update(
+    scriptName: string,
+    params: ScheduleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScheduleUpdateResponse> {
     const { account_id, body } = params;
-    return (this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}/schedules`, { body: body, ...options }) as Core.APIPromise<{ result: ScheduleUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/workers/scripts/${scriptName}/schedules`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: ScheduleUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches Cron Triggers for a Worker.
    */
-  get(scriptName: string, params: ScheduleGetParams, options?: Core.RequestOptions): Core.APIPromise<ScheduleGetResponse> {
+  get(
+    scriptName: string,
+    params: ScheduleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ScheduleGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/schedules`, options) as Core.APIPromise<{ result: ScheduleGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/scripts/${scriptName}/schedules`,
+        options,
+      ) as Core.APIPromise<{ result: ScheduleGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

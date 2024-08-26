@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error'
+import { CloudflareError } from '../../../../error';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as ApplicationsAPI from './applications';
 
@@ -12,9 +11,20 @@ export class UserPolicyChecks extends APIResource {
   /**
    * Tests if a specific user has permission to access an application.
    */
-  list(appId: ApplicationsAPI.AppIDParam, params?: UserPolicyCheckListParams, options?: Core.RequestOptions): Core.APIPromise<UserPolicyCheckListResponse>
-  list(appId: ApplicationsAPI.AppIDParam, options?: Core.RequestOptions): Core.APIPromise<UserPolicyCheckListResponse>
-  list(appId: ApplicationsAPI.AppIDParam, params: UserPolicyCheckListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<UserPolicyCheckListResponse> {
+  list(
+    appId: ApplicationsAPI.AppIDParam,
+    params?: UserPolicyCheckListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserPolicyCheckListResponse>;
+  list(
+    appId: ApplicationsAPI.AppIDParam,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserPolicyCheckListResponse>;
+  list(
+    appId: ApplicationsAPI.AppIDParam,
+    params: UserPolicyCheckListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<UserPolicyCheckListResponse> {
     if (isRequestOptions(params)) {
       return this.list(appId, {}, params);
     }
@@ -25,14 +35,22 @@ export class UserPolicyChecks extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/user_policy_checks`, options) as Core.APIPromise<{ result: UserPolicyCheckListResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/user_policy_checks`,
+        options,
+      ) as Core.APIPromise<{ result: UserPolicyCheckListResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

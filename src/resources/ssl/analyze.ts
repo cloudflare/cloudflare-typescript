@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AnalyzeAPI from './analyze';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
@@ -14,11 +12,15 @@ export class Analyze extends APIResource {
    */
   create(params: AnalyzeCreateParams, options?: Core.RequestOptions): Core.APIPromise<AnalyzeCreateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/ssl/analyze`, { body, ...options }) as Core.APIPromise<{ result: AnalyzeCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/ssl/analyze`, { body, ...options }) as Core.APIPromise<{
+        result: AnalyzeCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type AnalyzeCreateResponse = unknown
+export type AnalyzeCreateResponse = unknown;
 
 export interface AnalyzeCreateParams {
   /**

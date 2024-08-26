@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TagsAPI from './tags';
 import { SinglePage } from '../../../pagination';
@@ -13,7 +11,12 @@ export class Tags extends APIResource {
    */
   create(params: TagCreateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/access/tags`, { body: body, ...options }) as Core.APIPromise<{ result: Tag }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/access/tags`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: Tag }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -21,7 +24,12 @@ export class Tags extends APIResource {
    */
   update(tagName: string, params: TagUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/access/tags/${tagName}`, { body, ...options }) as Core.APIPromise<{ result: Tag }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/access/tags/${tagName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Tag }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -35,9 +43,17 @@ export class Tags extends APIResource {
   /**
    * Delete a tag
    */
-  delete(tagName: string, params: TagDeleteParams, options?: Core.RequestOptions): Core.APIPromise<TagDeleteResponse> {
+  delete(
+    tagName: string,
+    params: TagDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TagDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{ result: TagDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{
+        result: TagDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -45,12 +61,15 @@ export class Tags extends APIResource {
    */
   get(tagName: string, params: TagGetParams, options?: Core.RequestOptions): Core.APIPromise<Tag> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{ result: Tag }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/access/tags/${tagName}`, options) as Core.APIPromise<{
+        result: Tag;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TagsSinglePage extends SinglePage<Tag> {
-}
+export class TagsSinglePage extends SinglePage<Tag> {}
 
 /**
  * A tag

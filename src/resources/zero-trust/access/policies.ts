@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as PoliciesAPI from './policies';
 import * as AccessAPI from './access';
@@ -16,44 +14,79 @@ export class Policies extends APIResource {
    */
   create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/access/policies`, { body, ...options }) as Core.APIPromise<{ result: PolicyCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/access/policies`, { body, ...options }) as Core.APIPromise<{
+        result: PolicyCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a Access reusable policy.
    */
-  update(policyId: string, params: PolicyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyUpdateResponse> {
+  update(
+    policyId: string,
+    params: PolicyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/access/policies/${policyId}`, { body, ...options }) as Core.APIPromise<{ result: PolicyUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/access/policies/${policyId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Access reusable policies.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/access/policies`, PolicyListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/access/policies`,
+      PolicyListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes an Access reusable policy.
    */
-  delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse> {
+  delete(
+    policyId: string,
+    params: PolicyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{ result: PolicyDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{
+        result: PolicyDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Access reusable policy.
    */
-  get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse> {
+  get(
+    policyId: string,
+    params: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{ result: PolicyGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/access/policies/${policyId}`, options) as Core.APIPromise<{
+        result: PolicyGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {
-}
+export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
 export interface PolicyCreateResponse {
   /**

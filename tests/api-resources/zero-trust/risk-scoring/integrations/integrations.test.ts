@@ -1,13 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Cloudflare({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource integrations', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.riskScoring.integrations.create({ account_id: 'account_id', integration_type: 'Okta', tenant_url: 'https://example.com' });
+    const responsePromise = client.zeroTrust.riskScoring.integrations.create({
+      account_id: 'account_id',
+      integration_type: 'Okta',
+      tenant_url: 'https://example.com',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,11 +26,19 @@ describe('resource integrations', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.riskScoring.integrations.create({ account_id: 'account_id', integration_type: 'Okta', tenant_url: 'https://example.com', reference_id: 'reference_id' });
+    const response = await client.zeroTrust.riskScoring.integrations.create({
+      account_id: 'account_id',
+      integration_type: 'Okta',
+      tenant_url: 'https://example.com',
+      reference_id: 'reference_id',
+    });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.zeroTrust.riskScoring.integrations.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: 'account_id', active: true, tenant_url: 'https://example.com' });
+    const responsePromise = client.zeroTrust.riskScoring.integrations.update(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id', active: true, tenant_url: 'https://example.com' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -33,7 +49,15 @@ describe('resource integrations', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.zeroTrust.riskScoring.integrations.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: 'account_id', active: true, tenant_url: 'https://example.com', reference_id: 'reference_id' });
+    const response = await client.zeroTrust.riskScoring.integrations.update(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      {
+        account_id: 'account_id',
+        active: true,
+        tenant_url: 'https://example.com',
+        reference_id: 'reference_id',
+      },
+    );
   });
 
   // bug in prism where it confuses this method with /zt_risk_scoring/{user_id}
@@ -54,7 +78,10 @@ describe('resource integrations', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.zeroTrust.riskScoring.integrations.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: 'account_id' });
+    const responsePromise = client.zeroTrust.riskScoring.integrations.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,11 +92,17 @@ describe('resource integrations', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.zeroTrust.riskScoring.integrations.delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: 'account_id' });
+    const response = await client.zeroTrust.riskScoring.integrations.delete(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.riskScoring.integrations.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: 'account_id' });
+    const responsePromise = client.zeroTrust.riskScoring.integrations.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,6 +113,9 @@ describe('resource integrations', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.riskScoring.integrations.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { account_id: 'account_id' });
+    const response = await client.zeroTrust.riskScoring.integrations.get(
+      '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      { account_id: 'account_id' },
+    );
   });
 });

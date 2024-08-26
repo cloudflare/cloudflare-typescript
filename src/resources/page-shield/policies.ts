@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as PoliciesAPI from './policies';
 import { SinglePage } from '../../pagination';
@@ -11,25 +9,48 @@ export class Policies extends APIResource {
   /**
    * Create a Page Shield policy.
    */
-  create(params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyCreateResponse | null> {
+  create(
+    params: PolicyCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyCreateResponse | null> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options }) as Core.APIPromise<{ result: PolicyCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/page_shield/policies`, { body, ...options }) as Core.APIPromise<{
+        result: PolicyCreateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a Page Shield policy by ID.
    */
-  update(policyId: string, params: PolicyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyUpdateResponse | null> {
+  update(
+    policyId: string,
+    params: PolicyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyUpdateResponse | null> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, { body, ...options }) as Core.APIPromise<{ result: PolicyUpdateResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/page_shield/policies/${policyId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PolicyUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all Page Shield policies.
    */
-  list(params: PolicyListParams, options?: Core.RequestOptions): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
+  list(
+    params: PolicyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PolicyListResponsesSinglePage, PolicyListResponse> {
     const { zone_id } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/page_shield/policies`, PolicyListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/zones/${zone_id}/page_shield/policies`,
+      PolicyListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
@@ -37,20 +58,30 @@ export class Policies extends APIResource {
    */
   delete(policyId: string, params: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { zone_id } = params;
-    return this._client.delete(`/zones/${zone_id}/page_shield/policies/${policyId}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
+    return this._client.delete(`/zones/${zone_id}/page_shield/policies/${policyId}`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 
   /**
    * Fetches a Page Shield policy by ID.
    */
-  get(policyId: string, params: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<PolicyGetResponse | null> {
+  get(
+    policyId: string,
+    params: PolicyGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyGetResponse | null> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options) as Core.APIPromise<{ result: PolicyGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/page_shield/policies/${policyId}`, options) as Core.APIPromise<{
+        result: PolicyGetResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {
-}
+export class PolicyListResponsesSinglePage extends SinglePage<PolicyListResponse> {}
 
 export interface Policy {
   /**

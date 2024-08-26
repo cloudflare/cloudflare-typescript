@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as GroupsAPI from './groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
@@ -14,9 +12,17 @@ export class Groups extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  list(packageId: string, params: GroupListParams, options?: Core.RequestOptions): Core.PagePromise<GroupsV4PagePaginationArray, Group> {
+  list(
+    packageId: string,
+    params: GroupListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<GroupsV4PagePaginationArray, Group> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/firewall/waf/packages/${packageId}/groups`, GroupsV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/firewall/waf/packages/${packageId}/groups`,
+      GroupsV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
@@ -26,9 +32,19 @@ export class Groups extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  edit(packageId: string, groupId: string, params: GroupEditParams, options?: Core.RequestOptions): Core.APIPromise<GroupEditResponse> {
+  edit(
+    packageId: string,
+    groupId: string,
+    params: GroupEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupEditResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`, { body, ...options }) as Core.APIPromise<{ result: GroupEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: GroupEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -37,14 +53,23 @@ export class Groups extends APIResource {
    * **Note:** Applies only to the
    * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
    */
-  get(packageId: string, groupId: string, params: GroupGetParams, options?: Core.RequestOptions): Core.APIPromise<GroupGetResponse> {
+  get(
+    packageId: string,
+    groupId: string,
+    params: GroupGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GroupGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`, options) as Core.APIPromise<{ result: GroupGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/firewall/waf/packages/${packageId}/groups/${groupId}`,
+        options,
+      ) as Core.APIPromise<{ result: GroupGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class GroupsV4PagePaginationArray extends V4PagePaginationArray<Group> {
-}
+export class GroupsV4PagePaginationArray extends V4PagePaginationArray<Group> {}
 
 export interface Group {
   /**
@@ -90,9 +115,9 @@ export interface Group {
   package_id?: string;
 }
 
-export type GroupEditResponse = unknown | string | null
+export type GroupEditResponse = unknown | string | null;
 
-export type GroupGetResponse = unknown | string | null
+export type GroupGetResponse = unknown | string | null;
 
 export interface GroupListParams extends V4PagePaginationArrayParams {
   /**

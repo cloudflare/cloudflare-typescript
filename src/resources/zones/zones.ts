@@ -2,14 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { ActivationCheck } from './activation-check';
-import { Settings } from './settings';
-import { CustomNameservers } from './custom-nameservers';
-import { Holds } from './holds';
-import { Subscriptions } from './subscriptions';
-import * as ZonesAPI from './zones';
 import * as ActivationCheckAPI from './activation-check';
 import * as CustomNameserversAPI from './custom-nameservers';
 import * as HoldsAPI from './holds';
@@ -20,7 +13,9 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 export class Zones extends APIResource {
   activationCheck: ActivationCheckAPI.ActivationCheck = new ActivationCheckAPI.ActivationCheck(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-  customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(this._client);
+  customNameservers: CustomNameserversAPI.CustomNameservers = new CustomNameserversAPI.CustomNameservers(
+    this._client,
+  );
   holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 
@@ -28,16 +23,24 @@ export class Zones extends APIResource {
    * Create Zone
    */
   create(body: ZoneCreateParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
-    return (this._client.post('/zones', { body, ...options }) as Core.APIPromise<{ result: Zone }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post('/zones', { body, ...options }) as Core.APIPromise<{ result: Zone }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists, searches, sorts, and filters your zones. Listing zones across more than
    * 500 accounts is currently not allowed.
    */
-  list(query?: ZoneListParams, options?: Core.RequestOptions): Core.PagePromise<ZonesV4PagePaginationArray, Zone>
-  list(options?: Core.RequestOptions): Core.PagePromise<ZonesV4PagePaginationArray, Zone>
-  list(query: ZoneListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<ZonesV4PagePaginationArray, Zone> {
+  list(
+    query?: ZoneListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZonesV4PagePaginationArray, Zone>;
+  list(options?: Core.RequestOptions): Core.PagePromise<ZonesV4PagePaginationArray, Zone>;
+  list(
+    query: ZoneListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ZonesV4PagePaginationArray, Zone> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -47,9 +50,16 @@ export class Zones extends APIResource {
   /**
    * Deletes an existing zone.
    */
-  delete(params: ZoneDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ZoneDeleteResponse | null> {
+  delete(
+    params: ZoneDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ZoneDeleteResponse | null> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: ZoneDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/zones/${zone_id}`, options) as Core.APIPromise<{
+        result: ZoneDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -57,7 +67,9 @@ export class Zones extends APIResource {
    */
   edit(params: ZoneEditParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}`, { body, ...options }) as Core.APIPromise<{ result: Zone }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}`, { body, ...options }) as Core.APIPromise<{ result: Zone }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -65,24 +77,25 @@ export class Zones extends APIResource {
    */
   get(params: ZoneGetParams, options?: Core.RequestOptions): Core.APIPromise<Zone> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: Zone }>)._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}`, options) as Core.APIPromise<{ result: Zone }>)._thenUnwrap(
+      (obj) => obj.result,
+    );
   }
 }
 
-export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {
-}
+export class ZonesV4PagePaginationArray extends V4PagePaginationArray<Zone> {}
 
 /**
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type Type = 'full' | 'partial' | 'secondary'
+export type Type = 'full' | 'partial' | 'secondary';
 
 /**
  * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
  * typically a partner-hosted zone or a CNAME setup.
  */
-export type TypeParam = 'full' | 'partial' | 'secondary'
+export type TypeParam = 'full' | 'partial' | 'secondary';
 
 export interface Zone {
   /**

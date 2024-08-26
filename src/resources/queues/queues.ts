@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { Messages } from './messages';
-import * as QueuesAPI from './queues';
 import * as ConsumersAPI from './consumers';
 import * as MessagesAPI from './messages';
 import { SinglePage } from '../../pagination';
@@ -19,15 +15,28 @@ export class Queues extends APIResource {
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<QueueCreated | null> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{ result: QueueCreated | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
+        result: QueueCreated | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a queue.
    */
-  update(queueId: string, params: QueueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<QueueUpdated | null> {
+  update(
+    queueId: string,
+    params: QueueUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueUpdated | null> {
     const { account_id, body } = params;
-    return (this._client.put(`/accounts/${account_id}/queues/${queueId}`, { body: body, ...options }) as Core.APIPromise<{ result: QueueUpdated | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/queues/${queueId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: QueueUpdated | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -41,9 +50,17 @@ export class Queues extends APIResource {
   /**
    * Deletes a queue.
    */
-  delete(queueId: string, params: QueueDeleteParams, options?: Core.RequestOptions): Core.APIPromise<QueueDeleteResponse | null> {
+  delete(
+    queueId: string,
+    params: QueueDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<QueueDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{ result: QueueDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
+        result: QueueDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -51,12 +68,15 @@ export class Queues extends APIResource {
    */
   get(queueId: string, params: QueueGetParams, options?: Core.RequestOptions): Core.APIPromise<Queue | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{ result: Queue | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/queues/${queueId}`, options) as Core.APIPromise<{
+        result: Queue | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class QueuesSinglePage extends SinglePage<Queue> {
-}
+export class QueuesSinglePage extends SinglePage<Queue> {}
 
 export interface Queue {
   consumers?: Array<ConsumersAPI.Consumer>;
@@ -104,11 +124,11 @@ export interface QueueUpdated {
   queue_name?: string;
 }
 
-export type QueueDeleteResponse = unknown | Array<unknown> | string
+export type QueueDeleteResponse = unknown | Array<unknown> | string;
 
 export interface QueueCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -120,7 +140,7 @@ export interface QueueCreateParams {
 
 export interface QueueUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -132,21 +152,21 @@ export interface QueueUpdateParams {
 
 export interface QueueListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface QueueDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface QueueGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

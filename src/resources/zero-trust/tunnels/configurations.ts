@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ConfigurationsAPI from './configurations';
 
@@ -10,17 +8,35 @@ export class Configurations extends APIResource {
   /**
    * Adds or updates the configuration for a remotely-managed tunnel.
    */
-  update(tunnelId: string, params: ConfigurationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ConfigurationUpdateResponse> {
+  update(
+    tunnelId: string,
+    params: ConfigurationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`, { body, ...options }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ConfigurationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets the configuration for a remotely-managed tunnel
    */
-  get(tunnelId: string, params: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigurationGetResponse> {
+  get(
+    tunnelId: string,
+    params: ConfigurationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`, options) as Core.APIPromise<{ result: ConfigurationGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/configurations`,
+        options,
+      ) as Core.APIPromise<{ result: ConfigurationGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

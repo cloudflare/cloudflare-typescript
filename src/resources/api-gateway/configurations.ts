@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ConfigurationsAPI from './configurations';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
@@ -11,7 +9,10 @@ export class Configurations extends APIResource {
   /**
    * Set configuration properties
    */
-  update(params: ConfigurationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ConfigurationUpdateResponse> {
+  update(
+    params: ConfigurationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConfigurationUpdateResponse> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/api_gateway/configuration`, { body, ...options });
   }
@@ -21,12 +22,19 @@ export class Configurations extends APIResource {
    */
   get(params: ConfigurationGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { zone_id, ...query } = params;
-    return (this._client.get(`/zones/${zone_id}/api_gateway/configuration`, { query, ...options }) as Core.APIPromise<{ result: Configuration }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/api_gateway/configuration`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: Configuration }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export interface Configuration {
-  auth_id_characteristics: Array<Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJwtClaim>;
+  auth_id_characteristics: Array<
+    Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJwtClaim
+  >;
 }
 
 export namespace Configuration {
@@ -87,7 +95,10 @@ export interface ConfigurationUpdateParams {
   /**
    * Body param:
    */
-  auth_id_characteristics: Array<ConfigurationUpdateParams.APIShieldAuthIDCharacteristic | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJwtClaim>;
+  auth_id_characteristics: Array<
+    | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
+    | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJwtClaim
+  >;
 }
 
 export namespace ConfigurationUpdateParams {

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as BookmarksAPI from './bookmarks';
 import { SinglePage } from '../../../pagination';
@@ -11,23 +9,44 @@ export class Bookmarks extends APIResource {
   /**
    * Create a new Bookmark application.
    */
-  create(bookmarkId: string, params: BookmarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bookmark> {
+  create(
+    bookmarkId: string,
+    params: BookmarkCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Bookmark> {
     const { account_id, body } = params;
-    return (this._client.post(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, { body: body, ...options }) as Core.APIPromise<{ result: Bookmark }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: Bookmark }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured Bookmark application.
    */
-  update(bookmarkId: string, params: BookmarkUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Bookmark> {
+  update(
+    bookmarkId: string,
+    params: BookmarkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Bookmark> {
     const { account_id, body } = params;
-    return (this._client.put(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, { body: body, ...options }) as Core.APIPromise<{ result: Bookmark }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: Bookmark }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Bookmark applications.
    */
-  list(params: BookmarkListParams, options?: Core.RequestOptions): Core.PagePromise<BookmarksSinglePage, Bookmark> {
+  list(
+    params: BookmarkListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BookmarksSinglePage, Bookmark> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/access/bookmarks`, BookmarksSinglePage, options);
   }
@@ -35,22 +54,38 @@ export class Bookmarks extends APIResource {
   /**
    * Deletes a Bookmark application.
    */
-  delete(bookmarkId: string, params: BookmarkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<BookmarkDeleteResponse> {
+  delete(
+    bookmarkId: string,
+    params: BookmarkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BookmarkDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, options) as Core.APIPromise<{ result: BookmarkDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/access/bookmarks/${bookmarkId}`,
+        options,
+      ) as Core.APIPromise<{ result: BookmarkDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Bookmark application.
    */
-  get(bookmarkId: string, params: BookmarkGetParams, options?: Core.RequestOptions): Core.APIPromise<Bookmark> {
+  get(
+    bookmarkId: string,
+    params: BookmarkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Bookmark> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, options) as Core.APIPromise<{ result: Bookmark }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/access/bookmarks/${bookmarkId}`, options) as Core.APIPromise<{
+        result: Bookmark;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class BookmarksSinglePage extends SinglePage<Bookmark> {
-}
+export class BookmarksSinglePage extends SinglePage<Bookmark> {}
 
 export interface Bookmark {
   /**

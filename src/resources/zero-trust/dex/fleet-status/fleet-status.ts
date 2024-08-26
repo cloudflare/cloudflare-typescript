@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Devices } from './devices';
 import * as FleetStatusAPI from './fleet-status';
 import * as DevicesAPI from './devices';
 
@@ -14,9 +11,17 @@ export class FleetStatus extends APIResource {
   /**
    * List details for live (up to 60 minutes) devices using WARP
    */
-  live(params: FleetStatusLiveParams, options?: Core.RequestOptions): Core.APIPromise<FleetStatusLiveResponse> {
+  live(
+    params: FleetStatusLiveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FleetStatusLiveResponse> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/dex/fleet-status/live`, { query, ...options }) as Core.APIPromise<{ result: FleetStatusLiveResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/dex/fleet-status/live`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: FleetStatusLiveResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -24,7 +29,11 @@ export class FleetStatus extends APIResource {
    */
   overTime(params: FleetStatusOverTimeParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id, ...query } = params;
-    return this._client.get(`/accounts/${account_id}/dex/fleet-status/over-time`, { query, ...options, headers: { Accept: '*/*', ...options?.headers } });
+    return this._client.get(`/accounts/${account_id}/dex/fleet-status/over-time`, {
+      query,
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 }
 

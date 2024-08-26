@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as PreviewsAPI from './previews';
 import * as HealthchecksAPI from './healthchecks';
@@ -11,25 +9,50 @@ export class Previews extends APIResource {
   /**
    * Create a new preview health check.
    */
-  create(params: PreviewCreateParams, options?: Core.RequestOptions): Core.APIPromise<HealthchecksAPI.Healthcheck> {
+  create(
+    params: PreviewCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HealthchecksAPI.Healthcheck> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/healthchecks/preview`, { body, ...options }) as Core.APIPromise<{ result: HealthchecksAPI.Healthcheck }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/healthchecks/preview`, { body, ...options }) as Core.APIPromise<{
+        result: HealthchecksAPI.Healthcheck;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete a health check.
    */
-  delete(healthcheckId: string, params: PreviewDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PreviewDeleteResponse> {
+  delete(
+    healthcheckId: string,
+    params: PreviewDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PreviewDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/healthchecks/preview/${healthcheckId}`, options) as Core.APIPromise<{ result: PreviewDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
+        options,
+      ) as Core.APIPromise<{ result: PreviewDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a single configured health check preview.
    */
-  get(healthcheckId: string, params: PreviewGetParams, options?: Core.RequestOptions): Core.APIPromise<HealthchecksAPI.Healthcheck> {
+  get(
+    healthcheckId: string,
+    params: PreviewGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<HealthchecksAPI.Healthcheck> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/healthchecks/preview/${healthcheckId}`, options) as Core.APIPromise<{ result: HealthchecksAPI.Healthcheck }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/healthchecks/preview/${healthcheckId}`,
+        options,
+      ) as Core.APIPromise<{ result: HealthchecksAPI.Healthcheck }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as AsesAPI from './ases';
 
@@ -12,13 +11,20 @@ export class Ases extends APIResource {
    * percentage out of the total layer 7 attacks. The origin Autonomous Systems is
    * determined by the client IP.
    */
-  origin(query?: AseOriginParams, options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>
-  origin(options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>
-  origin(query: AseOriginParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse> {
+  origin(query?: AseOriginParams, options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;
+  origin(options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;
+  origin(
+    query: AseOriginParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AseOriginResponse> {
     if (isRequestOptions(query)) {
       return this.origin({}, query);
     }
-    return (this._client.get('/radar/attacks/layer7/top/ases/origin', { query, ...options }) as Core.APIPromise<{ result: AseOriginResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer7/top/ases/origin', { query, ...options }) as Core.APIPromise<{
+        result: AseOriginResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -119,7 +125,54 @@ export interface AseOriginParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
 
   /**
    * Filter for http version.
@@ -146,7 +199,15 @@ export interface AseOriginParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.

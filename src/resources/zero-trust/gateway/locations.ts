@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as LocationsAPI from './locations';
 import { SinglePage } from '../../../pagination';
@@ -13,21 +11,38 @@ export class Locations extends APIResource {
    */
   create(params: LocationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Location> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/gateway/locations`, { body, ...options }) as Core.APIPromise<{ result: Location }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/gateway/locations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Location }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured Zero Trust Gateway location.
    */
-  update(locationId: string, params: LocationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Location> {
+  update(
+    locationId: string,
+    params: LocationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Location> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/gateway/locations/${locationId}`, { body, ...options }) as Core.APIPromise<{ result: Location }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/gateway/locations/${locationId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Location }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches Zero Trust Gateway locations for an account.
    */
-  list(params: LocationListParams, options?: Core.RequestOptions): Core.PagePromise<LocationsSinglePage, Location> {
+  list(
+    params: LocationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<LocationsSinglePage, Location> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/gateway/locations`, LocationsSinglePage, options);
   }
@@ -35,22 +50,39 @@ export class Locations extends APIResource {
   /**
    * Deletes a configured Zero Trust Gateway location.
    */
-  delete(locationId: string, params: LocationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<LocationDeleteResponse> {
+  delete(
+    locationId: string,
+    params: LocationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/gateway/locations/${locationId}`, options) as Core.APIPromise<{ result: LocationDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/gateway/locations/${locationId}`,
+        options,
+      ) as Core.APIPromise<{ result: LocationDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Zero Trust Gateway location.
    */
-  get(locationId: string, params: LocationGetParams, options?: Core.RequestOptions): Core.APIPromise<Location> {
+  get(
+    locationId: string,
+    params: LocationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Location> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/gateway/locations/${locationId}`, options) as Core.APIPromise<{ result: Location }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/gateway/locations/${locationId}`,
+        options,
+      ) as Core.APIPromise<{ result: Location }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LocationsSinglePage extends SinglePage<Location> {
-}
+export class LocationsSinglePage extends SinglePage<Location> {}
 
 export interface DOHEndpoint {
   /**
@@ -298,7 +330,7 @@ export namespace Location {
   }
 }
 
-export type LocationDeleteResponse = unknown
+export type LocationDeleteResponse = unknown;
 
 export interface LocationCreateParams {
   /**

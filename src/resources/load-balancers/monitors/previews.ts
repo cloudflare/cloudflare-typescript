@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as PreviewsAPI from './previews';
 
@@ -11,9 +9,18 @@ export class Previews extends APIResource {
    * Preview pools using the specified monitor with provided monitor details. The
    * returned preview_id can be used in the preview endpoint to retrieve the results.
    */
-  create(monitorId: string, params: PreviewCreateParams, options?: Core.RequestOptions): Core.APIPromise<PreviewCreateResponse> {
+  create(
+    monitorId: string,
+    params: PreviewCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PreviewCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/load_balancers/monitors/${monitorId}/preview`, { body, ...options }) as Core.APIPromise<{ result: PreviewCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/load_balancers/monitors/${monitorId}/preview`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PreviewCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

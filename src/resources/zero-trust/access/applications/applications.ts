@@ -2,12 +2,8 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { CAs } from './cas';
-import { UserPolicyChecks } from './user-policy-checks';
-import { PolicyTests } from './policy-tests/policy-tests';
-import { CloudflareError } from '../../../../error'
+import { CloudflareError } from '../../../../error';
 import * as ApplicationsAPI from './applications';
 import * as AccessAPI from '../access';
 import * as CAsAPI from './cas';
@@ -18,14 +14,19 @@ import { SinglePage } from '../../../../pagination';
 
 export class Applications extends APIResource {
   cas: CAsAPI.CAs = new CAsAPI.CAs(this._client);
-  userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(this._client);
+  userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(
+    this._client,
+  );
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
 
   /**
    * Adds a new application to Access.
    */
-  create(params: ApplicationCreateParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationCreateResponse> {
+  create(
+    params: ApplicationCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -33,20 +34,32 @@ export class Applications extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, { body, ...options }) as Core.APIPromise<{ result: ApplicationCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ApplicationCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an Access application.
    */
-  update(appId: AppIDParam, params: ApplicationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationUpdateResponse> {
+  update(
+    appId: AppIDParam,
+    params: ApplicationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -54,22 +67,38 @@ export class Applications extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, { body, ...options }) as Core.APIPromise<{ result: ApplicationUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ApplicationUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all Access applications in an account or zone.
    */
-  list(params?: ApplicationListParams, options?: Core.RequestOptions): Core.PagePromise<ApplicationListResponsesSinglePage, ApplicationListResponse>
-  list(options?: Core.RequestOptions): Core.PagePromise<ApplicationListResponsesSinglePage, ApplicationListResponse>
-  list(params: ApplicationListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<ApplicationListResponsesSinglePage, ApplicationListResponse> {
+  list(
+    params?: ApplicationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ApplicationListResponsesSinglePage, ApplicationListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ApplicationListResponsesSinglePage, ApplicationListResponse>;
+  list(
+    params: ApplicationListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ApplicationListResponsesSinglePage, ApplicationListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -80,22 +109,37 @@ export class Applications extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/access/apps`, ApplicationListResponsesSinglePage, options);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return this._client.getAPIList(
+      `/${accountOrZone}/${accountOrZoneId}/access/apps`,
+      ApplicationListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes an application from Access.
    */
-  delete(appId: AppIDParam, params?: ApplicationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse>
-  delete(appId: AppIDParam, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse>
-  delete(appId: AppIDParam, params: ApplicationDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse> {
+  delete(
+    appId: AppIDParam,
+    params?: ApplicationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationDeleteResponse>;
+  delete(appId: AppIDParam, options?: Core.RequestOptions): Core.APIPromise<ApplicationDeleteResponse>;
+  delete(
+    appId: AppIDParam,
+    params: ApplicationDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(appId, {}, params);
     }
@@ -106,22 +150,38 @@ export class Applications extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, options) as Core.APIPromise<{ result: ApplicationDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
+        options,
+      ) as Core.APIPromise<{ result: ApplicationDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches information about an Access application.
    */
-  get(appId: AppIDParam, params?: ApplicationGetParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationGetResponse>
-  get(appId: AppIDParam, options?: Core.RequestOptions): Core.APIPromise<ApplicationGetResponse>
-  get(appId: AppIDParam, params: ApplicationGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ApplicationGetResponse> {
+  get(
+    appId: AppIDParam,
+    params?: ApplicationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationGetResponse>;
+  get(appId: AppIDParam, options?: Core.RequestOptions): Core.APIPromise<ApplicationGetResponse>;
+  get(
+    appId: AppIDParam,
+    params: ApplicationGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
@@ -132,22 +192,41 @@ export class Applications extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`, options) as Core.APIPromise<{ result: ApplicationGetResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}`,
+        options,
+      ) as Core.APIPromise<{ result: ApplicationGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Revokes all tokens issued for an application.
    */
-  revokeTokens(appId: AppIDParam, params?: ApplicationRevokeTokensParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationRevokeTokensResponse>
-  revokeTokens(appId: AppIDParam, options?: Core.RequestOptions): Core.APIPromise<ApplicationRevokeTokensResponse>
-  revokeTokens(appId: AppIDParam, params: ApplicationRevokeTokensParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ApplicationRevokeTokensResponse> {
+  revokeTokens(
+    appId: AppIDParam,
+    params?: ApplicationRevokeTokensParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
+  revokeTokens(
+    appId: AppIDParam,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null>;
+  revokeTokens(
+    appId: AppIDParam,
+    params: ApplicationRevokeTokensParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ApplicationRevokeTokensResponse | null> {
     if (isRequestOptions(params)) {
       return this.revokeTokens(appId, {}, params);
     }
@@ -158,56 +237,88 @@ export class Applications extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/revoke_tokens`, options) as Core.APIPromise<{ result: ApplicationRevokeTokensResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(
+        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/revoke_tokens`,
+        options,
+      ) as Core.APIPromise<{ result: ApplicationRevokeTokensResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ApplicationListResponsesSinglePage extends SinglePage<ApplicationListResponse> {
-}
+export class ApplicationListResponsesSinglePage extends SinglePage<ApplicationListResponse> {}
 
-export class ApplicationPoliciesSinglePage extends SinglePage<ApplicationPolicy> {
-}
+export class ApplicationPoliciesSinglePage extends SinglePage<ApplicationPolicy> {}
 
-export type AllowedHeaders = string
+export type AllowedHeaders = string;
 
-export type AllowedHeadersParam = string
+export type AllowedHeadersParam = string;
 
 /**
  * The identity providers selected for application.
  */
-export type AllowedIdPs = string
+export type AllowedIdPs = string;
 
 /**
  * The identity providers selected for application.
  */
-export type AllowedIdPsParam = string
+export type AllowedIdPsParam = string;
 
-export type AllowedMethods = 'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+export type AllowedMethods =
+  | 'GET'
+  | 'POST'
+  | 'HEAD'
+  | 'PUT'
+  | 'DELETE'
+  | 'CONNECT'
+  | 'OPTIONS'
+  | 'TRACE'
+  | 'PATCH';
 
-export type AllowedMethodsParam = 'GET' | 'POST' | 'HEAD' | 'PUT' | 'DELETE' | 'CONNECT' | 'OPTIONS' | 'TRACE' | 'PATCH'
+export type AllowedMethodsParam =
+  | 'GET'
+  | 'POST'
+  | 'HEAD'
+  | 'PUT'
+  | 'DELETE'
+  | 'CONNECT'
+  | 'OPTIONS'
+  | 'TRACE'
+  | 'PATCH';
 
-export type AllowedOrigins = string
+export type AllowedOrigins = string;
 
-export type AllowedOriginsParam = string
+export type AllowedOriginsParam = string;
 
 /**
  * Identifier
  */
-export type AppID = string
+export type AppID = string;
 
 /**
  * Identifier
  */
-export type AppIDParam = string
+export type AppIDParam = string;
 
-export type Application = Application.SelfHostedApplication | Application.SaaSApplication | Application.BrowserSSHApplication | Application.BrowserVNCApplication | Application.AppLauncherApplication | Application.DeviceEnrollmentPermissionsApplication | Application.BrowserIsolationPermissionsApplication | Application.BookmarkApplication
+export type Application =
+  | Application.SelfHostedApplication
+  | Application.SaaSApplication
+  | Application.BrowserSSHApplication
+  | Application.BrowserVNCApplication
+  | Application.AppLauncherApplication
+  | Application.DeviceEnrollmentPermissionsApplication
+  | Application.BrowserIsolationPermissionsApplication
+  | Application.BookmarkApplication;
 
 export namespace Application {
   export interface SelfHostedApplication {
@@ -546,7 +657,9 @@ export namespace Application {
       /**
        * The OIDC flows supported by this application
        */
-      grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'>;
+      grant_types?: Array<
+        'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+      >;
 
       /**
        * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint.
@@ -1258,7 +1371,10 @@ export interface ApplicationSCIMConfig {
    * Attributes for configuring HTTP Basic authentication scheme for SCIM
    * provisioning to an application.
    */
-  authentication?: SCIMConfigAuthenticationHTTPBasic | SCIMConfigAuthenticationOAuthBearerToken | SCIMConfigAuthenticationOauth2;
+  authentication?:
+    | SCIMConfigAuthenticationHTTPBasic
+    | SCIMConfigAuthenticationOAuthBearerToken
+    | SCIMConfigAuthenticationOauth2;
 
   /**
    * If false, we propagate DELETE requests to the target application for SCIM
@@ -1282,12 +1398,30 @@ export interface ApplicationSCIMConfig {
 /**
  * The application type.
  */
-export type ApplicationType = 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso'
+export type ApplicationType =
+  | 'self_hosted'
+  | 'saas'
+  | 'ssh'
+  | 'vnc'
+  | 'app_launcher'
+  | 'warp'
+  | 'biso'
+  | 'bookmark'
+  | 'dash_sso';
 
 /**
  * The application type.
  */
-export type ApplicationTypeParam = 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso'
+export type ApplicationTypeParam =
+  | 'self_hosted'
+  | 'saas'
+  | 'ssh'
+  | 'vnc'
+  | 'app_launcher'
+  | 'warp'
+  | 'biso'
+  | 'bookmark'
+  | 'dash_sso';
 
 export interface CORSHeaders {
   /**
@@ -1378,12 +1512,12 @@ export interface CORSHeadersParam {
 /**
  * The action Access will take if a user matches this policy.
  */
-export type Decision = 'allow' | 'deny' | 'non_identity' | 'bypass'
+export type Decision = 'allow' | 'deny' | 'non_identity' | 'bypass';
 
 /**
  * The action Access will take if a user matches this policy.
  */
-export type DecisionParam = 'allow' | 'deny' | 'non_identity' | 'bypass'
+export type DecisionParam = 'allow' | 'deny' | 'non_identity' | 'bypass';
 
 export interface OIDCSaaSApp {
   /**
@@ -1426,7 +1560,9 @@ export interface OIDCSaaSApp {
   /**
    * The OIDC flows supported by this application
    */
-  grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'>;
+  grant_types?: Array<
+    'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+  >;
 
   /**
    * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
@@ -1551,7 +1687,9 @@ export interface OIDCSaaSAppParam {
   /**
    * The OIDC flows supported by this application
    */
-  grant_types?: Array<'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'>;
+  grant_types?: Array<
+    'authorization_code' | 'authorization_code_with_pkce' | 'refresh_tokens' | 'hybrid' | 'implicit'
+  >;
 
   /**
    * A regex to filter Cloudflare groups returned in ID token and userinfo endpoint
@@ -1638,22 +1776,28 @@ export namespace OIDCSaaSAppParam {
 /**
  * A globally unique name for an identity or service provider.
  */
-export type SaaSAppNameFormat = 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified' | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic' | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri'
+export type SaaSAppNameFormat =
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
 
 /**
  * A globally unique name for an identity or service provider.
  */
-export type SaaSAppNameFormatParam = 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified' | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic' | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri'
+export type SaaSAppNameFormatParam =
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
 
 /**
  * The format of the name identifier sent to the SaaS application.
  */
-export type SaaSAppNameIDFormat = 'id' | 'email'
+export type SaaSAppNameIDFormat = 'id' | 'email';
 
 /**
  * The format of the name identifier sent to the SaaS application.
  */
-export type SaaSAppNameIDFormatParam = 'id' | 'email'
+export type SaaSAppNameIDFormatParam = 'id' | 'email';
 
 export interface SaaSAppSource {
   /**
@@ -2132,14 +2276,22 @@ export namespace SCIMConfigMappingParam {
 /**
  * A domain that Access will secure.
  */
-export type SelfHostedDomains = string
+export type SelfHostedDomains = string;
 
 /**
  * A domain that Access will secure.
  */
-export type SelfHostedDomainsParam = string
+export type SelfHostedDomainsParam = string;
 
-export type ApplicationCreateResponse = ApplicationCreateResponse.SelfHostedApplication | ApplicationCreateResponse.SaaSApplication | ApplicationCreateResponse.BrowserSSHApplication | ApplicationCreateResponse.BrowserVNCApplication | ApplicationCreateResponse.AppLauncherApplication | ApplicationCreateResponse.DeviceEnrollmentPermissionsApplication | ApplicationCreateResponse.BrowserIsolationPermissionsApplication | ApplicationCreateResponse.BookmarkApplication
+export type ApplicationCreateResponse =
+  | ApplicationCreateResponse.SelfHostedApplication
+  | ApplicationCreateResponse.SaaSApplication
+  | ApplicationCreateResponse.BrowserSSHApplication
+  | ApplicationCreateResponse.BrowserVNCApplication
+  | ApplicationCreateResponse.AppLauncherApplication
+  | ApplicationCreateResponse.DeviceEnrollmentPermissionsApplication
+  | ApplicationCreateResponse.BrowserIsolationPermissionsApplication
+  | ApplicationCreateResponse.BookmarkApplication;
 
 export namespace ApplicationCreateResponse {
   export interface SelfHostedApplication {
@@ -2316,7 +2468,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -2428,7 +2583,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -2624,7 +2782,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -2820,7 +2981,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -2994,7 +3158,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3168,7 +3335,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3342,7 +3512,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3438,7 +3611,10 @@ export namespace ApplicationCreateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3461,7 +3637,15 @@ export namespace ApplicationCreateResponse {
   }
 }
 
-export type ApplicationUpdateResponse = ApplicationUpdateResponse.SelfHostedApplication | ApplicationUpdateResponse.SaaSApplication | ApplicationUpdateResponse.BrowserSSHApplication | ApplicationUpdateResponse.BrowserVNCApplication | ApplicationUpdateResponse.AppLauncherApplication | ApplicationUpdateResponse.DeviceEnrollmentPermissionsApplication | ApplicationUpdateResponse.BrowserIsolationPermissionsApplication | ApplicationUpdateResponse.BookmarkApplication
+export type ApplicationUpdateResponse =
+  | ApplicationUpdateResponse.SelfHostedApplication
+  | ApplicationUpdateResponse.SaaSApplication
+  | ApplicationUpdateResponse.BrowserSSHApplication
+  | ApplicationUpdateResponse.BrowserVNCApplication
+  | ApplicationUpdateResponse.AppLauncherApplication
+  | ApplicationUpdateResponse.DeviceEnrollmentPermissionsApplication
+  | ApplicationUpdateResponse.BrowserIsolationPermissionsApplication
+  | ApplicationUpdateResponse.BookmarkApplication;
 
 export namespace ApplicationUpdateResponse {
   export interface SelfHostedApplication {
@@ -3638,7 +3822,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3750,7 +3937,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -3946,7 +4136,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4142,7 +4335,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4316,7 +4512,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4490,7 +4689,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4664,7 +4866,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4760,7 +4965,10 @@ export namespace ApplicationUpdateResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -4783,7 +4991,15 @@ export namespace ApplicationUpdateResponse {
   }
 }
 
-export type ApplicationListResponse = ApplicationListResponse.SelfHostedApplication | ApplicationListResponse.SaaSApplication | ApplicationListResponse.BrowserSSHApplication | ApplicationListResponse.BrowserVNCApplication | ApplicationListResponse.AppLauncherApplication | ApplicationListResponse.DeviceEnrollmentPermissionsApplication | ApplicationListResponse.BrowserIsolationPermissionsApplication | ApplicationListResponse.BookmarkApplication
+export type ApplicationListResponse =
+  | ApplicationListResponse.SelfHostedApplication
+  | ApplicationListResponse.SaaSApplication
+  | ApplicationListResponse.BrowserSSHApplication
+  | ApplicationListResponse.BrowserVNCApplication
+  | ApplicationListResponse.AppLauncherApplication
+  | ApplicationListResponse.DeviceEnrollmentPermissionsApplication
+  | ApplicationListResponse.BrowserIsolationPermissionsApplication
+  | ApplicationListResponse.BookmarkApplication;
 
 export namespace ApplicationListResponse {
   export interface SelfHostedApplication {
@@ -4960,7 +5176,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5072,7 +5291,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5268,7 +5490,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5464,7 +5689,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5638,7 +5866,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5812,7 +6043,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -5986,7 +6220,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6082,7 +6319,10 @@ export namespace ApplicationListResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6112,7 +6352,15 @@ export interface ApplicationDeleteResponse {
   id?: string;
 }
 
-export type ApplicationGetResponse = ApplicationGetResponse.SelfHostedApplication | ApplicationGetResponse.SaaSApplication | ApplicationGetResponse.BrowserSSHApplication | ApplicationGetResponse.BrowserVNCApplication | ApplicationGetResponse.AppLauncherApplication | ApplicationGetResponse.DeviceEnrollmentPermissionsApplication | ApplicationGetResponse.BrowserIsolationPermissionsApplication | ApplicationGetResponse.BookmarkApplication
+export type ApplicationGetResponse =
+  | ApplicationGetResponse.SelfHostedApplication
+  | ApplicationGetResponse.SaaSApplication
+  | ApplicationGetResponse.BrowserSSHApplication
+  | ApplicationGetResponse.BrowserVNCApplication
+  | ApplicationGetResponse.AppLauncherApplication
+  | ApplicationGetResponse.DeviceEnrollmentPermissionsApplication
+  | ApplicationGetResponse.BrowserIsolationPermissionsApplication
+  | ApplicationGetResponse.BookmarkApplication;
 
 export namespace ApplicationGetResponse {
   export interface SelfHostedApplication {
@@ -6289,7 +6537,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6401,7 +6652,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6597,7 +6851,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6793,7 +7050,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -6967,7 +7227,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7141,7 +7404,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7315,7 +7581,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7411,7 +7680,10 @@ export namespace ApplicationGetResponse {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7434,9 +7706,17 @@ export namespace ApplicationGetResponse {
   }
 }
 
-export type ApplicationRevokeTokensResponse = unknown
+export type ApplicationRevokeTokensResponse = unknown;
 
-export type ApplicationCreateParams = ApplicationCreateParams.SelfHostedApplication | ApplicationCreateParams.SaaSApplication | ApplicationCreateParams.BrowserSSHApplication | ApplicationCreateParams.BrowserVNCApplication | ApplicationCreateParams.AppLauncherApplication | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication | ApplicationCreateParams.BrowserIsolationPermissionsApplication | ApplicationCreateParams.BookmarkApplication
+export type ApplicationCreateParams =
+  | ApplicationCreateParams.SelfHostedApplication
+  | ApplicationCreateParams.SaaSApplication
+  | ApplicationCreateParams.BrowserSSHApplication
+  | ApplicationCreateParams.BrowserVNCApplication
+  | ApplicationCreateParams.AppLauncherApplication
+  | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
+  | ApplicationCreateParams.BrowserIsolationPermissionsApplication
+  | ApplicationCreateParams.BookmarkApplication;
 
 export namespace ApplicationCreateParams {
   export interface SelfHostedApplication {
@@ -7557,7 +7837,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.SelfHostedApplication.AccessAppPolicyLink | string | ApplicationCreateParams.SelfHostedApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.SelfHostedApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.SelfHostedApplication.UnionMember2
+    >;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -7714,7 +7998,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -7787,7 +8074,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.SaaSApplication.AccessAppPolicyLink | string | ApplicationCreateParams.SaaSApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.SaaSApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.SaaSApplication.UnionMember2
+    >;
 
     /**
      * Body param:
@@ -7925,7 +8216,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8065,7 +8359,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.BrowserSSHApplication.AccessAppPolicyLink | string | ApplicationCreateParams.BrowserSSHApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.BrowserSSHApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.BrowserSSHApplication.UnionMember2
+    >;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -8222,7 +8520,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8362,7 +8663,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.BrowserVNCApplication.AccessAppPolicyLink | string | ApplicationCreateParams.BrowserVNCApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.BrowserVNCApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.BrowserVNCApplication.UnionMember2
+    >;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -8519,7 +8824,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8602,7 +8910,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.AppLauncherApplication.AccessAppPolicyLink | string | ApplicationCreateParams.AppLauncherApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.AppLauncherApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.AppLauncherApplication.UnionMember2
+    >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
@@ -8778,7 +9090,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -8861,7 +9176,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink | string | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.UnionMember2
+    >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
@@ -9037,7 +9356,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9120,7 +9442,11 @@ export namespace ApplicationCreateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationCreateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink | string | ApplicationCreateParams.BrowserIsolationPermissionsApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationCreateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
+      | string
+      | ApplicationCreateParams.BrowserIsolationPermissionsApplication.UnionMember2
+    >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
@@ -9296,7 +9622,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9390,7 +9719,10 @@ export namespace ApplicationCreateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9413,7 +9745,15 @@ export namespace ApplicationCreateParams {
   }
 }
 
-export type ApplicationUpdateParams = ApplicationUpdateParams.SelfHostedApplication | ApplicationUpdateParams.SaaSApplication | ApplicationUpdateParams.BrowserSSHApplication | ApplicationUpdateParams.BrowserVNCApplication | ApplicationUpdateParams.AppLauncherApplication | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication | ApplicationUpdateParams.BrowserIsolationPermissionsApplication | ApplicationUpdateParams.BookmarkApplication
+export type ApplicationUpdateParams =
+  | ApplicationUpdateParams.SelfHostedApplication
+  | ApplicationUpdateParams.SaaSApplication
+  | ApplicationUpdateParams.BrowserSSHApplication
+  | ApplicationUpdateParams.BrowserVNCApplication
+  | ApplicationUpdateParams.AppLauncherApplication
+  | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
+  | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
+  | ApplicationUpdateParams.BookmarkApplication;
 
 export namespace ApplicationUpdateParams {
   export interface SelfHostedApplication {
@@ -9534,7 +9874,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.SelfHostedApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.SelfHostedApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.SelfHostedApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.SelfHostedApplication.UnionMember2
+    >;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -9691,7 +10035,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -9764,7 +10111,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.SaaSApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.SaaSApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.SaaSApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.SaaSApplication.UnionMember2
+    >;
 
     /**
      * Body param:
@@ -9902,7 +10253,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10042,7 +10396,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.BrowserSSHApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.BrowserSSHApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.BrowserSSHApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.BrowserSSHApplication.UnionMember2
+    >;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -10199,7 +10557,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10339,7 +10700,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.BrowserVNCApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.BrowserVNCApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.BrowserVNCApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.BrowserVNCApplication.UnionMember2
+    >;
 
     /**
      * Body param: Sets the SameSite cookie setting, which provides increased security
@@ -10496,7 +10861,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10579,7 +10947,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.AppLauncherApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.AppLauncherApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.AppLauncherApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.AppLauncherApplication.UnionMember2
+    >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
@@ -10755,7 +11127,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -10838,7 +11213,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.UnionMember2
+    >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
@@ -11014,7 +11393,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11097,7 +11479,11 @@ export namespace ApplicationUpdateParams {
      * of precedence. Items can reference existing policies or create new policies
      * exclusive to the application.
      */
-    policies?: Array<ApplicationUpdateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink | string | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.UnionMember2>;
+    policies?: Array<
+      | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
+      | string
+      | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.UnionMember2
+    >;
 
     /**
      * Body param: Configuration for provisioning to this application via SCIM. This is
@@ -11273,7 +11659,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM
@@ -11367,7 +11756,10 @@ export namespace ApplicationUpdateParams {
        * Attributes for configuring HTTP Basic authentication scheme for SCIM
        * provisioning to an application.
        */
-      authentication?: ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasicParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerTokenParam
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2Param;
 
       /**
        * If false, propagates DELETE requests to the target application for SCIM

@@ -1,17 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { DEXTests } from './dex-tests';
-import { Networks } from './networks';
-import { Policies } from './policies/policies';
-import { Posture } from './posture/posture';
-import { Revoke } from './revoke';
-import { Settings } from './settings';
-import { Unrevoke } from './unrevoke';
-import { OverrideCodes } from './override-codes';
 import * as DevicesAPI from './devices';
 import * as DEXTestsAPI from './dex-tests';
 import * as NetworksAPI from './networks';
@@ -44,14 +34,21 @@ export class Devices extends APIResource {
   /**
    * Fetches details for a single device.
    */
-  get(deviceId: string, params: DeviceGetParams, options?: Core.RequestOptions): Core.APIPromise<DeviceGetResponse | null> {
+  get(
+    deviceId: string,
+    params: DeviceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DeviceGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{ result: DeviceGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/devices/${deviceId}`, options) as Core.APIPromise<{
+        result: DeviceGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DevicesSinglePage extends SinglePage<Device> {
-}
+export class DevicesSinglePage extends SinglePage<Device> {}
 
 export interface Device {
   /**
@@ -168,7 +165,7 @@ export namespace Device {
   }
 }
 
-export type DeviceGetResponse = unknown | string
+export type DeviceGetResponse = unknown | string | null;
 
 export interface DeviceListParams {
   account_id: string;

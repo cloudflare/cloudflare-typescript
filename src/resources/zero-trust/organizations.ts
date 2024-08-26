@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error'
+import { CloudflareError } from '../../error';
 import * as OrganizationsAPI from './organizations';
 
 export class Organizations extends APIResource {
@@ -19,14 +18,22 @@ export class Organizations extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, { body, ...options }) as Core.APIPromise<{ result: Organization }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Organization }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -40,22 +47,33 @@ export class Organizations extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, { body, ...options }) as Core.APIPromise<{ result: Organization }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Organization }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the configuration for your Zero Trust organization.
    */
-  list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<Organization>
-  list(options?: Core.RequestOptions): Core.APIPromise<Organization>
-  list(params: OrganizationListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<Organization> {
+  list(params?: OrganizationListParams, options?: Core.RequestOptions): Core.APIPromise<Organization>;
+  list(options?: Core.RequestOptions): Core.APIPromise<Organization>;
+  list(
+    params: OrganizationListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Organization> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -66,20 +84,31 @@ export class Organizations extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/organizations`, options) as Core.APIPromise<{ result: Organization }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/access/organizations`,
+        options,
+      ) as Core.APIPromise<{ result: Organization }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Revokes a user's access across all applications.
    */
-  revokeUsers(params: OrganizationRevokeUsersParams, options?: Core.RequestOptions): Core.APIPromise<OrganizationRevokeUsersResponse> {
+  revokeUsers(
+    params: OrganizationRevokeUsersParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OrganizationRevokeUsersResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -87,14 +116,22 @@ export class Organizations extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations/revoke_user`, { body, ...options }) as Core.APIPromise<{ result: OrganizationRevokeUsersResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations/revoke_user`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: OrganizationRevokeUsersResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -232,7 +269,7 @@ export namespace Organization {
   }
 }
 
-export type OrganizationRevokeUsersResponse = true | false
+export type OrganizationRevokeUsersResponse = true | false;
 
 export interface OrganizationCreateParams {
   /**

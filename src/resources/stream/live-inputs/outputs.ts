@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as OutputsAPI from './outputs';
 import { SinglePage } from '../../../pagination';
@@ -13,38 +11,72 @@ export class Outputs extends APIResource {
    * other RTMP or SRT destinations. Outputs are always linked to a specific live
    * input — one live input can have many outputs.
    */
-  create(liveInputIdentifier: string, params: OutputCreateParams, options?: Core.RequestOptions): Core.APIPromise<Output> {
+  create(
+    liveInputIdentifier: string,
+    params: OutputCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Output> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, { body, ...options }) as Core.APIPromise<{ result: Output }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Output }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates the state of an output.
    */
-  update(liveInputIdentifier: string, outputIdentifier: string, params: OutputUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Output> {
+  update(
+    liveInputIdentifier: string,
+    outputIdentifier: string,
+    params: OutputUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Output> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`, { body, ...options }) as Core.APIPromise<{ result: Output }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(
+        `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: Output }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieves all outputs associated with a specified live input.
    */
-  list(liveInputIdentifier: string, params: OutputListParams, options?: Core.RequestOptions): Core.PagePromise<OutputsSinglePage, Output> {
+  list(
+    liveInputIdentifier: string,
+    params: OutputListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OutputsSinglePage, Output> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`, OutputsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs`,
+      OutputsSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes an output and removes it from the associated live input.
    */
-  delete(liveInputIdentifier: string, outputIdentifier: string, params: OutputDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
+  delete(
+    liveInputIdentifier: string,
+    outputIdentifier: string,
+    params: OutputDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<void> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
+    return this._client.delete(
+      `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}/outputs/${outputIdentifier}`,
+      { ...options, headers: { Accept: '*/*', ...options?.headers } },
+    );
   }
 }
 
-export class OutputsSinglePage extends SinglePage<Output> {
-}
+export class OutputsSinglePage extends SinglePage<Output> {}
 
 export interface Output {
   /**

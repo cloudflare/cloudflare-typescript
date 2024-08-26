@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as KeysAPI from './keys';
 import { SinglePage } from '../../../pagination';
@@ -19,25 +17,49 @@ export class Keys extends APIResource {
   /**
    * Edit details for a single TURN key.
    */
-  update(keyId: string, params: KeyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<KeyUpdateResponse> {
+  update(
+    keyId: string,
+    params: KeyUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/calls/turn_keys/${keyId}`, { body, ...options }) as Core.APIPromise<{ result: KeyUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/calls/turn_keys/${keyId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: KeyUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all TURN keys in the Cloudflare account
    */
-  list(params: KeyListParams, options?: Core.RequestOptions): Core.PagePromise<KeyListResponsesSinglePage, KeyListResponse> {
+  list(
+    params: KeyListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<KeyListResponsesSinglePage, KeyListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/calls/turn_keys`, KeyListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/calls/turn_keys`,
+      KeyListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Deletes a TURN key from Cloudflare Calls
    */
-  delete(keyId: string, params: KeyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<KeyDeleteResponse> {
+  delete(
+    keyId: string,
+    params: KeyDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<KeyDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{ result: KeyDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{
+        result: KeyDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -45,12 +67,15 @@ export class Keys extends APIResource {
    */
   get(keyId: string, params: KeyGetParams, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{ result: KeyGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{
+        result: KeyGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class KeyListResponsesSinglePage extends SinglePage<KeyListResponse> {
-}
+export class KeyListResponsesSinglePage extends SinglePage<KeyListResponse> {}
 
 export interface KeyCreateResponse {
   /**
@@ -82,22 +107,22 @@ export interface KeyCreateResponse {
 /**
  * Bearer token
  */
-export type KeyUpdateResponse = string
+export type KeyUpdateResponse = string;
 
 /**
  * Bearer token
  */
-export type KeyListResponse = string
+export type KeyListResponse = string;
 
 /**
  * Bearer token
  */
-export type KeyDeleteResponse = string
+export type KeyDeleteResponse = string;
 
 /**
  * Bearer token
  */
-export type KeyGetResponse = string
+export type KeyGetResponse = string;
 
 export interface KeyCreateParams {
   /**

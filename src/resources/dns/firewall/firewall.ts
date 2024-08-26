@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Analytics } from './analytics/analytics';
 import * as FirewallAPI from './firewall';
 import * as AnalyticsAPI from './analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -17,44 +14,79 @@ export class FirewallResource extends APIResource {
    */
   create(params: FirewallCreateParams, options?: Core.RequestOptions): Core.APIPromise<Firewall> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{ result: Firewall }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/dns_firewall`, { body, ...options }) as Core.APIPromise<{
+        result: Firewall;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List configured DNS Firewall clusters for an account.
    */
-  list(params: FirewallListParams, options?: Core.RequestOptions): Core.PagePromise<FirewallsV4PagePaginationArray, Firewall> {
+  list(
+    params: FirewallListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<FirewallsV4PagePaginationArray, Firewall> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dns_firewall`, FirewallsV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/dns_firewall`, FirewallsV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Delete a configured DNS Firewall Cluster.
    */
-  delete(dnsFirewallId: string, params: FirewallDeleteParams, options?: Core.RequestOptions): Core.APIPromise<FirewallDeleteResponse> {
+  delete(
+    dnsFirewallId: string,
+    params: FirewallDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FirewallDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{ result: FirewallDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/dns_firewall/${dnsFirewallId}`,
+        options,
+      ) as Core.APIPromise<{ result: FirewallDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify a DNS Firewall Cluster configuration.
    */
-  edit(dnsFirewallId: string, params: FirewallEditParams, options?: Core.RequestOptions): Core.APIPromise<Firewall> {
+  edit(
+    dnsFirewallId: string,
+    params: FirewallEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Firewall> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, { body, ...options }) as Core.APIPromise<{ result: Firewall }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Firewall }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Show a single configured DNS Firewall cluster for an account.
    */
-  get(dnsFirewallId: string, params: FirewallGetParams, options?: Core.RequestOptions): Core.APIPromise<Firewall> {
+  get(
+    dnsFirewallId: string,
+    params: FirewallGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Firewall> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{ result: Firewall }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}`, options) as Core.APIPromise<{
+        result: Firewall;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FirewallsV4PagePaginationArray extends V4PagePaginationArray<Firewall> {
-}
+export class FirewallsV4PagePaginationArray extends V4PagePaginationArray<Firewall> {}
 
 /**
  * Attack mitigation settings.
@@ -159,22 +191,22 @@ export interface Firewall {
 /**
  * Cloudflare-assigned DNS IPv4 Address.
  */
-export type FirewallIPs = string
+export type FirewallIPs = string;
 
 /**
  * Cloudflare-assigned DNS IPv4 Address.
  */
-export type FirewallIPsParam = string
+export type FirewallIPsParam = string;
 
 /**
  * Upstream DNS Server IPv4 Address.
  */
-export type UpstreamIPs = string
+export type UpstreamIPs = string;
 
 /**
  * Upstream DNS Server IPv4 Address.
  */
-export type UpstreamIPsParam = string
+export type UpstreamIPsParam = string;
 
 export interface FirewallDeleteResponse {
   /**
