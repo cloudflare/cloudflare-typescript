@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
+import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as ContentAPI from './content';
+import { type Uploadable, multipartFormRequestOptions } from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import { type Response } from '../../../../../_shims/index';
@@ -11,51 +14,18 @@ export class Content extends APIResource {
   /**
    * Put script content for a script uploaded to a Workers for Platforms namespace.
    */
-  update(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: ContentUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.Script> {
-    const {
-      account_id,
-      'CF-WORKER-BODY-PART': cfWorkerBodyPart,
-      'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart,
-      ...body
-    } = params;
-    return (
-      this._client.put(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
-        Core.multipartFormRequestOptions({
-          body,
-          ...options,
-          headers: {
-            ...(cfWorkerBodyPart != null ? { 'CF-WORKER-BODY-PART': cfWorkerBodyPart } : undefined),
-            ...(cfWorkerMainModulePart != null ?
-              { 'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart }
-            : undefined),
-            ...options?.headers,
-          },
-        }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
-    )._thenUnwrap((obj) => obj.result);
+  update(dispatchNamespace: string, scriptName: string, params: ContentUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ScriptsAPI.Script> {
+    const { account_id, 'CF-WORKER-BODY-PART': cfWorkerBodyPart, 'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart, ...body } = params;
+    return (this._client.put(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`, Core.multipartFormRequestOptions({ body, ...options, headers: { ...(cfWorkerBodyPart != null ? { 'CF-WORKER-BODY-PART': cfWorkerBodyPart } : undefined), ...(cfWorkerMainModulePart != null ? { 'CF-WORKER-MAIN-MODULE-PART': cfWorkerMainModulePart } : undefined), ...options?.headers } })) as Core.APIPromise<{ result: ScriptsAPI.Script }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch script content from a script uploaded to a Workers for Platforms
    * namespace.
    */
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: ContentGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Response> {
+  get(dispatchNamespace: string, scriptName: string, params: ContentGetParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
     const { account_id } = params;
-    return this._client.get(
-      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`,
-      { ...options, __binaryResponse: true },
-    );
+    return this._client.get(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}/content`, { ...options, __binaryResponse: true });
   }
 }
 

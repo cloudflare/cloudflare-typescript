@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as RetentionAPI from './retention';
 
@@ -8,32 +10,17 @@ export class Retention extends APIResource {
   /**
    * Updates log retention flag for Logpull API.
    */
-  create(
-    params: RetentionCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RetentionCreateResponse | null> {
+  create(params: RetentionCreateParams, options?: Core.RequestOptions): Core.APIPromise<RetentionCreateResponse | null> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/logs/control/retention/flag`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RetentionCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/logs/control/retention/flag`, { body, ...options }) as Core.APIPromise<{ result: RetentionCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets log retention flag for Logpull API.
    */
-  get(
-    params: RetentionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RetentionGetResponse | null> {
+  get(params: RetentionGetParams, options?: Core.RequestOptions): Core.APIPromise<RetentionGetResponse | null> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/logs/control/retention/flag`, options) as Core.APIPromise<{
-        result: RetentionGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/logs/control/retention/flag`, options) as Core.APIPromise<{ result: RetentionGetResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

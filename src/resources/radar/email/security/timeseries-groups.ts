@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 import * as EmailAPI from '../email';
@@ -10,208 +11,109 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Percentage distribution of emails classified per Arc validation over time.
    */
-  arc(
-    query?: TimeseriesGroupARCParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupARCResponse>;
-  arc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>;
-  arc(
-    query: TimeseriesGroupARCParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupARCResponse> {
+  arc(query?: TimeseriesGroupARCParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>
+  arc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse>
+  arc(query: TimeseriesGroupARCParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupARCResponse> {
     if (isRequestOptions(query)) {
       return this.arc({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/arc', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupARCResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/arc', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupARCResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per DKIM validation over time.
    */
-  dkim(
-    query?: TimeseriesGroupDKIMParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDKIMResponse>;
-  dkim(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse>;
-  dkim(
-    query: TimeseriesGroupDKIMParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDKIMResponse> {
+  dkim(query?: TimeseriesGroupDKIMParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse>
+  dkim(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse>
+  dkim(query: TimeseriesGroupDKIMParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDKIMResponse> {
     if (isRequestOptions(query)) {
       return this.dkim({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/dkim', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDKIMResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/dkim', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDKIMResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per DMARC validation over time.
    */
-  dmarc(
-    query?: TimeseriesGroupDMARCParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDMARCResponse>;
-  dmarc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>;
-  dmarc(
-    query: TimeseriesGroupDMARCParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupDMARCResponse> {
+  dmarc(query?: TimeseriesGroupDMARCParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>
+  dmarc(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse>
+  dmarc(query: TimeseriesGroupDMARCParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDMARCResponse> {
     if (isRequestOptions(query)) {
       return this.dmarc({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/dmarc', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupDMARCResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/dmarc', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDMARCResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified as MALICIOUS over time.
    */
-  malicious(
-    query?: TimeseriesGroupMaliciousParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMaliciousResponse>;
-  malicious(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMaliciousResponse>;
-  malicious(
-    query: TimeseriesGroupMaliciousParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupMaliciousResponse> {
+  malicious(query?: TimeseriesGroupMaliciousParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMaliciousResponse>
+  malicious(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMaliciousResponse>
+  malicious(query: TimeseriesGroupMaliciousParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupMaliciousResponse> {
     if (isRequestOptions(query)) {
       return this.malicious({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/malicious', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupMaliciousResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/malicious', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupMaliciousResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified as SPAM over time.
    */
-  spam(
-    query?: TimeseriesGroupSpamParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpamResponse>;
-  spam(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpamResponse>;
-  spam(
-    query: TimeseriesGroupSpamParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpamResponse> {
+  spam(query?: TimeseriesGroupSpamParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpamResponse>
+  spam(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpamResponse>
+  spam(query: TimeseriesGroupSpamParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpamResponse> {
     if (isRequestOptions(query)) {
       return this.spam({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/spam', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupSpamResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/spam', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupSpamResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per SPF validation over time.
    */
-  spf(
-    query?: TimeseriesGroupSPFParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSPFResponse>;
-  spf(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse>;
-  spf(
-    query: TimeseriesGroupSPFParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSPFResponse> {
+  spf(query?: TimeseriesGroupSPFParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse>
+  spf(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse>
+  spf(query: TimeseriesGroupSPFParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSPFResponse> {
     if (isRequestOptions(query)) {
       return this.spf({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/spf', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupSPFResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/spf', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupSPFResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified as SPOOF over time.
    */
-  spoof(
-    query?: TimeseriesGroupSpoofParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpoofResponse>;
-  spoof(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpoofResponse>;
-  spoof(
-    query: TimeseriesGroupSpoofParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupSpoofResponse> {
+  spoof(query?: TimeseriesGroupSpoofParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpoofResponse>
+  spoof(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpoofResponse>
+  spoof(query: TimeseriesGroupSpoofParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupSpoofResponse> {
     if (isRequestOptions(query)) {
       return this.spoof({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/spoof', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupSpoofResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/spoof', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupSpoofResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified in Threat Categories over time.
    */
-  threatCategory(
-    query?: TimeseriesGroupThreatCategoryParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupThreatCategoryResponse>;
-  threatCategory(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupThreatCategoryResponse>;
-  threatCategory(
-    query: TimeseriesGroupThreatCategoryParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupThreatCategoryResponse> {
+  threatCategory(query?: TimeseriesGroupThreatCategoryParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupThreatCategoryResponse>
+  threatCategory(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupThreatCategoryResponse>
+  threatCategory(query: TimeseriesGroupThreatCategoryParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupThreatCategoryResponse> {
     if (isRequestOptions(query)) {
       return this.threatCategory({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/threat_category', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupThreatCategoryResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/threat_category', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupThreatCategoryResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per TLS Version over time.
    */
-  tlsVersion(
-    query?: TimeseriesGroupTLSVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupTLSVersionResponse>;
-  tlsVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>;
-  tlsVersion(
-    query: TimeseriesGroupTLSVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TimeseriesGroupTLSVersionResponse> {
+  tlsVersion(query?: TimeseriesGroupTLSVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>
+  tlsVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse>
+  tlsVersion(query: TimeseriesGroupTLSVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupTLSVersionResponse> {
     if (isRequestOptions(query)) {
       return this.tlsVersion({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/timeseries_groups/tls_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: TimeseriesGroupTLSVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/timeseries_groups/tls_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupTLSVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

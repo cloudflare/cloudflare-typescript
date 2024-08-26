@@ -2,8 +2,10 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
+import { ByTag } from './by-tag';
+import { CloudflareError } from '../../../error'
 import * as VersionsAPI from './versions';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
@@ -16,20 +18,9 @@ export class Versions extends APIResource {
   /**
    * Fetches the versions of an account or zone ruleset.
    */
-  list(
-    rulesetId: string,
-    params?: VersionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
-  list(
-    rulesetId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>;
-  list(
-    rulesetId: string,
-    params: VersionListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse> {
+  list(rulesetId: string, params?: VersionListParams, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>
+  list(rulesetId: string, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse>
+  list(rulesetId: string, params: VersionListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesSinglePage, VersionListResponse> {
     if (isRequestOptions(params)) {
       return this.list(rulesetId, {}, params);
     }
@@ -40,39 +31,22 @@ export class Versions extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions`,
-      VersionListResponsesSinglePage,
-      options,
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions`, VersionListResponsesSinglePage, options);
   }
 
   /**
    * Deletes an existing version of an account or zone ruleset.
    */
-  delete(
-    rulesetId: string,
-    rulesetVersion: string,
-    params?: VersionDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void>;
-  delete(rulesetId: string, rulesetVersion: string, options?: Core.RequestOptions): Core.APIPromise<void>;
-  delete(
-    rulesetId: string,
-    rulesetVersion: string,
-    params: VersionDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  delete(rulesetId: string, rulesetVersion: string, params?: VersionDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void>
+  delete(rulesetId: string, rulesetVersion: string, options?: Core.RequestOptions): Core.APIPromise<void>
+  delete(rulesetId: string, rulesetVersion: string, params: VersionDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<void> {
     if (isRequestOptions(params)) {
       return this.delete(rulesetId, rulesetVersion, {}, params);
     }
@@ -83,42 +57,22 @@ export class Versions extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.delete(
-      `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
-      { ...options, headers: { Accept: '*/*', ...options?.headers } },
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.delete(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
   }
 
   /**
    * Fetches a specific version of an account or zone ruleset.
    */
-  get(
-    rulesetId: string,
-    rulesetVersion: string,
-    params?: VersionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionGetResponse>;
-  get(
-    rulesetId: string,
-    rulesetVersion: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionGetResponse>;
-  get(
-    rulesetId: string,
-    rulesetVersion: string,
-    params: VersionGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionGetResponse> {
+  get(rulesetId: string, rulesetVersion: string, params?: VersionGetParams, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse>
+  get(rulesetId: string, rulesetVersion: string, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse>
+  get(rulesetId: string, rulesetVersion: string, params: VersionGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(rulesetId, rulesetVersion, {}, params);
     }
@@ -129,26 +83,19 @@ export class Versions extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`,
-        options,
-      ) as Core.APIPromise<{ result: VersionGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/versions/${rulesetVersion}`, options) as Core.APIPromise<{ result: VersionGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class VersionListResponsesSinglePage extends SinglePage<VersionListResponse> {}
+export class VersionListResponsesSinglePage extends SinglePage<VersionListResponse> {
+}
 
 /**
  * A ruleset object.
@@ -222,26 +169,7 @@ export interface VersionGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<
-    | RulesAPI.BlockRule
-    | VersionGetResponse.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRule
-    | RulesAPI.ExecuteRule
-    | VersionGetResponse.RulesetsJSChallengeRule
-    | RulesAPI.LogRule
-    | RulesAPI.ManagedChallengeRule
-    | RulesAPI.RedirectRule
-    | RulesAPI.RewriteRule
-    | RulesAPI.RouteRule
-    | RulesAPI.ScoreRule
-    | RulesAPI.ServeErrorRule
-    | RulesAPI.SetConfigRule
-    | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ForceConnectionCloseRule
-  >;
+  rules: Array<RulesAPI.BlockRule | VersionGetResponse.RulesetsChallengeRule | RulesAPI.CompressResponseRule | RulesAPI.ExecuteRule | VersionGetResponse.RulesetsJSChallengeRule | RulesAPI.LogRule | RulesAPI.ManagedChallengeRule | RulesAPI.RedirectRule | RulesAPI.RewriteRule | RulesAPI.RouteRule | RulesAPI.ScoreRule | RulesAPI.ServeErrorRule | RulesAPI.SetConfigRule | RulesAPI.SkipRule | RulesAPI.SetCacheSettingsRule | RulesAPI.LogCustomFieldRule | RulesAPI.DDoSDynamicRule | RulesAPI.ForceConnectionCloseRule>;
 
   /**
    * The version of the ruleset.

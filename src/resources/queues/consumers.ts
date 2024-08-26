@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ConsumersAPI from './consumers';
 
@@ -8,70 +10,33 @@ export class Consumers extends APIResource {
   /**
    * Creates a new consumer for a queue.
    */
-  create(
-    queueId: string,
-    params: ConsumerCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerCreateResponse | null> {
+  create(queueId: string, params: ConsumerCreateParams, options?: Core.RequestOptions): Core.APIPromise<ConsumerCreateResponse | null> {
     const { account_id, body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/queues/${queueId}/consumers`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConsumerCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/queues/${queueId}/consumers`, { body: body, ...options }) as Core.APIPromise<{ result: ConsumerCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates the consumer for a queue, or creates one if it does not exist.
    */
-  update(
-    queueId: string,
-    consumerId: string,
-    params: ConsumerUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerUpdateResponse | null> {
+  update(queueId: string, consumerId: string, params: ConsumerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ConsumerUpdateResponse | null> {
     const { account_id, body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConsumerUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, { body: body, ...options }) as Core.APIPromise<{ result: ConsumerUpdateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes the consumer for a queue.
    */
-  delete(
-    queueId: string,
-    consumerId: string,
-    params: ConsumerDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerDeleteResponse | null> {
+  delete(queueId: string, consumerId: string, params: ConsumerDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ConsumerDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`,
-        options,
-      ) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/queues/${queueId}/consumers/${consumerId}`, options) as Core.APIPromise<{ result: ConsumerDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the consumers for a queue.
    */
-  get(
-    queueId: string,
-    params: ConsumerGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConsumerGetResponse | null> {
+  get(queueId: string, params: ConsumerGetParams, options?: Core.RequestOptions): Core.APIPromise<ConsumerGetResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/queues/${queueId}/consumers`, options) as Core.APIPromise<{
-        result: ConsumerGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/queues/${queueId}/consumers`, options) as Core.APIPromise<{ result: ConsumerGetResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -163,13 +128,13 @@ export namespace ConsumerUpdateResponse {
   }
 }
 
-export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
+export type ConsumerDeleteResponse = unknown | Array<unknown> | string
 
-export type ConsumerGetResponse = Array<Consumer>;
+export type ConsumerGetResponse = Array<Consumer>
 
 export interface ConsumerCreateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -181,7 +146,7 @@ export interface ConsumerCreateParams {
 
 export interface ConsumerUpdateParams {
   /**
-   * Path param: Identifier.
+   * Path param: Identifier
    */
   account_id: string;
 
@@ -193,14 +158,14 @@ export interface ConsumerUpdateParams {
 
 export interface ConsumerDeleteParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }
 
 export interface ConsumerGetParams {
   /**
-   * Identifier.
+   * Identifier
    */
   account_id: string;
 }

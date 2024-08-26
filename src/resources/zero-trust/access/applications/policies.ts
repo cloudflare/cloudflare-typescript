@@ -2,12 +2,14 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { CloudflareError } from '../../../../error';
+import { CloudflareError } from '../../../../error'
 import * as PoliciesAPI from './policies';
 import * as AccessAPI from '../access';
 import * as ApplicationsAPI from './applications';
 import { ApplicationPoliciesSinglePage } from './applications';
+import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
   /**
@@ -16,11 +18,7 @@ export class Policies extends APIResource {
    * instead and subsequently referencing its ID in the application's 'policies'
    * array.
    */
-  create(
-    appId: string,
-    params: PolicyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
+  create(appId: string, params: PolicyCreateParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -28,34 +26,21 @@ export class Policies extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`, { body, ...options }) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an Access policy specific to an application. To update a reusable
    * policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.
    */
-  update(
-    appId: string,
-    policyId: string,
-    params: PolicyUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
+  update(appId: string, policyId: string, params: PolicyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -63,42 +48,23 @@ export class Policies extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`, { body, ...options }) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Access policies configured for an application. Returns both exclusively
    * scoped and reusable policies used by the application.
    */
-  list(
-    appId: string,
-    params?: PolicyListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy>;
-  list(
-    appId: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy>;
-  list(
-    appId: string,
-    params: PolicyListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy> {
+  list(appId: string, params?: PolicyListParams, options?: Core.RequestOptions): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy>
+  list(appId: string, options?: Core.RequestOptions): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy>
+  list(appId: string, params: PolicyListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<ApplicationPoliciesSinglePage, ApplicationsAPI.ApplicationPolicy> {
     if (isRequestOptions(params)) {
       return this.list(appId, {}, params);
     }
@@ -109,44 +75,23 @@ export class Policies extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`,
-      ApplicationPoliciesSinglePage,
-      options,
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies`, ApplicationPoliciesSinglePage, options);
   }
 
   /**
    * Deletes an Access policy specific to an application. To delete a reusable
    * policy, use the /account or zones/{account or zone_id}/policies/{uid} endpoint.
    */
-  delete(
-    appId: string,
-    policyId: string,
-    params?: PolicyDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyDeleteResponse>;
-  delete(
-    appId: string,
-    policyId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyDeleteResponse>;
-  delete(
-    appId: string,
-    policyId: string,
-    params: PolicyDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PolicyDeleteResponse> {
+  delete(appId: string, policyId: string, params?: PolicyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse>
+  delete(appId: string, policyId: string, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse>
+  delete(appId: string, policyId: string, params: PolicyDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<PolicyDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(appId, policyId, {}, params);
     }
@@ -157,45 +102,23 @@ export class Policies extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`,
-        options,
-      ) as Core.APIPromise<{ result: PolicyDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`, options) as Core.APIPromise<{ result: PolicyDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single Access policy configured for an application. Returns both
    * exclusively owned and reusable policies used by the application.
    */
-  get(
-    appId: string,
-    policyId: string,
-    params?: PolicyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy>;
-  get(
-    appId: string,
-    policyId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy>;
-  get(
-    appId: string,
-    policyId: string,
-    params: PolicyGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
+  get(appId: string, policyId: string, params?: PolicyGetParams, options?: Core.RequestOptions): Core.APIPromise<ApplicationsAPI.ApplicationPolicy>
+  get(appId: string, policyId: string, options?: Core.RequestOptions): Core.APIPromise<ApplicationsAPI.ApplicationPolicy>
+  get(appId: string, policyId: string, params: PolicyGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ApplicationsAPI.ApplicationPolicy> {
     if (isRequestOptions(params)) {
       return this.get(appId, policyId, {}, params);
     }
@@ -206,22 +129,14 @@ export class Policies extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`,
-        options,
-      ) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/policies/${policyId}`, options) as Core.APIPromise<{ result: ApplicationsAPI.ApplicationPolicy }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -582,4 +497,4 @@ export namespace Policies {
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }
 
-export { ApplicationPoliciesSinglePage };
+export { ApplicationPoliciesSinglePage }

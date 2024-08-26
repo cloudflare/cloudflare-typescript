@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as FallbackOriginAPI from './fallback-origin';
 
@@ -8,47 +10,25 @@ export class FallbackOrigin extends APIResource {
   /**
    * Update Fallback Origin for Custom Hostnames
    */
-  update(
-    params: FallbackOriginUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackOriginUpdateResponse> {
+  update(params: FallbackOriginUpdateParams, options?: Core.RequestOptions): Core.APIPromise<FallbackOriginUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/custom_hostnames/fallback_origin`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: FallbackOriginUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/custom_hostnames/fallback_origin`, { body, ...options }) as Core.APIPromise<{ result: FallbackOriginUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete Fallback Origin for Custom Hostnames
    */
-  delete(
-    params: FallbackOriginDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackOriginDeleteResponse> {
+  delete(params: FallbackOriginDeleteParams, options?: Core.RequestOptions): Core.APIPromise<FallbackOriginDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{
-        result: FallbackOriginDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{ result: FallbackOriginDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Fallback Origin for Custom Hostnames
    */
-  get(
-    params: FallbackOriginGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FallbackOriginGetResponse> {
+  get(params: FallbackOriginGetParams, options?: Core.RequestOptions): Core.APIPromise<FallbackOriginGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{
-        result: FallbackOriginGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/custom_hostnames/fallback_origin`, options) as Core.APIPromise<{ result: FallbackOriginGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -72,13 +52,7 @@ export interface FallbackOriginUpdateResponse {
   /**
    * Status of the fallback origin's activation.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * This is the time the fallback origin was updated.
@@ -106,13 +80,7 @@ export interface FallbackOriginDeleteResponse {
   /**
    * Status of the fallback origin's activation.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * This is the time the fallback origin was updated.
@@ -140,13 +108,7 @@ export interface FallbackOriginGetResponse {
   /**
    * Status of the fallback origin's activation.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * This is the time the fallback origin was updated.

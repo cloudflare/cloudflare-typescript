@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Summary } from './summary';
+import { TimeseriesGroups } from './timeseries-groups';
+import { Top } from './top';
 import * as AS112API from './as112';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
@@ -10,31 +14,19 @@ import * as TopAPI from './top';
 
 export class AS112 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(this._client);
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
    * Get AS112 queries change over time.
    */
-  timeseries(
-    query?: AS112TimeseriesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AS112TimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<AS112TimeseriesResponse>;
-  timeseries(
-    query: AS112TimeseriesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AS112TimeseriesResponse> {
+  timeseries(query?: AS112TimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<AS112TimeseriesResponse>
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<AS112TimeseriesResponse>
+  timeseries(query: AS112TimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<AS112TimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (
-      this._client.get('/radar/as112/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: AS112TimeseriesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/as112/timeseries', { query, ...options }) as Core.APIPromise<{ result: AS112TimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

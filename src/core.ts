@@ -1,4 +1,5 @@
 import { VERSION } from './version';
+;
 import {
   CloudflareError,
   APIError,
@@ -38,6 +39,8 @@ type APIResponseProps = {
 
 async function defaultParseResponse<T>(props: APIResponseProps): Promise<T> {
   const { response } = props;
+  ;
+
   // fetch refuses to read the body when the status code is 204.
   if (response.status === 204) {
     return null as T;
@@ -194,7 +197,7 @@ export abstract class APIClient {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'User-Agent': this.getUserAgent(),
-      ...getPlatformHeaders(),
+...getPlatformHeaders(),
       ...this.authHeaders(opts),
     };
   }
@@ -751,8 +754,11 @@ export type RequestOptions<
   signal?: AbortSignal | undefined | null;
   idempotencyKey?: string;
 
+
+
   __binaryRequest?: boolean | undefined;
   __binaryResponse?: boolean | undefined;
+
 };
 
 // This is required so that we can determine if a given object matches the RequestOptions
@@ -772,8 +778,11 @@ const requestOptionsKeys: KeysEnum<RequestOptions> = {
   signal: true,
   idempotencyKey: true,
 
+
+
   __binaryRequest: true,
   __binaryResponse: true,
+
 };
 
 export const isRequestOptions = (obj: unknown): obj is RequestOptions => {
@@ -982,7 +991,8 @@ export const castToError = (err: any): Error => {
 };
 
 export const ensurePresent = <T>(value: T | null | undefined): T => {
-  if (value == null) throw new CloudflareError(`Expected a value to be given but received ${value} instead.`);
+  if (value == null)
+    throw new CloudflareError(`Expected a value to be given but received ${value} instead.`);
   return value;
 };
 

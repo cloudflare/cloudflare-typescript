@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
+import * as Core from '../../../../core';
+import { Bindings } from './bindings';
+import { Prefixes } from './prefixes';
+import { Statuses } from './statuses';
 import * as BindingsAPI from './bindings';
 import * as PrefixesAPI from './prefixes';
 import * as StatusesAPI from './statuses';

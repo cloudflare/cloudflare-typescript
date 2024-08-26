@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Certificates } from './certificates';
 import * as HostnamesAPI from './hostnames';
 import * as CertificatesAPI from './certificates';
 import { SinglePage } from '../../../pagination';
@@ -16,38 +19,22 @@ export class Hostnames extends APIResource {
    * certificate are allowed. Note: Use a null value for parameter _enabled_ to
    * invalidate the association.
    */
-  update(
-    params: HostnameUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HostnameUpdateResponse> {
+  update(params: HostnameUpdateParams, options?: Core.RequestOptions): Core.APIPromise<HostnameUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/origin_tls_client_auth/hostnames`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: HostnameUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/origin_tls_client_auth/hostnames`, { body, ...options }) as Core.APIPromise<{ result: HostnameUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the Hostname Status for Client Authentication
    */
-  get(
-    hostname: string,
-    params: HostnameGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AuthenticatedOriginPull> {
+  get(hostname: string, params: HostnameGetParams, options?: Core.RequestOptions): Core.APIPromise<AuthenticatedOriginPull> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`,
-        options,
-      ) as Core.APIPromise<{ result: AuthenticatedOriginPull }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/origin_tls_client_auth/hostnames/${hostname}`, options) as Core.APIPromise<{ result: AuthenticatedOriginPull }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AuthenticatedOriginPullsSinglePage extends SinglePage<AuthenticatedOriginPull> {}
+export class AuthenticatedOriginPullsSinglePage extends SinglePage<AuthenticatedOriginPull> {
+}
 
 export interface AuthenticatedOriginPull {
   /**
@@ -58,14 +45,7 @@ export interface AuthenticatedOriginPull {
   /**
    * Status of the certificate or the association.
    */
-  cert_status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  cert_status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * The time when the certificate was updated.
@@ -122,14 +102,7 @@ export interface AuthenticatedOriginPull {
   /**
    * Status of the certificate or the association.
    */
-  status?:
-    | 'initializing'
-    | 'pending_deployment'
-    | 'pending_deletion'
-    | 'active'
-    | 'deleted'
-    | 'deployment_timed_out'
-    | 'deletion_timed_out';
+  status?: 'initializing' | 'pending_deployment' | 'pending_deletion' | 'active' | 'deleted' | 'deployment_timed_out' | 'deletion_timed_out';
 
   /**
    * The time when the certificate was updated.
@@ -137,7 +110,7 @@ export interface AuthenticatedOriginPull {
   updated_at?: string;
 }
 
-export type HostnameUpdateResponse = Array<AuthenticatedOriginPull>;
+export type HostnameUpdateResponse = Array<AuthenticatedOriginPull>
 
 export interface HostnameUpdateParams {
   /**

@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as LockdownsAPI from './lockdowns';
 import * as OverridesAPI from './waf/overrides';
@@ -11,106 +12,61 @@ export class Lockdowns extends APIResource {
   /**
    * Creates a new Zone Lockdown rule.
    */
-  create(
-    zoneIdentifier: string,
-    body: LockdownCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Lockdown> {
-    return (
-      this._client.post(`/zones/${zoneIdentifier}/firewall/lockdowns`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Lockdown }>
-    )._thenUnwrap((obj) => obj.result);
+  create(zoneIdentifier: string, body: LockdownCreateParams, options?: Core.RequestOptions): Core.APIPromise<Lockdown> {
+    return (this._client.post(`/zones/${zoneIdentifier}/firewall/lockdowns`, { body, ...options }) as Core.APIPromise<{ result: Lockdown }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an existing Zone Lockdown rule.
    */
-  update(
-    zoneIdentifier: string,
-    id: string,
-    body: LockdownUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Lockdown> {
-    return (
-      this._client.put(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Lockdown }>
-    )._thenUnwrap((obj) => obj.result);
+  update(zoneIdentifier: string, id: string, body: LockdownUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Lockdown> {
+    return (this._client.put(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, { body, ...options }) as Core.APIPromise<{ result: Lockdown }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches Zone Lockdown rules. You can filter the results using several optional
    * parameters.
    */
-  list(
-    zoneIdentifier: string,
-    query?: LockdownListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown>;
-  list(
-    zoneIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown>;
-  list(
-    zoneIdentifier: string,
-    query: LockdownListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown> {
+  list(zoneIdentifier: string, query?: LockdownListParams, options?: Core.RequestOptions): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown>
+  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown>
+  list(zoneIdentifier: string, query: LockdownListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<LockdownsV4PagePaginationArray, Lockdown> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/firewall/lockdowns`,
-      LockdownsV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/firewall/lockdowns`, LockdownsV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Deletes an existing Zone Lockdown rule.
    */
-  delete(
-    zoneIdentifier: string,
-    id: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LockdownDeleteResponse> {
-    return (
-      this._client.delete(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
-        result: LockdownDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<LockdownDeleteResponse> {
+    return (this._client.delete(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{ result: LockdownDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the details of a Zone Lockdown rule.
    */
   get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Lockdown> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{
-        result: Lockdown;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zoneIdentifier}/firewall/lockdowns/${id}`, options) as Core.APIPromise<{ result: Lockdown }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LockdownsV4PagePaginationArray extends V4PagePaginationArray<Lockdown> {}
+export class LockdownsV4PagePaginationArray extends V4PagePaginationArray<Lockdown> {
+}
 
 /**
  * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
  * specified in the Zone Lockdown rule. You can include any number of `ip` or
  * `ip_range` configurations.
  */
-export type Configuration = LockdownIPConfiguration | LockdownCIDRConfiguration;
+export type Configuration = LockdownIPConfiguration | LockdownCIDRConfiguration
 
 /**
  * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
  * specified in the Zone Lockdown rule. You can include any number of `ip` or
  * `ip_range` configurations.
  */
-export type ConfigurationParam = LockdownIPConfigurationParam | LockdownCIDRConfigurationParam;
+export type ConfigurationParam = LockdownIPConfigurationParam | LockdownCIDRConfigurationParam
 
 export interface Lockdown {
   /**
@@ -207,7 +163,7 @@ export interface LockdownIPConfigurationParam {
   value?: string;
 }
 
-export type LockdownURL = string;
+export type LockdownURL = string
 
 export interface LockdownDeleteResponse {
   /**

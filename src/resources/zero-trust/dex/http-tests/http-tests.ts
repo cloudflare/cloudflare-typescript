@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as HTTPTestsAPI from './http-tests';
 import * as DEXAPI from '../dex';
@@ -13,18 +15,9 @@ export class HTTPTests extends APIResource {
    * Get test details and aggregate performance metrics for an http test for a given
    * time period between 1 hour and 7 days.
    */
-  get(
-    testId: string,
-    params: HTTPTestGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<HTTPDetails> {
+  get(testId: string, params: HTTPTestGetParams, options?: Core.RequestOptions): Core.APIPromise<HTTPDetails> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: HTTPDetails }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/dex/http-tests/${testId}`, { query, ...options }) as Core.APIPromise<{ result: HTTPDetails }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

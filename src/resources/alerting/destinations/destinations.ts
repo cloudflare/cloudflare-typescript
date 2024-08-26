@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
+import * as Core from '../../../core';
+import { Eligible } from './eligible';
+import { PagerdutyResource } from './pagerduty';
+import { Webhooks } from './webhooks';
 import * as EligibleAPI from './eligible';
 import * as PagerdutyAPI from './pagerduty';
 import * as WebhooksAPI from './webhooks';

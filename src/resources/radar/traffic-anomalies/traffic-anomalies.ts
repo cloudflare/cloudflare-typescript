@@ -2,7 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Locations } from './locations';
 import * as TrafficAnomaliesAPI from './traffic-anomalies';
 import * as LocationsAPI from './locations';
 
@@ -14,23 +16,13 @@ export class TrafficAnomalies extends APIResource {
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the latest alerts.
    */
-  get(
-    query?: TrafficAnomalyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TrafficAnomalyGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TrafficAnomalyGetResponse>;
-  get(
-    query: TrafficAnomalyGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TrafficAnomalyGetResponse> {
+  get(query?: TrafficAnomalyGetParams, options?: Core.RequestOptions): Core.APIPromise<TrafficAnomalyGetResponse>
+  get(options?: Core.RequestOptions): Core.APIPromise<TrafficAnomalyGetResponse>
+  get(query: TrafficAnomalyGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TrafficAnomalyGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (
-      this._client.get('/radar/traffic_anomalies', { query, ...options }) as Core.APIPromise<{
-        result: TrafficAnomalyGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/traffic_anomalies', { query, ...options }) as Core.APIPromise<{ result: TrafficAnomalyGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

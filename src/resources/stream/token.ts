@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as TokenAPI from './token';
 
@@ -9,18 +11,9 @@ export class Token extends APIResource {
    * Creates a signed URL token for a video. If a body is not provided in the
    * request, a token is created with default values.
    */
-  create(
-    identifier: string,
-    params: TokenCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenCreateResponse> {
+  create(identifier: string, params: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/stream/${identifier}/token`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TokenCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/stream/${identifier}/token`, { body, ...options }) as Core.APIPromise<{ result: TokenCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

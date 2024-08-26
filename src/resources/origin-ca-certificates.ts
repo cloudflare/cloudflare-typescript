@@ -2,7 +2,9 @@
 
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as OriginCACertificatesAPI from './origin-ca-certificates';
 import * as Shared from './shared';
 import * as CertificatePacksAPI from './ssl/certificate-packs/certificate-packs';
 import { SinglePage } from '../pagination';
@@ -12,15 +14,8 @@ export class OriginCACertificates extends APIResource {
    * Create an Origin CA certificate. Use your Origin CA Key as your User Service Key
    * when calling this endpoint ([see above](#requests)).
    */
-  create(
-    body: OriginCACertificateCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCACertificate> {
-    return (
-      this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{
-        result: OriginCACertificate;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  create(body: OriginCACertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
+    return (this._client.post('/certificates', { body, ...options }) as Core.APIPromise<{ result: OriginCACertificate }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,15 +23,9 @@ export class OriginCACertificates extends APIResource {
    * Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
    */
-  list(
-    query?: OriginCACertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>;
-  list(options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>;
-  list(
-    query: OriginCACertificateListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
+  list(query?: OriginCACertificateListParams, options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>
+  list(options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate>
+  list(query: OriginCACertificateListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<OriginCACertificatesSinglePage, OriginCACertificate> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -48,15 +37,8 @@ export class OriginCACertificates extends APIResource {
    * CA Key as your User Service Key when calling this endpoint
    * ([see above](#requests)).
    */
-  delete(
-    certificateId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OriginCACertificateDeleteResponse> {
-    return (
-      this._client.delete(`/certificates/${certificateId}`, options) as Core.APIPromise<{
-        result: OriginCACertificateDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+  delete(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificateDeleteResponse> {
+    return (this._client.delete(`/certificates/${certificateId}`, options) as Core.APIPromise<{ result: OriginCACertificateDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -65,15 +47,12 @@ export class OriginCACertificates extends APIResource {
    * ([see above](#requests)).
    */
   get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
-    return (
-      this._client.get(`/certificates/${certificateId}`, options) as Core.APIPromise<{
-        result: OriginCACertificate;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/certificates/${certificateId}`, options) as Core.APIPromise<{ result: OriginCACertificate }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class OriginCACertificatesSinglePage extends SinglePage<OriginCACertificate> {}
+export class OriginCACertificatesSinglePage extends SinglePage<OriginCACertificate> {
+}
 
 export interface OriginCACertificate {
   /**

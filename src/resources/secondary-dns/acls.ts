@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ACLsAPI from './acls';
 import { SinglePage } from '../../pagination';
@@ -11,12 +13,7 @@ export class ACLs extends APIResource {
    */
   create(params: ACLCreateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/secondary_dns/acls`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ACL }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/secondary_dns/acls`, { body, ...options }) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -24,12 +21,7 @@ export class ACLs extends APIResource {
    */
   update(aclId: string, params: ACLUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ACL }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, { body, ...options }) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -43,17 +35,9 @@ export class ACLs extends APIResource {
   /**
    * Delete ACL.
    */
-  delete(
-    aclId: string,
-    params: ACLDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ACLDeleteResponse> {
+  delete(aclId: string, params: ACLDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ACLDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
-        result: ACLDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{ result: ACLDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -61,15 +45,12 @@ export class ACLs extends APIResource {
    */
   get(aclId: string, params: ACLGetParams, options?: Core.RequestOptions): Core.APIPromise<ACL> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{
-        result: ACL;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/secondary_dns/acls/${aclId}`, options) as Core.APIPromise<{ result: ACL }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ACLsSinglePage extends SinglePage<ACL> {}
+export class ACLsSinglePage extends SinglePage<ACL> {
+}
 
 export interface ACL {
   id: string;

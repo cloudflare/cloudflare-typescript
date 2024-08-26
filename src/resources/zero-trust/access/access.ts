@@ -1,6 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
+import * as Core from '../../../core';
+import { Applications } from './applications/applications';
+import { Certificates } from './certificates/certificates';
+import { Groups } from './groups';
+import { ServiceTokens } from './service-tokens';
+import { Bookmarks } from './bookmarks';
+import { Keys } from './keys';
+import { Logs } from './logs/logs';
+import { Users } from './users/users';
+import { CustomPages } from './custom-pages';
+import { Tags } from './tags';
+import { Policies } from './policies';
 import * as AccessAPI from './access';
 import * as BookmarksAPI from './bookmarks';
 import * as CustomPagesAPI from './custom-pages';
@@ -63,50 +77,12 @@ export namespace AccessDevicePostureRuleParam {
 /**
  * Matches a specific email.
  */
-export type AccessRule =
-  | EmailRule
-  | EmailListRule
-  | DomainRule
-  | EveryoneRule
-  | IPRule
-  | IPListRule
-  | CertificateRule
-  | GroupRule
-  | AzureGroupRule
-  | GitHubOrganizationRule
-  | GSuiteGroupRule
-  | OktaGroupRule
-  | SAMLGroupRule
-  | ServiceTokenRule
-  | AnyValidServiceTokenRule
-  | ExternalEvaluationRule
-  | CountryRule
-  | AuthenticationMethodRule
-  | AccessDevicePostureRule;
+export type AccessRule = EmailRule | EmailListRule | DomainRule | EveryoneRule | IPRule | IPListRule | CertificateRule | GroupRule | AzureGroupRule | GitHubOrganizationRule | GSuiteGroupRule | OktaGroupRule | SAMLGroupRule | ServiceTokenRule | AnyValidServiceTokenRule | ExternalEvaluationRule | CountryRule | AuthenticationMethodRule | AccessDevicePostureRule
 
 /**
  * Matches a specific email.
  */
-export type AccessRuleParam =
-  | EmailRuleParam
-  | EmailListRuleParam
-  | DomainRuleParam
-  | EveryoneRuleParam
-  | IPRuleParam
-  | IPListRuleParam
-  | CertificateRuleParam
-  | GroupRuleParam
-  | AzureGroupRuleParam
-  | GitHubOrganizationRuleParam
-  | GSuiteGroupRuleParam
-  | OktaGroupRuleParam
-  | SAMLGroupRuleParam
-  | ServiceTokenRuleParam
-  | AnyValidServiceTokenRuleParam
-  | ExternalEvaluationRuleParam
-  | CountryRuleParam
-  | AuthenticationMethodRuleParam
-  | AccessDevicePostureRuleParam;
+export type AccessRuleParam = EmailRuleParam | EmailListRuleParam | DomainRuleParam | EveryoneRuleParam | IPRuleParam | IPListRuleParam | CertificateRuleParam | GroupRuleParam | AzureGroupRuleParam | GitHubOrganizationRuleParam | GSuiteGroupRuleParam | OktaGroupRuleParam | SAMLGroupRuleParam | ServiceTokenRuleParam | AnyValidServiceTokenRuleParam | ExternalEvaluationRuleParam | CountryRuleParam | AuthenticationMethodRuleParam | AccessDevicePostureRuleParam
 
 /**
  * Matches any valid Access Service Token

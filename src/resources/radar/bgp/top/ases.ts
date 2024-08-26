@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as AsesAPI from './ases';
 
@@ -10,20 +11,13 @@ export class Ases extends APIResource {
    * Get the top autonomous systems (AS) by BGP updates (announcements only). Values
    * are a percentage out of the total updates.
    */
-  get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
-  get(
-    query: AseGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AseGetResponse> {
+  get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>
+  get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>
+  get(query: AseGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/top/ases', { query, ...options }) as Core.APIPromise<{
-        result: AseGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/top/ases', { query, ...options }) as Core.APIPromise<{ result: AseGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,20 +25,13 @@ export class Ases extends APIResource {
    * announced prefixes count. The data comes from public BGP MRT data archives and
    * updates every 2 hours.
    */
-  prefixes(query?: AsePrefixesParams, options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>;
-  prefixes(options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>;
-  prefixes(
-    query: AsePrefixesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AsePrefixesResponse> {
+  prefixes(query?: AsePrefixesParams, options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>
+  prefixes(options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse>
+  prefixes(query: AsePrefixesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<AsePrefixesResponse> {
     if (isRequestOptions(query)) {
       return this.prefixes({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/top/ases/prefixes', { query, ...options }) as Core.APIPromise<{
-        result: AsePrefixesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/top/ases/prefixes', { query, ...options }) as Core.APIPromise<{ result: AsePrefixesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

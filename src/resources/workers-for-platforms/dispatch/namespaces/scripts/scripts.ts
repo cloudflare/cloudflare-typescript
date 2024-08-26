@@ -1,8 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
+import { isRequestOptions } from '../../../../../core';
+import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
+import { Content } from './content';
+import { Settings } from './settings';
+import { Bindings } from './bindings';
+import { Secrets } from './secrets';
+import { Tags } from './tags';
 import * as ScriptsScriptsAPI from './scripts';
+import { type Uploadable, maybeMultipartFormRequestOptions } from '../../../../../core';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import * as TailAPI from '../../../../workers/scripts/tail';
@@ -24,58 +32,26 @@ export class Scripts extends APIResource {
    * about the multipart metadata on our docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
-  update(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: ScriptUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptUpdateResponse> {
+  update(dispatchNamespace: string, scriptName: string, params: ScriptUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ScriptUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-        Core.maybeMultipartFormRequestOptions({
-          body,
-          ...options,
-          headers: { 'Content-Type': 'application/javascript', ...options?.headers },
-        }),
-      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`, Core.maybeMultipartFormRequestOptions({ body, ...options, headers: { 'Content-Type': 'application/javascript', ...options?.headers } })) as Core.APIPromise<{ result: ScriptUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete a worker from a Workers for Platforms namespace. This call has no
    * response body on a successful delete.
    */
-  delete(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: ScriptDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  delete(dispatchNamespace: string, scriptName: string, params: ScriptDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id, force } = params;
-    return this._client.delete(
-      `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-      { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } },
-    );
+    return this._client.delete(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`, { query: { force }, ...options, headers: { Accept: '*/*', ...options?.headers } });
   }
 
   /**
    * Fetch information about a script uploaded to a Workers for Platforms namespace.
    */
-  get(
-    dispatchNamespace: string,
-    scriptName: string,
-    params: ScriptGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Script> {
+  get(dispatchNamespace: string, scriptName: string, params: ScriptGetParams, options?: Core.RequestOptions): Core.APIPromise<Script> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`,
-        options,
-      ) as Core.APIPromise<{ result: Script }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}/scripts/${scriptName}`, options) as Core.APIPromise<{ result: Script }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -145,7 +121,7 @@ export interface ScriptUpdateResponse {
   usage_model?: string;
 }
 
-export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
+export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1
 
 export namespace ScriptUpdateParams {
   export interface Variant0 {
@@ -256,7 +232,7 @@ export namespace ScriptUpdateParams {
          * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
          */
         type?: string;
-        [k: string]: unknown;
+      [k: string]: unknown
       }
     }
   }

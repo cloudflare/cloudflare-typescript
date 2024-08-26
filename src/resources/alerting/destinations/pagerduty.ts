@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as PagerdutyAPI from './pagerduty';
 import * as Shared from '../../shared';
@@ -9,26 +11,15 @@ export class PagerdutyResource extends APIResource {
   /**
    * Creates a new token for integrating with PagerDuty.
    */
-  create(
-    params: PagerdutyCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyCreateResponse> {
+  create(params: PagerdutyCreateParams, options?: Core.RequestOptions): Core.APIPromise<PagerdutyCreateResponse> {
     const { account_id } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect`,
-        options,
-      ) as Core.APIPromise<{ result: PagerdutyCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect`, options) as Core.APIPromise<{ result: PagerdutyCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes all the PagerDuty Services connected to the account.
    */
-  delete(
-    params: PagerdutyDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyDeleteResponse> {
+  delete(params: PagerdutyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PagerdutyDeleteResponse> {
     const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/alerting/v3/destinations/pagerduty`, options);
   }
@@ -38,29 +29,15 @@ export class PagerdutyResource extends APIResource {
    */
   get(params: PagerdutyGetParams, options?: Core.RequestOptions): Core.APIPromise<PagerdutyGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/alerting/v3/destinations/pagerduty`,
-        options,
-      ) as Core.APIPromise<{ result: PagerdutyGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/alerting/v3/destinations/pagerduty`, options) as Core.APIPromise<{ result: PagerdutyGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Links PagerDuty with the account using the integration token.
    */
-  link(
-    tokenId: string,
-    params: PagerdutyLinkParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PagerdutyLinkResponse> {
+  link(tokenId: string, params: PagerdutyLinkParams, options?: Core.RequestOptions): Core.APIPromise<PagerdutyLinkResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect/${tokenId}`,
-        options,
-      ) as Core.APIPromise<{ result: PagerdutyLinkResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/alerting/v3/destinations/pagerduty/connect/${tokenId}`, options) as Core.APIPromise<{ result: PagerdutyLinkResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -120,7 +97,7 @@ export namespace PagerdutyDeleteResponse {
   }
 }
 
-export type PagerdutyGetResponse = Array<Pagerduty>;
+export type PagerdutyGetResponse = Array<Pagerduty>
 
 export interface PagerdutyLinkResponse {
   /**

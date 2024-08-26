@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ASNsAPI from './asns';
 
@@ -9,20 +10,13 @@ export class ASNs extends APIResource {
   /**
    * Gets a list of autonomous systems (AS).
    */
-  list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
-  list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
-  list(
-    query: ASNListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ASNListResponse> {
+  list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>
+  list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>
+  list(query: ASNListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (
-      this._client.get('/radar/entities/asns', { query, ...options }) as Core.APIPromise<{
-        result: ASNListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/entities/asns', { query, ...options }) as Core.APIPromise<{ result: ASNListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,21 +25,13 @@ export class ASNs extends APIResource {
    * because Cloudflare has a small amount of traffic from/to this AS). Population
    * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
    */
-  get(asn: number, query?: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
-  get(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>;
-  get(
-    asn: number,
-    query: ASNGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ASNGetResponse> {
+  get(asn: number, query?: ASNGetParams, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>
+  get(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse>
+  get(asn: number, query: ASNGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ASNGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(asn, {}, query);
     }
-    return (
-      this._client.get(`/radar/entities/asns/${asn}`, { query, ...options }) as Core.APIPromise<{
-        result: ASNGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/entities/asns/${asn}`, { query, ...options }) as Core.APIPromise<{ result: ASNGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -53,31 +39,19 @@ export class ASNs extends APIResource {
    * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
    */
   ip(query: ASNIPParams, options?: Core.RequestOptions): Core.APIPromise<ASNIPResponse> {
-    return (
-      this._client.get('/radar/entities/asns/ip', { query, ...options }) as Core.APIPromise<{
-        result: ASNIPResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/entities/asns/ip', { query, ...options }) as Core.APIPromise<{ result: ASNIPResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get AS-level relationship for given networks.
    */
-  rel(asn: number, query?: ASNRelParams, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
-  rel(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>;
-  rel(
-    asn: number,
-    query: ASNRelParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ASNRelResponse> {
+  rel(asn: number, query?: ASNRelParams, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>
+  rel(asn: number, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse>
+  rel(asn: number, query: ASNRelParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<ASNRelResponse> {
     if (isRequestOptions(query)) {
       return this.rel(asn, {}, query);
     }
-    return (
-      this._client.get(`/radar/entities/asns/${asn}/rel`, { query, ...options }) as Core.APIPromise<{
-        result: ASNRelResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/entities/asns/${asn}/rel`, { query, ...options }) as Core.APIPromise<{ result: ASNRelResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

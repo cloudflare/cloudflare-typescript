@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Objects } from './objects';
 import * as NamespacesAPI from './namespaces';
 import * as ObjectsAPI from './objects';
 import { SinglePage } from '../../../pagination';
@@ -12,20 +15,14 @@ export class Namespaces extends APIResource {
   /**
    * Returns the Durable Object namespaces owned by an account.
    */
-  list(
-    params: NamespaceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<NamespacesSinglePage, Namespace> {
+  list(params: NamespaceListParams, options?: Core.RequestOptions): Core.PagePromise<NamespacesSinglePage, Namespace> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/workers/durable_objects/namespaces`,
-      NamespacesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/workers/durable_objects/namespaces`, NamespacesSinglePage, options);
   }
 }
 
-export class NamespacesSinglePage extends SinglePage<Namespace> {}
+export class NamespacesSinglePage extends SinglePage<Namespace> {
+}
 
 export interface Namespace {
   id?: string;

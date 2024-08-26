@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { Integrations } from './integrations';
 import * as PostureAPI from './posture';
 import * as IntegrationsAPI from './integrations';
 import { SinglePage } from '../../../../pagination';
@@ -12,88 +15,50 @@ export class Posture extends APIResource {
   /**
    * Creates a new device posture rule.
    */
-  create(
-    params: PostureCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureRule | null> {
+  create(params: PostureCreateParams, options?: Core.RequestOptions): Core.APIPromise<DevicePostureRule | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/devices/posture`, { body, ...options }) as Core.APIPromise<{
-        result: DevicePostureRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/devices/posture`, { body, ...options }) as Core.APIPromise<{ result: DevicePostureRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a device posture rule.
    */
-  update(
-    ruleId: string,
-    params: PostureUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureRule | null> {
+  update(ruleId: string, params: PostureUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DevicePostureRule | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/devices/posture/${ruleId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: DevicePostureRule | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/devices/posture/${ruleId}`, { body, ...options }) as Core.APIPromise<{ result: DevicePostureRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches device posture rules for a Zero Trust account.
    */
-  list(
-    params: PostureListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRule> {
+  list(params: PostureListParams, options?: Core.RequestOptions): Core.PagePromise<DevicePostureRulesSinglePage, DevicePostureRule> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/posture`,
-      DevicePostureRulesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/devices/posture`, DevicePostureRulesSinglePage, options);
   }
 
   /**
    * Deletes a device posture rule.
    */
-  delete(
-    ruleId: string,
-    params: PostureDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PostureDeleteResponse | null> {
+  delete(ruleId: string, params: PostureDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PostureDeleteResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
-        result: PostureDeleteResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{ result: PostureDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single device posture rule.
    */
-  get(
-    ruleId: string,
-    params: PostureGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DevicePostureRule | null> {
+  get(ruleId: string, params: PostureGetParams, options?: Core.RequestOptions): Core.APIPromise<DevicePostureRule | null> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{
-        result: DevicePostureRule | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/devices/posture/${ruleId}`, options) as Core.APIPromise<{ result: DevicePostureRule | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRule> {}
+export class DevicePostureRulesSinglePage extends SinglePage<DevicePostureRule> {
+}
 
-export type CarbonblackInput = string;
+export type CarbonblackInput = string
 
-export type CarbonblackInputParam = string;
+export type CarbonblackInputParam = string
 
 export interface ClientCertificateInput {
   /**
@@ -216,24 +181,7 @@ export interface CrowdstrikeInputParam {
 /**
  * The value to be checked against.
  */
-export type DeviceInput =
-  | FileInput
-  | UniqueClientIDInput
-  | DomainJoinedInput
-  | OSVersionInput
-  | FirewallInput
-  | SentineloneInput
-  | DeviceInput.TeamsDevicesCarbonblackInputRequest
-  | DiskEncryptionInput
-  | DeviceInput.TeamsDevicesApplicationInputRequest
-  | ClientCertificateInput
-  | DeviceInput.TeamsDevicesClientCertificateV2InputRequest
-  | WorkspaceOneInput
-  | CrowdstrikeInput
-  | IntuneInput
-  | KolideInput
-  | TaniumInput
-  | SentineloneS2sInput;
+export type DeviceInput = FileInput | UniqueClientIDInput | DomainJoinedInput | OSVersionInput | FirewallInput | SentineloneInput | DeviceInput.TeamsDevicesCarbonblackInputRequest | DiskEncryptionInput | DeviceInput.TeamsDevicesApplicationInputRequest | ClientCertificateInput | DeviceInput.TeamsDevicesClientCertificateV2InputRequest | WorkspaceOneInput | CrowdstrikeInput | IntuneInput | KolideInput | TaniumInput | SentineloneS2sInput
 
 export namespace DeviceInput {
   export interface TeamsDevicesCarbonblackInputRequest {
@@ -331,24 +279,7 @@ export namespace DeviceInput {
 /**
  * The value to be checked against.
  */
-export type DeviceInputParam =
-  | FileInputParam
-  | UniqueClientIDInputParam
-  | DomainJoinedInputParam
-  | OSVersionInputParam
-  | FirewallInputParam
-  | SentineloneInputParam
-  | DeviceInputParam.TeamsDevicesCarbonblackInputRequest
-  | DiskEncryptionInputParam
-  | DeviceInputParam.TeamsDevicesApplicationInputRequest
-  | ClientCertificateInputParam
-  | DeviceInputParam.TeamsDevicesClientCertificateV2InputRequest
-  | WorkspaceOneInputParam
-  | CrowdstrikeInputParam
-  | IntuneInputParam
-  | KolideInputParam
-  | TaniumInputParam
-  | SentineloneS2sInputParam;
+export type DeviceInputParam = FileInputParam | UniqueClientIDInputParam | DomainJoinedInputParam | OSVersionInputParam | FirewallInputParam | SentineloneInputParam | DeviceInputParam.TeamsDevicesCarbonblackInputRequest | DiskEncryptionInputParam | DeviceInputParam.TeamsDevicesApplicationInputRequest | ClientCertificateInputParam | DeviceInputParam.TeamsDevicesClientCertificateV2InputRequest | WorkspaceOneInputParam | CrowdstrikeInputParam | IntuneInputParam | KolideInputParam | TaniumInputParam | SentineloneS2sInputParam
 
 export namespace DeviceInputParam {
   export interface TeamsDevicesCarbonblackInputRequest {
@@ -492,27 +423,7 @@ export interface DevicePostureRule {
   /**
    * The type of device posture rule.
    */
-  type?:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'client_certificate_v2'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
+  type?: 'file' | 'application' | 'tanium' | 'gateway' | 'warp' | 'disk_encryption' | 'sentinelone' | 'carbonblack' | 'firewall' | 'os_version' | 'domain_joined' | 'client_certificate' | 'client_certificate_v2' | 'unique_client_id' | 'kolide' | 'tanium_s2s' | 'crowdstrike_s2s' | 'intune' | 'workspace_one' | 'sentinelone_s2s';
 }
 
 export interface DiskEncryptionInput {
@@ -1006,27 +917,7 @@ export interface PostureCreateParams {
   /**
    * Body param: The type of device posture rule.
    */
-  type:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'client_certificate_v2'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
+  type: 'file' | 'application' | 'tanium' | 'gateway' | 'warp' | 'disk_encryption' | 'sentinelone' | 'carbonblack' | 'firewall' | 'os_version' | 'domain_joined' | 'client_certificate' | 'client_certificate_v2' | 'unique_client_id' | 'kolide' | 'tanium_s2s' | 'crowdstrike_s2s' | 'intune' | 'workspace_one' | 'sentinelone_s2s';
 
   /**
    * Body param: The description of the device posture rule.
@@ -1070,27 +961,7 @@ export interface PostureUpdateParams {
   /**
    * Body param: The type of device posture rule.
    */
-  type:
-    | 'file'
-    | 'application'
-    | 'tanium'
-    | 'gateway'
-    | 'warp'
-    | 'disk_encryption'
-    | 'sentinelone'
-    | 'carbonblack'
-    | 'firewall'
-    | 'os_version'
-    | 'domain_joined'
-    | 'client_certificate'
-    | 'client_certificate_v2'
-    | 'unique_client_id'
-    | 'kolide'
-    | 'tanium_s2s'
-    | 'crowdstrike_s2s'
-    | 'intune'
-    | 'workspace_one'
-    | 'sentinelone_s2s';
+  type: 'file' | 'application' | 'tanium' | 'gateway' | 'warp' | 'disk_encryption' | 'sentinelone' | 'carbonblack' | 'firewall' | 'os_version' | 'domain_joined' | 'client_certificate' | 'client_certificate_v2' | 'unique_client_id' | 'kolide' | 'tanium_s2s' | 'crowdstrike_s2s' | 'intune' | 'workspace_one' | 'sentinelone_s2s';
 
   /**
    * Body param: The description of the device posture rule.

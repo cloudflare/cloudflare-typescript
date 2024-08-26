@@ -1,16 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { SchemaValidation } from './schema-validation';
 import * as OperationsAPI from './operations';
 import * as SchemaValidationAPI from './schema-validation';
 import * as UserSchemasAPI from '../user-schemas/user-schemas';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Operations extends APIResource {
-  schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(
-    this._client,
-  );
+  schemaValidation: SchemaValidationAPI.SchemaValidation = new SchemaValidationAPI.SchemaValidation(this._client);
 
   /**
    * Add one or more operations to a zone. Endpoints can contain path variables.
@@ -19,42 +20,23 @@ export class Operations extends APIResource {
    * existing one will return the record of the already existing operation and update
    * its last_updated date.
    */
-  create(
-    params: OperationCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationCreateResponse> {
+  create(params: OperationCreateParams, options?: Core.RequestOptions): Core.APIPromise<OperationCreateResponse> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/api_gateway/operations`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: OperationCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/api_gateway/operations`, { body: body, ...options }) as Core.APIPromise<{ result: OperationCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieve information about all operations on a zone
    */
-  list(
-    params: OperationListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
+  list(params: OperationListParams, options?: Core.RequestOptions): Core.PagePromise<OperationListResponsesV4PagePaginationArray, OperationListResponse> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/api_gateway/operations`,
-      OperationListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/api_gateway/operations`, OperationListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Delete an operation
    */
-  delete(
-    operationId: string,
-    params: OperationDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationDeleteResponse> {
+  delete(operationId: string, params: OperationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<OperationDeleteResponse> {
     const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/api_gateway/operations/${operationId}`, options);
   }
@@ -62,22 +44,14 @@ export class Operations extends APIResource {
   /**
    * Retrieve information about an operation
    */
-  get(
-    operationId: string,
-    params: OperationGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OperationGetResponse> {
+  get(operationId: string, params: OperationGetParams, options?: Core.RequestOptions): Core.APIPromise<OperationGetResponse> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/api_gateway/operations/${operationId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: OperationGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/api_gateway/operations/${operationId}`, { query, ...options }) as Core.APIPromise<{ result: OperationGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
+export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {
+}
 
 export interface APIShield {
   /**
@@ -105,12 +79,7 @@ export interface APIShield {
    */
   operation_id: string;
 
-  features?:
-    | APIShield.APIShieldOperationFeatureThresholds
-    | APIShield.APIShieldOperationFeatureParameterSchemas
-    | APIShield.APIShieldOperationFeatureAPIRouting
-    | APIShield.APIShieldOperationFeatureConfidenceIntervals
-    | APIShield.APIShieldOperationFeatureSchemaInfo;
+  features?: APIShield.APIShieldOperationFeatureThresholds | APIShield.APIShieldOperationFeatureParameterSchemas | APIShield.APIShieldOperationFeatureAPIRouting | APIShield.APIShieldOperationFeatureConfidenceIntervals | APIShield.APIShieldOperationFeatureSchemaInfo;
 }
 
 export namespace APIShield {
@@ -355,7 +324,7 @@ export namespace APIShield {
   }
 }
 
-export type OperationCreateResponse = Array<APIShield>;
+export type OperationCreateResponse = Array<APIShield>
 
 export interface OperationListResponse {
   /**
@@ -383,12 +352,7 @@ export interface OperationListResponse {
    */
   operation_id: string;
 
-  features?:
-    | OperationListResponse.APIShieldOperationFeatureThresholds
-    | OperationListResponse.APIShieldOperationFeatureParameterSchemas
-    | OperationListResponse.APIShieldOperationFeatureAPIRouting
-    | OperationListResponse.APIShieldOperationFeatureConfidenceIntervals
-    | OperationListResponse.APIShieldOperationFeatureSchemaInfo;
+  features?: OperationListResponse.APIShieldOperationFeatureThresholds | OperationListResponse.APIShieldOperationFeatureParameterSchemas | OperationListResponse.APIShieldOperationFeatureAPIRouting | OperationListResponse.APIShieldOperationFeatureConfidenceIntervals | OperationListResponse.APIShieldOperationFeatureSchemaInfo;
 }
 
 export namespace OperationListResponse {
@@ -670,12 +634,7 @@ export interface OperationGetResponse {
    */
   operation_id: string;
 
-  features?:
-    | OperationGetResponse.APIShieldOperationFeatureThresholds
-    | OperationGetResponse.APIShieldOperationFeatureParameterSchemas
-    | OperationGetResponse.APIShieldOperationFeatureAPIRouting
-    | OperationGetResponse.APIShieldOperationFeatureConfidenceIntervals
-    | OperationGetResponse.APIShieldOperationFeatureSchemaInfo;
+  features?: OperationGetResponse.APIShieldOperationFeatureThresholds | OperationGetResponse.APIShieldOperationFeatureParameterSchemas | OperationGetResponse.APIShieldOperationFeatureAPIRouting | OperationGetResponse.APIShieldOperationFeatureConfidenceIntervals | OperationGetResponse.APIShieldOperationFeatureSchemaInfo;
 }
 
 export namespace OperationGetResponse {

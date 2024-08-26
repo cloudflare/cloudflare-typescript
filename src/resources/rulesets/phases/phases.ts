@@ -2,8 +2,10 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
+import { Versions } from './versions';
+import { CloudflareError } from '../../../error'
 import * as PhasesAPI from './phases';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
@@ -15,11 +17,7 @@ export class Phases extends APIResource {
   /**
    * Updates an account or zone entry point ruleset, creating a new version.
    */
-  update(
-    rulesetPhase: RulesetsAPI.PhaseParam,
-    params: PhaseUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PhaseUpdateResponse> {
+  update(rulesetPhase: RulesetsAPI.PhaseParam, params: PhaseUpdateParams, options?: Core.RequestOptions): Core.APIPromise<PhaseUpdateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -27,39 +25,23 @@ export class Phases extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: PhaseUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`, { body, ...options }) as Core.APIPromise<{ result: PhaseUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the latest version of the account or zone entry point ruleset for a
    * given phase.
    */
-  get(
-    rulesetPhase: RulesetsAPI.PhaseParam,
-    params?: PhaseGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PhaseGetResponse>;
-  get(rulesetPhase: RulesetsAPI.PhaseParam, options?: Core.RequestOptions): Core.APIPromise<PhaseGetResponse>;
-  get(
-    rulesetPhase: RulesetsAPI.PhaseParam,
-    params: PhaseGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PhaseGetResponse> {
+  get(rulesetPhase: RulesetsAPI.PhaseParam, params?: PhaseGetParams, options?: Core.RequestOptions): Core.APIPromise<PhaseGetResponse>
+  get(rulesetPhase: RulesetsAPI.PhaseParam, options?: Core.RequestOptions): Core.APIPromise<PhaseGetResponse>
+  get(rulesetPhase: RulesetsAPI.PhaseParam, params: PhaseGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<PhaseGetResponse> {
     if (isRequestOptions(params)) {
       return this.get(rulesetPhase, {}, params);
     }
@@ -70,22 +52,14 @@ export class Phases extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`,
-        options,
-      ) as Core.APIPromise<{ result: PhaseGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/rulesets/phases/${rulesetPhase}/entrypoint`, options) as Core.APIPromise<{ result: PhaseGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -121,26 +95,7 @@ export interface PhaseUpdateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<
-    | RulesAPI.BlockRule
-    | PhaseUpdateResponse.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRule
-    | RulesAPI.ExecuteRule
-    | PhaseUpdateResponse.RulesetsJSChallengeRule
-    | RulesAPI.LogRule
-    | RulesAPI.ManagedChallengeRule
-    | RulesAPI.RedirectRule
-    | RulesAPI.RewriteRule
-    | RulesAPI.RouteRule
-    | RulesAPI.ScoreRule
-    | RulesAPI.ServeErrorRule
-    | RulesAPI.SetConfigRule
-    | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ForceConnectionCloseRule
-  >;
+  rules: Array<RulesAPI.BlockRule | PhaseUpdateResponse.RulesetsChallengeRule | RulesAPI.CompressResponseRule | RulesAPI.ExecuteRule | PhaseUpdateResponse.RulesetsJSChallengeRule | RulesAPI.LogRule | RulesAPI.ManagedChallengeRule | RulesAPI.RedirectRule | RulesAPI.RewriteRule | RulesAPI.RouteRule | RulesAPI.ScoreRule | RulesAPI.ServeErrorRule | RulesAPI.SetConfigRule | RulesAPI.SkipRule | RulesAPI.SetCacheSettingsRule | RulesAPI.LogCustomFieldRule | RulesAPI.DDoSDynamicRule | RulesAPI.ForceConnectionCloseRule>;
 
   /**
    * The version of the ruleset.
@@ -301,26 +256,7 @@ export interface PhaseGetResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<
-    | RulesAPI.BlockRule
-    | PhaseGetResponse.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRule
-    | RulesAPI.ExecuteRule
-    | PhaseGetResponse.RulesetsJSChallengeRule
-    | RulesAPI.LogRule
-    | RulesAPI.ManagedChallengeRule
-    | RulesAPI.RedirectRule
-    | RulesAPI.RewriteRule
-    | RulesAPI.RouteRule
-    | RulesAPI.ScoreRule
-    | RulesAPI.ServeErrorRule
-    | RulesAPI.SetConfigRule
-    | RulesAPI.SkipRule
-    | RulesAPI.SetCacheSettingsRule
-    | RulesAPI.LogCustomFieldRule
-    | RulesAPI.DDoSDynamicRule
-    | RulesAPI.ForceConnectionCloseRule
-  >;
+  rules: Array<RulesAPI.BlockRule | PhaseGetResponse.RulesetsChallengeRule | RulesAPI.CompressResponseRule | RulesAPI.ExecuteRule | PhaseGetResponse.RulesetsJSChallengeRule | RulesAPI.LogRule | RulesAPI.ManagedChallengeRule | RulesAPI.RedirectRule | RulesAPI.RewriteRule | RulesAPI.RouteRule | RulesAPI.ScoreRule | RulesAPI.ServeErrorRule | RulesAPI.SetConfigRule | RulesAPI.SkipRule | RulesAPI.SetCacheSettingsRule | RulesAPI.LogCustomFieldRule | RulesAPI.DDoSDynamicRule | RulesAPI.ForceConnectionCloseRule>;
 
   /**
    * The version of the ruleset.
@@ -453,26 +389,7 @@ export interface PhaseUpdateParams {
   /**
    * Body param: The list of rules in the ruleset.
    */
-  rules: Array<
-    | RulesAPI.BlockRuleParam
-    | PhaseUpdateParams.RulesetsChallengeRule
-    | RulesAPI.CompressResponseRuleParam
-    | RulesAPI.ExecuteRuleParam
-    | PhaseUpdateParams.RulesetsJSChallengeRule
-    | RulesAPI.LogRuleParam
-    | RulesAPI.ManagedChallengeRuleParam
-    | RulesAPI.RedirectRuleParam
-    | RulesAPI.RewriteRuleParam
-    | RulesAPI.RouteRuleParam
-    | RulesAPI.ScoreRuleParam
-    | RulesAPI.ServeErrorRuleParam
-    | RulesAPI.SetConfigRuleParam
-    | RulesAPI.SkipRuleParam
-    | RulesAPI.SetCacheSettingsRuleParam
-    | RulesAPI.LogCustomFieldRuleParam
-    | RulesAPI.DDoSDynamicRuleParam
-    | RulesAPI.ForceConnectionCloseRuleParam
-  >;
+  rules: Array<RulesAPI.BlockRuleParam | PhaseUpdateParams.RulesetsChallengeRule | RulesAPI.CompressResponseRuleParam | RulesAPI.ExecuteRuleParam | PhaseUpdateParams.RulesetsJSChallengeRule | RulesAPI.LogRuleParam | RulesAPI.ManagedChallengeRuleParam | RulesAPI.RedirectRuleParam | RulesAPI.RewriteRuleParam | RulesAPI.RouteRuleParam | RulesAPI.ScoreRuleParam | RulesAPI.ServeErrorRuleParam | RulesAPI.SetConfigRuleParam | RulesAPI.SkipRuleParam | RulesAPI.SetCacheSettingsRuleParam | RulesAPI.LogCustomFieldRuleParam | RulesAPI.DDoSDynamicRuleParam | RulesAPI.ForceConnectionCloseRuleParam>;
 
   /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the

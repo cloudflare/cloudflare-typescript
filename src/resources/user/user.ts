@@ -1,7 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { AuditLogs } from './audit-logs';
+import { Billing } from './billing/billing';
+import { Invites } from './invites';
+import { Organizations } from './organizations';
+import { Subscriptions } from './subscriptions';
+import { Tokens } from './tokens/tokens';
+import * as UserAPI from './user';
 import * as AuditLogsAPI from './audit-logs';
 import * as InvitesAPI from './invites';
 import * as OrganizationsAPI from './organizations';
@@ -21,24 +30,20 @@ export class User extends APIResource {
    * Edit part of your user details.
    */
   edit(body: UserEditParams, options?: Core.RequestOptions): Core.APIPromise<UserEditResponse> {
-    return (
-      this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch('/user', { body, ...options }) as Core.APIPromise<{ result: UserEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * User Details
    */
   get(options?: Core.RequestOptions): Core.APIPromise<UserGetResponse> {
-    return (this._client.get('/user', options) as Core.APIPromise<{ result: UserGetResponse }>)._thenUnwrap(
-      (obj) => obj.result,
-    );
+    return (this._client.get('/user', options) as Core.APIPromise<{ result: UserGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type UserEditResponse = unknown;
+export type UserEditResponse = unknown
 
-export type UserGetResponse = unknown;
+export type UserGetResponse = unknown
 
 export interface UserEditParams {
   /**

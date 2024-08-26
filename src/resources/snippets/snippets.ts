@@ -1,7 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Content } from './content';
+import { Rules } from './rules';
+import * as SnippetsAPI from './snippets';
+import { multipartFormRequestOptions } from '../../core';
 import * as Shared from '../shared';
 import * as ContentAPI from './content';
 import * as RulesAPI from './rules';
@@ -14,27 +20,15 @@ export class Snippets extends APIResource {
   /**
    * Put Snippet
    */
-  update(
-    snippetName: string,
-    params: SnippetUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet> {
+  update(snippetName: string, params: SnippetUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Snippet> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(
-        `/zones/${zone_id}/snippets/${snippetName}`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Snippet }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/snippets/${snippetName}`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: Snippet }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * All Snippets
    */
-  list(
-    params: SnippetListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SnippetsSinglePage, Snippet> {
+  list(params: SnippetListParams, options?: Core.RequestOptions): Core.PagePromise<SnippetsSinglePage, Snippet> {
     const { zone_id } = params;
     return this._client.getAPIList(`/zones/${zone_id}/snippets`, SnippetsSinglePage, options);
   }
@@ -42,11 +36,7 @@ export class Snippets extends APIResource {
   /**
    * Delete Snippet
    */
-  delete(
-    snippetName: string,
-    params: SnippetDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SnippetDeleteResponse> {
+  delete(snippetName: string, params: SnippetDeleteParams, options?: Core.RequestOptions): Core.APIPromise<SnippetDeleteResponse> {
     const { zone_id } = params;
     return this._client.delete(`/zones/${zone_id}/snippets/${snippetName}`, options);
   }
@@ -54,21 +44,14 @@ export class Snippets extends APIResource {
   /**
    * Snippet
    */
-  get(
-    snippetName: string,
-    params: SnippetGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Snippet> {
+  get(snippetName: string, params: SnippetGetParams, options?: Core.RequestOptions): Core.APIPromise<Snippet> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{
-        result: Snippet;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/snippets/${snippetName}`, options) as Core.APIPromise<{ result: Snippet }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SnippetsSinglePage extends SinglePage<Snippet> {}
+export class SnippetsSinglePage extends SinglePage<Snippet> {
+}
 
 /**
  * Snippet Information

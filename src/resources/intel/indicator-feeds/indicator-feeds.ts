@@ -1,7 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Snapshots } from './snapshots';
+import { Permissions } from './permissions';
+import { Downloads } from './downloads';
 import * as IndicatorFeedsAPI from './indicator-feeds';
 import * as DownloadsAPI from './downloads';
 import * as PermissionsAPI from './permissions';
@@ -16,85 +21,46 @@ export class IndicatorFeeds extends APIResource {
   /**
    * Create new indicator feed
    */
-  create(
-    params: IndicatorFeedCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedCreateResponse> {
+  create(params: IndicatorFeedCreateParams, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/intel/indicator-feeds`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IndicatorFeedCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/intel/indicator-feeds`, { body, ...options }) as Core.APIPromise<{ result: IndicatorFeedCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update indicator feed metadata
    */
-  update(
-    feedId: number,
-    params: IndicatorFeedUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedUpdateResponse> {
+  update(feedId: number, params: IndicatorFeedUpdateParams, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/intel/indicator-feeds/${feedId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/intel/indicator-feeds/${feedId}`, { body, ...options }) as Core.APIPromise<{ result: IndicatorFeedUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get indicator feeds owned by this account
    */
-  list(
-    params: IndicatorFeedListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse> {
+  list(params: IndicatorFeedListParams, options?: Core.RequestOptions): Core.PagePromise<IndicatorFeedListResponsesSinglePage, IndicatorFeedListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/intel/indicator-feeds`,
-      IndicatorFeedListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/intel/indicator-feeds`, IndicatorFeedListResponsesSinglePage, options);
   }
 
   /**
    * Get indicator feed data
    */
-  data(
-    feedId: number,
-    params: IndicatorFeedDataParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<string> {
+  data(feedId: number, params: IndicatorFeedDataParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { account_id } = params;
-    return this._client.get(`/accounts/${account_id}/intel/indicator-feeds/${feedId}/data`, {
-      ...options,
-      headers: { Accept: 'text/csv', ...options?.headers },
-    });
+    return this._client.get(`/accounts/${account_id}/intel/indicator-feeds/${feedId}/data`, { ...options, headers: { Accept: 'text/csv', ...options?.headers } });
   }
 
   /**
    * Get indicator feed metadata
    */
-  get(
-    feedId: number,
-    params: IndicatorFeedGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IndicatorFeedGetResponse> {
+  get(feedId: number, params: IndicatorFeedGetParams, options?: Core.RequestOptions): Core.APIPromise<IndicatorFeedGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/intel/indicator-feeds/${feedId}`,
-        options,
-      ) as Core.APIPromise<{ result: IndicatorFeedGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/intel/indicator-feeds/${feedId}`, options) as Core.APIPromise<{ result: IndicatorFeedGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class IndicatorFeedListResponsesSinglePage extends SinglePage<IndicatorFeedListResponse> {}
+export class IndicatorFeedListResponsesSinglePage extends SinglePage<IndicatorFeedListResponse> {
+}
 
 export interface IndicatorFeedCreateResponse {
   /**
@@ -222,7 +188,7 @@ export interface IndicatorFeedListResponse {
   name?: string;
 }
 
-export type IndicatorFeedDataResponse = string;
+export type IndicatorFeedDataResponse = string
 
 export interface IndicatorFeedGetResponse {
   /**

@@ -2,7 +2,13 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Leaks } from './leaks/leaks';
+import { Top } from './top/top';
+import { Hijacks } from './hijacks/hijacks';
+import { Routes } from './routes';
+import { IPs } from './ips';
 import * as BGPAPI from './bgp';
 import * as IPsAPI from './ips';
 import * as RoutesAPI from './routes';
@@ -22,23 +28,13 @@ export class BGP extends APIResource {
    * updates of an autonomous system (AS), only BGP updates of type announcement are
    * returned.
    */
-  timeseries(
-    query?: BGPTimeseriesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BGPTimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<BGPTimeseriesResponse>;
-  timeseries(
-    query: BGPTimeseriesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BGPTimeseriesResponse> {
+  timeseries(query?: BGPTimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<BGPTimeseriesResponse>
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<BGPTimeseriesResponse>
+  timeseries(query: BGPTimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<BGPTimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (
-      this._client.get('/radar/bgp/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: BGPTimeseriesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/bgp/timeseries', { query, ...options }) as Core.APIPromise<{ result: BGPTimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

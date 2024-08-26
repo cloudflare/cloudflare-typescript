@@ -1,6 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
+import * as Core from '../../../core';
+import { Routes } from './routes/routes';
+import { VirtualNetworks } from './virtual-networks';
 import * as VirtualNetworksAPI from './virtual-networks';
 import * as RoutesAPI from './routes/routes';
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ReferencesAPI from './references';
 
@@ -8,18 +10,9 @@ export class References extends APIResource {
   /**
    * Get risk score integration by reference id.
    */
-  get(
-    referenceId: string,
-    params: ReferenceGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ReferenceGetResponse> {
+  get(referenceId: string, params: ReferenceGetParams, options?: Core.RequestOptions): Core.APIPromise<ReferenceGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/zt_risk_scoring/integrations/reference_id/${referenceId}`,
-        options,
-      ) as Core.APIPromise<{ result: ReferenceGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/zt_risk_scoring/integrations/reference_id/${referenceId}`, options) as Core.APIPromise<{ result: ReferenceGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

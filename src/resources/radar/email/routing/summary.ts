@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SummaryAPI from './summary';
 import * as EmailAPI from '../email';
@@ -10,121 +11,73 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of emails classified per ARC validation.
    */
-  arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
-  arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
-  arc(
-    query: SummaryARCParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryARCResponse> {
+  arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>
+  arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>
+  arc(query: SummaryARCParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse> {
     if (isRequestOptions(query)) {
       return this.arc({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/summary/arc', { query, ...options }) as Core.APIPromise<{
-        result: SummaryARCResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/summary/arc', { query, ...options }) as Core.APIPromise<{ result: SummaryARCResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per DKIM validation.
    */
-  dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
-  dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
-  dkim(
-    query: SummaryDKIMParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryDKIMResponse> {
+  dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>
+  dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>
+  dkim(query: SummaryDKIMParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse> {
     if (isRequestOptions(query)) {
       return this.dkim({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/summary/dkim', { query, ...options }) as Core.APIPromise<{
-        result: SummaryDKIMResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/summary/dkim', { query, ...options }) as Core.APIPromise<{ result: SummaryDKIMResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per DMARC validation.
    */
-  dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
-  dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
-  dmarc(
-    query: SummaryDMARCParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryDMARCResponse> {
+  dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>
+  dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>
+  dmarc(query: SummaryDMARCParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse> {
     if (isRequestOptions(query)) {
       return this.dmarc({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/summary/dmarc', { query, ...options }) as Core.APIPromise<{
-        result: SummaryDMARCResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/summary/dmarc', { query, ...options }) as Core.APIPromise<{ result: SummaryDMARCResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails by Encrypted
    */
-  encrypted(
-    query?: SummaryEncryptedParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryEncryptedResponse>;
-  encrypted(options?: Core.RequestOptions): Core.APIPromise<SummaryEncryptedResponse>;
-  encrypted(
-    query: SummaryEncryptedParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryEncryptedResponse> {
+  encrypted(query?: SummaryEncryptedParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEncryptedResponse>
+  encrypted(options?: Core.RequestOptions): Core.APIPromise<SummaryEncryptedResponse>
+  encrypted(query: SummaryEncryptedParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryEncryptedResponse> {
     if (isRequestOptions(query)) {
       return this.encrypted({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/summary/encrypted', { query, ...options }) as Core.APIPromise<{
-        result: SummaryEncryptedResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/summary/encrypted', { query, ...options }) as Core.APIPromise<{ result: SummaryEncryptedResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails by Ip Version.
    */
-  ipVersion(
-    query?: SummaryIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>;
-  ipVersion(
-    query: SummaryIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryIPVersionResponse> {
+  ipVersion(query?: SummaryIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
+  ipVersion(query: SummaryIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/summary/ip_version', { query, ...options }) as Core.APIPromise<{
-        result: SummaryIPVersionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/summary/ip_version', { query, ...options }) as Core.APIPromise<{ result: SummaryIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of emails classified per SPF validation.
    */
-  spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
-  spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
-  spf(
-    query: SummarySPFParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummarySPFResponse> {
+  spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>
+  spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>
+  spf(query: SummarySPFParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse> {
     if (isRequestOptions(query)) {
       return this.spf({}, query);
     }
-    return (
-      this._client.get('/radar/email/routing/summary/spf', { query, ...options }) as Core.APIPromise<{
-        result: SummarySPFResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/routing/summary/spf', { query, ...options }) as Core.APIPromise<{ result: SummarySPFResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

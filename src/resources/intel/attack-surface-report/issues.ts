@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as IssuesAPI from './issues';
 import * as Shared from '../../shared';
@@ -10,16 +12,9 @@ export class Issues extends APIResource {
   /**
    * Get Security Center Issues
    */
-  list(
-    params: IssueListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<IssueListResponsesV4PagePagination, IssueListResponse> {
+  list(params: IssueListParams, options?: Core.RequestOptions): Core.PagePromise<IssueListResponsesV4PagePagination, IssueListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/intel/attack-surface-report/issues`,
-      IssueListResponsesV4PagePagination,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/intel/attack-surface-report/issues`, IssueListResponsesV4PagePagination, { query, ...options });
   }
 
   /**
@@ -27,45 +22,23 @@ export class Issues extends APIResource {
    */
   class(params: IssueClassParams, options?: Core.RequestOptions): Core.APIPromise<IssueClassResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/class`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: IssueClassResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/class`, { query, ...options }) as Core.APIPromise<{ result: IssueClassResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Archive Security Center Insight
    */
-  dismiss(
-    issueId: string,
-    params: IssueDismissParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IssueDismissResponse> {
+  dismiss(issueId: string, params: IssueDismissParams, options?: Core.RequestOptions): Core.APIPromise<IssueDismissResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: IssueDismissResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, { body, ...options }) as Core.APIPromise<{ result: IssueDismissResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Security Center Issue Counts by Severity
    */
-  severity(
-    params: IssueSeverityParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<IssueSeverityResponse> {
+  severity(params: IssueSeverityParams, options?: Core.RequestOptions): Core.APIPromise<IssueSeverityResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/severity`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: IssueSeverityResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/severity`, { query, ...options }) as Core.APIPromise<{ result: IssueSeverityResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -73,34 +46,20 @@ export class Issues extends APIResource {
    */
   type(params: IssueTypeParams, options?: Core.RequestOptions): Core.APIPromise<IssueTypeResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/type`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: IssueTypeResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/intel/attack-surface-report/issues/type`, { query, ...options }) as Core.APIPromise<{ result: IssueTypeResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class IssueListResponsesV4PagePagination extends V4PagePagination<IssueListResponse> {}
+export class IssueListResponsesV4PagePagination extends V4PagePagination<IssueListResponse> {
+}
 
-export type IssueType =
-  | 'compliance_violation'
-  | 'email_security'
-  | 'exposed_infrastructure'
-  | 'insecure_configuration'
-  | 'weak_authentication';
+export type IssueType = 'compliance_violation' | 'email_security' | 'exposed_infrastructure' | 'insecure_configuration' | 'weak_authentication'
 
-export type IssueTypeParam =
-  | 'compliance_violation'
-  | 'email_security'
-  | 'exposed_infrastructure'
-  | 'insecure_configuration'
-  | 'weak_authentication';
+export type IssueTypeParam = 'compliance_violation' | 'email_security' | 'exposed_infrastructure' | 'insecure_configuration' | 'weak_authentication'
 
-export type SeverityQueryParam = 'low' | 'moderate' | 'critical';
+export type SeverityQueryParam = 'low' | 'moderate' | 'critical'
 
-export type SeverityQueryParamParam = 'low' | 'moderate' | 'critical';
+export type SeverityQueryParamParam = 'low' | 'moderate' | 'critical'
 
 export interface IssueListResponse {
   errors: Array<Shared.ResponseInfo>;
@@ -162,7 +121,7 @@ export namespace IssueListResponse {
   }
 }
 
-export type IssueClassResponse = Array<IssueClassResponse.IssueClassResponseItem>;
+export type IssueClassResponse = Array<IssueClassResponse.IssueClassResponseItem>
 
 export namespace IssueClassResponse {
   export interface IssueClassResponseItem {
@@ -172,9 +131,9 @@ export namespace IssueClassResponse {
   }
 }
 
-export type IssueDismissResponse = unknown | string;
+export type IssueDismissResponse = unknown | string
 
-export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>;
+export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>
 
 export namespace IssueSeverityResponse {
   export interface IssueSeverityResponseItem {
@@ -184,7 +143,7 @@ export namespace IssueSeverityResponse {
   }
 }
 
-export type IssueTypeResponse = Array<IssueTypeResponse.IssueTypeResponseItem>;
+export type IssueTypeResponse = Array<IssueTypeResponse.IssueTypeResponseItem>
 
 export namespace IssueTypeResponse {
   export interface IssueTypeResponseItem {

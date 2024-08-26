@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as TraceroutesAPI from './traceroutes';
 
@@ -8,17 +10,9 @@ export class Traceroutes extends APIResource {
   /**
    * Run traceroutes from Cloudflare colos.
    */
-  create(
-    params: TracerouteCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TracerouteCreateResponse | null> {
+  create(params: TracerouteCreateParams, options?: Core.RequestOptions): Core.APIPromise<TracerouteCreateResponse | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/diagnostics/traceroute`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: TracerouteCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/diagnostics/traceroute`, { body, ...options }) as Core.APIPromise<{ result: TracerouteCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -38,12 +32,7 @@ export namespace Traceroute {
     /**
      * Errors resulting from collecting traceroute from colo to target.
      */
-    error?:
-      | ''
-      | 'Could not gather traceroute data: Code 1'
-      | 'Could not gather traceroute data: Code 2'
-      | 'Could not gather traceroute data: Code 3'
-      | 'Could not gather traceroute data: Code 4';
+    error?: '' | 'Could not gather traceroute data: Code 1' | 'Could not gather traceroute data: Code 2' | 'Could not gather traceroute data: Code 3' | 'Could not gather traceroute data: Code 4';
 
     hops?: Array<Colo.Hop>;
 
@@ -146,7 +135,7 @@ export namespace Traceroute {
   }
 }
 
-export type TracerouteCreateResponse = Array<Traceroute>;
+export type TracerouteCreateResponse = Array<Traceroute>
 
 export interface TracerouteCreateParams {
   /**

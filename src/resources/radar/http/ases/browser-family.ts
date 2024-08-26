@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BrowserFamilyAPI from './browser-family';
 
@@ -10,29 +11,13 @@ export class BrowserFamily extends APIResource {
    * Get the top autonomous systems (AS), by HTTP traffic, of the requested browser
    * family. Values are a percentage out of the total traffic.
    */
-  get(
-    browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI',
-    query?: BrowserFamilyGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserFamilyGetResponse>;
-  get(
-    browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI',
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserFamilyGetResponse>;
-  get(
-    browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI',
-    query: BrowserFamilyGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BrowserFamilyGetResponse> {
+  get(browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI', query?: BrowserFamilyGetParams, options?: Core.RequestOptions): Core.APIPromise<BrowserFamilyGetResponse>
+  get(browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI', options?: Core.RequestOptions): Core.APIPromise<BrowserFamilyGetResponse>
+  get(browserFamily: 'CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI', query: BrowserFamilyGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<BrowserFamilyGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(browserFamily, {}, query);
     }
-    return (
-      this._client.get(`/radar/http/top/ases/browser_family/${browserFamily}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: BrowserFamilyGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/http/top/ases/browser_family/${browserFamily}`, { query, ...options }) as Core.APIPromise<{ result: BrowserFamilyGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

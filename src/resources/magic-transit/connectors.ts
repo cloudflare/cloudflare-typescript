@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ConnectorsAPI from './connectors';
 import { SinglePage } from '../../pagination';
@@ -9,71 +11,38 @@ export class Connectors extends APIResource {
   /**
    * Replace Connector
    */
-  update(
-    connectorId: string,
-    params: ConnectorUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectorUpdateResponse> {
+  update(connectorId: string, params: ConnectorUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ConnectorUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/magic/connectors/${connectorId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConnectorUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/magic/connectors/${connectorId}`, { body, ...options }) as Core.APIPromise<{ result: ConnectorUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Connectors
    */
-  list(
-    params: ConnectorListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse> {
+  list(params: ConnectorListParams, options?: Core.RequestOptions): Core.PagePromise<ConnectorListResponsesSinglePage, ConnectorListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/magic/connectors`,
-      ConnectorListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/magic/connectors`, ConnectorListResponsesSinglePage, options);
   }
 
   /**
    * Update Connector
    */
-  edit(
-    connectorId: string,
-    params: ConnectorEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectorEditResponse> {
+  edit(connectorId: string, params: ConnectorEditParams, options?: Core.RequestOptions): Core.APIPromise<ConnectorEditResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/magic/connectors/${connectorId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: ConnectorEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/magic/connectors/${connectorId}`, { body, ...options }) as Core.APIPromise<{ result: ConnectorEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch Connector
    */
-  get(
-    connectorId: string,
-    params: ConnectorGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectorGetResponse> {
+  get(connectorId: string, params: ConnectorGetParams, options?: Core.RequestOptions): Core.APIPromise<ConnectorGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/magic/connectors/${connectorId}`,
-        options,
-      ) as Core.APIPromise<{ result: ConnectorGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/magic/connectors/${connectorId}`, options) as Core.APIPromise<{ result: ConnectorGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ConnectorListResponsesSinglePage extends SinglePage<ConnectorListResponse> {}
+export class ConnectorListResponsesSinglePage extends SinglePage<ConnectorListResponse> {
+}
 
 export interface ConnectorUpdateResponse {
   id: string;

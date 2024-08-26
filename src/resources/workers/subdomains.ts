@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SubdomainsAPI from './subdomains';
 
@@ -8,16 +10,9 @@ export class Subdomains extends APIResource {
   /**
    * Creates a Workers subdomain for an account.
    */
-  update(
-    params: SubdomainUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubdomainUpdateResponse> {
+  update(params: SubdomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SubdomainUpdateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{
-        result: SubdomainUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/workers/subdomain`, { body, ...options }) as Core.APIPromise<{ result: SubdomainUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -25,11 +20,7 @@ export class Subdomains extends APIResource {
    */
   get(params: SubdomainGetParams, options?: Core.RequestOptions): Core.APIPromise<SubdomainGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/workers/subdomain`, options) as Core.APIPromise<{
-        result: SubdomainGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/workers/subdomain`, options) as Core.APIPromise<{ result: SubdomainGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -2,8 +2,9 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { CloudflareError } from '../../error'
 import * as JobsAPI from './jobs';
 import { SinglePage } from '../../pagination';
 
@@ -19,32 +20,20 @@ export class Jobs extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LogpushJob | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, { body, ...options }) as Core.APIPromise<{ result: LogpushJob | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a Logpush job.
    */
-  update(
-    jobId: number,
-    params: JobUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LogpushJob | null> {
+  update(jobId: number, params: JobUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -52,36 +41,22 @@ export class Jobs extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LogpushJob | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.put(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, { body, ...options }) as Core.APIPromise<{ result: LogpushJob | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists Logpush jobs for an account or zone.
    */
-  list(
-    params?: JobListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null>;
-  list(options?: Core.RequestOptions): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null>;
-  list(
-    params: JobListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null> {
+  list(params?: JobListParams, options?: Core.RequestOptions): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null>
+  list(options?: Core.RequestOptions): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null>
+  list(params: JobListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<LogpushJobsSinglePage, LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -92,37 +67,22 @@ export class Jobs extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return this._client.getAPIList(
-      `/${accountOrZone}/${accountOrZoneId}/logpush/jobs`,
-      LogpushJobsSinglePage,
-      options,
-    );
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return this._client.getAPIList(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs`, LogpushJobsSinglePage, options);
   }
 
   /**
    * Deletes a Logpush job.
    */
-  delete(
-    jobId: number,
-    params?: JobDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobDeleteResponse>;
-  delete(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse>;
-  delete(
-    jobId: number,
-    params: JobDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<JobDeleteResponse> {
+  delete(jobId: number, params?: JobDeleteParams, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse>
+  delete(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse>
+  delete(jobId: number, params: JobDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(jobId, {}, params);
     }
@@ -133,38 +93,22 @@ export class Jobs extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
-        options,
-      ) as Core.APIPromise<{ result: JobDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, options) as Core.APIPromise<{ result: JobDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Gets the details of a Logpush job.
    */
-  get(
-    jobId: number,
-    params?: JobGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LogpushJob | null>;
-  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null>;
-  get(
-    jobId: number,
-    params: JobGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LogpushJob | null> {
+  get(jobId: number, params?: JobGetParams, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null>
+  get(jobId: number, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null>
+  get(jobId: number, params: JobGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LogpushJob | null> {
     if (isRequestOptions(params)) {
       return this.get(jobId, {}, params);
     }
@@ -175,26 +119,19 @@ export class Jobs extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
-        options,
-      ) as Core.APIPromise<{ result: LogpushJob | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.get(`/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`, options) as Core.APIPromise<{ result: LogpushJob | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class LogpushJobsSinglePage extends SinglePage<LogpushJob | null> {}
+export class LogpushJobsSinglePage extends SinglePage<LogpushJob | null> {
+}
 
 export interface LogpushJob {
   /**

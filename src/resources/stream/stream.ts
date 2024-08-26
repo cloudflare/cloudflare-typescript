@@ -1,7 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { AudioTracks } from './audio-tracks';
+import { Videos } from './videos';
+import { ClipResource } from './clip';
+import { Copy } from './copy';
+import { DirectUpload } from './direct-upload';
+import { Keys } from './keys';
+import { LiveInputs } from './live-inputs/live-inputs';
+import { Webhooks } from './webhooks';
+import { Captions } from './captions/captions';
+import { Downloads } from './downloads';
+import { Embed } from './embed';
+import { Token } from './token';
+import * as StreamAPI from './stream';
 import * as AudioTracksAPI from './audio-tracks';
 import * as ClipAPI from './clip';
 import * as CopyAPI from './copy';
@@ -39,26 +54,8 @@ export class Stream extends APIResource {
    * details.
    */
   create(params: StreamCreateParams, options?: Core.RequestOptions): Core.APIPromise<void> {
-    const {
-      account_id,
-      body,
-      'Tus-Resumable': tusResumable,
-      'Upload-Length': uploadLength,
-      'Upload-Creator': uploadCreator,
-      'Upload-Metadata': uploadMetadata,
-    } = params;
-    return this._client.post(`/accounts/${account_id}/stream`, {
-      body: body,
-      ...options,
-      headers: {
-        Accept: '*/*',
-        'Tus-Resumable': tusResumable.toString(),
-        'Upload-Length': uploadLength.toString(),
-        ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
-        ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
-        ...options?.headers,
-      },
-    });
+    const { account_id, body, 'Tus-Resumable': tusResumable, 'Upload-Length': uploadLength, 'Upload-Creator': uploadCreator, 'Upload-Metadata': uploadMetadata } = params;
+    return this._client.post(`/accounts/${account_id}/stream`, { body: body, ...options, headers: { Accept: '*/*', 'Tus-Resumable': tusResumable.toString(), 'Upload-Length': uploadLength.toString(), ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined), ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined), ...options?.headers } });
   }
 
   /**
@@ -73,16 +70,9 @@ export class Stream extends APIResource {
   /**
    * Deletes a video and its copies from Cloudflare Stream.
    */
-  delete(
-    identifier: string,
-    params: StreamDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  delete(identifier: string, params: StreamDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return this._client.delete(`/accounts/${account_id}/stream/${identifier}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
   }
 
   /**
@@ -90,19 +80,16 @@ export class Stream extends APIResource {
    */
   get(identifier: string, params: StreamGetParams, options?: Core.RequestOptions): Core.APIPromise<Video> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/${identifier}`, options) as Core.APIPromise<{
-        result: Video;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/stream/${identifier}`, options) as Core.APIPromise<{ result: Video }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class VideosSinglePage extends SinglePage<Video> {}
+export class VideosSinglePage extends SinglePage<Video> {
+}
 
-export type AllowedOrigins = string;
+export type AllowedOrigins = string
 
-export type AllowedOriginsParam = string;
+export type AllowedOriginsParam = string
 
 export interface Video {
   /**

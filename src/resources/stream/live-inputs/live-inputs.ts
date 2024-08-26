@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Outputs } from './outputs';
 import * as LiveInputsAPI from './live-inputs';
 import * as OutputsAPI from './outputs';
 
@@ -14,29 +17,15 @@ export class LiveInputs extends APIResource {
    */
   create(params: LiveInputCreateParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/stream/live_inputs`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LiveInput }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/stream/live_inputs`, { body, ...options }) as Core.APIPromise<{ result: LiveInput }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a specified live input.
    */
-  update(
-    liveInputIdentifier: string,
-    params: LiveInputUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInput> {
+  update(liveInputIdentifier: string, params: LiveInputUpdateParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput> {
     const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: LiveInput }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, { body, ...options }) as Core.APIPromise<{ result: LiveInput }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -45,45 +34,24 @@ export class LiveInputs extends APIResource {
    */
   list(params: LiveInputListParams, options?: Core.RequestOptions): Core.APIPromise<LiveInputListResponse> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/stream/live_inputs`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: LiveInputListResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/stream/live_inputs`, { query, ...options }) as Core.APIPromise<{ result: LiveInputListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Prevents a live input from being streamed to and makes the live input
    * inaccessible to any future API calls.
    */
-  delete(
-    liveInputIdentifier: string,
-    params: LiveInputDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  delete(liveInputIdentifier: string, params: LiveInputDeleteParams, options?: Core.RequestOptions): Core.APIPromise<void> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, {
-      ...options,
-      headers: { Accept: '*/*', ...options?.headers },
-    });
+    return this._client.delete(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, { ...options, headers: { Accept: '*/*', ...options?.headers } });
   }
 
   /**
    * Retrieves details of an existing live input.
    */
-  get(
-    liveInputIdentifier: string,
-    params: LiveInputGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<LiveInput> {
+  get(liveInputIdentifier: string, params: LiveInputGetParams, options?: Core.RequestOptions): Core.APIPromise<LiveInput> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: LiveInput }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/stream/live_inputs/${liveInputIdentifier}`, options) as Core.APIPromise<{ result: LiveInput }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -146,16 +114,7 @@ export interface LiveInput {
   /**
    * The connection status of a live input.
    */
-  status?:
-    | 'connected'
-    | 'reconnected'
-    | 'reconnecting'
-    | 'client_disconnect'
-    | 'ttl_exceeded'
-    | 'failed_to_connect'
-    | 'failed_to_reconnect'
-    | 'new_configuration_accepted'
-    | null;
+  status?: 'connected' | 'reconnected' | 'reconnecting' | 'client_disconnect' | 'ttl_exceeded' | 'failed_to_connect' | 'failed_to_reconnect' | 'new_configuration_accepted' | null;
 
   /**
    * A unique identifier for a live input.

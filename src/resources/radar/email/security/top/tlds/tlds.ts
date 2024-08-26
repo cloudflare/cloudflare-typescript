@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
+import { APIPromise } from '../../../../../../core';
 import * as Core from '../../../../../../core';
+import { Malicious } from './malicious';
+import { Spam } from './spam';
+import { Spoof } from './spoof';
 import * as TldsAPI from './tlds';
 import * as MaliciousAPI from './malicious';
 import * as SpamAPI from './spam';
@@ -17,20 +21,13 @@ export class Tlds extends APIResource {
    * Get the top TLDs by email messages. Values are a percentage out of the total
    * emails.
    */
-  get(query?: TldGetParams, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
-  get(
-    query: TldGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TldGetResponse> {
+  get(query?: TldGetParams, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>
+  get(options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>
+  get(query: TldGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (
-      this._client.get('/radar/email/security/top/tlds', { query, ...options }) as Core.APIPromise<{
-        result: TldGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/email/security/top/tlds', { query, ...options }) as Core.APIPromise<{ result: TldGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

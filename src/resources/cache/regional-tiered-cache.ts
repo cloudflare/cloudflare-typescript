@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
 
@@ -10,17 +12,9 @@ export class RegionalTieredCacheResource extends APIResource {
    * upper tier. This can help improve performance for smart and custom tiered cache
    * topologies.
    */
-  edit(
-    params: RegionalTieredCacheEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionalTieredCacheEditResponse> {
+  edit(params: RegionalTieredCacheEditParams, options?: Core.RequestOptions): Core.APIPromise<RegionalTieredCacheEditResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/cache/regional_tiered_cache`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: RegionalTieredCacheEditResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/cache/regional_tiered_cache`, { body, ...options }) as Core.APIPromise<{ result: RegionalTieredCacheEditResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,23 +22,16 @@ export class RegionalTieredCacheResource extends APIResource {
    * upper tier. This can help improve performance for smart and custom tiered cache
    * topologies.
    */
-  get(
-    params: RegionalTieredCacheGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RegionalTieredCacheGetResponse> {
+  get(params: RegionalTieredCacheGetParams, options?: Core.RequestOptions): Core.APIPromise<RegionalTieredCacheGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/cache/regional_tiered_cache`, options) as Core.APIPromise<{
-        result: RegionalTieredCacheGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/cache/regional_tiered_cache`, options) as Core.APIPromise<{ result: RegionalTieredCacheGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
 /**
  * ID of the zone setting.
  */
-export type RegionalTieredCache = 'tc_regional';
+export type RegionalTieredCache = 'tc_regional'
 
 /**
  * Instructs Cloudflare to check a regional hub data center on the way to your

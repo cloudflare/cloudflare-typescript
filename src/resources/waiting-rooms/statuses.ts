@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as StatusesAPI from './statuses';
 
@@ -25,18 +27,9 @@ export class Statuses extends APIResource {
    * 5. `max_estimated_time_minutes`: Integer of the maximum estimated time currently
    *    presented to the users.
    */
-  get(
-    waitingRoomId: string,
-    params: StatusGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<StatusGetResponse> {
+  get(waitingRoomId: string, params: StatusGetParams, options?: Core.RequestOptions): Core.APIPromise<StatusGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/status`,
-        options,
-      ) as Core.APIPromise<{ result: StatusGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/status`, options) as Core.APIPromise<{ result: StatusGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as InvestigateAPI from './investigate';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -10,108 +12,57 @@ export class Investigate extends APIResource {
    * This endpoint returns information for each email that matches the search
    * parameter(s).
    */
-  list(
-    params: InvestigateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse> {
+  list(params: InvestigateListParams, options?: Core.RequestOptions): Core.PagePromise<InvestigateListResponsesV4PagePaginationArray, InvestigateListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/email-security/investigate`,
-      InvestigateListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/email-security/investigate`, InvestigateListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * For emails that have a detection, this endpoint returns detection details such
    * as threat categories, sender information, and links.
    */
-  detections(
-    postfixId: string,
-    params: InvestigateDetectionsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateDetectionsResponse> {
+  detections(postfixId: string, params: InvestigateDetectionsParams, options?: Core.RequestOptions): Core.APIPromise<InvestigateDetectionsResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/detections`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateDetectionsResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/detections`, options) as Core.APIPromise<{ result: InvestigateDetectionsResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get message details
    */
-  get(
-    postfixId: string,
-    params: InvestigateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateGetResponse> {
+  get(postfixId: string, params: InvestigateGetParams, options?: Core.RequestOptions): Core.APIPromise<InvestigateGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}`, options) as Core.APIPromise<{ result: InvestigateGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * For emails that have a detection, this endpoint returns a preview of the message
    * body as a base64 encoded PNG image.
    */
-  preview(
-    postfixId: string,
-    params: InvestigatePreviewParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigatePreviewResponse> {
+  preview(postfixId: string, params: InvestigatePreviewParams, options?: Core.RequestOptions): Core.APIPromise<InvestigatePreviewResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/preview`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigatePreviewResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/preview`, options) as Core.APIPromise<{ result: InvestigatePreviewResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * For emails that have a detection, this endpoint returns the raw email as an EML
    * file.
    */
-  raw(
-    postfixId: string,
-    params: InvestigateRawParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateRawResponse> {
+  raw(postfixId: string, params: InvestigateRawParams, options?: Core.RequestOptions): Core.APIPromise<InvestigateRawResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/raw`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateRawResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/raw`, options) as Core.APIPromise<{ result: InvestigateRawResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get email trace
    */
-  trace(
-    postfixId: string,
-    params: InvestigateTraceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateTraceResponse> {
+  trace(postfixId: string, params: InvestigateTraceParams, options?: Core.RequestOptions): Core.APIPromise<InvestigateTraceResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/trace`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateTraceResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/email-security/investigate/${postfixId}/trace`, options) as Core.APIPromise<{ result: InvestigateTraceResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class InvestigateListResponsesV4PagePaginationArray extends V4PagePaginationArray<InvestigateListResponse> {}
+export class InvestigateListResponsesV4PagePaginationArray extends V4PagePaginationArray<InvestigateListResponse> {
+}
 
 export interface InvestigateListResponse {
   id: string;
@@ -139,18 +90,7 @@ export interface InvestigateListResponse {
 
   edf_hash?: string | null;
 
-  final_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
+  final_disposition?: 'MALICIOUS' | 'MALICIOUS-BEC' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'ENCRYPTED' | 'EXTERNAL' | 'UNKNOWN' | 'NONE' | null;
 
   from?: string | null;
 
@@ -196,18 +136,7 @@ export interface InvestigateDetectionsResponse {
 
   validation: InvestigateDetectionsResponse.Validation;
 
-  final_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
+  final_disposition?: 'MALICIOUS' | 'MALICIOUS-BEC' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'ENCRYPTED' | 'EXTERNAL' | 'UNKNOWN' | 'NONE' | null;
 }
 
 export namespace InvestigateDetectionsResponse {
@@ -216,18 +145,7 @@ export namespace InvestigateDetectionsResponse {
 
     content_type?: string | null;
 
-    detection?:
-      | 'MALICIOUS'
-      | 'MALICIOUS-BEC'
-      | 'SUSPICIOUS'
-      | 'SPOOF'
-      | 'SPAM'
-      | 'BULK'
-      | 'ENCRYPTED'
-      | 'EXTERNAL'
-      | 'UNKNOWN'
-      | 'NONE'
-      | null;
+    detection?: 'MALICIOUS' | 'MALICIOUS-BEC' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'ENCRYPTED' | 'EXTERNAL' | 'UNKNOWN' | 'NONE' | null;
 
     encrypted?: boolean | null;
 
@@ -309,18 +227,7 @@ export interface InvestigateGetResponse {
 
   edf_hash?: string | null;
 
-  final_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
+  final_disposition?: 'MALICIOUS' | 'MALICIOUS-BEC' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'ENCRYPTED' | 'EXTERNAL' | 'UNKNOWN' | 'NONE' | null;
 
   from?: string | null;
 

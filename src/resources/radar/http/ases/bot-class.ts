@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BotClassAPI from './bot-class';
 
@@ -12,29 +13,13 @@ export class BotClass extends APIResource {
    * [Bot Scores](https://developers.cloudflare.com/bots/concepts/bot-score) for more
    * information. Values are a percentage out of the total traffic.
    */
-  get(
-    botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN',
-    query?: BotClassGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BotClassGetResponse>;
-  get(
-    botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN',
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BotClassGetResponse>;
-  get(
-    botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN',
-    query: BotClassGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<BotClassGetResponse> {
+  get(botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN', query?: BotClassGetParams, options?: Core.RequestOptions): Core.APIPromise<BotClassGetResponse>
+  get(botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN', options?: Core.RequestOptions): Core.APIPromise<BotClassGetResponse>
+  get(botClass: 'LIKELY_AUTOMATED' | 'LIKELY_HUMAN', query: BotClassGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<BotClassGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(botClass, {}, query);
     }
-    return (
-      this._client.get(`/radar/http/top/ases/bot_class/${botClass}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: BotClassGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/radar/http/top/ases/bot_class/${botClass}`, { query, ...options }) as Core.APIPromise<{ result: BotClassGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DirectUploadsAPI from './direct-uploads';
+import { multipartFormRequestOptions } from '../../../core';
 
 export class DirectUploads extends APIResource {
   /**
@@ -14,17 +17,9 @@ export class DirectUploads extends APIResource {
    * (accounts/:account_identifier/images/v1/:identifier), and check that the
    * `draft: true` property is not present.
    */
-  create(
-    params: DirectUploadCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<DirectUploadCreateResponse> {
+  create(params: DirectUploadCreateParams, options?: Core.RequestOptions): Core.APIPromise<DirectUploadCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/images/v2/direct_upload`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: DirectUploadCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/images/v2/direct_upload`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: DirectUploadCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

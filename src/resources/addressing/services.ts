@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ServicesAPI from './services';
 import { SinglePage } from '../../pagination';
@@ -12,20 +14,14 @@ export class Services extends APIResource {
    * IP addresses. This endpoint can be used as a reference of available services on
    * the Cloudflare network, and their service IDs.
    */
-  list(
-    params: ServiceListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ServiceListResponsesSinglePage, ServiceListResponse> {
+  list(params: ServiceListParams, options?: Core.RequestOptions): Core.PagePromise<ServiceListResponsesSinglePage, ServiceListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/addressing/services`,
-      ServiceListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/addressing/services`, ServiceListResponsesSinglePage, options);
   }
 }
 
-export class ServiceListResponsesSinglePage extends SinglePage<ServiceListResponse> {}
+export class ServiceListResponsesSinglePage extends SinglePage<ServiceListResponse> {
+}
 
 export interface ServiceListResponse {
   /**

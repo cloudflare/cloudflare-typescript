@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SummaryAPI from './summary';
 
@@ -9,134 +10,73 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of mitigation techniques in Layer 7 attacks.
    */
-  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
-  get(
-    query: SummaryGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryGetResponse> {
+  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>
+  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>
+  get(query: SummaryGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/summary', { query, ...options }) as Core.APIPromise<{
-        result: SummaryGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/summary', { query, ...options }) as Core.APIPromise<{ result: SummaryGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by http method used.
    */
-  httpMethod(
-    query?: SummaryHTTPMethodParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryHTTPMethodResponse>;
-  httpMethod(options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPMethodResponse>;
-  httpMethod(
-    query: SummaryHTTPMethodParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryHTTPMethodResponse> {
+  httpMethod(query?: SummaryHTTPMethodParams, options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPMethodResponse>
+  httpMethod(options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPMethodResponse>
+  httpMethod(query: SummaryHTTPMethodParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPMethodResponse> {
     if (isRequestOptions(query)) {
       return this.httpMethod({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/summary/http_method', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SummaryHTTPMethodResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/summary/http_method', { query, ...options }) as Core.APIPromise<{ result: SummaryHTTPMethodResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by http version used.
    */
-  httpVersion(
-    query?: SummaryHTTPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryHTTPVersionResponse>;
-  httpVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPVersionResponse>;
-  httpVersion(
-    query: SummaryHTTPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryHTTPVersionResponse> {
+  httpVersion(query?: SummaryHTTPVersionParams, options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPVersionResponse>
+  httpVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPVersionResponse>
+  httpVersion(query: SummaryHTTPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryHTTPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.httpVersion({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/summary/http_version', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SummaryHTTPVersionResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/summary/http_version', { query, ...options }) as Core.APIPromise<{ result: SummaryHTTPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by ip version used.
    */
-  ipVersion(
-    query?: SummaryIPVersionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryIPVersionResponse>;
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>;
-  ipVersion(
-    query: SummaryIPVersionParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryIPVersionResponse> {
+  ipVersion(query?: SummaryIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
+  ipVersion(query: SummaryIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/summary/ip_version', { query, ...options }) as Core.APIPromise<{
-        result: SummaryIPVersionResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/summary/ip_version', { query, ...options }) as Core.APIPromise<{ result: SummaryIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by managed rules used.
    */
-  managedRules(
-    query?: SummaryManagedRulesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryManagedRulesResponse>;
-  managedRules(options?: Core.RequestOptions): Core.APIPromise<SummaryManagedRulesResponse>;
-  managedRules(
-    query: SummaryManagedRulesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryManagedRulesResponse> {
+  managedRules(query?: SummaryManagedRulesParams, options?: Core.RequestOptions): Core.APIPromise<SummaryManagedRulesResponse>
+  managedRules(options?: Core.RequestOptions): Core.APIPromise<SummaryManagedRulesResponse>
+  managedRules(query: SummaryManagedRulesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryManagedRulesResponse> {
     if (isRequestOptions(query)) {
       return this.managedRules({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/summary/managed_rules', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SummaryManagedRulesResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/summary/managed_rules', { query, ...options }) as Core.APIPromise<{ result: SummaryManagedRulesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by mitigation product used.
    */
-  mitigationProduct(
-    query?: SummaryMitigationProductParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryMitigationProductResponse>;
-  mitigationProduct(options?: Core.RequestOptions): Core.APIPromise<SummaryMitigationProductResponse>;
-  mitigationProduct(
-    query: SummaryMitigationProductParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SummaryMitigationProductResponse> {
+  mitigationProduct(query?: SummaryMitigationProductParams, options?: Core.RequestOptions): Core.APIPromise<SummaryMitigationProductResponse>
+  mitigationProduct(options?: Core.RequestOptions): Core.APIPromise<SummaryMitigationProductResponse>
+  mitigationProduct(query: SummaryMitigationProductParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryMitigationProductResponse> {
     if (isRequestOptions(query)) {
       return this.mitigationProduct({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/summary/mitigation_product', {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: SummaryMitigationProductResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/summary/mitigation_product', { query, ...options }) as Core.APIPromise<{ result: SummaryMitigationProductResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -627,15 +567,7 @@ export interface SummaryHTTPMethodParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -683,54 +615,7 @@ export interface SummaryHTTPVersionParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for ip version.
@@ -747,15 +632,7 @@ export interface SummaryHTTPVersionParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -803,54 +680,7 @@ export interface SummaryIPVersionParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -867,15 +697,7 @@ export interface SummaryIPVersionParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -923,54 +745,7 @@ export interface SummaryManagedRulesParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -992,15 +767,7 @@ export interface SummaryManagedRulesParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -1048,54 +815,7 @@ export interface SummaryMitigationProductParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.

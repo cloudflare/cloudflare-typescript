@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as MetadataIndexAPI from './metadata-index';
 
@@ -8,52 +10,25 @@ export class MetadataIndex extends APIResource {
   /**
    * Enable metadata filtering based on metadata property. Limited to 10 properties.
    */
-  create(
-    indexName: string,
-    params: MetadataIndexCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MetadataIndexCreateResponse | null> {
+  create(indexName: string, params: MetadataIndexCreateParams, options?: Core.RequestOptions): Core.APIPromise<MetadataIndexCreateResponse | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/create`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MetadataIndexCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/create`, { body, ...options }) as Core.APIPromise<{ result: MetadataIndexCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Metadata Indexes for the specified Vectorize Index.
    */
-  list(
-    indexName: string,
-    params: MetadataIndexListParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MetadataIndexListResponse | null> {
+  list(indexName: string, params: MetadataIndexListParams, options?: Core.RequestOptions): Core.APIPromise<MetadataIndexListResponse | null> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/list`,
-        options,
-      ) as Core.APIPromise<{ result: MetadataIndexListResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/list`, options) as Core.APIPromise<{ result: MetadataIndexListResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Allow Vectorize to delete the specified metadata index.
    */
-  delete(
-    indexName: string,
-    params: MetadataIndexDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<MetadataIndexDeleteResponse | null> {
+  delete(indexName: string, params: MetadataIndexDeleteParams, options?: Core.RequestOptions): Core.APIPromise<MetadataIndexDeleteResponse | null> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/delete`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: MetadataIndexDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/vectorize/v2/indexes/${indexName}/metadata_index/delete`, { body, ...options }) as Core.APIPromise<{ result: MetadataIndexDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

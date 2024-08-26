@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as PermissionGroupsAPI from './permission-groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -9,34 +11,24 @@ export class PermissionGroups extends APIResource {
   /**
    * List all the permissions groups for an account.
    */
-  list(
-    params: PermissionGroupListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PermissionGroupListResponsesV4PagePaginationArray, PermissionGroupListResponse> {
+  list(params: PermissionGroupListParams, options?: Core.RequestOptions): Core.PagePromise<PermissionGroupListResponsesV4PagePaginationArray, PermissionGroupListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/iam/permission_groups`,
-      PermissionGroupListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/iam/permission_groups`, PermissionGroupListResponsesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Get information about a specific permission group in an account.
    */
-  get(
-    permissionGroupId: string,
-    params: PermissionGroupGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PermissionGroupGetResponse> {
+  get(permissionGroupId: string, params: PermissionGroupGetParams, options?: Core.RequestOptions): Core.APIPromise<PermissionGroupGetResponse> {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/iam/permission_groups/${permissionGroupId}`, options);
   }
 }
 
-export class PermissionGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<PermissionGroupListResponse> {}
+export class PermissionGroupListResponsesV4PagePaginationArray extends V4PagePaginationArray<PermissionGroupListResponse> {
+}
 
-export type PermissionGroupListResponse = unknown;
+export type PermissionGroupListResponse = unknown
 
 /**
  * A named group of permissions that map to a group of operations against

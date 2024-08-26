@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as PriorityAPI from './priority';
 import * as Shared from '../../shared';
@@ -10,82 +12,42 @@ export class PriorityResource extends APIResource {
   /**
    * Create a New Priority Requirement
    */
-  create(
-    accountIdentifier: string,
-    body: PriorityCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Priority> {
-    return (
-      this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/new`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Priority }>
-    )._thenUnwrap((obj) => obj.result);
+  create(accountIdentifier: string, body: PriorityCreateParams, options?: Core.RequestOptions): Core.APIPromise<Priority> {
+    return (this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/new`, { body, ...options }) as Core.APIPromise<{ result: Priority }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update a Priority Intelligence Requirement
    */
-  update(
-    accountIdentifier: string,
-    priorityIdentifer: string,
-    body: PriorityUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestsAPI.Item> {
-    return (
-      this._client.put(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
-        { body, ...options },
-      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
-    )._thenUnwrap((obj) => obj.result);
+  update(accountIdentifier: string, priorityIdentifer: string, body: PriorityUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Item> {
+    return (this._client.put(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`, { body, ...options }) as Core.APIPromise<{ result: RequestsAPI.Item }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete a Priority Intelligence Report
    */
-  delete(
-    accountIdentifier: string,
-    priorityIdentifer: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityDeleteResponse> {
-    return this._client.delete(
-      `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
-      options,
-    );
+  delete(accountIdentifier: string, priorityIdentifer: string, options?: Core.RequestOptions): Core.APIPromise<PriorityDeleteResponse> {
+    return this._client.delete(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`, options);
   }
 
   /**
    * Get a Priority Intelligence Requirement
    */
-  get(
-    accountIdentifier: string,
-    priorityIdentifer: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestsAPI.Item> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
-        options,
-      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
-    )._thenUnwrap((obj) => obj.result);
+  get(accountIdentifier: string, priorityIdentifer: string, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Item> {
+    return (this._client.get(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`, options) as Core.APIPromise<{ result: RequestsAPI.Item }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Priority Intelligence Requirement Quota
    */
   quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota> {
-    return (
-      this._client.get(
-        `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/quota`,
-        options,
-      ) as Core.APIPromise<{ result: RequestsAPI.Quota }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/quota`, options) as Core.APIPromise<{ result: RequestsAPI.Quota }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type Label = string;
+export type Label = string
 
-export type LabelParam = string;
+export type LabelParam = string
 
 export interface Priority {
   /**

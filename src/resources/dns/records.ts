@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RecordsAPI from './records';
+import { multipartFormRequestOptions } from '../../core';
 import * as Shared from '../shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -19,11 +22,7 @@ export class Records extends APIResource {
    */
   create(params: RecordCreateParams, options?: Core.RequestOptions): Core.APIPromise<Record> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{
-        result: Record;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/dns_records`, { body, ...options }) as Core.APIPromise<{ result: Record }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -34,48 +33,25 @@ export class Records extends APIResource {
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
    */
-  update(
-    dnsRecordId: string,
-    params: RecordUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Record> {
+  update(dnsRecordId: string, params: RecordUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Record> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Record }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/dns_records/${dnsRecordId}`, { body, ...options }) as Core.APIPromise<{ result: Record }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List, search, sort, and filter a zones' DNS records.
    */
-  list(
-    params: RecordListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<RecordsV4PagePaginationArray, Record> {
+  list(params: RecordListParams, options?: Core.RequestOptions): Core.PagePromise<RecordsV4PagePaginationArray, Record> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/dns_records`, RecordsV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+    return this._client.getAPIList(`/zones/${zone_id}/dns_records`, RecordsV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Delete DNS Record
    */
-  delete(
-    dnsRecordId: string,
-    params: RecordDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RecordDeleteResponse> {
+  delete(dnsRecordId: string, params: RecordDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RecordDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
-        result: RecordDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{ result: RecordDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -86,18 +62,9 @@ export class Records extends APIResource {
    * - Domain names are always represented in Punycode, even if Unicode characters
    *   were used when creating the record.
    */
-  edit(
-    dnsRecordId: string,
-    params: RecordEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Record> {
+  edit(dnsRecordId: string, params: RecordEditParams, options?: Core.RequestOptions): Core.APIPromise<Record> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Record }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/dns_records/${dnsRecordId}`, { body, ...options }) as Core.APIPromise<{ result: Record }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -111,10 +78,7 @@ export class Records extends APIResource {
    */
   export(params: RecordExportParams, options?: Core.RequestOptions): Core.APIPromise<string> {
     const { zone_id } = params;
-    return this._client.get(`/zones/${zone_id}/dns_records/export`, {
-      ...options,
-      headers: { Accept: 'text/plain', ...options?.headers },
-    });
+    return this._client.get(`/zones/${zone_id}/dns_records/export`, { ...options, headers: { Accept: 'text/plain', ...options?.headers } });
   }
 
   /**
@@ -122,11 +86,7 @@ export class Records extends APIResource {
    */
   get(dnsRecordId: string, params: RecordGetParams, options?: Core.RequestOptions): Core.APIPromise<Record> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{
-        result: Record;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/dns_records/${dnsRecordId}`, options) as Core.APIPromise<{ result: Record }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -141,12 +101,7 @@ export class Records extends APIResource {
    */
   import(params: RecordImportParams, options?: Core.RequestOptions): Core.APIPromise<RecordImportResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(
-        `/zones/${zone_id}/dns_records/import`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: RecordImportResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/dns_records/import`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: RecordImportResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -155,15 +110,12 @@ export class Records extends APIResource {
    */
   scan(params: RecordScanParams, options?: Core.RequestOptions): Core.APIPromise<RecordScanResponse> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/dns_records/scan`, { body: body, ...options }) as Core.APIPromise<{
-        result: RecordScanResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/dns_records/scan`, { body: body, ...options }) as Core.APIPromise<{ result: RecordScanResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RecordsV4PagePaginationArray extends V4PagePaginationArray<Record> {}
+export class RecordsV4PagePaginationArray extends V4PagePaginationArray<Record> {
+}
 
 export interface ARecord {
   /**
@@ -1363,27 +1315,7 @@ export interface PTRRecord {
   ttl?: TTL;
 }
 
-export type Record =
-  | ARecord
-  | AAAARecord
-  | CAARecord
-  | CERTRecord
-  | CNAMERecord
-  | DNSKEYRecord
-  | DSRecord
-  | HTTPSRecord
-  | LOCRecord
-  | MXRecord
-  | NAPTRRecord
-  | NSRecord
-  | PTRRecord
-  | SMIMEARecord
-  | SRVRecord
-  | SSHFPRecord
-  | SVCBRecord
-  | TLSARecord
-  | TXTRecord
-  | URIRecord;
+export type Record = ARecord | AAAARecord | CAARecord | CERTRecord | CNAMERecord | DNSKEYRecord | DSRecord | HTTPSRecord | LOCRecord | MXRecord | NAPTRRecord | NSRecord | PTRRecord | SMIMEARecord | SRVRecord | SSHFPRecord | SVCBRecord | TLSARecord | TXTRecord | URIRecord
 
 /**
  * Extra Cloudflare-specific information about the record.
@@ -1422,13 +1354,13 @@ export interface RecordProcessTiming {
  * Individual tag of the form name:value (the name must consist of only letters,
  * numbers, underscores and hyphens)
  */
-export type RecordTags = string;
+export type RecordTags = string
 
 /**
  * Individual tag of the form name:value (the name must consist of only letters,
  * numbers, underscores and hyphens)
  */
-export type RecordTagsParam = string;
+export type RecordTagsParam = string
 
 export interface SMIMEARecord {
   /**
@@ -1960,14 +1892,14 @@ export namespace TLSARecord {
  * Value must be between 60 and 86400, with the minimum reduced to 30 for
  * Enterprise zones.
  */
-export type TTL = number | 1;
+export type TTL = number | 1
 
 /**
  * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
  * Value must be between 60 and 86400, with the minimum reduced to 30 for
  * Enterprise zones.
  */
-export type TTLParam = number | 1;
+export type TTLParam = number | 1
 
 export interface TXTRecord {
   /**
@@ -2147,7 +2079,7 @@ export interface RecordDeleteResponse {
 /**
  * Exported BIND zone file.
  */
-export type RecordExportResponse = string;
+export type RecordExportResponse = string
 
 export interface RecordImportResponse {
   /**
@@ -2173,27 +2105,7 @@ export interface RecordScanResponse {
   total_records_parsed?: number;
 }
 
-export type RecordCreateParams =
-  | RecordCreateParams.ARecord
-  | RecordCreateParams.AAAARecord
-  | RecordCreateParams.CAARecord
-  | RecordCreateParams.CERTRecord
-  | RecordCreateParams.CNAMERecord
-  | RecordCreateParams.DNSKEYRecord
-  | RecordCreateParams.DSRecord
-  | RecordCreateParams.HTTPSRecord
-  | RecordCreateParams.LOCRecord
-  | RecordCreateParams.MXRecord
-  | RecordCreateParams.NAPTRRecord
-  | RecordCreateParams.NSRecord
-  | RecordCreateParams.PTRRecord
-  | RecordCreateParams.SMIMEARecord
-  | RecordCreateParams.SRVRecord
-  | RecordCreateParams.SSHFPRecord
-  | RecordCreateParams.SVCBRecord
-  | RecordCreateParams.TLSARecord
-  | RecordCreateParams.TXTRecord
-  | RecordCreateParams.URIRecord;
+export type RecordCreateParams = RecordCreateParams.ARecord | RecordCreateParams.AAAARecord | RecordCreateParams.CAARecord | RecordCreateParams.CERTRecord | RecordCreateParams.CNAMERecord | RecordCreateParams.DNSKEYRecord | RecordCreateParams.DSRecord | RecordCreateParams.HTTPSRecord | RecordCreateParams.LOCRecord | RecordCreateParams.MXRecord | RecordCreateParams.NAPTRRecord | RecordCreateParams.NSRecord | RecordCreateParams.PTRRecord | RecordCreateParams.SMIMEARecord | RecordCreateParams.SRVRecord | RecordCreateParams.SSHFPRecord | RecordCreateParams.SVCBRecord | RecordCreateParams.TLSARecord | RecordCreateParams.TXTRecord | RecordCreateParams.URIRecord
 
 export namespace RecordCreateParams {
   export interface ARecord {
@@ -3542,27 +3454,7 @@ export namespace RecordCreateParams {
   }
 }
 
-export type RecordUpdateParams =
-  | RecordUpdateParams.ARecord
-  | RecordUpdateParams.AAAARecord
-  | RecordUpdateParams.CAARecord
-  | RecordUpdateParams.CERTRecord
-  | RecordUpdateParams.CNAMERecord
-  | RecordUpdateParams.DNSKEYRecord
-  | RecordUpdateParams.DSRecord
-  | RecordUpdateParams.HTTPSRecord
-  | RecordUpdateParams.LOCRecord
-  | RecordUpdateParams.MXRecord
-  | RecordUpdateParams.NAPTRRecord
-  | RecordUpdateParams.NSRecord
-  | RecordUpdateParams.PTRRecord
-  | RecordUpdateParams.SMIMEARecord
-  | RecordUpdateParams.SRVRecord
-  | RecordUpdateParams.SSHFPRecord
-  | RecordUpdateParams.SVCBRecord
-  | RecordUpdateParams.TLSARecord
-  | RecordUpdateParams.TXTRecord
-  | RecordUpdateParams.URIRecord;
+export type RecordUpdateParams = RecordUpdateParams.ARecord | RecordUpdateParams.AAAARecord | RecordUpdateParams.CAARecord | RecordUpdateParams.CERTRecord | RecordUpdateParams.CNAMERecord | RecordUpdateParams.DNSKEYRecord | RecordUpdateParams.DSRecord | RecordUpdateParams.HTTPSRecord | RecordUpdateParams.LOCRecord | RecordUpdateParams.MXRecord | RecordUpdateParams.NAPTRRecord | RecordUpdateParams.NSRecord | RecordUpdateParams.PTRRecord | RecordUpdateParams.SMIMEARecord | RecordUpdateParams.SRVRecord | RecordUpdateParams.SSHFPRecord | RecordUpdateParams.SVCBRecord | RecordUpdateParams.TLSARecord | RecordUpdateParams.TXTRecord | RecordUpdateParams.URIRecord
 
 export namespace RecordUpdateParams {
   export interface ARecord {
@@ -4982,27 +4874,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   /**
    * Query param: Record type.
    */
-  type?:
-    | 'A'
-    | 'AAAA'
-    | 'CAA'
-    | 'CERT'
-    | 'CNAME'
-    | 'DNSKEY'
-    | 'DS'
-    | 'HTTPS'
-    | 'LOC'
-    | 'MX'
-    | 'NAPTR'
-    | 'NS'
-    | 'PTR'
-    | 'SMIMEA'
-    | 'SRV'
-    | 'SSHFP'
-    | 'SVCB'
-    | 'TLSA'
-    | 'TXT'
-    | 'URI';
+  type?: 'A' | 'AAAA' | 'CAA' | 'CERT' | 'CNAME' | 'DNSKEY' | 'DS' | 'HTTPS' | 'LOC' | 'MX' | 'NAPTR' | 'NS' | 'PTR' | 'SMIMEA' | 'SRV' | 'SSHFP' | 'SVCB' | 'TLSA' | 'TXT' | 'URI';
 }
 
 export namespace RecordListParams {
@@ -5088,27 +4960,7 @@ export interface RecordDeleteParams {
   zone_id: string;
 }
 
-export type RecordEditParams =
-  | RecordEditParams.ARecord
-  | RecordEditParams.AAAARecord
-  | RecordEditParams.CAARecord
-  | RecordEditParams.CERTRecord
-  | RecordEditParams.CNAMERecord
-  | RecordEditParams.DNSKEYRecord
-  | RecordEditParams.DSRecord
-  | RecordEditParams.HTTPSRecord
-  | RecordEditParams.LOCRecord
-  | RecordEditParams.MXRecord
-  | RecordEditParams.NAPTRRecord
-  | RecordEditParams.NSRecord
-  | RecordEditParams.PTRRecord
-  | RecordEditParams.SMIMEARecord
-  | RecordEditParams.SRVRecord
-  | RecordEditParams.SSHFPRecord
-  | RecordEditParams.SVCBRecord
-  | RecordEditParams.TLSARecord
-  | RecordEditParams.TXTRecord
-  | RecordEditParams.URIRecord;
+export type RecordEditParams = RecordEditParams.ARecord | RecordEditParams.AAAARecord | RecordEditParams.CAARecord | RecordEditParams.CERTRecord | RecordEditParams.CNAMERecord | RecordEditParams.DNSKEYRecord | RecordEditParams.DSRecord | RecordEditParams.HTTPSRecord | RecordEditParams.LOCRecord | RecordEditParams.MXRecord | RecordEditParams.NAPTRRecord | RecordEditParams.NSRecord | RecordEditParams.PTRRecord | RecordEditParams.SMIMEARecord | RecordEditParams.SRVRecord | RecordEditParams.SSHFPRecord | RecordEditParams.SVCBRecord | RecordEditParams.TLSARecord | RecordEditParams.TXTRecord | RecordEditParams.URIRecord
 
 export namespace RecordEditParams {
   export interface ARecord {

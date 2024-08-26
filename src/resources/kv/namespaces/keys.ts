@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as KeysAPI from './keys';
 import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
@@ -9,21 +11,14 @@ export class Keys extends APIResource {
   /**
    * Lists a namespace's keys.
    */
-  list(
-    namespaceId: string,
-    params: KeyListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<KeysCursorLimitPagination, Key> {
+  list(namespaceId: string, params: KeyListParams, options?: Core.RequestOptions): Core.PagePromise<KeysCursorLimitPagination, Key> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`,
-      KeysCursorLimitPagination,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/keys`, KeysCursorLimitPagination, { query, ...options });
   }
 }
 
-export class KeysCursorLimitPagination extends CursorLimitPagination<Key> {}
+export class KeysCursorLimitPagination extends CursorLimitPagination<Key> {
+}
 
 /**
  * A name for a value. A value stored under a given key may be retrieved via the

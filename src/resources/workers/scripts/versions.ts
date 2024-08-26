@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as VersionsAPI from './versions';
+import { type Uploadable, multipartFormRequestOptions } from '../../../core';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../pagination';
 
 export class Versions extends APIResource {
@@ -11,56 +14,30 @@ export class Versions extends APIResource {
    * more about the multipart metadata on our docs:
    * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
-  create(
-    scriptName: string,
-    params: VersionCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionCreateResponse> {
+  create(scriptName: string, params: VersionCreateParams, options?: Core.RequestOptions): Core.APIPromise<VersionCreateResponse> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: VersionCreateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/versions`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: VersionCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List of Worker Versions. The first version in the list is the latest version.
    */
-  list(
-    scriptName: string,
-    params: VersionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
+  list(scriptName: string, params: VersionListParams, options?: Core.RequestOptions): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/workers/scripts/${scriptName}/versions`,
-      VersionListResponsesV4PagePagination,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/workers/scripts/${scriptName}/versions`, VersionListResponsesV4PagePagination, { query, ...options });
   }
 
   /**
    * Get Version Detail
    */
-  get(
-    scriptName: string,
-    versionId: string,
-    params: VersionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<VersionGetResponse> {
+  get(scriptName: string, versionId: string, params: VersionGetParams, options?: Core.RequestOptions): Core.APIPromise<VersionGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/workers/scripts/${scriptName}/versions/${versionId}`,
-        options,
-      ) as Core.APIPromise<{ result: VersionGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/workers/scripts/${scriptName}/versions/${versionId}`, options) as Core.APIPromise<{ result: VersionGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class VersionListResponsesV4PagePagination extends V4PagePagination<VersionListResponse> {}
+export class VersionListResponsesV4PagePagination extends V4PagePagination<VersionListResponse> {
+}
 
 export interface VersionCreateResponse {
   resources: unknown;

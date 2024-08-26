@@ -1,8 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as WatermarksAPI from './watermarks';
+import { multipartFormRequestOptions } from '../../core';
 import { SinglePage } from '../../pagination';
 
 export class Watermarks extends APIResource {
@@ -12,65 +15,36 @@ export class Watermarks extends APIResource {
    */
   create(params: WatermarkCreateParams, options?: Core.RequestOptions): Core.APIPromise<Watermark> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/stream/watermarks`,
-        Core.multipartFormRequestOptions({ body, ...options }),
-      ) as Core.APIPromise<{ result: Watermark }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/stream/watermarks`, Core.multipartFormRequestOptions({ body, ...options })) as Core.APIPromise<{ result: Watermark }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all watermark profiles for an account.
    */
-  list(
-    params: WatermarkListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WatermarksSinglePage, Watermark> {
+  list(params: WatermarkListParams, options?: Core.RequestOptions): Core.PagePromise<WatermarksSinglePage, Watermark> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/stream/watermarks`,
-      WatermarksSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/stream/watermarks`, WatermarksSinglePage, options);
   }
 
   /**
    * Deletes a watermark profile.
    */
-  delete(
-    identifier: string,
-    params: WatermarkDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<WatermarkDeleteResponse> {
+  delete(identifier: string, params: WatermarkDeleteParams, options?: Core.RequestOptions): Core.APIPromise<WatermarkDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/stream/watermarks/${identifier}`,
-        options,
-      ) as Core.APIPromise<{ result: WatermarkDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/stream/watermarks/${identifier}`, options) as Core.APIPromise<{ result: WatermarkDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Retrieves details for a single watermark profile.
    */
-  get(
-    identifier: string,
-    params: WatermarkGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Watermark> {
+  get(identifier: string, params: WatermarkGetParams, options?: Core.RequestOptions): Core.APIPromise<Watermark> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/stream/watermarks/${identifier}`,
-        options,
-      ) as Core.APIPromise<{ result: Watermark }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/stream/watermarks/${identifier}`, options) as Core.APIPromise<{ result: Watermark }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class WatermarksSinglePage extends SinglePage<Watermark> {}
+export class WatermarksSinglePage extends SinglePage<Watermark> {
+}
 
 export interface Watermark {
   /**
@@ -139,7 +113,7 @@ export interface Watermark {
   width?: number;
 }
 
-export type WatermarkDeleteResponse = string;
+export type WatermarkDeleteResponse = string
 
 export interface WatermarkCreateParams {
   /**

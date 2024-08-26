@@ -2,7 +2,11 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
+import { Summary } from './summary';
+import { TimeseriesGroups } from './timeseries-groups';
+import { Top } from './top/top';
 import * as Layer7API from './layer7';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
@@ -10,32 +14,20 @@ import * as TopAPI from './top/top';
 
 export class Layer7 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
-    this._client,
-  );
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(this._client);
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
    * Get a timeseries of Layer 7 attacks. Values represent HTTP requests and are
    * normalized using min-max by default.
    */
-  timeseries(
-    query?: Layer7TimeseriesParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Layer7TimeseriesResponse>;
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<Layer7TimeseriesResponse>;
-  timeseries(
-    query: Layer7TimeseriesParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Layer7TimeseriesResponse> {
+  timeseries(query?: Layer7TimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<Layer7TimeseriesResponse>
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<Layer7TimeseriesResponse>
+  timeseries(query: Layer7TimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<Layer7TimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (
-      this._client.get('/radar/attacks/layer7/timeseries', { query, ...options }) as Core.APIPromise<{
-        result: Layer7TimeseriesResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get('/radar/attacks/layer7/timeseries', { query, ...options }) as Core.APIPromise<{ result: Layer7TimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -119,15 +111,7 @@ export interface Layer7TimeseriesParams {
   /**
    * This field is deprecated, please use the new `mitigationProduct`.
    */
-  attack?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  attack?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start
@@ -161,54 +145,7 @@ export interface Layer7TimeseriesParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  >;
+  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
 
   /**
    * Filter for http version.
@@ -230,15 +167,7 @@ export interface Layer7TimeseriesParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  >;
+  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
 
   /**
    * Array of names that will be used to name the series in responses.

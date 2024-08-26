@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
+import { isRequestOptions } from '../../../../core';
+import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as ActiveSessionsAPI from './active-sessions';
 import * as UserPolicyChecksAPI from '../applications/user-policy-checks';
@@ -10,39 +12,22 @@ export class ActiveSessions extends APIResource {
   /**
    * Get active sessions for a single user.
    */
-  list(
-    userId: string,
-    params: ActiveSessionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse> {
+  list(userId: string, params: ActiveSessionListParams, options?: Core.RequestOptions): Core.PagePromise<ActiveSessionListResponsesSinglePage, ActiveSessionListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/access/users/${userId}/active_sessions`,
-      ActiveSessionListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/access/users/${userId}/active_sessions`, ActiveSessionListResponsesSinglePage, options);
   }
 
   /**
    * Get an active session for a single user.
    */
-  get(
-    userId: string,
-    nonce: string,
-    params: ActiveSessionGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ActiveSessionGetResponse> {
+  get(userId: string, nonce: string, params: ActiveSessionGetParams, options?: Core.RequestOptions): Core.APIPromise<ActiveSessionGetResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/access/users/${userId}/active_sessions/${nonce}`,
-        options,
-      ) as Core.APIPromise<{ result: ActiveSessionGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/access/users/${userId}/active_sessions/${nonce}`, options) as Core.APIPromise<{ result: ActiveSessionGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ActiveSessionListResponsesSinglePage extends SinglePage<ActiveSessionListResponse> {}
+export class ActiveSessionListResponsesSinglePage extends SinglePage<ActiveSessionListResponse> {
+}
 
 export interface ActiveSessionListResponse {
   expiration?: number;

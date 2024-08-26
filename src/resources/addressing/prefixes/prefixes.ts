@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { BGP } from './bgp/bgp';
+import { Delegations } from './delegations';
 import * as PrefixesAPI from './prefixes';
 import * as Shared from '../../shared';
 import * as DelegationsAPI from './delegations';
@@ -17,37 +21,21 @@ export class Prefixes extends APIResource {
    */
   create(params: PrefixCreateParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/addressing/prefixes`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Prefix }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/addressing/prefixes`, { body, ...options }) as Core.APIPromise<{ result: Prefix }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all prefixes owned by the account.
    */
-  list(
-    params: PrefixListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<PrefixesSinglePage, Prefix> {
+  list(params: PrefixListParams, options?: Core.RequestOptions): Core.PagePromise<PrefixesSinglePage, Prefix> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/addressing/prefixes`,
-      PrefixesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/addressing/prefixes`, PrefixesSinglePage, options);
   }
 
   /**
    * Delete an unapproved prefix owned by the account.
    */
-  delete(
-    prefixId: string,
-    params: PrefixDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<PrefixDeleteResponse> {
+  delete(prefixId: string, params: PrefixDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PrefixDeleteResponse> {
     const { account_id } = params;
     return this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, options);
   }
@@ -57,12 +45,7 @@ export class Prefixes extends APIResource {
    */
   edit(prefixId: string, params: PrefixEditParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id, ...body } = params;
-    return (
-      this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Prefix }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, { body, ...options }) as Core.APIPromise<{ result: Prefix }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -70,16 +53,12 @@ export class Prefixes extends APIResource {
    */
   get(prefixId: string, params: PrefixGetParams, options?: Core.RequestOptions): Core.APIPromise<Prefix> {
     const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/addressing/prefixes/${prefixId}`,
-        options,
-      ) as Core.APIPromise<{ result: Prefix }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/addressing/prefixes/${prefixId}`, options) as Core.APIPromise<{ result: Prefix }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PrefixesSinglePage extends SinglePage<Prefix> {}
+export class PrefixesSinglePage extends SinglePage<Prefix> {
+}
 
 export interface Prefix {
   /**

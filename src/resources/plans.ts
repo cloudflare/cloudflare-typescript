@@ -1,43 +1,32 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as PlansAPI from './plans';
 import { SinglePage } from '../pagination';
 
 export class Plans extends APIResource {
   /**
    * Lists available plans the zone can subscribe to.
    */
-  list(
-    params: PlanListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
+  list(params: PlanListParams, options?: Core.RequestOptions): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
     const { zone_id } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/available_plans`,
-      AvailableRatePlansSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/available_plans`, AvailableRatePlansSinglePage, options);
   }
 
   /**
    * Details of the available plan that the zone can subscribe to.
    */
-  get(
-    planIdentifier: string,
-    params: PlanGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AvailableRatePlan> {
+  get(planIdentifier: string, params: PlanGetParams, options?: Core.RequestOptions): Core.APIPromise<AvailableRatePlan> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/available_plans/${planIdentifier}`, options) as Core.APIPromise<{
-        result: AvailableRatePlan;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/available_plans/${planIdentifier}`, options) as Core.APIPromise<{ result: AvailableRatePlan }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AvailableRatePlansSinglePage extends SinglePage<AvailableRatePlan> {}
+export class AvailableRatePlansSinglePage extends SinglePage<AvailableRatePlan> {
+}
 
 export interface AvailableRatePlan {
   /**

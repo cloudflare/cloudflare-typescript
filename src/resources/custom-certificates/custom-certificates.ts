@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
+import { Prioritize } from './prioritize';
+import * as CustomCertificatesAPI from './custom-certificates';
 import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
@@ -13,16 +17,9 @@ export class CustomCertificates extends APIResource {
   /**
    * Upload a new SSL certificate for a zone.
    */
-  create(
-    params: CustomCertificateCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificate> {
+  create(params: CustomCertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCertificate> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: CustomCertificate;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{ result: CustomCertificate }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,33 +27,17 @@ export class CustomCertificates extends APIResource {
    * priority will break ties across overlapping 'legacy_custom' certificates, but
    * 'legacy_custom' certificates will always supercede 'sni_custom' certificates.
    */
-  list(
-    params: CustomCertificateListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate> {
+  list(params: CustomCertificateListParams, options?: Core.RequestOptions): Core.PagePromise<CustomCertificatesV4PagePaginationArray, CustomCertificate> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/custom_certificates`,
-      CustomCertificatesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/zones/${zone_id}/custom_certificates`, CustomCertificatesV4PagePaginationArray, { query, ...options });
   }
 
   /**
    * Remove a SSL certificate from a zone.
    */
-  delete(
-    customCertificateId: string,
-    params: CustomCertificateDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateDeleteResponse> {
+  delete(customCertificateId: string, params: CustomCertificateDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CustomCertificateDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(
-        `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, options) as Core.APIPromise<{ result: CustomCertificateDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -64,39 +45,22 @@ export class CustomCertificates extends APIResource {
    * a configuration for sni_custom certificates will result in a new resource id
    * being returned, and the previous one being deleted.
    */
-  edit(
-    customCertificateId: string,
-    params: CustomCertificateEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificate> {
+  edit(customCertificateId: string, params: CustomCertificateEditParams, options?: Core.RequestOptions): Core.APIPromise<CustomCertificate> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CustomCertificate }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, { body, ...options }) as Core.APIPromise<{ result: CustomCertificate }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * SSL Configuration Details
    */
-  get(
-    customCertificateId: string,
-    params: CustomCertificateGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificate> {
+  get(customCertificateId: string, params: CustomCertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<CustomCertificate> {
     const { zone_id } = params;
-    return (
-      this._client.get(
-        `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
-        options,
-      ) as Core.APIPromise<{ result: CustomCertificate }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, options) as Core.APIPromise<{ result: CustomCertificate }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class CustomCertificatesV4PagePaginationArray extends V4PagePaginationArray<CustomCertificate> {}
+export class CustomCertificatesV4PagePaginationArray extends V4PagePaginationArray<CustomCertificate> {
+}
 
 export interface CustomCertificate {
   /**
@@ -214,7 +178,7 @@ export interface GeoRestrictionsParam {
  * Client Certificates may be active or revoked, and the pending_reactivation or
  * pending_revocation represent in-progress asynchronous transitions
  */
-export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
+export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked'
 
 export interface CustomCertificateDeleteResponse {
   /**

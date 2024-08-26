@@ -1,19 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare from 'cloudflare';
+import Cloudflare, { toFile } from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({
-  apiKey: '144c9defac04969c7bfad8efaa8ea194',
-  apiEmail: 'user@example.com',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource currents', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.spectrum.analytics.aggregates.currents.get({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.spectrum.analytics.aggregates.currents.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +18,6 @@ describe('resource currents', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.spectrum.analytics.aggregates.currents.get({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      appID: 'ea95132c15732412d22c1476fa83f27a,d122c5f4bb71e25cc9e86ab43b142e2f',
-      colo_name: 'PDX',
-    });
+    const response = await client.spectrum.analytics.aggregates.currents.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353', appID: 'ea95132c15732412d22c1476fa83f27a,d122c5f4bb71e25cc9e86ab43b142e2f', colo_name: 'PDX' });
   });
 });

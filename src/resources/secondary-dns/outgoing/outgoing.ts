@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
+import { Status } from './status';
 import * as OutgoingAPI from './outgoing';
 import * as StatusAPI from './status';
 
@@ -11,46 +14,25 @@ export class OutgoingResource extends APIResource {
   /**
    * Create primary zone configuration for outgoing zone transfers.
    */
-  create(
-    params: OutgoingCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingCreateResponse> {
+  create(params: OutgoingCreateParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingCreateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
-        result: OutgoingCreateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{ result: OutgoingCreateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update primary zone configuration for outgoing zone transfers.
    */
-  update(
-    params: OutgoingUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingUpdateResponse> {
+  update(params: OutgoingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (
-      this._client.put(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{
-        result: OutgoingUpdateResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/zones/${zone_id}/secondary_dns/outgoing`, { body, ...options }) as Core.APIPromise<{ result: OutgoingUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete primary zone configuration for outgoing zone transfers.
    */
-  delete(
-    params: OutgoingDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingDeleteResponse> {
+  delete(params: OutgoingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
-        result: OutgoingDeleteResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{ result: OutgoingDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -59,12 +41,7 @@ export class OutgoingResource extends APIResource {
    */
   disable(params: OutgoingDisableParams, options?: Core.RequestOptions): Core.APIPromise<DisableTransfer> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: DisableTransfer }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/disable`, { body: body, ...options }) as Core.APIPromise<{ result: DisableTransfer }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -72,28 +49,15 @@ export class OutgoingResource extends APIResource {
    */
   enable(params: OutgoingEnableParams, options?: Core.RequestOptions): Core.APIPromise<EnableTransfer> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: EnableTransfer }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/enable`, { body: body, ...options }) as Core.APIPromise<{ result: EnableTransfer }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Notifies the secondary nameserver(s) and clears IXFR backlog of primary zone.
    */
-  forceNotify(
-    params: OutgoingForceNotifyParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OutgoingForceNotifyResponse> {
+  forceNotify(params: OutgoingForceNotifyParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingForceNotifyResponse> {
     const { zone_id, body } = params;
-    return (
-      this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: OutgoingForceNotifyResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/zones/${zone_id}/secondary_dns/outgoing/force_notify`, { body: body, ...options }) as Core.APIPromise<{ result: OutgoingForceNotifyResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -101,23 +65,19 @@ export class OutgoingResource extends APIResource {
    */
   get(params: OutgoingGetParams, options?: Core.RequestOptions): Core.APIPromise<OutgoingGetResponse> {
     const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{
-        result: OutgoingGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/zones/${zone_id}/secondary_dns/outgoing`, options) as Core.APIPromise<{ result: OutgoingGetResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
 /**
  * The zone transfer status of a primary zone
  */
-export type DisableTransfer = string;
+export type DisableTransfer = string
 
 /**
  * The zone transfer status of a primary zone
  */
-export type EnableTransfer = string;
+export type EnableTransfer = string
 
 export interface Outgoing {
   id?: string;
@@ -156,7 +116,7 @@ export interface Outgoing {
 /**
  * The zone transfer status of a primary zone
  */
-export type OutgoingStatus = string | null;
+export type OutgoingStatus = string | null
 
 export interface OutgoingCreateResponse {
   id?: string;
@@ -234,7 +194,7 @@ export interface OutgoingDeleteResponse {
  * When force_notify query parameter is set to true, the response is a simple
  * string
  */
-export type OutgoingForceNotifyResponse = string;
+export type OutgoingForceNotifyResponse = string
 
 export interface OutgoingGetResponse {
   id?: string;

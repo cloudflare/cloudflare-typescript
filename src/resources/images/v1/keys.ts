@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as KeysAPI from './keys';
 
@@ -8,18 +10,9 @@ export class Keys extends APIResource {
   /**
    * Create a new signing key with specified name. Returns all keys available.
    */
-  update(
-    signingKeyName: string,
-    params: KeyUpdateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyUpdateResponse> {
+  update(signingKeyName: string, params: KeyUpdateParams, options?: Core.RequestOptions): Core.APIPromise<KeyUpdateResponse> {
     const { account_id } = params;
-    return (
-      this._client.put(
-        `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
-        options,
-      ) as Core.APIPromise<{ result: KeyUpdateResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.put(`/accounts/${account_id}/images/v1/keys/${signingKeyName}`, options) as Core.APIPromise<{ result: KeyUpdateResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -27,29 +20,16 @@ export class Keys extends APIResource {
    */
   list(params: KeyListParams, options?: Core.RequestOptions): Core.APIPromise<KeyListResponse> {
     const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{
-        result: KeyListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/images/v1/keys`, options) as Core.APIPromise<{ result: KeyListResponse }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete signing key with specified name. Returns all keys available. When last
    * key is removed, a new default signing key will be generated.
    */
-  delete(
-    signingKeyName: string,
-    params: KeyDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyDeleteResponse> {
+  delete(signingKeyName: string, params: KeyDeleteParams, options?: Core.RequestOptions): Core.APIPromise<KeyDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/images/v1/keys/${signingKeyName}`,
-        options,
-      ) as Core.APIPromise<{ result: KeyDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.delete(`/accounts/${account_id}/images/v1/keys/${signingKeyName}`, options) as Core.APIPromise<{ result: KeyDeleteResponse }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

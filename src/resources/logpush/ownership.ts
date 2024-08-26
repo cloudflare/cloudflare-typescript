@@ -1,18 +1,17 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { CloudflareError } from '../../error'
 import * as OwnershipAPI from './ownership';
 
 export class Ownership extends APIResource {
   /**
    * Gets a new ownership challenge sent to your destination.
    */
-  create(
-    params: OwnershipCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipCreateResponse | null> {
+  create(params: OwnershipCreateParams, options?: Core.RequestOptions): Core.APIPromise<OwnershipCreateResponse | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -20,31 +19,20 @@ export class Ownership extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OwnershipCreateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership`, { body, ...options }) as Core.APIPromise<{ result: OwnershipCreateResponse | null }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Validates ownership challenge of the destination.
    */
-  validate(
-    params: OwnershipValidateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipValidation | null> {
+  validate(params: OwnershipValidateParams, options?: Core.RequestOptions): Core.APIPromise<OwnershipValidation | null> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -52,22 +40,14 @@ export class Ownership extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership/validate`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OwnershipValidation | null }>
-    )._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } = account_id ? {
+      accountOrZone: "accounts",
+      accountOrZoneId: account_id,
+    } : {
+      accountOrZone: "zones",
+      accountOrZoneId: zone_id,
+    }
+    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/logpush/ownership/validate`, { body, ...options }) as Core.APIPromise<{ result: OwnershipValidation | null }>)._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,7 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
+import * as BrandProtectionAPI from './brand-protection';
 
 export class BrandProtection extends APIResource {
   /**
@@ -9,12 +12,7 @@ export class BrandProtection extends APIResource {
    */
   submit(params: BrandProtectionSubmitParams, options?: Core.RequestOptions): Core.APIPromise<Submit> {
     const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/brand-protection/submit`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: Submit }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.post(`/accounts/${account_id}/brand-protection/submit`, { body, ...options }) as Core.APIPromise<{ result: Submit }>)._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -22,12 +20,7 @@ export class BrandProtection extends APIResource {
    */
   urlInfo(params: BrandProtectionURLInfoParams, options?: Core.RequestOptions): Core.APIPromise<Info> {
     const { account_id, ...query } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/brand-protection/url-info`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: Info }>
-    )._thenUnwrap((obj) => obj.result);
+    return (this._client.get(`/accounts/${account_id}/brand-protection/url-info`, { query, ...options }) as Core.APIPromise<{ result: Info }>)._thenUnwrap((obj) => obj.result);
   }
 }
 
