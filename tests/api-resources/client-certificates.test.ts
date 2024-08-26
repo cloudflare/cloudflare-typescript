@@ -13,7 +13,7 @@ describe('resource clientCertificates', () => {
   test('create: only required params', async () => {
     const responsePromise = client.clientCertificates.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
+      csr: '-----BEGIN CERTIFICATE REQUEST-----\\nMIICY....\\n-----END CERTIFICATE REQUEST-----\\n',
       validity_days: 3650,
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,7 +28,7 @@ describe('resource clientCertificates', () => {
   test('create: required and optional params', async () => {
     const response = await client.clientCertificates.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      csr: '-----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n',
+      csr: '-----BEGIN CERTIFICATE REQUEST-----\\nMIICY....\\n-----END CERTIFICATE REQUEST-----\\n',
       validity_days: 3650,
     });
   });
