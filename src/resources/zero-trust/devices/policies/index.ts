@@ -2,6 +2,13 @@
 
 export { DefaultPolicyGetResponse, DefaultPolicyGetParams, DefaultPolicy } from './default-policy';
 export {
+  DevicePolicyCertificates,
+  CertificateUpdateResponse,
+  CertificateGetResponse,
+  CertificateUpdateParams,
+  Certificates,
+} from './certificates';
+export {
   FallbackDomain,
   FallbackDomainPolicy,
   FallbackDomainUpdateResponse,
