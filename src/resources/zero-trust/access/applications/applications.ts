@@ -9,6 +9,7 @@ import * as AccessAPI from '../access';
 import * as CAsAPI from './cas';
 import * as PoliciesAPI from './policies';
 import * as UserPolicyChecksAPI from './user-policy-checks';
+import * as PolicyTestsAPI from './policy-tests/policy-tests';
 import { SinglePage } from '../../../../pagination';
 
 export class Applications extends APIResource {
@@ -17,6 +18,7 @@ export class Applications extends APIResource {
     this._client,
   );
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
 
   /**
    * Adds a new application to Access.
@@ -11886,4 +11888,9 @@ export namespace Applications {
   export import PolicyListParams = PoliciesAPI.PolicyListParams;
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+  export import PolicyTests = PolicyTestsAPI.PolicyTests;
+  export import PolicyTestCreateResponse = PolicyTestsAPI.PolicyTestCreateResponse;
+  export import PolicyTestGetResponse = PolicyTestsAPI.PolicyTestGetResponse;
+  export import PolicyTestCreateParams = PolicyTestsAPI.PolicyTestCreateParams;
+  export import PolicyTestGetParams = PolicyTestsAPI.PolicyTestGetParams;
 }

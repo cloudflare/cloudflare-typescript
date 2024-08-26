@@ -22,6 +22,7 @@ export {
   DatasetsSinglePage,
   Datasets,
 } from './datasets/index';
+export { LimitListResponse, LimitListParams, Limits } from './limits';
 export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';
 export {
   PayloadLogUpdateResponse,

@@ -13,3 +13,4 @@ export {
   Datasets,
 } from './datasets';
 export { NewVersion, UploadCreateParams, UploadEditParams, Upload } from './upload';
+export { VersionCreateResponse, VersionCreateParams, Versions } from './versions/index';

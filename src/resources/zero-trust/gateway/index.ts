@@ -20,7 +20,7 @@ export {
   ConfigurationEditParams,
   ConfigurationGetParams,
   Configurations,
-} from './configurations';
+} from './configurations/index';
 export { AppType, AppTypeListParams, AppTypesSinglePage, AppTypes } from './app-types';
 export { Category, CategoryListParams, CategoriesSinglePage, Categories } from './categories';
 export {

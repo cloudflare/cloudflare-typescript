@@ -19,6 +19,7 @@ export namespace Networks {
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
   export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
   export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
@@ -26,4 +27,5 @@ export namespace Networks {
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
   export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
+  export import VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
 }

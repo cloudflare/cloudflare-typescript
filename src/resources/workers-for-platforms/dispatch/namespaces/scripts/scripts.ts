@@ -316,9 +316,11 @@ export namespace Scripts {
   export import Secrets = SecretsAPI.Secrets;
   export import SecretUpdateResponse = SecretsAPI.SecretUpdateResponse;
   export import SecretListResponse = SecretsAPI.SecretListResponse;
+  export import SecretGetResponse = SecretsAPI.SecretGetResponse;
   export import SecretListResponsesSinglePage = SecretsAPI.SecretListResponsesSinglePage;
   export import SecretUpdateParams = SecretsAPI.SecretUpdateParams;
   export import SecretListParams = SecretsAPI.SecretListParams;
+  export import SecretGetParams = SecretsAPI.SecretGetParams;
   export import Tags = TagsAPI.Tags;
   export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
   export import TagListResponse = TagsAPI.TagListResponse;

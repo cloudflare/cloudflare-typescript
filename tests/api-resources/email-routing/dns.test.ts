@@ -10,6 +10,64 @@ const client = new Cloudflare({
 });
 
 describe('resource dns', () => {
+  test('create', async () => {
+    const responsePromise = client.emailRouting.dns.create('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.emailRouting.dns.create('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('delete', async () => {
+    const responsePromise = client.emailRouting.dns.delete('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.emailRouting.dns.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('edit', async () => {
+    const responsePromise = client.emailRouting.dns.edit('023e105f4ecef8ad9ca31a8372d0c353');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.emailRouting.dns.edit('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
   test('get', async () => {
     const responsePromise = client.emailRouting.dns.get('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();

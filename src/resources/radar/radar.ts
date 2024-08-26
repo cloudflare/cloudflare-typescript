@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import * as DatasetsAPI from './datasets';
 import * as SearchAPI from './search';
 import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
+import * as AIAPI from './ai/ai';
 import * as AnnotationsAPI from './annotations/annotations';
 import * as AS112API from './as112/as112';
 import * as AttacksAPI from './attacks/attacks';
@@ -19,6 +20,7 @@ import * as TrafficAnomaliesAPI from './traffic-anomalies/traffic-anomalies';
 import * as VerifiedBotsAPI from './verified-bots/verified-bots';
 
 export class Radar extends APIResource {
+  ai: AIAPI.AI = new AIAPI.AI(this._client);
   annotations: AnnotationsAPI.Annotations = new AnnotationsAPI.Annotations(this._client);
   bgp: BGPAPI.BGP = new BGPAPI.BGP(this._client);
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
@@ -42,6 +44,7 @@ export class Radar extends APIResource {
 }
 
 export namespace Radar {
+  export import AI = AIAPI.AI;
   export import Annotations = AnnotationsAPI.Annotations;
   export import AnnotationListResponse = AnnotationsAPI.AnnotationListResponse;
   export import AnnotationListParams = AnnotationsAPI.AnnotationListParams;
