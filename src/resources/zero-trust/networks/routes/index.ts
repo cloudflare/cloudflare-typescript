@@ -10,6 +10,7 @@ export {
   RouteListParams,
   RouteDeleteParams,
   RouteEditParams,
+  RouteGetParams,
   TeamnetsV4PagePaginationArray,
   Routes,
 } from './routes';

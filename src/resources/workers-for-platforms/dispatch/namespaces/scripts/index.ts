@@ -13,8 +13,10 @@ export {
 export {
   SecretUpdateResponse,
   SecretListResponse,
+  SecretGetResponse,
   SecretUpdateParams,
   SecretListParams,
+  SecretGetParams,
   SecretListResponsesSinglePage,
   Secrets,
 } from './secrets';

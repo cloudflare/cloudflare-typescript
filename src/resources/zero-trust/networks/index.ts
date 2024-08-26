@@ -8,6 +8,7 @@ export {
   RouteListParams,
   RouteDeleteParams,
   RouteEditParams,
+  RouteGetParams,
   TeamnetsV4PagePaginationArray,
   Routes,
 } from './routes/index';
@@ -18,6 +19,7 @@ export {
   VirtualNetworkListParams,
   VirtualNetworkDeleteParams,
   VirtualNetworkEditParams,
+  VirtualNetworkGetParams,
   VirtualNetworksSinglePage,
   VirtualNetworks,
 } from './virtual-networks';

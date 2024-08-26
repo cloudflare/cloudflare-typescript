@@ -24,11 +24,14 @@ Types:
 Types:
 
 - <code><a href="./src/resources/accounts/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts/accounts.ts">AccountDeleteResponse</a></code>
 
 Methods:
 
+- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts/accounts.ts">create</a>({ ...params }) -> Account</code>
 - <code title="put /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">update</a>({ ...params }) -> Account</code>
 - <code title="get /accounts">client.accounts.<a href="./src/resources/accounts/accounts.ts">list</a>({ ...params }) -> AccountsV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">delete</a>({ ...params }) -> AccountDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts/accounts.ts">get</a>({ ...params }) -> Account</code>
 
 ## Members
@@ -1126,6 +1129,9 @@ Types:
 
 Methods:
 
+- <code title="post /zones/{zone_identifier}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">create</a>(zoneIdentifier) -> Settings</code>
+- <code title="delete /zones/{zone_identifier}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">delete</a>(zoneIdentifier) -> Settings</code>
+- <code title="patch /zones/{zone_identifier}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">edit</a>(zoneIdentifier) -> Settings</code>
 - <code title="get /zones/{zone_identifier}/email/routing/dns">client.emailRouting.dns.<a href="./src/resources/email-routing/dns.ts">get</a>(zoneIdentifier) -> DNSGetResponse</code>
 
 ## Rules
@@ -3950,11 +3956,13 @@ Types:
 
 - <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretUpdateResponse</a></code>
 - <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretListResponse</a></code>
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretGetResponse</a></code>
 
 Methods:
 
 - <code title="put /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">update</a>(dispatchNamespace, scriptName, { ...params }) -> SecretUpdateResponse</code>
 - <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">list</a>(dispatchNamespace, scriptName, { ...params }) -> SecretListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}">client.workersForPlatforms.dispatch.namespaces.scripts.secrets.<a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">get</a>(dispatchNamespace, scriptName, secretName, { ...params }) -> SecretGetResponse</code>
 
 ##### Tags
 
@@ -4048,11 +4056,23 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/default-policy.ts">DefaultPolicyGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default-policy/default-policy.ts">DefaultPolicyGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.defaultPolicy.<a href="./src/resources/zero-trust/devices/policies/default-policy.ts">get</a>({ ...params }) -> DefaultPolicyGetResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.defaultPolicy.<a href="./src/resources/zero-trust/devices/policies/default-policy/default-policy.ts">get</a>({ ...params }) -> DefaultPolicyGetResponse | null</code>
+
+##### Certificates
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">CertificateListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">CertificateEditResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.defaultPolicy.certificates.<a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">list</a>(zoneTag) -> CertificateListResponse</code>
+- <code title="patch /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.defaultPolicy.certificates.<a href="./src/resources/zero-trust/devices/policies/default-policy/certificates.ts">edit</a>(zoneTag, { ...params }) -> CertificateEditResponse</code>
 
 #### Excludes
 
@@ -4164,6 +4184,7 @@ Methods:
 
 - <code title="put /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">update</a>({ ...params }) -> DeviceSettings | null</code>
 - <code title="get /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">list</a>({ ...params }) -> DeviceSettings | null</code>
+- <code title="patch /accounts/{account_id}/devices/settings">client.zeroTrust.devices.settings.<a href="./src/resources/zero-trust/devices/settings.ts">edit</a>({ ...params }) -> DeviceSettings | null</code>
 
 ### Unrevoke
 
@@ -4339,6 +4360,28 @@ Methods:
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">list</a>(appId, { ...params }) -> ApplicationPoliciesSinglePage</code>
 - <code title="delete /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">delete</a>(appId, policyId, { ...params }) -> PolicyDeleteResponse</code>
 - <code title="get /{account_or_zone}/{account_or_zone_id}/access/apps/{app_id}/policies/{policy_id}">client.zeroTrust.access.applications.policies.<a href="./src/resources/zero-trust/access/applications/policies.ts">get</a>(appId, policyId, { ...params }) -> ApplicationPolicy</code>
+
+#### PolicyTests
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">PolicyTestCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">PolicyTestGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/access/policy-tests">client.zeroTrust.access.applications.policyTests.<a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">create</a>({ ...params }) -> PolicyTestCreateResponse</code>
+- <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}">client.zeroTrust.access.applications.policyTests.<a href="./src/resources/zero-trust/access/applications/policy-tests/policy-tests.ts">get</a>(policyTestId, { ...params }) -> PolicyTestGetResponse</code>
+
+##### Users
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">UserListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/access/policy-tests/{policy_test_id}/users">client.zeroTrust.access.applications.policyTests.users.<a href="./src/resources/zero-trust/access/applications/policy-tests/users.ts">list</a>(policyTestId, { ...params }) -> UserListResponse</code>
 
 ### Certificates
 
@@ -4755,6 +4798,26 @@ Methods:
 - <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">create</a>(datasetId, { ...params }) -> NewVersion</code>
 - <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/upload/{version}">client.zeroTrust.dlp.datasets.upload.<a href="./src/resources/zero-trust/dlp/datasets/upload.ts">edit</a>(datasetId, version, { ...params }) -> Dataset</code>
 
+#### Versions
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/datasets/versions/versions.ts">VersionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}">client.zeroTrust.dlp.datasets.versions.<a href="./src/resources/zero-trust/dlp/datasets/versions/versions.ts">create</a>(datasetId, version, [ ...body ]) -> VersionCreateResponse</code>
+
+##### Entries
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/datasets/versions/entries.ts">EntryCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}">client.zeroTrust.dlp.datasets.versions.entries.<a href="./src/resources/zero-trust/dlp/datasets/versions/entries.ts">create</a>(datasetId, version, entryId, { ...params }) -> EntryCreateResponse</code>
+
 ### Patterns
 
 Types:
@@ -4817,6 +4880,16 @@ Methods:
 - <code title="put /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">update</a>(profileId, { ...params }) -> Profile</code>
 - <code title="get /accounts/{account_id}/dlp/profiles/predefined/{profile_id}">client.zeroTrust.dlp.profiles.predefined.<a href="./src/resources/zero-trust/dlp/profiles/predefined.ts">get</a>(profileId, { ...params }) -> Profile</code>
 
+### Limits
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/limits.ts">LimitListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dlp/limits">client.zeroTrust.dlp.limits.<a href="./src/resources/zero-trust/dlp/limits.ts">list</a>({ ...params }) -> LimitListResponse</code>
+
 ## Gateway
 
 Types:
@@ -4864,27 +4937,33 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ActivityLogSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">AntiVirusSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">BlockPageSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">BodyScanningSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">BrowserIsolationSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">CustomCertificateSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ExtendedEmailMatching</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">FipsSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">GatewayConfigurationSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">NotificationSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ProtocolDetection</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">TLSSettings</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationEditResponse</a></code>
-- <code><a href="./src/resources/zero-trust/gateway/configurations.ts">ConfigurationGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ActivityLogSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">AntiVirusSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">BlockPageSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">BodyScanningSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">BrowserIsolationSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">CustomCertificateSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ExtendedEmailMatching</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">FipsSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">GatewayConfigurationSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">NotificationSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ProtocolDetection</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">TLSSettings</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ConfigurationUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ConfigurationEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">ConfigurationGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
-- <code title="patch /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations.ts">edit</a>({ ...params }) -> ConfigurationEditResponse</code>
-- <code title="get /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations.ts">get</a>({ ...params }) -> ConfigurationGetResponse</code>
+- <code title="put /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">update</a>({ ...params }) -> ConfigurationUpdateResponse</code>
+- <code title="patch /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">edit</a>({ ...params }) -> ConfigurationEditResponse</code>
+- <code title="get /accounts/{account_id}/gateway/configuration">client.zeroTrust.gateway.configurations.<a href="./src/resources/zero-trust/gateway/configurations/configurations.ts">get</a>({ ...params }) -> ConfigurationGetResponse</code>
+
+#### CustomCertificate
+
+Methods:
+
+- <code title="get /accounts/{account_id}/gateway/configuration/custom_certificate">client.zeroTrust.gateway.configurations.customCertificate.<a href="./src/resources/zero-trust/gateway/configurations/custom-certificate.ts">get</a>({ ...params }) -> CustomCertificateSettings</code>
 
 ### Lists
 
@@ -5020,6 +5099,7 @@ Methods:
 - <code title="get /accounts/{account_id}/teamnet/routes">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">list</a>({ ...params }) -> TeamnetsV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/teamnet/routes/{route_id}">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">delete</a>(routeId, { ...params }) -> Route</code>
 - <code title="patch /accounts/{account_id}/teamnet/routes/{route_id}">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">edit</a>(routeId, { ...params }) -> Route</code>
+- <code title="get /accounts/{account_id}/teamnet/routes/{route_id}">client.zeroTrust.networks.routes.<a href="./src/resources/zero-trust/networks/routes/routes.ts">get</a>(routeId, { ...params }) -> Route</code>
 
 #### IPs
 
@@ -5047,6 +5127,7 @@ Methods:
 - <code title="get /accounts/{account_id}/teamnet/virtual_networks">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">list</a>({ ...params }) -> VirtualNetworksSinglePage</code>
 - <code title="delete /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">delete</a>(virtualNetworkId, { ...params }) -> VirtualNetwork</code>
 - <code title="patch /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">edit</a>(virtualNetworkId, { ...params }) -> VirtualNetwork</code>
+- <code title="get /accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}">client.zeroTrust.networks.virtualNetworks.<a href="./src/resources/zero-trust/networks/virtual-networks.ts">get</a>(virtualNetworkId, { ...params }) -> VirtualNetwork</code>
 
 ## RiskScoring
 
@@ -5259,6 +5340,38 @@ Methods:
 
 # Radar
 
+## AI
+
+### Gateway
+
+#### Summary
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/gateway/summary.ts">SummaryModelResponse</a></code>
+- <code><a href="./src/resources/radar/ai/gateway/summary.ts">SummaryProviderResponse</a></code>
+- <code><a href="./src/resources/radar/ai/gateway/summary.ts">SummaryTaskResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/summary/model">client.radar.ai.gateway.summary.<a href="./src/resources/radar/ai/gateway/summary.ts">model</a>({ ...params }) -> SummaryModelResponse</code>
+- <code title="get /radar/ai/gateway/summary/provider">client.radar.ai.gateway.summary.<a href="./src/resources/radar/ai/gateway/summary.ts">provider</a>({ ...params }) -> SummaryProviderResponse</code>
+- <code title="get /radar/ai/inference/summary/task">client.radar.ai.gateway.summary.<a href="./src/resources/radar/ai/gateway/summary.ts">task</a>({ ...params }) -> SummaryTaskResponse</code>
+
+#### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/gateway/timeseries-groups.ts">TimeseriesGroupModelResponse</a></code>
+- <code><a href="./src/resources/radar/ai/gateway/timeseries-groups.ts">TimeseriesGroupProviderResponse</a></code>
+- <code><a href="./src/resources/radar/ai/gateway/timeseries-groups.ts">TimeseriesGroupTaskResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/inference/timeseries_groups/model">client.radar.ai.gateway.timeseriesGroups.<a href="./src/resources/radar/ai/gateway/timeseries-groups.ts">model</a>({ ...params }) -> TimeseriesGroupModelResponse</code>
+- <code title="get /radar/ai/gateway/timeseries_groups/provider">client.radar.ai.gateway.timeseriesGroups.<a href="./src/resources/radar/ai/gateway/timeseries-groups.ts">provider</a>({ ...params }) -> TimeseriesGroupProviderResponse</code>
+- <code title="get /radar/ai/inference/timeseries_groups/task">client.radar.ai.gateway.timeseriesGroups.<a href="./src/resources/radar/ai/gateway/timeseries-groups.ts">task</a>({ ...params }) -> TimeseriesGroupTaskResponse</code>
+
 ## Annotations
 
 Types:
@@ -5412,6 +5525,7 @@ Types:
 - <code><a href="./src/resources/radar/dns/summary.ts">SummaryProtocolResponse</a></code>
 - <code><a href="./src/resources/radar/dns/summary.ts">SummaryQueryTypeResponse</a></code>
 - <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseCodesResponse</a></code>
+- <code><a href="./src/resources/radar/dns/summary.ts">SummaryResponseTTLResponse</a></code>
 
 Methods:
 
@@ -5424,6 +5538,7 @@ Methods:
 - <code title="get /radar/dns/summary/protocol">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">protocol</a>({ ...params }) -> SummaryProtocolResponse</code>
 - <code title="get /radar/dns/summary/query_type">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">queryType</a>({ ...params }) -> SummaryQueryTypeResponse</code>
 - <code title="get /radar/dns/summary/response_codes">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseCodes</a>({ ...params }) -> SummaryResponseCodesResponse</code>
+- <code title="get /radar/dns/summary/response_ttl">client.radar.dns.summary.<a href="./src/resources/radar/dns/summary.ts">responseTTL</a>({ ...params }) -> SummaryResponseTTLResponse</code>
 
 ### TimeseriesGroups
 
@@ -6605,3 +6720,31 @@ Methods:
 
 - <code title="put /zones/{zone_id}/cloud_connector/rules">client.cloudConnector.rules.<a href="./src/resources/cloud-connector/rules.ts">update</a>([ ...body ]) -> RuleUpdateResponse</code>
 - <code title="get /zones/{zone_id}/cloud_connector/rules">client.cloudConnector.rules.<a href="./src/resources/cloud-connector/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
+
+# BotnetFeed
+
+## ASN
+
+Types:
+
+- <code><a href="./src/resources/botnet-feed/asn.ts">ASNDayReportResponse</a></code>
+- <code><a href="./src/resources/botnet-feed/asn.ts">ASNFullReportResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/botnet_feed/asn/{asn_id}/day_report">client.botnetFeed.asn.<a href="./src/resources/botnet-feed/asn.ts">dayReport</a>(asnId, { ...params }) -> ASNDayReportResponse</code>
+- <code title="get /accounts/{account_id}/botnet_feed/asn/{asn_id}/full_report">client.botnetFeed.asn.<a href="./src/resources/botnet-feed/asn.ts">fullReport</a>(asnId, { ...params }) -> ASNFullReportResponse</code>
+
+## Configs
+
+### ASN
+
+Types:
+
+- <code><a href="./src/resources/botnet-feed/configs/asn.ts">ASNDeleteResponse</a></code>
+- <code><a href="./src/resources/botnet-feed/configs/asn.ts">ASNGetResponse</a></code>
+
+Methods:
+
+- <code title="delete /accounts/{account_id}/botnet_feed/configs/asn/{asn_id}">client.botnetFeed.configs.asn.<a href="./src/resources/botnet-feed/configs/asn.ts">delete</a>(asnId, { ...params }) -> ASNDeleteResponse</code>
+- <code title="get /accounts/{account_id}/botnet_feed/configs/asn">client.botnetFeed.configs.asn.<a href="./src/resources/botnet-feed/configs/asn.ts">get</a>({ ...params }) -> ASNGetResponse</code>

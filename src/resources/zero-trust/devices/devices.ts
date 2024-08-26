@@ -243,6 +243,7 @@ export namespace Devices {
   export import DeviceSettings = SettingsAPI.DeviceSettings;
   export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
   export import SettingListParams = SettingsAPI.SettingListParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import Unrevoke = UnrevokeAPI.Unrevoke;
   export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
   export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;

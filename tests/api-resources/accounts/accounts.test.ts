@@ -10,6 +10,25 @@ const client = new Cloudflare({
 });
 
 describe('resource accounts', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.accounts.create({ name: 'name', type: 'standard' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.accounts.create({
+      name: 'name',
+      type: 'standard',
+      unit: { id: 'f267e341f3dd4697bd3b9f71dd96247f' },
+    });
+  });
+
   test('update: only required params', async () => {
     const responsePromise = client.accounts.update({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
@@ -63,6 +82,21 @@ describe('resource accounts', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.accounts.delete({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.accounts.delete({ account_id: 'account_id' });
   });
 
   test('get: only required params', async () => {

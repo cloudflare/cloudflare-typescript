@@ -67,6 +67,23 @@ export class VirtualNetworks extends APIResource {
       }) as Core.APIPromise<{ result: VirtualNetwork }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get a virtual network.
+   */
+  get(
+    virtualNetworkId: string,
+    params: VirtualNetworkGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<VirtualNetwork> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/teamnet/virtual_networks/${virtualNetworkId}`,
+        options,
+      ) as Core.APIPromise<{ result: VirtualNetwork }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class VirtualNetworksSinglePage extends SinglePage<VirtualNetwork> {}
@@ -186,6 +203,13 @@ export interface VirtualNetworkEditParams {
   name?: string;
 }
 
+export interface VirtualNetworkGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export namespace VirtualNetworks {
   export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
   export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
@@ -193,4 +217,5 @@ export namespace VirtualNetworks {
   export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
   export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
   export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
+  export import VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
 }

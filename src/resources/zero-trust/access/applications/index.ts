@@ -62,6 +62,13 @@ export {
   CAs,
 } from './cas';
 export {
+  PolicyTestCreateResponse,
+  PolicyTestGetResponse,
+  PolicyTestCreateParams,
+  PolicyTestGetParams,
+  PolicyTests,
+} from './policy-tests/index';
+export {
   UserPolicyCheckGeo,
   UserPolicyCheckListResponse,
   UserPolicyCheckListParams,

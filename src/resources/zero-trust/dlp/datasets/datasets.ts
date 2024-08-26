@@ -4,10 +4,12 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as DatasetsAPI from './datasets';
 import * as UploadAPI from './upload';
+import * as VersionsAPI from './versions/versions';
 import { SinglePage } from '../../../../pagination';
 
 export class Datasets extends APIResource {
   upload: UploadAPI.Upload = new UploadAPI.Upload(this._client);
+  versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
 
   /**
    * Create a new dataset
@@ -228,4 +230,7 @@ export namespace Datasets {
   export import NewVersion = UploadAPI.NewVersion;
   export import UploadCreateParams = UploadAPI.UploadCreateParams;
   export import UploadEditParams = UploadAPI.UploadEditParams;
+  export import Versions = VersionsAPI.Versions;
+  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
+  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
 }

@@ -12,6 +12,15 @@ export class Accounts extends APIResource {
   roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
 
   /**
+   * Create an account (only available for tenant admins at this time)
+   */
+  create(body: AccountCreateParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
+    return (
+      this._client.post('/accounts', { body, ...options }) as Core.APIPromise<{ result: Account }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Update an existing account.
    */
   update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
@@ -39,6 +48,23 @@ export class Accounts extends APIResource {
       return this.list({}, query);
     }
     return this._client.getAPIList('/accounts', AccountsV4PagePaginationArray, { query, ...options });
+  }
+
+  /**
+   * Delete a specific account (only available for tenant admins at this time). This
+   * is a permanent operation that will delete any zones or other resources under the
+   * account
+   */
+  delete(
+    params: AccountDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountDeleteResponse | null> {
+    const { account_id } = params;
+    return (
+      this._client.delete(`/accounts/${account_id}`, options) as Core.APIPromise<{
+        result: AccountDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -116,6 +142,47 @@ export namespace Account {
   }
 }
 
+export interface AccountDeleteResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+}
+
+export interface AccountCreateParams {
+  /**
+   * Account name
+   */
+  name: string;
+
+  /**
+   * the type of account being created. For self-serve customers, use standard. for
+   * enterprise customers, use enterprise.
+   */
+  type: 'standard' | 'enterprise';
+
+  /**
+   * information related to the tenant unit, and optionally, an id of the unit to
+   * create the account on. see
+   * https://developers.cloudflare.com/tenant/how-to/manage-accounts/
+   */
+  unit?: AccountCreateParams.Unit;
+}
+
+export namespace AccountCreateParams {
+  /**
+   * information related to the tenant unit, and optionally, an id of the unit to
+   * create the account on. see
+   * https://developers.cloudflare.com/tenant/how-to/manage-accounts/
+   */
+  export interface Unit {
+    /**
+     * Tenant unit ID
+     */
+    id?: string;
+  }
+}
+
 export interface AccountUpdateParams {
   /**
    * Path param: Account identifier tag.
@@ -183,6 +250,13 @@ export interface AccountListParams extends V4PagePaginationArrayParams {
    * Name of the account.
    */
   name?: string;
+}
+
+export interface AccountDeleteParams {
+  /**
+   * The account ID of the account to be deleted
+   */
+  account_id: string;
 }
 
 export interface AccountGetParams {
