@@ -2,11 +2,7 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Summary } from './summary';
-import { TimeseriesGroups } from './timeseries-groups';
-import { Top } from './top/top';
 import * as Layer3API from './layer3';
 import * as SummaryAPI from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
@@ -14,19 +10,31 @@ import * as TopAPI from './top/top';
 
 export class Layer3 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
-  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(this._client);
+  timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
+    this._client,
+  );
   top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
    * Get attacks change over time by bytes.
    */
-  timeseries(query?: Layer3TimeseriesParams, options?: Core.RequestOptions): Core.APIPromise<Layer3TimeseriesResponse>
-  timeseries(options?: Core.RequestOptions): Core.APIPromise<Layer3TimeseriesResponse>
-  timeseries(query: Layer3TimeseriesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<Layer3TimeseriesResponse> {
+  timeseries(
+    query?: Layer3TimeseriesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Layer3TimeseriesResponse>;
+  timeseries(options?: Core.RequestOptions): Core.APIPromise<Layer3TimeseriesResponse>;
+  timeseries(
+    query: Layer3TimeseriesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Layer3TimeseriesResponse> {
     if (isRequestOptions(query)) {
       return this.timeseries({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/timeseries', { query, ...options }) as Core.APIPromise<{ result: Layer3TimeseriesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/timeseries', { query, ...options }) as Core.APIPromise<{
+        result: Layer3TimeseriesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

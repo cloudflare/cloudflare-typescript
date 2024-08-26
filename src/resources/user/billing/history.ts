@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as HistoryAPI from './history';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -11,18 +10,28 @@ export class History extends APIResource {
   /**
    * Accesses your billing history object.
    */
-  list(query?: HistoryListParams, options?: Core.RequestOptions): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory>
-  list(options?: Core.RequestOptions): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory>
-  list(query: HistoryListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory> {
+  list(
+    query?: HistoryListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory>;
+  list(
+    query: HistoryListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BillingHistoriesV4PagePaginationArray, BillingHistory> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/billing/history', BillingHistoriesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList('/user/billing/history', BillingHistoriesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 }
 
-export class BillingHistoriesV4PagePaginationArray extends V4PagePaginationArray<BillingHistory> {
-}
+export class BillingHistoriesV4PagePaginationArray extends V4PagePaginationArray<BillingHistory> {}
 
 export interface BillingHistory {
   /**

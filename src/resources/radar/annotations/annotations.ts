@@ -2,9 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Outages } from './outages';
 import * as AnnotationsAPI from './annotations';
 import * as OutagesAPI from './outages';
 
@@ -14,13 +12,20 @@ export class Annotations extends APIResource {
   /**
    * Get latest annotations.
    */
-  list(query?: AnnotationListParams, options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>
-  list(options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>
-  list(query: AnnotationListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse> {
+  list(query?: AnnotationListParams, options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;
+  list(
+    query: AnnotationListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AnnotationListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (this._client.get('/radar/annotations', { query, ...options }) as Core.APIPromise<{ result: AnnotationListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/annotations', { query, ...options }) as Core.APIPromise<{
+        result: AnnotationListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

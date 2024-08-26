@@ -2,7 +2,6 @@
 
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
-import { APIPromise } from '../core';
 import * as Core from '../core';
 import * as RateLimitsAPI from './rate-limits';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
@@ -14,8 +13,16 @@ export class RateLimits extends APIResource {
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
-  create(zoneIdentifier: string, body: RateLimitCreateParams, options?: Core.RequestOptions): Core.APIPromise<RateLimitCreateResponse> {
-    return (this._client.post(`/zones/${zoneIdentifier}/rate_limits`, { body, ...options }) as Core.APIPromise<{ result: RateLimitCreateResponse }>)._thenUnwrap((obj) => obj.result);
+  create(
+    zoneIdentifier: string,
+    body: RateLimitCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimitCreateResponse> {
+    return (
+      this._client.post(`/zones/${zoneIdentifier}/rate_limits`, { body, ...options }) as Core.APIPromise<{
+        result: RateLimitCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -23,13 +30,27 @@ export class RateLimits extends APIResource {
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
-  list(zoneIdentifier: string, query?: RateLimitListParams, options?: Core.RequestOptions): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>
-  list(zoneIdentifier: string, options?: Core.RequestOptions): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>
-  list(zoneIdentifier: string, query: RateLimitListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit> {
+  list(
+    zoneIdentifier: string,
+    query?: RateLimitListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>;
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit>;
+  list(
+    zoneIdentifier: string,
+    query: RateLimitListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<RateLimitsV4PagePaginationArray, RateLimit> {
     if (isRequestOptions(query)) {
       return this.list(zoneIdentifier, {}, query);
     }
-    return this._client.getAPIList(`/zones/${zoneIdentifier}/rate_limits`, RateLimitsV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(`/zones/${zoneIdentifier}/rate_limits`, RateLimitsV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -37,8 +58,16 @@ export class RateLimits extends APIResource {
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
-  delete(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<RateLimitDeleteResponse> {
-    return (this._client.delete(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{ result: RateLimitDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+  delete(
+    zoneIdentifier: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimitDeleteResponse> {
+    return (
+      this._client.delete(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{
+        result: RateLimitDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -46,8 +75,18 @@ export class RateLimits extends APIResource {
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
-  edit(zoneIdentifier: string, id: string, body: RateLimitEditParams, options?: Core.RequestOptions): Core.APIPromise<RateLimitEditResponse> {
-    return (this._client.put(`/zones/${zoneIdentifier}/rate_limits/${id}`, { body, ...options }) as Core.APIPromise<{ result: RateLimitEditResponse }>)._thenUnwrap((obj) => obj.result);
+  edit(
+    zoneIdentifier: string,
+    id: string,
+    body: RateLimitEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimitEditResponse> {
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/rate_limits/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RateLimitEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -55,29 +94,43 @@ export class RateLimits extends APIResource {
    *
    * @deprecated Rate limiting API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#rate-limiting-api-previous-version for full details.
    */
-  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<RateLimitGetResponse> {
-    return (this._client.get(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{ result: RateLimitGetResponse }>)._thenUnwrap((obj) => obj.result);
+  get(
+    zoneIdentifier: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RateLimitGetResponse> {
+    return (
+      this._client.get(`/zones/${zoneIdentifier}/rate_limits/${id}`, options) as Core.APIPromise<{
+        result: RateLimitGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RateLimitsV4PagePaginationArray extends V4PagePaginationArray<RateLimit> {
-}
+export class RateLimitsV4PagePaginationArray extends V4PagePaginationArray<RateLimit> {}
 
 /**
  * The action to apply to a matched request. The `log` action is only available on
  * an Enterprise plan.
  */
-export type Action = 'block' | 'challenge' | 'js_challenge' | 'managed_challenge' | 'allow' | 'log' | 'bypass'
+export type Action =
+  | 'block'
+  | 'challenge'
+  | 'js_challenge'
+  | 'managed_challenge'
+  | 'allow'
+  | 'log'
+  | 'bypass';
 
 /**
  * An HTTP method or `_ALL_` to indicate all methods.
  */
-export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'
+export type Methods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
 
 /**
  * An HTTP method or `_ALL_` to indicate all methods.
  */
-export type MethodsParam = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_'
+export type MethodsParam = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | '_ALL_';
 
 export interface RateLimit {
   /**
@@ -256,7 +309,7 @@ export namespace RateLimit {
   }
 }
 
-export type RateLimitCreateResponse = unknown | string | null
+export type RateLimitCreateResponse = unknown | string | null;
 
 export interface RateLimitDeleteResponse {
   /**
@@ -265,9 +318,9 @@ export interface RateLimitDeleteResponse {
   id?: string;
 }
 
-export type RateLimitEditResponse = unknown | string | null
+export type RateLimitEditResponse = unknown | string | null;
 
-export type RateLimitGetResponse = unknown | string | null
+export type RateLimitGetResponse = unknown | string | null;
 
 export interface RateLimitCreateParams {
   /**
@@ -415,8 +468,7 @@ export namespace RateLimitCreateParams {
   }
 }
 
-export interface RateLimitListParams extends V4PagePaginationArrayParams {
-}
+export interface RateLimitListParams extends V4PagePaginationArrayParams {}
 
 export interface RateLimitEditParams {
   /**

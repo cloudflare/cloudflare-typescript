@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as CopyAPI from './copy';
 import * as StreamAPI from './stream';
@@ -12,8 +10,23 @@ export class Copy extends APIResource {
    * Uploads a video to Stream from a provided URL.
    */
   create(params: CopyCreateParams, options?: Core.RequestOptions): Core.APIPromise<StreamAPI.Video> {
-    const { account_id, 'Upload-Creator': uploadCreator, 'Upload-Metadata': uploadMetadata, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/stream/copy`, { body, ...options, headers: { ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined), ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined), ...options?.headers } }) as Core.APIPromise<{ result: StreamAPI.Video }>)._thenUnwrap((obj) => obj.result);
+    const {
+      account_id,
+      'Upload-Creator': uploadCreator,
+      'Upload-Metadata': uploadMetadata,
+      ...body
+    } = params;
+    return (
+      this._client.post(`/accounts/${account_id}/stream/copy`, {
+        body,
+        ...options,
+        headers: {
+          ...(uploadCreator != null ? { 'Upload-Creator': uploadCreator } : undefined),
+          ...(uploadMetadata != null ? { 'Upload-Metadata': uploadMetadata } : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: StreamAPI.Video }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

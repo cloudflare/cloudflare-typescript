@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Previews } from './previews';
-import { References } from './references';
 import * as MonitorsAPI from './monitors';
 import * as PreviewsAPI from './previews';
 import * as ReferencesAPI from './references';
@@ -20,39 +16,78 @@ export class Monitors extends APIResource {
    */
   create(params: MonitorCreateParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/load_balancers/monitors`, { body, ...options }) as Core.APIPromise<{ result: Monitor }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/load_balancers/monitors`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Monitor }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Modify a configured monitor.
    */
-  update(monitorId: string, params: MonitorUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
+  update(
+    monitorId: string,
+    params: MonitorUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Monitor> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, { body, ...options }) as Core.APIPromise<{ result: Monitor }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Monitor }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List configured monitors for an account.
    */
-  list(params: MonitorListParams, options?: Core.RequestOptions): Core.PagePromise<MonitorsSinglePage, Monitor> {
+  list(
+    params: MonitorListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<MonitorsSinglePage, Monitor> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/load_balancers/monitors`, MonitorsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/load_balancers/monitors`,
+      MonitorsSinglePage,
+      options,
+    );
   }
 
   /**
    * Delete a configured monitor.
    */
-  delete(monitorId: string, params: MonitorDeleteParams, options?: Core.RequestOptions): Core.APIPromise<MonitorDeleteResponse> {
+  delete(
+    monitorId: string,
+    params: MonitorDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<MonitorDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, options) as Core.APIPromise<{ result: MonitorDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/load_balancers/monitors/${monitorId}`,
+        options,
+      ) as Core.APIPromise<{ result: MonitorDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Apply changes to an existing monitor, overwriting the supplied properties.
    */
-  edit(monitorId: string, params: MonitorEditParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
+  edit(
+    monitorId: string,
+    params: MonitorEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Monitor> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, { body, ...options }) as Core.APIPromise<{ result: Monitor }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Monitor }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -60,12 +95,16 @@ export class Monitors extends APIResource {
    */
   get(monitorId: string, params: MonitorGetParams, options?: Core.RequestOptions): Core.APIPromise<Monitor> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/load_balancers/monitors/${monitorId}`, options) as Core.APIPromise<{ result: Monitor }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/load_balancers/monitors/${monitorId}`,
+        options,
+      ) as Core.APIPromise<{ result: Monitor }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MonitorsSinglePage extends SinglePage<Monitor> {
-}
+export class MonitorsSinglePage extends SinglePage<Monitor> {}
 
 export interface Monitor {
   id?: string;

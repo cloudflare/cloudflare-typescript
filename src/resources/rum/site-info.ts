@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SiteInfoAPI from './site-info';
 import * as RulesAPI from './rules';
@@ -14,7 +12,11 @@ export class SiteInfo extends APIResource {
    */
   create(params: SiteInfoCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/rum/site_info`, { body, ...options }) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/rum/site_info`, { body, ...options }) as Core.APIPromise<{
+        result: Site;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -22,23 +24,42 @@ export class SiteInfo extends APIResource {
    */
   update(siteId: string, params: SiteInfoUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/rum/site_info/${siteId}`, { body, ...options }) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/rum/site_info/${siteId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Site }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all Web Analytics sites of an account.
    */
-  list(params: SiteInfoListParams, options?: Core.RequestOptions): Core.PagePromise<SitesV4PagePaginationArray, Site> {
+  list(
+    params: SiteInfoListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SitesV4PagePaginationArray, Site> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/rum/site_info/list`, SitesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/rum/site_info/list`, SitesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Deletes an existing Web Analytics site.
    */
-  delete(siteId: string, params: SiteInfoDeleteParams, options?: Core.RequestOptions): Core.APIPromise<SiteInfoDeleteResponse> {
+  delete(
+    siteId: string,
+    params: SiteInfoDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SiteInfoDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{ result: SiteInfoDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
+        result: SiteInfoDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -46,12 +67,15 @@ export class SiteInfo extends APIResource {
    */
   get(siteId: string, params: SiteInfoGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/rum/site_info/${siteId}`, options) as Core.APIPromise<{
+        result: Site;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SitesV4PagePaginationArray extends V4PagePaginationArray<Site> {
-}
+export class SitesV4PagePaginationArray extends V4PagePaginationArray<Site> {}
 
 export interface Site {
   /**

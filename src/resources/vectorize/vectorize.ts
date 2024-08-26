@@ -1,10 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { Indexes } from './indexes/indexes';
 import * as IndexesAPI from './indexes/indexes';
 
 export class Vectorize extends APIResource {

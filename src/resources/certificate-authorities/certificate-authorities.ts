@@ -1,14 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { HostnameAssociations } from './hostname-associations';
 import * as HostnameAssociationsAPI from './hostname-associations';
 
 export class CertificateAuthorities extends APIResource {
-  hostnameAssociations: HostnameAssociationsAPI.HostnameAssociations = new HostnameAssociationsAPI.HostnameAssociations(this._client);
+  hostnameAssociations: HostnameAssociationsAPI.HostnameAssociations =
+    new HostnameAssociationsAPI.HostnameAssociations(this._client);
 }
 
 export namespace CertificateAuthorities {

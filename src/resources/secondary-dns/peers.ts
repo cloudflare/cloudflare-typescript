@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as PeersAPI from './peers';
 import { SinglePage } from '../../pagination';
@@ -13,7 +11,12 @@ export class Peers extends APIResource {
    */
   create(params: PeerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/secondary_dns/peers`, { body, ...options }) as Core.APIPromise<{ result: Peer }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/secondary_dns/peers`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Peer }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -21,7 +24,12 @@ export class Peers extends APIResource {
    */
   update(peerId: string, params: PeerUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, { body, ...options }) as Core.APIPromise<{ result: Peer }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Peer }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -35,9 +43,18 @@ export class Peers extends APIResource {
   /**
    * Delete Peer.
    */
-  delete(peerId: string, params: PeerDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PeerDeleteResponse> {
+  delete(
+    peerId: string,
+    params: PeerDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PeerDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{ result: PeerDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/secondary_dns/peers/${peerId}`,
+        options,
+      ) as Core.APIPromise<{ result: PeerDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -45,12 +62,15 @@ export class Peers extends APIResource {
    */
   get(peerId: string, params: PeerGetParams, options?: Core.RequestOptions): Core.APIPromise<Peer> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{ result: Peer }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/secondary_dns/peers/${peerId}`, options) as Core.APIPromise<{
+        result: Peer;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PeersSinglePage extends SinglePage<Peer> {
-}
+export class PeersSinglePage extends SinglePage<Peer> {}
 
 export interface Peer {
   id: string;

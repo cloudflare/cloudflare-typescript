@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SummaryAPI from './summary';
 
@@ -10,121 +9,218 @@ export class Summary extends APIResource {
   /**
    * Percentage breakdown of DNS queries/responses per Cache Hit status.
    */
-  cacheHit(query?: SummaryCacheHitParams, options?: Core.RequestOptions): Core.APIPromise<SummaryCacheHitResponse>
-  cacheHit(options?: Core.RequestOptions): Core.APIPromise<SummaryCacheHitResponse>
-  cacheHit(query: SummaryCacheHitParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryCacheHitResponse> {
+  cacheHit(
+    query?: SummaryCacheHitParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryCacheHitResponse>;
+  cacheHit(options?: Core.RequestOptions): Core.APIPromise<SummaryCacheHitResponse>;
+  cacheHit(
+    query: SummaryCacheHitParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryCacheHitResponse> {
     if (isRequestOptions(query)) {
       return this.cacheHit({}, query);
     }
-    return (this._client.get('/radar/dns/summary/cache_hit', { query, ...options }) as Core.APIPromise<{ result: SummaryCacheHitResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/cache_hit', { query, ...options }) as Core.APIPromise<{
+        result: SummaryCacheHitResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS responses by DNSSEC support.
    */
-  dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>
-  dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>
-  dnssec(query: SummaryDNSSECParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse> {
+  dnssec(query?: SummaryDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
+  dnssec(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECResponse>;
+  dnssec(
+    query: SummaryDNSSECParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDNSSECResponse> {
     if (isRequestOptions(query)) {
       return this.dnssec({}, query);
     }
-    return (this._client.get('/radar/dns/summary/dnssec', { query, ...options }) as Core.APIPromise<{ result: SummaryDNSSECResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/dnssec', { query, ...options }) as Core.APIPromise<{
+        result: SummaryDNSSECResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries by DNSSEC awareness.
    */
-  dnssecAware(query?: SummaryDNSSECAwareParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECAwareResponse>
-  dnssecAware(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECAwareResponse>
-  dnssecAware(query: SummaryDNSSECAwareParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECAwareResponse> {
+  dnssecAware(
+    query?: SummaryDNSSECAwareParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDNSSECAwareResponse>;
+  dnssecAware(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECAwareResponse>;
+  dnssecAware(
+    query: SummaryDNSSECAwareParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDNSSECAwareResponse> {
     if (isRequestOptions(query)) {
       return this.dnssecAware({}, query);
     }
-    return (this._client.get('/radar/dns/summary/dnssec_aware', { query, ...options }) as Core.APIPromise<{ result: SummaryDNSSECAwareResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/dnssec_aware', { query, ...options }) as Core.APIPromise<{
+        result: SummaryDNSSECAwareResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries/responses per end-to-end security status.
    */
-  dnssecE2E(query?: SummaryDNSSECE2EParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECE2EResponse>
-  dnssecE2E(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECE2EResponse>
-  dnssecE2E(query: SummaryDNSSECE2EParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECE2EResponse> {
+  dnssecE2E(
+    query?: SummaryDNSSECE2EParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDNSSECE2EResponse>;
+  dnssecE2E(options?: Core.RequestOptions): Core.APIPromise<SummaryDNSSECE2EResponse>;
+  dnssecE2E(
+    query: SummaryDNSSECE2EParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDNSSECE2EResponse> {
     if (isRequestOptions(query)) {
       return this.dnssecE2E({}, query);
     }
-    return (this._client.get('/radar/dns/summary/dnssec_e2e', { query, ...options }) as Core.APIPromise<{ result: SummaryDNSSECE2EResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/dnssec_e2e', { query, ...options }) as Core.APIPromise<{
+        result: SummaryDNSSECE2EResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries per IP version used.
    */
-  ipVersion(query?: SummaryIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
-  ipVersion(query: SummaryIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse> {
+  ipVersion(
+    query?: SummaryIPVersionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryIPVersionResponse>;
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>;
+  ipVersion(
+    query: SummaryIPVersionParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (this._client.get('/radar/dns/summary/ip_version', { query, ...options }) as Core.APIPromise<{ result: SummaryIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/ip_version', { query, ...options }) as Core.APIPromise<{
+        result: SummaryIPVersionResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries with/without matching answers.
    */
-  matchingAnswer(query?: SummaryMatchingAnswerParams, options?: Core.RequestOptions): Core.APIPromise<SummaryMatchingAnswerResponse>
-  matchingAnswer(options?: Core.RequestOptions): Core.APIPromise<SummaryMatchingAnswerResponse>
-  matchingAnswer(query: SummaryMatchingAnswerParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryMatchingAnswerResponse> {
+  matchingAnswer(
+    query?: SummaryMatchingAnswerParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryMatchingAnswerResponse>;
+  matchingAnswer(options?: Core.RequestOptions): Core.APIPromise<SummaryMatchingAnswerResponse>;
+  matchingAnswer(
+    query: SummaryMatchingAnswerParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryMatchingAnswerResponse> {
     if (isRequestOptions(query)) {
       return this.matchingAnswer({}, query);
     }
-    return (this._client.get('/radar/dns/summary/matching_answer', { query, ...options }) as Core.APIPromise<{ result: SummaryMatchingAnswerResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/matching_answer', { query, ...options }) as Core.APIPromise<{
+        result: SummaryMatchingAnswerResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries per DNS transport protocol used.
    */
-  protocol(query?: SummaryProtocolParams, options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>
-  protocol(options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>
-  protocol(query: SummaryProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse> {
+  protocol(
+    query?: SummaryProtocolParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryProtocolResponse>;
+  protocol(options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>;
+  protocol(
+    query: SummaryProtocolParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.protocol({}, query);
     }
-    return (this._client.get('/radar/dns/summary/protocol', { query, ...options }) as Core.APIPromise<{ result: SummaryProtocolResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/protocol', { query, ...options }) as Core.APIPromise<{
+        result: SummaryProtocolResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of DNS queries per query type.
    */
-  queryType(query?: SummaryQueryTypeParams, options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse>
-  queryType(options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse>
-  queryType(query: SummaryQueryTypeParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse> {
+  queryType(
+    query?: SummaryQueryTypeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryQueryTypeResponse>;
+  queryType(options?: Core.RequestOptions): Core.APIPromise<SummaryQueryTypeResponse>;
+  queryType(
+    query: SummaryQueryTypeParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryQueryTypeResponse> {
     if (isRequestOptions(query)) {
       return this.queryType({}, query);
     }
-    return (this._client.get('/radar/dns/summary/query_type', { query, ...options }) as Core.APIPromise<{ result: SummaryQueryTypeResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/query_type', { query, ...options }) as Core.APIPromise<{
+        result: SummaryQueryTypeResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS responses per response code.
    */
-  responseCodes(query?: SummaryResponseCodesParams, options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse>
-  responseCodes(options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse>
-  responseCodes(query: SummaryResponseCodesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse> {
+  responseCodes(
+    query?: SummaryResponseCodesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryResponseCodesResponse>;
+  responseCodes(options?: Core.RequestOptions): Core.APIPromise<SummaryResponseCodesResponse>;
+  responseCodes(
+    query: SummaryResponseCodesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryResponseCodesResponse> {
     if (isRequestOptions(query)) {
       return this.responseCodes({}, query);
     }
-    return (this._client.get('/radar/dns/summary/response_codes', { query, ...options }) as Core.APIPromise<{ result: SummaryResponseCodesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/response_codes', { query, ...options }) as Core.APIPromise<{
+        result: SummaryResponseCodesResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage breakdown of DNS queries per minimum answer TTL.
    */
-  responseTTL(query?: SummaryResponseTTLParams, options?: Core.RequestOptions): Core.APIPromise<SummaryResponseTTLResponse>
-  responseTTL(options?: Core.RequestOptions): Core.APIPromise<SummaryResponseTTLResponse>
-  responseTTL(query: SummaryResponseTTLParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryResponseTTLResponse> {
+  responseTTL(
+    query?: SummaryResponseTTLParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryResponseTTLResponse>;
+  responseTTL(options?: Core.RequestOptions): Core.APIPromise<SummaryResponseTTLResponse>;
+  responseTTL(
+    query: SummaryResponseTTLParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryResponseTTLResponse> {
     if (isRequestOptions(query)) {
       return this.responseTTL({}, query);
     }
-    return (this._client.get('/radar/dns/summary/response_ttl', { query, ...options }) as Core.APIPromise<{ result: SummaryResponseTTLResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/dns/summary/response_ttl', { query, ...options }) as Core.APIPromise<{
+        result: SummaryResponseTTLResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

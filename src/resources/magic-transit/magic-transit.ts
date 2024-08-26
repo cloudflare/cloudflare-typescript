@@ -1,17 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { Apps } from './apps';
-import { CfInterconnects } from './cf-interconnects';
-import { GRETunnels } from './gre-tunnels';
-import { IPSECTunnels } from './ipsec-tunnels';
-import { Routes } from './routes';
-import { Sites } from './sites/sites';
-import { Connectors } from './connectors';
-import * as MagicTransitAPI from './magic-transit';
 import * as AppsAPI from './apps';
 import * as CfInterconnectsAPI from './cf-interconnects';
 import * as ConnectorsAPI from './connectors';
@@ -105,22 +94,22 @@ export interface HealthCheckParam {
 /**
  * How frequent the health check is run. The default value is `mid`.
  */
-export type HealthCheckRate = 'low' | 'mid' | 'high'
+export type HealthCheckRate = 'low' | 'mid' | 'high';
 
 /**
  * How frequent the health check is run. The default value is `mid`.
  */
-export type HealthCheckRateParam = 'low' | 'mid' | 'high'
+export type HealthCheckRateParam = 'low' | 'mid' | 'high';
 
 /**
  * The type of healthcheck to run, reply or request. The default value is `reply`.
  */
-export type HealthCheckType = 'reply' | 'request'
+export type HealthCheckType = 'reply' | 'request';
 
 /**
  * The type of healthcheck to run, reply or request. The default value is `reply`.
  */
-export type HealthCheckTypeParam = 'reply' | 'request'
+export type HealthCheckTypeParam = 'reply' | 'request';
 
 export namespace MagicTransit {
   export import Apps = AppsAPI.Apps;

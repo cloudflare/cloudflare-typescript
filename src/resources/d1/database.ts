@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DatabaseAPI from './database';
 import * as D1API from './d1';
@@ -14,23 +12,42 @@ export class Database extends APIResource {
    */
   create(params: DatabaseCreateParams, options?: Core.RequestOptions): Core.APIPromise<D1API.D1> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/d1/database`, { body, ...options }) as Core.APIPromise<{ result: D1API.D1 }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/d1/database`, { body, ...options }) as Core.APIPromise<{
+        result: D1API.D1;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns a list of D1 databases.
    */
-  list(params: DatabaseListParams, options?: Core.RequestOptions): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse> {
+  list(
+    params: DatabaseListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DatabaseListResponsesV4PagePaginationArray, DatabaseListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/d1/database`, DatabaseListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/d1/database`,
+      DatabaseListResponsesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Deletes the specified D1 database.
    */
-  delete(databaseId: string, params: DatabaseDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DatabaseDeleteResponse | null> {
+  delete(
+    databaseId: string,
+    params: DatabaseDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{ result: DatabaseDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{
+        result: DatabaseDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -39,17 +56,34 @@ export class Database extends APIResource {
    * unavailable to serve queries. To avoid blocking your DB unnecessarily, an
    * in-progress export must be continually polled or will automatically cancel.
    */
-  export(databaseId: string, params: DatabaseExportParams, options?: Core.RequestOptions): Core.APIPromise<DatabaseExportResponse> {
+  export(
+    databaseId: string,
+    params: DatabaseExportParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseExportResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/export`, { body, ...options }) as Core.APIPromise<{ result: DatabaseExportResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/export`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatabaseExportResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the specified D1 database.
    */
-  get(databaseId: string, params: DatabaseGetParams, options?: Core.RequestOptions): Core.APIPromise<D1API.D1> {
+  get(
+    databaseId: string,
+    params: DatabaseGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<D1API.D1> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{ result: D1API.D1 }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/d1/database/${databaseId}`, options) as Core.APIPromise<{
+        result: D1API.D1;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -57,31 +91,57 @@ export class Database extends APIResource {
    * to import it and polling it for status updates. Imports block the D1 for their
    * duration.
    */
-  import(databaseId: string, params: DatabaseImportParams, options?: Core.RequestOptions): Core.APIPromise<DatabaseImportResponse> {
+  import(
+    databaseId: string,
+    params: DatabaseImportParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseImportResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/import`, { body, ...options }) as Core.APIPromise<{ result: DatabaseImportResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/import`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatabaseImportResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the query result as an object.
    */
-  query(databaseId: string, params: DatabaseQueryParams, options?: Core.RequestOptions): Core.APIPromise<DatabaseQueryResponse> {
+  query(
+    databaseId: string,
+    params: DatabaseQueryParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseQueryResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/query`, { body, ...options }) as Core.APIPromise<{ result: DatabaseQueryResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/query`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatabaseQueryResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Returns the query result rows as arrays rather than objects. This is a
    * performance-optimized version of the /query endpoint.
    */
-  raw(databaseId: string, params: DatabaseRawParams, options?: Core.RequestOptions): Core.APIPromise<DatabaseRawResponse> {
+  raw(
+    databaseId: string,
+    params: DatabaseRawParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DatabaseRawResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/raw`, { body, ...options }) as Core.APIPromise<{ result: DatabaseRawResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/d1/database/${databaseId}/raw`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DatabaseRawResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DatabaseListResponsesV4PagePaginationArray extends V4PagePaginationArray<DatabaseListResponse> {
-}
+export class DatabaseListResponsesV4PagePaginationArray extends V4PagePaginationArray<DatabaseListResponse> {}
 
 export interface QueryResult {
   meta?: QueryResult.Meta;
@@ -122,7 +182,7 @@ export interface DatabaseListResponse {
   version?: string;
 }
 
-export type DatabaseDeleteResponse = unknown
+export type DatabaseDeleteResponse = unknown;
 
 export interface DatabaseExportResponse {
   /**
@@ -251,9 +311,9 @@ export namespace DatabaseImportResponse {
   }
 }
 
-export type DatabaseQueryResponse = Array<QueryResult>
+export type DatabaseQueryResponse = Array<QueryResult>;
 
-export type DatabaseRawResponse = Array<DatabaseRawResponse.DatabaseRawResponseItem>
+export type DatabaseRawResponse = Array<DatabaseRawResponse.DatabaseRawResponseItem>;
 
 export namespace DatabaseRawResponse {
   export interface DatabaseRawResponseItem {
@@ -378,7 +438,10 @@ export interface DatabaseGetParams {
   account_id: string;
 }
 
-export type DatabaseImportParams = DatabaseImportParams.Variant0 | DatabaseImportParams.Variant1 | DatabaseImportParams.Variant2
+export type DatabaseImportParams =
+  | DatabaseImportParams.Variant0
+  | DatabaseImportParams.Variant1
+  | DatabaseImportParams.Variant2;
 
 export namespace DatabaseImportParams {
   export interface Variant0 {

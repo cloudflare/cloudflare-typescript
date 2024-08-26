@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as BehavioursAPI from './behaviours';
 
@@ -10,9 +8,17 @@ export class Behaviours extends APIResource {
   /**
    * Update configuration for risk behaviors
    */
-  update(params: BehaviourUpdateParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourUpdateResponse> {
+  update(
+    params: BehaviourUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BehaviourUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/zt_risk_scoring/behaviors`, { body, ...options }) as Core.APIPromise<{ result: BehaviourUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/zt_risk_scoring/behaviors`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: BehaviourUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +26,11 @@ export class Behaviours extends APIResource {
    */
   get(params: BehaviourGetParams, options?: Core.RequestOptions): Core.APIPromise<BehaviourGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/zt_risk_scoring/behaviors`, options) as Core.APIPromise<{ result: BehaviourGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/behaviors`, options) as Core.APIPromise<{
+        result: BehaviourGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

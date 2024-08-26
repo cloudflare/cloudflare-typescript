@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { MessageResource } from './message';
-import { PriorityResource } from './priority';
 import * as RequestsAPI from './requests';
 import * as Shared from '../../shared';
 import * as MessageAPI from './message';
@@ -21,8 +17,17 @@ export class Requests extends APIResource {
    * In addition to the content, a short title, type, priority, and releasability
    * should be provided. If one is not provided a default will be assigned.
    */
-  create(accountIdentifier: string, body: RequestCreateParams, options?: Core.RequestOptions): Core.APIPromise<Item> {
-    return (this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/new`, { body, ...options }) as Core.APIPromise<{ result: Item }>)._thenUnwrap((obj) => obj.result);
+  create(
+    accountIdentifier: string,
+    body: RequestCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Item> {
+    return (
+      this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/new`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Item }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -30,55 +35,103 @@ export class Requests extends APIResource {
    * be used to update any attributes of the request after the initial submission.
    * Only fields that you choose to update need to be add to the request body
    */
-  update(accountIdentifier: string, requestIdentifier: string, body: RequestUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Item> {
-    return (this._client.put(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`, { body, ...options }) as Core.APIPromise<{ result: Item }>)._thenUnwrap((obj) => obj.result);
+  update(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    body: RequestUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Item> {
+    return (
+      this._client.put(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Item }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List Requests
    */
-  list(accountIdentifier: string, body: RequestListParams, options?: Core.RequestOptions): Core.PagePromise<ListItemsV4PagePaginationArray, ListItem> {
-    return this._client.getAPIList(`/accounts/${accountIdentifier}/cloudforce-one/requests`, ListItemsV4PagePaginationArray, { body, method: "post", ...options });
+  list(
+    accountIdentifier: string,
+    body: RequestListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ListItemsV4PagePaginationArray, ListItem> {
+    return this._client.getAPIList(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests`,
+      ListItemsV4PagePaginationArray,
+      { body, method: 'post', ...options },
+    );
   }
 
   /**
    * Delete a Request
    */
-  delete(accountIdentifier: string, requestIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestDeleteResponse> {
-    return this._client.delete(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`, options);
+  delete(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RequestDeleteResponse> {
+    return this._client.delete(
+      `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
+      options,
+    );
   }
 
   /**
    * Get Request Priority, Status, and TLP constants
    */
   constants(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestConstants> {
-    return (this._client.get(`/accounts/${accountIdentifier}/cloudforce-one/requests/constants`, options) as Core.APIPromise<{ result: RequestConstants }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/constants`,
+        options,
+      ) as Core.APIPromise<{ result: RequestConstants }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a Request
    */
-  get(accountIdentifier: string, requestIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<Item> {
-    return (this._client.get(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`, options) as Core.APIPromise<{ result: Item }>)._thenUnwrap((obj) => obj.result);
+  get(
+    accountIdentifier: string,
+    requestIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Item> {
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: Item }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Request Quota
    */
   quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<Quota> {
-    return (this._client.get(`/accounts/${accountIdentifier}/cloudforce-one/requests/quota`, options) as Core.APIPromise<{ result: Quota }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/quota`,
+        options,
+      ) as Core.APIPromise<{ result: Quota }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Request Types
    */
   types(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestTypes> {
-    return (this._client.get(`/accounts/${accountIdentifier}/cloudforce-one/requests/types`, options) as Core.APIPromise<{ result: RequestTypes }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${accountIdentifier}/cloudforce-one/requests/types`,
+        options,
+      ) as Core.APIPromise<{ result: RequestTypes }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ListItemsV4PagePaginationArray extends V4PagePaginationArray<ListItem> {
-}
+export class ListItemsV4PagePaginationArray extends V4PagePaginationArray<ListItem> {}
 
 export interface Item {
   /**
@@ -224,7 +277,7 @@ export interface RequestConstants {
   tlp?: Array<'clear' | 'amber' | 'amber-strict' | 'green' | 'red'>;
 }
 
-export type RequestTypes = Array<string>
+export type RequestTypes = Array<string>;
 
 export interface RequestDeleteResponse {
   errors: Array<Shared.ResponseInfo>;

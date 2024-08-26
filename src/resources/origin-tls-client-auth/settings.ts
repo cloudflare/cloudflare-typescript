@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
 
@@ -14,7 +12,12 @@ export class Settings extends APIResource {
    */
   update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SettingUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/origin_tls_client_auth/settings`, { body, ...options }) as Core.APIPromise<{ result: SettingUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/origin_tls_client_auth/settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SettingUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -23,7 +26,11 @@ export class Settings extends APIResource {
    */
   get(params: SettingGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/origin_tls_client_auth/settings`, options) as Core.APIPromise<{ result: SettingGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/origin_tls_client_auth/settings`, options) as Core.APIPromise<{
+        result: SettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

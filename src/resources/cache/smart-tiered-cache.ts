@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as SmartTieredCacheAPI from './smart-tiered-cache';
 
@@ -10,25 +8,49 @@ export class SmartTieredCache extends APIResource {
   /**
    * Remvoves enablement of Smart Tiered Cache
    */
-  delete(params: SmartTieredCacheDeleteParams, options?: Core.RequestOptions): Core.APIPromise<SmartTieredCacheDeleteResponse> {
+  delete(
+    params: SmartTieredCacheDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SmartTieredCacheDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, options) as Core.APIPromise<{ result: SmartTieredCacheDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
+        options,
+      ) as Core.APIPromise<{ result: SmartTieredCacheDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates enablement of Tiered Cache
    */
-  edit(params: SmartTieredCacheEditParams, options?: Core.RequestOptions): Core.APIPromise<SmartTieredCacheEditResponse> {
+  edit(
+    params: SmartTieredCacheEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SmartTieredCacheEditResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, { body, ...options }) as Core.APIPromise<{ result: SmartTieredCacheEditResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: SmartTieredCacheEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Smart Tiered Cache setting
    */
-  get(params: SmartTieredCacheGetParams, options?: Core.RequestOptions): Core.APIPromise<SmartTieredCacheGetResponse> {
+  get(
+    params: SmartTieredCacheGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SmartTieredCacheGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`, options) as Core.APIPromise<{ result: SmartTieredCacheGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/cache/tiered_cache_smart_topology_enable`,
+        options,
+      ) as Core.APIPromise<{ result: SmartTieredCacheGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

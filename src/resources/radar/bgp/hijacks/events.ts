@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as EventsAPI from './events';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
@@ -11,18 +10,28 @@ export class Events extends APIResource {
   /**
    * Get the BGP hijack events. (Beta)
    */
-  list(query?: EventListParams, options?: Core.RequestOptions): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse>
-  list(options?: Core.RequestOptions): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse>
-  list(query: EventListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse> {
+  list(
+    query?: EventListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse>;
+  list(
+    query: EventListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EventListResponsesV4PagePagination, EventListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/radar/bgp/hijacks/events', EventListResponsesV4PagePagination, { query, ...options });
+    return this._client.getAPIList('/radar/bgp/hijacks/events', EventListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
 
-export class EventListResponsesV4PagePagination extends V4PagePagination<EventListResponse> {
-}
+export class EventListResponsesV4PagePagination extends V4PagePagination<EventListResponse> {}
 
 export interface EventListResponse {
   result: EventListResponse.Result;

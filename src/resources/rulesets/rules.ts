@@ -2,9 +2,8 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error'
+import { CloudflareError } from '../../error';
 import * as RulesAPI from './rules';
 import * as RulesetsAPI from './rulesets';
 
@@ -13,7 +12,11 @@ export class Rules extends APIResource {
    * Adds a new rule to an account or zone ruleset. The rule will be added to the end
    * of the existing list of rules in the ruleset by default.
    */
-  create(rulesetId: string, params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RuleCreateResponse> {
+  create(
+    rulesetId: string,
+    params: RuleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -21,22 +24,44 @@ export class Rules extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules`, { body, ...options }) as Core.APIPromise<{ result: RuleCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.post(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes an existing rule from an account or zone ruleset.
    */
-  delete(rulesetId: string, ruleId: string, params?: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>
-  delete(rulesetId: string, ruleId: string, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse>
-  delete(rulesetId: string, ruleId: string, params: RuleDeleteParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    params?: RuleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse>;
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse>;
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    params: RuleDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(rulesetId, ruleId, {}, params);
     }
@@ -47,20 +72,33 @@ export class Rules extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.delete(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`, options) as Core.APIPromise<{ result: RuleDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`,
+        options,
+      ) as Core.APIPromise<{ result: RuleDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates an existing rule in an account or zone ruleset.
    */
-  edit(rulesetId: string, ruleId: string, params: RuleEditParams, options?: Core.RequestOptions): Core.APIPromise<RuleEditResponse> {
+  edit(
+    rulesetId: string,
+    ruleId: string,
+    params: RuleEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleEditResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -68,14 +106,22 @@ export class Rules extends APIResource {
     if (account_id && zone_id) {
       throw new CloudflareError('You cannot provide both account_id and zone_id.');
     }
-    const { accountOrZone, accountOrZoneId } = account_id ? {
-      accountOrZone: "accounts",
-      accountOrZoneId: account_id,
-    } : {
-      accountOrZone: "zones",
-      accountOrZoneId: zone_id,
-    }
-    return (this._client.patch(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`, { body, ...options }) as Core.APIPromise<{ result: RuleEditResponse }>)._thenUnwrap((obj) => obj.result);
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.patch(`/${accountOrZone}/${accountOrZoneId}/rulesets/${rulesetId}/rules/${ruleId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RuleEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -1669,7 +1715,10 @@ export namespace RewriteRule {
     /**
      * Map of request headers to modify.
      */
-    headers?: Record<string, ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader>;
+    headers?: Record<
+      string,
+      ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+    >;
 
     /**
      * URI to rewrite the request to.
@@ -1776,7 +1825,10 @@ export namespace RewriteRuleParam {
     /**
      * Map of request headers to modify.
      */
-    headers?: Record<string, ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader>;
+    headers?: Record<
+      string,
+      ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+    >;
 
     /**
      * URI to rewrite the request to.
@@ -1833,7 +1885,7 @@ export namespace RewriteRuleParam {
   }
 }
 
-export type RewriteURIPart = RewriteURIPart.StaticValue | RewriteURIPart.DynamicValue
+export type RewriteURIPart = RewriteURIPart.StaticValue | RewriteURIPart.DynamicValue;
 
 export namespace RewriteURIPart {
   export interface StaticValue {
@@ -1851,7 +1903,7 @@ export namespace RewriteURIPart {
   }
 }
 
-export type RewriteURIPartParam = RewriteURIPartParam.StaticValue | RewriteURIPartParam.DynamicValue
+export type RewriteURIPartParam = RewriteURIPartParam.StaticValue | RewriteURIPartParam.DynamicValue;
 
 export namespace RewriteURIPartParam {
   export interface StaticValue {
@@ -3792,7 +3844,26 @@ export interface RuleCreateResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<BlockRule | RuleCreateResponse.RulesetsChallengeRule | CompressResponseRule | ExecuteRule | RuleCreateResponse.RulesetsJSChallengeRule | LogRule | ManagedChallengeRule | RedirectRule | RewriteRule | RouteRule | ScoreRule | ServeErrorRule | SetConfigRule | SkipRule | SetCacheSettingsRule | LogCustomFieldRule | DDoSDynamicRule | ForceConnectionCloseRule>;
+  rules: Array<
+    | BlockRule
+    | RuleCreateResponse.RulesetsChallengeRule
+    | CompressResponseRule
+    | ExecuteRule
+    | RuleCreateResponse.RulesetsJSChallengeRule
+    | LogRule
+    | ManagedChallengeRule
+    | RedirectRule
+    | RewriteRule
+    | RouteRule
+    | ScoreRule
+    | ServeErrorRule
+    | SetConfigRule
+    | SkipRule
+    | SetCacheSettingsRule
+    | LogCustomFieldRule
+    | DDoSDynamicRule
+    | ForceConnectionCloseRule
+  >;
 
   /**
    * The version of the ruleset.
@@ -3953,7 +4024,26 @@ export interface RuleDeleteResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<BlockRule | RuleDeleteResponse.RulesetsChallengeRule | CompressResponseRule | ExecuteRule | RuleDeleteResponse.RulesetsJSChallengeRule | LogRule | ManagedChallengeRule | RedirectRule | RewriteRule | RouteRule | ScoreRule | ServeErrorRule | SetConfigRule | SkipRule | SetCacheSettingsRule | LogCustomFieldRule | DDoSDynamicRule | ForceConnectionCloseRule>;
+  rules: Array<
+    | BlockRule
+    | RuleDeleteResponse.RulesetsChallengeRule
+    | CompressResponseRule
+    | ExecuteRule
+    | RuleDeleteResponse.RulesetsJSChallengeRule
+    | LogRule
+    | ManagedChallengeRule
+    | RedirectRule
+    | RewriteRule
+    | RouteRule
+    | ScoreRule
+    | ServeErrorRule
+    | SetConfigRule
+    | SkipRule
+    | SetCacheSettingsRule
+    | LogCustomFieldRule
+    | DDoSDynamicRule
+    | ForceConnectionCloseRule
+  >;
 
   /**
    * The version of the ruleset.
@@ -4114,7 +4204,26 @@ export interface RuleEditResponse {
   /**
    * The list of rules in the ruleset.
    */
-  rules: Array<BlockRule | RuleEditResponse.RulesetsChallengeRule | CompressResponseRule | ExecuteRule | RuleEditResponse.RulesetsJSChallengeRule | LogRule | ManagedChallengeRule | RedirectRule | RewriteRule | RouteRule | ScoreRule | ServeErrorRule | SetConfigRule | SkipRule | SetCacheSettingsRule | LogCustomFieldRule | DDoSDynamicRule | ForceConnectionCloseRule>;
+  rules: Array<
+    | BlockRule
+    | RuleEditResponse.RulesetsChallengeRule
+    | CompressResponseRule
+    | ExecuteRule
+    | RuleEditResponse.RulesetsJSChallengeRule
+    | LogRule
+    | ManagedChallengeRule
+    | RedirectRule
+    | RewriteRule
+    | RouteRule
+    | ScoreRule
+    | ServeErrorRule
+    | SetConfigRule
+    | SkipRule
+    | SetCacheSettingsRule
+    | LogCustomFieldRule
+    | DDoSDynamicRule
+    | ForceConnectionCloseRule
+  >;
 
   /**
    * The version of the ruleset.
@@ -4243,7 +4352,25 @@ export namespace RuleEditResponse {
   }
 }
 
-export type RuleCreateParams = RuleCreateParams.BlockRule | RuleCreateParams.RulesetsChallengeRule | RuleCreateParams.CompressResponseRule | RuleCreateParams.ExecuteRule | RuleCreateParams.RulesetsJSChallengeRule | RuleCreateParams.LogRule | RuleCreateParams.ManagedChallengeRule | RuleCreateParams.RedirectRule | RuleCreateParams.RewriteRule | RuleCreateParams.RouteRule | RuleCreateParams.ScoreRule | RuleCreateParams.ServeErrorRule | RuleCreateParams.SetConfigRule | RuleCreateParams.SkipRule | RuleCreateParams.SetCacheSettingsRule | RuleCreateParams.LogCustomFieldRule | RuleCreateParams.DDoSDynamicRule | RuleCreateParams.ForceConnectionCloseRule
+export type RuleCreateParams =
+  | RuleCreateParams.BlockRule
+  | RuleCreateParams.RulesetsChallengeRule
+  | RuleCreateParams.CompressResponseRule
+  | RuleCreateParams.ExecuteRule
+  | RuleCreateParams.RulesetsJSChallengeRule
+  | RuleCreateParams.LogRule
+  | RuleCreateParams.ManagedChallengeRule
+  | RuleCreateParams.RedirectRule
+  | RuleCreateParams.RewriteRule
+  | RuleCreateParams.RouteRule
+  | RuleCreateParams.ScoreRule
+  | RuleCreateParams.ServeErrorRule
+  | RuleCreateParams.SetConfigRule
+  | RuleCreateParams.SkipRule
+  | RuleCreateParams.SetCacheSettingsRule
+  | RuleCreateParams.LogCustomFieldRule
+  | RuleCreateParams.DDoSDynamicRule
+  | RuleCreateParams.ForceConnectionCloseRule;
 
 export namespace RuleCreateParams {
   export interface BlockRule {
@@ -4993,7 +5120,10 @@ export namespace RuleCreateParams {
       /**
        * Map of request headers to modify.
        */
-      headers?: Record<string, ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader>;
+      headers?: Record<
+        string,
+        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+      >;
 
       /**
        * URI to rewrite the request to.
@@ -6223,7 +6353,25 @@ export interface RuleDeleteParams {
   zone_id?: string;
 }
 
-export type RuleEditParams = RuleEditParams.BlockRule | RuleEditParams.RulesetsChallengeRule | RuleEditParams.CompressResponseRule | RuleEditParams.ExecuteRule | RuleEditParams.RulesetsJSChallengeRule | RuleEditParams.LogRule | RuleEditParams.ManagedChallengeRule | RuleEditParams.RedirectRule | RuleEditParams.RewriteRule | RuleEditParams.RouteRule | RuleEditParams.ScoreRule | RuleEditParams.ServeErrorRule | RuleEditParams.SetConfigRule | RuleEditParams.SkipRule | RuleEditParams.SetCacheSettingsRule | RuleEditParams.LogCustomFieldRule | RuleEditParams.DDoSDynamicRule | RuleEditParams.ForceConnectionCloseRule
+export type RuleEditParams =
+  | RuleEditParams.BlockRule
+  | RuleEditParams.RulesetsChallengeRule
+  | RuleEditParams.CompressResponseRule
+  | RuleEditParams.ExecuteRule
+  | RuleEditParams.RulesetsJSChallengeRule
+  | RuleEditParams.LogRule
+  | RuleEditParams.ManagedChallengeRule
+  | RuleEditParams.RedirectRule
+  | RuleEditParams.RewriteRule
+  | RuleEditParams.RouteRule
+  | RuleEditParams.ScoreRule
+  | RuleEditParams.ServeErrorRule
+  | RuleEditParams.SetConfigRule
+  | RuleEditParams.SkipRule
+  | RuleEditParams.SetCacheSettingsRule
+  | RuleEditParams.LogCustomFieldRule
+  | RuleEditParams.DDoSDynamicRule
+  | RuleEditParams.ForceConnectionCloseRule;
 
 export namespace RuleEditParams {
   export interface BlockRule {
@@ -6973,7 +7121,10 @@ export namespace RuleEditParams {
       /**
        * Map of request headers to modify.
        */
-      headers?: Record<string, ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader>;
+      headers?: Record<
+        string,
+        ActionParameters.RemoveHeader | ActionParameters.StaticHeader | ActionParameters.DynamicHeader
+      >;
 
       /**
        * URI to rewrite the request to.

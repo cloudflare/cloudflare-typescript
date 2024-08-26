@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AccountSettingsAPI from './account-settings';
 
@@ -10,17 +8,32 @@ export class AccountSettings extends APIResource {
   /**
    * Creates Worker account settings for an account.
    */
-  update(params: AccountSettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<AccountSettingUpdateResponse> {
+  update(
+    params: AccountSettingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountSettingUpdateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/workers/account-settings`, { body, ...options }) as Core.APIPromise<{ result: AccountSettingUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/workers/account-settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AccountSettingUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches Worker account settings for an account.
    */
-  get(params: AccountSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<AccountSettingGetResponse> {
+  get(
+    params: AccountSettingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountSettingGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/workers/account-settings`, options) as Core.APIPromise<{ result: AccountSettingGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/workers/account-settings`, options) as Core.APIPromise<{
+        result: AccountSettingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
-import { Users } from './users';
 import * as PolicyTestsAPI from './policy-tests';
 import * as AccessAPI from '../../access';
 import * as ApplicationsAPI from '../applications';
@@ -17,7 +14,10 @@ export class PolicyTests extends APIResource {
   /**
    * Starts an Access policy test.
    */
-  create(params: PolicyTestCreateParams, options?: Core.RequestOptions): Core.APIPromise<PolicyTestCreateResponse> {
+  create(
+    params: PolicyTestCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyTestCreateResponse> {
     const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/access/policy-tests`, { body, ...options });
   }
@@ -25,7 +25,11 @@ export class PolicyTests extends APIResource {
   /**
    * Fetches the current status of a given Access policy test.
    */
-  get(policyTestId: string, params: PolicyTestGetParams, options?: Core.RequestOptions): Core.APIPromise<PolicyTestGetResponse> {
+  get(
+    policyTestId: string,
+    params: PolicyTestGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PolicyTestGetResponse> {
     const { account_id } = params;
     return this._client.get(`/accounts/${account_id}/access/policy-tests/${policyTestId}`, options);
   }

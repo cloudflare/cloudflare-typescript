@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as HistoryAPI from './history';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -13,14 +11,20 @@ export class HistoryResource extends APIResource {
    * are displayed for last `x` number of days based on the zone plan (free = 30, pro
    * = 30, biz = 30, ent = 90).
    */
-  list(params: HistoryListParams, options?: Core.RequestOptions): Core.PagePromise<HistoriesV4PagePaginationArray, History> {
+  list(
+    params: HistoryListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<HistoriesV4PagePaginationArray, History> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/alerting/v3/history`, HistoriesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/accounts/${account_id}/alerting/v3/history`,
+      HistoriesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 }
 
-export class HistoriesV4PagePaginationArray extends V4PagePaginationArray<History> {
-}
+export class HistoriesV4PagePaginationArray extends V4PagePaginationArray<History> {}
 
 export interface History {
   /**

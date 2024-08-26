@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
 
@@ -10,74 +9,137 @@ export class TimeseriesGroups extends APIResource {
   /**
    * Percentage distribution of DNS AS112 queries by DNSSEC support over time.
    */
-  dnssec(query?: TimeseriesGroupDNSSECParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse>
-  dnssec(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse>
-  dnssec(query: TimeseriesGroupDNSSECParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse> {
+  dnssec(
+    query?: TimeseriesGroupDNSSECParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupDNSSECResponse>;
+  dnssec(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupDNSSECResponse>;
+  dnssec(
+    query: TimeseriesGroupDNSSECParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupDNSSECResponse> {
     if (isRequestOptions(query)) {
       return this.dnssec({}, query);
     }
-    return (this._client.get('/radar/as112/timeseries_groups/dnssec', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupDNSSECResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/as112/timeseries_groups/dnssec', { query, ...options }) as Core.APIPromise<{
+        result: TimeseriesGroupDNSSECResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of AS112 DNS queries by EDNS support over time.
    */
-  edns(query?: TimeseriesGroupEdnsParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEdnsResponse>
-  edns(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEdnsResponse>
-  edns(query: TimeseriesGroupEdnsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEdnsResponse> {
+  edns(
+    query?: TimeseriesGroupEdnsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupEdnsResponse>;
+  edns(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupEdnsResponse>;
+  edns(
+    query: TimeseriesGroupEdnsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupEdnsResponse> {
     if (isRequestOptions(query)) {
       return this.edns({}, query);
     }
-    return (this._client.get('/radar/as112/timeseries_groups/edns', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupEdnsResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/as112/timeseries_groups/edns', { query, ...options }) as Core.APIPromise<{
+        result: TimeseriesGroupEdnsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of AS112 DNS queries by IP Version over time.
    */
-  ipVersion(query?: TimeseriesGroupIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>
-  ipVersion(query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
+  ipVersion(
+    query?: TimeseriesGroupIPVersionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupIPVersionResponse>;
+  ipVersion(
+    query: TimeseriesGroupIPVersionParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (this._client.get('/radar/as112/timeseries_groups/ip_version', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/as112/timeseries_groups/ip_version', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupIPVersionResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of AS112 dns requests classified per Protocol over time.
    */
-  protocol(query?: TimeseriesGroupProtocolParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>
-  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>
-  protocol(query: TimeseriesGroupProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse> {
+  protocol(
+    query?: TimeseriesGroupProtocolParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupProtocolResponse>;
+  protocol(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupProtocolResponse>;
+  protocol(
+    query: TimeseriesGroupProtocolParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.protocol({}, query);
     }
-    return (this._client.get('/radar/as112/timeseries_groups/protocol', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupProtocolResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/as112/timeseries_groups/protocol', { query, ...options }) as Core.APIPromise<{
+        result: TimeseriesGroupProtocolResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of AS112 DNS queries by Query Type over time.
    */
-  queryType(query?: TimeseriesGroupQueryTypeParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse>
-  queryType(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse>
-  queryType(query: TimeseriesGroupQueryTypeParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse> {
+  queryType(
+    query?: TimeseriesGroupQueryTypeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupQueryTypeResponse>;
+  queryType(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupQueryTypeResponse>;
+  queryType(
+    query: TimeseriesGroupQueryTypeParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupQueryTypeResponse> {
     if (isRequestOptions(query)) {
       return this.queryType({}, query);
     }
-    return (this._client.get('/radar/as112/timeseries_groups/query_type', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupQueryTypeResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/as112/timeseries_groups/query_type', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupQueryTypeResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of AS112 dns requests classified per Response Codes over
    * time.
    */
-  responseCodes(query?: TimeseriesGroupResponseCodesParams, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse>
-  responseCodes(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse>
-  responseCodes(query: TimeseriesGroupResponseCodesParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse> {
+  responseCodes(
+    query?: TimeseriesGroupResponseCodesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupResponseCodesResponse>;
+  responseCodes(options?: Core.RequestOptions): Core.APIPromise<TimeseriesGroupResponseCodesResponse>;
+  responseCodes(
+    query: TimeseriesGroupResponseCodesParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TimeseriesGroupResponseCodesResponse> {
     if (isRequestOptions(query)) {
       return this.responseCodes({}, query);
     }
-    return (this._client.get('/radar/as112/timeseries_groups/response_codes', { query, ...options }) as Core.APIPromise<{ result: TimeseriesGroupResponseCodesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/as112/timeseries_groups/response_codes', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TimeseriesGroupResponseCodesResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

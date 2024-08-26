@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as LocationsAPI from './locations';
 
@@ -12,13 +11,24 @@ export class Locations extends APIResource {
    * out of the total layer 7 attacks. The origin location is determined by the
    * client IP.
    */
-  origin(query?: LocationOriginParams, options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse>
-  origin(options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse>
-  origin(query: LocationOriginParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse> {
+  origin(
+    query?: LocationOriginParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationOriginResponse>;
+  origin(options?: Core.RequestOptions): Core.APIPromise<LocationOriginResponse>;
+  origin(
+    query: LocationOriginParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationOriginResponse> {
     if (isRequestOptions(query)) {
       return this.origin({}, query);
     }
-    return (this._client.get('/radar/attacks/layer7/top/locations/origin', { query, ...options }) as Core.APIPromise<{ result: LocationOriginResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer7/top/locations/origin', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: LocationOriginResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -26,13 +36,24 @@ export class Locations extends APIResource {
    * out of the total layer 7 attacks. The target location is determined by the
    * attacked zone's billing country, when available.
    */
-  target(query?: LocationTargetParams, options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse>
-  target(options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse>
-  target(query: LocationTargetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse> {
+  target(
+    query?: LocationTargetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationTargetResponse>;
+  target(options?: Core.RequestOptions): Core.APIPromise<LocationTargetResponse>;
+  target(
+    query: LocationTargetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LocationTargetResponse> {
     if (isRequestOptions(query)) {
       return this.target({}, query);
     }
-    return (this._client.get('/radar/attacks/layer7/top/locations/target', { query, ...options }) as Core.APIPromise<{ result: LocationTargetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer7/top/locations/target', {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: LocationTargetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -204,7 +225,54 @@ export interface LocationOriginParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
 
   /**
    * Filter for http version.
@@ -224,7 +292,15 @@ export interface LocationOriginParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.
@@ -265,7 +341,54 @@ export interface LocationTargetParams {
   /**
    * Filter for http method.
    */
-  httpMethod?: Array<'GET' | 'POST' | 'DELETE' | 'PUT' | 'HEAD' | 'PURGE' | 'OPTIONS' | 'PROPFIND' | 'MKCOL' | 'PATCH' | 'ACL' | 'BCOPY' | 'BDELETE' | 'BMOVE' | 'BPROPFIND' | 'BPROPPATCH' | 'CHECKIN' | 'CHECKOUT' | 'CONNECT' | 'COPY' | 'LABEL' | 'LOCK' | 'MERGE' | 'MKACTIVITY' | 'MKWORKSPACE' | 'MOVE' | 'NOTIFY' | 'ORDERPATCH' | 'POLL' | 'PROPPATCH' | 'REPORT' | 'SEARCH' | 'SUBSCRIBE' | 'TRACE' | 'UNCHECKOUT' | 'UNLOCK' | 'UNSUBSCRIBE' | 'UPDATE' | 'VERSIONCONTROL' | 'BASELINECONTROL' | 'XMSENUMATTS' | 'RPC_OUT_DATA' | 'RPC_IN_DATA' | 'JSON' | 'COOK' | 'TRACK'>;
+  httpMethod?: Array<
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  >;
 
   /**
    * Filter for http version.
@@ -285,7 +408,15 @@ export interface LocationTargetParams {
   /**
    * Array of L7 mitigation products.
    */
-  mitigationProduct?: Array<'DDOS' | 'WAF' | 'BOT_MANAGEMENT' | 'ACCESS_RULES' | 'IP_REPUTATION' | 'API_SHIELD' | 'DATA_LOSS_PREVENTION'>;
+  mitigationProduct?: Array<
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  >;
 
   /**
    * Array of names that will be used to name the series in responses.

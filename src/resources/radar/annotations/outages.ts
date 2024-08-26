@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as OutagesAPI from './outages';
 
@@ -10,25 +9,42 @@ export class Outages extends APIResource {
   /**
    * Get latest Internet outages and anomalies.
    */
-  get(query?: OutageGetParams, options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>
-  get(options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>
-  get(query: OutageGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse> {
+  get(query?: OutageGetParams, options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<OutageGetResponse>;
+  get(
+    query: OutageGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutageGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (this._client.get('/radar/annotations/outages', { query, ...options }) as Core.APIPromise<{ result: OutageGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/annotations/outages', { query, ...options }) as Core.APIPromise<{
+        result: OutageGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get the number of outages for locations.
    */
-  locations(query?: OutageLocationsParams, options?: Core.RequestOptions): Core.APIPromise<OutageLocationsResponse>
-  locations(options?: Core.RequestOptions): Core.APIPromise<OutageLocationsResponse>
-  locations(query: OutageLocationsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<OutageLocationsResponse> {
+  locations(
+    query?: OutageLocationsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutageLocationsResponse>;
+  locations(options?: Core.RequestOptions): Core.APIPromise<OutageLocationsResponse>;
+  locations(
+    query: OutageLocationsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OutageLocationsResponse> {
     if (isRequestOptions(query)) {
       return this.locations({}, query);
     }
-    return (this._client.get('/radar/annotations/outages/locations', { query, ...options }) as Core.APIPromise<{ result: OutageLocationsResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/annotations/outages/locations', { query, ...options }) as Core.APIPromise<{
+        result: OutageLocationsResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

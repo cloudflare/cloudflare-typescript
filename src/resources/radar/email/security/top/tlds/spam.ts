@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
-import { APIPromise } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as SpamAPI from './spam';
 
@@ -10,13 +9,26 @@ export class Spam extends APIResource {
   /**
    * Get the top TLDs by emails classified as Spam or not.
    */
-  get(spam: 'SPAM' | 'NOT_SPAM', query?: SpamGetParams, options?: Core.RequestOptions): Core.APIPromise<SpamGetResponse>
-  get(spam: 'SPAM' | 'NOT_SPAM', options?: Core.RequestOptions): Core.APIPromise<SpamGetResponse>
-  get(spam: 'SPAM' | 'NOT_SPAM', query: SpamGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SpamGetResponse> {
+  get(
+    spam: 'SPAM' | 'NOT_SPAM',
+    query?: SpamGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SpamGetResponse>;
+  get(spam: 'SPAM' | 'NOT_SPAM', options?: Core.RequestOptions): Core.APIPromise<SpamGetResponse>;
+  get(
+    spam: 'SPAM' | 'NOT_SPAM',
+    query: SpamGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SpamGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(spam, {}, query);
     }
-    return (this._client.get(`/radar/email/security/top/tlds/spam/${spam}`, { query, ...options }) as Core.APIPromise<{ result: SpamGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/email/security/top/tlds/spam/${spam}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: SpamGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

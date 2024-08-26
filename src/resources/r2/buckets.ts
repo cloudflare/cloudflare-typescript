@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as BucketsAPI from './buckets';
 import { CursorPagination, type CursorPaginationParams } from '../../pagination';
@@ -13,23 +11,41 @@ export class Buckets extends APIResource {
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/r2/buckets`, { body, ...options }) as Core.APIPromise<{ result: Bucket }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/r2/buckets`, { body, ...options }) as Core.APIPromise<{
+        result: Bucket;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all R2 buckets on your account
    */
-  list(params: BucketListParams, options?: Core.RequestOptions): Core.PagePromise<BucketsCursorPagination, Bucket> {
+  list(
+    params: BucketListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<BucketsCursorPagination, Bucket> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/r2/buckets`, BucketsCursorPagination, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/r2/buckets`, BucketsCursorPagination, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Deletes an existing R2 bucket.
    */
-  delete(bucketName: string, params: BucketDeleteParams, options?: Core.RequestOptions): Core.APIPromise<BucketDeleteResponse> {
+  delete(
+    bucketName: string,
+    params: BucketDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BucketDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{ result: BucketDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+        result: BucketDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -37,12 +53,15 @@ export class Buckets extends APIResource {
    */
   get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{ result: Bucket }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+        result: Bucket;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class BucketsCursorPagination extends CursorPagination<Bucket> {
-}
+export class BucketsCursorPagination extends CursorPagination<Bucket> {}
 
 /**
  * A single R2 bucket
@@ -69,7 +88,7 @@ export interface Bucket {
   storage_class?: 'Standard' | 'InfrequentAccess';
 }
 
-export type BucketDeleteResponse = unknown
+export type BucketDeleteResponse = unknown;
 
 export interface BucketCreateParams {
   /**

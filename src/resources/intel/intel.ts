@@ -1,20 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { ASN } from './asn/asn';
-import { DNS } from './dns';
-import { Domains } from './domains/domains';
-import { DomainHistoryResource } from './domain-history';
-import { IPs } from './ips';
-import { IPLists } from './ip-lists';
-import { Miscategorizations } from './miscategorizations';
-import { Whois } from './whois';
-import { IndicatorFeeds } from './indicator-feeds/indicator-feeds';
-import { Sinkholes } from './sinkholes';
-import { AttackSurfaceReport } from './attack-surface-report/attack-surface-report';
 import * as DNSAPI from './dns';
 import * as DomainHistoryAPI from './domain-history';
 import * as IPListsAPI from './ip-lists';
@@ -31,14 +17,19 @@ export class Intel extends APIResource {
   asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  domainHistory: DomainHistoryAPI.DomainHistoryResource = new DomainHistoryAPI.DomainHistoryResource(this._client);
+  domainHistory: DomainHistoryAPI.DomainHistoryResource = new DomainHistoryAPI.DomainHistoryResource(
+    this._client,
+  );
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
   ipLists: IPListsAPI.IPLists = new IPListsAPI.IPLists(this._client);
-  miscategorizations: MiscategorizationsAPI.Miscategorizations = new MiscategorizationsAPI.Miscategorizations(this._client);
+  miscategorizations: MiscategorizationsAPI.Miscategorizations = new MiscategorizationsAPI.Miscategorizations(
+    this._client,
+  );
   whois: WhoisAPI.Whois = new WhoisAPI.Whois(this._client);
   indicatorFeeds: IndicatorFeedsAPI.IndicatorFeeds = new IndicatorFeedsAPI.IndicatorFeeds(this._client);
   sinkholes: SinkholesAPI.Sinkholes = new SinkholesAPI.Sinkholes(this._client);
-  attackSurfaceReport: AttackSurfaceReportAPI.AttackSurfaceReport = new AttackSurfaceReportAPI.AttackSurfaceReport(this._client);
+  attackSurfaceReport: AttackSurfaceReportAPI.AttackSurfaceReport =
+    new AttackSurfaceReportAPI.AttackSurfaceReport(this._client);
 }
 
 export namespace Intel {

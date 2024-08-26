@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as DNSAPI from './dns';
 import * as Shared from '../shared';
@@ -12,14 +10,19 @@ export class DNS extends APIResource {
   /**
    * Get Passive DNS by IP
    */
-  list(params: DNSListParams, options?: Core.RequestOptions): Core.PagePromise<DNSListResponsesV4PagePagination, DNSListResponse> {
+  list(
+    params: DNSListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DNSListResponsesV4PagePagination, DNSListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSListResponsesV4PagePagination, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSListResponsesV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
 
-export class DNSListResponsesV4PagePagination extends V4PagePagination<DNSListResponse> {
-}
+export class DNSListResponsesV4PagePagination extends V4PagePagination<DNSListResponse> {}
 
 export interface DNS {
   /**

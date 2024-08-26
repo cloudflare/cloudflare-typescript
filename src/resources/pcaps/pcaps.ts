@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { OwnershipResource } from './ownership';
-import { Download } from './download';
 import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
 import * as OwnershipAPI from './ownership';
@@ -20,13 +16,20 @@ export class PCAPs extends APIResource {
    */
   create(params: PCAPCreateParams, options?: Core.RequestOptions): Core.APIPromise<PCAPCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/pcaps`, { body, ...options }) as Core.APIPromise<{ result: PCAPCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/pcaps`, { body, ...options }) as Core.APIPromise<{
+        result: PCAPCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all packet capture requests for an account.
    */
-  list(params: PCAPListParams, options?: Core.RequestOptions): Core.PagePromise<PCAPListResponsesSinglePage, PCAPListResponse> {
+  list(
+    params: PCAPListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<PCAPListResponsesSinglePage, PCAPListResponse> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/pcaps`, PCAPListResponsesSinglePage, options);
   }
@@ -34,14 +37,21 @@ export class PCAPs extends APIResource {
   /**
    * Get information for a PCAP request by id.
    */
-  get(pcapId: string, params: PCAPGetParams, options?: Core.RequestOptions): Core.APIPromise<PCAPGetResponse> {
+  get(
+    pcapId: string,
+    params: PCAPGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PCAPGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/pcaps/${pcapId}`, options) as Core.APIPromise<{ result: PCAPGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/pcaps/${pcapId}`, options) as Core.APIPromise<{
+        result: PCAPGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PCAPListResponsesSinglePage extends SinglePage<PCAPListResponse> {
-}
+export class PCAPListResponsesSinglePage extends SinglePage<PCAPListResponse> {}
 
 export interface PCAP {
   /**
@@ -57,7 +67,15 @@ export interface PCAP {
   /**
    * The status of the packet capture request.
    */
-  status?: 'unknown' | 'success' | 'pending' | 'running' | 'conversion_pending' | 'conversion_running' | 'complete' | 'failed';
+  status?:
+    | 'unknown'
+    | 'success'
+    | 'pending'
+    | 'running'
+    | 'conversion_pending'
+    | 'conversion_running'
+    | 'complete'
+    | 'failed';
 
   /**
    * The RFC 3339 timestamp when the packet capture was created.
@@ -141,7 +159,7 @@ export interface PCAPFilterParam {
   source_port?: number;
 }
 
-export type PCAPCreateResponse = PCAP | PCAPCreateResponse.MagicVisibilityPCAPsResponseFull
+export type PCAPCreateResponse = PCAP | PCAPCreateResponse.MagicVisibilityPCAPsResponseFull;
 
 export namespace PCAPCreateResponse {
   export interface MagicVisibilityPCAPsResponseFull {
@@ -182,7 +200,15 @@ export namespace PCAPCreateResponse {
     /**
      * The status of the packet capture request.
      */
-    status?: 'unknown' | 'success' | 'pending' | 'running' | 'conversion_pending' | 'conversion_running' | 'complete' | 'failed';
+    status?:
+      | 'unknown'
+      | 'success'
+      | 'pending'
+      | 'running'
+      | 'conversion_pending'
+      | 'conversion_running'
+      | 'complete'
+      | 'failed';
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -207,7 +233,7 @@ export namespace PCAPCreateResponse {
   }
 }
 
-export type PCAPListResponse = PCAP | PCAPListResponse.MagicVisibilityPCAPsResponseFull
+export type PCAPListResponse = PCAP | PCAPListResponse.MagicVisibilityPCAPsResponseFull;
 
 export namespace PCAPListResponse {
   export interface MagicVisibilityPCAPsResponseFull {
@@ -248,7 +274,15 @@ export namespace PCAPListResponse {
     /**
      * The status of the packet capture request.
      */
-    status?: 'unknown' | 'success' | 'pending' | 'running' | 'conversion_pending' | 'conversion_running' | 'complete' | 'failed';
+    status?:
+      | 'unknown'
+      | 'success'
+      | 'pending'
+      | 'running'
+      | 'conversion_pending'
+      | 'conversion_running'
+      | 'complete'
+      | 'failed';
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -273,7 +307,7 @@ export namespace PCAPListResponse {
   }
 }
 
-export type PCAPGetResponse = PCAP | PCAPGetResponse.MagicVisibilityPCAPsResponseFull
+export type PCAPGetResponse = PCAP | PCAPGetResponse.MagicVisibilityPCAPsResponseFull;
 
 export namespace PCAPGetResponse {
   export interface MagicVisibilityPCAPsResponseFull {
@@ -314,7 +348,15 @@ export namespace PCAPGetResponse {
     /**
      * The status of the packet capture request.
      */
-    status?: 'unknown' | 'success' | 'pending' | 'running' | 'conversion_pending' | 'conversion_running' | 'complete' | 'failed';
+    status?:
+      | 'unknown'
+      | 'success'
+      | 'pending'
+      | 'running'
+      | 'conversion_pending'
+      | 'conversion_running'
+      | 'complete'
+      | 'failed';
 
     /**
      * The RFC 3339 timestamp when the packet capture was created.
@@ -339,7 +381,9 @@ export namespace PCAPGetResponse {
   }
 }
 
-export type PCAPCreateParams = PCAPCreateParams.MagicVisibilityPCAPsRequestSimple | PCAPCreateParams.MagicVisibilityPCAPsRequestFull
+export type PCAPCreateParams =
+  | PCAPCreateParams.MagicVisibilityPCAPsRequestSimple
+  | PCAPCreateParams.MagicVisibilityPCAPsRequestFull;
 
 export namespace PCAPCreateParams {
   export interface MagicVisibilityPCAPsRequestSimple {

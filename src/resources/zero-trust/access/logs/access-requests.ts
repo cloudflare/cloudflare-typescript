@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as AccessRequestsAPI from './access-requests';
 
@@ -10,9 +8,17 @@ export class AccessRequests extends APIResource {
   /**
    * Gets a list of Access authentication audit logs for an account.
    */
-  list(params: AccessRequestListParams, options?: Core.RequestOptions): Core.APIPromise<AccessRequestListResponse> {
+  list(
+    params: AccessRequestListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRequestListResponse> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/access/logs/access_requests`, { query, ...options }) as Core.APIPromise<{ result: AccessRequestListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/access/logs/access_requests`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: AccessRequestListResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -60,7 +66,7 @@ export interface AccessRequests {
   user_email?: string;
 }
 
-export type AccessRequestListResponse = Array<AccessRequests>
+export type AccessRequestListResponse = Array<AccessRequests>;
 
 export interface AccessRequestListParams {
   /**

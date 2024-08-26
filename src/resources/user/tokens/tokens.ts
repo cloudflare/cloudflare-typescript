@@ -2,78 +2,108 @@
 
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { PermissionGroups } from './permission-groups';
 import * as TokensAPI from './tokens';
 import * as PermissionGroupsAPI from './permission-groups';
 import * as ValueAPI from './value';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
-  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(this._client);
+  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
+    this._client,
+  );
   value: ValueAPI.ValueResource = new ValueAPI.ValueResource(this._client);
 
   /**
    * Create a new access token.
    */
   create(body: TokenCreateParams, options?: Core.RequestOptions): Core.APIPromise<TokenCreateResponse> {
-    return (this._client.post('/user/tokens', { body, ...options }) as Core.APIPromise<{ result: TokenCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post('/user/tokens', { body, ...options }) as Core.APIPromise<{
+        result: TokenCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update an existing token.
    */
-  update(tokenId: string, body: TokenUpdateParams, options?: Core.RequestOptions): Core.APIPromise<TokenUpdateResponse> {
-    return (this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{ result: TokenUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+  update(
+    tokenId: string,
+    body: TokenUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TokenUpdateResponse> {
+    return (
+      this._client.put(`/user/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
+        result: TokenUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all access tokens you created.
    */
-  list(query?: TokenListParams, options?: Core.RequestOptions): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse>
-  list(options?: Core.RequestOptions): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse>
-  list(query: TokenListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse> {
+  list(
+    query?: TokenListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse>;
+  list(
+    query: TokenListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/user/tokens', TokenListResponsesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList('/user/tokens', TokenListResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Destroy a token.
    */
   delete(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
-    return (this._client.delete(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{ result: TokenDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
+        result: TokenDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get information about a specific token.
    */
   get(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse> {
-    return (this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{ result: TokenGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{ result: TokenGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Test whether a token works.
    */
   verify(options?: Core.RequestOptions): Core.APIPromise<TokenVerifyResponse> {
-    return (this._client.get('/user/tokens/verify', options) as Core.APIPromise<{ result: TokenVerifyResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/user/tokens/verify', options) as Core.APIPromise<{ result: TokenVerifyResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class TokenListResponsesV4PagePaginationArray extends V4PagePaginationArray<TokenListResponse> {
-}
+export class TokenListResponsesV4PagePaginationArray extends V4PagePaginationArray<TokenListResponse> {}
 
 /**
  * IPv4/IPv6 CIDR.
  */
-export type CIDRList = string
+export type CIDRList = string;
 
 /**
  * IPv4/IPv6 CIDR.
  */
-export type CIDRListParam = string
+export type CIDRListParam = string;
 
 export interface Policy {
   /**

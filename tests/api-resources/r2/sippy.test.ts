@@ -1,13 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Cloudflare, { toFile } from 'cloudflare';
+import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const client = new Cloudflare({ apiKey: '144c9defac04969c7bfad8efaa8ea194', apiEmail: 'user@example.com', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Cloudflare({
+  apiKey: '144c9defac04969c7bfad8efaa8ea194',
+  apiEmail: 'user@example.com',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource sippy', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.r2.sippy.update('example-bucket', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.r2.sippy.update('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,11 +24,23 @@ describe('resource sippy', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.r2.sippy.update('example-bucket', { account_id: '023e105f4ecef8ad9ca31a8372d0c353', destination: { accessKeyId: 'accessKeyId', provider: 'r2', secretAccessKey: 'secretAccessKey' }, source: { accessKeyId: 'accessKeyId', bucket: 'bucket', provider: 'aws', region: 'region', secretAccessKey: 'secretAccessKey' } });
+    const response = await client.r2.sippy.update('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      destination: { accessKeyId: 'accessKeyId', provider: 'r2', secretAccessKey: 'secretAccessKey' },
+      source: {
+        accessKeyId: 'accessKeyId',
+        bucket: 'bucket',
+        provider: 'aws',
+        region: 'region',
+        secretAccessKey: 'secretAccessKey',
+      },
+    });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.r2.sippy.delete('example-bucket', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.r2.sippy.delete('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -33,11 +51,15 @@ describe('resource sippy', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.r2.sippy.delete('example-bucket', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.r2.sippy.delete('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.r2.sippy.get('example-bucket', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.r2.sippy.get('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -48,6 +70,8 @@ describe('resource sippy', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.r2.sippy.get('example-bucket', { account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.r2.sippy.get('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SchemaValidationAPI from './schema-validation';
 import * as SettingsAPI from './settings';
@@ -11,7 +9,10 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
    */
-  update(params: SchemaValidationUpdateParams, options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings> {
+  update(
+    params: SchemaValidationUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
     return this._client.put(`/zones/${zone_id}/api_gateway/settings/schema_validation`, { body, ...options });
   }
@@ -19,15 +20,24 @@ export class SchemaValidation extends APIResource {
   /**
    * Updates zone level schema validation settings on the zone
    */
-  edit(params: SchemaValidationEditParams, options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings> {
+  edit(
+    params: SchemaValidationEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingsAPI.Settings> {
     const { zone_id, ...body } = params;
-    return this._client.patch(`/zones/${zone_id}/api_gateway/settings/schema_validation`, { body, ...options });
+    return this._client.patch(`/zones/${zone_id}/api_gateway/settings/schema_validation`, {
+      body,
+      ...options,
+    });
   }
 
   /**
    * Retrieves zone level schema validation settings currently set on the zone
    */
-  get(params: SchemaValidationGetParams, options?: Core.RequestOptions): Core.APIPromise<SettingsAPI.Settings> {
+  get(
+    params: SchemaValidationGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SettingsAPI.Settings> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/api_gateway/settings/schema_validation`, options);
   }

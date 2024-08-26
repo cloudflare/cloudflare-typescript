@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as SummaryAPI from './summary';
 
@@ -10,74 +9,128 @@ export class Summary extends APIResource {
   /**
    * Percentage distribution of attacks by bitrate.
    */
-  bitrate(query?: SummaryBitrateParams, options?: Core.RequestOptions): Core.APIPromise<SummaryBitrateResponse>
-  bitrate(options?: Core.RequestOptions): Core.APIPromise<SummaryBitrateResponse>
-  bitrate(query: SummaryBitrateParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryBitrateResponse> {
+  bitrate(
+    query?: SummaryBitrateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryBitrateResponse>;
+  bitrate(options?: Core.RequestOptions): Core.APIPromise<SummaryBitrateResponse>;
+  bitrate(
+    query: SummaryBitrateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryBitrateResponse> {
     if (isRequestOptions(query)) {
       return this.bitrate({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/summary/bitrate', { query, ...options }) as Core.APIPromise<{ result: SummaryBitrateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/summary/bitrate', { query, ...options }) as Core.APIPromise<{
+        result: SummaryBitrateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by duration.
    */
-  duration(query?: SummaryDurationParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDurationResponse>
-  duration(options?: Core.RequestOptions): Core.APIPromise<SummaryDurationResponse>
-  duration(query: SummaryDurationParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryDurationResponse> {
+  duration(
+    query?: SummaryDurationParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDurationResponse>;
+  duration(options?: Core.RequestOptions): Core.APIPromise<SummaryDurationResponse>;
+  duration(
+    query: SummaryDurationParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryDurationResponse> {
     if (isRequestOptions(query)) {
       return this.duration({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/summary/duration', { query, ...options }) as Core.APIPromise<{ result: SummaryDurationResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/summary/duration', { query, ...options }) as Core.APIPromise<{
+        result: SummaryDurationResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of network protocols in layer 3/4 attacks over a given
    * time period.
    */
-  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>
-  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>
-  get(query: SummaryGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse> {
+  get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
+  get(options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;
+  get(
+    query: SummaryGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryGetResponse> {
     if (isRequestOptions(query)) {
       return this.get({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/summary', { query, ...options }) as Core.APIPromise<{ result: SummaryGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/summary', { query, ...options }) as Core.APIPromise<{
+        result: SummaryGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by ip version used.
    */
-  ipVersion(query?: SummaryIPVersionParams, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
-  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>
-  ipVersion(query: SummaryIPVersionParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse> {
+  ipVersion(
+    query?: SummaryIPVersionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryIPVersionResponse>;
+  ipVersion(options?: Core.RequestOptions): Core.APIPromise<SummaryIPVersionResponse>;
+  ipVersion(
+    query: SummaryIPVersionParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryIPVersionResponse> {
     if (isRequestOptions(query)) {
       return this.ipVersion({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/summary/ip_version', { query, ...options }) as Core.APIPromise<{ result: SummaryIPVersionResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/summary/ip_version', { query, ...options }) as Core.APIPromise<{
+        result: SummaryIPVersionResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by protocol used.
    */
-  protocol(query?: SummaryProtocolParams, options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>
-  protocol(options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>
-  protocol(query: SummaryProtocolParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse> {
+  protocol(
+    query?: SummaryProtocolParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryProtocolResponse>;
+  protocol(options?: Core.RequestOptions): Core.APIPromise<SummaryProtocolResponse>;
+  protocol(
+    query: SummaryProtocolParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryProtocolResponse> {
     if (isRequestOptions(query)) {
       return this.protocol({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/summary/protocol', { query, ...options }) as Core.APIPromise<{ result: SummaryProtocolResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/summary/protocol', { query, ...options }) as Core.APIPromise<{
+        result: SummaryProtocolResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Percentage distribution of attacks by vector.
    */
-  vector(query?: SummaryVectorParams, options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse>
-  vector(options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse>
-  vector(query: SummaryVectorParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse> {
+  vector(query?: SummaryVectorParams, options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse>;
+  vector(options?: Core.RequestOptions): Core.APIPromise<SummaryVectorResponse>;
+  vector(
+    query: SummaryVectorParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SummaryVectorResponse> {
     if (isRequestOptions(query)) {
       return this.vector({}, query);
     }
-    return (this._client.get('/radar/attacks/layer3/summary/vector', { query, ...options }) as Core.APIPromise<{ result: SummaryVectorResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/attacks/layer3/summary/vector', { query, ...options }) as Core.APIPromise<{
+        result: SummaryVectorResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

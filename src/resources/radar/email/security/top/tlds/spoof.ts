@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
-import { APIPromise } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as SpoofAPI from './spoof';
 
@@ -10,13 +9,26 @@ export class Spoof extends APIResource {
   /**
    * Get the TLDs by emails classified as spoof or not.
    */
-  get(spoof: 'SPOOF' | 'NOT_SPOOF', query?: SpoofGetParams, options?: Core.RequestOptions): Core.APIPromise<SpoofGetResponse>
-  get(spoof: 'SPOOF' | 'NOT_SPOOF', options?: Core.RequestOptions): Core.APIPromise<SpoofGetResponse>
-  get(spoof: 'SPOOF' | 'NOT_SPOOF', query: SpoofGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<SpoofGetResponse> {
+  get(
+    spoof: 'SPOOF' | 'NOT_SPOOF',
+    query?: SpoofGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SpoofGetResponse>;
+  get(spoof: 'SPOOF' | 'NOT_SPOOF', options?: Core.RequestOptions): Core.APIPromise<SpoofGetResponse>;
+  get(
+    spoof: 'SPOOF' | 'NOT_SPOOF',
+    query: SpoofGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SpoofGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(spoof, {}, query);
     }
-    return (this._client.get(`/radar/email/security/top/tlds/spoof/${spoof}`, { query, ...options }) as Core.APIPromise<{ result: SpoofGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/email/security/top/tlds/spoof/${spoof}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: SpoofGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as ReportsBytimesAPI from './bytimes';
 import * as BytimesAPI from '../../../analytics/reports/bytimes';
@@ -16,9 +14,18 @@ export class Bytimes extends APIResource {
    * [Analytics API properties](https://developers.cloudflare.com/dns/reference/analytics-api-properties/)
    * for detailed information about the available query parameters.
    */
-  get(dnsFirewallId: string, params: BytimeGetParams, options?: Core.RequestOptions): Core.APIPromise<BytimesAPI.ByTime> {
+  get(
+    dnsFirewallId: string,
+    params: BytimeGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BytimesAPI.ByTime> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report/bytime`, { query, ...options }) as Core.APIPromise<{ result: BytimesAPI.ByTime }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/dns_firewall/${dnsFirewallId}/dns_analytics/report/bytime`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: BytimesAPI.ByTime }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,15 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { Configurations } from './configurations';
-import { Discovery } from './discovery/discovery';
-import { Operations } from './operations/operations';
-import { Schemas } from './schemas';
-import { Settings } from './settings/settings';
-import { UserSchemas } from './user-schemas/user-schemas';
 import * as ConfigurationsAPI from './configurations';
 import * as SchemasAPI from './schemas';
 import * as DiscoveryAPI from './discovery/discovery';

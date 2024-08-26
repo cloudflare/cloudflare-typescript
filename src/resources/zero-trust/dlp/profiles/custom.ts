@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as CustomAPI from './custom';
 import * as ProfilesAPI from './profiles';
@@ -13,31 +11,62 @@ export class Custom extends APIResource {
    */
   create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCreateResponse> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, options) as Core.APIPromise<{ result: CustomCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, options) as Core.APIPromise<{
+        result: CustomCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a DLP custom profile.
    */
-  update(profileId: string, params: CustomUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
+  update(
+    profileId: string,
+    params: CustomUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;
-    return (this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, options) as Core.APIPromise<{ result: ProfilesAPI.Profile }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(
+        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
+        options,
+      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes a DLP custom profile.
    */
-  delete(profileId: string, params: CustomDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CustomDeleteResponse> {
+  delete(
+    profileId: string,
+    params: CustomDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, options) as Core.APIPromise<{ result: CustomDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
+        options,
+      ) as Core.APIPromise<{ result: CustomDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a custom DLP profile by id.
    */
-  get(profileId: string, params: CustomGetParams, options?: Core.RequestOptions): Core.APIPromise<ProfilesAPI.Profile> {
+  get(
+    profileId: string,
+    params: CustomGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, options) as Core.APIPromise<{ result: ProfilesAPI.Profile }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
+        options,
+      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -63,7 +92,13 @@ export interface CustomProfile {
    */
   created_at: string;
 
-  entries: Array<CustomProfile.Custom | CustomProfile.Predefined | CustomProfile.Integration | CustomProfile.ExactData | CustomProfile.WordList>;
+  entries: Array<
+    | CustomProfile.Custom
+    | CustomProfile.Predefined
+    | CustomProfile.Integration
+    | CustomProfile.ExactData
+    | CustomProfile.WordList
+  >;
 
   /**
    * The name of the profile
@@ -171,9 +206,9 @@ export interface Pattern {
   validation?: 'luhn';
 }
 
-export type CustomCreateResponse = Array<ProfilesAPI.Profile>
+export type CustomCreateResponse = Array<ProfilesAPI.Profile>;
 
-export type CustomDeleteResponse = unknown
+export type CustomDeleteResponse = unknown;
 
 export interface CustomCreateParams {
   account_id: string;

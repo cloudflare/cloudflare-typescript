@@ -1,12 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { Control } from './control/control';
-import { RayID } from './rayid';
-import { Received } from './received/received';
 import * as RayIDAPI from './rayid';
 import * as ControlAPI from './control/control';
 import * as ReceivedAPI from './received/received';

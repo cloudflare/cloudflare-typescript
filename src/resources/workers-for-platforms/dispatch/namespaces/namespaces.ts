@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
-import { Scripts } from './scripts/scripts';
 import * as NamespacesAPI from './namespaces';
 import * as ScriptsAPI from './scripts/scripts';
 import { SinglePage } from '../../../../pagination';
@@ -15,38 +12,70 @@ export class Namespaces extends APIResource {
   /**
    * Create a new Workers for Platforms namespace.
    */
-  create(params: NamespaceCreateParams, options?: Core.RequestOptions): Core.APIPromise<NamespaceCreateResponse> {
+  create(
+    params: NamespaceCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceCreateResponse> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/workers/dispatch/namespaces`, { body, ...options }) as Core.APIPromise<{ result: NamespaceCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/workers/dispatch/namespaces`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: NamespaceCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a list of Workers for Platforms namespaces.
    */
-  list(params: NamespaceListParams, options?: Core.RequestOptions): Core.PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse> {
+  list(
+    params: NamespaceListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<NamespaceListResponsesSinglePage, NamespaceListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/workers/dispatch/namespaces`, NamespaceListResponsesSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/workers/dispatch/namespaces`,
+      NamespaceListResponsesSinglePage,
+      options,
+    );
   }
 
   /**
    * Delete a Workers for Platforms namespace.
    */
-  delete(dispatchNamespace: string, params: NamespaceDeleteParams, options?: Core.RequestOptions): Core.APIPromise<NamespaceDeleteResponse | null> {
+  delete(
+    dispatchNamespace: string,
+    params: NamespaceDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`, options) as Core.APIPromise<{ result: NamespaceDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`,
+        options,
+      ) as Core.APIPromise<{ result: NamespaceDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a Workers for Platforms namespace.
    */
-  get(dispatchNamespace: string, params: NamespaceGetParams, options?: Core.RequestOptions): Core.APIPromise<NamespaceGetResponse> {
+  get(
+    dispatchNamespace: string,
+    params: NamespaceGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NamespaceGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`, options) as Core.APIPromise<{ result: NamespaceGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/workers/dispatch/namespaces/${dispatchNamespace}`,
+        options,
+      ) as Core.APIPromise<{ result: NamespaceGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class NamespaceListResponsesSinglePage extends SinglePage<NamespaceListResponse> {
-}
+export class NamespaceListResponsesSinglePage extends SinglePage<NamespaceListResponse> {}
 
 export interface NamespaceCreateResponse {
   /**
@@ -122,7 +151,7 @@ export interface NamespaceListResponse {
   script_count?: number;
 }
 
-export type NamespaceDeleteResponse = unknown
+export type NamespaceDeleteResponse = unknown;
 
 export interface NamespaceGetResponse {
   /**

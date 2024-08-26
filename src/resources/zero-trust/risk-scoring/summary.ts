@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SummaryAPI from './summary';
 
@@ -12,7 +10,11 @@ export class Summary extends APIResource {
    */
   get(params: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/zt_risk_scoring/summary`, options) as Core.APIPromise<{ result: SummaryGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/summary`, options) as Core.APIPromise<{
+        result: SummaryGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

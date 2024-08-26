@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Operations } from './operations';
 import * as DiscoveryAPI from './discovery';
 import * as OperationsAPI from './operations';
 import { V4PagePaginationArray } from '../../../pagination';
@@ -18,12 +15,15 @@ export class Discovery extends APIResource {
    */
   get(params: DiscoveryGetParams, options?: Core.RequestOptions): Core.APIPromise<DiscoveryGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/api_gateway/discovery`, options) as Core.APIPromise<{ result: DiscoveryGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/api_gateway/discovery`, options) as Core.APIPromise<{
+        result: DiscoveryGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DiscoveryOperationsV4PagePaginationArray extends V4PagePaginationArray<DiscoveryOperation> {
-}
+export class DiscoveryOperationsV4PagePaginationArray extends V4PagePaginationArray<DiscoveryOperation> {}
 
 export interface DiscoveryOperation {
   /**

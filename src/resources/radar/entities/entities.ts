@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { ASNs } from './asns';
-import { Locations } from './locations';
 import * as EntitiesAPI from './entities';
 import * as ASNsAPI from './asns';
 import * as LocationsAPI from './locations';
@@ -18,7 +14,11 @@ export class Entities extends APIResource {
    * Get IP address information.
    */
   get(query: EntityGetParams, options?: Core.RequestOptions): Core.APIPromise<EntityGetResponse> {
-    return (this._client.get('/radar/entities/ip', { query, ...options }) as Core.APIPromise<{ result: EntityGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/radar/entities/ip', { query, ...options }) as Core.APIPromise<{
+        result: EntityGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

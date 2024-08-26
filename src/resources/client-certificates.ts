@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
-import { APIPromise } from '../core';
 import * as Core from '../core';
-import * as ClientCertificatesAPI from './client-certificates';
 import * as CustomCertificatesAPI from './custom-certificates/custom-certificates';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
 
@@ -12,49 +9,89 @@ export class ClientCertificates extends APIResource {
   /**
    * Create a new API Shield mTLS Client Certificate
    */
-  create(params: ClientCertificateCreateParams, options?: Core.RequestOptions): Core.APIPromise<ClientCertificate> {
+  create(
+    params: ClientCertificateCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/client_certificates`, { body, ...options }) as Core.APIPromise<{ result: ClientCertificate }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/client_certificates`, { body, ...options }) as Core.APIPromise<{
+        result: ClientCertificate;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all of your Zone's API Shield mTLS Client Certificates by Status and/or
    * using Pagination
    */
-  list(params: ClientCertificateListParams, options?: Core.RequestOptions): Core.PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate> {
+  list(
+    params: ClientCertificateListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ClientCertificatesV4PagePaginationArray, ClientCertificate> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/client_certificates`, ClientCertificatesV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/client_certificates`,
+      ClientCertificatesV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Set a API Shield mTLS Client Certificate to pending_revocation status for
    * processing to revoked status.
    */
-  delete(clientCertificateId: string, params: ClientCertificateDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ClientCertificate> {
+  delete(
+    clientCertificateId: string,
+    params: ClientCertificateDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/client_certificates/${clientCertificateId}`, options) as Core.APIPromise<{ result: ClientCertificate }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: ClientCertificate }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * If a API Shield mTLS Client Certificate is in a pending_revocation state, you
    * may reactivate it with this endpoint.
    */
-  edit(clientCertificateId: string, params: ClientCertificateEditParams, options?: Core.RequestOptions): Core.APIPromise<ClientCertificate> {
+  edit(
+    clientCertificateId: string,
+    params: ClientCertificateEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id } = params;
-    return (this._client.patch(`/zones/${zone_id}/client_certificates/${clientCertificateId}`, options) as Core.APIPromise<{ result: ClientCertificate }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(
+        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: ClientCertificate }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Details for a single mTLS API Shield Client Certificate
    */
-  get(clientCertificateId: string, params: ClientCertificateGetParams, options?: Core.RequestOptions): Core.APIPromise<ClientCertificate> {
+  get(
+    clientCertificateId: string,
+    params: ClientCertificateGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ClientCertificate> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/client_certificates/${clientCertificateId}`, options) as Core.APIPromise<{ result: ClientCertificate }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/client_certificates/${clientCertificateId}`,
+        options,
+      ) as Core.APIPromise<{ result: ClientCertificate }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ClientCertificatesV4PagePaginationArray extends V4PagePaginationArray<ClientCertificate> {
-}
+export class ClientCertificatesV4PagePaginationArray extends V4PagePaginationArray<ClientCertificate> {}
 
 export interface ClientCertificate {
   /**

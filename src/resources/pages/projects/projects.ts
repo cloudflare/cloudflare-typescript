@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Deployments } from './deployments/deployments';
-import { Domains } from './domains';
 import * as ProjectsAPI from './projects';
 import * as DomainsAPI from './domains';
 import * as DeploymentsAPI from './deployments/deployments';
@@ -20,13 +16,20 @@ export class Projects extends APIResource {
    */
   create(params: ProjectCreateParams, options?: Core.RequestOptions): Core.APIPromise<Project> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/pages/projects`, { body, ...options }) as Core.APIPromise<{ result: Project }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/pages/projects`, { body, ...options }) as Core.APIPromise<{
+        result: Project;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a list of all user projects.
    */
-  list(params: ProjectListParams, options?: Core.RequestOptions): Core.PagePromise<DeploymentsSinglePage, Deployment> {
+  list(
+    params: ProjectListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DeploymentsSinglePage, Deployment> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/pages/projects`, DeploymentsSinglePage, options);
   }
@@ -34,39 +37,73 @@ export class Projects extends APIResource {
   /**
    * Delete a project by name.
    */
-  delete(projectName: string, params: ProjectDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ProjectDeleteResponse> {
+  delete(
+    projectName: string,
+    params: ProjectDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProjectDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{ result: ProjectDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/pages/projects/${projectName}`,
+        options,
+      ) as Core.APIPromise<{ result: ProjectDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Set new attributes for an existing project. Modify environment variables. To
    * delete an environment variable, set the key to null.
    */
-  edit(projectName: string, params: ProjectEditParams, options?: Core.RequestOptions): Core.APIPromise<Project> {
+  edit(
+    projectName: string,
+    params: ProjectEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Project> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}`, { body, ...options }) as Core.APIPromise<{ result: Project }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/pages/projects/${projectName}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Project }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetch a project by name.
    */
-  get(projectName: string, params: ProjectGetParams, options?: Core.RequestOptions): Core.APIPromise<Project> {
+  get(
+    projectName: string,
+    params: ProjectGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Project> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{ result: Project }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/pages/projects/${projectName}`, options) as Core.APIPromise<{
+        result: Project;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Purge all cached build artifacts for a Pages project
    */
-  purgeBuildCache(projectName: string, params: ProjectPurgeBuildCacheParams, options?: Core.RequestOptions): Core.APIPromise<ProjectPurgeBuildCacheResponse> {
+  purgeBuildCache(
+    projectName: string,
+    params: ProjectPurgeBuildCacheParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProjectPurgeBuildCacheResponse | null> {
     const { account_id } = params;
-    return (this._client.post(`/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`, options) as Core.APIPromise<{ result: ProjectPurgeBuildCacheResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(
+        `/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
+        options,
+      ) as Core.APIPromise<{ result: ProjectPurgeBuildCacheResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DeploymentsSinglePage extends SinglePage<Deployment> {
-}
+export class DeploymentsSinglePage extends SinglePage<Deployment> {}
 
 export interface Deployment {
   /**
@@ -883,9 +920,9 @@ export interface Stage {
   status?: string;
 }
 
-export type ProjectDeleteResponse = unknown
+export type ProjectDeleteResponse = unknown;
 
-export type ProjectPurgeBuildCacheResponse = unknown
+export type ProjectPurgeBuildCacheResponse = unknown;
 
 export interface ProjectCreateParams {
   /**

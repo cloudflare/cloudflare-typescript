@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Health } from './health';
-import { References } from './references';
 import * as PoolsAPI from './pools';
 import * as LoadBalancersAPI from '../load-balancers';
 import * as HealthAPI from './health';
@@ -21,7 +17,12 @@ export class Pools extends APIResource {
    */
   create(params: PoolCreateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/load_balancers/pools`, { body, ...options }) as Core.APIPromise<{ result: Pool }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/load_balancers/pools`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Pool }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -29,7 +30,12 @@ export class Pools extends APIResource {
    */
   update(poolId: string, params: PoolUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/load_balancers/pools/${poolId}`, { body, ...options }) as Core.APIPromise<{ result: Pool }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Pool }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -37,15 +43,27 @@ export class Pools extends APIResource {
    */
   list(params: PoolListParams, options?: Core.RequestOptions): Core.PagePromise<PoolsSinglePage, Pool> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/load_balancers/pools`, PoolsSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
    * Delete a configured pool.
    */
-  delete(poolId: string, params: PoolDeleteParams, options?: Core.RequestOptions): Core.APIPromise<PoolDeleteResponse> {
+  delete(
+    poolId: string,
+    params: PoolDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<PoolDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{ result: PoolDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/load_balancers/pools/${poolId}`,
+        options,
+      ) as Core.APIPromise<{ result: PoolDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -53,7 +71,12 @@ export class Pools extends APIResource {
    */
   edit(poolId: string, params: PoolEditParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/load_balancers/pools/${poolId}`, { body, ...options }) as Core.APIPromise<{ result: Pool }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/load_balancers/pools/${poolId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Pool }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -61,12 +84,15 @@ export class Pools extends APIResource {
    */
   get(poolId: string, params: PoolGetParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{ result: Pool }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/load_balancers/pools/${poolId}`, options) as Core.APIPromise<{
+        result: Pool;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class PoolsSinglePage extends SinglePage<Pool> {
-}
+export class PoolsSinglePage extends SinglePage<Pool> {}
 
 export interface Pool {
   id?: string;

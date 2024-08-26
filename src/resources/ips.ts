@@ -2,9 +2,7 @@
 
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
-import { APIPromise } from '../core';
 import * as Core from '../core';
-import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**
@@ -13,13 +11,18 @@ export class IPs extends APIResource {
    * https://developers.cloudflare.com/china-network/reference/infrastructure/ for JD
    * Cloud IPs.
    */
-  list(query?: IPListParams, options?: Core.RequestOptions): Core.APIPromise<IPListResponse>
-  list(options?: Core.RequestOptions): Core.APIPromise<IPListResponse>
-  list(query: IPListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<IPListResponse> {
+  list(query?: IPListParams, options?: Core.RequestOptions): Core.APIPromise<IPListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<IPListResponse>;
+  list(
+    query: IPListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPListResponse> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return (this._client.get('/ips', { query, ...options }) as Core.APIPromise<{ result: IPListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get('/ips', { query, ...options }) as Core.APIPromise<{ result: IPListResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -62,7 +65,7 @@ export interface JDCloudIPs {
   jdcloud_cidrs?: Array<string>;
 }
 
-export type IPListResponse = IPs | JDCloudIPs
+export type IPListResponse = IPs | JDCloudIPs;
 
 export interface IPListParams {
   /**

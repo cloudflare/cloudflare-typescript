@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as RulesAPI from './rules';
 
@@ -10,33 +8,70 @@ export class Rules extends APIResource {
   /**
    * Creates a new rule in a Web Analytics ruleset.
    */
-  create(rulesetId: string, params: RuleCreateParams, options?: Core.RequestOptions): Core.APIPromise<RUMRule> {
+  create(
+    rulesetId: string,
+    params: RuleCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RUMRule> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rule`, { body, ...options }) as Core.APIPromise<{ result: RUMRule }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/rum/v2/${rulesetId}/rule`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RUMRule }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a rule in a Web Analytics ruleset.
    */
-  update(rulesetId: string, ruleId: string, params: RuleUpdateParams, options?: Core.RequestOptions): Core.APIPromise<RUMRule> {
+  update(
+    rulesetId: string,
+    ruleId: string,
+    params: RuleUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RUMRule> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, { body, ...options }) as Core.APIPromise<{ result: RUMRule }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: RUMRule }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists all the rules in a Web Analytics ruleset.
    */
-  list(rulesetId: string, params: RuleListParams, options?: Core.RequestOptions): Core.APIPromise<RuleListResponse> {
+  list(
+    rulesetId: string,
+    params: RuleListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleListResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/rum/v2/${rulesetId}/rules`, options) as Core.APIPromise<{ result: RuleListResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/rum/v2/${rulesetId}/rules`, options) as Core.APIPromise<{
+        result: RuleListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes an existing rule from a Web Analytics ruleset.
    */
-  delete(rulesetId: string, ruleId: string, params: RuleDeleteParams, options?: Core.RequestOptions): Core.APIPromise<RuleDeleteResponse> {
+  delete(
+    rulesetId: string,
+    ruleId: string,
+    params: RuleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`, options) as Core.APIPromise<{ result: RuleDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/rum/v2/${rulesetId}/rule/${ruleId}`,
+        options,
+      ) as Core.APIPromise<{ result: RuleDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

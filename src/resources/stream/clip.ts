@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as ClipAPI from './clip';
 import * as StreamAPI from './stream';
@@ -13,7 +11,11 @@ export class ClipResource extends APIResource {
    */
   create(params: ClipCreateParams, options?: Core.RequestOptions): Core.APIPromise<Clip> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/stream/clip`, { body, ...options }) as Core.APIPromise<{ result: Clip }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/stream/clip`, { body, ...options }) as Core.APIPromise<{
+        result: Clip;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

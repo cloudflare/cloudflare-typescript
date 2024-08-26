@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../../resource';
-import { isRequestOptions } from '../../../../../core';
-import { APIPromise } from '../../../../../core';
 import * as Core from '../../../../../core';
 import * as EntriesAPI from './entries';
 
@@ -10,36 +8,86 @@ export class Entries extends APIResource {
   /**
    * Create IPFS Universal Path Gateway Content List Entry
    */
-  create(zoneIdentifier: string, identifier: string, body: EntryCreateParams, options?: Core.RequestOptions): Core.APIPromise<EntryCreateResponse> {
-    return (this._client.post(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`, { body, ...options }) as Core.APIPromise<{ result: EntryCreateResponse }>)._thenUnwrap((obj) => obj.result);
+  create(
+    zoneIdentifier: string,
+    identifier: string,
+    body: EntryCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryCreateResponse> {
+    return (
+      this._client.post(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: EntryCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Edit IPFS Universal Path Gateway Content List Entry
    */
-  update(zoneIdentifier: string, identifier: string, contentListEntryIdentifier: string, body: EntryUpdateParams, options?: Core.RequestOptions): Core.APIPromise<EntryUpdateResponse> {
-    return (this._client.put(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`, { body, ...options }) as Core.APIPromise<{ result: EntryUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+  update(
+    zoneIdentifier: string,
+    identifier: string,
+    contentListEntryIdentifier: string,
+    body: EntryUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryUpdateResponse> {
+    return (
+      this._client.put(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: EntryUpdateResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List IPFS Universal Path Gateway Content List Entries
    */
-  list(zoneIdentifier: string, identifier: string, options?: Core.RequestOptions): Core.APIPromise<EntryListResponse | null> {
-    return (this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`, options) as Core.APIPromise<{ result: EntryListResponse | null }>)._thenUnwrap((obj) => obj.result);
+  list(
+    zoneIdentifier: string,
+    identifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryListResponse | null> {
+    return (
+      this._client.get(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries`,
+        options,
+      ) as Core.APIPromise<{ result: EntryListResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete IPFS Universal Path Gateway Content List Entry
    */
-  delete(zoneIdentifier: string, identifier: string, contentListEntryIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EntryDeleteResponse | null> {
-    return (this._client.delete(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`, options) as Core.APIPromise<{ result: EntryDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+  delete(
+    zoneIdentifier: string,
+    identifier: string,
+    contentListEntryIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryDeleteResponse | null> {
+    return (
+      this._client.delete(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: EntryDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * IPFS Universal Path Gateway Content List Entry Details
    */
-  get(zoneIdentifier: string, identifier: string, contentListEntryIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<EntryGetResponse> {
-    return (this._client.get(`/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`, options) as Core.APIPromise<{ result: EntryGetResponse }>)._thenUnwrap((obj) => obj.result);
+  get(
+    zoneIdentifier: string,
+    identifier: string,
+    contentListEntryIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EntryGetResponse> {
+    return (
+      this._client.get(
+        `/zones/${zoneIdentifier}/web3/hostnames/${identifier}/ipfs_universal_path/content_list/entries/${contentListEntryIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: EntryGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

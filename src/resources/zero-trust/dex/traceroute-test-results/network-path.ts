@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as NetworkPathAPI from './network-path';
 
@@ -11,9 +9,18 @@ export class NetworkPath extends APIResource {
    * Get a breakdown of hops and performance metrics for a specific traceroute test
    * run
    */
-  get(testResultId: string, params: NetworkPathGetParams, options?: Core.RequestOptions): Core.APIPromise<NetworkPathGetResponse> {
+  get(
+    testResultId: string,
+    params: NetworkPathGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<NetworkPathGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`, options) as Core.APIPromise<{ result: NetworkPathGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/dex/traceroute-test-results/${testResultId}/network-path`,
+        options,
+      ) as Core.APIPromise<{ result: NetworkPathGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

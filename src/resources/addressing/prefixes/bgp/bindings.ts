@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as BindingsAPI from './bindings';
 import * as Shared from '../../../shared';
@@ -15,9 +13,18 @@ export class Bindings extends APIResource {
    * prefixes currently configured with a Magic Transit service binding, and only
    * allows creating service bindings for the Cloudflare CDN or Cloudflare Spectrum.
    */
-  create(prefixId: string, params: BindingCreateParams, options?: Core.RequestOptions): Core.APIPromise<ServiceBinding> {
+  create(
+    prefixId: string,
+    params: BindingCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceBinding> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, { body, ...options }) as Core.APIPromise<{ result: ServiceBinding }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ServiceBinding }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,30 +35,55 @@ export class Bindings extends APIResource {
    * CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other
    * IPs in the prefix to Cloudflare Magic Transit.
    */
-  list(prefixId: string, params: BindingListParams, options?: Core.RequestOptions): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding> {
+  list(
+    prefixId: string,
+    params: BindingListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ServiceBindingsSinglePage, ServiceBinding> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`, ServiceBindingsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings`,
+      ServiceBindingsSinglePage,
+      options,
+    );
   }
 
   /**
    * Delete a Service Binding
    */
-  delete(prefixId: string, bindingId: string, params: BindingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<BindingDeleteResponse> {
+  delete(
+    prefixId: string,
+    bindingId: string,
+    params: BindingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<BindingDeleteResponse> {
     const { account_id } = params;
-    return this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`, options);
+    return this._client.delete(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
+      options,
+    );
   }
 
   /**
    * Fetch a single Service Binding
    */
-  get(prefixId: string, bindingId: string, params: BindingGetParams, options?: Core.RequestOptions): Core.APIPromise<ServiceBinding> {
+  get(
+    prefixId: string,
+    bindingId: string,
+    params: BindingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ServiceBinding> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`, options) as Core.APIPromise<{ result: ServiceBinding }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/bindings/${bindingId}`,
+        options,
+      ) as Core.APIPromise<{ result: ServiceBinding }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ServiceBindingsSinglePage extends SinglePage<ServiceBinding> {
-}
+export class ServiceBindingsSinglePage extends SinglePage<ServiceBinding> {}
 
 export interface ServiceBinding {
   /**

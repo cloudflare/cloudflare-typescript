@@ -1,12 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { ACLs } from './acls';
-import { LANs } from './lans';
-import { WANs } from './wans';
 import * as SitesAPI from './sites';
 import * as ACLsAPI from './acls';
 import * as LANsAPI from './lans';
@@ -23,7 +18,11 @@ export class Sites extends APIResource {
    */
   create(params: SiteCreateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/magic/sites`, { body, ...options }) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/magic/sites`, { body, ...options }) as Core.APIPromise<{
+        result: Site;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -31,7 +30,12 @@ export class Sites extends APIResource {
    */
   update(siteId: string, params: SiteUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/magic/sites/${siteId}`, { body, ...options }) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/magic/sites/${siteId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Site }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -41,7 +45,10 @@ export class Sites extends APIResource {
    */
   list(params: SiteListParams, options?: Core.RequestOptions): Core.PagePromise<SitesSinglePage, Site> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/magic/sites`, SitesSinglePage, { query, ...options });
+    return this._client.getAPIList(`/accounts/${account_id}/magic/sites`, SitesSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -49,7 +56,11 @@ export class Sites extends APIResource {
    */
   delete(siteId: string, params: SiteDeleteParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
+        result: Site;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -57,7 +68,12 @@ export class Sites extends APIResource {
    */
   edit(siteId: string, params: SiteEditParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}`, { body, ...options }) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/magic/sites/${siteId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Site }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -65,12 +81,15 @@ export class Sites extends APIResource {
    */
   get(siteId: string, params: SiteGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{ result: Site }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
+        result: Site;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SitesSinglePage extends SinglePage<Site> {
-}
+export class SitesSinglePage extends SinglePage<Site> {}
 
 export interface Site {
   /**

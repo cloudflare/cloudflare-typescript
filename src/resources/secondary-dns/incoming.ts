@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as IncomingAPI from './incoming';
 
@@ -10,25 +8,46 @@ export class IncomingResource extends APIResource {
   /**
    * Create secondary zone configuration for incoming zone transfers.
    */
-  create(params: IncomingCreateParams, options?: Core.RequestOptions): Core.APIPromise<IncomingCreateResponse> {
+  create(
+    params: IncomingCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingCreateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{ result: IncomingCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
+        result: IncomingCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Update secondary zone configuration for incoming zone transfers.
    */
-  update(params: IncomingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<IncomingUpdateResponse> {
+  update(
+    params: IncomingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingUpdateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{ result: IncomingUpdateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/secondary_dns/incoming`, { body, ...options }) as Core.APIPromise<{
+        result: IncomingUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Delete secondary zone configuration for incoming zone transfers.
    */
-  delete(params: IncomingDeleteParams, options?: Core.RequestOptions): Core.APIPromise<IncomingDeleteResponse> {
+  delete(
+    params: IncomingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IncomingDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{ result: IncomingDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
+        result: IncomingDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -36,7 +55,11 @@ export class IncomingResource extends APIResource {
    */
   get(params: IncomingGetParams, options?: Core.RequestOptions): Core.APIPromise<IncomingGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{ result: IncomingGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/secondary_dns/incoming`, options) as Core.APIPromise<{
+        result: IncomingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

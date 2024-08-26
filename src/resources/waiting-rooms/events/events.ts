@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { Details } from './details';
 import * as EventsAPI from './events';
 import * as DetailsAPI from './details';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -20,54 +17,110 @@ export class Events extends APIResource {
    * inherit from the waiting room's configuration. Note that events cannot overlap
    * with each other, so only one event can be active at a time.
    */
-  create(waitingRoomId: string, params: EventCreateParams, options?: Core.RequestOptions): Core.APIPromise<Event> {
+  create(
+    waitingRoomId: string,
+    params: EventCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Event> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`, { body, ...options }) as Core.APIPromise<{ result: Event }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Event }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates a configured event for a waiting room.
    */
-  update(waitingRoomId: string, eventId: string, params: EventUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Event> {
+  update(
+    waitingRoomId: string,
+    eventId: string,
+    params: EventUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Event> {
     const { zone_id, ...body } = params;
-    return (this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, { body, ...options }) as Core.APIPromise<{ result: Event }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Event }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists events for a waiting room.
    */
-  list(waitingRoomId: string, params: EventListParams, options?: Core.RequestOptions): Core.PagePromise<EventsV4PagePaginationArray, Event> {
+  list(
+    waitingRoomId: string,
+    params: EventListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<EventsV4PagePaginationArray, Event> {
     const { zone_id, ...query } = params;
-    return this._client.getAPIList(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`, EventsV4PagePaginationArray, { query, ...options });
+    return this._client.getAPIList(
+      `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`,
+      EventsV4PagePaginationArray,
+      { query, ...options },
+    );
   }
 
   /**
    * Deletes an event for a waiting room.
    */
-  delete(waitingRoomId: string, eventId: string, params: EventDeleteParams, options?: Core.RequestOptions): Core.APIPromise<EventDeleteResponse> {
+  delete(
+    waitingRoomId: string,
+    eventId: string,
+    params: EventDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<EventDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, options) as Core.APIPromise<{ result: EventDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
+        options,
+      ) as Core.APIPromise<{ result: EventDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Patches a configured event for a waiting room.
    */
-  edit(waitingRoomId: string, eventId: string, params: EventEditParams, options?: Core.RequestOptions): Core.APIPromise<Event> {
+  edit(
+    waitingRoomId: string,
+    eventId: string,
+    params: EventEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Event> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, { body, ...options }) as Core.APIPromise<{ result: Event }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Event }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a single configured event for a waiting room.
    */
-  get(waitingRoomId: string, eventId: string, params: EventGetParams, options?: Core.RequestOptions): Core.APIPromise<Event> {
+  get(
+    waitingRoomId: string,
+    eventId: string,
+    params: EventGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Event> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`, options) as Core.APIPromise<{ result: Event }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events/${eventId}`,
+        options,
+      ) as Core.APIPromise<{ result: Event }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class EventsV4PagePaginationArray extends V4PagePaginationArray<Event> {
-}
+export class EventsV4PagePaginationArray extends V4PagePaginationArray<Event> {}
 
 export interface Event {
   id?: string;

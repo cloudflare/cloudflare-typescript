@@ -1,11 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
-import { BulkOperations } from './bulk-operations';
-import { Items } from './items';
 import * as ListsAPI from './lists';
 import * as BulkOperationsAPI from './bulk-operations';
 import * as ItemsAPI from './items';
@@ -20,21 +16,37 @@ export class Lists extends APIResource {
    */
   create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListsList | null> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{ result: ListsList | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{
+        result: ListsList | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Updates the description of a list.
    */
-  update(listId: string, params: ListUpdateParams, options?: Core.RequestOptions): Core.APIPromise<ListsList | null> {
+  update(
+    listId: string,
+    params: ListUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListsList | null> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, { body, ...options }) as Core.APIPromise<{ result: ListsList | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ListsList | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches all lists in the account.
    */
-  list(params: ListListParams, options?: Core.RequestOptions): Core.PagePromise<ListsListsSinglePage, ListsList> {
+  list(
+    params: ListListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<ListsListsSinglePage, ListsList> {
     const { account_id } = params;
     return this._client.getAPIList(`/accounts/${account_id}/rules/lists`, ListsListsSinglePage, options);
   }
@@ -42,22 +54,37 @@ export class Lists extends APIResource {
   /**
    * Deletes a specific list and all its items.
    */
-  delete(listId: string, params: ListDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ListDeleteResponse | null> {
+  delete(
+    listId: string,
+    params: ListDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{ result: ListDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
+        result: ListDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches the details of a list.
    */
-  get(listId: string, params: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<ListsList | null> {
+  get(
+    listId: string,
+    params: ListGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ListsList | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{ result: ListsList | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
+        result: ListsList | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class ListsListsSinglePage extends SinglePage<ListsList> {
-}
+export class ListsListsSinglePage extends SinglePage<ListsList> {}
 
 /**
  * Valid characters for hostnames are ASCII(7) letters from a to z, the digits from

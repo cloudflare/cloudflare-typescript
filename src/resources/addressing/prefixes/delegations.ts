@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as DelegationsAPI from './delegations';
 import { SinglePage } from '../../../pagination';
@@ -11,30 +9,56 @@ export class Delegations extends APIResource {
   /**
    * Create a new account delegation for a given IP prefix.
    */
-  create(prefixId: string, params: DelegationCreateParams, options?: Core.RequestOptions): Core.APIPromise<Delegations> {
+  create(
+    prefixId: string,
+    params: DelegationCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Delegations> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, { body, ...options }) as Core.APIPromise<{ result: Delegations }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Delegations }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all delegations for a given account IP prefix.
    */
-  list(prefixId: string, params: DelegationListParams, options?: Core.RequestOptions): Core.PagePromise<DelegationsSinglePage, Delegations> {
+  list(
+    prefixId: string,
+    params: DelegationListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<DelegationsSinglePage, Delegations> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`, DelegationsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations`,
+      DelegationsSinglePage,
+      options,
+    );
   }
 
   /**
    * Delete an account delegation for a given IP prefix.
    */
-  delete(prefixId: string, delegationId: string, params: DelegationDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DelegationDeleteResponse> {
+  delete(
+    prefixId: string,
+    delegationId: string,
+    params: DelegationDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DelegationDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations/${delegationId}`, options) as Core.APIPromise<{ result: DelegationDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/addressing/prefixes/${prefixId}/delegations/${delegationId}`,
+        options,
+      ) as Core.APIPromise<{ result: DelegationDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DelegationsSinglePage extends SinglePage<Delegations> {
-}
+export class DelegationsSinglePage extends SinglePage<Delegations> {}
 
 export interface Delegations {
   /**

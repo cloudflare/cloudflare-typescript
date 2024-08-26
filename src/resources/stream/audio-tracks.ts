@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as AudioTracksAPI from './audio-tracks';
 
@@ -11,17 +9,36 @@ export class AudioTracks extends APIResource {
    * Deletes additional audio tracks on a video. Deleting a default audio track is
    * not allowed. You must assign another audio track as default prior to deletion.
    */
-  delete(identifier: string, audioIdentifier: string, params: AudioTrackDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AudioTrackDeleteResponse> {
+  delete(
+    identifier: string,
+    audioIdentifier: string,
+    params: AudioTrackDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackDeleteResponse> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, options) as Core.APIPromise<{ result: AudioTrackDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`,
+        options,
+      ) as Core.APIPromise<{ result: AudioTrackDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Adds an additional audio track to a video using the provided audio track URL.
    */
-  copy(identifier: string, params: AudioTrackCopyParams, options?: Core.RequestOptions): Core.APIPromise<Audio> {
+  copy(
+    identifier: string,
+    params: AudioTrackCopyParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Audio> {
     const { account_id, ...body } = params;
-    return (this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, { body, ...options }) as Core.APIPromise<{ result: Audio }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/accounts/${account_id}/stream/${identifier}/audio/copy`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Audio }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -29,18 +46,36 @@ export class AudioTracks extends APIResource {
    * track to `true` will mark all other audio tracks on the video default status to
    * `false`.
    */
-  edit(identifier: string, audioIdentifier: string, params: AudioTrackEditParams, options?: Core.RequestOptions): Core.APIPromise<Audio> {
+  edit(
+    identifier: string,
+    audioIdentifier: string,
+    params: AudioTrackEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Audio> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, { body, ...options }) as Core.APIPromise<{ result: Audio }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/stream/${identifier}/audio/${audioIdentifier}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Audio }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Lists additional audio tracks on a video. Note this API will not return
    * information for audio attached to the video upload.
    */
-  get(identifier: string, params: AudioTrackGetParams, options?: Core.RequestOptions): Core.APIPromise<AudioTrackGetResponse> {
+  get(
+    identifier: string,
+    params: AudioTrackGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AudioTrackGetResponse> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{ result: AudioTrackGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/stream/${identifier}/audio`, options) as Core.APIPromise<{
+        result: AudioTrackGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -67,9 +102,9 @@ export interface Audio {
   uid?: string;
 }
 
-export type AudioTrackDeleteResponse = string
+export type AudioTrackDeleteResponse = string;
 
-export type AudioTrackGetResponse = Array<Audio>
+export type AudioTrackGetResponse = Array<Audio>;
 
 export interface AudioTrackDeleteParams {
   /**

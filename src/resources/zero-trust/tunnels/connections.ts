@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as ConnectionsAPI from './connections';
 
@@ -13,17 +11,35 @@ export class Connections extends APIResource {
    * all connectors will be removed. We recommend running this command after rotating
    * tokens.
    */
-  delete(tunnelId: string, params: ConnectionDeleteParams, options?: Core.RequestOptions): Core.APIPromise<ConnectionDeleteResponse | null> {
+  delete(
+    tunnelId: string,
+    params: ConnectionDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectionDeleteResponse | null> {
     const { account_id, client_id } = params;
-    return (this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`, { query: { client_id }, ...options }) as Core.APIPromise<{ result: ConnectionDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`, {
+        query: { client_id },
+        ...options,
+      }) as Core.APIPromise<{ result: ConnectionDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches connection details for a Cloudflare Tunnel.
    */
-  get(tunnelId: string, params: ConnectionGetParams, options?: Core.RequestOptions): Core.APIPromise<ConnectionGetResponse | null> {
+  get(
+    tunnelId: string,
+    params: ConnectionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ConnectionGetResponse | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`, options) as Core.APIPromise<{ result: ConnectionGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`,
+        options,
+      ) as Core.APIPromise<{ result: ConnectionGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -116,9 +132,9 @@ export namespace Client {
   }
 }
 
-export type ConnectionDeleteResponse = unknown
+export type ConnectionDeleteResponse = unknown;
 
-export type ConnectionGetResponse = Array<Client>
+export type ConnectionGetResponse = Array<Client>;
 
 export interface ConnectionDeleteParams {
   /**

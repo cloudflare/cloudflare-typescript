@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
 import * as TotalTLSAPI from './total-tls';
 
@@ -10,9 +8,16 @@ export class TotalTLS extends APIResource {
   /**
    * Set Total TLS Settings or disable the feature for a Zone.
    */
-  create(params: TotalTLSCreateParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSCreateResponse> {
+  create(
+    params: TotalTLSCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TotalTLSCreateResponse> {
     const { zone_id, ...body } = params;
-    return (this._client.post(`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{ result: TotalTLSCreateResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post(`/zones/${zone_id}/acm/total_tls`, { body, ...options }) as Core.APIPromise<{
+        result: TotalTLSCreateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,19 +25,23 @@ export class TotalTLS extends APIResource {
    */
   get(params: TotalTLSGetParams, options?: Core.RequestOptions): Core.APIPromise<TotalTLSGetResponse> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/acm/total_tls`, options) as Core.APIPromise<{ result: TotalTLSGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/acm/total_tls`, options) as Core.APIPromise<{
+        result: TotalTLSGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
  */
-export type CertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com'
+export type CertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
  */
-export type CertificateAuthorityParam = 'google' | 'lets_encrypt' | 'ssl_com'
+export type CertificateAuthorityParam = 'google' | 'lets_encrypt' | 'ssl_com';
 
 export interface TotalTLSCreateResponse {
   /**

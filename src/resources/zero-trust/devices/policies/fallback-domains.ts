@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as FallbackDomainsAPI from './fallback-domains';
 import { SinglePage } from '../../../../pagination';
@@ -13,18 +11,34 @@ export class FallbackDomains extends APIResource {
    * use the specified local DNS resolver instead. This will only apply to the
    * specified device settings profile.
    */
-  update(policyId: string, params: FallbackDomainUpdateParams, options?: Core.RequestOptions): Core.APIPromise<FallbackDomainUpdateResponse | null> {
+  update(
+    policyId: string,
+    params: FallbackDomainUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FallbackDomainUpdateResponse | null> {
     const { account_id, body } = params;
-    return (this._client.put(`/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`, { body: body, ...options }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Fetches a list of domains to bypass Gateway DNS resolution. These domains will
    * use the specified local DNS resolver instead.
    */
-  list(params: FallbackDomainListParams, options?: Core.RequestOptions): Core.PagePromise<FallbackDomainsSinglePage, FallbackDomain> {
+  list(
+    params: FallbackDomainListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<FallbackDomainsSinglePage, FallbackDomain> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/devices/policy/fallback_domains`, FallbackDomainsSinglePage, options);
+    return this._client.getAPIList(
+      `/accounts/${account_id}/devices/policy/fallback_domains`,
+      FallbackDomainsSinglePage,
+      options,
+    );
   }
 
   /**
@@ -32,14 +46,22 @@ export class FallbackDomains extends APIResource {
    * device settings profile. These domains will use the specified local DNS resolver
    * instead.
    */
-  get(policyId: string, params: FallbackDomainGetParams, options?: Core.RequestOptions): Core.APIPromise<FallbackDomainGetResponse | null> {
+  get(
+    policyId: string,
+    params: FallbackDomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FallbackDomainGetResponse | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`, options) as Core.APIPromise<{ result: FallbackDomainGetResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(
+        `/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`,
+        options,
+      ) as Core.APIPromise<{ result: FallbackDomainGetResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class FallbackDomainsSinglePage extends SinglePage<FallbackDomain> {
-}
+export class FallbackDomainsSinglePage extends SinglePage<FallbackDomain> {}
 
 export interface FallbackDomain {
   /**
@@ -75,11 +97,11 @@ export interface FallbackDomainParam {
   dns_server?: Array<string>;
 }
 
-export type FallbackDomainPolicy = Array<FallbackDomain>
+export type FallbackDomainPolicy = Array<FallbackDomain>;
 
-export type FallbackDomainUpdateResponse = Array<FallbackDomain>
+export type FallbackDomainUpdateResponse = Array<FallbackDomain>;
 
-export type FallbackDomainGetResponse = Array<FallbackDomain>
+export type FallbackDomainGetResponse = Array<FallbackDomain>;
 
 export interface FallbackDomainUpdateParams {
   /**

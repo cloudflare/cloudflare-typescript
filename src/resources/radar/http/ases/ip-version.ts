@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
-import { APIPromise } from '../../../../core';
 import * as Core from '../../../../core';
 import * as IPVersionAPI from './ip-version';
 
@@ -11,13 +10,26 @@ export class IPVersion extends APIResource {
    * Get the top autonomous systems, by HTTP traffic, of the requested IP protocol
    * version. Values are a percentage out of the total traffic.
    */
-  get(ipVersion: 'IPv4' | 'IPv6', query?: IPVersionGetParams, options?: Core.RequestOptions): Core.APIPromise<IPVersionGetResponse>
-  get(ipVersion: 'IPv4' | 'IPv6', options?: Core.RequestOptions): Core.APIPromise<IPVersionGetResponse>
-  get(ipVersion: 'IPv4' | 'IPv6', query: IPVersionGetParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<IPVersionGetResponse> {
+  get(
+    ipVersion: 'IPv4' | 'IPv6',
+    query?: IPVersionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPVersionGetResponse>;
+  get(ipVersion: 'IPv4' | 'IPv6', options?: Core.RequestOptions): Core.APIPromise<IPVersionGetResponse>;
+  get(
+    ipVersion: 'IPv4' | 'IPv6',
+    query: IPVersionGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<IPVersionGetResponse> {
     if (isRequestOptions(query)) {
       return this.get(ipVersion, {}, query);
     }
-    return (this._client.get(`/radar/http/top/ases/ip_version/${ipVersion}`, { query, ...options }) as Core.APIPromise<{ result: IPVersionGetResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/radar/http/top/ases/ip_version/${ipVersion}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: IPVersionGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
-import { APIPromise } from '../core';
 import * as Core from '../core';
-import * as DNSSECAPI from './dnssec';
 
 export class DNSSECResource extends APIResource {
   /**
@@ -12,7 +9,11 @@ export class DNSSECResource extends APIResource {
    */
   delete(params: DNSSECDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSSECDeleteResponse> {
     const { zone_id } = params;
-    return (this._client.delete(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{ result: DNSSECDeleteResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{
+        result: DNSSECDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +21,11 @@ export class DNSSECResource extends APIResource {
    */
   edit(params: DNSSECEditParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id, ...body } = params;
-    return (this._client.patch(`/zones/${zone_id}/dnssec`, { body, ...options }) as Core.APIPromise<{ result: DNSSEC }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/zones/${zone_id}/dnssec`, { body, ...options }) as Core.APIPromise<{
+        result: DNSSEC;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,7 +33,9 @@ export class DNSSECResource extends APIResource {
    */
   get(params: DNSSECGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSSEC> {
     const { zone_id } = params;
-    return (this._client.get(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{ result: DNSSEC }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/zones/${zone_id}/dnssec`, options) as Core.APIPromise<{ result: DNSSEC }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -112,7 +119,7 @@ export interface DNSSEC {
   status?: 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
 }
 
-export type DNSSECDeleteResponse = unknown | string
+export type DNSSECDeleteResponse = unknown | string;
 
 export interface DNSSECDeleteParams {
   /**

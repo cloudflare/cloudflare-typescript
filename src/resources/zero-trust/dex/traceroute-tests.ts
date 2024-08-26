@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as TracerouteTestsAPI from './traceroute-tests';
 import * as DEXAPI from './dex';
@@ -13,26 +11,53 @@ export class TracerouteTests extends APIResource {
    * Get test details and aggregate performance metrics for an traceroute test for a
    * given time period between 1 hour and 7 days.
    */
-  get(testId: string, params: TracerouteTestGetParams, options?: Core.RequestOptions): Core.APIPromise<Traceroute> {
+  get(
+    testId: string,
+    params: TracerouteTestGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Traceroute> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}`, { query, ...options }) as Core.APIPromise<{ result: Traceroute }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: Traceroute }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get a breakdown of metrics by hop for individual traceroute test runs
    */
-  networkPath(testId: string, params: TracerouteTestNetworkPathParams, options?: Core.RequestOptions): Core.APIPromise<DEXAPI.NetworkPathResponse> {
+  networkPath(
+    testId: string,
+    params: TracerouteTestNetworkPathParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DEXAPI.NetworkPathResponse> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, { query, ...options }) as Core.APIPromise<{ result: DEXAPI.NetworkPathResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/network-path`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: DEXAPI.NetworkPathResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get percentiles for a traceroute test for a given time period between 1 hour and
    * 7 days.
    */
-  percentiles(testId: string, params: TracerouteTestPercentilesParams, options?: Core.RequestOptions): Core.APIPromise<TracerouteTestPercentilesResponse> {
+  percentiles(
+    testId: string,
+    params: TracerouteTestPercentilesParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TracerouteTestPercentilesResponse> {
     const { account_id, ...query } = params;
-    return (this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, { query, ...options }) as Core.APIPromise<{ result: TracerouteTestPercentilesResponse }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/dex/traceroute-tests/${testId}/percentiles`, {
+        query,
+        ...options,
+      }) as Core.APIPromise<{ result: TracerouteTestPercentilesResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

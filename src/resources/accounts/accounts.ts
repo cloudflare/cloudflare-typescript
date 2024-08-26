@@ -2,11 +2,7 @@
 
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
 import * as Core from '../../core';
-import { Members } from './members';
-import { Roles } from './roles';
-import * as AccountsAPI from './accounts';
 import * as MembersAPI from './members';
 import * as RolesAPI from './roles';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -19,7 +15,9 @@ export class Accounts extends APIResource {
    * Create an account (only available for tenant admins at this time)
    */
   create(body: AccountCreateParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
-    return (this._client.post('/accounts', { body, ...options }) as Core.APIPromise<{ result: Account }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.post('/accounts', { body, ...options }) as Core.APIPromise<{ result: Account }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -27,15 +25,25 @@ export class Accounts extends APIResource {
    */
   update(params: AccountUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}`, { body, ...options }) as Core.APIPromise<{ result: Account }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}`, { body, ...options }) as Core.APIPromise<{
+        result: Account;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List all accounts you have ownership or verified access to.
    */
-  list(query?: AccountListParams, options?: Core.RequestOptions): Core.PagePromise<AccountsV4PagePaginationArray, Account>
-  list(options?: Core.RequestOptions): Core.PagePromise<AccountsV4PagePaginationArray, Account>
-  list(query: AccountListParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<AccountsV4PagePaginationArray, Account> {
+  list(
+    query?: AccountListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccountsV4PagePaginationArray, Account>;
+  list(options?: Core.RequestOptions): Core.PagePromise<AccountsV4PagePaginationArray, Account>;
+  list(
+    query: AccountListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccountsV4PagePaginationArray, Account> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
@@ -47,9 +55,16 @@ export class Accounts extends APIResource {
    * is a permanent operation that will delete any zones or other resources under the
    * account
    */
-  delete(params: AccountDeleteParams, options?: Core.RequestOptions): Core.APIPromise<AccountDeleteResponse | null> {
+  delete(
+    params: AccountDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccountDeleteResponse | null> {
     const { account_id } = params;
-    return (this._client.delete(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: AccountDeleteResponse | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.delete(`/accounts/${account_id}`, options) as Core.APIPromise<{
+        result: AccountDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -57,12 +72,13 @@ export class Accounts extends APIResource {
    */
   get(params: AccountGetParams, options?: Core.RequestOptions): Core.APIPromise<Account> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: Account }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}`, options) as Core.APIPromise<{ result: Account }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {
-}
+export class AccountsV4PagePaginationArray extends V4PagePaginationArray<Account> {}
 
 export interface Account {
   /**

@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
 import * as Core from '../../../core';
 import * as SettingsAPI from './settings';
 
@@ -12,7 +10,11 @@ export class Settings extends APIResource {
    */
   update(params: SettingUpdateParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
     const { account_id, ...body } = params;
-    return (this._client.put(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{ result: DeviceSettings | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.put(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{
+        result: DeviceSettings | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -20,7 +22,11 @@ export class Settings extends APIResource {
    */
   list(params: SettingListParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
     const { account_id } = params;
-    return (this._client.get(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{ result: DeviceSettings | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.get(`/accounts/${account_id}/devices/settings`, options) as Core.APIPromise<{
+        result: DeviceSettings | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -28,7 +34,12 @@ export class Settings extends APIResource {
    */
   edit(params: SettingEditParams, options?: Core.RequestOptions): Core.APIPromise<DeviceSettings | null> {
     const { account_id, ...body } = params;
-    return (this._client.patch(`/accounts/${account_id}/devices/settings`, { body, ...options }) as Core.APIPromise<{ result: DeviceSettings | null }>)._thenUnwrap((obj) => obj.result);
+    return (
+      this._client.patch(`/accounts/${account_id}/devices/settings`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: DeviceSettings | null }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 

@@ -1,14 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import { APIPromise } from '../../../core';
-import * as Core from '../../../core';
-import { Datasets } from './datasets/datasets';
-import { Patterns } from './patterns';
-import { PayloadLogs } from './payload-logs';
-import { Profiles } from './profiles/profiles';
-import { Limits } from './limits';
 import * as LimitsAPI from './limits';
 import * as PatternsAPI from './patterns';
 import * as PayloadLogsAPI from './payload-logs';

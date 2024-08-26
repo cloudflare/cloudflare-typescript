@@ -1,16 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import { APIPromise } from '../../core';
-import * as Core from '../../core';
-import { PermissionGroups } from './permission-groups';
-import { ResourceGroups } from './resource-groups';
 import * as PermissionGroupsAPI from './permission-groups';
 import * as ResourceGroupsAPI from './resource-groups';
 
 export class IAM extends APIResource {
-  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(this._client);
+  permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
+    this._client,
+  );
   resourceGroups: ResourceGroupsAPI.ResourceGroups = new ResourceGroupsAPI.ResourceGroups(this._client);
 }
 
