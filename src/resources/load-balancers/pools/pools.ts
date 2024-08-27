@@ -162,6 +162,11 @@ export interface Pool {
   name?: string;
 
   /**
+   * List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
+
+  /**
    * This field is now deprecated. It has been moved to Cloudflare's Centralized
    * Notification service
    * https://developers.cloudflare.com/fundamentals/notifications/. The email address
