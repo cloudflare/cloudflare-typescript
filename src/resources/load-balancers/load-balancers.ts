@@ -327,6 +327,11 @@ export interface LoadBalancer {
   name?: string;
 
   /**
+   * List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
+
+  /**
    * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
    * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
    * explicitly defined will fall back to using the corresponding country_pool, then
