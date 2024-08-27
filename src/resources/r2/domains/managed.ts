@@ -25,17 +25,17 @@ export class Managed extends APIResource {
   /**
    * Gets state of public access over the bucket's R2-managed (r2.dev) domain.
    */
-  get(
+  list(
     bucketName: string,
-    params: ManagedGetParams,
+    params: ManagedListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ManagedGetResponse> {
+  ): Core.APIPromise<ManagedListResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`,
         options,
-      ) as Core.APIPromise<{ result: ManagedGetResponse }>
+      ) as Core.APIPromise<{ result: ManagedListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -57,7 +57,7 @@ export interface ManagedUpdateResponse {
   enabled: boolean;
 }
 
-export interface ManagedGetResponse {
+export interface ManagedListResponse {
   /**
    * Bucket ID
    */
@@ -86,7 +86,7 @@ export interface ManagedUpdateParams {
   enabled: boolean;
 }
 
-export interface ManagedGetParams {
+export interface ManagedListParams {
   /**
    * Account ID
    */
@@ -95,7 +95,7 @@ export interface ManagedGetParams {
 
 export namespace Managed {
   export import ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
-  export import ManagedGetResponse = ManagedAPI.ManagedGetResponse;
+  export import ManagedListResponse = ManagedAPI.ManagedListResponse;
   export import ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
-  export import ManagedGetParams = ManagedAPI.ManagedGetParams;
+  export import ManagedListParams = ManagedAPI.ManagedListParams;
 }

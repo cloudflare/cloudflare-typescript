@@ -60,6 +60,25 @@ describe('resource custom', () => {
     );
   });
 
+  test('list: only required params', async () => {
+    const responsePromise = client.r2.domains.custom.list('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.r2.domains.custom.list('example-bucket', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
   test('delete: only required params', async () => {
     const responsePromise = client.r2.domains.custom.delete(
       'example-bucket',
@@ -81,24 +100,5 @@ describe('resource custom', () => {
       'example-domain/custom-domain.com',
       { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
-  });
-
-  test('get: only required params', async () => {
-    const responsePromise = client.r2.domains.custom.get('example-bucket', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await client.r2.domains.custom.get('example-bucket', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
   });
 });
