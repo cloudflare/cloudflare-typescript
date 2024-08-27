@@ -1376,6 +1376,7 @@ export type Record =
   | MXRecord
   | NAPTRRecord
   | NSRecord
+  | Record.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -1384,6 +1385,78 @@ export type Record =
   | TLSARecord
   | TXTRecord
   | URIRecord;
+
+export namespace Record {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * When the record comment was last modified.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on?: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta?: RecordsAPI.RecordMetadata;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable?: boolean;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * When the record tags were last modified.
+     */
+    tags_modified_on?: string;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+  }
+}
 
 /**
  * Extra Cloudflare-specific information about the record.
@@ -2186,6 +2259,7 @@ export type RecordCreateParams =
   | RecordCreateParams.MXRecord
   | RecordCreateParams.NAPTRRecord
   | RecordCreateParams.NSRecord
+  | RecordCreateParams.DNSRecordsOpenpgpkeyRecord
   | RecordCreateParams.PTRRecord
   | RecordCreateParams.SMIMEARecord
   | RecordCreateParams.SRVRecord
@@ -3001,6 +3075,53 @@ export namespace RecordCreateParams {
     ttl?: TTLParam;
   }
 
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+  }
+
   export interface PTRRecord {
     /**
      * Path param: Identifier
@@ -3555,6 +3676,7 @@ export type RecordUpdateParams =
   | RecordUpdateParams.MXRecord
   | RecordUpdateParams.NAPTRRecord
   | RecordUpdateParams.NSRecord
+  | RecordUpdateParams.DNSRecordsOpenpgpkeyRecord
   | RecordUpdateParams.PTRRecord
   | RecordUpdateParams.SMIMEARecord
   | RecordUpdateParams.SRVRecord
@@ -4370,6 +4492,53 @@ export namespace RecordUpdateParams {
     ttl?: TTLParam;
   }
 
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+  }
+
   export interface PTRRecord {
     /**
      * Path param: Identifier
@@ -4995,6 +5164,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
     | 'MX'
     | 'NAPTR'
     | 'NS'
+    | 'OPENPGPKEY'
     | 'PTR'
     | 'SMIMEA'
     | 'SRV'
@@ -5101,6 +5271,7 @@ export type RecordEditParams =
   | RecordEditParams.MXRecord
   | RecordEditParams.NAPTRRecord
   | RecordEditParams.NSRecord
+  | RecordEditParams.DNSRecordsOpenpgpkeyRecord
   | RecordEditParams.PTRRecord
   | RecordEditParams.SMIMEARecord
   | RecordEditParams.SRVRecord
@@ -5890,6 +6061,53 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'NS';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
+     */
+    comment?: string;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
 
     /**
      * Body param: Identifier
