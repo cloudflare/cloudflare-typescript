@@ -4,12 +4,14 @@ import { APIResource } from '../../resource';
 import * as BucketsAPI from './buckets';
 import * as SippyAPI from './sippy';
 import * as TemporaryCredentialsAPI from './temporary-credentials';
+import * as DomainsAPI from './domains/domains';
 
 export class R2 extends APIResource {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);
   sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
   temporaryCredentials: TemporaryCredentialsAPI.TemporaryCredentials =
     new TemporaryCredentialsAPI.TemporaryCredentials(this._client);
+  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
 }
 
 export namespace R2 {
@@ -32,4 +34,5 @@ export namespace R2 {
   export import TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
   export import TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
   export import TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
+  export import Domains = DomainsAPI.Domains;
 }
