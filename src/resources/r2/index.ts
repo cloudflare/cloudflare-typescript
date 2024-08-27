@@ -10,6 +10,7 @@ export {
   BucketGetParams,
   Buckets,
 } from './buckets';
+export { Domains } from './domains/index';
 export {
   Provider,
   Sippy,
