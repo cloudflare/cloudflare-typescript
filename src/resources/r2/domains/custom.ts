@@ -41,6 +41,23 @@ export class Custom extends APIResource {
   }
 
   /**
+   * Gets a list of all custom domains registered with an existing R2 bucket.
+   */
+  list(
+    bucketName: string,
+    params: CustomListParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomListResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`,
+        options,
+      ) as Core.APIPromise<{ result: CustomListResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Remove custom domain registration from an existing R2 bucket
    */
   delete(
@@ -55,23 +72,6 @@ export class Custom extends APIResource {
         `/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`,
         options,
       ) as Core.APIPromise<{ result: CustomDeleteResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Gets a list of all custom domains registered with an existing R2 bucket.
-   */
-  get(
-    bucketName: string,
-    params: CustomGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomGetResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`,
-        options,
-      ) as Core.APIPromise<{ result: CustomGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -100,18 +100,11 @@ export interface CustomUpdateResponse {
   enabled?: boolean;
 }
 
-export interface CustomDeleteResponse {
-  /**
-   * Name of the removed custom domain
-   */
-  domain: string;
+export interface CustomListResponse {
+  domains: Array<CustomListResponse.Domain>;
 }
 
-export interface CustomGetResponse {
-  domains: Array<CustomGetResponse.Domain>;
-}
-
-export namespace CustomGetResponse {
+export namespace CustomListResponse {
   export interface Domain {
     /**
      * Domain name of the custom domain to be added
@@ -149,6 +142,13 @@ export namespace CustomGetResponse {
       ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
     }
   }
+}
+
+export interface CustomDeleteResponse {
+  /**
+   * Name of the removed custom domain
+   */
+  domain: string;
 }
 
 export interface CustomCreateParams {
@@ -198,14 +198,14 @@ export interface CustomUpdateParams {
   enabled?: boolean;
 }
 
-export interface CustomDeleteParams {
+export interface CustomListParams {
   /**
    * Account ID
    */
   account_id: string;
 }
 
-export interface CustomGetParams {
+export interface CustomDeleteParams {
   /**
    * Account ID
    */
@@ -215,10 +215,10 @@ export interface CustomGetParams {
 export namespace Custom {
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
   export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
+  export import CustomListResponse = CustomAPI.CustomListResponse;
   export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export import CustomGetResponse = CustomAPI.CustomGetResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
+  export import CustomListParams = CustomAPI.CustomListParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomAPI.CustomGetParams;
 }
