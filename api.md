@@ -3871,27 +3871,27 @@ Types:
 
 - <code><a href="./src/resources/r2/domains/custom.ts">CustomCreateResponse</a></code>
 - <code><a href="./src/resources/r2/domains/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/domains/custom.ts">CustomListResponse</a></code>
 - <code><a href="./src/resources/r2/domains/custom.ts">CustomDeleteResponse</a></code>
-- <code><a href="./src/resources/r2/domains/custom.ts">CustomGetResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">create</a>(bucketName, { ...params }) -> CustomCreateResponse</code>
 - <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">update</a>(bucketName, domainName, { ...params }) -> CustomUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">list</a>(bucketName, { ...params }) -> CustomListResponse</code>
 - <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">delete</a>(bucketName, domainName, { ...params }) -> CustomDeleteResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">get</a>(bucketName, { ...params }) -> CustomGetResponse</code>
 
 ### Managed
 
 Types:
 
 - <code><a href="./src/resources/r2/domains/managed.ts">ManagedUpdateResponse</a></code>
-- <code><a href="./src/resources/r2/domains/managed.ts">ManagedGetResponse</a></code>
+- <code><a href="./src/resources/r2/domains/managed.ts">ManagedListResponse</a></code>
 
 Methods:
 
 - <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.domains.managed.<a href="./src/resources/r2/domains/managed.ts">update</a>(bucketName, { ...params }) -> ManagedUpdateResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.domains.managed.<a href="./src/resources/r2/domains/managed.ts">get</a>(bucketName, { ...params }) -> ManagedGetResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.domains.managed.<a href="./src/resources/r2/domains/managed.ts">list</a>(bucketName, { ...params }) -> ManagedListResponse</code>
 
 # WARPConnector
 

@@ -3,19 +3,19 @@
 export {
   CustomCreateResponse,
   CustomUpdateResponse,
+  CustomListResponse,
   CustomDeleteResponse,
-  CustomGetResponse,
   CustomCreateParams,
   CustomUpdateParams,
+  CustomListParams,
   CustomDeleteParams,
-  CustomGetParams,
   Custom,
 } from './custom';
 export { Domains } from './domains';
 export {
   ManagedUpdateResponse,
-  ManagedGetResponse,
+  ManagedListResponse,
   ManagedUpdateParams,
-  ManagedGetParams,
+  ManagedListParams,
   Managed,
 } from './managed';

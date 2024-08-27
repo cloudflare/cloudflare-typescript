@@ -31,8 +31,8 @@ describe('resource managed', () => {
     });
   });
 
-  test('get: only required params', async () => {
-    const responsePromise = client.r2.domains.managed.get('example-bucket', {
+  test('list: only required params', async () => {
+    const responsePromise = client.r2.domains.managed.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -44,8 +44,8 @@ describe('resource managed', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
-    const response = await client.r2.domains.managed.get('example-bucket', {
+  test('list: required and optional params', async () => {
+    const response = await client.r2.domains.managed.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
