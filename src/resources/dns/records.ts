@@ -205,7 +205,7 @@ export interface ARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: ARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -239,6 +239,24 @@ export interface ARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace ARecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface AAAARecord {
@@ -281,7 +299,7 @@ export interface AAAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: AAAARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -315,6 +333,24 @@ export interface AAAARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace AAAARecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface CAARecord {
@@ -362,7 +398,7 @@ export interface CAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: CAARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -412,6 +448,22 @@ export namespace CAARecord {
      */
     value?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface CERTRecord {
@@ -459,7 +511,7 @@ export interface CERTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: CERTRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -514,6 +566,22 @@ export namespace CERTRecord {
      */
     type?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface CNAMERecord {
@@ -556,7 +624,7 @@ export interface CNAMERecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: CNAMERecord.Meta;
 
   /**
    * When the record was last modified.
@@ -590,6 +658,24 @@ export interface CNAMERecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace CNAMERecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface DNSKEYRecord {
@@ -637,7 +723,7 @@ export interface DNSKEYRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: DNSKEYRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -692,6 +778,22 @@ export namespace DNSKEYRecord {
      */
     public_key?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface DSRecord {
@@ -739,7 +841,7 @@ export interface DSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: DSRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -794,6 +896,22 @@ export namespace DSRecord {
      */
     key_tag?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface HTTPSRecord {
@@ -841,7 +959,7 @@ export interface HTTPSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: HTTPSRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -891,6 +1009,22 @@ export namespace HTTPSRecord {
      */
     value?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface LOCRecord {
@@ -938,7 +1072,7 @@ export interface LOCRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: LOCRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1033,6 +1167,22 @@ export namespace LOCRecord {
      */
     size?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface MXRecord {
@@ -1081,7 +1231,7 @@ export interface MXRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: MXRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1109,6 +1259,24 @@ export interface MXRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace MXRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface NAPTRRecord {
@@ -1156,7 +1324,7 @@ export interface NAPTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: NAPTRRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1221,6 +1389,22 @@ export namespace NAPTRRecord {
      */
     service?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface NSRecord {
@@ -1263,7 +1447,7 @@ export interface NSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: NSRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1291,6 +1475,24 @@ export interface NSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace NSRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface PTRRecord {
@@ -1333,7 +1535,7 @@ export interface PTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: PTRRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1361,6 +1563,24 @@ export interface PTRRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace PTRRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export type Record =
@@ -1427,7 +1647,7 @@ export namespace Record {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: RecordsAPI.RecordMetadata;
+    meta?: Openpgpkey.Meta;
 
     /**
      * When the record was last modified.
@@ -1456,22 +1676,24 @@ export namespace Record {
      */
     ttl?: RecordsAPI.TTL;
   }
-}
 
-/**
- * Extra Cloudflare-specific information about the record.
- */
-export interface RecordMetadata {
-  /**
-   * Will exist if Cloudflare automatically added this DNS record during initial
-   * setup.
-   */
-  auto_added?: boolean;
+  export namespace Openpgpkey {
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    export interface Meta {
+      /**
+       * Will exist if Cloudflare automatically added this DNS record during initial
+       * setup.
+       */
+      auto_added?: boolean;
 
-  /**
-   * Where the record originated from.
-   */
-  source?: string;
+      /**
+       * Where the record originated from.
+       */
+      source?: string;
+    }
+  }
 }
 
 export interface RecordProcessTiming {
@@ -1548,7 +1770,7 @@ export interface SMIMEARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SMIMEARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1603,6 +1825,22 @@ export namespace SMIMEARecord {
      */
     usage?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface SRVRecord {
@@ -1653,7 +1891,7 @@ export interface SRVRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SRVRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1730,6 +1968,22 @@ export namespace SRVRecord {
      */
     weight?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface SSHFPRecord {
@@ -1777,7 +2031,7 @@ export interface SSHFPRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SSHFPRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1827,6 +2081,22 @@ export namespace SSHFPRecord {
      */
     type?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface SVCBRecord {
@@ -1874,7 +2144,7 @@ export interface SVCBRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SVCBRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1924,6 +2194,22 @@ export namespace SVCBRecord {
      */
     value?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface TLSARecord {
@@ -1971,7 +2257,7 @@ export interface TLSARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: TLSARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -2025,6 +2311,22 @@ export namespace TLSARecord {
      * Usage.
      */
     usage?: number;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -2082,7 +2384,7 @@ export interface TXTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: TXTRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -2110,6 +2412,24 @@ export interface TXTRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace TXTRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface URIRecord {
@@ -2163,7 +2483,7 @@ export interface URIRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: URIRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -2207,6 +2527,22 @@ export namespace URIRecord {
      * The record weight.
      */
     weight?: number;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -6424,7 +6760,6 @@ export namespace Records {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
-  export import RecordMetadata = RecordsAPI.RecordMetadata;
   export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
   export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;
