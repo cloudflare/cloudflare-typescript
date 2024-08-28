@@ -2292,11 +2292,6 @@ export namespace RecordCreateParams {
     type: 'A';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2344,11 +2339,6 @@ export namespace RecordCreateParams {
     type: 'AAAA';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2394,11 +2384,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CAA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2462,11 +2447,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CERT';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2537,11 +2517,6 @@ export namespace RecordCreateParams {
     type: 'CNAME';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2587,11 +2562,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2662,11 +2632,6 @@ export namespace RecordCreateParams {
     type: 'DS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2735,11 +2700,6 @@ export namespace RecordCreateParams {
     type: 'HTTPS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2801,11 +2761,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'LOC';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2922,11 +2877,6 @@ export namespace RecordCreateParams {
     type: 'MX';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2966,11 +2916,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3051,11 +2996,6 @@ export namespace RecordCreateParams {
     type: 'NS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3096,11 +3036,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3144,11 +3079,6 @@ export namespace RecordCreateParams {
     type: 'PTR';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3188,11 +3118,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3263,11 +3188,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SRV';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3360,11 +3280,6 @@ export namespace RecordCreateParams {
     type: 'SSHFP';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3428,11 +3343,6 @@ export namespace RecordCreateParams {
     type: 'SVCB';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3494,11 +3404,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3569,11 +3474,6 @@ export namespace RecordCreateParams {
     type: 'TXT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3619,11 +3519,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'URI';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3709,11 +3604,6 @@ export namespace RecordUpdateParams {
     type: 'A';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3761,11 +3651,6 @@ export namespace RecordUpdateParams {
     type: 'AAAA';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3811,11 +3696,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CAA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3879,11 +3759,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CERT';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3954,11 +3829,6 @@ export namespace RecordUpdateParams {
     type: 'CNAME';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4004,11 +3874,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4079,11 +3944,6 @@ export namespace RecordUpdateParams {
     type: 'DS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4152,11 +4012,6 @@ export namespace RecordUpdateParams {
     type: 'HTTPS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4218,11 +4073,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'LOC';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4339,11 +4189,6 @@ export namespace RecordUpdateParams {
     type: 'MX';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4383,11 +4228,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4468,11 +4308,6 @@ export namespace RecordUpdateParams {
     type: 'NS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4513,11 +4348,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4561,11 +4391,6 @@ export namespace RecordUpdateParams {
     type: 'PTR';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4605,11 +4430,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4680,11 +4500,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SRV';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4777,11 +4592,6 @@ export namespace RecordUpdateParams {
     type: 'SSHFP';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4845,11 +4655,6 @@ export namespace RecordUpdateParams {
     type: 'SVCB';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4911,11 +4716,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4986,11 +4786,6 @@ export namespace RecordUpdateParams {
     type: 'TXT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5036,11 +4831,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'URI';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5304,11 +5094,6 @@ export namespace RecordEditParams {
     type: 'A';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5356,11 +5141,6 @@ export namespace RecordEditParams {
     type: 'AAAA';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5406,11 +5186,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CAA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5474,11 +5249,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CERT';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5549,11 +5319,6 @@ export namespace RecordEditParams {
     type: 'CNAME';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5599,11 +5364,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5674,11 +5434,6 @@ export namespace RecordEditParams {
     type: 'DS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5747,11 +5502,6 @@ export namespace RecordEditParams {
     type: 'HTTPS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5813,11 +5563,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'LOC';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5934,11 +5679,6 @@ export namespace RecordEditParams {
     type: 'MX';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5978,11 +5718,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6063,11 +5798,6 @@ export namespace RecordEditParams {
     type: 'NS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6108,11 +5838,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6156,11 +5881,6 @@ export namespace RecordEditParams {
     type: 'PTR';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6200,11 +5920,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6275,11 +5990,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SRV';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6372,11 +6082,6 @@ export namespace RecordEditParams {
     type: 'SSHFP';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6440,11 +6145,6 @@ export namespace RecordEditParams {
     type: 'SVCB';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6506,11 +6206,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'TLSA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6581,11 +6276,6 @@ export namespace RecordEditParams {
     type: 'TXT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6631,11 +6321,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'URI';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
