@@ -872,7 +872,6 @@ Types:
 - <code><a href="./src/resources/dns/records.ts">NSRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">PTRRecord</a></code>
 - <code><a href="./src/resources/dns/records.ts">Record</a></code>
-- <code><a href="./src/resources/dns/records.ts">RecordMetadata</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordProcessTiming</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordTags</a></code>
 - <code><a href="./src/resources/dns/records.ts">SMIMEARecord</a></code>
