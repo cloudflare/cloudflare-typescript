@@ -29,21 +29,6 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Updates zone subscriptions, either plan or add-ons.
-   */
-  edit(
-    identifier: string,
-    body: SubscriptionEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SubscriptionEditResponse> {
-    return (
-      this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
-        result: SubscriptionEditResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Lists all of a user's subscriptions.
    */
   get(options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse | null> {
@@ -280,8 +265,6 @@ export interface SubscriptionDeleteResponse {
   subscription_id?: string;
 }
 
-export type SubscriptionEditResponse = unknown | string | null;
-
 export type SubscriptionGetResponse = Array<Subscription>;
 
 export interface SubscriptionUpdateParams {
@@ -317,39 +300,6 @@ export namespace SubscriptionUpdateParams {
   }
 }
 
-export interface SubscriptionEditParams {
-  app?: SubscriptionEditParams.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<SubscriptionComponentParam>;
-
-  /**
-   * How often the subscription is renewed automatically.
-   */
-  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
-
-  /**
-   * The rate plan applied to the subscription.
-   */
-  rate_plan?: RatePlanParam;
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  zone?: SubscriptionZoneParam;
-}
-
-export namespace SubscriptionEditParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
-}
-
 export namespace Subscriptions {
   export import RatePlan = SubscriptionsAPI.RatePlan;
   export import Subscription = SubscriptionsAPI.Subscription;
@@ -357,8 +307,6 @@ export namespace Subscriptions {
   export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
 }

@@ -468,7 +468,9 @@ export namespace Zones {
   export import HoldGetParams = HoldsAPI.HoldGetParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
   export import SubscriptionListParams = SubscriptionsAPI.SubscriptionListParams;
+  export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
 }
