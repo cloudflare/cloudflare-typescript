@@ -166,6 +166,23 @@ export interface Zone {
   owner: Zone.Owner;
 
   /**
+   * Indicates whether the zone is only using Cloudflare DNS services. A true value
+   * means the zone will not receive security or performance benefits.
+   */
+  paused?: boolean;
+
+  /**
+   * The zone status on Cloudflare.
+   */
+  status?: 'initializing' | 'pending' | 'active' | 'moved';
+
+  /**
+   * A full zone implies that DNS is hosted with Cloudflare. A partial zone is
+   * typically a partner-hosted zone or a CNAME setup.
+   */
+  type?: Type;
+
+  /**
    * An array of domains used for custom name servers. This is only available for
    * Business and Enterprise plans.
    */
@@ -424,9 +441,7 @@ export namespace Zones {
   export import IPGeolocation = SettingsAPI.IPGeolocation;
   export import IPV6 = SettingsAPI.IPV6;
   export import MinTLSVersion = SettingsAPI.MinTLSVersion;
-  export import Minify = SettingsAPI.Minify;
   export import Mirage = SettingsAPI.Mirage;
-  export import MobileRedirect = SettingsAPI.MobileRedirect;
   export import NEL = SettingsAPI.NEL;
   export import OpportunisticEncryption = SettingsAPI.OpportunisticEncryption;
   export import OpportunisticOnion = SettingsAPI.OpportunisticOnion;

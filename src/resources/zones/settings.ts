@@ -786,56 +786,6 @@ export interface MinTLSVersion {
 }
 
 /**
- * Automatically minify certain assets for your website. Refer to
- * [Using Cloudflare Auto Minify](https://support.cloudflare.com/hc/en-us/articles/200168196)
- * for more information.
- */
-export interface Minify {
-  /**
-   * Zone setting identifier.
-   */
-  id: 'minify';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: Minify.Value;
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-export namespace Minify {
-  /**
-   * Current value of the zone setting.
-   */
-  export interface Value {
-    /**
-     * Automatically minify all CSS files for your website.
-     */
-    css?: 'on' | 'off';
-
-    /**
-     * Automatically minify all HTML files for your website.
-     */
-    html?: 'on' | 'off';
-
-    /**
-     * Automatically minify all JavaScript files for your website.
-     */
-    js?: 'on' | 'off';
-  }
-}
-
-/**
  * Automatically optimize image loading for website visitors on mobile devices.
  * Refer to
  * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
@@ -862,61 +812,6 @@ export interface Mirage {
    * last time this setting was modified.
    */
   modified_on?: string | null;
-}
-
-/**
- * @deprecated: Deprecated: Use Single Redirects instead
- * https://developers.cloudflare.com/rules/url-forwarding/single-redirects/examples/#perform-mobile-redirects.
- * Automatically redirect visitors on mobile devices to a mobile-optimized
- * subdomain.
- */
-export interface MobileRedirect {
-  /**
-   * Identifier of the zone setting.
-   */
-  id: 'mobile_redirect';
-
-  /**
-   * @deprecated: Current value of the zone setting.
-   */
-  value: MobileRedirect.Value;
-
-  /**
-   * Whether or not this setting can be modified for this zone (based on your
-   * Cloudflare plan level).
-   */
-  editable?: true | false;
-
-  /**
-   * last time this setting was modified.
-   */
-  modified_on?: string | null;
-}
-
-export namespace MobileRedirect {
-  /**
-   * @deprecated: Current value of the zone setting.
-   */
-  export interface Value {
-    /**
-     * Which subdomain prefix you wish to redirect visitors on mobile devices to
-     * (subdomain must already exist).
-     */
-    mobile_subdomain?: string | null;
-
-    /**
-     * Deprecated: Use Single Redirects instead
-     * https://developers.cloudflare.com/rules/url-forwarding/single-redirects/examples/#perform-mobile-redirects.
-     * Whether or not mobile redirect is enabled.
-     */
-    status?: 'on' | 'off';
-
-    /**
-     * Whether to drop the current page path and redirect to the mobile subdomain URL
-     * root, or keep the path and redirect to the same page on the mobile subdomain.
-     */
-    strip_uri?: boolean;
-  }
 }
 
 /**
@@ -1692,9 +1587,7 @@ export type SettingEditResponse =
   | IPV6
   | SettingEditResponse.ZonesMaxUpload
   | MinTLSVersion
-  | Minify
   | Mirage
-  | MobileRedirect
   | NEL
   | OpportunisticEncryption
   | OpportunisticOnion
@@ -1962,9 +1855,7 @@ export type SettingGetResponse =
   | IPV6
   | SettingGetResponse.ZonesMaxUpload
   | MinTLSVersion
-  | Minify
   | Mirage
-  | MobileRedirect
   | NEL
   | OpportunisticEncryption
   | OpportunisticOnion
@@ -2229,9 +2120,7 @@ export type SettingEditParams =
   | SettingEditParams.IPV6
   | SettingEditParams.ZonesMaxUpload
   | SettingEditParams.MinTLSVersion
-  | SettingEditParams.Minify
   | SettingEditParams.Mirage
-  | SettingEditParams.MobileRedirect
   | SettingEditParams.NEL
   | SettingEditParams.OpportunisticEncryption
   | SettingEditParams.OpportunisticOnion
@@ -2749,45 +2638,6 @@ export namespace SettingEditParams {
     value: '1.0' | '1.1' | '1.2' | '1.3';
   }
 
-  export interface Minify {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Zone setting identifier.
-     */
-    id: 'minify';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: SettingEditParams.Minify.Value;
-  }
-
-  export namespace Minify {
-    /**
-     * Current value of the zone setting.
-     */
-    export interface Value {
-      /**
-       * Automatically minify all CSS files for your website.
-       */
-      css?: 'on' | 'off';
-
-      /**
-       * Automatically minify all HTML files for your website.
-       */
-      html?: 'on' | 'off';
-
-      /**
-       * Automatically minify all JavaScript files for your website.
-       */
-      js?: 'on' | 'off';
-    }
-  }
-
   export interface Mirage {
     /**
      * Path param: Identifier
@@ -2803,49 +2653,6 @@ export namespace SettingEditParams {
      * Body param: Current value of the zone setting.
      */
     value: 'on' | 'off';
-  }
-
-  export interface MobileRedirect {
-    /**
-     * Path param: Identifier
-     */
-    zone_id: string;
-
-    /**
-     * Body param: Identifier of the zone setting.
-     */
-    id: 'mobile_redirect';
-
-    /**
-     * Body param: Current value of the zone setting.
-     */
-    value: SettingEditParams.MobileRedirect.Value;
-  }
-
-  export namespace MobileRedirect {
-    /**
-     * @deprecated: Current value of the zone setting.
-     */
-    export interface Value {
-      /**
-       * Which subdomain prefix you wish to redirect visitors on mobile devices to
-       * (subdomain must already exist).
-       */
-      mobile_subdomain?: string | null;
-
-      /**
-       * Deprecated: Use Single Redirects instead
-       * https://developers.cloudflare.com/rules/url-forwarding/single-redirects/examples/#perform-mobile-redirects.
-       * Whether or not mobile redirect is enabled.
-       */
-      status?: 'on' | 'off';
-
-      /**
-       * Whether to drop the current page path and redirect to the mobile subdomain URL
-       * root, or keep the path and redirect to the same page on the mobile subdomain.
-       */
-      strip_uri?: boolean;
-    }
   }
 
   export interface NEL {
@@ -3392,9 +3199,7 @@ export namespace Settings {
   export import IPGeolocation = SettingsAPI.IPGeolocation;
   export import IPV6 = SettingsAPI.IPV6;
   export import MinTLSVersion = SettingsAPI.MinTLSVersion;
-  export import Minify = SettingsAPI.Minify;
   export import Mirage = SettingsAPI.Mirage;
-  export import MobileRedirect = SettingsAPI.MobileRedirect;
   export import NEL = SettingsAPI.NEL;
   export import OpportunisticEncryption = SettingsAPI.OpportunisticEncryption;
   export import OpportunisticOnion = SettingsAPI.OpportunisticOnion;
