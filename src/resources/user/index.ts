@@ -41,10 +41,8 @@ export {
   SubscriptionZone,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
-  SubscriptionEditResponse,
   SubscriptionGetResponse,
   SubscriptionUpdateParams,
-  SubscriptionEditParams,
   SubscriptionsSinglePage,
   Subscriptions,
 } from './subscriptions';
