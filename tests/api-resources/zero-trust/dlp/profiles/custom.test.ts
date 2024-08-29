@@ -11,7 +11,35 @@ const client = new Cloudflare({
 
 describe('resource custom', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.zeroTrust.dlp.profiles.custom.create({ account_id: 'account_id' });
+    const responsePromise = client.zeroTrust.dlp.profiles.custom.create({
+      account_id: 'account_id',
+      profiles: [
+        {
+          entries: [
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+          ],
+          name: 'name',
+        },
+        {
+          entries: [
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+          ],
+          name: 'name',
+        },
+        {
+          entries: [
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex' } },
+          ],
+          name: 'name',
+        },
+      ],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,13 +50,91 @@ describe('resource custom', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.zeroTrust.dlp.profiles.custom.create({ account_id: 'account_id' });
+    const response = await client.zeroTrust.dlp.profiles.custom.create({
+      account_id: 'account_id',
+      profiles: [
+        {
+          entries: [
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+          ],
+          name: 'name',
+          allowed_match_count: 5,
+          context_awareness: { enabled: true, skip: { files: true } },
+          description: 'description',
+          ocr_enabled: true,
+          shared_entries: [
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+          ],
+        },
+        {
+          entries: [
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+          ],
+          name: 'name',
+          allowed_match_count: 5,
+          context_awareness: { enabled: true, skip: { files: true } },
+          description: 'description',
+          ocr_enabled: true,
+          shared_entries: [
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+          ],
+        },
+        {
+          entries: [
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+            { enabled: true, name: 'name', pattern: { regex: 'regex', validation: 'luhn' } },
+          ],
+          name: 'name',
+          allowed_match_count: 5,
+          context_awareness: { enabled: true, skip: { files: true } },
+          description: 'description',
+          ocr_enabled: true,
+          shared_entries: [
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+            { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'custom' },
+          ],
+        },
+      ],
+    });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.profiles.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
+      {
+        account_id: 'account_id',
+        entries: [
+          {
+            enabled: true,
+            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            name: 'name',
+            pattern: { regex: 'regex' },
+          },
+          {
+            enabled: true,
+            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            name: 'name',
+            pattern: { regex: 'regex' },
+          },
+          {
+            enabled: true,
+            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            name: 'name',
+            pattern: { regex: 'regex' },
+          },
+        ],
+        name: 'name',
+      },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -42,7 +148,39 @@ describe('resource custom', () => {
   test('update: required and optional params', async () => {
     const response = await client.zeroTrust.dlp.profiles.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      { account_id: 'account_id' },
+      {
+        account_id: 'account_id',
+        entries: [
+          {
+            enabled: true,
+            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            name: 'name',
+            pattern: { regex: 'regex', validation: 'luhn' },
+          },
+          {
+            enabled: true,
+            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            name: 'name',
+            pattern: { regex: 'regex', validation: 'luhn' },
+          },
+          {
+            enabled: true,
+            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            name: 'name',
+            pattern: { regex: 'regex', validation: 'luhn' },
+          },
+        ],
+        name: 'name',
+        allowed_match_count: 0,
+        context_awareness: { enabled: true, skip: { files: true } },
+        description: 'description',
+        ocr_enabled: true,
+        shared_entries: [
+          { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'predefined' },
+          { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'predefined' },
+          { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'predefined' },
+        ],
+      },
     );
   });
 
