@@ -10,11 +10,12 @@ export class Custom extends APIResource {
    * Creates a set of DLP custom profiles.
    */
   create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCreateResponse> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, options) as Core.APIPromise<{
-        result: CustomCreateResponse;
-      }>
+      this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CustomCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -26,12 +27,12 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.put(
-        `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
-        options,
-      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+      this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -206,16 +207,197 @@ export interface Pattern {
   validation?: 'luhn';
 }
 
+export interface PatternParam {
+  regex: string;
+
+  validation?: 'luhn';
+}
+
 export type CustomCreateResponse = Array<ProfilesAPI.Profile>;
 
 export type CustomDeleteResponse = unknown;
 
 export interface CustomCreateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  profiles: Array<CustomCreateParams.Profile>;
+}
+
+export namespace CustomCreateParams {
+  export interface Profile {
+    entries: Array<Profile.DLPNewCustomEntry | Profile.DLPNewWordListEntry>;
+
+    name: string;
+
+    /**
+     * Related DLP policies will trigger when the match count exceeds the number set.
+     */
+    allowed_match_count?: number;
+
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+    /**
+     * The description of the profile
+     */
+    description?: string | null;
+
+    ocr_enabled?: boolean;
+
+    /**
+     * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your
+     * Microsoft Information Protection profiles).
+     */
+    shared_entries?: Array<Profile.Custom | Profile.Predefined | Profile.Integration | Profile.ExactData>;
+  }
+
+  export namespace Profile {
+    export interface DLPNewCustomEntry {
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.PatternParam;
+    }
+
+    export interface DLPNewWordListEntry {
+      enabled: boolean;
+
+      name: string;
+
+      words: Array<string>;
+    }
+
+    export interface Custom {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'custom';
+    }
+
+    export interface Predefined {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'predefined';
+    }
+
+    export interface Integration {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'integration';
+    }
+
+    export interface ExactData {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'exact_data';
+    }
+  }
 }
 
 export interface CustomUpdateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param: Custom entries from this profile
+   */
+  entries: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry>;
+
+  /**
+   * Body param:
+   */
+  name: string;
+
+  /**
+   * Body param:
+   */
+  allowed_match_count?: number | null;
+
+  /**
+   * Body param: Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+  /**
+   * Body param: The description of the profile
+   */
+  description?: string | null;
+
+  /**
+   * Body param:
+   */
+  ocr_enabled?: boolean;
+
+  /**
+   * Body param: Other entries, e.g. predefined or integration.
+   */
+  shared_entries?: Array<
+    CustomUpdateParams.Predefined | CustomUpdateParams.Integration | CustomUpdateParams.ExactData
+  >;
+}
+
+export namespace CustomUpdateParams {
+  export interface DLPNewCustomEntryWithID {
+    enabled: boolean;
+
+    entry_id: string;
+
+    name: string;
+
+    pattern: CustomAPI.PatternParam;
+  }
+
+  export interface DLPNewCustomEntry {
+    enabled: boolean;
+
+    name: string;
+
+    pattern: CustomAPI.PatternParam;
+  }
+
+  export interface Predefined {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'predefined';
+  }
+
+  export interface Integration {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'integration';
+  }
+
+  export interface ExactData {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'exact_data';
+  }
 }
 
 export interface CustomDeleteParams {

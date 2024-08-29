@@ -15,12 +15,12 @@ export class Predefined extends APIResource {
     params: PredefinedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfilesAPI.Profile> {
-    const { account_id } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.put(
-        `/accounts/${account_id}/dlp/profiles/predefined/${profileId}`,
-        options,
-      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+      this._client.put(`/accounts/${account_id}/dlp/profiles/predefined/${profileId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -160,7 +160,39 @@ export namespace PredefinedProfile {
 }
 
 export interface PredefinedUpdateParams {
+  /**
+   * Path param:
+   */
   account_id: string;
+
+  /**
+   * Body param:
+   */
+  entries: Array<PredefinedUpdateParams.Entry>;
+
+  /**
+   * Body param:
+   */
+  allowed_match_count?: number | null;
+
+  /**
+   * Body param: Scan the context of predefined entries to only return matches
+   * surrounded by keywords.
+   */
+  context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+  /**
+   * Body param:
+   */
+  ocr_enabled?: boolean;
+}
+
+export namespace PredefinedUpdateParams {
+  export interface Entry {
+    id: string;
+
+    enabled: boolean;
+  }
 }
 
 export interface PredefinedGetParams {
