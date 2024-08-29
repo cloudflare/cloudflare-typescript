@@ -46,6 +46,11 @@ export class BotManagement extends APIResource {
 
 export interface BotFightModeConfiguration {
   /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
+  /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
    */
@@ -64,6 +69,11 @@ export interface BotFightModeConfiguration {
 }
 
 export interface SubscriptionConfiguration {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
   /**
    * Automatically update to the newest bot detection models created by Cloudflare as
    * they are released.
@@ -91,6 +101,11 @@ export interface SubscriptionConfiguration {
 }
 
 export interface SuperBotFightModeDefinitelyConfiguration {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
@@ -127,6 +142,11 @@ export interface SuperBotFightModeDefinitelyConfiguration {
 }
 
 export interface SuperBotFightModeLikelyConfiguration {
+  /**
+   * Enable rule to block AI Scrapers and Crawlers.
+   */
+  ai_bots_protection?: 'block' | 'disabled';
+
   /**
    * Use lightweight, invisible JavaScript detections to improve Bot Management.
    * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
@@ -193,6 +213,11 @@ export namespace BotManagementUpdateParams {
     zone_id: string;
 
     /**
+     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     */
+    ai_bots_protection?: 'block' | 'disabled';
+
+    /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
      * Management.
      * [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
@@ -210,6 +235,11 @@ export namespace BotManagementUpdateParams {
      * Path param: Identifier
      */
     zone_id: string;
+
+    /**
+     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     */
+    ai_bots_protection?: 'block' | 'disabled';
 
     /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
@@ -248,6 +278,11 @@ export namespace BotManagementUpdateParams {
      * Path param: Identifier
      */
     zone_id: string;
+
+    /**
+     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     */
+    ai_bots_protection?: 'block' | 'disabled';
 
     /**
      * Body param: Use lightweight, invisible JavaScript detections to improve Bot
@@ -292,6 +327,11 @@ export namespace BotManagementUpdateParams {
      * Path param: Identifier
      */
     zone_id: string;
+
+    /**
+     * Body param: Enable rule to block AI Scrapers and Crawlers.
+     */
+    ai_bots_protection?: 'block' | 'disabled';
 
     /**
      * Body param: Automatically update to the newest bot detection models created by
