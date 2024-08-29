@@ -1307,7 +1307,7 @@ export namespace RulesParam {
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '';
 
 /**
  * Specifies the type of session affinity the load balancer should use unless
@@ -1334,7 +1334,7 @@ export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '""';
+export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '';
 
 /**
  * Configures attributes for session affinity.
@@ -1502,7 +1502,7 @@ export type SteeringPolicy =
   | 'proximity'
   | 'least_outstanding_requests'
   | 'least_connections'
-  | '""';
+  | '';
 
 /**
  * Steering Policy for this load balancer.
@@ -1536,7 +1536,7 @@ export type SteeringPolicyParam =
   | 'proximity'
   | 'least_outstanding_requests'
   | 'least_connections'
-  | '""';
+  | '';
 
 export interface LoadBalancerDeleteResponse {
   id?: string;
@@ -1595,6 +1595,11 @@ export interface LoadBalancerCreateParams {
    * `steering_policy` to learn how steering is affected.
    */
   location_strategy?: LocationStrategyParam;
+
+  /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
@@ -1774,6 +1779,11 @@ export interface LoadBalancerUpdateParams {
    * `steering_policy` to learn how steering is affected.
    */
   location_strategy?: LocationStrategyParam;
+
+  /**
+   * Body param: List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * Body param: (Enterprise only): A mapping of Cloudflare PoP identifiers to a list
