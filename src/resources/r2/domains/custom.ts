@@ -163,26 +163,15 @@ export interface CustomCreateParams {
   domain: string;
 
   /**
-   * Body param: Zone name of the custom domain. Note that `zoneName` must be a
-   * suffix of `domain`.
+   * Body param: Zone ID of the custom domain
    */
-  zoneName: string;
-
-  /**
-   * Body param: Zone tag of the custom domain
-   */
-  zoneTag: string;
+  zoneId: string;
 
   /**
    * Body param: Whether to enable public bucket access at the custom domain. If
    * undefined, the domain will be enabled.
    */
   enabled?: boolean;
-
-  /**
-   * Body param: Zone ID of the custom domain
-   */
-  zoneId?: string;
 }
 
 export interface CustomUpdateParams {

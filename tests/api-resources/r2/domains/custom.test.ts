@@ -14,8 +14,7 @@ describe('resource custom', () => {
     const responsePromise = client.r2.domains.custom.create('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domain: 'prefix.example-domain.com',
-      zoneName: 'example-domain.com',
-      zoneTag: '36ca64a6d92827b8a6b90be344bb1bfd',
+      zoneId: '36ca64a6d92827b8a6b90be344bb1bfd',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,10 +29,8 @@ describe('resource custom', () => {
     const response = await client.r2.domains.custom.create('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domain: 'prefix.example-domain.com',
-      zoneName: 'example-domain.com',
-      zoneTag: '36ca64a6d92827b8a6b90be344bb1bfd',
+      zoneId: '36ca64a6d92827b8a6b90be344bb1bfd',
       enabled: true,
-      zoneId: 'zoneId',
     });
   });
 
