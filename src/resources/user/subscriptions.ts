@@ -128,13 +128,6 @@ export interface Subscription {
    */
   id?: string;
 
-  app?: Subscription.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<SubscriptionComponent>;
-
   /**
    * The monetary unit in which pricing information is displayed.
    */
@@ -170,51 +163,12 @@ export interface Subscription {
    * The state that the subscription is in.
    */
   state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  zone?: SubscriptionZone;
-}
-
-export namespace Subscription {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
 }
 
 /**
  * A component value for a subscription.
  */
 export interface SubscriptionComponent {
-  /**
-   * The default amount assigned.
-   */
-  default?: number;
-
-  /**
-   * The name of the component value.
-   */
-  name?: string;
-
-  /**
-   * The unit price for the component value.
-   */
-  price?: number;
-
-  /**
-   * The amount of the component value assigned.
-   */
-  value?: number;
-}
-
-/**
- * A component value for a subscription.
- */
-export interface SubscriptionComponentParam {
   /**
    * The default amount assigned.
    */
@@ -251,11 +205,6 @@ export interface SubscriptionZone {
   name?: string;
 }
 
-/**
- * A simple zone object. May have null properties if not a zone subscription.
- */
-export interface SubscriptionZoneParam {}
-
 export type SubscriptionUpdateResponse = unknown | string | null;
 
 export interface SubscriptionDeleteResponse {
@@ -268,13 +217,6 @@ export interface SubscriptionDeleteResponse {
 export type SubscriptionGetResponse = Array<Subscription>;
 
 export interface SubscriptionUpdateParams {
-  app?: SubscriptionUpdateParams.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<SubscriptionComponentParam>;
-
   /**
    * How often the subscription is renewed automatically.
    */
@@ -284,20 +226,6 @@ export interface SubscriptionUpdateParams {
    * The rate plan applied to the subscription.
    */
   rate_plan?: RatePlanParam;
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  zone?: SubscriptionZoneParam;
-}
-
-export namespace SubscriptionUpdateParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
 }
 
 export namespace Subscriptions {
