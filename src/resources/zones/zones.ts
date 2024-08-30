@@ -464,5 +464,4 @@ export namespace Zones {
   export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export import SubscriptionListParams = SubscriptionsAPI.SubscriptionListParams;
 }
