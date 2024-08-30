@@ -70,11 +70,9 @@ export {
 } from './custom-nameservers';
 export {
   SubscriptionCreateResponse,
-  SubscriptionEditResponse,
   SubscriptionGetResponse,
   SubscriptionCreateParams,
   SubscriptionListParams,
-  SubscriptionEditParams,
   Subscriptions,
 } from './subscriptions';
 export { ZoneHold, HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds } from './holds';

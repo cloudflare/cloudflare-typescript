@@ -97,7 +97,6 @@ describe('resource zones', () => {
   test('edit: required and optional params', async () => {
     const response = await client.zones.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      plan: { id: '023e105f4ecef8ad9ca31a8372d0c353' },
       type: 'full',
       vanity_name_servers: ['ns1.example.com', 'ns2.example.com'],
     });

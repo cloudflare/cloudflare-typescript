@@ -205,7 +205,7 @@ export interface ARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: ARecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -239,24 +239,6 @@ export interface ARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace ARecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface AAAARecord {
@@ -299,7 +281,7 @@ export interface AAAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: AAAARecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -333,24 +315,6 @@ export interface AAAARecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace AAAARecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface CAARecord {
@@ -398,7 +362,7 @@ export interface CAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: CAARecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -448,22 +412,6 @@ export namespace CAARecord {
      */
     value?: string;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface CERTRecord {
@@ -511,7 +459,7 @@ export interface CERTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: CERTRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -566,22 +514,6 @@ export namespace CERTRecord {
      */
     type?: number;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface CNAMERecord {
@@ -624,7 +556,7 @@ export interface CNAMERecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: CNAMERecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -658,24 +590,6 @@ export interface CNAMERecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace CNAMERecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface DNSKEYRecord {
@@ -723,7 +637,7 @@ export interface DNSKEYRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: DNSKEYRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -778,22 +692,6 @@ export namespace DNSKEYRecord {
      */
     public_key?: string;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface DSRecord {
@@ -841,7 +739,7 @@ export interface DSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: DSRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -896,22 +794,6 @@ export namespace DSRecord {
      */
     key_tag?: number;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface HTTPSRecord {
@@ -959,7 +841,7 @@ export interface HTTPSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: HTTPSRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1009,22 +891,6 @@ export namespace HTTPSRecord {
      */
     value?: string;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface LOCRecord {
@@ -1072,7 +938,7 @@ export interface LOCRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: LOCRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1167,22 +1033,6 @@ export namespace LOCRecord {
      */
     size?: number;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface MXRecord {
@@ -1231,7 +1081,7 @@ export interface MXRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: MXRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1259,24 +1109,6 @@ export interface MXRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace MXRecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface NAPTRRecord {
@@ -1324,7 +1156,7 @@ export interface NAPTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: NAPTRRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1389,22 +1221,6 @@ export namespace NAPTRRecord {
      */
     service?: string;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface NSRecord {
@@ -1447,7 +1263,7 @@ export interface NSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: NSRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1475,24 +1291,6 @@ export interface NSRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace NSRecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface PTRRecord {
@@ -1535,7 +1333,7 @@ export interface PTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: PTRRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1563,24 +1361,6 @@ export interface PTRRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace PTRRecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export type Record =
@@ -1647,7 +1427,7 @@ export namespace Record {
     /**
      * Extra Cloudflare-specific information about the record.
      */
-    meta?: Openpgpkey.Meta;
+    meta?: RecordsAPI.RecordMetadata;
 
     /**
      * When the record was last modified.
@@ -1676,24 +1456,22 @@ export namespace Record {
      */
     ttl?: RecordsAPI.TTL;
   }
+}
 
-  export namespace Openpgpkey {
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    export interface Meta {
-      /**
-       * Will exist if Cloudflare automatically added this DNS record during initial
-       * setup.
-       */
-      auto_added?: boolean;
+/**
+ * Extra Cloudflare-specific information about the record.
+ */
+export interface RecordMetadata {
+  /**
+   * Will exist if Cloudflare automatically added this DNS record during initial
+   * setup.
+   */
+  auto_added?: boolean;
 
-      /**
-       * Where the record originated from.
-       */
-      source?: string;
-    }
-  }
+  /**
+   * Where the record originated from.
+   */
+  source?: string;
 }
 
 export interface RecordProcessTiming {
@@ -1770,7 +1548,7 @@ export interface SMIMEARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: SMIMEARecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1825,22 +1603,6 @@ export namespace SMIMEARecord {
      */
     usage?: number;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface SRVRecord {
@@ -1891,7 +1653,7 @@ export interface SRVRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: SRVRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -1968,22 +1730,6 @@ export namespace SRVRecord {
      */
     weight?: number;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface SSHFPRecord {
@@ -2031,7 +1777,7 @@ export interface SSHFPRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: SSHFPRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2081,22 +1827,6 @@ export namespace SSHFPRecord {
      */
     type?: number;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface SVCBRecord {
@@ -2144,7 +1874,7 @@ export interface SVCBRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: SVCBRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2194,22 +1924,6 @@ export namespace SVCBRecord {
      */
     value?: string;
   }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface TLSARecord {
@@ -2257,7 +1971,7 @@ export interface TLSARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: TLSARecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2311,22 +2025,6 @@ export namespace TLSARecord {
      * Usage.
      */
     usage?: number;
-  }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
   }
 }
 
@@ -2384,7 +2082,7 @@ export interface TXTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: TXTRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2412,24 +2110,6 @@ export interface TXTRecord {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace TXTRecord {
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
-  }
 }
 
 export interface URIRecord {
@@ -2483,7 +2163,7 @@ export interface URIRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: URIRecord.Meta;
+  meta?: RecordMetadata;
 
   /**
    * When the record was last modified.
@@ -2527,22 +2207,6 @@ export namespace URIRecord {
      * The record weight.
      */
     weight?: number;
-  }
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-
-    /**
-     * Where the record originated from.
-     */
-    source?: string;
   }
 }
 
@@ -2628,6 +2292,11 @@ export namespace RecordCreateParams {
     type: 'A';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2675,6 +2344,11 @@ export namespace RecordCreateParams {
     type: 'AAAA';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2720,6 +2394,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CAA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2783,6 +2462,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CERT';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2853,6 +2537,11 @@ export namespace RecordCreateParams {
     type: 'CNAME';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2898,6 +2587,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2968,6 +2662,11 @@ export namespace RecordCreateParams {
     type: 'DS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3036,6 +2735,11 @@ export namespace RecordCreateParams {
     type: 'HTTPS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3097,6 +2801,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'LOC';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3213,6 +2922,11 @@ export namespace RecordCreateParams {
     type: 'MX';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3252,6 +2966,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3332,6 +3051,11 @@ export namespace RecordCreateParams {
     type: 'NS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3372,6 +3096,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3415,6 +3144,11 @@ export namespace RecordCreateParams {
     type: 'PTR';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3454,6 +3188,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3524,6 +3263,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SRV';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3616,6 +3360,11 @@ export namespace RecordCreateParams {
     type: 'SSHFP';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3679,6 +3428,11 @@ export namespace RecordCreateParams {
     type: 'SVCB';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3740,6 +3494,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3810,6 +3569,11 @@ export namespace RecordCreateParams {
     type: 'TXT';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3855,6 +3619,11 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'URI';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3940,6 +3709,11 @@ export namespace RecordUpdateParams {
     type: 'A';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3987,6 +3761,11 @@ export namespace RecordUpdateParams {
     type: 'AAAA';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4032,6 +3811,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CAA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4095,6 +3879,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CERT';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4165,6 +3954,11 @@ export namespace RecordUpdateParams {
     type: 'CNAME';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4210,6 +4004,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4280,6 +4079,11 @@ export namespace RecordUpdateParams {
     type: 'DS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4348,6 +4152,11 @@ export namespace RecordUpdateParams {
     type: 'HTTPS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4409,6 +4218,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'LOC';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4525,6 +4339,11 @@ export namespace RecordUpdateParams {
     type: 'MX';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4564,6 +4383,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4644,6 +4468,11 @@ export namespace RecordUpdateParams {
     type: 'NS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4684,6 +4513,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4727,6 +4561,11 @@ export namespace RecordUpdateParams {
     type: 'PTR';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4766,6 +4605,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4836,6 +4680,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SRV';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4928,6 +4777,11 @@ export namespace RecordUpdateParams {
     type: 'SSHFP';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4991,6 +4845,11 @@ export namespace RecordUpdateParams {
     type: 'SVCB';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5052,6 +4911,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5122,6 +4986,11 @@ export namespace RecordUpdateParams {
     type: 'TXT';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5167,6 +5036,11 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'URI';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5430,6 +5304,11 @@ export namespace RecordEditParams {
     type: 'A';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5477,6 +5356,11 @@ export namespace RecordEditParams {
     type: 'AAAA';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5522,6 +5406,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CAA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5585,6 +5474,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CERT';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5655,6 +5549,11 @@ export namespace RecordEditParams {
     type: 'CNAME';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5700,6 +5599,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5770,6 +5674,11 @@ export namespace RecordEditParams {
     type: 'DS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5838,6 +5747,11 @@ export namespace RecordEditParams {
     type: 'HTTPS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5899,6 +5813,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'LOC';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6015,6 +5934,11 @@ export namespace RecordEditParams {
     type: 'MX';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6054,6 +5978,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6134,6 +6063,11 @@ export namespace RecordEditParams {
     type: 'NS';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6174,6 +6108,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'OPENPGPKEY';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6217,6 +6156,11 @@ export namespace RecordEditParams {
     type: 'PTR';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6256,6 +6200,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6326,6 +6275,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SRV';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6418,6 +6372,11 @@ export namespace RecordEditParams {
     type: 'SSHFP';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6481,6 +6440,11 @@ export namespace RecordEditParams {
     type: 'SVCB';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6542,6 +6506,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'TLSA';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6612,6 +6581,11 @@ export namespace RecordEditParams {
     type: 'TXT';
 
     /**
+     * Body param: Identifier
+     */
+    id?: string;
+
+    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6657,6 +6631,11 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'URI';
+
+    /**
+     * Body param: Identifier
+     */
+    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6760,6 +6739,7 @@ export namespace Records {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
+  export import RecordMetadata = RecordsAPI.RecordMetadata;
   export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
   export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;

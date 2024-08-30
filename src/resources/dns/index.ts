@@ -15,6 +15,7 @@ export {
   NSRecord,
   PTRRecord,
   Record,
+  RecordMetadata,
   RecordProcessTiming,
   RecordTags,
   SMIMEARecord,
