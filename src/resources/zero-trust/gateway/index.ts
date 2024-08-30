@@ -20,17 +20,21 @@ export {
   ConfigurationEditParams,
   ConfigurationGetParams,
   Configurations,
-} from './configurations';
+} from './configurations/index';
 export { AppType, AppTypeListParams, AppTypesSinglePage, AppTypes } from './app-types';
 export { Category, CategoryListParams, CategoriesSinglePage, Categories } from './categories';
 export {
   CertificateCreateResponse,
   CertificateListResponse,
   CertificateDeleteResponse,
+  CertificateActivateResponse,
+  CertificateDeactivateResponse,
   CertificateGetResponse,
   CertificateCreateParams,
   CertificateListParams,
   CertificateDeleteParams,
+  CertificateActivateParams,
+  CertificateDeactivateParams,
   CertificateGetParams,
   CertificateListResponsesSinglePage,
   Certificates,
@@ -51,6 +55,24 @@ export {
   GatewayRulesSinglePage,
   Rules,
 } from './rules';
+export {
+  DOHEndpoint,
+  DOTEndpoint,
+  Endpoint,
+  IPNetwork,
+  IPV4Endpoint,
+  IPV6Endpoint,
+  IPV6Network,
+  Location,
+  LocationDeleteResponse,
+  LocationCreateParams,
+  LocationUpdateParams,
+  LocationListParams,
+  LocationDeleteParams,
+  LocationGetParams,
+  LocationsSinglePage,
+  Locations,
+} from './locations';
 export {
   GatewayCreateResponse,
   GatewayListResponse,
@@ -90,15 +112,4 @@ export {
   AuditSSHSettingGetParams,
   AuditSSHSettings,
 } from './audit-ssh-settings';
-export {
-  Location,
-  LocationDeleteResponse,
-  LocationCreateParams,
-  LocationUpdateParams,
-  LocationListParams,
-  LocationDeleteParams,
-  LocationGetParams,
-  LocationsSinglePage,
-  Locations,
-} from './locations';
 export { LoggingSetting, LoggingUpdateParams, LoggingGetParams, Logging } from './logging';

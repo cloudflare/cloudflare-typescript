@@ -1,21 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as Core from '../../core';
 import * as DNSAPI from './dns';
 
-export class DNS extends APIResource {
-  /**
-   * Show the DNS records needed to configure your Email Routing zone.
-   */
-  get(zoneIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse | null> {
-    return (
-      this._client.get(`/zones/${zoneIdentifier}/email/routing/dns`, options) as Core.APIPromise<{
-        result: DNSGetResponse | null;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-}
+export class DNS extends APIResource {}
 
 /**
  * List of records needed to enable an Email Routing zone.
@@ -67,9 +55,6 @@ export interface DNSRecord {
     | 'URI';
 }
 
-export type DNSGetResponse = Array<DNSRecord>;
-
 export namespace DNS {
   export import DNSRecord = DNSAPI.DNSRecord;
-  export import DNSGetResponse = DNSAPI.DNSGetResponse;
 }

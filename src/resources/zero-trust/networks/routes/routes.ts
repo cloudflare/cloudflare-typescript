@@ -62,6 +62,18 @@ export class Routes extends APIResource {
       }) as Core.APIPromise<{ result: Route }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get a private network route in an account.
+   */
+  get(routeId: string, params: RouteGetParams, options?: Core.RequestOptions): Core.APIPromise<Route> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/teamnet/routes/${routeId}`, options) as Core.APIPromise<{
+        result: Route;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class TeamnetsV4PagePaginationArray extends V4PagePaginationArray<Teamnet> {}
@@ -312,6 +324,13 @@ export interface RouteEditParams {
   virtual_network_id?: string;
 }
 
+export interface RouteGetParams {
+  /**
+   * Cloudflare account ID
+   */
+  account_id: string;
+}
+
 export namespace Routes {
   export import NetworkRoute = RoutesAPI.NetworkRoute;
   export import Route = RoutesAPI.Route;
@@ -321,6 +340,7 @@ export namespace Routes {
   export import RouteListParams = RoutesAPI.RouteListParams;
   export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
   export import RouteEditParams = RoutesAPI.RouteEditParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import IPs = IPsAPI.IPs;
   export import IPGetParams = IPsAPI.IPGetParams;
   export import Networks = NetworksAPI.Networks;

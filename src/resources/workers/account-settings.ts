@@ -12,10 +12,10 @@ export class AccountSettings extends APIResource {
     params: AccountSettingUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AccountSettingUpdateResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/workers/account-settings`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: AccountSettingUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -38,15 +38,15 @@ export class AccountSettings extends APIResource {
 }
 
 export interface AccountSettingUpdateResponse {
-  default_usage_model?: unknown;
+  default_usage_model?: string;
 
-  green_compute?: unknown;
+  green_compute?: boolean;
 }
 
 export interface AccountSettingGetResponse {
-  default_usage_model?: unknown;
+  default_usage_model?: string;
 
-  green_compute?: unknown;
+  green_compute?: boolean;
 }
 
 export interface AccountSettingUpdateParams {
@@ -58,7 +58,12 @@ export interface AccountSettingUpdateParams {
   /**
    * Body param:
    */
-  body: string;
+  default_usage_model?: string;
+
+  /**
+   * Body param:
+   */
+  green_compute?: boolean;
 }
 
 export interface AccountSettingGetParams {

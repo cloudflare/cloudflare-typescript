@@ -166,6 +166,7 @@ export class Cloudflare extends Core.APIClient {
   customNameservers: API.CustomNameservers = new API.CustomNameservers(this);
   dns: API.DNS = new API.DNS(this);
   dnssec: API.DNSSECResource = new API.DNSSECResource(this);
+  emailSecurity: API.EmailSecurity = new API.EmailSecurity(this);
   emailRouting: API.EmailRouting = new API.EmailRouting(this);
   filters: API.Filters = new API.Filters(this);
   firewall: API.Firewall = new API.Firewall(this);
@@ -336,6 +337,7 @@ export class Cloudflare extends Core.APIClient {
   }
 
   static Cloudflare = this;
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static CloudflareError = Errors.CloudflareError;
   static APIError = Errors.APIError;
@@ -437,6 +439,8 @@ export namespace Cloudflare {
   export import DNS = API.DNS;
 
   export import DNSSECResource = API.DNSSECResource;
+
+  export import EmailSecurity = API.EmailSecurity;
 
   export import EmailRouting = API.EmailRouting;
 

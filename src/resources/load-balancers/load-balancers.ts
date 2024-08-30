@@ -286,7 +286,7 @@ export interface LoadBalancer {
    * back to using the corresponding region_pool mapping if it exists else to
    * default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   created_on?: string;
 
@@ -309,7 +309,7 @@ export interface LoadBalancer {
   /**
    * The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool?: unknown;
+  fallback_pool?: string;
 
   /**
    * Controls location-based steering for non-proxied requests. See `steering_policy`
@@ -327,12 +327,17 @@ export interface LoadBalancer {
   name?: string;
 
   /**
+   * List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
+
+  /**
    * (Enterprise only): A mapping of Cloudflare PoP identifiers to a list of pool IDs
    * (ordered by their failover priority) for the PoP (datacenter). Any PoPs not
    * explicitly defined will fall back to using the corresponding country_pool, then
    * region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Whether the hostname should be gray clouded (false) or orange clouded (true).
@@ -356,7 +361,7 @@ export interface LoadBalancer {
    * priority) for the given region. Any regions not explicitly defined will fall
    * back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * BETA Field Not General Access: A list of rules for this load balancer to
@@ -760,7 +765,25 @@ export interface RandomSteering {
    * A mapping of pool IDs to custom weights. The weight is relative to other pools
    * in the load balancer.
    */
-  pool_weights?: unknown;
+  pool_weights?: RandomSteering.PoolWeights;
+}
+
+export namespace RandomSteering {
+  /**
+   * A mapping of pool IDs to custom weights. The weight is relative to other pools
+   * in the load balancer.
+   */
+  export interface PoolWeights {
+    /**
+     * Pool ID
+     */
+    key?: string;
+
+    /**
+     * Weight
+     */
+    value?: number;
+  }
 }
 
 /**
@@ -784,7 +807,25 @@ export interface RandomSteeringParam {
    * A mapping of pool IDs to custom weights. The weight is relative to other pools
    * in the load balancer.
    */
-  pool_weights?: unknown;
+  pool_weights?: RandomSteeringParam.PoolWeights;
+}
+
+export namespace RandomSteeringParam {
+  /**
+   * A mapping of pool IDs to custom weights. The weight is relative to other pools
+   * in the load balancer.
+   */
+  export interface PoolWeights {
+    /**
+     * Pool ID
+     */
+    key?: string;
+
+    /**
+     * Weight
+     */
+    value?: number;
+  }
 }
 
 /**
@@ -888,7 +929,7 @@ export namespace Rules {
      * back to using the corresponding region_pool mapping if it exists else to
      * default_pools.
      */
-    country_pools?: unknown;
+    country_pools?: Record<string, Array<string>>;
 
     /**
      * A list of pool IDs ordered by their failover priority. Pools defined here are
@@ -899,7 +940,7 @@ export namespace Rules {
     /**
      * The pool ID to use when all other pools are detected as unhealthy.
      */
-    fallback_pool?: unknown;
+    fallback_pool?: string;
 
     /**
      * Controls location-based steering for non-proxied requests. See `steering_policy`
@@ -913,7 +954,7 @@ export namespace Rules {
      * explicitly defined will fall back to using the corresponding country_pool, then
      * region_pool mapping if it exists else to default_pools.
      */
-    pop_pools?: unknown;
+    pop_pools?: Record<string, Array<string>>;
 
     /**
      * Configures pool weights.
@@ -932,7 +973,7 @@ export namespace Rules {
      * priority) for the given region. Any regions not explicitly defined will fall
      * back to using default_pools.
      */
-    region_pools?: unknown;
+    region_pools?: Record<string, Array<string>>;
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
@@ -1115,7 +1156,7 @@ export namespace RulesParam {
      * back to using the corresponding region_pool mapping if it exists else to
      * default_pools.
      */
-    country_pools?: unknown;
+    country_pools?: Record<string, Array<string>>;
 
     /**
      * A list of pool IDs ordered by their failover priority. Pools defined here are
@@ -1126,7 +1167,7 @@ export namespace RulesParam {
     /**
      * The pool ID to use when all other pools are detected as unhealthy.
      */
-    fallback_pool?: unknown;
+    fallback_pool?: string;
 
     /**
      * Controls location-based steering for non-proxied requests. See `steering_policy`
@@ -1140,7 +1181,7 @@ export namespace RulesParam {
      * explicitly defined will fall back to using the corresponding country_pool, then
      * region_pool mapping if it exists else to default_pools.
      */
-    pop_pools?: unknown;
+    pop_pools?: Record<string, Array<string>>;
 
     /**
      * Configures pool weights.
@@ -1159,7 +1200,7 @@ export namespace RulesParam {
      * priority) for the given region. Any regions not explicitly defined will fall
      * back to using default_pools.
      */
-    region_pools?: unknown;
+    region_pools?: Record<string, Array<string>>;
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
@@ -1517,7 +1558,7 @@ export interface LoadBalancerCreateParams {
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool: unknown;
+  fallback_pool: string;
 
   /**
    * Body param: The DNS hostname to associate with your Load Balancer. If this
@@ -1542,7 +1583,7 @@ export interface LoadBalancerCreateParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Object description.
@@ -1561,7 +1602,7 @@ export interface LoadBalancerCreateParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1586,7 +1627,7 @@ export interface LoadBalancerCreateParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -1691,7 +1732,7 @@ export interface LoadBalancerUpdateParams {
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool: unknown;
+  fallback_pool: string;
 
   /**
    * Body param: The DNS hostname to associate with your Load Balancer. If this
@@ -1716,7 +1757,7 @@ export interface LoadBalancerUpdateParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Object description.
@@ -1740,7 +1781,7 @@ export interface LoadBalancerUpdateParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1765,7 +1806,7 @@ export interface LoadBalancerUpdateParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load
@@ -1884,7 +1925,7 @@ export interface LoadBalancerEditParams {
    * will fall back to using the corresponding region_pool mapping if it exists else
    * to default_pools.
    */
-  country_pools?: unknown;
+  country_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: A list of pool IDs ordered by their failover priority. Pools defined
@@ -1906,7 +1947,7 @@ export interface LoadBalancerEditParams {
   /**
    * Body param: The pool ID to use when all other pools are detected as unhealthy.
    */
-  fallback_pool?: unknown;
+  fallback_pool?: string;
 
   /**
    * Body param: Controls location-based steering for non-proxied requests. See
@@ -1927,7 +1968,7 @@ export interface LoadBalancerEditParams {
    * PoPs not explicitly defined will fall back to using the corresponding
    * country_pool, then region_pool mapping if it exists else to default_pools.
    */
-  pop_pools?: unknown;
+  pop_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: Whether the hostname should be gray clouded (false) or orange
@@ -1952,7 +1993,7 @@ export interface LoadBalancerEditParams {
    * failover priority) for the given region. Any regions not explicitly defined will
    * fall back to using default_pools.
    */
-  region_pools?: unknown;
+  region_pools?: Record<string, Array<string>>;
 
   /**
    * Body param: BETA Field Not General Access: A list of rules for this load

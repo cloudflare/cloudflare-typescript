@@ -16,11 +16,11 @@ export class CustomCertificates extends APIResource {
   create(
     params: CustomCertificateCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateCreateResponse> {
+  ): Core.APIPromise<CustomCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/custom_certificates`, { body, ...options }) as Core.APIPromise<{
-        result: CustomCertificateCreateResponse;
+        result: CustomCertificate;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -68,13 +68,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateEditResponse> {
+  ): Core.APIPromise<CustomCertificate> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/custom_certificates/${customCertificateId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomCertificateEditResponse }>
+      }) as Core.APIPromise<{ result: CustomCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -85,13 +85,13 @@ export class CustomCertificates extends APIResource {
     customCertificateId: string,
     params: CustomCertificateGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCertificateGetResponse> {
+  ): Core.APIPromise<CustomCertificate> {
     const { zone_id } = params;
     return (
       this._client.get(
         `/zones/${zone_id}/custom_certificates/${customCertificateId}`,
         options,
-      ) as Core.APIPromise<{ result: CustomCertificateGetResponse }>
+      ) as Core.APIPromise<{ result: CustomCertificate }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -216,18 +216,12 @@ export interface GeoRestrictionsParam {
  */
 export type Status = 'active' | 'pending_reactivation' | 'pending_revocation' | 'revoked';
 
-export type CustomCertificateCreateResponse = unknown | string | null;
-
 export interface CustomCertificateDeleteResponse {
   /**
    * Identifier
    */
   id?: string;
 }
-
-export type CustomCertificateEditResponse = unknown | string | null;
-
-export type CustomCertificateGetResponse = unknown | string | null;
 
 export interface CustomCertificateCreateParams {
   /**

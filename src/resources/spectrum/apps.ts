@@ -1,25 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as AppsAPI from './apps';
 import * as SpectrumAPI from './spectrum';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Apps extends APIResource {
   /**
    * Creates a new Spectrum application from a configuration using a name for the
    * origin.
    */
-  create(
-    zone: string,
-    body: AppCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AppCreateResponse | null> {
+  create(params: AppCreateParams, options?: Core.RequestOptions): Core.APIPromise<AppCreateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zone}/spectrum/apps`, { body, ...options }) as Core.APIPromise<{
-        result: AppCreateResponse | null;
+      this._client.post(`/zones/${zone_id}/spectrum/apps`, { body, ...options }) as Core.APIPromise<{
+        result: AppCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -29,14 +24,14 @@ export class Apps extends APIResource {
    * the origin.
    */
   update(
-    zone: string,
     appId: string,
-    body: AppUpdateParams,
+    params: AppUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AppUpdateResponse | null> {
+  ): Core.APIPromise<AppUpdateResponse> {
+    const { zone_id, ...body } = params;
     return (
-      this._client.put(`/zones/${zone}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
-        result: AppUpdateResponse | null;
+      this._client.put(`/zones/${zone_id}/spectrum/apps/${appId}`, { body, ...options }) as Core.APIPromise<{
+        result: AppUpdateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -44,39 +39,26 @@ export class Apps extends APIResource {
   /**
    * Retrieves a list of currently existing Spectrum applications inside a zone.
    */
-  list(
-    zone: string,
-    query?: AppListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AppListResponsesV4PagePaginationArray, AppListResponse>;
-  list(
-    zone: string,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AppListResponsesV4PagePaginationArray, AppListResponse>;
-  list(
-    zone: string,
-    query: AppListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<AppListResponsesV4PagePaginationArray, AppListResponse> {
-    if (isRequestOptions(query)) {
-      return this.list(zone, {}, query);
-    }
-    return this._client.getAPIList(`/zones/${zone}/spectrum/apps`, AppListResponsesV4PagePaginationArray, {
-      query,
-      ...options,
-    });
+  list(params: AppListParams, options?: Core.RequestOptions): Core.APIPromise<AppListResponse> {
+    const { zone_id, ...query } = params;
+    return (
+      this._client.get(`/zones/${zone_id}/spectrum/apps`, { query, ...options }) as Core.APIPromise<{
+        result: AppListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Deletes a previously existing application.
    */
   delete(
-    zone: string,
     appId: string,
+    params: AppDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AppDeleteResponse | null> {
+    const { zone_id } = params;
     return (
-      this._client.delete(`/zones/${zone}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
+      this._client.delete(`/zones/${zone_id}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
         result: AppDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -85,332 +67,790 @@ export class Apps extends APIResource {
   /**
    * Gets the application configuration of a specific application inside a zone.
    */
-  get(zone: string, appId: string, options?: Core.RequestOptions): Core.APIPromise<AppGetResponse> {
+  get(appId: string, params: AppGetParams, options?: Core.RequestOptions): Core.APIPromise<AppGetResponse> {
+    const { zone_id } = params;
     return (
-      this._client.get(`/zones/${zone}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
+      this._client.get(`/zones/${zone_id}/spectrum/apps/${appId}`, options) as Core.APIPromise<{
         result: AppGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class AppListResponsesV4PagePaginationArray extends V4PagePaginationArray<AppListResponse> {}
+export type AppCreateResponse =
+  | AppCreateResponse.SpectrumConfigAppConfig
+  | AppCreateResponse.SpectrumConfigPaygoAppConfig;
 
-export interface AppCreateResponse {
-  /**
-   * Application identifier.
-   */
-  id?: string;
+export namespace AppCreateResponse {
+  export interface SpectrumConfigAppConfig {
+    /**
+     * App identifier.
+     */
+    id: string;
 
-  /**
-   * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-   * applications with traffic_type set to "direct".
-   */
-  argo_smart_routing?: boolean;
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
 
-  /**
-   * When the Application was created.
-   */
-  created_on?: string;
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
 
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  dns?: SpectrumAPI.DNS;
+    /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall: boolean;
 
-  /**
-   * The anycast edge IP configuration for the hostname of this application.
-   */
-  edge_ips?: SpectrumAPI.EdgeIPs;
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
 
-  /**
-   * Enables IP Access Rules for this application. Notes: Only available for TCP
-   * applications.
-   */
-  ip_firewall?: boolean;
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
 
-  /**
-   * When the Application was last modified.
-   */
-  modified_on?: string;
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
 
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  origin_dns?: SpectrumAPI.OriginDNS;
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls: 'off' | 'flexible' | 'full' | 'strict';
 
-  /**
-   * The destination port at the origin. Only specified in conjunction with
-   * origin_dns. May use an integer to specify a single origin port, for example
-   * `1000`, or a string to specify a range of origin ports, for example
-   * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
-   * range must match the number of ports specified in the "protocol" field.
-   */
-  origin_port?: SpectrumAPI.OriginPort;
+    /**
+     * Determines how data travels from the edge to your origin. When set to "direct",
+     * Spectrum will send traffic directly to your origin, and the application's type
+     * is derived from the `protocol`. When set to "http" or "https", Spectrum will
+     * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
+     * the application type matches this property exactly.
+     */
+    traffic_type: 'direct' | 'http' | 'https';
 
-  /**
-   * The port configuration at Cloudflare’s edge. May specify a single port, for
-   * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
-   */
-  protocol?: string;
+    /**
+     * Enables Argo Smart Routing for this application. Notes: Only available for TCP
+     * applications with traffic_type set to "direct".
+     */
+    argo_smart_routing?: boolean;
 
-  /**
-   * Enables Proxy Protocol to the origin. Refer to
-   * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-   * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-   * Proxy Protocol.
-   */
-  proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+    /**
+     * The anycast edge IP configuration for the hostname of this application.
+     */
+    edge_ips?: SpectrumAPI.EdgeIPs;
 
-  /**
-   * The type of TLS termination associated with the application.
-   */
-  tls?: 'off' | 'flexible' | 'full' | 'strict';
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
 
-  /**
-   * Determines how data travels from the edge to your origin. When set to "direct",
-   * Spectrum will send traffic directly to your origin, and the application's type
-   * is derived from the `protocol`. When set to "http" or "https", Spectrum will
-   * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
-   * the application type matches this property exactly.
-   */
-  traffic_type?: 'direct' | 'http' | 'https';
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    origin_dns?: SpectrumAPI.OriginDNS;
+
+    /**
+     * The destination port at the origin. Only specified in conjunction with
+     * origin_dns. May use an integer to specify a single origin port, for example
+     * `1000`, or a string to specify a range of origin ports, for example
+     * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
+     * range must match the number of ports specified in the "protocol" field.
+     */
+    origin_port?: SpectrumAPI.OriginPort;
+  }
+
+  export interface SpectrumConfigPaygoAppConfig {
+    /**
+     * App identifier.
+     */
+    id: string;
+
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
+
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+  }
 }
 
-export interface AppUpdateResponse {
-  /**
-   * Application identifier.
-   */
-  id?: string;
+export type AppUpdateResponse =
+  | AppUpdateResponse.SpectrumConfigAppConfig
+  | AppUpdateResponse.SpectrumConfigPaygoAppConfig;
 
-  /**
-   * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-   * applications with traffic_type set to "direct".
-   */
-  argo_smart_routing?: boolean;
+export namespace AppUpdateResponse {
+  export interface SpectrumConfigAppConfig {
+    /**
+     * App identifier.
+     */
+    id: string;
 
-  /**
-   * When the Application was created.
-   */
-  created_on?: string;
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
 
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  dns?: SpectrumAPI.DNS;
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
 
-  /**
-   * The anycast edge IP configuration for the hostname of this application.
-   */
-  edge_ips?: SpectrumAPI.EdgeIPs;
+    /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall: boolean;
 
-  /**
-   * Enables IP Access Rules for this application. Notes: Only available for TCP
-   * applications.
-   */
-  ip_firewall?: boolean;
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
 
-  /**
-   * When the Application was last modified.
-   */
-  modified_on?: string;
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
 
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  origin_dns?: SpectrumAPI.OriginDNS;
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
 
-  /**
-   * The destination port at the origin. Only specified in conjunction with
-   * origin_dns. May use an integer to specify a single origin port, for example
-   * `1000`, or a string to specify a range of origin ports, for example
-   * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
-   * range must match the number of ports specified in the "protocol" field.
-   */
-  origin_port?: SpectrumAPI.OriginPort;
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls: 'off' | 'flexible' | 'full' | 'strict';
 
-  /**
-   * The port configuration at Cloudflare’s edge. May specify a single port, for
-   * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
-   */
-  protocol?: string;
+    /**
+     * Determines how data travels from the edge to your origin. When set to "direct",
+     * Spectrum will send traffic directly to your origin, and the application's type
+     * is derived from the `protocol`. When set to "http" or "https", Spectrum will
+     * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
+     * the application type matches this property exactly.
+     */
+    traffic_type: 'direct' | 'http' | 'https';
 
-  /**
-   * Enables Proxy Protocol to the origin. Refer to
-   * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-   * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-   * Proxy Protocol.
-   */
-  proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+    /**
+     * Enables Argo Smart Routing for this application. Notes: Only available for TCP
+     * applications with traffic_type set to "direct".
+     */
+    argo_smart_routing?: boolean;
 
-  /**
-   * The type of TLS termination associated with the application.
-   */
-  tls?: 'off' | 'flexible' | 'full' | 'strict';
+    /**
+     * The anycast edge IP configuration for the hostname of this application.
+     */
+    edge_ips?: SpectrumAPI.EdgeIPs;
 
-  /**
-   * Determines how data travels from the edge to your origin. When set to "direct",
-   * Spectrum will send traffic directly to your origin, and the application's type
-   * is derived from the `protocol`. When set to "http" or "https", Spectrum will
-   * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
-   * the application type matches this property exactly.
-   */
-  traffic_type?: 'direct' | 'http' | 'https';
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    origin_dns?: SpectrumAPI.OriginDNS;
+
+    /**
+     * The destination port at the origin. Only specified in conjunction with
+     * origin_dns. May use an integer to specify a single origin port, for example
+     * `1000`, or a string to specify a range of origin ports, for example
+     * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
+     * range must match the number of ports specified in the "protocol" field.
+     */
+    origin_port?: SpectrumAPI.OriginPort;
+  }
+
+  export interface SpectrumConfigPaygoAppConfig {
+    /**
+     * App identifier.
+     */
+    id: string;
+
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
+
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+  }
 }
 
-export type AppListResponse = unknown;
+export type AppListResponse = Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
+
+export namespace AppListResponse {
+  export interface UnionMember0 {
+    /**
+     * App identifier.
+     */
+    id: string;
+
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
+
+    /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall: boolean;
+
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Determines how data travels from the edge to your origin. When set to "direct",
+     * Spectrum will send traffic directly to your origin, and the application's type
+     * is derived from the `protocol`. When set to "http" or "https", Spectrum will
+     * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
+     * the application type matches this property exactly.
+     */
+    traffic_type: 'direct' | 'http' | 'https';
+
+    /**
+     * Enables Argo Smart Routing for this application. Notes: Only available for TCP
+     * applications with traffic_type set to "direct".
+     */
+    argo_smart_routing?: boolean;
+
+    /**
+     * The anycast edge IP configuration for the hostname of this application.
+     */
+    edge_ips?: SpectrumAPI.EdgeIPs;
+
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    origin_dns?: SpectrumAPI.OriginDNS;
+
+    /**
+     * The destination port at the origin. Only specified in conjunction with
+     * origin_dns. May use an integer to specify a single origin port, for example
+     * `1000`, or a string to specify a range of origin ports, for example
+     * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
+     * range must match the number of ports specified in the "protocol" field.
+     */
+    origin_port?: SpectrumAPI.OriginPort;
+  }
+
+  export interface UnionMember1 {
+    /**
+     * App identifier.
+     */
+    id: string;
+
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
+
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+  }
+}
 
 export interface AppDeleteResponse {
   /**
-   * Application identifier.
+   * Identifier
    */
-  id?: string;
+  id: string;
 }
 
-export type AppGetResponse = unknown | string | null;
+export type AppGetResponse =
+  | AppGetResponse.SpectrumConfigAppConfig
+  | AppGetResponse.SpectrumConfigPaygoAppConfig;
 
-export interface AppCreateParams {
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  dns: SpectrumAPI.DNSParam;
+export namespace AppGetResponse {
+  export interface SpectrumConfigAppConfig {
+    /**
+     * App identifier.
+     */
+    id: string;
 
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  origin_dns: SpectrumAPI.OriginDNSParam;
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
 
-  /**
-   * The destination port at the origin. Only specified in conjunction with
-   * origin_dns. May use an integer to specify a single origin port, for example
-   * `1000`, or a string to specify a range of origin ports, for example
-   * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
-   * range must match the number of ports specified in the "protocol" field.
-   */
-  origin_port: SpectrumAPI.OriginPortParam;
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
 
-  /**
-   * The port configuration at Cloudflare’s edge. May specify a single port, for
-   * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
-   */
-  protocol: string;
+    /**
+     * Enables IP Access Rules for this application. Notes: Only available for TCP
+     * applications.
+     */
+    ip_firewall: boolean;
 
-  /**
-   * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-   * applications with traffic_type set to "direct".
-   */
-  argo_smart_routing?: boolean;
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
 
-  /**
-   * The anycast edge IP configuration for the hostname of this application.
-   */
-  edge_ips?: SpectrumAPI.EdgeIPsParam;
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
 
-  /**
-   * Enables IP Access Rules for this application. Notes: Only available for TCP
-   * applications.
-   */
-  ip_firewall?: boolean;
+    /**
+     * Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
 
-  /**
-   * Enables Proxy Protocol to the origin. Refer to
-   * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-   * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-   * Proxy Protocol.
-   */
-  proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+    /**
+     * The type of TLS termination associated with the application.
+     */
+    tls: 'off' | 'flexible' | 'full' | 'strict';
 
-  /**
-   * The type of TLS termination associated with the application.
-   */
-  tls?: 'off' | 'flexible' | 'full' | 'strict';
+    /**
+     * Determines how data travels from the edge to your origin. When set to "direct",
+     * Spectrum will send traffic directly to your origin, and the application's type
+     * is derived from the `protocol`. When set to "http" or "https", Spectrum will
+     * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
+     * the application type matches this property exactly.
+     */
+    traffic_type: 'direct' | 'http' | 'https';
 
-  /**
-   * Determines how data travels from the edge to your origin. When set to "direct",
-   * Spectrum will send traffic directly to your origin, and the application's type
-   * is derived from the `protocol`. When set to "http" or "https", Spectrum will
-   * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
-   * the application type matches this property exactly.
-   */
-  traffic_type?: 'direct' | 'http' | 'https';
+    /**
+     * Enables Argo Smart Routing for this application. Notes: Only available for TCP
+     * applications with traffic_type set to "direct".
+     */
+    argo_smart_routing?: boolean;
+
+    /**
+     * The anycast edge IP configuration for the hostname of this application.
+     */
+    edge_ips?: SpectrumAPI.EdgeIPs;
+
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    origin_dns?: SpectrumAPI.OriginDNS;
+
+    /**
+     * The destination port at the origin. Only specified in conjunction with
+     * origin_dns. May use an integer to specify a single origin port, for example
+     * `1000`, or a string to specify a range of origin ports, for example
+     * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
+     * range must match the number of ports specified in the "protocol" field.
+     */
+    origin_port?: SpectrumAPI.OriginPort;
+  }
+
+  export interface SpectrumConfigPaygoAppConfig {
+    /**
+     * App identifier.
+     */
+    id: string;
+
+    /**
+     * When the Application was created.
+     */
+    created_on: string;
+
+    /**
+     * The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNS;
+
+    /**
+     * When the Application was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The port configuration at Cloudflare's edge. May specify a single port, for
+     * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * List of origin IP addresses. Array may contain multiple IP addresses for load
+     * balancing.
+     */
+    origin_direct?: Array<string>;
+  }
 }
 
-export interface AppUpdateParams {
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  dns: SpectrumAPI.DNSParam;
+export type AppCreateParams =
+  | AppCreateParams.SpectrumConfigAppConfig
+  | AppCreateParams.SpectrumConfigPaygoAppConfig;
 
-  /**
-   * The name and type of DNS record for the Spectrum application.
-   */
-  origin_dns: SpectrumAPI.OriginDNSParam;
+export namespace AppCreateParams {
+  export interface SpectrumConfigAppConfig {
+    /**
+     * Path param: Zone identifier.
+     */
+    zone_id: string;
 
-  /**
-   * The destination port at the origin. Only specified in conjunction with
-   * origin_dns. May use an integer to specify a single origin port, for example
-   * `1000`, or a string to specify a range of origin ports, for example
-   * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
-   * range must match the number of ports specified in the "protocol" field.
-   */
-  origin_port: SpectrumAPI.OriginPortParam;
+    /**
+     * Body param: The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNSParam;
 
-  /**
-   * The port configuration at Cloudflare’s edge. May specify a single port, for
-   * example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
-   */
-  protocol: string;
+    /**
+     * Body param: Enables IP Access Rules for this application. Notes: Only available
+     * for TCP applications.
+     */
+    ip_firewall: boolean;
 
-  /**
-   * Enables Argo Smart Routing for this application. Notes: Only available for TCP
-   * applications with traffic_type set to "direct".
-   */
-  argo_smart_routing?: boolean;
+    /**
+     * Body param: The port configuration at Cloudflare's edge. May specify a single
+     * port, for example `"tcp/1000"`, or a range of ports, for example
+     * `"tcp/1000-2000"`.
+     */
+    protocol: string;
 
-  /**
-   * The anycast edge IP configuration for the hostname of this application.
-   */
-  edge_ips?: SpectrumAPI.EdgeIPsParam;
+    /**
+     * Body param: Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
 
-  /**
-   * Enables IP Access Rules for this application. Notes: Only available for TCP
-   * applications.
-   */
-  ip_firewall?: boolean;
+    /**
+     * Body param: The type of TLS termination associated with the application.
+     */
+    tls: 'off' | 'flexible' | 'full' | 'strict';
 
-  /**
-   * Enables Proxy Protocol to the origin. Refer to
-   * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
-   * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
-   * Proxy Protocol.
-   */
-  proxy_protocol?: 'off' | 'v1' | 'v2' | 'simple';
+    /**
+     * Body param: Determines how data travels from the edge to your origin. When set
+     * to "direct", Spectrum will send traffic directly to your origin, and the
+     * application's type is derived from the `protocol`. When set to "http" or
+     * "https", Spectrum will apply Cloudflare's HTTP/HTTPS features as it sends
+     * traffic to your origin, and the application type matches this property exactly.
+     */
+    traffic_type: 'direct' | 'http' | 'https';
 
-  /**
-   * The type of TLS termination associated with the application.
-   */
-  tls?: 'off' | 'flexible' | 'full' | 'strict';
+    /**
+     * Body param: Enables Argo Smart Routing for this application. Notes: Only
+     * available for TCP applications with traffic_type set to "direct".
+     */
+    argo_smart_routing?: boolean;
 
-  /**
-   * Determines how data travels from the edge to your origin. When set to "direct",
-   * Spectrum will send traffic directly to your origin, and the application's type
-   * is derived from the `protocol`. When set to "http" or "https", Spectrum will
-   * apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and
-   * the application type matches this property exactly.
-   */
-  traffic_type?: 'direct' | 'http' | 'https';
+    /**
+     * Body param: The anycast edge IP configuration for the hostname of this
+     * application.
+     */
+    edge_ips?: SpectrumAPI.EdgeIPsParam;
+
+    /**
+     * Body param: List of origin IP addresses. Array may contain multiple IP addresses
+     * for load balancing.
+     */
+    origin_direct?: Array<string>;
+
+    /**
+     * Body param: The name and type of DNS record for the Spectrum application.
+     */
+    origin_dns?: SpectrumAPI.OriginDNSParam;
+
+    /**
+     * Body param: The destination port at the origin. Only specified in conjunction
+     * with origin_dns. May use an integer to specify a single origin port, for example
+     * `1000`, or a string to specify a range of origin ports, for example
+     * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
+     * range must match the number of ports specified in the "protocol" field.
+     */
+    origin_port?: SpectrumAPI.OriginPortParam;
+  }
+
+  export interface SpectrumConfigPaygoAppConfig {
+    /**
+     * Path param: Zone identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNSParam;
+
+    /**
+     * Body param: The port configuration at Cloudflare's edge. May specify a single
+     * port, for example `"tcp/1000"`, or a range of ports, for example
+     * `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * Body param: List of origin IP addresses. Array may contain multiple IP addresses
+     * for load balancing.
+     */
+    origin_direct?: Array<string>;
+  }
 }
 
-export interface AppListParams extends V4PagePaginationArrayParams {
+export type AppUpdateParams =
+  | AppUpdateParams.SpectrumConfigAppConfig
+  | AppUpdateParams.SpectrumConfigPaygoAppConfig;
+
+export namespace AppUpdateParams {
+  export interface SpectrumConfigAppConfig {
+    /**
+     * Path param: Zone identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNSParam;
+
+    /**
+     * Body param: Enables IP Access Rules for this application. Notes: Only available
+     * for TCP applications.
+     */
+    ip_firewall: boolean;
+
+    /**
+     * Body param: The port configuration at Cloudflare's edge. May specify a single
+     * port, for example `"tcp/1000"`, or a range of ports, for example
+     * `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * Body param: Enables Proxy Protocol to the origin. Refer to
+     * [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/)
+     * for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple
+     * Proxy Protocol.
+     */
+    proxy_protocol: 'off' | 'v1' | 'v2' | 'simple';
+
+    /**
+     * Body param: The type of TLS termination associated with the application.
+     */
+    tls: 'off' | 'flexible' | 'full' | 'strict';
+
+    /**
+     * Body param: Determines how data travels from the edge to your origin. When set
+     * to "direct", Spectrum will send traffic directly to your origin, and the
+     * application's type is derived from the `protocol`. When set to "http" or
+     * "https", Spectrum will apply Cloudflare's HTTP/HTTPS features as it sends
+     * traffic to your origin, and the application type matches this property exactly.
+     */
+    traffic_type: 'direct' | 'http' | 'https';
+
+    /**
+     * Body param: Enables Argo Smart Routing for this application. Notes: Only
+     * available for TCP applications with traffic_type set to "direct".
+     */
+    argo_smart_routing?: boolean;
+
+    /**
+     * Body param: The anycast edge IP configuration for the hostname of this
+     * application.
+     */
+    edge_ips?: SpectrumAPI.EdgeIPsParam;
+
+    /**
+     * Body param: List of origin IP addresses. Array may contain multiple IP addresses
+     * for load balancing.
+     */
+    origin_direct?: Array<string>;
+
+    /**
+     * Body param: The name and type of DNS record for the Spectrum application.
+     */
+    origin_dns?: SpectrumAPI.OriginDNSParam;
+
+    /**
+     * Body param: The destination port at the origin. Only specified in conjunction
+     * with origin_dns. May use an integer to specify a single origin port, for example
+     * `1000`, or a string to specify a range of origin ports, for example
+     * `"1000-2000"`. Notes: If specifying a port range, the number of ports in the
+     * range must match the number of ports specified in the "protocol" field.
+     */
+    origin_port?: SpectrumAPI.OriginPortParam;
+  }
+
+  export interface SpectrumConfigPaygoAppConfig {
+    /**
+     * Path param: Zone identifier.
+     */
+    zone_id: string;
+
+    /**
+     * Body param: The name and type of DNS record for the Spectrum application.
+     */
+    dns: SpectrumAPI.DNSParam;
+
+    /**
+     * Body param: The port configuration at Cloudflare's edge. May specify a single
+     * port, for example `"tcp/1000"`, or a range of ports, for example
+     * `"tcp/1000-2000"`.
+     */
+    protocol: string;
+
+    /**
+     * Body param: List of origin IP addresses. Array may contain multiple IP addresses
+     * for load balancing.
+     */
+    origin_direct?: Array<string>;
+  }
+}
+
+export interface AppListParams {
   /**
-   * Sets the direction by which results are ordered.
+   * Path param: Zone identifier.
+   */
+  zone_id: string;
+
+  /**
+   * Query param: Sets the direction by which results are ordered.
    */
   direction?: 'asc' | 'desc';
 
   /**
-   * Application field by which results are ordered.
+   * Query param: Application field by which results are ordered.
    */
   order?: 'protocol' | 'app_id' | 'created_on' | 'modified_on' | 'dns';
+
+  /**
+   * Query param: Page number of paginated results. This parameter is required in
+   * order to use other pagination parameters. If included in the query,
+   * `result_info` will be present in the response.
+   */
+  page?: number;
+
+  /**
+   * Query param: Sets the maximum number of results per page.
+   */
+  per_page?: number;
+}
+
+export interface AppDeleteParams {
+  /**
+   * Zone identifier.
+   */
+  zone_id: string;
+}
+
+export interface AppGetParams {
+  /**
+   * Zone identifier.
+   */
+  zone_id: string;
 }
 
 export namespace Apps {
@@ -419,8 +859,9 @@ export namespace Apps {
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
   export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
+  export import AppDeleteParams = AppsAPI.AppDeleteParams;
+  export import AppGetParams = AppsAPI.AppGetParams;
 }

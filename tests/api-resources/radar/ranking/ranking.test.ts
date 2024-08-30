@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,7 +11,7 @@ const cloudflare = new Cloudflare({
 
 describe('resource ranking', () => {
   test('timeseriesGroups', async () => {
-    const responsePromise = cloudflare.radar.ranking.timeseriesGroups();
+    const responsePromise = client.radar.ranking.timeseriesGroups();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,15 +23,15 @@ describe('resource ranking', () => {
 
   test('timeseriesGroups: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.radar.ranking.timeseriesGroups({ path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+    await expect(client.radar.ranking.timeseriesGroups({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Cloudflare.NotFoundError,
+    );
   });
 
   test('timeseriesGroups: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.ranking.timeseriesGroups(
+      client.radar.ranking.timeseriesGroups(
         {
           dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
           dateRange: ['7d', '7d', '7d'],
@@ -49,7 +49,7 @@ describe('resource ranking', () => {
   });
 
   test('top', async () => {
-    const responsePromise = cloudflare.radar.ranking.top();
+    const responsePromise = client.radar.ranking.top();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,7 +61,7 @@ describe('resource ranking', () => {
 
   test('top: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.radar.ranking.top({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.radar.ranking.top({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -69,7 +69,7 @@ describe('resource ranking', () => {
   test('top: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.radar.ranking.top(
+      client.radar.ranking.top(
         {
           date: ['string', 'string', 'string'],
           format: 'JSON',

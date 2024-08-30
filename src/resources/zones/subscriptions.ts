@@ -26,14 +26,26 @@ export class Subscriptions extends APIResource {
    * Lists all of an account's subscriptions.
    */
   list(
-    accountIdentifier: string,
+    params: SubscriptionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubscriptionsSinglePage, SubscriptionsAPI.Subscription> {
-    return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/subscriptions`,
-      SubscriptionsSinglePage,
-      options,
-    );
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
+  }
+
+  /**
+   * Updates zone subscriptions, either plan or add-ons.
+   */
+  edit(
+    identifier: string,
+    body: SubscriptionEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionEditResponse> {
+    return (
+      this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
+        result: SubscriptionEditResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -49,6 +61,8 @@ export class Subscriptions extends APIResource {
 }
 
 export type SubscriptionCreateResponse = unknown | string | null;
+
+export type SubscriptionEditResponse = unknown | string | null;
 
 export type SubscriptionGetResponse = unknown | string | null;
 
@@ -85,10 +99,53 @@ export namespace SubscriptionCreateParams {
   }
 }
 
+export interface SubscriptionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface SubscriptionEditParams {
+  app?: SubscriptionEditParams.App;
+
+  /**
+   * The list of add-ons subscribed to.
+   */
+  component_values?: Array<SubscriptionsAPI.SubscriptionComponentParam>;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: SubscriptionsAPI.RatePlanParam;
+
+  /**
+   * A simple zone object. May have null properties if not a zone subscription.
+   */
+  zone?: SubscriptionsAPI.SubscriptionZoneParam;
+}
+
+export namespace SubscriptionEditParams {
+  export interface App {
+    /**
+     * app install id.
+     */
+    install_id?: string;
+  }
+}
+
 export namespace Subscriptions {
   export import SubscriptionCreateResponse = ZonesSubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionEditResponse = ZonesSubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionListParams = ZonesSubscriptionsAPI.SubscriptionListParams;
+  export import SubscriptionEditParams = ZonesSubscriptionsAPI.SubscriptionEditParams;
 }
 
 export { SubscriptionsSinglePage };

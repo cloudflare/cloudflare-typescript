@@ -4,7 +4,6 @@ export {
   ContextAwareness,
   Profile,
   SkipConfiguration,
-  ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
   ProfilesSinglePage,
@@ -23,7 +22,8 @@ export {
   DatasetsSinglePage,
   Datasets,
 } from './datasets/index';
-export { PatternValidateParams, Patterns } from './patterns';
+export { LimitListResponse, LimitListParams, Limits } from './limits';
+export { PatternValidateResponse, PatternValidateParams, Patterns } from './patterns';
 export {
   PayloadLogUpdateResponse,
   PayloadLogGetResponse,

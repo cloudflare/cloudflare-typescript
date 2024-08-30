@@ -193,6 +193,11 @@ export interface ARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -200,7 +205,7 @@ export interface ARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: ARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -224,11 +229,34 @@ export interface ARecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace ARecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface AAAARecord {
@@ -259,6 +287,11 @@ export interface AAAARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -266,7 +299,7 @@ export interface AAAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: AAAARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -290,11 +323,34 @@ export interface AAAARecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace AAAARecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface CAARecord {
@@ -325,6 +381,11 @@ export interface CAARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted CAA content. See 'data' to set CAA properties.
    */
   content?: string;
@@ -337,7 +398,7 @@ export interface CAARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: CAARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -353,6 +414,11 @@ export interface CAARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -381,6 +447,22 @@ export namespace CAARecord {
      * Value of the record. This field's semantics depend on the chosen tag.
      */
     value?: string;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -412,6 +494,11 @@ export interface CERTRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted CERT content. See 'data' to set CERT properties.
    */
   content?: string;
@@ -424,7 +511,7 @@ export interface CERTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: CERTRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -440,6 +527,11 @@ export interface CERTRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -474,13 +566,29 @@ export namespace CERTRecord {
      */
     type?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface CNAMERecord {
   /**
    * A valid hostname. Must not match the record's name.
    */
-  content: unknown;
+  content: string;
 
   /**
    * DNS record name (or @ for the zone apex) in Punycode.
@@ -504,6 +612,11 @@ export interface CNAMERecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -511,7 +624,7 @@ export interface CNAMERecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: CNAMERecord.Meta;
 
   /**
    * When the record was last modified.
@@ -535,11 +648,34 @@ export interface CNAMERecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace CNAMERecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface DNSKEYRecord {
@@ -570,6 +706,11 @@ export interface DNSKEYRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted DNSKEY content. See 'data' to set DNSKEY properties.
    */
   content?: string;
@@ -582,7 +723,7 @@ export interface DNSKEYRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: DNSKEYRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -598,6 +739,11 @@ export interface DNSKEYRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -632,6 +778,22 @@ export namespace DNSKEYRecord {
      */
     public_key?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface DSRecord {
@@ -662,6 +824,11 @@ export interface DSRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted DS content. See 'data' to set DS properties.
    */
   content?: string;
@@ -674,7 +841,7 @@ export interface DSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: DSRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -690,6 +857,11 @@ export interface DSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -724,6 +896,22 @@ export namespace DSRecord {
      */
     key_tag?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface HTTPSRecord {
@@ -754,6 +942,11 @@ export interface HTTPSRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted HTTPS content. See 'data' to set HTTPS properties.
    */
   content?: string;
@@ -766,7 +959,7 @@ export interface HTTPSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: HTTPSRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -782,6 +975,11 @@ export interface HTTPSRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -810,6 +1008,22 @@ export namespace HTTPSRecord {
      * value.
      */
     value?: string;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -841,6 +1055,11 @@ export interface LOCRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted LOC content. See 'data' to set LOC properties.
    */
   content?: string;
@@ -853,7 +1072,7 @@ export interface LOCRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: LOCRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -869,6 +1088,11 @@ export interface LOCRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -943,6 +1167,22 @@ export namespace LOCRecord {
      */
     size?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface MXRecord {
@@ -979,6 +1219,11 @@ export interface MXRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -986,7 +1231,7 @@ export interface MXRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: MXRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1004,11 +1249,34 @@ export interface MXRecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace MXRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface NAPTRRecord {
@@ -1039,6 +1307,11 @@ export interface NAPTRRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted NAPTR content. See 'data' to set NAPTR properties.
    */
   content?: string;
@@ -1051,7 +1324,7 @@ export interface NAPTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: NAPTRRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1067,6 +1340,11 @@ export interface NAPTRRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1111,6 +1389,22 @@ export namespace NAPTRRecord {
      */
     service?: string;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface NSRecord {
@@ -1141,6 +1435,11 @@ export interface NSRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1148,7 +1447,7 @@ export interface NSRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: NSRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1166,11 +1465,34 @@ export interface NSRecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace NSRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface PTRRecord {
@@ -1201,6 +1523,11 @@ export interface PTRRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1208,7 +1535,7 @@ export interface PTRRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: PTRRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1226,11 +1553,34 @@ export interface PTRRecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace PTRRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export type Record =
@@ -1246,6 +1596,7 @@ export type Record =
   | MXRecord
   | NAPTRRecord
   | NSRecord
+  | Record.Openpgpkey
   | PTRRecord
   | SMIMEARecord
   | SRVRecord
@@ -1255,20 +1606,94 @@ export type Record =
   | TXTRecord
   | URIRecord;
 
-/**
- * Extra Cloudflare-specific information about the record.
- */
-export interface RecordMetadata {
-  /**
-   * Will exist if Cloudflare automatically added this DNS record during initial
-   * setup.
-   */
-  auto_added?: boolean;
+export namespace Record {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content: string;
 
-  /**
-   * Where the record originated from.
-   */
-  source?: string;
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Record type.
+     */
+    type: 'OPENPGPKEY';
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment?: string;
+
+    /**
+     * When the record comment was last modified.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on?: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta?: Openpgpkey.Meta;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable?: boolean;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags?: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * When the record tags were last modified.
+     */
+    tags_modified_on?: string;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl?: RecordsAPI.TTL;
+  }
+
+  export namespace Openpgpkey {
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    export interface Meta {
+      /**
+       * Will exist if Cloudflare automatically added this DNS record during initial
+       * setup.
+       */
+      auto_added?: boolean;
+
+      /**
+       * Where the record originated from.
+       */
+      source?: string;
+    }
+  }
 }
 
 export interface RecordProcessTiming {
@@ -1328,6 +1753,11 @@ export interface SMIMEARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted SMIMEA content. See 'data' to set SMIMEA properties.
    */
   content?: string;
@@ -1340,7 +1770,7 @@ export interface SMIMEARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SMIMEARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1356,6 +1786,11 @@ export interface SMIMEARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1390,6 +1825,22 @@ export namespace SMIMEARecord {
      */
     usage?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface SRVRecord {
@@ -1422,6 +1873,11 @@ export interface SRVRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Priority, weight, port, and SRV target. See 'data' for setting the individual
    * component values.
    */
@@ -1435,7 +1891,7 @@ export interface SRVRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SRVRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1451,6 +1907,11 @@ export interface SRVRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1507,6 +1968,22 @@ export namespace SRVRecord {
      */
     weight?: number;
   }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface SSHFPRecord {
@@ -1537,6 +2014,11 @@ export interface SSHFPRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted SSHFP content. See 'data' to set SSHFP properties.
    */
   content?: string;
@@ -1549,7 +2031,7 @@ export interface SSHFPRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SSHFPRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1565,6 +2047,11 @@ export interface SSHFPRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1593,6 +2080,22 @@ export namespace SSHFPRecord {
      * type.
      */
     type?: number;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -1624,6 +2127,11 @@ export interface SVCBRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted SVCB content. See 'data' to set SVCB properties.
    */
   content?: string;
@@ -1636,7 +2144,7 @@ export interface SVCBRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: SVCBRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1652,6 +2160,11 @@ export interface SVCBRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1680,6 +2193,22 @@ export namespace SVCBRecord {
      * value.
      */
     value?: string;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -1711,6 +2240,11 @@ export interface TLSARecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted TLSA content. See 'data' to set TLSA properties.
    */
   content?: string;
@@ -1723,7 +2257,7 @@ export interface TLSARecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: TLSARecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1739,6 +2273,11 @@ export interface TLSARecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1772,6 +2311,22 @@ export namespace TLSARecord {
      * Usage.
      */
     usage?: number;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -1817,6 +2372,11 @@ export interface TXTRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * When the record was created.
    */
   created_on?: string;
@@ -1824,7 +2384,7 @@ export interface TXTRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: TXTRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1842,11 +2402,34 @@ export interface TXTRecord {
   tags?: Array<RecordTags>;
 
   /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
+
+  /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
    * Value must be between 60 and 86400, with the minimum reduced to 30 for
    * Enterprise zones.
    */
   ttl?: TTL;
+}
+
+export namespace TXTRecord {
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
+  }
 }
 
 export interface URIRecord {
@@ -1883,6 +2466,11 @@ export interface URIRecord {
   comment?: string;
 
   /**
+   * When the record comment was last modified.
+   */
+  comment_modified_on?: string;
+
+  /**
    * Formatted URI content. See 'data' to set URI properties.
    */
   content?: string;
@@ -1895,7 +2483,7 @@ export interface URIRecord {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta?: RecordMetadata;
+  meta?: URIRecord.Meta;
 
   /**
    * When the record was last modified.
@@ -1911,6 +2499,11 @@ export interface URIRecord {
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
+
+  /**
+   * When the record tags were last modified.
+   */
+  tags_modified_on?: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1934,6 +2527,22 @@ export namespace URIRecord {
      * The record weight.
      */
     weight?: number;
+  }
+
+  /**
+   * Extra Cloudflare-specific information about the record.
+   */
+  export interface Meta {
+    /**
+     * Will exist if Cloudflare automatically added this DNS record during initial
+     * setup.
+     */
+    auto_added?: boolean;
+
+    /**
+     * Where the record originated from.
+     */
+    source?: string;
   }
 }
 
@@ -1986,6 +2595,7 @@ export type RecordCreateParams =
   | RecordCreateParams.MXRecord
   | RecordCreateParams.NAPTRRecord
   | RecordCreateParams.NSRecord
+  | RecordCreateParams.DNSRecordsOpenpgpkeyRecord
   | RecordCreateParams.PTRRecord
   | RecordCreateParams.SMIMEARecord
   | RecordCreateParams.SRVRecord
@@ -2016,11 +2626,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'A';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2070,11 +2675,6 @@ export namespace RecordCreateParams {
     type: 'AAAA';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2120,11 +2720,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CAA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2190,11 +2785,6 @@ export namespace RecordCreateParams {
     type: 'CERT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2250,7 +2840,7 @@ export namespace RecordCreateParams {
     /**
      * Body param: A valid hostname. Must not match the record's name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -2261,11 +2851,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'CNAME';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2313,11 +2898,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2388,11 +2968,6 @@ export namespace RecordCreateParams {
     type: 'DS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2461,11 +3036,6 @@ export namespace RecordCreateParams {
     type: 'HTTPS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2527,11 +3097,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'LOC';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2648,11 +3213,6 @@ export namespace RecordCreateParams {
     type: 'MX';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2692,11 +3252,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2777,9 +3332,46 @@ export namespace RecordCreateParams {
     type: 'NS';
 
     /**
-     * Body param: Identifier
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
      */
-    id?: string;
+    comment?: string;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2823,11 +3415,6 @@ export namespace RecordCreateParams {
     type: 'PTR';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -2867,11 +3454,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -2942,11 +3524,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'SRV';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3039,11 +3616,6 @@ export namespace RecordCreateParams {
     type: 'SSHFP';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3107,11 +3679,6 @@ export namespace RecordCreateParams {
     type: 'SVCB';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3173,11 +3740,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3248,11 +3810,6 @@ export namespace RecordCreateParams {
     type: 'TXT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3298,11 +3855,6 @@ export namespace RecordCreateParams {
      * Body param: Record type.
      */
     type: 'URI';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3355,6 +3907,7 @@ export type RecordUpdateParams =
   | RecordUpdateParams.MXRecord
   | RecordUpdateParams.NAPTRRecord
   | RecordUpdateParams.NSRecord
+  | RecordUpdateParams.DNSRecordsOpenpgpkeyRecord
   | RecordUpdateParams.PTRRecord
   | RecordUpdateParams.SMIMEARecord
   | RecordUpdateParams.SRVRecord
@@ -3385,11 +3938,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'A';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3439,11 +3987,6 @@ export namespace RecordUpdateParams {
     type: 'AAAA';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3489,11 +4032,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CAA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3559,11 +4097,6 @@ export namespace RecordUpdateParams {
     type: 'CERT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3619,7 +4152,7 @@ export namespace RecordUpdateParams {
     /**
      * Body param: A valid hostname. Must not match the record's name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -3630,11 +4163,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'CNAME';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3682,11 +4210,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -3757,11 +4280,6 @@ export namespace RecordUpdateParams {
     type: 'DS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3830,11 +4348,6 @@ export namespace RecordUpdateParams {
     type: 'HTTPS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -3896,11 +4409,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'LOC';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4017,11 +4525,6 @@ export namespace RecordUpdateParams {
     type: 'MX';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4061,11 +4564,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4146,9 +4644,46 @@ export namespace RecordUpdateParams {
     type: 'NS';
 
     /**
-     * Body param: Identifier
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
      */
-    id?: string;
+    comment?: string;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4192,11 +4727,6 @@ export namespace RecordUpdateParams {
     type: 'PTR';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4236,11 +4766,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4311,11 +4836,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'SRV';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4408,11 +4928,6 @@ export namespace RecordUpdateParams {
     type: 'SSHFP';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4476,11 +4991,6 @@ export namespace RecordUpdateParams {
     type: 'SVCB';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4542,11 +5052,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'TLSA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4617,11 +5122,6 @@ export namespace RecordUpdateParams {
     type: 'TXT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -4667,11 +5167,6 @@ export namespace RecordUpdateParams {
      * Body param: Record type.
      */
     type: 'URI';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4795,6 +5290,7 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
     | 'MX'
     | 'NAPTR'
     | 'NS'
+    | 'OPENPGPKEY'
     | 'PTR'
     | 'SMIMEA'
     | 'SRV'
@@ -4901,6 +5397,7 @@ export type RecordEditParams =
   | RecordEditParams.MXRecord
   | RecordEditParams.NAPTRRecord
   | RecordEditParams.NSRecord
+  | RecordEditParams.DNSRecordsOpenpgpkeyRecord
   | RecordEditParams.PTRRecord
   | RecordEditParams.SMIMEARecord
   | RecordEditParams.SRVRecord
@@ -4931,11 +5428,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'A';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -4985,11 +5477,6 @@ export namespace RecordEditParams {
     type: 'AAAA';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5035,11 +5522,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CAA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5105,11 +5587,6 @@ export namespace RecordEditParams {
     type: 'CERT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5165,7 +5642,7 @@ export namespace RecordEditParams {
     /**
      * Body param: A valid hostname. Must not match the record's name.
      */
-    content: unknown;
+    content: string;
 
     /**
      * Body param: DNS record name (or @ for the zone apex) in Punycode.
@@ -5176,11 +5653,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'CNAME';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5228,11 +5700,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'DNSKEY';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5303,11 +5770,6 @@ export namespace RecordEditParams {
     type: 'DS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5376,11 +5838,6 @@ export namespace RecordEditParams {
     type: 'HTTPS';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5442,11 +5899,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'LOC';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5563,11 +6015,6 @@ export namespace RecordEditParams {
     type: 'MX';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5607,11 +6054,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'NAPTR';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5692,9 +6134,46 @@ export namespace RecordEditParams {
     type: 'NS';
 
     /**
-     * Body param: Identifier
+     * Body param: Comments or notes about the DNS record. This field has no effect on
+     * DNS responses.
      */
-    id?: string;
+    comment?: string;
+
+    /**
+     * Body param: Custom tags for the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    tags?: Array<RecordTagsParam>;
+
+    /**
+     * Body param: Time To Live (TTL) of the DNS record in seconds. Setting to 1 means
+     * 'automatic'. Value must be between 60 and 86400, with the minimum reduced to 30
+     * for Enterprise zones.
+     */
+    ttl?: TTLParam;
+  }
+
+  export interface DNSRecordsOpenpgpkeyRecord {
+    /**
+     * Path param: Identifier
+     */
+    zone_id: string;
+
+    /**
+     * Body param: A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880
+     * Section 11.1)
+     */
+    content: string;
+
+    /**
+     * Body param: DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Body param: Record type.
+     */
+    type: 'OPENPGPKEY';
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5738,11 +6217,6 @@ export namespace RecordEditParams {
     type: 'PTR';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -5782,11 +6256,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SMIMEA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5857,11 +6326,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'SRV';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -5954,11 +6418,6 @@ export namespace RecordEditParams {
     type: 'SSHFP';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6022,11 +6481,6 @@ export namespace RecordEditParams {
     type: 'SVCB';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6088,11 +6542,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'TLSA';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6163,11 +6612,6 @@ export namespace RecordEditParams {
     type: 'TXT';
 
     /**
-     * Body param: Identifier
-     */
-    id?: string;
-
-    /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
      * DNS responses.
      */
@@ -6213,11 +6657,6 @@ export namespace RecordEditParams {
      * Body param: Record type.
      */
     type: 'URI';
-
-    /**
-     * Body param: Identifier
-     */
-    id?: string;
 
     /**
      * Body param: Comments or notes about the DNS record. This field has no effect on
@@ -6321,7 +6760,6 @@ export namespace Records {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
-  export import RecordMetadata = RecordsAPI.RecordMetadata;
   export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
   export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;

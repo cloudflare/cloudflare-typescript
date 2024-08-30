@@ -14,13 +14,13 @@ export class Prioritize extends APIResource {
   update(
     params: PrioritizeUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PrioritizeUpdateResponse | null> {
+  ): Core.APIPromise<PrioritizeUpdateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.put(`/zones/${zone_id}/custom_certificates/prioritize`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PrioritizeUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: PrioritizeUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }

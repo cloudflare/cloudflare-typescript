@@ -225,7 +225,99 @@ export namespace IPSECTunnelCreateResponse {
 export interface IPSECTunnelUpdateResponse {
   modified?: boolean;
 
-  modified_ipsec_tunnel?: unknown;
+  modified_ipsec_tunnel?: IPSECTunnelUpdateResponse.ModifiedIPSECTunnel;
+}
+
+export namespace IPSECTunnelUpdateResponse {
+  export interface ModifiedIPSECTunnel {
+    /**
+     * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+     */
+    cloudflare_endpoint: string;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address: string;
+
+    /**
+     * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+     */
+    name: string;
+
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
+     * (Phase 2).
+     */
+    allow_null_cipher?: boolean;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * The IP address assigned to the customer side of the IPsec tunnel. Not required,
+     * but must be set for proactive traceroutes to work.
+     */
+    customer_endpoint?: string;
+
+    /**
+     * An optional description forthe IPsec tunnel.
+     */
+    description?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The PSK metadata that includes when the PSK was generated.
+     */
+    psk_metadata?: IPSECTunnelsAPI.PSKMetadata;
+
+    /**
+     * If `true`, then IPsec replay protection will be supported in the
+     * Cloudflare-to-customer direction.
+     */
+    replay_protection?: boolean;
+
+    tunnel_health_check?: ModifiedIPSECTunnel.TunnelHealthCheck;
+  }
+
+  export namespace ModifiedIPSECTunnel {
+    export interface TunnelHealthCheck {
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`.
+       */
+      target?: string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+  }
 }
 
 export interface IPSECTunnelListResponse {
@@ -327,11 +419,195 @@ export namespace IPSECTunnelListResponse {
 export interface IPSECTunnelDeleteResponse {
   deleted?: boolean;
 
-  deleted_ipsec_tunnel?: unknown;
+  deleted_ipsec_tunnel?: IPSECTunnelDeleteResponse.DeletedIPSECTunnel;
+}
+
+export namespace IPSECTunnelDeleteResponse {
+  export interface DeletedIPSECTunnel {
+    /**
+     * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+     */
+    cloudflare_endpoint: string;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address: string;
+
+    /**
+     * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+     */
+    name: string;
+
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
+     * (Phase 2).
+     */
+    allow_null_cipher?: boolean;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * The IP address assigned to the customer side of the IPsec tunnel. Not required,
+     * but must be set for proactive traceroutes to work.
+     */
+    customer_endpoint?: string;
+
+    /**
+     * An optional description forthe IPsec tunnel.
+     */
+    description?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The PSK metadata that includes when the PSK was generated.
+     */
+    psk_metadata?: IPSECTunnelsAPI.PSKMetadata;
+
+    /**
+     * If `true`, then IPsec replay protection will be supported in the
+     * Cloudflare-to-customer direction.
+     */
+    replay_protection?: boolean;
+
+    tunnel_health_check?: DeletedIPSECTunnel.TunnelHealthCheck;
+  }
+
+  export namespace DeletedIPSECTunnel {
+    export interface TunnelHealthCheck {
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`.
+       */
+      target?: string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+  }
 }
 
 export interface IPSECTunnelGetResponse {
-  ipsec_tunnel?: unknown;
+  ipsec_tunnel?: IPSECTunnelGetResponse.IPSECTunnel;
+}
+
+export namespace IPSECTunnelGetResponse {
+  export interface IPSECTunnel {
+    /**
+     * The IP address assigned to the Cloudflare side of the IPsec tunnel.
+     */
+    cloudflare_endpoint: string;
+
+    /**
+     * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side
+     * of the tunnel. Select the subnet from the following private IP space:
+     * 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
+     */
+    interface_address: string;
+
+    /**
+     * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+     */
+    name: string;
+
+    /**
+     * Tunnel identifier tag.
+     */
+    id?: string;
+
+    /**
+     * When `true`, the tunnel can use a null-cipher (`ENCR_NULL`) in the ESP tunnel
+     * (Phase 2).
+     */
+    allow_null_cipher?: boolean;
+
+    /**
+     * The date and time the tunnel was created.
+     */
+    created_on?: string;
+
+    /**
+     * The IP address assigned to the customer side of the IPsec tunnel. Not required,
+     * but must be set for proactive traceroutes to work.
+     */
+    customer_endpoint?: string;
+
+    /**
+     * An optional description forthe IPsec tunnel.
+     */
+    description?: string;
+
+    /**
+     * The date and time the tunnel was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * The PSK metadata that includes when the PSK was generated.
+     */
+    psk_metadata?: IPSECTunnelsAPI.PSKMetadata;
+
+    /**
+     * If `true`, then IPsec replay protection will be supported in the
+     * Cloudflare-to-customer direction.
+     */
+    replay_protection?: boolean;
+
+    tunnel_health_check?: IPSECTunnel.TunnelHealthCheck;
+  }
+
+  export namespace IPSECTunnel {
+    export interface TunnelHealthCheck {
+      /**
+       * Determines whether to run healthchecks for a tunnel.
+       */
+      enabled?: boolean;
+
+      /**
+       * How frequent the health check is run. The default value is `mid`.
+       */
+      rate?: MagicTransitAPI.HealthCheckRate;
+
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`.
+       */
+      target?: string;
+
+      /**
+       * The type of healthcheck to run, reply or request. The default value is `reply`.
+       */
+      type?: MagicTransitAPI.HealthCheckType;
+    }
+  }
 }
 
 export interface IPSECTunnelPSKGenerateResponse {

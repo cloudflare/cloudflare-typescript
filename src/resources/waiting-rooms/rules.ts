@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as RulesAPI from './rules';
-import { SinglePage } from '../../pagination';
 
 export class Rules extends APIResource {
   /**
@@ -14,13 +13,13 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleCreateResponse | null> {
+  ): Core.APIPromise<RuleCreateResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleCreateResponse | null }>
+      }) as Core.APIPromise<{ result: RuleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,30 +31,14 @@ export class Rules extends APIResource {
     waitingRoomId: string,
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleUpdateResponse | null> {
+  ): Core.APIPromise<RuleUpdateResponse> {
     const { zone_id, body } = params;
     return (
       this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists rules for a waiting room.
-   */
-  list(
-    waitingRoomId: string,
-    params: RuleListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<WaitingRoomRulesSinglePage, WaitingRoomRule> {
-    const { zone_id } = params;
-    return this._client.getAPIList(
-      `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`,
-      WaitingRoomRulesSinglePage,
-      options,
-    );
   }
 
   /**
@@ -66,13 +49,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleDeleteResponse | null> {
+  ): Core.APIPromise<RuleDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(
         `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`,
         options,
-      ) as Core.APIPromise<{ result: RuleDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: RuleDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -84,18 +67,32 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RuleEditResponse | null> {
+  ): Core.APIPromise<RuleEditResponse> {
     const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
+      }) as Core.APIPromise<{ result: RuleEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Lists rules for a waiting room.
+   */
+  get(
+    waitingRoomId: string,
+    params: RuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleGetResponse> {
+    const { zone_id } = params;
+    return (
+      this._client.get(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, options) as Core.APIPromise<{
+        result: RuleGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class WaitingRoomRulesSinglePage extends SinglePage<WaitingRoomRule> {}
 
 export interface WaitingRoomRule {
   /**
@@ -138,6 +135,8 @@ export type RuleUpdateResponse = Array<WaitingRoomRule>;
 export type RuleDeleteResponse = Array<WaitingRoomRule>;
 
 export type RuleEditResponse = Array<WaitingRoomRule>;
+
+export type RuleGetResponse = Array<WaitingRoomRule>;
 
 export interface RuleCreateParams {
   /**
@@ -200,13 +199,6 @@ export namespace RuleUpdateParams {
      */
     enabled?: boolean;
   }
-}
-
-export interface RuleListParams {
-  /**
-   * Identifier
-   */
-  zone_id: string;
 }
 
 export interface RuleDeleteParams {
@@ -276,16 +268,23 @@ export namespace RuleEditParams {
   }
 }
 
+export interface RuleGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export namespace Rules {
   export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
   export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import WaitingRoomRulesSinglePage = RulesAPI.WaitingRoomRulesSinglePage;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleCreateParams = RulesAPI.RuleCreateParams;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
 }

@@ -182,19 +182,9 @@ export interface CustomPageCreateParams {
   app_count?: number;
 
   /**
-   * Body param:
-   */
-  created_at?: string;
-
-  /**
    * Body param: UUID
    */
   uid?: string;
-
-  /**
-   * Body param:
-   */
-  updated_at?: string;
 }
 
 export interface CustomPageUpdateParams {
@@ -224,19 +214,9 @@ export interface CustomPageUpdateParams {
   app_count?: number;
 
   /**
-   * Body param:
-   */
-  created_at?: string;
-
-  /**
    * Body param: UUID
    */
   uid?: string;
-
-  /**
-   * Body param:
-   */
-  updated_at?: string;
 }
 
 export interface CustomPageListParams {

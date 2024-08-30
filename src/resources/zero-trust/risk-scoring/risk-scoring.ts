@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as RiskScoringAPI from './risk-scoring';
 import * as BehavioursAPI from './behaviours';
@@ -17,30 +16,15 @@ export class RiskScoring extends APIResource {
    * Get risk event/score information for a specific user
    */
   get(
-    accountIdentifier: string,
     userId: string,
-    query?: RiskScoringGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringGetResponse>;
-  get(
-    accountIdentifier: string,
-    userId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RiskScoringGetResponse>;
-  get(
-    accountIdentifier: string,
-    userId: string,
-    query: RiskScoringGetParams | Core.RequestOptions = {},
+    params: RiskScoringGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RiskScoringGetResponse> {
-    if (isRequestOptions(query)) {
-      return this.get(accountIdentifier, userId, {}, query);
-    }
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${accountIdentifier}/zt_risk_scoring/${userId}`, {
-        query,
-        ...options,
-      }) as Core.APIPromise<{ result: RiskScoringGetResponse }>
+      this._client.get(`/accounts/${account_id}/zt_risk_scoring/${userId}`, options) as Core.APIPromise<{
+        result: RiskScoringGetResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,13 +32,14 @@ export class RiskScoring extends APIResource {
    * Clear the risk score for a particular user
    */
   reset(
-    accountIdentifier: string,
     userId: string,
+    params: RiskScoringResetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RiskScoringResetResponse> {
+    const { account_id } = params;
     return (
       this._client.post(
-        `/accounts/${accountIdentifier}/zt_risk_scoring/${userId}/reset`,
+        `/accounts/${account_id}/zt_risk_scoring/${userId}/reset`,
         options,
       ) as Core.APIPromise<{ result: RiskScoringResetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -62,15 +47,15 @@ export class RiskScoring extends APIResource {
 }
 
 export interface RiskScoringGetResponse {
-  email?: string;
+  email: string;
 
-  events?: Array<RiskScoringGetResponse.Event>;
+  events: Array<RiskScoringGetResponse.Event>;
+
+  name: string;
 
   last_reset_time?: string | null;
 
-  name?: string;
-
-  risk_level?: 'low' | 'medium' | 'high' | null;
+  risk_level?: 'low' | 'medium' | 'high';
 }
 
 export namespace RiskScoringGetResponse {
@@ -87,26 +72,26 @@ export namespace RiskScoringGetResponse {
   }
 }
 
-export type RiskScoringResetResponse = unknown | string | null;
+export type RiskScoringResetResponse = unknown;
 
 export interface RiskScoringGetParams {
-  direction?: 'desc' | 'asc';
+  account_id: string;
+}
 
-  order_by?: 'timestamp' | 'risk_level';
-
-  page?: number;
-
-  per_page?: number;
+export interface RiskScoringResetParams {
+  account_id: string;
 }
 
 export namespace RiskScoring {
   export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
   export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
   export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
+  export import RiskScoringResetParams = RiskScoringAPI.RiskScoringResetParams;
   export import Behaviours = BehavioursAPI.Behaviours;
   export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
   export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
   export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
+  export import BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
   export import Summary = SummaryAPI.Summary;
   export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
   export import SummaryGetParams = SummaryAPI.SummaryGetParams;

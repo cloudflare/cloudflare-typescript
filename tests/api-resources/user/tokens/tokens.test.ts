@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,33 +12,12 @@ const cloudflare = new Cloudflare({
 describe('resource tokens', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = cloudflare.user.tokens.create({
+    const responsePromise = client.user.tokens.create({
       name: 'readonly token',
       policies: [
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [{}, {}],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
-        },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
       ],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -52,45 +31,36 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await cloudflare.user.tokens.create({
+    const response = await client.user.tokens.create({
       name: 'readonly token',
       policies: [
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
         {
           effect: 'allow',
           permission_groups: [
-            { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-            { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
           ],
-          resources: {
-            'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-            'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-          },
+          resources: { resource: 'resource', scope: 'scope' },
         },
       ],
       condition: {
-        request_ip: {
+        'request.ip': {
           in: ['123.123.123.0/24', '2606:4700::/32'],
           not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
         },
@@ -102,39 +72,15 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.user.tokens.update(
-      {},
-      {
-        name: 'readonly token',
-        policies: [
-          {
-            effect: 'allow',
-            permission_groups: [{}, {}],
-            resources: {
-              'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-              'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-            },
-          },
-          {
-            effect: 'allow',
-            permission_groups: [{}, {}],
-            resources: {
-              'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-              'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-            },
-          },
-          {
-            effect: 'allow',
-            permission_groups: [{}, {}],
-            resources: {
-              'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-              'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-            },
-          },
-        ],
-        status: 'active',
-      },
-    );
+    const responsePromise = client.user.tokens.update('ed17574386854bf78a67040be0a770b0', {
+      name: 'readonly token',
+      policies: [
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
+      ],
+      status: 'active',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -146,60 +92,48 @@ describe('resource tokens', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.user.tokens.update(
-      {},
-      {
-        name: 'readonly token',
-        policies: [
-          {
-            effect: 'allow',
-            permission_groups: [
-              { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-              { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
-            ],
-            resources: {
-              'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-              'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-            },
-          },
-          {
-            effect: 'allow',
-            permission_groups: [
-              { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-              { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
-            ],
-            resources: {
-              'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-              'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-            },
-          },
-          {
-            effect: 'allow',
-            permission_groups: [
-              { meta: { label: 'load_balancer_admin', scopes: 'com.cloudflare.api.account' } },
-              { meta: { label: 'fbm_user', scopes: 'com.cloudflare.api.account' } },
-            ],
-            resources: {
-              'com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43': '*',
-              'com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4': '*',
-            },
-          },
-        ],
-        status: 'active',
-        condition: {
-          request_ip: {
-            in: ['123.123.123.0/24', '2606:4700::/32'],
-            not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
-          },
+    const response = await client.user.tokens.update('ed17574386854bf78a67040be0a770b0', {
+      name: 'readonly token',
+      policies: [
+        {
+          effect: 'allow',
+          permission_groups: [
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
+          ],
+          resources: { resource: 'resource', scope: 'scope' },
         },
-        expires_on: '2020-01-01T00:00:00Z',
-        not_before: '2018-07-01T05:20:00Z',
+        {
+          effect: 'allow',
+          permission_groups: [
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
+          ],
+          resources: { resource: 'resource', scope: 'scope' },
+        },
+        {
+          effect: 'allow',
+          permission_groups: [
+            { meta: { key: 'key', value: 'value' } },
+            { meta: { key: 'key', value: 'value' } },
+          ],
+          resources: { resource: 'resource', scope: 'scope' },
+        },
+      ],
+      status: 'active',
+      condition: {
+        'request.ip': {
+          in: ['123.123.123.0/24', '2606:4700::/32'],
+          not_in: ['123.123.123.100/24', '2606:4700:4700::/48'],
+        },
       },
-    );
+      expires_on: '2020-01-01T00:00:00Z',
+      not_before: '2018-07-01T05:20:00Z',
+    });
   });
 
   test('list', async () => {
-    const responsePromise = cloudflare.user.tokens.list();
+    const responsePromise = client.user.tokens.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -211,7 +145,7 @@ describe('resource tokens', () => {
 
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.tokens.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });
@@ -219,15 +153,15 @@ describe('resource tokens', () => {
   test('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      cloudflare.user.tokens.list(
-        { direction: 'desc', page: 1, per_page: 5 },
+      client.user.tokens.list(
+        { direction: 'asc', page: 1, per_page: 5 },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('delete', async () => {
-    const responsePromise = cloudflare.user.tokens.delete({});
+    const responsePromise = client.user.tokens.delete('ed17574386854bf78a67040be0a770b0');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -239,13 +173,13 @@ describe('resource tokens', () => {
 
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.delete({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+    await expect(
+      client.user.tokens.delete('ed17574386854bf78a67040be0a770b0', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('get', async () => {
-    const responsePromise = cloudflare.user.tokens.get({});
+    const responsePromise = client.user.tokens.get('ed17574386854bf78a67040be0a770b0');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -257,13 +191,13 @@ describe('resource tokens', () => {
 
   test('get: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.get({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Cloudflare.NotFoundError,
-    );
+    await expect(
+      client.user.tokens.get('ed17574386854bf78a67040be0a770b0', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   test('verify', async () => {
-    const responsePromise = cloudflare.user.tokens.verify();
+    const responsePromise = client.user.tokens.verify();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -275,7 +209,7 @@ describe('resource tokens', () => {
 
   test('verify: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(cloudflare.user.tokens.verify({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.user.tokens.verify({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Cloudflare.NotFoundError,
     );
   });

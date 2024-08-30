@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -12,7 +12,7 @@ const cloudflare = new Cloudflare({
 describe('resource snippets', () => {
   // throwing HTTP 415
   test.skip('update: only required params', async () => {
-    const responsePromise = cloudflare.snippets.update('snippet_name_01', {
+    const responsePromise = client.snippets.update('snippet_name_01', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource snippets', () => {
 
   // throwing HTTP 415
   test.skip('update: required and optional params', async () => {
-    const response = await cloudflare.snippets.update('snippet_name_01', {
+    const response = await client.snippets.update('snippet_name_01', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       files: "export { async function fetch(request, env) {return new Response('some_response') } }",
       metadata: { main_module: 'main.js' },
@@ -34,7 +34,7 @@ describe('resource snippets', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,11 +45,11 @@ describe('resource snippets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.snippets.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.snippets.delete('snippet_name_01', {
+    const responsePromise = client.snippets.delete('snippet_name_01', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -62,13 +62,13 @@ describe('resource snippets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.snippets.delete('snippet_name_01', {
+    const response = await client.snippets.delete('snippet_name_01', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.snippets.get('snippet_name_01', {
+    const responsePromise = client.snippets.get('snippet_name_01', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -81,7 +81,7 @@ describe('resource snippets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.snippets.get('snippet_name_01', {
+    const response = await client.snippets.get('snippet_name_01', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

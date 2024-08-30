@@ -2,10 +2,11 @@
 
 export {
   BlockRule,
-  ChallengeRule,
   CompressResponseRule,
+  DDoSDynamicRule,
   ExecuteRule,
-  JSChallengeRule,
+  ForceConnectionCloseRule,
+  LogCustomFieldRule,
   LogRule,
   Logging,
   ManagedChallengeRule,

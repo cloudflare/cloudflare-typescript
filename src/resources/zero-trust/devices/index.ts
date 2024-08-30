@@ -60,7 +60,13 @@ export {
   DeviceNetworksSinglePage,
   Networks,
 } from './networks';
-export { DeviceSettings, SettingUpdateParams, SettingListParams, Settings } from './settings';
+export {
+  DeviceSettings,
+  SettingUpdateParams,
+  SettingListParams,
+  SettingEditParams,
+  Settings,
+} from './settings';
 export { OverrideCodeListResponse, OverrideCodeListParams, OverrideCodes } from './override-codes';
 export { RevokeCreateResponse, RevokeCreateParams, Revoke } from './revoke';
 export {

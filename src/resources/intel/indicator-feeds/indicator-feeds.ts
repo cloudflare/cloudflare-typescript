@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as IndicatorFeedsAPI from './indicator-feeds';
+import * as DownloadsAPI from './downloads';
 import * as PermissionsAPI from './permissions';
 import * as SnapshotsAPI from './snapshots';
 import { SinglePage } from '../../../pagination';
@@ -10,6 +11,7 @@ import { SinglePage } from '../../../pagination';
 export class IndicatorFeeds extends APIResource {
   snapshots: SnapshotsAPI.Snapshots = new SnapshotsAPI.Snapshots(this._client);
   permissions: PermissionsAPI.Permissions = new PermissionsAPI.Permissions(this._client);
+  downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
 
   /**
    * Create new indicator feed
@@ -116,6 +118,11 @@ export interface IndicatorFeedCreateResponse {
   is_attributable?: boolean;
 
   /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
+
+  /**
    * Whether the indicator feed is exposed to customers
    */
   is_public?: boolean;
@@ -151,6 +158,11 @@ export interface IndicatorFeedUpdateResponse {
    * Whether the indicator feed can be attributed to a provider
    */
   is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
 
   /**
    * Whether the indicator feed is exposed to customers
@@ -190,6 +202,11 @@ export interface IndicatorFeedListResponse {
   is_attributable?: boolean;
 
   /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
+
+  /**
    * Whether the indicator feed is exposed to customers
    */
   is_public?: boolean;
@@ -227,6 +244,11 @@ export interface IndicatorFeedGetResponse {
    * Whether the indicator feed can be attributed to a provider
    */
   is_attributable?: boolean;
+
+  /**
+   * Whether the indicator feed can be downloaded
+   */
+  is_downloadable?: boolean;
 
   /**
    * Whether the indicator feed is exposed to customers
@@ -293,6 +315,11 @@ export interface IndicatorFeedUpdateParams {
   is_attributable?: boolean;
 
   /**
+   * Body param: The new is_downloadable value of the feed
+   */
+  is_downloadable?: boolean;
+
+  /**
    * Body param: The new is_public value of the feed
    */
   is_public?: boolean;
@@ -346,4 +373,7 @@ export namespace IndicatorFeeds {
   export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
   export import PermissionListParams = PermissionsAPI.PermissionListParams;
   export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
+  export import Downloads = DownloadsAPI.Downloads;
+  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
+  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

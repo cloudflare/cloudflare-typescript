@@ -123,7 +123,7 @@ export interface Image {
   /**
    * Object specifying available variants for an image.
    */
-  variants?: Array<string | string | string>;
+  variants?: Array<string>;
 }
 
 export interface V1ListResponse {
@@ -145,7 +145,7 @@ export namespace V1ListResponse {
   }
 }
 
-export type V1DeleteResponse = unknown | string | null;
+export type V1DeleteResponse = unknown | string;
 
 export interface V1CreateParams {
   /**

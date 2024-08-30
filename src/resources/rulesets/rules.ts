@@ -292,105 +292,6 @@ export namespace BlockRuleParam {
   }
 }
 
-export interface ChallengeRule {
-  /**
-   * The timestamp of when the rule was last modified.
-   */
-  last_updated: string;
-
-  /**
-   * The version of the rule.
-   */
-  version: string;
-
-  /**
-   * The unique ID of the rule.
-   */
-  id?: string;
-
-  /**
-   * The action to perform when the rule matches.
-   */
-  action?: 'challenge';
-
-  /**
-   * The parameters configuring the rule's action.
-   */
-  action_parameters?: unknown;
-
-  /**
-   * The categories of the rule.
-   */
-  categories?: Array<string>;
-
-  /**
-   * An informative description of the rule.
-   */
-  description?: string;
-
-  /**
-   * Whether the rule should be executed.
-   */
-  enabled?: boolean;
-
-  /**
-   * The expression defining which traffic will match the rule.
-   */
-  expression?: string;
-
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: Logging;
-
-  /**
-   * The reference of the rule (the rule ID by default).
-   */
-  ref?: string;
-}
-
-export interface ChallengeRuleParam {
-  /**
-   * The unique ID of the rule.
-   */
-  id?: string;
-
-  /**
-   * The action to perform when the rule matches.
-   */
-  action?: 'challenge';
-
-  /**
-   * The parameters configuring the rule's action.
-   */
-  action_parameters?: unknown;
-
-  /**
-   * An informative description of the rule.
-   */
-  description?: string;
-
-  /**
-   * Whether the rule should be executed.
-   */
-  enabled?: boolean;
-
-  /**
-   * The expression defining which traffic will match the rule.
-   */
-  expression?: string;
-
-  /**
-   * An object configuring the rule's logging behavior.
-   */
-  logging?: LoggingParam;
-
-  /**
-   * The reference of the rule (the rule ID by default).
-   */
-  ref?: string;
-}
-
 export interface CompressResponseRule {
   /**
    * The timestamp of when the rule was last modified.
@@ -536,6 +437,105 @@ export namespace CompressResponseRuleParam {
       name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
     }
   }
+}
+
+export interface DDoSDynamicRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'ddos_dynamic';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: unknown;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export interface DDoSDynamicRuleParam {
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'ddos_dynamic';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: unknown;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: LoggingParam;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
 }
 
 export interface ExecuteRule {
@@ -887,7 +887,7 @@ export namespace ExecuteRuleParam {
   }
 }
 
-export interface JSChallengeRule {
+export interface ForceConnectionCloseRule {
   /**
    * The timestamp of when the rule was last modified.
    */
@@ -906,7 +906,7 @@ export interface JSChallengeRule {
   /**
    * The action to perform when the rule matches.
    */
-  action?: 'js_challenge';
+  action?: 'force_connection_close';
 
   /**
    * The parameters configuring the rule's action.
@@ -944,7 +944,7 @@ export interface JSChallengeRule {
   ref?: string;
 }
 
-export interface JSChallengeRuleParam {
+export interface ForceConnectionCloseRuleParam {
   /**
    * The unique ID of the rule.
    */
@@ -953,7 +953,7 @@ export interface JSChallengeRuleParam {
   /**
    * The action to perform when the rule matches.
    */
-  action?: 'js_challenge';
+  action?: 'force_connection_close';
 
   /**
    * The parameters configuring the rule's action.
@@ -984,6 +984,213 @@ export interface JSChallengeRuleParam {
    * The reference of the rule (the rule ID by default).
    */
   ref?: string;
+}
+
+export interface LogCustomFieldRule {
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  last_updated: string;
+
+  /**
+   * The version of the rule.
+   */
+  version: string;
+
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'log_custom_field';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: LogCustomFieldRule.ActionParameters;
+
+  /**
+   * The categories of the rule.
+   */
+  categories?: Array<string>;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: Logging;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace LogCustomFieldRule {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * The cookie fields to log.
+     */
+    cookie_fields?: Array<ActionParameters.CookieField>;
+
+    /**
+     * The request fields to log.
+     */
+    request_fields?: Array<ActionParameters.RequestField>;
+
+    /**
+     * The response fields to log.
+     */
+    response_fields?: Array<ActionParameters.ResponseField>;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * The cookie field to log.
+     */
+    export interface CookieField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+    }
+
+    /**
+     * The request field to log.
+     */
+    export interface RequestField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+    }
+
+    /**
+     * The response field to log.
+     */
+    export interface ResponseField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+    }
+  }
+}
+
+export interface LogCustomFieldRuleParam {
+  /**
+   * The unique ID of the rule.
+   */
+  id?: string;
+
+  /**
+   * The action to perform when the rule matches.
+   */
+  action?: 'log_custom_field';
+
+  /**
+   * The parameters configuring the rule's action.
+   */
+  action_parameters?: LogCustomFieldRuleParam.ActionParameters;
+
+  /**
+   * An informative description of the rule.
+   */
+  description?: string;
+
+  /**
+   * Whether the rule should be executed.
+   */
+  enabled?: boolean;
+
+  /**
+   * The expression defining which traffic will match the rule.
+   */
+  expression?: string;
+
+  /**
+   * An object configuring the rule's logging behavior.
+   */
+  logging?: LoggingParam;
+
+  /**
+   * The reference of the rule (the rule ID by default).
+   */
+  ref?: string;
+}
+
+export namespace LogCustomFieldRuleParam {
+  /**
+   * The parameters configuring the rule's action.
+   */
+  export interface ActionParameters {
+    /**
+     * The cookie fields to log.
+     */
+    cookie_fields?: Array<ActionParameters.CookieField>;
+
+    /**
+     * The request fields to log.
+     */
+    request_fields?: Array<ActionParameters.RequestField>;
+
+    /**
+     * The response fields to log.
+     */
+    response_fields?: Array<ActionParameters.ResponseField>;
+  }
+
+  export namespace ActionParameters {
+    /**
+     * The cookie field to log.
+     */
+    export interface CookieField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+    }
+
+    /**
+     * The request field to log.
+     */
+    export interface RequestField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+    }
+
+    /**
+     * The response field to log.
+     */
+    export interface ResponseField {
+      /**
+       * The name of the field.
+       */
+      name: string;
+    }
+  }
 }
 
 export interface LogRule {
@@ -3639,10 +3846,10 @@ export interface RuleCreateResponse {
    */
   rules: Array<
     | BlockRule
-    | ChallengeRule
+    | RuleCreateResponse.RulesetsChallengeRule
     | CompressResponseRule
     | ExecuteRule
-    | JSChallengeRule
+    | RuleCreateResponse.RulesetsJSChallengeRule
     | LogRule
     | ManagedChallengeRule
     | RedirectRule
@@ -3653,9 +3860,9 @@ export interface RuleCreateResponse {
     | SetConfigRule
     | SkipRule
     | SetCacheSettingsRule
-    | RuleCreateResponse.RulesetsLogCustomFieldRule
-    | RuleCreateResponse.RulesetsDDoSDynamicRule
-    | RuleCreateResponse.RulesetsForceConnectionCloseRule
+    | LogCustomFieldRule
+    | DDoSDynamicRule
+    | ForceConnectionCloseRule
   >;
 
   /**
@@ -3670,7 +3877,7 @@ export interface RuleCreateResponse {
 }
 
 export namespace RuleCreateResponse {
-  export interface RulesetsLogCustomFieldRule {
+  export interface RulesetsChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -3689,118 +3896,7 @@ export namespace RuleCreateResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'log_custom_field';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsLogCustomFieldRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-  }
-
-  export interface RulesetsDDoSDynamicRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
+    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -3838,7 +3934,7 @@ export namespace RuleCreateResponse {
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export interface RulesetsJSChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -3857,7 +3953,7 @@ export namespace RuleCreateResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'force_connection_close';
+    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -3930,10 +4026,10 @@ export interface RuleDeleteResponse {
    */
   rules: Array<
     | BlockRule
-    | ChallengeRule
+    | RuleDeleteResponse.RulesetsChallengeRule
     | CompressResponseRule
     | ExecuteRule
-    | JSChallengeRule
+    | RuleDeleteResponse.RulesetsJSChallengeRule
     | LogRule
     | ManagedChallengeRule
     | RedirectRule
@@ -3944,9 +4040,9 @@ export interface RuleDeleteResponse {
     | SetConfigRule
     | SkipRule
     | SetCacheSettingsRule
-    | RuleDeleteResponse.RulesetsLogCustomFieldRule
-    | RuleDeleteResponse.RulesetsDDoSDynamicRule
-    | RuleDeleteResponse.RulesetsForceConnectionCloseRule
+    | LogCustomFieldRule
+    | DDoSDynamicRule
+    | ForceConnectionCloseRule
   >;
 
   /**
@@ -3961,7 +4057,7 @@ export interface RuleDeleteResponse {
 }
 
 export namespace RuleDeleteResponse {
-  export interface RulesetsLogCustomFieldRule {
+  export interface RulesetsChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -3980,118 +4076,7 @@ export namespace RuleDeleteResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'log_custom_field';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsLogCustomFieldRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-  }
-
-  export interface RulesetsDDoSDynamicRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
+    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -4129,7 +4114,7 @@ export namespace RuleDeleteResponse {
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export interface RulesetsJSChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -4148,7 +4133,7 @@ export namespace RuleDeleteResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'force_connection_close';
+    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -4221,10 +4206,10 @@ export interface RuleEditResponse {
    */
   rules: Array<
     | BlockRule
-    | ChallengeRule
+    | RuleEditResponse.RulesetsChallengeRule
     | CompressResponseRule
     | ExecuteRule
-    | JSChallengeRule
+    | RuleEditResponse.RulesetsJSChallengeRule
     | LogRule
     | ManagedChallengeRule
     | RedirectRule
@@ -4235,9 +4220,9 @@ export interface RuleEditResponse {
     | SetConfigRule
     | SkipRule
     | SetCacheSettingsRule
-    | RuleEditResponse.RulesetsLogCustomFieldRule
-    | RuleEditResponse.RulesetsDDoSDynamicRule
-    | RuleEditResponse.RulesetsForceConnectionCloseRule
+    | LogCustomFieldRule
+    | DDoSDynamicRule
+    | ForceConnectionCloseRule
   >;
 
   /**
@@ -4252,7 +4237,7 @@ export interface RuleEditResponse {
 }
 
 export namespace RuleEditResponse {
-  export interface RulesetsLogCustomFieldRule {
+  export interface RulesetsChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -4271,118 +4256,7 @@ export namespace RuleEditResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'log_custom_field';
-
-    /**
-     * The parameters configuring the rule's action.
-     */
-    action_parameters?: RulesetsLogCustomFieldRule.ActionParameters;
-
-    /**
-     * The categories of the rule.
-     */
-    categories?: Array<string>;
-
-    /**
-     * An informative description of the rule.
-     */
-    description?: string;
-
-    /**
-     * Whether the rule should be executed.
-     */
-    enabled?: boolean;
-
-    /**
-     * The expression defining which traffic will match the rule.
-     */
-    expression?: string;
-
-    /**
-     * An object configuring the rule's logging behavior.
-     */
-    logging?: RulesAPI.Logging;
-
-    /**
-     * The reference of the rule (the rule ID by default).
-     */
-    ref?: string;
-  }
-
-  export namespace RulesetsLogCustomFieldRule {
-    /**
-     * The parameters configuring the rule's action.
-     */
-    export interface ActionParameters {
-      /**
-       * The cookie fields to log.
-       */
-      cookie_fields?: Array<ActionParameters.CookieField>;
-
-      /**
-       * The request fields to log.
-       */
-      request_fields?: Array<ActionParameters.RequestField>;
-
-      /**
-       * The response fields to log.
-       */
-      response_fields?: Array<ActionParameters.ResponseField>;
-    }
-
-    export namespace ActionParameters {
-      /**
-       * The cookie field to log.
-       */
-      export interface CookieField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The request field to log.
-       */
-      export interface RequestField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-
-      /**
-       * The response field to log.
-       */
-      export interface ResponseField {
-        /**
-         * The name of the field.
-         */
-        name: string;
-      }
-    }
-  }
-
-  export interface RulesetsDDoSDynamicRule {
-    /**
-     * The timestamp of when the rule was last modified.
-     */
-    last_updated: string;
-
-    /**
-     * The version of the rule.
-     */
-    version: string;
-
-    /**
-     * The unique ID of the rule.
-     */
-    id?: string;
-
-    /**
-     * The action to perform when the rule matches.
-     */
-    action?: 'ddos_dynamic';
+    action?: 'challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -4420,7 +4294,7 @@ export namespace RuleEditResponse {
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export interface RulesetsJSChallengeRule {
     /**
      * The timestamp of when the rule was last modified.
      */
@@ -4439,7 +4313,7 @@ export namespace RuleEditResponse {
     /**
      * The action to perform when the rule matches.
      */
-    action?: 'force_connection_close';
+    action?: 'js_challenge';
 
     /**
      * The parameters configuring the rule's action.
@@ -4480,10 +4354,10 @@ export namespace RuleEditResponse {
 
 export type RuleCreateParams =
   | RuleCreateParams.BlockRule
-  | RuleCreateParams.ChallengeRule
+  | RuleCreateParams.RulesetsChallengeRule
   | RuleCreateParams.CompressResponseRule
   | RuleCreateParams.ExecuteRule
-  | RuleCreateParams.JSChallengeRule
+  | RuleCreateParams.RulesetsJSChallengeRule
   | RuleCreateParams.LogRule
   | RuleCreateParams.ManagedChallengeRule
   | RuleCreateParams.RedirectRule
@@ -4494,9 +4368,9 @@ export type RuleCreateParams =
   | RuleCreateParams.SetConfigRule
   | RuleCreateParams.SkipRule
   | RuleCreateParams.SetCacheSettingsRule
-  | RuleCreateParams.RulesetsLogCustomFieldRule
-  | RuleCreateParams.RulesetsDDoSDynamicRule
-  | RuleCreateParams.RulesetsForceConnectionCloseRule;
+  | RuleCreateParams.LogCustomFieldRule
+  | RuleCreateParams.DDoSDynamicRule
+  | RuleCreateParams.ForceConnectionCloseRule;
 
 export namespace RuleCreateParams {
   export interface BlockRule {
@@ -4587,7 +4461,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface ChallengeRule {
+  export interface RulesetsChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -4898,7 +4772,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface JSChallengeRule {
+  export interface RulesetsJSChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6250,7 +6124,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsLogCustomFieldRule {
+  export interface LogCustomFieldRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6276,7 +6150,7 @@ export namespace RuleCreateParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleCreateParams.RulesetsLogCustomFieldRule.ActionParameters;
+    action_parameters?: RuleCreateParams.LogCustomFieldRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -6304,7 +6178,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export namespace RulesetsLogCustomFieldRule {
+  export namespace LogCustomFieldRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -6358,7 +6232,7 @@ export namespace RuleCreateParams {
     }
   }
 
-  export interface RulesetsDDoSDynamicRule {
+  export interface DDoSDynamicRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6412,7 +6286,7 @@ export namespace RuleCreateParams {
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export interface ForceConnectionCloseRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6481,10 +6355,10 @@ export interface RuleDeleteParams {
 
 export type RuleEditParams =
   | RuleEditParams.BlockRule
-  | RuleEditParams.ChallengeRule
+  | RuleEditParams.RulesetsChallengeRule
   | RuleEditParams.CompressResponseRule
   | RuleEditParams.ExecuteRule
-  | RuleEditParams.JSChallengeRule
+  | RuleEditParams.RulesetsJSChallengeRule
   | RuleEditParams.LogRule
   | RuleEditParams.ManagedChallengeRule
   | RuleEditParams.RedirectRule
@@ -6495,9 +6369,9 @@ export type RuleEditParams =
   | RuleEditParams.SetConfigRule
   | RuleEditParams.SkipRule
   | RuleEditParams.SetCacheSettingsRule
-  | RuleEditParams.RulesetsLogCustomFieldRule
-  | RuleEditParams.RulesetsDDoSDynamicRule
-  | RuleEditParams.RulesetsForceConnectionCloseRule;
+  | RuleEditParams.LogCustomFieldRule
+  | RuleEditParams.DDoSDynamicRule
+  | RuleEditParams.ForceConnectionCloseRule;
 
 export namespace RuleEditParams {
   export interface BlockRule {
@@ -6588,7 +6462,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface ChallengeRule {
+  export interface RulesetsChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -6899,7 +6773,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface JSChallengeRule {
+  export interface RulesetsJSChallengeRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8251,7 +8125,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsLogCustomFieldRule {
+  export interface LogCustomFieldRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8277,7 +8151,7 @@ export namespace RuleEditParams {
     /**
      * Body param: The parameters configuring the rule's action.
      */
-    action_parameters?: RuleEditParams.RulesetsLogCustomFieldRule.ActionParameters;
+    action_parameters?: RuleEditParams.LogCustomFieldRule.ActionParameters;
 
     /**
      * Body param: An informative description of the rule.
@@ -8305,7 +8179,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export namespace RulesetsLogCustomFieldRule {
+  export namespace LogCustomFieldRule {
     /**
      * The parameters configuring the rule's action.
      */
@@ -8359,7 +8233,7 @@ export namespace RuleEditParams {
     }
   }
 
-  export interface RulesetsDDoSDynamicRule {
+  export interface DDoSDynamicRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8413,7 +8287,7 @@ export namespace RuleEditParams {
     ref?: string;
   }
 
-  export interface RulesetsForceConnectionCloseRule {
+  export interface ForceConnectionCloseRule {
     /**
      * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
      * Zone ID.
@@ -8470,10 +8344,11 @@ export namespace RuleEditParams {
 
 export namespace Rules {
   export import BlockRule = RulesAPI.BlockRule;
-  export import ChallengeRule = RulesAPI.ChallengeRule;
   export import CompressResponseRule = RulesAPI.CompressResponseRule;
+  export import DDoSDynamicRule = RulesAPI.DDoSDynamicRule;
   export import ExecuteRule = RulesAPI.ExecuteRule;
-  export import JSChallengeRule = RulesAPI.JSChallengeRule;
+  export import ForceConnectionCloseRule = RulesAPI.ForceConnectionCloseRule;
+  export import LogCustomFieldRule = RulesAPI.LogCustomFieldRule;
   export import LogRule = RulesAPI.LogRule;
   export import Logging = RulesAPI.Logging;
   export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;

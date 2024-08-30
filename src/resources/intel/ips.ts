@@ -25,7 +25,7 @@ export interface IP {
    */
   belongs_to_ref?: IP.BelongsToRef;
 
-  ip?: string | string;
+  ip?: string;
 
   risk_types?: Array<unknown>;
 }

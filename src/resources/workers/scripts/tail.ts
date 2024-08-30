@@ -95,11 +95,11 @@ export interface ConsumerScriptParam {
 }
 
 export interface TailCreateResponse {
-  id?: unknown;
+  id?: string;
 
-  expires_at?: unknown;
+  expires_at?: string;
 
-  url?: unknown;
+  url?: string;
 }
 
 export interface TailDeleteResponse {
@@ -114,11 +114,11 @@ export interface TailDeleteResponse {
 }
 
 export interface TailGetResponse {
-  id?: unknown;
+  id?: string;
 
-  expires_at?: unknown;
+  expires_at?: string;
 
-  url?: unknown;
+  url?: string;
 }
 
 export interface TailCreateParams {

@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as AccountsAPI from './accounts';
+import * as Shared from '../../shared';
 
 export class Accounts extends APIResource {
   /**
@@ -12,14 +13,12 @@ export class Accounts extends APIResource {
     addressMapId: string,
     params: AccountUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountUpdateResponse | null> {
+  ): Core.APIPromise<AccountUpdateResponse> {
     const { account_id, body } = params;
-    return (
-      this._client.put(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-        { body: body, ...options },
-      ) as Core.APIPromise<{ result: AccountUpdateResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.put(
+      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
+      { body: body, ...options },
+    );
   }
 
   /**
@@ -29,20 +28,88 @@ export class Accounts extends APIResource {
     addressMapId: string,
     params: AccountDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<AccountDeleteResponse | null> {
+  ): Core.APIPromise<AccountDeleteResponse> {
     const { account_id } = params;
-    return (
-      this._client.delete(
-        `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
-        options,
-      ) as Core.APIPromise<{ result: AccountDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(
+      `/accounts/${account_id}/addressing/address_maps/${addressMapId}/accounts/${account_id}`,
+      options,
+    );
   }
 }
 
-export type AccountUpdateResponse = Array<unknown>;
+export interface AccountUpdateResponse {
+  errors: Array<Shared.ResponseInfo>;
 
-export type AccountDeleteResponse = Array<unknown>;
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: AccountUpdateResponse.ResultInfo;
+}
+
+export namespace AccountUpdateResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
+
+export interface AccountDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result_info?: AccountDeleteResponse.ResultInfo;
+}
+
+export namespace AccountDeleteResponse {
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
+  }
+}
 
 export interface AccountUpdateParams {
   /**

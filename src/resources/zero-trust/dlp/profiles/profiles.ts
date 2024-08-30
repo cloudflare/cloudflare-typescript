@@ -18,22 +18,21 @@ export class Profiles extends APIResource {
     params: ProfileListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<ProfilesSinglePage, Profile> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, options);
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/dlp/profiles`, ProfilesSinglePage, {
+      query,
+      ...options,
+    });
   }
 
   /**
-   * Fetches a DLP profile by ID. Supports both predefined and custom profiles
+   * Fetches a DLP profile by ID
    */
-  get(
-    profileId: string,
-    params: ProfileGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ProfileGetResponse> {
+  get(profileId: string, params: ProfileGetParams, options?: Core.RequestOptions): Core.APIPromise<Profile> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/dlp/profiles/${profileId}`, options) as Core.APIPromise<{
-        result: ProfileGetResponse;
+        result: Profile;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -75,71 +74,360 @@ export interface ContextAwarenessParam {
   skip: SkipConfigurationParam;
 }
 
-export type Profile =
-  | PredefinedAPI.PredefinedProfile
-  | CustomAPI.CustomProfile
-  | Profile.DLPIntegrationProfile;
+export type Profile = Profile.Custom | Profile.Predefined | Profile.Integration;
 
 export namespace Profile {
-  export interface DLPIntegrationProfile {
+  export interface Custom {
     /**
-     * The ID for this profile
+     * The id of the profile (uuid)
      */
-    id?: string;
-
-    created_at?: string;
+    id: string;
 
     /**
-     * The description of the profile.
+     * Related DLP policies will trigger when the match count exceeds the number set.
      */
-    description?: string;
+    allowed_match_count: number;
 
     /**
-     * The entries for this profile.
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
      */
-    entries?: Array<DLPIntegrationProfile.Entry>;
+    context_awareness: ProfilesAPI.ContextAwareness;
 
     /**
-     * The name of the profile.
+     * When the profile was created
      */
-    name?: string;
+    created_at: string;
+
+    entries: Array<
+      Custom.Custom | Custom.Predefined | Custom.Integration | Custom.ExactData | Custom.WordList
+    >;
 
     /**
-     * The type of the profile.
+     * The name of the profile
      */
-    type?: 'integration';
+    name: string;
 
-    updated_at?: string;
+    ocr_enabled: boolean;
+
+    type: 'custom';
+
+    /**
+     * When the profile was lasted updated
+     */
+    updated_at: string;
+
+    /**
+     * The description of the profile
+     */
+    description?: string | null;
   }
 
-  export namespace DLPIntegrationProfile {
+  export namespace Custom {
+    export interface Custom {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface Predefined {
+      id: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      profile_id?: string | null;
+    }
+
+    export interface Integration {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactData {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface WordList {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+  }
+
+  export interface Predefined {
     /**
-     * An entry derived from an integration
+     * The id of the predefined profile (uuid)
      */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
+    id: string;
 
-      created_at?: string;
+    allowed_match_count: number;
 
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
+    entries: Array<
+      | Predefined.Custom
+      | Predefined.Predefined
+      | Predefined.Integration
+      | Predefined.ExactData
+      | Predefined.WordList
+    >;
 
-      /**
-       * The name of the entry.
-       */
-      name?: string;
+    /**
+     * The name of the predefined profile
+     */
+    name: string;
 
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
+    type: 'predefined';
 
-      updated_at?: string;
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: ProfilesAPI.ContextAwareness;
+
+    ocr_enabled?: boolean;
+
+    /**
+     * Whether this profile can be accessed by anyone
+     */
+    open_access?: boolean;
+  }
+
+  export namespace Predefined {
+    export interface Custom {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface Predefined {
+      id: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      profile_id?: string | null;
+    }
+
+    export interface Integration {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactData {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface WordList {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+  }
+
+  export interface Integration {
+    id: string;
+
+    created_at: string;
+
+    entries: Array<
+      | Integration.Custom
+      | Integration.Predefined
+      | Integration.Integration
+      | Integration.ExactData
+      | Integration.WordList
+    >;
+
+    name: string;
+
+    type: 'integration';
+
+    updated_at: string;
+
+    /**
+     * The description of the profile
+     */
+    description?: string | null;
+  }
+
+  export namespace Integration {
+    export interface Custom {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface Predefined {
+      id: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      profile_id?: string | null;
+    }
+
+    export interface Integration {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactData {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface WordList {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
     }
   }
 }
@@ -164,86 +452,20 @@ export interface SkipConfigurationParam {
   files: boolean;
 }
 
-export type ProfileGetResponse =
-  | PredefinedAPI.PredefinedProfile
-  | CustomAPI.CustomProfile
-  | ProfileGetResponse.DLPIntegrationProfile;
-
-export namespace ProfileGetResponse {
-  export interface DLPIntegrationProfile {
-    /**
-     * The ID for this profile
-     */
-    id?: string;
-
-    created_at?: string;
-
-    /**
-     * The description of the profile.
-     */
-    description?: string;
-
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<DLPIntegrationProfile.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * The type of the profile.
-     */
-    type?: 'integration';
-
-    updated_at?: string;
-  }
-
-  export namespace DLPIntegrationProfile {
-    /**
-     * An entry derived from an integration
-     */
-    export interface Entry {
-      /**
-       * The ID for this entry
-       */
-      id?: string;
-
-      created_at?: string;
-
-      /**
-       * Whether the entry is enabled or not.
-       */
-      enabled?: boolean;
-
-      /**
-       * The name of the entry.
-       */
-      name?: string;
-
-      /**
-       * ID of the parent profile
-       */
-      profile_id?: unknown;
-
-      updated_at?: string;
-    }
-  }
-}
-
 export interface ProfileListParams {
   /**
-   * Identifier
+   * Path param:
    */
   account_id: string;
+
+  /**
+   * Query param: Return all profiles, including those that current account does not
+   * have access to.
+   */
+  all?: boolean;
 }
 
 export interface ProfileGetParams {
-  /**
-   * Identifier
-   */
   account_id: string;
 }
 
@@ -251,7 +473,6 @@ export namespace Profiles {
   export import ContextAwareness = ProfilesAPI.ContextAwareness;
   export import Profile = ProfilesAPI.Profile;
   export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
-  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
   export import ProfilesSinglePage = ProfilesAPI.ProfilesSinglePage;
   export import ProfileListParams = ProfilesAPI.ProfileListParams;
   export import ProfileGetParams = ProfilesAPI.ProfileGetParams;

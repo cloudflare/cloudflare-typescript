@@ -262,12 +262,23 @@ export namespace MemberCreateResponse {
       /**
        * Attributes associated to the permission group.
        */
-      meta?: unknown;
+      meta?: PermissionGroup.Meta;
 
       /**
        * Name of the group.
        */
       name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
 
     /**
@@ -287,7 +298,7 @@ export namespace MemberCreateResponse {
       /**
        * Attributes associated to the resource group.
        */
-      meta?: unknown;
+      meta?: ResourceGroup.Meta;
 
       /**
        * Name of the resource group.
@@ -324,6 +335,15 @@ export namespace MemberCreateResponse {
            */
           key: string;
         }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
       }
     }
   }
@@ -424,12 +444,23 @@ export namespace MemberUpdateResponse {
       /**
        * Attributes associated to the permission group.
        */
-      meta?: unknown;
+      meta?: PermissionGroup.Meta;
 
       /**
        * Name of the group.
        */
       name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
 
     /**
@@ -449,7 +480,7 @@ export namespace MemberUpdateResponse {
       /**
        * Attributes associated to the resource group.
        */
-      meta?: unknown;
+      meta?: ResourceGroup.Meta;
 
       /**
        * Name of the resource group.
@@ -486,6 +517,15 @@ export namespace MemberUpdateResponse {
            */
           key: string;
         }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
       }
     }
   }
@@ -586,12 +626,23 @@ export namespace MemberListResponse {
       /**
        * Attributes associated to the permission group.
        */
-      meta?: unknown;
+      meta?: PermissionGroup.Meta;
 
       /**
        * Name of the group.
        */
       name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
 
     /**
@@ -611,7 +662,7 @@ export namespace MemberListResponse {
       /**
        * Attributes associated to the resource group.
        */
-      meta?: unknown;
+      meta?: ResourceGroup.Meta;
 
       /**
        * Name of the resource group.
@@ -648,6 +699,15 @@ export namespace MemberListResponse {
            */
           key: string;
         }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
       }
     }
   }
@@ -755,12 +815,23 @@ export namespace MemberGetResponse {
       /**
        * Attributes associated to the permission group.
        */
-      meta?: unknown;
+      meta?: PermissionGroup.Meta;
 
       /**
        * Name of the group.
        */
       name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
     }
 
     /**
@@ -780,7 +851,7 @@ export namespace MemberGetResponse {
       /**
        * Attributes associated to the resource group.
        */
-      meta?: unknown;
+      meta?: ResourceGroup.Meta;
 
       /**
        * Name of the resource group.
@@ -817,6 +888,15 @@ export namespace MemberGetResponse {
            */
           key: string;
         }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
       }
     }
   }

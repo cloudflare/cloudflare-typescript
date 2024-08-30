@@ -48,11 +48,11 @@ export class TLS extends APIResource {
     settingId: 'ciphers' | 'min_tls_version' | 'http2',
     params: TLSGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TLSGetResponse | null> {
+  ): Core.APIPromise<TLSGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/hostnames/settings/${settingId}`, options) as Core.APIPromise<{
-        result: TLSGetResponse | null;
+        result: TLSGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -106,6 +106,9 @@ export interface TLSDeleteResponse {
    */
   hostname?: string;
 
+  /**
+   * Deployment status for the given tls setting.
+   */
   status?: string;
 
   /**
@@ -113,7 +116,10 @@ export interface TLSDeleteResponse {
    */
   updated_at?: string;
 
-  value?: string;
+  /**
+   * The tls setting value.
+   */
+  value?: SettingValue;
 }
 
 export type TLSGetResponse = Array<TLSGetResponse.TLSGetResponseItem>;

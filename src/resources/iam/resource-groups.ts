@@ -149,7 +149,7 @@ export interface ResourceGroupUpdateResponse {
   /**
    * Attributes associated to the resource group.
    */
-  meta?: unknown;
+  meta?: ResourceGroupUpdateResponse.Meta;
 
   /**
    * Name of the resource group.
@@ -187,6 +187,15 @@ export namespace ResourceGroupUpdateResponse {
       key: string;
     }
   }
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
+  }
 }
 
 export type ResourceGroupListResponse = unknown;
@@ -215,7 +224,7 @@ export interface ResourceGroupGetResponse {
   /**
    * Attributes associated to the resource group.
    */
-  meta?: unknown;
+  meta?: ResourceGroupGetResponse.Meta;
 
   /**
    * Name of the resource group.
@@ -252,6 +261,15 @@ export namespace ResourceGroupGetResponse {
        */
       key: string;
     }
+  }
+
+  /**
+   * Attributes associated to the resource group.
+   */
+  export interface Meta {
+    key?: string;
+
+    value?: string;
   }
 }
 

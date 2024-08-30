@@ -116,13 +116,13 @@ export class Jobs extends APIResource {
     jobId: number,
     params?: JobDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobDeleteResponse | null>;
-  delete(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse | null>;
+  ): Core.APIPromise<JobDeleteResponse>;
+  delete(jobId: number, options?: Core.RequestOptions): Core.APIPromise<JobDeleteResponse>;
   delete(
     jobId: number,
     params: JobDeleteParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<JobDeleteResponse | null> {
+  ): Core.APIPromise<JobDeleteResponse> {
     if (isRequestOptions(params)) {
       return this.delete(jobId, {}, params);
     }
@@ -147,7 +147,7 @@ export class Jobs extends APIResource {
       this._client.delete(
         `/${accountOrZone}/${accountOrZoneId}/logpush/jobs/${jobId}`,
         options,
-      ) as Core.APIPromise<{ result: JobDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: JobDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -460,7 +460,12 @@ export interface OutputOptionsParam {
   timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
 }
 
-export type JobDeleteResponse = unknown;
+export interface JobDeleteResponse {
+  /**
+   * Unique id of the job.
+   */
+  id?: number;
+}
 
 export interface JobCreateParams {
   /**

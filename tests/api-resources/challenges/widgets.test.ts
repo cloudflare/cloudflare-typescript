@@ -3,7 +3,7 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -11,10 +11,10 @@ const cloudflare = new Cloudflare({
 
 describe('resource widgets', () => {
   test('create: only required params', async () => {
-    const responsePromise = cloudflare.challenges.widgets.create({
+    const responsePromise = client.challenges.widgets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,27 +27,27 @@ describe('resource widgets', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await cloudflare.challenges.widgets.create({
+    const response = await client.challenges.widgets.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
       direction: 'asc',
       order: 'id',
       page: 1,
       per_page: 5,
       bot_fight_mode: false,
-      clearance_level: 'interactive',
+      clearance_level: 'no_clearance',
       offlabel: false,
       region: 'world',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = cloudflare.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
+    const responsePromise = client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -60,19 +60,19 @@ describe('resource widgets', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await cloudflare.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
+    const response = await client.challenges.widgets.update('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domains: ['203.0.113.1', 'cloudflare.com', 'blog.example.com'],
-      mode: 'invisible',
+      mode: 'non-interactive',
       name: 'blog.cloudflare.com login form',
       bot_fight_mode: false,
-      clearance_level: 'interactive',
+      clearance_level: 'no_clearance',
       offlabel: false,
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = cloudflare.challenges.widgets.list({
+    const responsePromise = client.challenges.widgets.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -85,7 +85,7 @@ describe('resource widgets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await cloudflare.challenges.widgets.list({
+    const response = await client.challenges.widgets.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
       order: 'id',
@@ -95,7 +95,7 @@ describe('resource widgets', () => {
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = cloudflare.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', {
+    const responsePromise = client.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -108,13 +108,13 @@ describe('resource widgets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await cloudflare.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', {
+    const response = await client.challenges.widgets.delete('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = cloudflare.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', {
+    const responsePromise = client.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -127,13 +127,13 @@ describe('resource widgets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await cloudflare.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', {
+    const response = await client.challenges.widgets.get('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('rotateSecret: only required params', async () => {
-    const responsePromise = cloudflare.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', {
+    const responsePromise = client.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -146,7 +146,7 @@ describe('resource widgets', () => {
   });
 
   test('rotateSecret: required and optional params', async () => {
-    const response = await cloudflare.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', {
+    const response = await client.challenges.widgets.rotateSecret('0x4AAF00AAAABn0R22HWm-YUc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       invalidate_immediately: true,
     });

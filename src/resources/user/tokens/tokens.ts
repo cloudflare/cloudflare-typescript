@@ -29,7 +29,7 @@ export class Tokens extends APIResource {
    * Update an existing token.
    */
   update(
-    tokenId: unknown,
+    tokenId: string,
     body: TokenUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<TokenUpdateResponse> {
@@ -66,7 +66,7 @@ export class Tokens extends APIResource {
   /**
    * Destroy a token.
    */
-  delete(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
+  delete(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenDeleteResponse | null> {
     return (
       this._client.delete(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{
         result: TokenDeleteResponse | null;
@@ -77,7 +77,7 @@ export class Tokens extends APIResource {
   /**
    * Get information about a specific token.
    */
-  get(tokenId: unknown, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse> {
+  get(tokenId: string, options?: Core.RequestOptions): Core.APIPromise<TokenGetResponse> {
     return (
       this._client.get(`/user/tokens/${tokenId}`, options) as Core.APIPromise<{ result: TokenGetResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -124,7 +124,7 @@ export interface Policy {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: unknown;
+  resources: Policy.Resources;
 }
 
 export namespace Policy {
@@ -141,12 +141,32 @@ export namespace Policy {
     /**
      * Attributes associated to the permission group.
      */
-    meta?: unknown;
+    meta?: PermissionGroup.Meta;
 
     /**
      * Name of the group.
      */
     name?: string;
+  }
+
+  export namespace PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    export interface Meta {
+      key?: string;
+
+      value?: string;
+    }
+  }
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  export interface Resources {
+    resource?: string;
+
+    scope?: string;
   }
 }
 
@@ -164,7 +184,7 @@ export interface PolicyParam {
   /**
    * A list of resource names that the policy applies to.
    */
-  resources: unknown;
+  resources: PolicyParam.Resources;
 }
 
 export namespace PolicyParam {
@@ -176,16 +196,31 @@ export namespace PolicyParam {
     /**
      * Attributes associated to the permission group.
      */
-    meta?: unknown;
+    meta?: PermissionGroup.Meta;
+  }
+
+  export namespace PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    export interface Meta {
+      key?: string;
+
+      value?: string;
+    }
+  }
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  export interface Resources {
+    resource?: string;
+
+    scope?: string;
   }
 }
 
 export interface Token {
-  /**
-   * Token identifier tag.
-   */
-  id: string;
-
   /**
    * Token name.
    */
@@ -201,6 +236,11 @@ export interface Token {
    */
   status: 'active' | 'disabled' | 'expired';
 
+  /**
+   * Token identifier tag.
+   */
+  id?: string;
+
   condition?: Token.Condition;
 
   /**
@@ -213,6 +253,11 @@ export interface Token {
    * The time on which the token was created.
    */
   issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
 
   /**
    * Last time the token was modified.
@@ -230,7 +275,7 @@ export namespace Token {
     /**
      * Client IP restrictions.
      */
-    request_ip?: Condition.RequestIP;
+    'request.ip'?: Condition.RequestIP;
   }
 
   export namespace Condition {
@@ -253,14 +298,236 @@ export namespace Token {
 
 export interface TokenCreateResponse {
   /**
+   * Token identifier tag.
+   */
+  id?: string;
+
+  condition?: TokenCreateResponse.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<Policy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
+
+  /**
    * The token value.
    */
   value?: ValueAPI.Value;
 }
 
-export type TokenUpdateResponse = unknown;
+export namespace TokenCreateResponse {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    'request.ip'?: Condition.RequestIP;
+  }
 
-export type TokenListResponse = unknown;
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<TokensAPI.CIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<TokensAPI.CIDRList>;
+    }
+  }
+}
+
+export interface TokenUpdateResponse {
+  /**
+   * Token identifier tag.
+   */
+  id?: string;
+
+  condition?: TokenUpdateResponse.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<Policy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
+}
+
+export namespace TokenUpdateResponse {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    'request.ip'?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<TokensAPI.CIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<TokensAPI.CIDRList>;
+    }
+  }
+}
+
+export interface TokenListResponse {
+  /**
+   * Token identifier tag.
+   */
+  id?: string;
+
+  condition?: TokenListResponse.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<Policy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
+}
+
+export namespace TokenListResponse {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    'request.ip'?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<TokensAPI.CIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<TokensAPI.CIDRList>;
+    }
+  }
+}
 
 export interface TokenDeleteResponse {
   /**
@@ -269,7 +536,81 @@ export interface TokenDeleteResponse {
   id: string;
 }
 
-export type TokenGetResponse = unknown;
+export interface TokenGetResponse {
+  /**
+   * Token identifier tag.
+   */
+  id?: string;
+
+  condition?: TokenGetResponse.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<Policy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
+}
+
+export namespace TokenGetResponse {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    'request.ip'?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<TokensAPI.CIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<TokensAPI.CIDRList>;
+    }
+  }
+}
 
 export interface TokenVerifyResponse {
   /**
@@ -324,7 +665,7 @@ export namespace TokenCreateParams {
     /**
      * Client IP restrictions.
      */
-    request_ip?: Condition.RequestIP;
+    'request.ip'?: Condition.RequestIP;
   }
 
   export namespace Condition {
@@ -380,7 +721,7 @@ export namespace TokenUpdateParams {
     /**
      * Client IP restrictions.
      */
-    request_ip?: Condition.RequestIP;
+    'request.ip'?: Condition.RequestIP;
   }
 
   export namespace Condition {

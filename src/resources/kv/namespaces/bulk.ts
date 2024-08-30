@@ -17,13 +17,13 @@ export class Bulk extends APIResource {
     namespaceId: string,
     params: BulkUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkUpdateResponse | null> {
+  ): Core.APIPromise<BulkUpdateResponse> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: BulkUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: BulkUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -35,20 +35,20 @@ export class Bulk extends APIResource {
     namespaceId: string,
     params: BulkDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<BulkDeleteResponse | null> {
+  ): Core.APIPromise<BulkDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/bulk`,
         options,
-      ) as Core.APIPromise<{ result: BulkDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: BulkDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface BulkUpdateResponse {}
+export type BulkUpdateResponse = unknown;
 
-export interface BulkDeleteResponse {}
+export type BulkDeleteResponse = unknown;
 
 export interface BulkUpdateParams {
   /**

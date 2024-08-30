@@ -22,7 +22,7 @@ export class Roles extends APIResource {
    * Get information about a specific role for an account.
    */
   get(
-    roleId: unknown,
+    roleId: string,
     params: RoleGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RoleGetResponse> {

@@ -37,13 +37,13 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceUpdateResponse | null> {
+  ): Core.APIPromise<NamespaceUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: NamespaceUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: NamespaceUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,13 +69,13 @@ export class Namespaces extends APIResource {
     namespaceId: string,
     params: NamespaceDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<NamespaceDeleteResponse | null> {
+  ): Core.APIPromise<NamespaceDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}`,
         options,
-      ) as Core.APIPromise<{ result: NamespaceDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: NamespaceDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -117,9 +117,9 @@ export interface Namespace {
   supports_url_encoding?: boolean;
 }
 
-export interface NamespaceUpdateResponse {}
+export type NamespaceUpdateResponse = unknown;
 
-export interface NamespaceDeleteResponse {}
+export type NamespaceDeleteResponse = unknown;
 
 export interface NamespaceCreateParams {
   /**

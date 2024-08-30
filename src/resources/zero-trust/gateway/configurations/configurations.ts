@@ -1,10 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
+import { APIResource } from '../../../../resource';
+import * as Core from '../../../../core';
 import * as ConfigurationsAPI from './configurations';
+import * as CustomCertificateAPI from './custom-certificate';
 
 export class Configurations extends APIResource {
+  customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(
+    this._client,
+  );
+
   /**
    * Updates the current Zero Trust account configuration.
    */
@@ -429,7 +434,8 @@ export namespace GatewayConfigurationSettings {
    */
   export interface Certificate {
     /**
-     * UUID of certificate to be used for interception.
+     * UUID of certificate to be used for interception. Certificate must be active on
+     * the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
      */
     id: string;
   }
@@ -504,7 +510,8 @@ export namespace GatewayConfigurationSettingsParam {
    */
   export interface Certificate {
     /**
-     * UUID of certificate to be used for interception.
+     * UUID of certificate to be used for interception. Certificate must be active on
+     * the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
      */
     id: string;
   }
@@ -683,4 +690,6 @@ export namespace Configurations {
   export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
   export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
   export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
+  export import CustomCertificate = CustomCertificateAPI.CustomCertificate;
+  export import CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
 }

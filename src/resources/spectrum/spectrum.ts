@@ -42,10 +42,10 @@ export interface DNSParam {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPs = EdgeIPs.EyeballIPs | EdgeIPs.CustomerOwnedIPs;
+export type EdgeIPs = EdgeIPs.UnionMember0 | EdgeIPs.UnionMember1;
 
 export namespace EdgeIPs {
-  export interface EyeballIPs {
+  export interface UnionMember0 {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -59,7 +59,7 @@ export namespace EdgeIPs {
     type?: 'dynamic';
   }
 
-  export interface CustomerOwnedIPs {
+  export interface UnionMember1 {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -78,10 +78,10 @@ export namespace EdgeIPs {
 /**
  * The anycast edge IP configuration for the hostname of this application.
  */
-export type EdgeIPsParam = EdgeIPsParam.EyeballIPs | EdgeIPsParam.CustomerOwnedIPs;
+export type EdgeIPsParam = EdgeIPsParam.UnionMember0 | EdgeIPsParam.UnionMember1;
 
 export namespace EdgeIPsParam {
-  export interface EyeballIPs {
+  export interface UnionMember0 {
     /**
      * The IP versions supported for inbound connections on Spectrum anycast IPs.
      */
@@ -95,7 +95,7 @@ export namespace EdgeIPsParam {
     type?: 'dynamic';
   }
 
-  export interface CustomerOwnedIPs {
+  export interface UnionMember1 {
     /**
      * The array of customer owned IPs we broadcast via anycast for this hostname and
      * application.
@@ -179,8 +179,9 @@ export namespace Spectrum {
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
   export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;
+  export import AppDeleteParams = AppsAPI.AppDeleteParams;
+  export import AppGetParams = AppsAPI.AppGetParams;
 }

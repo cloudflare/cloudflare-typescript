@@ -4,7 +4,6 @@ export {
   ContextAwareness,
   Profile,
   SkipConfiguration,
-  ProfileGetResponse,
   ProfileListParams,
   ProfileGetParams,
   ProfilesSinglePage,

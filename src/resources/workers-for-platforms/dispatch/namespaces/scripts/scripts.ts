@@ -20,16 +20,16 @@ export class Scripts extends APIResource {
   tags: TagsAPI.Tags = new TagsAPI.Tags(this._client);
 
   /**
-   * Upload a worker module to a Workers for Platforms namespace. You can find an
-   * example of the metadata on our docs:
-   * https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/reference/metadata/
+   * Upload a worker module to a Workers for Platforms namespace. You can find more
+   * about the multipart metadata on our docs:
+   * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.
    */
   update(
     dispatchNamespace: string,
     scriptName: string,
     params: ScriptUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ScriptsAPI.Script> {
+  ): Core.APIPromise<ScriptUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(
@@ -39,7 +39,7 @@ export class Scripts extends APIResource {
           ...options,
           headers: { 'Content-Type': 'application/javascript', ...options?.headers },
         }),
-      ) as Core.APIPromise<{ result: ScriptsAPI.Script }>
+      ) as Core.APIPromise<{ result: ScriptUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -101,6 +101,50 @@ export interface Script {
   script?: ScriptsAPI.Script;
 }
 
+export interface ScriptUpdateResponse {
+  /**
+   * The id of the script in the Workers system. Usually the script name.
+   */
+  id?: string;
+
+  /**
+   * When the script was created.
+   */
+  created_on?: string;
+
+  /**
+   * Hashed script content, can be used in a If-None-Match header when updating.
+   */
+  etag?: string;
+
+  /**
+   * Whether Logpush is turned on for the Worker.
+   */
+  logpush?: boolean;
+
+  /**
+   * When the script was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Specifies the placement mode for the Worker (e.g. 'smart').
+   */
+  placement_mode?: string;
+
+  startup_time_ms?: number;
+
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: Array<TailAPI.ConsumerScript>;
+
+  /**
+   * Specifies the usage model for the Worker (e.g. 'bundled' or 'unbound').
+   */
+  usage_model?: string;
+}
+
 export type ScriptUpdateParams = ScriptUpdateParams.Variant0 | ScriptUpdateParams.Variant1;
 
 export namespace ScriptUpdateParams {
@@ -134,7 +178,7 @@ export namespace ScriptUpdateParams {
       /**
        * List of bindings available to the worker.
        */
-      bindings?: Array<unknown>;
+      bindings?: Array<Metadata.Binding>;
 
       /**
        * Name of the part in the multipart request that contains the script (e.g. the
@@ -197,7 +241,23 @@ export namespace ScriptUpdateParams {
       /**
        * Key-value pairs to use as tags for this version of this Worker
        */
-      version_tags?: unknown;
+      version_tags?: Record<string, string>;
+    }
+
+    export namespace Metadata {
+      export interface Binding {
+        /**
+         * Name of the binding variable.
+         */
+        name?: string;
+
+        /**
+         * Type of binding. You can find more about bindings on our docs:
+         * https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+         */
+        type?: string;
+        [k: string]: unknown;
+      }
     }
   }
 
@@ -238,6 +298,7 @@ export interface ScriptGetParams {
 
 export namespace Scripts {
   export import Script = ScriptsScriptsAPI.Script;
+  export import ScriptUpdateResponse = ScriptsScriptsAPI.ScriptUpdateResponse;
   export import ScriptUpdateParams = ScriptsScriptsAPI.ScriptUpdateParams;
   export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;

@@ -153,13 +153,18 @@ export interface Pool {
    * The ID of the Monitor to use for checking the health of origins within this
    * pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and
    * underscores are allowed.
    */
   name?: string;
+
+  /**
+   * List of networks where Load Balancer or Pool is enabled.
+   */
+  networks?: Array<string>;
 
   /**
    * This field is now deprecated. It has been moved to Cloudflare's Centralized
@@ -252,7 +257,7 @@ export interface PoolCreateParams {
    * Body param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -341,7 +346,7 @@ export interface PoolUpdateParams {
    * Body param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * Body param: This field is now deprecated. It has been moved to Cloudflare's
@@ -375,7 +380,7 @@ export interface PoolListParams {
    * Query param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 }
 
 export interface PoolDeleteParams {
@@ -437,7 +442,7 @@ export interface PoolEditParams {
    * Body param: The ID of the Monitor to use for checking the health of origins
    * within this pool.
    */
-  monitor?: unknown;
+  monitor?: string;
 
   /**
    * Body param: A short name (tag) for the pool. Only alphanumeric characters,

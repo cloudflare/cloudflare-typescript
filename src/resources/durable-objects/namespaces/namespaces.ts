@@ -28,13 +28,13 @@ export class Namespaces extends APIResource {
 export class NamespacesSinglePage extends SinglePage<Namespace> {}
 
 export interface Namespace {
-  id?: unknown;
+  id?: string;
 
-  class?: unknown;
+  class?: string;
 
-  name?: unknown;
+  name?: string;
 
-  script?: unknown;
+  script?: string;
 }
 
 export interface NamespaceListParams {

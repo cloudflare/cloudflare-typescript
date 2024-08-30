@@ -8,7 +8,7 @@ export class ValueResource extends APIResource {
   /**
    * Roll the token secret.
    */
-  update(tokenId: unknown, body: ValueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Value> {
+  update(tokenId: string, body: ValueUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Value> {
     return (
       this._client.put(`/user/tokens/${tokenId}/value`, { body, ...options }) as Core.APIPromise<{
         result: Value;

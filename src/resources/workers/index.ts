@@ -20,6 +20,7 @@ export {
 export {
   Script,
   ScriptSetting,
+  ScriptUpdateResponse,
   ScriptUpdateParams,
   ScriptListParams,
   ScriptDeleteParams,

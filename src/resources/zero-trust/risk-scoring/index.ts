@@ -4,6 +4,7 @@ export {
   BehaviourUpdateResponse,
   BehaviourGetResponse,
   BehaviourUpdateParams,
+  BehaviourGetParams,
   Behaviours,
 } from './behaviours';
 export {
@@ -24,6 +25,7 @@ export {
   RiskScoringGetResponse,
   RiskScoringResetResponse,
   RiskScoringGetParams,
+  RiskScoringResetParams,
   RiskScoring,
 } from './risk-scoring';
 export { SummaryGetResponse, SummaryGetParams, Summary } from './summary';

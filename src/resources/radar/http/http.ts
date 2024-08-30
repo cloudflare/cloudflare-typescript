@@ -11,13 +11,13 @@ import * as AsesAPI from './ases/ases';
 import * as LocationsAPI from './locations/locations';
 
 export class HTTP extends APIResource {
-  top: TopAPI.Top = new TopAPI.Top(this._client);
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
   ases: AsesAPI.Ases = new AsesAPI.Ases(this._client);
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
   timeseriesGroups: TimeseriesGroupsAPI.TimeseriesGroups = new TimeseriesGroupsAPI.TimeseriesGroups(
     this._client,
   );
+  top: TopAPI.Top = new TopAPI.Top(this._client);
 
   /**
    * Get HTTP requests over time.
@@ -159,17 +159,17 @@ export interface HTTPTimeseriesParams {
    * Array of names that will be used to name the series in responses.
    */
   name?: Array<string>;
+
+  /**
+   * Normalization method applied. Refer to
+   * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
+   */
+  normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
 }
 
 export namespace HTTP {
   export import HTTPTimeseriesResponse = HTTPAPI.HTTPTimeseriesResponse;
   export import HTTPTimeseriesParams = HTTPAPI.HTTPTimeseriesParams;
-  export import Top = TopAPI.Top;
-  export import Browser = TopAPI.Browser;
-  export import TopBrowserFamiliesResponse = TopAPI.TopBrowserFamiliesResponse;
-  export import TopBrowsersResponse = TopAPI.TopBrowsersResponse;
-  export import TopBrowserFamiliesParams = TopAPI.TopBrowserFamiliesParams;
-  export import TopBrowsersParams = TopAPI.TopBrowsersParams;
   export import Locations = LocationsAPI.Locations;
   export import LocationGetResponse = LocationsAPI.LocationGetResponse;
   export import LocationGetParams = LocationsAPI.LocationGetParams;
@@ -214,4 +214,9 @@ export namespace HTTP {
   export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
   export import TimeseriesGroupPostQuantumParams = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumParams;
   export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
+  export import Top = TopAPI.Top;
+  export import TopBrowserResponse = TopAPI.TopBrowserResponse;
+  export import TopBrowserFamilyResponse = TopAPI.TopBrowserFamilyResponse;
+  export import TopBrowserParams = TopAPI.TopBrowserParams;
+  export import TopBrowserFamilyParams = TopAPI.TopBrowserFamilyParams;
 }

@@ -84,6 +84,176 @@ export class Locations extends APIResource {
 
 export class LocationsSinglePage extends SinglePage<Location> {}
 
+export interface DOHEndpoint {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+
+  /**
+   * A list of allowed source IP network ranges for this endpoint. When empty, all
+   * source IPs are allowed. A non-empty list is only effective if the endpoint is
+   * enabled for this location.
+   */
+  networks?: Array<IPNetwork>;
+
+  /**
+   * True if the endpoint requires
+   * [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user)
+   * authentication.
+   */
+  require_token?: boolean;
+}
+
+export interface DOHEndpointParam {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+
+  /**
+   * A list of allowed source IP network ranges for this endpoint. When empty, all
+   * source IPs are allowed. A non-empty list is only effective if the endpoint is
+   * enabled for this location.
+   */
+  networks?: Array<IPNetworkParam>;
+
+  /**
+   * True if the endpoint requires
+   * [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user)
+   * authentication.
+   */
+  require_token?: boolean;
+}
+
+export interface DOTEndpoint {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+
+  /**
+   * A list of allowed source IP network ranges for this endpoint. When empty, all
+   * source IPs are allowed. A non-empty list is only effective if the endpoint is
+   * enabled for this location.
+   */
+  networks?: Array<IPNetwork>;
+}
+
+export interface DOTEndpointParam {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+
+  /**
+   * A list of allowed source IP network ranges for this endpoint. When empty, all
+   * source IPs are allowed. A non-empty list is only effective if the endpoint is
+   * enabled for this location.
+   */
+  networks?: Array<IPNetworkParam>;
+}
+
+/**
+ * The destination endpoints configured for this location. When updating a
+ * location, if this field is absent or set with null, the endpoints configuration
+ * remains unchanged.
+ */
+export interface Endpoint {
+  doh?: DOHEndpoint;
+
+  dot?: DOTEndpoint;
+
+  ipv4?: IPV4Endpoint;
+
+  ipv6?: IPV6Endpoint;
+}
+
+/**
+ * The destination endpoints configured for this location. When updating a
+ * location, if this field is absent or set with null, the endpoints configuration
+ * remains unchanged.
+ */
+export interface EndpointParam {
+  doh?: DOHEndpointParam;
+
+  dot?: DOTEndpointParam;
+
+  ipv4?: IPV4EndpointParam;
+
+  ipv6?: IPV6EndpointParam;
+}
+
+export interface IPNetwork {
+  /**
+   * The IP address or IP CIDR.
+   */
+  network: string;
+}
+
+export interface IPNetworkParam {
+  /**
+   * The IP address or IP CIDR.
+   */
+  network: string;
+}
+
+export interface IPV4Endpoint {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+}
+
+export interface IPV4EndpointParam {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+}
+
+export interface IPV6Endpoint {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+
+  /**
+   * A list of allowed source IPv6 network ranges for this endpoint. When empty, all
+   * source IPs are allowed. A non-empty list is only effective if the endpoint is
+   * enabled for this location.
+   */
+  networks?: Array<IPV6Network>;
+}
+
+export interface IPV6EndpointParam {
+  /**
+   * True if the endpoint is enabled for this location.
+   */
+  enabled?: boolean;
+
+  /**
+   * A list of allowed source IPv6 network ranges for this endpoint. When empty, all
+   * source IPs are allowed. A non-empty list is only effective if the endpoint is
+   * enabled for this location.
+   */
+  networks?: Array<IPV6NetworkParam>;
+}
+
+export interface IPV6Network {
+  /**
+   * The IPv6 address or IPv6 CIDR.
+   */
+  network: string;
+}
+
+export interface IPV6NetworkParam {
+  /**
+   * The IPv6 address or IPv6 CIDR.
+   */
+  network: string;
+}
+
 export interface Location {
   id?: string;
 
@@ -115,7 +285,7 @@ export interface Location {
    * location, if this field is absent or set with null, the endpoints configuration
    * remains unchanged.
    */
-  endpoints?: Location.Endpoints;
+  endpoints?: Endpoint;
 
   /**
    * IPV6 destination ip assigned to this location. DNS requests sent to this IP will
@@ -152,106 +322,6 @@ export interface Location {
 }
 
 export namespace Location {
-  /**
-   * The destination endpoints configured for this location. When updating a
-   * location, if this field is absent or set with null, the endpoints configuration
-   * remains unchanged.
-   */
-  export interface Endpoints {
-    doh?: Endpoints.DOH;
-
-    dot?: Endpoints.DOT;
-
-    ipv4?: Endpoints.IPV4;
-
-    ipv6?: Endpoints.IPV6;
-  }
-
-  export namespace Endpoints {
-    export interface DOH {
-      /**
-       * True if the endpoint is enabled for this location.
-       */
-      enabled?: boolean;
-
-      /**
-       * A list of allowed source IP network ranges for this endpoint. When empty, all
-       * source IPs are allowed. A non-empty list is only effective if the endpoint is
-       * enabled for this location.
-       */
-      networks?: Array<DOH.Network>;
-
-      /**
-       * True if the endpoint requires
-       * [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user)
-       * authentication.
-       */
-      require_token?: boolean;
-    }
-
-    export namespace DOH {
-      export interface Network {
-        /**
-         * The IP address or IP CIDR.
-         */
-        network: string;
-      }
-    }
-
-    export interface DOT {
-      /**
-       * True if the endpoint is enabled for this location.
-       */
-      enabled?: boolean;
-
-      /**
-       * A list of allowed source IP network ranges for this endpoint. When empty, all
-       * source IPs are allowed. A non-empty list is only effective if the endpoint is
-       * enabled for this location.
-       */
-      networks?: Array<DOT.Network>;
-    }
-
-    export namespace DOT {
-      export interface Network {
-        /**
-         * The IP address or IP CIDR.
-         */
-        network: string;
-      }
-    }
-
-    export interface IPV4 {
-      /**
-       * True if the endpoint is enabled for this location.
-       */
-      enabled?: boolean;
-    }
-
-    export interface IPV6 {
-      /**
-       * True if the endpoint is enabled for this location.
-       */
-      enabled?: boolean;
-
-      /**
-       * A list of allowed source IPv6 network ranges for this endpoint. When empty, all
-       * source IPs are allowed. A non-empty list is only effective if the endpoint is
-       * enabled for this location.
-       */
-      networks?: Array<IPV6.Network>;
-    }
-
-    export namespace IPV6 {
-      export interface Network {
-        /**
-         * The IPv6 address or IPv6 CIDR.
-         */
-        network: string;
-      }
-    }
-  }
-
   export interface Network {
     /**
      * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
@@ -260,7 +330,7 @@ export namespace Location {
   }
 }
 
-export type LocationDeleteResponse = unknown | string | null;
+export type LocationDeleteResponse = unknown;
 
 export interface LocationCreateParams {
   /**
@@ -291,6 +361,13 @@ export interface LocationCreateParams {
    * Body param: True if the location needs to resolve EDNS queries.
    */
   ecs_support?: boolean;
+
+  /**
+   * Body param: The destination endpoints configured for this location. When
+   * updating a location, if this field is absent or set with null, the endpoints
+   * configuration remains unchanged.
+   */
+  endpoints?: EndpointParam;
 
   /**
    * Body param: A list of network ranges that requests from this location would
@@ -340,6 +417,13 @@ export interface LocationUpdateParams {
   ecs_support?: boolean;
 
   /**
+   * Body param: The destination endpoints configured for this location. When
+   * updating a location, if this field is absent or set with null, the endpoints
+   * configuration remains unchanged.
+   */
+  endpoints?: EndpointParam;
+
+  /**
    * Body param: A list of network ranges that requests from this location would
    * originate from. A non-empty list is only effective if the ipv4 endpoint is
    * enabled for this location.
@@ -369,6 +453,13 @@ export interface LocationGetParams {
 }
 
 export namespace Locations {
+  export import DOHEndpoint = LocationsAPI.DOHEndpoint;
+  export import DOTEndpoint = LocationsAPI.DOTEndpoint;
+  export import Endpoint = LocationsAPI.Endpoint;
+  export import IPNetwork = LocationsAPI.IPNetwork;
+  export import IPV4Endpoint = LocationsAPI.IPV4Endpoint;
+  export import IPV6Endpoint = LocationsAPI.IPV6Endpoint;
+  export import IPV6Network = LocationsAPI.IPV6Network;
   export import Location = LocationsAPI.Location;
   export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;

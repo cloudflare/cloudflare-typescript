@@ -27,8 +27,8 @@ export {
   AzureAD,
   GenericOAuthConfig,
   IdentityProvider,
+  IdentityProviderSCIMConfig,
   IdentityProviderType,
-  SCIMConfig,
   IdentityProviderListResponse,
   IdentityProviderDeleteResponse,
   IdentityProviderCreateParams,
@@ -93,6 +93,7 @@ export {
   RiskScoringGetResponse,
   RiskScoringResetResponse,
   RiskScoringGetParams,
+  RiskScoringResetParams,
   RiskScoring,
 } from './risk-scoring/index';
 export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';

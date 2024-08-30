@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as BucketsAPI from './buckets';
-import { CursorPagination, type CursorPaginationParams } from '../../pagination';
 
 export class Buckets extends APIResource {
   /**
@@ -21,15 +20,13 @@ export class Buckets extends APIResource {
   /**
    * Lists all R2 buckets on your account
    */
-  list(
-    params: BucketListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<BucketsCursorPagination, Bucket> {
+  list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/r2/buckets`, BucketsCursorPagination, {
-      query,
-      ...options,
-    });
+    return (
+      this._client.get(`/accounts/${account_id}/r2/buckets`, { query, ...options }) as Core.APIPromise<{
+        result: BucketListResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -61,8 +58,6 @@ export class Buckets extends APIResource {
   }
 }
 
-export class BucketsCursorPagination extends CursorPagination<Bucket> {}
-
 /**
  * A single R2 bucket
  */
@@ -86,6 +81,10 @@ export interface Bucket {
    * Storage class for newly uploaded objects, unless specified otherwise.
    */
   storage_class?: 'Standard' | 'InfrequentAccess';
+}
+
+export interface BucketListResponse {
+  buckets?: Array<Bucket>;
 }
 
 export type BucketDeleteResponse = unknown;
@@ -113,11 +112,17 @@ export interface BucketCreateParams {
   storageClass?: 'Standard' | 'InfrequentAccess';
 }
 
-export interface BucketListParams extends CursorPaginationParams {
+export interface BucketListParams {
   /**
    * Path param: Account ID
    */
   account_id: string;
+
+  /**
+   * Query param: Pagination cursor received during the last List Buckets call. R2
+   * buckets are paginated using cursors instead of page numbers.
+   */
+  cursor?: string;
 
   /**
    * Query param: Direction to order buckets
@@ -134,6 +139,11 @@ export interface BucketListParams extends CursorPaginationParams {
    * Query param: Field to order buckets by
    */
   order?: 'name';
+
+  /**
+   * Query param: Maximum number of buckets to return in a single call
+   */
+  per_page?: number;
 
   /**
    * Query param: Bucket name to start searching after. Buckets are ordered
@@ -158,8 +168,8 @@ export interface BucketGetParams {
 
 export namespace Buckets {
   export import Bucket = BucketsAPI.Bucket;
+  export import BucketListResponse = BucketsAPI.BucketListResponse;
   export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import BucketsCursorPagination = BucketsAPI.BucketsCursorPagination;
   export import BucketCreateParams = BucketsAPI.BucketCreateParams;
   export import BucketListParams = BucketsAPI.BucketListParams;
   export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;

@@ -43,8 +43,8 @@ export namespace ZeroTrust {
   export import AzureAD = IdentityProvidersAPI.AzureAD;
   export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
   export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
+  export import IdentityProviderSCIMConfig = IdentityProvidersAPI.IdentityProviderSCIMConfig;
   export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
-  export import SCIMConfig = IdentityProvidersAPI.SCIMConfig;
   export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
   export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
@@ -120,4 +120,5 @@ export namespace ZeroTrust {
   export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
   export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
   export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
+  export import RiskScoringResetParams = RiskScoringAPI.RiskScoringResetParams;
 }

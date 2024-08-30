@@ -26,8 +26,6 @@ export class Integrations extends APIResource {
   }
 
   /**
-   * Update a risk score integration.
-   *
    * Overwrite the reference_id, tenant_url, and active values with the ones provided
    */
   update(

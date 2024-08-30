@@ -9,16 +9,13 @@ export class Custom extends APIResource {
   /**
    * Creates a set of DLP custom profiles.
    */
-  create(
-    params: CustomCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomCreateResponse | null> {
+  create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/dlp/profiles/custom`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CustomCreateResponse | null }>
+      }) as Core.APIPromise<{ result: CustomCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,9 +26,14 @@ export class Custom extends APIResource {
     profileId: string,
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomProfile> {
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id, ...body } = params;
-    return this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, { body, ...options });
+    return (
+      this._client.put(`/accounts/${account_id}/dlp/profiles/custom/${profileId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -52,145 +54,172 @@ export class Custom extends APIResource {
   }
 
   /**
-   * Fetches a custom DLP profile.
+   * Fetches a custom DLP profile by id.
    */
   get(
     profileId: string,
     params: CustomGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomProfile> {
+  ): Core.APIPromise<ProfilesAPI.Profile> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/dlp/profiles/custom/${profileId}`,
         options,
-      ) as Core.APIPromise<{ result: CustomProfile }>
+      ) as Core.APIPromise<{ result: ProfilesAPI.Profile }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
 export interface CustomProfile {
   /**
-   * The ID for this profile
+   * The id of the profile (uuid)
    */
-  id?: string;
+  id: string;
 
   /**
    * Related DLP policies will trigger when the match count exceeds the number set.
    */
-  allowed_match_count?: number;
+  allowed_match_count: number;
 
   /**
    * Scan the context of predefined entries to only return matches surrounded by
    * keywords.
    */
-  context_awareness?: ProfilesAPI.ContextAwareness;
-
-  created_at?: string;
+  context_awareness: ProfilesAPI.ContextAwareness;
 
   /**
-   * The description of the profile.
+   * When the profile was created
    */
-  description?: string;
+  created_at: string;
+
+  entries: Array<
+    | CustomProfile.Custom
+    | CustomProfile.Predefined
+    | CustomProfile.Integration
+    | CustomProfile.ExactData
+    | CustomProfile.WordList
+  >;
 
   /**
-   * The entries for this profile.
+   * The name of the profile
    */
-  entries?: Array<CustomProfile.Entry>;
+  name: string;
+
+  ocr_enabled: boolean;
 
   /**
-   * The name of the profile.
+   * When the profile was lasted updated
    */
-  name?: string;
+  updated_at: string;
 
   /**
-   * If true, scan images via OCR to determine if any text present matches filters.
+   * The description of the profile
    */
-  ocr_enabled?: boolean;
-
-  /**
-   * The type of the profile.
-   */
-  type?: 'custom';
-
-  updated_at?: string;
+  description?: string | null;
 }
 
 export namespace CustomProfile {
-  /**
-   * A custom entry that matches a profile
-   */
-  export interface Entry {
-    /**
-     * The ID for this entry
-     */
-    id?: string;
+  export interface Custom {
+    id: string;
 
-    created_at?: string;
+    created_at: string;
 
-    /**
-     * Whether the entry is enabled or not.
-     */
-    enabled?: boolean;
+    enabled: boolean;
 
-    /**
-     * The name of the entry.
-     */
-    name?: string;
+    name: string;
 
-    /**
-     * A pattern that matches an entry
-     */
-    pattern?: CustomAPI.Pattern;
+    pattern: CustomAPI.Pattern;
 
-    /**
-     * ID of the parent profile
-     */
-    profile_id?: unknown;
+    type: 'custom';
 
-    updated_at?: string;
+    updated_at: string;
+
+    profile_id?: string | null;
+  }
+
+  export interface Predefined {
+    id: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'predefined';
+
+    profile_id?: string | null;
+  }
+
+  export interface Integration {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'integration';
+
+    updated_at: string;
+
+    profile_id?: string | null;
+  }
+
+  export interface ExactData {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    secret: boolean;
+
+    type: 'exact_data';
+
+    updated_at: string;
+  }
+
+  export interface WordList {
+    id: string;
+
+    created_at: string;
+
+    enabled: boolean;
+
+    name: string;
+
+    type: 'word_list';
+
+    updated_at: string;
+
+    word_list: unknown;
+
+    profile_id?: string | null;
   }
 }
 
-/**
- * A pattern that matches an entry
- */
 export interface Pattern {
-  /**
-   * The regex pattern.
-   */
   regex: string;
 
-  /**
-   * Validation algorithm for the pattern. This algorithm will get run on potential
-   * matches, and if it returns false, the entry will not be matched.
-   */
   validation?: 'luhn';
 }
 
-/**
- * A pattern that matches an entry
- */
 export interface PatternParam {
-  /**
-   * The regex pattern.
-   */
   regex: string;
 
-  /**
-   * Validation algorithm for the pattern. This algorithm will get run on potential
-   * matches, and if it returns false, the entry will not be matched.
-   */
   validation?: 'luhn';
 }
 
-export type CustomCreateResponse = Array<CustomProfile>;
+export type CustomCreateResponse = Array<ProfilesAPI.Profile>;
 
-export type CustomDeleteResponse = unknown | string | null;
+export type CustomDeleteResponse = unknown;
 
 export interface CustomCreateParams {
   /**
-   * Path param: Identifier
+   * Path param:
    */
   account_id: string;
 
@@ -202,6 +231,10 @@ export interface CustomCreateParams {
 
 export namespace CustomCreateParams {
   export interface Profile {
+    entries: Array<Profile.DLPNewCustomEntry | Profile.DLPNewWordListEntry>;
+
+    name: string;
+
     /**
      * Related DLP policies will trigger when the match count exceeds the number set.
      */
@@ -214,60 +247,90 @@ export namespace CustomCreateParams {
     context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
     /**
-     * The description of the profile.
+     * The description of the profile
      */
-    description?: string;
+    description?: string | null;
 
-    /**
-     * The entries for this profile.
-     */
-    entries?: Array<Profile.Entry>;
-
-    /**
-     * The name of the profile.
-     */
-    name?: string;
-
-    /**
-     * If true, scan images via OCR to determine if any text present matches filters.
-     */
     ocr_enabled?: boolean;
+
+    /**
+     * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your
+     * Microsoft Information Protection profiles).
+     */
+    shared_entries?: Array<Profile.Custom | Profile.Predefined | Profile.Integration | Profile.ExactData>;
   }
 
   export namespace Profile {
-    /**
-     * A custom entry create payload
-     */
-    export interface Entry {
-      /**
-       * Whether the entry is enabled or not.
-       */
+    export interface DLPNewCustomEntry {
       enabled: boolean;
 
-      /**
-       * The name of the entry.
-       */
       name: string;
 
-      /**
-       * A pattern that matches an entry
-       */
       pattern: CustomAPI.PatternParam;
+    }
+
+    export interface DLPNewWordListEntry {
+      enabled: boolean;
+
+      name: string;
+
+      words: Array<string>;
+    }
+
+    export interface Custom {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'custom';
+    }
+
+    export interface Predefined {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'predefined';
+    }
+
+    export interface Integration {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'integration';
+    }
+
+    export interface ExactData {
+      enabled: boolean;
+
+      entry_id: string;
+
+      entry_type: 'exact_data';
     }
   }
 }
 
 export interface CustomUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param:
    */
   account_id: string;
 
   /**
-   * Body param: Related DLP policies will trigger when the match count exceeds the
-   * number set.
+   * Body param: Custom entries from this profile
    */
-  allowed_match_count?: number;
+  entries: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry>;
+
+  /**
+   * Body param:
+   */
+  name: string;
+
+  /**
+   * Body param:
+   */
+  allowed_match_count?: number | null;
 
   /**
    * Body param: Scan the context of predefined entries to only return matches
@@ -276,95 +339,72 @@ export interface CustomUpdateParams {
   context_awareness?: ProfilesAPI.ContextAwarenessParam;
 
   /**
-   * Body param: The description of the profile.
+   * Body param: The description of the profile
    */
-  description?: string;
+  description?: string | null;
 
   /**
-   * Body param: The custom entries for this profile. Array elements with IDs are
-   * modifying the existing entry with that ID. Elements without ID will create new
-   * entries. Any entry not in the list will be deleted.
-   */
-  entries?: Array<CustomUpdateParams.Entry>;
-
-  /**
-   * Body param: The name of the profile.
-   */
-  name?: string;
-
-  /**
-   * Body param: If true, scan images via OCR to determine if any text present
-   * matches filters.
+   * Body param:
    */
   ocr_enabled?: boolean;
 
   /**
-   * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
-   * or your Microsoft Information Protection profiles).
+   * Body param: Other entries, e.g. predefined or integration.
    */
   shared_entries?: Array<
-    CustomUpdateParams.DLPSharedEntryUpdatePredefined | CustomUpdateParams.DLPSharedEntryUpdateIntegration
+    CustomUpdateParams.Predefined | CustomUpdateParams.Integration | CustomUpdateParams.ExactData
   >;
 }
 
 export namespace CustomUpdateParams {
-  /**
-   * A custom entry that matches a profile
-   */
-  export interface Entry {
-    /**
-     * Whether the entry is enabled or not.
-     */
-    enabled?: boolean;
+  export interface DLPNewCustomEntryWithID {
+    enabled: boolean;
 
-    /**
-     * The name of the entry.
-     */
-    name?: string;
+    entry_id: string;
 
-    /**
-     * A pattern that matches an entry
-     */
-    pattern?: CustomAPI.PatternParam;
+    name: string;
 
-    /**
-     * ID of the parent profile
-     */
-    profile_id?: unknown;
+    pattern: CustomAPI.PatternParam;
   }
 
-  /**
-   * Properties of a predefined entry in a custom profile
-   */
-  export interface DLPSharedEntryUpdatePredefined {
-    /**
-     * Whether the entry is enabled or not.
-     */
-    enabled?: boolean;
+  export interface DLPNewCustomEntry {
+    enabled: boolean;
+
+    name: string;
+
+    pattern: CustomAPI.PatternParam;
   }
 
-  /**
-   * Properties of an integration entry in a custom profile
-   */
-  export interface DLPSharedEntryUpdateIntegration {
-    /**
-     * Whether the entry is enabled or not.
-     */
-    enabled?: boolean;
+  export interface Predefined {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'predefined';
+  }
+
+  export interface Integration {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'integration';
+  }
+
+  export interface ExactData {
+    enabled: boolean;
+
+    entry_id: string;
+
+    entry_type: 'exact_data';
   }
 }
 
 export interface CustomDeleteParams {
-  /**
-   * Identifier
-   */
   account_id: string;
 }
 
 export interface CustomGetParams {
-  /**
-   * Identifier
-   */
   account_id: string;
 }
 

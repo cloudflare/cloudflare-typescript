@@ -9,7 +9,7 @@ export {
   EventDeleteParams,
   EventEditParams,
   EventGetParams,
-  EventsSinglePage,
+  EventsV4PagePaginationArray,
   Events,
 } from './events/index';
 export { PagePreviewResponse, PagePreviewParams, Page } from './page';
@@ -30,12 +30,12 @@ export {
   RuleUpdateResponse,
   RuleDeleteResponse,
   RuleEditResponse,
+  RuleGetResponse,
   RuleCreateParams,
   RuleUpdateParams,
-  RuleListParams,
   RuleDeleteParams,
   RuleEditParams,
-  WaitingRoomRulesSinglePage,
+  RuleGetParams,
   Rules,
 } from './rules';
 export { WaitingRooms } from './waiting-rooms';

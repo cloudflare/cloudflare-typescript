@@ -3,18 +3,17 @@
 import Cloudflare from 'cloudflare';
 import { Response } from 'node-fetch';
 
-const cloudflare = new Cloudflare({
+const client = new Cloudflare({
   apiKey: '144c9defac04969c7bfad8efaa8ea194',
   apiEmail: 'user@example.com',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource riskScoring', () => {
-  test('get', async () => {
-    const responsePromise = cloudflare.zeroTrust.riskScoring.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f2108713-1206-4e84-8b80-0e71a6a1c67b',
-    );
+  test('get: only required params', async () => {
+    const responsePromise = client.zeroTrust.riskScoring.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,34 +23,16 @@ describe('resource riskScoring', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.riskScoring.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f2108713-1206-4e84-8b80-0e71a6a1c67b',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.zeroTrust.riskScoring.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
   });
 
-  test('get: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.riskScoring.get(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f2108713-1206-4e84-8b80-0e71a6a1c67b',
-        { direction: 'desc', order_by: 'timestamp', page: 0, per_page: 0 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('reset', async () => {
-    const responsePromise = cloudflare.zeroTrust.riskScoring.reset(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      'f2108713-1206-4e84-8b80-0e71a6a1c67b',
-    );
+  test('reset: only required params', async () => {
+    const responsePromise = client.zeroTrust.riskScoring.reset('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,14 +42,9 @@ describe('resource riskScoring', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('reset: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      cloudflare.zeroTrust.riskScoring.reset(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        'f2108713-1206-4e84-8b80-0e71a6a1c67b',
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('reset: required and optional params', async () => {
+    const response = await client.zeroTrust.riskScoring.reset('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+      account_id: 'account_id',
+    });
   });
 });

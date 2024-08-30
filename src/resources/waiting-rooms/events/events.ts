@@ -4,7 +4,7 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as EventsAPI from './events';
 import * as DetailsAPI from './details';
-import { SinglePage } from '../../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Events extends APIResource {
   details: DetailsAPI.Details = new DetailsAPI.Details(this._client);
@@ -56,11 +56,11 @@ export class Events extends APIResource {
     waitingRoomId: string,
     params: EventListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<EventsSinglePage, Event> {
+  ): Core.PagePromise<EventsV4PagePaginationArray, Event> {
     const { zone_id, ...query } = params;
     return this._client.getAPIList(
       `/zones/${zone_id}/waiting_rooms/${waitingRoomId}/events`,
-      EventsSinglePage,
+      EventsV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -120,7 +120,7 @@ export class Events extends APIResource {
   }
 }
 
-export class EventsSinglePage extends SinglePage<Event> {}
+export class EventsV4PagePaginationArray extends V4PagePaginationArray<Event> {}
 
 export interface Event {
   id?: string;
@@ -410,21 +410,11 @@ export interface EventUpdateParams {
   total_active_users?: number | null;
 }
 
-export interface EventListParams {
+export interface EventListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Identifier
    */
   zone_id: string;
-
-  /**
-   * Query param: Page number of paginated results.
-   */
-  page?: unknown;
-
-  /**
-   * Query param: Maximum number of results per page. Must be a multiple of 5.
-   */
-  per_page?: unknown;
 }
 
 export interface EventDeleteParams {
@@ -540,7 +530,7 @@ export interface EventGetParams {
 export namespace Events {
   export import Event = EventsAPI.Event;
   export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
-  export import EventsSinglePage = EventsAPI.EventsSinglePage;
+  export import EventsV4PagePaginationArray = EventsAPI.EventsV4PagePaginationArray;
   export import EventCreateParams = EventsAPI.EventCreateParams;
   export import EventUpdateParams = EventsAPI.EventUpdateParams;
   export import EventListParams = EventsAPI.EventListParams;

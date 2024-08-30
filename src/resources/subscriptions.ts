@@ -25,13 +25,13 @@ export class Subscriptions extends APIResource {
    * Updates an account subscription.
    */
   update(
-    accountIdentifier: string,
     subscriptionIdentifier: string,
-    body: SubscriptionUpdateParams,
+    params: SubscriptionUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionUpdateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`, {
+      this._client.put(`/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`, {
         body,
         ...options,
       }) as Core.APIPromise<{ result: SubscriptionUpdateResponse }>
@@ -42,27 +42,25 @@ export class Subscriptions extends APIResource {
    * Lists all of an account's subscriptions.
    */
   list(
-    accountIdentifier: string,
+    params: SubscriptionListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<SubscriptionsSinglePage, UserSubscriptionsAPI.Subscription> {
-    return this._client.getAPIList(
-      `/accounts/${accountIdentifier}/subscriptions`,
-      SubscriptionsSinglePage,
-      options,
-    );
+    const { account_id } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
   }
 
   /**
    * Deletes an account's subscription.
    */
   delete(
-    accountIdentifier: string,
     subscriptionIdentifier: string,
+    params: SubscriptionDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionDeleteResponse> {
+    const { account_id } = params;
     return (
       this._client.delete(
-        `/accounts/${accountIdentifier}/subscriptions/${subscriptionIdentifier}`,
+        `/accounts/${account_id}/subscriptions/${subscriptionIdentifier}`,
         options,
       ) as Core.APIPromise<{ result: SubscriptionDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -127,25 +125,34 @@ export namespace SubscriptionCreateParams {
 }
 
 export interface SubscriptionUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
   app?: SubscriptionUpdateParams.App;
 
   /**
-   * The list of add-ons subscribed to.
+   * Body param: The list of add-ons subscribed to.
    */
   component_values?: Array<UserSubscriptionsAPI.SubscriptionComponentParam>;
 
   /**
-   * How often the subscription is renewed automatically.
+   * Body param: How often the subscription is renewed automatically.
    */
   frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
 
   /**
-   * The rate plan applied to the subscription.
+   * Body param: The rate plan applied to the subscription.
    */
   rate_plan?: UserSubscriptionsAPI.RatePlanParam;
 
   /**
-   * A simple zone object. May have null properties if not a zone subscription.
+   * Body param: A simple zone object. May have null properties if not a zone
+   * subscription.
    */
   zone?: UserSubscriptionsAPI.SubscriptionZoneParam;
 }
@@ -157,6 +164,20 @@ export namespace SubscriptionUpdateParams {
      */
     install_id?: string;
   }
+}
+
+export interface SubscriptionListParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export interface SubscriptionDeleteParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
 }
 
 export { SubscriptionsSinglePage };

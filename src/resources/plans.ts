@@ -9,11 +9,12 @@ export class Plans extends APIResource {
    * Lists available plans the zone can subscribe to.
    */
   list(
-    zoneIdentifier: string,
+    params: PlanListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AvailableRatePlansSinglePage, AvailableRatePlan> {
+    const { zone_id } = params;
     return this._client.getAPIList(
-      `/zones/${zoneIdentifier}/available_plans`,
+      `/zones/${zone_id}/available_plans`,
       AvailableRatePlansSinglePage,
       options,
     );
@@ -23,15 +24,15 @@ export class Plans extends APIResource {
    * Details of the available plan that the zone can subscribe to.
    */
   get(
-    zoneIdentifier: string,
     planIdentifier: string,
+    params: PlanGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<AvailableRatePlan> {
+    const { zone_id } = params;
     return (
-      this._client.get(
-        `/zones/${zoneIdentifier}/available_plans/${planIdentifier}`,
-        options,
-      ) as Core.APIPromise<{ result: AvailableRatePlan }>
+      this._client.get(`/zones/${zone_id}/available_plans/${planIdentifier}`, options) as Core.APIPromise<{
+        result: AvailableRatePlan;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -88,4 +89,18 @@ export interface AvailableRatePlan {
    * The amount you will be billed for this plan.
    */
   price?: number;
+}
+
+export interface PlanListParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface PlanGetParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
 }

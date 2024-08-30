@@ -4,7 +4,6 @@ import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
 import * as MaliciousAPI from './malicious';
-import * as TopAPI from '../../../../http/top';
 
 export class Malicious extends APIResource {
   /**
@@ -39,7 +38,7 @@ export class Malicious extends APIResource {
 export interface MaliciousGetResponse {
   meta: MaliciousGetResponse.Meta;
 
-  top_0: Array<TopAPI.Browser>;
+  top_0: Array<MaliciousGetResponse.Top0>;
 }
 
 export namespace MaliciousGetResponse {
@@ -87,6 +86,12 @@ export namespace MaliciousGetResponse {
         startTime?: string;
       }
     }
+  }
+
+  export interface Top0 {
+    name: string;
+
+    value: string;
   }
 }
 

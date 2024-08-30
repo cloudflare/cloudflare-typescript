@@ -89,7 +89,7 @@ export interface Domain {
 
 export interface DomainUpdateParams {
   /**
-   * Path param:
+   * Path param: Identifer of the account.
    */
   account_id: string;
 
@@ -116,7 +116,7 @@ export interface DomainUpdateParams {
 
 export interface DomainListParams {
   /**
-   * Path param:
+   * Path param: Identifer of the account.
    */
   account_id: string;
 
@@ -147,10 +147,16 @@ export interface DomainListParams {
 }
 
 export interface DomainDeleteParams {
+  /**
+   * Identifer of the account.
+   */
   account_id: string;
 }
 
 export interface DomainGetParams {
+  /**
+   * Identifer of the account.
+   */
   account_id: string;
 }
 

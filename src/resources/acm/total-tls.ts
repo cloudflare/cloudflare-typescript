@@ -36,12 +36,12 @@ export class TotalTLS extends APIResource {
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
  */
-export type CertificateAuthority = 'google' | 'lets_encrypt';
+export type CertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
 
 /**
  * The Certificate Authority that Total TLS certificates will be issued through.
  */
-export type CertificateAuthorityParam = 'google' | 'lets_encrypt';
+export type CertificateAuthorityParam = 'google' | 'lets_encrypt' | 'ssl_com';
 
 export interface TotalTLSCreateResponse {
   /**
@@ -58,7 +58,7 @@ export interface TotalTLSCreateResponse {
   /**
    * The validity period in days for the certificates ordered via Total TLS.
    */
-  validity_days?: 90;
+  validity_period?: 90;
 }
 
 export interface TotalTLSGetResponse {
@@ -76,7 +76,7 @@ export interface TotalTLSGetResponse {
   /**
    * The validity period in days for the certificates ordered via Total TLS.
    */
-  validity_days?: 90;
+  validity_period?: 90;
 }
 
 export interface TotalTLSCreateParams {

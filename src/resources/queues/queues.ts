@@ -14,9 +14,9 @@ export class Queues extends APIResource {
    * Creates a new queue.
    */
   create(params: QueueCreateParams, options?: Core.RequestOptions): Core.APIPromise<QueueCreated | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/queues`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/queues`, { body, ...options }) as Core.APIPromise<{
         result: QueueCreated | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -79,27 +79,35 @@ export class Queues extends APIResource {
 export class QueuesSinglePage extends SinglePage<Queue> {}
 
 export interface Queue {
-  consumers?: unknown;
+  consumers?: Array<ConsumersAPI.Consumer>;
 
-  consumers_total_count?: unknown;
+  consumers_total_count?: number;
 
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
-  producers?: unknown;
+  producers?: Array<Queue.Producer>;
 
-  producers_total_count?: unknown;
+  producers_total_count?: number;
 
   queue_id?: string;
 
   queue_name?: string;
 }
 
-export interface QueueCreated {
-  created_on?: unknown;
+export namespace Queue {
+  export interface Producer {
+    environment?: string;
 
-  modified_on?: unknown;
+    service?: string;
+  }
+}
+
+export interface QueueCreated {
+  created_on?: string;
+
+  modified_on?: string;
 
   queue_id?: string;
 
@@ -107,9 +115,9 @@ export interface QueueCreated {
 }
 
 export interface QueueUpdated {
-  created_on?: unknown;
+  created_on?: string;
 
-  modified_on?: unknown;
+  modified_on?: string;
 
   queue_id?: string;
 
@@ -120,19 +128,19 @@ export type QueueDeleteResponse = unknown | Array<unknown> | string;
 
 export interface QueueCreateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
   /**
    * Body param:
    */
-  body: unknown;
+  queue_name: string;
 }
 
 export interface QueueUpdateParams {
   /**
-   * Path param: Identifier
+   * Path param: Identifier.
    */
   account_id: string;
 
@@ -144,21 +152,21 @@ export interface QueueUpdateParams {
 
 export interface QueueListParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface QueueDeleteParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }
 
 export interface QueueGetParams {
   /**
-   * Identifier
+   * Identifier.
    */
   account_id: string;
 }

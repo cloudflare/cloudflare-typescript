@@ -24,7 +24,21 @@ export class Logs extends APIResource {
   }
 }
 
-export type LogGetResponse = unknown | Array<unknown> | string;
+export interface LogGetResponse {
+  data?: Array<LogGetResponse.Data>;
+
+  includes_container_logs?: boolean;
+
+  total?: number;
+}
+
+export namespace LogGetResponse {
+  export interface Data {
+    line?: string;
+
+    ts?: string;
+  }
+}
 
 export interface LogGetParams {
   /**

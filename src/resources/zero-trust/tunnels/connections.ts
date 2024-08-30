@@ -6,20 +6,22 @@ import * as ConnectionsAPI from './connections';
 
 export class Connections extends APIResource {
   /**
-   * Removes connections that are in a disconnected or pending reconnect state. We
-   * recommend running this command after shutting down a tunnel.
+   * Removes a connection (aka Cloudflare Tunnel Connector) from a Cloudflare Tunnel
+   * independently of its current state. If no connector id (client_id) is provided
+   * all connectors will be removed. We recommend running this command after rotating
+   * tokens.
    */
   delete(
     tunnelId: string,
     params: ConnectionDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ConnectionDeleteResponse> {
-    const { account_id } = params;
+  ): Core.APIPromise<ConnectionDeleteResponse | null> {
+    const { account_id, client_id } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/tunnels/${tunnelId}/connections`,
-        options,
-      ) as Core.APIPromise<{ result: ConnectionDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/cfd_tunnel/${tunnelId}/connections`, {
+        query: { client_id },
+        ...options,
+      }) as Core.APIPromise<{ result: ConnectionDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -130,15 +132,20 @@ export namespace Client {
   }
 }
 
-export type ConnectionDeleteResponse = unknown | Array<unknown> | string;
+export type ConnectionDeleteResponse = unknown;
 
 export type ConnectionGetResponse = Array<Client>;
 
 export interface ConnectionDeleteParams {
   /**
-   * Cloudflare account ID
+   * Path param: Cloudflare account ID
    */
   account_id: string;
+
+  /**
+   * Query param: UUID of the Cloudflare Tunnel connector.
+   */
+  client_id?: string;
 }
 
 export interface ConnectionGetParams {

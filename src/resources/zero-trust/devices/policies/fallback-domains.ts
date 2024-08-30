@@ -77,7 +77,7 @@ export interface FallbackDomain {
   /**
    * A list of IP addresses to handle domain resolution.
    */
-  dns_server?: Array<unknown>;
+  dns_server?: Array<string>;
 }
 
 export interface FallbackDomainParam {
@@ -94,7 +94,7 @@ export interface FallbackDomainParam {
   /**
    * A list of IP addresses to handle domain resolution.
    */
-  dns_server?: Array<unknown>;
+  dns_server?: Array<string>;
 }
 
 export type FallbackDomainPolicy = Array<FallbackDomain>;

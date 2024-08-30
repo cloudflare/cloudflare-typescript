@@ -8,19 +8,18 @@ export {
   RouteListParams,
   RouteDeleteParams,
   RouteEditParams,
+  RouteGetParams,
   TeamnetsV4PagePaginationArray,
   Routes,
 } from './routes/index';
 export { Networks } from './networks';
 export {
   VirtualNetwork,
-  VirtualNetworkCreateResponse,
-  VirtualNetworkDeleteResponse,
-  VirtualNetworkEditResponse,
   VirtualNetworkCreateParams,
   VirtualNetworkListParams,
   VirtualNetworkDeleteParams,
   VirtualNetworkEditParams,
+  VirtualNetworkGetParams,
   VirtualNetworksSinglePage,
   VirtualNetworks,
 } from './virtual-networks';

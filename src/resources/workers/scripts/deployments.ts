@@ -16,9 +16,10 @@ export class Deployments extends APIResource {
     params: DeploymentCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<DeploymentCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, force, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/workers/scripts/${scriptName}/deployments`, {
+        query: { force },
         body,
         ...options,
       }) as Core.APIPromise<{ result: DeploymentCreateResponse }>
@@ -59,6 +60,10 @@ export interface DeploymentParam {
 }
 
 export interface DeploymentCreateResponse {
+  strategy: 'percentage';
+
+  versions: Array<DeploymentCreateResponse.Version>;
+
   id?: string;
 
   annotations?: Deployment;
@@ -68,8 +73,14 @@ export interface DeploymentCreateResponse {
   created_on?: string;
 
   source?: string;
+}
 
-  strategy?: string;
+export namespace DeploymentCreateResponse {
+  export interface Version {
+    percentage: number;
+
+    version_id: string;
+  }
 }
 
 export interface DeploymentGetResponse {
@@ -78,6 +89,10 @@ export interface DeploymentGetResponse {
 
 export namespace DeploymentGetResponse {
   export interface Deployment {
+    strategy: 'percentage';
+
+    versions: Array<Deployment.Version>;
+
     id?: string;
 
     annotations?: DeploymentsAPI.Deployment;
@@ -87,8 +102,14 @@ export namespace DeploymentGetResponse {
     created_on?: string;
 
     source?: string;
+  }
 
-    strategy?: string;
+  export namespace Deployment {
+    export interface Version {
+      percentage: number;
+
+      version_id: string;
+    }
   }
 }
 
@@ -101,12 +122,32 @@ export interface DeploymentCreateParams {
   /**
    * Body param:
    */
-  annotations?: DeploymentParam;
+  strategy: 'percentage';
 
   /**
    * Body param:
    */
-  strategy?: string;
+  versions: Array<DeploymentCreateParams.Version>;
+
+  /**
+   * Query param: If set to true, the deployment will be created even if normally
+   * blocked by something such rolling back to an older version when a secret has
+   * changed.
+   */
+  force?: boolean;
+
+  /**
+   * Body param:
+   */
+  annotations?: DeploymentParam;
+}
+
+export namespace DeploymentCreateParams {
+  export interface Version {
+    percentage: number;
+
+    version_id: string;
+  }
 }
 
 export interface DeploymentGetParams {
