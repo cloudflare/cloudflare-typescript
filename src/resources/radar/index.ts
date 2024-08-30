@@ -4,7 +4,7 @@ export { AS112TimeseriesResponse, AS112TimeseriesParams, AS112 } from './as112/i
 export { AnnotationListResponse, AnnotationListParams, Annotations } from './annotations/index';
 export { Attacks } from './attacks/index';
 export { BGPTimeseriesResponse, BGPTimeseriesParams, BGP } from './bgp/index';
-export { DNSTimeseriesResponse, DNSTimeseriesParams, DNS } from './dns/index';
+export { DNS } from './dns/index';
 export {
   DatasetListResponse,
   DatasetDownloadResponse,
