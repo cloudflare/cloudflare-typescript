@@ -371,13 +371,6 @@ export interface ZoneEditParams {
   zone_id: string;
 
   /**
-   * Body param: (Deprecated) Please use the `/zones/{zone_id}/subscription` API to
-   * update a zone's plan. Changing this value will create/cancel associated
-   * subscriptions. To view available plans for this zone, see Zone Plans.
-   */
-  plan?: ZoneEditParams.Plan;
-
-  /**
    * Body param: A full zone implies that DNS is hosted with Cloudflare. A partial
    * zone is typically a partner-hosted zone or a CNAME setup. This parameter is only
    * available to Enterprise customers or if it has been explicitly enabled on a
@@ -390,20 +383,6 @@ export interface ZoneEditParams {
    * available for Business and Enterprise plans.
    */
   vanity_name_servers?: Array<string>;
-}
-
-export namespace ZoneEditParams {
-  /**
-   * (Deprecated) Please use the `/zones/{zone_id}/subscription` API to update a
-   * zone's plan. Changing this value will create/cancel associated subscriptions. To
-   * view available plans for this zone, see Zone Plans.
-   */
-  export interface Plan {
-    /**
-     * Identifier
-     */
-    id?: string;
-  }
 }
 
 export interface ZoneGetParams {
@@ -483,9 +462,7 @@ export namespace Zones {
   export import HoldGetParams = HoldsAPI.HoldGetParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
   export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export import SubscriptionEditResponse = SubscriptionsAPI.SubscriptionEditResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
   export import SubscriptionListParams = SubscriptionsAPI.SubscriptionListParams;
-  export import SubscriptionEditParams = SubscriptionsAPI.SubscriptionEditParams;
 }
