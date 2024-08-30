@@ -72,7 +72,6 @@ export {
   SubscriptionCreateResponse,
   SubscriptionGetResponse,
   SubscriptionCreateParams,
-  SubscriptionListParams,
   Subscriptions,
 } from './subscriptions';
 export { ZoneHold, HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds } from './holds';
