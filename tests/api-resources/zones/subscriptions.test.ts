@@ -21,25 +21,6 @@ describe('resource subscriptions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.zones.subscriptions.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('list: required and optional params', async () => {
-    const response = await client.zones.subscriptions.list({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
   test('get', async () => {
     const responsePromise = client.zones.subscriptions.get('506e3185e9c882d175a2d0cb0093d9f2');
     const rawResponse = await responsePromise.asResponse();
