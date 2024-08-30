@@ -70,8 +70,10 @@ export {
 } from './custom-nameservers';
 export {
   SubscriptionCreateResponse,
+  SubscriptionUpdateResponse,
   SubscriptionGetResponse,
   SubscriptionCreateParams,
+  SubscriptionUpdateParams,
   Subscriptions,
 } from './subscriptions';
 export { ZoneHold, HoldCreateParams, HoldDeleteParams, HoldGetParams, Holds } from './holds';
