@@ -37,12 +37,6 @@ describe('resource subscriptions', () => {
   test('update: required and optional params', async () => {
     const response = await client.subscriptions.update('506e3185e9c882d175a2d0cb0093d9f2', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      app: { install_id: 'install_id' },
-      component_values: [
-        { default: 5, name: 'page_rules', price: 5, value: 20 },
-        { default: 5, name: 'page_rules', price: 5, value: 20 },
-        { default: 5, name: 'page_rules', price: 5, value: 20 },
-      ],
       frequency: 'weekly',
       rate_plan: {
         id: 'free',
@@ -53,7 +47,6 @@ describe('resource subscriptions', () => {
         scope: 'zone',
         sets: ['string', 'string', 'string'],
       },
-      zone: {},
     });
   });
 
