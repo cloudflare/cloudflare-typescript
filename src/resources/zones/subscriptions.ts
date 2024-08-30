@@ -22,6 +22,21 @@ export class Subscriptions extends APIResource {
   }
 
   /**
+   * Updates zone subscriptions, either plan or add-ons.
+   */
+  update(
+    identifier: string,
+    body: SubscriptionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionUpdateResponse> {
+    return (
+      this._client.put(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
+        result: SubscriptionUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists zone subscription details.
    */
   get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse> {
@@ -34,6 +49,8 @@ export class Subscriptions extends APIResource {
 }
 
 export type SubscriptionCreateResponse = unknown | string | null;
+
+export type SubscriptionUpdateResponse = unknown | string | null;
 
 export type SubscriptionGetResponse = unknown | string | null;
 
@@ -70,8 +87,43 @@ export namespace SubscriptionCreateParams {
   }
 }
 
+export interface SubscriptionUpdateParams {
+  app?: SubscriptionUpdateParams.App;
+
+  /**
+   * The list of add-ons subscribed to.
+   */
+  component_values?: Array<SubscriptionsAPI.SubscriptionComponentParam>;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: SubscriptionsAPI.RatePlanParam;
+
+  /**
+   * A simple zone object. May have null properties if not a zone subscription.
+   */
+  zone?: SubscriptionsAPI.SubscriptionZoneParam;
+}
+
+export namespace SubscriptionUpdateParams {
+  export interface App {
+    /**
+     * app install id.
+     */
+    install_id?: string;
+  }
+}
+
 export namespace Subscriptions {
   export import SubscriptionCreateResponse = ZonesSubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = ZonesSubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = ZonesSubscriptionsAPI.SubscriptionUpdateParams;
 }
