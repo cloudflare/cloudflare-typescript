@@ -92,13 +92,6 @@ export interface SubscriptionDeleteResponse {
 export type SubscriptionGetResponse = unknown | string | null;
 
 export interface SubscriptionCreateParams {
-  app?: SubscriptionCreateParams.App;
-
-  /**
-   * The list of add-ons subscribed to.
-   */
-  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponentParam>;
-
   /**
    * How often the subscription is renewed automatically.
    */
@@ -108,20 +101,6 @@ export interface SubscriptionCreateParams {
    * The rate plan applied to the subscription.
    */
   rate_plan?: UserSubscriptionsAPI.RatePlanParam;
-
-  /**
-   * A simple zone object. May have null properties if not a zone subscription.
-   */
-  zone?: UserSubscriptionsAPI.SubscriptionZoneParam;
-}
-
-export namespace SubscriptionCreateParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
 }
 
 export interface SubscriptionUpdateParams {
@@ -129,16 +108,6 @@ export interface SubscriptionUpdateParams {
    * Path param: Identifier
    */
   account_id: string;
-
-  /**
-   * Body param:
-   */
-  app?: SubscriptionUpdateParams.App;
-
-  /**
-   * Body param: The list of add-ons subscribed to.
-   */
-  component_values?: Array<UserSubscriptionsAPI.SubscriptionComponentParam>;
 
   /**
    * Body param: How often the subscription is renewed automatically.
@@ -149,21 +118,6 @@ export interface SubscriptionUpdateParams {
    * Body param: The rate plan applied to the subscription.
    */
   rate_plan?: UserSubscriptionsAPI.RatePlanParam;
-
-  /**
-   * Body param: A simple zone object. May have null properties if not a zone
-   * subscription.
-   */
-  zone?: UserSubscriptionsAPI.SubscriptionZoneParam;
-}
-
-export namespace SubscriptionUpdateParams {
-  export interface App {
-    /**
-     * app install id.
-     */
-    install_id?: string;
-  }
 }
 
 export interface SubscriptionListParams {
