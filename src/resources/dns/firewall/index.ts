@@ -2,16 +2,19 @@
 
 export {
   AttackMitigation,
-  Firewall,
   FirewallIPs,
   UpstreamIPs,
+  FirewallCreateResponse,
+  FirewallListResponse,
   FirewallDeleteResponse,
+  FirewallEditResponse,
+  FirewallGetResponse,
   FirewallCreateParams,
   FirewallListParams,
   FirewallDeleteParams,
   FirewallEditParams,
   FirewallGetParams,
-  FirewallsV4PagePaginationArray,
-  FirewallResource,
+  FirewallListResponsesV4PagePaginationArray,
+  Firewall,
 } from './firewall';
 export { Delta, Analytics } from './analytics/index';

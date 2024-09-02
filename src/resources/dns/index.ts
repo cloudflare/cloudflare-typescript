@@ -45,17 +45,20 @@ export {
 export { Analytics } from './analytics/index';
 export {
   AttackMitigation,
-  Firewall,
   FirewallIPs,
   UpstreamIPs,
+  FirewallCreateResponse,
+  FirewallListResponse,
   FirewallDeleteResponse,
+  FirewallEditResponse,
+  FirewallGetResponse,
   FirewallCreateParams,
   FirewallListParams,
   FirewallDeleteParams,
   FirewallEditParams,
   FirewallGetParams,
-  FirewallsV4PagePaginationArray,
-  FirewallResource,
+  FirewallListResponsesV4PagePaginationArray,
+  Firewall,
 } from './firewall/index';
 export { DNS } from './dns';
 export {
