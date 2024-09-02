@@ -11,7 +11,7 @@ export class DNS extends APIResource {
   records: RecordsAPI.Records = new RecordsAPI.Records(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
-  firewall: FirewallAPI.FirewallResource = new FirewallAPI.FirewallResource(this._client);
+  firewall: FirewallAPI.Firewall = new FirewallAPI.Firewall(this._client);
 }
 
 /**
@@ -111,13 +111,16 @@ export namespace DNS {
   export import SettingEditParams = SettingsAPI.SettingEditParams;
   export import SettingGetParams = SettingsAPI.SettingGetParams;
   export import Analytics = AnalyticsAPI.Analytics;
-  export import FirewallResource = FirewallAPI.FirewallResource;
-  export import AttackMitigation = FirewallAPI.AttackMitigation;
   export import Firewall = FirewallAPI.Firewall;
+  export import AttackMitigation = FirewallAPI.AttackMitigation;
   export import FirewallIPs = FirewallAPI.FirewallIPs;
   export import UpstreamIPs = FirewallAPI.UpstreamIPs;
+  export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
+  export import FirewallListResponse = FirewallAPI.FirewallListResponse;
   export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import FirewallsV4PagePaginationArray = FirewallAPI.FirewallsV4PagePaginationArray;
+  export import FirewallEditResponse = FirewallAPI.FirewallEditResponse;
+  export import FirewallGetResponse = FirewallAPI.FirewallGetResponse;
+  export import FirewallListResponsesV4PagePaginationArray = FirewallAPI.FirewallListResponsesV4PagePaginationArray;
   export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
   export import FirewallListParams = FirewallAPI.FirewallListParams;
   export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;
