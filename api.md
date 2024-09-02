@@ -5430,10 +5430,6 @@ Methods:
 - <code title="get /radar/dns/top/ases">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">ases</a>({ ...params }) -> TopAsesResponse</code>
 - <code title="get /radar/dns/top/locations">client.radar.dns.top.<a href="./src/resources/radar/dns/top.ts">locations</a>({ ...params }) -> TopLocationsResponse</code>
 
-### Summary
-
-### TimeseriesGroups
-
 ## Netflows
 
 Types:
@@ -6248,6 +6244,20 @@ Methods:
 
 - <code title="get /radar/tcp_resets_timeouts/summary">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">summary</a>({ ...params }) -> TCPResetsTimeoutSummaryResponse</code>
 - <code title="get /radar/tcp_resets_timeouts/timeseries_groups">client.radar.tcpResetsTimeouts.<a href="./src/resources/radar/tcp-resets-timeouts.ts">timeseriesGroups</a>({ ...params }) -> TCPResetsTimeoutTimeseriesGroupsResponse</code>
+
+## RobotsTXT
+
+### Top
+
+#### Directive
+
+Types:
+
+- <code><a href="./src/resources/radar/robots-txt/top/directive.ts">DirectiveGetResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/robots_txt/top/{directive}">client.radar.robotsTXT.top.directive.<a href="./src/resources/radar/robots-txt/top/directive.ts">get</a>(directive, { ...params }) -> DirectiveGetResponse</code>
 
 # BotManagement
 
