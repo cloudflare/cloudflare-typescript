@@ -78,7 +78,6 @@ export namespace DNS {
   export import NSRecord = RecordsAPI.NSRecord;
   export import PTRRecord = RecordsAPI.PTRRecord;
   export import Record = RecordsAPI.Record;
-  export import RecordMetadata = RecordsAPI.RecordMetadata;
   export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
   export import RecordTags = RecordsAPI.RecordTags;
   export import SMIMEARecord = RecordsAPI.SMIMEARecord;
@@ -89,11 +88,16 @@ export namespace DNS {
   export import TTL = RecordsAPI.TTL;
   export import TXTRecord = RecordsAPI.TXTRecord;
   export import URIRecord = RecordsAPI.URIRecord;
+  export import RecordCreateResponse = RecordsAPI.RecordCreateResponse;
+  export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
+  export import RecordListResponse = RecordsAPI.RecordListResponse;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
+  export import RecordEditResponse = RecordsAPI.RecordEditResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;
+  export import RecordGetResponse = RecordsAPI.RecordGetResponse;
   export import RecordImportResponse = RecordsAPI.RecordImportResponse;
   export import RecordScanResponse = RecordsAPI.RecordScanResponse;
-  export import RecordsV4PagePaginationArray = RecordsAPI.RecordsV4PagePaginationArray;
+  export import RecordListResponsesV4PagePaginationArray = RecordsAPI.RecordListResponsesV4PagePaginationArray;
   export import RecordCreateParams = RecordsAPI.RecordCreateParams;
   export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
   export import RecordListParams = RecordsAPI.RecordListParams;

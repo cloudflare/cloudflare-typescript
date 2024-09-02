@@ -12,12 +12,7 @@ const client = new Cloudflare({
 describe('resource records', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.dns.records.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      content: '198.51.100.4',
-      name: 'example.com',
-      type: 'A',
-    });
+    const responsePromise = client.dns.records.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -32,13 +27,7 @@ describe('resource records', () => {
     const response = await client.dns.records.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
-      name: 'example.com',
       type: 'A',
-      id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comment: 'Domain verification record',
-      proxied: false,
-      tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-      ttl: 3600,
     });
   });
 
@@ -46,9 +35,6 @@ describe('resource records', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      content: '198.51.100.4',
-      name: 'example.com',
-      type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,13 +50,7 @@ describe('resource records', () => {
     const response = await client.dns.records.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
-      name: 'example.com',
       type: 'A',
-      id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comment: 'Domain verification record',
-      proxied: false,
-      tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-      ttl: 3600,
     });
   });
 
@@ -103,7 +83,7 @@ describe('resource records', () => {
       order: 'type',
       page: 1,
       per_page: 5,
-      proxied: false,
+      proxied: true,
       search: 'www.cloudflare.com',
       tag: {
         absent: 'important',
@@ -141,9 +121,6 @@ describe('resource records', () => {
   test.skip('edit: only required params', async () => {
     const responsePromise = client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      content: '198.51.100.4',
-      name: 'example.com',
-      type: 'A',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -159,13 +136,7 @@ describe('resource records', () => {
     const response = await client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       content: '198.51.100.4',
-      name: 'example.com',
       type: 'A',
-      id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comment: 'Domain verification record',
-      proxied: false,
-      tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-      ttl: 3600,
     });
   });
 
