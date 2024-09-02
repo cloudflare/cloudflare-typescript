@@ -186,7 +186,7 @@ export namespace VariantCreateResponse {
   }
 }
 
-export type VariantDeleteResponse = unknown | string;
+export type VariantDeleteResponse = unknown | string | null;
 
 export interface VariantEditResponse {
   variant?: VariantEditResponse.Variant;
