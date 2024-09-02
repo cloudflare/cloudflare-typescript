@@ -47,13 +47,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainDeleteResponse | null> {
+  ): Core.APIPromise<DomainDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: DomainDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: DomainDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
