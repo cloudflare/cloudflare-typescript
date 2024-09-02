@@ -85,6 +85,8 @@ export namespace DirectiveGetResponse {
   }
 
   export interface Top0 {
+    date: string;
+
     fully: number;
 
     partially: number;
