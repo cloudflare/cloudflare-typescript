@@ -542,12 +542,7 @@ export interface FontSettings {
   /**
    * ID of the zone setting.
    */
-  id: 'fonts';
-
-  /**
-   * Current value of the zone setting.
-   */
-  value: 'on' | 'off';
+  id?: 'fonts';
 
   /**
    * Whether or not this setting can be modified for this zone (based on your
@@ -559,6 +554,11 @@ export interface FontSettings {
    * last time this setting was modified.
    */
   modified_on?: string | null;
+
+  /**
+   * Current value of the zone setting.
+   */
+  value?: 'on' | 'off';
 }
 
 /**
