@@ -236,7 +236,8 @@ export type Phase =
   | 'http_response_headers_transform'
   | 'magic_transit'
   | 'magic_transit_ids_managed'
-  | 'magic_transit_managed';
+  | 'magic_transit_managed'
+  | 'magic_transit_ratelimit';
 
 /**
  * The phase of the ruleset.
@@ -264,7 +265,8 @@ export type PhaseParam =
   | 'http_response_headers_transform'
   | 'magic_transit'
   | 'magic_transit_ids_managed'
-  | 'magic_transit_managed';
+  | 'magic_transit_managed'
+  | 'magic_transit_ratelimit';
 
 /**
  * A ruleset object.
