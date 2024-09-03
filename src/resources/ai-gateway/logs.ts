@@ -138,7 +138,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  order_by_direction?: 'asc' | 'desc' | 'ASC' | 'DESC';
+  order_by_direction?: 'asc' | 'desc';
 
   /**
    * Query param:
