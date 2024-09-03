@@ -6344,6 +6344,14 @@ Methods:
 
 ## RobotsTXT
 
+Types:
+
+- <code><a href="./src/resources/radar/robots-txt/robots-txt.ts">RobotsTXTDomainsResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/robots_txt/domains">client.radar.robotsTXT.<a href="./src/resources/radar/robots-txt/robots-txt.ts">domains</a>({ ...params }) -> RobotsTXTDomainsResponse</code>
+
 ### Top
 
 #### Directive
@@ -6639,6 +6647,14 @@ Methods:
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">get</a>(id, { ...params }) -> AIGatewayGetResponse</code>
 
 ## Logs
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">list</a>(gatewayId, { ...params }) -> LogListResponsesV4PagePaginationArray</code>
 
 # IAM
 
