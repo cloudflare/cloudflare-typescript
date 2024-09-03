@@ -94,4 +94,6 @@ export namespace Radar {
   export import TCPResetsTimeoutSummaryParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryParams;
   export import TCPResetsTimeoutTimeseriesGroupsParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsParams;
   export import RobotsTXT = RobotsTXTAPI.RobotsTXT;
+  export import RobotsTXTDomainsResponse = RobotsTXTAPI.RobotsTXTDomainsResponse;
+  export import RobotsTXTDomainsParams = RobotsTXTAPI.RobotsTXTDomainsParams;
 }

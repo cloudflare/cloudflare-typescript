@@ -32,7 +32,7 @@ export {
   RankingTopParams,
   Ranking,
 } from './ranking/index';
-export { RobotsTXT } from './robots-txt/index';
+export { RobotsTXTDomainsResponse, RobotsTXTDomainsParams, RobotsTXT } from './robots-txt/index';
 export { SearchGlobalResponse, SearchGlobalParams, Search } from './search';
 export {
   TCPResetsTimeoutSummaryResponse,

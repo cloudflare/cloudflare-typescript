@@ -312,4 +312,7 @@ export interface AIGatewayGetParams {
 
 export namespace AIGateway {
   export import Logs = LogsAPI.Logs;
+  export import LogListResponse = LogsAPI.LogListResponse;
+  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
+  export import LogListParams = LogsAPI.LogListParams;
 }
