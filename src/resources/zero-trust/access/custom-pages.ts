@@ -180,11 +180,6 @@ export interface CustomPageCreateParams {
    * Body param: Number of apps the custom page is assigned to.
    */
   app_count?: number;
-
-  /**
-   * Body param: UUID
-   */
-  uid?: string;
 }
 
 export interface CustomPageUpdateParams {
@@ -212,11 +207,6 @@ export interface CustomPageUpdateParams {
    * Body param: Number of apps the custom page is assigned to.
    */
   app_count?: number;
-
-  /**
-   * Body param: UUID
-   */
-  uid?: string;
 }
 
 export interface CustomPageListParams {
