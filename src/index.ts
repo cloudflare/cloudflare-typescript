@@ -231,7 +231,6 @@ export class Cloudflare extends Core.APIClient {
   aiGateway: API.AIGateway = new API.AIGateway(this);
   iam: API.IAM = new API.IAM(this);
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
-  botnetFeed: API.BotnetFeed = new API.BotnetFeed(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -570,8 +569,6 @@ export namespace Cloudflare {
   export import IAM = API.IAM;
 
   export import CloudConnector = API.CloudConnector;
-
-  export import BotnetFeed = API.BotnetFeed;
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;
