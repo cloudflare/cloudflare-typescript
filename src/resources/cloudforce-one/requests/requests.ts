@@ -15,7 +15,7 @@ export class Requests extends APIResource {
   /**
    * Creating a request adds the request into the Cloudforce One queue for analysis.
    * In addition to the content, a short title, type, priority, and releasability
-   * should be provided. If one is not provided a default will be assigned.
+   * should be provided. If one is not provided, a default will be assigned.
    */
   create(
     accountIdentifier: string,
@@ -33,7 +33,7 @@ export class Requests extends APIResource {
   /**
    * Updating a request alters the request in the Cloudforce One queue. This API may
    * be used to update any attributes of the request after the initial submission.
-   * Only fields that you choose to update need to be add to the request body
+   * Only fields that you choose to update need to be add to the request body.
    */
   update(
     accountIdentifier: string,
