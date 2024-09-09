@@ -15,7 +15,6 @@ import * as HTTPAPI from './http/http';
 import * as NetflowsAPI from './netflows/netflows';
 import * as QualityAPI from './quality/quality';
 import * as RankingAPI from './ranking/ranking';
-import * as RobotsTXTAPI from './robots-txt/robots-txt';
 import * as TrafficAnomaliesAPI from './traffic-anomalies/traffic-anomalies';
 import * as VerifiedBotsAPI from './verified-bots/verified-bots';
 
@@ -40,7 +39,6 @@ export class Radar extends APIResource {
   tcpResetsTimeouts: TCPResetsTimeoutsAPI.TCPResetsTimeouts = new TCPResetsTimeoutsAPI.TCPResetsTimeouts(
     this._client,
   );
-  robotsTXT: RobotsTXTAPI.RobotsTXT = new RobotsTXTAPI.RobotsTXT(this._client);
 }
 
 export namespace Radar {
@@ -93,7 +91,4 @@ export namespace Radar {
   export import TCPResetsTimeoutTimeseriesGroupsResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsResponse;
   export import TCPResetsTimeoutSummaryParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryParams;
   export import TCPResetsTimeoutTimeseriesGroupsParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsParams;
-  export import RobotsTXT = RobotsTXTAPI.RobotsTXT;
-  export import RobotsTXTDomainsResponse = RobotsTXTAPI.RobotsTXTDomainsResponse;
-  export import RobotsTXTDomainsParams = RobotsTXTAPI.RobotsTXTDomainsParams;
 }
