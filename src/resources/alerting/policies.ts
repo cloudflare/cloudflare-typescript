@@ -348,6 +348,11 @@ export interface PolicyFilter {
   pool_id?: Array<string>;
 
   /**
+   * Usage depends on specific alert type
+   */
+  pop_name?: Array<string>;
+
+  /**
    * Used for configuring billing_usage_alert
    */
   product?: Array<string>;
@@ -555,6 +560,11 @@ export interface PolicyFilterParam {
    * Usage depends on specific alert type
    */
   pool_id?: Array<string>;
+
+  /**
+   * Usage depends on specific alert type
+   */
+  pop_name?: Array<string>;
 
   /**
    * Used for configuring billing_usage_alert
