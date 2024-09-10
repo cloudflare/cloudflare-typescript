@@ -3,14 +3,14 @@
 import { APIResource } from '../resource';
 import * as Core from '../core';
 
-export class ManagedHeaders extends APIResource {
+export class ManagedTransforms extends APIResource {
   /**
    * Fetches a list of all Managed Transforms.
    */
   list(
-    params: ManagedHeaderListParams,
+    params: ManagedTransformListParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ManagedHeaderListResponse> {
+  ): Core.APIPromise<ManagedTransformListResponse> {
     const { zone_id } = params;
     return this._client.get(`/zones/${zone_id}/managed_headers`, options);
   }
@@ -19,9 +19,9 @@ export class ManagedHeaders extends APIResource {
    * Updates the status of one or more Managed Transforms.
    */
   edit(
-    params: ManagedHeaderEditParams,
+    params: ManagedTransformEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ManagedHeaderEditResponse> {
+  ): Core.APIPromise<ManagedTransformEditResponse> {
     const { zone_id, ...body } = params;
     return this._client.patch(`/zones/${zone_id}/managed_headers`, { body, ...options });
   }
@@ -51,19 +51,19 @@ export interface RequestModelParam {
   enabled?: boolean;
 }
 
-export interface ManagedHeaderListResponse {
+export interface ManagedTransformListResponse {
   managed_request_headers?: Array<RequestModel>;
 
   managed_response_headers?: Array<RequestModel>;
 }
 
-export interface ManagedHeaderEditResponse {
-  managed_request_headers?: Array<ManagedHeaderEditResponse.ManagedRequestHeader>;
+export interface ManagedTransformEditResponse {
+  managed_request_headers?: Array<ManagedTransformEditResponse.ManagedRequestHeader>;
 
-  managed_response_headers?: Array<ManagedHeaderEditResponse.ManagedResponseHeader>;
+  managed_response_headers?: Array<ManagedTransformEditResponse.ManagedResponseHeader>;
 }
 
-export namespace ManagedHeaderEditResponse {
+export namespace ManagedTransformEditResponse {
   export interface ManagedRequestHeader {
     /**
      * Human-readable identifier of the Managed Transform.
@@ -99,14 +99,14 @@ export namespace ManagedHeaderEditResponse {
   }
 }
 
-export interface ManagedHeaderListParams {
+export interface ManagedTransformListParams {
   /**
    * Identifier
    */
   zone_id: string;
 }
 
-export interface ManagedHeaderEditParams {
+export interface ManagedTransformEditParams {
   /**
    * Path param: Identifier
    */
