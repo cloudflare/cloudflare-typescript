@@ -118,6 +118,16 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
+  max_total_tokens?: number;
+
+  /**
+   * Query param:
+   */
+  meta_info?: boolean;
+
+  /**
+   * Query param:
+   */
   min_cost?: number;
 
   /**
@@ -134,6 +144,11 @@ export interface LogListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   min_tokens_out?: number;
+
+  /**
+   * Query param:
+   */
+  min_total_tokens?: number;
 
   /**
    * Query param:
