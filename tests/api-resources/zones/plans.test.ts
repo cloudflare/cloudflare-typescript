@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource plans', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.plans.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.zones.plans.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,11 +22,11 @@ describe('resource plans', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.plans.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.zones.plans.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.plans.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.zones.plans.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -39,7 +39,7 @@ describe('resource plans', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.plans.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.zones.plans.get('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

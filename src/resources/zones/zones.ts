@@ -6,6 +6,8 @@ import * as Core from '../../core';
 import * as ActivationCheckAPI from './activation-check';
 import * as CustomNameserversAPI from './custom-nameservers';
 import * as HoldsAPI from './holds';
+import * as PlansAPI from './plans';
+import * as RatePlansAPI from './rate-plans';
 import * as SettingsAPI from './settings';
 import * as SubscriptionsAPI from './subscriptions';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -18,6 +20,8 @@ export class Zones extends APIResource {
   );
   holds: HoldsAPI.Holds = new HoldsAPI.Holds(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  plans: PlansAPI.Plans = new PlansAPI.Plans(this._client);
+  ratePlans: RatePlansAPI.RatePlans = new RatePlansAPI.RatePlans(this._client);
 
   /**
    * Create Zone
@@ -466,4 +470,12 @@ export namespace Zones {
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
   export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
   export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import Plans = PlansAPI.Plans;
+  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
+  export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
+  export import PlanListParams = PlansAPI.PlanListParams;
+  export import PlanGetParams = PlansAPI.PlanGetParams;
+  export import RatePlans = RatePlansAPI.RatePlans;
+  export import RatePlanGetResponse = RatePlansAPI.RatePlanGetResponse;
+  export import RatePlanGetParams = RatePlansAPI.RatePlanGetParams;
 }
