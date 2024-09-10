@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Challenges } from './challenges';
+export { Turnstile } from './turnstile';
 export {
   Widget,
   WidgetDomain,
