@@ -5155,24 +5155,24 @@ Methods:
 
 - <code title="get /accounts/{account_id}/zt_risk_scoring/integrations/reference_id/{reference_id}">client.zeroTrust.riskScoring.integrations.references.<a href="./src/resources/zero-trust/risk-scoring/integrations/references.ts">get</a>(referenceId, { ...params }) -> ReferenceGetResponse</code>
 
-# Challenges
+# Turnstile
 
 ## Widgets
 
 Types:
 
-- <code><a href="./src/resources/challenges/widgets.ts">Widget</a></code>
-- <code><a href="./src/resources/challenges/widgets.ts">WidgetDomain</a></code>
-- <code><a href="./src/resources/challenges/widgets.ts">WidgetListResponse</a></code>
+- <code><a href="./src/resources/turnstile/widgets.ts">Widget</a></code>
+- <code><a href="./src/resources/turnstile/widgets.ts">WidgetDomain</a></code>
+- <code><a href="./src/resources/turnstile/widgets.ts">WidgetListResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">create</a>({ ...params }) -> Widget</code>
-- <code title="put /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">update</a>(sitekey, { ...params }) -> Widget</code>
-- <code title="get /accounts/{account_id}/challenges/widgets">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">list</a>({ ...params }) -> WidgetListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">delete</a>(sitekey, { ...params }) -> Widget</code>
-- <code title="get /accounts/{account_id}/challenges/widgets/{sitekey}">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">get</a>(sitekey, { ...params }) -> Widget</code>
-- <code title="post /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret">client.challenges.widgets.<a href="./src/resources/challenges/widgets.ts">rotateSecret</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="post /accounts/{account_id}/challenges/widgets">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">create</a>({ ...params }) -> Widget</code>
+- <code title="put /accounts/{account_id}/challenges/widgets/{sitekey}">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">update</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="get /accounts/{account_id}/challenges/widgets">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">list</a>({ ...params }) -> WidgetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/challenges/widgets/{sitekey}">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">delete</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="get /accounts/{account_id}/challenges/widgets/{sitekey}">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">get</a>(sitekey, { ...params }) -> Widget</code>
+- <code title="post /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret">client.turnstile.widgets.<a href="./src/resources/turnstile/widgets.ts">rotateSecret</a>(sitekey, { ...params }) -> Widget</code>
 
 # Hyperdrive
 

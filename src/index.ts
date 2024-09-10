@@ -212,7 +212,7 @@ export class Cloudflare extends Core.APIClient {
   warpConnector: API.WARPConnector = new API.WARPConnector(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
-  challenges: API.Challenges = new API.Challenges(this);
+  turnstile: API.Turnstile = new API.Turnstile(this);
   hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
@@ -531,7 +531,7 @@ export namespace Cloudflare {
 
   export import ZeroTrust = API.ZeroTrust;
 
-  export import Challenges = API.Challenges;
+  export import Turnstile = API.Turnstile;
 
   export import HyperdriveResource = API.HyperdriveResource;
 
