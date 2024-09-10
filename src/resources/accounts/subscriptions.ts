@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SubscriptionsAPI from './subscriptions';
+import * as Shared from '../shared';
 import * as UserSubscriptionsAPI from '../user/subscriptions';
 
 export class Subscriptions extends APIResource {
@@ -82,7 +83,7 @@ export interface SubscriptionDeleteResponse {
   subscription_id?: string;
 }
 
-export type SubscriptionGetResponse = Array<UserSubscriptionsAPI.Subscription>;
+export type SubscriptionGetResponse = Array<Shared.Subscription>;
 
 export interface SubscriptionCreateParams {
   /**

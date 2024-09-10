@@ -36,8 +36,6 @@ export {
 } from './organizations';
 export {
   RatePlan,
-  Subscription,
-  SubscriptionComponent,
   SubscriptionZone,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
