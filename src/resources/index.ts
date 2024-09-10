@@ -52,7 +52,6 @@ export { Memberships } from './memberships';
 export { OriginCACertificates } from './origin-ca-certificates';
 export { OriginPostQuantumEncryption } from './origin-post-quantum-encryption';
 export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-auth';
-export { PCAPs } from './pcaps/pcaps';
 export { PageShield } from './page-shield/page-shield';
 export { Pagerules } from './pagerules/pagerules';
 export { Pages } from './pages/pages';

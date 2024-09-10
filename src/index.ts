@@ -200,7 +200,6 @@ export class Cloudflare extends Core.APIClient {
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
-  pcaps: API.PCAPs = new API.PCAPs(this);
   registrar: API.Registrar = new API.Registrar(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
   rules: API.Rules = new API.Rules(this);
@@ -506,8 +505,6 @@ export namespace Cloudflare {
   export import MTLSCertificates = API.MTLSCertificates;
 
   export import Pages = API.Pages;
-
-  export import PCAPs = API.PCAPs;
 
   export import Registrar = API.Registrar;
 

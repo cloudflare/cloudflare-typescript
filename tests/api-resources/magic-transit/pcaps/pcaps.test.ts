@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource pcaps', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.pcaps.create({
+    const responsePromise = client.magicTransit.pcaps.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       packet_limit: 10000,
       system: 'magic-transit',
@@ -28,7 +28,7 @@ describe('resource pcaps', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.pcaps.create({
+    const response = await client.magicTransit.pcaps.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       packet_limit: 10000,
       system: 'magic-transit',
@@ -45,7 +45,9 @@ describe('resource pcaps', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.pcaps.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.magicTransit.pcaps.list({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,11 +58,11 @@ describe('resource pcaps', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.pcaps.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.magicTransit.pcaps.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pcaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.pcaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +75,7 @@ describe('resource pcaps', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pcaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.pcaps.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

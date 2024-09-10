@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource ownership', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.pcaps.ownership.create({
+    const responsePromise = client.magicTransit.pcaps.ownership.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
     });
@@ -25,14 +25,14 @@ describe('resource ownership', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.pcaps.ownership.create({
+    const response = await client.magicTransit.pcaps.ownership.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.pcaps.ownership.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.magicTransit.pcaps.ownership.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -45,13 +45,15 @@ describe('resource ownership', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.pcaps.ownership.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.pcaps.ownership.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pcaps.ownership.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.magicTransit.pcaps.ownership.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,11 +64,13 @@ describe('resource ownership', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pcaps.ownership.get({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.magicTransit.pcaps.ownership.get({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
   test('validate: only required params', async () => {
-    const responsePromise = client.pcaps.ownership.validate({
+    const responsePromise = client.magicTransit.pcaps.ownership.validate({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
       ownership_challenge: 'ownership-challenge-9883874ecac311ec8475433579a6bf5f.txt',
@@ -81,7 +85,7 @@ describe('resource ownership', () => {
   });
 
   test('validate: required and optional params', async () => {
-    const response = await client.pcaps.ownership.validate({
+    const response = await client.magicTransit.pcaps.ownership.validate({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       destination_conf: 's3://pcaps-bucket?region=us-east-1',
       ownership_challenge: 'ownership-challenge-9883874ecac311ec8475433579a6bf5f.txt',
