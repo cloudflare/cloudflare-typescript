@@ -374,6 +374,27 @@ Methods:
 - <code title="put /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">update</a>(identifier, { ...params }) -> SubscriptionUpdateResponse</code>
 - <code title="get /zones/{identifier}/subscription">client.zones.subscriptions.<a href="./src/resources/zones/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
+## Plans
+
+Types:
+
+- <code><a href="./src/resources/zones/plans.ts">AvailableRatePlan</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/available_plans">client.zones.plans.<a href="./src/resources/zones/plans.ts">list</a>({ ...params }) -> AvailableRatePlansSinglePage</code>
+- <code title="get /zones/{zone_id}/available_plans/{plan_identifier}">client.zones.plans.<a href="./src/resources/zones/plans.ts">get</a>(planIdentifier, { ...params }) -> AvailableRatePlan</code>
+
+## RatePlans
+
+Types:
+
+- <code><a href="./src/resources/zones/rate-plans.ts">RatePlanGetResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/available_rate_plans">client.zones.ratePlans.<a href="./src/resources/zones/rate-plans.ts">get</a>({ ...params }) -> RatePlanGetResponse | null</code>
+
 # LoadBalancers
 
 Types:
@@ -711,28 +732,6 @@ Methods:
 
 - <code title="patch /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">edit</a>({ ...params }) -> TieredCachingEditResponse</code>
 - <code title="get /zones/{zone_id}/argo/tiered_caching">client.argo.tieredCaching.<a href="./src/resources/argo/tiered-caching.ts">get</a>({ ...params }) -> TieredCachingGetResponse</code>
-
-# Plans
-
-Types:
-
-- <code><a href="./src/resources/plans.ts">AvailableRatePlan</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_id}/available_plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> AvailableRatePlansSinglePage</code>
-- <code title="get /zones/{zone_id}/available_plans/{plan_identifier}">client.plans.<a href="./src/resources/plans.ts">get</a>(planIdentifier, { ...params }) -> AvailableRatePlan</code>
-
-# RatePlans
-
-Types:
-
-- <code><a href="./src/resources/rate-plans.ts">RatePlan</a></code>
-- <code><a href="./src/resources/rate-plans.ts">RatePlanGetResponse</a></code>
-
-Methods:
-
-- <code title="get /zones/{zone_id}/available_rate_plans">client.ratePlans.<a href="./src/resources/rate-plans.ts">get</a>({ ...params }) -> RatePlanGetResponse | null</code>
 
 # CertificateAuthorities
 

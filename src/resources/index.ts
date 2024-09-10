@@ -55,13 +55,11 @@ export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-
 export { PageShield } from './page-shield/page-shield';
 export { Pagerules } from './pagerules/pagerules';
 export { Pages } from './pages/pages';
-export { Plans } from './plans';
 export { Queues } from './queues/queues';
 export { R2 } from './r2/r2';
 export { RUM } from './rum/rum';
 export { Radar } from './radar/radar';
 export { RateLimits } from './rate-limits';
-export { RatePlans } from './rate-plans';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
 export { Rules } from './rules/rules';
