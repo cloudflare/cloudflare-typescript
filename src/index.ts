@@ -580,6 +580,8 @@ export namespace Cloudflare {
   export import Result = API.Result;
   export import Role = API.Role;
   export import SortDirection = API.SortDirection;
+  export import Subscription = API.Subscription;
+  export import SubscriptionComponent = API.SubscriptionComponent;
 }
 
 export default Cloudflare;

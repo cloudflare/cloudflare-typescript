@@ -18,6 +18,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">Result</a></code>
 - <code><a href="./src/resources/shared.ts">Role</a></code>
 - <code><a href="./src/resources/shared.ts">SortDirection</a></code>
+- <code><a href="./src/resources/shared.ts">Subscription</a></code>
+- <code><a href="./src/resources/shared.ts">SubscriptionComponent</a></code>
 
 # Accounts
 
@@ -193,8 +195,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/user/subscriptions.ts">RatePlan</a></code>
-- <code><a href="./src/resources/user/subscriptions.ts">Subscription</a></code>
-- <code><a href="./src/resources/user/subscriptions.ts">SubscriptionComponent</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionZone</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionUpdateResponse</a></code>
 - <code><a href="./src/resources/user/subscriptions.ts">SubscriptionDeleteResponse</a></code>
