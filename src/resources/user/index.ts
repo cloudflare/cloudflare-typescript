@@ -43,7 +43,6 @@ export {
   SubscriptionDeleteResponse,
   SubscriptionGetResponse,
   SubscriptionUpdateParams,
-  SubscriptionsSinglePage,
   Subscriptions,
 } from './subscriptions';
 export { User } from './user';
