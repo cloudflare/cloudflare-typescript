@@ -75,7 +75,6 @@ export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';
 export { Storage } from './storage/storage';
 export { Stream } from './stream/stream';
-export { Subscriptions } from './subscriptions';
 export { URLNormalization } from './url-normalization';
 export { URLScanner } from './url-scanner/url-scanner';
 export { User } from './user/user';

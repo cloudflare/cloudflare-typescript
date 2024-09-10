@@ -62,6 +62,22 @@ Methods:
 - <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RolesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
+## Subscriptions
+
+Types:
+
+- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionCreateResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionUpdateResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/subscriptions.ts">SubscriptionGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">create</a>({ ...params }) -> SubscriptionCreateResponse</code>
+- <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
+- <code title="get /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionGetResponse | null</code>
+
 # OriginCACertificates
 
 Types:
@@ -654,23 +670,6 @@ Methods:
 
 - <code title="patch /zones/{zone_id}/ssl/verification/{certificate_pack_id}">client.ssl.verification.<a href="./src/resources/ssl/verification.ts">edit</a>(certificatePackId, { ...params }) -> VerificationEditResponse</code>
 - <code title="get /zones/{zone_id}/ssl/verification">client.ssl.verification.<a href="./src/resources/ssl/verification.ts">get</a>({ ...params }) -> VerificationGetResponse</code>
-
-# Subscriptions
-
-Types:
-
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionCreateResponse</a></code>
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionUpdateResponse</a></code>
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionDeleteResponse</a></code>
-- <code><a href="./src/resources/subscriptions.ts">SubscriptionGetResponse</a></code>
-
-Methods:
-
-- <code title="post /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">create</a>(identifier, { ...params }) -> SubscriptionCreateResponse</code>
-- <code title="put /accounts/{account_id}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">update</a>(subscriptionIdentifier, { ...params }) -> SubscriptionUpdateResponse</code>
-- <code title="get /accounts/{account_id}/subscriptions">client.subscriptions.<a href="./src/resources/subscriptions.ts">list</a>({ ...params }) -> SubscriptionsSinglePage</code>
-- <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.subscriptions.<a href="./src/resources/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
-- <code title="get /zones/{identifier}/subscription">client.subscriptions.<a href="./src/resources/subscriptions.ts">get</a>(identifier) -> SubscriptionGetResponse</code>
 
 # ACM
 

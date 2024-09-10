@@ -154,7 +154,6 @@ export class Cloudflare extends Core.APIClient {
   loadBalancers: API.LoadBalancers = new API.LoadBalancers(this);
   cache: API.Cache = new API.Cache(this);
   ssl: API.SSL = new API.SSL(this);
-  subscriptions: API.Subscriptions = new API.Subscriptions(this);
   acm: API.ACM = new API.ACM(this);
   argo: API.Argo = new API.Argo(this);
   plans: API.Plans = new API.Plans(this);
@@ -415,8 +414,6 @@ export namespace Cloudflare {
   export import Cache = API.Cache;
 
   export import SSL = API.SSL;
-
-  export import Subscriptions = API.Subscriptions;
 
   export import ACM = API.ACM;
 
