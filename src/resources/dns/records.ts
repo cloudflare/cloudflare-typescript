@@ -279,7 +279,7 @@ export namespace CERTRecord {
 
 export interface CNAMERecord {
   /**
-   * A valid hostname. Must not match the record's name.
+   * A valid domain name. Must not match the record's name.
    */
   content?: string;
 
@@ -502,20 +502,36 @@ export namespace LOCRecord {
 
 export interface MXRecord {
   /**
-   * A valid mail server hostname.
+   * Formatted MX content. See 'data' to set MX properties.
    */
   content?: string;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
+   * Components of a MX record.
    */
-  priority?: number;
+  data?: MXRecord.Data;
 
   /**
    * Record type.
    */
   type?: 'MX';
+}
+
+export namespace MXRecord {
+  /**
+   * Components of a MX record.
+   */
+  export interface Data {
+    /**
+     * The record priority.
+     */
+    priority?: number;
+
+    /**
+     * A valid mail server domain name.
+     */
+    target?: string;
+  }
 }
 
 export interface NAPTRRecord {
@@ -613,6 +629,11 @@ export interface Record {
    * Cloudflare.
    */
   proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -729,7 +750,7 @@ export namespace SRVRecord {
     priority?: number;
 
     /**
-     * A valid hostname.
+     * A valid domain name.
      */
     target?: string;
 
@@ -893,12 +914,6 @@ export interface URIRecord {
   data?: URIRecord.Data;
 
   /**
-   * Required for MX, SRV and URI records; unused by other record types. Records with
-   * lower priorities are preferred.
-   */
-  priority?: number;
-
-  /**
    * Record type.
    */
   type?: 'URI';
@@ -909,6 +924,11 @@ export namespace URIRecord {
    * Components of a URI record.
    */
   export interface Data {
+    /**
+     * The record priority.
+     */
+    priority?: number;
+
     /**
      * The record content.
      */
@@ -934,11 +954,6 @@ export interface RecordCreateResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -946,7 +961,7 @@ export interface RecordCreateResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordCreateResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -970,14 +985,14 @@ export interface RecordCreateResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -985,19 +1000,16 @@ export interface RecordCreateResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordCreateResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordUpdateResponse {
@@ -1013,11 +1025,6 @@ export interface RecordUpdateResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1025,7 +1032,7 @@ export interface RecordUpdateResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordUpdateResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1049,14 +1056,14 @@ export interface RecordUpdateResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1064,19 +1071,16 @@ export interface RecordUpdateResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordUpdateResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordListResponse {
@@ -1092,11 +1096,6 @@ export interface RecordListResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1104,7 +1103,7 @@ export interface RecordListResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordListResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1128,14 +1127,14 @@ export interface RecordListResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1143,19 +1142,16 @@ export interface RecordListResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordListResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordDeleteResponse {
@@ -1178,11 +1174,6 @@ export interface RecordEditResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1190,7 +1181,7 @@ export interface RecordEditResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordEditResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1214,14 +1205,14 @@ export interface RecordEditResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1229,19 +1220,16 @@ export interface RecordEditResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordEditResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 /**
@@ -1262,11 +1250,6 @@ export interface RecordGetResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1274,7 +1257,7 @@ export interface RecordGetResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordGetResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1298,14 +1281,14 @@ export interface RecordGetResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1313,19 +1296,16 @@ export interface RecordGetResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordGetResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordImportResponse {
@@ -1500,7 +1480,7 @@ export namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: A valid hostname. Must not match the record's name.
+     * Body param: A valid domain name. Must not match the record's name.
      */
     content?: string;
 
@@ -1728,20 +1708,31 @@ export namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: A valid mail server hostname.
+     * Body param: Components of a MX record.
      */
-    content?: string;
-
-    /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
+    data?: RecordCreateParams.MXRecord.Data;
 
     /**
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Components of a MX record.
+     */
+    export interface Data {
+      /**
+       * The record priority.
+       */
+      priority?: number;
+
+      /**
+       * A valid mail server domain name.
+       */
+      target?: string;
+    }
   }
 
   export interface NAPTRRecord {
@@ -1928,7 +1919,7 @@ export namespace RecordCreateParams {
       priority?: number;
 
       /**
-       * A valid hostname.
+       * A valid domain name.
        */
       target?: string;
 
@@ -2090,12 +2081,6 @@ export namespace RecordCreateParams {
     data?: RecordCreateParams.URIRecord.Data;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
-
-    /**
      * Body param: Record type.
      */
     type?: 'URI';
@@ -2106,6 +2091,11 @@ export namespace RecordCreateParams {
      * Components of a URI record.
      */
     export interface Data {
+      /**
+       * The record priority.
+       */
+      priority?: number;
+
       /**
        * The record content.
        */
@@ -2267,7 +2257,7 @@ export namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: A valid hostname. Must not match the record's name.
+     * Body param: A valid domain name. Must not match the record's name.
      */
     content?: string;
 
@@ -2495,20 +2485,31 @@ export namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: A valid mail server hostname.
+     * Body param: Components of a MX record.
      */
-    content?: string;
-
-    /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
+    data?: RecordUpdateParams.MXRecord.Data;
 
     /**
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Components of a MX record.
+     */
+    export interface Data {
+      /**
+       * The record priority.
+       */
+      priority?: number;
+
+      /**
+       * A valid mail server domain name.
+       */
+      target?: string;
+    }
   }
 
   export interface NAPTRRecord {
@@ -2695,7 +2696,7 @@ export namespace RecordUpdateParams {
       priority?: number;
 
       /**
-       * A valid hostname.
+       * A valid domain name.
        */
       target?: string;
 
@@ -2857,12 +2858,6 @@ export namespace RecordUpdateParams {
     data?: RecordUpdateParams.URIRecord.Data;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
-
-    /**
      * Body param: Record type.
      */
     type?: 'URI';
@@ -2873,6 +2868,11 @@ export namespace RecordUpdateParams {
      * Components of a URI record.
      */
     export interface Data {
+      /**
+       * The record priority.
+       */
+      priority?: number;
+
       /**
        * The record content.
        */
@@ -3212,7 +3212,7 @@ export namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: A valid hostname. Must not match the record's name.
+     * Body param: A valid domain name. Must not match the record's name.
      */
     content?: string;
 
@@ -3440,20 +3440,31 @@ export namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: A valid mail server hostname.
+     * Body param: Components of a MX record.
      */
-    content?: string;
-
-    /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
+    data?: RecordEditParams.MXRecord.Data;
 
     /**
      * Body param: Record type.
      */
     type?: 'MX';
+  }
+
+  export namespace MXRecord {
+    /**
+     * Components of a MX record.
+     */
+    export interface Data {
+      /**
+       * The record priority.
+       */
+      priority?: number;
+
+      /**
+       * A valid mail server domain name.
+       */
+      target?: string;
+    }
   }
 
   export interface NAPTRRecord {
@@ -3640,7 +3651,7 @@ export namespace RecordEditParams {
       priority?: number;
 
       /**
-       * A valid hostname.
+       * A valid domain name.
        */
       target?: string;
 
@@ -3802,12 +3813,6 @@ export namespace RecordEditParams {
     data?: RecordEditParams.URIRecord.Data;
 
     /**
-     * Body param: Required for MX, SRV and URI records; unused by other record types.
-     * Records with lower priorities are preferred.
-     */
-    priority?: number;
-
-    /**
      * Body param: Record type.
      */
     type?: 'URI';
@@ -3818,6 +3823,11 @@ export namespace RecordEditParams {
      * Components of a URI record.
      */
     export interface Data {
+      /**
+       * The record priority.
+       */
+      priority?: number;
+
       /**
        * The record content.
        */

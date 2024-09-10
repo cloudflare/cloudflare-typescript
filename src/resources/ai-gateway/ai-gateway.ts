@@ -300,6 +300,11 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
    * Query param: Order By Column Name
    */
   order_by?: string;
+
+  /**
+   * Query param: Order By Direction
+   */
+  order_by_direction?: 'asc' | 'desc';
 }
 
 export interface AIGatewayDeleteParams {
