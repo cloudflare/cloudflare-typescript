@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SubscriptionsAPI from './subscriptions';
 import * as Shared from '../shared';
-import * as UserSubscriptionsAPI from '../user/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
@@ -99,7 +98,7 @@ export interface SubscriptionCreateParams {
   /**
    * Body param: The rate plan applied to the subscription.
    */
-  rate_plan?: UserSubscriptionsAPI.RatePlanParam;
+  rate_plan?: Shared.RatePlanParam;
 }
 
 export interface SubscriptionUpdateParams {
@@ -116,7 +115,7 @@ export interface SubscriptionUpdateParams {
   /**
    * Body param: The rate plan applied to the subscription.
    */
-  rate_plan?: UserSubscriptionsAPI.RatePlanParam;
+  rate_plan?: Shared.RatePlanParam;
 }
 
 export interface SubscriptionDeleteParams {

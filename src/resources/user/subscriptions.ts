@@ -40,101 +40,6 @@ export class Subscriptions extends APIResource {
   }
 }
 
-/**
- * The rate plan applied to the subscription.
- */
-export interface RatePlan {
-  /**
-   * The ID of the rate plan.
-   */
-  id?: string;
-
-  /**
-   * The currency applied to the rate plan subscription.
-   */
-  currency?: string;
-
-  /**
-   * Whether this rate plan is managed externally from Cloudflare.
-   */
-  externally_managed?: boolean;
-
-  /**
-   * Whether a rate plan is enterprise-based (or newly adopted term contract).
-   */
-  is_contract?: boolean;
-
-  /**
-   * The full name of the rate plan.
-   */
-  public_name?: string;
-
-  /**
-   * The scope that this rate plan applies to.
-   */
-  scope?: string;
-
-  /**
-   * The list of sets this rate plan applies to.
-   */
-  sets?: Array<string>;
-}
-
-/**
- * The rate plan applied to the subscription.
- */
-export interface RatePlanParam {
-  /**
-   * The ID of the rate plan.
-   */
-  id?: string;
-
-  /**
-   * The currency applied to the rate plan subscription.
-   */
-  currency?: string;
-
-  /**
-   * Whether this rate plan is managed externally from Cloudflare.
-   */
-  externally_managed?: boolean;
-
-  /**
-   * Whether a rate plan is enterprise-based (or newly adopted term contract).
-   */
-  is_contract?: boolean;
-
-  /**
-   * The full name of the rate plan.
-   */
-  public_name?: string;
-
-  /**
-   * The scope that this rate plan applies to.
-   */
-  scope?: string;
-
-  /**
-   * The list of sets this rate plan applies to.
-   */
-  sets?: Array<string>;
-}
-
-/**
- * A simple zone object. May have null properties if not a zone subscription.
- */
-export interface SubscriptionZone {
-  /**
-   * Identifier
-   */
-  id?: string;
-
-  /**
-   * The domain name
-   */
-  name?: string;
-}
-
 export type SubscriptionUpdateResponse = unknown | string | null;
 
 export interface SubscriptionDeleteResponse {
@@ -155,12 +60,10 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: RatePlanParam;
+  rate_plan?: Shared.RatePlanParam;
 }
 
 export namespace Subscriptions {
-  export import RatePlan = SubscriptionsAPI.RatePlan;
-  export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
