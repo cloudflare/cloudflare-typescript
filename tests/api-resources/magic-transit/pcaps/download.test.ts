@@ -11,7 +11,7 @@ const client = new Cloudflare({
 describe('resource download', () => {
   // TODO: investigate broken test
   test.skip('get: required and optional params', async () => {
-    const response = await client.pcaps.download.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.magicTransit.pcaps.download.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
