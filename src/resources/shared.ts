@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
+import * as SubscriptionsAPI from './user/subscriptions';
 import { SinglePage, V4PagePaginationArray } from '../pagination';
 
 export type ASN = number;
@@ -467,6 +468,74 @@ export type SortDirection = 'asc' | 'desc';
  * Direction to order DNS records in.
  */
 export type SortDirectionParam = 'asc' | 'desc';
+
+export interface Subscription {
+  /**
+   * Subscription identifier tag.
+   */
+  id?: string;
+
+  /**
+   * The monetary unit in which pricing information is displayed.
+   */
+  currency?: string;
+
+  /**
+   * The end of the current period and also when the next billing is due.
+   */
+  current_period_end?: string;
+
+  /**
+   * When the current billing period started. May match initial_period_start if this
+   * is the first period.
+   */
+  current_period_start?: string;
+
+  /**
+   * How often the subscription is renewed automatically.
+   */
+  frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+
+  /**
+   * The price of the subscription that will be billed, in US dollars.
+   */
+  price?: number;
+
+  /**
+   * The rate plan applied to the subscription.
+   */
+  rate_plan?: SubscriptionsAPI.RatePlan;
+
+  /**
+   * The state that the subscription is in.
+   */
+  state?: 'Trial' | 'Provisioned' | 'Paid' | 'AwaitingPayment' | 'Cancelled' | 'Failed' | 'Expired';
+}
+
+/**
+ * A component value for a subscription.
+ */
+export interface SubscriptionComponent {
+  /**
+   * The default amount assigned.
+   */
+  default?: number;
+
+  /**
+   * The name of the component value.
+   */
+  name?: string;
+
+  /**
+   * The unit price for the component value.
+   */
+  price?: number;
+
+  /**
+   * The amount of the component value assigned.
+   */
+  value?: number;
+}
 
 export class RolesSinglePage extends SinglePage<Role> {}
 
