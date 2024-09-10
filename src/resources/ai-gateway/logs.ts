@@ -93,7 +93,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  feedback?: -1 | 0 | 1;
+  feedback?: 0 | 1;
 
   /**
    * Query param:

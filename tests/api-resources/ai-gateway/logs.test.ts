@@ -29,7 +29,7 @@ describe('resource logs', () => {
       cached: true,
       direction: 'asc',
       end_date: '2019-12-27T18:11:19.117Z',
-      feedback: -1,
+      feedback: 0,
       max_cost: 0,
       max_duration: 0,
       max_tokens_in: 0,
