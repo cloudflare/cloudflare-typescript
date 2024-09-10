@@ -1,21 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import * as Core from '../core';
-import * as UserSubscriptionsAPI from './user/subscriptions';
-import { SubscriptionsSinglePage } from './user/subscriptions';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as SubscriptionsAPI from './subscriptions';
+import * as UserSubscriptionsAPI from '../user/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
-   * Create a zone subscription, either plan or add-ons.
+   * Creates an account subscription.
    */
   create(
-    identifier: string,
-    body: SubscriptionCreateParams,
+    params: SubscriptionCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SubscriptionCreateResponse> {
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/zones/${identifier}/subscription`, { body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/subscriptions`, { body, ...options }) as Core.APIPromise<{
         result: SubscriptionCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -39,17 +39,6 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Lists all of an account's subscriptions.
-   */
-  list(
-    params: SubscriptionListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SubscriptionsSinglePage, UserSubscriptionsAPI.Subscription> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/subscriptions`, SubscriptionsSinglePage, options);
-  }
-
-  /**
    * Deletes an account's subscription.
    */
   delete(
@@ -67,12 +56,16 @@ export class Subscriptions extends APIResource {
   }
 
   /**
-   * Lists zone subscription details.
+   * Lists all of an account's subscriptions.
    */
-  get(identifier: string, options?: Core.RequestOptions): Core.APIPromise<SubscriptionGetResponse> {
+  get(
+    params: SubscriptionGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SubscriptionGetResponse | null> {
+    const { account_id } = params;
     return (
-      this._client.get(`/zones/${identifier}/subscription`, options) as Core.APIPromise<{
-        result: SubscriptionGetResponse;
+      this._client.get(`/accounts/${account_id}/subscriptions`, options) as Core.APIPromise<{
+        result: SubscriptionGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -89,16 +82,21 @@ export interface SubscriptionDeleteResponse {
   subscription_id?: string;
 }
 
-export type SubscriptionGetResponse = unknown | string | null;
+export type SubscriptionGetResponse = Array<UserSubscriptionsAPI.Subscription>;
 
 export interface SubscriptionCreateParams {
   /**
-   * How often the subscription is renewed automatically.
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: How often the subscription is renewed automatically.
    */
   frequency?: 'weekly' | 'monthly' | 'quarterly' | 'yearly';
 
   /**
-   * The rate plan applied to the subscription.
+   * Body param: The rate plan applied to the subscription.
    */
   rate_plan?: UserSubscriptionsAPI.RatePlanParam;
 }
@@ -120,13 +118,6 @@ export interface SubscriptionUpdateParams {
   rate_plan?: UserSubscriptionsAPI.RatePlanParam;
 }
 
-export interface SubscriptionListParams {
-  /**
-   * Identifier
-   */
-  account_id: string;
-}
-
 export interface SubscriptionDeleteParams {
   /**
    * Identifier
@@ -134,4 +125,20 @@ export interface SubscriptionDeleteParams {
   account_id: string;
 }
 
-export { SubscriptionsSinglePage };
+export interface SubscriptionGetParams {
+  /**
+   * Identifier
+   */
+  account_id: string;
+}
+
+export namespace Subscriptions {
+  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
+  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
+  export import SubscriptionGetParams = SubscriptionsAPI.SubscriptionGetParams;
+}

@@ -5,11 +5,13 @@ import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as MembersAPI from './members';
 import * as RolesAPI from './roles';
+import * as SubscriptionsAPI from './subscriptions';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Accounts extends APIResource {
   members: MembersAPI.Members = new MembersAPI.Members(this._client);
   roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
+  subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
 
   /**
    * Create an account (only available for tenant admins at this time)
@@ -285,4 +287,13 @@ export namespace Accounts {
   export import RoleGetResponse = RolesAPI.RoleGetResponse;
   export import RoleListParams = RolesAPI.RoleListParams;
   export import RoleGetParams = RolesAPI.RoleGetParams;
+  export import Subscriptions = SubscriptionsAPI.Subscriptions;
+  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
+  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
+  export import SubscriptionGetParams = SubscriptionsAPI.SubscriptionGetParams;
 }
