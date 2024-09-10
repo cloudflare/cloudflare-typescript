@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource managedHeaders', () => {
+describe('resource managedTransforms', () => {
   test('list: only required params', async () => {
-    const responsePromise = client.managedHeaders.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.managedTransforms.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,11 +22,11 @@ describe('resource managedHeaders', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.managedHeaders.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.managedTransforms.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.managedHeaders.edit({
+    const responsePromise = client.managedTransforms.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       managed_request_headers: [{}, {}, {}],
       managed_response_headers: [{}, {}, {}],
@@ -41,7 +41,7 @@ describe('resource managedHeaders', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.managedHeaders.edit({
+    const response = await client.managedTransforms.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       managed_request_headers: [
         { id: 'add_cf-bot-score_header', enabled: true },

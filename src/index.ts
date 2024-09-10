@@ -184,7 +184,7 @@ export class Cloudflare extends Core.APIClient {
   durableObjects: API.DurableObjects = new API.DurableObjects(this);
   queues: API.Queues = new API.Queues(this);
   apiGateway: API.APIGateway = new API.APIGateway(this);
-  managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
+  managedTransforms: API.ManagedTransforms = new API.ManagedTransforms(this);
   pageShield: API.PageShield = new API.PageShield(this);
   rulesets: API.Rulesets = new API.Rulesets(this);
   urlNormalization: API.URLNormalization = new API.URLNormalization(this);
@@ -474,7 +474,7 @@ export namespace Cloudflare {
 
   export import APIGateway = API.APIGateway;
 
-  export import ManagedHeaders = API.ManagedHeaders;
+  export import ManagedTransforms = API.ManagedTransforms;
 
   export import PageShield = API.PageShield;
 

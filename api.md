@@ -2288,18 +2288,18 @@ Methods:
 
 - <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}/operations">client.apiGateway.userSchemas.operations.<a href="./src/resources/api-gateway/user-schemas/operations.ts">list</a>(schemaId, { ...params }) -> OperationListResponsesV4PagePaginationArray</code>
 
-# ManagedHeaders
+# ManagedTransforms
 
 Types:
 
-- <code><a href="./src/resources/managed-headers.ts">RequestModel</a></code>
-- <code><a href="./src/resources/managed-headers.ts">ManagedHeaderListResponse</a></code>
-- <code><a href="./src/resources/managed-headers.ts">ManagedHeaderEditResponse</a></code>
+- <code><a href="./src/resources/managed-transforms.ts">RequestModel</a></code>
+- <code><a href="./src/resources/managed-transforms.ts">ManagedTransformListResponse</a></code>
+- <code><a href="./src/resources/managed-transforms.ts">ManagedTransformEditResponse</a></code>
 
 Methods:
 
-- <code title="get /zones/{zone_id}/managed_headers">client.managedHeaders.<a href="./src/resources/managed-headers.ts">list</a>({ ...params }) -> ManagedHeaderListResponse</code>
-- <code title="patch /zones/{zone_id}/managed_headers">client.managedHeaders.<a href="./src/resources/managed-headers.ts">edit</a>({ ...params }) -> ManagedHeaderEditResponse</code>
+- <code title="get /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">list</a>({ ...params }) -> ManagedTransformListResponse</code>
+- <code title="patch /zones/{zone_id}/managed_headers">client.managedTransforms.<a href="./src/resources/managed-transforms.ts">edit</a>({ ...params }) -> ManagedTransformEditResponse</code>
 
 # PageShield
 

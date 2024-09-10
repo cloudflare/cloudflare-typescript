@@ -47,7 +47,7 @@ export { Logs } from './logs/logs';
 export { MTLSCertificates } from './mtls-certificates/mtls-certificates';
 export { MagicNetworkMonitoring } from './magic-network-monitoring/magic-network-monitoring';
 export { MagicTransit } from './magic-transit/magic-transit';
-export { ManagedHeaders } from './managed-headers';
+export { ManagedTransforms } from './managed-transforms';
 export { Memberships } from './memberships';
 export { OriginCACertificates } from './origin-ca-certificates';
 export { OriginPostQuantumEncryption } from './origin-post-quantum-encryption';
