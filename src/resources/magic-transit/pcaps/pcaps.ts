@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
 import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
 import * as OwnershipAPI from './ownership';
-import { SinglePage } from '../../pagination';
+import { SinglePage } from '../../../pagination';
 
 export class PCAPs extends APIResource {
   ownership: OwnershipAPI.OwnershipResource = new OwnershipAPI.OwnershipResource(this._client);
@@ -489,6 +489,15 @@ export interface PCAPGetParams {
 }
 
 export namespace PCAPs {
+  export import PCAP = PCAPsAPI.PCAP;
+  export import PCAPFilter = PCAPsAPI.PCAPFilter;
+  export import PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
+  export import PCAPListResponse = PCAPsAPI.PCAPListResponse;
+  export import PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
+  export import PCAPListResponsesSinglePage = PCAPsAPI.PCAPListResponsesSinglePage;
+  export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
+  export import PCAPListParams = PCAPsAPI.PCAPListParams;
+  export import PCAPGetParams = PCAPsAPI.PCAPGetParams;
   export import OwnershipResource = OwnershipAPI.OwnershipResource;
   export import Ownership = OwnershipAPI.Ownership;
   export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;

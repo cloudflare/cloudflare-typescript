@@ -10,4 +10,15 @@ export {
   OwnershipValidateParams,
   OwnershipResource,
 } from './ownership';
-export { PCAPs } from './pcaps';
+export {
+  PCAP,
+  PCAPFilter,
+  PCAPCreateResponse,
+  PCAPListResponse,
+  PCAPGetResponse,
+  PCAPCreateParams,
+  PCAPListParams,
+  PCAPGetParams,
+  PCAPListResponsesSinglePage,
+  PCAPs,
+} from './pcaps';
