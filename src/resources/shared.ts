@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
-import * as SubscriptionsAPI from './user/subscriptions';
 import { SinglePage, V4PagePaginationArray } from '../pagination';
 
 export type ASN = number;
@@ -406,6 +405,86 @@ export interface PermissionGrantParam {
   write?: boolean;
 }
 
+/**
+ * The rate plan applied to the subscription.
+ */
+export interface RatePlan {
+  /**
+   * The ID of the rate plan.
+   */
+  id?: string;
+
+  /**
+   * The currency applied to the rate plan subscription.
+   */
+  currency?: string;
+
+  /**
+   * Whether this rate plan is managed externally from Cloudflare.
+   */
+  externally_managed?: boolean;
+
+  /**
+   * Whether a rate plan is enterprise-based (or newly adopted term contract).
+   */
+  is_contract?: boolean;
+
+  /**
+   * The full name of the rate plan.
+   */
+  public_name?: string;
+
+  /**
+   * The scope that this rate plan applies to.
+   */
+  scope?: string;
+
+  /**
+   * The list of sets this rate plan applies to.
+   */
+  sets?: Array<string>;
+}
+
+/**
+ * The rate plan applied to the subscription.
+ */
+export interface RatePlanParam {
+  /**
+   * The ID of the rate plan.
+   */
+  id?: string;
+
+  /**
+   * The currency applied to the rate plan subscription.
+   */
+  currency?: string;
+
+  /**
+   * Whether this rate plan is managed externally from Cloudflare.
+   */
+  externally_managed?: boolean;
+
+  /**
+   * Whether a rate plan is enterprise-based (or newly adopted term contract).
+   */
+  is_contract?: boolean;
+
+  /**
+   * The full name of the rate plan.
+   */
+  public_name?: string;
+
+  /**
+   * The scope that this rate plan applies to.
+   */
+  scope?: string;
+
+  /**
+   * The list of sets this rate plan applies to.
+   */
+  sets?: Array<string>;
+}
+
 export interface ResponseInfo {
   code: number;
 
@@ -504,7 +583,7 @@ export interface Subscription {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: SubscriptionsAPI.RatePlan;
+  rate_plan?: RatePlan;
 
   /**
    * The state that the subscription is in.
@@ -535,6 +614,21 @@ export interface SubscriptionComponent {
    * The amount of the component value assigned.
    */
   value?: number;
+}
+
+/**
+ * A simple zone object. May have null properties if not a zone subscription.
+ */
+export interface SubscriptionZone {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * The domain name
+   */
+  name?: string;
 }
 
 export class RolesSinglePage extends SinglePage<Role> {}

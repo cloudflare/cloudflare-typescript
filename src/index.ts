@@ -576,12 +576,14 @@ export namespace Cloudflare {
   export import PaginationInfo = API.PaginationInfo;
   export import Permission = API.Permission;
   export import PermissionGrant = API.PermissionGrant;
+  export import RatePlan = API.RatePlan;
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
   export import Role = API.Role;
   export import SortDirection = API.SortDirection;
   export import Subscription = API.Subscription;
   export import SubscriptionComponent = API.SubscriptionComponent;
+  export import SubscriptionZone = API.SubscriptionZone;
 }
 
 export default Cloudflare;
