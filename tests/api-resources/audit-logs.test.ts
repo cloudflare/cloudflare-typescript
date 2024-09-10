@@ -27,13 +27,13 @@ describe('resource auditLogs', () => {
       id: 'f174be97-19b1-40d6-954d-70cd5fbd52db',
       action: { type: 'add' },
       actor: { email: 'alice@example.com', ip: '17.168.228.63' },
-      before: '2019-04-30T01:12:20Z',
+      before: '2019-04-30',
       direction: 'desc',
       export: true,
       hide_user_logs: true,
       page: 50,
       per_page: 25,
-      since: '2019-04-30T01:12:20Z',
+      since: '2019-04-30',
       zone: { name: 'example.com' },
     });
   });
