@@ -3,11 +3,11 @@
 import { APIResource } from '../../resource';
 import * as WidgetsAPI from './widgets';
 
-export class Challenges extends APIResource {
+export class Turnstile extends APIResource {
   widgets: WidgetsAPI.Widgets = new WidgetsAPI.Widgets(this._client);
 }
 
-export namespace Challenges {
+export namespace Turnstile {
   export import Widgets = WidgetsAPI.Widgets;
   export import Widget = WidgetsAPI.Widget;
   export import WidgetDomain = WidgetsAPI.WidgetDomain;
