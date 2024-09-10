@@ -1,8 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import * as Core from '../core';
-import { SinglePage } from '../pagination';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import * as PlansAPI from './plans';
+import { SinglePage } from '../../pagination';
 
 export class Plans extends APIResource {
   /**
@@ -103,4 +104,11 @@ export interface PlanGetParams {
    * Identifier
    */
   zone_id: string;
+}
+
+export namespace Plans {
+  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
+  export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
+  export import PlanListParams = PlansAPI.PlanListParams;
+  export import PlanGetParams = PlansAPI.PlanGetParams;
 }
