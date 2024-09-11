@@ -111,7 +111,7 @@ export namespace Tests {
      */
     method?: string;
 
-    target_policies?: Array<DEXAPI.DeviceExperienceMonitor> | null;
+    target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
 
     targeted?: boolean;
 

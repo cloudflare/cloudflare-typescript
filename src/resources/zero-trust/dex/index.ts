@@ -8,7 +8,7 @@ export {
   TestListResponsesV4PagePagination,
 } from './tests/index';
 export { ColoListResponse, ColoListParams, ColoListResponsesSinglePage, Colos } from './colos';
-export { DeviceExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles, DEX } from './dex';
+export { DigitalExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles, DEX } from './dex';
 export { HTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/index';
 export {
   LiveStat,
