@@ -172,6 +172,12 @@ export interface CustomCreateParams {
    * undefined, the domain will be enabled.
    */
   enabled?: boolean;
+
+  /**
+   * Body param: Minimum TLS Version the custom domain will accept for incoming
+   * connections. If not set, defaults to 1.0.
+   */
+  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface CustomUpdateParams {
@@ -185,6 +191,12 @@ export interface CustomUpdateParams {
    * domain
    */
   enabled?: boolean;
+
+  /**
+   * Body param: Minimum TLS Version the custom domain will accept for incoming
+   * connections. If not set, defaults to previous value.
+   */
+  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface CustomListParams {
