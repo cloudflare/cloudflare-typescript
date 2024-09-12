@@ -279,7 +279,7 @@ export namespace CERTRecord {
 
 export interface CNAMERecord {
   /**
-   * A valid domain name. Must not match the record's name.
+   * A valid hostname. Must not match the record's name.
    */
   content?: string;
 
@@ -502,36 +502,20 @@ export namespace LOCRecord {
 
 export interface MXRecord {
   /**
-   * Formatted MX content. See 'data' to set MX properties.
+   * A valid mail server hostname.
    */
   content?: string;
 
   /**
-   * Components of a MX record.
+   * Required for MX, SRV and URI records; unused by other record types. Records with
+   * lower priorities are preferred.
    */
-  data?: MXRecord.Data;
+  priority?: number;
 
   /**
    * Record type.
    */
   type?: 'MX';
-}
-
-export namespace MXRecord {
-  /**
-   * Components of a MX record.
-   */
-  export interface Data {
-    /**
-     * The record priority.
-     */
-    priority?: number;
-
-    /**
-     * A valid mail server domain name.
-     */
-    target?: string;
-  }
 }
 
 export interface NAPTRRecord {
@@ -750,7 +734,7 @@ export namespace SRVRecord {
     priority?: number;
 
     /**
-     * A valid domain name.
+     * A valid hostname.
      */
     target?: string;
 
@@ -914,6 +898,12 @@ export interface URIRecord {
   data?: URIRecord.Data;
 
   /**
+   * Required for MX, SRV and URI records; unused by other record types. Records with
+   * lower priorities are preferred.
+   */
+  priority?: number;
+
+  /**
    * Record type.
    */
   type?: 'URI';
@@ -924,11 +914,6 @@ export namespace URIRecord {
    * Components of a URI record.
    */
   export interface Data {
-    /**
-     * The record priority.
-     */
-    priority?: number;
-
     /**
      * The record content.
      */
@@ -1480,7 +1465,7 @@ export namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: A valid domain name. Must not match the record's name.
+     * Body param: A valid hostname. Must not match the record's name.
      */
     content?: string;
 
@@ -1708,31 +1693,20 @@ export namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: Components of a MX record.
+     * Body param: A valid mail server hostname.
      */
-    data?: RecordCreateParams.MXRecord.Data;
+    content?: string;
+
+    /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
 
     /**
      * Body param: Record type.
      */
     type?: 'MX';
-  }
-
-  export namespace MXRecord {
-    /**
-     * Components of a MX record.
-     */
-    export interface Data {
-      /**
-       * The record priority.
-       */
-      priority?: number;
-
-      /**
-       * A valid mail server domain name.
-       */
-      target?: string;
-    }
   }
 
   export interface NAPTRRecord {
@@ -1919,7 +1893,7 @@ export namespace RecordCreateParams {
       priority?: number;
 
       /**
-       * A valid domain name.
+       * A valid hostname.
        */
       target?: string;
 
@@ -2081,6 +2055,12 @@ export namespace RecordCreateParams {
     data?: RecordCreateParams.URIRecord.Data;
 
     /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
      * Body param: Record type.
      */
     type?: 'URI';
@@ -2091,11 +2071,6 @@ export namespace RecordCreateParams {
      * Components of a URI record.
      */
     export interface Data {
-      /**
-       * The record priority.
-       */
-      priority?: number;
-
       /**
        * The record content.
        */
@@ -2257,7 +2232,7 @@ export namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: A valid domain name. Must not match the record's name.
+     * Body param: A valid hostname. Must not match the record's name.
      */
     content?: string;
 
@@ -2485,31 +2460,20 @@ export namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: Components of a MX record.
+     * Body param: A valid mail server hostname.
      */
-    data?: RecordUpdateParams.MXRecord.Data;
+    content?: string;
+
+    /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
 
     /**
      * Body param: Record type.
      */
     type?: 'MX';
-  }
-
-  export namespace MXRecord {
-    /**
-     * Components of a MX record.
-     */
-    export interface Data {
-      /**
-       * The record priority.
-       */
-      priority?: number;
-
-      /**
-       * A valid mail server domain name.
-       */
-      target?: string;
-    }
   }
 
   export interface NAPTRRecord {
@@ -2696,7 +2660,7 @@ export namespace RecordUpdateParams {
       priority?: number;
 
       /**
-       * A valid domain name.
+       * A valid hostname.
        */
       target?: string;
 
@@ -2858,6 +2822,12 @@ export namespace RecordUpdateParams {
     data?: RecordUpdateParams.URIRecord.Data;
 
     /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
      * Body param: Record type.
      */
     type?: 'URI';
@@ -2868,11 +2838,6 @@ export namespace RecordUpdateParams {
      * Components of a URI record.
      */
     export interface Data {
-      /**
-       * The record priority.
-       */
-      priority?: number;
-
       /**
        * The record content.
        */
@@ -3212,7 +3177,7 @@ export namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: A valid domain name. Must not match the record's name.
+     * Body param: A valid hostname. Must not match the record's name.
      */
     content?: string;
 
@@ -3440,31 +3405,20 @@ export namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: Components of a MX record.
+     * Body param: A valid mail server hostname.
      */
-    data?: RecordEditParams.MXRecord.Data;
+    content?: string;
+
+    /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
 
     /**
      * Body param: Record type.
      */
     type?: 'MX';
-  }
-
-  export namespace MXRecord {
-    /**
-     * Components of a MX record.
-     */
-    export interface Data {
-      /**
-       * The record priority.
-       */
-      priority?: number;
-
-      /**
-       * A valid mail server domain name.
-       */
-      target?: string;
-    }
   }
 
   export interface NAPTRRecord {
@@ -3651,7 +3605,7 @@ export namespace RecordEditParams {
       priority?: number;
 
       /**
-       * A valid domain name.
+       * A valid hostname.
        */
       target?: string;
 
@@ -3813,6 +3767,12 @@ export namespace RecordEditParams {
     data?: RecordEditParams.URIRecord.Data;
 
     /**
+     * Body param: Required for MX, SRV and URI records; unused by other record types.
+     * Records with lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
      * Body param: Record type.
      */
     type?: 'URI';
@@ -3823,11 +3783,6 @@ export namespace RecordEditParams {
      * Components of a URI record.
      */
     export interface Data {
-      /**
-       * The record priority.
-       */
-      priority?: number;
-
       /**
        * The record content.
        */
