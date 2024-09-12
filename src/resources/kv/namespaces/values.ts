@@ -24,7 +24,11 @@ export class Values extends APIResource {
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
-        Core.multipartFormRequestOptions({ body, ...options }),
+        Core.maybeMultipartFormRequestOptions({
+          body,
+          ...options,
+          headers: { 'Content-Type': '*/*', ...options?.headers },
+        }),
       ) as Core.APIPromise<{ result: ValueUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
