@@ -41,13 +41,13 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectDeleteResponse | null> {
+  ): Core.APIPromise<ProjectDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/pages/projects/${projectName}`,
         options,
-      ) as Core.APIPromise<{ result: ProjectDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: ProjectDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -92,13 +92,13 @@ export class Projects extends APIResource {
     projectName: string,
     params: ProjectPurgeBuildCacheParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ProjectPurgeBuildCacheResponse | null> {
+  ): Core.APIPromise<ProjectPurgeBuildCacheResponse> {
     const { account_id } = params;
     return (
       this._client.post(
         `/accounts/${account_id}/pages/projects/${projectName}/purge_build_cache`,
         options,
-      ) as Core.APIPromise<{ result: ProjectPurgeBuildCacheResponse | null }>
+      ) as Core.APIPromise<{ result: ProjectPurgeBuildCacheResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
