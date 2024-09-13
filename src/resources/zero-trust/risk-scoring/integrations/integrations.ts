@@ -64,13 +64,13 @@ export class Integrations extends APIResource {
     integrationId: string,
     params: IntegrationDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<IntegrationDeleteResponse | null> {
+  ): Core.APIPromise<IntegrationDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/zt_risk_scoring/integrations/${integrationId}`,
         options,
-      ) as Core.APIPromise<{ result: IntegrationDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: IntegrationDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
