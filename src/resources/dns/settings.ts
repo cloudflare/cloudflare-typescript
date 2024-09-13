@@ -75,6 +75,12 @@ export class Settings extends APIResource {
 
 export interface DNSSetting {
   /**
+   * Whether to flatten all CNAME records in the zone. Note that, due to DNS
+   * limitations, a CNAME record at the zone apex will always be flattened.
+   */
+  flatten_all_cnames?: boolean;
+
+  /**
    * Whether to enable Foundation DNS Advanced Nameservers on the zone.
    */
   foundation_dns?: boolean;
@@ -160,6 +166,12 @@ export namespace DNSSetting {
 }
 
 export interface DNSSettingParam {
+  /**
+   * Whether to flatten all CNAME records in the zone. Note that, due to DNS
+   * limitations, a CNAME record at the zone apex will always be flattened.
+   */
+  flatten_all_cnames?: boolean;
+
   /**
    * Whether to enable Foundation DNS Advanced Nameservers on the zone.
    */
@@ -252,7 +264,12 @@ export interface Nameserver {
   /**
    * Nameserver type
    */
-  type: 'cloudflare.standard';
+  type:
+    | 'cloudflare.standard'
+    | 'cloudflare.standard.random'
+    | 'custom.account'
+    | 'custom.tenant'
+    | 'custom.zone';
 }
 
 /**
@@ -262,7 +279,12 @@ export interface NameserverParam {
   /**
    * Nameserver type
    */
-  type: 'cloudflare.standard';
+  type:
+    | 'cloudflare.standard'
+    | 'cloudflare.standard.random'
+    | 'custom.account'
+    | 'custom.tenant'
+    | 'custom.zone';
 }
 
 export interface SettingEditResponse {
