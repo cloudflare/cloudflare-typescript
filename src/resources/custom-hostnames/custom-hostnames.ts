@@ -135,9 +135,10 @@ export interface CustomHostname {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostname.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -391,16 +392,6 @@ export namespace CustomHostname {
   }
 
   /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
-  /**
    * This is a record which can be placed to activate a hostname.
    */
   export interface OwnershipVerification {
@@ -482,9 +473,10 @@ export interface CustomHostnameCreateResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameCreateResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -738,16 +730,6 @@ export namespace CustomHostnameCreateResponse {
   }
 
   /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
-  /**
    * This is a record which can be placed to activate a hostname.
    */
   export interface OwnershipVerification {
@@ -807,9 +789,10 @@ export interface CustomHostnameListResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameListResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1063,16 +1046,6 @@ export namespace CustomHostnameListResponse {
   }
 
   /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
-  /**
    * This is a record which can be placed to activate a hostname.
    */
   export interface OwnershipVerification {
@@ -1139,9 +1112,10 @@ export interface CustomHostnameEditResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameEditResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1395,16 +1369,6 @@ export namespace CustomHostnameEditResponse {
   }
 
   /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
-  /**
    * This is a record which can be placed to activate a hostname.
    */
   export interface OwnershipVerification {
@@ -1464,9 +1428,10 @@ export interface CustomHostnameGetResponse {
   created_at?: string;
 
   /**
-   * These are per-hostname (customer) settings.
+   * Unique key/value metadata for this hostname. These are per-hostname (customer)
+   * settings.
    */
-  custom_metadata?: CustomHostnameGetResponse.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME
@@ -1720,16 +1685,6 @@ export namespace CustomHostnameGetResponse {
   }
 
   /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
-  /**
    * This is a record which can be placed to activate a hostname.
    */
   export interface OwnershipVerification {
@@ -1784,9 +1739,10 @@ export interface CustomHostnameCreateParams {
   ssl: CustomHostnameCreateParams.SSL;
 
   /**
-   * Body param: These are per-hostname (customer) settings.
+   * Body param: Unique key/value metadata for this hostname. These are per-hostname
+   * (customer) settings.
    */
-  custom_metadata?: CustomHostnameCreateParams.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 }
 
 export namespace CustomHostnameCreateParams {
@@ -1871,16 +1827,6 @@ export namespace CustomHostnameCreateParams {
       tls_1_3?: 'on' | 'off';
     }
   }
-
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
 }
 
 export interface CustomHostnameListParams extends V4PagePaginationArrayParams {
@@ -1932,9 +1878,10 @@ export interface CustomHostnameEditParams {
   zone_id: string;
 
   /**
-   * Body param: These are per-hostname (customer) settings.
+   * Body param: Unique key/value metadata for this hostname. These are per-hostname
+   * (customer) settings.
    */
-  custom_metadata?: CustomHostnameEditParams.CustomMetadata;
+  custom_metadata?: Record<string, string>;
 
   /**
    * Body param: a valid hostname that’s been added to your DNS zone as an A, AAAA,
@@ -1958,16 +1905,6 @@ export interface CustomHostnameEditParams {
 }
 
 export namespace CustomHostnameEditParams {
-  /**
-   * These are per-hostname (customer) settings.
-   */
-  export interface CustomMetadata {
-    /**
-     * Unique metadata for this hostname.
-     */
-    key?: string;
-  }
-
   /**
    * SSL properties used when creating the custom hostname.
    */
