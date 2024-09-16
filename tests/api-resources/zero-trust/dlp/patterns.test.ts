@@ -28,6 +28,7 @@ describe('resource patterns', () => {
     const response = await client.zeroTrust.dlp.patterns.validate({
       account_id: 'account_id',
       regex: 'regex',
+      max_match_bytes: 0,
     });
   });
 });
