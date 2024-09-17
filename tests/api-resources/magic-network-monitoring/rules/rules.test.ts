@@ -13,7 +13,8 @@ describe('resource rules', () => {
   test('create: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,14 +28,20 @@ describe('resource rules', () => {
   test('create: required and optional params', async () => {
     const response = await client.magicNetworkMonitoring.rules.create({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
+      automatic_advertisement: true,
+      bandwidth: 1000,
+      packet_threshold: 10000,
+      prefixes: ['203.0.113.1/32', '203.0.113.1/32', '203.0.113.1/32'],
     });
   });
 
   test('update: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +55,13 @@ describe('resource rules', () => {
   test('update: required and optional params', async () => {
     const response = await client.magicNetworkMonitoring.rules.update({
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      duration: '300s',
+      name: 'my_rule_1',
+      id: '2890e6fa406311ed9b5a23f70f6fb8cf',
+      automatic_advertisement: true,
+      bandwidth: 1000,
+      packet_threshold: 10000,
+      prefixes: ['203.0.113.1/32', '203.0.113.1/32', '203.0.113.1/32'],
     });
   });
 
@@ -93,7 +106,6 @@ describe('resource rules', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -107,7 +119,12 @@ describe('resource rules', () => {
   test('edit: required and optional params', async () => {
     const response = await client.magicNetworkMonitoring.rules.edit('2890e6fa406311ed9b5a23f70f6fb8cf', {
       account_id: '6f91088a406011ed95aed352566e8d4c',
-      body: {},
+      automatic_advertisement: true,
+      bandwidth: 1000,
+      duration: '300s',
+      name: 'my_rule_1',
+      packet_threshold: 10000,
+      prefixes: ['203.0.113.1/32', '203.0.113.1/32', '203.0.113.1/32'],
     });
   });
 
