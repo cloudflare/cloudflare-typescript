@@ -7,7 +7,7 @@ import * as ConfigsAPI from './configs';
 
 export class Full extends APIResource {
   /**
-   * Lists default sampling, router IPs, and rules for account.
+   * Lists default sampling, router IPs, warp devices, and rules for account.
    */
   get(params: FullGetParams, options?: Core.RequestOptions): Core.APIPromise<ConfigsAPI.Configuration> {
     const { account_id } = params;

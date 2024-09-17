@@ -17,9 +17,9 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/mnm/rules`, { body, ...options }) as Core.APIPromise<{
         result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -32,9 +32,9 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/mnm/rules`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/mnm/rules`, { body, ...options }) as Core.APIPromise<{
         result: MagicNetworkMonitoringRule | null;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -79,10 +79,10 @@ export class Rules extends APIResource {
     params: RuleEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -158,9 +158,46 @@ export interface RuleCreateParams {
   account_id: string;
 
   /**
+   * Body param: The amount of time that the rule threshold must be exceeded to send
+   * an alert notification. The final value must be equivalent to one of the
+   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format
+   * is AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
+   * 0-9, underscore (\_), dash (-), period (.), and tilde (~). You can’t have a
+   * space in the rule name. Max 256 characters.
+   */
+  name: string;
+
+  /**
+   * Body param: Toggle on if you would like Cloudflare to automatically advertise
+   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
+   * Only available for users of Magic Transit.
+   */
+  automatic_advertisement?: boolean | null;
+
+  /**
+   * Body param: The number of bits per second for the rule. When this value is
+   * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
+   * no maximum.
+   */
+  bandwidth?: number;
+
+  /**
+   * Body param: The number of packets per second for the rule. When this value is
+   * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
+   * no maximum.
+   */
+  packet_threshold?: number;
+
+  /**
    * Body param:
    */
-  body: unknown;
+  prefixes?: Array<string>;
 }
 
 export interface RuleUpdateParams {
@@ -170,9 +207,51 @@ export interface RuleUpdateParams {
   account_id: string;
 
   /**
+   * Body param: The amount of time that the rule threshold must be exceeded to send
+   * an alert notification. The final value must be equivalent to one of the
+   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format
+   * is AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
+   * 0-9, underscore (\_), dash (-), period (.), and tilde (~). You can’t have a
+   * space in the rule name. Max 256 characters.
+   */
+  name: string;
+
+  /**
+   * Body param: The id of the rule. Must be unique.
+   */
+  id?: string;
+
+  /**
+   * Body param: Toggle on if you would like Cloudflare to automatically advertise
+   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
+   * Only available for users of Magic Transit.
+   */
+  automatic_advertisement?: boolean | null;
+
+  /**
+   * Body param: The number of bits per second for the rule. When this value is
+   * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
+   * no maximum.
+   */
+  bandwidth?: number;
+
+  /**
+   * Body param: The number of packets per second for the rule. When this value is
+   * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
+   * no maximum.
+   */
+  packet_threshold?: number;
+
+  /**
    * Body param:
    */
-  body: unknown;
+  prefixes?: Array<string>;
 }
 
 export interface RuleListParams {
@@ -190,9 +269,46 @@ export interface RuleEditParams {
   account_id: string;
 
   /**
+   * Body param: Toggle on if you would like Cloudflare to automatically advertise
+   * the IP Prefixes within the rule via Magic Transit when the rule is triggered.
+   * Only available for users of Magic Transit.
+   */
+  automatic_advertisement?: boolean | null;
+
+  /**
+   * Body param: The number of bits per second for the rule. When this value is
+   * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
+   * no maximum.
+   */
+  bandwidth?: number;
+
+  /**
+   * Body param: The amount of time that the rule threshold must be exceeded to send
+   * an alert notification. The final value must be equivalent to one of the
+   * following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format
+   * is AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration?: string;
+
+  /**
+   * Body param: The name of the rule. Must be unique. Supports characters A-Z, a-z,
+   * 0-9, underscore (\_), dash (-), period (.), and tilde (~). You can’t have a
+   * space in the rule name. Max 256 characters.
+   */
+  name?: string;
+
+  /**
+   * Body param: The number of packets per second for the rule. When this value is
+   * exceeded for the set duration, an alert notification is sent. Minimum of 1 and
+   * no maximum.
+   */
+  packet_threshold?: number;
+
+  /**
    * Body param:
    */
-  body: unknown;
+  prefixes?: Array<string>;
 }
 
 export interface RuleGetParams {
