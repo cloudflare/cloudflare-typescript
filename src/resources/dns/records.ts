@@ -2863,9 +2863,9 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   comment?: RecordListParams.Comment;
 
   /**
-   * Query param:
+   * Query param: DNS record content.
    */
-  content?: RecordListParams.Content;
+  content?: string;
 
   /**
    * Query param: Direction to order DNS records in.
@@ -2881,9 +2881,9 @@ export interface RecordListParams extends V4PagePaginationArrayParams {
   match?: 'any' | 'all';
 
   /**
-   * Query param:
+   * Query param: DNS record name (or @ for the zone apex) in Punycode.
    */
-  name?: RecordListParams.Name;
+  name?: string;
 
   /**
    * Query param: Field to order DNS records by.
@@ -2975,50 +2975,6 @@ export namespace RecordListParams {
 
     /**
      * Prefix of the DNS record comment. Comment filters are case-insensitive.
-     */
-    startswith?: string;
-  }
-
-  export interface Content {
-    /**
-     * Substring of the DNS record content. Content filters are case-insensitive.
-     */
-    contains?: string;
-
-    /**
-     * Suffix of the DNS record content. Content filters are case-insensitive.
-     */
-    endswith?: string;
-
-    /**
-     * Exact value of the DNS record content. Content filters are case-insensitive.
-     */
-    exact?: string;
-
-    /**
-     * Prefix of the DNS record content. Content filters are case-insensitive.
-     */
-    startswith?: string;
-  }
-
-  export interface Name {
-    /**
-     * Substring of the DNS record name. Name filters are case-insensitive.
-     */
-    contains?: string;
-
-    /**
-     * Suffix of the DNS record name. Name filters are case-insensitive.
-     */
-    endswith?: string;
-
-    /**
-     * Exact value of the DNS record name. Name filters are case-insensitive.
-     */
-    exact?: string;
-
-    /**
-     * Prefix of the DNS record name. Name filters are case-insensitive.
      */
     startswith?: string;
   }
