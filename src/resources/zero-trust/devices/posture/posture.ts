@@ -233,8 +233,7 @@ export type DeviceInput =
   | IntuneInput
   | KolideInput
   | TaniumInput
-  | SentineloneS2sInput
-  | DeviceInput.TeamsDevicesCustomS2sInputRequest;
+  | SentineloneS2sInput;
 
 export namespace DeviceInput {
   export interface TeamsDevicesCarbonblackInputRequest {
@@ -327,23 +326,6 @@ export namespace DeviceInput {
       trust_stores?: Array<'system' | 'user'>;
     }
   }
-
-  export interface TeamsDevicesCustomS2sInputRequest {
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-
-    /**
-     * operator
-     */
-    operator: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * A value between 0-100 assigned to devices set by the 3rd party posture provider.
-     */
-    score: number;
-  }
 }
 
 /**
@@ -366,8 +348,7 @@ export type DeviceInputParam =
   | IntuneInputParam
   | KolideInputParam
   | TaniumInputParam
-  | SentineloneS2sInputParam
-  | DeviceInputParam.TeamsDevicesCustomS2sInputRequest;
+  | SentineloneS2sInputParam;
 
 export namespace DeviceInputParam {
   export interface TeamsDevicesCarbonblackInputRequest {
@@ -460,23 +441,6 @@ export namespace DeviceInputParam {
       trust_stores?: Array<'system' | 'user'>;
     }
   }
-
-  export interface TeamsDevicesCustomS2sInputRequest {
-    /**
-     * Posture Integration ID.
-     */
-    connection_id: string;
-
-    /**
-     * operator
-     */
-    operator: '<' | '<=' | '>' | '>=' | '==';
-
-    /**
-     * A value between 0-100 assigned to devices set by the 3rd party posture provider.
-     */
-    score: number;
-  }
 }
 
 export interface DeviceMatch {
@@ -548,8 +512,7 @@ export interface DevicePostureRule {
     | 'crowdstrike_s2s'
     | 'intune'
     | 'workspace_one'
-    | 'sentinelone_s2s'
-    | 'custom_s2s';
+    | 'sentinelone_s2s';
 }
 
 export interface DiskEncryptionInput {
@@ -1063,8 +1026,7 @@ export interface PostureCreateParams {
     | 'crowdstrike_s2s'
     | 'intune'
     | 'workspace_one'
-    | 'sentinelone_s2s'
-    | 'custom_s2s';
+    | 'sentinelone_s2s';
 
   /**
    * Body param: The description of the device posture rule.
@@ -1128,8 +1090,7 @@ export interface PostureUpdateParams {
     | 'crowdstrike_s2s'
     | 'intune'
     | 'workspace_one'
-    | 'sentinelone_s2s'
-    | 'custom_s2s';
+    | 'sentinelone_s2s';
 
   /**
    * Body param: The description of the device posture rule.
