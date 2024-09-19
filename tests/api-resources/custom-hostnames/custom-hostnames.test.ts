@@ -47,7 +47,7 @@ describe('resource customHostnames', () => {
         type: 'dv',
         wildcard: false,
       },
-      custom_metadata: { key: 'value' },
+      custom_metadata: { foo: 'string' },
     });
   });
 
@@ -110,7 +110,7 @@ describe('resource customHostnames', () => {
   test('edit: required and optional params', async () => {
     const response = await client.customHostnames.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      custom_metadata: { key: 'value' },
+      custom_metadata: { foo: 'string' },
       custom_origin_server: 'origin2.example.com',
       custom_origin_sni: 'sni.example.com',
       ssl: {

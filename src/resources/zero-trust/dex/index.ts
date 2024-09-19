@@ -1,12 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AggregateTimePeriod,
-  Tests,
-  TestListResponse,
-  TestListParams,
-  TestListResponsesV4PagePagination,
-} from './tests/index';
+export { AggregateTimePeriod, Tests } from './tests/index';
 export { ColoListResponse, ColoListParams, ColoListResponsesSinglePage, Colos } from './colos';
 export { DigitalExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles, DEX } from './dex';
 export { HTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/index';

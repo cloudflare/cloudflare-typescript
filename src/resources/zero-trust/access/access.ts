@@ -138,7 +138,8 @@ export interface AuthenticationMethodRule {
 export namespace AuthenticationMethodRule {
   export interface AuthMethod {
     /**
-     * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+     * The type of authentication method
+     * https://datatracker.ietf.org/doc/html/rfc8176#section-2.
      */
     auth_method: string;
   }
@@ -154,7 +155,8 @@ export interface AuthenticationMethodRuleParam {
 export namespace AuthenticationMethodRuleParam {
   export interface AuthMethod {
     /**
-     * The type of authentication method https://datatracker.ietf.org/doc/html/rfc8176.
+     * The type of authentication method
+     * https://datatracker.ietf.org/doc/html/rfc8176#section-2.
      */
     auth_method: string;
   }
@@ -177,7 +179,7 @@ export namespace AzureGroupRule {
     /**
      * The ID of your Azure identity provider.
      */
-    connection_id: string;
+    identity_provider_id: string;
   }
 }
 
@@ -198,7 +200,7 @@ export namespace AzureGroupRuleParam {
     /**
      * The ID of your Azure identity provider.
      */
-    connection_id: string;
+    identity_provider_id: string;
   }
 }
 
@@ -420,7 +422,7 @@ export namespace GitHubOrganizationRule {
     /**
      * The ID of your Github identity provider.
      */
-    connection_id: string;
+    identity_provider_id: string;
 
     /**
      * The name of the organization.
@@ -441,7 +443,7 @@ export namespace GitHubOrganizationRuleParam {
     /**
      * The ID of your Github identity provider.
      */
-    connection_id: string;
+    identity_provider_id: string;
 
     /**
      * The name of the organization.
@@ -493,14 +495,14 @@ export interface GSuiteGroupRule {
 export namespace GSuiteGroupRule {
   export interface GSuite {
     /**
-     * The ID of your Google Workspace identity provider.
-     */
-    connection_id: string;
-
-    /**
      * The email of the Google Workspace group.
      */
     email: string;
+
+    /**
+     * The ID of your Google Workspace identity provider.
+     */
+    identity_provider_id: string;
   }
 }
 
@@ -515,14 +517,14 @@ export interface GSuiteGroupRuleParam {
 export namespace GSuiteGroupRuleParam {
   export interface GSuite {
     /**
-     * The ID of your Google Workspace identity provider.
-     */
-    connection_id: string;
-
-    /**
      * The email of the Google Workspace group.
      */
     email: string;
+
+    /**
+     * The ID of your Google Workspace identity provider.
+     */
+    identity_provider_id: string;
   }
 }
 
@@ -602,12 +604,12 @@ export namespace OktaGroupRule {
     /**
      * The ID of your Okta identity provider.
      */
-    connection_id: string;
+    identity_provider_id: string;
 
     /**
-     * The email of the Okta group.
+     * The name of the Okta group.
      */
-    email: string;
+    name: string;
   }
 }
 
@@ -623,12 +625,12 @@ export namespace OktaGroupRuleParam {
     /**
      * The ID of your Okta identity provider.
      */
-    connection_id: string;
+    identity_provider_id: string;
 
     /**
-     * The email of the Okta group.
+     * The name of the Okta group.
      */
-    email: string;
+    name: string;
   }
 }
 
@@ -650,6 +652,11 @@ export namespace SAMLGroupRule {
      * The SAML attribute value to look for.
      */
     attribute_value: string;
+
+    /**
+     * The ID of your SAML identity provider.
+     */
+    identity_provider_id: string;
   }
 }
 
@@ -671,6 +678,11 @@ export namespace SAMLGroupRuleParam {
      * The SAML attribute value to look for.
      */
     attribute_value: string;
+
+    /**
+     * The ID of your SAML identity provider.
+     */
+    identity_provider_id: string;
   }
 }
 

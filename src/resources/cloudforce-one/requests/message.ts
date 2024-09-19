@@ -7,9 +7,7 @@ import * as Shared from '../../shared';
 
 export class MessageResource extends APIResource {
   /**
-   * Creating a request adds the request into the Cloudforce One queue for analysis.
-   * In addition to the content, a short title, type, priority, and releasability
-   * should be provided. If one is not provided a default will be assigned.
+   * Create a New Request Message
    */
   create(
     accountIdentifier: string,
@@ -93,7 +91,7 @@ export interface Message {
   content: string;
 
   /**
-   * Message is a follow-on request
+   * Whether the message is a follow-on request
    */
   is_follow_on_request: boolean;
 
@@ -130,29 +128,9 @@ export interface MessageCreateParams {
 
 export interface MessageUpdateParams {
   /**
-   * Request content
+   * Content of message
    */
   content?: string;
-
-  /**
-   * Priority for analyzing the request
-   */
-  priority?: string;
-
-  /**
-   * Requested information from request
-   */
-  request_type?: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary?: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp?: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
 export interface MessageGetParams {
