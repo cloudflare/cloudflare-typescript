@@ -238,16 +238,6 @@ export namespace AIRunParams {
      * Body param:
      */
     audio: Array<number>;
-
-    /**
-     * Body param:
-     */
-    source_lang?: string;
-
-    /**
-     * Body param:
-     */
-    target_lang?: string;
   }
 
   export interface ImageClassification {

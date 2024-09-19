@@ -44,10 +44,12 @@ export class Issues extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<IssueDismissResponse> {
     const { account_id, ...body } = params;
-    return this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, {
-      body,
-      ...options,
-    });
+    return (
+      this._client.put(`/accounts/${account_id}/intel/attack-surface-report/${issueId}/dismiss`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: IssueDismissResponse }>
+    )._thenUnwrap((obj) => obj.result);
   }
 
   /**
@@ -170,16 +172,7 @@ export namespace IssueClassResponse {
   }
 }
 
-export interface IssueDismissResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
+export type IssueDismissResponse = unknown | string;
 
 export type IssueSeverityResponse = Array<IssueSeverityResponse.IssueSeverityResponseItem>;
 

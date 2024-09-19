@@ -83,17 +83,12 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  direction?: 'asc' | 'desc';
+  direction?: 'asc' | 'desc' | 'ASC' | 'DESC';
 
   /**
    * Query param:
    */
   end_date?: string;
-
-  /**
-   * Query param:
-   */
-  feedback?: 0 | 1;
 
   /**
    * Query param:
@@ -108,22 +103,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  max_tokens_in?: number;
-
-  /**
-   * Query param:
-   */
-  max_tokens_out?: number;
-
-  /**
-   * Query param:
-   */
-  max_total_tokens?: number;
-
-  /**
-   * Query param:
-   */
-  meta_info?: boolean;
+  max_tokens?: number;
 
   /**
    * Query param:
@@ -138,17 +118,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  min_tokens_in?: number;
-
-  /**
-   * Query param:
-   */
-  min_tokens_out?: number;
-
-  /**
-   * Query param:
-   */
-  min_total_tokens?: number;
+  min_tokens?: number;
 
   /**
    * Query param:
@@ -168,7 +138,7 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  order_by_direction?: 'asc' | 'desc';
+  order_by_direction?: 'asc' | 'desc' | 'ASC' | 'DESC';
 
   /**
    * Query param:

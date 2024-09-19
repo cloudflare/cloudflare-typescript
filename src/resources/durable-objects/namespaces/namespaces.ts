@@ -35,8 +35,6 @@ export interface Namespace {
   name?: string;
 
   script?: string;
-
-  use_sqlite?: boolean;
 }
 
 export interface NamespaceListParams {
