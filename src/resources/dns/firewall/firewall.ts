@@ -10,7 +10,7 @@ export class Firewall extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
 
   /**
-   * Create a configured DNS Firewall Cluster.
+   * Create a DNS Firewall cluster
    */
   create(
     params: FirewallCreateParams,
@@ -25,7 +25,7 @@ export class Firewall extends APIResource {
   }
 
   /**
-   * List configured DNS Firewall clusters for an account.
+   * List DNS Firewall clusters for an account
    */
   list(
     params: FirewallListParams,
@@ -40,7 +40,7 @@ export class Firewall extends APIResource {
   }
 
   /**
-   * Delete a configured DNS Firewall Cluster.
+   * Delete a DNS Firewall cluster
    */
   delete(
     dnsFirewallId: string,
@@ -57,7 +57,7 @@ export class Firewall extends APIResource {
   }
 
   /**
-   * Modify a DNS Firewall Cluster configuration.
+   * Modify the configuration of a DNS Firewall cluster
    */
   edit(
     dnsFirewallId: string,
@@ -74,7 +74,7 @@ export class Firewall extends APIResource {
   }
 
   /**
-   * Show a single configured DNS Firewall cluster for an account.
+   * Show a single DNS Firewall cluster for an account
    */
   get(
     dnsFirewallId: string,
@@ -93,49 +93,49 @@ export class Firewall extends APIResource {
 export class FirewallListResponsesV4PagePaginationArray extends V4PagePaginationArray<FirewallListResponse> {}
 
 /**
- * Attack mitigation settings.
+ * Attack mitigation settings
  */
 export interface AttackMitigation {
   /**
-   * When enabled, random-prefix attacks are automatically mitigated and the upstream
-   * DNS servers protected.
+   * When enabled, automatically mitigate random-prefix attacks to protect upstream
+   * DNS servers
    */
   enabled?: boolean;
 
   /**
-   * Only mitigate attacks when upstream servers seem unhealthy.
+   * Only mitigate attacks when upstream servers seem unhealthy
    */
   only_when_upstream_unhealthy?: boolean;
 }
 
 /**
- * Attack mitigation settings.
+ * Attack mitigation settings
  */
 export interface AttackMitigationParam {
   /**
-   * When enabled, random-prefix attacks are automatically mitigated and the upstream
-   * DNS servers protected.
+   * When enabled, automatically mitigate random-prefix attacks to protect upstream
+   * DNS servers
    */
   enabled?: boolean;
 
   /**
-   * Only mitigate attacks when upstream servers seem unhealthy.
+   * Only mitigate attacks when upstream servers seem unhealthy
    */
   only_when_upstream_unhealthy?: boolean;
 }
 
 /**
- * Cloudflare-assigned DNS IPv4 Address.
+ * Cloudflare-assigned DNS IPv4 address
  */
 export type FirewallIPs = string;
 
 /**
- * Upstream DNS Server IPv4 Address.
+ * Upstream DNS Server IPv4 address
  */
 export type UpstreamIPs = string;
 
 /**
- * Upstream DNS Server IPv4 Address.
+ * Upstream DNS Server IPv4 address
  */
 export type UpstreamIPsParam = string;
 
@@ -146,63 +146,63 @@ export interface FirewallCreateResponse {
   id: string;
 
   /**
-   * Deprecate the response to ANY requests.
+   * Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests: boolean;
 
   dns_firewall_ips: Array<FirewallIPs>;
 
   /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
    */
   ecs_fallback: boolean;
 
   /**
-   * Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs for purposes
+   * Maximum DNS cache TTL This setting sets an upper bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Higher TTLs will be
    * decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs for purposes
+   * Minimum DNS cache TTL This setting sets a lower bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Lower TTLs will be
    * increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl: number;
 
   /**
-   * Last modification of DNS Firewall cluster.
+   * Last modification of DNS Firewall cluster
    */
   modified_on: string;
 
   /**
-   * DNS Firewall Cluster Name.
+   * DNS Firewall cluster name
    */
   name: string;
 
   /**
-   * Negative DNS cache TTL. This setting controls how long DNS Firewall should cache
+   * Negative DNS cache TTL This setting controls how long DNS Firewall should cache
    * negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl: number | null;
 
   /**
    * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
+   * the upstream nameservers configured on the cluster)
    */
   ratelimit: number | null;
 
   /**
    * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
+   * counting the initial attempt)
    */
   retries: number;
 
   upstream_ips: Array<UpstreamIPs>;
 
   /**
-   * Attack mitigation settings.
+   * Attack mitigation settings
    */
   attack_mitigation?: AttackMitigation | null;
 }
@@ -214,63 +214,63 @@ export interface FirewallListResponse {
   id: string;
 
   /**
-   * Deprecate the response to ANY requests.
+   * Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests: boolean;
 
   dns_firewall_ips: Array<FirewallIPs>;
 
   /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
    */
   ecs_fallback: boolean;
 
   /**
-   * Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs for purposes
+   * Maximum DNS cache TTL This setting sets an upper bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Higher TTLs will be
    * decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs for purposes
+   * Minimum DNS cache TTL This setting sets a lower bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Lower TTLs will be
    * increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl: number;
 
   /**
-   * Last modification of DNS Firewall cluster.
+   * Last modification of DNS Firewall cluster
    */
   modified_on: string;
 
   /**
-   * DNS Firewall Cluster Name.
+   * DNS Firewall cluster name
    */
   name: string;
 
   /**
-   * Negative DNS cache TTL. This setting controls how long DNS Firewall should cache
+   * Negative DNS cache TTL This setting controls how long DNS Firewall should cache
    * negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl: number | null;
 
   /**
    * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
+   * the upstream nameservers configured on the cluster)
    */
   ratelimit: number | null;
 
   /**
    * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
+   * counting the initial attempt)
    */
   retries: number;
 
   upstream_ips: Array<UpstreamIPs>;
 
   /**
-   * Attack mitigation settings.
+   * Attack mitigation settings
    */
   attack_mitigation?: AttackMitigation | null;
 }
@@ -289,63 +289,63 @@ export interface FirewallEditResponse {
   id: string;
 
   /**
-   * Deprecate the response to ANY requests.
+   * Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests: boolean;
 
   dns_firewall_ips: Array<FirewallIPs>;
 
   /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
    */
   ecs_fallback: boolean;
 
   /**
-   * Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs for purposes
+   * Maximum DNS cache TTL This setting sets an upper bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Higher TTLs will be
    * decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs for purposes
+   * Minimum DNS cache TTL This setting sets a lower bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Lower TTLs will be
    * increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl: number;
 
   /**
-   * Last modification of DNS Firewall cluster.
+   * Last modification of DNS Firewall cluster
    */
   modified_on: string;
 
   /**
-   * DNS Firewall Cluster Name.
+   * DNS Firewall cluster name
    */
   name: string;
 
   /**
-   * Negative DNS cache TTL. This setting controls how long DNS Firewall should cache
+   * Negative DNS cache TTL This setting controls how long DNS Firewall should cache
    * negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl: number | null;
 
   /**
    * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
+   * the upstream nameservers configured on the cluster)
    */
   ratelimit: number | null;
 
   /**
    * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
+   * counting the initial attempt)
    */
   retries: number;
 
   upstream_ips: Array<UpstreamIPs>;
 
   /**
-   * Attack mitigation settings.
+   * Attack mitigation settings
    */
   attack_mitigation?: AttackMitigation | null;
 }
@@ -357,63 +357,63 @@ export interface FirewallGetResponse {
   id: string;
 
   /**
-   * Deprecate the response to ANY requests.
+   * Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests: boolean;
 
   dns_firewall_ips: Array<FirewallIPs>;
 
   /**
-   * Forward client IP (resolver) subnet if no EDNS Client Subnet is sent.
+   * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
    */
   ecs_fallback: boolean;
 
   /**
-   * Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs for purposes
+   * Maximum DNS cache TTL This setting sets an upper bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Higher TTLs will be
    * decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl: number;
 
   /**
-   * Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs for purposes
+   * Minimum DNS cache TTL This setting sets a lower bound on DNS TTLs for purposes
    * of caching between DNS Firewall and the upstream servers. Lower TTLs will be
    * increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl: number;
 
   /**
-   * Last modification of DNS Firewall cluster.
+   * Last modification of DNS Firewall cluster
    */
   modified_on: string;
 
   /**
-   * DNS Firewall Cluster Name.
+   * DNS Firewall cluster name
    */
   name: string;
 
   /**
-   * Negative DNS cache TTL. This setting controls how long DNS Firewall should cache
+   * Negative DNS cache TTL This setting controls how long DNS Firewall should cache
    * negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl: number | null;
 
   /**
    * Ratelimit in queries per second per datacenter (applies to DNS queries sent to
-   * the upstream nameservers configured on the cluster).
+   * the upstream nameservers configured on the cluster)
    */
   ratelimit: number | null;
 
   /**
    * Number of retries for fetching DNS responses from upstream nameservers (not
-   * counting the initial attempt).
+   * counting the initial attempt)
    */
   retries: number;
 
   upstream_ips: Array<UpstreamIPs>;
 
   /**
-   * Attack mitigation settings.
+   * Attack mitigation settings
    */
   attack_mitigation?: AttackMitigation | null;
 }
@@ -425,7 +425,7 @@ export interface FirewallCreateParams {
   account_id: string;
 
   /**
-   * Body param: DNS Firewall Cluster Name.
+   * Body param: DNS Firewall cluster name
    */
   name: string;
 
@@ -435,50 +435,50 @@ export interface FirewallCreateParams {
   upstream_ips: Array<UpstreamIPsParam>;
 
   /**
-   * Body param: Attack mitigation settings.
+   * Body param: Attack mitigation settings
    */
   attack_mitigation?: AttackMitigationParam | null;
 
   /**
-   * Body param: Deprecate the response to ANY requests.
+   * Body param: Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests?: boolean;
 
   /**
-   * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
-   * sent.
+   * Body param: Whether to forward client IP (resolver) subnet if no EDNS Client
+   * Subnet is sent
    */
   ecs_fallback?: boolean;
 
   /**
-   * Body param: Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs
+   * Body param: Maximum DNS cache TTL This setting sets an upper bound on DNS TTLs
    * for purposes of caching between DNS Firewall and the upstream servers. Higher
    * TTLs will be decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl?: number;
 
   /**
-   * Body param: Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs
+   * Body param: Minimum DNS cache TTL This setting sets a lower bound on DNS TTLs
    * for purposes of caching between DNS Firewall and the upstream servers. Lower
    * TTLs will be increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl?: number;
 
   /**
-   * Body param: Negative DNS cache TTL. This setting controls how long DNS Firewall
+   * Body param: Negative DNS cache TTL This setting controls how long DNS Firewall
    * should cache negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl?: number | null;
 
   /**
    * Body param: Ratelimit in queries per second per datacenter (applies to DNS
-   * queries sent to the upstream nameservers configured on the cluster).
+   * queries sent to the upstream nameservers configured on the cluster)
    */
   ratelimit?: number | null;
 
   /**
    * Body param: Number of retries for fetching DNS responses from upstream
-   * nameservers (not counting the initial attempt).
+   * nameservers (not counting the initial attempt)
    */
   retries?: number;
 }
@@ -504,55 +504,55 @@ export interface FirewallEditParams {
   account_id: string;
 
   /**
-   * Body param: Attack mitigation settings.
+   * Body param: Attack mitigation settings
    */
   attack_mitigation?: AttackMitigationParam | null;
 
   /**
-   * Body param: Deprecate the response to ANY requests.
+   * Body param: Whether to refuse to answer queries for the ANY type
    */
   deprecate_any_requests?: boolean;
 
   /**
-   * Body param: Forward client IP (resolver) subnet if no EDNS Client Subnet is
-   * sent.
+   * Body param: Whether to forward client IP (resolver) subnet if no EDNS Client
+   * Subnet is sent
    */
   ecs_fallback?: boolean;
 
   /**
-   * Body param: Maximum DNS cache TTL. This setting sets an upper bound on DNS TTLs
+   * Body param: Maximum DNS cache TTL This setting sets an upper bound on DNS TTLs
    * for purposes of caching between DNS Firewall and the upstream servers. Higher
    * TTLs will be decreased to the maximum defined here for caching purposes.
    */
   maximum_cache_ttl?: number;
 
   /**
-   * Body param: Minimum DNS cache TTL. This setting sets a lower bound on DNS TTLs
+   * Body param: Minimum DNS cache TTL This setting sets a lower bound on DNS TTLs
    * for purposes of caching between DNS Firewall and the upstream servers. Lower
    * TTLs will be increased to the minimum defined here for caching purposes.
    */
   minimum_cache_ttl?: number;
 
   /**
-   * Body param: DNS Firewall Cluster Name.
+   * Body param: DNS Firewall cluster name
    */
   name?: string;
 
   /**
-   * Body param: Negative DNS cache TTL. This setting controls how long DNS Firewall
+   * Body param: Negative DNS cache TTL This setting controls how long DNS Firewall
    * should cache negative responses (e.g., NXDOMAIN) from the upstream servers.
    */
   negative_cache_ttl?: number | null;
 
   /**
    * Body param: Ratelimit in queries per second per datacenter (applies to DNS
-   * queries sent to the upstream nameservers configured on the cluster).
+   * queries sent to the upstream nameservers configured on the cluster)
    */
   ratelimit?: number | null;
 
   /**
    * Body param: Number of retries for fetching DNS responses from upstream
-   * nameservers (not counting the initial attempt).
+   * nameservers (not counting the initial attempt)
    */
   retries?: number;
 
