@@ -8,7 +8,7 @@ import * as RequestsAPI from './requests';
 
 export class PriorityResource extends APIResource {
   /**
-   * Create a New Priority Requirement
+   * Create a New Priority Intelligence Requirement
    */
   create(
     accountIdentifier: string,
@@ -41,7 +41,7 @@ export class PriorityResource extends APIResource {
   }
 
   /**
-   * Delete a Priority Intelligence Report
+   * Delete a Priority Intelligence Requirement
    */
   delete(
     accountIdentifier: string,

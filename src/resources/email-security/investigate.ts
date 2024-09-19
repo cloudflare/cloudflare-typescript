@@ -137,6 +137,20 @@ export interface InvestigateListResponse {
 
   alert_id?: string | null;
 
+  delivery_mode?:
+    | 'DIRECT'
+    | 'BCC'
+    | 'JOURNAL'
+    | 'REVIEW_SUBMISSION'
+    | 'DMARC_UNVERIFIED'
+    | 'DMARC_FAILURE_REPORT'
+    | 'DMARC_AGGREGATE_REPORT'
+    | 'THREAT_INTEL_SUBMISSION'
+    | 'SIMULATION_SUBMISSION'
+    | 'API'
+    | 'RETRO_SCAN'
+    | null;
+
   edf_hash?: string | null;
 
   final_disposition?:
@@ -306,6 +320,20 @@ export interface InvestigateGetResponse {
   ts: string;
 
   alert_id?: string | null;
+
+  delivery_mode?:
+    | 'DIRECT'
+    | 'BCC'
+    | 'JOURNAL'
+    | 'REVIEW_SUBMISSION'
+    | 'DMARC_UNVERIFIED'
+    | 'DMARC_FAILURE_REPORT'
+    | 'DMARC_AGGREGATE_REPORT'
+    | 'THREAT_INTEL_SUBMISSION'
+    | 'SIMULATION_SUBMISSION'
+    | 'API'
+    | 'RETRO_SCAN'
+    | null;
 
   edf_hash?: string | null;
 

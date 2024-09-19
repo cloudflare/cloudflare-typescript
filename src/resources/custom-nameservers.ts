@@ -26,11 +26,11 @@ export class CustomNameservers extends APIResource {
     customNSId: string,
     params: CustomNameserverDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverDeleteResponse | null> {
+  ): Core.APIPromise<CustomNameserverDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/custom_ns/${customNSId}`, options) as Core.APIPromise<{
-        result: CustomNameserverDeleteResponse | null;
+        result: CustomNameserverDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -41,11 +41,11 @@ export class CustomNameservers extends APIResource {
   availabilty(
     params: CustomNameserverAvailabiltyParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverAvailabiltyResponse | null> {
+  ): Core.APIPromise<CustomNameserverAvailabiltyResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/custom_ns/availability`, options) as Core.APIPromise<{
-        result: CustomNameserverAvailabiltyResponse | null;
+        result: CustomNameserverAvailabiltyResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -56,11 +56,11 @@ export class CustomNameservers extends APIResource {
   get(
     params: CustomNameserverGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CustomNameserverGetResponse | null> {
+  ): Core.APIPromise<CustomNameserverGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/custom_ns`, options) as Core.APIPromise<{
-        result: CustomNameserverGetResponse | null;
+        result: CustomNameserverGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
