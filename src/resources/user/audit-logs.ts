@@ -40,10 +40,10 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   actor?: AuditLogListParams.Actor;
 
   /**
-   * Limits the returned results to logs older than the specified date. This can be a
-   * date string `2019-04-30` or an absolute timestamp that conforms to RFC3339.
+   * Limits the returned results to logs older than the specified date. A `full-date`
+   * that conforms to RFC3339.
    */
-  before?: string;
+  before?: string | string;
 
   /**
    * Changes the direction of the chronological sorting.
@@ -61,10 +61,10 @@ export interface AuditLogListParams extends V4PagePaginationArrayParams {
   hide_user_logs?: boolean;
 
   /**
-   * Limits the returned results to logs newer than the specified date. This can be a
-   * date string `2019-04-30` or an absolute timestamp that conforms to RFC3339.
+   * Limits the returned results to logs newer than the specified date. A `full-date`
+   * that conforms to RFC3339.
    */
-  since?: string;
+  since?: string | string;
 
   zone?: AuditLogListParams.Zone;
 }

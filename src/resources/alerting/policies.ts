@@ -158,6 +158,7 @@ export interface Policy {
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
     | 'incident_alert'
+    | 'image_notification'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
@@ -346,6 +347,11 @@ export interface PolicyFilter {
    * Usage depends on specific alert type
    */
   pool_id?: Array<string>;
+
+  /**
+   * Usage depends on specific alert type
+   */
+  pop_name?: Array<string>;
 
   /**
    * Used for configuring billing_usage_alert
@@ -557,6 +563,11 @@ export interface PolicyFilterParam {
   pool_id?: Array<string>;
 
   /**
+   * Usage depends on specific alert type
+   */
+  pop_name?: Array<string>;
+
+  /**
    * Used for configuring billing_usage_alert
    */
   product?: Array<string>;
@@ -735,6 +746,7 @@ export interface PolicyCreateParams {
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
     | 'incident_alert'
+    | 'image_notification'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'
@@ -851,6 +863,7 @@ export interface PolicyUpdateParams {
     | 'http_alert_edge_error'
     | 'http_alert_origin_error'
     | 'incident_alert'
+    | 'image_notification'
     | 'load_balancing_health_alert'
     | 'load_balancing_pool_enablement_alert'
     | 'logo_match_alert'

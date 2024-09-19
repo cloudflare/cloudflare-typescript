@@ -72,7 +72,7 @@ describe('resource domains', () => {
     const response = await client.emailSecurity.settings.domains.edit(2400, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domain: 'domain',
-      lookback_hops: 0,
+      lookback_hops: 1,
     });
   });
 });

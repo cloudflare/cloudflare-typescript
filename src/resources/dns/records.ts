@@ -615,6 +615,11 @@ export interface Record {
   proxied?: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings?: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags?: Array<RecordTags>;
@@ -934,11 +939,6 @@ export interface RecordCreateResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -946,7 +946,7 @@ export interface RecordCreateResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordCreateResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -970,14 +970,14 @@ export interface RecordCreateResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -985,19 +985,16 @@ export interface RecordCreateResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordCreateResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordUpdateResponse {
@@ -1013,11 +1010,6 @@ export interface RecordUpdateResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1025,7 +1017,7 @@ export interface RecordUpdateResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordUpdateResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1049,14 +1041,14 @@ export interface RecordUpdateResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1064,19 +1056,16 @@ export interface RecordUpdateResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordUpdateResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordListResponse {
@@ -1092,11 +1081,6 @@ export interface RecordListResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1104,7 +1088,7 @@ export interface RecordListResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordListResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1128,14 +1112,14 @@ export interface RecordListResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1143,19 +1127,16 @@ export interface RecordListResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordListResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordDeleteResponse {
@@ -1178,11 +1159,6 @@ export interface RecordEditResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1190,7 +1166,7 @@ export interface RecordEditResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordEditResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1214,14 +1190,14 @@ export interface RecordEditResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1229,19 +1205,16 @@ export interface RecordEditResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordEditResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 /**
@@ -1262,11 +1235,6 @@ export interface RecordGetResponse {
   comment: string;
 
   /**
-   * When the record comment was last modified.
-   */
-  comment_modified_on: string;
-
-  /**
    * When the record was created.
    */
   created_on: string;
@@ -1274,7 +1242,7 @@ export interface RecordGetResponse {
   /**
    * Extra Cloudflare-specific information about the record.
    */
-  meta: RecordGetResponse.Meta;
+  meta: unknown;
 
   /**
    * When the record was last modified.
@@ -1298,14 +1266,14 @@ export interface RecordGetResponse {
   proxied: boolean;
 
   /**
+   * Settings for the DNS record.
+   */
+  settings: unknown;
+
+  /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
    */
   tags: Array<RecordTags>;
-
-  /**
-   * When the record tags were last modified.
-   */
-  tags_modified_on: string;
 
   /**
    * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
@@ -1313,19 +1281,16 @@ export interface RecordGetResponse {
    * Enterprise zones.
    */
   ttl: TTL;
-}
 
-export namespace RecordGetResponse {
   /**
-   * Extra Cloudflare-specific information about the record.
+   * When the record comment was last modified. Omitted if there is no comment.
    */
-  export interface Meta {
-    /**
-     * Will exist if Cloudflare automatically added this DNS record during initial
-     * setup.
-     */
-    auto_added?: boolean;
-  }
+  comment_modified_on?: string;
+
+  /**
+   * When the record tags were last modified. Omitted if there are no tags.
+   */
+  tags_modified_on?: string;
 }
 
 export interface RecordImportResponse {

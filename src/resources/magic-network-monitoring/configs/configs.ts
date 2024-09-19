@@ -12,9 +12,9 @@ export class Configs extends APIResource {
    * Create a new network monitoring configuration.
    */
   create(params: ConfigCreateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.post(`/accounts/${account_id}/mnm/config`, { body, ...options }) as Core.APIPromise<{
         result: Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -25,9 +25,9 @@ export class Configs extends APIResource {
    * configuration to be updated at once.
    */
   update(params: ConfigUpdateParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.put(`/accounts/${account_id}/mnm/config`, { body: body, ...options }) as Core.APIPromise<{
+      this._client.put(`/accounts/${account_id}/mnm/config`, { body, ...options }) as Core.APIPromise<{
         result: Configuration;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -49,17 +49,16 @@ export class Configs extends APIResource {
    * Update fields in an existing network monitoring configuration.
    */
   edit(params: ConfigEditParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.patch(`/accounts/${account_id}/mnm/config`, {
-        body: body,
-        ...options,
-      }) as Core.APIPromise<{ result: Configuration }>
+      this._client.patch(`/accounts/${account_id}/mnm/config`, { body, ...options }) as Core.APIPromise<{
+        result: Configuration;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Lists default sampling and router IPs for account.
+   * Lists default sampling, router IPs and warp devices for account.
    */
   get(params: ConfigGetParams, options?: Core.RequestOptions): Core.APIPromise<Configuration> {
     const { account_id } = params;
@@ -84,6 +83,25 @@ export interface Configuration {
   name: string;
 
   router_ips: Array<string>;
+
+  warp_devices: Array<Configuration.WARPDevice>;
+}
+
+export namespace Configuration {
+  /**
+   * Object representing a warp device with an ID and name.
+   */
+  export interface WARPDevice {
+    /**
+     * Unique identifier for the warp device.
+     */
+    id: string;
+
+    /**
+     * Name of the warp device.
+     */
+    name: string;
+  }
 }
 
 export interface ConfigCreateParams {
@@ -93,9 +111,42 @@ export interface ConfigCreateParams {
   account_id: string;
 
   /**
+   * Body param: Fallback sampling rate of flow messages being sent in packets per
+   * second. This should match the packet sampling rate configured on the router.
+   */
+  default_sampling: number;
+
+  /**
+   * Body param: The account name.
+   */
+  name: string;
+
+  /**
    * Body param:
    */
-  body: unknown;
+  router_ips?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  warp_devices?: Array<ConfigCreateParams.WARPDevice>;
+}
+
+export namespace ConfigCreateParams {
+  /**
+   * Object representing a warp device with an ID and name.
+   */
+  export interface WARPDevice {
+    /**
+     * Unique identifier for the warp device.
+     */
+    id: string;
+
+    /**
+     * Name of the warp device.
+     */
+    name: string;
+  }
 }
 
 export interface ConfigUpdateParams {
@@ -105,9 +156,42 @@ export interface ConfigUpdateParams {
   account_id: string;
 
   /**
+   * Body param: Fallback sampling rate of flow messages being sent in packets per
+   * second. This should match the packet sampling rate configured on the router.
+   */
+  default_sampling: number;
+
+  /**
+   * Body param: The account name.
+   */
+  name: string;
+
+  /**
    * Body param:
    */
-  body: unknown;
+  router_ips?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  warp_devices?: Array<ConfigUpdateParams.WARPDevice>;
+}
+
+export namespace ConfigUpdateParams {
+  /**
+   * Object representing a warp device with an ID and name.
+   */
+  export interface WARPDevice {
+    /**
+     * Unique identifier for the warp device.
+     */
+    id: string;
+
+    /**
+     * Name of the warp device.
+     */
+    name: string;
+  }
 }
 
 export interface ConfigDeleteParams {
@@ -121,9 +205,42 @@ export interface ConfigEditParams {
   account_id: string;
 
   /**
+   * Body param: Fallback sampling rate of flow messages being sent in packets per
+   * second. This should match the packet sampling rate configured on the router.
+   */
+  default_sampling?: number;
+
+  /**
+   * Body param: The account name.
+   */
+  name?: string;
+
+  /**
    * Body param:
    */
-  body: unknown;
+  router_ips?: Array<string>;
+
+  /**
+   * Body param:
+   */
+  warp_devices?: Array<ConfigEditParams.WARPDevice>;
+}
+
+export namespace ConfigEditParams {
+  /**
+   * Object representing a warp device with an ID and name.
+   */
+  export interface WARPDevice {
+    /**
+     * Unique identifier for the warp device.
+     */
+    id: string;
+
+    /**
+     * Name of the warp device.
+     */
+    name: string;
+  }
 }
 
 export interface ConfigGetParams {

@@ -95,8 +95,7 @@ export interface ConnectionListParams {
   exclude_urls?: string;
 
   /**
-   * Query param: Export the list of connections as a file. Cannot be used with
-   * per_page or page options.
+   * Query param: Export the list of connections as a file.
    */
   export?: 'csv';
 
@@ -119,10 +118,9 @@ export interface ConnectionListParams {
    * Query param: The current page number of the paginated results.
    *
    * We additionally support a special value "all". When "all" is used, the API will
-   * return all the connections with the applied filters in a single page.
-   * Additionally, when using this value, the API will not return the categorisation
-   * data for the URL and domain of the connections. This feature is best-effort and
-   * it may only work for zones with a low number of connections
+   * return all the connections with the applied filters in a single page. This
+   * feature is best-effort and it may only work for zones with a low number of
+   * connections
    */
   page?: string;
 

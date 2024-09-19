@@ -123,8 +123,7 @@ export interface CookieListParams {
   domain?: string;
 
   /**
-   * Query param: Export the list of cookies as a file. Cannot be used with per_page
-   * or page options.
+   * Query param: Export the list of cookies as a file.
    */
   export?: 'csv';
 
@@ -157,6 +156,10 @@ export interface CookieListParams {
 
   /**
    * Query param: The current page number of the paginated results.
+   *
+   * We additionally support a special value "all". When "all" is used, the API will
+   * return all the cookies with the applied filters in a single page. This feature
+   * is best-effort and it may only work for zones with a low number of cookies
    */
   page?: string;
 

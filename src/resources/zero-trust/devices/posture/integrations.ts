@@ -116,7 +116,15 @@ export interface Integration {
   /**
    * The type of device posture integration.
    */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+  type?:
+    | 'workspace_one'
+    | 'crowdstrike_s2s'
+    | 'uptycs'
+    | 'intune'
+    | 'kolide'
+    | 'tanium'
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export namespace Integration {
@@ -160,7 +168,8 @@ export interface IntegrationCreateParams {
     | IntegrationCreateParams.TeamsDevicesIntuneConfigRequest
     | IntegrationCreateParams.TeamsDevicesKolideConfigRequest
     | IntegrationCreateParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest;
+    | IntegrationCreateParams.TeamsDevicesSentineloneS2sConfigRequest
+    | IntegrationCreateParams.TeamsDevicesCustomS2sConfigRequest;
 
   /**
    * Body param: The interval between each posture check with the third-party API.
@@ -176,7 +185,15 @@ export interface IntegrationCreateParams {
   /**
    * Body param: The type of device posture integration.
    */
-  type: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+  type:
+    | 'workspace_one'
+    | 'crowdstrike_s2s'
+    | 'uptycs'
+    | 'intune'
+    | 'kolide'
+    | 'tanium'
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export namespace IntegrationCreateParams {
@@ -310,6 +327,25 @@ export namespace IntegrationCreateParams {
      */
     client_secret: string;
   }
+
+  export interface TeamsDevicesCustomS2sConfigRequest {
+    /**
+     * This id will be passed in the `CF-Access-Client-ID` header when hitting the
+     * `api_url`
+     */
+    access_client_id: string;
+
+    /**
+     * This secret will be passed in the `CF-Access-Client-Secret` header when hitting
+     * the `api_url`
+     */
+    access_client_secret: string;
+
+    /**
+     * The Custom Device Posture Integration API URL.
+     */
+    api_url: string;
+  }
 }
 
 export interface IntegrationListParams {
@@ -337,7 +373,8 @@ export interface IntegrationEditParams {
     | IntegrationEditParams.TeamsDevicesIntuneConfigRequest
     | IntegrationEditParams.TeamsDevicesKolideConfigRequest
     | IntegrationEditParams.TeamsDevicesTaniumConfigRequest
-    | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest;
+    | IntegrationEditParams.TeamsDevicesSentineloneS2sConfigRequest
+    | IntegrationEditParams.TeamsDevicesCustomS2sConfigRequest;
 
   /**
    * Body param: The interval between each posture check with the third-party API.
@@ -353,7 +390,15 @@ export interface IntegrationEditParams {
   /**
    * Body param: The type of device posture integration.
    */
-  type?: 'workspace_one' | 'crowdstrike_s2s' | 'uptycs' | 'intune' | 'kolide' | 'tanium' | 'sentinelone_s2s';
+  type?:
+    | 'workspace_one'
+    | 'crowdstrike_s2s'
+    | 'uptycs'
+    | 'intune'
+    | 'kolide'
+    | 'tanium'
+    | 'sentinelone_s2s'
+    | 'custom_s2s';
 }
 
 export namespace IntegrationEditParams {
@@ -486,6 +531,25 @@ export namespace IntegrationEditParams {
      * The SentinelOne S2S client secret.
      */
     client_secret: string;
+  }
+
+  export interface TeamsDevicesCustomS2sConfigRequest {
+    /**
+     * This id will be passed in the `CF-Access-Client-ID` header when hitting the
+     * `api_url`
+     */
+    access_client_id: string;
+
+    /**
+     * This secret will be passed in the `CF-Access-Client-Secret` header when hitting
+     * the `api_url`
+     */
+    access_client_secret: string;
+
+    /**
+     * The Custom Device Posture Integration API URL.
+     */
+    api_url: string;
   }
 }
 
