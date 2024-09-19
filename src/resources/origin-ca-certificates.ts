@@ -116,14 +116,41 @@ export interface OriginCACertificate {
 
 export interface OriginCACertificateDeleteResponse {
   /**
+   * The Certificate Signing Request (CSR). Must be newline-encoded.
+   */
+  csr: string;
+
+  /**
+   * Array of hostnames or wildcard names (e.g., \*.example.com) bound to the
+   * certificate.
+   */
+  hostnames: Array<string>;
+
+  /**
+   * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa),
+   * or "keyless-certificate" (for Keyless SSL servers).
+   */
+  request_type: Shared.CertificateRequestType;
+
+  /**
+   * The number of days for which the certificate should be valid.
+   */
+  requested_validity: CertificatePacksAPI.RequestValidity;
+
+  /**
    * Identifier
    */
   id?: string;
 
   /**
-   * When the certificate was revoked.
+   * The Origin CA certificate. Will be newline-encoded.
    */
-  revoked_at?: string;
+  certificate?: string;
+
+  /**
+   * When the certificate will expire.
+   */
+  expires_on?: string;
 }
 
 export interface OriginCACertificateCreateParams {

@@ -2804,7 +2804,7 @@ export namespace SetCacheSettingsRule {
       /**
        * The minimum file size eligible for store in cache reserve.
        */
-      minimum_file_size: number;
+      min_file_size: number;
     }
 
     /**
@@ -3232,7 +3232,7 @@ export namespace SetCacheSettingsRuleParam {
       /**
        * The minimum file size eligible for store in cache reserve.
        */
-      minimum_file_size: number;
+      min_file_size: number;
     }
 
     /**
@@ -6042,7 +6042,7 @@ export namespace RuleCreateParams {
         /**
          * The minimum file size eligible for store in cache reserve.
          */
-        minimum_file_size: number;
+        min_file_size: number;
       }
 
       /**
@@ -8043,7 +8043,7 @@ export namespace RuleEditParams {
         /**
          * The minimum file size eligible for store in cache reserve.
          */
-        minimum_file_size: number;
+        min_file_size: number;
       }
 
       /**

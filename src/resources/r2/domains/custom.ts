@@ -86,12 +86,6 @@ export interface CustomCreateResponse {
    * Whether this bucket is publicly accessible at the specified custom domain
    */
   enabled: boolean;
-
-  /**
-   * Minimum TLS Version the custom domain will accept for incoming connections. If
-   * not set, defaults to 1.0.
-   */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface CustomUpdateResponse {
@@ -104,12 +98,6 @@ export interface CustomUpdateResponse {
    * Whether this bucket is publicly accessible at the specified custom domain
    */
   enabled?: boolean;
-
-  /**
-   * Minimum TLS Version the custom domain will accept for incoming connections. If
-   * not set, defaults to 1.0.
-   */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface CustomListResponse {
@@ -129,12 +117,6 @@ export namespace CustomListResponse {
     enabled: boolean;
 
     status: Domain.Status;
-
-    /**
-     * Minimum TLS Version the custom domain will accept for incoming connections. If
-     * not set, defaults to 1.0.
-     */
-    minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 
     /**
      * Zone ID of the custom domain resides in
@@ -190,12 +172,6 @@ export interface CustomCreateParams {
    * undefined, the domain will be enabled.
    */
   enabled?: boolean;
-
-  /**
-   * Body param: Minimum TLS Version the custom domain will accept for incoming
-   * connections. If not set, defaults to 1.0.
-   */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface CustomUpdateParams {
@@ -209,12 +185,6 @@ export interface CustomUpdateParams {
    * domain
    */
   enabled?: boolean;
-
-  /**
-   * Body param: Minimum TLS Version the custom domain will accept for incoming
-   * connections. If not set, defaults to previous value.
-   */
-  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 }
 
 export interface CustomListParams {

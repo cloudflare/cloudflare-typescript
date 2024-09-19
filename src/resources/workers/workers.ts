@@ -312,11 +312,6 @@ export interface MigrationStep {
   new_classes?: Array<string>;
 
   /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
-
-  /**
    * A list of classes with Durable Object namespaces that were renamed.
    */
   renamed_classes?: Array<MigrationStep.RenamedClass>;
@@ -354,11 +349,6 @@ export interface MigrationStepParam {
    * A list of classes to create Durable Object namespaces from.
    */
   new_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
 
   /**
    * A list of classes with Durable Object namespaces that were renamed.
@@ -518,11 +508,6 @@ export interface SingleStepMigration {
   new_classes?: Array<string>;
 
   /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
-
-  /**
    * Tag to set as the latest migration tag.
    */
   new_tag?: string;
@@ -574,11 +559,6 @@ export interface SingleStepMigrationParam {
    * A list of classes to create Durable Object namespaces from.
    */
   new_classes?: Array<string>;
-
-  /**
-   * A list of classes to create Durable Object namespaces with SQLite from.
-   */
-  new_sqlite_classes?: Array<string>;
 
   /**
    * Tag to set as the latest migration tag.
