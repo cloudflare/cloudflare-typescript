@@ -101,6 +101,12 @@ export namespace Configuration {
      * Name of the warp device.
      */
     name: string;
+
+    /**
+     * IPv4 CIDR of the router sourcing flow data associated with this warp device.
+     * Only /32 addresses are currently supported.
+     */
+    router_ip: string;
   }
 }
 
@@ -146,6 +152,12 @@ export namespace ConfigCreateParams {
      * Name of the warp device.
      */
     name: string;
+
+    /**
+     * IPv4 CIDR of the router sourcing flow data associated with this warp device.
+     * Only /32 addresses are currently supported.
+     */
+    router_ip: string;
   }
 }
 
@@ -191,6 +203,12 @@ export namespace ConfigUpdateParams {
      * Name of the warp device.
      */
     name: string;
+
+    /**
+     * IPv4 CIDR of the router sourcing flow data associated with this warp device.
+     * Only /32 addresses are currently supported.
+     */
+    router_ip: string;
   }
 }
 
@@ -240,6 +258,12 @@ export namespace ConfigEditParams {
      * Name of the warp device.
      */
     name: string;
+
+    /**
+     * IPv4 CIDR of the router sourcing flow data associated with this warp device.
+     * Only /32 addresses are currently supported.
+     */
+    router_ip: string;
   }
 }
 
