@@ -3,11 +3,13 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as FirewallAPI from './firewall';
+import * as ReverseDNSAPI from './reverse-dns';
 import * as AnalyticsAPI from './analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Firewall extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
+  reverseDNS: ReverseDNSAPI.ReverseDNS = new ReverseDNSAPI.ReverseDNS(this._client);
 
   /**
    * Create a DNS Firewall cluster
@@ -586,4 +588,9 @@ export namespace Firewall {
   export import FirewallGetParams = FirewallAPI.FirewallGetParams;
   export import Analytics = AnalyticsAPI.Analytics;
   export import Delta = AnalyticsAPI.Delta;
+  export import ReverseDNS = ReverseDNSAPI.ReverseDNS;
+  export import ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
+  export import ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
+  export import ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
+  export import ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
 }
