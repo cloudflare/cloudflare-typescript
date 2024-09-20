@@ -55,6 +55,11 @@ export interface Script {
   url_contains_cdn_cgi_path: boolean;
 
   /**
+   * The cryptomining score of the JavaScript content.
+   */
+  cryptomining_score?: number | null;
+
+  /**
    * The dataflow score of the JavaScript content.
    */
   dataflow_score?: number | null;
@@ -78,9 +83,19 @@ export interface Script {
    */
   js_integrity_score?: number | null;
 
+  /**
+   * The magecart score of the JavaScript content.
+   */
+  magecart_score?: number | null;
+
   malicious_domain_categories?: Array<string>;
 
   malicious_url_categories?: Array<string>;
+
+  /**
+   * The malware score of the JavaScript content.
+   */
+  malware_score?: number | null;
 
   /**
    * The obfuscation score of the JavaScript content.
@@ -111,6 +126,11 @@ export interface ScriptGetResponse {
   url_contains_cdn_cgi_path: boolean;
 
   /**
+   * The cryptomining score of the JavaScript content.
+   */
+  cryptomining_score?: number | null;
+
+  /**
    * The dataflow score of the JavaScript content.
    */
   dataflow_score?: number | null;
@@ -134,9 +154,19 @@ export interface ScriptGetResponse {
    */
   js_integrity_score?: number | null;
 
+  /**
+   * The magecart score of the JavaScript content.
+   */
+  magecart_score?: number | null;
+
   malicious_domain_categories?: Array<string>;
 
   malicious_url_categories?: Array<string>;
+
+  /**
+   * The malware score of the JavaScript content.
+   */
+  malware_score?: number | null;
 
   /**
    * The obfuscation score of the JavaScript content.
@@ -156,6 +186,11 @@ export namespace ScriptGetResponse {
    */
   export interface Version {
     /**
+     * The cryptomining score of the JavaScript content.
+     */
+    cryptomining_score?: number | null;
+
+    /**
      * The dataflow score of the JavaScript content.
      */
     dataflow_score?: number | null;
@@ -174,6 +209,16 @@ export namespace ScriptGetResponse {
      * The integrity score of the JavaScript content.
      */
     js_integrity_score?: number | null;
+
+    /**
+     * The magecart score of the JavaScript content.
+     */
+    magecart_score?: number | null;
+
+    /**
+     * The malware score of the JavaScript content.
+     */
+    malware_score?: number | null;
 
     /**
      * The obfuscation score of the JavaScript content.
