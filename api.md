@@ -974,6 +974,18 @@ Methods:
 
 - <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report/bytime">client.dns.firewall.analytics.reports.bytimes.<a href="./src/resources/dns/firewall/analytics/reports/bytimes.ts">get</a>(dnsFirewallId, { ...params }) -> ByTime</code>
 
+### ReverseDNS
+
+Types:
+
+- <code><a href="./src/resources/dns/firewall/reverse-dns.ts">ReverseDNSEditResponse</a></code>
+- <code><a href="./src/resources/dns/firewall/reverse-dns.ts">ReverseDNSGetResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dns.firewall.reverseDNS.<a href="./src/resources/dns/firewall/reverse-dns.ts">edit</a>(dnsFirewallId, { ...params }) -> ReverseDNSEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns">client.dns.firewall.reverseDNS.<a href="./src/resources/dns/firewall/reverse-dns.ts">get</a>(dnsFirewallId, { ...params }) -> ReverseDNSGetResponse</code>
+
 # DNSSEC
 
 Types:
@@ -4292,6 +4304,25 @@ Types:
 - <code><a href="./src/resources/zero-trust/access/access.ts">SAMLGroupRule</a></code>
 - <code><a href="./src/resources/zero-trust/access/access.ts">ServiceTokenRule</a></code>
 
+### Infrastructure
+
+#### Targets
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/access/infrastructure/targets.ts">TargetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/infrastructure/targets">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">create</a>({ ...params }) -> TargetCreateResponse</code>
+- <code title="put /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">update</a>(targetId, { ...params }) -> TargetUpdateResponse</code>
+- <code title="get /accounts/{account_id}/infrastructure/targets">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">list</a>({ ...params }) -> TargetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">delete</a>(targetId, { ...params }) -> void</code>
+- <code title="get /accounts/{account_id}/infrastructure/targets/{target_id}">client.zeroTrust.access.infrastructure.targets.<a href="./src/resources/zero-trust/access/infrastructure/targets.ts">get</a>(targetId, { ...params }) -> TargetGetResponse</code>
+
 ### Applications
 
 Types:
@@ -4639,6 +4670,11 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">AggregateTimePeriod</a></code>
 - <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">Tests</a></code>
+- <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">TestListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/dex/tests/overview">client.zeroTrust.dex.tests.<a href="./src/resources/zero-trust/dex/tests/tests.ts">list</a>({ ...params }) -> TestListResponsesV4PagePagination</code>
 
 #### UniqueDevices
 
@@ -6482,6 +6518,22 @@ Methods:
 - <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">delete</a>(accountIdentifier, priorityIdentifer) -> PriorityDeleteResponse</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/{priority_identifer}">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">get</a>(accountIdentifier, priorityIdentifer) -> Item</code>
 - <code title="get /accounts/{account_identifier}/cloudforce-one/requests/priority/quota">client.cloudforceOne.requests.priority.<a href="./src/resources/cloudforce-one/requests/priority.ts">quota</a>(accountIdentifier) -> Quota</code>
+
+### Assets
+
+Types:
+
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetCreateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetUpdateResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetDeleteResponse</a></code>
+- <code><a href="./src/resources/cloudforce-one/requests/assets.ts">AssetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">create</a>(accountIdentifier, requestIdentifier, { ...params }) -> AssetCreateResponse</code>
+- <code title="put /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">update</a>(accountIdentifier, requestIdentifier, assetIdentifer, { ...params }) -> AssetUpdateResponse</code>
+- <code title="delete /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">delete</a>(accountIdentifier, requestIdentifier, assetIdentifer) -> AssetDeleteResponse</code>
+- <code title="get /accounts/{account_identifier}/cloudforce-one/requests/{request_identifier}/asset/{asset_identifer}">client.cloudforceOne.requests.assets.<a href="./src/resources/cloudforce-one/requests/assets.ts">get</a>(accountIdentifier, requestIdentifier, assetIdentifer) -> AssetGetResponse</code>
 
 # EventNotifications
 

@@ -11,10 +11,12 @@ import * as ServiceTokensAPI from './service-tokens';
 import * as TagsAPI from './tags';
 import * as ApplicationsAPI from './applications/applications';
 import * as CertificatesAPI from './certificates/certificates';
+import * as InfrastructureAPI from './infrastructure/infrastructure';
 import * as LogsAPI from './logs/logs';
 import * as UsersAPI from './users/users';
 
 export class Access extends APIResource {
+  infrastructure: InfrastructureAPI.Infrastructure = new InfrastructureAPI.Infrastructure(this._client);
   applications: ApplicationsAPI.Applications = new ApplicationsAPI.Applications(this._client);
   certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
   groups: GroupsAPI.Groups = new GroupsAPI.Groups(this._client);
@@ -739,6 +741,7 @@ export namespace Access {
   export import OktaGroupRule = AccessAPI.OktaGroupRule;
   export import SAMLGroupRule = AccessAPI.SAMLGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
+  export import Infrastructure = InfrastructureAPI.Infrastructure;
   export import Applications = ApplicationsAPI.Applications;
   export import AllowedHeaders = ApplicationsAPI.AllowedHeaders;
   export import AllowedIdPs = ApplicationsAPI.AllowedIdPs;
