@@ -6607,7 +6607,25 @@ Methods:
 
 ### Configuration
 
+Types:
+
+- <code><a href="./src/resources/event-notifications/r2/configuration/configuration.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.eventNotifications.r2.configuration.<a href="./src/resources/event-notifications/r2/configuration/configuration.ts">get</a>(bucketName, { ...params }) -> ConfigurationGetResponse</code>
+
 #### Queues
+
+Types:
+
+- <code><a href="./src/resources/event-notifications/r2/configuration/queues.ts">QueueUpdateResponse</a></code>
+- <code><a href="./src/resources/event-notifications/r2/configuration/queues.ts">QueueDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.eventNotifications.r2.configuration.queues.<a href="./src/resources/event-notifications/r2/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
 
 # AIGateway
 
