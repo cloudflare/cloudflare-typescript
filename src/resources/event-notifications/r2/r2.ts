@@ -9,4 +9,6 @@ export class R2 extends APIResource {
 
 export namespace R2 {
   export import Configuration = ConfigurationAPI.Configuration;
+  export import ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
+  export import ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
 }
