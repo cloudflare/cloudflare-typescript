@@ -51,7 +51,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 DNS queries by IP Version over time.
+   * Percentage distribution of AS112 DNS queries by IP version over time.
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -74,7 +74,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 dns requests classified per Protocol over time.
+   * Percentage distribution of AS112 DNS requests classified by protocol over time.
    */
   protocol(
     query?: TimeseriesGroupProtocolParams,
@@ -96,7 +96,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 DNS queries by Query Type over time.
+   * Percentage distribution of AS112 DNS queries by query type over time.
    */
   queryType(
     query?: TimeseriesGroupQueryTypeParams,
@@ -119,7 +119,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 dns requests classified per Response Codes over
+   * Percentage distribution of AS112 DNS requests classified by response code over
    * time.
    */
   responseCodes(

@@ -51,7 +51,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of network protocols in layer 3/4 attacks over a given
+   * Percentage distribution of network protocols in Layer 3/4 attacks over a given
    * time period.
    */
   get(query?: SummaryGetParams, options?: Core.RequestOptions): Core.APIPromise<SummaryGetResponse>;

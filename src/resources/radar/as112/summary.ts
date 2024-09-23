@@ -26,7 +26,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries, to AS112, by EDNS support.
+   * Percentage distribution of DNS queries to AS112 by EDNS support.
    */
   edns(query?: SummaryEdnsParams, options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
   edns(options?: Core.RequestOptions): Core.APIPromise<SummaryEdnsResponse>;
@@ -89,7 +89,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of DNS queries to AS112 by Query Type.
+   * Percentage distribution of DNS queries to AS112 by query type.
    */
   queryType(
     query?: SummaryQueryTypeParams,
@@ -111,7 +111,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of AS112 dns requests classified per Response Codes.
+   * Percentage distribution of AS112 DNS requests classified by response code.
    */
   responseCodes(
     query?: SummaryResponseCodesParams,

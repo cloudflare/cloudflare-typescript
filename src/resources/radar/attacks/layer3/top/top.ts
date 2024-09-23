@@ -32,7 +32,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the Industry of attacks.
+   * Get the industries targeted by attacks.
    */
   industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
   industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
@@ -51,7 +51,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the Verticals of attacks.
+   * Get the verticals targeted by attacks.
    */
   vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
   vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;

@@ -7,9 +7,9 @@ import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
-   * Get the top origin Autonomous Systems of and by layer 7 attacks. Values are a
-   * percentage out of the total layer 7 attacks. The origin Autonomous Systems is
-   * determined by the client IP.
+   * Get the top origin Autonomous Systems of and by Layer 7 attacks. Values are a
+   * percentage out of the total Layer 7 attacks. The origin Autonomous Systems is
+   * determined by the client IP address.
    */
   origin(query?: AseOriginParams, options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;
   origin(options?: Core.RequestOptions): Core.APIPromise<AseOriginResponse>;

@@ -7,7 +7,7 @@ import * as ASNsAPI from './asns';
 
 export class ASNs extends APIResource {
   /**
-   * Gets a list of autonomous systems (AS).
+   * Get a list of autonomous systems (ASes).
    */
   list(query?: ASNListParams, options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<ASNListResponse>;

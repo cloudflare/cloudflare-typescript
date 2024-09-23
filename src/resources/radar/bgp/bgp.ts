@@ -18,8 +18,8 @@ export class BGP extends APIResource {
   ips: IPsAPI.IPs = new IPsAPI.IPs(this._client);
 
   /**
-   * Gets BGP updates change over time. Raw values are returned. When requesting
-   * updates of an autonomous system (AS), only BGP updates of type announcement are
+   * Get BGP updates change over time. Raw values are returned. When requesting
+   * updates for an autonomous system (AS), only BGP updates of type announcement are
    * returned.
    */
   timeseries(
