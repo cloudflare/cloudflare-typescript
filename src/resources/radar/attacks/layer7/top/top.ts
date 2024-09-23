@@ -13,10 +13,10 @@ export class Top extends APIResource {
 
   /**
    * Get the top attacks from origin to target location. Values are a percentage out
-   * of the total layer 7 attacks (with billing country). The attack magnitude can be
+   * of the total Layer 7 attacks (with billing country). The attack magnitude can be
    * defined by the number of mitigated requests or by the number of zones affected.
-   * You can optionally limit the number of attacks per origin/target location
-   * (useful if all the top attacks are from or to the same location).
+   * You can optionally limit the number of attacks by origin/target location (useful
+   * if all the top attacks are from or to the same location).
    */
   attacks(query?: TopAttacksParams, options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
   attacks(options?: Core.RequestOptions): Core.APIPromise<TopAttacksResponse>;
@@ -35,7 +35,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the Industry of attacks.
+   * Get the industries targeted by attacks.
    */
   industry(query?: TopIndustryParams, options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
   industry(options?: Core.RequestOptions): Core.APIPromise<TopIndustryResponse>;
@@ -54,7 +54,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the Verticals of attacks.
+   * Get the verticals targeted by attacks.
    */
   vertical(query?: TopVerticalParams, options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;
   vertical(options?: Core.RequestOptions): Core.APIPromise<TopVerticalResponse>;

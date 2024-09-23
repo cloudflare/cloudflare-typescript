@@ -7,8 +7,8 @@ import * as IPVersionAPI from './ip-version';
 
 export class IPVersion extends APIResource {
   /**
-   * Get the top autonomous systems, by HTTP traffic, of the requested IP protocol
-   * version. Values are a percentage out of the total traffic.
+   * Get the top autonomous systems, by HTTP traffic, of the requested IP version.
+   * Values are a percentage out of the total traffic.
    */
   get(
     ipVersion: 'IPv4' | 'IPv6',

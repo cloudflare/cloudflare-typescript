@@ -7,8 +7,8 @@ import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**
-   * Gets time-series data for the announced IP space count, represented as the
-   * number of IPv4 /24s and IPv6 /48s, for a given ASN.
+   * Get time series data for the announced IP space count, represented as the number
+   * of IPv4 /24s and IPv6 /48s, for a given ASN.
    */
   timeseries(
     query?: IPTimeseriesParams,

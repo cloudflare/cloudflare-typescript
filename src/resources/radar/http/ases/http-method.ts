@@ -8,7 +8,7 @@ import * as HTTPMethodAPI from './http-method';
 export class HTTPMethod extends APIResource {
   /**
    * Get the top autonomous systems (AS), by HTTP traffic, of the requested HTTP
-   * protocol version. Values are a percentage out of the total traffic.
+   * version. Values are a percentage out of the total traffic.
    */
   get(
     httpVersion: 'HTTPv1' | 'HTTPv2' | 'HTTPv3',

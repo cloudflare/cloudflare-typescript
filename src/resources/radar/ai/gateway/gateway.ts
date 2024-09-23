@@ -13,17 +13,5 @@ export class Gateway extends APIResource {
 
 export namespace Gateway {
   export import Summary = SummaryAPI.Summary;
-  export import SummaryModelResponse = SummaryAPI.SummaryModelResponse;
-  export import SummaryProviderResponse = SummaryAPI.SummaryProviderResponse;
-  export import SummaryTaskResponse = SummaryAPI.SummaryTaskResponse;
-  export import SummaryModelParams = SummaryAPI.SummaryModelParams;
-  export import SummaryProviderParams = SummaryAPI.SummaryProviderParams;
-  export import SummaryTaskParams = SummaryAPI.SummaryTaskParams;
   export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupModelResponse = TimeseriesGroupsAPI.TimeseriesGroupModelResponse;
-  export import TimeseriesGroupProviderResponse = TimeseriesGroupsAPI.TimeseriesGroupProviderResponse;
-  export import TimeseriesGroupTaskResponse = TimeseriesGroupsAPI.TimeseriesGroupTaskResponse;
-  export import TimeseriesGroupModelParams = TimeseriesGroupsAPI.TimeseriesGroupModelParams;
-  export import TimeseriesGroupProviderParams = TimeseriesGroupsAPI.TimeseriesGroupProviderParams;
-  export import TimeseriesGroupTaskParams = TimeseriesGroupsAPI.TimeseriesGroupTaskParams;
 }

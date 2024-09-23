@@ -6,7 +6,7 @@ import * as SearchAPI from './search';
 
 export class Search extends APIResource {
   /**
-   * Lets you search for locations, autonomous systems (AS) and reports.
+   * Lets you search for locations, autonomous systems (ASes), and reports.
    */
   global(query: SearchGlobalParams, options?: Core.RequestOptions): Core.APIPromise<SearchGlobalResponse> {
     return (

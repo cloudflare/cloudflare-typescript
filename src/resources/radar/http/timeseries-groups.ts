@@ -79,7 +79,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per device type.
+   * Get a time series of the percentage distribution of traffic by device type.
    */
   deviceType(
     query?: TimeseriesGroupDeviceTypeParams,
@@ -102,7 +102,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per HTTP protocol.
+   * Get a time series of the percentage distribution of traffic by HTTP protocol.
    */
   httpProtocol(
     query?: TimeseriesGroupHTTPProtocolParams,
@@ -125,8 +125,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per HTTP protocol
-   * version.
+   * Get a time series of the percentage distribution of traffic by HTTP version.
    */
   httpVersion(
     query?: TimeseriesGroupHTTPVersionParams,
@@ -149,8 +148,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per IP protocol
-   * version.
+   * Get a time series of the percentage distribution of traffic by IP version.
    */
   ipVersion(
     query?: TimeseriesGroupIPVersionParams,
@@ -195,7 +193,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per Post Quantum
+   * Get a time series of the percentage distribution of traffic by post-quantum
    * suport.
    */
   postQuantum(
@@ -219,7 +217,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a time series of the percentage distribution of traffic per TLS protocol
+   * Get a time series of the percentage distribution of traffic by TLS protocol
    * version.
    */
   tlsVersion(

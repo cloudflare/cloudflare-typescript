@@ -7,7 +7,7 @@ import * as LocationsAPI from './locations';
 
 export class Locations extends APIResource {
   /**
-   * Internet traffic anomalies are signals that might point to an outage, These
+   * Internet traffic anomalies are signals that might point to an outage. These
    * alerts are automatically detected by Radar and then manually verified by our
    * team. This endpoint returns the sum of alerts grouped by location.
    */

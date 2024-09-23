@@ -7,7 +7,7 @@ import * as RoutesAPI from './routes';
 
 export class Routes extends APIResource {
   /**
-   * List all ASes on current global routing tables with routing statistics
+   * List all ASes in current global routing tables with routing statistics
    */
   ases(query?: RouteAsesParams, options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
   ases(options?: Core.RequestOptions): Core.APIPromise<RouteAsesResponse>;
@@ -26,7 +26,7 @@ export class Routes extends APIResource {
   }
 
   /**
-   * List all Multi-origin AS (MOAS) prefixes on the global routing tables.
+   * List all Multi-Origin AS (MOAS) prefixes on the global routing tables.
    */
   moas(query?: RouteMoasParams, options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;
   moas(options?: Core.RequestOptions): Core.APIPromise<RouteMoasResponse>;

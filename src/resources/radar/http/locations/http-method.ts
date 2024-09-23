@@ -7,7 +7,7 @@ import * as HTTPMethodAPI from './http-method';
 
 export class HTTPMethod extends APIResource {
   /**
-   * Get the top locations, by HTTP traffic, of the requested HTTP protocol. Values
+   * Get the top locations, by HTTP traffic, of the requested HTTP version. Values
    * are a percentage out of the total traffic.
    */
   get(

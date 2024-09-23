@@ -27,7 +27,9 @@ export class Records extends APIResource {
   }
 
   /**
-   * Overwrite an existing DNS record. Notes:
+   * Overwrite an existing DNS record.
+   *
+   * Notes:
    *
    * - A/AAAA records cannot exist on the same name as CNAME records.
    * - NS records cannot exist on the same name as any other record type.
@@ -80,7 +82,9 @@ export class Records extends APIResource {
   }
 
   /**
-   * Update an existing DNS record. Notes:
+   * Update an existing DNS record.
+   *
+   * Notes:
    *
    * - A/AAAA records cannot exist on the same name as CNAME records.
    * - NS records cannot exist on the same name as any other record type.
