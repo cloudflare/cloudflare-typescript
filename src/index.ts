@@ -10,22 +10,22 @@ import * as API from './resources/index';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['CLOUDFLARE_API_TOKEN'].
+   * The preferred authorization scheme for interacting with the Cloudflare API. [Create a token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
    */
   apiToken?: string | null | undefined;
 
   /**
-   * Defaults to process.env['CLOUDFLARE_API_KEY'].
+   * The previous authorization scheme for interacting with the Cloudflare API. When possible, use API tokens instead of Global API keys.
    */
   apiKey?: string | null | undefined;
 
   /**
-   * Defaults to process.env['CLOUDFLARE_EMAIL'].
+   * The previous authorization scheme for interacting with the Cloudflare API, used in conjunction with a Global API key.
    */
   apiEmail?: string | null | undefined;
 
   /**
-   * Defaults to process.env['CLOUDFLARE_API_USER_SERVICE_KEY'].
+   * Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).
    */
   userServiceKey?: string | null | undefined;
 
