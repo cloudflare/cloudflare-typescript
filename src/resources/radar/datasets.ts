@@ -43,7 +43,7 @@ export class Datasets extends APIResource {
   }
 
   /**
-   * Get the csv content of a given dataset by alias or id. When getting the content
+   * Get the CSV content of a given dataset by alias or ID. When getting the content
    * by alias the latest dataset is returned, optionally filtered by the latest
    * available at a given date.
    */

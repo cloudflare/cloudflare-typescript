@@ -10,7 +10,7 @@ export class Annotations extends APIResource {
   outages: OutagesAPI.Outages = new OutagesAPI.Outages(this._client);
 
   /**
-   * Get latest annotations.
+   * Get the latest annotations.
    */
   list(query?: AnnotationListParams, options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<AnnotationListResponse>;

@@ -7,8 +7,7 @@ import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Get a time series of the percentual distribution of mitigation techniques, over
-   * time.
+   * Get a time series of the distribution of mitigation techniques over time.
    */
   get(
     query?: TimeseriesGroupGetParams,
@@ -76,7 +75,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by industry used over time.
+   * Percentage distribution of attacks by targeted industry over time.
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -168,7 +167,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by vertical used over time.
+   * Percentage distribution of attacks by targeted vertical over time.
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,

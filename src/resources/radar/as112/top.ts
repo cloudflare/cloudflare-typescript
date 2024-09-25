@@ -7,7 +7,7 @@ import * as TopAPI from './top';
 
 export class Top extends APIResource {
   /**
-   * Get the top locations by DNS queries DNSSEC support to AS112.
+   * Get the top locations of DNS queries to AS112 with DNSSEC.
    */
   dnssec(
     dnssec: 'SUPPORTED' | 'NOT_SUPPORTED',
@@ -35,7 +35,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the top locations, by DNS queries EDNS support to AS112.
+   * Get the top locations of DNS queries to AS112 with EDNS support.
    */
   edns(
     edns: 'SUPPORTED' | 'NOT_SUPPORTED',
@@ -59,7 +59,7 @@ export class Top extends APIResource {
   }
 
   /**
-   * Get the top locations by DNS queries IP version to AS112.
+   * Get the top locations of DNS queries to AS112 by IP version.
    */
   ipVersion(
     ipVersion: 'IPv4' | 'IPv6',

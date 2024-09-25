@@ -26,7 +26,7 @@ export class Outages extends APIResource {
   }
 
   /**
-   * Get the number of outages for locations.
+   * Get the number of outages by location.
    */
   locations(
     query?: OutageLocationsParams,

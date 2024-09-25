@@ -7,7 +7,7 @@ import * as SpamAPI from './spam';
 
 export class Spam extends APIResource {
   /**
-   * Get the top TLDs by emails classified as Spam or not.
+   * Get the top TLDs by emails classified as spam or not.
    */
   get(
     spam: 'SPAM' | 'NOT_SPAM',

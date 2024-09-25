@@ -8,7 +8,7 @@ import * as EmailAPI from '../email';
 
 export class Summary extends APIResource {
   /**
-   * Percentage distribution of emails classified per ARC validation.
+   * Percentage distribution of emails classified by ARC validation.
    */
   arc(query?: SummaryARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
   arc(options?: Core.RequestOptions): Core.APIPromise<SummaryARCResponse>;
@@ -27,7 +27,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DKIM validation.
+   * Percentage distribution of emails classified by DKIM validation.
    */
   dkim(query?: SummaryDKIMParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
   dkim(options?: Core.RequestOptions): Core.APIPromise<SummaryDKIMResponse>;
@@ -46,7 +46,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DMARC validation.
+   * Percentage distribution of emails classified by DMARC validation.
    */
   dmarc(query?: SummaryDMARCParams, options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
   dmarc(options?: Core.RequestOptions): Core.APIPromise<SummaryDMARCResponse>;
@@ -106,7 +106,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per SPF validation.
+   * Percentage distribution of emails classified by SPF validation.
    */
   spf(query?: SummarySPFParams, options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
   spf(options?: Core.RequestOptions): Core.APIPromise<SummarySPFResponse>;
@@ -167,7 +167,7 @@ export class Summary extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per TLS Version.
+   * Percentage distribution of emails classified by TLS version.
    */
   tlsVersion(
     query?: SummaryTLSVersionParams,

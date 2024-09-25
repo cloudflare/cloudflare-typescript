@@ -8,7 +8,7 @@ import * as EmailAPI from '../email';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of emails classified per Arc validation over time.
+   * Percentage distribution of emails classified by ARC validation over time.
    */
   arc(
     query?: TimeseriesGroupARCParams,
@@ -31,7 +31,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DKIM validation over time.
+   * Percentage distribution of emails classified by DKIM validation over time.
    */
   dkim(
     query?: TimeseriesGroupDKIMParams,
@@ -54,7 +54,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per DMARC validation over time.
+   * Percentage distribution of emails classified by DMARC validation over time.
    */
   dmarc(
     query?: TimeseriesGroupDMARCParams,
@@ -123,7 +123,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per SPF validation over time.
+   * Percentage distribution of emails classified by SPF validation over time.
    */
   spf(
     query?: TimeseriesGroupSPFParams,
@@ -169,7 +169,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified in Threat Categories over time.
+   * Percentage distribution of emails classified by threat category over time.
    */
   threatCategory(
     query?: TimeseriesGroupThreatCategoryParams,
@@ -192,7 +192,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of emails classified per TLS Version over time.
+   * Percentage distribution of emails classified by TLS version over time.
    */
   tlsVersion(
     query?: TimeseriesGroupTLSVersionParams,

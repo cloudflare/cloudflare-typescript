@@ -53,7 +53,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Get a timeseries of the percentage distribution of network protocols in Layer
+   * Get a time series of the percentage distribution of network protocols in Layer
    * 3/4 attacks.
    */
   get(

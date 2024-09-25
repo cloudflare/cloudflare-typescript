@@ -14,8 +14,8 @@ export class Tlds extends APIResource {
   spoof: SpoofAPI.Spoof = new SpoofAPI.Spoof(this._client);
 
   /**
-   * Get the top TLDs by email messages. Values are a percentage out of the total
-   * emails.
+   * Get the top TLDs by email messages. Values are a percentage out of total email
+   * volume.
    */
   get(query?: TldGetParams, options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<TldGetResponse>;

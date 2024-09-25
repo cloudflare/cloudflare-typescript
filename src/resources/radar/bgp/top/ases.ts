@@ -7,8 +7,8 @@ import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
-   * Get the top autonomous systems (AS) by BGP updates (announcements only). Values
-   * are a percentage out of the total updates.
+   * Get the top autonomous systems (ASes) by BGP updates (announcements only).
+   * Values are a percentage out of the total updates.
    */
   get(query?: AseGetParams, options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
   get(options?: Core.RequestOptions): Core.APIPromise<AseGetResponse>;
