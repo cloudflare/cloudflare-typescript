@@ -5365,14 +5365,6 @@ Methods:
 
 # URLScanner
 
-Types:
-
-- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerScanResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{accountId}/urlscanner/scan">client.urlScanner.<a href="./src/resources/url-scanner/url-scanner.ts">scan</a>(accountId, { ...params }) -> URLScannerScanResponse</code>
-
 ## Scans
 
 Types:
@@ -5380,12 +5372,14 @@ Types:
 - <code><a href="./src/resources/url-scanner/scans.ts">URLScannerDomain</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">URLScannerTask</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanCreateResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanListResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanGetResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanHarResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{accountId}/urlscanner/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">create</a>(accountId, { ...params }) -> ScanCreateResponse</code>
+- <code title="get /accounts/{accountId}/urlscanner/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">list</a>(accountId, { ...params }) -> ScanListResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">get</a>(accountId, scanId, { ...params }) -> ScanGetResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/har">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(accountId, scanId) -> ScanHarResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/screenshot">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(accountId, scanId, { ...params }) -> Response</code>
