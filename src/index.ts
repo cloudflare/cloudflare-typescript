@@ -223,7 +223,6 @@ export class Cloudflare extends Core.APIClient {
   snippets: API.Snippets = new API.Snippets(this);
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
-  eventNotifications: API.EventNotifications = new API.EventNotifications(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
   iam: API.IAM = new API.IAM(this);
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
@@ -549,8 +548,6 @@ export namespace Cloudflare {
   export import Calls = API.Calls;
 
   export import CloudforceOne = API.CloudforceOne;
-
-  export import EventNotifications = API.EventNotifications;
 
   export import AIGateway = API.AIGateway;
 

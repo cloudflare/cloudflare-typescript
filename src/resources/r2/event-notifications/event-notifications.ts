@@ -3,11 +3,11 @@
 import { APIResource } from '../../../resource';
 import * as ConfigurationAPI from './configuration/configuration';
 
-export class R2 extends APIResource {
+export class EventNotifications extends APIResource {
   configuration: ConfigurationAPI.Configuration = new ConfigurationAPI.Configuration(this._client);
 }
 
-export namespace R2 {
+export namespace EventNotifications {
   export import Configuration = ConfigurationAPI.Configuration;
   export import ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
   export import ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;

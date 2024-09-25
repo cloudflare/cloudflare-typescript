@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource configuration', () => {
   test('get: only required params', async () => {
-    const responsePromise = client.eventNotifications.r2.configuration.get('example-bucket', {
+    const responsePromise = client.r2.eventNotifications.configuration.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,7 +24,7 @@ describe('resource configuration', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.eventNotifications.r2.configuration.get('example-bucket', {
+    const response = await client.r2.eventNotifications.configuration.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

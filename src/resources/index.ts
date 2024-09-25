@@ -29,7 +29,6 @@ export { Diagnostics } from './diagnostics/diagnostics';
 export { DurableObjects } from './durable-objects/durable-objects';
 export { EmailRouting } from './email-routing/email-routing';
 export { EmailSecurity } from './email-security/email-security';
-export { EventNotifications } from './event-notifications/event-notifications';
 export { Filters } from './filters';
 export { Firewall } from './firewall/firewall';
 export { Healthchecks } from './healthchecks/healthchecks';
