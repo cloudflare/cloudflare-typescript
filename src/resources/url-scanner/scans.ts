@@ -912,12 +912,12 @@ export interface ScanCreateParams {
   url: string;
 
   /**
-   * Set custom headers
+   * Set custom headers.
    */
   customHeaders?: Record<string, string>;
 
   /**
-   * Take multiple screenshots targeting different device types
+   * Take multiple screenshots targeting different device types.
    */
   screenshotsResolutions?: Array<'desktop' | 'mobile' | 'tablet'>;
 
@@ -1033,7 +1033,7 @@ export interface ScanGetParams {
 
 export interface ScanScreenshotParams {
   /**
-   * Target device type
+   * Target device type.
    */
   resolution?: 'desktop' | 'mobile' | 'tablet';
 }
