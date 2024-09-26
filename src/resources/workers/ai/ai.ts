@@ -30,6 +30,9 @@ export class AI extends APIResource {
   }
 }
 
+/**
+ * An array of classification results for the input text
+ */
 export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
@@ -44,18 +47,31 @@ export type AIRunResponse =
 
 export namespace AIRunResponse {
   export interface TextClassification {
+    /**
+     * The classification label assigned to the text (e.g., 'POSITIVE' or 'NEGATIVE')
+     */
     label?: string;
 
+    /**
+     * Confidence score indicating the likelihood that the text belongs to the
+     * specified label
+     */
     score?: number;
   }
 
   export interface TextEmbeddings {
+    /**
+     * Embeddings of the requested text values
+     */
     data?: Array<Array<number>>;
 
     shape?: Array<number>;
   }
 
   export interface AutomaticSpeechRecognition {
+    /**
+     * The transcription
+     */
     text: string;
 
     vtt?: string;
@@ -67,8 +83,14 @@ export namespace AIRunResponse {
 
   export namespace AutomaticSpeechRecognition {
     export interface Word {
+      /**
+       * The ending second when the word completes
+       */
       end?: number;
 
+      /**
+       * The second this word begins in the recording
+       */
       start?: number;
 
       word?: string;
@@ -76,50 +98,99 @@ export namespace AIRunResponse {
   }
 
   export interface ImageClassification {
+    /**
+     * The predicted category or class for the input image based on analysis
+     */
     label?: string;
 
+    /**
+     * A confidence value, between 0 and 1, indicating how certain the model is about
+     * the predicted label
+     */
     score?: number;
   }
 
   export interface ObjectDetection {
+    /**
+     * Coordinates defining the bounding box around the detected object
+     */
     box?: ObjectDetection.Box;
 
+    /**
+     * The class label or name of the detected object
+     */
     label?: string;
 
+    /**
+     * Confidence score indicating the likelihood that the detection is correct
+     */
     score?: number;
   }
 
   export namespace ObjectDetection {
+    /**
+     * Coordinates defining the bounding box around the detected object
+     */
     export interface Box {
+      /**
+       * The x-coordinate of the bottom-right corner of the bounding box
+       */
       xmax?: number;
 
+      /**
+       * The x-coordinate of the top-left corner of the bounding box
+       */
       xmin?: number;
 
+      /**
+       * The y-coordinate of the bottom-right corner of the bounding box
+       */
       ymax?: number;
 
+      /**
+       * The y-coordinate of the top-left corner of the bounding box
+       */
       ymin?: number;
     }
   }
 
   export interface UnionMember6 {
+    /**
+     * The generated text response from the model
+     */
     response?: string;
 
+    /**
+     * An array of tool calls requests made during the response generation
+     */
     tool_calls?: Array<UnionMember6.ToolCall>;
   }
 
   export namespace UnionMember6 {
     export interface ToolCall {
+      /**
+       * The arguments passed to be passed to the tool call request
+       */
       arguments?: unknown;
 
+      /**
+       * The name of the tool to be called
+       */
       name?: string;
     }
   }
 
   export interface Translation {
+    /**
+     * The translated text in the target language
+     */
     translated_text?: string;
   }
 
   export interface Summarization {
+    /**
+     * The summarized version of the input text
+     */
     summary?: string;
   }
 
@@ -135,8 +206,8 @@ export type AIRunParams =
   | AIRunParams.AutomaticSpeechRecognition
   | AIRunParams.ImageClassification
   | AIRunParams.ObjectDetection
-  | AIRunParams.Variant6
-  | AIRunParams.Variant7
+  | AIRunParams.Prompt
+  | AIRunParams.Messages
   | AIRunParams.Translation
   | AIRunParams.Summarization
   | AIRunParams.ImageToText;
@@ -149,7 +220,7 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The text that you want to classify
      */
     text: string;
   }
@@ -161,57 +232,64 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: A text description of the image you want to generate
      */
     prompt: string;
 
     /**
-     * Body param:
+     * Body param: Controls how closely the generated image should adhere to the
+     * prompt; higher values make the image more aligned with the prompt
      */
     guidance?: number;
 
     /**
-     * Body param:
+     * Body param: The height of the generated image in pixels
      */
     height?: number;
 
     /**
-     * Body param:
+     * Body param: For use with img2img tasks. An array of integers that represent the
+     * image data constrained to 8-bit unsigned integer values
      */
     image?: Array<number>;
 
     /**
-     * Body param:
+     * Body param: For use with img2img tasks. A base64-encoded string of the input
+     * image
      */
     image_b64?: string;
 
     /**
-     * Body param:
+     * Body param: An array representing An array of integers that represent mask image
+     * data for inpainting constrained to 8-bit unsigned integer values
      */
     mask?: Array<number>;
 
     /**
-     * Body param:
+     * Body param: Text describing elements to avoid in the generated image
      */
     negative_prompt?: string;
 
     /**
-     * Body param:
+     * Body param: The number of diffusion steps; higher values can improve quality but
+     * take longer
      */
     num_steps?: number;
 
     /**
-     * Body param:
+     * Body param: Random seed for reproducibility of the image generation
      */
     seed?: number;
 
     /**
-     * Body param:
+     * Body param: A value between 0 and 1 indicating how strongly to apply the
+     * transformation during img2img tasks; lower values make the output closer to the
+     * input image
      */
     strength?: number;
 
     /**
-     * Body param:
+     * Body param: The width of the generated image in pixels
      */
     width?: number;
   }
@@ -223,7 +301,7 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The text to embed
      */
     text: string | Array<string>;
   }
@@ -235,17 +313,19 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: An array of integers that represent the audio data constrained to
+     * 8-bit unsigned integer values
      */
     audio: Array<number>;
 
     /**
-     * Body param:
+     * Body param: The language of the recorded audio
      */
     source_lang?: string;
 
     /**
-     * Body param:
+     * Body param: The language to translate the transcription into. Currently only
+     * English is supported.
      */
     target_lang?: string;
   }
@@ -257,7 +337,8 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: An array of integers that represent the image data constrained to
+     * 8-bit unsigned integer values
      */
     image: Array<number>;
   }
@@ -269,149 +350,183 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: An array of integers that represent the image data constrained to
+     * 8-bit unsigned integer values
      */
     image?: Array<number>;
   }
 
-  export interface Variant6 {
+  export interface Prompt {
     /**
      * Path param:
      */
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The input text prompt for the model to generate a response.
      */
     prompt: string;
 
     /**
-     * Body param:
+     * Body param: Decreases the likelihood of the model repeating the same lines
+     * verbatim.
      */
     frequency_penalty?: number;
 
     /**
-     * Body param:
+     * Body param: An array of integers that represent the image data constrained to
+     * 8-bit unsigned integer values
+     */
+    image?: Array<number>;
+
+    /**
+     * Body param: Name of the LoRA (Low-Rank Adaptation) model to fine-tune the base
+     * model.
      */
     lora?: string;
 
     /**
-     * Body param:
+     * Body param: The maximum number of tokens to generate in the response.
      */
     max_tokens?: number;
 
     /**
-     * Body param:
+     * Body param: Increases the likelihood of the model introducing new topics.
      */
     presence_penalty?: number;
 
     /**
-     * Body param:
+     * Body param: If true, a chat template is not applied and you must adhere to the
+     * specific model's expected formatting.
      */
     raw?: boolean;
 
     /**
-     * Body param:
+     * Body param: Penalty for repeated tokens; higher values discourage repetition.
      */
     repetition_penalty?: number;
 
     /**
-     * Body param:
+     * Body param: Random seed for reproducibility of the generation.
      */
     seed?: number;
 
     /**
-     * Body param:
+     * Body param: If true, the response will be streamed back incrementally using SSE,
+     * Server Sent Events.
      */
     stream?: boolean;
 
     /**
-     * Body param:
+     * Body param: Controls the randomness of the output; higher values produce more
+     * random results.
      */
     temperature?: number;
 
     /**
-     * Body param:
+     * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
+     * values make responses more focused; higher values introduce more variety and
+     * potential surprises.
      */
     top_k?: number;
 
     /**
-     * Body param:
+     * Body param: Adjusts the creativity of the AI's responses by controlling how many
+     * possible words it considers. Lower values make outputs more predictable; higher
+     * values allow for more varied and creative responses.
      */
     top_p?: number;
   }
 
-  export interface Variant7 {
+  export interface Messages {
     /**
      * Path param:
      */
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: An array of message objects representing the conversation history.
      */
-    messages: Array<AIRunParams.Variant7.Message>;
+    messages: Array<AIRunParams.Messages.Message>;
 
     /**
-     * Body param:
+     * Body param: Decreases the likelihood of the model repeating the same lines
+     * verbatim.
      */
     frequency_penalty?: number;
 
     /**
      * Body param:
      */
-    functions?: Array<AIRunParams.Variant7.Function>;
+    functions?: Array<AIRunParams.Messages.Function>;
 
     /**
-     * Body param:
+     * Body param: An array of integers that represent the image data constrained to
+     * 8-bit unsigned integer values
+     */
+    image?: Array<number>;
+
+    /**
+     * Body param: The maximum number of tokens to generate in the response.
      */
     max_tokens?: number;
 
     /**
-     * Body param:
+     * Body param: Increases the likelihood of the model introducing new topics.
      */
     presence_penalty?: number;
 
     /**
-     * Body param:
+     * Body param: Penalty for repeated tokens; higher values discourage repetition.
      */
     repetition_penalty?: number;
 
     /**
-     * Body param:
+     * Body param: Random seed for reproducibility of the generation.
      */
     seed?: number;
 
     /**
-     * Body param:
+     * Body param: If true, the response will be streamed back incrementally.
      */
     stream?: boolean;
 
     /**
-     * Body param:
+     * Body param: Controls the randomness of the output; higher values produce more
+     * random results.
      */
     temperature?: number;
 
     /**
-     * Body param:
+     * Body param: A list of tools available for the assistant to use.
      */
-    tools?: Array<AIRunParams.Variant7.UnionMember0 | AIRunParams.Variant7.UnionMember1>;
+    tools?: Array<AIRunParams.Messages.UnionMember0 | AIRunParams.Messages.UnionMember1>;
 
     /**
-     * Body param:
+     * Body param: Limits the AI to choose from the top 'k' most probable words. Lower
+     * values make responses more focused; higher values introduce more variety and
+     * potential surprises.
      */
     top_k?: number;
 
     /**
-     * Body param:
+     * Body param: Controls the creativity of the AI's responses by adjusting how many
+     * possible words it considers. Lower values make outputs more predictable; higher
+     * values allow for more varied and creative responses.
      */
     top_p?: number;
   }
 
-  export namespace Variant7 {
+  export namespace Messages {
     export interface Message {
+      /**
+       * The content of the message as a string.
+       */
       content: string;
 
+      /**
+       * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+       */
       role: string;
     }
 
@@ -422,59 +537,122 @@ export namespace AIRunParams {
     }
 
     export interface UnionMember0 {
+      /**
+       * A brief description of what the tool does.
+       */
       description: string;
 
+      /**
+       * The name of the tool. More descriptive the better.
+       */
       name: string;
 
+      /**
+       * Schema defining the parameters accepted by the tool.
+       */
       parameters: UnionMember0.Parameters;
     }
 
     export namespace UnionMember0 {
+      /**
+       * Schema defining the parameters accepted by the tool.
+       */
       export interface Parameters {
+        /**
+         * Definitions of each parameter.
+         */
         properties: Record<string, Parameters.Properties>;
 
+        /**
+         * The type of the parameters object (usually 'object').
+         */
         type: string;
 
+        /**
+         * List of required parameter names.
+         */
         required?: Array<string>;
       }
 
       export namespace Parameters {
         export interface Properties {
+          /**
+           * A description of the expected parameter.
+           */
           description: string;
 
+          /**
+           * The data type of the parameter.
+           */
           type: string;
         }
       }
     }
 
     export interface UnionMember1 {
+      /**
+       * Details of the function tool.
+       */
       function: UnionMember1.Function;
 
+      /**
+       * Specifies the type of tool (e.g., 'function').
+       */
       type: string;
     }
 
     export namespace UnionMember1 {
+      /**
+       * Details of the function tool.
+       */
       export interface Function {
+        /**
+         * A brief description of what the function does.
+         */
         description: string;
 
+        /**
+         * The name of the function.
+         */
         name: string;
 
+        /**
+         * Schema defining the parameters accepted by the function.
+         */
         parameters: Function.Parameters;
       }
 
       export namespace Function {
+        /**
+         * Schema defining the parameters accepted by the function.
+         */
         export interface Parameters {
+          /**
+           * Definitions of each parameter.
+           */
           properties: Record<string, Parameters.Properties>;
 
+          /**
+           * The type of the parameters object (usually 'object').
+           */
           type: string;
 
+          /**
+           * List of required parameter names.
+           */
           required?: Array<string>;
         }
 
         export namespace Parameters {
           export interface Properties {
+            /**
+             * A description of the expected parameter.
+             */
             description: string;
 
+            /**
+             * The data type of the parameter.
+             */
             type: string;
           }
         }
@@ -489,17 +667,19 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The language code to translate the text into (e.g., 'es' for
+     * Spanish)
      */
     target_lang: string;
 
     /**
-     * Body param:
+     * Body param: The text to be translated
      */
     text: string;
 
     /**
-     * Body param:
+     * Body param: The language code of the source text (e.g., 'en' for English).
+     * Defaults to 'en' if not specified
      */
     source_lang?: string;
   }
@@ -511,12 +691,12 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: The text that you want the model to summarize
      */
     input_text: string;
 
     /**
-     * Body param:
+     * Body param: The maximum length of the generated summary in tokens
      */
     max_length?: number;
   }
@@ -528,42 +708,32 @@ export namespace AIRunParams {
     account_id: string;
 
     /**
-     * Body param:
+     * Body param: An array of integers that represent the image data constrained to
+     * 8-bit unsigned integer values
      */
     image: Array<number>;
 
     /**
-     * Body param:
+     * Body param: The maximum number of tokens to generate in the response.
      */
     max_tokens?: number;
 
     /**
-     * Body param:
-     */
-    messages?: Array<AIRunParams.ImageToText.Message>;
-
-    /**
-     * Body param:
+     * Body param: The input text prompt for the model to generate a response.
      */
     prompt?: string;
 
     /**
-     * Body param:
+     * Body param: If true, a chat template is not applied and you must adhere to the
+     * specific model's expected formatting.
      */
     raw?: boolean;
 
     /**
-     * Body param:
+     * Body param: Controls the randomness of the output; higher values produce more
+     * random results.
      */
     temperature?: number;
-  }
-
-  export namespace ImageToText {
-    export interface Message {
-      content: string;
-
-      role: string;
-    }
   }
 }
 
