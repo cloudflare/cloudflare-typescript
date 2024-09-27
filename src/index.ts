@@ -10,22 +10,22 @@ import * as API from './resources/index';
 
 export interface ClientOptions {
   /**
-   * The preferred authorization scheme for interacting with the Cloudflare API. [Create a token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/).
+   * Defaults to process.env['CLOUDFLARE_API_TOKEN'].
    */
   apiToken?: string | null | undefined;
 
   /**
-   * The previous authorization scheme for interacting with the Cloudflare API. When possible, use API tokens instead of Global API keys.
+   * Defaults to process.env['CLOUDFLARE_API_KEY'].
    */
   apiKey?: string | null | undefined;
 
   /**
-   * The previous authorization scheme for interacting with the Cloudflare API, used in conjunction with a Global API key.
+   * Defaults to process.env['CLOUDFLARE_EMAIL'].
    */
   apiEmail?: string | null | undefined;
 
   /**
-   * Used when interacting with the Origin CA certificates API. [View/change your key](https://developers.cloudflare.com/fundamentals/api/get-started/ca-keys/#viewchange-your-origin-ca-keys).
+   * Defaults to process.env['CLOUDFLARE_API_USER_SERVICE_KEY'].
    */
   userServiceKey?: string | null | undefined;
 
@@ -156,6 +156,8 @@ export class Cloudflare extends Core.APIClient {
   ssl: API.SSL = new API.SSL(this);
   acm: API.ACM = new API.ACM(this);
   argo: API.Argo = new API.Argo(this);
+  plans: API.Plans = new API.Plans(this);
+  ratePlans: API.RatePlans = new API.RatePlans(this);
   certificateAuthorities: API.CertificateAuthorities = new API.CertificateAuthorities(this);
   clientCertificates: API.ClientCertificates = new API.ClientCertificates(this);
   customCertificates: API.CustomCertificates = new API.CustomCertificates(this);
@@ -182,7 +184,7 @@ export class Cloudflare extends Core.APIClient {
   durableObjects: API.DurableObjects = new API.DurableObjects(this);
   queues: API.Queues = new API.Queues(this);
   apiGateway: API.APIGateway = new API.APIGateway(this);
-  managedTransforms: API.ManagedTransforms = new API.ManagedTransforms(this);
+  managedHeaders: API.ManagedHeaders = new API.ManagedHeaders(this);
   pageShield: API.PageShield = new API.PageShield(this);
   rulesets: API.Rulesets = new API.Rulesets(this);
   urlNormalization: API.URLNormalization = new API.URLNormalization(this);
@@ -198,6 +200,7 @@ export class Cloudflare extends Core.APIClient {
   magicNetworkMonitoring: API.MagicNetworkMonitoring = new API.MagicNetworkMonitoring(this);
   mtlsCertificates: API.MTLSCertificates = new API.MTLSCertificates(this);
   pages: API.Pages = new API.Pages(this);
+  pcaps: API.PCAPs = new API.PCAPs(this);
   registrar: API.Registrar = new API.Registrar(this);
   requestTracers: API.RequestTracers = new API.RequestTracers(this);
   rules: API.Rules = new API.Rules(this);
@@ -209,7 +212,7 @@ export class Cloudflare extends Core.APIClient {
   warpConnector: API.WARPConnector = new API.WARPConnector(this);
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
-  turnstile: API.Turnstile = new API.Turnstile(this);
+  challenges: API.Challenges = new API.Challenges(this);
   hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
@@ -223,6 +226,7 @@ export class Cloudflare extends Core.APIClient {
   snippets: API.Snippets = new API.Snippets(this);
   calls: API.Calls = new API.Calls(this);
   cloudforceOne: API.CloudforceOne = new API.CloudforceOne(this);
+  eventNotifications: API.EventNotifications = new API.EventNotifications(this);
   aiGateway: API.AIGateway = new API.AIGateway(this);
   iam: API.IAM = new API.IAM(this);
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
@@ -415,6 +419,10 @@ export namespace Cloudflare {
 
   export import Argo = API.Argo;
 
+  export import Plans = API.Plans;
+
+  export import RatePlans = API.RatePlans;
+
   export import CertificateAuthorities = API.CertificateAuthorities;
 
   export import ClientCertificates = API.ClientCertificates;
@@ -467,7 +475,7 @@ export namespace Cloudflare {
 
   export import APIGateway = API.APIGateway;
 
-  export import ManagedTransforms = API.ManagedTransforms;
+  export import ManagedHeaders = API.ManagedHeaders;
 
   export import PageShield = API.PageShield;
 
@@ -499,6 +507,8 @@ export namespace Cloudflare {
 
   export import Pages = API.Pages;
 
+  export import PCAPs = API.PCAPs;
+
   export import Registrar = API.Registrar;
 
   export import RequestTracers = API.RequestTracers;
@@ -521,7 +531,7 @@ export namespace Cloudflare {
 
   export import ZeroTrust = API.ZeroTrust;
 
-  export import Turnstile = API.Turnstile;
+  export import Challenges = API.Challenges;
 
   export import HyperdriveResource = API.HyperdriveResource;
 
@@ -549,6 +559,8 @@ export namespace Cloudflare {
 
   export import CloudforceOne = API.CloudforceOne;
 
+  export import EventNotifications = API.EventNotifications;
+
   export import AIGateway = API.AIGateway;
 
   export import IAM = API.IAM;
@@ -567,14 +579,10 @@ export namespace Cloudflare {
   export import PaginationInfo = API.PaginationInfo;
   export import Permission = API.Permission;
   export import PermissionGrant = API.PermissionGrant;
-  export import RatePlan = API.RatePlan;
   export import ResponseInfo = API.ResponseInfo;
   export import Result = API.Result;
   export import Role = API.Role;
   export import SortDirection = API.SortDirection;
-  export import Subscription = API.Subscription;
-  export import SubscriptionComponent = API.SubscriptionComponent;
-  export import SubscriptionZone = API.SubscriptionZone;
 }
 
 export default Cloudflare;

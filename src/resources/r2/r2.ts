@@ -5,7 +5,6 @@ import * as BucketsAPI from './buckets';
 import * as SippyAPI from './sippy';
 import * as TemporaryCredentialsAPI from './temporary-credentials';
 import * as DomainsAPI from './domains/domains';
-import * as EventNotificationsAPI from './event-notifications/event-notifications';
 
 export class R2 extends APIResource {
   buckets: BucketsAPI.Buckets = new BucketsAPI.Buckets(this._client);
@@ -13,9 +12,6 @@ export class R2 extends APIResource {
   temporaryCredentials: TemporaryCredentialsAPI.TemporaryCredentials =
     new TemporaryCredentialsAPI.TemporaryCredentials(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
-  eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
-    this._client,
-  );
 }
 
 export namespace R2 {
@@ -39,5 +35,4 @@ export namespace R2 {
   export import TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
   export import TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
   export import Domains = DomainsAPI.Domains;
-  export import EventNotifications = EventNotificationsAPI.EventNotifications;
 }
