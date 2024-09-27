@@ -35,10 +35,6 @@ export {
   Organizations,
 } from './organizations';
 export {
-  RatePlan,
-  Subscription,
-  SubscriptionComponent,
-  SubscriptionZone,
   SubscriptionUpdateResponse,
   SubscriptionDeleteResponse,
   SubscriptionGetResponse,

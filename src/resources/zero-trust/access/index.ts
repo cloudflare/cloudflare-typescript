@@ -97,6 +97,7 @@ export {
   CustomPageWithoutHTMLsSinglePage,
   CustomPages,
 } from './custom-pages';
+export { Infrastructure } from './infrastructure/index';
 export {
   KeyUpdateResponse,
   KeyGetResponse,

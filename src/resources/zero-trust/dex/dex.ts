@@ -19,7 +19,7 @@ export class DEX extends APIResource {
   tracerouteTests: TracerouteTestsAPI.TracerouteTests = new TracerouteTestsAPI.TracerouteTests(this._client);
 }
 
-export interface DeviceExperienceMonitor {
+export interface DigitalExperienceMonitor {
   id: string;
 
   /**
@@ -131,7 +131,7 @@ export interface Percentiles {
 }
 
 export namespace DEX {
-  export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
+  export import DigitalExperienceMonitor = DEXAPI.DigitalExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
   export import NetworkPathResponse = DEXAPI.NetworkPathResponse;
   export import Percentiles = DEXAPI.Percentiles;
@@ -149,6 +149,9 @@ export namespace DEX {
   export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Tests = TestsAPI.Tests;
   export import AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
+  export import TestListResponse = TestsAPI.TestListResponse;
+  export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
+  export import TestListParams = TestsAPI.TestListParams;
   export import TracerouteTestResults = TracerouteTestResultsAPI.TracerouteTestResults;
   export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;
   export import Traceroute = TracerouteTestsAPI.Traceroute;

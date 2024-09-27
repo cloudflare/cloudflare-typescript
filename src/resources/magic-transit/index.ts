@@ -48,6 +48,18 @@ export {
 } from './gre-tunnels';
 export { MagicTransit } from './magic-transit';
 export {
+  PCAP,
+  PCAPFilter,
+  PCAPCreateResponse,
+  PCAPListResponse,
+  PCAPGetResponse,
+  PCAPCreateParams,
+  PCAPListParams,
+  PCAPGetParams,
+  PCAPListResponsesSinglePage,
+  PCAPs,
+} from './pcaps/index';
+export {
   PSKMetadata,
   IPSECTunnelCreateResponse,
   IPSECTunnelUpdateResponse,
