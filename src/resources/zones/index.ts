@@ -62,12 +62,20 @@ export {
   Settings,
 } from './settings';
 export {
+  AvailableRatePlan,
+  PlanListParams,
+  PlanGetParams,
+  AvailableRatePlansSinglePage,
+  Plans,
+} from './plans';
+export {
   CustomNameserverUpdateResponse,
   CustomNameserverGetResponse,
   CustomNameserverUpdateParams,
   CustomNameserverGetParams,
   CustomNameservers,
 } from './custom-nameservers';
+export { RatePlanGetResponse, RatePlanGetParams, RatePlans } from './rate-plans';
 export {
   SubscriptionCreateResponse,
   SubscriptionUpdateResponse,

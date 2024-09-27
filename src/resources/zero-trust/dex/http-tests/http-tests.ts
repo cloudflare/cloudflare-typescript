@@ -55,7 +55,7 @@ export interface HTTPDetails {
    */
   name?: string;
 
-  target_policies?: Array<DEXAPI.DeviceExperienceMonitor> | null;
+  target_policies?: Array<DEXAPI.DigitalExperienceMonitor> | null;
 
   targeted?: boolean;
 }
