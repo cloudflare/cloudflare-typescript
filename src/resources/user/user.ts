@@ -84,10 +84,6 @@ export namespace User {
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import Subscriptions = SubscriptionsAPI.Subscriptions;
-  export import RatePlan = SubscriptionsAPI.RatePlan;
-  export import Subscription = SubscriptionsAPI.Subscription;
-  export import SubscriptionComponent = SubscriptionsAPI.SubscriptionComponent;
-  export import SubscriptionZone = SubscriptionsAPI.SubscriptionZone;
   export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
   export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
   export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;

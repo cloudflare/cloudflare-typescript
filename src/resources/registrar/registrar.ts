@@ -2,15 +2,12 @@
 
 import { APIResource } from '../../resource';
 import * as DomainsAPI from './domains';
-import * as TerraformAPI from './terraform';
 
 export class Registrar extends APIResource {
-  terraform: TerraformAPI.Terraform = new TerraformAPI.Terraform(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
 }
 
 export namespace Registrar {
-  export import Terraform = TerraformAPI.Terraform;
   export import Domains = DomainsAPI.Domains;
   export import Domain = DomainsAPI.Domain;
   export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
