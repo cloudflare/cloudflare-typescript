@@ -12,3 +12,4 @@ export {
   Domains,
 } from './domains';
 export { Registrar } from './registrar';
+export { Terraform } from './terraform';

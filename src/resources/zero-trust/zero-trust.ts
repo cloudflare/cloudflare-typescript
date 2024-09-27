@@ -87,7 +87,7 @@ export namespace ZeroTrust {
   export import SAMLGroupRule = AccessAPI.SAMLGroupRule;
   export import ServiceTokenRule = AccessAPI.ServiceTokenRule;
   export import DEX = DEXAPI.DEX;
-  export import DigitalExperienceMonitor = DEXAPI.DigitalExperienceMonitor;
+  export import DeviceExperienceMonitor = DEXAPI.DeviceExperienceMonitor;
   export import NetworkPath = DEXAPI.NetworkPath;
   export import NetworkPathResponse = DEXAPI.NetworkPathResponse;
   export import Percentiles = DEXAPI.Percentiles;

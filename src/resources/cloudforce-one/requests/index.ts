@@ -1,15 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  AssetCreateResponse,
-  AssetUpdateResponse,
-  AssetDeleteResponse,
-  AssetGetResponse,
-  AssetCreateParams,
-  AssetUpdateParams,
-  Assets,
-} from './assets';
-export {
   Item,
   ListItem,
   Quota,

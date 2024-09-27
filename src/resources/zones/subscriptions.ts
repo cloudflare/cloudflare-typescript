@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SubscriptionsAPI from './subscriptions';
-import * as Shared from '../shared';
+import * as ZonesSubscriptionsAPI from './subscriptions';
+import * as SubscriptionsAPI from '../user/subscriptions';
 
 export class Subscriptions extends APIResource {
   /**
@@ -63,7 +63,7 @@ export interface SubscriptionCreateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: Shared.RatePlanParam;
+  rate_plan?: SubscriptionsAPI.RatePlanParam;
 }
 
 export interface SubscriptionUpdateParams {
@@ -75,13 +75,13 @@ export interface SubscriptionUpdateParams {
   /**
    * The rate plan applied to the subscription.
    */
-  rate_plan?: Shared.RatePlanParam;
+  rate_plan?: SubscriptionsAPI.RatePlanParam;
 }
 
 export namespace Subscriptions {
-  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionCreateResponse = ZonesSubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = ZonesSubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionGetResponse = ZonesSubscriptionsAPI.SubscriptionGetResponse;
+  export import SubscriptionCreateParams = ZonesSubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = ZonesSubscriptionsAPI.SubscriptionUpdateParams;
 }

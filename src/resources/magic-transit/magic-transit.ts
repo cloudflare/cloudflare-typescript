@@ -7,7 +7,6 @@ import * as ConnectorsAPI from './connectors';
 import * as GRETunnelsAPI from './gre-tunnels';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import * as RoutesAPI from './routes';
-import * as PCAPsAPI from './pcaps/pcaps';
 import * as SitesAPI from './sites/sites';
 
 export class MagicTransit extends APIResource {
@@ -18,7 +17,6 @@ export class MagicTransit extends APIResource {
   routes: RoutesAPI.Routes = new RoutesAPI.Routes(this._client);
   sites: SitesAPI.Sites = new SitesAPI.Sites(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
-  pcaps: PCAPsAPI.PCAPs = new PCAPsAPI.PCAPs(this._client);
 }
 
 export interface HealthCheck {
@@ -190,14 +188,4 @@ export namespace MagicTransit {
   export import ConnectorListParams = ConnectorsAPI.ConnectorListParams;
   export import ConnectorEditParams = ConnectorsAPI.ConnectorEditParams;
   export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
-  export import PCAPs = PCAPsAPI.PCAPs;
-  export import PCAP = PCAPsAPI.PCAP;
-  export import PCAPFilter = PCAPsAPI.PCAPFilter;
-  export import PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
-  export import PCAPListResponse = PCAPsAPI.PCAPListResponse;
-  export import PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
-  export import PCAPListResponsesSinglePage = PCAPsAPI.PCAPListResponsesSinglePage;
-  export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
-  export import PCAPListParams = PCAPsAPI.PCAPListParams;
-  export import PCAPGetParams = PCAPsAPI.PCAPGetParams;
 }
