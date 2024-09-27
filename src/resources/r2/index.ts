@@ -11,7 +11,6 @@ export {
   Buckets,
 } from './buckets';
 export { Domains } from './domains/index';
-export { EventNotifications } from './event-notifications/index';
 export {
   Provider,
   Sippy,

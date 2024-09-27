@@ -18,10 +18,3 @@ export {
   Firewall,
 } from './firewall';
 export { Delta, Analytics } from './analytics/index';
-export {
-  ReverseDNSEditResponse,
-  ReverseDNSGetResponse,
-  ReverseDNSEditParams,
-  ReverseDNSGetParams,
-  ReverseDNS,
-} from './reverse-dns';

@@ -4,7 +4,6 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as RequestsAPI from './requests';
 import * as Shared from '../../shared';
-import * as AssetsAPI from './assets';
 import * as MessageAPI from './message';
 import * as PriorityAPI from './priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
@@ -12,7 +11,6 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 export class Requests extends APIResource {
   message: MessageAPI.MessageResource = new MessageAPI.MessageResource(this._client);
   priority: PriorityAPI.PriorityResource = new PriorityAPI.PriorityResource(this._client);
-  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
 
   /**
    * Creating a request adds the request into the Cloudforce One queue for analysis.
@@ -413,11 +411,4 @@ export namespace Requests {
   export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
   export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
   export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
-  export import Assets = AssetsAPI.Assets;
-  export import AssetCreateResponse = AssetsAPI.AssetCreateResponse;
-  export import AssetUpdateResponse = AssetsAPI.AssetUpdateResponse;
-  export import AssetDeleteResponse = AssetsAPI.AssetDeleteResponse;
-  export import AssetGetResponse = AssetsAPI.AssetGetResponse;
-  export import AssetCreateParams = AssetsAPI.AssetCreateParams;
-  export import AssetUpdateParams = AssetsAPI.AssetUpdateParams;
 }
