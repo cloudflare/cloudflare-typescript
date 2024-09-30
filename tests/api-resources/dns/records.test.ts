@@ -117,6 +117,64 @@ describe('resource records', () => {
     });
   });
 
+  test('batch: only required params', async () => {
+    const responsePromise = client.dns.records.batch({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('batch: required and optional params', async () => {
+    const response = await client.dns.records.batch({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      deletes: [
+        { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+        { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+        { id: '023e105f4ecef8ad9ca31a8372d0c353' },
+      ],
+      patches: [
+        { content: '198.51.100.4', type: 'A' },
+        { content: '198.51.100.4', type: 'A' },
+        { content: '198.51.100.4', type: 'A' },
+      ],
+      posts: [
+        {
+          name: 'example.com',
+          comment: 'Domain verification record',
+          proxied: true,
+          settings: {},
+          tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
+          ttl: 3600,
+        },
+        {
+          name: 'example.com',
+          comment: 'Domain verification record',
+          proxied: true,
+          settings: {},
+          tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
+          ttl: 3600,
+        },
+        {
+          name: 'example.com',
+          comment: 'Domain verification record',
+          proxied: true,
+          settings: {},
+          tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
+          ttl: 3600,
+        },
+      ],
+      puts: [
+        { content: '198.51.100.4', type: 'A' },
+        { content: '198.51.100.4', type: 'A' },
+        { content: '198.51.100.4', type: 'A' },
+      ],
+    });
+  });
+
   // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
     const responsePromise = client.dns.records.edit('023e105f4ecef8ad9ca31a8372d0c353', {

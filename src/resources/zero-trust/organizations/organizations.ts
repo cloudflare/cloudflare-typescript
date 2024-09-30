@@ -1,12 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import { isRequestOptions } from '../../core';
-import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as Core from '../../../core';
+import { CloudflareError } from '../../../error';
 import * as OrganizationsAPI from './organizations';
+import * as DOHAPI from './doh';
 
 export class Organizations extends APIResource {
+  doh: DOHAPI.DOH = new DOHAPI.DOH(this._client);
+
   /**
    * Sets up a Zero Trust organization for your account or zone.
    */
@@ -484,4 +487,9 @@ export namespace Organizations {
   export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
   export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
   export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
+  export import DOH = DOHAPI.DOH;
+  export import DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
+  export import DOHGetResponse = DOHAPI.DOHGetResponse;
+  export import DOHUpdateParams = DOHAPI.DOHUpdateParams;
+  export import DOHGetParams = DOHAPI.DOHGetParams;
 }

@@ -65,6 +65,15 @@ export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
+export {
+  SecurityTXTUpdateResponse,
+  SecurityTXTDeleteResponse,
+  SecurityTXTGetResponse,
+  SecurityTXTUpdateParams,
+  SecurityTXTDeleteParams,
+  SecurityTXTGetParams,
+  SecurityTXT,
+} from './security-txt';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';

@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as ScansAPI from './scans';
+import * as URLScannerAPI from './url-scanner';
 import { type Response as FetchResponse } from '../../_shims/index';
 
 export class Scans extends APIResource {
@@ -120,42 +121,6 @@ export class Scans extends APIResource {
       ...options,
       __binaryResponse: true,
     });
-  }
-}
-
-export interface URLScannerDomain {
-  id: number;
-
-  name: string;
-
-  super_category_id?: number;
-}
-
-export interface URLScannerTask {
-  effectiveUrl: string;
-
-  errors: Array<URLScannerTask.Error>;
-
-  location: string;
-
-  region: string;
-
-  status: string;
-
-  success: boolean;
-
-  time: string;
-
-  url: string;
-
-  uuid: string;
-
-  visibility: string;
-}
-
-export namespace URLScannerTask {
-  export interface Error {
-    message: string;
   }
 }
 
@@ -291,7 +256,7 @@ export namespace ScanGetResponse {
 
       export namespace Processors {
         export interface Categories {
-          content: Array<ScansAPI.URLScannerDomain>;
+          content: Array<URLScannerAPI.URLScannerDomain>;
 
           risks: Array<Categories.Risk>;
         }
@@ -674,18 +639,18 @@ export namespace ScanGetResponse {
         export interface Categories {
           inherited: Categories.Inherited;
 
-          content?: Array<ScansAPI.URLScannerDomain>;
+          content?: Array<URLScannerAPI.URLScannerDomain>;
 
-          risks?: Array<ScansAPI.URLScannerDomain>;
+          risks?: Array<URLScannerAPI.URLScannerDomain>;
         }
 
         export namespace Categories {
           export interface Inherited {
-            content?: Array<ScansAPI.URLScannerDomain>;
+            content?: Array<URLScannerAPI.URLScannerDomain>;
 
             from?: string;
 
-            risks?: Array<ScansAPI.URLScannerDomain>;
+            risks?: Array<URLScannerAPI.URLScannerDomain>;
           }
         }
 
@@ -1039,8 +1004,6 @@ export interface ScanScreenshotParams {
 }
 
 export namespace Scans {
-  export import URLScannerDomain = ScansAPI.URLScannerDomain;
-  export import URLScannerTask = ScansAPI.URLScannerTask;
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
   export import ScanListResponse = ScansAPI.ScanListResponse;
   export import ScanGetResponse = ScansAPI.ScanGetResponse;
