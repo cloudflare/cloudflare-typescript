@@ -857,9 +857,9 @@ export namespace ResultGetResponse {
 
     domURL: string;
 
-    extraOptions: Task.ExtraOptions;
-
     method: string;
+
+    options: Task.Options;
 
     reportURL: string;
 
@@ -879,7 +879,12 @@ export namespace ResultGetResponse {
   }
 
   export namespace Task {
-    export interface ExtraOptions {
+    export interface Options {
+      /**
+       * Custom headers set.
+       */
+      customHeaders?: unknown;
+
       screenshotsResolutions?: Array<string>;
     }
   }
