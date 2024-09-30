@@ -18,7 +18,7 @@ export class DOM extends APIResource {
 }
 
 /**
- * HTML of webpage
+ * HTML of webpage.
  */
 export type DOMGetResponse = string;
 
