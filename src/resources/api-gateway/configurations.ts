@@ -33,7 +33,7 @@ export class Configurations extends APIResource {
 
 export interface Configuration {
   auth_id_characteristics: Array<
-    Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJwtClaim
+    Configuration.APIShieldAuthIDCharacteristic | Configuration.APIShieldAuthIDCharacteristicJWTClaim
   >;
 }
 
@@ -56,7 +56,7 @@ export namespace Configuration {
   /**
    * Auth ID Characteristic extracted from JWT Token Claims
    */
-  export interface APIShieldAuthIDCharacteristicJwtClaim {
+  export interface APIShieldAuthIDCharacteristicJWTClaim {
     /**
      * Claim location expressed as `$(token_config_id):$(json_path)`, where
      * `token_config_id` is the ID of the token configuration used in validating the
@@ -97,7 +97,7 @@ export interface ConfigurationUpdateParams {
    */
   auth_id_characteristics: Array<
     | ConfigurationUpdateParams.APIShieldAuthIDCharacteristic
-    | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJwtClaim
+    | ConfigurationUpdateParams.APIShieldAuthIDCharacteristicJWTClaim
   >;
 }
 
@@ -120,7 +120,7 @@ export namespace ConfigurationUpdateParams {
   /**
    * Auth ID Characteristic extracted from JWT Token Claims
    */
-  export interface APIShieldAuthIDCharacteristicJwtClaim {
+  export interface APIShieldAuthIDCharacteristicJWTClaim {
     /**
      * Claim location expressed as `$(token_config_id):$(json_path)`, where
      * `token_config_id` is the ID of the token configuration used in validating the
