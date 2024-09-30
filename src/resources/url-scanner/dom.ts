@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DomAPI from './dom';
+import * as DOMAPI from './dom';
 
-export class Dom extends APIResource {
+export class DOM extends APIResource {
   /**
    * Returns a plain text response, with the scan's DOM content as rendered by
    * Chrome.
@@ -20,8 +20,8 @@ export class Dom extends APIResource {
 /**
  * HTML of webpage
  */
-export type DomGetResponse = string;
+export type DOMGetResponse = string;
 
-export namespace Dom {
-  export import DomGetResponse = DomAPI.DomGetResponse;
+export namespace DOM {
+  export import DOMGetResponse = DOMAPI.DOMGetResponse;
 }
