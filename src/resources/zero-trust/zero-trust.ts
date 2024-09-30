@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as ConnectivitySettingsAPI from './connectivity-settings';
 import * as IdentityProvidersAPI from './identity-providers';
-import * as OrganizationsAPI from './organizations';
 import * as SeatsAPI from './seats';
 import * as AccessAPI from './access/access';
 import * as DevicesAPI from './devices/devices';
@@ -11,6 +10,7 @@ import * as DEXAPI from './dex/dex';
 import * as DLPAPI from './dlp/dlp';
 import * as GatewayAPI from './gateway/gateway';
 import * as NetworksAPI from './networks/networks';
+import * as OrganizationsAPI from './organizations/organizations';
 import * as RiskScoringAPI from './risk-scoring/risk-scoring';
 import * as TunnelsAPI from './tunnels/tunnels';
 

@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { URLScanner } from './url-scanner';
+export { DomGetResponse, Dom } from './dom';
+export { HarGetResponse, Har } from './har';
+export { ResponseGetResponse, Responses } from './responses';
+export { ResultGetResponse, Result } from './result';
 export {
-  URLScannerDomain,
-  URLScannerTask,
   ScanCreateResponse,
   ScanListResponse,
   ScanGetResponse,
@@ -14,3 +15,5 @@ export {
   ScanScreenshotParams,
   Scans,
 } from './scans';
+export { ScreenshotGetParams, Screenshot } from './screenshot';
+export { URLScanner } from './url-scanner';

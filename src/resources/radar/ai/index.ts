@@ -1,4 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export { AI } from './ai';
-export { Gateway } from './gateway/index';
+export { Bots } from './bots/index';
+export {
+  TimeseriesGroupUserAgentResponse,
+  TimeseriesGroupUserAgentParams,
+  TimeseriesGroups,
+} from './timeseries-groups';

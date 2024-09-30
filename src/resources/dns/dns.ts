@@ -92,6 +92,7 @@ export namespace DNS {
   export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
   export import RecordListResponse = RecordsAPI.RecordListResponse;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
+  export import RecordBatchResponse = RecordsAPI.RecordBatchResponse;
   export import RecordEditResponse = RecordsAPI.RecordEditResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;
   export import RecordGetResponse = RecordsAPI.RecordGetResponse;
@@ -102,6 +103,7 @@ export namespace DNS {
   export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
   export import RecordListParams = RecordsAPI.RecordListParams;
   export import RecordDeleteParams = RecordsAPI.RecordDeleteParams;
+  export import RecordBatchParams = RecordsAPI.RecordBatchParams;
   export import RecordEditParams = RecordsAPI.RecordEditParams;
   export import RecordExportParams = RecordsAPI.RecordExportParams;
   export import RecordGetParams = RecordsAPI.RecordGetParams;

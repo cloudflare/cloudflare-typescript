@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import * as ConfigurationsAPI from './configurations';
 import * as SchemasAPI from './schemas';
 import * as DiscoveryAPI from './discovery/discovery';
+import * as ExpressionTemplateAPI from './expression-template/expression-template';
 import * as OperationsAPI from './operations/operations';
 import * as SettingsAPI from './settings/settings';
 import * as UserSchemasAPI from './user-schemas/user-schemas';
@@ -15,6 +16,9 @@ export class APIGateway extends APIResource {
   schemas: SchemasAPI.Schemas = new SchemasAPI.Schemas(this._client);
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
   userSchemas: UserSchemasAPI.UserSchemas = new UserSchemasAPI.UserSchemas(this._client);
+  expressionTemplate: ExpressionTemplateAPI.ExpressionTemplate = new ExpressionTemplateAPI.ExpressionTemplate(
+    this._client,
+  );
 }
 
 export namespace APIGateway {
@@ -53,4 +57,5 @@ export namespace APIGateway {
   export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
   export import UserSchemaEditParams = UserSchemasAPI.UserSchemaEditParams;
   export import UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
+  export import ExpressionTemplate = ExpressionTemplateAPI.ExpressionTemplate;
 }
