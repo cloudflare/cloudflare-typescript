@@ -87,7 +87,7 @@ export {
   OrganizationListParams,
   OrganizationRevokeUsersParams,
   Organizations,
-} from './organizations';
+} from './organizations/index';
 export { Networks } from './networks/index';
 export {
   RiskScoringGetResponse,

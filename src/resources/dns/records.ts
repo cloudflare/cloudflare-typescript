@@ -82,6 +82,34 @@ export class Records extends APIResource {
   }
 
   /**
+   * Send a Batch of DNS Record API calls to be executed together.
+   *
+   * Notes:
+   *
+   * - Although Cloudflare will execute the batched operations in a single database
+   *   transaction, Cloudflare's distributed KV store must treat each record change
+   *   as a single key-value pair. This means that the propagation of changes is not
+   *   atomic. See
+   *   [the documentation](https://developers.cloudflare.com/dns/manage-dns-records/how-to/batch-record-changes/ "Batch DNS records")
+   *   for more information.
+   * - The operations you specify within the /batch request body are always executed
+   *   in the following order:
+   *
+   *   - Deletes
+   *   - Patches
+   *   - Puts
+   *   - Posts
+   */
+  batch(params: RecordBatchParams, options?: Core.RequestOptions): Core.APIPromise<RecordBatchResponse> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(`/zones/${zone_id}/dns_records/batch`, { body, ...options }) as Core.APIPromise<{
+        result: RecordBatchResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Update an existing DNS record.
    *
    * Notes:
@@ -186,7 +214,31 @@ export interface ARecord {
   type?: 'A';
 }
 
+export interface ARecordParam {
+  /**
+   * A valid IPv4 address.
+   */
+  content?: string;
+
+  /**
+   * Record type.
+   */
+  type?: 'A';
+}
+
 export interface AAAARecord {
+  /**
+   * A valid IPv6 address.
+   */
+  content?: string;
+
+  /**
+   * Record type.
+   */
+  type?: 'AAAA';
+}
+
+export interface AAAARecordParam {
   /**
    * A valid IPv6 address.
    */
@@ -216,6 +268,40 @@ export interface CAARecord {
 }
 
 export namespace CAARecord {
+  /**
+   * Components of a CAA record.
+   */
+  export interface Data {
+    /**
+     * Flags for the CAA record.
+     */
+    flags?: number;
+
+    /**
+     * Name of the property controlled by this record (e.g.: issue, issuewild, iodef).
+     */
+    tag?: string;
+
+    /**
+     * Value of the record. This field's semantics depend on the chosen tag.
+     */
+    value?: string;
+  }
+}
+
+export interface CAARecordParam {
+  /**
+   * Components of a CAA record.
+   */
+  data?: CAARecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'CAA';
+}
+
+export namespace CAARecordParam {
   /**
    * Components of a CAA record.
    */
@@ -281,7 +367,58 @@ export namespace CERTRecord {
   }
 }
 
+export interface CERTRecordParam {
+  /**
+   * Components of a CERT record.
+   */
+  data?: CERTRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'CERT';
+}
+
+export namespace CERTRecordParam {
+  /**
+   * Components of a CERT record.
+   */
+  export interface Data {
+    /**
+     * Algorithm.
+     */
+    algorithm?: number;
+
+    /**
+     * Certificate.
+     */
+    certificate?: string;
+
+    /**
+     * Key Tag.
+     */
+    key_tag?: number;
+
+    /**
+     * Type.
+     */
+    type?: number;
+  }
+}
+
 export interface CNAMERecord {
+  /**
+   * A valid hostname. Must not match the record's name.
+   */
+  content?: string;
+
+  /**
+   * Record type.
+   */
+  type?: 'CNAME';
+}
+
+export interface CNAMERecordParam {
   /**
    * A valid hostname. Must not match the record's name.
    */
@@ -311,6 +448,45 @@ export interface DNSKEYRecord {
 }
 
 export namespace DNSKEYRecord {
+  /**
+   * Components of a DNSKEY record.
+   */
+  export interface Data {
+    /**
+     * Algorithm.
+     */
+    algorithm?: number;
+
+    /**
+     * Flags.
+     */
+    flags?: number;
+
+    /**
+     * Protocol.
+     */
+    protocol?: number;
+
+    /**
+     * Public Key.
+     */
+    public_key?: string;
+  }
+}
+
+export interface DNSKEYRecordParam {
+  /**
+   * Components of a DNSKEY record.
+   */
+  data?: DNSKEYRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'DNSKEY';
+}
+
+export namespace DNSKEYRecordParam {
   /**
    * Components of a DNSKEY record.
    */
@@ -381,6 +557,45 @@ export namespace DSRecord {
   }
 }
 
+export interface DSRecordParam {
+  /**
+   * Components of a DS record.
+   */
+  data?: DSRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'DS';
+}
+
+export namespace DSRecordParam {
+  /**
+   * Components of a DS record.
+   */
+  export interface Data {
+    /**
+     * Algorithm.
+     */
+    algorithm?: number;
+
+    /**
+     * Digest.
+     */
+    digest?: string;
+
+    /**
+     * Digest Type.
+     */
+    digest_type?: number;
+
+    /**
+     * Key Tag.
+     */
+    key_tag?: number;
+  }
+}
+
 export interface HTTPSRecord {
   /**
    * Formatted HTTPS content. See 'data' to set HTTPS properties.
@@ -399,6 +614,40 @@ export interface HTTPSRecord {
 }
 
 export namespace HTTPSRecord {
+  /**
+   * Components of a HTTPS record.
+   */
+  export interface Data {
+    /**
+     * priority.
+     */
+    priority?: number;
+
+    /**
+     * target.
+     */
+    target?: string;
+
+    /**
+     * value.
+     */
+    value?: string;
+  }
+}
+
+export interface HTTPSRecordParam {
+  /**
+   * Components of a HTTPS record.
+   */
+  data?: HTTPSRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'HTTPS';
+}
+
+export namespace HTTPSRecordParam {
   /**
    * Components of a HTTPS record.
    */
@@ -504,7 +753,104 @@ export namespace LOCRecord {
   }
 }
 
+export interface LOCRecordParam {
+  /**
+   * Components of a LOC record.
+   */
+  data?: LOCRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'LOC';
+}
+
+export namespace LOCRecordParam {
+  /**
+   * Components of a LOC record.
+   */
+  export interface Data {
+    /**
+     * Altitude of location in meters.
+     */
+    altitude?: number;
+
+    /**
+     * Degrees of latitude.
+     */
+    lat_degrees?: number;
+
+    /**
+     * Latitude direction.
+     */
+    lat_direction?: 'N' | 'S';
+
+    /**
+     * Minutes of latitude.
+     */
+    lat_minutes?: number;
+
+    /**
+     * Seconds of latitude.
+     */
+    lat_seconds?: number;
+
+    /**
+     * Degrees of longitude.
+     */
+    long_degrees?: number;
+
+    /**
+     * Longitude direction.
+     */
+    long_direction?: 'E' | 'W';
+
+    /**
+     * Minutes of longitude.
+     */
+    long_minutes?: number;
+
+    /**
+     * Seconds of longitude.
+     */
+    long_seconds?: number;
+
+    /**
+     * Horizontal precision of location.
+     */
+    precision_horz?: number;
+
+    /**
+     * Vertical precision of location.
+     */
+    precision_vert?: number;
+
+    /**
+     * Size of location in meters.
+     */
+    size?: number;
+  }
+}
+
 export interface MXRecord {
+  /**
+   * A valid mail server hostname.
+   */
+  content?: string;
+
+  /**
+   * Required for MX, SRV and URI records; unused by other record types. Records with
+   * lower priorities are preferred.
+   */
+  priority?: number;
+
+  /**
+   * Record type.
+   */
+  type?: 'MX';
+}
+
+export interface MXRecordParam {
   /**
    * A valid mail server hostname.
    */
@@ -576,6 +922,55 @@ export namespace NAPTRRecord {
   }
 }
 
+export interface NAPTRRecordParam {
+  /**
+   * Components of a NAPTR record.
+   */
+  data?: NAPTRRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'NAPTR';
+}
+
+export namespace NAPTRRecordParam {
+  /**
+   * Components of a NAPTR record.
+   */
+  export interface Data {
+    /**
+     * Flags.
+     */
+    flags?: string;
+
+    /**
+     * Order.
+     */
+    order?: number;
+
+    /**
+     * Preference.
+     */
+    preference?: number;
+
+    /**
+     * Regex.
+     */
+    regex?: string;
+
+    /**
+     * Replacement.
+     */
+    replacement?: string;
+
+    /**
+     * Service.
+     */
+    service?: string;
+  }
+}
+
 export interface NSRecord {
   /**
    * A valid name server host name.
@@ -588,7 +983,31 @@ export interface NSRecord {
   type?: 'NS';
 }
 
+export interface NSRecordParam {
+  /**
+   * A valid name server host name.
+   */
+  content?: string;
+
+  /**
+   * Record type.
+   */
+  type?: 'NS';
+}
+
 export interface PTRRecord {
+  /**
+   * Domain name pointing to the address.
+   */
+  content?: string;
+
+  /**
+   * Record type.
+   */
+  type?: 'PTR';
+}
+
+export interface PTRRecordParam {
   /**
    * Domain name pointing to the address.
    */
@@ -636,6 +1055,42 @@ export interface Record {
   ttl?: TTL;
 }
 
+export interface RecordParam {
+  /**
+   * Comments or notes about the DNS record. This field has no effect on DNS
+   * responses.
+   */
+  comment?: string;
+
+  /**
+   * DNS record name (or @ for the zone apex) in Punycode.
+   */
+  name?: string;
+
+  /**
+   * Whether the record is receiving the performance and security benefits of
+   * Cloudflare.
+   */
+  proxied?: boolean;
+
+  /**
+   * Settings for the DNS record.
+   */
+  settings?: unknown;
+
+  /**
+   * Custom tags for the DNS record. This field has no effect on DNS responses.
+   */
+  tags?: Array<RecordTagsParam>;
+
+  /**
+   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+   * Value must be between 60 and 86400, with the minimum reduced to 30 for
+   * Enterprise zones.
+   */
+  ttl?: TTLParam;
+}
+
 export interface RecordProcessTiming {
   /**
    * When the file parsing ended.
@@ -659,6 +1114,12 @@ export interface RecordProcessTiming {
  */
 export type RecordTags = string;
 
+/**
+ * Individual tag of the form name:value (the name must consist of only letters,
+ * numbers, underscores and hyphens)
+ */
+export type RecordTagsParam = string;
+
 export interface SMIMEARecord {
   /**
    * Formatted SMIMEA content. See 'data' to set SMIMEA properties.
@@ -677,6 +1138,45 @@ export interface SMIMEARecord {
 }
 
 export namespace SMIMEARecord {
+  /**
+   * Components of a SMIMEA record.
+   */
+  export interface Data {
+    /**
+     * Certificate.
+     */
+    certificate?: string;
+
+    /**
+     * Matching Type.
+     */
+    matching_type?: number;
+
+    /**
+     * Selector.
+     */
+    selector?: number;
+
+    /**
+     * Usage.
+     */
+    usage?: number;
+  }
+}
+
+export interface SMIMEARecordParam {
+  /**
+   * Components of a SMIMEA record.
+   */
+  data?: SMIMEARecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'SMIMEA';
+}
+
+export namespace SMIMEARecordParam {
   /**
    * Components of a SMIMEA record.
    */
@@ -749,6 +1249,46 @@ export namespace SRVRecord {
   }
 }
 
+export interface SRVRecordParam {
+  /**
+   * Components of a SRV record.
+   */
+  data?: SRVRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'SRV';
+}
+
+export namespace SRVRecordParam {
+  /**
+   * Components of a SRV record.
+   */
+  export interface Data {
+    /**
+     * The port of the service.
+     */
+    port?: number;
+
+    /**
+     * Required for MX, SRV and URI records; unused by other record types. Records with
+     * lower priorities are preferred.
+     */
+    priority?: number;
+
+    /**
+     * A valid hostname.
+     */
+    target?: string;
+
+    /**
+     * The record weight.
+     */
+    weight?: number;
+  }
+}
+
 export interface SSHFPRecord {
   /**
    * Formatted SSHFP content. See 'data' to set SSHFP properties.
@@ -788,6 +1328,40 @@ export namespace SSHFPRecord {
   }
 }
 
+export interface SSHFPRecordParam {
+  /**
+   * Components of a SSHFP record.
+   */
+  data?: SSHFPRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'SSHFP';
+}
+
+export namespace SSHFPRecordParam {
+  /**
+   * Components of a SSHFP record.
+   */
+  export interface Data {
+    /**
+     * algorithm.
+     */
+    algorithm?: number;
+
+    /**
+     * fingerprint.
+     */
+    fingerprint?: string;
+
+    /**
+     * type.
+     */
+    type?: number;
+  }
+}
+
 export interface SVCBRecord {
   /**
    * Formatted SVCB content. See 'data' to set SVCB properties.
@@ -806,6 +1380,40 @@ export interface SVCBRecord {
 }
 
 export namespace SVCBRecord {
+  /**
+   * Components of a SVCB record.
+   */
+  export interface Data {
+    /**
+     * priority.
+     */
+    priority?: number;
+
+    /**
+     * target.
+     */
+    target?: string;
+
+    /**
+     * value.
+     */
+    value?: string;
+  }
+}
+
+export interface SVCBRecordParam {
+  /**
+   * Components of a SVCB record.
+   */
+  data?: SVCBRecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'SVCB';
+}
+
+export namespace SVCBRecordParam {
   /**
    * Components of a SVCB record.
    */
@@ -871,6 +1479,45 @@ export namespace TLSARecord {
   }
 }
 
+export interface TLSARecordParam {
+  /**
+   * Components of a TLSA record.
+   */
+  data?: TLSARecordParam.Data;
+
+  /**
+   * Record type.
+   */
+  type?: 'TLSA';
+}
+
+export namespace TLSARecordParam {
+  /**
+   * Components of a TLSA record.
+   */
+  export interface Data {
+    /**
+     * certificate.
+     */
+    certificate?: string;
+
+    /**
+     * Matching Type.
+     */
+    matching_type?: number;
+
+    /**
+     * Selector.
+     */
+    selector?: number;
+
+    /**
+     * Usage.
+     */
+    usage?: number;
+  }
+}
+
 /**
  * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
  * Value must be between 60 and 86400, with the minimum reduced to 30 for
@@ -878,7 +1525,26 @@ export namespace TLSARecord {
  */
 export type TTL = number | 1;
 
+/**
+ * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+ * Value must be between 60 and 86400, with the minimum reduced to 30 for
+ * Enterprise zones.
+ */
+export type TTLParam = number | 1;
+
 export interface TXTRecord {
+  /**
+   * Text content for the record.
+   */
+  content?: string;
+
+  /**
+   * Record type.
+   */
+  type?: 'TXT';
+}
+
+export interface TXTRecordParam {
   /**
    * Text content for the record.
    */
@@ -914,6 +1580,41 @@ export interface URIRecord {
 }
 
 export namespace URIRecord {
+  /**
+   * Components of a URI record.
+   */
+  export interface Data {
+    /**
+     * The record content.
+     */
+    target?: string;
+
+    /**
+     * The record weight.
+     */
+    weight?: number;
+  }
+}
+
+export interface URIRecordParam {
+  /**
+   * Components of a URI record.
+   */
+  data?: URIRecordParam.Data;
+
+  /**
+   * Required for MX, SRV and URI records; unused by other record types. Records with
+   * lower priorities are preferred.
+   */
+  priority?: number;
+
+  /**
+   * Record type.
+   */
+  type?: 'URI';
+}
+
+export namespace URIRecordParam {
   /**
    * Components of a URI record.
    */
@@ -1148,6 +1849,302 @@ export interface RecordDeleteResponse {
    * Identifier
    */
   id?: string;
+}
+
+export interface RecordBatchResponse {
+  deletes?: Array<RecordBatchResponse.Delete>;
+
+  patches?: Array<RecordBatchResponse.Patch>;
+
+  posts?: Array<RecordBatchResponse.Post>;
+
+  puts?: Array<RecordBatchResponse.Put>;
+}
+
+export namespace RecordBatchResponse {
+  export interface Delete {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings: unknown;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface Patch {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings: unknown;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface Post {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings: unknown;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
+
+  export interface Put {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * Comments or notes about the DNS record. This field has no effect on DNS
+     * responses.
+     */
+    comment: string;
+
+    /**
+     * When the record was created.
+     */
+    created_on: string;
+
+    /**
+     * Extra Cloudflare-specific information about the record.
+     */
+    meta: unknown;
+
+    /**
+     * When the record was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * DNS record name (or @ for the zone apex) in Punycode.
+     */
+    name: string;
+
+    /**
+     * Whether the record can be proxied by Cloudflare or not.
+     */
+    proxiable: boolean;
+
+    /**
+     * Whether the record is receiving the performance and security benefits of
+     * Cloudflare.
+     */
+    proxied: boolean;
+
+    /**
+     * Settings for the DNS record.
+     */
+    settings: unknown;
+
+    /**
+     * Custom tags for the DNS record. This field has no effect on DNS responses.
+     */
+    tags: Array<RecordsAPI.RecordTags>;
+
+    /**
+     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
+     * Value must be between 60 and 86400, with the minimum reduced to 30 for
+     * Enterprise zones.
+     */
+    ttl: RecordsAPI.TTL;
+
+    /**
+     * When the record comment was last modified. Omitted if there is no comment.
+     */
+    comment_modified_on?: string;
+
+    /**
+     * When the record tags were last modified. Omitted if there are no tags.
+     */
+    tags_modified_on?: string;
+  }
 }
 
 export interface RecordEditResponse {
@@ -3033,6 +4030,42 @@ export interface RecordDeleteParams {
   zone_id: string;
 }
 
+export interface RecordBatchParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  deletes?: Array<RecordBatchParams.Delete>;
+
+  /**
+   * Body param:
+   */
+  patches?: Array<RecordParam>;
+
+  /**
+   * Body param:
+   */
+  posts?: Array<RecordParam>;
+
+  /**
+   * Body param:
+   */
+  puts?: Array<RecordParam>;
+}
+
+export namespace RecordBatchParams {
+  export interface Delete {
+    /**
+     * Identifier
+     */
+    id: string;
+  }
+}
+
 export type RecordEditParams =
   | RecordEditParams.ARecord
   | RecordEditParams.AAAARecord
@@ -3878,6 +4911,7 @@ export namespace Records {
   export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
   export import RecordListResponse = RecordsAPI.RecordListResponse;
   export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
+  export import RecordBatchResponse = RecordsAPI.RecordBatchResponse;
   export import RecordEditResponse = RecordsAPI.RecordEditResponse;
   export import RecordExportResponse = RecordsAPI.RecordExportResponse;
   export import RecordGetResponse = RecordsAPI.RecordGetResponse;
@@ -3888,6 +4922,7 @@ export namespace Records {
   export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
   export import RecordListParams = RecordsAPI.RecordListParams;
   export import RecordDeleteParams = RecordsAPI.RecordDeleteParams;
+  export import RecordBatchParams = RecordsAPI.RecordBatchParams;
   export import RecordEditParams = RecordsAPI.RecordEditParams;
   export import RecordExportParams = RecordsAPI.RecordExportParams;
   export import RecordGetParams = RecordsAPI.RecordGetParams;

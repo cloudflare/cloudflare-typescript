@@ -4,11 +4,13 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as UserSchemasAPI from './user-schemas';
 import * as Shared from '../../shared';
+import * as HostsAPI from './hosts';
 import * as OperationsAPI from './operations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class UserSchemas extends APIResource {
   operations: OperationsAPI.Operations = new OperationsAPI.Operations(this._client);
+  hosts: HostsAPI.Hosts = new HostsAPI.Hosts(this._client);
 
   /**
    * Upload a schema to a zone
@@ -256,4 +258,8 @@ export namespace UserSchemas {
   export import OperationListResponse = OperationsAPI.OperationListResponse;
   export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
   export import OperationListParams = OperationsAPI.OperationListParams;
+  export import Hosts = HostsAPI.Hosts;
+  export import HostListResponse = HostsAPI.HostListResponse;
+  export import HostListResponsesV4PagePaginationArray = HostsAPI.HostListResponsesV4PagePaginationArray;
+  export import HostListParams = HostsAPI.HostListParams;
 }

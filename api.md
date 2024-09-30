@@ -884,6 +884,7 @@ Types:
 - <code><a href="./src/resources/dns/records.ts">RecordUpdateResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordListResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/records.ts">RecordBatchResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordEditResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordExportResponse</a></code>
 - <code><a href="./src/resources/dns/records.ts">RecordGetResponse</a></code>
@@ -896,6 +897,7 @@ Methods:
 - <code title="put /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">update</a>(dnsRecordId, { ...params }) -> RecordUpdateResponse</code>
 - <code title="get /zones/{zone_id}/dns_records">client.dns.records.<a href="./src/resources/dns/records.ts">list</a>({ ...params }) -> RecordListResponsesV4PagePaginationArray</code>
 - <code title="delete /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">delete</a>(dnsRecordId, { ...params }) -> RecordDeleteResponse</code>
+- <code title="post /zones/{zone_id}/dns_records/batch">client.dns.records.<a href="./src/resources/dns/records.ts">batch</a>({ ...params }) -> RecordBatchResponse</code>
 - <code title="patch /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">edit</a>(dnsRecordId, { ...params }) -> RecordEditResponse</code>
 - <code title="get /zones/{zone_id}/dns_records/export">client.dns.records.<a href="./src/resources/dns/records.ts">export</a>({ ...params }) -> string</code>
 - <code title="get /zones/{zone_id}/dns_records/{dns_record_id}">client.dns.records.<a href="./src/resources/dns/records.ts">get</a>(dnsRecordId, { ...params }) -> RecordGetResponse</code>
@@ -2301,6 +2303,28 @@ Types:
 Methods:
 
 - <code title="get /zones/{zone_id}/api_gateway/user_schemas/{schema_id}/operations">client.apiGateway.userSchemas.operations.<a href="./src/resources/api-gateway/user-schemas/operations.ts">list</a>(schemaId, { ...params }) -> OperationListResponsesV4PagePaginationArray</code>
+
+### Hosts
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/user-schemas/hosts.ts">HostListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/api_gateway/user_schemas/hosts">client.apiGateway.userSchemas.hosts.<a href="./src/resources/api-gateway/user-schemas/hosts.ts">list</a>({ ...params }) -> HostListResponsesV4PagePaginationArray</code>
+
+## ExpressionTemplate
+
+### Fallthrough
+
+Types:
+
+- <code><a href="./src/resources/api-gateway/expression-template/fallthrough.ts">FallthroughCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/api_gateway/expression-template/fallthrough">client.apiGateway.expressionTemplate.fallthrough.<a href="./src/resources/api-gateway/expression-template/fallthrough.ts">create</a>({ ...params }) -> FallthroughCreateResponse</code>
 
 # ManagedTransforms
 
@@ -4287,16 +4311,28 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/organizations.ts">LoginDesign</a></code>
-- <code><a href="./src/resources/zero-trust/organizations.ts">Organization</a></code>
-- <code><a href="./src/resources/zero-trust/organizations.ts">OrganizationRevokeUsersResponse</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">LoginDesign</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">Organization</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/organizations.ts">OrganizationRevokeUsersResponse</a></code>
 
 Methods:
 
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">create</a>({ ...params }) -> Organization</code>
-- <code title="put /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">update</a>({ ...params }) -> Organization</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">list</a>({ ...params }) -> Organization</code>
-- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations/revoke_user">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">create</a>({ ...params }) -> Organization</code>
+- <code title="put /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">update</a>({ ...params }) -> Organization</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/access/organizations">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">list</a>({ ...params }) -> Organization</code>
+- <code title="post /{account_or_zone}/{account_or_zone_id}/access/organizations/revoke_user">client.zeroTrust.organizations.<a href="./src/resources/zero-trust/organizations/organizations.ts">revokeUsers</a>({ ...params }) -> OrganizationRevokeUsersResponse</code>
+
+### DOH
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/organizations/doh.ts">DOHUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/organizations/doh.ts">DOHGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/access/organizations/doh">client.zeroTrust.organizations.doh.<a href="./src/resources/zero-trust/organizations/doh.ts">update</a>({ ...params }) -> DOHUpdateResponse</code>
+- <code title="get /accounts/{account_id}/access/organizations/doh">client.zeroTrust.organizations.doh.<a href="./src/resources/zero-trust/organizations/doh.ts">get</a>({ ...params }) -> DOHGetResponse</code>
 
 ## Seats
 
@@ -5389,12 +5425,25 @@ Methods:
 
 # URLScanner
 
+Types:
+
+- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerDomain</a></code>
+- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerTask</a></code>
+
+## Responses
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/responses.ts">ResponseGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/urlscanner/v2/responses/{responseId}">client.urlScanner.responses.<a href="./src/resources/url-scanner/responses.ts">get</a>(accountId, responseId) -> string</code>
+
 ## Scans
 
 Types:
 
-- <code><a href="./src/resources/url-scanner/scans.ts">URLScannerDomain</a></code>
-- <code><a href="./src/resources/url-scanner/scans.ts">URLScannerTask</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanCreateResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanListResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanGetResponse</a></code>
@@ -5408,15 +5457,67 @@ Methods:
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/har">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(accountId, scanId) -> ScanHarResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/screenshot">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(accountId, scanId, { ...params }) -> Response</code>
 
+## Dom
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/dom.ts">DomGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/urlscanner/v2/dom/{scanId}">client.urlScanner.dom.<a href="./src/resources/url-scanner/dom.ts">get</a>(accountId, scanId) -> string</code>
+
+## Har
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/har.ts">HarGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/urlscanner/v2/har/{scanId}">client.urlScanner.har.<a href="./src/resources/url-scanner/har.ts">get</a>(accountId, scanId) -> HarGetResponse</code>
+
+## Result
+
+Types:
+
+- <code><a href="./src/resources/url-scanner/result.ts">ResultGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountId}/urlscanner/v2/result/{scanId}">client.urlScanner.result.<a href="./src/resources/url-scanner/result.ts">get</a>(accountId, scanId) -> ResultGetResponse</code>
+
+## Screenshot
+
+Methods:
+
+- <code title="get /accounts/{accountId}/urlscanner/v2/screenshots/{scanId}.png">client.urlScanner.screenshot.<a href="./src/resources/url-scanner/screenshot.ts">get</a>(accountId, scanId, { ...params }) -> Response</code>
+
 # Radar
 
 ## AI
 
-### Gateway
+### Bots
 
 #### Summary
 
-#### TimeseriesGroups
+Types:
+
+- <code><a href="./src/resources/radar/ai/bots/summary.ts">SummaryUserAgentResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/summary/user_agent">client.radar.ai.bots.summary.<a href="./src/resources/radar/ai/bots/summary.ts">userAgent</a>({ ...params }) -> SummaryUserAgentResponse</code>
+
+### TimeseriesGroups
+
+Types:
+
+- <code><a href="./src/resources/radar/ai/timeseries-groups.ts">TimeseriesGroupUserAgentResponse</a></code>
+
+Methods:
+
+- <code title="get /radar/ai/bots/timeseries_groups/user_agent">client.radar.ai.timeseriesGroups.<a href="./src/resources/radar/ai/timeseries-groups.ts">userAgent</a>({ ...params }) -> TimeseriesGroupUserAgentResponse</code>
 
 ## Annotations
 
@@ -6720,3 +6821,17 @@ Methods:
 
 - <code title="delete /accounts/{account_id}/botnet_feed/configs/asn/{asn_id}">client.botnetFeed.configs.asn.<a href="./src/resources/botnet-feed/configs/asn.ts">delete</a>(asnId, { ...params }) -> ASNDeleteResponse</code>
 - <code title="get /accounts/{account_id}/botnet_feed/configs/asn">client.botnetFeed.configs.asn.<a href="./src/resources/botnet-feed/configs/asn.ts">get</a>({ ...params }) -> ASNGetResponse</code>
+
+# SecurityTXT
+
+Types:
+
+- <code><a href="./src/resources/security-txt.ts">SecurityTXTUpdateResponse</a></code>
+- <code><a href="./src/resources/security-txt.ts">SecurityTXTDeleteResponse</a></code>
+- <code><a href="./src/resources/security-txt.ts">SecurityTXTGetResponse</a></code>
+
+Methods:
+
+- <code title="put /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">update</a>({ ...params }) -> SecurityTXTUpdateResponse</code>
+- <code title="delete /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">delete</a>({ ...params }) -> SecurityTXTDeleteResponse</code>
+- <code title="get /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">get</a>({ ...params }) -> SecurityTXTGetResponse</code>

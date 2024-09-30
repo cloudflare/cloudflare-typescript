@@ -28,6 +28,7 @@ export {
   DiscoveryOperationsV4PagePaginationArray,
   Discovery,
 } from './discovery/index';
+export { ExpressionTemplate } from './expression-template/index';
 export {
   Message,
   PublicSchema,
