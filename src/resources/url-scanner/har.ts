@@ -2,23 +2,23 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as HarAPI from './har';
+import * as HARAPI from './har';
 
-export class Har extends APIResource {
+export class HAR extends APIResource {
   /**
    * Get a URL scan's HAR file. See HAR spec at
    * http://www.softwareishard.com/blog/har-12-spec/.
    */
-  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<HarGetResponse> {
+  get(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<HARGetResponse> {
     return this._client.get(`/accounts/${accountId}/urlscanner/v2/har/${scanId}`, options);
   }
 }
 
-export interface HarGetResponse {
-  log: HarGetResponse.Log;
+export interface HARGetResponse {
+  log: HARGetResponse.Log;
 }
 
-export namespace HarGetResponse {
+export namespace HARGetResponse {
   export interface Log {
     creator: Log.Creator;
 
@@ -148,6 +148,6 @@ export namespace HarGetResponse {
   }
 }
 
-export namespace Har {
-  export import HarGetResponse = HarAPI.HarGetResponse;
+export namespace HAR {
+  export import HARGetResponse = HARAPI.HARGetResponse;
 }

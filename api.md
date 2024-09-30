@@ -5447,35 +5447,35 @@ Types:
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanCreateResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanListResponse</a></code>
 - <code><a href="./src/resources/url-scanner/scans.ts">ScanGetResponse</a></code>
-- <code><a href="./src/resources/url-scanner/scans.ts">ScanHarResponse</a></code>
+- <code><a href="./src/resources/url-scanner/scans.ts">ScanHARResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{accountId}/urlscanner/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">create</a>(accountId, { ...params }) -> ScanCreateResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">list</a>(accountId, { ...params }) -> ScanListResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">get</a>(accountId, scanId, { ...params }) -> ScanGetResponse</code>
-- <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/har">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(accountId, scanId) -> ScanHarResponse</code>
+- <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/har">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">har</a>(accountId, scanId) -> ScanHARResponse</code>
 - <code title="get /accounts/{accountId}/urlscanner/scan/{scanId}/screenshot">client.urlScanner.scans.<a href="./src/resources/url-scanner/scans.ts">screenshot</a>(accountId, scanId, { ...params }) -> Response</code>
 
-## Dom
+## DOM
 
 Types:
 
-- <code><a href="./src/resources/url-scanner/dom.ts">DomGetResponse</a></code>
+- <code><a href="./src/resources/url-scanner/dom.ts">DOMGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{accountId}/urlscanner/v2/dom/{scanId}">client.urlScanner.dom.<a href="./src/resources/url-scanner/dom.ts">get</a>(accountId, scanId) -> string</code>
 
-## Har
+## HAR
 
 Types:
 
-- <code><a href="./src/resources/url-scanner/har.ts">HarGetResponse</a></code>
+- <code><a href="./src/resources/url-scanner/har.ts">HARGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{accountId}/urlscanner/v2/har/{scanId}">client.urlScanner.har.<a href="./src/resources/url-scanner/har.ts">get</a>(accountId, scanId) -> HarGetResponse</code>
+- <code title="get /accounts/{accountId}/urlscanner/v2/har/{scanId}">client.urlScanner.har.<a href="./src/resources/url-scanner/har.ts">get</a>(accountId, scanId) -> HARGetResponse</code>
 
 ## Result
 

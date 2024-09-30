@@ -85,10 +85,10 @@ export class Scans extends APIResource {
    * Get a URL scan's HAR file. See HAR spec at
    * http://www.softwareishard.com/blog/har-12-spec/.
    */
-  har(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHarResponse> {
+  har(accountId: string, scanId: string, options?: Core.RequestOptions): Core.APIPromise<ScanHARResponse> {
     return (
       this._client.get(`/accounts/${accountId}/urlscanner/scan/${scanId}/har`, options) as Core.APIPromise<{
-        result: ScanHarResponse;
+        result: ScanHARResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -733,16 +733,16 @@ export namespace ScanGetResponse {
   }
 }
 
-export interface ScanHarResponse {
-  har: ScanHarResponse.Har;
+export interface ScanHARResponse {
+  har: ScanHARResponse.HAR;
 }
 
-export namespace ScanHarResponse {
-  export interface Har {
-    log: Har.Log;
+export namespace ScanHARResponse {
+  export interface HAR {
+    log: HAR.Log;
   }
 
-  export namespace Har {
+  export namespace HAR {
     export interface Log {
       creator: Log.Creator;
 
@@ -1007,7 +1007,7 @@ export namespace Scans {
   export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
   export import ScanListResponse = ScansAPI.ScanListResponse;
   export import ScanGetResponse = ScansAPI.ScanGetResponse;
-  export import ScanHarResponse = ScansAPI.ScanHarResponse;
+  export import ScanHARResponse = ScansAPI.ScanHARResponse;
   export import ScanCreateParams = ScansAPI.ScanCreateParams;
   export import ScanListParams = ScansAPI.ScanListParams;
   export import ScanGetParams = ScansAPI.ScanGetParams;
