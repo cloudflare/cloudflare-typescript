@@ -1534,7 +1534,9 @@ export type TTLParam = number | 1;
 
 export interface TXTRecord {
   /**
-   * Text content for the record.
+   * Text content for the record. The content must consist of quoted "character
+   * strings" (RFC 1035), each with a length of up to 255 bytes. Strings exceeding
+   * this allowed maximum length are automatically split.
    */
   content?: string;
 
@@ -1546,7 +1548,9 @@ export interface TXTRecord {
 
 export interface TXTRecordParam {
   /**
-   * Text content for the record.
+   * Text content for the record. The content must consist of quoted "character
+   * strings" (RFC 1035), each with a length of up to 255 bytes. Strings exceeding
+   * this allowed maximum length are automatically split.
    */
   content?: string;
 
@@ -3034,7 +3038,9 @@ export namespace RecordCreateParams {
     zone_id: string;
 
     /**
-     * Body param: Text content for the record.
+     * Body param: Text content for the record. The content must consist of quoted
+     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
+     * exceeding this allowed maximum length are automatically split.
      */
     content?: string;
 
@@ -3801,7 +3807,9 @@ export namespace RecordUpdateParams {
     zone_id: string;
 
     /**
-     * Body param: Text content for the record.
+     * Body param: Text content for the record. The content must consist of quoted
+     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
+     * exceeding this allowed maximum length are automatically split.
      */
     content?: string;
 
@@ -4782,7 +4790,9 @@ export namespace RecordEditParams {
     zone_id: string;
 
     /**
-     * Body param: Text content for the record.
+     * Body param: Text content for the record. The content must consist of quoted
+     * "character strings" (RFC 1035), each with a length of up to 255 bytes. Strings
+     * exceeding this allowed maximum length are automatically split.
      */
     content?: string;
 
