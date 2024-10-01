@@ -110,6 +110,12 @@ export interface PolicyCreateResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyCreateResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -167,6 +173,33 @@ export interface PolicyCreateResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyCreateResponse {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
 }
 
 export interface PolicyUpdateResponse {
@@ -191,6 +224,12 @@ export interface PolicyUpdateResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyUpdateResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -250,6 +289,33 @@ export interface PolicyUpdateResponse {
   updated_at?: string;
 }
 
+export namespace PolicyUpdateResponse {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
+}
+
 export interface PolicyListResponse {
   /**
    * The UUID of the policy
@@ -271,6 +337,12 @@ export interface PolicyListResponse {
    * session.
    */
   approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyListResponse.ConnectionRules;
 
   created_at?: string;
 
@@ -329,6 +401,33 @@ export interface PolicyListResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyListResponse {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
 }
 
 export interface PolicyDeleteResponse {
@@ -360,6 +459,12 @@ export interface PolicyGetResponse {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  connection_rules?: PolicyGetResponse.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -417,6 +522,33 @@ export interface PolicyGetResponse {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace PolicyGetResponse {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
 }
 
 export interface PolicyCreateParams {
@@ -453,6 +585,12 @@ export interface PolicyCreateParams {
   approval_required?: boolean;
 
   /**
+   * Body param: The rules that define how users may connect to the targets secured
+   * by your application.
+   */
+  connection_rules?: PolicyCreateParams.ConnectionRules;
+
+  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
@@ -491,6 +629,33 @@ export interface PolicyCreateParams {
   session_duration?: string;
 }
 
+export namespace PolicyCreateParams {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
+}
+
 export interface PolicyUpdateParams {
   /**
    * Path param: Identifier
@@ -523,6 +688,12 @@ export interface PolicyUpdateParams {
    * start of each session.
    */
   approval_required?: boolean;
+
+  /**
+   * Body param: The rules that define how users may connect to the targets secured
+   * by your application.
+   */
+  connection_rules?: PolicyUpdateParams.ConnectionRules;
 
   /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
@@ -561,6 +732,33 @@ export interface PolicyUpdateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
+}
+
+export namespace PolicyUpdateParams {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
 }
 
 export interface PolicyListParams {

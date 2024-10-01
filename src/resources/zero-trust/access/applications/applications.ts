@@ -1068,7 +1068,7 @@ export namespace Application {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
      * UUID
@@ -1124,7 +1124,7 @@ export namespace Application {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
      * UUID
@@ -1180,7 +1180,7 @@ export namespace Application {
     /**
      * The application type.
      */
-    type: ApplicationsAPI.ApplicationType;
+    type: 'self_hosted' | 'saas' | 'ssh' | 'vnc' | 'app_launcher' | 'warp' | 'biso' | 'bookmark' | 'dash_sso';
 
     /**
      * UUID
@@ -1294,6 +1294,12 @@ export interface ApplicationPolicy {
    */
   approval_required?: boolean;
 
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  connection_rules?: ApplicationPolicy.ConnectionRules;
+
   created_at?: string;
 
   /**
@@ -1349,6 +1355,136 @@ export interface ApplicationPolicy {
   session_duration?: string;
 
   updated_at?: string;
+}
+
+export namespace ApplicationPolicy {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
+}
+
+export interface ApplicationPolicyParam {
+  /**
+   * The UUID of the policy
+   */
+  id?: string;
+
+  /**
+   * Administrators who can approve a temporary authentication request.
+   */
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
+
+  /**
+   * Requires the user to request access from an administrator at the start of each
+   * session.
+   */
+  approval_required?: boolean;
+
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  connection_rules?: ApplicationPolicyParam.ConnectionRules;
+
+  /**
+   * The action Access will take if a user matches this policy.
+   */
+  decision?: DecisionParam;
+
+  /**
+   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+   * meet any of the Exclude rules.
+   */
+  exclude?: Array<AccessAPI.AccessRuleParam>;
+
+  /**
+   * Rules evaluated with an OR logical operator. A user needs to meet only one of
+   * the Include rules.
+   */
+  include?: Array<AccessAPI.AccessRuleParam>;
+
+  /**
+   * Require this application to be served in an isolated browser for users matching
+   * this policy. 'Client Web Isolation' must be on for the account in order to use
+   * this feature.
+   */
+  isolation_required?: boolean;
+
+  /**
+   * The name of the Access policy.
+   */
+  name?: string;
+
+  /**
+   * A custom message that will appear on the purpose justification screen.
+   */
+  purpose_justification_prompt?: string;
+
+  /**
+   * Require users to enter a justification when they log in to the application.
+   */
+  purpose_justification_required?: boolean;
+
+  /**
+   * Rules evaluated with an AND logical operator. To match the policy, a user must
+   * meet all of the Require rules.
+   */
+  require?: Array<AccessAPI.AccessRuleParam>;
+
+  /**
+   * The amount of time that tokens issued for the application will be valid. Must be
+   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
+   * m, h.
+   */
+  session_duration?: string;
+}
+
+export namespace ApplicationPolicyParam {
+  /**
+   * The rules that define how users may connect to the targets secured by your
+   * application.
+   */
+  export interface ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    ssh?: ConnectionRules.SSH;
+  }
+
+  export namespace ConnectionRules {
+    /**
+     * The SSH-specific rules that define how users may connect to the targets secured
+     * by your application.
+     */
+    export interface SSH {
+      /**
+       * Contains the Unix usernames that may be used when connecting over SSH.
+       */
+      usernames: Array<string>;
+    }
+  }
 }
 
 /**
@@ -1407,7 +1543,8 @@ export type ApplicationType =
   | 'warp'
   | 'biso'
   | 'bookmark'
-  | 'dash_sso';
+  | 'dash_sso'
+  | 'infrastructure';
 
 /**
  * The application type.
@@ -1421,7 +1558,8 @@ export type ApplicationTypeParam =
   | 'warp'
   | 'biso'
   | 'bookmark'
-  | 'dash_sso';
+  | 'dash_sso'
+  | 'infrastructure';
 
 export interface CORSHeaders {
   /**
@@ -2291,7 +2429,8 @@ export type ApplicationCreateResponse =
   | ApplicationCreateResponse.AppLauncherApplication
   | ApplicationCreateResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateResponse.BrowserIsolationPermissionsApplication
-  | ApplicationCreateResponse.BookmarkApplication;
+  | ApplicationCreateResponse.BookmarkApplication
+  | ApplicationCreateResponse.InfrastructureApplication;
 
 export namespace ApplicationCreateResponse {
   export interface SelfHostedApplication {
@@ -3635,6 +3774,106 @@ export namespace ApplicationCreateResponse {
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
     }
   }
+
+  export interface InfrastructureApplication {
+    target_criteria: Array<InfrastructureApplication.TargetCriterion>;
+
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    created_at?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: InfrastructureApplication.SCIMConfig;
+
+    updated_at?: string;
+  }
+
+  export namespace InfrastructureApplication {
+    export interface TargetCriterion {
+      /**
+       * The port that the targets use for the chosen communication protocol. A port
+       * cannot be assigned to multiple protocols.
+       */
+      port: number;
+
+      /**
+       * The communication protocol your application secures.
+       */
+      protocol: 'ssh';
+
+      /**
+       * Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes: Record<string, Array<string>>;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+  }
 }
 
 export type ApplicationUpdateResponse =
@@ -3645,7 +3884,8 @@ export type ApplicationUpdateResponse =
   | ApplicationUpdateResponse.AppLauncherApplication
   | ApplicationUpdateResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateResponse.BrowserIsolationPermissionsApplication
-  | ApplicationUpdateResponse.BookmarkApplication;
+  | ApplicationUpdateResponse.BookmarkApplication
+  | ApplicationUpdateResponse.InfrastructureApplication;
 
 export namespace ApplicationUpdateResponse {
   export interface SelfHostedApplication {
@@ -4989,6 +5229,106 @@ export namespace ApplicationUpdateResponse {
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
     }
   }
+
+  export interface InfrastructureApplication {
+    target_criteria: Array<InfrastructureApplication.TargetCriterion>;
+
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    created_at?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: InfrastructureApplication.SCIMConfig;
+
+    updated_at?: string;
+  }
+
+  export namespace InfrastructureApplication {
+    export interface TargetCriterion {
+      /**
+       * The port that the targets use for the chosen communication protocol. A port
+       * cannot be assigned to multiple protocols.
+       */
+      port: number;
+
+      /**
+       * The communication protocol your application secures.
+       */
+      protocol: 'ssh';
+
+      /**
+       * Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes: Record<string, Array<string>>;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+  }
 }
 
 export type ApplicationListResponse =
@@ -4999,7 +5339,8 @@ export type ApplicationListResponse =
   | ApplicationListResponse.AppLauncherApplication
   | ApplicationListResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationListResponse.BrowserIsolationPermissionsApplication
-  | ApplicationListResponse.BookmarkApplication;
+  | ApplicationListResponse.BookmarkApplication
+  | ApplicationListResponse.InfrastructureApplication;
 
 export namespace ApplicationListResponse {
   export interface SelfHostedApplication {
@@ -6343,6 +6684,106 @@ export namespace ApplicationListResponse {
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
     }
   }
+
+  export interface InfrastructureApplication {
+    target_criteria: Array<InfrastructureApplication.TargetCriterion>;
+
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    created_at?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: InfrastructureApplication.SCIMConfig;
+
+    updated_at?: string;
+  }
+
+  export namespace InfrastructureApplication {
+    export interface TargetCriterion {
+      /**
+       * The port that the targets use for the chosen communication protocol. A port
+       * cannot be assigned to multiple protocols.
+       */
+      port: number;
+
+      /**
+       * The communication protocol your application secures.
+       */
+      protocol: 'ssh';
+
+      /**
+       * Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes: Record<string, Array<string>>;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+  }
 }
 
 export interface ApplicationDeleteResponse {
@@ -6360,7 +6801,8 @@ export type ApplicationGetResponse =
   | ApplicationGetResponse.AppLauncherApplication
   | ApplicationGetResponse.DeviceEnrollmentPermissionsApplication
   | ApplicationGetResponse.BrowserIsolationPermissionsApplication
-  | ApplicationGetResponse.BookmarkApplication;
+  | ApplicationGetResponse.BookmarkApplication
+  | ApplicationGetResponse.InfrastructureApplication;
 
 export namespace ApplicationGetResponse {
   export interface SelfHostedApplication {
@@ -7704,6 +8146,106 @@ export namespace ApplicationGetResponse {
       mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
     }
   }
+
+  export interface InfrastructureApplication {
+    target_criteria: Array<InfrastructureApplication.TargetCriterion>;
+
+    /**
+     * The application type.
+     */
+    type: ApplicationsAPI.ApplicationType;
+
+    /**
+     * UUID
+     */
+    id?: string;
+
+    /**
+     * Audience tag.
+     */
+    aud?: string;
+
+    created_at?: string;
+
+    /**
+     * The name of the application.
+     */
+    name?: string;
+
+    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    scim_config?: InfrastructureApplication.SCIMConfig;
+
+    updated_at?: string;
+  }
+
+  export namespace InfrastructureApplication {
+    export interface TargetCriterion {
+      /**
+       * The port that the targets use for the chosen communication protocol. A port
+       * cannot be assigned to multiple protocols.
+       */
+      port: number;
+
+      /**
+       * The communication protocol your application secures.
+       */
+      protocol: 'ssh';
+
+      /**
+       * Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes: Record<string, Array<string>>;
+    }
+
+    /**
+     * Configuration for provisioning to this application via SCIM. This is currently
+     * in closed beta.
+     */
+    export interface SCIMConfig {
+      /**
+       * The UID of the IdP to use as the source for SCIM resources to provision to this
+       * application.
+       */
+      idp_uid: string;
+
+      /**
+       * The base URI for the application's SCIM-compatible API.
+       */
+      remote_uri: string;
+
+      /**
+       * Attributes for configuring HTTP Basic authentication scheme for SCIM
+       * provisioning to an application.
+       */
+      authentication?:
+        | ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic
+        | ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken
+        | ApplicationsAPI.SCIMConfigAuthenticationOauth2;
+
+      /**
+       * If false, propagates DELETE requests to the target application for SCIM
+       * resources. If true, sets 'active' to false on the SCIM resource. Note: Some
+       * targets do not support DELETE operations.
+       */
+      deactivate_on_delete?: boolean;
+
+      /**
+       * Whether SCIM provisioning is turned on for this application.
+       */
+      enabled?: boolean;
+
+      /**
+       * A list of mappings to apply to SCIM resources before provisioning them in this
+       * application. These can transform or filter the resources to be provisioned.
+       */
+      mappings?: Array<ApplicationsAPI.SCIMConfigMapping>;
+    }
+  }
 }
 
 export type ApplicationRevokeTokensResponse = unknown;
@@ -7716,7 +8258,8 @@ export type ApplicationCreateParams =
   | ApplicationCreateParams.AppLauncherApplication
   | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationCreateParams.BrowserIsolationPermissionsApplication
-  | ApplicationCreateParams.BookmarkApplication;
+  | ApplicationCreateParams.BookmarkApplication
+  | ApplicationCreateParams.InfrastructureApplication;
 
 export namespace ApplicationCreateParams {
   export interface SelfHostedApplication {
@@ -7936,6 +8479,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -7976,6 +8525,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -8154,6 +8730,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -8194,6 +8776,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -8458,6 +9067,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -8498,6 +9113,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -8762,6 +9404,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -8802,6 +9450,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -9028,6 +9703,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -9068,6 +9749,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -9294,6 +10002,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -9334,6 +10048,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -9560,6 +10301,12 @@ export namespace ApplicationCreateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -9600,6 +10347,33 @@ export namespace ApplicationCreateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -9743,6 +10517,60 @@ export namespace ApplicationCreateParams {
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
     }
   }
+
+  export interface InfrastructureApplication {
+    /**
+     * Body param:
+     */
+    target_criteria: Array<ApplicationCreateParams.InfrastructureApplication.TargetCriterion>;
+
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param:
+     */
+    policies?: Array<ApplicationPolicyParam>;
+  }
+
+  export namespace InfrastructureApplication {
+    export interface TargetCriterion {
+      /**
+       * The port that the targets use for the chosen communication protocol. A port
+       * cannot be assigned to multiple protocols.
+       */
+      port: number;
+
+      /**
+       * The communication protocol your application secures.
+       */
+      protocol: 'ssh';
+
+      /**
+       * Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes: Record<string, Array<string>>;
+    }
+  }
 }
 
 export type ApplicationUpdateParams =
@@ -9753,7 +10581,8 @@ export type ApplicationUpdateParams =
   | ApplicationUpdateParams.AppLauncherApplication
   | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication
   | ApplicationUpdateParams.BrowserIsolationPermissionsApplication
-  | ApplicationUpdateParams.BookmarkApplication;
+  | ApplicationUpdateParams.BookmarkApplication
+  | ApplicationUpdateParams.InfrastructureApplication;
 
 export namespace ApplicationUpdateParams {
   export interface SelfHostedApplication {
@@ -9973,6 +10802,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -10013,6 +10848,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -10191,6 +11053,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -10231,6 +11099,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -10495,6 +11390,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -10535,6 +11436,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -10799,6 +11727,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -10839,6 +11773,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -11065,6 +12026,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -11105,6 +12072,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -11331,6 +12325,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -11371,6 +12371,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -11597,6 +12624,12 @@ export namespace ApplicationUpdateParams {
       approval_required?: boolean;
 
       /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      connection_rules?: UnionMember2.ConnectionRules;
+
+      /**
        * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
        * meet any of the Exclude rules.
        */
@@ -11637,6 +12670,33 @@ export namespace ApplicationUpdateParams {
        * m, h.
        */
       session_duration?: string;
+    }
+
+    export namespace UnionMember2 {
+      /**
+       * The rules that define how users may connect to the targets secured by your
+       * application.
+       */
+      export interface ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        ssh?: ConnectionRules.SSH;
+      }
+
+      export namespace ConnectionRules {
+        /**
+         * The SSH-specific rules that define how users may connect to the targets secured
+         * by your application.
+         */
+        export interface SSH {
+          /**
+           * Contains the Unix usernames that may be used when connecting over SSH.
+           */
+          usernames: Array<string>;
+        }
+      }
     }
 
     /**
@@ -11778,6 +12838,60 @@ export namespace ApplicationUpdateParams {
        * application. These can transform or filter the resources to be provisioned.
        */
       mappings?: Array<ApplicationsAPI.SCIMConfigMappingParam>;
+    }
+  }
+
+  export interface InfrastructureApplication {
+    /**
+     * Body param:
+     */
+    target_criteria: Array<ApplicationUpdateParams.InfrastructureApplication.TargetCriterion>;
+
+    /**
+     * Body param: The application type.
+     */
+    type: ApplicationTypeParam;
+
+    /**
+     * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+     * Zone ID.
+     */
+    account_id?: string;
+
+    /**
+     * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+     * Account ID.
+     */
+    zone_id?: string;
+
+    /**
+     * Body param: The name of the application.
+     */
+    name?: string;
+
+    /**
+     * Body param:
+     */
+    policies?: Array<ApplicationPolicyParam>;
+  }
+
+  export namespace InfrastructureApplication {
+    export interface TargetCriterion {
+      /**
+       * The port that the targets use for the chosen communication protocol. A port
+       * cannot be assigned to multiple protocols.
+       */
+      port: number;
+
+      /**
+       * The communication protocol your application secures.
+       */
+      protocol: 'ssh';
+
+      /**
+       * Contains a map of target attribute keys to target attribute values.
+       */
+      target_attributes: Record<string, Array<string>>;
     }
   }
 }
