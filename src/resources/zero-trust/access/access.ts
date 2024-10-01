@@ -117,14 +117,7 @@ export interface AnyValidServiceTokenRule {
   /**
    * An empty object which matches on all service tokens.
    */
-  any_valid_service_token: AnyValidServiceTokenRule.AnyValidServiceToken;
-}
-
-export namespace AnyValidServiceTokenRule {
-  /**
-   * An empty object which matches on all service tokens.
-   */
-  export interface AnyValidServiceToken {}
+  any_valid_service_token: unknown;
 }
 
 /**
@@ -134,14 +127,7 @@ export interface AnyValidServiceTokenRuleParam {
   /**
    * An empty object which matches on all service tokens.
    */
-  any_valid_service_token: AnyValidServiceTokenRuleParam.AnyValidServiceToken;
-}
-
-export namespace AnyValidServiceTokenRuleParam {
-  /**
-   * An empty object which matches on all service tokens.
-   */
-  export interface AnyValidServiceToken {}
+  any_valid_service_token: unknown;
 }
 
 /**
@@ -224,22 +210,14 @@ export namespace AzureGroupRuleParam {
  * Matches any valid client certificate.
  */
 export interface CertificateRule {
-  certificate: CertificateRule.Certificate;
-}
-
-export namespace CertificateRule {
-  export interface Certificate {}
+  certificate: unknown;
 }
 
 /**
  * Matches any valid client certificate.
  */
 export interface CertificateRuleParam {
-  certificate: CertificateRuleParam.Certificate;
-}
-
-export namespace CertificateRuleParam {
-  export interface Certificate {}
+  certificate: unknown;
 }
 
 /**
@@ -377,14 +355,7 @@ export interface EveryoneRule {
   /**
    * An empty object which matches on all users.
    */
-  everyone: EveryoneRule.Everyone;
-}
-
-export namespace EveryoneRule {
-  /**
-   * An empty object which matches on all users.
-   */
-  export interface Everyone {}
+  everyone: unknown;
 }
 
 /**
@@ -394,14 +365,7 @@ export interface EveryoneRuleParam {
   /**
    * An empty object which matches on all users.
    */
-  everyone: EveryoneRuleParam.Everyone;
-}
-
-export namespace EveryoneRuleParam {
-  /**
-   * An empty object which matches on all users.
-   */
-  export interface Everyone {}
+  everyone: unknown;
 }
 
 /**

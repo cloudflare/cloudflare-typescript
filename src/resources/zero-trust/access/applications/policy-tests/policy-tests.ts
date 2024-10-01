@@ -117,12 +117,6 @@ export interface PolicyTestCreateParams {
   approval_required?: boolean;
 
   /**
-   * Body param: The rules that define how users may connect to the targets secured
-   * by your application.
-   */
-  connection_rules?: PolicyTestCreateParams.ConnectionRules;
-
-  /**
    * Body param: The action Access will take if a user matches this policy.
    */
   decision?: ApplicationsAPI.DecisionParam;
@@ -175,33 +169,6 @@ export interface PolicyTestCreateParams {
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
-}
-
-export namespace PolicyTestCreateParams {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyTestGetParams {
