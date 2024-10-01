@@ -38,6 +38,7 @@ describe('resource widgets', () => {
       per_page: 5,
       bot_fight_mode: false,
       clearance_level: 'no_clearance',
+      ephemeral_id: false,
       offlabel: false,
       region: 'world',
     });
@@ -67,6 +68,7 @@ describe('resource widgets', () => {
       name: 'blog.cloudflare.com login form',
       bot_fight_mode: false,
       clearance_level: 'no_clearance',
+      ephemeral_id: false,
       offlabel: false,
     });
   });

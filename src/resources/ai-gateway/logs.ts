@@ -98,6 +98,11 @@ export interface LogListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
+  filters?: Array<LogListParams.Filter>;
+
+  /**
+   * Query param:
+   */
   max_cost?: number;
 
   /**
@@ -199,6 +204,29 @@ export interface LogListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   success?: boolean;
+}
+
+export namespace LogListParams {
+  export interface Filter {
+    key:
+      | 'created_at'
+      | 'request_content_type'
+      | 'response_content_type'
+      | 'success'
+      | 'cached'
+      | 'provider'
+      | 'model'
+      | 'cost'
+      | 'tokens'
+      | 'tokens_in'
+      | 'tokens_out'
+      | 'duration'
+      | 'feedback';
+
+    operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
+
+    value: Array<string | null | number | boolean>;
+  }
 }
 
 export namespace Logs {
