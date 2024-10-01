@@ -74,6 +74,8 @@ export interface DomainListResponse {
 
   lookback_hops: number;
 
+  folder?: 'AllItems' | 'Inbox' | null;
+
   integration_id?: string | null;
 
   o365_tenant_id?: string | null;
@@ -101,6 +103,8 @@ export interface DomainEditResponse {
   last_modified: string;
 
   lookback_hops: number;
+
+  folder?: 'AllItems' | 'Inbox' | null;
 
   integration_id?: string | null;
 
