@@ -128,6 +128,11 @@ export interface Widget {
   domains: Array<WidgetDomain>;
 
   /**
+   * Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id: boolean;
+
+  /**
    * Widget Mode
    */
   mode: 'non-interactive' | 'invisible' | 'managed';
@@ -199,6 +204,11 @@ export interface WidgetListResponse {
   created_on: string;
 
   domains: Array<WidgetDomain>;
+
+  /**
+   * Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id: boolean;
 
   /**
    * Widget Mode
@@ -290,6 +300,11 @@ export interface WidgetCreateParams {
   clearance_level?: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
 
   /**
+   * Body param: Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id?: boolean;
+
+  /**
    * Body param: Do not show any Cloudflare branding on the widget (ENT only).
    */
   offlabel?: boolean;
@@ -335,6 +350,11 @@ export interface WidgetUpdateParams {
    * set
    */
   clearance_level?: 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
+
+  /**
+   * Body param: Return the Ephemeral ID in /siteverify (ENT only).
+   */
+  ephemeral_id?: boolean;
 
   /**
    * Body param: Do not show any Cloudflare branding on the widget (ENT only).
