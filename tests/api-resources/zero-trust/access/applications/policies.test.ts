@@ -60,7 +60,6 @@ describe('resource policies', () => {
           },
         ],
         approval_required: true,
-        connection_rules: { ssh: { usernames: ['root', 'ubuntu'] } },
         exclude: [
           { email: { email: 'test@example.com' } },
           { email: { email: 'test@example.com' } },
@@ -132,7 +131,6 @@ describe('resource policies', () => {
           },
         ],
         approval_required: true,
-        connection_rules: { ssh: { usernames: ['root', 'ubuntu'] } },
         exclude: [
           { email: { email: 'test@example.com' } },
           { email: { email: 'test@example.com' } },
