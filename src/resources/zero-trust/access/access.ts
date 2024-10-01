@@ -117,7 +117,14 @@ export interface AnyValidServiceTokenRule {
   /**
    * An empty object which matches on all service tokens.
    */
-  any_valid_service_token: unknown;
+  any_valid_service_token: AnyValidServiceTokenRule.AnyValidServiceToken;
+}
+
+export namespace AnyValidServiceTokenRule {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  export interface AnyValidServiceToken {}
 }
 
 /**
@@ -127,7 +134,14 @@ export interface AnyValidServiceTokenRuleParam {
   /**
    * An empty object which matches on all service tokens.
    */
-  any_valid_service_token: unknown;
+  any_valid_service_token: AnyValidServiceTokenRuleParam.AnyValidServiceToken;
+}
+
+export namespace AnyValidServiceTokenRuleParam {
+  /**
+   * An empty object which matches on all service tokens.
+   */
+  export interface AnyValidServiceToken {}
 }
 
 /**
@@ -210,14 +224,22 @@ export namespace AzureGroupRuleParam {
  * Matches any valid client certificate.
  */
 export interface CertificateRule {
-  certificate: unknown;
+  certificate: CertificateRule.Certificate;
+}
+
+export namespace CertificateRule {
+  export interface Certificate {}
 }
 
 /**
  * Matches any valid client certificate.
  */
 export interface CertificateRuleParam {
-  certificate: unknown;
+  certificate: CertificateRuleParam.Certificate;
+}
+
+export namespace CertificateRuleParam {
+  export interface Certificate {}
 }
 
 /**
@@ -355,7 +377,14 @@ export interface EveryoneRule {
   /**
    * An empty object which matches on all users.
    */
-  everyone: unknown;
+  everyone: EveryoneRule.Everyone;
+}
+
+export namespace EveryoneRule {
+  /**
+   * An empty object which matches on all users.
+   */
+  export interface Everyone {}
 }
 
 /**
@@ -365,7 +394,14 @@ export interface EveryoneRuleParam {
   /**
    * An empty object which matches on all users.
    */
-  everyone: unknown;
+  everyone: EveryoneRuleParam.Everyone;
+}
+
+export namespace EveryoneRuleParam {
+  /**
+   * An empty object which matches on all users.
+   */
+  export interface Everyone {}
 }
 
 /**
