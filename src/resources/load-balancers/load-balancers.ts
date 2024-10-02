@@ -371,7 +371,7 @@ export interface LoadBalancer {
 
   /**
    * Specifies the type of session affinity the load balancer should use unless
-   * specified as `"none"` or "" (default). The supported types are:
+   * specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -765,25 +765,7 @@ export interface RandomSteering {
    * A mapping of pool IDs to custom weights. The weight is relative to other pools
    * in the load balancer.
    */
-  pool_weights?: RandomSteering.PoolWeights;
-}
-
-export namespace RandomSteering {
-  /**
-   * A mapping of pool IDs to custom weights. The weight is relative to other pools
-   * in the load balancer.
-   */
-  export interface PoolWeights {
-    /**
-     * Pool ID
-     */
-    key?: string;
-
-    /**
-     * Weight
-     */
-    value?: number;
-  }
+  pool_weights?: Record<string, number>;
 }
 
 /**
@@ -807,25 +789,7 @@ export interface RandomSteeringParam {
    * A mapping of pool IDs to custom weights. The weight is relative to other pools
    * in the load balancer.
    */
-  pool_weights?: RandomSteeringParam.PoolWeights;
-}
-
-export namespace RandomSteeringParam {
-  /**
-   * A mapping of pool IDs to custom weights. The weight is relative to other pools
-   * in the load balancer.
-   */
-  export interface PoolWeights {
-    /**
-     * Pool ID
-     */
-    key?: string;
-
-    /**
-     * Weight
-     */
-    value?: number;
-  }
+  pool_weights?: Record<string, number>;
 }
 
 /**
@@ -977,7 +941,7 @@ export namespace Rules {
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
-     * specified as `"none"` or "" (default). The supported types are:
+     * specified as `"none"`. The supported types are:
      *
      * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
      *   generated, encoding information of which origin the request will be forwarded
@@ -1204,7 +1168,7 @@ export namespace RulesParam {
 
     /**
      * Specifies the type of session affinity the load balancer should use unless
-     * specified as `"none"` or "" (default). The supported types are:
+     * specified as `"none"`. The supported types are:
      *
      * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
      *   generated, encoding information of which origin the request will be forwarded
@@ -1284,7 +1248,7 @@ export namespace RulesParam {
 
 /**
  * Specifies the type of session affinity the load balancer should use unless
- * specified as `"none"` or "" (default). The supported types are:
+ * specified as `"none"`. The supported types are:
  *
  * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
  *   generated, encoding information of which origin the request will be forwarded
@@ -1307,11 +1271,11 @@ export namespace RulesParam {
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '';
+export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header';
 
 /**
  * Specifies the type of session affinity the load balancer should use unless
- * specified as `"none"` or "" (default). The supported types are:
+ * specified as `"none"`. The supported types are:
  *
  * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
  *   generated, encoding information of which origin the request will be forwarded
@@ -1334,7 +1298,7 @@ export type SessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header' | '';
  *   `headers` in `session_affinity_attributes` for additional required
  *   configuration.
  */
-export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header' | '';
+export type SessionAffinityParam = 'none' | 'cookie' | 'ip_cookie' | 'header';
 
 /**
  * Configures attributes for session affinity.
@@ -1642,7 +1606,7 @@ export interface LoadBalancerCreateParams {
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
-   * unless specified as `"none"` or "" (default). The supported types are:
+   * unless specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -1826,7 +1790,7 @@ export interface LoadBalancerUpdateParams {
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
-   * unless specified as `"none"` or "" (default). The supported types are:
+   * unless specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
@@ -2013,7 +1977,7 @@ export interface LoadBalancerEditParams {
 
   /**
    * Body param: Specifies the type of session affinity the load balancer should use
-   * unless specified as `"none"` or "" (default). The supported types are:
+   * unless specified as `"none"`. The supported types are:
    *
    * - `"cookie"`: On the first request to a proxied load balancer, a cookie is
    *   generated, encoding information of which origin the request will be forwarded
