@@ -6743,10 +6743,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ai-gateway/logs.ts">LogListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogDeleteResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">list</a>(gatewayId, { ...params }) -> LogListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">delete</a>(gatewayId, { ...params }) -> LogDeleteResponse</code>
 
 # IAM
 

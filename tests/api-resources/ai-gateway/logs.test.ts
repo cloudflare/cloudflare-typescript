@@ -60,4 +60,31 @@ describe('resource logs', () => {
       success: true,
     });
   });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.aiGateway.logs.delete('my-gateway', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('delete: required and optional params', async () => {
+    const response = await client.aiGateway.logs.delete('my-gateway', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+      filters: [
+        { key: 'created_at', operator: 'eq', value: ['string', 'string', 'string'] },
+        { key: 'created_at', operator: 'eq', value: ['string', 'string', 'string'] },
+        { key: 'created_at', operator: 'eq', value: ['string', 'string', 'string'] },
+      ],
+      limit: 1,
+      order_by: 'created_at',
+      order_by_direction: 'asc',
+    });
+  });
 });
