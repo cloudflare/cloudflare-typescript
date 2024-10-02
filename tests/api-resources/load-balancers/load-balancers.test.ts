@@ -54,7 +54,10 @@ describe('resource loadBalancers', () => {
         SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
       },
       proxied: true,
-      random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+      random_steering: {
+        default_weight: 0.2,
+        pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
+      },
       region_pools: {
         ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
         WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -88,7 +91,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -137,7 +146,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -186,7 +201,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -268,7 +289,10 @@ describe('resource loadBalancers', () => {
         SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
       },
       proxied: true,
-      random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+      random_steering: {
+        default_weight: 0.2,
+        pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
+      },
       region_pools: {
         ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
         WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -302,7 +326,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -351,7 +381,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -400,7 +436,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -508,7 +550,10 @@ describe('resource loadBalancers', () => {
         SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
       },
       proxied: true,
-      random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+      random_steering: {
+        default_weight: 0.2,
+        pool_weights: { '9290f38c5d07c2e2f4df57b1f61d4196': 0.5, de90f38ced07c2e2f4df50b1f61d4194: 0.3 },
+      },
       region_pools: {
         ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
         WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -542,7 +587,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -591,7 +642,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
@@ -640,7 +697,13 @@ describe('resource loadBalancers', () => {
               LHR: ['abd90f38ced07c2e2f4df50b1f61d4194', 'f9138c5d07c2e2f4df57b1f61d4196'],
               SJC: ['00920f38ce07c2e2f4df50b1f61d4194'],
             },
-            random_steering: { default_weight: 0.2, pool_weights: { key: 'key', value: 0 } },
+            random_steering: {
+              default_weight: 0.2,
+              pool_weights: {
+                '9290f38c5d07c2e2f4df57b1f61d4196': 0.5,
+                de90f38ced07c2e2f4df50b1f61d4194: 0.3,
+              },
+            },
             region_pools: {
               ENAM: ['00920f38ce07c2e2f4df50b1f61d4194'],
               WNAM: ['de90f38ced07c2e2f4df50b1f61d4194', '9290f38c5d07c2e2f4df57b1f61d4196'],
