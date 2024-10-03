@@ -873,6 +873,18 @@ export interface SentineloneS2sInput {
   network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
 
   /**
+   * Agent operational state.
+   */
+  operational_state?:
+    | 'na'
+    | 'partially_disabled'
+    | 'auto_fully_disabled'
+    | 'fully_disabled'
+    | 'auto_partially_disabled'
+    | 'disabled_error'
+    | 'db_corruption';
+
+  /**
    * operator
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
@@ -903,6 +915,18 @@ export interface SentineloneS2sInputParam {
    * Network status of device.
    */
   network_status?: 'connected' | 'disconnected' | 'disconnecting' | 'connecting';
+
+  /**
+   * Agent operational state.
+   */
+  operational_state?:
+    | 'na'
+    | 'partially_disabled'
+    | 'auto_fully_disabled'
+    | 'fully_disabled'
+    | 'auto_partially_disabled'
+    | 'disabled_error'
+    | 'db_corruption';
 
   /**
    * operator
