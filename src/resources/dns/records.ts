@@ -412,10 +412,24 @@ export interface CNAMERecord {
    */
   content?: string;
 
+  settings?: CNAMERecord.Settings;
+
   /**
    * Record type.
    */
   type?: 'CNAME';
+}
+
+export namespace CNAMERecord {
+  export interface Settings {
+    /**
+     * If enabled, causes the CNAME record to be resolved externally and the resulting
+     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+     * itself. This setting has no effect on proxied records, which are always
+     * flattened.
+     */
+    flatten_cname?: boolean;
+  }
 }
 
 export interface CNAMERecordParam {
@@ -424,10 +438,24 @@ export interface CNAMERecordParam {
    */
   content?: string;
 
+  settings?: CNAMERecordParam.Settings;
+
   /**
    * Record type.
    */
   type?: 'CNAME';
+}
+
+export namespace CNAMERecordParam {
+  export interface Settings {
+    /**
+     * If enabled, causes the CNAME record to be resolved externally and the resulting
+     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+     * itself. This setting has no effect on proxied records, which are always
+     * flattened.
+     */
+    flatten_cname?: boolean;
+  }
 }
 
 export interface DNSKEYRecord {
@@ -1040,7 +1068,7 @@ export interface Record {
   /**
    * Settings for the DNS record.
    */
-  settings?: Record.Settings;
+  settings?: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1053,21 +1081,6 @@ export interface Record {
    * Enterprise zones.
    */
   ttl?: TTL;
-}
-
-export namespace Record {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 export interface RecordParam {
@@ -1091,7 +1104,7 @@ export interface RecordParam {
   /**
    * Settings for the DNS record.
    */
-  settings?: RecordParam.Settings;
+  settings?: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1104,21 +1117,6 @@ export interface RecordParam {
    * Enterprise zones.
    */
   ttl?: TTLParam;
-}
-
-export namespace RecordParam {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 export interface RecordProcessTiming {
@@ -1717,7 +1715,7 @@ export interface RecordCreateResponse {
   /**
    * Settings for the DNS record.
    */
-  settings: RecordCreateResponse.Settings;
+  settings: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1740,21 +1738,6 @@ export interface RecordCreateResponse {
    * When the record tags were last modified. Omitted if there are no tags.
    */
   tags_modified_on?: string;
-}
-
-export namespace RecordCreateResponse {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 export interface RecordUpdateResponse {
@@ -1803,7 +1786,7 @@ export interface RecordUpdateResponse {
   /**
    * Settings for the DNS record.
    */
-  settings: RecordUpdateResponse.Settings;
+  settings: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1826,21 +1809,6 @@ export interface RecordUpdateResponse {
    * When the record tags were last modified. Omitted if there are no tags.
    */
   tags_modified_on?: string;
-}
-
-export namespace RecordUpdateResponse {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 export interface RecordListResponse {
@@ -1889,7 +1857,7 @@ export interface RecordListResponse {
   /**
    * Settings for the DNS record.
    */
-  settings: RecordListResponse.Settings;
+  settings: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -1912,21 +1880,6 @@ export interface RecordListResponse {
    * When the record tags were last modified. Omitted if there are no tags.
    */
   tags_modified_on?: string;
-}
-
-export namespace RecordListResponse {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 export interface RecordDeleteResponse {
@@ -1993,7 +1946,7 @@ export namespace RecordBatchResponse {
     /**
      * Settings for the DNS record.
      */
-    settings: Delete.Settings;
+    settings: unknown;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2016,21 +1969,6 @@ export namespace RecordBatchResponse {
      * When the record tags were last modified. Omitted if there are no tags.
      */
     tags_modified_on?: string;
-  }
-
-  export namespace Delete {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-    }
   }
 
   export interface Patch {
@@ -2079,7 +2017,7 @@ export namespace RecordBatchResponse {
     /**
      * Settings for the DNS record.
      */
-    settings: Patch.Settings;
+    settings: unknown;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2102,21 +2040,6 @@ export namespace RecordBatchResponse {
      * When the record tags were last modified. Omitted if there are no tags.
      */
     tags_modified_on?: string;
-  }
-
-  export namespace Patch {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-    }
   }
 
   export interface Post {
@@ -2165,7 +2088,7 @@ export namespace RecordBatchResponse {
     /**
      * Settings for the DNS record.
      */
-    settings: Post.Settings;
+    settings: unknown;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2188,21 +2111,6 @@ export namespace RecordBatchResponse {
      * When the record tags were last modified. Omitted if there are no tags.
      */
     tags_modified_on?: string;
-  }
-
-  export namespace Post {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-    }
   }
 
   export interface Put {
@@ -2251,7 +2159,7 @@ export namespace RecordBatchResponse {
     /**
      * Settings for the DNS record.
      */
-    settings: Put.Settings;
+    settings: unknown;
 
     /**
      * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2274,21 +2182,6 @@ export namespace RecordBatchResponse {
      * When the record tags were last modified. Omitted if there are no tags.
      */
     tags_modified_on?: string;
-  }
-
-  export namespace Put {
-    /**
-     * Settings for the DNS record.
-     */
-    export interface Settings {
-      /**
-       * If enabled, causes the CNAME record to be resolved externally and the resulting
-       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-       * itself. This setting has no effect on proxied records, which are always
-       * flattened.
-       */
-      flatten_cname?: boolean;
-    }
   }
 }
 
@@ -2338,7 +2231,7 @@ export interface RecordEditResponse {
   /**
    * Settings for the DNS record.
    */
-  settings: RecordEditResponse.Settings;
+  settings: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2361,21 +2254,6 @@ export interface RecordEditResponse {
    * When the record tags were last modified. Omitted if there are no tags.
    */
   tags_modified_on?: string;
-}
-
-export namespace RecordEditResponse {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 /**
@@ -2429,7 +2307,7 @@ export interface RecordGetResponse {
   /**
    * Settings for the DNS record.
    */
-  settings: RecordGetResponse.Settings;
+  settings: unknown;
 
   /**
    * Custom tags for the DNS record. This field has no effect on DNS responses.
@@ -2452,21 +2330,6 @@ export interface RecordGetResponse {
    * When the record tags were last modified. Omitted if there are no tags.
    */
   tags_modified_on?: string;
-}
-
-export namespace RecordGetResponse {
-  /**
-   * Settings for the DNS record.
-   */
-  export interface Settings {
-    /**
-     * If enabled, causes the CNAME record to be resolved externally and the resulting
-     * address records (e.g., A and AAAA) to be returned instead of the CNAME record
-     * itself. This setting has no effect on proxied records, which are always
-     * flattened.
-     */
-    flatten_cname?: boolean;
-  }
 }
 
 export interface RecordImportResponse {
@@ -2646,9 +2509,26 @@ export namespace RecordCreateParams {
     content?: string;
 
     /**
+     * Body param:
+     */
+    settings?: RecordCreateParams.CNAMERecord.Settings;
+
+    /**
      * Body param: Record type.
      */
     type?: 'CNAME';
+  }
+
+  export namespace CNAMERecord {
+    export interface Settings {
+      /**
+       * If enabled, causes the CNAME record to be resolved externally and the resulting
+       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+       * itself. This setting has no effect on proxied records, which are always
+       * flattened.
+       */
+      flatten_cname?: boolean;
+    }
   }
 
   export interface DNSKEYRecord {
@@ -3418,9 +3298,26 @@ export namespace RecordUpdateParams {
     content?: string;
 
     /**
+     * Body param:
+     */
+    settings?: RecordUpdateParams.CNAMERecord.Settings;
+
+    /**
      * Body param: Record type.
      */
     type?: 'CNAME';
+  }
+
+  export namespace CNAMERecord {
+    export interface Settings {
+      /**
+       * If enabled, causes the CNAME record to be resolved externally and the resulting
+       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+       * itself. This setting has no effect on proxied records, which are always
+       * flattened.
+       */
+      flatten_cname?: boolean;
+    }
   }
 
   export interface DNSKEYRecord {
@@ -4404,9 +4301,26 @@ export namespace RecordEditParams {
     content?: string;
 
     /**
+     * Body param:
+     */
+    settings?: RecordEditParams.CNAMERecord.Settings;
+
+    /**
      * Body param: Record type.
      */
     type?: 'CNAME';
+  }
+
+  export namespace CNAMERecord {
+    export interface Settings {
+      /**
+       * If enabled, causes the CNAME record to be resolved externally and the resulting
+       * address records (e.g., A and AAAA) to be returned instead of the CNAME record
+       * itself. This setting has no effect on proxied records, which are always
+       * flattened.
+       */
+      flatten_cname?: boolean;
+    }
   }
 
   export interface DNSKEYRecord {
