@@ -75,6 +75,11 @@ export interface SettingEditResponse {
    */
   migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
 
+  /**
+   * Observability settings for the Worker
+   */
+  observability?: SettingEditResponse.Observability;
+
   placement?: WorkersAPI.PlacementConfiguration;
 
   /**
@@ -102,6 +107,22 @@ export namespace SettingEditResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+  }
+
+  /**
+   * Observability settings for the Worker
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker
+     */
+    enabled: boolean;
+
+    /**
+     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     * Default is 1.
+     */
+    head_sampling_rate?: number | null;
   }
 }
 
@@ -136,6 +157,11 @@ export interface SettingGetResponse {
    */
   migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
 
+  /**
+   * Observability settings for the Worker
+   */
+  observability?: SettingGetResponse.Observability;
+
   placement?: WorkersAPI.PlacementConfiguration;
 
   /**
@@ -163,6 +189,22 @@ export namespace SettingGetResponse {
      * The amount of CPU time this Worker can use in milliseconds.
      */
     cpu_ms?: number;
+  }
+
+  /**
+   * Observability settings for the Worker
+   */
+  export interface Observability {
+    /**
+     * Whether observability is enabled for the Worker
+     */
+    enabled: boolean;
+
+    /**
+     * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+     * Default is 1.
+     */
+    head_sampling_rate?: number | null;
   }
 }
 
@@ -210,6 +252,11 @@ export namespace SettingEditParams {
      */
     migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
 
+    /**
+     * Observability settings for the Worker
+     */
+    observability?: Settings.Observability;
+
     placement?: WorkersAPI.PlacementConfigurationParam;
 
     /**
@@ -237,6 +284,22 @@ export namespace SettingEditParams {
        * The amount of CPU time this Worker can use in milliseconds.
        */
       cpu_ms?: number;
+    }
+
+    /**
+     * Observability settings for the Worker
+     */
+    export interface Observability {
+      /**
+       * Whether observability is enabled for the Worker
+       */
+      enabled: boolean;
+
+      /**
+       * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%).
+       * Default is 1.
+       */
+      head_sampling_rate?: number | null;
     }
   }
 }

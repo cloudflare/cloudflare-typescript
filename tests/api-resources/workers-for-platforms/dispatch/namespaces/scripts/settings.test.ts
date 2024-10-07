@@ -60,6 +60,7 @@ describe('resource settings', () => {
               { from: 'from', from_script: 'from_script', to: 'to' },
             ],
           },
+          observability: { enabled: true, head_sampling_rate: 0.1 },
           placement: { mode: 'smart' },
           tags: ['my-tag', 'my-tag', 'my-tag'],
           tail_consumers: [
