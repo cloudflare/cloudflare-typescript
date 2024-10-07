@@ -1949,6 +1949,18 @@ Methods:
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> Response</code>
 
+### Subdomain
+
+Types:
+
+- <code><a href="./src/resources/workers/scripts/subdomain.ts">SubdomainCreateResponse</a></code>
+- <code><a href="./src/resources/workers/scripts/subdomain.ts">SubdomainGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/subdomain">client.workers.scripts.subdomain.<a href="./src/resources/workers/scripts/subdomain.ts">create</a>(scriptName, { ...params }) -> SubdomainCreateResponse</code>
+- <code title="get /accounts/{account_id}/workers/scripts/{script_name}/subdomain">client.workers.scripts.subdomain.<a href="./src/resources/workers/scripts/subdomain.ts">get</a>(scriptName, { ...params }) -> SubdomainGetResponse</code>
+
 ### Schedules
 
 Types:
