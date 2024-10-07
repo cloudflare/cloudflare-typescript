@@ -274,9 +274,9 @@ export namespace TargetParam {
   }
 }
 
-export type PageruleCreateResponse = unknown | string;
+export type PageruleCreateResponse = unknown | string | null;
 
-export type PageruleUpdateResponse = unknown | string;
+export type PageruleUpdateResponse = unknown | string | null;
 
 export type PageruleListResponse = Array<PageRule>;
 
@@ -287,9 +287,9 @@ export interface PageruleDeleteResponse {
   id: string;
 }
 
-export type PageruleEditResponse = unknown | string;
+export type PageruleEditResponse = unknown | string | null;
 
-export type PageruleGetResponse = unknown | string;
+export type PageruleGetResponse = unknown | string | null;
 
 export interface PageruleCreateParams {
   /**
