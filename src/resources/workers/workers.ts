@@ -26,7 +26,8 @@ export type Binding =
   | Binding.WorkersQueueBinding
   | D1Binding
   | DispatchNamespaceBinding
-  | MTLSCERTBinding;
+  | MTLSCERTBinding
+  | Binding.WorkersAssetsBinding;
 
 export namespace Binding {
   export interface WorkersQueueBinding {
@@ -45,6 +46,18 @@ export namespace Binding {
      */
     type: 'queue';
   }
+
+  export interface WorkersAssetsBinding {
+    /**
+     * A JavaScript variable name for the binding.
+     */
+    name: string;
+
+    /**
+     * The class of resource that the binding provides.
+     */
+    type: 'assets';
+  }
 }
 
 /**
@@ -58,7 +71,8 @@ export type BindingParam =
   | BindingParam.WorkersQueueBinding
   | D1BindingParam
   | DispatchNamespaceBindingParam
-  | MTLSCERTBindingParam;
+  | MTLSCERTBindingParam
+  | BindingParam.WorkersAssetsBinding;
 
 export namespace BindingParam {
   export interface WorkersQueueBinding {
@@ -71,6 +85,13 @@ export namespace BindingParam {
      * The class of resource that the binding provides.
      */
     type: 'queue';
+  }
+
+  export interface WorkersAssetsBinding {
+    /**
+     * The class of resource that the binding provides.
+     */
+    type: 'assets';
   }
 }
 
@@ -390,6 +411,11 @@ export namespace MigrationStepParam {
 
 export interface MTLSCERTBinding {
   /**
+   * ID of the certificate to bind to
+   */
+  certificate_id: string;
+
+  /**
    * A JavaScript variable name for the binding.
    */
   name: string;
@@ -398,23 +424,18 @@ export interface MTLSCERTBinding {
    * The class of resource that the binding provides.
    */
   type: 'mtls_certificate';
-
-  /**
-   * ID of the certificate to bind to
-   */
-  certificate_id?: string;
 }
 
 export interface MTLSCERTBindingParam {
   /**
+   * ID of the certificate to bind to
+   */
+  certificate_id: string;
+
+  /**
    * The class of resource that the binding provides.
    */
   type: 'mtls_certificate';
-
-  /**
-   * ID of the certificate to bind to
-   */
-  certificate_id?: string;
 }
 
 export interface PlacementConfiguration {
