@@ -40,6 +40,13 @@ export {
 } from './scripts';
 export { SettingEditParams, SettingGetParams, Settings } from './settings';
 export {
+  SubdomainCreateResponse,
+  SubdomainGetResponse,
+  SubdomainCreateParams,
+  SubdomainGetParams,
+  Subdomain,
+} from './subdomain';
+export {
   VersionCreateResponse,
   VersionListResponse,
   VersionGetResponse,
