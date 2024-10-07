@@ -8,12 +8,14 @@ import * as ContentAPI from './content';
 import * as DeploymentsAPI from './deployments';
 import * as SchedulesAPI from './schedules';
 import * as SettingsAPI from './settings';
+import * as SubdomainAPI from './subdomain';
 import * as TailAPI from './tail';
 import * as VersionsAPI from './versions';
 import { SinglePage } from '../../../pagination';
 import { type Response } from '../../../_shims/index';
 
 export class Scripts extends APIResource {
+  subdomain: SubdomainAPI.Subdomain = new SubdomainAPI.Subdomain(this._client);
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
   tail: TailAPI.Tail = new TailAPI.Tail(this._client);
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
@@ -407,6 +409,11 @@ export namespace Scripts {
   export import ScriptListParams = ScriptsAPI.ScriptListParams;
   export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
   export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+  export import Subdomain = SubdomainAPI.Subdomain;
+  export import SubdomainCreateResponse = SubdomainAPI.SubdomainCreateResponse;
+  export import SubdomainGetResponse = SubdomainAPI.SubdomainGetResponse;
+  export import SubdomainCreateParams = SubdomainAPI.SubdomainCreateParams;
+  export import SubdomainGetParams = SubdomainAPI.SubdomainGetParams;
   export import Schedules = SchedulesAPI.Schedules;
   export import Schedule = SchedulesAPI.Schedule;
   export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
