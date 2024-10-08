@@ -422,6 +422,11 @@ export interface GatewayConfigurationSettings {
   protocol_detection?: ProtocolDetection;
 
   /**
+   * Sandbox settings.
+   */
+  sandbox?: GatewayConfigurationSettings.Sandbox;
+
+  /**
    * TLS interception settings.
    */
   tls_decrypt?: TLSSettings;
@@ -438,6 +443,21 @@ export namespace GatewayConfigurationSettings {
      * the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
      */
     id: string;
+  }
+
+  /**
+   * Sandbox settings.
+   */
+  export interface Sandbox {
+    /**
+     * Enable sandbox.
+     */
+    enabled?: boolean;
+
+    /**
+     * Action to take when the file cannot be scanned.
+     */
+    fallback_action?: 'allow' | 'block';
   }
 }
 
@@ -498,6 +518,11 @@ export interface GatewayConfigurationSettingsParam {
   protocol_detection?: ProtocolDetectionParam;
 
   /**
+   * Sandbox settings.
+   */
+  sandbox?: GatewayConfigurationSettingsParam.Sandbox;
+
+  /**
    * TLS interception settings.
    */
   tls_decrypt?: TLSSettingsParam;
@@ -514,6 +539,21 @@ export namespace GatewayConfigurationSettingsParam {
      * the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
      */
     id: string;
+  }
+
+  /**
+   * Sandbox settings.
+   */
+  export interface Sandbox {
+    /**
+     * Enable sandbox.
+     */
+    enabled?: boolean;
+
+    /**
+     * Action to take when the file cannot be scanned.
+     */
+    fallback_action?: 'allow' | 'block';
   }
 }
 
