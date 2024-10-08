@@ -16,11 +16,17 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`, {
         body,
         ...options,
+        headers: {
+          ...(xMagicNewHcTarget?.toString() != null ?
+            { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
       }) as Core.APIPromise<{ result: CfInterconnectUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -32,11 +38,17 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectListResponse> {
-    const { account_id } = params;
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
-      this._client.get(`/accounts/${account_id}/magic/cf_interconnects`, options) as Core.APIPromise<{
-        result: CfInterconnectListResponse;
-      }>
+      this._client.get(`/accounts/${account_id}/magic/cf_interconnects`, {
+        ...options,
+        headers: {
+          ...(xMagicNewHcTarget?.toString() != null ?
+            { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: CfInterconnectListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -48,12 +60,17 @@ export class CfInterconnects extends APIResource {
     params: CfInterconnectGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CfInterconnectGetResponse> {
-    const { account_id } = params;
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`,
-        options,
-      ) as Core.APIPromise<{ result: CfInterconnectGetResponse }>
+      this._client.get(`/accounts/${account_id}/magic/cf_interconnects/${cfInterconnectId}`, {
+        ...options,
+        headers: {
+          ...(xMagicNewHcTarget?.toString() != null ?
+            { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: CfInterconnectGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -143,14 +160,42 @@ export namespace CfInterconnectUpdateResponse {
       /**
        * The destination address in a request type health check. After the healthcheck is
        * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`.
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
        */
-      target?: string;
+      target?: HealthCheck.MagicHealthCheckTarget | string;
 
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
       type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -238,14 +283,42 @@ export namespace CfInterconnectListResponse {
       /**
        * The destination address in a request type health check. After the healthcheck is
        * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`.
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
        */
-      target?: string;
+      target?: HealthCheck.MagicHealthCheckTarget | string;
 
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
       type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -333,14 +406,42 @@ export namespace CfInterconnectGetResponse {
       /**
        * The destination address in a request type health check. After the healthcheck is
        * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-       * to this address. This field defaults to `customer_gre_endpoint address`.
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+       * object form if the x-magic-new-hc-target header is set to true and string form
+       * if x-magic-new-hc-target is absent or set to false.
        */
-      target?: string;
+      target?: HealthCheck.MagicHealthCheckTarget | string;
 
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
       type?: MagicTransitAPI.HealthCheckType;
+    }
+
+    export namespace HealthCheck {
+      /**
+       * The destination address in a request type health check. After the healthcheck is
+       * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+       * to this address. This field defaults to `customer_gre_endpoint address`. This
+       * field is ignored for bidirectional healthchecks as the interface_address (not
+       * assigned to the Cloudflare side of the tunnel) is used as the target.
+       */
+      export interface MagicHealthCheckTarget {
+        /**
+         * The effective health check target. If 'saved' is empty, then this field will be
+         * populated with the calculated default value on GET requests. Ignored in POST,
+         * PUT, and PATCH requests.
+         */
+        effective?: string;
+
+        /**
+         * The saved health check target. Setting the value to the empty string indicates
+         * that the calculated default value will be used.
+         */
+        saved?: string;
+      }
     }
   }
 }
@@ -378,6 +479,12 @@ export interface CfInterconnectUpdateParams {
    * The minimum value is 576.
    */
   mtu?: number;
+
+  /**
+   * Header param: If true, the health check target in the request and response
+   * bodies will be presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
 }
 
 export namespace CfInterconnectUpdateParams {
@@ -406,29 +513,62 @@ export namespace CfInterconnectUpdateParams {
     /**
      * The destination address in a request type health check. After the healthcheck is
      * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
-     * to this address. This field defaults to `customer_gre_endpoint address`.
+     * to this address. This field defaults to `customer_gre_endpoint address`. This
+     * field is ignored for bidirectional healthchecks as the interface_address (not
+     * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+     * object form if the x-magic-new-hc-target header is set to true and string form
+     * if x-magic-new-hc-target is absent or set to false.
      */
-    target?: string;
+    target?: HealthCheck.MagicHealthCheckTarget | string;
 
     /**
      * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
     type?: MagicTransitAPI.HealthCheckTypeParam;
   }
+
+  export namespace HealthCheck {
+    /**
+     * The destination address in a request type health check. After the healthcheck is
+     * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+     * to this address. This field defaults to `customer_gre_endpoint address`. This
+     * field is ignored for bidirectional healthchecks as the interface_address (not
+     * assigned to the Cloudflare side of the tunnel) is used as the target.
+     */
+    export interface MagicHealthCheckTarget {
+      /**
+       * The saved health check target. Setting the value to the empty string indicates
+       * that the calculated default value will be used.
+       */
+      saved?: string;
+    }
+  }
 }
 
 export interface CfInterconnectListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Header param: If true, the health check target in the response body will be
+   * presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
 }
 
 export interface CfInterconnectGetParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Header param: If true, the health check target in the response body will be
+   * presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
 }
 
 export namespace CfInterconnects {

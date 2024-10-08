@@ -80,11 +80,17 @@ export class Sites extends APIResource {
    * Get a specific Site.
    */
   get(siteId: string, params: SiteGetParams, options?: Core.RequestOptions): Core.APIPromise<Site> {
-    const { account_id } = params;
+    const { account_id, 'x-magic-new-hc-target': xMagicNewHcTarget } = params;
     return (
-      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, options) as Core.APIPromise<{
-        result: Site;
-      }>
+      this._client.get(`/accounts/${account_id}/magic/sites/${siteId}`, {
+        ...options,
+        headers: {
+          ...(xMagicNewHcTarget?.toString() != null ?
+            { 'x-magic-new-hc-target': xMagicNewHcTarget?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: Site }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -282,9 +288,15 @@ export interface SiteEditParams {
 
 export interface SiteGetParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Header param: If true, the health check target in the response body will be
+   * presented using the new object format. Defaults to false.
+   */
+  'x-magic-new-hc-target'?: boolean;
 }
 
 export namespace Sites {
