@@ -208,7 +208,8 @@ export interface GatewayRule {
     | 'l4_override'
     | 'egress'
     | 'audit_ssh'
-    | 'resolve';
+    | 'resolve'
+    | 'quarantine';
 
   created_at?: string;
 
@@ -386,6 +387,11 @@ export interface RuleSetting {
   payload_log?: RuleSetting.PayloadLog;
 
   /**
+   * Settings that apply to quarantine rules
+   */
+  quarantine?: RuleSetting.Quarantine;
+
+  /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
    * resolver. Cannot be set when dns_resolvers are specified. Only valid when a
    * rule's action is set to 'resolve'.
@@ -538,6 +544,30 @@ export namespace RuleSetting {
   }
 
   /**
+   * Settings that apply to quarantine rules
+   */
+  export interface Quarantine {
+    /**
+     * Types of files to sandbox.
+     */
+    file_types?: Array<
+      | 'exe'
+      | 'pdf'
+      | 'doc'
+      | 'docm'
+      | 'docx'
+      | 'rtf'
+      | 'ppt'
+      | 'pptx'
+      | 'xls'
+      | 'xlsm'
+      | 'xlsx'
+      | 'zip'
+      | 'rar'
+    >;
+  }
+
+  /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
   export interface UntrustedCERT {
@@ -659,6 +689,11 @@ export interface RuleSettingParam {
    * Configure DLP payload logging.
    */
   payload_log?: RuleSettingParam.PayloadLog;
+
+  /**
+   * Settings that apply to quarantine rules
+   */
+  quarantine?: RuleSettingParam.Quarantine;
 
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS
@@ -810,6 +845,30 @@ export namespace RuleSettingParam {
      * Set to true to enable DLP payload logging for this rule.
      */
     enabled?: boolean;
+  }
+
+  /**
+   * Settings that apply to quarantine rules
+   */
+  export interface Quarantine {
+    /**
+     * Types of files to sandbox.
+     */
+    file_types?: Array<
+      | 'exe'
+      | 'pdf'
+      | 'doc'
+      | 'docm'
+      | 'docx'
+      | 'rtf'
+      | 'ppt'
+      | 'pptx'
+      | 'xls'
+      | 'xlsm'
+      | 'xlsx'
+      | 'zip'
+      | 'rar'
+    >;
   }
 
   /**
@@ -983,7 +1042,8 @@ export interface RuleCreateParams {
     | 'l4_override'
     | 'egress'
     | 'audit_ssh'
-    | 'resolve';
+    | 'resolve'
+    | 'quarantine';
 
   /**
    * Body param: The name of the rule.
@@ -1065,7 +1125,8 @@ export interface RuleUpdateParams {
     | 'l4_override'
     | 'egress'
     | 'audit_ssh'
-    | 'resolve';
+    | 'resolve'
+    | 'quarantine';
 
   /**
    * Body param: The name of the rule.
