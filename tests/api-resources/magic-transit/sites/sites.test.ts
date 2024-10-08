@@ -139,6 +139,7 @@ describe('resource sites', () => {
   test('get: required and optional params', async () => {
     const response = await client.magicTransit.sites.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
     });
   });
 });

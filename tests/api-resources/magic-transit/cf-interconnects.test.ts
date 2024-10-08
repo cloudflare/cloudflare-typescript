@@ -28,9 +28,10 @@ describe('resource cfInterconnects', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       description: 'Tunnel for Interconnect to ORD',
       gre: { cloudflare_endpoint: '203.0.113.1' },
-      health_check: { enabled: true, rate: 'low', target: '203.0.113.1', type: 'reply' },
+      health_check: { enabled: true, rate: 'low', target: { saved: '203.0.113.1' }, type: 'reply' },
       interface_address: '192.0.2.0/31',
       mtu: 0,
+      'x-magic-new-hc-target': true,
     });
   });
 
@@ -50,6 +51,7 @@ describe('resource cfInterconnects', () => {
   test('list: required and optional params', async () => {
     const response = await client.magicTransit.cfInterconnects.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
     });
   });
 
@@ -69,6 +71,7 @@ describe('resource cfInterconnects', () => {
   test('get: required and optional params', async () => {
     const response = await client.magicTransit.cfInterconnects.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
     });
   });
 });

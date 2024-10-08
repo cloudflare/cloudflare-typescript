@@ -30,6 +30,7 @@ describe('resource greTunnels', () => {
     const response = await client.magicTransit.greTunnels.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: {},
+      'x-magic-new-hc-target': true,
     });
   });
 
@@ -62,11 +63,12 @@ describe('resource greTunnels', () => {
         direction: 'unidirectional',
         enabled: true,
         rate: 'low',
-        target: '203.0.113.1',
+        target: { saved: '203.0.113.1' },
         type: 'reply',
       },
       mtu: 0,
       ttl: 0,
+      'x-magic-new-hc-target': true,
     });
   });
 
@@ -86,6 +88,7 @@ describe('resource greTunnels', () => {
   test('list: required and optional params', async () => {
     const response = await client.magicTransit.greTunnels.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
     });
   });
 
@@ -105,6 +108,7 @@ describe('resource greTunnels', () => {
   test('delete: required and optional params', async () => {
     const response = await client.magicTransit.greTunnels.delete('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
     });
   });
 
@@ -124,6 +128,7 @@ describe('resource greTunnels', () => {
   test('get: required and optional params', async () => {
     const response = await client.magicTransit.greTunnels.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'x-magic-new-hc-target': true,
     });
   });
 });

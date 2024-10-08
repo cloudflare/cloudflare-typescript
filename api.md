@@ -3107,7 +3107,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheck</a></code>
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckRate</a></code>
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckType</a></code>
 
