@@ -52,6 +52,7 @@ describe('resource configurations', () => {
         extended_email_matching: { enabled: true },
         fips: { tls: true },
         protocol_detection: { enabled: true },
+        sandbox: { enabled: true, fallback_action: 'allow' },
         tls_decrypt: { enabled: true },
       },
     });
@@ -99,6 +100,7 @@ describe('resource configurations', () => {
         extended_email_matching: { enabled: true },
         fips: { tls: true },
         protocol_detection: { enabled: true },
+        sandbox: { enabled: true, fallback_action: 'allow' },
         tls_decrypt: { enabled: true },
       },
     });
