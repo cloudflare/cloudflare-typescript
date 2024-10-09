@@ -114,9 +114,14 @@ export namespace ImpersonationRegistryCreateResponse {
 
     directory_id?: number | null;
 
-    directory_node_id?: string | null;
+    directory_node_id?: number | null;
 
     email?: string | null;
+
+    /**
+     * @deprecated
+     */
+    external_directory_node_id?: string | null;
 
     provenance?: string | null;
   }
@@ -136,9 +141,14 @@ export namespace ImpersonationRegistryCreateResponse {
 
     directory_id?: number | null;
 
-    directory_node_id?: string | null;
+    directory_node_id?: number | null;
 
     email?: string | null;
+
+    /**
+     * @deprecated
+     */
+    external_directory_node_id?: string | null;
 
     provenance?: string | null;
   }
@@ -159,9 +169,14 @@ export interface ImpersonationRegistryListResponse {
 
   directory_id?: number | null;
 
-  directory_node_id?: string | null;
+  directory_node_id?: number | null;
 
   email?: string | null;
+
+  /**
+   * @deprecated
+   */
+  external_directory_node_id?: string | null;
 
   provenance?: string | null;
 }
@@ -185,9 +200,14 @@ export interface ImpersonationRegistryEditResponse {
 
   directory_id?: number | null;
 
-  directory_node_id?: string | null;
+  directory_node_id?: number | null;
 
   email?: string | null;
+
+  /**
+   * @deprecated
+   */
+  external_directory_node_id?: string | null;
 
   provenance?: string | null;
 }
@@ -207,9 +227,14 @@ export interface ImpersonationRegistryGetResponse {
 
   directory_id?: number | null;
 
-  directory_node_id?: string | null;
+  directory_node_id?: number | null;
 
   email?: string | null;
+
+  /**
+   * @deprecated
+   */
+  external_directory_node_id?: string | null;
 
   provenance?: string | null;
 }
