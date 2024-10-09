@@ -63,6 +63,8 @@ export interface PredefinedProfile {
    */
   name: string;
 
+  confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
+
   /**
    * Scan the context of predefined entries to only return matches surrounded by
    * keywords.
@@ -99,6 +101,8 @@ export namespace PredefinedProfile {
   export interface Predefined {
     id: string;
 
+    confidence: Predefined.Confidence;
+
     enabled: boolean;
 
     name: string;
@@ -106,6 +110,17 @@ export namespace PredefinedProfile {
     type: 'predefined';
 
     profile_id?: string | null;
+  }
+
+  export namespace Predefined {
+    export interface Confidence {
+      /**
+       * Indicates whether this entry can be made more or less sensitive by setting a
+       * confidence threshold. Profiles that use an entry with `available` set to true
+       * can use confidence thresholds
+       */
+      available: boolean;
+    }
   }
 
   export interface Integration {
@@ -174,6 +189,11 @@ export interface PredefinedUpdateParams {
    * Body param:
    */
   allowed_match_count?: number | null;
+
+  /**
+   * Body param:
+   */
+  confidence_threshold?: string | null;
 
   /**
    * Body param: Scan the context of predefined entries to only return matches
