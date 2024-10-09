@@ -428,7 +428,7 @@ export namespace Project {
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Record<string, unknown> | null;
+      browsers?: Record<string, Preview.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -513,6 +513,11 @@ export namespace Project {
          */
         dataset?: string;
       }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
 
       /**
        * D1 binding.
@@ -653,7 +658,7 @@ export namespace Project {
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Record<string, unknown> | null;
+      browsers?: Record<string, Production.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -738,6 +743,11 @@ export namespace Project {
          */
         dataset?: string;
       }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
 
       /**
        * D1 binding.
@@ -1021,7 +1031,7 @@ export namespace ProjectCreateParams {
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Record<string, unknown> | null;
+      browsers?: Record<string, Preview.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1106,6 +1116,11 @@ export namespace ProjectCreateParams {
          */
         dataset?: string;
       }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
 
       /**
        * D1 binding.
@@ -1246,7 +1261,7 @@ export namespace ProjectCreateParams {
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Record<string, unknown> | null;
+      browsers?: Record<string, Production.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1331,6 +1346,11 @@ export namespace ProjectCreateParams {
          */
         dataset?: string;
       }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
 
       /**
        * D1 binding.
@@ -1567,7 +1587,7 @@ export namespace ProjectEditParams {
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Record<string, unknown> | null;
+      browsers?: Record<string, Preview.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1652,6 +1672,11 @@ export namespace ProjectEditParams {
          */
         dataset?: string;
       }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
 
       /**
        * D1 binding.
@@ -1792,7 +1817,7 @@ export namespace ProjectEditParams {
       /**
        * Browser bindings used for Pages Functions.
        */
-      browsers?: Record<string, unknown> | null;
+      browsers?: Record<string, Production.Browsers | null> | null;
 
       /**
        * Compatibility date used for Pages Functions.
@@ -1877,6 +1902,11 @@ export namespace ProjectEditParams {
          */
         dataset?: string;
       }
+
+      /**
+       * Browser binding.
+       */
+      export interface Browsers {}
 
       /**
        * D1 binding.

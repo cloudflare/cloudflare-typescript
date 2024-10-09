@@ -36,7 +36,7 @@ describe('resource projects', () => {
         preview: {
           ai_bindings: { AI_BINDING: { project_id: 'some-project-id' } },
           analytics_engine_datasets: { ANALYTICS_ENGINE_BINDING: { dataset: 'api_analytics' } },
-          browsers: { BROWSER: 'bar' },
+          browsers: { BROWSER: {} },
           compatibility_date: '2022-01-01',
           compatibility_flags: ['url_standard'],
           d1_databases: { D1_BINDING: { id: '445e2955-951a-43f8-a35b-a4d0c8138f63' } },
@@ -60,7 +60,7 @@ describe('resource projects', () => {
         production: {
           ai_bindings: { AI_BINDING: { project_id: 'some-project-id' } },
           analytics_engine_datasets: { ANALYTICS_ENGINE_BINDING: { dataset: 'api_analytics' } },
-          browsers: { BROWSER: 'bar' },
+          browsers: { BROWSER: {} },
           compatibility_date: '2022-01-01',
           compatibility_flags: ['url_standard'],
           d1_databases: { D1_BINDING: { id: '445e2955-951a-43f8-a35b-a4d0c8138f63' } },
@@ -149,7 +149,7 @@ describe('resource projects', () => {
         preview: {
           ai_bindings: { AI_BINDING: { project_id: 'some-project-id' } },
           analytics_engine_datasets: { ANALYTICS_ENGINE_BINDING: { dataset: 'api_analytics' } },
-          browsers: { BROWSER: 'bar' },
+          browsers: { BROWSER: {} },
           compatibility_date: '2022-01-01',
           compatibility_flags: ['url_standard'],
           d1_databases: { D1_BINDING: { id: '445e2955-951a-43f8-a35b-a4d0c8138f63' } },
@@ -173,7 +173,7 @@ describe('resource projects', () => {
         production: {
           ai_bindings: { AI_BINDING: { project_id: 'some-project-id' } },
           analytics_engine_datasets: { ANALYTICS_ENGINE_BINDING: { dataset: 'api_analytics' } },
-          browsers: { BROWSER: 'bar' },
+          browsers: { BROWSER: {} },
           compatibility_date: '2022-01-01',
           compatibility_flags: ['url_standard'],
           d1_databases: { D1_BINDING: { id: '445e2955-951a-43f8-a35b-a4d0c8138f63' } },
