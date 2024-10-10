@@ -42,6 +42,7 @@ describe('resource predefined', () => {
           { id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', enabled: true },
         ],
         allowed_match_count: 0,
+        confidence_threshold: 'confidence_threshold',
         context_awareness: { enabled: true, skip: { files: true } },
         ocr_enabled: true,
       },

@@ -117,6 +117,8 @@ export namespace Profile {
      */
     updated_at: string;
 
+    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
+
     /**
      * The description of the profile
      */
@@ -145,6 +147,8 @@ export namespace Profile {
     export interface Predefined {
       id: string;
 
+      confidence: Predefined.Confidence;
+
       enabled: boolean;
 
       name: string;
@@ -152,6 +156,17 @@ export namespace Profile {
       type: 'predefined';
 
       profile_id?: string | null;
+    }
+
+    export namespace Predefined {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry can be made more or less sensitive by setting a
+         * confidence threshold. Profiles that use an entry with `available` set to true
+         * can use confidence thresholds
+         */
+        available: boolean;
+      }
     }
 
     export interface Integration {
@@ -228,6 +243,8 @@ export namespace Profile {
 
     type: 'predefined';
 
+    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
+
     /**
      * Scan the context of predefined entries to only return matches surrounded by
      * keywords.
@@ -264,6 +281,8 @@ export namespace Profile {
     export interface Predefined {
       id: string;
 
+      confidence: Predefined.Confidence;
+
       enabled: boolean;
 
       name: string;
@@ -271,6 +290,17 @@ export namespace Profile {
       type: 'predefined';
 
       profile_id?: string | null;
+    }
+
+    export namespace Predefined {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry can be made more or less sensitive by setting a
+         * confidence threshold. Profiles that use an entry with `available` set to true
+         * can use confidence thresholds
+         */
+        available: boolean;
+      }
     }
 
     export interface Integration {
@@ -371,6 +401,8 @@ export namespace Profile {
     export interface Predefined {
       id: string;
 
+      confidence: Predefined.Confidence;
+
       enabled: boolean;
 
       name: string;
@@ -378,6 +410,17 @@ export namespace Profile {
       type: 'predefined';
 
       profile_id?: string | null;
+    }
+
+    export namespace Predefined {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry can be made more or less sensitive by setting a
+         * confidence threshold. Profiles that use an entry with `available` set to true
+         * can use confidence thresholds
+         */
+        available: boolean;
+      }
     }
 
     export interface Integration {
