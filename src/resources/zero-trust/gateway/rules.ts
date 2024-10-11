@@ -234,6 +234,14 @@ export interface GatewayRule {
   enabled?: boolean;
 
   /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  expiration?: GatewayRule.Expiration;
+
+  /**
    * The protocol or layer to evaluate the traffic, identity, and device posture
    * expressions.
    */
@@ -273,6 +281,35 @@ export interface GatewayRule {
   traffic?: string;
 
   updated_at?: string;
+}
+
+export namespace GatewayRule {
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  export interface Expiration {
+    /**
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
+     */
+    expires_at: string;
+
+    /**
+     * The default duration a policy will be active in minutes. Must be set in order to
+     * use the `reset_expiration` endpoint on this rule.
+     */
+    duration?: number;
+  }
 }
 
 /**
@@ -1066,6 +1103,14 @@ export interface RuleCreateParams {
   enabled?: boolean;
 
   /**
+   * Body param: The expiration time stamp and default duration of a DNS policy.
+   * Takes precedence over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  expiration?: RuleCreateParams.Expiration;
+
+  /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
    * posture expressions.
    */
@@ -1098,6 +1143,35 @@ export interface RuleCreateParams {
    * Body param: The wirefilter expression used for traffic matching.
    */
   traffic?: string;
+}
+
+export namespace RuleCreateParams {
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  export interface Expiration {
+    /**
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
+     */
+    expires_at: string;
+
+    /**
+     * The default duration a policy will be active in minutes. Must be set in order to
+     * use the `reset_expiration` endpoint on this rule.
+     */
+    duration?: number;
+  }
 }
 
 export interface RuleUpdateParams {
@@ -1149,6 +1223,14 @@ export interface RuleUpdateParams {
   enabled?: boolean;
 
   /**
+   * Body param: The expiration time stamp and default duration of a DNS policy.
+   * Takes precedence over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  expiration?: RuleUpdateParams.Expiration;
+
+  /**
    * Body param: The protocol or layer to evaluate the traffic, identity, and device
    * posture expressions.
    */
@@ -1181,6 +1263,35 @@ export interface RuleUpdateParams {
    * Body param: The wirefilter expression used for traffic matching.
    */
   traffic?: string;
+}
+
+export namespace RuleUpdateParams {
+  /**
+   * The expiration time stamp and default duration of a DNS policy. Takes precedence
+   * over the policy's `schedule` configuration, if any.
+   *
+   * This does not apply to HTTP or network policies.
+   */
+  export interface Expiration {
+    /**
+     * The time stamp at which the policy will expire and cease to be applied.
+     *
+     * Must adhere to RFC 3339 and include a UTC offset. Non-zero offsets are accepted
+     * but will be converted to the equivalent value with offset zero (UTC+00:00) and
+     * will be returned as time stamps with offset zero denoted by a trailing 'Z'.
+     *
+     * Policies with an expiration do not consider the timezone of clients they are
+     * applied to, and expire "globally" at the point given by their `expires_at`
+     * value.
+     */
+    expires_at: string;
+
+    /**
+     * The default duration a policy will be active in minutes. Must be set in order to
+     * use the `reset_expiration` endpoint on this rule.
+     */
+    duration?: number;
+  }
 }
 
 export interface RuleListParams {
