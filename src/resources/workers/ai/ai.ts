@@ -374,12 +374,6 @@ export namespace AIRunParams {
     frequency_penalty?: number;
 
     /**
-     * Body param: An array of integers that represent the image data constrained to
-     * 8-bit unsigned integer values
-     */
-    image?: Array<number>;
-
-    /**
      * Body param: Name of the LoRA (Low-Rank Adaptation) model to fine-tune the base
      * model.
      */
@@ -459,12 +453,6 @@ export namespace AIRunParams {
      * Body param:
      */
     functions?: Array<AIRunParams.Messages.Function>;
-
-    /**
-     * Body param: An array of integers that represent the image data constrained to
-     * 8-bit unsigned integer values
-     */
-    image?: Array<number>;
 
     /**
      * Body param: The maximum number of tokens to generate in the response.
