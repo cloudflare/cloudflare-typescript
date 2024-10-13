@@ -86,6 +86,33 @@ describe('resource stream', () => {
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = client.stream.edit('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.stream.edit('ea95132c15732412d22c1476fa83f27a', {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      allowedOrigins: ['example.com'],
+      creator: 'creator-id_abcde12345',
+      maxDurationSeconds: 1,
+      meta: { name: 'video12345.mp4' },
+      requireSignedURLs: true,
+      scheduledDeletion: '2014-01-02T02:20:00Z',
+      thumbnailTimestampPct: 0.529241,
+      uploadExpiry: '2014-01-02T02:20:00Z',
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.stream.get('ea95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
