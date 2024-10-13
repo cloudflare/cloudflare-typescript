@@ -3569,6 +3569,7 @@ Methods:
 - <code title="post /accounts/{account_id}/stream">client.stream.<a href="./src/resources/stream/stream.ts">create</a>({ ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/stream">client.stream.<a href="./src/resources/stream/stream.ts">list</a>({ ...params }) -> VideosSinglePage</code>
 - <code title="delete /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">delete</a>(identifier, { ...params }) -> void</code>
+- <code title="post /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">edit</a>(identifier, { ...params }) -> Video</code>
 - <code title="get /accounts/{account_id}/stream/{identifier}">client.stream.<a href="./src/resources/stream/stream.ts">get</a>(identifier, { ...params }) -> Video</code>
 
 ## AudioTracks
