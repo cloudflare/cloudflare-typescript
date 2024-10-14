@@ -53,7 +53,7 @@ export interface MiscategorizationCreateParams {
   /**
    * Body param: Provide only if indicator_type is `ipv4` or `ipv6`.
    */
-  ip?: string;
+  ip?: string | null;
 
   /**
    * Body param: Security category IDs to add.
