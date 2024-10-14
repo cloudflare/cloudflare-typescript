@@ -6,7 +6,7 @@ import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**
-   * Get IP Overview
+   * Same as summary
    */
   get(params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null> {
     const { account_id, ...query } = params;
@@ -27,7 +27,7 @@ export interface IP {
 
   ip?: string;
 
-  risk_types?: Array<unknown>;
+  risk_types?: Array<IP.RiskType>;
 }
 
 export namespace IP {
@@ -48,6 +48,14 @@ export namespace IP {
     type?: 'hosting_provider' | 'isp' | 'organization';
 
     value?: string;
+  }
+
+  export interface RiskType {
+    id?: number;
+
+    name?: string;
+
+    super_category_id?: number;
   }
 }
 

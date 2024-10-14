@@ -6,7 +6,7 @@ import * as BulksAPI from './bulks';
 
 export class Bulks extends APIResource {
   /**
-   * Get Multiple Domain Details
+   * Same as summary
    */
   get(params: BulkGetParams, options?: Core.RequestOptions): Core.APIPromise<BulkGetResponse | null> {
     const { account_id, ...query } = params;
@@ -33,10 +33,7 @@ export namespace BulkGetResponse {
      */
     application?: BulkGetResponseItem.Application;
 
-    /**
-     * Current content categories.
-     */
-    content_categories?: Array<unknown>;
+    content_categories?: Array<BulkGetResponseItem.ContentCategory>;
 
     domain?: string;
 
@@ -62,7 +59,7 @@ export namespace BulkGetResponse {
      */
     risk_score?: number;
 
-    risk_types?: Array<unknown>;
+    risk_types?: Array<BulkGetResponseItem.RiskType>;
   }
 
   export namespace BulkGetResponseItem {
@@ -85,6 +82,17 @@ export namespace BulkGetResponse {
       name?: string;
     }
 
+    /**
+     * Current content categories.
+     */
+    export interface ContentCategory {
+      id?: number;
+
+      name?: string;
+
+      super_category_id?: number;
+    }
+
     export interface InheritedContentCategory {
       id?: number;
 
@@ -94,6 +102,14 @@ export namespace BulkGetResponse {
     }
 
     export interface InheritedRiskType {
+      id?: number;
+
+      name?: string;
+
+      super_category_id?: number;
+    }
+
+    export interface RiskType {
       id?: number;
 
       name?: string;

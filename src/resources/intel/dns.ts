@@ -56,7 +56,7 @@ export namespace DNS {
     /**
      * Hostname that the IP was observed resolving to.
      */
-    hostname?: unknown;
+    hostname?: string;
 
     /**
      * Last seen date of the DNS record during the time period.
