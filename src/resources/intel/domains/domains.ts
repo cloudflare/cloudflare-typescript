@@ -32,10 +32,7 @@ export interface Domain {
    */
   application?: Domain.Application;
 
-  /**
-   * Current content categories.
-   */
-  content_categories?: Array<unknown>;
+  content_categories?: Array<Domain.ContentCategory>;
 
   domain?: string;
 
@@ -67,7 +64,7 @@ export interface Domain {
    */
   risk_score?: number;
 
-  risk_types?: Array<unknown>;
+  risk_types?: Array<Domain.RiskType>;
 }
 
 export namespace Domain {
@@ -88,6 +85,17 @@ export namespace Domain {
     id?: number;
 
     name?: string;
+  }
+
+  /**
+   * Current content categories.
+   */
+  export interface ContentCategory {
+    id?: number;
+
+    name?: string;
+
+    super_category_id?: number;
   }
 
   export interface InheritedContentCategory {
@@ -117,6 +125,14 @@ export namespace Domain {
      * IP address or domain name.
      */
     value?: string;
+  }
+
+  export interface RiskType {
+    id?: number;
+
+    name?: string;
+
+    super_category_id?: number;
   }
 }
 
