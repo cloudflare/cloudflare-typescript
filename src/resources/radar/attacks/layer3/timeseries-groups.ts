@@ -76,7 +76,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by industry used over time.
+   * Percentage distribution of attacks by industry targeted over time.
    */
   industry(
     query?: TimeseriesGroupIndustryParams,
@@ -168,7 +168,7 @@ export class TimeseriesGroups extends APIResource {
   }
 
   /**
-   * Percentage distribution of attacks by vertical used over time.
+   * Percentage distribution of attacks by vertical targeted over time.
    */
   vertical(
     query?: TimeseriesGroupVerticalParams,

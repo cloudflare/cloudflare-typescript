@@ -26,8 +26,8 @@ export class Locations extends APIResource {
   }
 
   /**
-   * Get the requested location information. A confidence level below `5` indicates a
-   * low level of confidence in the traffic data - normally this happens because
+   * Get the requested location information. (A confidence level below `5` indicates
+   * a low level of confidence in the traffic data - normally this happens because
    * Cloudflare has a small amount of traffic from/to this location).
    */
   get(

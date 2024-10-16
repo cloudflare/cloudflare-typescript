@@ -26,7 +26,7 @@ export class ASNs extends APIResource {
   }
 
   /**
-   * Get the requested autonomous system information. A confidence level below `5`
+   * Get the requested autonomous system information. (A confidence level below `5`
    * indicates a low level of confidence in the traffic data - normally this happens
    * because Cloudflare has a small amount of traffic from/to this AS). Population
    * estimates come from APNIC (refer to https://labs.apnic.net/?p=526).
