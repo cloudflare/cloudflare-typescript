@@ -7,7 +7,7 @@ import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
-   * Percentage distribution of DNS AS112 queries by DNSSEC support over time.
+   * Percentage distribution of AS112 DNS queries by DNSSEC support over time.
    */
   dnssec(
     query?: TimeseriesGroupDNSSECParams,
