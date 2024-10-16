@@ -13,6 +13,7 @@ describe('resource hostnames', () => {
   test('create: only required params', async () => {
     const responsePromise = client.web3.hostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'gateway.example.com',
       target: 'ethereum',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,6 +28,7 @@ describe('resource hostnames', () => {
   test('create: required and optional params', async () => {
     const response = await client.web3.hostnames.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'gateway.example.com',
       target: 'ethereum',
       description: 'This is my IPFS gateway.',
       dnslink: '/ipns/onboarding.ipfs.cloudflare.com',
