@@ -136,6 +136,11 @@ export interface HostnameCreateParams {
   zone_id: string;
 
   /**
+   * Body param: The hostname that will point to the target gateway via CNAME.
+   */
+  name: string;
+
+  /**
    * Body param: Target gateway of the hostname.
    */
   target: 'ethereum' | 'ipfs' | 'ipfs_universal_path';
