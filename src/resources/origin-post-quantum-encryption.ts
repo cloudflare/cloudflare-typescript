@@ -46,9 +46,9 @@ export class OriginPostQuantumEncryption extends APIResource {
   }
 }
 
-export type OriginPostQuantumEncryptionUpdateResponse = unknown | string | null;
+export type OriginPostQuantumEncryptionUpdateResponse = unknown;
 
-export type OriginPostQuantumEncryptionGetResponse = unknown | string | null;
+export type OriginPostQuantumEncryptionGetResponse = unknown;
 
 export interface OriginPostQuantumEncryptionUpdateParams {
   /**
