@@ -32,6 +32,8 @@ describe('resource values', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       metadata: '{"someMetadataKey": "someMetadataValue"}',
       value: 'Some Value',
+      expiration: 1578435000,
+      expiration_ttl: 300,
     });
   });
 
