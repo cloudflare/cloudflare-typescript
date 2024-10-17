@@ -9,10 +9,12 @@ export class Values extends APIResource {
   /**
    * Write a value identified by a key. Use URL-encoding to use special characters
    * (for example, `:`, `!`, `%`) in the key name. Body should be the value to be
-   * stored along with JSON metadata to be associated with the key/value pair.
-   * Existing values, expirations, and metadata will be overwritten. If neither
-   * `expiration` nor `expiration_ttl` is specified, the key-value pair will never
-   * expire. If both are set, `expiration_ttl` is used and `expiration` is ignored.
+   * stored. If JSON metadata to be associated with the key/value pair is needed, use
+   * `multipart/form-data` content type for your PUT request (see dropdown below in
+   * `REQUEST BODY SCHEMA`). Existing values, expirations, and metadata will be
+   * overwritten. If neither `expiration` nor `expiration_ttl` is specified, the
+   * key-value pair will never expire. If both are set, `expiration_ttl` is used and
+   * `expiration` is ignored.
    */
   update(
     namespaceId: string,
@@ -20,14 +22,15 @@ export class Values extends APIResource {
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ValueUpdateResponse | null> {
-    const { account_id, ...body } = params;
+    const { account_id, expiration, expiration_ttl, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
         Core.maybeMultipartFormRequestOptions({
+          query: { expiration, expiration_ttl },
           body,
           ...options,
-          headers: { 'Content-Type': '*/*', ...options?.headers },
+          headers: { 'Content-Type': '', ...options?.headers },
         }),
       ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -92,6 +95,18 @@ export interface ValueUpdateParams {
    * Body param: A byte sequence to be stored, up to 25 MiB in length.
    */
   value: string;
+
+  /**
+   * Query param: The time, measured in number of seconds since the UNIX epoch, at
+   * which the key should expire.
+   */
+  expiration?: number;
+
+  /**
+   * Query param: The number of seconds for which the key should be visible before it
+   * expires. At least 60.
+   */
+  expiration_ttl?: number;
 }
 
 export interface ValueDeleteParams {
