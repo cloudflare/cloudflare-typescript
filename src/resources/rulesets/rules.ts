@@ -288,7 +288,7 @@ export namespace BlockRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -440,7 +440,7 @@ export namespace BlockRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -597,7 +597,7 @@ export namespace CompressResponseRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -739,7 +739,7 @@ export namespace CompressResponseRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -874,7 +874,7 @@ export namespace DDoSDynamicRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -994,7 +994,7 @@ export namespace DDoSDynamicRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -1252,7 +1252,7 @@ export namespace ExecuteRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -1495,7 +1495,7 @@ export namespace ExecuteRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -1630,7 +1630,7 @@ export namespace ForceConnectionCloseRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -1750,7 +1750,7 @@ export namespace ForceConnectionCloseRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -1937,7 +1937,7 @@ export namespace LogCustomFieldRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -2109,7 +2109,7 @@ export namespace LogCustomFieldRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -2244,7 +2244,7 @@ export namespace LogRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -2364,7 +2364,7 @@ export namespace LogRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -2519,7 +2519,7 @@ export namespace ManagedChallengeRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -2639,7 +2639,7 @@ export namespace ManagedChallengeRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -2842,7 +2842,7 @@ export namespace RedirectRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -3030,7 +3030,7 @@ export namespace RedirectRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -3231,7 +3231,7 @@ export namespace RewriteRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -3417,7 +3417,7 @@ export namespace RewriteRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -3635,7 +3635,7 @@ export namespace RouteRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -3802,7 +3802,7 @@ export namespace RouteRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -3937,7 +3937,7 @@ export namespace RulesetRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -4083,7 +4083,7 @@ export namespace ScoreRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -4214,7 +4214,7 @@ export namespace ScoreRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -4369,7 +4369,7 @@ export namespace ServeErrorRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -4509,7 +4509,7 @@ export namespace ServeErrorRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -5028,7 +5028,7 @@ export namespace SetCacheSettingsRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -5532,7 +5532,7 @@ export namespace SetCacheSettingsRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -5779,7 +5779,7 @@ export namespace SetConfigRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -6011,7 +6011,7 @@ export namespace SetConfigRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -6180,7 +6180,7 @@ export namespace SkipRule {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -6334,7 +6334,7 @@ export namespace SkipRuleParam {
      * The response header name provided by the origin which should contain the score
      * to increment ratelimit counter on.
      */
-    score_response_header_name?: number;
+    score_response_header_name?: string;
   }
 }
 
@@ -6534,7 +6534,7 @@ export namespace RuleCreateResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -6669,7 +6669,7 @@ export namespace RuleCreateResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 }
@@ -6870,7 +6870,7 @@ export namespace RuleDeleteResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -7005,7 +7005,7 @@ export namespace RuleDeleteResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 }
@@ -7206,7 +7206,7 @@ export namespace RuleEditResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -7341,7 +7341,7 @@ export namespace RuleEditResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 }
@@ -7527,7 +7527,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -7659,7 +7659,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -7813,7 +7813,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -8068,7 +8068,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -8200,7 +8200,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -8332,7 +8332,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -8464,7 +8464,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -8664,7 +8664,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -8862,7 +8862,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -9041,7 +9041,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -9184,7 +9184,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -9336,7 +9336,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -9580,7 +9580,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -9746,7 +9746,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -10262,7 +10262,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -10446,7 +10446,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -10578,7 +10578,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -10710,7 +10710,7 @@ export namespace RuleCreateParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 }
@@ -10908,7 +10908,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -11040,7 +11040,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -11194,7 +11194,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -11449,7 +11449,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -11581,7 +11581,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -11713,7 +11713,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -11845,7 +11845,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -12045,7 +12045,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -12243,7 +12243,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -12422,7 +12422,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -12565,7 +12565,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -12717,7 +12717,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -12961,7 +12961,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -13127,7 +13127,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -13643,7 +13643,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -13827,7 +13827,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -13959,7 +13959,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -14091,7 +14091,7 @@ export namespace RuleEditParams {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 }

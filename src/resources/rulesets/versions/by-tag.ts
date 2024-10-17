@@ -223,7 +223,7 @@ export namespace ByTagGetResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 
@@ -358,7 +358,7 @@ export namespace ByTagGetResponse {
        * The response header name provided by the origin which should contain the score
        * to increment ratelimit counter on.
        */
-      score_response_header_name?: number;
+      score_response_header_name?: string;
     }
   }
 }
