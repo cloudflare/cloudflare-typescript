@@ -12,7 +12,8 @@ const client = new Cloudflare({
 describe('resource uaRules', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.firewall.uaRules.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       configuration: {},
       mode: 'block',
     });
@@ -27,7 +28,8 @@ describe('resource uaRules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.uaRules.create('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.firewall.uaRules.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       configuration: { target: 'ip', value: '198.51.100.4' },
       mode: 'block',
     });
@@ -35,11 +37,11 @@ describe('resource uaRules', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = client.firewall.uaRules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-      { configuration: {}, mode: 'block' },
-    );
+    const responsePromise = client.firewall.uaRules.update('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      configuration: {},
+      mode: 'block',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,15 +53,15 @@ describe('resource uaRules', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await client.firewall.uaRules.update(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-      { configuration: { target: 'ip', value: '198.51.100.4' }, mode: 'block' },
-    );
+    const response = await client.firewall.uaRules.update('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      configuration: { target: 'ip', value: '198.51.100.4' },
+      mode: 'block',
+    });
   });
 
-  test('list', async () => {
-    const responsePromise = client.firewall.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353');
+  test('list: only required params', async () => {
+    const responsePromise = client.firewall.uaRules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -69,29 +71,21 @@ describe('resource uaRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.firewall.uaRules.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('list: required and optional params', async () => {
+    const response = await client.firewall.uaRules.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      description: 'abusive',
+      description_search: 'abusive',
+      page: 1,
+      per_page: 1,
+      ua_search: 'Safari',
+    });
   });
 
-  test('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.firewall.uaRules.list(
-        '023e105f4ecef8ad9ca31a8372d0c353',
-        { description: 'abusive', description_search: 'abusive', page: 1, per_page: 1, ua_search: 'Safari' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
-  });
-
-  test('delete', async () => {
-    const responsePromise = client.firewall.uaRules.delete(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-    );
+  test('delete: only required params', async () => {
+    const responsePromise = client.firewall.uaRules.delete('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,20 +95,16 @@ describe('resource uaRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.firewall.uaRules.delete('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('delete: required and optional params', async () => {
+    const response = await client.firewall.uaRules.delete('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 
-  test('get', async () => {
-    const responsePromise = client.firewall.uaRules.get(
-      '023e105f4ecef8ad9ca31a8372d0c353',
-      '372e67954025e0ba6aaa6d586b9e0b59',
-    );
+  test('get: only required params', async () => {
+    const responsePromise = client.firewall.uaRules.get('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,12 +114,9 @@ describe('resource uaRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.firewall.uaRules.get('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b59', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Cloudflare.NotFoundError);
+  test('get: required and optional params', async () => {
+    const response = await client.firewall.uaRules.get('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });

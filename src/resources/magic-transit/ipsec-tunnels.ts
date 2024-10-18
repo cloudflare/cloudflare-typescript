@@ -257,7 +257,7 @@ export namespace IPSECTunnelCreateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -391,7 +391,7 @@ export namespace IPSECTunnelUpdateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -523,7 +523,7 @@ export namespace IPSECTunnelListResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -657,7 +657,7 @@ export namespace IPSECTunnelDeleteResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -789,7 +789,7 @@ export namespace IPSECTunnelGetResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -927,7 +927,7 @@ export namespace IPSECTunnelCreateParams {
     /**
      * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
-    type?: MagicTransitAPI.HealthCheckTypeParam;
+    type?: 'reply' | 'request';
   }
 
   export namespace HealthCheck {
@@ -1040,7 +1040,7 @@ export namespace IPSECTunnelUpdateParams {
     /**
      * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
-    type?: MagicTransitAPI.HealthCheckTypeParam;
+    type?: 'reply' | 'request';
   }
 
   export namespace HealthCheck {

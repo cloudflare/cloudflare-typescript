@@ -5,8 +5,22 @@ export {
   OverrideURL,
   RewriteAction,
   WAFRule,
+  OverrideDeleteResponse,
+  OverrideCreateParams,
+  OverrideUpdateParams,
+  OverrideListParams,
+  OverrideDeleteParams,
+  OverrideGetParams,
   WAFRulesV4PagePaginationArray,
+  OverridesV4PagePaginationArray,
   Overrides,
 } from './overrides';
-export { Packages } from './packages/index';
+export {
+  PackageListResponse,
+  PackageGetResponse,
+  PackageListParams,
+  PackageGetParams,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages/index';
 export { WAF } from './waf';

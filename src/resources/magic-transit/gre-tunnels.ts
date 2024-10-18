@@ -214,7 +214,7 @@ export namespace GRETunnelCreateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -342,7 +342,7 @@ export namespace GRETunnelUpdateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -468,7 +468,7 @@ export namespace GRETunnelListResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -596,7 +596,7 @@ export namespace GRETunnelDeleteResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -722,7 +722,7 @@ export namespace GRETunnelGetResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: MagicTransitAPI.HealthCheckType;
+      type?: 'reply' | 'request';
     }
 
     export namespace HealthCheck {
@@ -861,7 +861,7 @@ export namespace GRETunnelUpdateParams {
     /**
      * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
-    type?: MagicTransitAPI.HealthCheckTypeParam;
+    type?: 'reply' | 'request';
   }
 
   export namespace HealthCheck {
