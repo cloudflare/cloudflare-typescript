@@ -5,9 +5,7 @@ import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CloudflareError } from '../../error';
 import * as AccessRulesAPI from './access-rules';
-import * as OverridesAPI from './waf/overrides';
-import { WAFRulesV4PagePaginationArray } from './waf/overrides';
-import { type V4PagePaginationArrayParams } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AccessRules extends APIResource {
   /**
@@ -20,7 +18,7 @@ export class AccessRules extends APIResource {
   create(
     params: AccessRuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<OverridesAPI.WAFRule> {
+  ): Core.APIPromise<AccessRuleCreateResponse> {
     const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
@@ -42,7 +40,7 @@ export class AccessRules extends APIResource {
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OverridesAPI.WAFRule }>
+      }) as Core.APIPromise<{ result: AccessRuleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,12 +52,14 @@ export class AccessRules extends APIResource {
   list(
     params?: AccessRuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WAFRulesV4PagePaginationArray, OverridesAPI.WAFRule>;
-  list(options?: Core.RequestOptions): Core.PagePromise<WAFRulesV4PagePaginationArray, OverridesAPI.WAFRule>;
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
+  list(
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse>;
   list(
     params: AccessRuleListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<WAFRulesV4PagePaginationArray, OverridesAPI.WAFRule> {
+  ): Core.PagePromise<AccessRuleListResponsesV4PagePaginationArray, AccessRuleListResponse> {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
@@ -82,132 +82,13 @@ export class AccessRules extends APIResource {
         };
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules`,
-      WAFRulesV4PagePaginationArray,
+      AccessRuleListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
-
-  /**
-   * Deletes an existing IP Access rule defined.
-   *
-   * Note: This operation will affect all zones in the account or zone.
-   */
-  delete(
-    ruleId: string,
-    params?: AccessRuleDeleteParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleDeleteResponse | null>;
-  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<AccessRuleDeleteResponse | null>;
-  delete(
-    ruleId: string,
-    params: AccessRuleDeleteParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<AccessRuleDeleteResponse | null> {
-    if (isRequestOptions(params)) {
-      return this.delete(ruleId, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.delete(
-        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${ruleId}`,
-        options,
-      ) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Updates an IP Access rule defined.
-   *
-   * Note: This operation will affect all zones in the account or zone.
-   */
-  edit(
-    ruleId: string,
-    params: AccessRuleEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OverridesAPI.WAFRule> {
-    const { account_id, zone_id, ...body } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.patch(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${ruleId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: OverridesAPI.WAFRule }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches the details of an IP Access rule defined.
-   */
-  get(
-    ruleId: string,
-    params?: AccessRuleGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OverridesAPI.WAFRule>;
-  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<OverridesAPI.WAFRule>;
-  get(
-    ruleId: string,
-    params: AccessRuleGetParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OverridesAPI.WAFRule> {
-    if (isRequestOptions(params)) {
-      return this.get(ruleId, {}, params);
-    }
-    const { account_id, zone_id } = params;
-    if (!account_id && !zone_id) {
-      throw new CloudflareError('You must provide either account_id or zone_id.');
-    }
-    if (account_id && zone_id) {
-      throw new CloudflareError('You cannot provide both account_id and zone_id.');
-    }
-    const { accountOrZone, accountOrZoneId } =
-      account_id ?
-        {
-          accountOrZone: 'accounts',
-          accountOrZoneId: account_id,
-        }
-      : {
-          accountOrZone: 'zones',
-          accountOrZoneId: zone_id,
-        };
-    return (
-      this._client.get(
-        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${ruleId}`,
-        options,
-      ) as Core.APIPromise<{ result: OverridesAPI.WAFRule }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
+
+export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
 
 export interface AccessRuleCIDRConfiguration {
   /**
@@ -345,12 +226,9 @@ export interface IPV6ConfigurationParam {
   value?: string;
 }
 
-export interface AccessRuleDeleteResponse {
-  /**
-   * Identifier
-   */
-  id: string;
-}
+export type AccessRuleCreateResponse = unknown | string | null;
+
+export type AccessRuleListResponse = unknown;
 
 export interface AccessRuleCreateParams {
   /**
@@ -451,77 +329,15 @@ export namespace AccessRuleListParams {
   }
 }
 
-export interface AccessRuleDeleteParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
-export interface AccessRuleEditParams {
-  /**
-   * Body param: The rule configuration.
-   */
-  configuration:
-    | AccessRuleIPConfigurationParam
-    | IPV6ConfigurationParam
-    | AccessRuleCIDRConfigurationParam
-    | ASNConfigurationParam
-    | CountryConfigurationParam;
-
-  /**
-   * Body param: The action to apply to a matched request.
-   */
-  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
-
-  /**
-   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
-   * Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
-   * Account ID.
-   */
-  zone_id?: string;
-
-  /**
-   * Body param: An informative summary of the rule, typically used as a reminder or
-   * explanation.
-   */
-  notes?: string;
-}
-
-export interface AccessRuleGetParams {
-  /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
-   */
-  account_id?: string;
-
-  /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
-   */
-  zone_id?: string;
-}
-
 export namespace AccessRules {
   export import AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
   export import AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
   export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
   export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
   export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
-  export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
+  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
+  export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
+  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
   export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
   export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
-  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
-  export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
-  export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
 }
-
-export { WAFRulesV4PagePaginationArray };
