@@ -15,17 +15,5 @@ export namespace WAF {
   export import OverrideURL = OverridesAPI.OverrideURL;
   export import RewriteAction = OverridesAPI.RewriteAction;
   export import WAFRule = OverridesAPI.WAFRule;
-  export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
-  export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
-  export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
-  export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
-  export import OverrideListParams = OverridesAPI.OverrideListParams;
-  export import OverrideDeleteParams = OverridesAPI.OverrideDeleteParams;
-  export import OverrideGetParams = OverridesAPI.OverrideGetParams;
   export import Packages = PackagesAPI.Packages;
-  export import PackageListResponse = PackagesAPI.PackageListResponse;
-  export import PackageGetResponse = PackagesAPI.PackageGetResponse;
-  export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
-  export import PackageListParams = PackagesAPI.PackageListParams;
-  export import PackageGetParams = PackagesAPI.PackageGetParams;
 }
