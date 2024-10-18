@@ -126,8 +126,6 @@ export interface InvestigateListResponse {
 
   is_quarantined: boolean;
 
-  message_id: string;
-
   /**
    * Message identifier
    */
@@ -169,6 +167,8 @@ export interface InvestigateListResponse {
   from?: string | null;
 
   from_name?: string | null;
+
+  message_id?: string | null;
 
   sent_date?: string | null;
 
@@ -310,8 +310,6 @@ export interface InvestigateGetResponse {
 
   is_quarantined: boolean;
 
-  message_id: string;
-
   /**
    * Message identifier
    */
@@ -353,6 +351,8 @@ export interface InvestigateGetResponse {
   from?: string | null;
 
   from_name?: string | null;
+
+  message_id?: string | null;
 
   sent_date?: string | null;
 
