@@ -28,6 +28,7 @@ describe('resource managed', () => {
     const response = await client.r2.domains.managed.update('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       enabled: true,
+      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -47,6 +48,7 @@ describe('resource managed', () => {
   test('list: required and optional params', async () => {
     const response = await client.r2.domains.managed.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      'cf-r2-jurisdiction': 'default',
     });
   });
 });
