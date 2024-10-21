@@ -652,7 +652,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_claims?: Array<AccessSchemasOIDCSaaSApp.CustomClaim>;
+      custom_claims?: AccessSchemasOIDCSaaSApp.CustomClaims;
 
       /**
        * The OIDC flows supported by this application
@@ -691,7 +691,7 @@ export namespace Application {
     }
 
     export namespace AccessSchemasOIDCSaaSApp {
-      export interface CustomClaim {
+      export interface CustomClaims {
         /**
          * The name of the claim.
          */
@@ -707,10 +707,10 @@ export namespace Application {
          */
         scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-        source?: CustomClaim.Source;
+        source?: CustomClaims.Source;
       }
 
-      export namespace CustomClaim {
+      export namespace CustomClaims {
         export interface Source {
           /**
            * The name of the IdP claim.
@@ -1693,7 +1693,7 @@ export interface OIDCSaaSApp {
 
   created_at?: string;
 
-  custom_claims?: Array<OIDCSaaSApp.CustomClaim>;
+  custom_claims?: OIDCSaaSApp.CustomClaims;
 
   /**
    * The OIDC flows supported by this application
@@ -1732,7 +1732,7 @@ export interface OIDCSaaSApp {
 }
 
 export namespace OIDCSaaSApp {
-  export interface CustomClaim {
+  export interface CustomClaims {
     /**
      * The name of the claim.
      */
@@ -1748,10 +1748,10 @@ export namespace OIDCSaaSApp {
      */
     scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-    source?: CustomClaim.Source;
+    source?: CustomClaims.Source;
   }
 
-  export namespace CustomClaim {
+  export namespace CustomClaims {
     export interface Source {
       /**
        * The name of the IdP claim.
@@ -1820,7 +1820,7 @@ export interface OIDCSaaSAppParam {
    */
   client_secret?: string;
 
-  custom_claims?: Array<OIDCSaaSAppParam.CustomClaim>;
+  custom_claims?: OIDCSaaSAppParam.CustomClaims;
 
   /**
    * The OIDC flows supported by this application
@@ -1857,7 +1857,7 @@ export interface OIDCSaaSAppParam {
 }
 
 export namespace OIDCSaaSAppParam {
-  export interface CustomClaim {
+  export interface CustomClaims {
     /**
      * The name of the claim.
      */
@@ -1873,10 +1873,10 @@ export namespace OIDCSaaSAppParam {
      */
     scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-    source?: CustomClaim.Source;
+    source?: CustomClaims.Source;
   }
 
-  export namespace CustomClaim {
+  export namespace CustomClaims {
     export interface Source {
       /**
        * The name of the IdP claim.
