@@ -52,7 +52,6 @@ export {
   RuleListParams,
   RuleDeleteParams,
   RuleGetParams,
-  RuleResetExpirationParams,
   GatewayRulesSinglePage,
   Rules,
 } from './rules';

@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as DomainsAPI from './domains';
-import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Domains extends APIResource {
@@ -14,29 +13,22 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainUpdateResponse | null> {
+  ): Core.APIPromise<DomainUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: DomainUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * List domains handled by Registrar.
    */
-  list(
-    params: DomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DomainListResponsesSinglePage, DomainListResponse> {
+  list(params: DomainListParams, options?: Core.RequestOptions): Core.PagePromise<DomainsSinglePage, Domain> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/registrar/domains`,
-      DomainListResponsesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/registrar/domains`, DomainsSinglePage, options);
   }
 
   /**
@@ -46,18 +38,18 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse | null> {
+  ): Core.APIPromise<DomainGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/registrar/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
+      ) as Core.APIPromise<{ result: DomainGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class DomainListResponsesSinglePage extends SinglePage<DomainListResponse> {}
+export class DomainsSinglePage extends SinglePage<Domain> {}
 
 export interface Domain {
   /**
@@ -232,48 +224,9 @@ export namespace Domain {
   }
 }
 
-export type DomainUpdateResponse = unknown | Array<unknown> | string;
+export type DomainUpdateResponse = unknown;
 
-export interface DomainListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  result: unknown | Array<unknown> | string | null;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-
-  result_info?: DomainListResponse.ResultInfo;
-}
-
-export namespace DomainListResponse {
-  export interface ResultInfo {
-    /**
-     * Total number of results for the requested service
-     */
-    count?: number;
-
-    /**
-     * Current page within paginated list of results
-     */
-    page?: number;
-
-    /**
-     * Number of results per page of results
-     */
-    per_page?: number;
-
-    /**
-     * Total results available without any search parameters
-     */
-    total_count?: number;
-  }
-}
-
-export type DomainGetResponse = unknown | Array<unknown> | string;
+export type DomainGetResponse = unknown;
 
 export interface DomainUpdateParams {
   /**
@@ -315,9 +268,8 @@ export interface DomainGetParams {
 export namespace Domains {
   export import Domain = DomainsAPI.Domain;
   export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
   export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
+  export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
   export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
   export import DomainListParams = DomainsAPI.DomainListParams;
   export import DomainGetParams = DomainsAPI.DomainGetParams;

@@ -124,7 +124,7 @@ export interface QueueUpdated {
   queue_name?: string;
 }
 
-export type QueueDeleteResponse = unknown | Array<unknown> | string;
+export type QueueDeleteResponse = Array<unknown>;
 
 export interface QueueCreateParams {
   /**

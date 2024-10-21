@@ -73,27 +73,6 @@ export class Rules extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
-
-  /**
-   * Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed
-   * and it has a default duration.
-   *
-   * The Zero Trust Gateway Rule must have values for both `expiration.expires_at`
-   * and `expiration.duration`.
-   */
-  resetExpiration(
-    ruleId: string,
-    params: RuleResetExpirationParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<GatewayRule> {
-    const { account_id } = params;
-    return (
-      this._client.post(
-        `/accounts/${account_id}/gateway/rules/${ruleId}/reset_expiration`,
-        options,
-      ) as Core.APIPromise<{ result: GatewayRule }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
 export class GatewayRulesSinglePage extends SinglePage<GatewayRule> {}
@@ -1327,10 +1306,6 @@ export interface RuleGetParams {
   account_id: string;
 }
 
-export interface RuleResetExpirationParams {
-  account_id: string;
-}
-
 export namespace Rules {
   export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
   export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
@@ -1345,5 +1320,4 @@ export namespace Rules {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import RuleResetExpirationParams = RulesAPI.RuleResetExpirationParams;
 }
