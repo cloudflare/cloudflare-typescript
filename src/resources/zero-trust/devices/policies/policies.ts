@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as PoliciesAPI from './policies';
-import * as CertificatesAPI from './certificates';
 import * as DefaultPolicyAPI from './default-policy';
 import * as ExcludesAPI from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
@@ -11,7 +10,6 @@ import * as IncludesAPI from './includes';
 import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
-  certificates: CertificatesAPI.Certificates = new CertificatesAPI.Certificates(this._client);
   defaultPolicy: DefaultPolicyAPI.DefaultPolicy = new DefaultPolicyAPI.DefaultPolicy(this._client);
   excludes: ExcludesAPI.Excludes = new ExcludesAPI.Excludes(this._client);
   fallbackDomains: FallbackDomainsAPI.FallbackDomains = new FallbackDomainsAPI.FallbackDomains(this._client);
@@ -492,11 +490,6 @@ export namespace Policies {
   export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
   export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
   export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
-  export import Certificates = CertificatesAPI.Certificates;
-  export import DevicePolicyCertificates = CertificatesAPI.DevicePolicyCertificates;
-  export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
   export import DefaultPolicy = DefaultPolicyAPI.DefaultPolicy;
   export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
   export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
