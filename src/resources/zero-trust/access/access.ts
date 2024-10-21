@@ -885,6 +885,8 @@ export namespace Access {
   export import TagDeleteParams = TagsAPI.TagDeleteParams;
   export import TagGetParams = TagsAPI.TagGetParams;
   export import Policies = PoliciesAPI.Policies;
+  export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
+  export import Policy = PoliciesAPI.Policy;
   export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
   export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
   export import PolicyListResponse = PoliciesAPI.PolicyListResponse;

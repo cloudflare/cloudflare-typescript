@@ -13,17 +13,11 @@ export class SippyResource extends APIResource {
     params: SippyUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<Sippy> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
         body,
         ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
       }) as Core.APIPromise<{ result: Sippy }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -36,17 +30,12 @@ export class SippyResource extends APIResource {
     params: SippyDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SippyDeleteResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: SippyDeleteResponse }>
+      this._client.delete(
+        `/accounts/${account_id}/r2/buckets/${bucketName}/sippy`,
+        options,
+      ) as Core.APIPromise<{ result: SippyDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -54,17 +43,11 @@ export class SippyResource extends APIResource {
    * Gets configuration for Sippy for an existing R2 bucket.
    */
   get(bucketName: string, params: SippyGetParams, options?: Core.RequestOptions): Core.APIPromise<Sippy> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, {
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: Sippy }>
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/sippy`, options) as Core.APIPromise<{
+        result: Sippy;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -150,11 +133,6 @@ export namespace SippyUpdateParams {
      * Body param: AWS S3 bucket to copy objects from
      */
     source?: SippyUpdateParams.R2EnableSippyAws.Source;
-
-    /**
-     * Header param: The bucket jurisdiction
-     */
-    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
   }
 
   export namespace R2EnableSippyAws {
@@ -228,11 +206,6 @@ export namespace SippyUpdateParams {
      * Body param: GCS bucket to copy objects from
      */
     source?: SippyUpdateParams.R2EnableSippyGcs.Source;
-
-    /**
-     * Header param: The bucket jurisdiction
-     */
-    'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
   }
 
   export namespace R2EnableSippyGcs {
@@ -289,26 +262,16 @@ export namespace SippyUpdateParams {
 
 export interface SippyDeleteParams {
   /**
-   * Path param: Account ID
+   * Account ID
    */
   account_id: string;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface SippyGetParams {
   /**
-   * Path param: Account ID
+   * Account ID
    */
   account_id: string;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace SippyResource {

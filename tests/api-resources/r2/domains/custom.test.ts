@@ -32,7 +32,6 @@ describe('resource custom', () => {
       zoneId: '36ca64a6d92827b8a6b90be344bb1bfd',
       enabled: true,
       minTLS: '1.0',
-      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -55,12 +54,7 @@ describe('resource custom', () => {
     const response = await client.r2.domains.custom.update(
       'example-bucket',
       'example-domain/custom-domain.com',
-      {
-        account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        enabled: true,
-        minTLS: '1.0',
-        'cf-r2-jurisdiction': 'default',
-      },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', enabled: true, minTLS: '1.0' },
     );
   });
 
@@ -80,7 +74,6 @@ describe('resource custom', () => {
   test('list: required and optional params', async () => {
     const response = await client.r2.domains.custom.list('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -103,7 +96,7 @@ describe('resource custom', () => {
     const response = await client.r2.domains.custom.delete(
       'example-bucket',
       'example-domain/custom-domain.com',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', 'cf-r2-jurisdiction': 'default' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
   });
 });

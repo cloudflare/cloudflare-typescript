@@ -63,6 +63,22 @@ export {
   Applications,
 } from './applications/index';
 export {
+  ApprovalGroup,
+  Policy,
+  PolicyCreateResponse,
+  PolicyUpdateResponse,
+  PolicyListResponse,
+  PolicyDeleteResponse,
+  PolicyGetResponse,
+  PolicyCreateParams,
+  PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
+  PolicyListResponsesSinglePage,
+  Policies,
+} from './policies';
+export {
   AssociatedHostnames,
   Certificate,
   CertificateDeleteResponse,
@@ -108,20 +124,6 @@ export {
   Keys,
 } from './keys';
 export { Logs } from './logs/index';
-export {
-  PolicyCreateResponse,
-  PolicyUpdateResponse,
-  PolicyListResponse,
-  PolicyDeleteResponse,
-  PolicyGetResponse,
-  PolicyCreateParams,
-  PolicyUpdateParams,
-  PolicyListParams,
-  PolicyDeleteParams,
-  PolicyGetParams,
-  PolicyListResponsesSinglePage,
-  Policies,
-} from './policies';
 export {
   ServiceToken,
   ServiceTokenCreateResponse,

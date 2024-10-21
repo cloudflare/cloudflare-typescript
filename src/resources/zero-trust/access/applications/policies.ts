@@ -4,8 +4,9 @@ import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from '../../../../error';
-import * as PoliciesAPI from './policies';
+import * as ApplicationsPoliciesAPI from './policies';
 import * as AccessAPI from '../access';
+import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
 import { ApplicationPoliciesSinglePage } from './applications';
 
@@ -245,26 +246,6 @@ export interface ApprovalGroup {
   email_list_uuid?: string;
 }
 
-/**
- * A group of email addresses that can approve a temporary authentication request.
- */
-export interface ApprovalGroupParam {
-  /**
-   * The number of approvals needed to obtain access.
-   */
-  approvals_needed: number;
-
-  /**
-   * A list of emails that can approve the access request.
-   */
-  email_addresses?: Array<string>;
-
-  /**
-   * The UUID of an re-usable email list.
-   */
-  email_list_uuid?: string;
-}
-
 export interface Policy {
   /**
    * UUID
@@ -397,7 +378,7 @@ export interface PolicyCreateParams {
   /**
    * Body param: Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupParam>;
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
   /**
    * Body param: Requires the user to request access from an administrator at the
@@ -515,7 +496,7 @@ export interface PolicyUpdateParams {
   /**
    * Body param: Administrators who can approve a temporary authentication request.
    */
-  approval_groups?: Array<ApprovalGroupParam>;
+  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
 
   /**
    * Body param: Requires the user to request access from an administrator at the
@@ -638,14 +619,14 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+  export import ApprovalGroup = ApplicationsPoliciesAPI.ApprovalGroup;
+  export import Policy = ApplicationsPoliciesAPI.Policy;
+  export import PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
+  export import PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = ApplicationsPoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = ApplicationsPoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = ApplicationsPoliciesAPI.PolicyGetParams;
 }
 
 export { ApplicationPoliciesSinglePage };

@@ -30,7 +30,6 @@ describe('resource buckets', () => {
       name: 'example-bucket',
       locationHint: 'apac',
       storageClass: 'Standard',
-      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -54,7 +53,6 @@ describe('resource buckets', () => {
       order: 'name',
       per_page: 1,
       start_after: 'my-bucket',
-      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -74,7 +72,6 @@ describe('resource buckets', () => {
   test('delete: required and optional params', async () => {
     const response = await client.r2.buckets.delete('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      'cf-r2-jurisdiction': 'default',
     });
   });
 
@@ -94,7 +91,6 @@ describe('resource buckets', () => {
   test('get: required and optional params', async () => {
     const response = await client.r2.buckets.get('example-bucket', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      'cf-r2-jurisdiction': 'default',
     });
   });
 });
