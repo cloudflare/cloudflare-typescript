@@ -171,7 +171,7 @@ export namespace CfInterconnectUpdateResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: 'reply' | 'request';
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -294,7 +294,7 @@ export namespace CfInterconnectListResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: 'reply' | 'request';
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -417,7 +417,7 @@ export namespace CfInterconnectGetResponse {
       /**
        * The type of healthcheck to run, reply or request. The default value is `reply`.
        */
-      type?: 'reply' | 'request';
+      type?: MagicTransitAPI.HealthCheckType;
     }
 
     export namespace HealthCheck {
@@ -524,7 +524,7 @@ export namespace CfInterconnectUpdateParams {
     /**
      * The type of healthcheck to run, reply or request. The default value is `reply`.
      */
-    type?: 'reply' | 'request';
+    type?: MagicTransitAPI.HealthCheckTypeParam;
   }
 
   export namespace HealthCheck {

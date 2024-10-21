@@ -716,7 +716,7 @@ export namespace WARPConnectorGetResponse {
   }
 }
 
-export type WARPConnectorTokenResponse = unknown | Array<unknown> | string;
+export type WARPConnectorTokenResponse = string;
 
 export interface WARPConnectorCreateParams {
   /**

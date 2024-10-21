@@ -31,6 +31,16 @@ export type HealthCheckRate = 'low' | 'mid' | 'high';
  */
 export type HealthCheckRateParam = 'low' | 'mid' | 'high';
 
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type HealthCheckType = 'reply' | 'request';
+
+/**
+ * The type of healthcheck to run, reply or request. The default value is `reply`.
+ */
+export type HealthCheckTypeParam = 'reply' | 'request';
+
 export namespace MagicTransit {
   export import Apps = AppsAPI.Apps;
   export import AppCreateResponse = AppsAPI.AppCreateResponse;

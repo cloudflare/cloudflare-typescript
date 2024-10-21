@@ -24,7 +24,7 @@ export class Management extends APIResource {
   }
 }
 
-export type ManagementCreateResponse = unknown | Array<unknown> | string;
+export type ManagementCreateResponse = string;
 
 export interface ManagementCreateParams {
   /**
