@@ -4605,6 +4605,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/access/policies.ts">ApprovalGroup</a></code>
+- <code><a href="./src/resources/zero-trust/access/policies.ts">Policy</a></code>
 - <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyCreateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyUpdateResponse</a></code>
 - <code><a href="./src/resources/zero-trust/access/policies.ts">PolicyListResponse</a></code>

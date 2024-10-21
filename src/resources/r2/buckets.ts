@@ -9,18 +9,11 @@ export class Buckets extends APIResource {
    * Creates a new R2 bucket.
    */
   create(params: BucketCreateParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, ...body } = params;
     return (
-      this._client.post(`/accounts/${account_id}/r2/buckets`, {
-        body,
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: Bucket }>
+      this._client.post(`/accounts/${account_id}/r2/buckets`, { body, ...options }) as Core.APIPromise<{
+        result: Bucket;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -28,18 +21,11 @@ export class Buckets extends APIResource {
    * Lists all R2 buckets on your account
    */
   list(params: BucketListParams, options?: Core.RequestOptions): Core.APIPromise<BucketListResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...query } = params;
+    const { account_id, ...query } = params;
     return (
-      this._client.get(`/accounts/${account_id}/r2/buckets`, {
-        query,
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: BucketListResponse }>
+      this._client.get(`/accounts/${account_id}/r2/buckets`, { query, ...options }) as Core.APIPromise<{
+        result: BucketListResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -51,17 +37,11 @@ export class Buckets extends APIResource {
     params: BucketDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<BucketDeleteResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id } = params;
     return (
-      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: BucketDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+        result: BucketDeleteResponse;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -69,17 +49,11 @@ export class Buckets extends APIResource {
    * Gets metadata for an existing R2 bucket.
    */
   get(bucketName: string, params: BucketGetParams, options?: Core.RequestOptions): Core.APIPromise<Bucket> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, {
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: Bucket }>
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}`, options) as Core.APIPromise<{
+        result: Bucket;
+      }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -136,11 +110,6 @@ export interface BucketCreateParams {
    * otherwise.
    */
   storageClass?: 'Standard' | 'InfrequentAccess';
-
-  /**
-   * Header param: Creates the bucket in the provided jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketListParams {
@@ -181,35 +150,20 @@ export interface BucketListParams {
    * lexicographically.
    */
   start_after?: string;
-
-  /**
-   * Header param: Lists buckets in the provided jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketDeleteParams {
   /**
-   * Path param: Account ID
+   * Account ID
    */
   account_id: string;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface BucketGetParams {
   /**
-   * Path param: Account ID
+   * Account ID
    */
   account_id: string;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace Buckets {
