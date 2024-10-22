@@ -3,7 +3,9 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as AppsAPI from './apps';
+import * as Shared from '../shared';
 import * as SpectrumAPI from './spectrum';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Apps extends APIResource {
   /**
@@ -39,13 +41,15 @@ export class Apps extends APIResource {
   /**
    * Retrieves a list of currently existing Spectrum applications inside a zone.
    */
-  list(params: AppListParams, options?: Core.RequestOptions): Core.APIPromise<AppListResponse> {
+  list(
+    params: AppListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<AppListResponsesV4PagePaginationArray, AppListResponse> {
     const { zone_id, ...query } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/spectrum/apps`, { query, ...options }) as Core.APIPromise<{
-        result: AppListResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.getAPIList(`/zones/${zone_id}/spectrum/apps`, AppListResponsesV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -76,6 +80,8 @@ export class Apps extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
+
+export class AppListResponsesV4PagePaginationArray extends V4PagePaginationArray<AppListResponse> {}
 
 export type AppCreateResponse =
   | AppCreateResponse.SpectrumConfigAppConfig
@@ -331,7 +337,20 @@ export namespace AppUpdateResponse {
   }
 }
 
-export type AppListResponse = Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
+export interface AppListResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+
+  result?: Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
+
+  result_info?: AppListResponse.ResultInfo;
+}
 
 export namespace AppListResponse {
   export interface UnionMember0 {
@@ -453,6 +472,28 @@ export namespace AppListResponse {
      * balancing.
      */
     origin_direct?: Array<string>;
+  }
+
+  export interface ResultInfo {
+    /**
+     * Total number of results for the requested service
+     */
+    count?: number;
+
+    /**
+     * Current page within paginated list of results
+     */
+    page?: number;
+
+    /**
+     * Number of results per page of results
+     */
+    per_page?: number;
+
+    /**
+     * Total results available without any search parameters
+     */
+    total_count?: number;
   }
 }
 
@@ -810,7 +851,7 @@ export namespace AppUpdateParams {
   }
 }
 
-export interface AppListParams {
+export interface AppListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Zone identifier.
    */
@@ -825,18 +866,6 @@ export interface AppListParams {
    * Query param: Application field by which results are ordered.
    */
   order?: 'protocol' | 'app_id' | 'created_on' | 'modified_on' | 'dns';
-
-  /**
-   * Query param: Page number of paginated results. This parameter is required in
-   * order to use other pagination parameters. If included in the query,
-   * `result_info` will be present in the response.
-   */
-  page?: number;
-
-  /**
-   * Query param: Sets the maximum number of results per page.
-   */
-  per_page?: number;
 }
 
 export interface AppDeleteParams {
@@ -859,6 +888,7 @@ export namespace Apps {
   export import AppListResponse = AppsAPI.AppListResponse;
   export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
   export import AppGetResponse = AppsAPI.AppGetResponse;
+  export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
   export import AppCreateParams = AppsAPI.AppCreateParams;
   export import AppUpdateParams = AppsAPI.AppUpdateParams;
   export import AppListParams = AppsAPI.AppListParams;

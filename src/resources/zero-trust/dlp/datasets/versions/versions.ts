@@ -58,10 +58,18 @@ export interface VersionCreateParams {
 export namespace VersionCreateParams {
   export interface ExistingColumn {
     entry_id: string;
+
+    header_name?: string;
+
+    num_cells?: number;
   }
 
   export interface NewColumn {
     entry_name: string;
+
+    header_name?: string;
+
+    num_cells?: number;
   }
 }
 

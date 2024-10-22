@@ -147,30 +147,9 @@ describe('resource records', () => {
         { content: '198.51.100.4', type: 'A' },
       ],
       posts: [
-        {
-          name: 'example.com',
-          comment: 'Domain verification record',
-          proxied: true,
-          settings: {},
-          tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-          ttl: 3600,
-        },
-        {
-          name: 'example.com',
-          comment: 'Domain verification record',
-          proxied: true,
-          settings: {},
-          tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-          ttl: 3600,
-        },
-        {
-          name: 'example.com',
-          comment: 'Domain verification record',
-          proxied: true,
-          settings: {},
-          tags: ['owner:dns-team', 'owner:dns-team', 'owner:dns-team'],
-          ttl: 3600,
-        },
+        { content: '198.51.100.4', type: 'A' },
+        { content: '198.51.100.4', type: 'A' },
+        { content: '198.51.100.4', type: 'A' },
       ],
       puts: [
         { content: '198.51.100.4', type: 'A' },

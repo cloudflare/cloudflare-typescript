@@ -1047,76 +1047,78 @@ export interface PTRRecordParam {
   type?: 'PTR';
 }
 
-export interface Record {
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment?: string;
+export type Record =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | Record.Openpgpkey
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
 
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
+export namespace Record {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied?: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings?: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags?: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTL;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
-export interface RecordParam {
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment?: string;
+export type RecordParam =
+  | ARecordParam
+  | AAAARecordParam
+  | CAARecordParam
+  | CERTRecordParam
+  | CNAMERecordParam
+  | DNSKEYRecordParam
+  | DSRecordParam
+  | HTTPSRecordParam
+  | LOCRecordParam
+  | MXRecordParam
+  | NAPTRRecordParam
+  | NSRecordParam
+  | RecordParam.Openpgpkey
+  | PTRRecordParam
+  | SMIMEARecordParam
+  | SRVRecordParam
+  | SSHFPRecordParam
+  | SVCBRecordParam
+  | TLSARecordParam
+  | TXTRecordParam
+  | URIRecordParam;
 
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name?: string;
+export namespace RecordParam {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied?: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings?: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags?: Array<RecordTagsParam>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl?: TTLParam;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
 export interface RecordProcessTiming {
@@ -1141,12 +1143,6 @@ export interface RecordProcessTiming {
  * numbers, underscores and hyphens)
  */
 export type RecordTags = string;
-
-/**
- * Individual tag of the form name:value (the name must consist of only letters,
- * numbers, underscores and hyphens)
- */
-export type RecordTagsParam = string;
 
 export interface SMIMEARecord {
   /**
@@ -1553,13 +1549,6 @@ export namespace TLSARecordParam {
  */
 export type TTL = number | 1;
 
-/**
- * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
- * Value must be between 60 and 86400, with the minimum reduced to 30 for
- * Enterprise zones.
- */
-export type TTLParam = number | 1;
-
 export interface TXTRecord {
   /**
    * Text content for the record. The content must consist of quoted "character
@@ -1669,217 +1658,115 @@ export namespace URIRecordParam {
   }
 }
 
-export interface RecordCreateResponse {
-  /**
-   * Identifier
-   */
-  id: string;
+export type RecordCreateResponse =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | RecordCreateResponse.Openpgpkey
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
 
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment: string;
+export namespace RecordCreateResponse {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * When the record was created.
-   */
-  created_on: string;
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  meta: unknown;
-
-  /**
-   * When the record was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name: string;
-
-  /**
-   * Whether the record can be proxied by Cloudflare or not.
-   */
-  proxiable: boolean;
-
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl: TTL;
-
-  /**
-   * When the record comment was last modified. Omitted if there is no comment.
-   */
-  comment_modified_on?: string;
-
-  /**
-   * When the record tags were last modified. Omitted if there are no tags.
-   */
-  tags_modified_on?: string;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
-export interface RecordUpdateResponse {
-  /**
-   * Identifier
-   */
-  id: string;
+export type RecordUpdateResponse =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | RecordUpdateResponse.Openpgpkey
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
 
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment: string;
+export namespace RecordUpdateResponse {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * When the record was created.
-   */
-  created_on: string;
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  meta: unknown;
-
-  /**
-   * When the record was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name: string;
-
-  /**
-   * Whether the record can be proxied by Cloudflare or not.
-   */
-  proxiable: boolean;
-
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl: TTL;
-
-  /**
-   * When the record comment was last modified. Omitted if there is no comment.
-   */
-  comment_modified_on?: string;
-
-  /**
-   * When the record tags were last modified. Omitted if there are no tags.
-   */
-  tags_modified_on?: string;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
-export interface RecordListResponse {
-  /**
-   * Identifier
-   */
-  id: string;
+export type RecordListResponse =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | RecordListResponse.Openpgpkey
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
 
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment: string;
+export namespace RecordListResponse {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * When the record was created.
-   */
-  created_on: string;
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  meta: unknown;
-
-  /**
-   * When the record was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name: string;
-
-  /**
-   * Whether the record can be proxied by Cloudflare or not.
-   */
-  proxiable: boolean;
-
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl: TTL;
-
-  /**
-   * When the record comment was last modified. Omitted if there is no comment.
-   */
-  comment_modified_on?: string;
-
-  /**
-   * When the record tags were last modified. Omitted if there are no tags.
-   */
-  tags_modified_on?: string;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
 export interface RecordDeleteResponse {
@@ -1890,370 +1777,188 @@ export interface RecordDeleteResponse {
 }
 
 export interface RecordBatchResponse {
-  deletes?: Array<RecordBatchResponse.Delete>;
+  deletes?: Array<
+    | ARecord
+    | AAAARecord
+    | CAARecord
+    | CERTRecord
+    | CNAMERecord
+    | DNSKEYRecord
+    | DSRecord
+    | HTTPSRecord
+    | LOCRecord
+    | MXRecord
+    | NAPTRRecord
+    | NSRecord
+    | RecordBatchResponse.Openpgpkey
+    | PTRRecord
+    | SMIMEARecord
+    | SRVRecord
+    | SSHFPRecord
+    | SVCBRecord
+    | TLSARecord
+    | TXTRecord
+    | URIRecord
+  >;
 
-  patches?: Array<RecordBatchResponse.Patch>;
+  patches?: Array<
+    | ARecord
+    | AAAARecord
+    | CAARecord
+    | CERTRecord
+    | CNAMERecord
+    | DNSKEYRecord
+    | DSRecord
+    | HTTPSRecord
+    | LOCRecord
+    | MXRecord
+    | NAPTRRecord
+    | NSRecord
+    | RecordBatchResponse.Openpgpkey
+    | PTRRecord
+    | SMIMEARecord
+    | SRVRecord
+    | SSHFPRecord
+    | SVCBRecord
+    | TLSARecord
+    | TXTRecord
+    | URIRecord
+  >;
 
-  posts?: Array<RecordBatchResponse.Post>;
+  posts?: Array<
+    | ARecord
+    | AAAARecord
+    | CAARecord
+    | CERTRecord
+    | CNAMERecord
+    | DNSKEYRecord
+    | DSRecord
+    | HTTPSRecord
+    | LOCRecord
+    | MXRecord
+    | NAPTRRecord
+    | NSRecord
+    | RecordBatchResponse.Openpgpkey
+    | PTRRecord
+    | SMIMEARecord
+    | SRVRecord
+    | SSHFPRecord
+    | SVCBRecord
+    | TLSARecord
+    | TXTRecord
+    | URIRecord
+  >;
 
-  puts?: Array<RecordBatchResponse.Put>;
+  puts?: Array<
+    | ARecord
+    | AAAARecord
+    | CAARecord
+    | CERTRecord
+    | CNAMERecord
+    | DNSKEYRecord
+    | DSRecord
+    | HTTPSRecord
+    | LOCRecord
+    | MXRecord
+    | NAPTRRecord
+    | NSRecord
+    | RecordBatchResponse.Openpgpkey
+    | PTRRecord
+    | SMIMEARecord
+    | SRVRecord
+    | SSHFPRecord
+    | SVCBRecord
+    | TLSARecord
+    | TXTRecord
+    | URIRecord
+  >;
 }
 
 export namespace RecordBatchResponse {
-  export interface Delete {
+  export interface Openpgpkey {
     /**
-     * Identifier
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
-    id: string;
+    content?: string;
 
     /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
+     * Record type.
      */
-    comment: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings: unknown;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
+    type?: 'OPENPGPKEY';
   }
 
-  export interface Patch {
+  export interface Openpgpkey {
     /**
-     * Identifier
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
-    id: string;
+    content?: string;
 
     /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
+     * Record type.
      */
-    comment: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings: unknown;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
+    type?: 'OPENPGPKEY';
   }
 
-  export interface Post {
+  export interface Openpgpkey {
     /**
-     * Identifier
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
-    id: string;
+    content?: string;
 
     /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
+     * Record type.
      */
-    comment: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings: unknown;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
+    type?: 'OPENPGPKEY';
   }
 
-  export interface Put {
+  export interface Openpgpkey {
     /**
-     * Identifier
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
      */
-    id: string;
+    content?: string;
 
     /**
-     * Comments or notes about the DNS record. This field has no effect on DNS
-     * responses.
+     * Record type.
      */
-    comment: string;
-
-    /**
-     * When the record was created.
-     */
-    created_on: string;
-
-    /**
-     * Extra Cloudflare-specific information about the record.
-     */
-    meta: unknown;
-
-    /**
-     * When the record was last modified.
-     */
-    modified_on: string;
-
-    /**
-     * DNS record name (or @ for the zone apex) in Punycode.
-     */
-    name: string;
-
-    /**
-     * Whether the record can be proxied by Cloudflare or not.
-     */
-    proxiable: boolean;
-
-    /**
-     * Whether the record is receiving the performance and security benefits of
-     * Cloudflare.
-     */
-    proxied: boolean;
-
-    /**
-     * Settings for the DNS record.
-     */
-    settings: unknown;
-
-    /**
-     * Custom tags for the DNS record. This field has no effect on DNS responses.
-     */
-    tags: Array<RecordsAPI.RecordTags>;
-
-    /**
-     * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-     * Value must be between 60 and 86400, with the minimum reduced to 30 for
-     * Enterprise zones.
-     */
-    ttl: RecordsAPI.TTL;
-
-    /**
-     * When the record comment was last modified. Omitted if there is no comment.
-     */
-    comment_modified_on?: string;
-
-    /**
-     * When the record tags were last modified. Omitted if there are no tags.
-     */
-    tags_modified_on?: string;
+    type?: 'OPENPGPKEY';
   }
 }
 
-export interface RecordEditResponse {
-  /**
-   * Identifier
-   */
-  id: string;
+export type RecordEditResponse =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | RecordEditResponse.Openpgpkey
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
 
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment: string;
+export namespace RecordEditResponse {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * When the record was created.
-   */
-  created_on: string;
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  meta: unknown;
-
-  /**
-   * When the record was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name: string;
-
-  /**
-   * Whether the record can be proxied by Cloudflare or not.
-   */
-  proxiable: boolean;
-
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl: TTL;
-
-  /**
-   * When the record comment was last modified. Omitted if there is no comment.
-   */
-  comment_modified_on?: string;
-
-  /**
-   * When the record tags were last modified. Omitted if there are no tags.
-   */
-  tags_modified_on?: string;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
 /**
@@ -2261,75 +1966,41 @@ export interface RecordEditResponse {
  */
 export type RecordExportResponse = string;
 
-export interface RecordGetResponse {
-  /**
-   * Identifier
-   */
-  id: string;
+export type RecordGetResponse =
+  | ARecord
+  | AAAARecord
+  | CAARecord
+  | CERTRecord
+  | CNAMERecord
+  | DNSKEYRecord
+  | DSRecord
+  | HTTPSRecord
+  | LOCRecord
+  | MXRecord
+  | NAPTRRecord
+  | NSRecord
+  | RecordGetResponse.Openpgpkey
+  | PTRRecord
+  | SMIMEARecord
+  | SRVRecord
+  | SSHFPRecord
+  | SVCBRecord
+  | TLSARecord
+  | TXTRecord
+  | URIRecord;
 
-  /**
-   * Comments or notes about the DNS record. This field has no effect on DNS
-   * responses.
-   */
-  comment: string;
+export namespace RecordGetResponse {
+  export interface Openpgpkey {
+    /**
+     * A single Base64-encoded OpenPGP Transferable Public Key (RFC 4880 Section 11.1)
+     */
+    content?: string;
 
-  /**
-   * When the record was created.
-   */
-  created_on: string;
-
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  meta: unknown;
-
-  /**
-   * When the record was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * DNS record name (or @ for the zone apex) in Punycode.
-   */
-  name: string;
-
-  /**
-   * Whether the record can be proxied by Cloudflare or not.
-   */
-  proxiable: boolean;
-
-  /**
-   * Whether the record is receiving the performance and security benefits of
-   * Cloudflare.
-   */
-  proxied: boolean;
-
-  /**
-   * Settings for the DNS record.
-   */
-  settings: unknown;
-
-  /**
-   * Custom tags for the DNS record. This field has no effect on DNS responses.
-   */
-  tags: Array<RecordTags>;
-
-  /**
-   * Time To Live (TTL) of the DNS record in seconds. Setting to 1 means 'automatic'.
-   * Value must be between 60 and 86400, with the minimum reduced to 30 for
-   * Enterprise zones.
-   */
-  ttl: TTL;
-
-  /**
-   * When the record comment was last modified. Omitted if there is no comment.
-   */
-  comment_modified_on?: string;
-
-  /**
-   * When the record tags were last modified. Omitted if there are no tags.
-   */
-  tags_modified_on?: string;
+    /**
+     * Record type.
+     */
+    type?: 'OPENPGPKEY';
+  }
 }
 
 export interface RecordImportResponse {
