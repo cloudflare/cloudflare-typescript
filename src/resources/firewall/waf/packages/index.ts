@@ -22,4 +22,10 @@ export {
   GroupsV4PagePaginationArray,
   Groups,
 } from './groups';
-export { Packages } from './packages';
+export {
+  PackageListResponse,
+  PackageGetResponse,
+  PackageListParams,
+  PackageListResponsesV4PagePaginationArray,
+  Packages,
+} from './packages';

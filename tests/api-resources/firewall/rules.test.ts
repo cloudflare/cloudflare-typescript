@@ -12,8 +12,7 @@ const client = new Cloudflare({
 describe('resource rules', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.rules.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.firewall.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       action: {},
       filter: {},
     });
@@ -28,8 +27,7 @@ describe('resource rules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.rules.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.firewall.rules.create('023e105f4ecef8ad9ca31a8372d0c353', {
       action: {
         mode: 'simulate',
         response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
@@ -47,11 +45,11 @@ describe('resource rules', () => {
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = client.firewall.rules.update('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action: {},
-      filter: {},
-    });
+    const responsePromise = client.firewall.rules.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b60',
+      { action: {}, filter: {} },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,25 +61,28 @@ describe('resource rules', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await client.firewall.rules.update('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action: {
-        mode: 'simulate',
-        response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
-        timeout: 86400,
+    const response = await client.firewall.rules.update(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b60',
+      {
+        action: {
+          mode: 'simulate',
+          response: { body: '<error>This request has been rate-limited.</error>', content_type: 'text/xml' },
+          timeout: 86400,
+        },
+        filter: {
+          description: 'Restrict access from these browsers on this address range.',
+          expression:
+            '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
+          paused: false,
+          ref: 'FIL-100',
+        },
       },
-      filter: {
-        description: 'Restrict access from these browsers on this address range.',
-        expression:
-          '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
-        paused: false,
-        ref: 'FIL-100',
-      },
-    });
+    );
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.firewall.rules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  test('list', async () => {
+    const responsePromise = client.firewall.rules.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,22 +92,36 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.firewall.rules.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: '372e67954025e0ba6aaa6d586b9e0b60',
-      action: 'block',
-      description: 'mir',
-      page: 1,
-      paused: false,
-      per_page: 5,
-    });
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.rules.list('023e105f4ecef8ad9ca31a8372d0c353', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.firewall.rules.delete('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.rules.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        {
+          id: '372e67954025e0ba6aaa6d586b9e0b60',
+          action: 'block',
+          description: 'mir',
+          page: 1,
+          paused: false,
+          per_page: 5,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('delete', async () => {
+    const responsePromise = client.firewall.rules.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b60',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -116,17 +131,22 @@ describe('resource rules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.firewall.rules.delete('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.rules.delete('023e105f4ecef8ad9ca31a8372d0c353', '372e67954025e0ba6aaa6d586b9e0b60', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
   // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
-    const responsePromise = client.firewall.rules.edit('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test.skip('edit', async () => {
+    const responsePromise = client.firewall.rules.edit(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      '372e67954025e0ba6aaa6d586b9e0b60',
+      {},
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -134,18 +154,11 @@ describe('resource rules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
-    const response = await client.firewall.rules.edit('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.firewall.rules.get('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.firewall.rules.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      path_id: '372e67954025e0ba6aaa6d586b9e0b60',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -157,9 +170,9 @@ describe('resource rules', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.firewall.rules.get('372e67954025e0ba6aaa6d586b9e0b60', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: '372e67954025e0ba6aaa6d586b9e0b60',
+    const response = await client.firewall.rules.get('023e105f4ecef8ad9ca31a8372d0c353', {
+      path_id: '372e67954025e0ba6aaa6d586b9e0b60',
+      query_id: '372e67954025e0ba6aaa6d586b9e0b60',
     });
   });
 });

@@ -12,8 +12,7 @@ const client = new Cloudflare({
 describe('resource overrides', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.firewall.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {
       urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
@@ -27,17 +26,16 @@ describe('resource overrides', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.create({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.firewall.waf.overrides.create('023e105f4ecef8ad9ca31a8372d0c353', {
       urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
     });
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.update('de677e5818985db1285d0e80225f06e5', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const responsePromise = client.firewall.waf.overrides.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      path_id: 'de677e5818985db1285d0e80225f06e5',
+      body_id: '023e105f4ecef8ad9ca31a8372d0c353',
       rewrite_action: {},
       rules: { '100015': 'challenge' },
       urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
@@ -53,9 +51,9 @@ describe('resource overrides', () => {
 
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.update('de677e5818985db1285d0e80225f06e5', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      id: '023e105f4ecef8ad9ca31a8372d0c353',
+    const response = await client.firewall.waf.overrides.update('023e105f4ecef8ad9ca31a8372d0c353', {
+      path_id: 'de677e5818985db1285d0e80225f06e5',
+      body_id: '023e105f4ecef8ad9ca31a8372d0c353',
       rewrite_action: {
         block: 'challenge',
         challenge: 'challenge',
@@ -68,10 +66,8 @@ describe('resource overrides', () => {
     });
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('list', async () => {
+    const responsePromise = client.firewall.waf.overrides.list('023e105f4ecef8ad9ca31a8372d0c353');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,18 +77,31 @@ describe('resource overrides', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      page: 1,
-      per_page: 5,
-    });
+  test('list: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.waf.overrides.list('023e105f4ecef8ad9ca31a8372d0c353', {
+        path: '/_stainless_unknown_path',
+      }),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('delete: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.delete('de677e5818985db1285d0e80225f06e5', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.waf.overrides.list(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        { page: 1, per_page: 5 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
+  });
+
+  test('delete', async () => {
+    const responsePromise = client.firewall.waf.overrides.delete(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,16 +111,22 @@ describe('resource overrides', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('delete: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.delete('de677e5818985db1285d0e80225f06e5', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('delete: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.waf.overrides.delete(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        'de677e5818985db1285d0e80225f06e5',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 
-  test('get: only required params', async () => {
-    const responsePromise = client.firewall.waf.overrides.get('de677e5818985db1285d0e80225f06e5', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('get', async () => {
+    const responsePromise = client.firewall.waf.overrides.get(
+      '023e105f4ecef8ad9ca31a8372d0c353',
+      'de677e5818985db1285d0e80225f06e5',
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,9 +136,14 @@ describe('resource overrides', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('get: required and optional params', async () => {
-    const response = await client.firewall.waf.overrides.get('de677e5818985db1285d0e80225f06e5', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('get: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.firewall.waf.overrides.get(
+        '023e105f4ecef8ad9ca31a8372d0c353',
+        'de677e5818985db1285d0e80225f06e5',
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Cloudflare.NotFoundError);
   });
 });
