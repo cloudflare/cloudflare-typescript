@@ -28,7 +28,6 @@ describe('resource auditSSHSettings', () => {
     const response = await client.zeroTrust.gateway.auditSSHSettings.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
-      seed_id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
     });
   });
 
