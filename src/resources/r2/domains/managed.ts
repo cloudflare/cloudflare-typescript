@@ -13,11 +13,17 @@ export class Managed extends APIResource {
     params: ManagedUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
         body,
         ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
       }) as Core.APIPromise<{ result: ManagedUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,12 +36,17 @@ export class Managed extends APIResource {
     params: ManagedListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ManagedListResponse> {
-    const { account_id } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`,
-        options,
-      ) as Core.APIPromise<{ result: ManagedListResponse }>
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/managed`, {
+        ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: ManagedListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -84,13 +95,23 @@ export interface ManagedUpdateParams {
    * Body param: Whether to enable public bucket access at the r2.dev domain
    */
   enabled: boolean;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface ManagedListParams {
   /**
-   * Account ID
+   * Path param: Account ID
    */
   account_id: string;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace Managed {
