@@ -6,8 +6,9 @@ import * as Core from '../../../../core';
 import { CloudflareError } from '../../../../error';
 import * as ApplicationsAPI from './applications';
 import * as AccessAPI from '../access';
+import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
-import * as PoliciesAPI from './policies';
+import * as ApplicationsPoliciesAPI from './policies';
 import * as UserPolicyChecksAPI from './user-policy-checks';
 import * as PolicyTestsAPI from './policy-tests/policy-tests';
 import { SinglePage } from '../../../../pagination';
@@ -17,7 +18,7 @@ export class Applications extends APIResource {
   userPolicyChecks: UserPolicyChecksAPI.UserPolicyChecks = new UserPolicyChecksAPI.UserPolicyChecks(
     this._client,
   );
-  policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
+  policies: ApplicationsPoliciesAPI.Policies = new ApplicationsPoliciesAPI.Policies(this._client);
   policyTests: PolicyTestsAPI.PolicyTests = new PolicyTestsAPI.PolicyTests(this._client);
 
   /**
@@ -652,7 +653,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_claims?: AccessSchemasOIDCSaaSApp.CustomClaims;
+      custom_claims?: Array<AccessSchemasOIDCSaaSApp.CustomClaim>;
 
       /**
        * The OIDC flows supported by this application
@@ -691,7 +692,7 @@ export namespace Application {
     }
 
     export namespace AccessSchemasOIDCSaaSApp {
-      export interface CustomClaims {
+      export interface CustomClaim {
         /**
          * The name of the claim.
          */
@@ -707,10 +708,10 @@ export namespace Application {
          */
         scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-        source?: CustomClaims.Source;
+        source?: CustomClaim.Source;
       }
 
-      export namespace CustomClaims {
+      export namespace CustomClaim {
         export interface Source {
           /**
            * The name of the IdP claim.
@@ -1693,7 +1694,7 @@ export interface OIDCSaaSApp {
 
   created_at?: string;
 
-  custom_claims?: OIDCSaaSApp.CustomClaims;
+  custom_claims?: Array<OIDCSaaSApp.CustomClaim>;
 
   /**
    * The OIDC flows supported by this application
@@ -1732,7 +1733,7 @@ export interface OIDCSaaSApp {
 }
 
 export namespace OIDCSaaSApp {
-  export interface CustomClaims {
+  export interface CustomClaim {
     /**
      * The name of the claim.
      */
@@ -1748,10 +1749,10 @@ export namespace OIDCSaaSApp {
      */
     scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-    source?: CustomClaims.Source;
+    source?: CustomClaim.Source;
   }
 
-  export namespace CustomClaims {
+  export namespace CustomClaim {
     export interface Source {
       /**
        * The name of the IdP claim.
@@ -1820,7 +1821,7 @@ export interface OIDCSaaSAppParam {
    */
   client_secret?: string;
 
-  custom_claims?: OIDCSaaSAppParam.CustomClaims;
+  custom_claims?: Array<OIDCSaaSAppParam.CustomClaim>;
 
   /**
    * The OIDC flows supported by this application
@@ -1857,7 +1858,7 @@ export interface OIDCSaaSAppParam {
 }
 
 export namespace OIDCSaaSAppParam {
-  export interface CustomClaims {
+  export interface CustomClaim {
     /**
      * The name of the claim.
      */
@@ -1873,10 +1874,10 @@ export namespace OIDCSaaSAppParam {
      */
     scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-    source?: CustomClaims.Source;
+    source?: CustomClaim.Source;
   }
 
-  export namespace CustomClaims {
+  export namespace CustomClaim {
     export interface Source {
       /**
        * The name of the IdP claim.
@@ -12993,15 +12994,15 @@ export namespace Applications {
   export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
-  export import Policies = PoliciesAPI.Policies;
-  export import ApprovalGroup = PoliciesAPI.ApprovalGroup;
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+  export import Policies = ApplicationsPoliciesAPI.Policies;
+  export import ApprovalGroup = ApplicationsPoliciesAPI.ApprovalGroup;
+  export import Policy = ApplicationsPoliciesAPI.Policy;
+  export import PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
+  export import PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = ApplicationsPoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = ApplicationsPoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = ApplicationsPoliciesAPI.PolicyGetParams;
   export import PolicyTests = PolicyTestsAPI.PolicyTests;
   export import PolicyTestCreateResponse = PolicyTestsAPI.PolicyTestCreateResponse;
   export import PolicyTestGetResponse = PolicyTestsAPI.PolicyTestGetResponse;

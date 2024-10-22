@@ -16,17 +16,12 @@ export class Configuration extends APIResource {
     params: ConfigurationGetParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ConfigurationGetResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id } = params;
     return (
-      this._client.get(`/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration`, {
-        ...options,
-        headers: {
-          ...(cfR2Jurisdiction?.toString() != null ?
-            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-          : undefined),
-          ...options?.headers,
-        },
-      }) as Core.APIPromise<{ result: ConfigurationGetResponse }>
+      this._client.get(
+        `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration`,
+        options,
+      ) as Core.APIPromise<{ result: ConfigurationGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -92,14 +87,9 @@ export namespace ConfigurationGetResponse {
 
 export interface ConfigurationGetParams {
   /**
-   * Path param: Account ID
+   * Account ID
    */
   account_id: string;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace Configuration {

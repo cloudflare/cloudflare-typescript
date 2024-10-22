@@ -14,20 +14,11 @@ export class Queues extends APIResource {
     params: QueueUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueUpdateResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.put(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
-        {
-          body,
-          ...options,
-          headers: {
-            ...(cfR2Jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-            : undefined),
-            ...options?.headers,
-          },
-        },
+        { body, ...options },
       ) as Core.APIPromise<{ result: QueueUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -42,19 +33,11 @@ export class Queues extends APIResource {
     params: QueueDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<QueueDeleteResponse> {
-    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/event_notifications/r2/${bucketName}/configuration/queues/${queueId}`,
-        {
-          ...options,
-          headers: {
-            ...(cfR2Jurisdiction?.toString() != null ?
-              { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
-            : undefined),
-            ...options?.headers,
-          },
-        },
+        options,
       ) as Core.APIPromise<{ result: QueueDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -74,11 +57,6 @@ export interface QueueUpdateParams {
    * Body param: Array of rules to drive notifications
    */
   rules?: Array<QueueUpdateParams.Rule>;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace QueueUpdateParams {
@@ -104,14 +82,9 @@ export namespace QueueUpdateParams {
 
 export interface QueueDeleteParams {
   /**
-   * Path param: Account ID
+   * Account ID
    */
   account_id: string;
-
-  /**
-   * Header param: The bucket jurisdiction
-   */
-  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace Queues {

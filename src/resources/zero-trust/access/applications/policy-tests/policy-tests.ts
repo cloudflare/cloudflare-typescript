@@ -4,8 +4,8 @@ import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as PolicyTestsAPI from './policy-tests';
 import * as AccessAPI from '../../access';
+import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
-import * as PoliciesAPI from '../policies';
 import * as UsersAPI from './users';
 
 export class PolicyTests extends APIResource {
