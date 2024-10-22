@@ -6,7 +6,8 @@ import * as AuditSSHSettingsAPI from './audit-ssh-settings';
 
 export class AuditSSHSettings extends APIResource {
   /**
-   * Updates Zero Trust Audit SSH settings.
+   * Updates Zero Trust Audit SSH and SSH with Access for Infrastructure settings for
+   * an account.
    */
   update(
     params: AuditSSHSettingUpdateParams,
@@ -22,7 +23,8 @@ export class AuditSSHSettings extends APIResource {
   }
 
   /**
-   * Get all Zero Trust Audit SSH settings for an account.
+   * Gets all Zero Trust Audit SSH and SSH with Access for Infrastructure settings
+   * for an account.
    */
   get(params: AuditSSHSettingGetParams, options?: Core.RequestOptions): Core.APIPromise<GatewaySettings> {
     const { account_id } = params;
@@ -38,7 +40,8 @@ export interface GatewaySettings {
   created_at?: string;
 
   /**
-   * SSH encryption public key
+   * Base64 encoded HPKE public key used to encrypt all your ssh session logs.
+   * https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
    */
   public_key?: string;
 
@@ -57,14 +60,11 @@ export interface AuditSSHSettingUpdateParams {
   account_id: string;
 
   /**
-   * Body param: SSH encryption public key
+   * Body param: Base64 encoded HPKE public key used to encrypt all your ssh session
+   * logs.
+   * https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
    */
   public_key: string;
-
-  /**
-   * Body param: Seed ID
-   */
-  seed_id?: string;
 }
 
 export interface AuditSSHSettingGetParams {
