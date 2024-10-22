@@ -7,11 +7,11 @@ import * as AppTypesAPI from './app-types';
 import * as AuditSSHSettingsAPI from './audit-ssh-settings';
 import * as CategoriesAPI from './categories';
 import * as CertificatesAPI from './certificates';
+import * as ConfigurationsAPI from './configurations';
 import * as LocationsAPI from './locations';
 import * as LoggingAPI from './logging';
 import * as ProxyEndpointsAPI from './proxy-endpoints';
 import * as RulesAPI from './rules';
-import * as ConfigurationsAPI from './configurations/configurations';
 import * as ListsAPI from './lists/lists';
 
 export class Gateway extends APIResource {
