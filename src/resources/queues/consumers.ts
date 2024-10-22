@@ -163,7 +163,7 @@ export namespace ConsumerUpdateResponse {
   }
 }
 
-export type ConsumerDeleteResponse = unknown | Array<unknown> | string;
+export type ConsumerDeleteResponse = Array<unknown>;
 
 export type ConsumerGetResponse = Array<Consumer>;
 

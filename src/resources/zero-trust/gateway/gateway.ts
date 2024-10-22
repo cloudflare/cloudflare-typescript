@@ -187,7 +187,6 @@ export namespace Gateway {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import RuleResetExpirationParams = RulesAPI.RuleResetExpirationParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;

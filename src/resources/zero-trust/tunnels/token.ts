@@ -22,7 +22,7 @@ export class Token extends APIResource {
   }
 }
 
-export type TokenGetResponse = unknown | Array<unknown> | string;
+export type TokenGetResponse = string;
 
 export interface TokenGetParams {
   /**
