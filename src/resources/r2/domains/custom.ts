@@ -13,11 +13,17 @@ export class Custom extends APIResource {
     params: CustomCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomCreateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
         body,
         ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
       }) as Core.APIPromise<{ result: CustomCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,11 +37,17 @@ export class Custom extends APIResource {
     params: CustomUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomUpdateResponse> {
-    const { account_id, ...body } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
         body,
         ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
       }) as Core.APIPromise<{ result: CustomUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -48,12 +60,17 @@ export class Custom extends APIResource {
     params: CustomListParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomListResponse> {
-    const { account_id } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
-      this._client.get(
-        `/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`,
-        options,
-      ) as Core.APIPromise<{ result: CustomListResponse }>
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom`, {
+        ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: CustomListResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -66,12 +83,17 @@ export class Custom extends APIResource {
     params: CustomDeleteParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CustomDeleteResponse> {
-    const { account_id } = params;
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
     return (
-      this._client.delete(
-        `/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`,
-        options,
-      ) as Core.APIPromise<{ result: CustomDeleteResponse }>
+      this._client.delete(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
+        ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: CustomDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -196,6 +218,11 @@ export interface CustomCreateParams {
    * connections. If not set, defaults to 1.0.
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomUpdateParams {
@@ -215,20 +242,35 @@ export interface CustomUpdateParams {
    * connections. If not set, defaults to previous value.
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomListParams {
   /**
-   * Account ID
+   * Path param: Account ID
    */
   account_id: string;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export interface CustomDeleteParams {
   /**
-   * Account ID
+   * Path param: Account ID
    */
   account_id: string;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
 export namespace Custom {
