@@ -12,6 +12,7 @@ export {
   AppListParams,
   AppDeleteParams,
   AppGetParams,
+  AppListResponsesV4PagePaginationArray,
   Apps,
 } from './apps';
 export { Spectrum } from './spectrum';
