@@ -21,7 +21,7 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueUpdateResponse> {
+  ): Core.APIPromise<ValueUpdateResponse | null> {
     const { account_id, expiration, expiration_ttl, ...body } = params;
     return (
       this._client.put(
@@ -30,9 +30,9 @@ export class Values extends APIResource {
           query: { expiration, expiration_ttl },
           body,
           ...options,
-          headers: { 'Content-Type': '', ...options?.headers },
+          headers: { 'Content-Type': '*/*', ...options?.headers },
         }),
-      ) as Core.APIPromise<{ result: ValueUpdateResponse }>
+      ) as Core.APIPromise<{ result: ValueUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -45,13 +45,13 @@ export class Values extends APIResource {
     keyName: string,
     params: ValueDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ValueDeleteResponse> {
+  ): Core.APIPromise<ValueDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/storage/kv/namespaces/${namespaceId}/values/${keyName}`,
         options,
-      ) as Core.APIPromise<{ result: ValueDeleteResponse }>
+      ) as Core.APIPromise<{ result: ValueDeleteResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -76,9 +76,9 @@ export class Values extends APIResource {
   }
 }
 
-export type ValueUpdateResponse = unknown;
+export interface ValueUpdateResponse {}
 
-export type ValueDeleteResponse = unknown;
+export interface ValueDeleteResponse {}
 
 export interface ValueUpdateParams {
   /**
