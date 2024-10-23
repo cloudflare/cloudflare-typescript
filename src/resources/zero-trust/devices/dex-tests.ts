@@ -59,13 +59,13 @@ export class DEXTests extends APIResource {
     dexTestId: string,
     params: DEXTestDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DEXTestDeleteResponse | null> {
+  ): Core.APIPromise<DEXTestDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(
         `/accounts/${account_id}/devices/dex_tests/${dexTestId}`,
         options,
-      ) as Core.APIPromise<{ result: DEXTestDeleteResponse | null }>
+      ) as Core.APIPromise<{ result: DEXTestDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -121,6 +121,11 @@ export interface DEXTest {
   target_policies?: Array<DEXTest.TargetPolicy>;
 
   targeted?: boolean;
+
+  /**
+   * The unique identifier for the test.
+   */
+  test_id?: string;
 }
 
 export namespace DEXTest {
@@ -217,6 +222,11 @@ export interface SchemaHTTP {
   target_policies?: Array<SchemaHTTP.TargetPolicy>;
 
   targeted?: boolean;
+
+  /**
+   * The unique identifier for the test.
+   */
+  test_id?: string;
 }
 
 export namespace SchemaHTTP {
@@ -238,7 +248,9 @@ export namespace SchemaHTTP {
   }
 }
 
-export type DEXTestDeleteResponse = Array<SchemaHTTP>;
+export interface DEXTestDeleteResponse {
+  dex_tests?: Array<SchemaHTTP>;
+}
 
 export interface DEXTestCreateParams {
   /**
