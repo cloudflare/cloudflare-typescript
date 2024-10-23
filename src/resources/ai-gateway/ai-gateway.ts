@@ -112,6 +112,10 @@ export interface AIGatewayCreateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayUpdateResponse {
@@ -135,6 +139,10 @@ export interface AIGatewayUpdateResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayListResponse {
@@ -158,6 +166,10 @@ export interface AIGatewayListResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayDeleteResponse {
@@ -181,6 +193,10 @@ export interface AIGatewayDeleteResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayGetResponse {
@@ -204,6 +220,10 @@ export interface AIGatewayGetResponse {
   rate_limiting_limit: number | null;
 
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  logpush?: boolean;
+
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayCreateParams {
@@ -246,6 +266,16 @@ export interface AIGatewayCreateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  logpush?: boolean;
+
+  /**
+   * Body param:
+   */
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayUpdateParams {
@@ -283,6 +313,16 @@ export interface AIGatewayUpdateParams {
    * Body param:
    */
   rate_limiting_technique: 'fixed' | 'sliding';
+
+  /**
+   * Body param:
+   */
+  logpush?: boolean;
+
+  /**
+   * Body param:
+   */
+  logpush_public_key?: string | null;
 }
 
 export interface AIGatewayListParams extends V4PagePaginationArrayParams {
