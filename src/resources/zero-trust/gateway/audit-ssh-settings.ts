@@ -34,6 +34,23 @@ export class AuditSSHSettings extends APIResource {
       }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Rotates the SSH account seed that is used for generating the host key identity
+   * when connecting through the Cloudflare SSH Proxy.
+   */
+  rotateSeed(
+    params: AuditSSHSettingRotateSeedParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<GatewaySettings> {
+    const { account_id } = params;
+    return (
+      this._client.post(
+        `/accounts/${account_id}/gateway/audit_ssh_settings/rotate_seed`,
+        options,
+      ) as Core.APIPromise<{ result: GatewaySettings }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface GatewaySettings {
@@ -71,8 +88,13 @@ export interface AuditSSHSettingGetParams {
   account_id: string;
 }
 
+export interface AuditSSHSettingRotateSeedParams {
+  account_id: string;
+}
+
 export namespace AuditSSHSettings {
   export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
   export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
+  export import AuditSSHSettingRotateSeedParams = AuditSSHSettingsAPI.AuditSSHSettingRotateSeedParams;
 }

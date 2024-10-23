@@ -52,6 +52,7 @@ export {
   RuleListParams,
   RuleDeleteParams,
   RuleGetParams,
+  RuleResetExpirationParams,
   GatewayRulesSinglePage,
   Rules,
 } from './rules';
@@ -110,6 +111,7 @@ export {
   GatewaySettings,
   AuditSSHSettingUpdateParams,
   AuditSSHSettingGetParams,
+  AuditSSHSettingRotateSeedParams,
   AuditSSHSettings,
 } from './audit-ssh-settings';
 export { LoggingSetting, LoggingUpdateParams, LoggingGetParams, Logging } from './logging';

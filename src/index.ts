@@ -228,6 +228,7 @@ export class Cloudflare extends Core.APIClient {
   cloudConnector: API.CloudConnector = new API.CloudConnector(this);
   botnetFeed: API.BotnetFeed = new API.BotnetFeed(this);
   securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
+  workflows: API.Workflows = new API.Workflows(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -566,6 +567,15 @@ export namespace Cloudflare {
   export import SecurityTXTUpdateParams = API.SecurityTXTUpdateParams;
   export import SecurityTXTDeleteParams = API.SecurityTXTDeleteParams;
   export import SecurityTXTGetParams = API.SecurityTXTGetParams;
+
+  export import Workflows = API.Workflows;
+  export import WorkflowUpdateResponse = API.WorkflowUpdateResponse;
+  export import WorkflowListResponse = API.WorkflowListResponse;
+  export import WorkflowGetResponse = API.WorkflowGetResponse;
+  export import WorkflowListResponsesV4PagePaginationArray = API.WorkflowListResponsesV4PagePaginationArray;
+  export import WorkflowUpdateParams = API.WorkflowUpdateParams;
+  export import WorkflowListParams = API.WorkflowListParams;
+  export import WorkflowGetParams = API.WorkflowGetParams;
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;

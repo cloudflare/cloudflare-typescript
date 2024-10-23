@@ -87,4 +87,83 @@ describe('resource logs', () => {
       order_by_direction: 'asc',
     });
   });
+
+  test('edit: only required params', async () => {
+    const responsePromise = client.aiGateway.logs.edit('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.aiGateway.logs.edit('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+      feedback: -1,
+      metadata: { foo: 'string' },
+      score: 0,
+    });
+  });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.aiGateway.logs.get('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.aiGateway.logs.get('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+  });
+
+  test('request: only required params', async () => {
+    const responsePromise = client.aiGateway.logs.request('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('request: required and optional params', async () => {
+    const response = await client.aiGateway.logs.request('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+  });
+
+  test('response: only required params', async () => {
+    const responsePromise = client.aiGateway.logs.response('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('response: required and optional params', async () => {
+    const response = await client.aiGateway.logs.response('my-gateway', 'id', {
+      account_id: '0d37909e38d3e99c29fa2cd343ac421a',
+    });
+  });
 });

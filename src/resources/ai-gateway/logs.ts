@@ -36,6 +36,74 @@ export class Logs extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Patch Gateway Log
+   */
+  edit(
+    gatewayId: string,
+    id: string,
+    params: LogEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogEditResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: LogEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get Gateway Log Detail
+   */
+  get(
+    gatewayId: string,
+    id: string,
+    params: LogGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<LogGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}`,
+        options,
+      ) as Core.APIPromise<{ result: LogGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get Gateway Log Request
+   */
+  request(
+    gatewayId: string,
+    id: string,
+    params: LogRequestParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown> {
+    const { account_id } = params;
+    return this._client.get(
+      `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}/request`,
+      options,
+    );
+  }
+
+  /**
+   * Get Gateway Log Response
+   */
+  response(
+    gatewayId: string,
+    id: string,
+    params: LogResponseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<unknown> {
+    const { account_id } = params;
+    return this._client.get(
+      `/accounts/${account_id}/ai-gateway/gateways/${gatewayId}/logs/${id}/response`,
+      options,
+    );
+  }
 }
 
 export class LogListResponsesV4PagePaginationArray extends V4PagePaginationArray<LogListResponse> {}
@@ -83,6 +151,64 @@ export interface LogListResponse {
 export interface LogDeleteResponse {
   success: boolean;
 }
+
+export type LogEditResponse = unknown;
+
+export interface LogGetResponse {
+  id: string;
+
+  cached: boolean;
+
+  created_at: string;
+
+  duration: number;
+
+  model: string;
+
+  path: string;
+
+  provider: string;
+
+  success: boolean;
+
+  tokens_in: number | null;
+
+  tokens_out: number | null;
+
+  cost?: number;
+
+  custom_cost?: boolean;
+
+  metadata?: string;
+
+  model_type?: string;
+
+  request_content_type?: string;
+
+  request_head?: string;
+
+  request_head_complete?: boolean;
+
+  request_size?: number;
+
+  request_type?: string;
+
+  response_content_type?: string;
+
+  response_head?: string;
+
+  response_head_complete?: boolean;
+
+  response_size?: number;
+
+  status_code?: number;
+
+  step?: number;
+}
+
+export type LogRequestResponse = unknown;
+
+export type LogResponseResponse = unknown;
 
 export interface LogListParams extends V4PagePaginationArrayParams {
   /**
@@ -305,10 +431,52 @@ export namespace LogDeleteParams {
   }
 }
 
+export interface LogEditParams {
+  /**
+   * Path param:
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  feedback?: number | null;
+
+  /**
+   * Body param:
+   */
+  metadata?: Record<string, string | number | boolean> | null;
+
+  /**
+   * Body param:
+   */
+  score?: number | null;
+}
+
+export interface LogGetParams {
+  account_id: string;
+}
+
+export interface LogRequestParams {
+  account_id: string;
+}
+
+export interface LogResponseParams {
+  account_id: string;
+}
+
 export namespace Logs {
   export import LogListResponse = LogsAPI.LogListResponse;
   export import LogDeleteResponse = LogsAPI.LogDeleteResponse;
+  export import LogEditResponse = LogsAPI.LogEditResponse;
+  export import LogGetResponse = LogsAPI.LogGetResponse;
+  export import LogRequestResponse = LogsAPI.LogRequestResponse;
+  export import LogResponseResponse = LogsAPI.LogResponseResponse;
   export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
   export import LogListParams = LogsAPI.LogListParams;
   export import LogDeleteParams = LogsAPI.LogDeleteParams;
+  export import LogEditParams = LogsAPI.LogEditParams;
+  export import LogGetParams = LogsAPI.LogGetParams;
+  export import LogRequestParams = LogsAPI.LogRequestParams;
+  export import LogResponseParams = LogsAPI.LogResponseParams;
 }
