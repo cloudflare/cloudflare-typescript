@@ -55,10 +55,6 @@ export interface LogListResponse {
 
   provider: string;
 
-  request: string;
-
-  response: string;
-
   success: boolean;
 
   tokens_in: number | null;
