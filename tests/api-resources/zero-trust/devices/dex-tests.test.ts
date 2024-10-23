@@ -117,7 +117,7 @@ describe('resource dexTests', () => {
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.devices.dexTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const responsePromise = client.zeroTrust.devices.dexTests.get('372e67954025e0ba6aaa6d586b9e0b59', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -130,7 +130,7 @@ describe('resource dexTests', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.devices.dexTests.get('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
+    const response = await client.zeroTrust.devices.dexTests.get('372e67954025e0ba6aaa6d586b9e0b59', {
       account_id: '699d98642c564d2e855e9661899b7252',
     });
   });
