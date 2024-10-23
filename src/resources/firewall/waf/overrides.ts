@@ -1,9 +1,116 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import { isRequestOptions } from '../../../core';
+import * as Core from '../../../core';
 import * as OverridesAPI from './overrides';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
-export class Overrides extends APIResource {}
+export class Overrides extends APIResource {
+  /**
+   * Creates a URI-based WAF override for a zone.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  create(
+    zoneIdentifier: string,
+    body: OverrideCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Override> {
+    return (
+      this._client.post(`/zones/${zoneIdentifier}/firewall/waf/overrides`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: Override }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates an existing URI-based WAF override.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  update(
+    zoneIdentifier: string,
+    params: OverrideUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Override> {
+    const { path_id, body_id, ...body } = params;
+    return (
+      this._client.put(`/zones/${zoneIdentifier}/firewall/waf/overrides/${path_id}`, {
+        body: { id: body_id, ...body },
+        ...options,
+      }) as Core.APIPromise<{ result: Override }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches the URI-based WAF overrides in a zone.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  list(
+    zoneIdentifier: string,
+    query?: OverrideListParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OverridesV4PagePaginationArray, Override>;
+  list(
+    zoneIdentifier: string,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OverridesV4PagePaginationArray, Override>;
+  list(
+    zoneIdentifier: string,
+    query: OverrideListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<OverridesV4PagePaginationArray, Override> {
+    if (isRequestOptions(query)) {
+      return this.list(zoneIdentifier, {}, query);
+    }
+    return this._client.getAPIList(
+      `/zones/${zoneIdentifier}/firewall/waf/overrides`,
+      OverridesV4PagePaginationArray,
+      { query, ...options },
+    );
+  }
+
+  /**
+   * Deletes an existing URI-based WAF override.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  delete(
+    zoneIdentifier: string,
+    id: string,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OverrideDeleteResponse> {
+    return (
+      this._client.delete(
+        `/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`,
+        options,
+      ) as Core.APIPromise<{ result: OverrideDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches the details of a URI-based WAF override.
+   *
+   * **Note:** Applies only to the
+   * [previous version of WAF managed rules](https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).
+   */
+  get(zoneIdentifier: string, id: string, options?: Core.RequestOptions): Core.APIPromise<Override> {
+    return (
+      this._client.get(`/zones/${zoneIdentifier}/firewall/waf/overrides/${id}`, options) as Core.APIPromise<{
+        result: Override;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export class OverridesV4PagePaginationArray extends V4PagePaginationArray<Override> {}
 
 export interface Override {
   /**
@@ -62,11 +169,44 @@ export interface Override {
 
 export type OverrideURL = string;
 
+export type OverrideURLParam = string;
+
 /**
  * Specifies that, when a WAF rule matches, its configured action will be replaced
  * by the action configured in this object.
  */
 export interface RewriteAction {
+  /**
+   * The WAF rule action to apply.
+   */
+  block?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+  /**
+   * The WAF rule action to apply.
+   */
+  challenge?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+  /**
+   * The WAF rule action to apply.
+   */
+  default?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+  /**
+   * The WAF rule action to apply.
+   */
+  disable?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+
+  /**
+   * The WAF rule action to apply.
+   */
+  simulate?: 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
+}
+
+/**
+ * Specifies that, when a WAF rule matches, its configured action will be replaced
+ * by the action configured in this object.
+ */
+export interface RewriteActionParam {
   /**
    * The WAF rule action to apply.
    */
@@ -102,9 +242,75 @@ export interface RewriteAction {
  */
 export type WAFRule = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
 
+/**
+ * An object that allows you to override the action of specific WAF rules. Each key
+ * of this object must be the ID of a WAF rule, and each value must be a valid WAF
+ * action. Unless you are disabling a rule, ensure that you also enable the rule
+ * group that this WAF rule belongs to. When creating a new URI-based WAF override,
+ * you must provide a `groups` object or a `rules` object.
+ */
+export type WAFRuleParam = Record<string, 'challenge' | 'block' | 'simulate' | 'disable' | 'default'>;
+
+export interface OverrideDeleteResponse {
+  /**
+   * The unique identifier of the WAF override.
+   */
+  id?: string;
+}
+
+export interface OverrideCreateParams {
+  /**
+   * The URLs to include in the current WAF override. You can use wildcards. Each
+   * entered URL will be escaped before use, which means you can only use simple
+   * wildcard patterns.
+   */
+  urls: Array<OverrideURLParam>;
+}
+
+export interface OverrideUpdateParams {
+  /**
+   * Path param: The unique identifier of the WAF override.
+   */
+  path_id: string;
+
+  /**
+   * Body param: Identifier
+   */
+  body_id: string;
+
+  /**
+   * Body param: Specifies that, when a WAF rule matches, its configured action will
+   * be replaced by the action configured in this object.
+   */
+  rewrite_action: RewriteActionParam;
+
+  /**
+   * Body param: An object that allows you to override the action of specific WAF
+   * rules. Each key of this object must be the ID of a WAF rule, and each value must
+   * be a valid WAF action. Unless you are disabling a rule, ensure that you also
+   * enable the rule group that this WAF rule belongs to. When creating a new
+   * URI-based WAF override, you must provide a `groups` object or a `rules` object.
+   */
+  rules: WAFRuleParam;
+
+  /**
+   * Body param: The URLs to include in the current WAF override. You can use
+   * wildcards. Each entered URL will be escaped before use, which means you can only
+   * use simple wildcard patterns.
+   */
+  urls: Array<OverrideURLParam>;
+}
+
+export interface OverrideListParams extends V4PagePaginationArrayParams {}
+
 export namespace Overrides {
   export import Override = OverridesAPI.Override;
   export import OverrideURL = OverridesAPI.OverrideURL;
   export import RewriteAction = OverridesAPI.RewriteAction;
   export import WAFRule = OverridesAPI.WAFRule;
+  export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
+  export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
+  export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
+  export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
+  export import OverrideListParams = OverridesAPI.OverrideListParams;
 }
