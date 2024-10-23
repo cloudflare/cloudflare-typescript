@@ -570,6 +570,4 @@ export namespace Versions {
   export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
   export import VersionGetParams = VersionsAPI.VersionGetParams;
   export import ByTag = ByTagAPI.ByTag;
-  export import ByTagGetResponse = ByTagAPI.ByTagGetResponse;
-  export import ByTagGetParams = ByTagAPI.ByTagGetParams;
 }
