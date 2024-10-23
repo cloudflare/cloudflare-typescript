@@ -224,14 +224,22 @@ export namespace AzureGroupRuleParam {
  * Matches any valid client certificate.
  */
 export interface CertificateRule {
-  certificate: unknown;
+  certificate: CertificateRule.Certificate;
+}
+
+export namespace CertificateRule {
+  export interface Certificate {}
 }
 
 /**
  * Matches any valid client certificate.
  */
 export interface CertificateRuleParam {
-  certificate: unknown;
+  certificate: CertificateRuleParam.Certificate;
+}
+
+export namespace CertificateRuleParam {
+  export interface Certificate {}
 }
 
 /**
