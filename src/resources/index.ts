@@ -89,5 +89,15 @@ export { WaitingRooms } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
+export {
+  WorkflowUpdateResponse,
+  WorkflowListResponse,
+  WorkflowGetResponse,
+  WorkflowUpdateParams,
+  WorkflowListParams,
+  WorkflowGetParams,
+  WorkflowListResponsesV4PagePaginationArray,
+  Workflows,
+} from './workflows/workflows';
 export { ZeroTrust } from './zero-trust/zero-trust';
 export { Zones } from './zones/zones';

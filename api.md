@@ -2505,14 +2505,6 @@ Methods:
 
 ### ByTag
 
-Types:
-
-- <code><a href="./src/resources/rulesets/versions/by-tag.ts">ByTagGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/rulesets/{ruleset_id}/versions/{ruleset_version}/by_tag/{rule_tag}">client.rulesets.versions.byTag.<a href="./src/resources/rulesets/versions/by-tag.ts">get</a>(rulesetId, rulesetVersion, ruleTag, { ...params }) -> ByTagGetResponse</code>
-
 # URLNormalization
 
 Types:
@@ -5034,6 +5026,7 @@ Methods:
 
 - <code title="put /accounts/{account_id}/gateway/audit_ssh_settings">client.zeroTrust.gateway.auditSSHSettings.<a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">update</a>({ ...params }) -> GatewaySettings</code>
 - <code title="get /accounts/{account_id}/gateway/audit_ssh_settings">client.zeroTrust.gateway.auditSSHSettings.<a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">get</a>({ ...params }) -> GatewaySettings</code>
+- <code title="post /accounts/{account_id}/gateway/audit_ssh_settings/rotate_seed">client.zeroTrust.gateway.auditSSHSettings.<a href="./src/resources/zero-trust/gateway/audit-ssh-settings.ts">rotateSeed</a>({ ...params }) -> GatewaySettings</code>
 
 ### Categories
 
@@ -5184,6 +5177,7 @@ Methods:
 - <code title="get /accounts/{account_id}/gateway/rules">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">list</a>({ ...params }) -> GatewayRulesSinglePage</code>
 - <code title="delete /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">delete</a>(ruleId, { ...params }) -> RuleDeleteResponse</code>
 - <code title="get /accounts/{account_id}/gateway/rules/{rule_id}">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">get</a>(ruleId, { ...params }) -> GatewayRule</code>
+- <code title="post /accounts/{account_id}/gateway/rules/{rule_id}/reset_expiration">client.zeroTrust.gateway.rules.<a href="./src/resources/zero-trust/gateway/rules.ts">resetExpiration</a>(ruleId, { ...params }) -> GatewayRule</code>
 
 ### Certificates
 
@@ -6748,17 +6742,69 @@ Methods:
 - <code title="delete /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">delete</a>(id, { ...params }) -> AIGatewayDeleteResponse</code>
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{id}">client.aiGateway.<a href="./src/resources/ai-gateway/ai-gateway.ts">get</a>(id, { ...params }) -> AIGatewayGetResponse</code>
 
+## EvaluationTypes
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/evaluation-types.ts">EvaluationTypeGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/ai-gateway/evaluation-types">client.aiGateway.evaluationTypes.<a href="./src/resources/ai-gateway/evaluation-types.ts">get</a>({ ...params }) -> EvaluationTypeGetResponse</code>
+
 ## Logs
 
 Types:
 
 - <code><a href="./src/resources/ai-gateway/logs.ts">LogListResponse</a></code>
 - <code><a href="./src/resources/ai-gateway/logs.ts">LogDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogEditResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogGetResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogRequestResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/logs.ts">LogResponseResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">list</a>(gatewayId, { ...params }) -> LogListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">delete</a>(gatewayId, { ...params }) -> LogDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">edit</a>(gatewayId, id, { ...params }) -> LogEditResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">get</a>(gatewayId, id, { ...params }) -> LogGetResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}/request">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">request</a>(gatewayId, id, { ...params }) -> unknown</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/logs/{id}/response">client.aiGateway.logs.<a href="./src/resources/ai-gateway/logs.ts">response</a>(gatewayId, id, { ...params }) -> unknown</code>
+
+## Datasets
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetUpdateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/datasets.ts">DatasetGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">create</a>(gatewayId, { ...params }) -> DatasetCreateResponse</code>
+- <code title="put /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">update</a>(gatewayId, id, { ...params }) -> DatasetUpdateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">list</a>(gatewayId, { ...params }) -> DatasetListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">delete</a>(gatewayId, id, { ...params }) -> DatasetDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}">client.aiGateway.datasets.<a href="./src/resources/ai-gateway/datasets.ts">get</a>(gatewayId, id, { ...params }) -> DatasetGetResponse</code>
+
+## Evaluations
+
+Types:
+
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationCreateResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationListResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationDeleteResponse</a></code>
+- <code><a href="./src/resources/ai-gateway/evaluations.ts">EvaluationGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">create</a>(gatewayId, { ...params }) -> EvaluationCreateResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">list</a>(gatewayId, { ...params }) -> EvaluationListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">delete</a>(gatewayId, id, { ...params }) -> EvaluationDeleteResponse</code>
+- <code title="get /accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}">client.aiGateway.evaluations.<a href="./src/resources/ai-gateway/evaluations.ts">get</a>(gatewayId, id, { ...params }) -> EvaluationGetResponse</code>
 
 # IAM
 
@@ -6847,3 +6893,53 @@ Methods:
 - <code title="put /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">update</a>({ ...params }) -> SecurityTXTUpdateResponse</code>
 - <code title="delete /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">delete</a>({ ...params }) -> SecurityTXTDeleteResponse</code>
 - <code title="get /zones/{zone_id}/security-center/securitytxt">client.securityTXT.<a href="./src/resources/security-txt.ts">get</a>({ ...params }) -> SecurityTXTGetResponse</code>
+
+# Workflows
+
+Types:
+
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowUpdateResponse</a></code>
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowListResponse</a></code>
+- <code><a href="./src/resources/workflows/workflows.ts">WorkflowGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/workflows/{workflow_name}">client.workflows.<a href="./src/resources/workflows/workflows.ts">update</a>(workflowName, { ...params }) -> WorkflowUpdateResponse</code>
+- <code title="get /accounts/{account_id}/workflows">client.workflows.<a href="./src/resources/workflows/workflows.ts">list</a>({ ...params }) -> WorkflowListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}">client.workflows.<a href="./src/resources/workflows/workflows.ts">get</a>(workflowName, { ...params }) -> WorkflowGetResponse</code>
+
+## Instances
+
+Types:
+
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceCreateResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceListResponse</a></code>
+- <code><a href="./src/resources/workflows/instances/instances.ts">InstanceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">create</a>(workflowName, { ...params }) -> InstanceCreateResponse</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">list</a>(workflowName, { ...params }) -> InstanceListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}">client.workflows.instances.<a href="./src/resources/workflows/instances/instances.ts">get</a>(workflowName, instanceId, { ...params }) -> InstanceGetResponse</code>
+
+### Status
+
+Types:
+
+- <code><a href="./src/resources/workflows/instances/status.ts">StatusEditResponse</a></code>
+
+Methods:
+
+- <code title="patch /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/status">client.workflows.instances.status.<a href="./src/resources/workflows/instances/status.ts">edit</a>(workflowName, instanceId, { ...params }) -> StatusEditResponse</code>
+
+## Versions
+
+Types:
+
+- <code><a href="./src/resources/workflows/versions.ts">VersionListResponse</a></code>
+- <code><a href="./src/resources/workflows/versions.ts">VersionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">list</a>(workflowName, { ...params }) -> VersionListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">get</a>(workflowName, versionId, { ...params }) -> VersionGetResponse</code>

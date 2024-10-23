@@ -2,11 +2,17 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as DatasetsAPI from './datasets';
+import * as EvaluationTypesAPI from './evaluation-types';
+import * as EvaluationsAPI from './evaluations';
 import * as LogsAPI from './logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
+  evaluationTypes: EvaluationTypesAPI.EvaluationTypes = new EvaluationTypesAPI.EvaluationTypes(this._client);
   logs: LogsAPI.Logs = new LogsAPI.Logs(this._client);
+  datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
+  evaluations: EvaluationsAPI.Evaluations = new EvaluationsAPI.Evaluations(this._client);
 
   /**
    * Create a new Gateway
@@ -356,10 +362,43 @@ export interface AIGatewayGetParams {
 }
 
 export namespace AIGateway {
+  export import EvaluationTypes = EvaluationTypesAPI.EvaluationTypes;
+  export import EvaluationTypeGetResponse = EvaluationTypesAPI.EvaluationTypeGetResponse;
+  export import EvaluationTypeGetParams = EvaluationTypesAPI.EvaluationTypeGetParams;
   export import Logs = LogsAPI.Logs;
   export import LogListResponse = LogsAPI.LogListResponse;
   export import LogDeleteResponse = LogsAPI.LogDeleteResponse;
+  export import LogEditResponse = LogsAPI.LogEditResponse;
+  export import LogGetResponse = LogsAPI.LogGetResponse;
+  export import LogRequestResponse = LogsAPI.LogRequestResponse;
+  export import LogResponseResponse = LogsAPI.LogResponseResponse;
   export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
   export import LogListParams = LogsAPI.LogListParams;
   export import LogDeleteParams = LogsAPI.LogDeleteParams;
+  export import LogEditParams = LogsAPI.LogEditParams;
+  export import LogGetParams = LogsAPI.LogGetParams;
+  export import LogRequestParams = LogsAPI.LogRequestParams;
+  export import LogResponseParams = LogsAPI.LogResponseParams;
+  export import Datasets = DatasetsAPI.Datasets;
+  export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
+  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
+  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export import DatasetDeleteResponse = DatasetsAPI.DatasetDeleteResponse;
+  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
+  export import DatasetListResponsesV4PagePaginationArray = DatasetsAPI.DatasetListResponsesV4PagePaginationArray;
+  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
+  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
+  export import DatasetListParams = DatasetsAPI.DatasetListParams;
+  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
+  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
+  export import Evaluations = EvaluationsAPI.Evaluations;
+  export import EvaluationCreateResponse = EvaluationsAPI.EvaluationCreateResponse;
+  export import EvaluationListResponse = EvaluationsAPI.EvaluationListResponse;
+  export import EvaluationDeleteResponse = EvaluationsAPI.EvaluationDeleteResponse;
+  export import EvaluationGetResponse = EvaluationsAPI.EvaluationGetResponse;
+  export import EvaluationListResponsesV4PagePaginationArray = EvaluationsAPI.EvaluationListResponsesV4PagePaginationArray;
+  export import EvaluationCreateParams = EvaluationsAPI.EvaluationCreateParams;
+  export import EvaluationListParams = EvaluationsAPI.EvaluationListParams;
+  export import EvaluationDeleteParams = EvaluationsAPI.EvaluationDeleteParams;
+  export import EvaluationGetParams = EvaluationsAPI.EvaluationGetParams;
 }

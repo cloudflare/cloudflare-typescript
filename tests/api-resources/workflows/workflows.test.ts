@@ -9,11 +9,12 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource auditSSHSettings', () => {
+describe('resource workflows', () => {
   test('update: only required params', async () => {
-    const responsePromise = client.zeroTrust.gateway.auditSSHSettings.update({
-      account_id: '699d98642c564d2e855e9661899b7252',
-      public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
+    const responsePromise = client.workflows.update('x', {
+      account_id: 'account_id',
+      class_name: 'x',
+      script_name: 'x',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,16 +26,30 @@ describe('resource auditSSHSettings', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.zeroTrust.gateway.auditSSHSettings.update({
-      account_id: '699d98642c564d2e855e9661899b7252',
-      public_key: '1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=',
+    const response = await client.workflows.update('x', {
+      account_id: 'account_id',
+      class_name: 'x',
+      script_name: 'x',
     });
   });
 
+  test('list: only required params', async () => {
+    const responsePromise = client.workflows.list({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.workflows.list({ account_id: 'account_id', page: 1, per_page: 1 });
+  });
+
   test('get: only required params', async () => {
-    const responsePromise = client.zeroTrust.gateway.auditSSHSettings.get({
-      account_id: '699d98642c564d2e855e9661899b7252',
-    });
+    const responsePromise = client.workflows.get('x', { account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,27 +60,6 @@ describe('resource auditSSHSettings', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.zeroTrust.gateway.auditSSHSettings.get({
-      account_id: '699d98642c564d2e855e9661899b7252',
-    });
-  });
-
-  test('rotateSeed: only required params', async () => {
-    const responsePromise = client.zeroTrust.gateway.auditSSHSettings.rotateSeed({
-      account_id: '699d98642c564d2e855e9661899b7252',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('rotateSeed: required and optional params', async () => {
-    const response = await client.zeroTrust.gateway.auditSSHSettings.rotateSeed({
-      account_id: '699d98642c564d2e855e9661899b7252',
-    });
+    const response = await client.workflows.get('x', { account_id: 'account_id' });
   });
 });

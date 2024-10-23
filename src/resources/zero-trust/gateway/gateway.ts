@@ -104,6 +104,7 @@ export namespace Gateway {
   export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
   export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
   export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
+  export import AuditSSHSettingRotateSeedParams = AuditSSHSettingsAPI.AuditSSHSettingRotateSeedParams;
   export import Categories = CategoriesAPI.Categories;
   export import Category = CategoriesAPI.Category;
   export import CategoriesSinglePage = CategoriesAPI.CategoriesSinglePage;
@@ -187,6 +188,7 @@ export namespace Gateway {
   export import RuleListParams = RulesAPI.RuleListParams;
   export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
   export import RuleGetParams = RulesAPI.RuleGetParams;
+  export import RuleResetExpirationParams = RulesAPI.RuleResetExpirationParams;
   export import Certificates = CertificatesAPI.Certificates;
   export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
   export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
