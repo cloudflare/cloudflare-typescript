@@ -33,6 +33,7 @@ export interface StatusEditResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
+    | 'waiting'
     | 'unknown';
 
   /**
