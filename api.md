@@ -3096,6 +3096,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheck</a></code>
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckRate</a></code>
 - <code><a href="./src/resources/magic-transit/magic-transit.ts">HealthCheckType</a></code>
 
@@ -4461,8 +4462,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">ApprovalGroup</a></code>
-- <code><a href="./src/resources/zero-trust/access/applications/policies.ts">Policy</a></code>
 - <code><a href="./src/resources/zero-trust/access/applications/policies.ts">PolicyDeleteResponse</a></code>
 
 Methods:
