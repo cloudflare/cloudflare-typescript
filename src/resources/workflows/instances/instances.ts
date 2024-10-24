@@ -77,7 +77,6 @@ export namespace InstanceCreateResponse {
       | 'terminated'
       | 'complete'
       | 'waitingForPause'
-      | 'waiting'
       | 'unknown';
 
     version_id: string;
@@ -101,7 +100,6 @@ export interface InstanceListResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
     | 'unknown';
 
   version_id: string;
@@ -130,7 +128,6 @@ export interface InstanceGetResponse {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
     | 'unknown';
 
   steps: Array<
@@ -288,7 +285,6 @@ export interface InstanceListParams extends V4PagePaginationArrayParams {
     | 'terminated'
     | 'complete'
     | 'waitingForPause'
-    | 'waiting'
     | 'unknown';
 }
 
