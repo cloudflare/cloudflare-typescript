@@ -18,13 +18,13 @@ export class Items extends APIResource {
     listId: string,
     params: ItemCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemCreateResponse | null> {
+  ): Core.APIPromise<ItemCreateResponse> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ItemCreateResponse | null }>
+      }) as Core.APIPromise<{ result: ItemCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -40,13 +40,13 @@ export class Items extends APIResource {
     listId: string,
     params: ItemUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemUpdateResponse | null> {
+  ): Core.APIPromise<ItemUpdateResponse> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}/items`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: ItemUpdateResponse | null }>
+      }) as Core.APIPromise<{ result: ItemUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -77,11 +77,11 @@ export class Items extends APIResource {
     listId: string,
     params: ItemDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemDeleteResponse | null> {
+  ): Core.APIPromise<ItemDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/rules/lists/${listId}/items`, options) as Core.APIPromise<{
-        result: ItemDeleteResponse | null;
+        result: ItemDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -94,12 +94,12 @@ export class Items extends APIResource {
     listId: string,
     itemId: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ItemGetResponse | null> {
+  ): Core.APIPromise<ItemGetResponse> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/rules/lists/${listId}/items/${itemId}`,
         options,
-      ) as Core.APIPromise<{ result: ItemGetResponse | null }>
+      ) as Core.APIPromise<{ result: ItemGetResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -133,7 +133,11 @@ export interface ItemUpdateResponse {
   operation_id?: string;
 }
 
-export type ItemListResponse = unknown;
+/**
+ * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a
+ * maximum of /64.
+ */
+export type ItemListResponse = string | ListsAPI.Redirect | ListsAPI.Hostname | number;
 
 export interface ItemDeleteResponse {
   /**

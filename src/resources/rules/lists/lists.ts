@@ -14,11 +14,11 @@ export class Lists extends APIResource {
   /**
    * Creates a new list of the specified type.
    */
-  create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListsList | null> {
+  create(params: ListCreateParams, options?: Core.RequestOptions): Core.APIPromise<ListsList> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/rules/lists`, { body, ...options }) as Core.APIPromise<{
-        result: ListsList | null;
+        result: ListsList;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -30,13 +30,13 @@ export class Lists extends APIResource {
     listId: string,
     params: ListUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListsList | null> {
+  ): Core.APIPromise<ListsList> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/rules/lists/${listId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: ListsList | null }>
+      }) as Core.APIPromise<{ result: ListsList }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -58,11 +58,11 @@ export class Lists extends APIResource {
     listId: string,
     params: ListDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ListDeleteResponse | null> {
+  ): Core.APIPromise<ListDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
-        result: ListDeleteResponse | null;
+        result: ListDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -70,15 +70,11 @@ export class Lists extends APIResource {
   /**
    * Fetches the details of a list.
    */
-  get(
-    listId: string,
-    params: ListGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<ListsList | null> {
+  get(listId: string, params: ListGetParams, options?: Core.RequestOptions): Core.APIPromise<ListsList> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/rules/lists/${listId}`, options) as Core.APIPromise<{
-        result: ListsList | null;
+        result: ListsList;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
