@@ -12995,8 +12995,6 @@ export namespace Applications {
   export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
   export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
   export import Policies = ApplicationsPoliciesAPI.Policies;
-  export import ApprovalGroup = ApplicationsPoliciesAPI.ApprovalGroup;
-  export import Policy = ApplicationsPoliciesAPI.Policy;
   export import PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
   export import PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
   export import PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;

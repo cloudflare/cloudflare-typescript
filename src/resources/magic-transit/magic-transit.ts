@@ -21,6 +21,103 @@ export class MagicTransit extends APIResource {
   pcaps: PCAPsAPI.PCAPs = new PCAPsAPI.PCAPs(this._client);
 }
 
+export interface HealthCheck {
+  /**
+   * Determines whether to run healthchecks for a tunnel.
+   */
+  enabled?: boolean;
+
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: HealthCheckRate;
+
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+   * object form if the x-magic-new-hc-target header is set to true and string form
+   * if x-magic-new-hc-target is absent or set to false.
+   */
+  target?: HealthCheck.MagicHealthCheckTarget | string;
+
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: HealthCheckType;
+}
+
+export namespace HealthCheck {
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target.
+   */
+  export interface MagicHealthCheckTarget {
+    /**
+     * The effective health check target. If 'saved' is empty, then this field will be
+     * populated with the calculated default value on GET requests. Ignored in POST,
+     * PUT, and PATCH requests.
+     */
+    effective?: string;
+
+    /**
+     * The saved health check target. Setting the value to the empty string indicates
+     * that the calculated default value will be used.
+     */
+    saved?: string;
+  }
+}
+
+export interface HealthCheckParam {
+  /**
+   * Determines whether to run healthchecks for a tunnel.
+   */
+  enabled?: boolean;
+
+  /**
+   * How frequent the health check is run. The default value is `mid`.
+   */
+  rate?: HealthCheckRateParam;
+
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target. Must be in
+   * object form if the x-magic-new-hc-target header is set to true and string form
+   * if x-magic-new-hc-target is absent or set to false.
+   */
+  target?: HealthCheckParam.MagicHealthCheckTarget | string;
+
+  /**
+   * The type of healthcheck to run, reply or request. The default value is `reply`.
+   */
+  type?: HealthCheckTypeParam;
+}
+
+export namespace HealthCheckParam {
+  /**
+   * The destination address in a request type health check. After the healthcheck is
+   * decapsulated at the customer end of the tunnel, the ICMP echo will be forwarded
+   * to this address. This field defaults to `customer_gre_endpoint address`. This
+   * field is ignored for bidirectional healthchecks as the interface_address (not
+   * assigned to the Cloudflare side of the tunnel) is used as the target.
+   */
+  export interface MagicHealthCheckTarget {
+    /**
+     * The saved health check target. Setting the value to the empty string indicates
+     * that the calculated default value will be used.
+     */
+    saved?: string;
+  }
+}
+
 /**
  * How frequent the health check is run. The default value is `mid`.
  */
