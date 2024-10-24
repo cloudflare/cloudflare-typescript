@@ -39,17 +39,6 @@ export {
   Applications,
 } from './applications';
 export {
-  ApprovalGroup,
-  Policy,
-  PolicyDeleteResponse,
-  PolicyCreateParams,
-  PolicyUpdateParams,
-  PolicyListParams,
-  PolicyDeleteParams,
-  PolicyGetParams,
-  Policies,
-} from './policies';
-export {
   CA,
   CACreateResponse,
   CADeleteResponse,
@@ -61,6 +50,15 @@ export {
   CAsSinglePage,
   CAs,
 } from './cas';
+export {
+  PolicyDeleteResponse,
+  PolicyCreateParams,
+  PolicyUpdateParams,
+  PolicyListParams,
+  PolicyDeleteParams,
+  PolicyGetParams,
+  Policies,
+} from './policies';
 export {
   PolicyTestCreateResponse,
   PolicyTestGetResponse,
