@@ -32,9 +32,24 @@ describe('resource queues', () => {
       {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         rules: [
-          { actions: ['PutObject', 'CopyObject'], prefix: 'img/', suffix: '.jpeg' },
-          { actions: ['PutObject', 'CopyObject'], prefix: 'img/', suffix: '.jpeg' },
-          { actions: ['PutObject', 'CopyObject'], prefix: 'img/', suffix: '.jpeg' },
+          {
+            actions: ['PutObject', 'CopyObject'],
+            description: 'Notifications from source bucket to queue',
+            prefix: 'img/',
+            suffix: '.jpeg',
+          },
+          {
+            actions: ['PutObject', 'CopyObject'],
+            description: 'Notifications from source bucket to queue',
+            prefix: 'img/',
+            suffix: '.jpeg',
+          },
+          {
+            actions: ['PutObject', 'CopyObject'],
+            description: 'Notifications from source bucket to queue',
+            prefix: 'img/',
+            suffix: '.jpeg',
+          },
         ],
         'cf-r2-jurisdiction': 'default',
       },
