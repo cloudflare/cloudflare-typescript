@@ -114,6 +114,8 @@ export namespace WorkflowListResponse {
 
     unknown?: number;
 
+    waiting?: number;
+
     waitingForPause?: number;
   }
 }
@@ -151,6 +153,8 @@ export namespace WorkflowGetResponse {
     terminated?: number;
 
     unknown?: number;
+
+    waiting?: number;
 
     waitingForPause?: number;
   }
