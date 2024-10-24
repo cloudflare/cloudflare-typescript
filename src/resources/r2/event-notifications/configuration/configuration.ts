@@ -73,6 +73,12 @@ export namespace ConfigurationGetResponse {
       createdAt?: string;
 
       /**
+       * A description that can be used to identify the event notification rule after
+       * creation
+       */
+      description?: string;
+
+      /**
        * Notifications will be sent only for objects with this prefix
        */
       prefix?: string;
