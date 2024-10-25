@@ -60,8 +60,8 @@ export interface SmartRoutingGetParams {
 }
 
 export namespace SmartRouting {
-  export type SmartRoutingEditResponse = SmartRoutingAPI.SmartRoutingEditResponse;
-  export type SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
-  export type SmartRoutingEditParams = SmartRoutingAPI.SmartRoutingEditParams;
-  export type SmartRoutingGetParams = SmartRoutingAPI.SmartRoutingGetParams;
+  export import SmartRoutingEditResponse = SmartRoutingAPI.SmartRoutingEditResponse;
+  export import SmartRoutingGetResponse = SmartRoutingAPI.SmartRoutingGetResponse;
+  export import SmartRoutingEditParams = SmartRoutingAPI.SmartRoutingEditParams;
+  export import SmartRoutingGetParams = SmartRoutingAPI.SmartRoutingGetParams;
 }

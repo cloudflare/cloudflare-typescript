@@ -68,8 +68,8 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export type SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export type SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export type SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export type SettingGetParams = SettingsAPI.SettingGetParams;
+  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

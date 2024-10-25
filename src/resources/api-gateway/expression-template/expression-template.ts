@@ -9,6 +9,6 @@ export class ExpressionTemplate extends APIResource {
 
 export namespace ExpressionTemplate {
   export import Fallthrough = FallthroughAPI.Fallthrough;
-  export type FallthroughCreateResponse = FallthroughAPI.FallthroughCreateResponse;
-  export type FallthroughCreateParams = FallthroughAPI.FallthroughCreateParams;
+  export import FallthroughCreateResponse = FallthroughAPI.FallthroughCreateResponse;
+  export import FallthroughCreateParams = FallthroughAPI.FallthroughCreateParams;
 }

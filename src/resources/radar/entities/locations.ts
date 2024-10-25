@@ -120,8 +120,8 @@ export interface LocationGetParams {
 }
 
 export namespace Locations {
-  export type LocationListResponse = LocationsAPI.LocationListResponse;
-  export type LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export type LocationListParams = LocationsAPI.LocationListParams;
-  export type LocationGetParams = LocationsAPI.LocationGetParams;
+  export import LocationListResponse = LocationsAPI.LocationListResponse;
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

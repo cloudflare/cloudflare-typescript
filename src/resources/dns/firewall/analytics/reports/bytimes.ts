@@ -78,5 +78,5 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export type BytimeGetParams = ReportsBytimesAPI.BytimeGetParams;
+  export import BytimeGetParams = ReportsBytimesAPI.BytimeGetParams;
 }

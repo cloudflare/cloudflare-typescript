@@ -1,106 +1,100 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  AccessDevicePostureRule,
+  AccessRule,
+  AnyValidServiceTokenRule,
+  AuthenticationMethodRule,
+  AzureGroupRule,
+  CertificateRule,
+  CountryRule,
+  DomainRule,
+  EmailListRule,
+  EmailRule,
+  EveryoneRule,
+  ExternalEvaluationRule,
+  GitHubOrganizationRule,
+  GroupRule,
+  GSuiteGroupRule,
+  IPListRule,
+  IPRule,
+  OktaGroupRule,
+  SAMLGroupRule,
+  ServiceTokenRule,
   Access,
-  type AccessDevicePostureRule,
-  type AccessRule,
-  type AnyValidServiceTokenRule,
-  type AuthenticationMethodRule,
-  type AzureGroupRule,
-  type CertificateRule,
-  type CountryRule,
-  type DomainRule,
-  type EmailListRule,
-  type EmailRule,
-  type EveryoneRule,
-  type ExternalEvaluationRule,
-  type GitHubOrganizationRule,
-  type GroupRule,
-  type GSuiteGroupRule,
-  type IPListRule,
-  type IPRule,
-  type OktaGroupRule,
-  type SAMLGroupRule,
-  type ServiceTokenRule,
 } from './access/index';
 export {
-  ConnectivitySettings,
-  type ConnectivitySettingEditResponse,
-  type ConnectivitySettingGetResponse,
-  type ConnectivitySettingEditParams,
-  type ConnectivitySettingGetParams,
-} from './connectivity-settings';
-export {
-  DEX,
-  type DigitalExperienceMonitor,
-  type NetworkPath,
-  type NetworkPathResponse,
-  type Percentiles,
-} from './dex/index';
-export { DLP } from './dlp/index';
-export {
-  DevicesSinglePage,
-  Devices,
-  type Device,
-  type DeviceGetResponse,
-  type DeviceListParams,
-  type DeviceGetParams,
-} from './devices/index';
-export {
-  Gateway,
-  type GatewayCreateResponse,
-  type GatewayListResponse,
-  type GatewayCreateParams,
-  type GatewayListParams,
-} from './gateway/index';
-export {
+  AzureAD,
+  GenericOAuthConfig,
+  IdentityProvider,
+  IdentityProviderSCIMConfig,
+  IdentityProviderType,
+  IdentityProviderListResponse,
+  IdentityProviderDeleteResponse,
+  IdentityProviderCreateParams,
+  IdentityProviderUpdateParams,
+  IdentityProviderListParams,
+  IdentityProviderDeleteParams,
+  IdentityProviderGetParams,
   IdentityProviderListResponsesSinglePage,
   IdentityProviders,
-  type AzureAD,
-  type GenericOAuthConfig,
-  type IdentityProvider,
-  type IdentityProviderSCIMConfig,
-  type IdentityProviderType,
-  type IdentityProviderListResponse,
-  type IdentityProviderDeleteResponse,
-  type IdentityProviderCreateParams,
-  type IdentityProviderUpdateParams,
-  type IdentityProviderListParams,
-  type IdentityProviderDeleteParams,
-  type IdentityProviderGetParams,
 } from './identity-providers';
-export { Networks } from './networks/index';
 export {
-  Organizations,
-  type LoginDesign,
-  type Organization,
-  type OrganizationRevokeUsersResponse,
-  type OrganizationCreateParams,
-  type OrganizationUpdateParams,
-  type OrganizationListParams,
-  type OrganizationRevokeUsersParams,
-} from './organizations/index';
-export {
-  RiskScoring,
-  type RiskScoringGetResponse,
-  type RiskScoringResetResponse,
-  type RiskScoringGetParams,
-  type RiskScoringResetParams,
-} from './risk-scoring/index';
-export { Seats, type Seat, type SeatEditResponse, type SeatEditParams } from './seats';
-export {
+  Connection,
+  TunnelCreateResponse,
+  TunnelListResponse,
+  TunnelDeleteResponse,
+  TunnelEditResponse,
+  TunnelGetResponse,
+  TunnelCreateParams,
+  TunnelListParams,
+  TunnelDeleteParams,
+  TunnelEditParams,
+  TunnelGetParams,
   TunnelListResponsesV4PagePaginationArray,
   Tunnels,
-  type Connection,
-  type TunnelCreateResponse,
-  type TunnelListResponse,
-  type TunnelDeleteResponse,
-  type TunnelEditResponse,
-  type TunnelGetResponse,
-  type TunnelCreateParams,
-  type TunnelListParams,
-  type TunnelDeleteParams,
-  type TunnelEditParams,
-  type TunnelGetParams,
 } from './tunnels/index';
+export {
+  ConnectivitySettingEditResponse,
+  ConnectivitySettingGetResponse,
+  ConnectivitySettingEditParams,
+  ConnectivitySettingGetParams,
+  ConnectivitySettings,
+} from './connectivity-settings';
+export { DLP } from './dlp/index';
+export {
+  Device,
+  DeviceGetResponse,
+  DeviceListParams,
+  DeviceGetParams,
+  DevicesSinglePage,
+  Devices,
+} from './devices/index';
+export { DigitalExperienceMonitor, NetworkPath, NetworkPathResponse, Percentiles, DEX } from './dex/index';
+export {
+  GatewayCreateResponse,
+  GatewayListResponse,
+  GatewayCreateParams,
+  GatewayListParams,
+  Gateway,
+} from './gateway/index';
+export {
+  LoginDesign,
+  Organization,
+  OrganizationRevokeUsersResponse,
+  OrganizationCreateParams,
+  OrganizationUpdateParams,
+  OrganizationListParams,
+  OrganizationRevokeUsersParams,
+  Organizations,
+} from './organizations/index';
+export { Networks } from './networks/index';
+export {
+  RiskScoringGetResponse,
+  RiskScoringResetResponse,
+  RiskScoringGetParams,
+  RiskScoringResetParams,
+  RiskScoring,
+} from './risk-scoring/index';
+export { Seat, SeatEditResponse, SeatEditParams, Seats } from './seats';
 export { ZeroTrust } from './zero-trust';

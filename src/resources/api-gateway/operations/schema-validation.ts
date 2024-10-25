@@ -161,10 +161,10 @@ export interface SchemaValidationGetParams {
 }
 
 export namespace SchemaValidation {
-  export type SettingsMultipleRequest = SchemaValidationAPI.SettingsMultipleRequest;
-  export type SchemaValidationUpdateResponse = SchemaValidationAPI.SchemaValidationUpdateResponse;
-  export type SchemaValidationGetResponse = SchemaValidationAPI.SchemaValidationGetResponse;
-  export type SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export type SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export type SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+  export import SettingsMultipleRequest = SchemaValidationAPI.SettingsMultipleRequest;
+  export import SchemaValidationUpdateResponse = SchemaValidationAPI.SchemaValidationUpdateResponse;
+  export import SchemaValidationGetResponse = SchemaValidationAPI.SchemaValidationGetResponse;
+  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
+  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
+  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
 }

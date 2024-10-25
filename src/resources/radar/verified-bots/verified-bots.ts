@@ -9,8 +9,8 @@ export class VerifiedBots extends APIResource {
 
 export namespace VerifiedBots {
   export import Top = TopAPI.Top;
-  export type TopBotsResponse = TopAPI.TopBotsResponse;
-  export type TopCategoriesResponse = TopAPI.TopCategoriesResponse;
-  export type TopBotsParams = TopAPI.TopBotsParams;
-  export type TopCategoriesParams = TopAPI.TopCategoriesParams;
+  export import TopBotsResponse = TopAPI.TopBotsResponse;
+  export import TopCategoriesResponse = TopAPI.TopCategoriesResponse;
+  export import TopBotsParams = TopAPI.TopBotsParams;
+  export import TopCategoriesParams = TopAPI.TopCategoriesParams;
 }

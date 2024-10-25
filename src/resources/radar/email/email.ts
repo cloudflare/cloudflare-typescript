@@ -27,8 +27,8 @@ export interface RadarEmailSummary {
 }
 
 export namespace Email {
-  export type RadarEmailSeries = EmailAPI.RadarEmailSeries;
-  export type RadarEmailSummary = EmailAPI.RadarEmailSummary;
+  export import RadarEmailSeries = EmailAPI.RadarEmailSeries;
+  export import RadarEmailSummary = EmailAPI.RadarEmailSummary;
   export import Routing = RoutingAPI.Routing;
   export import Security = SecurityAPI.Security;
 }

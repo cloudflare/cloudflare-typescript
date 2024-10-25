@@ -1,39 +1,39 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Bindings, type BindingGetResponse, type BindingGetParams } from './bindings';
-export { Content, type ContentUpdateParams, type ContentGetParams } from './content';
+export { BindingGetResponse, BindingGetParams, Bindings } from './bindings';
+export { ContentUpdateParams, ContentGetParams, Content } from './content';
 export {
+  Script,
+  ScriptUpdateResponse,
+  ScriptUpdateParams,
+  ScriptDeleteParams,
+  ScriptGetParams,
   Scripts,
-  type Script,
-  type ScriptUpdateResponse,
-  type ScriptUpdateParams,
-  type ScriptDeleteParams,
-  type ScriptGetParams,
 } from './scripts';
 export {
+  SecretUpdateResponse,
+  SecretListResponse,
+  SecretGetResponse,
+  SecretUpdateParams,
+  SecretListParams,
+  SecretGetParams,
   SecretListResponsesSinglePage,
   Secrets,
-  type SecretUpdateResponse,
-  type SecretListResponse,
-  type SecretGetResponse,
-  type SecretUpdateParams,
-  type SecretListParams,
-  type SecretGetParams,
 } from './secrets';
 export {
+  SettingEditResponse,
+  SettingGetResponse,
+  SettingEditParams,
+  SettingGetParams,
   Settings,
-  type SettingEditResponse,
-  type SettingGetResponse,
-  type SettingEditParams,
-  type SettingGetParams,
 } from './settings';
 export {
+  TagUpdateResponse,
+  TagListResponse,
+  TagDeleteResponse,
+  TagUpdateParams,
+  TagListParams,
+  TagDeleteParams,
   TagListResponsesSinglePage,
   Tags,
-  type TagUpdateResponse,
-  type TagListResponse,
-  type TagDeleteResponse,
-  type TagUpdateParams,
-  type TagListParams,
-  type TagDeleteParams,
 } from './tags';

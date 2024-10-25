@@ -316,15 +316,15 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export type MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
+  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
   export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
-  export type RuleCreateParams = RulesAPI.RuleCreateParams;
-  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export type RuleListParams = RulesAPI.RuleListParams;
-  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export type RuleEditParams = RulesAPI.RuleEditParams;
-  export type RuleGetParams = RulesAPI.RuleGetParams;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
   export import Advertisements = AdvertisementsAPI.Advertisements;
-  export type Advertisement = AdvertisementsAPI.Advertisement;
-  export type AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
+  export import Advertisement = AdvertisementsAPI.Advertisement;
+  export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
 }

@@ -198,8 +198,8 @@ export interface OutageLocationsParams {
 }
 
 export namespace Outages {
-  export type OutageGetResponse = OutagesAPI.OutageGetResponse;
-  export type OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
-  export type OutageGetParams = OutagesAPI.OutageGetParams;
-  export type OutageLocationsParams = OutagesAPI.OutageLocationsParams;
+  export import OutageGetResponse = OutagesAPI.OutageGetResponse;
+  export import OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
+  export import OutageGetParams = OutagesAPI.OutageGetParams;
+  export import OutageLocationsParams = OutagesAPI.OutageLocationsParams;
 }

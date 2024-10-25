@@ -190,6 +190,6 @@ export interface BrowserFamilyGetParams {
 }
 
 export namespace BrowserFamily {
-  export type BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
-  export type BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
+  export import BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
+  export import BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
 }

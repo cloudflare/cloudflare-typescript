@@ -80,9 +80,9 @@ export interface ScheduleGetParams {
 }
 
 export namespace Schedules {
-  export type Schedule = SchedulesAPI.Schedule;
-  export type ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
-  export type ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
-  export type ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
-  export type ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
+  export import Schedule = SchedulesAPI.Schedule;
+  export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
+  export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
+  export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
+  export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
 }

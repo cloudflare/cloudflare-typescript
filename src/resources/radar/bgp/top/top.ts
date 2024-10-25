@@ -109,11 +109,11 @@ export interface TopPrefixesParams {
 }
 
 export namespace Top {
-  export type TopPrefixesResponse = TopAPI.TopPrefixesResponse;
-  export type TopPrefixesParams = TopAPI.TopPrefixesParams;
+  export import TopPrefixesResponse = TopAPI.TopPrefixesResponse;
+  export import TopPrefixesParams = TopAPI.TopPrefixesParams;
   export import Ases = AsesAPI.Ases;
-  export type AseGetResponse = AsesAPI.AseGetResponse;
-  export type AsePrefixesResponse = AsesAPI.AsePrefixesResponse;
-  export type AseGetParams = AsesAPI.AseGetParams;
-  export type AsePrefixesParams = AsesAPI.AsePrefixesParams;
+  export import AseGetResponse = AsesAPI.AseGetResponse;
+  export import AsePrefixesResponse = AsesAPI.AsePrefixesResponse;
+  export import AseGetParams = AsesAPI.AseGetParams;
+  export import AsePrefixesParams = AsesAPI.AsePrefixesParams;
 }

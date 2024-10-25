@@ -39,6 +39,6 @@ export interface MetadataGetParams {
 }
 
 export namespace Metadata {
-  export type MetadataGetResponse = MetadataAPI.MetadataGetResponse;
-  export type MetadataGetParams = MetadataAPI.MetadataGetParams;
+  export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
+  export import MetadataGetParams = MetadataAPI.MetadataGetParams;
 }

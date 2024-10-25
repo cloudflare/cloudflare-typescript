@@ -2,25 +2,25 @@
 
 export { EmailSecurity } from './email-security';
 export {
+  InvestigateListResponse,
+  InvestigateDetectionsResponse,
+  InvestigateGetResponse,
+  InvestigatePreviewResponse,
+  InvestigateRawResponse,
+  InvestigateTraceResponse,
+  InvestigateListParams,
+  InvestigateDetectionsParams,
+  InvestigateGetParams,
+  InvestigatePreviewParams,
+  InvestigateRawParams,
+  InvestigateTraceParams,
   InvestigateListResponsesV4PagePaginationArray,
   Investigate,
-  type InvestigateListResponse,
-  type InvestigateDetectionsResponse,
-  type InvestigateGetResponse,
-  type InvestigatePreviewResponse,
-  type InvestigateRawResponse,
-  type InvestigateTraceResponse,
-  type InvestigateListParams,
-  type InvestigateDetectionsParams,
-  type InvestigateGetParams,
-  type InvestigatePreviewParams,
-  type InvestigateRawParams,
-  type InvestigateTraceParams,
 } from './investigate';
 export {
+  PhishguardListResponse,
+  PhishguardListParams,
   PhishguardListResponsesSinglePage,
   Phishguard,
-  type PhishguardListResponse,
-  type PhishguardListParams,
 } from './phishguard';
 export { Settings } from './settings/index';

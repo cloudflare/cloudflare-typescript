@@ -211,10 +211,10 @@ export interface ScheduleGetParams {
 }
 
 export namespace ScheduleResource {
-  export type Schedule = ScheduleAPI.Schedule;
-  export type ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
-  export type ScheduleDeleteResponse = ScheduleAPI.ScheduleDeleteResponse;
-  export type ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
-  export type ScheduleDeleteParams = ScheduleAPI.ScheduleDeleteParams;
-  export type ScheduleGetParams = ScheduleAPI.ScheduleGetParams;
+  export import Schedule = ScheduleAPI.Schedule;
+  export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
+  export import ScheduleDeleteResponse = ScheduleAPI.ScheduleDeleteResponse;
+  export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
+  export import ScheduleDeleteParams = ScheduleAPI.ScheduleDeleteParams;
+  export import ScheduleGetParams = ScheduleAPI.ScheduleGetParams;
 }

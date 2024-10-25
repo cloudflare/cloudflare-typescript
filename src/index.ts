@@ -375,26 +375,26 @@ export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
 export namespace Cloudflare {
-  export type RequestOptions = Core.RequestOptions;
+  export import RequestOptions = Core.RequestOptions;
 
   export import V4PagePagination = Pagination.V4PagePagination;
-  export type V4PagePaginationParams = Pagination.V4PagePaginationParams;
-  export type V4PagePaginationResponse<T> = Pagination.V4PagePaginationResponse<T>;
+  export import V4PagePaginationParams = Pagination.V4PagePaginationParams;
+  export import V4PagePaginationResponse = Pagination.V4PagePaginationResponse;
 
   export import V4PagePaginationArray = Pagination.V4PagePaginationArray;
-  export type V4PagePaginationArrayParams = Pagination.V4PagePaginationArrayParams;
-  export type V4PagePaginationArrayResponse<T> = Pagination.V4PagePaginationArrayResponse<T>;
+  export import V4PagePaginationArrayParams = Pagination.V4PagePaginationArrayParams;
+  export import V4PagePaginationArrayResponse = Pagination.V4PagePaginationArrayResponse;
 
   export import CursorPagination = Pagination.CursorPagination;
-  export type CursorPaginationParams = Pagination.CursorPaginationParams;
-  export type CursorPaginationResponse<T> = Pagination.CursorPaginationResponse<T>;
+  export import CursorPaginationParams = Pagination.CursorPaginationParams;
+  export import CursorPaginationResponse = Pagination.CursorPaginationResponse;
 
   export import CursorLimitPagination = Pagination.CursorLimitPagination;
-  export type CursorLimitPaginationParams = Pagination.CursorLimitPaginationParams;
-  export type CursorLimitPaginationResponse<T> = Pagination.CursorLimitPaginationResponse<T>;
+  export import CursorLimitPaginationParams = Pagination.CursorLimitPaginationParams;
+  export import CursorLimitPaginationResponse = Pagination.CursorLimitPaginationResponse;
 
   export import SinglePage = Pagination.SinglePage;
-  export type SinglePageResponse<T> = Pagination.SinglePageResponse<T>;
+  export import SinglePageResponse = Pagination.SinglePageResponse;
 
   export import Accounts = API.Accounts;
 
@@ -561,42 +561,42 @@ export namespace Cloudflare {
   export import BotnetFeed = API.BotnetFeed;
 
   export import SecurityTXT = API.SecurityTXT;
-  export type SecurityTXTUpdateResponse = API.SecurityTXTUpdateResponse;
-  export type SecurityTXTDeleteResponse = API.SecurityTXTDeleteResponse;
-  export type SecurityTXTGetResponse = API.SecurityTXTGetResponse;
-  export type SecurityTXTUpdateParams = API.SecurityTXTUpdateParams;
-  export type SecurityTXTDeleteParams = API.SecurityTXTDeleteParams;
-  export type SecurityTXTGetParams = API.SecurityTXTGetParams;
+  export import SecurityTXTUpdateResponse = API.SecurityTXTUpdateResponse;
+  export import SecurityTXTDeleteResponse = API.SecurityTXTDeleteResponse;
+  export import SecurityTXTGetResponse = API.SecurityTXTGetResponse;
+  export import SecurityTXTUpdateParams = API.SecurityTXTUpdateParams;
+  export import SecurityTXTDeleteParams = API.SecurityTXTDeleteParams;
+  export import SecurityTXTGetParams = API.SecurityTXTGetParams;
 
   export import Workflows = API.Workflows;
-  export type WorkflowUpdateResponse = API.WorkflowUpdateResponse;
-  export type WorkflowListResponse = API.WorkflowListResponse;
-  export type WorkflowGetResponse = API.WorkflowGetResponse;
+  export import WorkflowUpdateResponse = API.WorkflowUpdateResponse;
+  export import WorkflowListResponse = API.WorkflowListResponse;
+  export import WorkflowGetResponse = API.WorkflowGetResponse;
   export import WorkflowListResponsesV4PagePaginationArray = API.WorkflowListResponsesV4PagePaginationArray;
-  export type WorkflowUpdateParams = API.WorkflowUpdateParams;
-  export type WorkflowListParams = API.WorkflowListParams;
-  export type WorkflowGetParams = API.WorkflowGetParams;
+  export import WorkflowUpdateParams = API.WorkflowUpdateParams;
+  export import WorkflowListParams = API.WorkflowListParams;
+  export import WorkflowGetParams = API.WorkflowGetParams;
 
-  export type ASN = API.ASN;
-  export type AuditLog = API.AuditLog;
-  export type CertificateCA = API.CertificateCA;
-  export type CertificateRequestType = API.CertificateRequestType;
-  export type CloudflareTunnel = API.CloudflareTunnel;
-  export type ErrorData = API.ErrorData;
-  export type Identifier = API.Identifier;
-  export type LoadBalancerPreview = API.LoadBalancerPreview;
-  export type Member = API.Member;
-  export type PaginationInfo = API.PaginationInfo;
-  export type Permission = API.Permission;
-  export type PermissionGrant = API.PermissionGrant;
-  export type RatePlan = API.RatePlan;
-  export type ResponseInfo = API.ResponseInfo;
-  export type Result = API.Result;
-  export type Role = API.Role;
-  export type SortDirection = API.SortDirection;
-  export type Subscription = API.Subscription;
-  export type SubscriptionComponent = API.SubscriptionComponent;
-  export type SubscriptionZone = API.SubscriptionZone;
+  export import ASN = API.ASN;
+  export import AuditLog = API.AuditLog;
+  export import CertificateCA = API.CertificateCA;
+  export import CertificateRequestType = API.CertificateRequestType;
+  export import CloudflareTunnel = API.CloudflareTunnel;
+  export import ErrorData = API.ErrorData;
+  export import Identifier = API.Identifier;
+  export import LoadBalancerPreview = API.LoadBalancerPreview;
+  export import Member = API.Member;
+  export import PaginationInfo = API.PaginationInfo;
+  export import Permission = API.Permission;
+  export import PermissionGrant = API.PermissionGrant;
+  export import RatePlan = API.RatePlan;
+  export import ResponseInfo = API.ResponseInfo;
+  export import Result = API.Result;
+  export import Role = API.Role;
+  export import SortDirection = API.SortDirection;
+  export import Subscription = API.Subscription;
+  export import SubscriptionComponent = API.SubscriptionComponent;
+  export import SubscriptionZone = API.SubscriptionZone;
 }
 
 export default Cloudflare;

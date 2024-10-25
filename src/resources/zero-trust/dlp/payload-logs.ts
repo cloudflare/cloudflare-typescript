@@ -62,8 +62,8 @@ export interface PayloadLogGetParams {
 }
 
 export namespace PayloadLogs {
-  export type PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
-  export type PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
-  export type PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
-  export type PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
+  export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
+  export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
+  export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
+  export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
 }

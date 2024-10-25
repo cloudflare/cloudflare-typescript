@@ -360,6 +360,6 @@ export interface CustomCertificateGetParams {
 
 export namespace CustomCertificates {
   export import Prioritize = PrioritizeAPI.Prioritize;
-  export type PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
-  export type PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
+  export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
+  export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
 }

@@ -179,11 +179,11 @@ export interface GroupGetParams {
 }
 
 export namespace Groups {
-  export type Group = GroupsAPI.Group;
-  export type GroupEditResponse = GroupsAPI.GroupEditResponse;
-  export type GroupGetResponse = GroupsAPI.GroupGetResponse;
+  export import Group = GroupsAPI.Group;
+  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
+  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
-  export type GroupListParams = GroupsAPI.GroupListParams;
-  export type GroupEditParams = GroupsAPI.GroupEditParams;
-  export type GroupGetParams = GroupsAPI.GroupGetParams;
+  export import GroupListParams = GroupsAPI.GroupListParams;
+  export import GroupEditParams = GroupsAPI.GroupEditParams;
+  export import GroupGetParams = GroupsAPI.GroupGetParams;
 }

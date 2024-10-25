@@ -9,6 +9,6 @@ export class History extends APIResource {
 
 export namespace History {
   export import Logs = LogsAPI.Logs;
-  export type LogGetResponse = LogsAPI.LogGetResponse;
-  export type LogGetParams = LogsAPI.LogGetParams;
+  export import LogGetResponse = LogsAPI.LogGetResponse;
+  export import LogGetParams = LogsAPI.LogGetParams;
 }

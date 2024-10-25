@@ -9,7 +9,7 @@ export class Hijacks extends APIResource {
 
 export namespace Hijacks {
   export import Events = EventsAPI.Events;
-  export type EventListResponse = EventsAPI.EventListResponse;
+  export import EventListResponse = EventsAPI.EventListResponse;
   export import EventListResponsesV4PagePagination = EventsAPI.EventListResponsesV4PagePagination;
-  export type EventListParams = EventsAPI.EventListParams;
+  export import EventListParams = EventsAPI.EventListParams;
 }

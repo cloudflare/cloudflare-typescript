@@ -162,12 +162,12 @@ export interface BookmarkGetParams {
 }
 
 export namespace Bookmarks {
-  export type Bookmark = BookmarksAPI.Bookmark;
-  export type BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
+  export import Bookmark = BookmarksAPI.Bookmark;
+  export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
   export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
-  export type BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
-  export type BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
-  export type BookmarkListParams = BookmarksAPI.BookmarkListParams;
-  export type BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
-  export type BookmarkGetParams = BookmarksAPI.BookmarkGetParams;
+  export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
+  export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
+  export import BookmarkListParams = BookmarksAPI.BookmarkListParams;
+  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
+  export import BookmarkGetParams = BookmarksAPI.BookmarkGetParams;
 }

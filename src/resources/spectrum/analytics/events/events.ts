@@ -15,11 +15,11 @@ export type Dimension = 'event' | 'appID' | 'coloName' | 'ipVersion';
 export type DimensionParam = 'event' | 'appID' | 'coloName' | 'ipVersion';
 
 export namespace Events {
-  export type Dimension = EventsAPI.Dimension;
+  export import Dimension = EventsAPI.Dimension;
   export import Bytimes = BytimesAPI.Bytimes;
-  export type BytimeGetResponse = BytimesAPI.BytimeGetResponse;
-  export type BytimeGetParams = BytimesAPI.BytimeGetParams;
+  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
+  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
   export import Summaries = SummariesAPI.Summaries;
-  export type SummaryGetResponse = SummariesAPI.SummaryGetResponse;
-  export type SummaryGetParams = SummariesAPI.SummaryGetParams;
+  export import SummaryGetResponse = SummariesAPI.SummaryGetResponse;
+  export import SummaryGetParams = SummariesAPI.SummaryGetParams;
 }

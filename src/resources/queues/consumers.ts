@@ -206,13 +206,13 @@ export interface ConsumerGetParams {
 }
 
 export namespace Consumers {
-  export type Consumer = ConsumersAPI.Consumer;
-  export type ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
-  export type ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export type ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export type ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
-  export type ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export type ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export type ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
-  export type ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
+  export import Consumer = ConsumersAPI.Consumer;
+  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
+  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
+  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
+  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
+  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
+  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
+  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
+  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
 }

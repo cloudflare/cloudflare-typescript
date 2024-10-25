@@ -66,6 +66,6 @@ export interface JobGetParams {
 }
 
 export namespace Jobs {
-  export type JobGetResponse = DatasetsJobsAPI.JobGetResponse;
-  export type JobGetParams = DatasetsJobsAPI.JobGetParams;
+  export import JobGetResponse = DatasetsJobsAPI.JobGetResponse;
+  export import JobGetParams = DatasetsJobsAPI.JobGetParams;
 }

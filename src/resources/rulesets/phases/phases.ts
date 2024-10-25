@@ -1064,14 +1064,14 @@ export interface PhaseGetParams {
 }
 
 export namespace Phases {
-  export type PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
-  export type PhaseGetResponse = PhasesAPI.PhaseGetResponse;
-  export type PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
-  export type PhaseGetParams = PhasesAPI.PhaseGetParams;
+  export import PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
+  export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
+  export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
+  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
   export import Versions = VersionsAPI.Versions;
-  export type VersionListResponse = VersionsAPI.VersionListResponse;
-  export type VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export import VersionListResponse = VersionsAPI.VersionListResponse;
+  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
   export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export type VersionListParams = VersionsAPI.VersionListParams;
-  export type VersionGetParams = VersionsAPI.VersionGetParams;
+  export import VersionListParams = VersionsAPI.VersionListParams;
+  export import VersionGetParams = VersionsAPI.VersionGetParams;
 }

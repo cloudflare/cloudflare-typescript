@@ -253,15 +253,15 @@ export interface CacheReserveStatusParams {
 }
 
 export namespace CacheReserveResource {
-  export type CacheReserve = CacheReserveAPI.CacheReserve;
-  export type CacheReserveClear = CacheReserveAPI.CacheReserveClear;
-  export type State = CacheReserveAPI.State;
-  export type CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
-  export type CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
-  export type CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
-  export type CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
-  export type CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
-  export type CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
-  export type CacheReserveGetParams = CacheReserveAPI.CacheReserveGetParams;
-  export type CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
+  export import CacheReserve = CacheReserveAPI.CacheReserve;
+  export import CacheReserveClear = CacheReserveAPI.CacheReserveClear;
+  export import State = CacheReserveAPI.State;
+  export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
+  export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
+  export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
+  export import CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
+  export import CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
+  export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
+  export import CacheReserveGetParams = CacheReserveAPI.CacheReserveGetParams;
+  export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
 }

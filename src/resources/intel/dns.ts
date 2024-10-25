@@ -110,8 +110,8 @@ export namespace DNSListParams {
 }
 
 export namespace DNS {
-  export type DNS = DNSAPI.DNS;
-  export type DNSListResponse = DNSAPI.DNSListResponse;
+  export import DNS = DNSAPI.DNS;
+  export import DNSListResponse = DNSAPI.DNSListResponse;
   export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
-  export type DNSListParams = DNSAPI.DNSListParams;
+  export import DNSListParams = DNSAPI.DNSListParams;
 }

@@ -94,6 +94,6 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export type SettingEditParams = SettingsAPI.SettingEditParams;
-  export type SettingGetParams = SettingsAPI.SettingGetParams;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

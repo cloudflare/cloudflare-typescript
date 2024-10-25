@@ -118,6 +118,6 @@ export interface DefaultPolicyGetParams {
 }
 
 export namespace DefaultPolicy {
-  export type DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
-  export type DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
+  export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
+  export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
 }

@@ -121,8 +121,8 @@ export interface QueueDeleteParams {
 }
 
 export namespace Queues {
-  export type QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
-  export type QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
-  export type QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export type QueueDeleteParams = QueuesAPI.QueueDeleteParams;
+  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
+  export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
+  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
+  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
 }

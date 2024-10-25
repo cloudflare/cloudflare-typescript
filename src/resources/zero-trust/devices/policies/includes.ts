@@ -121,11 +121,11 @@ export interface IncludeGetParams {
 }
 
 export namespace Includes {
-  export type SplitTunnelInclude = IncludesAPI.SplitTunnelInclude;
-  export type IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
-  export type IncludeGetResponse = IncludesAPI.IncludeGetResponse;
+  export import SplitTunnelInclude = IncludesAPI.SplitTunnelInclude;
+  export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
+  export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
   export import SplitTunnelIncludesSinglePage = IncludesAPI.SplitTunnelIncludesSinglePage;
-  export type IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
-  export type IncludeListParams = IncludesAPI.IncludeListParams;
-  export type IncludeGetParams = IncludesAPI.IncludeGetParams;
+  export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
+  export import IncludeListParams = IncludesAPI.IncludeListParams;
+  export import IncludeGetParams = IncludesAPI.IncludeGetParams;
 }

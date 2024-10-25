@@ -210,11 +210,11 @@ export interface WatermarkGetParams {
 }
 
 export namespace Watermarks {
-  export type Watermark = WatermarksAPI.Watermark;
-  export type WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
+  export import Watermark = WatermarksAPI.Watermark;
+  export import WatermarkDeleteResponse = WatermarksAPI.WatermarkDeleteResponse;
   export import WatermarksSinglePage = WatermarksAPI.WatermarksSinglePage;
-  export type WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
-  export type WatermarkListParams = WatermarksAPI.WatermarkListParams;
-  export type WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
-  export type WatermarkGetParams = WatermarksAPI.WatermarkGetParams;
+  export import WatermarkCreateParams = WatermarksAPI.WatermarkCreateParams;
+  export import WatermarkListParams = WatermarksAPI.WatermarkListParams;
+  export import WatermarkDeleteParams = WatermarksAPI.WatermarkDeleteParams;
+  export import WatermarkGetParams = WatermarksAPI.WatermarkGetParams;
 }

@@ -2,45 +2,45 @@
 
 export { APIGateway } from './api-gateway';
 export {
+  APIShield,
+  OperationCreateResponse,
+  OperationListResponse,
+  OperationDeleteResponse,
+  OperationGetResponse,
+  OperationCreateParams,
+  OperationListParams,
+  OperationDeleteParams,
+  OperationGetParams,
+  OperationListResponsesV4PagePaginationArray,
+  Operations,
+} from './operations/index';
+export {
+  Configuration,
+  ConfigurationUpdateResponse,
+  ConfigurationUpdateParams,
+  ConfigurationGetParams,
   Configurations,
-  type Configuration,
-  type ConfigurationUpdateResponse,
-  type ConfigurationUpdateParams,
-  type ConfigurationGetParams,
 } from './configurations';
 export {
+  DiscoveryOperation,
+  DiscoveryGetResponse,
+  DiscoveryGetParams,
   DiscoveryOperationsV4PagePaginationArray,
   Discovery,
-  type DiscoveryOperation,
-  type DiscoveryGetResponse,
-  type DiscoveryGetParams,
 } from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
 export {
-  OperationListResponsesV4PagePaginationArray,
-  Operations,
-  type APIShield,
-  type OperationCreateResponse,
-  type OperationListResponse,
-  type OperationDeleteResponse,
-  type OperationGetResponse,
-  type OperationCreateParams,
-  type OperationListParams,
-  type OperationDeleteParams,
-  type OperationGetParams,
-} from './operations/index';
-export {
+  Message,
+  PublicSchema,
+  SchemaUpload,
+  UserSchemaDeleteResponse,
+  UserSchemaCreateParams,
+  UserSchemaListParams,
+  UserSchemaDeleteParams,
+  UserSchemaEditParams,
+  UserSchemaGetParams,
   PublicSchemasV4PagePaginationArray,
   UserSchemas,
-  type Message,
-  type PublicSchema,
-  type SchemaUpload,
-  type UserSchemaDeleteResponse,
-  type UserSchemaCreateParams,
-  type UserSchemaListParams,
-  type UserSchemaDeleteParams,
-  type UserSchemaEditParams,
-  type UserSchemaGetParams,
 } from './user-schemas/index';
-export { Schemas, type SchemaListResponse, type SchemaListParams } from './schemas';
-export { type Settings } from './settings/index';
+export { SchemaListResponse, SchemaListParams, Schemas } from './schemas';
+export { Settings } from './settings/index';

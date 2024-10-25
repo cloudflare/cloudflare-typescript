@@ -372,11 +372,11 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export type CacheVariant = VariantsAPI.CacheVariant;
-  export type CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
-  export type VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export type VariantGetResponse = VariantsAPI.VariantGetResponse;
-  export type VariantDeleteParams = VariantsAPI.VariantDeleteParams;
-  export type VariantEditParams = VariantsAPI.VariantEditParams;
-  export type VariantGetParams = VariantsAPI.VariantGetParams;
+  export import CacheVariant = VariantsAPI.CacheVariant;
+  export import CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
+  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
+  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
+  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
+  export import VariantEditParams = VariantsAPI.VariantEditParams;
+  export import VariantGetParams = VariantsAPI.VariantGetParams;
 }

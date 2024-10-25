@@ -9,13 +9,13 @@ export class Dispatch extends APIResource {
 
 export namespace Dispatch {
   export import Namespaces = NamespacesAPI.Namespaces;
-  export type NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
-  export type NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
-  export type NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
-  export type NamespaceGetResponse = NamespacesAPI.NamespaceGetResponse;
+  export import NamespaceCreateResponse = NamespacesAPI.NamespaceCreateResponse;
+  export import NamespaceListResponse = NamespacesAPI.NamespaceListResponse;
+  export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
+  export import NamespaceGetResponse = NamespacesAPI.NamespaceGetResponse;
   export import NamespaceListResponsesSinglePage = NamespacesAPI.NamespaceListResponsesSinglePage;
-  export type NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
-  export type NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export type NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
-  export type NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
+  export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
+  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
+  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
+  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
 }

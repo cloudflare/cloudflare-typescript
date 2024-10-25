@@ -79,8 +79,8 @@ export interface ASNFullReportParams {
 }
 
 export namespace ASN {
-  export type ASNDayReportResponse = ASNAPI.ASNDayReportResponse;
-  export type ASNFullReportResponse = ASNAPI.ASNFullReportResponse;
-  export type ASNDayReportParams = ASNAPI.ASNDayReportParams;
-  export type ASNFullReportParams = ASNAPI.ASNFullReportParams;
+  export import ASNDayReportResponse = ASNAPI.ASNDayReportResponse;
+  export import ASNFullReportResponse = ASNAPI.ASNFullReportResponse;
+  export import ASNDayReportParams = ASNAPI.ASNDayReportParams;
+  export import ASNFullReportParams = ASNAPI.ASNFullReportParams;
 }

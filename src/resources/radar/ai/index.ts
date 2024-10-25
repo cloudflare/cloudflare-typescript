@@ -3,7 +3,7 @@
 export { AI } from './ai';
 export { Bots } from './bots/index';
 export {
+  TimeseriesGroupUserAgentResponse,
+  TimeseriesGroupUserAgentParams,
   TimeseriesGroups,
-  type TimeseriesGroupUserAgentResponse,
-  type TimeseriesGroupUserAgentParams,
 } from './timeseries-groups';

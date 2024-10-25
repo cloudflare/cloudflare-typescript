@@ -62,7 +62,7 @@ export interface KeyListParams extends CursorLimitPaginationParams {
 }
 
 export namespace Keys {
-  export type Key = KeysAPI.Key;
+  export import Key = KeysAPI.Key;
   export import KeysCursorLimitPagination = KeysAPI.KeysCursorLimitPagination;
-  export type KeyListParams = KeysAPI.KeyListParams;
+  export import KeyListParams = KeysAPI.KeyListParams;
 }

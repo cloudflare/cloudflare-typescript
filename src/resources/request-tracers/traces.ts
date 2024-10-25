@@ -205,8 +205,8 @@ export namespace TraceCreateParams {
 }
 
 export namespace Traces {
-  export type Trace = TracesAPI.Trace;
-  export type TraceItem = TracesAPI.TraceItem;
-  export type TraceCreateResponse = TracesAPI.TraceCreateResponse;
-  export type TraceCreateParams = TracesAPI.TraceCreateParams;
+  export import Trace = TracesAPI.Trace;
+  export import TraceItem = TracesAPI.TraceItem;
+  export import TraceCreateResponse = TracesAPI.TraceCreateResponse;
+  export import TraceCreateParams = TracesAPI.TraceCreateParams;
 }

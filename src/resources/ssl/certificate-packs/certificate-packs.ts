@@ -223,23 +223,23 @@ export interface CertificatePackGetParams {
 }
 
 export namespace CertificatePacks {
-  export type Host = CertificatePacksAPI.Host;
-  export type RequestValidity = CertificatePacksAPI.RequestValidity;
-  export type Status = CertificatePacksAPI.Status;
-  export type ValidationMethod = CertificatePacksAPI.ValidationMethod;
-  export type CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
-  export type CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
-  export type CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
-  export type CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
+  export import Host = CertificatePacksAPI.Host;
+  export import RequestValidity = CertificatePacksAPI.RequestValidity;
+  export import Status = CertificatePacksAPI.Status;
+  export import ValidationMethod = CertificatePacksAPI.ValidationMethod;
+  export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
+  export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
+  export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
+  export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
   export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
-  export type CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
-  export type CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
-  export type CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;
-  export type CertificatePackGetParams = CertificatePacksAPI.CertificatePackGetParams;
+  export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
+  export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
+  export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;
+  export import CertificatePackGetParams = CertificatePacksAPI.CertificatePackGetParams;
   export import Order = OrderAPI.Order;
-  export type OrderCreateResponse = OrderAPI.OrderCreateResponse;
-  export type OrderCreateParams = OrderAPI.OrderCreateParams;
+  export import OrderCreateResponse = OrderAPI.OrderCreateResponse;
+  export import OrderCreateParams = OrderAPI.OrderCreateParams;
   export import Quota = QuotaAPI.Quota;
-  export type QuotaGetResponse = QuotaAPI.QuotaGetResponse;
-  export type QuotaGetParams = QuotaAPI.QuotaGetParams;
+  export import QuotaGetResponse = QuotaAPI.QuotaGetResponse;
+  export import QuotaGetParams = QuotaAPI.QuotaGetParams;
 }

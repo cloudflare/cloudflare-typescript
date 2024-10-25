@@ -72,7 +72,7 @@ export interface AppTypeListParams {
 }
 
 export namespace AppTypes {
-  export type AppType = AppTypesAPI.AppType;
+  export import AppType = AppTypesAPI.AppType;
   export import AppTypesSinglePage = AppTypesAPI.AppTypesSinglePage;
-  export type AppTypeListParams = AppTypesAPI.AppTypeListParams;
+  export import AppTypeListParams = AppTypesAPI.AppTypeListParams;
 }

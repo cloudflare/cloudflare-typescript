@@ -44,7 +44,7 @@ export interface RegionListParams {
 }
 
 export namespace Regions {
-  export type RegionListResponse = RegionsAPI.RegionListResponse;
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionListResponsesSinglePage = RegionsAPI.RegionListResponsesSinglePage;
-  export type RegionListParams = RegionsAPI.RegionListParams;
+  export import RegionListParams = RegionsAPI.RegionListParams;
 }

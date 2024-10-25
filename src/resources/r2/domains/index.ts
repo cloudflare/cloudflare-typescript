@@ -1,21 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  CustomCreateResponse,
+  CustomUpdateResponse,
+  CustomListResponse,
+  CustomDeleteResponse,
+  CustomCreateParams,
+  CustomUpdateParams,
+  CustomListParams,
+  CustomDeleteParams,
   Custom,
-  type CustomCreateResponse,
-  type CustomUpdateResponse,
-  type CustomListResponse,
-  type CustomDeleteResponse,
-  type CustomCreateParams,
-  type CustomUpdateParams,
-  type CustomListParams,
-  type CustomDeleteParams,
 } from './custom';
 export { Domains } from './domains';
 export {
+  ManagedUpdateResponse,
+  ManagedListResponse,
+  ManagedUpdateParams,
+  ManagedListParams,
   Managed,
-  type ManagedUpdateResponse,
-  type ManagedListResponse,
-  type ManagedUpdateParams,
-  type ManagedListParams,
 } from './managed';

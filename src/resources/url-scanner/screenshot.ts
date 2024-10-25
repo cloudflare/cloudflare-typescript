@@ -42,5 +42,5 @@ export interface ScreenshotGetParams {
 }
 
 export namespace Screenshot {
-  export type ScreenshotGetParams = ScreenshotAPI.ScreenshotGetParams;
+  export import ScreenshotGetParams = ScreenshotAPI.ScreenshotGetParams;
 }

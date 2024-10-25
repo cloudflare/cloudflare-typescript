@@ -29,6 +29,6 @@ export interface IssueTypeGetParams {
 }
 
 export namespace IssueTypes {
-  export type IssueTypeGetResponse = IssueTypesAPI.IssueTypeGetResponse;
-  export type IssueTypeGetParams = IssueTypesAPI.IssueTypeGetParams;
+  export import IssueTypeGetResponse = IssueTypesAPI.IssueTypeGetResponse;
+  export import IssueTypeGetParams = IssueTypesAPI.IssueTypeGetParams;
 }

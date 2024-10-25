@@ -59,20 +59,20 @@ export interface EntityGetParams {
 }
 
 export namespace Entities {
-  export type EntityGetResponse = EntitiesAPI.EntityGetResponse;
-  export type EntityGetParams = EntitiesAPI.EntityGetParams;
+  export import EntityGetResponse = EntitiesAPI.EntityGetResponse;
+  export import EntityGetParams = EntitiesAPI.EntityGetParams;
   export import ASNs = ASNsAPI.ASNs;
-  export type ASNListResponse = ASNsAPI.ASNListResponse;
-  export type ASNGetResponse = ASNsAPI.ASNGetResponse;
-  export type ASNIPResponse = ASNsAPI.ASNIPResponse;
-  export type ASNRelResponse = ASNsAPI.ASNRelResponse;
-  export type ASNListParams = ASNsAPI.ASNListParams;
-  export type ASNGetParams = ASNsAPI.ASNGetParams;
-  export type ASNIPParams = ASNsAPI.ASNIPParams;
-  export type ASNRelParams = ASNsAPI.ASNRelParams;
+  export import ASNListResponse = ASNsAPI.ASNListResponse;
+  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
+  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
+  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
+  export import ASNListParams = ASNsAPI.ASNListParams;
+  export import ASNGetParams = ASNsAPI.ASNGetParams;
+  export import ASNIPParams = ASNsAPI.ASNIPParams;
+  export import ASNRelParams = ASNsAPI.ASNRelParams;
   export import Locations = LocationsAPI.Locations;
-  export type LocationListResponse = LocationsAPI.LocationListResponse;
-  export type LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export type LocationListParams = LocationsAPI.LocationListParams;
-  export type LocationGetParams = LocationsAPI.LocationGetParams;
+  export import LocationListResponse = LocationsAPI.LocationListResponse;
+  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

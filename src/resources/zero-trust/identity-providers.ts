@@ -3829,17 +3829,17 @@ export interface IdentityProviderGetParams {
 }
 
 export namespace IdentityProviders {
-  export type AzureAD = IdentityProvidersAPI.AzureAD;
-  export type GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
-  export type IdentityProvider = IdentityProvidersAPI.IdentityProvider;
-  export type IdentityProviderSCIMConfig = IdentityProvidersAPI.IdentityProviderSCIMConfig;
-  export type IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
-  export type IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
-  export type IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
+  export import AzureAD = IdentityProvidersAPI.AzureAD;
+  export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
+  export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
+  export import IdentityProviderSCIMConfig = IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
+  export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
+  export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
   export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
-  export type IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
-  export type IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
-  export type IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;
-  export type IdentityProviderDeleteParams = IdentityProvidersAPI.IdentityProviderDeleteParams;
-  export type IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
+  export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
+  export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
+  export import IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;
+  export import IdentityProviderDeleteParams = IdentityProvidersAPI.IdentityProviderDeleteParams;
+  export import IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
 }

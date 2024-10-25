@@ -1,9 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  EventListResponsesV4PagePagination,
-  Events,
-  type EventListResponse,
-  type EventListParams,
-} from './events';
+export { EventListResponse, EventListParams, EventListResponsesV4PagePagination, Events } from './events';
 export { Leaks } from './leaks';

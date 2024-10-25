@@ -1,24 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  PermissionGroupListResponsesSinglePage,
-  PermissionGroups,
-  type PermissionGroupListResponse,
-} from './permission-groups';
-export {
+  CIDRList,
+  Policy,
+  Token,
+  TokenCreateResponse,
+  TokenUpdateResponse,
+  TokenListResponse,
+  TokenDeleteResponse,
+  TokenGetResponse,
+  TokenVerifyResponse,
+  TokenCreateParams,
+  TokenUpdateParams,
+  TokenListParams,
   TokenListResponsesV4PagePaginationArray,
   Tokens,
-  type CIDRList,
-  type Policy,
-  type Token,
-  type TokenCreateResponse,
-  type TokenUpdateResponse,
-  type TokenListResponse,
-  type TokenDeleteResponse,
-  type TokenGetResponse,
-  type TokenVerifyResponse,
-  type TokenCreateParams,
-  type TokenUpdateParams,
-  type TokenListParams,
 } from './tokens';
-export { ValueResource, type Value, type ValueUpdateParams } from './value';
+export {
+  PermissionGroupListResponse,
+  PermissionGroupListResponsesSinglePage,
+  PermissionGroups,
+} from './permission-groups';
+export { Value, ValueUpdateParams, ValueResource } from './value';

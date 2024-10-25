@@ -186,8 +186,8 @@ export interface TopLocationsParams {
 }
 
 export namespace Top {
-  export type TopAsesResponse = TopAPI.TopAsesResponse;
-  export type TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export type TopAsesParams = TopAPI.TopAsesParams;
-  export type TopLocationsParams = TopAPI.TopLocationsParams;
+  export import TopAsesResponse = TopAPI.TopAsesResponse;
+  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
+  export import TopAsesParams = TopAPI.TopAsesParams;
+  export import TopLocationsParams = TopAPI.TopLocationsParams;
 }

@@ -100,9 +100,9 @@ export interface PermissionGroupGetParams {
 }
 
 export namespace PermissionGroups {
-  export type PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
-  export type PermissionGroupGetResponse = PermissionGroupsAPI.PermissionGroupGetResponse;
+  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
+  export import PermissionGroupGetResponse = PermissionGroupsAPI.PermissionGroupGetResponse;
   export import PermissionGroupListResponsesV4PagePaginationArray = PermissionGroupsAPI.PermissionGroupListResponsesV4PagePaginationArray;
-  export type PermissionGroupListParams = PermissionGroupsAPI.PermissionGroupListParams;
-  export type PermissionGroupGetParams = PermissionGroupsAPI.PermissionGroupGetParams;
+  export import PermissionGroupListParams = PermissionGroupsAPI.PermissionGroupListParams;
+  export import PermissionGroupGetParams = PermissionGroupsAPI.PermissionGroupGetParams;
 }

@@ -45,7 +45,7 @@ export interface AssociationGetParams {
 }
 
 export namespace Associations {
-  export type CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
-  export type AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
-  export type AssociationGetParams = AssociationsAPI.AssociationGetParams;
+  export import CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
+  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
+  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

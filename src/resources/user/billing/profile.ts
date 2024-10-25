@@ -99,5 +99,5 @@ export interface ProfileGetResponse {
 }
 
 export namespace Profile {
-  export type ProfileGetResponse = ProfileAPI.ProfileGetResponse;
+  export import ProfileGetResponse = ProfileAPI.ProfileGetResponse;
 }

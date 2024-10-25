@@ -161,10 +161,10 @@ export interface OutputDeleteParams {
 }
 
 export namespace Outputs {
-  export type Output = OutputsAPI.Output;
+  export import Output = OutputsAPI.Output;
   export import OutputsSinglePage = OutputsAPI.OutputsSinglePage;
-  export type OutputCreateParams = OutputsAPI.OutputCreateParams;
-  export type OutputUpdateParams = OutputsAPI.OutputUpdateParams;
-  export type OutputListParams = OutputsAPI.OutputListParams;
-  export type OutputDeleteParams = OutputsAPI.OutputDeleteParams;
+  export import OutputCreateParams = OutputsAPI.OutputCreateParams;
+  export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
+  export import OutputListParams = OutputsAPI.OutputListParams;
+  export import OutputDeleteParams = OutputsAPI.OutputDeleteParams;
 }

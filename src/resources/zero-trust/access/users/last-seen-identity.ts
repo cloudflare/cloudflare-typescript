@@ -122,6 +122,6 @@ export interface LastSeenIdentityGetParams {
 }
 
 export namespace LastSeenIdentity {
-  export type Identity = LastSeenIdentityAPI.Identity;
-  export type LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
+  export import Identity = LastSeenIdentityAPI.Identity;
+  export import LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
 }

@@ -455,15 +455,15 @@ export interface DatasetGetParams {
 }
 
 export namespace Datasets {
-  export type DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
-  export type DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
-  export type DatasetListResponse = DatasetsAPI.DatasetListResponse;
-  export type DatasetDeleteResponse = DatasetsAPI.DatasetDeleteResponse;
-  export type DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
+  export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
+  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
+  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export import DatasetDeleteResponse = DatasetsAPI.DatasetDeleteResponse;
+  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
   export import DatasetListResponsesV4PagePaginationArray = DatasetsAPI.DatasetListResponsesV4PagePaginationArray;
-  export type DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export type DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
-  export type DatasetListParams = DatasetsAPI.DatasetListParams;
-  export type DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
-  export type DatasetGetParams = DatasetsAPI.DatasetGetParams;
+  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
+  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
+  export import DatasetListParams = DatasetsAPI.DatasetListParams;
+  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
+  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
 }

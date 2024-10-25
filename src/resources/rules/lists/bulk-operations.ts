@@ -54,6 +54,6 @@ export interface BulkOperationGetResponse {
 }
 
 export namespace BulkOperations {
-  export type OperationStatus = BulkOperationsAPI.OperationStatus;
-  export type BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
+  export import OperationStatus = BulkOperationsAPI.OperationStatus;
+  export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
 }

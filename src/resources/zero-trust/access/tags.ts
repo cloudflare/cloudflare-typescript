@@ -143,12 +143,12 @@ export interface TagGetParams {
 }
 
 export namespace Tags {
-  export type Tag = TagsAPI.Tag;
-  export type TagDeleteResponse = TagsAPI.TagDeleteResponse;
+  export import Tag = TagsAPI.Tag;
+  export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
   export import TagsSinglePage = TagsAPI.TagsSinglePage;
-  export type TagCreateParams = TagsAPI.TagCreateParams;
-  export type TagUpdateParams = TagsAPI.TagUpdateParams;
-  export type TagListParams = TagsAPI.TagListParams;
-  export type TagDeleteParams = TagsAPI.TagDeleteParams;
-  export type TagGetParams = TagsAPI.TagGetParams;
+  export import TagCreateParams = TagsAPI.TagCreateParams;
+  export import TagUpdateParams = TagsAPI.TagUpdateParams;
+  export import TagListParams = TagsAPI.TagListParams;
+  export import TagDeleteParams = TagsAPI.TagDeleteParams;
+  export import TagGetParams = TagsAPI.TagGetParams;
 }

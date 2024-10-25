@@ -123,7 +123,7 @@ export interface UserPolicyCheckListParams {
 }
 
 export namespace UserPolicyChecks {
-  export type UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
-  export type UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
-  export type UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
+  export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
+  export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
+  export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
 }

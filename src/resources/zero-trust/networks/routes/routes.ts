@@ -332,19 +332,19 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
-  export type NetworkRoute = RoutesAPI.NetworkRoute;
-  export type Route = RoutesAPI.Route;
-  export type Teamnet = RoutesAPI.Teamnet;
+  export import NetworkRoute = RoutesAPI.NetworkRoute;
+  export import Route = RoutesAPI.Route;
+  export import Teamnet = RoutesAPI.Teamnet;
   export import TeamnetsV4PagePaginationArray = RoutesAPI.TeamnetsV4PagePaginationArray;
-  export type RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export type RouteListParams = RoutesAPI.RouteListParams;
-  export type RouteDeleteParams = RoutesAPI.RouteDeleteParams;
-  export type RouteEditParams = RoutesAPI.RouteEditParams;
-  export type RouteGetParams = RoutesAPI.RouteGetParams;
+  export import RouteCreateParams = RoutesAPI.RouteCreateParams;
+  export import RouteListParams = RoutesAPI.RouteListParams;
+  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
+  export import RouteEditParams = RoutesAPI.RouteEditParams;
+  export import RouteGetParams = RoutesAPI.RouteGetParams;
   export import IPs = IPsAPI.IPs;
-  export type IPGetParams = IPsAPI.IPGetParams;
+  export import IPGetParams = IPsAPI.IPGetParams;
   export import Networks = NetworksAPI.Networks;
-  export type NetworkCreateParams = NetworksAPI.NetworkCreateParams;
-  export type NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
-  export type NetworkEditParams = NetworksAPI.NetworkEditParams;
+  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
+  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export import NetworkEditParams = NetworksAPI.NetworkEditParams;
 }

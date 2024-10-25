@@ -405,14 +405,14 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export type Variant = VariantsAPI.Variant;
-  export type VariantCreateResponse = VariantsAPI.VariantCreateResponse;
-  export type VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
-  export type VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export type VariantGetResponse = VariantsAPI.VariantGetResponse;
-  export type VariantCreateParams = VariantsAPI.VariantCreateParams;
-  export type VariantListParams = VariantsAPI.VariantListParams;
-  export type VariantDeleteParams = VariantsAPI.VariantDeleteParams;
-  export type VariantEditParams = VariantsAPI.VariantEditParams;
-  export type VariantGetParams = VariantsAPI.VariantGetParams;
+  export import Variant = VariantsAPI.Variant;
+  export import VariantCreateResponse = VariantsAPI.VariantCreateResponse;
+  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
+  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
+  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
+  export import VariantCreateParams = VariantsAPI.VariantCreateParams;
+  export import VariantListParams = VariantsAPI.VariantListParams;
+  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
+  export import VariantEditParams = VariantsAPI.VariantEditParams;
+  export import VariantGetParams = VariantsAPI.VariantGetParams;
 }

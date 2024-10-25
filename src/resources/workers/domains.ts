@@ -161,10 +161,10 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
-  export type Domain = DomainsAPI.Domain;
+  export import Domain = DomainsAPI.Domain;
   export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
-  export type DomainUpdateParams = DomainsAPI.DomainUpdateParams;
-  export type DomainListParams = DomainsAPI.DomainListParams;
-  export type DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export type DomainGetParams = DomainsAPI.DomainGetParams;
+  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
+  export import DomainListParams = DomainsAPI.DomainListParams;
+  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export import DomainGetParams = DomainsAPI.DomainGetParams;
 }

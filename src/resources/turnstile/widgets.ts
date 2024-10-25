@@ -408,14 +408,14 @@ export interface WidgetRotateSecretParams {
 }
 
 export namespace Widgets {
-  export type Widget = WidgetsAPI.Widget;
-  export type WidgetDomain = WidgetsAPI.WidgetDomain;
-  export type WidgetListResponse = WidgetsAPI.WidgetListResponse;
+  export import Widget = WidgetsAPI.Widget;
+  export import WidgetDomain = WidgetsAPI.WidgetDomain;
+  export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
   export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
-  export type WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
-  export type WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
-  export type WidgetListParams = WidgetsAPI.WidgetListParams;
-  export type WidgetDeleteParams = WidgetsAPI.WidgetDeleteParams;
-  export type WidgetGetParams = WidgetsAPI.WidgetGetParams;
-  export type WidgetRotateSecretParams = WidgetsAPI.WidgetRotateSecretParams;
+  export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
+  export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
+  export import WidgetListParams = WidgetsAPI.WidgetListParams;
+  export import WidgetDeleteParams = WidgetsAPI.WidgetDeleteParams;
+  export import WidgetGetParams = WidgetsAPI.WidgetGetParams;
+  export import WidgetRotateSecretParams = WidgetsAPI.WidgetRotateSecretParams;
 }

@@ -126,8 +126,8 @@ export interface ValidateOriginParams {
 }
 
 export namespace Validate {
-  export type ValidateDestinationResponse = ValidateAPI.ValidateDestinationResponse;
-  export type ValidateOriginResponse = ValidateAPI.ValidateOriginResponse;
-  export type ValidateDestinationParams = ValidateAPI.ValidateDestinationParams;
-  export type ValidateOriginParams = ValidateAPI.ValidateOriginParams;
+  export import ValidateDestinationResponse = ValidateAPI.ValidateDestinationResponse;
+  export import ValidateOriginResponse = ValidateAPI.ValidateOriginResponse;
+  export import ValidateDestinationParams = ValidateAPI.ValidateDestinationParams;
+  export import ValidateOriginParams = ValidateAPI.ValidateOriginParams;
 }

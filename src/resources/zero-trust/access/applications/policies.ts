@@ -506,12 +506,12 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export type PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
-  export type PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
-  export type PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;
-  export type PolicyListParams = ApplicationsPoliciesAPI.PolicyListParams;
-  export type PolicyDeleteParams = ApplicationsPoliciesAPI.PolicyDeleteParams;
-  export type PolicyGetParams = ApplicationsPoliciesAPI.PolicyGetParams;
+  export import PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
+  export import PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = ApplicationsPoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = ApplicationsPoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = ApplicationsPoliciesAPI.PolicyGetParams;
 }
 
 export { ApplicationPoliciesSinglePage };

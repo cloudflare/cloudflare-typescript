@@ -227,15 +227,15 @@ export interface UARuleGetParams {
 }
 
 export namespace UARules {
-  export type UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
-  export type UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
-  export type UARuleListResponse = UARulesAPI.UARuleListResponse;
-  export type UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
-  export type UARuleGetResponse = UARulesAPI.UARuleGetResponse;
+  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
+  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
+  export import UARuleListResponse = UARulesAPI.UARuleListResponse;
+  export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
+  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
   export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
-  export type UARuleCreateParams = UARulesAPI.UARuleCreateParams;
-  export type UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
-  export type UARuleListParams = UARulesAPI.UARuleListParams;
-  export type UARuleDeleteParams = UARulesAPI.UARuleDeleteParams;
-  export type UARuleGetParams = UARulesAPI.UARuleGetParams;
+  export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
+  export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
+  export import UARuleListParams = UARulesAPI.UARuleListParams;
+  export import UARuleDeleteParams = UARulesAPI.UARuleDeleteParams;
+  export import UARuleGetParams = UARulesAPI.UARuleGetParams;
 }

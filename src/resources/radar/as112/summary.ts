@@ -812,16 +812,16 @@ export interface SummaryResponseCodesParams {
 }
 
 export namespace Summary {
-  export type SummaryDNSSECResponse = SummaryAPI.SummaryDNSSECResponse;
-  export type SummaryEdnsResponse = SummaryAPI.SummaryEdnsResponse;
-  export type SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export type SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export type SummaryQueryTypeResponse = SummaryAPI.SummaryQueryTypeResponse;
-  export type SummaryResponseCodesResponse = SummaryAPI.SummaryResponseCodesResponse;
-  export type SummaryDNSSECParams = SummaryAPI.SummaryDNSSECParams;
-  export type SummaryEdnsParams = SummaryAPI.SummaryEdnsParams;
-  export type SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export type SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export type SummaryQueryTypeParams = SummaryAPI.SummaryQueryTypeParams;
-  export type SummaryResponseCodesParams = SummaryAPI.SummaryResponseCodesParams;
+  export import SummaryDNSSECResponse = SummaryAPI.SummaryDNSSECResponse;
+  export import SummaryEdnsResponse = SummaryAPI.SummaryEdnsResponse;
+  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
+  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
+  export import SummaryQueryTypeResponse = SummaryAPI.SummaryQueryTypeResponse;
+  export import SummaryResponseCodesResponse = SummaryAPI.SummaryResponseCodesResponse;
+  export import SummaryDNSSECParams = SummaryAPI.SummaryDNSSECParams;
+  export import SummaryEdnsParams = SummaryAPI.SummaryEdnsParams;
+  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
+  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
+  export import SummaryQueryTypeParams = SummaryAPI.SummaryQueryTypeParams;
+  export import SummaryResponseCodesParams = SummaryAPI.SummaryResponseCodesParams;
 }

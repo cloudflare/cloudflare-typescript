@@ -295,13 +295,13 @@ export interface NetflowTimeseriesParams {
 }
 
 export namespace Netflows {
-  export type NetflowSummaryResponse = NetflowsAPI.NetflowSummaryResponse;
-  export type NetflowTimeseriesResponse = NetflowsAPI.NetflowTimeseriesResponse;
-  export type NetflowSummaryParams = NetflowsAPI.NetflowSummaryParams;
-  export type NetflowTimeseriesParams = NetflowsAPI.NetflowTimeseriesParams;
+  export import NetflowSummaryResponse = NetflowsAPI.NetflowSummaryResponse;
+  export import NetflowTimeseriesResponse = NetflowsAPI.NetflowTimeseriesResponse;
+  export import NetflowSummaryParams = NetflowsAPI.NetflowSummaryParams;
+  export import NetflowTimeseriesParams = NetflowsAPI.NetflowTimeseriesParams;
   export import Top = TopAPI.Top;
-  export type TopAsesResponse = TopAPI.TopAsesResponse;
-  export type TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export type TopAsesParams = TopAPI.TopAsesParams;
-  export type TopLocationsParams = TopAPI.TopLocationsParams;
+  export import TopAsesResponse = TopAPI.TopAsesResponse;
+  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
+  export import TopAsesParams = TopAPI.TopAsesParams;
+  export import TopLocationsParams = TopAPI.TopLocationsParams;
 }

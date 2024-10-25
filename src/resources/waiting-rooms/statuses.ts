@@ -60,6 +60,6 @@ export interface StatusGetParams {
 }
 
 export namespace Statuses {
-  export type StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export type StatusGetParams = StatusesAPI.StatusGetParams;
+  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
+  export import StatusGetParams = StatusesAPI.StatusGetParams;
 }

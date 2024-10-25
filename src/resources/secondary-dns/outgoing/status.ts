@@ -24,5 +24,5 @@ export interface StatusGetParams {
 }
 
 export namespace Status {
-  export type StatusGetParams = StatusAPI.StatusGetParams;
+  export import StatusGetParams = StatusAPI.StatusGetParams;
 }

@@ -185,6 +185,6 @@ export interface HTTPProtocolGetParams {
 }
 
 export namespace HTTPProtocol {
-  export type HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
-  export type HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
+  export import HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
+  export import HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
 }

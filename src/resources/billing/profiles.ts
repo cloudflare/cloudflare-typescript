@@ -109,6 +109,6 @@ export interface ProfileGetParams {
 }
 
 export namespace Profiles {
-  export type ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
-  export type ProfileGetParams = ProfilesAPI.ProfileGetParams;
+  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
+  export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
 }

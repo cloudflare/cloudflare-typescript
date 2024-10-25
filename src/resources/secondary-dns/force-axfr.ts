@@ -37,6 +37,6 @@ export interface ForceAXFRCreateParams {
 }
 
 export namespace ForceAXFRResource {
-  export type ForceAXFR = ForceAXFRAPI.ForceAXFR;
-  export type ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
+  export import ForceAXFR = ForceAXFRAPI.ForceAXFR;
+  export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
 }

@@ -105,9 +105,9 @@ export interface InviteEditParams {
 }
 
 export namespace Invites {
-  export type Invite = InvitesAPI.Invite;
-  export type InviteEditResponse = InvitesAPI.InviteEditResponse;
-  export type InviteGetResponse = InvitesAPI.InviteGetResponse;
+  export import Invite = InvitesAPI.Invite;
+  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
+  export import InviteGetResponse = InvitesAPI.InviteGetResponse;
   export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
-  export type InviteEditParams = InvitesAPI.InviteEditParams;
+  export import InviteEditParams = InvitesAPI.InviteEditParams;
 }

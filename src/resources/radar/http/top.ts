@@ -363,8 +363,8 @@ export interface TopBrowserFamilyParams {
 }
 
 export namespace Top {
-  export type TopBrowserResponse = TopAPI.TopBrowserResponse;
-  export type TopBrowserFamilyResponse = TopAPI.TopBrowserFamilyResponse;
-  export type TopBrowserParams = TopAPI.TopBrowserParams;
-  export type TopBrowserFamilyParams = TopAPI.TopBrowserFamilyParams;
+  export import TopBrowserResponse = TopAPI.TopBrowserResponse;
+  export import TopBrowserFamilyResponse = TopAPI.TopBrowserFamilyResponse;
+  export import TopBrowserParams = TopAPI.TopBrowserParams;
+  export import TopBrowserFamilyParams = TopAPI.TopBrowserFamilyParams;
 }

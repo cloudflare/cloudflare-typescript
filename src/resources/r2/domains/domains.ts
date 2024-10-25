@@ -11,17 +11,17 @@ export class Domains extends APIResource {
 
 export namespace Domains {
   export import Custom = CustomAPI.Custom;
-  export type CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export type CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
-  export type CustomListResponse = CustomAPI.CustomListResponse;
-  export type CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export type CustomCreateParams = CustomAPI.CustomCreateParams;
-  export type CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export type CustomListParams = CustomAPI.CustomListParams;
-  export type CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
+  export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
+  export import CustomListResponse = CustomAPI.CustomListResponse;
+  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export import CustomCreateParams = CustomAPI.CustomCreateParams;
+  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
+  export import CustomListParams = CustomAPI.CustomListParams;
+  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
   export import Managed = ManagedAPI.Managed;
-  export type ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
-  export type ManagedListResponse = ManagedAPI.ManagedListResponse;
-  export type ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
-  export type ManagedListParams = ManagedAPI.ManagedListParams;
+  export import ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
+  export import ManagedListResponse = ManagedAPI.ManagedListResponse;
+  export import ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
+  export import ManagedListParams = ManagedAPI.ManagedListParams;
 }

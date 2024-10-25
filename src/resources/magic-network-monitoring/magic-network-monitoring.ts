@@ -11,19 +11,19 @@ export class MagicNetworkMonitoring extends APIResource {
 
 export namespace MagicNetworkMonitoring {
   export import Configs = ConfigsAPI.Configs;
-  export type Configuration = ConfigsAPI.Configuration;
-  export type ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export type ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
-  export type ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
-  export type ConfigEditParams = ConfigsAPI.ConfigEditParams;
-  export type ConfigGetParams = ConfigsAPI.ConfigGetParams;
+  export import Configuration = ConfigsAPI.Configuration;
+  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
+  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
+  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
+  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
   export import Rules = RulesAPI.Rules;
-  export type MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
+  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
   export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
-  export type RuleCreateParams = RulesAPI.RuleCreateParams;
-  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export type RuleListParams = RulesAPI.RuleListParams;
-  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export type RuleEditParams = RulesAPI.RuleEditParams;
-  export type RuleGetParams = RulesAPI.RuleGetParams;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
 }

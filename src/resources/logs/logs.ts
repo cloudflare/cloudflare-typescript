@@ -14,9 +14,9 @@ export class Logs extends APIResource {
 export namespace Logs {
   export import Control = ControlAPI.Control;
   export import RayID = RayIDAPI.RayID;
-  export type RayIDGetResponse = RayIDAPI.RayIDGetResponse;
-  export type RayIDGetParams = RayIDAPI.RayIDGetParams;
+  export import RayIDGetResponse = RayIDAPI.RayIDGetResponse;
+  export import RayIDGetParams = RayIDAPI.RayIDGetParams;
   export import Received = ReceivedAPI.Received;
-  export type ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
-  export type ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
+  export import ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
+  export import ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
 }

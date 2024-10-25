@@ -75,10 +75,10 @@ export interface WebhookGetParams {
 }
 
 export namespace Webhooks {
-  export type WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export type WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
-  export type WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
-  export type WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
-  export type WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
-  export type WebhookGetParams = WebhooksAPI.WebhookGetParams;
+  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
+  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
+  export import WebhookGetResponse = WebhooksAPI.WebhookGetResponse;
+  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
+  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
+  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
 }

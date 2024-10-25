@@ -133,12 +133,12 @@ export interface SubscriptionGetParams {
 }
 
 export namespace Subscriptions {
-  export type SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export type SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export type SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export type SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export type SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export type SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export type SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
-  export type SubscriptionGetParams = SubscriptionsAPI.SubscriptionGetParams;
+  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
+  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
+  export import SubscriptionGetParams = SubscriptionsAPI.SubscriptionGetParams;
 }

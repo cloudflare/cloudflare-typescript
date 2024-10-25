@@ -212,11 +212,11 @@ export interface PolicyTestGetParams {
 }
 
 export namespace PolicyTests {
-  export type PolicyTestCreateResponse = PolicyTestsAPI.PolicyTestCreateResponse;
-  export type PolicyTestGetResponse = PolicyTestsAPI.PolicyTestGetResponse;
-  export type PolicyTestCreateParams = PolicyTestsAPI.PolicyTestCreateParams;
-  export type PolicyTestGetParams = PolicyTestsAPI.PolicyTestGetParams;
+  export import PolicyTestCreateResponse = PolicyTestsAPI.PolicyTestCreateResponse;
+  export import PolicyTestGetResponse = PolicyTestsAPI.PolicyTestGetResponse;
+  export import PolicyTestCreateParams = PolicyTestsAPI.PolicyTestCreateParams;
+  export import PolicyTestGetParams = PolicyTestsAPI.PolicyTestGetParams;
   export import Users = UsersAPI.Users;
-  export type UserListResponse = UsersAPI.UserListResponse;
-  export type UserListParams = UsersAPI.UserListParams;
+  export import UserListResponse = UsersAPI.UserListResponse;
+  export import UserListParams = UsersAPI.UserListParams;
 }

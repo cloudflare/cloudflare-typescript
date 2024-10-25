@@ -355,17 +355,15 @@ export interface ImpersonationRegistryGetParams {
 }
 
 export namespace ImpersonationRegistry {
-  export type ImpersonationRegistryCreateResponse =
-    ImpersonationRegistryAPI.ImpersonationRegistryCreateResponse;
-  export type ImpersonationRegistryListResponse = ImpersonationRegistryAPI.ImpersonationRegistryListResponse;
-  export type ImpersonationRegistryDeleteResponse =
-    ImpersonationRegistryAPI.ImpersonationRegistryDeleteResponse;
-  export type ImpersonationRegistryEditResponse = ImpersonationRegistryAPI.ImpersonationRegistryEditResponse;
-  export type ImpersonationRegistryGetResponse = ImpersonationRegistryAPI.ImpersonationRegistryGetResponse;
+  export import ImpersonationRegistryCreateResponse = ImpersonationRegistryAPI.ImpersonationRegistryCreateResponse;
+  export import ImpersonationRegistryListResponse = ImpersonationRegistryAPI.ImpersonationRegistryListResponse;
+  export import ImpersonationRegistryDeleteResponse = ImpersonationRegistryAPI.ImpersonationRegistryDeleteResponse;
+  export import ImpersonationRegistryEditResponse = ImpersonationRegistryAPI.ImpersonationRegistryEditResponse;
+  export import ImpersonationRegistryGetResponse = ImpersonationRegistryAPI.ImpersonationRegistryGetResponse;
   export import ImpersonationRegistryListResponsesV4PagePaginationArray = ImpersonationRegistryAPI.ImpersonationRegistryListResponsesV4PagePaginationArray;
-  export type ImpersonationRegistryCreateParams = ImpersonationRegistryAPI.ImpersonationRegistryCreateParams;
-  export type ImpersonationRegistryListParams = ImpersonationRegistryAPI.ImpersonationRegistryListParams;
-  export type ImpersonationRegistryDeleteParams = ImpersonationRegistryAPI.ImpersonationRegistryDeleteParams;
-  export type ImpersonationRegistryEditParams = ImpersonationRegistryAPI.ImpersonationRegistryEditParams;
-  export type ImpersonationRegistryGetParams = ImpersonationRegistryAPI.ImpersonationRegistryGetParams;
+  export import ImpersonationRegistryCreateParams = ImpersonationRegistryAPI.ImpersonationRegistryCreateParams;
+  export import ImpersonationRegistryListParams = ImpersonationRegistryAPI.ImpersonationRegistryListParams;
+  export import ImpersonationRegistryDeleteParams = ImpersonationRegistryAPI.ImpersonationRegistryDeleteParams;
+  export import ImpersonationRegistryEditParams = ImpersonationRegistryAPI.ImpersonationRegistryEditParams;
+  export import ImpersonationRegistryGetParams = ImpersonationRegistryAPI.ImpersonationRegistryGetParams;
 }

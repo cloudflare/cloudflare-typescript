@@ -55,6 +55,6 @@ export interface PatternValidateParams {
 }
 
 export namespace Patterns {
-  export type PatternValidateResponse = PatternsAPI.PatternValidateResponse;
-  export type PatternValidateParams = PatternsAPI.PatternValidateParams;
+  export import PatternValidateResponse = PatternsAPI.PatternValidateResponse;
+  export import PatternValidateParams = PatternsAPI.PatternValidateParams;
 }

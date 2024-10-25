@@ -53,7 +53,7 @@ export interface DomainHistoryGetParams {
 }
 
 export namespace DomainHistoryResource {
-  export type DomainHistory = DomainHistoryAPI.DomainHistory;
-  export type DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
-  export type DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
+  export import DomainHistory = DomainHistoryAPI.DomainHistory;
+  export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
+  export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
 }

@@ -118,6 +118,6 @@ export interface IPTimeseriesParams {
 }
 
 export namespace IPs {
-  export type IPTimeseriesResponse = IPsAPI.IPTimeseriesResponse;
-  export type IPTimeseriesParams = IPsAPI.IPTimeseriesParams;
+  export import IPTimeseriesResponse = IPsAPI.IPTimeseriesResponse;
+  export import IPTimeseriesParams = IPsAPI.IPTimeseriesParams;
 }

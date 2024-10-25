@@ -57,6 +57,6 @@ export interface VideoStorageUsageParams {
 }
 
 export namespace Videos {
-  export type VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
-  export type VideoStorageUsageParams = VideosAPI.VideoStorageUsageParams;
+  export import VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
+  export import VideoStorageUsageParams = VideosAPI.VideoStorageUsageParams;
 }

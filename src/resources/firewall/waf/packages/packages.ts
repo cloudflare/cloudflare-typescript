@@ -107,27 +107,27 @@ export interface PackageGetParams {
 }
 
 export namespace Packages {
-  export type PackageListResponse = PackagesAPI.PackageListResponse;
-  export type PackageGetResponse = PackagesAPI.PackageGetResponse;
+  export import PackageListResponse = PackagesAPI.PackageListResponse;
+  export import PackageGetResponse = PackagesAPI.PackageGetResponse;
   export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
-  export type PackageListParams = PackagesAPI.PackageListParams;
-  export type PackageGetParams = PackagesAPI.PackageGetParams;
+  export import PackageListParams = PackagesAPI.PackageListParams;
+  export import PackageGetParams = PackagesAPI.PackageGetParams;
   export import Groups = GroupsAPI.Groups;
-  export type Group = GroupsAPI.Group;
-  export type GroupEditResponse = GroupsAPI.GroupEditResponse;
-  export type GroupGetResponse = GroupsAPI.GroupGetResponse;
+  export import Group = GroupsAPI.Group;
+  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
+  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
   export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
-  export type GroupListParams = GroupsAPI.GroupListParams;
-  export type GroupEditParams = GroupsAPI.GroupEditParams;
-  export type GroupGetParams = GroupsAPI.GroupGetParams;
+  export import GroupListParams = GroupsAPI.GroupListParams;
+  export import GroupEditParams = GroupsAPI.GroupEditParams;
+  export import GroupGetParams = GroupsAPI.GroupGetParams;
   export import Rules = RulesAPI.Rules;
-  export type AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export type WAFRuleGroup = RulesAPI.WAFRuleGroup;
-  export type RuleListResponse = RulesAPI.RuleListResponse;
-  export type RuleEditResponse = RulesAPI.RuleEditResponse;
-  export type RuleGetResponse = RulesAPI.RuleGetResponse;
+  export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
+  export import WAFRuleGroup = RulesAPI.WAFRuleGroup;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
-  export type RuleListParams = RulesAPI.RuleListParams;
-  export type RuleEditParams = RulesAPI.RuleEditParams;
-  export type RuleGetParams = RulesAPI.RuleGetParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
 }

@@ -33,5 +33,5 @@ export interface ConnectorGetParams {
 }
 
 export namespace Connectors {
-  export type ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
+  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
 }

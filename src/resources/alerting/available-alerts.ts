@@ -56,6 +56,6 @@ export interface AvailableAlertListParams {
 }
 
 export namespace AvailableAlerts {
-  export type AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;
-  export type AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
+  export import AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;
+  export import AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
 }

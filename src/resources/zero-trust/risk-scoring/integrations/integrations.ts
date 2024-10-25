@@ -330,18 +330,18 @@ export interface IntegrationGetParams {
 }
 
 export namespace Integrations {
-  export type IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
-  export type IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
-  export type IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
-  export type IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export type IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
+  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
+  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
+  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
+  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
   export import IntegrationListResponsesSinglePage = IntegrationsAPI.IntegrationListResponsesSinglePage;
-  export type IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export type IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
-  export type IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export type IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export type IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
+  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
+  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
+  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
+  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
   export import References = ReferencesAPI.References;
-  export type ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export type ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

@@ -150,10 +150,10 @@ export interface AddressGetParams {
 }
 
 export namespace Addresses {
-  export type Address = AddressesAPI.Address;
+  export import Address = AddressesAPI.Address;
   export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
-  export type AddressCreateParams = AddressesAPI.AddressCreateParams;
-  export type AddressListParams = AddressesAPI.AddressListParams;
-  export type AddressDeleteParams = AddressesAPI.AddressDeleteParams;
-  export type AddressGetParams = AddressesAPI.AddressGetParams;
+  export import AddressCreateParams = AddressesAPI.AddressCreateParams;
+  export import AddressListParams = AddressesAPI.AddressListParams;
+  export import AddressDeleteParams = AddressesAPI.AddressDeleteParams;
+  export import AddressGetParams = AddressesAPI.AddressGetParams;
 }

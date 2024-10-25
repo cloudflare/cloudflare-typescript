@@ -274,12 +274,12 @@ export interface CustomDeleteParams {
 }
 
 export namespace Custom {
-  export type CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export type CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
-  export type CustomListResponse = CustomAPI.CustomListResponse;
-  export type CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export type CustomCreateParams = CustomAPI.CustomCreateParams;
-  export type CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export type CustomListParams = CustomAPI.CustomListParams;
-  export type CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
+  export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
+  export import CustomListResponse = CustomAPI.CustomListResponse;
+  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export import CustomCreateParams = CustomAPI.CustomCreateParams;
+  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
+  export import CustomListParams = CustomAPI.CustomListParams;
+  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
 }

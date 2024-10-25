@@ -202,10 +202,10 @@ export interface PriorityUpdateParams {
 }
 
 export namespace PriorityResource {
-  export type Label = PriorityAPI.Label;
-  export type Priority = PriorityAPI.Priority;
-  export type PriorityEdit = PriorityAPI.PriorityEdit;
-  export type PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export type PriorityCreateParams = PriorityAPI.PriorityCreateParams;
-  export type PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
+  export import Label = PriorityAPI.Label;
+  export import Priority = PriorityAPI.Priority;
+  export import PriorityEdit = PriorityAPI.PriorityEdit;
+  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
+  export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
+  export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
 }

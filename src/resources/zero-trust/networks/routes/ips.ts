@@ -33,5 +33,5 @@ export interface IPGetParams {
 }
 
 export namespace IPs {
-  export type IPGetParams = IPsAPI.IPGetParams;
+  export import IPGetParams = IPsAPI.IPGetParams;
 }

@@ -350,11 +350,11 @@ export interface TestListParams extends V4PagePaginationParams {
 }
 
 export namespace Tests {
-  export type AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
-  export type Tests = TestsAPI.Tests;
-  export type TestListResponse = TestsAPI.TestListResponse;
+  export import AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
+  export import Tests = TestsAPI.Tests;
+  export import TestListResponse = TestsAPI.TestListResponse;
   export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
-  export type TestListParams = TestsAPI.TestListParams;
+  export import TestListParams = TestsAPI.TestListParams;
   export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
-  export type UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
+  export import UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
 }

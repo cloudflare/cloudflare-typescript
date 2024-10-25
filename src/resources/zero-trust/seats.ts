@@ -75,7 +75,7 @@ export namespace SeatEditParams {
 }
 
 export namespace Seats {
-  export type Seat = SeatsAPI.Seat;
-  export type SeatEditResponse = SeatsAPI.SeatEditResponse;
-  export type SeatEditParams = SeatsAPI.SeatEditParams;
+  export import Seat = SeatsAPI.Seat;
+  export import SeatEditResponse = SeatsAPI.SeatEditResponse;
+  export import SeatEditParams = SeatsAPI.SeatEditParams;
 }

@@ -61,8 +61,8 @@ export interface SubdomainGetParams {
 }
 
 export namespace Subdomains {
-  export type SubdomainUpdateResponse = SubdomainsAPI.SubdomainUpdateResponse;
-  export type SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
-  export type SubdomainUpdateParams = SubdomainsAPI.SubdomainUpdateParams;
-  export type SubdomainGetParams = SubdomainsAPI.SubdomainGetParams;
+  export import SubdomainUpdateResponse = SubdomainsAPI.SubdomainUpdateResponse;
+  export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
+  export import SubdomainUpdateParams = SubdomainsAPI.SubdomainUpdateParams;
+  export import SubdomainGetParams = SubdomainsAPI.SubdomainGetParams;
 }

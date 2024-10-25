@@ -212,11 +212,11 @@ export interface RuleDeleteParams {
 }
 
 export namespace Rules {
-  export type RUMRule = RulesAPI.RUMRule;
-  export type RuleListResponse = RulesAPI.RuleListResponse;
-  export type RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export type RuleCreateParams = RulesAPI.RuleCreateParams;
-  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export type RuleListParams = RulesAPI.RuleListParams;
-  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export import RUMRule = RulesAPI.RUMRule;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
 }

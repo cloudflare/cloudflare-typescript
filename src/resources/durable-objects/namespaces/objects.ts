@@ -45,7 +45,7 @@ export interface ObjectListParams extends CursorLimitPaginationParams {
 }
 
 export namespace Objects {
-  export type DurableObject = ObjectsAPI.DurableObject;
+  export import DurableObject = ObjectsAPI.DurableObject;
   export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
-  export type ObjectListParams = ObjectsAPI.ObjectListParams;
+  export import ObjectListParams = ObjectsAPI.ObjectListParams;
 }

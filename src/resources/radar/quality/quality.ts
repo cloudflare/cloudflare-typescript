@@ -11,13 +11,13 @@ export class Quality extends APIResource {
 
 export namespace Quality {
   export import IQI = IQIAPI.IQI;
-  export type IQISummaryResponse = IQIAPI.IQISummaryResponse;
-  export type IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
-  export type IQISummaryParams = IQIAPI.IQISummaryParams;
-  export type IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
+  export import IQISummaryResponse = IQIAPI.IQISummaryResponse;
+  export import IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
+  export import IQISummaryParams = IQIAPI.IQISummaryParams;
+  export import IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
   export import Speed = SpeedAPI.Speed;
-  export type SpeedHistogramResponse = SpeedAPI.SpeedHistogramResponse;
-  export type SpeedSummaryResponse = SpeedAPI.SpeedSummaryResponse;
-  export type SpeedHistogramParams = SpeedAPI.SpeedHistogramParams;
-  export type SpeedSummaryParams = SpeedAPI.SpeedSummaryParams;
+  export import SpeedHistogramResponse = SpeedAPI.SpeedHistogramResponse;
+  export import SpeedSummaryResponse = SpeedAPI.SpeedSummaryResponse;
+  export import SpeedHistogramParams = SpeedAPI.SpeedHistogramParams;
+  export import SpeedSummaryParams = SpeedAPI.SpeedSummaryParams;
 }

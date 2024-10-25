@@ -187,6 +187,6 @@ export interface IPVersionGetParams {
 }
 
 export namespace IPVersion {
-  export type IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
-  export type IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
+  export import IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
+  export import IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
 }

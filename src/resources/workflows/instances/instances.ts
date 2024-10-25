@@ -297,14 +297,14 @@ export interface InstanceGetParams {
 }
 
 export namespace Instances {
-  export type InstanceCreateResponse = InstancesAPI.InstanceCreateResponse;
-  export type InstanceListResponse = InstancesAPI.InstanceListResponse;
-  export type InstanceGetResponse = InstancesAPI.InstanceGetResponse;
+  export import InstanceCreateResponse = InstancesAPI.InstanceCreateResponse;
+  export import InstanceListResponse = InstancesAPI.InstanceListResponse;
+  export import InstanceGetResponse = InstancesAPI.InstanceGetResponse;
   export import InstanceListResponsesV4PagePaginationArray = InstancesAPI.InstanceListResponsesV4PagePaginationArray;
-  export type InstanceCreateParams = InstancesAPI.InstanceCreateParams;
-  export type InstanceListParams = InstancesAPI.InstanceListParams;
-  export type InstanceGetParams = InstancesAPI.InstanceGetParams;
+  export import InstanceCreateParams = InstancesAPI.InstanceCreateParams;
+  export import InstanceListParams = InstancesAPI.InstanceListParams;
+  export import InstanceGetParams = InstancesAPI.InstanceGetParams;
   export import Status = StatusAPI.Status;
-  export type StatusEditResponse = StatusAPI.StatusEditResponse;
-  export type StatusEditParams = StatusAPI.StatusEditParams;
+  export import StatusEditResponse = StatusAPI.StatusEditResponse;
+  export import StatusEditParams = StatusAPI.StatusEditParams;
 }

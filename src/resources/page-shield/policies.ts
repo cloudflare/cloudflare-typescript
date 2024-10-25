@@ -331,15 +331,15 @@ export interface PolicyGetParams {
 }
 
 export namespace Policies {
-  export type Policy = PoliciesAPI.Policy;
-  export type PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export type PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export type PolicyListResponse = PoliciesAPI.PolicyListResponse;
-  export type PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
+  export import Policy = PoliciesAPI.Policy;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
+  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
   export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
-  export type PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export type PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export type PolicyListParams = PoliciesAPI.PolicyListParams;
-  export type PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export type PolicyGetParams = PoliciesAPI.PolicyGetParams;
+  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

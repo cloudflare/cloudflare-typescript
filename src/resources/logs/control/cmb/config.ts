@@ -82,9 +82,9 @@ export interface ConfigGetParams {
 }
 
 export namespace Config {
-  export type CmbConfig = ConfigAPI.CmbConfig;
-  export type ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
-  export type ConfigCreateParams = ConfigAPI.ConfigCreateParams;
-  export type ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
-  export type ConfigGetParams = ConfigAPI.ConfigGetParams;
+  export import CmbConfig = ConfigAPI.CmbConfig;
+  export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
+  export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
+  export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
+  export import ConfigGetParams = ConfigAPI.ConfigGetParams;
 }

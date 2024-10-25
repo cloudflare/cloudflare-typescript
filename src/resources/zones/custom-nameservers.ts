@@ -117,8 +117,8 @@ export interface CustomNameserverGetParams {
 }
 
 export namespace CustomNameservers {
-  export type CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
-  export type CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
-  export type CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
-  export type CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
+  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
+  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
+  export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
+  export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
 }

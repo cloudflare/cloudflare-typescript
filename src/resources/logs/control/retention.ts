@@ -71,8 +71,8 @@ export interface RetentionGetParams {
 }
 
 export namespace Retention {
-  export type RetentionCreateResponse = RetentionAPI.RetentionCreateResponse;
-  export type RetentionGetResponse = RetentionAPI.RetentionGetResponse;
-  export type RetentionCreateParams = RetentionAPI.RetentionCreateParams;
-  export type RetentionGetParams = RetentionAPI.RetentionGetParams;
+  export import RetentionCreateResponse = RetentionAPI.RetentionCreateResponse;
+  export import RetentionGetResponse = RetentionAPI.RetentionGetResponse;
+  export import RetentionCreateParams = RetentionAPI.RetentionCreateParams;
+  export import RetentionGetParams = RetentionAPI.RetentionGetParams;
 }

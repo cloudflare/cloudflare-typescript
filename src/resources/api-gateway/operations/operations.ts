@@ -1016,21 +1016,21 @@ export interface OperationGetParams {
 }
 
 export namespace Operations {
-  export type APIShield = OperationsAPI.APIShield;
-  export type OperationCreateResponse = OperationsAPI.OperationCreateResponse;
-  export type OperationListResponse = OperationsAPI.OperationListResponse;
-  export type OperationDeleteResponse = OperationsAPI.OperationDeleteResponse;
-  export type OperationGetResponse = OperationsAPI.OperationGetResponse;
+  export import APIShield = OperationsAPI.APIShield;
+  export import OperationCreateResponse = OperationsAPI.OperationCreateResponse;
+  export import OperationListResponse = OperationsAPI.OperationListResponse;
+  export import OperationDeleteResponse = OperationsAPI.OperationDeleteResponse;
+  export import OperationGetResponse = OperationsAPI.OperationGetResponse;
   export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export type OperationCreateParams = OperationsAPI.OperationCreateParams;
-  export type OperationListParams = OperationsAPI.OperationListParams;
-  export type OperationDeleteParams = OperationsAPI.OperationDeleteParams;
-  export type OperationGetParams = OperationsAPI.OperationGetParams;
+  export import OperationCreateParams = OperationsAPI.OperationCreateParams;
+  export import OperationListParams = OperationsAPI.OperationListParams;
+  export import OperationDeleteParams = OperationsAPI.OperationDeleteParams;
+  export import OperationGetParams = OperationsAPI.OperationGetParams;
   export import SchemaValidation = SchemaValidationAPI.SchemaValidation;
-  export type SettingsMultipleRequest = SchemaValidationAPI.SettingsMultipleRequest;
-  export type SchemaValidationUpdateResponse = SchemaValidationAPI.SchemaValidationUpdateResponse;
-  export type SchemaValidationGetResponse = SchemaValidationAPI.SchemaValidationGetResponse;
-  export type SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export type SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export type SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+  export import SettingsMultipleRequest = SchemaValidationAPI.SettingsMultipleRequest;
+  export import SchemaValidationUpdateResponse = SchemaValidationAPI.SchemaValidationUpdateResponse;
+  export import SchemaValidationGetResponse = SchemaValidationAPI.SchemaValidationGetResponse;
+  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
+  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
+  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
 }

@@ -57,13 +57,13 @@ export interface CaptionGetParams {
 }
 
 export namespace Captions {
-  export type Caption = CaptionsAPI.Caption;
-  export type CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
-  export type CaptionGetParams = CaptionsAPI.CaptionGetParams;
+  export import Caption = CaptionsAPI.Caption;
+  export import CaptionGetResponse = CaptionsAPI.CaptionGetResponse;
+  export import CaptionGetParams = CaptionsAPI.CaptionGetParams;
   export import Language = LanguageAPI.Language;
-  export type LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
-  export type LanguageCreateParams = LanguageAPI.LanguageCreateParams;
-  export type LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
-  export type LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
-  export type LanguageGetParams = LanguageAPI.LanguageGetParams;
+  export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
+  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
+  export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
+  export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
+  export import LanguageGetParams = LanguageAPI.LanguageGetParams;
 }

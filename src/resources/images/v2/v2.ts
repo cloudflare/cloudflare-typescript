@@ -58,9 +58,9 @@ export interface V2ListParams {
 }
 
 export namespace V2 {
-  export type V2ListResponse = V2API.V2ListResponse;
-  export type V2ListParams = V2API.V2ListParams;
+  export import V2ListResponse = V2API.V2ListResponse;
+  export import V2ListParams = V2API.V2ListParams;
   export import DirectUploads = DirectUploadsAPI.DirectUploads;
-  export type DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
-  export type DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
+  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
+  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
 }

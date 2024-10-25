@@ -95,9 +95,9 @@ export interface ReceivedGetParams {
 }
 
 export namespace Received {
-  export type ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
-  export type ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
+  export import ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
+  export import ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
   export import Fields = FieldsAPI.Fields;
-  export type FieldGetResponse = FieldsAPI.FieldGetResponse;
-  export type FieldGetParams = FieldsAPI.FieldGetParams;
+  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
+  export import FieldGetParams = FieldsAPI.FieldGetParams;
 }

@@ -123,7 +123,7 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Devices {
-  export type DeviceListResponse = DevicesAPI.DeviceListResponse;
+  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
   export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
-  export type DeviceListParams = DevicesAPI.DeviceListParams;
+  export import DeviceListParams = DevicesAPI.DeviceListParams;
 }

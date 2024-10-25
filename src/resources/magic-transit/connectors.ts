@@ -274,13 +274,13 @@ export interface ConnectorGetParams {
 }
 
 export namespace Connectors {
-  export type ConnectorUpdateResponse = ConnectorsAPI.ConnectorUpdateResponse;
-  export type ConnectorListResponse = ConnectorsAPI.ConnectorListResponse;
-  export type ConnectorEditResponse = ConnectorsAPI.ConnectorEditResponse;
-  export type ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
+  export import ConnectorUpdateResponse = ConnectorsAPI.ConnectorUpdateResponse;
+  export import ConnectorListResponse = ConnectorsAPI.ConnectorListResponse;
+  export import ConnectorEditResponse = ConnectorsAPI.ConnectorEditResponse;
+  export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
   export import ConnectorListResponsesSinglePage = ConnectorsAPI.ConnectorListResponsesSinglePage;
-  export type ConnectorUpdateParams = ConnectorsAPI.ConnectorUpdateParams;
-  export type ConnectorListParams = ConnectorsAPI.ConnectorListParams;
-  export type ConnectorEditParams = ConnectorsAPI.ConnectorEditParams;
-  export type ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
+  export import ConnectorUpdateParams = ConnectorsAPI.ConnectorUpdateParams;
+  export import ConnectorListParams = ConnectorsAPI.ConnectorListParams;
+  export import ConnectorEditParams = ConnectorsAPI.ConnectorEditParams;
+  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
 }
