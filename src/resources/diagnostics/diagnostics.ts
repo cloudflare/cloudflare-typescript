@@ -9,7 +9,7 @@ export class Diagnostics extends APIResource {
 
 export namespace Diagnostics {
   export import Traceroutes = TraceroutesAPI.Traceroutes;
-  export import Traceroute = TraceroutesAPI.Traceroute;
-  export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
-  export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
+  export type Traceroute = TraceroutesAPI.Traceroute;
+  export type TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
+  export type TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
 }

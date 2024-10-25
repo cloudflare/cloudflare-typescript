@@ -475,13 +475,13 @@ export interface EvaluationGetParams {
 }
 
 export namespace Evaluations {
-  export import EvaluationCreateResponse = EvaluationsAPI.EvaluationCreateResponse;
-  export import EvaluationListResponse = EvaluationsAPI.EvaluationListResponse;
-  export import EvaluationDeleteResponse = EvaluationsAPI.EvaluationDeleteResponse;
-  export import EvaluationGetResponse = EvaluationsAPI.EvaluationGetResponse;
+  export type EvaluationCreateResponse = EvaluationsAPI.EvaluationCreateResponse;
+  export type EvaluationListResponse = EvaluationsAPI.EvaluationListResponse;
+  export type EvaluationDeleteResponse = EvaluationsAPI.EvaluationDeleteResponse;
+  export type EvaluationGetResponse = EvaluationsAPI.EvaluationGetResponse;
   export import EvaluationListResponsesV4PagePaginationArray = EvaluationsAPI.EvaluationListResponsesV4PagePaginationArray;
-  export import EvaluationCreateParams = EvaluationsAPI.EvaluationCreateParams;
-  export import EvaluationListParams = EvaluationsAPI.EvaluationListParams;
-  export import EvaluationDeleteParams = EvaluationsAPI.EvaluationDeleteParams;
-  export import EvaluationGetParams = EvaluationsAPI.EvaluationGetParams;
+  export type EvaluationCreateParams = EvaluationsAPI.EvaluationCreateParams;
+  export type EvaluationListParams = EvaluationsAPI.EvaluationListParams;
+  export type EvaluationDeleteParams = EvaluationsAPI.EvaluationDeleteParams;
+  export type EvaluationGetParams = EvaluationsAPI.EvaluationGetParams;
 }

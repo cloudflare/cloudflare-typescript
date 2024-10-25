@@ -239,19 +239,19 @@ export interface PrefixGetParams {
 }
 
 export namespace Prefixes {
-  export import Prefix = PrefixesAPI.Prefix;
-  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
+  export type Prefix = PrefixesAPI.Prefix;
+  export type PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
   export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
-  export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
+  export type PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
+  export type PrefixListParams = PrefixesAPI.PrefixListParams;
+  export type PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
+  export type PrefixEditParams = PrefixesAPI.PrefixEditParams;
+  export type PrefixGetParams = PrefixesAPI.PrefixGetParams;
   export import BGP = BGPAPI.BGP;
   export import Delegations = DelegationsAPI.Delegations;
-  export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
+  export type DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
   export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
-  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
-  export import DelegationListParams = DelegationsAPI.DelegationListParams;
-  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
+  export type DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
+  export type DelegationListParams = DelegationsAPI.DelegationListParams;
+  export type DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
 }

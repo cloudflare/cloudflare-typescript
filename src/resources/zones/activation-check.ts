@@ -37,6 +37,6 @@ export interface ActivationCheckTriggerParams {
 }
 
 export namespace ActivationCheck {
-  export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
-  export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
+  export type ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
+  export type ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
 }

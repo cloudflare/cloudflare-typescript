@@ -131,32 +131,32 @@ export interface Percentiles {
 }
 
 export namespace DEX {
-  export import DigitalExperienceMonitor = DEXAPI.DigitalExperienceMonitor;
-  export import NetworkPath = DEXAPI.NetworkPath;
-  export import NetworkPathResponse = DEXAPI.NetworkPathResponse;
-  export import Percentiles = DEXAPI.Percentiles;
+  export type DigitalExperienceMonitor = DEXAPI.DigitalExperienceMonitor;
+  export type NetworkPath = DEXAPI.NetworkPath;
+  export type NetworkPathResponse = DEXAPI.NetworkPathResponse;
+  export type Percentiles = DEXAPI.Percentiles;
   export import Colos = ColosAPI.Colos;
-  export import ColoListResponse = ColosAPI.ColoListResponse;
+  export type ColoListResponse = ColosAPI.ColoListResponse;
   export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;
-  export import ColoListParams = ColosAPI.ColoListParams;
+  export type ColoListParams = ColosAPI.ColoListParams;
   export import FleetStatus = FleetStatusAPI.FleetStatus;
-  export import LiveStat = FleetStatusAPI.LiveStat;
-  export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
-  export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
-  export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
+  export type LiveStat = FleetStatusAPI.LiveStat;
+  export type FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
+  export type FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
+  export type FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
   export import HTTPTests = HTTPTestsAPI.HTTPTests;
-  export import HTTPDetails = HTTPTestsAPI.HTTPDetails;
-  export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
+  export type HTTPDetails = HTTPTestsAPI.HTTPDetails;
+  export type HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Tests = TestsAPI.Tests;
-  export import AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
-  export import TestListResponse = TestsAPI.TestListResponse;
+  export type AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
+  export type TestListResponse = TestsAPI.TestListResponse;
   export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
-  export import TestListParams = TestsAPI.TestListParams;
+  export type TestListParams = TestsAPI.TestListParams;
   export import TracerouteTestResults = TracerouteTestResultsAPI.TracerouteTestResults;
   export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;
-  export import Traceroute = TracerouteTestsAPI.Traceroute;
-  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
-  export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
-  export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
-  export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
+  export type Traceroute = TracerouteTestsAPI.Traceroute;
+  export type TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
+  export type TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
+  export type TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
+  export type TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
 }

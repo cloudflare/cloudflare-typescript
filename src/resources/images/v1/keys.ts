@@ -99,11 +99,11 @@ export interface KeyDeleteParams {
 }
 
 export namespace Keys {
-  export import Key = KeysAPI.Key;
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyListParams = KeysAPI.KeyListParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
+  export type Key = KeysAPI.Key;
+  export type KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export type KeyListResponse = KeysAPI.KeyListResponse;
+  export type KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
+  export type KeyUpdateParams = KeysAPI.KeyUpdateParams;
+  export type KeyListParams = KeysAPI.KeyListParams;
+  export type KeyDeleteParams = KeysAPI.KeyDeleteParams;
 }

@@ -194,6 +194,6 @@ export namespace ClipCreateParams {
 }
 
 export namespace ClipResource {
-  export import Clip = ClipAPI.Clip;
-  export import ClipCreateParams = ClipAPI.ClipCreateParams;
+  export type Clip = ClipAPI.Clip;
+  export type ClipCreateParams = ClipAPI.ClipCreateParams;
 }

@@ -23,5 +23,5 @@ export interface CustomCertificateGetParams {
 }
 
 export namespace CustomCertificate {
-  export import CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
+  export type CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
 }

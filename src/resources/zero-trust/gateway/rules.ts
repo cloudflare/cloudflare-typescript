@@ -1332,18 +1332,18 @@ export interface RuleResetExpirationParams {
 }
 
 export namespace Rules {
-  export import DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
-  export import DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
-  export import GatewayFilter = RulesAPI.GatewayFilter;
-  export import GatewayRule = RulesAPI.GatewayRule;
-  export import RuleSetting = RulesAPI.RuleSetting;
-  export import Schedule = RulesAPI.Schedule;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export type DNSResolverSettingsV4 = RulesAPI.DNSResolverSettingsV4;
+  export type DNSResolverSettingsV6 = RulesAPI.DNSResolverSettingsV6;
+  export type GatewayFilter = RulesAPI.GatewayFilter;
+  export type GatewayRule = RulesAPI.GatewayRule;
+  export type RuleSetting = RulesAPI.RuleSetting;
+  export type Schedule = RulesAPI.Schedule;
+  export type RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import GatewayRulesSinglePage = RulesAPI.GatewayRulesSinglePage;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import RuleResetExpirationParams = RulesAPI.RuleResetExpirationParams;
+  export type RuleCreateParams = RulesAPI.RuleCreateParams;
+  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export type RuleListParams = RulesAPI.RuleListParams;
+  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export type RuleGetParams = RulesAPI.RuleGetParams;
+  export type RuleResetExpirationParams = RulesAPI.RuleResetExpirationParams;
 }

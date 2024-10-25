@@ -963,8 +963,8 @@ export interface ConfigurationGetParams {
 }
 
 export namespace Configurations {
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
+  export type ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export type ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
+  export type ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
+  export type ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
 }

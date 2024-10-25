@@ -11,21 +11,21 @@ export class Networks extends APIResource {
 
 export namespace Networks {
   export import Routes = RoutesAPI.Routes;
-  export import NetworkRoute = RoutesAPI.NetworkRoute;
-  export import Route = RoutesAPI.Route;
-  export import Teamnet = RoutesAPI.Teamnet;
+  export type NetworkRoute = RoutesAPI.NetworkRoute;
+  export type Route = RoutesAPI.Route;
+  export type Teamnet = RoutesAPI.Teamnet;
   export import TeamnetsV4PagePaginationArray = RoutesAPI.TeamnetsV4PagePaginationArray;
-  export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteListParams = RoutesAPI.RouteListParams;
-  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
-  export import RouteEditParams = RoutesAPI.RouteEditParams;
-  export import RouteGetParams = RoutesAPI.RouteGetParams;
+  export type RouteCreateParams = RoutesAPI.RouteCreateParams;
+  export type RouteListParams = RoutesAPI.RouteListParams;
+  export type RouteDeleteParams = RoutesAPI.RouteDeleteParams;
+  export type RouteEditParams = RoutesAPI.RouteEditParams;
+  export type RouteGetParams = RoutesAPI.RouteGetParams;
   export import VirtualNetworks = VirtualNetworksAPI.VirtualNetworks;
-  export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
+  export type VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
   export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
-  export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
-  export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
-  export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
-  export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
-  export import VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
+  export type VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
+  export type VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
+  export type VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
+  export type VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
+  export type VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
 }

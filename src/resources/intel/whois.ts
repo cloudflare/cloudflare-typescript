@@ -227,7 +227,7 @@ export interface WhoisGetParams {
 }
 
 export namespace Whois {
-  export import Whois = WhoisAPI.Whois;
-  export import WhoisGetResponse = WhoisAPI.WhoisGetResponse;
-  export import WhoisGetParams = WhoisAPI.WhoisGetParams;
+  export type Whois = WhoisAPI.Whois;
+  export type WhoisGetResponse = WhoisAPI.WhoisGetResponse;
+  export type WhoisGetParams = WhoisAPI.WhoisGetParams;
 }

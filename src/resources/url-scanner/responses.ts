@@ -23,5 +23,5 @@ export class Responses extends APIResource {
 export type ResponseGetResponse = string;
 
 export namespace Responses {
-  export import ResponseGetResponse = ResponsesAPI.ResponseGetResponse;
+  export type ResponseGetResponse = ResponsesAPI.ResponseGetResponse;
 }

@@ -158,13 +158,13 @@ export interface PagerdutyLinkParams {
 }
 
 export namespace PagerdutyResource {
-  export import Pagerduty = PagerdutyAPI.Pagerduty;
-  export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
-  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
-  export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
-  export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
-  export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
-  export import PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
-  export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
-  export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
+  export type Pagerduty = PagerdutyAPI.Pagerduty;
+  export type PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
+  export type PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
+  export type PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
+  export type PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
+  export type PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
+  export type PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
+  export type PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
+  export type PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
 }

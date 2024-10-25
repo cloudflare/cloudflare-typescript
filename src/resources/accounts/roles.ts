@@ -52,9 +52,9 @@ export interface RoleGetParams {
 }
 
 export namespace Roles {
-  export import RoleGetResponse = RolesAPI.RoleGetResponse;
-  export import RoleListParams = RolesAPI.RoleListParams;
-  export import RoleGetParams = RolesAPI.RoleGetParams;
+  export type RoleGetResponse = RolesAPI.RoleGetResponse;
+  export type RoleListParams = RolesAPI.RoleListParams;
+  export type RoleGetParams = RolesAPI.RoleGetParams;
 }
 
 export { RolesSinglePage };

@@ -99,6 +99,6 @@ export interface DomainGetParams {
 }
 
 export namespace Domain {
-  export import DomainGetResponse = DomainAPI.DomainGetResponse;
-  export import DomainGetParams = DomainAPI.DomainGetParams;
+  export type DomainGetResponse = DomainAPI.DomainGetResponse;
+  export type DomainGetParams = DomainAPI.DomainGetParams;
 }

@@ -115,9 +115,9 @@ export interface OrganizationListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Organizations {
-  export import Organization = OrganizationsAPI.Organization;
-  export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
-  export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
+  export type Organization = OrganizationsAPI.Organization;
+  export type OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
+  export type OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
   export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
-  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
+  export type OrganizationListParams = OrganizationsAPI.OrganizationListParams;
 }

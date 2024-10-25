@@ -1113,17 +1113,17 @@ export interface IPSECTunnelPSKGenerateParams {
 }
 
 export namespace IPSECTunnels {
-  export import PSKMetadata = IPSECTunnelsAPI.PSKMetadata;
-  export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
-  export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
-  export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
-  export import IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
-  export import IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
-  export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
-  export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
-  export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
-  export import IPSECTunnelListParams = IPSECTunnelsAPI.IPSECTunnelListParams;
-  export import IPSECTunnelDeleteParams = IPSECTunnelsAPI.IPSECTunnelDeleteParams;
-  export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
-  export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
+  export type PSKMetadata = IPSECTunnelsAPI.PSKMetadata;
+  export type IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
+  export type IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
+  export type IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
+  export type IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
+  export type IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
+  export type IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
+  export type IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
+  export type IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
+  export type IPSECTunnelListParams = IPSECTunnelsAPI.IPSECTunnelListParams;
+  export type IPSECTunnelDeleteParams = IPSECTunnelsAPI.IPSECTunnelDeleteParams;
+  export type IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
+  export type IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
 }

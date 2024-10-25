@@ -55,6 +55,6 @@ export interface StatusEditParams {
 }
 
 export namespace Status {
-  export import StatusEditResponse = StatusAPI.StatusEditResponse;
-  export import StatusEditParams = StatusAPI.StatusEditParams;
+  export type StatusEditResponse = StatusAPI.StatusEditResponse;
+  export type StatusEditParams = StatusAPI.StatusEditParams;
 }

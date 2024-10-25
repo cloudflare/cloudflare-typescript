@@ -572,25 +572,25 @@ export interface FirewallGetParams {
 }
 
 export namespace Firewall {
-  export import AttackMitigation = FirewallAPI.AttackMitigation;
-  export import FirewallIPs = FirewallAPI.FirewallIPs;
-  export import UpstreamIPs = FirewallAPI.UpstreamIPs;
-  export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
-  export import FirewallListResponse = FirewallAPI.FirewallListResponse;
-  export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import FirewallEditResponse = FirewallAPI.FirewallEditResponse;
-  export import FirewallGetResponse = FirewallAPI.FirewallGetResponse;
+  export type AttackMitigation = FirewallAPI.AttackMitigation;
+  export type FirewallIPs = FirewallAPI.FirewallIPs;
+  export type UpstreamIPs = FirewallAPI.UpstreamIPs;
+  export type FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
+  export type FirewallListResponse = FirewallAPI.FirewallListResponse;
+  export type FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
+  export type FirewallEditResponse = FirewallAPI.FirewallEditResponse;
+  export type FirewallGetResponse = FirewallAPI.FirewallGetResponse;
   export import FirewallListResponsesV4PagePaginationArray = FirewallAPI.FirewallListResponsesV4PagePaginationArray;
-  export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
-  export import FirewallListParams = FirewallAPI.FirewallListParams;
-  export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;
-  export import FirewallEditParams = FirewallAPI.FirewallEditParams;
-  export import FirewallGetParams = FirewallAPI.FirewallGetParams;
+  export type FirewallCreateParams = FirewallAPI.FirewallCreateParams;
+  export type FirewallListParams = FirewallAPI.FirewallListParams;
+  export type FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;
+  export type FirewallEditParams = FirewallAPI.FirewallEditParams;
+  export type FirewallGetParams = FirewallAPI.FirewallGetParams;
   export import Analytics = AnalyticsAPI.Analytics;
-  export import Delta = AnalyticsAPI.Delta;
+  export type Delta = AnalyticsAPI.Delta;
   export import ReverseDNS = ReverseDNSAPI.ReverseDNS;
-  export import ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
-  export import ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
-  export import ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
-  export import ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
+  export type ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
+  export type ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
+  export type ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
+  export type ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
 }

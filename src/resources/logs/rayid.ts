@@ -53,6 +53,6 @@ export interface RayIDGetParams {
 }
 
 export namespace RayID {
-  export import RayIDGetResponse = RayIDAPI.RayIDGetResponse;
-  export import RayIDGetParams = RayIDAPI.RayIDGetParams;
+  export type RayIDGetResponse = RayIDAPI.RayIDGetResponse;
+  export type RayIDGetParams = RayIDAPI.RayIDGetParams;
 }

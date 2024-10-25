@@ -298,8 +298,8 @@ export interface LocationTargetParams {
 }
 
 export namespace Locations {
-  export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
-  export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
-  export import LocationOriginParams = LocationsAPI.LocationOriginParams;
-  export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+  export type LocationOriginResponse = LocationsAPI.LocationOriginResponse;
+  export type LocationTargetResponse = LocationsAPI.LocationTargetResponse;
+  export type LocationOriginParams = LocationsAPI.LocationOriginParams;
+  export type LocationTargetParams = LocationsAPI.LocationTargetParams;
 }

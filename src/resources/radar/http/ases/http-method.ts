@@ -190,6 +190,6 @@ export interface HTTPMethodGetParams {
 }
 
 export namespace HTTPMethod {
-  export import HTTPMethodGetResponse = HTTPMethodAPI.HTTPMethodGetResponse;
-  export import HTTPMethodGetParams = HTTPMethodAPI.HTTPMethodGetParams;
+  export type HTTPMethodGetResponse = HTTPMethodAPI.HTTPMethodGetResponse;
+  export type HTTPMethodGetParams = HTTPMethodAPI.HTTPMethodGetParams;
 }

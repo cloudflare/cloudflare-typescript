@@ -141,10 +141,10 @@ export interface OwnershipValidateParams {
 }
 
 export namespace OwnershipResource {
-  export import Ownership = OwnershipAPI.Ownership;
-  export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
-  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export import OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
-  export import OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
-  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
+  export type Ownership = OwnershipAPI.Ownership;
+  export type OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
+  export type OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
+  export type OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
+  export type OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
+  export type OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
 }

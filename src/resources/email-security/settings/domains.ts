@@ -172,11 +172,11 @@ export interface DomainEditParams {
 }
 
 export namespace Domains {
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
+  export type DomainListResponse = DomainsAPI.DomainListResponse;
+  export type DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
+  export type DomainEditResponse = DomainsAPI.DomainEditResponse;
   export import DomainListResponsesV4PagePaginationArray = DomainsAPI.DomainListResponsesV4PagePaginationArray;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
+  export type DomainListParams = DomainsAPI.DomainListParams;
+  export type DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export type DomainEditParams = DomainsAPI.DomainEditParams;
 }

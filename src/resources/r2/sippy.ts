@@ -312,10 +312,10 @@ export interface SippyGetParams {
 }
 
 export namespace SippyResource {
-  export import Provider = SippyAPI.Provider;
-  export import Sippy = SippyAPI.Sippy;
-  export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
-  export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
-  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
-  export import SippyGetParams = SippyAPI.SippyGetParams;
+  export type Provider = SippyAPI.Provider;
+  export type Sippy = SippyAPI.Sippy;
+  export type SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
+  export type SippyUpdateParams = SippyAPI.SippyUpdateParams;
+  export type SippyDeleteParams = SippyAPI.SippyDeleteParams;
+  export type SippyGetParams = SippyAPI.SippyGetParams;
 }

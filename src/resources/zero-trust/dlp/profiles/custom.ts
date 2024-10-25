@@ -431,12 +431,12 @@ export interface CustomGetParams {
 }
 
 export namespace Custom {
-  export import CustomProfile = CustomAPI.CustomProfile;
-  export import Pattern = CustomAPI.Pattern;
-  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export import CustomCreateParams = CustomAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomAPI.CustomGetParams;
+  export type CustomProfile = CustomAPI.CustomProfile;
+  export type Pattern = CustomAPI.Pattern;
+  export type CustomCreateResponse = CustomAPI.CustomCreateResponse;
+  export type CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export type CustomCreateParams = CustomAPI.CustomCreateParams;
+  export type CustomUpdateParams = CustomAPI.CustomUpdateParams;
+  export type CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export type CustomGetParams = CustomAPI.CustomGetParams;
 }

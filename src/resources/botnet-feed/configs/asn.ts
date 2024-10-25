@@ -58,8 +58,8 @@ export interface ASNGetParams {
 }
 
 export namespace ASN {
-  export import ASNDeleteResponse = ASNAPI.ASNDeleteResponse;
-  export import ASNGetResponse = ASNAPI.ASNGetResponse;
-  export import ASNDeleteParams = ASNAPI.ASNDeleteParams;
-  export import ASNGetParams = ASNAPI.ASNGetParams;
+  export type ASNDeleteResponse = ASNAPI.ASNDeleteResponse;
+  export type ASNGetResponse = ASNAPI.ASNGetResponse;
+  export type ASNDeleteParams = ASNAPI.ASNDeleteParams;
+  export type ASNGetParams = ASNAPI.ASNGetParams;
 }

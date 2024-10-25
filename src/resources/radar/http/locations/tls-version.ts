@@ -190,6 +190,6 @@ export interface TLSVersionGetParams {
 }
 
 export namespace TLSVersion {
-  export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
-  export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
+  export type TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
+  export type TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
 }

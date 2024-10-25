@@ -842,22 +842,23 @@ export interface TimeseriesGroupTLSVersionParams {
 }
 
 export namespace TimeseriesGroups {
-  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
-  export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
-  export import TimeseriesGroupMaliciousResponse = TimeseriesGroupsAPI.TimeseriesGroupMaliciousResponse;
-  export import TimeseriesGroupSpamResponse = TimeseriesGroupsAPI.TimeseriesGroupSpamResponse;
-  export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
-  export import TimeseriesGroupSpoofResponse = TimeseriesGroupsAPI.TimeseriesGroupSpoofResponse;
-  export import TimeseriesGroupThreatCategoryResponse = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryResponse;
-  export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
-  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
-  export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
-  export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
-  export import TimeseriesGroupMaliciousParams = TimeseriesGroupsAPI.TimeseriesGroupMaliciousParams;
-  export import TimeseriesGroupSpamParams = TimeseriesGroupsAPI.TimeseriesGroupSpamParams;
-  export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
-  export import TimeseriesGroupSpoofParams = TimeseriesGroupsAPI.TimeseriesGroupSpoofParams;
-  export import TimeseriesGroupThreatCategoryParams = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryParams;
-  export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
+  export type TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
+  export type TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
+  export type TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
+  export type TimeseriesGroupMaliciousResponse = TimeseriesGroupsAPI.TimeseriesGroupMaliciousResponse;
+  export type TimeseriesGroupSpamResponse = TimeseriesGroupsAPI.TimeseriesGroupSpamResponse;
+  export type TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
+  export type TimeseriesGroupSpoofResponse = TimeseriesGroupsAPI.TimeseriesGroupSpoofResponse;
+  export type TimeseriesGroupThreatCategoryResponse =
+    TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryResponse;
+  export type TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
+  export type TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
+  export type TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
+  export type TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
+  export type TimeseriesGroupMaliciousParams = TimeseriesGroupsAPI.TimeseriesGroupMaliciousParams;
+  export type TimeseriesGroupSpamParams = TimeseriesGroupsAPI.TimeseriesGroupSpamParams;
+  export type TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
+  export type TimeseriesGroupSpoofParams = TimeseriesGroupsAPI.TimeseriesGroupSpoofParams;
+  export type TimeseriesGroupThreatCategoryParams = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryParams;
+  export type TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
 }

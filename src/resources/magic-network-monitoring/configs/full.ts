@@ -24,5 +24,5 @@ export interface FullGetParams {
 }
 
 export namespace Full {
-  export import FullGetParams = FullAPI.FullGetParams;
+  export type FullGetParams = FullAPI.FullGetParams;
 }

@@ -462,17 +462,17 @@ export interface IssueTypeParams {
 }
 
 export namespace Issues {
-  export import IssueType = IssuesAPI.IssueType;
-  export import SeverityQueryParam = IssuesAPI.SeverityQueryParam;
-  export import IssueListResponse = IssuesAPI.IssueListResponse;
-  export import IssueClassResponse = IssuesAPI.IssueClassResponse;
-  export import IssueDismissResponse = IssuesAPI.IssueDismissResponse;
-  export import IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;
-  export import IssueTypeResponse = IssuesAPI.IssueTypeResponse;
+  export type IssueType = IssuesAPI.IssueType;
+  export type SeverityQueryParam = IssuesAPI.SeverityQueryParam;
+  export type IssueListResponse = IssuesAPI.IssueListResponse;
+  export type IssueClassResponse = IssuesAPI.IssueClassResponse;
+  export type IssueDismissResponse = IssuesAPI.IssueDismissResponse;
+  export type IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;
+  export type IssueTypeResponse = IssuesAPI.IssueTypeResponse;
   export import IssueListResponsesV4PagePagination = IssuesAPI.IssueListResponsesV4PagePagination;
-  export import IssueListParams = IssuesAPI.IssueListParams;
-  export import IssueClassParams = IssuesAPI.IssueClassParams;
-  export import IssueDismissParams = IssuesAPI.IssueDismissParams;
-  export import IssueSeverityParams = IssuesAPI.IssueSeverityParams;
-  export import IssueTypeParams = IssuesAPI.IssueTypeParams;
+  export type IssueListParams = IssuesAPI.IssueListParams;
+  export type IssueClassParams = IssuesAPI.IssueClassParams;
+  export type IssueDismissParams = IssuesAPI.IssueDismissParams;
+  export type IssueSeverityParams = IssuesAPI.IssueSeverityParams;
+  export type IssueTypeParams = IssuesAPI.IssueTypeParams;
 }

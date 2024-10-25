@@ -32,5 +32,5 @@ export interface RecommendationGetResponse {
 }
 
 export namespace Recommendations {
-  export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
+  export type RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
 }

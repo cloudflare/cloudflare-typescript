@@ -356,15 +356,15 @@ export interface ACLGetParams {
 }
 
 export namespace ACLs {
-  export import ACL = ACLsAPI.ACL;
-  export import ACLConfiguration = ACLsAPI.ACLConfiguration;
-  export import AllowedProtocol = ACLsAPI.AllowedProtocol;
-  export import Subnet = ACLsAPI.Subnet;
+  export type ACL = ACLsAPI.ACL;
+  export type ACLConfiguration = ACLsAPI.ACLConfiguration;
+  export type AllowedProtocol = ACLsAPI.AllowedProtocol;
+  export type Subnet = ACLsAPI.Subnet;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
-  export import ACLCreateParams = ACLsAPI.ACLCreateParams;
-  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
-  export import ACLListParams = ACLsAPI.ACLListParams;
-  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
-  export import ACLEditParams = ACLsAPI.ACLEditParams;
-  export import ACLGetParams = ACLsAPI.ACLGetParams;
+  export type ACLCreateParams = ACLsAPI.ACLCreateParams;
+  export type ACLUpdateParams = ACLsAPI.ACLUpdateParams;
+  export type ACLListParams = ACLsAPI.ACLListParams;
+  export type ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export type ACLEditParams = ACLsAPI.ACLEditParams;
+  export type ACLGetParams = ACLsAPI.ACLGetParams;
 }

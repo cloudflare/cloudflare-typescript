@@ -165,9 +165,9 @@ export interface PrefixGetParams {
 }
 
 export namespace Prefixes {
-  export import BGPPrefix = PrefixesAPI.BGPPrefix;
+  export type BGPPrefix = PrefixesAPI.BGPPrefix;
   export import BGPPrefixesSinglePage = PrefixesAPI.BGPPrefixesSinglePage;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
+  export type PrefixListParams = PrefixesAPI.PrefixListParams;
+  export type PrefixEditParams = PrefixesAPI.PrefixEditParams;
+  export type PrefixGetParams = PrefixesAPI.PrefixGetParams;
 }

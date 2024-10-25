@@ -333,9 +333,9 @@ export interface TracerouteTestPercentilesParams {
 }
 
 export namespace TracerouteTests {
-  export import Traceroute = TracerouteTestsAPI.Traceroute;
-  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
-  export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
-  export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
-  export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
+  export type Traceroute = TracerouteTestsAPI.Traceroute;
+  export type TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
+  export type TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
+  export type TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
+  export type TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
 }

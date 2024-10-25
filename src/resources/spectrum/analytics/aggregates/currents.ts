@@ -70,6 +70,6 @@ export interface CurrentGetParams {
 }
 
 export namespace Currents {
-  export import CurrentGetResponse = CurrentsAPI.CurrentGetResponse;
-  export import CurrentGetParams = CurrentsAPI.CurrentGetParams;
+  export type CurrentGetResponse = CurrentsAPI.CurrentGetResponse;
+  export type CurrentGetParams = CurrentsAPI.CurrentGetParams;
 }

@@ -121,11 +121,11 @@ export interface ExcludeGetParams {
 }
 
 export namespace Excludes {
-  export import SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
-  export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
-  export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
+  export type SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
+  export type ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
+  export type ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
   export import SplitTunnelExcludesSinglePage = ExcludesAPI.SplitTunnelExcludesSinglePage;
-  export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
-  export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
-  export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
+  export type ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
+  export type ExcludeListParams = ExcludesAPI.ExcludeListParams;
+  export type ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
 }

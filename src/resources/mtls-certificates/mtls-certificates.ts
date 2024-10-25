@@ -227,7 +227,7 @@ export interface MTLSCertificateGetParams {
 
 export namespace MTLSCertificates {
   export import Associations = AssociationsAPI.Associations;
-  export import CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
-  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
-  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
+  export type CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
+  export type AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
+  export type AssociationGetParams = AssociationsAPI.AssociationGetParams;
 }

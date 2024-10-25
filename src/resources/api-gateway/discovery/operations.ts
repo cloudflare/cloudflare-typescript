@@ -128,9 +128,9 @@ export interface OperationEditParams {
 }
 
 export namespace Operations {
-  export import OperationEditResponse = OperationsAPI.OperationEditResponse;
-  export import OperationListParams = OperationsAPI.OperationListParams;
-  export import OperationEditParams = OperationsAPI.OperationEditParams;
+  export type OperationEditResponse = OperationsAPI.OperationEditResponse;
+  export type OperationListParams = OperationsAPI.OperationListParams;
+  export type OperationEditParams = OperationsAPI.OperationEditParams;
 }
 
 export { DiscoveryOperationsV4PagePaginationArray };

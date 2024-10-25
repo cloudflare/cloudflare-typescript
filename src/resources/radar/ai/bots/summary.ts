@@ -137,6 +137,6 @@ export interface SummaryUserAgentParams {
 }
 
 export namespace Summary {
-  export import SummaryUserAgentResponse = SummaryAPI.SummaryUserAgentResponse;
-  export import SummaryUserAgentParams = SummaryAPI.SummaryUserAgentParams;
+  export type SummaryUserAgentResponse = SummaryAPI.SummaryUserAgentResponse;
+  export type SummaryUserAgentParams = SummaryAPI.SummaryUserAgentParams;
 }

@@ -35,9 +35,9 @@ export interface Settings {
 }
 
 export namespace Settings {
-  export import Settings = SettingsAPI.Settings;
+  export type Settings = SettingsAPI.Settings;
   export import SchemaValidation = SchemaValidationAPI.SchemaValidation;
-  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+  export type SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
+  export type SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
+  export type SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
 }

@@ -23,5 +23,5 @@ export class DOM extends APIResource {
 export type DOMGetResponse = string;
 
 export namespace DOM {
-  export import DOMGetResponse = DOMAPI.DOMGetResponse;
+  export type DOMGetResponse = DOMAPI.DOMGetResponse;
 }

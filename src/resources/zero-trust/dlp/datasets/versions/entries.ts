@@ -54,6 +54,6 @@ export interface EntryCreateParams {
 }
 
 export namespace Entries {
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
+  export type EntryCreateResponse = EntriesAPI.EntryCreateResponse;
+  export type EntryCreateParams = EntriesAPI.EntryCreateParams;
 }

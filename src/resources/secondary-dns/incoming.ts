@@ -282,13 +282,13 @@ export interface IncomingGetParams {
 }
 
 export namespace IncomingResource {
-  export import Incoming = IncomingAPI.Incoming;
-  export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
-  export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
-  export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;
-  export import IncomingGetResponse = IncomingAPI.IncomingGetResponse;
-  export import IncomingCreateParams = IncomingAPI.IncomingCreateParams;
-  export import IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
-  export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
-  export import IncomingGetParams = IncomingAPI.IncomingGetParams;
+  export type Incoming = IncomingAPI.Incoming;
+  export type IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
+  export type IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
+  export type IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;
+  export type IncomingGetResponse = IncomingAPI.IncomingGetResponse;
+  export type IncomingCreateParams = IncomingAPI.IncomingCreateParams;
+  export type IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
+  export type IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
+  export type IncomingGetParams = IncomingAPI.IncomingGetParams;
 }

@@ -91,6 +91,6 @@ export interface NetworkPathGetParams {
 }
 
 export namespace NetworkPath {
-  export import NetworkPathGetResponse = NetworkPathAPI.NetworkPathGetResponse;
-  export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
+  export type NetworkPathGetResponse = NetworkPathAPI.NetworkPathGetResponse;
+  export type NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
 }

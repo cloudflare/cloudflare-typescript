@@ -526,17 +526,17 @@ export interface RouteGetParams {
 }
 
 export namespace Routes {
-  export import Scope = RoutesAPI.Scope;
-  export import RouteCreateResponse = RoutesAPI.RouteCreateResponse;
-  export import RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
-  export import RouteListResponse = RoutesAPI.RouteListResponse;
-  export import RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
-  export import RouteEmptyResponse = RoutesAPI.RouteEmptyResponse;
-  export import RouteGetResponse = RoutesAPI.RouteGetResponse;
-  export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteUpdateParams = RoutesAPI.RouteUpdateParams;
-  export import RouteListParams = RoutesAPI.RouteListParams;
-  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
-  export import RouteEmptyParams = RoutesAPI.RouteEmptyParams;
-  export import RouteGetParams = RoutesAPI.RouteGetParams;
+  export type Scope = RoutesAPI.Scope;
+  export type RouteCreateResponse = RoutesAPI.RouteCreateResponse;
+  export type RouteUpdateResponse = RoutesAPI.RouteUpdateResponse;
+  export type RouteListResponse = RoutesAPI.RouteListResponse;
+  export type RouteDeleteResponse = RoutesAPI.RouteDeleteResponse;
+  export type RouteEmptyResponse = RoutesAPI.RouteEmptyResponse;
+  export type RouteGetResponse = RoutesAPI.RouteGetResponse;
+  export type RouteCreateParams = RoutesAPI.RouteCreateParams;
+  export type RouteUpdateParams = RoutesAPI.RouteUpdateParams;
+  export type RouteListParams = RoutesAPI.RouteListParams;
+  export type RouteDeleteParams = RoutesAPI.RouteDeleteParams;
+  export type RouteEmptyParams = RoutesAPI.RouteEmptyParams;
+  export type RouteGetParams = RoutesAPI.RouteGetParams;
 }

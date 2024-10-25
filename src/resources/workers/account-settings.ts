@@ -74,8 +74,8 @@ export interface AccountSettingGetParams {
 }
 
 export namespace AccountSettings {
-  export import AccountSettingUpdateResponse = AccountSettingsAPI.AccountSettingUpdateResponse;
-  export import AccountSettingGetResponse = AccountSettingsAPI.AccountSettingGetResponse;
-  export import AccountSettingUpdateParams = AccountSettingsAPI.AccountSettingUpdateParams;
-  export import AccountSettingGetParams = AccountSettingsAPI.AccountSettingGetParams;
+  export type AccountSettingUpdateResponse = AccountSettingsAPI.AccountSettingUpdateResponse;
+  export type AccountSettingGetResponse = AccountSettingsAPI.AccountSettingGetResponse;
+  export type AccountSettingUpdateParams = AccountSettingsAPI.AccountSettingUpdateParams;
+  export type AccountSettingGetParams = AccountSettingsAPI.AccountSettingGetParams;
 }

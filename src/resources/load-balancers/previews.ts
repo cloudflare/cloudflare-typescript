@@ -59,6 +59,6 @@ export interface PreviewGetParams {
 }
 
 export namespace Previews {
-  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
+  export type PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
+  export type PreviewGetParams = PreviewsAPI.PreviewGetParams;
 }

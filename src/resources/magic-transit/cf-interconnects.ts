@@ -371,10 +371,10 @@ export interface CfInterconnectGetParams {
 }
 
 export namespace CfInterconnects {
-  export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
-  export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
-  export import CfInterconnectGetResponse = CfInterconnectsAPI.CfInterconnectGetResponse;
-  export import CfInterconnectUpdateParams = CfInterconnectsAPI.CfInterconnectUpdateParams;
-  export import CfInterconnectListParams = CfInterconnectsAPI.CfInterconnectListParams;
-  export import CfInterconnectGetParams = CfInterconnectsAPI.CfInterconnectGetParams;
+  export type CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
+  export type CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
+  export type CfInterconnectGetResponse = CfInterconnectsAPI.CfInterconnectGetResponse;
+  export type CfInterconnectUpdateParams = CfInterconnectsAPI.CfInterconnectUpdateParams;
+  export type CfInterconnectListParams = CfInterconnectsAPI.CfInterconnectListParams;
+  export type CfInterconnectGetParams = CfInterconnectsAPI.CfInterconnectGetParams;
 }

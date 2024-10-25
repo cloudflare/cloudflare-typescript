@@ -389,14 +389,14 @@ export interface DEXTestGetParams {
 }
 
 export namespace DEXTests {
-  export import DEXTest = DEXTestsAPI.DEXTest;
-  export import SchemaData = DEXTestsAPI.SchemaData;
-  export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
-  export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
+  export type DEXTest = DEXTestsAPI.DEXTest;
+  export type SchemaData = DEXTestsAPI.SchemaData;
+  export type SchemaHTTP = DEXTestsAPI.SchemaHTTP;
+  export type DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
   export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
-  export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
-  export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
-  export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
-  export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
-  export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
+  export type DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
+  export type DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
+  export type DEXTestListParams = DEXTestsAPI.DEXTestListParams;
+  export type DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
+  export type DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
 }

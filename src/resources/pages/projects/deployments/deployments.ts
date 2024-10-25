@@ -184,13 +184,13 @@ export interface DeploymentRollbackParams {
 }
 
 export namespace Deployments {
-  export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
-  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
-  export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
-  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
-  export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
-  export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
+  export type DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
+  export type DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
+  export type DeploymentListParams = DeploymentsAPI.DeploymentListParams;
+  export type DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
+  export type DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
+  export type DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
+  export type DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
   export import History = HistoryAPI.History;
 }
 

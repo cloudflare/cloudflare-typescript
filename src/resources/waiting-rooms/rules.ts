@@ -276,15 +276,15 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+  export type WaitingRoomRule = RulesAPI.WaitingRoomRule;
+  export type RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export type RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export type RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export type RuleEditResponse = RulesAPI.RuleEditResponse;
+  export type RuleGetResponse = RulesAPI.RuleGetResponse;
+  export type RuleCreateParams = RulesAPI.RuleCreateParams;
+  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export type RuleEditParams = RulesAPI.RuleEditParams;
+  export type RuleGetParams = RulesAPI.RuleGetParams;
 }

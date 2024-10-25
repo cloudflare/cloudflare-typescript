@@ -169,18 +169,18 @@ export interface Trend {
 
 export namespace Speed {
   export import ScheduleResource = ScheduleAPI.ScheduleResource;
-  export import Schedule = ScheduleAPI.Schedule;
-  export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
-  export import ScheduleDeleteResponse = ScheduleAPI.ScheduleDeleteResponse;
-  export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
-  export import ScheduleDeleteParams = ScheduleAPI.ScheduleDeleteParams;
-  export import ScheduleGetParams = ScheduleAPI.ScheduleGetParams;
+  export type Schedule = ScheduleAPI.Schedule;
+  export type ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
+  export type ScheduleDeleteResponse = ScheduleAPI.ScheduleDeleteResponse;
+  export type ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
+  export type ScheduleDeleteParams = ScheduleAPI.ScheduleDeleteParams;
+  export type ScheduleGetParams = ScheduleAPI.ScheduleGetParams;
   export import Availabilities = AvailabilitiesAPI.Availabilities;
-  export import Availability = AvailabilitiesAPI.Availability;
-  export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
+  export type Availability = AvailabilitiesAPI.Availability;
+  export type AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
   export import Pages = PagesAPI.Pages;
-  export import PageListResponse = PagesAPI.PageListResponse;
+  export type PageListResponse = PagesAPI.PageListResponse;
   export import PageListResponsesSinglePage = PagesAPI.PageListResponsesSinglePage;
-  export import PageListParams = PagesAPI.PageListParams;
-  export import PageTrendParams = PagesAPI.PageTrendParams;
+  export type PageListParams = PagesAPI.PageListParams;
+  export type PageTrendParams = PagesAPI.PageTrendParams;
 }

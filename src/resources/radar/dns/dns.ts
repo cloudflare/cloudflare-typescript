@@ -9,8 +9,8 @@ export class DNS extends APIResource {
 
 export namespace DNS {
   export import Top = TopAPI.Top;
-  export import TopAsesResponse = TopAPI.TopAsesResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopAsesParams = TopAPI.TopAsesParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+  export type TopAsesResponse = TopAPI.TopAsesResponse;
+  export type TopLocationsResponse = TopAPI.TopLocationsResponse;
+  export type TopAsesParams = TopAPI.TopAsesParams;
+  export type TopLocationsParams = TopAPI.TopLocationsParams;
 }

@@ -93,8 +93,8 @@ export interface AuditSSHSettingRotateSeedParams {
 }
 
 export namespace AuditSSHSettings {
-  export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
-  export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
-  export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
-  export import AuditSSHSettingRotateSeedParams = AuditSSHSettingsAPI.AuditSSHSettingRotateSeedParams;
+  export type GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
+  export type AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
+  export type AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
+  export type AuditSSHSettingRotateSeedParams = AuditSSHSettingsAPI.AuditSSHSettingRotateSeedParams;
 }

@@ -203,7 +203,7 @@ export namespace TracerouteCreateParams {
 }
 
 export namespace Traceroutes {
-  export import Traceroute = TraceroutesAPI.Traceroute;
-  export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
-  export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
+  export type Traceroute = TraceroutesAPI.Traceroute;
+  export type TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
+  export type TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
 }

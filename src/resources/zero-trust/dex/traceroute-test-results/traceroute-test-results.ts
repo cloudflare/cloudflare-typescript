@@ -9,6 +9,6 @@ export class TracerouteTestResults extends APIResource {
 
 export namespace TracerouteTestResults {
   export import NetworkPath = NetworkPathAPI.NetworkPath;
-  export import NetworkPathGetResponse = NetworkPathAPI.NetworkPathGetResponse;
-  export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
+  export type NetworkPathGetResponse = NetworkPathAPI.NetworkPathGetResponse;
+  export type NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
 }

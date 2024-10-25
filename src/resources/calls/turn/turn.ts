@@ -9,15 +9,15 @@ export class TURN extends APIResource {
 
 export namespace TURN {
   export import Keys = KeysAPI.Keys;
-  export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
+  export type KeyCreateResponse = KeysAPI.KeyCreateResponse;
+  export type KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export type KeyListResponse = KeysAPI.KeyListResponse;
+  export type KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
+  export type KeyGetResponse = KeysAPI.KeyGetResponse;
   export import KeyListResponsesSinglePage = KeysAPI.KeyListResponsesSinglePage;
-  export import KeyCreateParams = KeysAPI.KeyCreateParams;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyListParams = KeysAPI.KeyListParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
+  export type KeyCreateParams = KeysAPI.KeyCreateParams;
+  export type KeyUpdateParams = KeysAPI.KeyUpdateParams;
+  export type KeyListParams = KeysAPI.KeyListParams;
+  export type KeyDeleteParams = KeysAPI.KeyDeleteParams;
+  export type KeyGetParams = KeysAPI.KeyGetParams;
 }

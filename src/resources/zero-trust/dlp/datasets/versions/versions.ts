@@ -74,9 +74,9 @@ export namespace VersionCreateParams {
 }
 
 export namespace Versions {
-  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
-  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
+  export type VersionCreateResponse = VersionsAPI.VersionCreateResponse;
+  export type VersionCreateParams = VersionsAPI.VersionCreateParams;
   export import Entries = EntriesAPI.Entries;
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
+  export type EntryCreateResponse = EntriesAPI.EntryCreateResponse;
+  export type EntryCreateParams = EntriesAPI.EntryCreateParams;
 }

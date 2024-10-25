@@ -446,15 +446,15 @@ export interface TopVerticalParams {
 }
 
 export namespace Top {
-  export import TopAttacksResponse = TopAPI.TopAttacksResponse;
-  export import TopIndustryResponse = TopAPI.TopIndustryResponse;
-  export import TopVerticalResponse = TopAPI.TopVerticalResponse;
-  export import TopAttacksParams = TopAPI.TopAttacksParams;
-  export import TopIndustryParams = TopAPI.TopIndustryParams;
-  export import TopVerticalParams = TopAPI.TopVerticalParams;
+  export type TopAttacksResponse = TopAPI.TopAttacksResponse;
+  export type TopIndustryResponse = TopAPI.TopIndustryResponse;
+  export type TopVerticalResponse = TopAPI.TopVerticalResponse;
+  export type TopAttacksParams = TopAPI.TopAttacksParams;
+  export type TopIndustryParams = TopAPI.TopIndustryParams;
+  export type TopVerticalParams = TopAPI.TopVerticalParams;
   export import Locations = LocationsAPI.Locations;
-  export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
-  export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
-  export import LocationOriginParams = LocationsAPI.LocationOriginParams;
-  export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+  export type LocationOriginResponse = LocationsAPI.LocationOriginResponse;
+  export type LocationTargetResponse = LocationsAPI.LocationTargetResponse;
+  export type LocationOriginParams = LocationsAPI.LocationOriginParams;
+  export type LocationTargetParams = LocationsAPI.LocationTargetParams;
 }

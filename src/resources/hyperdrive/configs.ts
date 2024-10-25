@@ -261,13 +261,13 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
-  export import ConfigListParams = ConfigsAPI.ConfigListParams;
-  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
-  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
-  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
+  export type ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
+  export type ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
+  export type ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export type ConfigListParams = ConfigsAPI.ConfigListParams;
+  export type ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
+  export type ConfigEditParams = ConfigsAPI.ConfigEditParams;
+  export type ConfigGetParams = ConfigsAPI.ConfigGetParams;
 }
 
 export { HyperdrivesSinglePage };

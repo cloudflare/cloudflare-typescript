@@ -189,25 +189,25 @@ export interface WorkflowGetParams {
 }
 
 export namespace Workflows {
-  export import WorkflowUpdateResponse = WorkflowsAPI.WorkflowUpdateResponse;
-  export import WorkflowListResponse = WorkflowsAPI.WorkflowListResponse;
-  export import WorkflowGetResponse = WorkflowsAPI.WorkflowGetResponse;
+  export type WorkflowUpdateResponse = WorkflowsAPI.WorkflowUpdateResponse;
+  export type WorkflowListResponse = WorkflowsAPI.WorkflowListResponse;
+  export type WorkflowGetResponse = WorkflowsAPI.WorkflowGetResponse;
   export import WorkflowListResponsesV4PagePaginationArray = WorkflowsAPI.WorkflowListResponsesV4PagePaginationArray;
-  export import WorkflowUpdateParams = WorkflowsAPI.WorkflowUpdateParams;
-  export import WorkflowListParams = WorkflowsAPI.WorkflowListParams;
-  export import WorkflowGetParams = WorkflowsAPI.WorkflowGetParams;
+  export type WorkflowUpdateParams = WorkflowsAPI.WorkflowUpdateParams;
+  export type WorkflowListParams = WorkflowsAPI.WorkflowListParams;
+  export type WorkflowGetParams = WorkflowsAPI.WorkflowGetParams;
   export import Instances = InstancesAPI.Instances;
-  export import InstanceCreateResponse = InstancesAPI.InstanceCreateResponse;
-  export import InstanceListResponse = InstancesAPI.InstanceListResponse;
-  export import InstanceGetResponse = InstancesAPI.InstanceGetResponse;
+  export type InstanceCreateResponse = InstancesAPI.InstanceCreateResponse;
+  export type InstanceListResponse = InstancesAPI.InstanceListResponse;
+  export type InstanceGetResponse = InstancesAPI.InstanceGetResponse;
   export import InstanceListResponsesV4PagePaginationArray = InstancesAPI.InstanceListResponsesV4PagePaginationArray;
-  export import InstanceCreateParams = InstancesAPI.InstanceCreateParams;
-  export import InstanceListParams = InstancesAPI.InstanceListParams;
-  export import InstanceGetParams = InstancesAPI.InstanceGetParams;
+  export type InstanceCreateParams = InstancesAPI.InstanceCreateParams;
+  export type InstanceListParams = InstancesAPI.InstanceListParams;
+  export type InstanceGetParams = InstancesAPI.InstanceGetParams;
   export import Versions = VersionsAPI.Versions;
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export type VersionListResponse = VersionsAPI.VersionListResponse;
+  export type VersionGetResponse = VersionsAPI.VersionGetResponse;
   export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+  export type VersionListParams = VersionsAPI.VersionListParams;
+  export type VersionGetParams = VersionsAPI.VersionGetParams;
 }

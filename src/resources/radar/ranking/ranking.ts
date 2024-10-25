@@ -208,11 +208,11 @@ export interface RankingTopParams {
 }
 
 export namespace Ranking {
-  export import RankingTimeseriesGroupsResponse = RankingAPI.RankingTimeseriesGroupsResponse;
-  export import RankingTopResponse = RankingAPI.RankingTopResponse;
-  export import RankingTimeseriesGroupsParams = RankingAPI.RankingTimeseriesGroupsParams;
-  export import RankingTopParams = RankingAPI.RankingTopParams;
+  export type RankingTimeseriesGroupsResponse = RankingAPI.RankingTimeseriesGroupsResponse;
+  export type RankingTopResponse = RankingAPI.RankingTopResponse;
+  export type RankingTimeseriesGroupsParams = RankingAPI.RankingTimeseriesGroupsParams;
+  export type RankingTopParams = RankingAPI.RankingTopParams;
   export import Domain = DomainAPI.Domain;
-  export import DomainGetResponse = DomainAPI.DomainGetResponse;
-  export import DomainGetParams = DomainAPI.DomainGetParams;
+  export type DomainGetResponse = DomainAPI.DomainGetResponse;
+  export type DomainGetParams = DomainAPI.DomainGetParams;
 }

@@ -555,19 +555,19 @@ export interface MonitorGetParams {
 }
 
 export namespace Monitors {
-  export import Monitor = MonitorsAPI.Monitor;
-  export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
+  export type Monitor = MonitorsAPI.Monitor;
+  export type MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
   export import MonitorsSinglePage = MonitorsAPI.MonitorsSinglePage;
-  export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
-  export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
-  export import MonitorListParams = MonitorsAPI.MonitorListParams;
-  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
-  export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
-  export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
+  export type MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
+  export type MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
+  export type MonitorListParams = MonitorsAPI.MonitorListParams;
+  export type MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
+  export type MonitorEditParams = MonitorsAPI.MonitorEditParams;
+  export type MonitorGetParams = MonitorsAPI.MonitorGetParams;
   export import Previews = PreviewsAPI.Previews;
-  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+  export type PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
+  export type PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
   export import References = ReferencesAPI.References;
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+  export type ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export type ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

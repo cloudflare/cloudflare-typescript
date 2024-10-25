@@ -950,20 +950,20 @@ export interface TimeseriesGroupVerticalParams {
 }
 
 export namespace TimeseriesGroups {
-  export import TimeseriesGroupBitrateResponse = TimeseriesGroupsAPI.TimeseriesGroupBitrateResponse;
-  export import TimeseriesGroupDurationResponse = TimeseriesGroupsAPI.TimeseriesGroupDurationResponse;
-  export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
-  export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupVectorResponse = TimeseriesGroupsAPI.TimeseriesGroupVectorResponse;
-  export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupBitrateParams = TimeseriesGroupsAPI.TimeseriesGroupBitrateParams;
-  export import TimeseriesGroupDurationParams = TimeseriesGroupsAPI.TimeseriesGroupDurationParams;
-  export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
-  export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupVectorParams = TimeseriesGroupsAPI.TimeseriesGroupVectorParams;
-  export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
+  export type TimeseriesGroupBitrateResponse = TimeseriesGroupsAPI.TimeseriesGroupBitrateResponse;
+  export type TimeseriesGroupDurationResponse = TimeseriesGroupsAPI.TimeseriesGroupDurationResponse;
+  export type TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
+  export type TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
+  export type TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
+  export type TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
+  export type TimeseriesGroupVectorResponse = TimeseriesGroupsAPI.TimeseriesGroupVectorResponse;
+  export type TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
+  export type TimeseriesGroupBitrateParams = TimeseriesGroupsAPI.TimeseriesGroupBitrateParams;
+  export type TimeseriesGroupDurationParams = TimeseriesGroupsAPI.TimeseriesGroupDurationParams;
+  export type TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
+  export type TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
+  export type TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
+  export type TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
+  export type TimeseriesGroupVectorParams = TimeseriesGroupsAPI.TimeseriesGroupVectorParams;
+  export type TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
 }

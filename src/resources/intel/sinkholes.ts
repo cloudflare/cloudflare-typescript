@@ -65,7 +65,7 @@ export interface SinkholeListParams {
 }
 
 export namespace Sinkholes {
-  export import Sinkhole = SinkholesAPI.Sinkhole;
+  export type Sinkhole = SinkholesAPI.Sinkhole;
   export import SinkholesSinglePage = SinkholesAPI.SinkholesSinglePage;
-  export import SinkholeListParams = SinkholesAPI.SinkholeListParams;
+  export type SinkholeListParams = SinkholesAPI.SinkholeListParams;
 }

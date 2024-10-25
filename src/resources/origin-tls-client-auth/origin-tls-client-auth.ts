@@ -165,13 +165,13 @@ export interface OriginTLSClientAuthGetParams {
 
 export namespace OriginTLSClientAuth {
   export import Hostnames = HostnamesAPI.Hostnames;
-  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
-  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
+  export type AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
+  export type HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
+  export type HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
+  export type HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export type SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export type SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export type SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export type SettingGetParams = SettingsAPI.SettingGetParams;
 }

@@ -39,6 +39,6 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
-  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
+  export type BindingGetResponse = BindingsAPI.BindingGetResponse;
+  export type BindingGetParams = BindingsAPI.BindingGetParams;
 }

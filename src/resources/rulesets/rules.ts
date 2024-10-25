@@ -14097,29 +14097,29 @@ export namespace RuleEditParams {
 }
 
 export namespace Rules {
-  export import BlockRule = RulesAPI.BlockRule;
-  export import CompressResponseRule = RulesAPI.CompressResponseRule;
-  export import DDoSDynamicRule = RulesAPI.DDoSDynamicRule;
-  export import ExecuteRule = RulesAPI.ExecuteRule;
-  export import ForceConnectionCloseRule = RulesAPI.ForceConnectionCloseRule;
-  export import LogCustomFieldRule = RulesAPI.LogCustomFieldRule;
-  export import LogRule = RulesAPI.LogRule;
-  export import Logging = RulesAPI.Logging;
-  export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;
-  export import RedirectRule = RulesAPI.RedirectRule;
-  export import RewriteRule = RulesAPI.RewriteRule;
-  export import RewriteURIPart = RulesAPI.RewriteURIPart;
-  export import RouteRule = RulesAPI.RouteRule;
-  export import RulesetRule = RulesAPI.RulesetRule;
-  export import ScoreRule = RulesAPI.ScoreRule;
-  export import ServeErrorRule = RulesAPI.ServeErrorRule;
-  export import SetCacheSettingsRule = RulesAPI.SetCacheSettingsRule;
-  export import SetConfigRule = RulesAPI.SetConfigRule;
-  export import SkipRule = RulesAPI.SkipRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
+  export type BlockRule = RulesAPI.BlockRule;
+  export type CompressResponseRule = RulesAPI.CompressResponseRule;
+  export type DDoSDynamicRule = RulesAPI.DDoSDynamicRule;
+  export type ExecuteRule = RulesAPI.ExecuteRule;
+  export type ForceConnectionCloseRule = RulesAPI.ForceConnectionCloseRule;
+  export type LogCustomFieldRule = RulesAPI.LogCustomFieldRule;
+  export type LogRule = RulesAPI.LogRule;
+  export type Logging = RulesAPI.Logging;
+  export type ManagedChallengeRule = RulesAPI.ManagedChallengeRule;
+  export type RedirectRule = RulesAPI.RedirectRule;
+  export type RewriteRule = RulesAPI.RewriteRule;
+  export type RewriteURIPart = RulesAPI.RewriteURIPart;
+  export type RouteRule = RulesAPI.RouteRule;
+  export type RulesetRule = RulesAPI.RulesetRule;
+  export type ScoreRule = RulesAPI.ScoreRule;
+  export type ServeErrorRule = RulesAPI.ServeErrorRule;
+  export type SetCacheSettingsRule = RulesAPI.SetCacheSettingsRule;
+  export type SetConfigRule = RulesAPI.SetConfigRule;
+  export type SkipRule = RulesAPI.SkipRule;
+  export type RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export type RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export type RuleEditResponse = RulesAPI.RuleEditResponse;
+  export type RuleCreateParams = RulesAPI.RuleCreateParams;
+  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export type RuleEditParams = RulesAPI.RuleEditParams;
 }

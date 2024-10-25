@@ -177,31 +177,31 @@ export interface NamespaceGetParams {
 }
 
 export namespace Namespaces {
-  export import Namespace = NamespacesAPI.Namespace;
-  export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
-  export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
+  export type Namespace = NamespacesAPI.Namespace;
+  export type NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
+  export type NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
   export import NamespacesV4PagePaginationArray = NamespacesAPI.NamespacesV4PagePaginationArray;
-  export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
-  export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
-  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
+  export type NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
+  export type NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
+  export type NamespaceListParams = NamespacesAPI.NamespaceListParams;
+  export type NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
+  export type NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
   export import Bulk = BulkAPI.Bulk;
-  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
-  export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
-  export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
-  export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
+  export type BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
+  export type BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
+  export type BulkUpdateParams = BulkAPI.BulkUpdateParams;
+  export type BulkDeleteParams = BulkAPI.BulkDeleteParams;
   export import Keys = KeysAPI.Keys;
-  export import Key = KeysAPI.Key;
+  export type Key = KeysAPI.Key;
   export import KeysCursorLimitPagination = KeysAPI.KeysCursorLimitPagination;
-  export import KeyListParams = KeysAPI.KeyListParams;
+  export type KeyListParams = KeysAPI.KeyListParams;
   export import Metadata = MetadataAPI.Metadata;
-  export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
-  export import MetadataGetParams = MetadataAPI.MetadataGetParams;
+  export type MetadataGetResponse = MetadataAPI.MetadataGetResponse;
+  export type MetadataGetParams = MetadataAPI.MetadataGetParams;
   export import Values = ValuesAPI.Values;
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
-  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
-  export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
-  export import ValueGetParams = ValuesAPI.ValueGetParams;
+  export type ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
+  export type ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
+  export type ValueUpdateParams = ValuesAPI.ValueUpdateParams;
+  export type ValueDeleteParams = ValuesAPI.ValueDeleteParams;
+  export type ValueGetParams = ValuesAPI.ValueGetParams;
 }

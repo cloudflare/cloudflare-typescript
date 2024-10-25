@@ -44,6 +44,6 @@ export interface SchemaListParams {
 }
 
 export namespace Schemas {
-  export import SchemaListResponse = SchemasAPI.SchemaListResponse;
-  export import SchemaListParams = SchemasAPI.SchemaListParams;
+  export type SchemaListResponse = SchemasAPI.SchemaListResponse;
+  export type SchemaListParams = SchemasAPI.SchemaListParams;
 }

@@ -119,12 +119,12 @@ export interface LanguageGetParams {
 }
 
 export namespace Language {
-  export import LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
-  export import LanguageCreateParams = LanguageAPI.LanguageCreateParams;
-  export import LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
-  export import LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
-  export import LanguageGetParams = LanguageAPI.LanguageGetParams;
+  export type LanguageDeleteResponse = LanguageAPI.LanguageDeleteResponse;
+  export type LanguageCreateParams = LanguageAPI.LanguageCreateParams;
+  export type LanguageUpdateParams = LanguageAPI.LanguageUpdateParams;
+  export type LanguageDeleteParams = LanguageAPI.LanguageDeleteParams;
+  export type LanguageGetParams = LanguageAPI.LanguageGetParams;
   export import Vtt = VttAPI.Vtt;
-  export import VttGetResponse = VttAPI.VttGetResponse;
-  export import VttGetParams = VttAPI.VttGetParams;
+  export type VttGetResponse = VttAPI.VttGetResponse;
+  export type VttGetParams = VttAPI.VttGetParams;
 }

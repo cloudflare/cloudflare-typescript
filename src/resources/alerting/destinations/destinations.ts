@@ -13,26 +13,26 @@ export class Destinations extends APIResource {
 
 export namespace Destinations {
   export import Eligible = EligibleAPI.Eligible;
-  export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
-  export import EligibleGetParams = EligibleAPI.EligibleGetParams;
+  export type EligibleGetResponse = EligibleAPI.EligibleGetResponse;
+  export type EligibleGetParams = EligibleAPI.EligibleGetParams;
   export import PagerdutyResource = PagerdutyAPI.PagerdutyResource;
-  export import Pagerduty = PagerdutyAPI.Pagerduty;
-  export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
-  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
-  export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
-  export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
-  export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
-  export import PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
-  export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
-  export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
+  export type Pagerduty = PagerdutyAPI.Pagerduty;
+  export type PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
+  export type PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
+  export type PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
+  export type PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
+  export type PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
+  export type PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
+  export type PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
+  export type PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
   export import Webhooks = WebhooksAPI.Webhooks;
-  export import WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
-  export import WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
-  export import WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
+  export type WebhookCreateResponse = WebhooksAPI.WebhookCreateResponse;
+  export type WebhookUpdateResponse = WebhooksAPI.WebhookUpdateResponse;
+  export type WebhookDeleteResponse = WebhooksAPI.WebhookDeleteResponse;
   export import WebhooksSinglePage = WebhooksAPI.WebhooksSinglePage;
-  export import WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
-  export import WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
-  export import WebhookListParams = WebhooksAPI.WebhookListParams;
-  export import WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
-  export import WebhookGetParams = WebhooksAPI.WebhookGetParams;
+  export type WebhookCreateParams = WebhooksAPI.WebhookCreateParams;
+  export type WebhookUpdateParams = WebhooksAPI.WebhookUpdateParams;
+  export type WebhookListParams = WebhooksAPI.WebhookListParams;
+  export type WebhookDeleteParams = WebhooksAPI.WebhookDeleteParams;
+  export type WebhookGetParams = WebhooksAPI.WebhookGetParams;
 }

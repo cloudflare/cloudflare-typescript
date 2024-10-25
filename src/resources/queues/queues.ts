@@ -173,18 +173,18 @@ export interface QueueGetParams {
 
 export namespace Queues {
   export import Consumers = ConsumersAPI.Consumers;
-  export import Consumer = ConsumersAPI.Consumer;
-  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
-  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
-  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
+  export type Consumer = ConsumersAPI.Consumer;
+  export type ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
+  export type ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
+  export type ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
+  export type ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
+  export type ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
+  export type ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
+  export type ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
+  export type ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
   export import Messages = MessagesAPI.Messages;
-  export import MessageAckResponse = MessagesAPI.MessageAckResponse;
-  export import MessagePullResponse = MessagesAPI.MessagePullResponse;
-  export import MessageAckParams = MessagesAPI.MessageAckParams;
-  export import MessagePullParams = MessagesAPI.MessagePullParams;
+  export type MessageAckResponse = MessagesAPI.MessageAckResponse;
+  export type MessagePullResponse = MessagesAPI.MessagePullResponse;
+  export type MessageAckParams = MessagesAPI.MessageAckParams;
+  export type MessagePullParams = MessagesAPI.MessagePullParams;
 }

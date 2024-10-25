@@ -25,6 +25,6 @@ export type Value = string;
 export type ValueUpdateParams = unknown;
 
 export namespace ValueResource {
-  export import Value = ValueAPI.Value;
-  export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
+  export type Value = ValueAPI.Value;
+  export type ValueUpdateParams = ValueAPI.ValueUpdateParams;
 }

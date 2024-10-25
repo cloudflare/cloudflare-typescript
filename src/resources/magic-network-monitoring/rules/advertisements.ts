@@ -45,6 +45,6 @@ export interface AdvertisementEditParams {
 }
 
 export namespace Advertisements {
-  export import Advertisement = AdvertisementsAPI.Advertisement;
-  export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
+  export type Advertisement = AdvertisementsAPI.Advertisement;
+  export type AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
 }

@@ -141,8 +141,8 @@ export interface ZoneDeleteParams {
 }
 
 export namespace Zones {
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
-  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
+  export type ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
+  export type ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
+  export type ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
+  export type ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
 }

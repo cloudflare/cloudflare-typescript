@@ -99,7 +99,7 @@ export interface CategoryListParams {
 }
 
 export namespace Categories {
-  export import Category = CategoriesAPI.Category;
+  export type Category = CategoriesAPI.Category;
   export import CategoriesSinglePage = CategoriesAPI.CategoriesSinglePage;
-  export import CategoryListParams = CategoriesAPI.CategoryListParams;
+  export type CategoryListParams = CategoriesAPI.CategoryListParams;
 }

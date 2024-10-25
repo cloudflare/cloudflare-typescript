@@ -62,6 +62,6 @@ export interface OverrideCodeListParams {
 }
 
 export namespace OverrideCodes {
-  export import OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
-  export import OverrideCodeListParams = OverrideCodesAPI.OverrideCodeListParams;
+  export type OverrideCodeListResponse = OverrideCodesAPI.OverrideCodeListResponse;
+  export type OverrideCodeListParams = OverrideCodesAPI.OverrideCodeListParams;
 }

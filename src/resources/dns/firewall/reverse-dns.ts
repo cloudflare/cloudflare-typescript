@@ -74,8 +74,8 @@ export interface ReverseDNSGetParams {
 }
 
 export namespace ReverseDNS {
-  export import ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
-  export import ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
-  export import ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
-  export import ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
+  export type ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
+  export type ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
+  export type ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
+  export type ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
 }

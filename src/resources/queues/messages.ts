@@ -130,8 +130,8 @@ export interface MessagePullParams {
 }
 
 export namespace Messages {
-  export import MessageAckResponse = MessagesAPI.MessageAckResponse;
-  export import MessagePullResponse = MessagesAPI.MessagePullResponse;
-  export import MessageAckParams = MessagesAPI.MessageAckParams;
-  export import MessagePullParams = MessagesAPI.MessagePullParams;
+  export type MessageAckResponse = MessagesAPI.MessageAckResponse;
+  export type MessagePullResponse = MessagesAPI.MessagePullResponse;
+  export type MessageAckParams = MessagesAPI.MessageAckParams;
+  export type MessagePullParams = MessagesAPI.MessagePullParams;
 }

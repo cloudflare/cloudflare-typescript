@@ -142,8 +142,8 @@ export interface SettingEditParams {
 }
 
 export namespace Settings {
-  export import DeviceSettings = SettingsAPI.DeviceSettings;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingListParams = SettingsAPI.SettingListParams;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export type DeviceSettings = SettingsAPI.DeviceSettings;
+  export type SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export type SettingListParams = SettingsAPI.SettingListParams;
+  export type SettingEditParams = SettingsAPI.SettingEditParams;
 }

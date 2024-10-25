@@ -128,9 +128,9 @@ export interface TrafficAnomalyGetParams {
 }
 
 export namespace TrafficAnomalies {
-  export import TrafficAnomalyGetResponse = TrafficAnomaliesAPI.TrafficAnomalyGetResponse;
-  export import TrafficAnomalyGetParams = TrafficAnomaliesAPI.TrafficAnomalyGetParams;
+  export type TrafficAnomalyGetResponse = TrafficAnomaliesAPI.TrafficAnomalyGetResponse;
+  export type TrafficAnomalyGetParams = TrafficAnomaliesAPI.TrafficAnomalyGetParams;
   export import Locations = LocationsAPI.Locations;
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+  export type LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export type LocationGetParams = LocationsAPI.LocationGetParams;
 }

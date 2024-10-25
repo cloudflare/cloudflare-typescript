@@ -96,10 +96,10 @@ export interface HostnameAssociationGetParams {
 }
 
 export namespace HostnameAssociations {
-  export import HostnameAssociation = HostnameAssociationsAPI.HostnameAssociation;
-  export import TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
-  export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
-  export import HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;
-  export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
-  export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
+  export type HostnameAssociation = HostnameAssociationsAPI.HostnameAssociation;
+  export type TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
+  export type HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
+  export type HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;
+  export type HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
+  export type HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
 }

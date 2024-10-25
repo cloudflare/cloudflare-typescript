@@ -109,8 +109,8 @@ export interface BulkDeleteParams {
 }
 
 export namespace Bulk {
-  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
-  export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
-  export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
-  export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
+  export type BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
+  export type BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
+  export type BulkUpdateParams = BulkAPI.BulkUpdateParams;
+  export type BulkDeleteParams = BulkAPI.BulkDeleteParams;
 }

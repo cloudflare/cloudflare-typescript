@@ -83,28 +83,28 @@ export interface RiskScoringResetParams {
 }
 
 export namespace RiskScoring {
-  export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
-  export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
-  export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
-  export import RiskScoringResetParams = RiskScoringAPI.RiskScoringResetParams;
+  export type RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
+  export type RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
+  export type RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
+  export type RiskScoringResetParams = RiskScoringAPI.RiskScoringResetParams;
   export import Behaviours = BehavioursAPI.Behaviours;
-  export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
-  export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
-  export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
-  export import BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
+  export type BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
+  export type BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
+  export type BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
+  export type BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
   export import Summary = SummaryAPI.Summary;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export type SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export type SummaryGetParams = SummaryAPI.SummaryGetParams;
   export import Integrations = IntegrationsAPI.Integrations;
-  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
-  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
+  export type IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
+  export type IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
+  export type IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
+  export type IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export type IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
   export import IntegrationListResponsesSinglePage = IntegrationsAPI.IntegrationListResponsesSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+  export type IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
+  export type IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
+  export type IntegrationListParams = IntegrationsAPI.IntegrationListParams;
+  export type IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
+  export type IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
 }

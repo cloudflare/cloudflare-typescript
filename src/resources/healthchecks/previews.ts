@@ -159,8 +159,8 @@ export interface PreviewGetParams {
 }
 
 export namespace Previews {
-  export import PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
-  export import PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
+  export type PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
+  export type PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+  export type PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
+  export type PreviewGetParams = PreviewsAPI.PreviewGetParams;
 }

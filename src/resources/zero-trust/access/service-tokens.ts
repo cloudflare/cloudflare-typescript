@@ -439,15 +439,15 @@ export interface ServiceTokenRotateParams {
 }
 
 export namespace ServiceTokens {
-  export import ServiceToken = ServiceTokensAPI.ServiceToken;
-  export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
-  export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
+  export type ServiceToken = ServiceTokensAPI.ServiceToken;
+  export type ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
+  export type ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
   export import ServiceTokensSinglePage = ServiceTokensAPI.ServiceTokensSinglePage;
-  export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
-  export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
-  export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
-  export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
-  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
-  export import ServiceTokenRefreshParams = ServiceTokensAPI.ServiceTokenRefreshParams;
-  export import ServiceTokenRotateParams = ServiceTokensAPI.ServiceTokenRotateParams;
+  export type ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
+  export type ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
+  export type ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
+  export type ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
+  export type ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
+  export type ServiceTokenRefreshParams = ServiceTokensAPI.ServiceTokenRefreshParams;
+  export type ServiceTokenRotateParams = ServiceTokensAPI.ServiceTokenRotateParams;
 }

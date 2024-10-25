@@ -216,6 +216,6 @@ export interface AseOriginParams {
 }
 
 export namespace Ases {
-  export import AseOriginResponse = AsesAPI.AseOriginResponse;
-  export import AseOriginParams = AsesAPI.AseOriginParams;
+  export type AseOriginResponse = AsesAPI.AseOriginResponse;
+  export type AseOriginParams = AsesAPI.AseOriginParams;
 }

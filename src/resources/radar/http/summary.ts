@@ -1347,20 +1347,20 @@ export interface SummaryTLSVersionParams {
 }
 
 export namespace Summary {
-  export import SummaryBotClassResponse = SummaryAPI.SummaryBotClassResponse;
-  export import SummaryDeviceTypeResponse = SummaryAPI.SummaryDeviceTypeResponse;
-  export import SummaryHTTPProtocolResponse = SummaryAPI.SummaryHTTPProtocolResponse;
-  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryOSResponse = SummaryAPI.SummaryOSResponse;
-  export import SummaryPostQuantumResponse = SummaryAPI.SummaryPostQuantumResponse;
-  export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
-  export import SummaryBotClassParams = SummaryAPI.SummaryBotClassParams;
-  export import SummaryDeviceTypeParams = SummaryAPI.SummaryDeviceTypeParams;
-  export import SummaryHTTPProtocolParams = SummaryAPI.SummaryHTTPProtocolParams;
-  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryOSParams = SummaryAPI.SummaryOSParams;
-  export import SummaryPostQuantumParams = SummaryAPI.SummaryPostQuantumParams;
-  export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
+  export type SummaryBotClassResponse = SummaryAPI.SummaryBotClassResponse;
+  export type SummaryDeviceTypeResponse = SummaryAPI.SummaryDeviceTypeResponse;
+  export type SummaryHTTPProtocolResponse = SummaryAPI.SummaryHTTPProtocolResponse;
+  export type SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
+  export type SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
+  export type SummaryOSResponse = SummaryAPI.SummaryOSResponse;
+  export type SummaryPostQuantumResponse = SummaryAPI.SummaryPostQuantumResponse;
+  export type SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
+  export type SummaryBotClassParams = SummaryAPI.SummaryBotClassParams;
+  export type SummaryDeviceTypeParams = SummaryAPI.SummaryDeviceTypeParams;
+  export type SummaryHTTPProtocolParams = SummaryAPI.SummaryHTTPProtocolParams;
+  export type SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
+  export type SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
+  export type SummaryOSParams = SummaryAPI.SummaryOSParams;
+  export type SummaryPostQuantumParams = SummaryAPI.SummaryPostQuantumParams;
+  export type SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
 }

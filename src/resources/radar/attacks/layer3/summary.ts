@@ -854,16 +854,16 @@ export interface SummaryVectorParams {
 }
 
 export namespace Summary {
-  export import SummaryBitrateResponse = SummaryAPI.SummaryBitrateResponse;
-  export import SummaryDurationResponse = SummaryAPI.SummaryDurationResponse;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryVectorResponse = SummaryAPI.SummaryVectorResponse;
-  export import SummaryBitrateParams = SummaryAPI.SummaryBitrateParams;
-  export import SummaryDurationParams = SummaryAPI.SummaryDurationParams;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryVectorParams = SummaryAPI.SummaryVectorParams;
+  export type SummaryBitrateResponse = SummaryAPI.SummaryBitrateResponse;
+  export type SummaryDurationResponse = SummaryAPI.SummaryDurationResponse;
+  export type SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export type SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
+  export type SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
+  export type SummaryVectorResponse = SummaryAPI.SummaryVectorResponse;
+  export type SummaryBitrateParams = SummaryAPI.SummaryBitrateParams;
+  export type SummaryDurationParams = SummaryAPI.SummaryDurationParams;
+  export type SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export type SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
+  export type SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
+  export type SummaryVectorParams = SummaryAPI.SummaryVectorParams;
 }

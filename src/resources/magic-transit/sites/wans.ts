@@ -311,14 +311,14 @@ export interface WANGetParams {
 }
 
 export namespace WANs {
-  export import WAN = WANsAPI.WAN;
-  export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
-  export import WANCreateResponse = WANsAPI.WANCreateResponse;
+  export type WAN = WANsAPI.WAN;
+  export type WANStaticAddressing = WANsAPI.WANStaticAddressing;
+  export type WANCreateResponse = WANsAPI.WANCreateResponse;
   export import WANsSinglePage = WANsAPI.WANsSinglePage;
-  export import WANCreateParams = WANsAPI.WANCreateParams;
-  export import WANUpdateParams = WANsAPI.WANUpdateParams;
-  export import WANListParams = WANsAPI.WANListParams;
-  export import WANDeleteParams = WANsAPI.WANDeleteParams;
-  export import WANEditParams = WANsAPI.WANEditParams;
-  export import WANGetParams = WANsAPI.WANGetParams;
+  export type WANCreateParams = WANsAPI.WANCreateParams;
+  export type WANUpdateParams = WANsAPI.WANUpdateParams;
+  export type WANListParams = WANsAPI.WANListParams;
+  export type WANDeleteParams = WANsAPI.WANDeleteParams;
+  export type WANEditParams = WANsAPI.WANEditParams;
+  export type WANGetParams = WANsAPI.WANGetParams;
 }

@@ -86,8 +86,8 @@ export interface StatusGetParams {
 }
 
 export namespace Statuses {
-  export import StatusEditResponse = StatusesAPI.StatusEditResponse;
-  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusEditParams = StatusesAPI.StatusEditParams;
-  export import StatusGetParams = StatusesAPI.StatusGetParams;
+  export type StatusEditResponse = StatusesAPI.StatusEditResponse;
+  export type StatusGetResponse = StatusesAPI.StatusGetResponse;
+  export type StatusEditParams = StatusesAPI.StatusEditParams;
+  export type StatusGetParams = StatusesAPI.StatusGetParams;
 }

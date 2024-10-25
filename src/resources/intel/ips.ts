@@ -79,7 +79,7 @@ export interface IPGetParams {
 }
 
 export namespace IPs {
-  export import IP = IPsAPI.IP;
-  export import IPGetResponse = IPsAPI.IPGetResponse;
-  export import IPGetParams = IPsAPI.IPGetParams;
+  export type IP = IPsAPI.IP;
+  export type IPGetResponse = IPsAPI.IPGetResponse;
+  export type IPGetParams = IPsAPI.IPGetParams;
 }

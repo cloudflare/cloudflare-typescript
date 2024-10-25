@@ -89,7 +89,7 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Operations {
-  export import OperationListResponse = UserSchemasOperationsAPI.OperationListResponse;
+  export type OperationListResponse = UserSchemasOperationsAPI.OperationListResponse;
   export import OperationListResponsesV4PagePaginationArray = UserSchemasOperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export import OperationListParams = UserSchemasOperationsAPI.OperationListParams;
+  export type OperationListParams = UserSchemasOperationsAPI.OperationListParams;
 }

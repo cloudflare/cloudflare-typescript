@@ -37,6 +37,6 @@ export interface UnrevokeCreateParams {
 }
 
 export namespace Unrevoke {
-  export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
-  export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
+  export type UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
+  export type UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
 }

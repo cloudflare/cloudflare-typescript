@@ -152,8 +152,8 @@ export interface ConfigurationGetParams {
 }
 
 export namespace Configurations {
-  export import Configuration = ConfigurationsAPI.Configuration;
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
+  export type Configuration = ConfigurationsAPI.Configuration;
+  export type ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export type ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
+  export type ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
 }

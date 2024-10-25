@@ -100,8 +100,8 @@ export interface TieredCachingGetParams {
 }
 
 export namespace TieredCaching {
-  export import TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
-  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
-  export import TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
-  export import TieredCachingGetParams = TieredCachingAPI.TieredCachingGetParams;
+  export type TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
+  export type TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
+  export type TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
+  export type TieredCachingGetParams = TieredCachingAPI.TieredCachingGetParams;
 }

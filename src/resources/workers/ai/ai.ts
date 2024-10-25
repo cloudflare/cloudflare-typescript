@@ -726,7 +726,7 @@ export namespace AIRunParams {
 }
 
 export namespace AI {
-  export import AIRunResponse = AIAPI.AIRunResponse;
-  export import AIRunParams = AIAPI.AIRunParams;
+  export type AIRunResponse = AIAPI.AIRunResponse;
+  export type AIRunParams = AIAPI.AIRunParams;
   export import Models = ModelsAPI.Models;
 }

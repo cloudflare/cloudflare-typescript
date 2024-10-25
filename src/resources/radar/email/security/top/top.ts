@@ -9,6 +9,6 @@ export class Top extends APIResource {
 
 export namespace Top {
   export import Tlds = TldsAPI.Tlds;
-  export import TldGetResponse = TldsAPI.TldGetResponse;
-  export import TldGetParams = TldsAPI.TldGetParams;
+  export type TldGetResponse = TldsAPI.TldGetResponse;
+  export type TldGetParams = TldsAPI.TldGetParams;
 }

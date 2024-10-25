@@ -118,7 +118,7 @@ export interface NetworkEditParams {
 }
 
 export namespace Networks {
-  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
-  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
-  export import NetworkEditParams = NetworksAPI.NetworkEditParams;
+  export type NetworkCreateParams = NetworksAPI.NetworkCreateParams;
+  export type NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export type NetworkEditParams = NetworksAPI.NetworkEditParams;
 }

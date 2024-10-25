@@ -573,12 +573,12 @@ export interface TopLocationsParams {
 }
 
 export namespace Top {
-  export import TopDNSSECResponse = TopAPI.TopDNSSECResponse;
-  export import TopEdnsResponse = TopAPI.TopEdnsResponse;
-  export import TopIPVersionResponse = TopAPI.TopIPVersionResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopDNSSECParams = TopAPI.TopDNSSECParams;
-  export import TopEdnsParams = TopAPI.TopEdnsParams;
-  export import TopIPVersionParams = TopAPI.TopIPVersionParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+  export type TopDNSSECResponse = TopAPI.TopDNSSECResponse;
+  export type TopEdnsResponse = TopAPI.TopEdnsResponse;
+  export type TopIPVersionResponse = TopAPI.TopIPVersionResponse;
+  export type TopLocationsResponse = TopAPI.TopLocationsResponse;
+  export type TopDNSSECParams = TopAPI.TopDNSSECParams;
+  export type TopEdnsParams = TopAPI.TopEdnsParams;
+  export type TopIPVersionParams = TopAPI.TopIPVersionParams;
+  export type TopLocationsParams = TopAPI.TopLocationsParams;
 }

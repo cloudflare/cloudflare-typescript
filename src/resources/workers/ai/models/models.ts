@@ -9,6 +9,6 @@ export class Models extends APIResource {
 
 export namespace Models {
   export import Schema = SchemaAPI.Schema;
-  export import SchemaGetResponse = SchemaAPI.SchemaGetResponse;
-  export import SchemaGetParams = SchemaAPI.SchemaGetParams;
+  export type SchemaGetResponse = SchemaAPI.SchemaGetResponse;
+  export type SchemaGetParams = SchemaAPI.SchemaGetParams;
 }

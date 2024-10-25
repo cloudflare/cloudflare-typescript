@@ -334,8 +334,10 @@ export interface TCPResetsTimeoutTimeseriesGroupsParams {
 }
 
 export namespace TCPResetsTimeouts {
-  export import TCPResetsTimeoutSummaryResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryResponse;
-  export import TCPResetsTimeoutTimeseriesGroupsResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsResponse;
-  export import TCPResetsTimeoutSummaryParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryParams;
-  export import TCPResetsTimeoutTimeseriesGroupsParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsParams;
+  export type TCPResetsTimeoutSummaryResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryResponse;
+  export type TCPResetsTimeoutTimeseriesGroupsResponse =
+    TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsResponse;
+  export type TCPResetsTimeoutSummaryParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryParams;
+  export type TCPResetsTimeoutTimeseriesGroupsParams =
+    TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsParams;
 }

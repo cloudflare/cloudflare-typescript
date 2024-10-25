@@ -224,8 +224,8 @@ export interface HealthGetParams {
 }
 
 export namespace Health {
-  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
-  export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthCreateParams = HealthAPI.HealthCreateParams;
-  export import HealthGetParams = HealthAPI.HealthGetParams;
+  export type HealthCreateResponse = HealthAPI.HealthCreateResponse;
+  export type HealthGetResponse = HealthAPI.HealthGetResponse;
+  export type HealthCreateParams = HealthAPI.HealthCreateParams;
+  export type HealthGetParams = HealthAPI.HealthGetParams;
 }

@@ -87,8 +87,8 @@ export interface BehaviourGetParams {
 }
 
 export namespace Behaviours {
-  export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
-  export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
-  export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
-  export import BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
+  export type BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
+  export type BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
+  export type BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
+  export type BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
 }

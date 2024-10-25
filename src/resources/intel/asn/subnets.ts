@@ -50,6 +50,6 @@ export interface SubnetGetParams {
 }
 
 export namespace Subnets {
-  export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
-  export import SubnetGetParams = SubnetsAPI.SubnetGetParams;
+  export type SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
+  export type SubnetGetParams = SubnetsAPI.SubnetGetParams;
 }

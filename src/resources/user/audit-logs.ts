@@ -99,7 +99,7 @@ export namespace AuditLogListParams {
 }
 
 export namespace AuditLogs {
-  export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
+  export type AuditLogListParams = AuditLogsAPI.AuditLogListParams;
 }
 
 export { AuditLogsV4PagePaginationArray };

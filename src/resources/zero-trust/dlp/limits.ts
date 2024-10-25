@@ -27,6 +27,6 @@ export interface LimitListParams {
 }
 
 export namespace Limits {
-  export import LimitListResponse = LimitsAPI.LimitListResponse;
-  export import LimitListParams = LimitsAPI.LimitListParams;
+  export type LimitListResponse = LimitsAPI.LimitListResponse;
+  export type LimitListParams = LimitsAPI.LimitListParams;
 }

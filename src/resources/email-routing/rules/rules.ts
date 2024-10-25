@@ -284,20 +284,20 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import Action = RulesAPI.Action;
-  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
-  export import Matcher = RulesAPI.Matcher;
+  export type Action = RulesAPI.Action;
+  export type EmailRoutingRule = RulesAPI.EmailRoutingRule;
+  export type Matcher = RulesAPI.Matcher;
   export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+  export type RuleCreateParams = RulesAPI.RuleCreateParams;
+  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export type RuleListParams = RulesAPI.RuleListParams;
+  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export type RuleGetParams = RulesAPI.RuleGetParams;
   export import CatchAlls = CatchAllsAPI.CatchAlls;
-  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
-  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
-  export import CatchAllGetParams = CatchAllsAPI.CatchAllGetParams;
+  export type CatchAllAction = CatchAllsAPI.CatchAllAction;
+  export type CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
+  export type CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
+  export type CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
+  export type CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
+  export type CatchAllGetParams = CatchAllsAPI.CatchAllGetParams;
 }

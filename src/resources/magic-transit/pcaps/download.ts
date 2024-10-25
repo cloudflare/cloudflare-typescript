@@ -26,5 +26,5 @@ export interface DownloadGetParams {
 }
 
 export namespace Download {
-  export import DownloadGetParams = DownloadAPI.DownloadGetParams;
+  export type DownloadGetParams = DownloadAPI.DownloadGetParams;
 }
