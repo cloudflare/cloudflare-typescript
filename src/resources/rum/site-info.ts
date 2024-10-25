@@ -210,12 +210,12 @@ export interface SiteInfoGetParams {
 }
 
 export namespace SiteInfo {
-  export import Site = SiteInfoAPI.Site;
-  export import SiteInfoDeleteResponse = SiteInfoAPI.SiteInfoDeleteResponse;
+  export type Site = SiteInfoAPI.Site;
+  export type SiteInfoDeleteResponse = SiteInfoAPI.SiteInfoDeleteResponse;
   export import SitesV4PagePaginationArray = SiteInfoAPI.SitesV4PagePaginationArray;
-  export import SiteInfoCreateParams = SiteInfoAPI.SiteInfoCreateParams;
-  export import SiteInfoUpdateParams = SiteInfoAPI.SiteInfoUpdateParams;
-  export import SiteInfoListParams = SiteInfoAPI.SiteInfoListParams;
-  export import SiteInfoDeleteParams = SiteInfoAPI.SiteInfoDeleteParams;
-  export import SiteInfoGetParams = SiteInfoAPI.SiteInfoGetParams;
+  export type SiteInfoCreateParams = SiteInfoAPI.SiteInfoCreateParams;
+  export type SiteInfoUpdateParams = SiteInfoAPI.SiteInfoUpdateParams;
+  export type SiteInfoListParams = SiteInfoAPI.SiteInfoListParams;
+  export type SiteInfoDeleteParams = SiteInfoAPI.SiteInfoDeleteParams;
+  export type SiteInfoGetParams = SiteInfoAPI.SiteInfoGetParams;
 }

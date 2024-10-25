@@ -2,14 +2,14 @@
 
 export { Dispatch } from './dispatch';
 export {
-  NamespaceCreateResponse,
-  NamespaceListResponse,
-  NamespaceDeleteResponse,
-  NamespaceGetResponse,
-  NamespaceCreateParams,
-  NamespaceListParams,
-  NamespaceDeleteParams,
-  NamespaceGetParams,
   NamespaceListResponsesSinglePage,
   Namespaces,
+  type NamespaceCreateResponse,
+  type NamespaceListResponse,
+  type NamespaceDeleteResponse,
+  type NamespaceGetResponse,
+  type NamespaceCreateParams,
+  type NamespaceListParams,
+  type NamespaceDeleteParams,
+  type NamespaceGetParams,
 } from './namespaces/index';

@@ -334,19 +334,19 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import AssociatedHostnames = CertificatesAPI.AssociatedHostnames;
-  export import Certificate = CertificatesAPI.Certificate;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export type AssociatedHostnames = CertificatesAPI.AssociatedHostnames;
+  export type Certificate = CertificatesAPI.Certificate;
+  export type CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
   export import CertificatesSinglePage = CertificatesAPI.CertificatesSinglePage;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+  export type CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export type CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
+  export type CertificateListParams = CertificatesAPI.CertificateListParams;
+  export type CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export type CertificateGetParams = CertificatesAPI.CertificateGetParams;
   export import Settings = SettingsAPI.Settings;
-  export import CertificateSettings = SettingsAPI.CertificateSettings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export type CertificateSettings = SettingsAPI.CertificateSettings;
+  export type SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export type SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export type SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export type SettingGetParams = SettingsAPI.SettingGetParams;
 }

@@ -506,9 +506,9 @@ export interface VersionGetParams {
 }
 
 export namespace Versions {
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
+  export type VersionListResponse = VersionsAPI.VersionListResponse;
+  export type VersionGetResponse = VersionsAPI.VersionGetResponse;
   export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+  export type VersionListParams = VersionsAPI.VersionListParams;
+  export type VersionGetParams = VersionsAPI.VersionGetParams;
 }

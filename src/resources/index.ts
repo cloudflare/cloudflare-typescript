@@ -67,13 +67,13 @@ export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
 export {
-  SecurityTXTUpdateResponse,
-  SecurityTXTDeleteResponse,
-  SecurityTXTGetResponse,
-  SecurityTXTUpdateParams,
-  SecurityTXTDeleteParams,
-  SecurityTXTGetParams,
   SecurityTXT,
+  type SecurityTXTUpdateResponse,
+  type SecurityTXTDeleteResponse,
+  type SecurityTXTGetResponse,
+  type SecurityTXTUpdateParams,
+  type SecurityTXTDeleteParams,
+  type SecurityTXTGetParams,
 } from './security-txt';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
@@ -91,14 +91,14 @@ export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
 export {
-  WorkflowUpdateResponse,
-  WorkflowListResponse,
-  WorkflowGetResponse,
-  WorkflowUpdateParams,
-  WorkflowListParams,
-  WorkflowGetParams,
   WorkflowListResponsesV4PagePaginationArray,
   Workflows,
+  type WorkflowUpdateResponse,
+  type WorkflowListResponse,
+  type WorkflowGetResponse,
+  type WorkflowUpdateParams,
+  type WorkflowListParams,
+  type WorkflowGetParams,
 } from './workflows/workflows';
 export { ZeroTrust } from './zero-trust/zero-trust';
 export { Zones } from './zones/zones';

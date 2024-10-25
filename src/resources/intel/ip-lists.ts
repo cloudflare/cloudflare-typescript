@@ -36,7 +36,7 @@ export interface IPListGetParams {
 }
 
 export namespace IPLists {
-  export import IPList = IPListsAPI.IPList;
-  export import IPListGetResponse = IPListsAPI.IPListGetResponse;
-  export import IPListGetParams = IPListsAPI.IPListGetParams;
+  export type IPList = IPListsAPI.IPList;
+  export type IPListGetResponse = IPListsAPI.IPListGetResponse;
+  export type IPListGetParams = IPListsAPI.IPListGetParams;
 }

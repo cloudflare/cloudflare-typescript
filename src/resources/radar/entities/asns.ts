@@ -352,12 +352,12 @@ export interface ASNRelParams {
 }
 
 export namespace ASNs {
-  export import ASNListResponse = ASNsAPI.ASNListResponse;
-  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
-  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
-  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
-  export import ASNListParams = ASNsAPI.ASNListParams;
-  export import ASNGetParams = ASNsAPI.ASNGetParams;
-  export import ASNIPParams = ASNsAPI.ASNIPParams;
-  export import ASNRelParams = ASNsAPI.ASNRelParams;
+  export type ASNListResponse = ASNsAPI.ASNListResponse;
+  export type ASNGetResponse = ASNsAPI.ASNGetResponse;
+  export type ASNIPResponse = ASNsAPI.ASNIPResponse;
+  export type ASNRelResponse = ASNsAPI.ASNRelResponse;
+  export type ASNListParams = ASNsAPI.ASNListParams;
+  export type ASNGetParams = ASNsAPI.ASNGetParams;
+  export type ASNIPParams = ASNsAPI.ASNIPParams;
+  export type ASNRelParams = ASNsAPI.ASNRelParams;
 }

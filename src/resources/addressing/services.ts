@@ -47,7 +47,7 @@ export interface ServiceListParams {
 }
 
 export namespace Services {
-  export import ServiceListResponse = ServicesAPI.ServiceListResponse;
+  export type ServiceListResponse = ServicesAPI.ServiceListResponse;
   export import ServiceListResponsesSinglePage = ServicesAPI.ServiceListResponsesSinglePage;
-  export import ServiceListParams = ServicesAPI.ServiceListParams;
+  export type ServiceListParams = ServicesAPI.ServiceListParams;
 }

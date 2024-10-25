@@ -148,9 +148,9 @@ export interface VerificationGetParams {
 }
 
 export namespace VerificationResource {
-  export import Verification = VerificationAPI.Verification;
-  export import VerificationEditResponse = VerificationAPI.VerificationEditResponse;
-  export import VerificationGetResponse = VerificationAPI.VerificationGetResponse;
-  export import VerificationEditParams = VerificationAPI.VerificationEditParams;
-  export import VerificationGetParams = VerificationAPI.VerificationGetParams;
+  export type Verification = VerificationAPI.Verification;
+  export type VerificationEditResponse = VerificationAPI.VerificationEditResponse;
+  export type VerificationGetResponse = VerificationAPI.VerificationGetResponse;
+  export type VerificationEditParams = VerificationAPI.VerificationEditParams;
+  export type VerificationGetParams = VerificationAPI.VerificationGetParams;
 }

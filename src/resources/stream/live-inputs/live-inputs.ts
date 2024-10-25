@@ -536,18 +536,18 @@ export interface LiveInputGetParams {
 }
 
 export namespace LiveInputs {
-  export import LiveInput = LiveInputsAPI.LiveInput;
-  export import LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
-  export import LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
-  export import LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
-  export import LiveInputListParams = LiveInputsAPI.LiveInputListParams;
-  export import LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
-  export import LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
+  export type LiveInput = LiveInputsAPI.LiveInput;
+  export type LiveInputListResponse = LiveInputsAPI.LiveInputListResponse;
+  export type LiveInputCreateParams = LiveInputsAPI.LiveInputCreateParams;
+  export type LiveInputUpdateParams = LiveInputsAPI.LiveInputUpdateParams;
+  export type LiveInputListParams = LiveInputsAPI.LiveInputListParams;
+  export type LiveInputDeleteParams = LiveInputsAPI.LiveInputDeleteParams;
+  export type LiveInputGetParams = LiveInputsAPI.LiveInputGetParams;
   export import Outputs = OutputsAPI.Outputs;
-  export import Output = OutputsAPI.Output;
+  export type Output = OutputsAPI.Output;
   export import OutputsSinglePage = OutputsAPI.OutputsSinglePage;
-  export import OutputCreateParams = OutputsAPI.OutputCreateParams;
-  export import OutputUpdateParams = OutputsAPI.OutputUpdateParams;
-  export import OutputListParams = OutputsAPI.OutputListParams;
-  export import OutputDeleteParams = OutputsAPI.OutputDeleteParams;
+  export type OutputCreateParams = OutputsAPI.OutputCreateParams;
+  export type OutputUpdateParams = OutputsAPI.OutputUpdateParams;
+  export type OutputListParams = OutputsAPI.OutputListParams;
+  export type OutputDeleteParams = OutputsAPI.OutputDeleteParams;
 }

@@ -9,6 +9,6 @@ export class EventNotifications extends APIResource {
 
 export namespace EventNotifications {
   export import Configuration = ConfigurationAPI.Configuration;
-  export import ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
-  export import ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
+  export type ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
+  export type ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
 }

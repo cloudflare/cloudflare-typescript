@@ -11,9 +11,9 @@ export class Attacks extends APIResource {
 
 export namespace Attacks {
   export import Layer3 = Layer3API.Layer3;
-  export import Layer3TimeseriesResponse = Layer3API.Layer3TimeseriesResponse;
-  export import Layer3TimeseriesParams = Layer3API.Layer3TimeseriesParams;
+  export type Layer3TimeseriesResponse = Layer3API.Layer3TimeseriesResponse;
+  export type Layer3TimeseriesParams = Layer3API.Layer3TimeseriesParams;
   export import Layer7 = Layer7API.Layer7;
-  export import Layer7TimeseriesResponse = Layer7API.Layer7TimeseriesResponse;
-  export import Layer7TimeseriesParams = Layer7API.Layer7TimeseriesParams;
+  export type Layer7TimeseriesResponse = Layer7API.Layer7TimeseriesResponse;
+  export type Layer7TimeseriesParams = Layer7API.Layer7TimeseriesParams;
 }

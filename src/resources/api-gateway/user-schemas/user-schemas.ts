@@ -244,22 +244,22 @@ export interface UserSchemaGetParams {
 }
 
 export namespace UserSchemas {
-  export import Message = UserSchemasAPI.Message;
-  export import PublicSchema = UserSchemasAPI.PublicSchema;
-  export import SchemaUpload = UserSchemasAPI.SchemaUpload;
-  export import UserSchemaDeleteResponse = UserSchemasAPI.UserSchemaDeleteResponse;
+  export type Message = UserSchemasAPI.Message;
+  export type PublicSchema = UserSchemasAPI.PublicSchema;
+  export type SchemaUpload = UserSchemasAPI.SchemaUpload;
+  export type UserSchemaDeleteResponse = UserSchemasAPI.UserSchemaDeleteResponse;
   export import PublicSchemasV4PagePaginationArray = UserSchemasAPI.PublicSchemasV4PagePaginationArray;
-  export import UserSchemaCreateParams = UserSchemasAPI.UserSchemaCreateParams;
-  export import UserSchemaListParams = UserSchemasAPI.UserSchemaListParams;
-  export import UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
-  export import UserSchemaEditParams = UserSchemasAPI.UserSchemaEditParams;
-  export import UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
+  export type UserSchemaCreateParams = UserSchemasAPI.UserSchemaCreateParams;
+  export type UserSchemaListParams = UserSchemasAPI.UserSchemaListParams;
+  export type UserSchemaDeleteParams = UserSchemasAPI.UserSchemaDeleteParams;
+  export type UserSchemaEditParams = UserSchemasAPI.UserSchemaEditParams;
+  export type UserSchemaGetParams = UserSchemasAPI.UserSchemaGetParams;
   export import Operations = OperationsAPI.Operations;
-  export import OperationListResponse = OperationsAPI.OperationListResponse;
+  export type OperationListResponse = OperationsAPI.OperationListResponse;
   export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export import OperationListParams = OperationsAPI.OperationListParams;
+  export type OperationListParams = OperationsAPI.OperationListParams;
   export import Hosts = HostsAPI.Hosts;
-  export import HostListResponse = HostsAPI.HostListResponse;
+  export type HostListResponse = HostsAPI.HostListResponse;
   export import HostListResponsesV4PagePaginationArray = HostsAPI.HostListResponsesV4PagePaginationArray;
-  export import HostListParams = HostsAPI.HostListParams;
+  export type HostListParams = HostsAPI.HostListParams;
 }

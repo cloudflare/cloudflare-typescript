@@ -53,6 +53,6 @@ export interface SnapshotUpdateParams {
 }
 
 export namespace Snapshots {
-  export import SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
-  export import SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
+  export type SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
+  export type SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
 }

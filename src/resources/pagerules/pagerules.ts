@@ -431,6 +431,6 @@ export interface PageruleGetParams {
 
 export namespace Pagerules {
   export import Settings = SettingsAPI.Settings;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+  export type SettingListResponse = SettingsAPI.SettingListResponse;
+  export type SettingListParams = SettingsAPI.SettingListParams;
 }

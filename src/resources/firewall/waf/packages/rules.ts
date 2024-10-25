@@ -458,13 +458,13 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export import WAFRuleGroup = RulesAPI.WAFRuleGroup;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
+  export type AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
+  export type WAFRuleGroup = RulesAPI.WAFRuleGroup;
+  export type RuleListResponse = RulesAPI.RuleListResponse;
+  export type RuleEditResponse = RulesAPI.RuleEditResponse;
+  export type RuleGetResponse = RulesAPI.RuleGetResponse;
   export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+  export type RuleListParams = RulesAPI.RuleListParams;
+  export type RuleEditParams = RulesAPI.RuleEditParams;
+  export type RuleGetParams = RulesAPI.RuleGetParams;
 }

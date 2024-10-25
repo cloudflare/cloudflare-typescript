@@ -37,6 +37,6 @@ export interface RevokeCreateParams {
 }
 
 export namespace Revoke {
-  export import RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
-  export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
+  export type RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
+  export type RevokeCreateParams = RevokeAPI.RevokeCreateParams;
 }

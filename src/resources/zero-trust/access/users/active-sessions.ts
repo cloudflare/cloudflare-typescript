@@ -185,9 +185,9 @@ export interface ActiveSessionGetParams {
 }
 
 export namespace ActiveSessions {
-  export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
-  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
+  export type ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
+  export type ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
-  export import ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
-  export import ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
+  export type ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
+  export type ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
 }

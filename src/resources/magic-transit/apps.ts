@@ -321,13 +321,13 @@ export interface AppDeleteParams {
 }
 
 export namespace Apps {
-  export import AppCreateResponse = AppsAPI.AppCreateResponse;
-  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
-  export import AppListResponse = AppsAPI.AppListResponse;
-  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
+  export type AppCreateResponse = AppsAPI.AppCreateResponse;
+  export type AppUpdateResponse = AppsAPI.AppUpdateResponse;
+  export type AppListResponse = AppsAPI.AppListResponse;
+  export type AppDeleteResponse = AppsAPI.AppDeleteResponse;
   export import AppListResponsesSinglePage = AppsAPI.AppListResponsesSinglePage;
-  export import AppCreateParams = AppsAPI.AppCreateParams;
-  export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import AppListParams = AppsAPI.AppListParams;
-  export import AppDeleteParams = AppsAPI.AppDeleteParams;
+  export type AppCreateParams = AppsAPI.AppCreateParams;
+  export type AppUpdateParams = AppsAPI.AppUpdateParams;
+  export type AppListParams = AppsAPI.AppListParams;
+  export type AppDeleteParams = AppsAPI.AppDeleteParams;
 }

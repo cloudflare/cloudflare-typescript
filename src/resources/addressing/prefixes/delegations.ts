@@ -126,10 +126,10 @@ export interface DelegationDeleteParams {
 }
 
 export namespace Delegations {
-  export import Delegations = DelegationsAPI.Delegations;
-  export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
+  export type Delegations = DelegationsAPI.Delegations;
+  export type DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
   export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
-  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
-  export import DelegationListParams = DelegationsAPI.DelegationListParams;
-  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
+  export type DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
+  export type DelegationListParams = DelegationsAPI.DelegationListParams;
+  export type DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
 }

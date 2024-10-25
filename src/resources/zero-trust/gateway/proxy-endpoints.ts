@@ -168,13 +168,13 @@ export interface ProxyEndpointGetParams {
 }
 
 export namespace ProxyEndpoints {
-  export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
-  export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
-  export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
-  export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
-  export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
-  export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;
-  export import ProxyEndpointEditParams = ProxyEndpointsAPI.ProxyEndpointEditParams;
-  export import ProxyEndpointGetParams = ProxyEndpointsAPI.ProxyEndpointGetParams;
+  export type GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
+  export type ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
+  export type ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
+  export type ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
+  export type ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
+  export type ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
+  export type ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;
+  export type ProxyEndpointEditParams = ProxyEndpointsAPI.ProxyEndpointEditParams;
+  export type ProxyEndpointGetParams = ProxyEndpointsAPI.ProxyEndpointGetParams;
 }

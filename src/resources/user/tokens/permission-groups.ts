@@ -25,6 +25,6 @@ export class PermissionGroupListResponsesSinglePage extends SinglePage<Permissio
 export type PermissionGroupListResponse = unknown;
 
 export namespace PermissionGroups {
-  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
+  export type PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
 }

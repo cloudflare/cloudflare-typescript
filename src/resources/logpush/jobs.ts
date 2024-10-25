@@ -696,13 +696,13 @@ export interface JobGetParams {
 }
 
 export namespace Jobs {
-  export import LogpushJob = JobsAPI.LogpushJob;
-  export import OutputOptions = JobsAPI.OutputOptions;
-  export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
+  export type LogpushJob = JobsAPI.LogpushJob;
+  export type OutputOptions = JobsAPI.OutputOptions;
+  export type JobDeleteResponse = JobsAPI.JobDeleteResponse;
   export import LogpushJobsSinglePage = JobsAPI.LogpushJobsSinglePage;
-  export import JobCreateParams = JobsAPI.JobCreateParams;
-  export import JobUpdateParams = JobsAPI.JobUpdateParams;
-  export import JobListParams = JobsAPI.JobListParams;
-  export import JobDeleteParams = JobsAPI.JobDeleteParams;
-  export import JobGetParams = JobsAPI.JobGetParams;
+  export type JobCreateParams = JobsAPI.JobCreateParams;
+  export type JobUpdateParams = JobsAPI.JobUpdateParams;
+  export type JobListParams = JobsAPI.JobListParams;
+  export type JobDeleteParams = JobsAPI.JobDeleteParams;
+  export type JobGetParams = JobsAPI.JobGetParams;
 }

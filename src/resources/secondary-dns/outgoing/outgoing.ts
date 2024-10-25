@@ -349,22 +349,22 @@ export interface OutgoingGetParams {
 }
 
 export namespace OutgoingResource {
-  export import DisableTransfer = OutgoingAPI.DisableTransfer;
-  export import EnableTransfer = OutgoingAPI.EnableTransfer;
-  export import Outgoing = OutgoingAPI.Outgoing;
-  export import OutgoingStatus = OutgoingAPI.OutgoingStatus;
-  export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
-  export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
-  export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
-  export import OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
-  export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
-  export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
-  export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
-  export import OutgoingDeleteParams = OutgoingAPI.OutgoingDeleteParams;
-  export import OutgoingDisableParams = OutgoingAPI.OutgoingDisableParams;
-  export import OutgoingEnableParams = OutgoingAPI.OutgoingEnableParams;
-  export import OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
-  export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
+  export type DisableTransfer = OutgoingAPI.DisableTransfer;
+  export type EnableTransfer = OutgoingAPI.EnableTransfer;
+  export type Outgoing = OutgoingAPI.Outgoing;
+  export type OutgoingStatus = OutgoingAPI.OutgoingStatus;
+  export type OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
+  export type OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
+  export type OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
+  export type OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
+  export type OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
+  export type OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
+  export type OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
+  export type OutgoingDeleteParams = OutgoingAPI.OutgoingDeleteParams;
+  export type OutgoingDisableParams = OutgoingAPI.OutgoingDisableParams;
+  export type OutgoingEnableParams = OutgoingAPI.OutgoingEnableParams;
+  export type OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
+  export type OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
   export import Status = StatusAPI.Status;
-  export import StatusGetParams = StatusAPI.StatusGetParams;
+  export type StatusGetParams = StatusAPI.StatusGetParams;
 }

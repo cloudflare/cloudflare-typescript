@@ -149,9 +149,9 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
-  export import Domain = DomainsAPI.Domain;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+  export type Domain = DomainsAPI.Domain;
+  export type DomainGetParams = DomainsAPI.DomainGetParams;
   export import Bulks = BulksAPI.Bulks;
-  export import BulkGetResponse = BulksAPI.BulkGetResponse;
-  export import BulkGetParams = BulksAPI.BulkGetParams;
+  export type BulkGetResponse = BulksAPI.BulkGetResponse;
+  export type BulkGetParams = BulksAPI.BulkGetParams;
 }

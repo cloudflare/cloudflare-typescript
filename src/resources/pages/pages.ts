@@ -9,16 +9,16 @@ export class Pages extends APIResource {
 
 export namespace Pages {
   export import Projects = ProjectsAPI.Projects;
-  export import Deployment = ProjectsAPI.Deployment;
-  export import Project = ProjectsAPI.Project;
-  export import Stage = ProjectsAPI.Stage;
-  export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
-  export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
+  export type Deployment = ProjectsAPI.Deployment;
+  export type Project = ProjectsAPI.Project;
+  export type Stage = ProjectsAPI.Stage;
+  export type ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
+  export type ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
   export import DeploymentsSinglePage = ProjectsAPI.DeploymentsSinglePage;
-  export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
-  export import ProjectListParams = ProjectsAPI.ProjectListParams;
-  export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
-  export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
-  export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
-  export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
+  export type ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
+  export type ProjectListParams = ProjectsAPI.ProjectListParams;
+  export type ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
+  export type ProjectEditParams = ProjectsAPI.ProjectEditParams;
+  export type ProjectGetParams = ProjectsAPI.ProjectGetParams;
+  export type ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
 }

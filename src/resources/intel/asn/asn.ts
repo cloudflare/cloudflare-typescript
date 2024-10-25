@@ -34,8 +34,8 @@ export interface ASNGetParams {
 }
 
 export namespace ASN {
-  export import ASNGetParams = ASNAPI.ASNGetParams;
+  export type ASNGetParams = ASNAPI.ASNGetParams;
   export import Subnets = SubnetsAPI.Subnets;
-  export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
-  export import SubnetGetParams = SubnetsAPI.SubnetGetParams;
+  export type SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
+  export type SubnetGetParams = SubnetsAPI.SubnetGetParams;
 }

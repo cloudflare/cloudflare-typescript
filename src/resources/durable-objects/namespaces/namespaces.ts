@@ -47,11 +47,11 @@ export interface NamespaceListParams {
 }
 
 export namespace Namespaces {
-  export import Namespace = NamespacesAPI.Namespace;
+  export type Namespace = NamespacesAPI.Namespace;
   export import NamespacesSinglePage = NamespacesAPI.NamespacesSinglePage;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
+  export type NamespaceListParams = NamespacesAPI.NamespaceListParams;
   export import Objects = ObjectsAPI.Objects;
-  export import DurableObject = ObjectsAPI.DurableObject;
+  export type DurableObject = ObjectsAPI.DurableObject;
   export import DurableObjectsCursorLimitPagination = ObjectsAPI.DurableObjectsCursorLimitPagination;
-  export import ObjectListParams = ObjectsAPI.ObjectListParams;
+  export type ObjectListParams = ObjectsAPI.ObjectListParams;
 }

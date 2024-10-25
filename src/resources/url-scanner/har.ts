@@ -149,5 +149,5 @@ export namespace HARGetResponse {
 }
 
 export namespace HAR {
-  export import HARGetResponse = HARAPI.HARGetResponse;
+  export type HARGetResponse = HARAPI.HARGetResponse;
 }

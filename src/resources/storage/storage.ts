@@ -9,8 +9,8 @@ export class Storage extends APIResource {
 
 export namespace Storage {
   export import Analytics = AnalyticsAPI.Analytics;
-  export import Components = AnalyticsAPI.Components;
-  export import Schema = AnalyticsAPI.Schema;
-  export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
-  export import AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
+  export type Components = AnalyticsAPI.Components;
+  export type Schema = AnalyticsAPI.Schema;
+  export type AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
+  export type AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
 }

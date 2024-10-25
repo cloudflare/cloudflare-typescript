@@ -109,6 +109,6 @@ export interface OrderCreateParams {
 }
 
 export namespace Order {
-  export import OrderCreateResponse = OrderAPI.OrderCreateResponse;
-  export import OrderCreateParams = OrderAPI.OrderCreateParams;
+  export type OrderCreateResponse = OrderAPI.OrderCreateResponse;
+  export type OrderCreateParams = OrderAPI.OrderCreateParams;
 }

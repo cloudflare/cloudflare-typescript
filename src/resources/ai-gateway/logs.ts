@@ -466,17 +466,17 @@ export interface LogResponseParams {
 }
 
 export namespace Logs {
-  export import LogListResponse = LogsAPI.LogListResponse;
-  export import LogDeleteResponse = LogsAPI.LogDeleteResponse;
-  export import LogEditResponse = LogsAPI.LogEditResponse;
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogRequestResponse = LogsAPI.LogRequestResponse;
-  export import LogResponseResponse = LogsAPI.LogResponseResponse;
+  export type LogListResponse = LogsAPI.LogListResponse;
+  export type LogDeleteResponse = LogsAPI.LogDeleteResponse;
+  export type LogEditResponse = LogsAPI.LogEditResponse;
+  export type LogGetResponse = LogsAPI.LogGetResponse;
+  export type LogRequestResponse = LogsAPI.LogRequestResponse;
+  export type LogResponseResponse = LogsAPI.LogResponseResponse;
   export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
-  export import LogListParams = LogsAPI.LogListParams;
-  export import LogDeleteParams = LogsAPI.LogDeleteParams;
-  export import LogEditParams = LogsAPI.LogEditParams;
-  export import LogGetParams = LogsAPI.LogGetParams;
-  export import LogRequestParams = LogsAPI.LogRequestParams;
-  export import LogResponseParams = LogsAPI.LogResponseParams;
+  export type LogListParams = LogsAPI.LogListParams;
+  export type LogDeleteParams = LogsAPI.LogDeleteParams;
+  export type LogEditParams = LogsAPI.LogEditParams;
+  export type LogGetParams = LogsAPI.LogGetParams;
+  export type LogRequestParams = LogsAPI.LogRequestParams;
+  export type LogResponseParams = LogsAPI.LogResponseParams;
 }

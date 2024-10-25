@@ -96,7 +96,7 @@ export interface AccessRequestListParams {
 }
 
 export namespace AccessRequests {
-  export import AccessRequests = AccessRequestsAPI.AccessRequests;
-  export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
-  export import AccessRequestListParams = AccessRequestsAPI.AccessRequestListParams;
+  export type AccessRequests = AccessRequestsAPI.AccessRequests;
+  export type AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
+  export type AccessRequestListParams = AccessRequestsAPI.AccessRequestListParams;
 }

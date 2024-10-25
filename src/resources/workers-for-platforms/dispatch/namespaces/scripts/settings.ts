@@ -312,8 +312,8 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export type SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export type SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export type SettingEditParams = SettingsAPI.SettingEditParams;
+  export type SettingGetParams = SettingsAPI.SettingGetParams;
 }

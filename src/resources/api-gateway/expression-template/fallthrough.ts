@@ -47,6 +47,6 @@ export interface FallthroughCreateParams {
 }
 
 export namespace Fallthrough {
-  export import FallthroughCreateResponse = FallthroughAPI.FallthroughCreateResponse;
-  export import FallthroughCreateParams = FallthroughAPI.FallthroughCreateParams;
+  export type FallthroughCreateResponse = FallthroughAPI.FallthroughCreateResponse;
+  export type FallthroughCreateParams = FallthroughAPI.FallthroughCreateParams;
 }

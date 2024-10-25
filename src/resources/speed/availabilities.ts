@@ -132,6 +132,6 @@ export interface AvailabilityListParams {
 }
 
 export namespace Availabilities {
-  export import Availability = AvailabilitiesAPI.Availability;
-  export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
+  export type Availability = AvailabilitiesAPI.Availability;
+  export type AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
 }

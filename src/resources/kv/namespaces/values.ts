@@ -124,9 +124,9 @@ export interface ValueGetParams {
 }
 
 export namespace Values {
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
-  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
-  export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
-  export import ValueGetParams = ValuesAPI.ValueGetParams;
+  export type ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
+  export type ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
+  export type ValueUpdateParams = ValuesAPI.ValueUpdateParams;
+  export type ValueDeleteParams = ValuesAPI.ValueDeleteParams;
+  export type ValueGetParams = ValuesAPI.ValueGetParams;
 }

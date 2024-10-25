@@ -36,7 +36,7 @@ export interface ItemListParams {
 }
 
 export namespace Items {
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
+  export type ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
-  export import ItemListParams = ItemsAPI.ItemListParams;
+  export type ItemListParams = ItemsAPI.ItemListParams;
 }

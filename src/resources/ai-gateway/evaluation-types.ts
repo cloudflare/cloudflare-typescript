@@ -72,6 +72,6 @@ export interface EvaluationTypeGetParams {
 }
 
 export namespace EvaluationTypes {
-  export import EvaluationTypeGetResponse = EvaluationTypesAPI.EvaluationTypeGetResponse;
-  export import EvaluationTypeGetParams = EvaluationTypesAPI.EvaluationTypeGetParams;
+  export type EvaluationTypeGetResponse = EvaluationTypesAPI.EvaluationTypeGetResponse;
+  export type EvaluationTypeGetParams = EvaluationTypesAPI.EvaluationTypeGetParams;
 }

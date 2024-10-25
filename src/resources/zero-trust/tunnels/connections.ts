@@ -156,9 +156,9 @@ export interface ConnectionGetParams {
 }
 
 export namespace Connections {
-  export import Client = ConnectionsAPI.Client;
-  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
-  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
-  export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
-  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
+  export type Client = ConnectionsAPI.Client;
+  export type ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
+  export type ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
+  export type ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
+  export type ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

@@ -125,27 +125,27 @@ export interface EmailRoutingGetParams {
 
 export namespace EmailRouting {
   export import DNS = DNSAPI.DNS;
-  export import DNSRecord = DNSAPI.DNSRecord;
-  export import DNSGetResponse = DNSAPI.DNSGetResponse;
-  export import DNSCreateParams = DNSAPI.DNSCreateParams;
-  export import DNSDeleteParams = DNSAPI.DNSDeleteParams;
-  export import DNSEditParams = DNSAPI.DNSEditParams;
-  export import DNSGetParams = DNSAPI.DNSGetParams;
+  export type DNSRecord = DNSAPI.DNSRecord;
+  export type DNSGetResponse = DNSAPI.DNSGetResponse;
+  export type DNSCreateParams = DNSAPI.DNSCreateParams;
+  export type DNSDeleteParams = DNSAPI.DNSDeleteParams;
+  export type DNSEditParams = DNSAPI.DNSEditParams;
+  export type DNSGetParams = DNSAPI.DNSGetParams;
   export import Rules = RulesAPI.Rules;
-  export import Action = RulesAPI.Action;
-  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
-  export import Matcher = RulesAPI.Matcher;
+  export type Action = RulesAPI.Action;
+  export type EmailRoutingRule = RulesAPI.EmailRoutingRule;
+  export type Matcher = RulesAPI.Matcher;
   export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+  export type RuleCreateParams = RulesAPI.RuleCreateParams;
+  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export type RuleListParams = RulesAPI.RuleListParams;
+  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export type RuleGetParams = RulesAPI.RuleGetParams;
   export import Addresses = AddressesAPI.Addresses;
-  export import Address = AddressesAPI.Address;
+  export type Address = AddressesAPI.Address;
   export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
-  export import AddressCreateParams = AddressesAPI.AddressCreateParams;
-  export import AddressListParams = AddressesAPI.AddressListParams;
-  export import AddressDeleteParams = AddressesAPI.AddressDeleteParams;
-  export import AddressGetParams = AddressesAPI.AddressGetParams;
+  export type AddressCreateParams = AddressesAPI.AddressCreateParams;
+  export type AddressListParams = AddressesAPI.AddressListParams;
+  export type AddressDeleteParams = AddressesAPI.AddressDeleteParams;
+  export type AddressGetParams = AddressesAPI.AddressGetParams;
 }

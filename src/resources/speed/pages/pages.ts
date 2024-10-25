@@ -126,16 +126,16 @@ export interface PageTrendParams {
 }
 
 export namespace Pages {
-  export import PageListResponse = PagesAPI.PageListResponse;
+  export type PageListResponse = PagesAPI.PageListResponse;
   export import PageListResponsesSinglePage = PagesAPI.PageListResponsesSinglePage;
-  export import PageListParams = PagesAPI.PageListParams;
-  export import PageTrendParams = PagesAPI.PageTrendParams;
+  export type PageListParams = PagesAPI.PageListParams;
+  export type PageTrendParams = PagesAPI.PageTrendParams;
   export import Tests = TestsAPI.Tests;
-  export import Test = TestsAPI.Test;
-  export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
+  export type Test = TestsAPI.Test;
+  export type TestDeleteResponse = TestsAPI.TestDeleteResponse;
   export import TestsV4PagePaginationArray = TestsAPI.TestsV4PagePaginationArray;
-  export import TestCreateParams = TestsAPI.TestCreateParams;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import TestDeleteParams = TestsAPI.TestDeleteParams;
-  export import TestGetParams = TestsAPI.TestGetParams;
+  export type TestCreateParams = TestsAPI.TestCreateParams;
+  export type TestListParams = TestsAPI.TestListParams;
+  export type TestDeleteParams = TestsAPI.TestDeleteParams;
+  export type TestGetParams = TestsAPI.TestGetParams;
 }

@@ -48,6 +48,6 @@ export interface ReferenceGetParams {
 }
 
 export namespace References {
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+  export type ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export type ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

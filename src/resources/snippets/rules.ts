@@ -104,9 +104,9 @@ export interface RuleListParams {
 }
 
 export namespace Rules {
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
+  export type RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export type RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
+  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export type RuleListParams = RulesAPI.RuleListParams;
 }

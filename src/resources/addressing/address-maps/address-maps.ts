@@ -450,30 +450,30 @@ export interface AddressMapGetParams {
 }
 
 export namespace AddressMaps {
-  export import AddressMap = AddressMapsAPI.AddressMap;
-  export import Kind = AddressMapsAPI.Kind;
-  export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
-  export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
+  export type AddressMap = AddressMapsAPI.AddressMap;
+  export type Kind = AddressMapsAPI.Kind;
+  export type AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
+  export type AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
+  export type AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
   export import AddressMapsSinglePage = AddressMapsAPI.AddressMapsSinglePage;
-  export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
-  export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
-  export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
-  export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
-  export import AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
+  export type AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
+  export type AddressMapListParams = AddressMapsAPI.AddressMapListParams;
+  export type AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
+  export type AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
+  export type AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
   export import Accounts = AccountsAPI.Accounts;
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
-  export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
-  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
-  export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
+  export type AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
+  export type AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
+  export type AccountUpdateParams = AccountsAPI.AccountUpdateParams;
+  export type AccountDeleteParams = AccountsAPI.AccountDeleteParams;
   export import IPs = IPsAPI.IPs;
-  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
-  export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
-  export import IPUpdateParams = IPsAPI.IPUpdateParams;
-  export import IPDeleteParams = IPsAPI.IPDeleteParams;
+  export type IPUpdateResponse = IPsAPI.IPUpdateResponse;
+  export type IPDeleteResponse = IPsAPI.IPDeleteResponse;
+  export type IPUpdateParams = IPsAPI.IPUpdateParams;
+  export type IPDeleteParams = IPsAPI.IPDeleteParams;
   export import Zones = ZonesAPI.Zones;
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
-  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
+  export type ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
+  export type ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
+  export type ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
+  export type ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
 }

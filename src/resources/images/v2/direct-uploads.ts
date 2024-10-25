@@ -74,6 +74,6 @@ export interface DirectUploadCreateParams {
 }
 
 export namespace DirectUploads {
-  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
-  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
+  export type DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
+  export type DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
 }

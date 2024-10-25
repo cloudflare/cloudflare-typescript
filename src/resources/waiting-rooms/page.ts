@@ -93,6 +93,6 @@ export interface PagePreviewParams {
 }
 
 export namespace Page {
-  export import PagePreviewResponse = PageAPI.PagePreviewResponse;
-  export import PagePreviewParams = PageAPI.PagePreviewParams;
+  export type PagePreviewResponse = PageAPI.PagePreviewResponse;
+  export type PagePreviewParams = PageAPI.PagePreviewParams;
 }

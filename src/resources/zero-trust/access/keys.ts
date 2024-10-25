@@ -120,10 +120,10 @@ export interface KeyRotateParams {
 }
 
 export namespace Keys {
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
-  export import KeyRotateParams = KeysAPI.KeyRotateParams;
+  export type KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
+  export type KeyGetResponse = KeysAPI.KeyGetResponse;
+  export type KeyRotateResponse = KeysAPI.KeyRotateResponse;
+  export type KeyUpdateParams = KeysAPI.KeyUpdateParams;
+  export type KeyGetParams = KeysAPI.KeyGetParams;
+  export type KeyRotateParams = KeysAPI.KeyRotateParams;
 }

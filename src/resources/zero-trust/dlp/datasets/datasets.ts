@@ -217,20 +217,20 @@ export interface DatasetGetParams {
 }
 
 export namespace Datasets {
-  export import Dataset = DatasetsAPI.Dataset;
-  export import DatasetArray = DatasetsAPI.DatasetArray;
-  export import DatasetCreation = DatasetsAPI.DatasetCreation;
+  export type Dataset = DatasetsAPI.Dataset;
+  export type DatasetArray = DatasetsAPI.DatasetArray;
+  export type DatasetCreation = DatasetsAPI.DatasetCreation;
   export import DatasetsSinglePage = DatasetsAPI.DatasetsSinglePage;
-  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
-  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
+  export type DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
+  export type DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
+  export type DatasetListParams = DatasetsAPI.DatasetListParams;
+  export type DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
+  export type DatasetGetParams = DatasetsAPI.DatasetGetParams;
   export import Upload = UploadAPI.Upload;
-  export import NewVersion = UploadAPI.NewVersion;
-  export import UploadCreateParams = UploadAPI.UploadCreateParams;
-  export import UploadEditParams = UploadAPI.UploadEditParams;
+  export type NewVersion = UploadAPI.NewVersion;
+  export type UploadCreateParams = UploadAPI.UploadCreateParams;
+  export type UploadEditParams = UploadAPI.UploadEditParams;
   export import Versions = VersionsAPI.Versions;
-  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
-  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
+  export type VersionCreateResponse = VersionsAPI.VersionCreateResponse;
+  export type VersionCreateParams = VersionsAPI.VersionCreateParams;
 }

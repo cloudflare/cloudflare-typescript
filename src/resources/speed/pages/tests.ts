@@ -223,11 +223,11 @@ export interface TestGetParams {
 }
 
 export namespace Tests {
-  export import Test = TestsAPI.Test;
-  export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
+  export type Test = TestsAPI.Test;
+  export type TestDeleteResponse = TestsAPI.TestDeleteResponse;
   export import TestsV4PagePaginationArray = TestsAPI.TestsV4PagePaginationArray;
-  export import TestCreateParams = TestsAPI.TestCreateParams;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import TestDeleteParams = TestsAPI.TestDeleteParams;
-  export import TestGetParams = TestsAPI.TestGetParams;
+  export type TestCreateParams = TestsAPI.TestCreateParams;
+  export type TestListParams = TestsAPI.TestListParams;
+  export type TestDeleteParams = TestsAPI.TestDeleteParams;
+  export type TestGetParams = TestsAPI.TestGetParams;
 }

@@ -32,6 +32,6 @@ export interface SettingListParams {
 }
 
 export namespace Settings {
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+  export type SettingListResponse = SettingsAPI.SettingListResponse;
+  export type SettingListParams = SettingsAPI.SettingListParams;
 }

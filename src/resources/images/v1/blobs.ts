@@ -27,5 +27,5 @@ export interface BlobGetParams {
 }
 
 export namespace Blobs {
-  export import BlobGetParams = BlobsAPI.BlobGetParams;
+  export type BlobGetParams = BlobsAPI.BlobGetParams;
 }

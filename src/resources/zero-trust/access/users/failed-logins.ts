@@ -39,7 +39,7 @@ export interface FailedLoginListParams {
 }
 
 export namespace FailedLogins {
-  export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
+  export type FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
   export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
-  export import FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
+  export type FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
 }

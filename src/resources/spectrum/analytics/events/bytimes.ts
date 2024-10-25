@@ -234,6 +234,6 @@ export interface BytimeGetParams {
 }
 
 export namespace Bytimes {
-  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
-  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
+  export type BytimeGetResponse = BytimesAPI.BytimeGetResponse;
+  export type BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

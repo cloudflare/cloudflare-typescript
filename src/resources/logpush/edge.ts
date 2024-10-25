@@ -91,8 +91,8 @@ export interface EdgeGetParams {
 }
 
 export namespace Edge {
-  export import InstantLogpushJob = EdgeAPI.InstantLogpushJob;
-  export import EdgeGetResponse = EdgeAPI.EdgeGetResponse;
-  export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
-  export import EdgeGetParams = EdgeAPI.EdgeGetParams;
+  export type InstantLogpushJob = EdgeAPI.InstantLogpushJob;
+  export type EdgeGetResponse = EdgeAPI.EdgeGetResponse;
+  export type EdgeCreateParams = EdgeAPI.EdgeCreateParams;
+  export type EdgeGetParams = EdgeAPI.EdgeGetParams;
 }

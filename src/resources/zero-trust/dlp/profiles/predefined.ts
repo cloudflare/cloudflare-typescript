@@ -220,7 +220,7 @@ export interface PredefinedGetParams {
 }
 
 export namespace Predefined {
-  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
-  export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
-  export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
+  export type PredefinedProfile = PredefinedAPI.PredefinedProfile;
+  export type PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
+  export type PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
 }

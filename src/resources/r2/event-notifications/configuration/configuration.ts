@@ -109,11 +109,11 @@ export interface ConfigurationGetParams {
 }
 
 export namespace Configuration {
-  export import ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
-  export import ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
+  export type ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
+  export type ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
   export import Queues = QueuesAPI.Queues;
-  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
-  export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
-  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
+  export type QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
+  export type QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
+  export type QueueUpdateParams = QueuesAPI.QueueUpdateParams;
+  export type QueueDeleteParams = QueuesAPI.QueueDeleteParams;
 }

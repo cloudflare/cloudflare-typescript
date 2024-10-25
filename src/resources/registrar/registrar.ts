@@ -9,11 +9,11 @@ export class Registrar extends APIResource {
 
 export namespace Registrar {
   export import Domains = DomainsAPI.Domains;
-  export import Domain = DomainsAPI.Domain;
-  export import DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
+  export type Domain = DomainsAPI.Domain;
+  export type DomainUpdateResponse = DomainsAPI.DomainUpdateResponse;
+  export type DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
-  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+  export type DomainUpdateParams = DomainsAPI.DomainUpdateParams;
+  export type DomainListParams = DomainsAPI.DomainListParams;
+  export type DomainGetParams = DomainsAPI.DomainGetParams;
 }

@@ -213,11 +213,11 @@ export interface BucketGetParams {
 }
 
 export namespace Buckets {
-  export import Bucket = BucketsAPI.Bucket;
-  export import BucketListResponse = BucketsAPI.BucketListResponse;
-  export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import BucketCreateParams = BucketsAPI.BucketCreateParams;
-  export import BucketListParams = BucketsAPI.BucketListParams;
-  export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
-  export import BucketGetParams = BucketsAPI.BucketGetParams;
+  export type Bucket = BucketsAPI.Bucket;
+  export type BucketListResponse = BucketsAPI.BucketListResponse;
+  export type BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
+  export type BucketCreateParams = BucketsAPI.BucketCreateParams;
+  export type BucketListParams = BucketsAPI.BucketListParams;
+  export type BucketDeleteParams = BucketsAPI.BucketDeleteParams;
+  export type BucketGetParams = BucketsAPI.BucketGetParams;
 }

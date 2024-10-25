@@ -137,11 +137,11 @@ export interface AnnotationListParams {
 }
 
 export namespace Annotations {
-  export import AnnotationListResponse = AnnotationsAPI.AnnotationListResponse;
-  export import AnnotationListParams = AnnotationsAPI.AnnotationListParams;
+  export type AnnotationListResponse = AnnotationsAPI.AnnotationListResponse;
+  export type AnnotationListParams = AnnotationsAPI.AnnotationListParams;
   export import Outages = OutagesAPI.Outages;
-  export import OutageGetResponse = OutagesAPI.OutageGetResponse;
-  export import OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
-  export import OutageGetParams = OutagesAPI.OutageGetParams;
-  export import OutageLocationsParams = OutagesAPI.OutageLocationsParams;
+  export type OutageGetResponse = OutagesAPI.OutageGetResponse;
+  export type OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
+  export type OutageGetParams = OutagesAPI.OutageGetParams;
+  export type OutageLocationsParams = OutagesAPI.OutageLocationsParams;
 }

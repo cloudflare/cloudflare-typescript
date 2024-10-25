@@ -55,6 +55,6 @@ export interface UserListParams {
 }
 
 export namespace Users {
-  export import UserListResponse = UsersAPI.UserListResponse;
-  export import UserListParams = UsersAPI.UserListParams;
+  export type UserListResponse = UsersAPI.UserListResponse;
+  export type UserListParams = UsersAPI.UserListParams;
 }

@@ -247,13 +247,13 @@ export interface CAGetParams {
 }
 
 export namespace CAs {
-  export import CA = CAsAPI.CA;
-  export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import CAGetResponse = CAsAPI.CAGetResponse;
+  export type CA = CAsAPI.CA;
+  export type CACreateResponse = CAsAPI.CACreateResponse;
+  export type CADeleteResponse = CAsAPI.CADeleteResponse;
+  export type CAGetResponse = CAsAPI.CAGetResponse;
   export import CAsSinglePage = CAsAPI.CAsSinglePage;
-  export import CACreateParams = CAsAPI.CACreateParams;
-  export import CAListParams = CAsAPI.CAListParams;
-  export import CADeleteParams = CAsAPI.CADeleteParams;
-  export import CAGetParams = CAsAPI.CAGetParams;
+  export type CACreateParams = CAsAPI.CACreateParams;
+  export type CAListParams = CAsAPI.CAListParams;
+  export type CADeleteParams = CAsAPI.CADeleteParams;
+  export type CAGetParams = CAsAPI.CAGetParams;
 }

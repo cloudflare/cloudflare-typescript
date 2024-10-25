@@ -103,6 +103,6 @@ export interface ContentGetParams {
 }
 
 export namespace Content {
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
+  export type ContentUpdateParams = ContentAPI.ContentUpdateParams;
+  export type ContentGetParams = ContentAPI.ContentGetParams;
 }

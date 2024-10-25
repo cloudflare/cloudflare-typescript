@@ -185,7 +185,7 @@ export interface DetailGetParams {
 }
 
 export namespace Details {
-  export import EventQuery = DetailsAPI.EventQuery;
-  export import DetailGetResponse = DetailsAPI.DetailGetResponse;
-  export import DetailGetParams = DetailsAPI.DetailGetParams;
+  export type EventQuery = DetailsAPI.EventQuery;
+  export type DetailGetResponse = DetailsAPI.DetailGetResponse;
+  export type DetailGetParams = DetailsAPI.DetailGetParams;
 }

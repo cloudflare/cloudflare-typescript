@@ -231,13 +231,13 @@ export interface CustomPageGetParams {
 }
 
 export namespace CustomPages {
-  export import CustomPage = CustomPagesAPI.CustomPage;
-  export import CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
-  export import CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
+  export type CustomPage = CustomPagesAPI.CustomPage;
+  export type CustomPageWithoutHTML = CustomPagesAPI.CustomPageWithoutHTML;
+  export type CustomPageDeleteResponse = CustomPagesAPI.CustomPageDeleteResponse;
   export import CustomPageWithoutHTMLsSinglePage = CustomPagesAPI.CustomPageWithoutHTMLsSinglePage;
-  export import CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
-  export import CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
-  export import CustomPageListParams = CustomPagesAPI.CustomPageListParams;
-  export import CustomPageDeleteParams = CustomPagesAPI.CustomPageDeleteParams;
-  export import CustomPageGetParams = CustomPagesAPI.CustomPageGetParams;
+  export type CustomPageCreateParams = CustomPagesAPI.CustomPageCreateParams;
+  export type CustomPageUpdateParams = CustomPagesAPI.CustomPageUpdateParams;
+  export type CustomPageListParams = CustomPagesAPI.CustomPageListParams;
+  export type CustomPageDeleteParams = CustomPagesAPI.CustomPageDeleteParams;
+  export type CustomPageGetParams = CustomPagesAPI.CustomPageGetParams;
 }

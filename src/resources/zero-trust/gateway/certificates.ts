@@ -465,17 +465,17 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateActivateResponse = CertificatesAPI.CertificateActivateResponse;
-  export import CertificateDeactivateResponse = CertificatesAPI.CertificateDeactivateResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
+  export type CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export type CertificateListResponse = CertificatesAPI.CertificateListResponse;
+  export type CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export type CertificateActivateResponse = CertificatesAPI.CertificateActivateResponse;
+  export type CertificateDeactivateResponse = CertificatesAPI.CertificateDeactivateResponse;
+  export type CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
   export import CertificateListResponsesSinglePage = CertificatesAPI.CertificateListResponsesSinglePage;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateActivateParams = CertificatesAPI.CertificateActivateParams;
-  export import CertificateDeactivateParams = CertificatesAPI.CertificateDeactivateParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+  export type CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export type CertificateListParams = CertificatesAPI.CertificateListParams;
+  export type CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export type CertificateActivateParams = CertificatesAPI.CertificateActivateParams;
+  export type CertificateDeactivateParams = CertificatesAPI.CertificateDeactivateParams;
+  export type CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }

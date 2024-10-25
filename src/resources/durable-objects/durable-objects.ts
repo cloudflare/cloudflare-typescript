@@ -9,7 +9,7 @@ export class DurableObjects extends APIResource {
 
 export namespace DurableObjects {
   export import Namespaces = NamespacesAPI.Namespaces;
-  export import Namespace = NamespacesAPI.Namespace;
+  export type Namespace = NamespacesAPI.Namespace;
   export import NamespacesSinglePage = NamespacesAPI.NamespacesSinglePage;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
+  export type NamespaceListParams = NamespacesAPI.NamespaceListParams;
 }

@@ -48,6 +48,6 @@ export interface LogGetParams {
 }
 
 export namespace Logs {
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogGetParams = LogsAPI.LogGetParams;
+  export type LogGetResponse = LogsAPI.LogGetResponse;
+  export type LogGetParams = LogsAPI.LogGetParams;
 }

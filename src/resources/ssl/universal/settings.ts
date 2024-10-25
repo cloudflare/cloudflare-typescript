@@ -106,7 +106,7 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import UniversalSSLSettings = SettingsAPI.UniversalSSLSettings;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export type UniversalSSLSettings = SettingsAPI.UniversalSSLSettings;
+  export type SettingEditParams = SettingsAPI.SettingEditParams;
+  export type SettingGetParams = SettingsAPI.SettingGetParams;
 }

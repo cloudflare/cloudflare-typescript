@@ -161,11 +161,11 @@ export interface AudioTrackGetParams {
 }
 
 export namespace AudioTracks {
-  export import Audio = AudioTracksAPI.Audio;
-  export import AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
-  export import AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
-  export import AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
-  export import AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
-  export import AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
-  export import AudioTrackGetParams = AudioTracksAPI.AudioTrackGetParams;
+  export type Audio = AudioTracksAPI.Audio;
+  export type AudioTrackDeleteResponse = AudioTracksAPI.AudioTrackDeleteResponse;
+  export type AudioTrackGetResponse = AudioTracksAPI.AudioTrackGetResponse;
+  export type AudioTrackDeleteParams = AudioTracksAPI.AudioTrackDeleteParams;
+  export type AudioTrackCopyParams = AudioTracksAPI.AudioTrackCopyParams;
+  export type AudioTrackEditParams = AudioTracksAPI.AudioTrackEditParams;
+  export type AudioTrackGetParams = AudioTracksAPI.AudioTrackGetParams;
 }

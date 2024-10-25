@@ -147,10 +147,10 @@ export interface SmartTieredCacheGetParams {
 }
 
 export namespace SmartTieredCache {
-  export import SmartTieredCacheDeleteResponse = SmartTieredCacheAPI.SmartTieredCacheDeleteResponse;
-  export import SmartTieredCacheEditResponse = SmartTieredCacheAPI.SmartTieredCacheEditResponse;
-  export import SmartTieredCacheGetResponse = SmartTieredCacheAPI.SmartTieredCacheGetResponse;
-  export import SmartTieredCacheDeleteParams = SmartTieredCacheAPI.SmartTieredCacheDeleteParams;
-  export import SmartTieredCacheEditParams = SmartTieredCacheAPI.SmartTieredCacheEditParams;
-  export import SmartTieredCacheGetParams = SmartTieredCacheAPI.SmartTieredCacheGetParams;
+  export type SmartTieredCacheDeleteResponse = SmartTieredCacheAPI.SmartTieredCacheDeleteResponse;
+  export type SmartTieredCacheEditResponse = SmartTieredCacheAPI.SmartTieredCacheEditResponse;
+  export type SmartTieredCacheGetResponse = SmartTieredCacheAPI.SmartTieredCacheGetResponse;
+  export type SmartTieredCacheDeleteParams = SmartTieredCacheAPI.SmartTieredCacheDeleteParams;
+  export type SmartTieredCacheEditParams = SmartTieredCacheAPI.SmartTieredCacheEditParams;
+  export type SmartTieredCacheGetParams = SmartTieredCacheAPI.SmartTieredCacheGetParams;
 }

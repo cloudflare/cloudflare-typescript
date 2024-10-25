@@ -157,6 +157,6 @@ export interface SpamGetParams {
 }
 
 export namespace Spam {
-  export import SpamGetResponse = SpamAPI.SpamGetResponse;
-  export import SpamGetParams = SpamAPI.SpamGetParams;
+  export type SpamGetResponse = SpamAPI.SpamGetResponse;
+  export type SpamGetParams = SpamAPI.SpamGetParams;
 }

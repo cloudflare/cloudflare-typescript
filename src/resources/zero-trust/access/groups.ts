@@ -365,12 +365,12 @@ export interface GroupGetParams {
 }
 
 export namespace Groups {
-  export import ZeroTrustGroup = GroupsAPI.ZeroTrustGroup;
-  export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
+  export type ZeroTrustGroup = GroupsAPI.ZeroTrustGroup;
+  export type GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
   export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;
-  export import GroupCreateParams = GroupsAPI.GroupCreateParams;
-  export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
-  export import GroupListParams = GroupsAPI.GroupListParams;
-  export import GroupDeleteParams = GroupsAPI.GroupDeleteParams;
-  export import GroupGetParams = GroupsAPI.GroupGetParams;
+  export type GroupCreateParams = GroupsAPI.GroupCreateParams;
+  export type GroupUpdateParams = GroupsAPI.GroupUpdateParams;
+  export type GroupListParams = GroupsAPI.GroupListParams;
+  export type GroupDeleteParams = GroupsAPI.GroupDeleteParams;
+  export type GroupGetParams = GroupsAPI.GroupGetParams;
 }

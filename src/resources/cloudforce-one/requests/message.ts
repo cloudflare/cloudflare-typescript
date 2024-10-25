@@ -166,10 +166,10 @@ export interface MessageGetParams {
 }
 
 export namespace MessageResource {
-  export import Message = MessageAPI.Message;
-  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
-  export import MessageGetResponse = MessageAPI.MessageGetResponse;
-  export import MessageCreateParams = MessageAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
-  export import MessageGetParams = MessageAPI.MessageGetParams;
+  export type Message = MessageAPI.Message;
+  export type MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
+  export type MessageGetResponse = MessageAPI.MessageGetResponse;
+  export type MessageCreateParams = MessageAPI.MessageCreateParams;
+  export type MessageUpdateParams = MessageAPI.MessageUpdateParams;
+  export type MessageGetParams = MessageAPI.MessageGetParams;
 }

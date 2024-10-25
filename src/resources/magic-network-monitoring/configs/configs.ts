@@ -272,12 +272,12 @@ export interface ConfigGetParams {
 }
 
 export namespace Configs {
-  export import Configuration = ConfigsAPI.Configuration;
-  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
-  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
-  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
-  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
+  export type Configuration = ConfigsAPI.Configuration;
+  export type ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
+  export type ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
+  export type ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
+  export type ConfigEditParams = ConfigsAPI.ConfigEditParams;
+  export type ConfigGetParams = ConfigsAPI.ConfigGetParams;
   export import Full = FullAPI.Full;
-  export import FullGetParams = FullAPI.FullGetParams;
+  export type FullGetParams = FullAPI.FullGetParams;
 }

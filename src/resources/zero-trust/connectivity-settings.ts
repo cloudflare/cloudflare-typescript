@@ -87,8 +87,8 @@ export interface ConnectivitySettingGetParams {
 }
 
 export namespace ConnectivitySettings {
-  export import ConnectivitySettingEditResponse = ConnectivitySettingsAPI.ConnectivitySettingEditResponse;
-  export import ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
-  export import ConnectivitySettingEditParams = ConnectivitySettingsAPI.ConnectivitySettingEditParams;
-  export import ConnectivitySettingGetParams = ConnectivitySettingsAPI.ConnectivitySettingGetParams;
+  export type ConnectivitySettingEditResponse = ConnectivitySettingsAPI.ConnectivitySettingEditResponse;
+  export type ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
+  export type ConnectivitySettingEditParams = ConnectivitySettingsAPI.ConnectivitySettingEditParams;
+  export type ConnectivitySettingGetParams = ConnectivitySettingsAPI.ConnectivitySettingGetParams;
 }

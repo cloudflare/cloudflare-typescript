@@ -148,12 +148,12 @@ export interface ACLGetParams {
 }
 
 export namespace ACLs {
-  export import ACL = ACLsAPI.ACL;
-  export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
+  export type ACL = ACLsAPI.ACL;
+  export type ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
   export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
-  export import ACLCreateParams = ACLsAPI.ACLCreateParams;
-  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
-  export import ACLListParams = ACLsAPI.ACLListParams;
-  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
-  export import ACLGetParams = ACLsAPI.ACLGetParams;
+  export type ACLCreateParams = ACLsAPI.ACLCreateParams;
+  export type ACLUpdateParams = ACLsAPI.ACLUpdateParams;
+  export type ACLListParams = ACLsAPI.ACLListParams;
+  export type ACLDeleteParams = ACLsAPI.ACLDeleteParams;
+  export type ACLGetParams = ACLsAPI.ACLGetParams;
 }

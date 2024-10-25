@@ -57,6 +57,6 @@ export namespace PrioritizeUpdateParams {
 }
 
 export namespace Prioritize {
-  export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
-  export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
+  export type PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
+  export type PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
 }

@@ -11,20 +11,20 @@ export class RUM extends APIResource {
 
 export namespace RUM {
   export import SiteInfo = SiteInfoAPI.SiteInfo;
-  export import Site = SiteInfoAPI.Site;
-  export import SiteInfoDeleteResponse = SiteInfoAPI.SiteInfoDeleteResponse;
+  export type Site = SiteInfoAPI.Site;
+  export type SiteInfoDeleteResponse = SiteInfoAPI.SiteInfoDeleteResponse;
   export import SitesV4PagePaginationArray = SiteInfoAPI.SitesV4PagePaginationArray;
-  export import SiteInfoCreateParams = SiteInfoAPI.SiteInfoCreateParams;
-  export import SiteInfoUpdateParams = SiteInfoAPI.SiteInfoUpdateParams;
-  export import SiteInfoListParams = SiteInfoAPI.SiteInfoListParams;
-  export import SiteInfoDeleteParams = SiteInfoAPI.SiteInfoDeleteParams;
-  export import SiteInfoGetParams = SiteInfoAPI.SiteInfoGetParams;
+  export type SiteInfoCreateParams = SiteInfoAPI.SiteInfoCreateParams;
+  export type SiteInfoUpdateParams = SiteInfoAPI.SiteInfoUpdateParams;
+  export type SiteInfoListParams = SiteInfoAPI.SiteInfoListParams;
+  export type SiteInfoDeleteParams = SiteInfoAPI.SiteInfoDeleteParams;
+  export type SiteInfoGetParams = SiteInfoAPI.SiteInfoGetParams;
   export import Rules = RulesAPI.Rules;
-  export import RUMRule = RulesAPI.RUMRule;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export type RUMRule = RulesAPI.RUMRule;
+  export type RuleListResponse = RulesAPI.RuleListResponse;
+  export type RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
+  export type RuleCreateParams = RulesAPI.RuleCreateParams;
+  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export type RuleListParams = RulesAPI.RuleListParams;
+  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
 }

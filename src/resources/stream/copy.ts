@@ -115,5 +115,5 @@ export namespace CopyCreateParams {
 }
 
 export namespace Copy {
-  export import CopyCreateParams = CopyAPI.CopyCreateParams;
+  export type CopyCreateParams = CopyAPI.CopyCreateParams;
 }

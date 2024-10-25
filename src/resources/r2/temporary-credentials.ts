@@ -110,7 +110,7 @@ export interface TemporaryCredentialCreateParams {
 }
 
 export namespace TemporaryCredentials {
-  export import TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
-  export import TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
-  export import TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
+  export type TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
+  export type TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
+  export type TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
 }

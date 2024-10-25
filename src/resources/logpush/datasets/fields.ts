@@ -66,6 +66,6 @@ export interface FieldGetParams {
 }
 
 export namespace Fields {
-  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
-  export import FieldGetParams = FieldsAPI.FieldGetParams;
+  export type FieldGetResponse = FieldsAPI.FieldGetResponse;
+  export type FieldGetParams = FieldsAPI.FieldGetParams;
 }

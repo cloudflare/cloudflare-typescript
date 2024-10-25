@@ -56,8 +56,8 @@ export interface CertificateUpdateParams {
 }
 
 export namespace Certificates {
-  export import DevicePolicyCertificates = CertificatesAPI.DevicePolicyCertificates;
-  export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
+  export type DevicePolicyCertificates = CertificatesAPI.DevicePolicyCertificates;
+  export type CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
+  export type CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
+  export type CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
 }

@@ -174,12 +174,12 @@ export interface PeerGetParams {
 }
 
 export namespace Peers {
-  export import Peer = PeersAPI.Peer;
-  export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
+  export type Peer = PeersAPI.Peer;
+  export type PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
   export import PeersSinglePage = PeersAPI.PeersSinglePage;
-  export import PeerCreateParams = PeersAPI.PeerCreateParams;
-  export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
-  export import PeerListParams = PeersAPI.PeerListParams;
-  export import PeerDeleteParams = PeersAPI.PeerDeleteParams;
-  export import PeerGetParams = PeersAPI.PeerGetParams;
+  export type PeerCreateParams = PeersAPI.PeerCreateParams;
+  export type PeerUpdateParams = PeersAPI.PeerUpdateParams;
+  export type PeerListParams = PeersAPI.PeerListParams;
+  export type PeerDeleteParams = PeersAPI.PeerDeleteParams;
+  export type PeerGetParams = PeersAPI.PeerGetParams;
 }

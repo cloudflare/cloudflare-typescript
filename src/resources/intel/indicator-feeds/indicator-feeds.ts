@@ -352,28 +352,28 @@ export interface IndicatorFeedGetParams {
 }
 
 export namespace IndicatorFeeds {
-  export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
-  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
-  export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
-  export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
-  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
+  export type IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
+  export type IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
+  export type IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
+  export type IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
+  export type IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
   export import IndicatorFeedListResponsesSinglePage = IndicatorFeedsAPI.IndicatorFeedListResponsesSinglePage;
-  export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
-  export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
-  export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
-  export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
-  export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
+  export type IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
+  export type IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
+  export type IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
+  export type IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
+  export type IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
   export import Snapshots = SnapshotsAPI.Snapshots;
-  export import SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
-  export import SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
+  export type SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
+  export type SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
   export import Permissions = PermissionsAPI.Permissions;
-  export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
-  export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
-  export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
-  export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
-  export import PermissionListParams = PermissionsAPI.PermissionListParams;
-  export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
+  export type PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
+  export type PermissionListResponse = PermissionsAPI.PermissionListResponse;
+  export type PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
+  export type PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
+  export type PermissionListParams = PermissionsAPI.PermissionListParams;
+  export type PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
   export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
+  export type DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
+  export type DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

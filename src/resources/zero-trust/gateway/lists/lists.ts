@@ -268,19 +268,19 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
-  export import GatewayItem = ListsAPI.GatewayItem;
-  export import GatewayList = ListsAPI.GatewayList;
-  export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export type GatewayItem = ListsAPI.GatewayItem;
+  export type GatewayList = ListsAPI.GatewayList;
+  export type ListCreateResponse = ListsAPI.ListCreateResponse;
+  export type ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import GatewayListsSinglePage = ListsAPI.GatewayListsSinglePage;
-  export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListListParams = ListsAPI.ListListParams;
-  export import ListDeleteParams = ListsAPI.ListDeleteParams;
-  export import ListEditParams = ListsAPI.ListEditParams;
-  export import ListGetParams = ListsAPI.ListGetParams;
+  export type ListCreateParams = ListsAPI.ListCreateParams;
+  export type ListUpdateParams = ListsAPI.ListUpdateParams;
+  export type ListListParams = ListsAPI.ListListParams;
+  export type ListDeleteParams = ListsAPI.ListDeleteParams;
+  export type ListEditParams = ListsAPI.ListEditParams;
+  export type ListGetParams = ListsAPI.ListGetParams;
   export import Items = ItemsAPI.Items;
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
+  export type ItemListResponse = ItemsAPI.ItemListResponse;
   export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
-  export import ItemListParams = ItemsAPI.ItemListParams;
+  export type ItemListParams = ItemsAPI.ItemListParams;
 }

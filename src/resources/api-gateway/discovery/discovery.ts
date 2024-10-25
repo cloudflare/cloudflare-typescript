@@ -104,11 +104,11 @@ export interface DiscoveryGetParams {
 }
 
 export namespace Discovery {
-  export import DiscoveryOperation = DiscoveryAPI.DiscoveryOperation;
-  export import DiscoveryGetResponse = DiscoveryAPI.DiscoveryGetResponse;
-  export import DiscoveryGetParams = DiscoveryAPI.DiscoveryGetParams;
+  export type DiscoveryOperation = DiscoveryAPI.DiscoveryOperation;
+  export type DiscoveryGetResponse = DiscoveryAPI.DiscoveryGetResponse;
+  export type DiscoveryGetParams = DiscoveryAPI.DiscoveryGetParams;
   export import Operations = OperationsAPI.Operations;
-  export import OperationEditResponse = OperationsAPI.OperationEditResponse;
-  export import OperationListParams = OperationsAPI.OperationListParams;
-  export import OperationEditParams = OperationsAPI.OperationEditParams;
+  export type OperationEditResponse = OperationsAPI.OperationEditResponse;
+  export type OperationListParams = OperationsAPI.OperationListParams;
+  export type OperationEditParams = OperationsAPI.OperationEditParams;
 }

@@ -133,6 +133,6 @@ export interface BulkGetParams {
 }
 
 export namespace Bulks {
-  export import BulkGetResponse = BulksAPI.BulkGetResponse;
-  export import BulkGetParams = BulksAPI.BulkGetParams;
+  export type BulkGetResponse = BulksAPI.BulkGetResponse;
+  export type BulkGetParams = BulksAPI.BulkGetParams;
 }

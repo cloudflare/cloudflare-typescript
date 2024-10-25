@@ -113,6 +113,6 @@ export namespace TokenCreateParams {
 }
 
 export namespace Token {
-  export import TokenCreateResponse = TokenAPI.TokenCreateResponse;
-  export import TokenCreateParams = TokenAPI.TokenCreateParams;
+  export type TokenCreateResponse = TokenAPI.TokenCreateResponse;
+  export type TokenCreateParams = TokenAPI.TokenCreateParams;
 }

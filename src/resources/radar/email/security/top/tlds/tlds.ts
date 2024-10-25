@@ -159,15 +159,15 @@ export interface TldGetParams {
 }
 
 export namespace Tlds {
-  export import TldGetResponse = TldsAPI.TldGetResponse;
-  export import TldGetParams = TldsAPI.TldGetParams;
+  export type TldGetResponse = TldsAPI.TldGetResponse;
+  export type TldGetParams = TldsAPI.TldGetParams;
   export import Malicious = MaliciousAPI.Malicious;
-  export import MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
-  export import MaliciousGetParams = MaliciousAPI.MaliciousGetParams;
+  export type MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
+  export type MaliciousGetParams = MaliciousAPI.MaliciousGetParams;
   export import Spam = SpamAPI.Spam;
-  export import SpamGetResponse = SpamAPI.SpamGetResponse;
-  export import SpamGetParams = SpamAPI.SpamGetParams;
+  export type SpamGetResponse = SpamAPI.SpamGetResponse;
+  export type SpamGetParams = SpamAPI.SpamGetParams;
   export import Spoof = SpoofAPI.Spoof;
-  export import SpoofGetResponse = SpoofAPI.SpoofGetResponse;
-  export import SpoofGetParams = SpoofAPI.SpoofGetParams;
+  export type SpoofGetResponse = SpoofAPI.SpoofGetResponse;
+  export type SpoofGetParams = SpoofAPI.SpoofGetParams;
 }

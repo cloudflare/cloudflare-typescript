@@ -329,9 +329,9 @@ export interface ScriptGetParams {
 }
 
 export namespace Scripts {
-  export import Script = ScriptsAPI.Script;
-  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
+  export type Script = ScriptsAPI.Script;
+  export type ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
   export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
-  export import ScriptListParams = ScriptsAPI.ScriptListParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+  export type ScriptListParams = ScriptsAPI.ScriptListParams;
+  export type ScriptGetParams = ScriptsAPI.ScriptGetParams;
 }

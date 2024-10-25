@@ -116,10 +116,10 @@ export interface KeyGetParams {
 }
 
 export namespace Keys {
-  export import Keys = KeysAPI.Keys;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyCreateParams = KeysAPI.KeyCreateParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
+  export type Keys = KeysAPI.Keys;
+  export type KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
+  export type KeyGetResponse = KeysAPI.KeyGetResponse;
+  export type KeyCreateParams = KeysAPI.KeyCreateParams;
+  export type KeyDeleteParams = KeysAPI.KeyDeleteParams;
+  export type KeyGetParams = KeysAPI.KeyGetParams;
 }

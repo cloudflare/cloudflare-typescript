@@ -88,20 +88,20 @@ export interface UserListParams {
 }
 
 export namespace Users {
-  export import AccessUser = UsersAPI.AccessUser;
+  export type AccessUser = UsersAPI.AccessUser;
   export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
-  export import UserListParams = UsersAPI.UserListParams;
+  export type UserListParams = UsersAPI.UserListParams;
   export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
-  export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
-  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
+  export type ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
+  export type ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
   export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
-  export import ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
-  export import ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
+  export type ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
+  export type ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
   export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import Identity = LastSeenIdentityAPI.Identity;
-  export import LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
+  export type Identity = LastSeenIdentityAPI.Identity;
+  export type LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
   export import FailedLogins = FailedLoginsAPI.FailedLogins;
-  export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
+  export type FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
   export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
-  export import FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
+  export type FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
 }

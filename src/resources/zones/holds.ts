@@ -90,8 +90,8 @@ export interface HoldGetParams {
 }
 
 export namespace Holds {
-  export import ZoneHold = HoldsAPI.ZoneHold;
-  export import HoldCreateParams = HoldsAPI.HoldCreateParams;
-  export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
-  export import HoldGetParams = HoldsAPI.HoldGetParams;
+  export type ZoneHold = HoldsAPI.ZoneHold;
+  export type HoldCreateParams = HoldsAPI.HoldCreateParams;
+  export type HoldDeleteParams = HoldsAPI.HoldDeleteParams;
+  export type HoldGetParams = HoldsAPI.HoldGetParams;
 }

@@ -160,6 +160,6 @@ export interface MaliciousGetParams {
 }
 
 export namespace Malicious {
-  export import MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
-  export import MaliciousGetParams = MaliciousAPI.MaliciousGetParams;
+  export type MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
+  export type MaliciousGetParams = MaliciousAPI.MaliciousGetParams;
 }

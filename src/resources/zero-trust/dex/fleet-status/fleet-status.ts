@@ -109,12 +109,12 @@ export interface FleetStatusOverTimeParams {
 }
 
 export namespace FleetStatus {
-  export import LiveStat = FleetStatusAPI.LiveStat;
-  export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
-  export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
-  export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
+  export type LiveStat = FleetStatusAPI.LiveStat;
+  export type FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
+  export type FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
+  export type FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
   export import Devices = DevicesAPI.Devices;
-  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
+  export type DeviceListResponse = DevicesAPI.DeviceListResponse;
   export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
-  export import DeviceListParams = DevicesAPI.DeviceListParams;
+  export type DeviceListParams = DevicesAPI.DeviceListParams;
 }

@@ -129,10 +129,10 @@ export interface MetadataIndexDeleteParams {
 }
 
 export namespace MetadataIndex {
-  export import MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
-  export import MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
-  export import MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
-  export import MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
-  export import MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
-  export import MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
+  export type MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
+  export type MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
+  export type MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
+  export type MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
+  export type MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
+  export type MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
 }

@@ -13,22 +13,22 @@ export class EmailSecurity extends APIResource {
 
 export namespace EmailSecurity {
   export import Investigate = InvestigateAPI.Investigate;
-  export import InvestigateListResponse = InvestigateAPI.InvestigateListResponse;
-  export import InvestigateDetectionsResponse = InvestigateAPI.InvestigateDetectionsResponse;
-  export import InvestigateGetResponse = InvestigateAPI.InvestigateGetResponse;
-  export import InvestigatePreviewResponse = InvestigateAPI.InvestigatePreviewResponse;
-  export import InvestigateRawResponse = InvestigateAPI.InvestigateRawResponse;
-  export import InvestigateTraceResponse = InvestigateAPI.InvestigateTraceResponse;
+  export type InvestigateListResponse = InvestigateAPI.InvestigateListResponse;
+  export type InvestigateDetectionsResponse = InvestigateAPI.InvestigateDetectionsResponse;
+  export type InvestigateGetResponse = InvestigateAPI.InvestigateGetResponse;
+  export type InvestigatePreviewResponse = InvestigateAPI.InvestigatePreviewResponse;
+  export type InvestigateRawResponse = InvestigateAPI.InvestigateRawResponse;
+  export type InvestigateTraceResponse = InvestigateAPI.InvestigateTraceResponse;
   export import InvestigateListResponsesV4PagePaginationArray = InvestigateAPI.InvestigateListResponsesV4PagePaginationArray;
-  export import InvestigateListParams = InvestigateAPI.InvestigateListParams;
-  export import InvestigateDetectionsParams = InvestigateAPI.InvestigateDetectionsParams;
-  export import InvestigateGetParams = InvestigateAPI.InvestigateGetParams;
-  export import InvestigatePreviewParams = InvestigateAPI.InvestigatePreviewParams;
-  export import InvestigateRawParams = InvestigateAPI.InvestigateRawParams;
-  export import InvestigateTraceParams = InvestigateAPI.InvestigateTraceParams;
+  export type InvestigateListParams = InvestigateAPI.InvestigateListParams;
+  export type InvestigateDetectionsParams = InvestigateAPI.InvestigateDetectionsParams;
+  export type InvestigateGetParams = InvestigateAPI.InvestigateGetParams;
+  export type InvestigatePreviewParams = InvestigateAPI.InvestigatePreviewParams;
+  export type InvestigateRawParams = InvestigateAPI.InvestigateRawParams;
+  export type InvestigateTraceParams = InvestigateAPI.InvestigateTraceParams;
   export import Phishguard = PhishguardAPI.Phishguard;
-  export import PhishguardListResponse = PhishguardAPI.PhishguardListResponse;
+  export type PhishguardListResponse = PhishguardAPI.PhishguardListResponse;
   export import PhishguardListResponsesSinglePage = PhishguardAPI.PhishguardListResponsesSinglePage;
-  export import PhishguardListParams = PhishguardAPI.PhishguardListParams;
+  export type PhishguardListParams = PhishguardAPI.PhishguardListParams;
   export import Settings = SettingsAPI.Settings;
 }

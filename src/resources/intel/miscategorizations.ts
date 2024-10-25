@@ -74,6 +74,6 @@ export interface MiscategorizationCreateParams {
 }
 
 export namespace Miscategorizations {
-  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
-  export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
+  export type MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
+  export type MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
 }

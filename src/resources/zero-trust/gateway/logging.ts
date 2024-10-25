@@ -111,7 +111,7 @@ export interface LoggingGetParams {
 }
 
 export namespace Logging {
-  export import LoggingSetting = LoggingAPI.LoggingSetting;
-  export import LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
-  export import LoggingGetParams = LoggingAPI.LoggingGetParams;
+  export type LoggingSetting = LoggingAPI.LoggingSetting;
+  export type LoggingUpdateParams = LoggingAPI.LoggingUpdateParams;
+  export type LoggingGetParams = LoggingAPI.LoggingGetParams;
 }

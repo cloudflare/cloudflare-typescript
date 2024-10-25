@@ -140,6 +140,6 @@ export interface PreviewCreateParams {
 }
 
 export namespace Previews {
-  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+  export type PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
+  export type PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
 }

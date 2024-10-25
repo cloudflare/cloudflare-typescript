@@ -178,10 +178,10 @@ export interface CatchAllGetParams {
 }
 
 export namespace CatchAlls {
-  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
-  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
-  export import CatchAllGetParams = CatchAllsAPI.CatchAllGetParams;
+  export type CatchAllAction = CatchAllsAPI.CatchAllAction;
+  export type CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
+  export type CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
+  export type CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
+  export type CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
+  export type CatchAllGetParams = CatchAllsAPI.CatchAllGetParams;
 }

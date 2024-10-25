@@ -122,9 +122,9 @@ export interface DatasetDownloadParams {
 }
 
 export namespace Datasets {
-  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
-  export import DatasetDownloadResponse = DatasetsAPI.DatasetDownloadResponse;
-  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDownloadParams = DatasetsAPI.DatasetDownloadParams;
+  export type DatasetListResponse = DatasetsAPI.DatasetListResponse;
+  export type DatasetDownloadResponse = DatasetsAPI.DatasetDownloadResponse;
+  export type DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
+  export type DatasetListParams = DatasetsAPI.DatasetListParams;
+  export type DatasetDownloadParams = DatasetsAPI.DatasetDownloadParams;
 }

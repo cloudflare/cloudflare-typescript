@@ -115,8 +115,8 @@ export interface ManagedListParams {
 }
 
 export namespace Managed {
-  export import ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
-  export import ManagedListResponse = ManagedAPI.ManagedListResponse;
-  export import ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
-  export import ManagedListParams = ManagedAPI.ManagedListParams;
+  export type ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
+  export type ManagedListResponse = ManagedAPI.ManagedListResponse;
+  export type ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
+  export type ManagedListParams = ManagedAPI.ManagedListParams;
 }

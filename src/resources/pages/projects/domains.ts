@@ -304,15 +304,15 @@ export interface DomainGetParams {
 }
 
 export namespace Domains {
-  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
+  export type DomainCreateResponse = DomainsAPI.DomainCreateResponse;
+  export type DomainListResponse = DomainsAPI.DomainListResponse;
+  export type DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
+  export type DomainEditResponse = DomainsAPI.DomainEditResponse;
+  export type DomainGetResponse = DomainsAPI.DomainGetResponse;
   export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
-  export import DomainCreateParams = DomainsAPI.DomainCreateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+  export type DomainCreateParams = DomainsAPI.DomainCreateParams;
+  export type DomainListParams = DomainsAPI.DomainListParams;
+  export type DomainDeleteParams = DomainsAPI.DomainDeleteParams;
+  export type DomainEditParams = DomainsAPI.DomainEditParams;
+  export type DomainGetParams = DomainsAPI.DomainGetParams;
 }

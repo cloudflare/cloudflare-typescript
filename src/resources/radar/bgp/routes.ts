@@ -364,12 +364,12 @@ export interface RouteStatsParams {
 }
 
 export namespace Routes {
-  export import RouteAsesResponse = RoutesAPI.RouteAsesResponse;
-  export import RouteMoasResponse = RoutesAPI.RouteMoasResponse;
-  export import RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
-  export import RouteStatsResponse = RoutesAPI.RouteStatsResponse;
-  export import RouteAsesParams = RoutesAPI.RouteAsesParams;
-  export import RouteMoasParams = RoutesAPI.RouteMoasParams;
-  export import RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
-  export import RouteStatsParams = RoutesAPI.RouteStatsParams;
+  export type RouteAsesResponse = RoutesAPI.RouteAsesResponse;
+  export type RouteMoasResponse = RoutesAPI.RouteMoasResponse;
+  export type RoutePfx2asResponse = RoutesAPI.RoutePfx2asResponse;
+  export type RouteStatsResponse = RoutesAPI.RouteStatsResponse;
+  export type RouteAsesParams = RoutesAPI.RouteAsesParams;
+  export type RouteMoasParams = RoutesAPI.RouteMoasParams;
+  export type RoutePfx2asParams = RoutesAPI.RoutePfx2asParams;
+  export type RouteStatsParams = RoutesAPI.RouteStatsParams;
 }

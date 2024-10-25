@@ -489,22 +489,22 @@ export interface PCAPGetParams {
 }
 
 export namespace PCAPs {
-  export import PCAP = PCAPsAPI.PCAP;
-  export import PCAPFilter = PCAPsAPI.PCAPFilter;
-  export import PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
-  export import PCAPListResponse = PCAPsAPI.PCAPListResponse;
-  export import PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
+  export type PCAP = PCAPsAPI.PCAP;
+  export type PCAPFilter = PCAPsAPI.PCAPFilter;
+  export type PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
+  export type PCAPListResponse = PCAPsAPI.PCAPListResponse;
+  export type PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
   export import PCAPListResponsesSinglePage = PCAPsAPI.PCAPListResponsesSinglePage;
-  export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
-  export import PCAPListParams = PCAPsAPI.PCAPListParams;
-  export import PCAPGetParams = PCAPsAPI.PCAPGetParams;
+  export type PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
+  export type PCAPListParams = PCAPsAPI.PCAPListParams;
+  export type PCAPGetParams = PCAPsAPI.PCAPGetParams;
   export import OwnershipResource = OwnershipAPI.OwnershipResource;
-  export import Ownership = OwnershipAPI.Ownership;
-  export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
-  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export import OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
-  export import OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
-  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
+  export type Ownership = OwnershipAPI.Ownership;
+  export type OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
+  export type OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
+  export type OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
+  export type OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
+  export type OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
   export import Download = DownloadAPI.Download;
-  export import DownloadGetParams = DownloadAPI.DownloadGetParams;
+  export type DownloadGetParams = DownloadAPI.DownloadGetParams;
 }

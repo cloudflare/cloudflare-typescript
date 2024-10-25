@@ -189,6 +189,6 @@ export interface OSGetParams {
 }
 
 export namespace OS {
-  export import OSGetResponse = OSAPI.OSGetResponse;
-  export import OSGetParams = OSAPI.OSGetParams;
+  export type OSGetResponse = OSAPI.OSGetResponse;
+  export type OSGetParams = OSAPI.OSGetParams;
 }

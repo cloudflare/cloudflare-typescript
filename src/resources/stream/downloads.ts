@@ -89,10 +89,10 @@ export interface DownloadGetParams {
 }
 
 export namespace Downloads {
-  export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
-  export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
-  export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
-  export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
+  export type DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
+  export type DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
+  export type DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
+  export type DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
+  export type DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
+  export type DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

@@ -922,14 +922,14 @@ export interface GRETunnelGetParams {
 }
 
 export namespace GRETunnels {
-  export import GRETunnelCreateResponse = GRETunnelsAPI.GRETunnelCreateResponse;
-  export import GRETunnelUpdateResponse = GRETunnelsAPI.GRETunnelUpdateResponse;
-  export import GRETunnelListResponse = GRETunnelsAPI.GRETunnelListResponse;
-  export import GRETunnelDeleteResponse = GRETunnelsAPI.GRETunnelDeleteResponse;
-  export import GRETunnelGetResponse = GRETunnelsAPI.GRETunnelGetResponse;
-  export import GRETunnelCreateParams = GRETunnelsAPI.GRETunnelCreateParams;
-  export import GRETunnelUpdateParams = GRETunnelsAPI.GRETunnelUpdateParams;
-  export import GRETunnelListParams = GRETunnelsAPI.GRETunnelListParams;
-  export import GRETunnelDeleteParams = GRETunnelsAPI.GRETunnelDeleteParams;
-  export import GRETunnelGetParams = GRETunnelsAPI.GRETunnelGetParams;
+  export type GRETunnelCreateResponse = GRETunnelsAPI.GRETunnelCreateResponse;
+  export type GRETunnelUpdateResponse = GRETunnelsAPI.GRETunnelUpdateResponse;
+  export type GRETunnelListResponse = GRETunnelsAPI.GRETunnelListResponse;
+  export type GRETunnelDeleteResponse = GRETunnelsAPI.GRETunnelDeleteResponse;
+  export type GRETunnelGetResponse = GRETunnelsAPI.GRETunnelGetResponse;
+  export type GRETunnelCreateParams = GRETunnelsAPI.GRETunnelCreateParams;
+  export type GRETunnelUpdateParams = GRETunnelsAPI.GRETunnelUpdateParams;
+  export type GRETunnelListParams = GRETunnelsAPI.GRETunnelListParams;
+  export type GRETunnelDeleteParams = GRETunnelsAPI.GRETunnelDeleteParams;
+  export type GRETunnelGetParams = GRETunnelsAPI.GRETunnelGetParams;
 }

@@ -203,30 +203,30 @@ export interface LocationGetParams {
 }
 
 export namespace Locations {
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+  export type LocationGetResponse = LocationsAPI.LocationGetResponse;
+  export type LocationGetParams = LocationsAPI.LocationGetParams;
   export import BotClass = BotClassAPI.BotClass;
-  export import BotClassGetResponse = BotClassAPI.BotClassGetResponse;
-  export import BotClassGetParams = BotClassAPI.BotClassGetParams;
+  export type BotClassGetResponse = BotClassAPI.BotClassGetResponse;
+  export type BotClassGetParams = BotClassAPI.BotClassGetParams;
   export import DeviceType = DeviceTypeAPI.DeviceType;
-  export import DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
-  export import DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
+  export type DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
+  export type DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
   export import HTTPProtocol = HTTPProtocolAPI.HTTPProtocol;
-  export import HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
-  export import HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
+  export type HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
+  export type HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
   export import HTTPMethod = HTTPMethodAPI.HTTPMethod;
-  export import HTTPMethodGetResponse = HTTPMethodAPI.HTTPMethodGetResponse;
-  export import HTTPMethodGetParams = HTTPMethodAPI.HTTPMethodGetParams;
+  export type HTTPMethodGetResponse = HTTPMethodAPI.HTTPMethodGetResponse;
+  export type HTTPMethodGetParams = HTTPMethodAPI.HTTPMethodGetParams;
   export import IPVersion = IPVersionAPI.IPVersion;
-  export import IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
-  export import IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
+  export type IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
+  export type IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
   export import OS = OSAPI.OS;
-  export import OSGetResponse = OSAPI.OSGetResponse;
-  export import OSGetParams = OSAPI.OSGetParams;
+  export type OSGetResponse = OSAPI.OSGetResponse;
+  export type OSGetParams = OSAPI.OSGetParams;
   export import TLSVersion = TLSVersionAPI.TLSVersion;
-  export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
-  export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
+  export type TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
+  export type TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
   export import BrowserFamily = BrowserFamilyAPI.BrowserFamily;
-  export import BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
-  export import BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
+  export type BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
+  export type BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
 }

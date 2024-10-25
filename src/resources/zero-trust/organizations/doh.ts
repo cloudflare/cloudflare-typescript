@@ -136,8 +136,8 @@ export interface DOHGetParams {
 }
 
 export namespace DOH {
-  export import DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
-  export import DOHGetResponse = DOHAPI.DOHGetResponse;
-  export import DOHUpdateParams = DOHAPI.DOHUpdateParams;
-  export import DOHGetParams = DOHAPI.DOHGetParams;
+  export type DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
+  export type DOHGetResponse = DOHAPI.DOHGetResponse;
+  export type DOHUpdateParams = DOHAPI.DOHUpdateParams;
+  export type DOHGetParams = DOHAPI.DOHGetParams;
 }

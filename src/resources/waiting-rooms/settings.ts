@@ -117,11 +117,11 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export import Setting = SettingsAPI.Setting;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+  export type Setting = SettingsAPI.Setting;
+  export type SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
+  export type SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export type SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export type SettingUpdateParams = SettingsAPI.SettingUpdateParams;
+  export type SettingEditParams = SettingsAPI.SettingEditParams;
+  export type SettingGetParams = SettingsAPI.SettingGetParams;
 }

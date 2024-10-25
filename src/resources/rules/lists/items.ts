@@ -260,16 +260,16 @@ export interface ItemDeleteParams {
 }
 
 export namespace Items {
-  export import ListCursor = ItemsAPI.ListCursor;
-  export import ListItem = ItemsAPI.ListItem;
-  export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
-  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
-  export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
-  export import ItemGetResponse = ItemsAPI.ItemGetResponse;
+  export type ListCursor = ItemsAPI.ListCursor;
+  export type ListItem = ItemsAPI.ListItem;
+  export type ItemCreateResponse = ItemsAPI.ItemCreateResponse;
+  export type ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
+  export type ItemListResponse = ItemsAPI.ItemListResponse;
+  export type ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
+  export type ItemGetResponse = ItemsAPI.ItemGetResponse;
   export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
-  export import ItemCreateParams = ItemsAPI.ItemCreateParams;
-  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
-  export import ItemListParams = ItemsAPI.ItemListParams;
-  export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
+  export type ItemCreateParams = ItemsAPI.ItemCreateParams;
+  export type ItemUpdateParams = ItemsAPI.ItemUpdateParams;
+  export type ItemListParams = ItemsAPI.ItemListParams;
+  export type ItemDeleteParams = ItemsAPI.ItemDeleteParams;
 }
