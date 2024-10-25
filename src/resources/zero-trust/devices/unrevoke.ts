@@ -11,18 +11,18 @@ export class Unrevoke extends APIResource {
   create(
     params: UnrevokeCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<UnrevokeCreateResponse | null> {
+  ): Core.APIPromise<UnrevokeCreateResponse> {
     const { account_id, body } = params;
     return (
       this._client.post(`/accounts/${account_id}/devices/unrevoke`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: UnrevokeCreateResponse | null }>
+      }) as Core.APIPromise<{ result: UnrevokeCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export type UnrevokeCreateResponse = unknown | string;
+export type UnrevokeCreateResponse = unknown | string | null;
 
 export interface UnrevokeCreateParams {
   /**
