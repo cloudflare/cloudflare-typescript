@@ -1194,22 +1194,22 @@ export interface SummaryTLSVersionParams {
 }
 
 export namespace Summary {
-  export type SummaryARCResponse = SummaryAPI.SummaryARCResponse;
-  export type SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export type SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
-  export type SummaryMaliciousResponse = SummaryAPI.SummaryMaliciousResponse;
-  export type SummarySpamResponse = SummaryAPI.SummarySpamResponse;
-  export type SummarySPFResponse = SummaryAPI.SummarySPFResponse;
-  export type SummarySpoofResponse = SummaryAPI.SummarySpoofResponse;
-  export type SummaryThreatCategoryResponse = SummaryAPI.SummaryThreatCategoryResponse;
-  export type SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
-  export type SummaryARCParams = SummaryAPI.SummaryARCParams;
-  export type SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export type SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
-  export type SummaryMaliciousParams = SummaryAPI.SummaryMaliciousParams;
-  export type SummarySpamParams = SummaryAPI.SummarySpamParams;
-  export type SummarySPFParams = SummaryAPI.SummarySPFParams;
-  export type SummarySpoofParams = SummaryAPI.SummarySpoofParams;
-  export type SummaryThreatCategoryParams = SummaryAPI.SummaryThreatCategoryParams;
-  export type SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
+  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
+  export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
+  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
+  export import SummaryMaliciousResponse = SummaryAPI.SummaryMaliciousResponse;
+  export import SummarySpamResponse = SummaryAPI.SummarySpamResponse;
+  export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
+  export import SummarySpoofResponse = SummaryAPI.SummarySpoofResponse;
+  export import SummaryThreatCategoryResponse = SummaryAPI.SummaryThreatCategoryResponse;
+  export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
+  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
+  export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
+  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
+  export import SummaryMaliciousParams = SummaryAPI.SummaryMaliciousParams;
+  export import SummarySpamParams = SummaryAPI.SummarySpamParams;
+  export import SummarySPFParams = SummaryAPI.SummarySPFParams;
+  export import SummarySpoofParams = SummaryAPI.SummarySpoofParams;
+  export import SummaryThreatCategoryParams = SummaryAPI.SummaryThreatCategoryParams;
+  export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
 }

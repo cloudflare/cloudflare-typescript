@@ -39,6 +39,6 @@ export interface ManagementCreateParams {
 }
 
 export namespace Management {
-  export type ManagementCreateResponse = ManagementAPI.ManagementCreateResponse;
-  export type ManagementCreateParams = ManagementAPI.ManagementCreateParams;
+  export import ManagementCreateResponse = ManagementAPI.ManagementCreateResponse;
+  export import ManagementCreateParams = ManagementAPI.ManagementCreateParams;
 }

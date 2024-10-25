@@ -2,15 +2,15 @@
 
 export { Turnstile } from './turnstile';
 export {
+  Widget,
+  WidgetDomain,
+  WidgetListResponse,
+  WidgetCreateParams,
+  WidgetUpdateParams,
+  WidgetListParams,
+  WidgetDeleteParams,
+  WidgetGetParams,
+  WidgetRotateSecretParams,
   WidgetListResponsesV4PagePaginationArray,
   Widgets,
-  type Widget,
-  type WidgetDomain,
-  type WidgetListResponse,
-  type WidgetCreateParams,
-  type WidgetUpdateParams,
-  type WidgetListParams,
-  type WidgetDeleteParams,
-  type WidgetGetParams,
-  type WidgetRotateSecretParams,
 } from './widgets';

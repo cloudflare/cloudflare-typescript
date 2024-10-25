@@ -44,6 +44,6 @@ export interface QuotaGetParams {
 }
 
 export namespace Quota {
-  export type QuotaGetResponse = QuotaAPI.QuotaGetResponse;
-  export type QuotaGetParams = QuotaAPI.QuotaGetParams;
+  export import QuotaGetResponse = QuotaAPI.QuotaGetResponse;
+  export import QuotaGetParams = QuotaAPI.QuotaGetParams;
 }

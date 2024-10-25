@@ -238,8 +238,8 @@ export interface IQITimeseriesGroupsParams {
 }
 
 export namespace IQI {
-  export type IQISummaryResponse = IQIAPI.IQISummaryResponse;
-  export type IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
-  export type IQISummaryParams = IQIAPI.IQISummaryParams;
-  export type IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
+  export import IQISummaryResponse = IQIAPI.IQISummaryResponse;
+  export import IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
+  export import IQISummaryParams = IQIAPI.IQISummaryParams;
+  export import IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
 }

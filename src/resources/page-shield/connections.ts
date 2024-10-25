@@ -167,8 +167,8 @@ export interface ConnectionGetParams {
 }
 
 export namespace Connections {
-  export type Connection = ConnectionsAPI.Connection;
+  export import Connection = ConnectionsAPI.Connection;
   export import ConnectionsSinglePage = ConnectionsAPI.ConnectionsSinglePage;
-  export type ConnectionListParams = ConnectionsAPI.ConnectionListParams;
-  export type ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
+  export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
+  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
 }

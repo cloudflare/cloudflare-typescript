@@ -190,6 +190,6 @@ export interface DeviceTypeGetParams {
 }
 
 export namespace DeviceType {
-  export type DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
-  export type DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
+  export import DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
+  export import DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
 }

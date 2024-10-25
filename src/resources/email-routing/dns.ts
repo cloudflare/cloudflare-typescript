@@ -137,10 +137,10 @@ export interface DNSGetParams {
 }
 
 export namespace DNS {
-  export type DNSRecord = DNSAPI.DNSRecord;
-  export type DNSGetResponse = DNSAPI.DNSGetResponse;
-  export type DNSCreateParams = DNSAPI.DNSCreateParams;
-  export type DNSDeleteParams = DNSAPI.DNSDeleteParams;
-  export type DNSEditParams = DNSAPI.DNSEditParams;
-  export type DNSGetParams = DNSAPI.DNSGetParams;
+  export import DNSRecord = DNSAPI.DNSRecord;
+  export import DNSGetResponse = DNSAPI.DNSGetResponse;
+  export import DNSCreateParams = DNSAPI.DNSCreateParams;
+  export import DNSDeleteParams = DNSAPI.DNSDeleteParams;
+  export import DNSEditParams = DNSAPI.DNSEditParams;
+  export import DNSGetParams = DNSAPI.DNSGetParams;
 }

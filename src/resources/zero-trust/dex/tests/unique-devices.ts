@@ -46,6 +46,6 @@ export interface UniqueDeviceListParams {
 }
 
 export namespace UniqueDevices {
-  export type UniqueDevices = UniqueDevicesAPI.UniqueDevices;
-  export type UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
+  export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
+  export import UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
 }

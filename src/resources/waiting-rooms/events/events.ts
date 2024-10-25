@@ -528,17 +528,17 @@ export interface EventGetParams {
 }
 
 export namespace Events {
-  export type Event = EventsAPI.Event;
-  export type EventDeleteResponse = EventsAPI.EventDeleteResponse;
+  export import Event = EventsAPI.Event;
+  export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
   export import EventsV4PagePaginationArray = EventsAPI.EventsV4PagePaginationArray;
-  export type EventCreateParams = EventsAPI.EventCreateParams;
-  export type EventUpdateParams = EventsAPI.EventUpdateParams;
-  export type EventListParams = EventsAPI.EventListParams;
-  export type EventDeleteParams = EventsAPI.EventDeleteParams;
-  export type EventEditParams = EventsAPI.EventEditParams;
-  export type EventGetParams = EventsAPI.EventGetParams;
+  export import EventCreateParams = EventsAPI.EventCreateParams;
+  export import EventUpdateParams = EventsAPI.EventUpdateParams;
+  export import EventListParams = EventsAPI.EventListParams;
+  export import EventDeleteParams = EventsAPI.EventDeleteParams;
+  export import EventEditParams = EventsAPI.EventEditParams;
+  export import EventGetParams = EventsAPI.EventGetParams;
   export import Details = DetailsAPI.Details;
-  export type EventQuery = DetailsAPI.EventQuery;
-  export type DetailGetResponse = DetailsAPI.DetailGetResponse;
-  export type DetailGetParams = DetailsAPI.DetailGetParams;
+  export import EventQuery = DetailsAPI.EventQuery;
+  export import DetailGetResponse = DetailsAPI.DetailGetResponse;
+  export import DetailGetParams = DetailsAPI.DetailGetParams;
 }

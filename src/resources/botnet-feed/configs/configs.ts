@@ -9,8 +9,8 @@ export class Configs extends APIResource {
 
 export namespace Configs {
   export import ASN = ASNAPI.ASN;
-  export type ASNDeleteResponse = ASNAPI.ASNDeleteResponse;
-  export type ASNGetResponse = ASNAPI.ASNGetResponse;
-  export type ASNDeleteParams = ASNAPI.ASNDeleteParams;
-  export type ASNGetParams = ASNAPI.ASNGetParams;
+  export import ASNDeleteResponse = ASNAPI.ASNDeleteResponse;
+  export import ASNGetResponse = ASNAPI.ASNGetResponse;
+  export import ASNDeleteParams = ASNAPI.ASNDeleteParams;
+  export import ASNGetParams = ASNAPI.ASNGetParams;
 }

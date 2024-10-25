@@ -92,6 +92,6 @@ export namespace SearchGetParams {
 }
 
 export namespace Searches {
-  export type SearchGetResponse = SearchesAPI.SearchGetResponse;
-  export type SearchGetParams = SearchesAPI.SearchGetParams;
+  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
+  export import SearchGetParams = SearchesAPI.SearchGetParams;
 }

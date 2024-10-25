@@ -318,15 +318,15 @@ export interface OverrideGetParams {
 }
 
 export namespace Overrides {
-  export type Override = OverridesAPI.Override;
-  export type OverrideURL = OverridesAPI.OverrideURL;
-  export type RewriteAction = OverridesAPI.RewriteAction;
-  export type WAFRule = OverridesAPI.WAFRule;
-  export type OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
+  export import Override = OverridesAPI.Override;
+  export import OverrideURL = OverridesAPI.OverrideURL;
+  export import RewriteAction = OverridesAPI.RewriteAction;
+  export import WAFRule = OverridesAPI.WAFRule;
+  export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
   export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
-  export type OverrideCreateParams = OverridesAPI.OverrideCreateParams;
-  export type OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
-  export type OverrideListParams = OverridesAPI.OverrideListParams;
-  export type OverrideDeleteParams = OverridesAPI.OverrideDeleteParams;
-  export type OverrideGetParams = OverridesAPI.OverrideGetParams;
+  export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
+  export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
+  export import OverrideListParams = OverridesAPI.OverrideListParams;
+  export import OverrideDeleteParams = OverridesAPI.OverrideDeleteParams;
+  export import OverrideGetParams = OverridesAPI.OverrideGetParams;
 }

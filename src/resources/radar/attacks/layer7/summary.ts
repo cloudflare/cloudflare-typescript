@@ -1121,16 +1121,16 @@ export interface SummaryMitigationProductParams {
 }
 
 export namespace Summary {
-  export type SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export type SummaryHTTPMethodResponse = SummaryAPI.SummaryHTTPMethodResponse;
-  export type SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export type SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export type SummaryManagedRulesResponse = SummaryAPI.SummaryManagedRulesResponse;
-  export type SummaryMitigationProductResponse = SummaryAPI.SummaryMitigationProductResponse;
-  export type SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export type SummaryHTTPMethodParams = SummaryAPI.SummaryHTTPMethodParams;
-  export type SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export type SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export type SummaryManagedRulesParams = SummaryAPI.SummaryManagedRulesParams;
-  export type SummaryMitigationProductParams = SummaryAPI.SummaryMitigationProductParams;
+  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export import SummaryHTTPMethodResponse = SummaryAPI.SummaryHTTPMethodResponse;
+  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
+  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
+  export import SummaryManagedRulesResponse = SummaryAPI.SummaryManagedRulesResponse;
+  export import SummaryMitigationProductResponse = SummaryAPI.SummaryMitigationProductResponse;
+  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export import SummaryHTTPMethodParams = SummaryAPI.SummaryHTTPMethodParams;
+  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
+  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
+  export import SummaryManagedRulesParams = SummaryAPI.SummaryManagedRulesParams;
+  export import SummaryMitigationProductParams = SummaryAPI.SummaryMitigationProductParams;
 }

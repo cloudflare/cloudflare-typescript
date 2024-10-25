@@ -88,7 +88,7 @@ export interface PhishguardListParams {
 }
 
 export namespace Phishguard {
-  export type PhishguardListResponse = PhishguardAPI.PhishguardListResponse;
+  export import PhishguardListResponse = PhishguardAPI.PhishguardListResponse;
   export import PhishguardListResponsesSinglePage = PhishguardAPI.PhishguardListResponsesSinglePage;
-  export type PhishguardListParams = PhishguardAPI.PhishguardListParams;
+  export import PhishguardListParams = PhishguardAPI.PhishguardListParams;
 }

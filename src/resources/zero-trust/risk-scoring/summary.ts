@@ -43,6 +43,6 @@ export interface SummaryGetParams {
 }
 
 export namespace Summary {
-  export type SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export type SummaryGetParams = SummaryAPI.SummaryGetParams;
+  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
+  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
 }

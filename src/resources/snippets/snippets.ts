@@ -150,11 +150,11 @@ export interface SnippetGetParams {
 
 export namespace Snippets {
   export import Content = ContentAPI.Content;
-  export type ContentGetParams = ContentAPI.ContentGetParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
   export import Rules = RulesAPI.Rules;
-  export type RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export type RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
+  export import RuleListResponse = RulesAPI.RuleListResponse;
   export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
-  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export type RuleListParams = RulesAPI.RuleListParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
 }

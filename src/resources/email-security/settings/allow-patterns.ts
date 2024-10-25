@@ -417,15 +417,15 @@ export interface AllowPatternGetParams {
 }
 
 export namespace AllowPatterns {
-  export type AllowPatternCreateResponse = AllowPatternsAPI.AllowPatternCreateResponse;
-  export type AllowPatternListResponse = AllowPatternsAPI.AllowPatternListResponse;
-  export type AllowPatternDeleteResponse = AllowPatternsAPI.AllowPatternDeleteResponse;
-  export type AllowPatternEditResponse = AllowPatternsAPI.AllowPatternEditResponse;
-  export type AllowPatternGetResponse = AllowPatternsAPI.AllowPatternGetResponse;
+  export import AllowPatternCreateResponse = AllowPatternsAPI.AllowPatternCreateResponse;
+  export import AllowPatternListResponse = AllowPatternsAPI.AllowPatternListResponse;
+  export import AllowPatternDeleteResponse = AllowPatternsAPI.AllowPatternDeleteResponse;
+  export import AllowPatternEditResponse = AllowPatternsAPI.AllowPatternEditResponse;
+  export import AllowPatternGetResponse = AllowPatternsAPI.AllowPatternGetResponse;
   export import AllowPatternListResponsesV4PagePaginationArray = AllowPatternsAPI.AllowPatternListResponsesV4PagePaginationArray;
-  export type AllowPatternCreateParams = AllowPatternsAPI.AllowPatternCreateParams;
-  export type AllowPatternListParams = AllowPatternsAPI.AllowPatternListParams;
-  export type AllowPatternDeleteParams = AllowPatternsAPI.AllowPatternDeleteParams;
-  export type AllowPatternEditParams = AllowPatternsAPI.AllowPatternEditParams;
-  export type AllowPatternGetParams = AllowPatternsAPI.AllowPatternGetParams;
+  export import AllowPatternCreateParams = AllowPatternsAPI.AllowPatternCreateParams;
+  export import AllowPatternListParams = AllowPatternsAPI.AllowPatternListParams;
+  export import AllowPatternDeleteParams = AllowPatternsAPI.AllowPatternDeleteParams;
+  export import AllowPatternEditParams = AllowPatternsAPI.AllowPatternEditParams;
+  export import AllowPatternGetParams = AllowPatternsAPI.AllowPatternGetParams;
 }

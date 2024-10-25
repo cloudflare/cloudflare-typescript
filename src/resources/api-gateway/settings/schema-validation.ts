@@ -116,7 +116,7 @@ export interface SchemaValidationGetParams {
 }
 
 export namespace SchemaValidation {
-  export type SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export type SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export type SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
+  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
+  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
 }

@@ -327,10 +327,10 @@ export interface SettingGetParams {
 }
 
 export namespace Settings {
-  export type DNSSetting = SettingsAPI.DNSSetting;
-  export type Nameserver = SettingsAPI.Nameserver;
-  export type SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export type SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export type SettingEditParams = SettingsAPI.SettingEditParams;
-  export type SettingGetParams = SettingsAPI.SettingGetParams;
+  export import DNSSetting = SettingsAPI.DNSSetting;
+  export import Nameserver = SettingsAPI.Nameserver;
+  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
+  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
+  export import SettingEditParams = SettingsAPI.SettingEditParams;
+  export import SettingGetParams = SettingsAPI.SettingGetParams;
 }

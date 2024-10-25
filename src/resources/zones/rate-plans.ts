@@ -81,6 +81,6 @@ export interface RatePlanGetParams {
 }
 
 export namespace RatePlans {
-  export type RatePlanGetResponse = RatePlansAPI.RatePlanGetResponse;
-  export type RatePlanGetParams = RatePlansAPI.RatePlanGetParams;
+  export import RatePlanGetResponse = RatePlansAPI.RatePlanGetResponse;
+  export import RatePlanGetParams = RatePlansAPI.RatePlanGetParams;
 }

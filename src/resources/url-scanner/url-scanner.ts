@@ -55,22 +55,22 @@ export namespace URLScannerTask {
 
 export namespace URLScanner {
   export import Responses = ResponsesAPI.Responses;
-  export type ResponseGetResponse = ResponsesAPI.ResponseGetResponse;
+  export import ResponseGetResponse = ResponsesAPI.ResponseGetResponse;
   export import Scans = ScansAPI.Scans;
-  export type ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export type ScanListResponse = ScansAPI.ScanListResponse;
-  export type ScanGetResponse = ScansAPI.ScanGetResponse;
-  export type ScanHARResponse = ScansAPI.ScanHARResponse;
-  export type ScanCreateParams = ScansAPI.ScanCreateParams;
-  export type ScanListParams = ScansAPI.ScanListParams;
-  export type ScanGetParams = ScansAPI.ScanGetParams;
-  export type ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
+  export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
+  export import ScanListResponse = ScansAPI.ScanListResponse;
+  export import ScanGetResponse = ScansAPI.ScanGetResponse;
+  export import ScanHARResponse = ScansAPI.ScanHARResponse;
+  export import ScanCreateParams = ScansAPI.ScanCreateParams;
+  export import ScanListParams = ScansAPI.ScanListParams;
+  export import ScanGetParams = ScansAPI.ScanGetParams;
+  export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
   export import DOM = DOMAPI.DOM;
-  export type DOMGetResponse = DOMAPI.DOMGetResponse;
+  export import DOMGetResponse = DOMAPI.DOMGetResponse;
   export import HAR = HARAPI.HAR;
-  export type HARGetResponse = HARAPI.HARGetResponse;
+  export import HARGetResponse = HARAPI.HARGetResponse;
   export import Result = ResultAPI.Result;
-  export type ResultGetResponse = ResultAPI.ResultGetResponse;
+  export import ResultGetResponse = ResultAPI.ResultGetResponse;
   export import Screenshot = ScreenshotAPI.Screenshot;
-  export type ScreenshotGetParams = ScreenshotAPI.ScreenshotGetParams;
+  export import ScreenshotGetParams = ScreenshotAPI.ScreenshotGetParams;
 }

@@ -750,23 +750,23 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Tokens {
-  export type CIDRList = TokensAPI.CIDRList;
-  export type Policy = TokensAPI.Policy;
-  export type Token = TokensAPI.Token;
-  export type TokenCreateResponse = TokensAPI.TokenCreateResponse;
-  export type TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
-  export type TokenListResponse = TokensAPI.TokenListResponse;
-  export type TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
-  export type TokenGetResponse = TokensAPI.TokenGetResponse;
-  export type TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
+  export import CIDRList = TokensAPI.CIDRList;
+  export import Policy = TokensAPI.Policy;
+  export import Token = TokensAPI.Token;
+  export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
+  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
+  export import TokenListResponse = TokensAPI.TokenListResponse;
+  export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
+  export import TokenGetResponse = TokensAPI.TokenGetResponse;
+  export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
   export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
-  export type TokenCreateParams = TokensAPI.TokenCreateParams;
-  export type TokenUpdateParams = TokensAPI.TokenUpdateParams;
-  export type TokenListParams = TokensAPI.TokenListParams;
+  export import TokenCreateParams = TokensAPI.TokenCreateParams;
+  export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
+  export import TokenListParams = TokensAPI.TokenListParams;
   export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
-  export type PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
+  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
   export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
   export import ValueResource = ValueAPI.ValueResource;
-  export type Value = ValueAPI.Value;
-  export type ValueUpdateParams = ValueAPI.ValueUpdateParams;
+  export import Value = ValueAPI.Value;
+  export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
 }

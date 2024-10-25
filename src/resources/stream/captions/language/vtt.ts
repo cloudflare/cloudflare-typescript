@@ -32,6 +32,6 @@ export interface VttGetParams {
 }
 
 export namespace Vtt {
-  export type VttGetResponse = VttAPI.VttGetResponse;
-  export type VttGetParams = VttAPI.VttGetParams;
+  export import VttGetResponse = VttAPI.VttGetResponse;
+  export import VttGetParams = VttAPI.VttGetParams;
 }

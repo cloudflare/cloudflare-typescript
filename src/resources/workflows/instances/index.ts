@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  InstanceCreateResponse,
+  InstanceListResponse,
+  InstanceGetResponse,
+  InstanceCreateParams,
+  InstanceListParams,
+  InstanceGetParams,
   InstanceListResponsesV4PagePaginationArray,
   Instances,
-  type InstanceCreateResponse,
-  type InstanceListResponse,
-  type InstanceGetResponse,
-  type InstanceCreateParams,
-  type InstanceListParams,
-  type InstanceGetParams,
 } from './instances';
-export { Status, type StatusEditResponse, type StatusEditParams } from './status';
+export { StatusEditResponse, StatusEditParams, Status } from './status';

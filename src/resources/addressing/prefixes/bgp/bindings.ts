@@ -175,11 +175,11 @@ export interface BindingGetParams {
 }
 
 export namespace Bindings {
-  export type ServiceBinding = BindingsAPI.ServiceBinding;
-  export type BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
+  export import ServiceBinding = BindingsAPI.ServiceBinding;
+  export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
   export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
-  export type BindingCreateParams = BindingsAPI.BindingCreateParams;
-  export type BindingListParams = BindingsAPI.BindingListParams;
-  export type BindingDeleteParams = BindingsAPI.BindingDeleteParams;
-  export type BindingGetParams = BindingsAPI.BindingGetParams;
+  export import BindingCreateParams = BindingsAPI.BindingCreateParams;
+  export import BindingListParams = BindingsAPI.BindingListParams;
+  export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;
+  export import BindingGetParams = BindingsAPI.BindingGetParams;
 }

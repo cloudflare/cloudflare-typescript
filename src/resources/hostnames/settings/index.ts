@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Settings } from './settings';
 export {
+  Setting,
+  SettingValue,
+  TLSDeleteResponse,
+  TLSGetResponse,
+  TLSUpdateParams,
+  TLSDeleteParams,
+  TLSGetParams,
   TLS,
-  type Setting,
-  type SettingValue,
-  type TLSDeleteResponse,
-  type TLSGetResponse,
-  type TLSUpdateParams,
-  type TLSDeleteParams,
-  type TLSGetParams,
 } from './tls';
+export { Settings } from './settings';

@@ -150,10 +150,10 @@ export interface SecurityTXTGetParams {
 }
 
 export namespace SecurityTXT {
-  export type SecurityTXTUpdateResponse = SecurityTXTAPI.SecurityTXTUpdateResponse;
-  export type SecurityTXTDeleteResponse = SecurityTXTAPI.SecurityTXTDeleteResponse;
-  export type SecurityTXTGetResponse = SecurityTXTAPI.SecurityTXTGetResponse;
-  export type SecurityTXTUpdateParams = SecurityTXTAPI.SecurityTXTUpdateParams;
-  export type SecurityTXTDeleteParams = SecurityTXTAPI.SecurityTXTDeleteParams;
-  export type SecurityTXTGetParams = SecurityTXTAPI.SecurityTXTGetParams;
+  export import SecurityTXTUpdateResponse = SecurityTXTAPI.SecurityTXTUpdateResponse;
+  export import SecurityTXTDeleteResponse = SecurityTXTAPI.SecurityTXTDeleteResponse;
+  export import SecurityTXTGetResponse = SecurityTXTAPI.SecurityTXTGetResponse;
+  export import SecurityTXTUpdateParams = SecurityTXTAPI.SecurityTXTUpdateParams;
+  export import SecurityTXTDeleteParams = SecurityTXTAPI.SecurityTXTDeleteParams;
+  export import SecurityTXTGetParams = SecurityTXTAPI.SecurityTXTGetParams;
 }

@@ -234,12 +234,12 @@ export interface NetworkGetParams {
 }
 
 export namespace Networks {
-  export type DeviceNetwork = NetworksAPI.DeviceNetwork;
-  export type NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
+  export import DeviceNetwork = NetworksAPI.DeviceNetwork;
+  export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
   export import DeviceNetworksSinglePage = NetworksAPI.DeviceNetworksSinglePage;
-  export type NetworkCreateParams = NetworksAPI.NetworkCreateParams;
-  export type NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
-  export type NetworkListParams = NetworksAPI.NetworkListParams;
-  export type NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
-  export type NetworkGetParams = NetworksAPI.NetworkGetParams;
+  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
+  export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
+  export import NetworkListParams = NetworksAPI.NetworkListParams;
+  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
+  export import NetworkGetParams = NetworksAPI.NetworkGetParams;
 }

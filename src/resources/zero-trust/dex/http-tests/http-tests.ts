@@ -215,10 +215,10 @@ export interface HTTPTestGetParams {
 }
 
 export namespace HTTPTests {
-  export type HTTPDetails = HTTPTestsAPI.HTTPDetails;
-  export type HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
+  export import HTTPDetails = HTTPTestsAPI.HTTPDetails;
+  export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
   export import Percentiles = PercentilesAPI.Percentiles;
-  export type HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
-  export type TestStatOverTime = PercentilesAPI.TestStatOverTime;
-  export type PercentileGetParams = PercentilesAPI.PercentileGetParams;
+  export import HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
+  export import TestStatOverTime = PercentilesAPI.TestStatOverTime;
+  export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
 }

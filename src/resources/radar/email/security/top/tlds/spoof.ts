@@ -157,6 +157,6 @@ export interface SpoofGetParams {
 }
 
 export namespace Spoof {
-  export type SpoofGetResponse = SpoofAPI.SpoofGetResponse;
-  export type SpoofGetParams = SpoofAPI.SpoofGetParams;
+  export import SpoofGetResponse = SpoofAPI.SpoofGetResponse;
+  export import SpoofGetParams = SpoofAPI.SpoofGetParams;
 }

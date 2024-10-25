@@ -152,12 +152,12 @@ export interface TSIGGetParams {
 }
 
 export namespace TSIGs {
-  export type TSIG = TSIGsAPI.TSIG;
-  export type TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
+  export import TSIG = TSIGsAPI.TSIG;
+  export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
   export import TSIGsSinglePage = TSIGsAPI.TSIGsSinglePage;
-  export type TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
-  export type TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
-  export type TSIGListParams = TSIGsAPI.TSIGListParams;
-  export type TSIGDeleteParams = TSIGsAPI.TSIGDeleteParams;
-  export type TSIGGetParams = TSIGsAPI.TSIGGetParams;
+  export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
+  export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
+  export import TSIGListParams = TSIGsAPI.TSIGListParams;
+  export import TSIGDeleteParams = TSIGsAPI.TSIGDeleteParams;
+  export import TSIGGetParams = TSIGsAPI.TSIGGetParams;
 }

@@ -51,7 +51,7 @@ export interface HostListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace Hosts {
-  export type HostListResponse = HostsAPI.HostListResponse;
+  export import HostListResponse = HostsAPI.HostListResponse;
   export import HostListResponsesV4PagePaginationArray = HostsAPI.HostListResponsesV4PagePaginationArray;
-  export type HostListParams = HostsAPI.HostListParams;
+  export import HostListParams = HostsAPI.HostListParams;
 }

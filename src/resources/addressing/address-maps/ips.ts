@@ -133,8 +133,8 @@ export interface IPDeleteParams {
 }
 
 export namespace IPs {
-  export type IPUpdateResponse = IPsAPI.IPUpdateResponse;
-  export type IPDeleteResponse = IPsAPI.IPDeleteResponse;
-  export type IPUpdateParams = IPsAPI.IPUpdateParams;
-  export type IPDeleteParams = IPsAPI.IPDeleteParams;
+  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
+  export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
+  export import IPUpdateParams = IPsAPI.IPUpdateParams;
+  export import IPDeleteParams = IPsAPI.IPDeleteParams;
 }

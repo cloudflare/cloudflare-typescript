@@ -211,11 +211,11 @@ export interface VirtualNetworkGetParams {
 }
 
 export namespace VirtualNetworks {
-  export type VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
+  export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
   export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
-  export type VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
-  export type VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
-  export type VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
-  export type VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
-  export type VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
+  export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
+  export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
+  export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
+  export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
+  export import VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
 }

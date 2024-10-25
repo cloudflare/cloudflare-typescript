@@ -480,16 +480,16 @@ export interface OrganizationRevokeUsersParams {
 }
 
 export namespace Organizations {
-  export type LoginDesign = OrganizationsAPI.LoginDesign;
-  export type Organization = OrganizationsAPI.Organization;
-  export type OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
-  export type OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
-  export type OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
-  export type OrganizationListParams = OrganizationsAPI.OrganizationListParams;
-  export type OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
+  export import LoginDesign = OrganizationsAPI.LoginDesign;
+  export import Organization = OrganizationsAPI.Organization;
+  export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
+  export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
+  export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
+  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
+  export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
   export import DOH = DOHAPI.DOH;
-  export type DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
-  export type DOHGetResponse = DOHAPI.DOHGetResponse;
-  export type DOHUpdateParams = DOHAPI.DOHUpdateParams;
-  export type DOHGetParams = DOHAPI.DOHGetParams;
+  export import DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
+  export import DOHGetResponse = DOHAPI.DOHGetResponse;
+  export import DOHUpdateParams = DOHAPI.DOHUpdateParams;
+  export import DOHGetParams = DOHAPI.DOHGetParams;
 }

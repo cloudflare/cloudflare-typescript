@@ -789,20 +789,20 @@ export interface AccessRuleGetParams {
 }
 
 export namespace AccessRules {
-  export type AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
-  export type AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
-  export type ASNConfiguration = AccessRulesAPI.ASNConfiguration;
-  export type CountryConfiguration = AccessRulesAPI.CountryConfiguration;
-  export type IPV6Configuration = AccessRulesAPI.IPV6Configuration;
-  export type AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
-  export type AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
-  export type AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export type AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
-  export type AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
+  export import AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
+  export import AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
+  export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
+  export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
+  export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
+  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
+  export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
+  export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
+  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
+  export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
   export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
-  export type AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
-  export type AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
-  export type AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
-  export type AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
-  export type AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
+  export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
+  export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
+  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
+  export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
+  export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
 }

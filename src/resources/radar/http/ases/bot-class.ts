@@ -191,6 +191,6 @@ export interface BotClassGetParams {
 }
 
 export namespace BotClass {
-  export type BotClassGetResponse = BotClassAPI.BotClassGetResponse;
-  export type BotClassGetParams = BotClassAPI.BotClassGetParams;
+  export import BotClassGetResponse = BotClassAPI.BotClassGetResponse;
+  export import BotClassGetParams = BotClassAPI.BotClassGetParams;
 }

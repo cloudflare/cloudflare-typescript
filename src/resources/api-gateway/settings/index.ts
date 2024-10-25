@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  SchemaValidationUpdateParams,
+  SchemaValidationEditParams,
+  SchemaValidationGetParams,
   SchemaValidation,
-  type SchemaValidationUpdateParams,
-  type SchemaValidationEditParams,
-  type SchemaValidationGetParams,
 } from './schema-validation';
-export { type Settings } from './settings';
+export { Settings } from './settings';

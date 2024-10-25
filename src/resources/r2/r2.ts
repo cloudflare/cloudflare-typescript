@@ -20,24 +20,24 @@ export class R2 extends APIResource {
 
 export namespace R2 {
   export import Buckets = BucketsAPI.Buckets;
-  export type Bucket = BucketsAPI.Bucket;
-  export type BucketListResponse = BucketsAPI.BucketListResponse;
-  export type BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export type BucketCreateParams = BucketsAPI.BucketCreateParams;
-  export type BucketListParams = BucketsAPI.BucketListParams;
-  export type BucketDeleteParams = BucketsAPI.BucketDeleteParams;
-  export type BucketGetParams = BucketsAPI.BucketGetParams;
+  export import Bucket = BucketsAPI.Bucket;
+  export import BucketListResponse = BucketsAPI.BucketListResponse;
+  export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
+  export import BucketCreateParams = BucketsAPI.BucketCreateParams;
+  export import BucketListParams = BucketsAPI.BucketListParams;
+  export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
+  export import BucketGetParams = BucketsAPI.BucketGetParams;
   export import SippyResource = SippyAPI.SippyResource;
-  export type Provider = SippyAPI.Provider;
-  export type Sippy = SippyAPI.Sippy;
-  export type SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
-  export type SippyUpdateParams = SippyAPI.SippyUpdateParams;
-  export type SippyDeleteParams = SippyAPI.SippyDeleteParams;
-  export type SippyGetParams = SippyAPI.SippyGetParams;
+  export import Provider = SippyAPI.Provider;
+  export import Sippy = SippyAPI.Sippy;
+  export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
+  export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
+  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
+  export import SippyGetParams = SippyAPI.SippyGetParams;
   export import TemporaryCredentials = TemporaryCredentialsAPI.TemporaryCredentials;
-  export type TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
-  export type TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
-  export type TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
+  export import TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
+  export import TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
+  export import TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
   export import Domains = DomainsAPI.Domains;
   export import EventNotifications = EventNotificationsAPI.EventNotifications;
 }

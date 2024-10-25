@@ -1997,10 +1997,10 @@ export interface CustomHostnameGetParams {
 
 export namespace CustomHostnames {
   export import FallbackOrigin = FallbackOriginAPI.FallbackOrigin;
-  export type FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
-  export type FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
-  export type FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
-  export type FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
-  export type FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
-  export type FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
+  export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
+  export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
+  export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
+  export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
+  export import FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
+  export import FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
 }

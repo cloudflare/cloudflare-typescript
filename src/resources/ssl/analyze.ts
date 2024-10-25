@@ -43,6 +43,6 @@ export interface AnalyzeCreateParams {
 }
 
 export namespace Analyze {
-  export type AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
-  export type AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
+  export import AnalyzeCreateResponse = AnalyzeAPI.AnalyzeCreateResponse;
+  export import AnalyzeCreateParams = AnalyzeAPI.AnalyzeCreateParams;
 }

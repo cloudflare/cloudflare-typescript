@@ -9,6 +9,6 @@ export class Analytics extends APIResource {
 
 export namespace Analytics {
   export import Reports = ReportsAPI.Reports;
-  export type Report = ReportsAPI.Report;
-  export type ReportGetParams = ReportsAPI.ReportGetParams;
+  export import Report = ReportsAPI.Report;
+  export import ReportGetParams = ReportsAPI.ReportGetParams;
 }

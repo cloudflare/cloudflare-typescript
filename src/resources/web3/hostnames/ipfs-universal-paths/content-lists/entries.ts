@@ -292,14 +292,14 @@ export interface EntryGetParams {
 }
 
 export namespace Entries {
-  export type EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export type EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
-  export type EntryListResponse = EntriesAPI.EntryListResponse;
-  export type EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
-  export type EntryGetResponse = EntriesAPI.EntryGetResponse;
-  export type EntryCreateParams = EntriesAPI.EntryCreateParams;
-  export type EntryUpdateParams = EntriesAPI.EntryUpdateParams;
-  export type EntryListParams = EntriesAPI.EntryListParams;
-  export type EntryDeleteParams = EntriesAPI.EntryDeleteParams;
-  export type EntryGetParams = EntriesAPI.EntryGetParams;
+  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
+  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
+  export import EntryListResponse = EntriesAPI.EntryListResponse;
+  export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
+  export import EntryGetResponse = EntriesAPI.EntryGetResponse;
+  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
+  export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
+  export import EntryListParams = EntriesAPI.EntryListParams;
+  export import EntryDeleteParams = EntriesAPI.EntryDeleteParams;
+  export import EntryGetParams = EntriesAPI.EntryGetParams;
 }

@@ -45,8 +45,8 @@ export interface LOADocumentCreateParams {
 }
 
 export namespace LOADocuments {
-  export type LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
-  export type LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
+  export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
+  export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
   export import Downloads = DownloadsAPI.Downloads;
-  export type DownloadGetParams = DownloadsAPI.DownloadGetParams;
+  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
 }

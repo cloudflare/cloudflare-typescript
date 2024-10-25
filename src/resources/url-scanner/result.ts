@@ -907,5 +907,5 @@ export namespace ResultGetResponse {
 }
 
 export namespace Result {
-  export type ResultGetResponse = ResultAPI.ResultGetResponse;
+  export import ResultGetResponse = ResultAPI.ResultGetResponse;
 }

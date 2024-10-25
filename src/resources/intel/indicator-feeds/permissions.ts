@@ -143,10 +143,10 @@ export interface PermissionDeleteParams {
 }
 
 export namespace Permissions {
-  export type PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
-  export type PermissionListResponse = PermissionsAPI.PermissionListResponse;
-  export type PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
-  export type PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
-  export type PermissionListParams = PermissionsAPI.PermissionListParams;
-  export type PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
+  export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
+  export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
+  export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
+  export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
+  export import PermissionListParams = PermissionsAPI.PermissionListParams;
+  export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
 }

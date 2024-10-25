@@ -39,7 +39,7 @@ export type DeltaParam =
   | 'minute';
 
 export namespace Analytics {
-  export type Delta = AnalyticsAPI.Delta;
+  export import Delta = AnalyticsAPI.Delta;
   export import Reports = ReportsAPI.Reports;
-  export type ReportGetParams = ReportsAPI.ReportGetParams;
+  export import ReportGetParams = ReportsAPI.ReportGetParams;
 }

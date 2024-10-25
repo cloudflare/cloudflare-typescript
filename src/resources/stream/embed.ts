@@ -29,6 +29,6 @@ export interface EmbedGetParams {
 }
 
 export namespace Embed {
-  export type EmbedGetResponse = EmbedAPI.EmbedGetResponse;
-  export type EmbedGetParams = EmbedAPI.EmbedGetParams;
+  export import EmbedGetResponse = EmbedAPI.EmbedGetResponse;
+  export import EmbedGetParams = EmbedAPI.EmbedGetParams;
 }

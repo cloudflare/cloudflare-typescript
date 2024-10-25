@@ -1139,17 +1139,17 @@ export interface MemberGetParams {
 }
 
 export namespace Members {
-  export type Status = MembersAPI.Status;
-  export type UserWithInviteCode = MembersAPI.UserWithInviteCode;
-  export type MemberCreateResponse = MembersAPI.MemberCreateResponse;
-  export type MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
-  export type MemberListResponse = MembersAPI.MemberListResponse;
-  export type MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export type MemberGetResponse = MembersAPI.MemberGetResponse;
+  export import Status = MembersAPI.Status;
+  export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
+  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
+  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
+  export import MemberListResponse = MembersAPI.MemberListResponse;
+  export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
+  export import MemberGetResponse = MembersAPI.MemberGetResponse;
   export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
-  export type MemberCreateParams = MembersAPI.MemberCreateParams;
-  export type MemberUpdateParams = MembersAPI.MemberUpdateParams;
-  export type MemberListParams = MembersAPI.MemberListParams;
-  export type MemberDeleteParams = MembersAPI.MemberDeleteParams;
-  export type MemberGetParams = MembersAPI.MemberGetParams;
+  export import MemberCreateParams = MembersAPI.MemberCreateParams;
+  export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
+  export import MemberListParams = MembersAPI.MemberListParams;
+  export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
+  export import MemberGetParams = MembersAPI.MemberGetParams;
 }

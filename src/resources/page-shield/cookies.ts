@@ -210,9 +210,9 @@ export interface CookieGetParams {
 }
 
 export namespace Cookies {
-  export type CookieListResponse = CookiesAPI.CookieListResponse;
-  export type CookieGetResponse = CookiesAPI.CookieGetResponse;
+  export import CookieListResponse = CookiesAPI.CookieListResponse;
+  export import CookieGetResponse = CookiesAPI.CookieGetResponse;
   export import CookieListResponsesSinglePage = CookiesAPI.CookieListResponsesSinglePage;
-  export type CookieListParams = CookiesAPI.CookieListParams;
-  export type CookieGetParams = CookiesAPI.CookieGetParams;
+  export import CookieListParams = CookiesAPI.CookieListParams;
+  export import CookieGetParams = CookiesAPI.CookieGetParams;
 }

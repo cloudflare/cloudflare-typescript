@@ -9,6 +9,6 @@ export class Logs extends APIResource {
 
 export namespace Logs {
   export import AccessRequests = AccessRequestsAPI.AccessRequests;
-  export type AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
-  export type AccessRequestListParams = AccessRequestsAPI.AccessRequestListParams;
+  export import AccessRequestListResponse = AccessRequestsAPI.AccessRequestListResponse;
+  export import AccessRequestListParams = AccessRequestsAPI.AccessRequestListParams;
 }

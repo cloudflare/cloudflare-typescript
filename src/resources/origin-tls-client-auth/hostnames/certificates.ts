@@ -309,14 +309,14 @@ export interface CertificateGetParams {
 }
 
 export namespace Certificates {
-  export type Certificate = CertificatesAPI.Certificate;
-  export type CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export type CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export type CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export type CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export type CertificateListParams = CertificatesAPI.CertificateListParams;
-  export type CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export type CertificateGetParams = CertificatesAPI.CertificateGetParams;
+  export import Certificate = CertificatesAPI.Certificate;
+  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
+  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }
 
 export { AuthenticatedOriginPullsSinglePage };

@@ -44,6 +44,6 @@ export interface StatGetParams {
 }
 
 export namespace Stats {
-  export type Stat = StatsAPI.Stat;
-  export type StatGetParams = StatsAPI.StatGetParams;
+  export import Stat = StatsAPI.Stat;
+  export import StatGetParams = StatsAPI.StatGetParams;
 }

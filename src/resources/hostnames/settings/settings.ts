@@ -9,11 +9,11 @@ export class Settings extends APIResource {
 
 export namespace Settings {
   export import TLS = TLSAPI.TLS;
-  export type Setting = TLSAPI.Setting;
-  export type SettingValue = TLSAPI.SettingValue;
-  export type TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
-  export type TLSGetResponse = TLSAPI.TLSGetResponse;
-  export type TLSUpdateParams = TLSAPI.TLSUpdateParams;
-  export type TLSDeleteParams = TLSAPI.TLSDeleteParams;
-  export type TLSGetParams = TLSAPI.TLSGetParams;
+  export import Setting = TLSAPI.Setting;
+  export import SettingValue = TLSAPI.SettingValue;
+  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
+  export import TLSGetResponse = TLSAPI.TLSGetResponse;
+  export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
+  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
+  export import TLSGetParams = TLSAPI.TLSGetParams;
 }

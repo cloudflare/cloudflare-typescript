@@ -407,15 +407,15 @@ export interface ResourceGroupGetParams {
 }
 
 export namespace ResourceGroups {
-  export type ResourceGroupCreateResponse = ResourceGroupsAPI.ResourceGroupCreateResponse;
-  export type ResourceGroupUpdateResponse = ResourceGroupsAPI.ResourceGroupUpdateResponse;
-  export type ResourceGroupListResponse = ResourceGroupsAPI.ResourceGroupListResponse;
-  export type ResourceGroupDeleteResponse = ResourceGroupsAPI.ResourceGroupDeleteResponse;
-  export type ResourceGroupGetResponse = ResourceGroupsAPI.ResourceGroupGetResponse;
+  export import ResourceGroupCreateResponse = ResourceGroupsAPI.ResourceGroupCreateResponse;
+  export import ResourceGroupUpdateResponse = ResourceGroupsAPI.ResourceGroupUpdateResponse;
+  export import ResourceGroupListResponse = ResourceGroupsAPI.ResourceGroupListResponse;
+  export import ResourceGroupDeleteResponse = ResourceGroupsAPI.ResourceGroupDeleteResponse;
+  export import ResourceGroupGetResponse = ResourceGroupsAPI.ResourceGroupGetResponse;
   export import ResourceGroupListResponsesV4PagePaginationArray = ResourceGroupsAPI.ResourceGroupListResponsesV4PagePaginationArray;
-  export type ResourceGroupCreateParams = ResourceGroupsAPI.ResourceGroupCreateParams;
-  export type ResourceGroupUpdateParams = ResourceGroupsAPI.ResourceGroupUpdateParams;
-  export type ResourceGroupListParams = ResourceGroupsAPI.ResourceGroupListParams;
-  export type ResourceGroupDeleteParams = ResourceGroupsAPI.ResourceGroupDeleteParams;
-  export type ResourceGroupGetParams = ResourceGroupsAPI.ResourceGroupGetParams;
+  export import ResourceGroupCreateParams = ResourceGroupsAPI.ResourceGroupCreateParams;
+  export import ResourceGroupUpdateParams = ResourceGroupsAPI.ResourceGroupUpdateParams;
+  export import ResourceGroupListParams = ResourceGroupsAPI.ResourceGroupListParams;
+  export import ResourceGroupDeleteParams = ResourceGroupsAPI.ResourceGroupDeleteParams;
+  export import ResourceGroupGetParams = ResourceGroupsAPI.ResourceGroupGetParams;
 }

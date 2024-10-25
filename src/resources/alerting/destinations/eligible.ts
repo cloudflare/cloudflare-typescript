@@ -49,6 +49,6 @@ export interface EligibleGetParams {
 }
 
 export namespace Eligible {
-  export type EligibleGetResponse = EligibleAPI.EligibleGetResponse;
-  export type EligibleGetParams = EligibleAPI.EligibleGetParams;
+  export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
+  export import EligibleGetParams = EligibleAPI.EligibleGetParams;
 }

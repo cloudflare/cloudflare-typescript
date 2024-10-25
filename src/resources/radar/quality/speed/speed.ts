@@ -228,13 +228,13 @@ export interface SpeedSummaryParams {
 }
 
 export namespace Speed {
-  export type SpeedHistogramResponse = SpeedAPI.SpeedHistogramResponse;
-  export type SpeedSummaryResponse = SpeedAPI.SpeedSummaryResponse;
-  export type SpeedHistogramParams = SpeedAPI.SpeedHistogramParams;
-  export type SpeedSummaryParams = SpeedAPI.SpeedSummaryParams;
+  export import SpeedHistogramResponse = SpeedAPI.SpeedHistogramResponse;
+  export import SpeedSummaryResponse = SpeedAPI.SpeedSummaryResponse;
+  export import SpeedHistogramParams = SpeedAPI.SpeedHistogramParams;
+  export import SpeedSummaryParams = SpeedAPI.SpeedSummaryParams;
   export import Top = TopAPI.Top;
-  export type TopAsesResponse = TopAPI.TopAsesResponse;
-  export type TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export type TopAsesParams = TopAPI.TopAsesParams;
-  export type TopLocationsParams = TopAPI.TopLocationsParams;
+  export import TopAsesResponse = TopAPI.TopAsesResponse;
+  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
+  export import TopAsesParams = TopAPI.TopAsesParams;
+  export import TopLocationsParams = TopAPI.TopLocationsParams;
 }

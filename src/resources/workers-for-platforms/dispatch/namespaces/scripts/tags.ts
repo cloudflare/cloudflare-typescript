@@ -99,11 +99,11 @@ export interface TagDeleteParams {
 }
 
 export namespace Tags {
-  export type TagUpdateResponse = TagsAPI.TagUpdateResponse;
-  export type TagListResponse = TagsAPI.TagListResponse;
-  export type TagDeleteResponse = TagsAPI.TagDeleteResponse;
+  export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
+  export import TagListResponse = TagsAPI.TagListResponse;
+  export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
   export import TagListResponsesSinglePage = TagsAPI.TagListResponsesSinglePage;
-  export type TagUpdateParams = TagsAPI.TagUpdateParams;
-  export type TagListParams = TagsAPI.TagListParams;
-  export type TagDeleteParams = TagsAPI.TagDeleteParams;
+  export import TagUpdateParams = TagsAPI.TagUpdateParams;
+  export import TagListParams = TagsAPI.TagListParams;
+  export import TagDeleteParams = TagsAPI.TagDeleteParams;
 }

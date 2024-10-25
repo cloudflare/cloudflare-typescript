@@ -124,12 +124,12 @@ export interface FallbackDomainGetParams {
 }
 
 export namespace FallbackDomains {
-  export type FallbackDomain = FallbackDomainsAPI.FallbackDomain;
-  export type FallbackDomainPolicy = FallbackDomainsAPI.FallbackDomainPolicy;
-  export type FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
-  export type FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
+  export import FallbackDomain = FallbackDomainsAPI.FallbackDomain;
+  export import FallbackDomainPolicy = FallbackDomainsAPI.FallbackDomainPolicy;
+  export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
+  export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
   export import FallbackDomainsSinglePage = FallbackDomainsAPI.FallbackDomainsSinglePage;
-  export type FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
-  export type FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
-  export type FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
+  export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
+  export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
+  export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
 }

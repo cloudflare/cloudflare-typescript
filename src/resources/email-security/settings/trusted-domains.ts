@@ -336,15 +336,15 @@ export interface TrustedDomainGetParams {
 }
 
 export namespace TrustedDomains {
-  export type TrustedDomainCreateResponse = TrustedDomainsAPI.TrustedDomainCreateResponse;
-  export type TrustedDomainListResponse = TrustedDomainsAPI.TrustedDomainListResponse;
-  export type TrustedDomainDeleteResponse = TrustedDomainsAPI.TrustedDomainDeleteResponse;
-  export type TrustedDomainEditResponse = TrustedDomainsAPI.TrustedDomainEditResponse;
-  export type TrustedDomainGetResponse = TrustedDomainsAPI.TrustedDomainGetResponse;
+  export import TrustedDomainCreateResponse = TrustedDomainsAPI.TrustedDomainCreateResponse;
+  export import TrustedDomainListResponse = TrustedDomainsAPI.TrustedDomainListResponse;
+  export import TrustedDomainDeleteResponse = TrustedDomainsAPI.TrustedDomainDeleteResponse;
+  export import TrustedDomainEditResponse = TrustedDomainsAPI.TrustedDomainEditResponse;
+  export import TrustedDomainGetResponse = TrustedDomainsAPI.TrustedDomainGetResponse;
   export import TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainsAPI.TrustedDomainListResponsesV4PagePaginationArray;
-  export type TrustedDomainCreateParams = TrustedDomainsAPI.TrustedDomainCreateParams;
-  export type TrustedDomainListParams = TrustedDomainsAPI.TrustedDomainListParams;
-  export type TrustedDomainDeleteParams = TrustedDomainsAPI.TrustedDomainDeleteParams;
-  export type TrustedDomainEditParams = TrustedDomainsAPI.TrustedDomainEditParams;
-  export type TrustedDomainGetParams = TrustedDomainsAPI.TrustedDomainGetParams;
+  export import TrustedDomainCreateParams = TrustedDomainsAPI.TrustedDomainCreateParams;
+  export import TrustedDomainListParams = TrustedDomainsAPI.TrustedDomainListParams;
+  export import TrustedDomainDeleteParams = TrustedDomainsAPI.TrustedDomainDeleteParams;
+  export import TrustedDomainEditParams = TrustedDomainsAPI.TrustedDomainEditParams;
+  export import TrustedDomainGetParams = TrustedDomainsAPI.TrustedDomainGetParams;
 }

@@ -101,7 +101,7 @@ export interface HistoryListParams extends V4PagePaginationArrayParams {
 }
 
 export namespace History {
-  export type BillingHistory = HistoryAPI.BillingHistory;
+  export import BillingHistory = HistoryAPI.BillingHistory;
   export import BillingHistoriesV4PagePaginationArray = HistoryAPI.BillingHistoriesV4PagePaginationArray;
-  export type HistoryListParams = HistoryAPI.HistoryListParams;
+  export import HistoryListParams = HistoryAPI.HistoryListParams;
 }

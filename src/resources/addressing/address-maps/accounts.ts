@@ -131,8 +131,8 @@ export interface AccountDeleteParams {
 }
 
 export namespace Accounts {
-  export type AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
-  export type AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
-  export type AccountUpdateParams = AccountsAPI.AccountUpdateParams;
-  export type AccountDeleteParams = AccountsAPI.AccountDeleteParams;
+  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
+  export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
+  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
+  export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
 }

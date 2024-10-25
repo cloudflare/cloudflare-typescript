@@ -1004,12 +1004,12 @@ export interface ScanScreenshotParams {
 }
 
 export namespace Scans {
-  export type ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export type ScanListResponse = ScansAPI.ScanListResponse;
-  export type ScanGetResponse = ScansAPI.ScanGetResponse;
-  export type ScanHARResponse = ScansAPI.ScanHARResponse;
-  export type ScanCreateParams = ScansAPI.ScanCreateParams;
-  export type ScanListParams = ScansAPI.ScanListParams;
-  export type ScanGetParams = ScansAPI.ScanGetParams;
-  export type ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
+  export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
+  export import ScanListResponse = ScansAPI.ScanListResponse;
+  export import ScanGetResponse = ScansAPI.ScanGetResponse;
+  export import ScanHARResponse = ScansAPI.ScanHARResponse;
+  export import ScanCreateParams = ScansAPI.ScanCreateParams;
+  export import ScanListParams = ScansAPI.ScanListParams;
+  export import ScanGetParams = ScansAPI.ScanGetParams;
+  export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
 }

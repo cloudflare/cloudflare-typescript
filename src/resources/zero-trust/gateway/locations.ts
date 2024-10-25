@@ -453,19 +453,19 @@ export interface LocationGetParams {
 }
 
 export namespace Locations {
-  export type DOHEndpoint = LocationsAPI.DOHEndpoint;
-  export type DOTEndpoint = LocationsAPI.DOTEndpoint;
-  export type Endpoint = LocationsAPI.Endpoint;
-  export type IPNetwork = LocationsAPI.IPNetwork;
-  export type IPV4Endpoint = LocationsAPI.IPV4Endpoint;
-  export type IPV6Endpoint = LocationsAPI.IPV6Endpoint;
-  export type IPV6Network = LocationsAPI.IPV6Network;
-  export type Location = LocationsAPI.Location;
-  export type LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
+  export import DOHEndpoint = LocationsAPI.DOHEndpoint;
+  export import DOTEndpoint = LocationsAPI.DOTEndpoint;
+  export import Endpoint = LocationsAPI.Endpoint;
+  export import IPNetwork = LocationsAPI.IPNetwork;
+  export import IPV4Endpoint = LocationsAPI.IPV4Endpoint;
+  export import IPV6Endpoint = LocationsAPI.IPV6Endpoint;
+  export import IPV6Network = LocationsAPI.IPV6Network;
+  export import Location = LocationsAPI.Location;
+  export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
   export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
-  export type LocationCreateParams = LocationsAPI.LocationCreateParams;
-  export type LocationUpdateParams = LocationsAPI.LocationUpdateParams;
-  export type LocationListParams = LocationsAPI.LocationListParams;
-  export type LocationDeleteParams = LocationsAPI.LocationDeleteParams;
-  export type LocationGetParams = LocationsAPI.LocationGetParams;
+  export import LocationCreateParams = LocationsAPI.LocationCreateParams;
+  export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
+  export import LocationListParams = LocationsAPI.LocationListParams;
+  export import LocationDeleteParams = LocationsAPI.LocationDeleteParams;
+  export import LocationGetParams = LocationsAPI.LocationGetParams;
 }

@@ -2,15 +2,15 @@
 
 export { Infrastructure } from './infrastructure';
 export {
+  TargetCreateResponse,
+  TargetUpdateResponse,
+  TargetListResponse,
+  TargetGetResponse,
+  TargetCreateParams,
+  TargetUpdateParams,
+  TargetListParams,
+  TargetDeleteParams,
+  TargetGetParams,
   TargetListResponsesV4PagePaginationArray,
   Targets,
-  type TargetCreateResponse,
-  type TargetUpdateResponse,
-  type TargetListResponse,
-  type TargetGetResponse,
-  type TargetCreateParams,
-  type TargetUpdateParams,
-  type TargetListParams,
-  type TargetDeleteParams,
-  type TargetGetParams,
 } from './targets';

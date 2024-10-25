@@ -107,6 +107,6 @@ export interface TimeseriesGroupUserAgentParams {
 }
 
 export namespace TimeseriesGroups {
-  export type TimeseriesGroupUserAgentResponse = TimeseriesGroupsAPI.TimeseriesGroupUserAgentResponse;
-  export type TimeseriesGroupUserAgentParams = TimeseriesGroupsAPI.TimeseriesGroupUserAgentParams;
+  export import TimeseriesGroupUserAgentResponse = TimeseriesGroupsAPI.TimeseriesGroupUserAgentResponse;
+  export import TimeseriesGroupUserAgentParams = TimeseriesGroupsAPI.TimeseriesGroupUserAgentParams;
 }

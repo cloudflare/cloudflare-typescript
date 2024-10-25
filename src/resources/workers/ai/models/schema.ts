@@ -33,6 +33,6 @@ export interface SchemaGetParams {
 }
 
 export namespace Schema {
-  export type SchemaGetResponse = SchemaAPI.SchemaGetResponse;
-  export type SchemaGetParams = SchemaAPI.SchemaGetParams;
+  export import SchemaGetResponse = SchemaAPI.SchemaGetResponse;
+  export import SchemaGetParams = SchemaAPI.SchemaGetParams;
 }

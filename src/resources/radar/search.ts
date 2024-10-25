@@ -64,6 +64,6 @@ export interface SearchGlobalParams {
 }
 
 export namespace Search {
-  export type SearchGlobalResponse = SearchAPI.SearchGlobalResponse;
-  export type SearchGlobalParams = SearchAPI.SearchGlobalParams;
+  export import SearchGlobalResponse = SearchAPI.SearchGlobalResponse;
+  export import SearchGlobalParams = SearchAPI.SearchGlobalParams;
 }

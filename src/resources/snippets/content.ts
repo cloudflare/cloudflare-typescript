@@ -30,5 +30,5 @@ export interface ContentGetParams {
 }
 
 export namespace Content {
-  export type ContentGetParams = ContentAPI.ContentGetParams;
+  export import ContentGetParams = ContentAPI.ContentGetParams;
 }

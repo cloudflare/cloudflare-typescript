@@ -158,9 +158,9 @@ export interface DeploymentGetParams {
 }
 
 export namespace Deployments {
-  export type Deployment = DeploymentsAPI.Deployment;
-  export type DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
-  export type DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
-  export type DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export type DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
+  export import Deployment = DeploymentsAPI.Deployment;
+  export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
+  export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
+  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
+  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
 }

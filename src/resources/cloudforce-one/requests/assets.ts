@@ -194,10 +194,10 @@ export interface AssetUpdateParams {
 }
 
 export namespace Assets {
-  export type AssetCreateResponse = AssetsAPI.AssetCreateResponse;
-  export type AssetUpdateResponse = AssetsAPI.AssetUpdateResponse;
-  export type AssetDeleteResponse = AssetsAPI.AssetDeleteResponse;
-  export type AssetGetResponse = AssetsAPI.AssetGetResponse;
-  export type AssetCreateParams = AssetsAPI.AssetCreateParams;
-  export type AssetUpdateParams = AssetsAPI.AssetUpdateParams;
+  export import AssetCreateResponse = AssetsAPI.AssetCreateResponse;
+  export import AssetUpdateResponse = AssetsAPI.AssetUpdateResponse;
+  export import AssetDeleteResponse = AssetsAPI.AssetDeleteResponse;
+  export import AssetGetResponse = AssetsAPI.AssetGetResponse;
+  export import AssetCreateParams = AssetsAPI.AssetCreateParams;
+  export import AssetUpdateParams = AssetsAPI.AssetUpdateParams;
 }

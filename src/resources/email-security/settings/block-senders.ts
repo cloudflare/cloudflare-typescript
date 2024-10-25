@@ -309,15 +309,15 @@ export interface BlockSenderGetParams {
 }
 
 export namespace BlockSenders {
-  export type BlockSenderCreateResponse = BlockSendersAPI.BlockSenderCreateResponse;
-  export type BlockSenderListResponse = BlockSendersAPI.BlockSenderListResponse;
-  export type BlockSenderDeleteResponse = BlockSendersAPI.BlockSenderDeleteResponse;
-  export type BlockSenderEditResponse = BlockSendersAPI.BlockSenderEditResponse;
-  export type BlockSenderGetResponse = BlockSendersAPI.BlockSenderGetResponse;
+  export import BlockSenderCreateResponse = BlockSendersAPI.BlockSenderCreateResponse;
+  export import BlockSenderListResponse = BlockSendersAPI.BlockSenderListResponse;
+  export import BlockSenderDeleteResponse = BlockSendersAPI.BlockSenderDeleteResponse;
+  export import BlockSenderEditResponse = BlockSendersAPI.BlockSenderEditResponse;
+  export import BlockSenderGetResponse = BlockSendersAPI.BlockSenderGetResponse;
   export import BlockSenderListResponsesV4PagePaginationArray = BlockSendersAPI.BlockSenderListResponsesV4PagePaginationArray;
-  export type BlockSenderCreateParams = BlockSendersAPI.BlockSenderCreateParams;
-  export type BlockSenderListParams = BlockSendersAPI.BlockSenderListParams;
-  export type BlockSenderDeleteParams = BlockSendersAPI.BlockSenderDeleteParams;
-  export type BlockSenderEditParams = BlockSendersAPI.BlockSenderEditParams;
-  export type BlockSenderGetParams = BlockSendersAPI.BlockSenderGetParams;
+  export import BlockSenderCreateParams = BlockSendersAPI.BlockSenderCreateParams;
+  export import BlockSenderListParams = BlockSendersAPI.BlockSenderListParams;
+  export import BlockSenderDeleteParams = BlockSendersAPI.BlockSenderDeleteParams;
+  export import BlockSenderEditParams = BlockSendersAPI.BlockSenderEditParams;
+  export import BlockSenderGetParams = BlockSendersAPI.BlockSenderGetParams;
 }

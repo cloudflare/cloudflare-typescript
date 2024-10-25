@@ -88,7 +88,7 @@ export interface UploadEditParams {
 }
 
 export namespace Upload {
-  export type NewVersion = UploadAPI.NewVersion;
-  export type UploadCreateParams = UploadAPI.UploadCreateParams;
-  export type UploadEditParams = UploadAPI.UploadEditParams;
+  export import NewVersion = UploadAPI.NewVersion;
+  export import UploadCreateParams = UploadAPI.UploadCreateParams;
+  export import UploadEditParams = UploadAPI.UploadEditParams;
 }

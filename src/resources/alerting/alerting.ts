@@ -15,24 +15,24 @@ export class Alerting extends APIResource {
 
 export namespace Alerting {
   export import AvailableAlerts = AvailableAlertsAPI.AvailableAlerts;
-  export type AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;
-  export type AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
+  export import AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;
+  export import AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
   export import Destinations = DestinationsAPI.Destinations;
   export import HistoryResource = HistoryAPI.HistoryResource;
-  export type History = HistoryAPI.History;
+  export import History = HistoryAPI.History;
   export import HistoriesV4PagePaginationArray = HistoryAPI.HistoriesV4PagePaginationArray;
-  export type HistoryListParams = HistoryAPI.HistoryListParams;
+  export import HistoryListParams = HistoryAPI.HistoryListParams;
   export import Policies = PoliciesAPI.Policies;
-  export type Mechanism = PoliciesAPI.Mechanism;
-  export type Policy = PoliciesAPI.Policy;
-  export type PolicyFilter = PoliciesAPI.PolicyFilter;
-  export type PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export type PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export type PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
+  export import Mechanism = PoliciesAPI.Mechanism;
+  export import Policy = PoliciesAPI.Policy;
+  export import PolicyFilter = PoliciesAPI.PolicyFilter;
+  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
+  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
+  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
   export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
-  export type PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export type PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export type PolicyListParams = PoliciesAPI.PolicyListParams;
-  export type PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export type PolicyGetParams = PoliciesAPI.PolicyGetParams;
+  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
+  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
+  export import PolicyListParams = PoliciesAPI.PolicyListParams;
+  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
+  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
 }

@@ -581,14 +581,14 @@ export interface TargetGetParams {
 }
 
 export namespace Targets {
-  export type TargetCreateResponse = TargetsAPI.TargetCreateResponse;
-  export type TargetUpdateResponse = TargetsAPI.TargetUpdateResponse;
-  export type TargetListResponse = TargetsAPI.TargetListResponse;
-  export type TargetGetResponse = TargetsAPI.TargetGetResponse;
+  export import TargetCreateResponse = TargetsAPI.TargetCreateResponse;
+  export import TargetUpdateResponse = TargetsAPI.TargetUpdateResponse;
+  export import TargetListResponse = TargetsAPI.TargetListResponse;
+  export import TargetGetResponse = TargetsAPI.TargetGetResponse;
   export import TargetListResponsesV4PagePaginationArray = TargetsAPI.TargetListResponsesV4PagePaginationArray;
-  export type TargetCreateParams = TargetsAPI.TargetCreateParams;
-  export type TargetUpdateParams = TargetsAPI.TargetUpdateParams;
-  export type TargetListParams = TargetsAPI.TargetListParams;
-  export type TargetDeleteParams = TargetsAPI.TargetDeleteParams;
-  export type TargetGetParams = TargetsAPI.TargetGetParams;
+  export import TargetCreateParams = TargetsAPI.TargetCreateParams;
+  export import TargetUpdateParams = TargetsAPI.TargetUpdateParams;
+  export import TargetListParams = TargetsAPI.TargetListParams;
+  export import TargetDeleteParams = TargetsAPI.TargetDeleteParams;
+  export import TargetGetParams = TargetsAPI.TargetGetParams;
 }

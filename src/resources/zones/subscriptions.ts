@@ -79,9 +79,9 @@ export interface SubscriptionUpdateParams {
 }
 
 export namespace Subscriptions {
-  export type SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export type SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export type SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export type SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export type SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
+  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
+  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
+  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
+  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
 }

@@ -1,19 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { DOM, type DOMGetResponse } from './dom';
-export { HAR, type HARGetResponse } from './har';
-export { Responses, type ResponseGetResponse } from './responses';
-export { Result, type ResultGetResponse } from './result';
+export { DOMGetResponse, DOM } from './dom';
+export { HARGetResponse, HAR } from './har';
+export { ResponseGetResponse, Responses } from './responses';
+export { ResultGetResponse, Result } from './result';
 export {
+  ScanCreateResponse,
+  ScanListResponse,
+  ScanGetResponse,
+  ScanHARResponse,
+  ScanCreateParams,
+  ScanListParams,
+  ScanGetParams,
+  ScanScreenshotParams,
   Scans,
-  type ScanCreateResponse,
-  type ScanListResponse,
-  type ScanGetResponse,
-  type ScanHARResponse,
-  type ScanCreateParams,
-  type ScanListParams,
-  type ScanGetParams,
-  type ScanScreenshotParams,
 } from './scans';
-export { Screenshot, type ScreenshotGetParams } from './screenshot';
+export { ScreenshotGetParams, Screenshot } from './screenshot';
 export { URLScanner } from './url-scanner';

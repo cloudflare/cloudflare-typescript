@@ -86,8 +86,8 @@ export interface RegionGetParams {
 }
 
 export namespace Regions {
-  export type RegionListResponse = RegionsAPI.RegionListResponse;
-  export type RegionGetResponse = RegionsAPI.RegionGetResponse;
-  export type RegionListParams = RegionsAPI.RegionListParams;
-  export type RegionGetParams = RegionsAPI.RegionGetParams;
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
+  export import RegionGetResponse = RegionsAPI.RegionGetResponse;
+  export import RegionListParams = RegionsAPI.RegionListParams;
+  export import RegionGetParams = RegionsAPI.RegionGetParams;
 }

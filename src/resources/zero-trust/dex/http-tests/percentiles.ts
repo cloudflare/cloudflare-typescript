@@ -90,7 +90,7 @@ export interface PercentileGetParams {
 }
 
 export namespace Percentiles {
-  export type HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
-  export type TestStatOverTime = PercentilesAPI.TestStatOverTime;
-  export type PercentileGetParams = PercentilesAPI.PercentileGetParams;
+  export import HTTPDetailsPercentiles = PercentilesAPI.HTTPDetailsPercentiles;
+  export import TestStatOverTime = PercentilesAPI.TestStatOverTime;
+  export import PercentileGetParams = PercentilesAPI.PercentileGetParams;
 }

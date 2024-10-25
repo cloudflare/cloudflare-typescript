@@ -75,7 +75,7 @@ export interface ReportGetParams {
 }
 
 export namespace Reports {
-  export type ReportGetParams = ReportsReportsAPI.ReportGetParams;
+  export import ReportGetParams = ReportsReportsAPI.ReportGetParams;
   export import Bytimes = BytimesAPI.Bytimes;
-  export type BytimeGetParams = BytimesAPI.BytimeGetParams;
+  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
 }

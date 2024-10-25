@@ -180,17 +180,17 @@ export interface HostnameGetParams {
 }
 
 export namespace Hostnames {
-  export type AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export type HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export type HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
-  export type HostnameGetParams = HostnamesAPI.HostnameGetParams;
+  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
+  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
+  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
+  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
   export import Certificates = CertificatesAPI.Certificates;
-  export type Certificate = CertificatesAPI.Certificate;
-  export type CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export type CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export type CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export type CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export type CertificateListParams = CertificatesAPI.CertificateListParams;
-  export type CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export type CertificateGetParams = CertificatesAPI.CertificateGetParams;
+  export import Certificate = CertificatesAPI.Certificate;
+  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
+  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
+  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
+  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
+  export import CertificateListParams = CertificatesAPI.CertificateListParams;
+  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
+  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
 }

@@ -131,8 +131,8 @@ export interface OwnershipValidateParams {
 }
 
 export namespace Ownership {
-  export type OwnershipValidation = OwnershipAPI.OwnershipValidation;
-  export type OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
-  export type OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export type OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
+  export import OwnershipValidation = OwnershipAPI.OwnershipValidation;
+  export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
+  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
+  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
 }

@@ -487,21 +487,21 @@ export interface PoolGetParams {
 }
 
 export namespace Pools {
-  export type Pool = PoolsAPI.Pool;
-  export type PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
+  export import Pool = PoolsAPI.Pool;
+  export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
   export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
-  export type PoolCreateParams = PoolsAPI.PoolCreateParams;
-  export type PoolUpdateParams = PoolsAPI.PoolUpdateParams;
-  export type PoolListParams = PoolsAPI.PoolListParams;
-  export type PoolDeleteParams = PoolsAPI.PoolDeleteParams;
-  export type PoolEditParams = PoolsAPI.PoolEditParams;
-  export type PoolGetParams = PoolsAPI.PoolGetParams;
+  export import PoolCreateParams = PoolsAPI.PoolCreateParams;
+  export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
+  export import PoolListParams = PoolsAPI.PoolListParams;
+  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
+  export import PoolEditParams = PoolsAPI.PoolEditParams;
+  export import PoolGetParams = PoolsAPI.PoolGetParams;
   export import Health = HealthAPI.Health;
-  export type HealthCreateResponse = HealthAPI.HealthCreateResponse;
-  export type HealthGetResponse = HealthAPI.HealthGetResponse;
-  export type HealthCreateParams = HealthAPI.HealthCreateParams;
-  export type HealthGetParams = HealthAPI.HealthGetParams;
+  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
+  export import HealthGetResponse = HealthAPI.HealthGetResponse;
+  export import HealthCreateParams = HealthAPI.HealthCreateParams;
+  export import HealthGetParams = HealthAPI.HealthGetParams;
   export import References = ReferencesAPI.References;
-  export type ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export type ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
+  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
 }

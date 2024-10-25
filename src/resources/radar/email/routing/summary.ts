@@ -801,16 +801,16 @@ export interface SummarySPFParams {
 }
 
 export namespace Summary {
-  export type SummaryARCResponse = SummaryAPI.SummaryARCResponse;
-  export type SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export type SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
-  export type SummaryEncryptedResponse = SummaryAPI.SummaryEncryptedResponse;
-  export type SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export type SummarySPFResponse = SummaryAPI.SummarySPFResponse;
-  export type SummaryARCParams = SummaryAPI.SummaryARCParams;
-  export type SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export type SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
-  export type SummaryEncryptedParams = SummaryAPI.SummaryEncryptedParams;
-  export type SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export type SummarySPFParams = SummaryAPI.SummarySPFParams;
+  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
+  export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
+  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
+  export import SummaryEncryptedResponse = SummaryAPI.SummaryEncryptedResponse;
+  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
+  export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
+  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
+  export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
+  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
+  export import SummaryEncryptedParams = SummaryAPI.SummaryEncryptedParams;
+  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
+  export import SummarySPFParams = SummaryAPI.SummarySPFParams;
 }

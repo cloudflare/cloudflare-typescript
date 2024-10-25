@@ -558,12 +558,12 @@ export interface IntegrationGetParams {
 }
 
 export namespace Integrations {
-  export type Integration = IntegrationsAPI.Integration;
-  export type IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
+  export import Integration = IntegrationsAPI.Integration;
+  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
   export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
-  export type IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export type IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export type IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export type IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
-  export type IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
+  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
+  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
+  export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
+  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
 }

@@ -244,30 +244,30 @@ export interface ListGetParams {
 }
 
 export namespace Lists {
-  export type Hostname = ListsAPI.Hostname;
-  export type ListsList = ListsAPI.ListsList;
-  export type Redirect = ListsAPI.Redirect;
-  export type ListDeleteResponse = ListsAPI.ListDeleteResponse;
+  export import Hostname = ListsAPI.Hostname;
+  export import ListsList = ListsAPI.ListsList;
+  export import Redirect = ListsAPI.Redirect;
+  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
   export import ListsListsSinglePage = ListsAPI.ListsListsSinglePage;
-  export type ListCreateParams = ListsAPI.ListCreateParams;
-  export type ListUpdateParams = ListsAPI.ListUpdateParams;
-  export type ListListParams = ListsAPI.ListListParams;
-  export type ListDeleteParams = ListsAPI.ListDeleteParams;
-  export type ListGetParams = ListsAPI.ListGetParams;
+  export import ListCreateParams = ListsAPI.ListCreateParams;
+  export import ListUpdateParams = ListsAPI.ListUpdateParams;
+  export import ListListParams = ListsAPI.ListListParams;
+  export import ListDeleteParams = ListsAPI.ListDeleteParams;
+  export import ListGetParams = ListsAPI.ListGetParams;
   export import BulkOperations = BulkOperationsAPI.BulkOperations;
-  export type OperationStatus = BulkOperationsAPI.OperationStatus;
-  export type BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
+  export import OperationStatus = BulkOperationsAPI.OperationStatus;
+  export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
   export import Items = ItemsAPI.Items;
-  export type ListCursor = ItemsAPI.ListCursor;
-  export type ListItem = ItemsAPI.ListItem;
-  export type ItemCreateResponse = ItemsAPI.ItemCreateResponse;
-  export type ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
-  export type ItemListResponse = ItemsAPI.ItemListResponse;
-  export type ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
-  export type ItemGetResponse = ItemsAPI.ItemGetResponse;
+  export import ListCursor = ItemsAPI.ListCursor;
+  export import ListItem = ItemsAPI.ListItem;
+  export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
+  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
+  export import ItemListResponse = ItemsAPI.ItemListResponse;
+  export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
+  export import ItemGetResponse = ItemsAPI.ItemGetResponse;
   export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
-  export type ItemCreateParams = ItemsAPI.ItemCreateParams;
-  export type ItemUpdateParams = ItemsAPI.ItemUpdateParams;
-  export type ItemListParams = ItemsAPI.ItemListParams;
-  export type ItemDeleteParams = ItemsAPI.ItemDeleteParams;
+  export import ItemCreateParams = ItemsAPI.ItemCreateParams;
+  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
+  export import ItemListParams = ItemsAPI.ItemListParams;
+  export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
 }

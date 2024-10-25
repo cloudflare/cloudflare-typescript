@@ -107,8 +107,8 @@ export interface PlanGetParams {
 }
 
 export namespace Plans {
-  export type AvailableRatePlan = PlansAPI.AvailableRatePlan;
+  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
   export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
-  export type PlanListParams = PlansAPI.PlanListParams;
-  export type PlanGetParams = PlansAPI.PlanGetParams;
+  export import PlanListParams = PlansAPI.PlanListParams;
+  export import PlanGetParams = PlansAPI.PlanGetParams;
 }

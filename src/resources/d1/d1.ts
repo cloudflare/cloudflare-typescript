@@ -29,20 +29,20 @@ export interface D1 {
 
 export namespace D1Resource {
   export import Database = DatabaseAPI.Database;
-  export type QueryResult = DatabaseAPI.QueryResult;
-  export type DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
-  export type DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
-  export type DatabaseExportResponse = DatabaseAPI.DatabaseExportResponse;
-  export type DatabaseImportResponse = DatabaseAPI.DatabaseImportResponse;
-  export type DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
-  export type DatabaseRawResponse = DatabaseAPI.DatabaseRawResponse;
+  export import QueryResult = DatabaseAPI.QueryResult;
+  export import DatabaseListResponse = DatabaseAPI.DatabaseListResponse;
+  export import DatabaseDeleteResponse = DatabaseAPI.DatabaseDeleteResponse;
+  export import DatabaseExportResponse = DatabaseAPI.DatabaseExportResponse;
+  export import DatabaseImportResponse = DatabaseAPI.DatabaseImportResponse;
+  export import DatabaseQueryResponse = DatabaseAPI.DatabaseQueryResponse;
+  export import DatabaseRawResponse = DatabaseAPI.DatabaseRawResponse;
   export import DatabaseListResponsesV4PagePaginationArray = DatabaseAPI.DatabaseListResponsesV4PagePaginationArray;
-  export type DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
-  export type DatabaseListParams = DatabaseAPI.DatabaseListParams;
-  export type DatabaseDeleteParams = DatabaseAPI.DatabaseDeleteParams;
-  export type DatabaseExportParams = DatabaseAPI.DatabaseExportParams;
-  export type DatabaseGetParams = DatabaseAPI.DatabaseGetParams;
-  export type DatabaseImportParams = DatabaseAPI.DatabaseImportParams;
-  export type DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
-  export type DatabaseRawParams = DatabaseAPI.DatabaseRawParams;
+  export import DatabaseCreateParams = DatabaseAPI.DatabaseCreateParams;
+  export import DatabaseListParams = DatabaseAPI.DatabaseListParams;
+  export import DatabaseDeleteParams = DatabaseAPI.DatabaseDeleteParams;
+  export import DatabaseExportParams = DatabaseAPI.DatabaseExportParams;
+  export import DatabaseGetParams = DatabaseAPI.DatabaseGetParams;
+  export import DatabaseImportParams = DatabaseAPI.DatabaseImportParams;
+  export import DatabaseQueryParams = DatabaseAPI.DatabaseQueryParams;
+  export import DatabaseRawParams = DatabaseAPI.DatabaseRawParams;
 }

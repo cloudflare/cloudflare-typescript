@@ -229,19 +229,19 @@ export interface RegionalHostnameGetParams {
 }
 
 export namespace RegionalHostnames {
-  export type RegionalHostnameCreateResponse = RegionalHostnamesAPI.RegionalHostnameCreateResponse;
-  export type RegionalHostnameListResponse = RegionalHostnamesAPI.RegionalHostnameListResponse;
-  export type RegionalHostnameDeleteResponse = RegionalHostnamesAPI.RegionalHostnameDeleteResponse;
-  export type RegionalHostnameEditResponse = RegionalHostnamesAPI.RegionalHostnameEditResponse;
-  export type RegionalHostnameGetResponse = RegionalHostnamesAPI.RegionalHostnameGetResponse;
+  export import RegionalHostnameCreateResponse = RegionalHostnamesAPI.RegionalHostnameCreateResponse;
+  export import RegionalHostnameListResponse = RegionalHostnamesAPI.RegionalHostnameListResponse;
+  export import RegionalHostnameDeleteResponse = RegionalHostnamesAPI.RegionalHostnameDeleteResponse;
+  export import RegionalHostnameEditResponse = RegionalHostnamesAPI.RegionalHostnameEditResponse;
+  export import RegionalHostnameGetResponse = RegionalHostnamesAPI.RegionalHostnameGetResponse;
   export import RegionalHostnameListResponsesSinglePage = RegionalHostnamesAPI.RegionalHostnameListResponsesSinglePage;
-  export type RegionalHostnameCreateParams = RegionalHostnamesAPI.RegionalHostnameCreateParams;
-  export type RegionalHostnameListParams = RegionalHostnamesAPI.RegionalHostnameListParams;
-  export type RegionalHostnameDeleteParams = RegionalHostnamesAPI.RegionalHostnameDeleteParams;
-  export type RegionalHostnameEditParams = RegionalHostnamesAPI.RegionalHostnameEditParams;
-  export type RegionalHostnameGetParams = RegionalHostnamesAPI.RegionalHostnameGetParams;
+  export import RegionalHostnameCreateParams = RegionalHostnamesAPI.RegionalHostnameCreateParams;
+  export import RegionalHostnameListParams = RegionalHostnamesAPI.RegionalHostnameListParams;
+  export import RegionalHostnameDeleteParams = RegionalHostnamesAPI.RegionalHostnameDeleteParams;
+  export import RegionalHostnameEditParams = RegionalHostnamesAPI.RegionalHostnameEditParams;
+  export import RegionalHostnameGetParams = RegionalHostnamesAPI.RegionalHostnameGetParams;
   export import Regions = RegionsAPI.Regions;
-  export type RegionListResponse = RegionsAPI.RegionListResponse;
+  export import RegionListResponse = RegionsAPI.RegionListResponse;
   export import RegionListResponsesSinglePage = RegionsAPI.RegionListResponsesSinglePage;
-  export type RegionListParams = RegionsAPI.RegionListParams;
+  export import RegionListParams = RegionsAPI.RegionListParams;
 }

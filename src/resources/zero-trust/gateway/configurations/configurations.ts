@@ -712,24 +712,24 @@ export interface ConfigurationGetParams {
 }
 
 export namespace Configurations {
-  export type ActivityLogSettings = ConfigurationsAPI.ActivityLogSettings;
-  export type AntiVirusSettings = ConfigurationsAPI.AntiVirusSettings;
-  export type BlockPageSettings = ConfigurationsAPI.BlockPageSettings;
-  export type BodyScanningSettings = ConfigurationsAPI.BodyScanningSettings;
-  export type BrowserIsolationSettings = ConfigurationsAPI.BrowserIsolationSettings;
-  export type CustomCertificateSettings = ConfigurationsAPI.CustomCertificateSettings;
-  export type ExtendedEmailMatching = ConfigurationsAPI.ExtendedEmailMatching;
-  export type FipsSettings = ConfigurationsAPI.FipsSettings;
-  export type GatewayConfigurationSettings = ConfigurationsAPI.GatewayConfigurationSettings;
-  export type NotificationSettings = ConfigurationsAPI.NotificationSettings;
-  export type ProtocolDetection = ConfigurationsAPI.ProtocolDetection;
-  export type TLSSettings = ConfigurationsAPI.TLSSettings;
-  export type ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export type ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
-  export type ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
-  export type ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export type ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
-  export type ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
+  export import ActivityLogSettings = ConfigurationsAPI.ActivityLogSettings;
+  export import AntiVirusSettings = ConfigurationsAPI.AntiVirusSettings;
+  export import BlockPageSettings = ConfigurationsAPI.BlockPageSettings;
+  export import BodyScanningSettings = ConfigurationsAPI.BodyScanningSettings;
+  export import BrowserIsolationSettings = ConfigurationsAPI.BrowserIsolationSettings;
+  export import CustomCertificateSettings = ConfigurationsAPI.CustomCertificateSettings;
+  export import ExtendedEmailMatching = ConfigurationsAPI.ExtendedEmailMatching;
+  export import FipsSettings = ConfigurationsAPI.FipsSettings;
+  export import GatewayConfigurationSettings = ConfigurationsAPI.GatewayConfigurationSettings;
+  export import NotificationSettings = ConfigurationsAPI.NotificationSettings;
+  export import ProtocolDetection = ConfigurationsAPI.ProtocolDetection;
+  export import TLSSettings = ConfigurationsAPI.TLSSettings;
+  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
+  export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
+  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
+  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
+  export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
+  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
   export import CustomCertificate = CustomCertificateAPI.CustomCertificate;
-  export type CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
+  export import CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
 }

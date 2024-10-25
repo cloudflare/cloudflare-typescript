@@ -455,18 +455,18 @@ export interface LANGetParams {
 }
 
 export namespace LANs {
-  export type DHCPRelay = LANsAPI.DHCPRelay;
-  export type DHCPServer = LANsAPI.DHCPServer;
-  export type LAN = LANsAPI.LAN;
-  export type LANStaticAddressing = LANsAPI.LANStaticAddressing;
-  export type Nat = LANsAPI.Nat;
-  export type RoutedSubnet = LANsAPI.RoutedSubnet;
-  export type LANCreateResponse = LANsAPI.LANCreateResponse;
+  export import DHCPRelay = LANsAPI.DHCPRelay;
+  export import DHCPServer = LANsAPI.DHCPServer;
+  export import LAN = LANsAPI.LAN;
+  export import LANStaticAddressing = LANsAPI.LANStaticAddressing;
+  export import Nat = LANsAPI.Nat;
+  export import RoutedSubnet = LANsAPI.RoutedSubnet;
+  export import LANCreateResponse = LANsAPI.LANCreateResponse;
   export import LANsSinglePage = LANsAPI.LANsSinglePage;
-  export type LANCreateParams = LANsAPI.LANCreateParams;
-  export type LANUpdateParams = LANsAPI.LANUpdateParams;
-  export type LANListParams = LANsAPI.LANListParams;
-  export type LANDeleteParams = LANsAPI.LANDeleteParams;
-  export type LANEditParams = LANsAPI.LANEditParams;
-  export type LANGetParams = LANsAPI.LANGetParams;
+  export import LANCreateParams = LANsAPI.LANCreateParams;
+  export import LANUpdateParams = LANsAPI.LANUpdateParams;
+  export import LANListParams = LANsAPI.LANListParams;
+  export import LANDeleteParams = LANsAPI.LANDeleteParams;
+  export import LANEditParams = LANsAPI.LANEditParams;
+  export import LANGetParams = LANsAPI.LANGetParams;
 }

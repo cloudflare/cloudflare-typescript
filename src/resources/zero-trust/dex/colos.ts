@@ -51,7 +51,7 @@ export interface ColoListParams {
 }
 
 export namespace Colos {
-  export type ColoListResponse = ColosAPI.ColoListResponse;
+  export import ColoListResponse = ColosAPI.ColoListResponse;
   export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;
-  export type ColoListParams = ColosAPI.ColoListParams;
+  export import ColoListParams = ColosAPI.ColoListParams;
 }

@@ -376,16 +376,16 @@ export interface RuleGetParams {
 }
 
 export namespace Rules {
-  export type FirewallRule = RulesAPI.FirewallRule;
-  export type Product = RulesAPI.Product;
-  export type DeletedFilter = RulesAPI.DeletedFilter;
-  export type RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export type RuleEditResponse = RulesAPI.RuleEditResponse;
+  export import FirewallRule = RulesAPI.FirewallRule;
+  export import Product = RulesAPI.Product;
+  export import DeletedFilter = RulesAPI.DeletedFilter;
+  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
+  export import RuleEditResponse = RulesAPI.RuleEditResponse;
   export import FirewallRulesV4PagePaginationArray = RulesAPI.FirewallRulesV4PagePaginationArray;
-  export type RuleCreateParams = RulesAPI.RuleCreateParams;
-  export type RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export type RuleListParams = RulesAPI.RuleListParams;
-  export type RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export type RuleEditParams = RulesAPI.RuleEditParams;
-  export type RuleGetParams = RulesAPI.RuleGetParams;
+  export import RuleCreateParams = RulesAPI.RuleCreateParams;
+  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
+  export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+  export import RuleEditParams = RulesAPI.RuleEditParams;
+  export import RuleGetParams = RulesAPI.RuleGetParams;
 }

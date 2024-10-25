@@ -148,11 +148,11 @@ export interface TailGetParams {
 }
 
 export namespace Tail {
-  export type ConsumerScript = TailAPI.ConsumerScript;
-  export type TailCreateResponse = TailAPI.TailCreateResponse;
-  export type TailDeleteResponse = TailAPI.TailDeleteResponse;
-  export type TailGetResponse = TailAPI.TailGetResponse;
-  export type TailCreateParams = TailAPI.TailCreateParams;
-  export type TailDeleteParams = TailAPI.TailDeleteParams;
-  export type TailGetParams = TailAPI.TailGetParams;
+  export import ConsumerScript = TailAPI.ConsumerScript;
+  export import TailCreateResponse = TailAPI.TailCreateResponse;
+  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
+  export import TailGetResponse = TailAPI.TailGetResponse;
+  export import TailCreateParams = TailAPI.TailCreateParams;
+  export import TailDeleteParams = TailAPI.TailDeleteParams;
+  export import TailGetParams = TailAPI.TailGetParams;
 }

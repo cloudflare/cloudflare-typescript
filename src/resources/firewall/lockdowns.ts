@@ -315,16 +315,16 @@ export interface LockdownGetParams {
 }
 
 export namespace Lockdowns {
-  export type Configuration = LockdownsAPI.Configuration;
-  export type Lockdown = LockdownsAPI.Lockdown;
-  export type LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
-  export type LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
-  export type LockdownURL = LockdownsAPI.LockdownURL;
-  export type LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
+  export import Configuration = LockdownsAPI.Configuration;
+  export import Lockdown = LockdownsAPI.Lockdown;
+  export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
+  export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
+  export import LockdownURL = LockdownsAPI.LockdownURL;
+  export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
   export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
-  export type LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
-  export type LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
-  export type LockdownListParams = LockdownsAPI.LockdownListParams;
-  export type LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
-  export type LockdownGetParams = LockdownsAPI.LockdownGetParams;
+  export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
+  export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
+  export import LockdownListParams = LockdownsAPI.LockdownListParams;
+  export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
+  export import LockdownGetParams = LockdownsAPI.LockdownGetParams;
 }
