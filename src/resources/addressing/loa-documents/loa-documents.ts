@@ -27,9 +27,36 @@ export class LOADocuments extends APIResource {
 
 export interface LOADocumentCreateResponse {
   /**
-   * Name of LOA document.
+   * Identifier for the uploaded LOA document.
+   */
+  id?: string | null;
+
+  /**
+   * Identifier
+   */
+  account_id?: string;
+
+  created?: string;
+
+  /**
+   * Name of LOA document. Max file size 10MB, and supported filetype is pdf.
    */
   filename?: string;
+
+  /**
+   * File size of the uploaded LOA document.
+   */
+  size_bytes?: number;
+
+  /**
+   * Whether the LOA has been verified by Cloudflare staff.
+   */
+  verified?: boolean;
+
+  /**
+   * Timestamp of the moment the LOA was marked as validated.
+   */
+  verified_at?: string | null;
 }
 
 export interface LOADocumentCreateParams {
