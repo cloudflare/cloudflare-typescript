@@ -2328,6 +2328,13 @@ export interface SCIMConfigMapping {
   operations?: SCIMConfigMapping.Operations;
 
   /**
+   * The level of adherence to outbound resource schemas when provisioning to this
+   * mapping. ‘Strict’ removes unknown values, while ‘passthrough’ passes unknown
+   * values to the target.
+   */
+  strictness?: 'strict' | 'passthrough';
+
+  /**
    * A [JSONata](https://jsonata.org/) expression that transforms the resource before
    * provisioning it in the application.
    */
@@ -2382,6 +2389,13 @@ export interface SCIMConfigMappingParam {
    * Whether or not this mapping applies to creates, updates, or deletes.
    */
   operations?: SCIMConfigMappingParam.Operations;
+
+  /**
+   * The level of adherence to outbound resource schemas when provisioning to this
+   * mapping. ‘Strict’ removes unknown values, while ‘passthrough’ passes unknown
+   * values to the target.
+   */
+  strictness?: 'strict' | 'passthrough';
 
   /**
    * A [JSONata](https://jsonata.org/) expression that transforms the resource before
