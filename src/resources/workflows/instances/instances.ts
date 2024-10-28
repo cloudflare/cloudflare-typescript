@@ -63,27 +63,23 @@ export class Instances extends APIResource {
 
 export class InstanceListResponsesV4PagePaginationArray extends V4PagePaginationArray<InstanceListResponse> {}
 
-export type InstanceCreateResponse = Array<InstanceCreateResponse.InstanceCreateResponseItem>;
+export interface InstanceCreateResponse {
+  id: string;
 
-export namespace InstanceCreateResponse {
-  export interface InstanceCreateResponseItem {
-    id: string;
+  status:
+    | 'queued'
+    | 'running'
+    | 'paused'
+    | 'errored'
+    | 'terminated'
+    | 'complete'
+    | 'waitingForPause'
+    | 'waiting'
+    | 'unknown';
 
-    status:
-      | 'queued'
-      | 'running'
-      | 'paused'
-      | 'errored'
-      | 'terminated'
-      | 'complete'
-      | 'waitingForPause'
-      | 'waiting'
-      | 'unknown';
+  version_id: string;
 
-    version_id: string;
-
-    workflow_id: string;
-  }
+  workflow_id: string;
 }
 
 export interface InstanceListResponse {
