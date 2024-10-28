@@ -82,6 +82,7 @@ describe('resource applications', () => {
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
+            strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
@@ -90,6 +91,7 @@ describe('resource applications', () => {
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
+            strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
@@ -98,6 +100,7 @@ describe('resource applications', () => {
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
+            strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
@@ -183,6 +186,7 @@ describe('resource applications', () => {
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
+            strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
@@ -191,6 +195,7 @@ describe('resource applications', () => {
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
+            strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
@@ -199,6 +204,7 @@ describe('resource applications', () => {
             enabled: true,
             filter: 'title pr or userType eq "Intern"',
             operations: { create: true, delete: true, update: true },
+            strictness: 'strict',
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
