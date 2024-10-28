@@ -94,11 +94,6 @@ export type CacheReserve = 'cache_reserve';
 export type CacheReserveClear = 'cache_reserve_clear';
 
 /**
- * The current state of the Cache Reserve Clear operation.
- */
-export type State = 'In-progress' | 'Completed';
-
-/**
  * You can use Cache Reserve Clear to clear your Cache Reserve, but you must first
  * disable Cache Reserve. In most cases, this will be accomplished within 24 hours.
  * You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind
@@ -123,7 +118,7 @@ export interface CacheReserveClearResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -206,7 +201,7 @@ export interface CacheReserveStatusResponse {
   /**
    * The current state of the Cache Reserve Clear operation.
    */
-  state: State;
+  state: 'In-progress' | 'Completed';
 
   /**
    * The time that the latest Cache Reserve Clear operation completed.
@@ -255,7 +250,6 @@ export interface CacheReserveStatusParams {
 export namespace CacheReserveResource {
   export import CacheReserve = CacheReserveAPI.CacheReserve;
   export import CacheReserveClear = CacheReserveAPI.CacheReserveClear;
-  export import State = CacheReserveAPI.State;
   export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
   export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
   export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
