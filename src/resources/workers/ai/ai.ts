@@ -36,11 +36,12 @@ export class AI extends APIResource {
 export type AIRunResponse =
   | Array<AIRunResponse.TextClassification>
   | Core.Uploadable
+  | AIRunResponse.Audio
   | AIRunResponse.TextEmbeddings
   | AIRunResponse.AutomaticSpeechRecognition
   | Array<AIRunResponse.ImageClassification>
   | Array<AIRunResponse.ObjectDetection>
-  | AIRunResponse.UnionMember6
+  | AIRunResponse.UnionMember7
   | AIRunResponse.Translation
   | AIRunResponse.Summarization
   | AIRunResponse.ImageToText;
@@ -57,6 +58,13 @@ export namespace AIRunResponse {
      * specified label
      */
     score?: number;
+  }
+
+  export interface Audio {
+    /**
+     * The generated audio in MP3 format, base64-encoded
+     */
+    audio?: string;
   }
 
   export interface TextEmbeddings {
@@ -154,7 +162,7 @@ export namespace AIRunResponse {
     }
   }
 
-  export interface UnionMember6 {
+  export interface UnionMember7 {
     /**
      * The generated text response from the model
      */
@@ -163,10 +171,10 @@ export namespace AIRunResponse {
     /**
      * An array of tool calls requests made during the response generation
      */
-    tool_calls?: Array<UnionMember6.ToolCall>;
+    tool_calls?: Array<UnionMember7.ToolCall>;
   }
 
-  export namespace UnionMember6 {
+  export namespace UnionMember7 {
     export interface ToolCall {
       /**
        * The arguments passed to be passed to the tool call request
@@ -202,6 +210,7 @@ export namespace AIRunResponse {
 export type AIRunParams =
   | AIRunParams.TextClassification
   | AIRunParams.TextToImage
+  | AIRunParams.TextToSpeech
   | AIRunParams.TextEmbeddings
   | AIRunParams.AutomaticSpeechRecognition
   | AIRunParams.ImageClassification
@@ -292,6 +301,24 @@ export namespace AIRunParams {
      * Body param: The width of the generated image in pixels
      */
     width?: number;
+  }
+
+  export interface TextToSpeech {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param: A text description of the image you want to generate
+     */
+    prompt: string;
+
+    /**
+     * Body param: The speech language (e.g., 'en' for English, 'fr' for French).
+     * Defaults to 'en' if not specified
+     */
+    lang?: string;
   }
 
   export interface TextEmbeddings {
