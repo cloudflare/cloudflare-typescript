@@ -12,11 +12,11 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariant> {
+  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
     const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
-        result: CacheVariant;
+        result: VariantDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -55,13 +55,18 @@ export class Variants extends APIResource {
 }
 
 /**
+ * ID of the zone setting.
+ */
+export type CacheVariantIdentifier = 'variants';
+
+/**
  * Variant support enables caching variants of images with certain file extensions
  * in addition to the original. This only applies when the origin server sends the
  * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
  * does not serve the variant requested, the response will not be cached. This will
  * be indicated with BYPASS cache status in the response headers.
  */
-export interface CacheVariant {
+export interface VariantDeleteResponse {
   /**
    * ID of the zone setting.
    */
@@ -72,11 +77,6 @@ export interface CacheVariant {
    */
   modified_on: string | null;
 }
-
-/**
- * ID of the zone setting.
- */
-export type CacheVariantIdentifier = 'variants';
 
 /**
  * Variant support enables caching variants of images with certain file extensions
@@ -372,8 +372,8 @@ export interface VariantGetParams {
 }
 
 export namespace Variants {
-  export import CacheVariant = VariantsAPI.CacheVariant;
   export import CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
+  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
   export import VariantEditResponse = VariantsAPI.VariantEditResponse;
   export import VariantGetResponse = VariantsAPI.VariantGetResponse;
   export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;

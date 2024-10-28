@@ -4,7 +4,6 @@ export { Cache } from './cache';
 export {
   CacheReserve,
   CacheReserveClear,
-  State,
   CacheReserveClearResponse,
   CacheReserveEditResponse,
   CacheReserveGetResponse,
@@ -16,8 +15,8 @@ export {
   CacheReserveResource,
 } from './cache-reserve';
 export {
-  CacheVariant,
   CacheVariantIdentifier,
+  VariantDeleteResponse,
   VariantEditResponse,
   VariantGetResponse,
   VariantDeleteParams,
