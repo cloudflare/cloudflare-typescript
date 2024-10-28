@@ -5,10 +5,12 @@ export {
   CustomUpdateResponse,
   CustomListResponse,
   CustomDeleteResponse,
+  CustomGetResponse,
   CustomCreateParams,
   CustomUpdateParams,
   CustomListParams,
   CustomDeleteParams,
+  CustomGetParams,
   Custom,
 } from './custom';
 export { Domains } from './domains';
