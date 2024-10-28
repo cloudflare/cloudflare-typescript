@@ -13,13 +13,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainUpdateResponse> {
+  ): Core.APIPromise<DomainUpdateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/registrar/domains/${domainName}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: DomainUpdateResponse }>
+      }) as Core.APIPromise<{ result: DomainUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -38,13 +38,13 @@ export class Domains extends APIResource {
     domainName: string,
     params: DomainGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<DomainGetResponse> {
+  ): Core.APIPromise<DomainGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(
         `/accounts/${account_id}/registrar/domains/${domainName}`,
         options,
-      ) as Core.APIPromise<{ result: DomainGetResponse }>
+      ) as Core.APIPromise<{ result: DomainGetResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
