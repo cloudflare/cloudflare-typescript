@@ -15,10 +15,12 @@ export namespace Domains {
   export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
   export import CustomListResponse = CustomAPI.CustomListResponse;
   export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export import CustomGetResponse = CustomAPI.CustomGetResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
   export import CustomListParams = CustomAPI.CustomListParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export import CustomGetParams = CustomAPI.CustomGetParams;
   export import Managed = ManagedAPI.Managed;
   export import ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
   export import ManagedListResponse = ManagedAPI.ManagedListResponse;
