@@ -6609,11 +6609,13 @@ Types:
 
 - <code><a href="./src/resources/snippets/rules.ts">RuleUpdateResponse</a></code>
 - <code><a href="./src/resources/snippets/rules.ts">RuleListResponse</a></code>
+- <code><a href="./src/resources/snippets/rules.ts">RuleDeleteResponse</a></code>
 
 Methods:
 
 - <code title="put /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">update</a>({ ...params }) -> RuleUpdateResponse</code>
 - <code title="get /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">list</a>({ ...params }) -> RuleListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/snippets/snippet_rules">client.snippets.rules.<a href="./src/resources/snippets/rules.ts">delete</a>({ ...params }) -> RuleDeleteResponse</code>
 
 # Calls
 

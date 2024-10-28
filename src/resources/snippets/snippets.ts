@@ -154,7 +154,9 @@ export namespace Snippets {
   export import Rules = RulesAPI.Rules;
   export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
   export import RuleListResponse = RulesAPI.RuleListResponse;
+  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
   export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
   export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
   export import RuleListParams = RulesAPI.RuleListParams;
+  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
 }

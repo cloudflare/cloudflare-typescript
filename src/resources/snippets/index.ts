@@ -4,8 +4,10 @@ export { ContentGetParams, Content } from './content';
 export {
   RuleUpdateResponse,
   RuleListResponse,
+  RuleDeleteResponse,
   RuleUpdateParams,
   RuleListParams,
+  RuleDeleteParams,
   RuleListResponsesSinglePage,
   Rules,
 } from './rules';
