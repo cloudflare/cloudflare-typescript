@@ -288,7 +288,28 @@ export interface Query {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * A note that you can use to add more details about the waiting room.
@@ -595,7 +616,28 @@ export interface WaitingRoom {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * A note that you can use to add more details about the waiting room.
@@ -983,7 +1025,28 @@ export interface WaitingRoomCreateParams {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -1325,7 +1388,28 @@ export interface WaitingRoomUpdateParams {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
@@ -1681,7 +1765,28 @@ export interface WaitingRoomEditParams {
     | 'tr-TR'
     | 'ar-EG'
     | 'ru-RU'
-    | 'fa-IR';
+    | 'fa-IR'
+    | 'bg-BG'
+    | 'hr-HR'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'fi-FI'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'ro-RO'
+    | 'el-GR'
+    | 'he-IL'
+    | 'hi-IN'
+    | 'hu-HU'
+    | 'sr-BA'
+    | 'sk-SK'
+    | 'sl-SI'
+    | 'sv-SE'
+    | 'tl-PH'
+    | 'th-TH'
+    | 'uk-UA'
+    | 'vi-VN';
 
   /**
    * Body param: A note that you can use to add more details about the waiting room.
