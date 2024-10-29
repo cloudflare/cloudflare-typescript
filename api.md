@@ -552,6 +552,7 @@ Types:
 
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserve</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClear</a></code>
+- <code><a href="./src/resources/cache/cache-reserve.ts">State</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveClearResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveEditResponse</a></code>
 - <code><a href="./src/resources/cache/cache-reserve.ts">CacheReserveGetResponse</a></code>
