@@ -96,6 +96,29 @@ export class Custom extends APIResource {
       }) as Core.APIPromise<{ result: CustomDeleteResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get the configuration for a custom domain on an existing R2 bucket.
+   */
+  get(
+    bucketName: string,
+    domainName: string,
+    params: CustomGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CustomGetResponse> {
+    const { account_id, 'cf-r2-jurisdiction': cfR2Jurisdiction } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/r2/buckets/${bucketName}/domains/custom/${domainName}`, {
+        ...options,
+        headers: {
+          ...(cfR2Jurisdiction?.toString() != null ?
+            { 'cf-r2-jurisdiction': cfR2Jurisdiction?.toString() }
+          : undefined),
+          ...options?.headers,
+        },
+      }) as Core.APIPromise<{ result: CustomGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export interface CustomCreateResponse {
@@ -191,6 +214,50 @@ export interface CustomDeleteResponse {
   domain: string;
 }
 
+export interface CustomGetResponse {
+  /**
+   * Domain name of the custom domain to be added
+   */
+  domain: string;
+
+  /**
+   * Whether this bucket is publicly accessible at the specified custom domain
+   */
+  enabled: boolean;
+
+  status: CustomGetResponse.Status;
+
+  /**
+   * Minimum TLS Version the custom domain will accept for incoming connections. If
+   * not set, defaults to 1.0.
+   */
+  minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
+
+  /**
+   * Zone ID of the custom domain resides in
+   */
+  zoneId?: string;
+
+  /**
+   * Zone that the custom domain resides in
+   */
+  zoneName?: string;
+}
+
+export namespace CustomGetResponse {
+  export interface Status {
+    /**
+     * Ownership status of the domain
+     */
+    ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
+
+    /**
+     * SSL certificate status
+     */
+    ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
+  }
+}
+
 export interface CustomCreateParams {
   /**
    * Path param: Account ID
@@ -273,13 +340,27 @@ export interface CustomDeleteParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
+export interface CustomGetParams {
+  /**
+   * Path param: Account ID
+   */
+  account_id: string;
+
+  /**
+   * Header param: The bucket jurisdiction
+   */
+  'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
+}
+
 export namespace Custom {
   export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
   export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
   export import CustomListResponse = CustomAPI.CustomListResponse;
   export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
+  export import CustomGetResponse = CustomAPI.CustomGetResponse;
   export import CustomCreateParams = CustomAPI.CustomCreateParams;
   export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
   export import CustomListParams = CustomAPI.CustomListParams;
   export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
+  export import CustomGetParams = CustomAPI.CustomGetParams;
 }
