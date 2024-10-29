@@ -4,6 +4,7 @@ export { Cache } from './cache';
 export {
   CacheReserve,
   CacheReserveClear,
+  State,
   CacheReserveClearResponse,
   CacheReserveEditResponse,
   CacheReserveGetResponse,
