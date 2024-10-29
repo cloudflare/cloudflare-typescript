@@ -3872,16 +3872,28 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/r2/buckets.ts">Bucket</a></code>
-- <code><a href="./src/resources/r2/buckets.ts">BucketListResponse</a></code>
-- <code><a href="./src/resources/r2/buckets.ts">BucketDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/buckets.ts">Bucket</a></code>
+- <code><a href="./src/resources/r2/buckets/buckets.ts">BucketListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/buckets.ts">BucketDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/r2/buckets">client.r2.buckets.<a href="./src/resources/r2/buckets.ts">create</a>({ ...params }) -> Bucket</code>
-- <code title="get /accounts/{account_id}/r2/buckets">client.r2.buckets.<a href="./src/resources/r2/buckets.ts">list</a>({ ...params }) -> BucketListResponse</code>
-- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets.ts">delete</a>(bucketName, { ...params }) -> BucketDeleteResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets.ts">get</a>(bucketName, { ...params }) -> Bucket</code>
+- <code title="post /accounts/{account_id}/r2/buckets">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">create</a>({ ...params }) -> Bucket</code>
+- <code title="get /accounts/{account_id}/r2/buckets">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">list</a>({ ...params }) -> BucketListResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">delete</a>(bucketName, { ...params }) -> BucketDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}">client.r2.buckets.<a href="./src/resources/r2/buckets/buckets.ts">get</a>(bucketName, { ...params }) -> Bucket</code>
+
+### Lifecycle
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/lifecycle.ts">LifecycleUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/lifecycle.ts">LifecycleGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">update</a>(bucketName, { ...params }) -> LifecycleUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">get</a>(bucketName, { ...params }) -> LifecycleGetResponse</code>
 
 ## Sippy
 
@@ -6946,3 +6958,55 @@ Methods:
 
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">list</a>(workflowName, { ...params }) -> VersionListResponsesV4PagePagination</code>
 - <code title="get /accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}">client.workflows.versions.<a href="./src/resources/workflows/versions.ts">get</a>(workflowName, versionId, { ...params }) -> VersionGetResponse</code>
+
+# ResourceSharing
+
+Types:
+
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingUpdateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resource-sharing.ts">ResourceSharingGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/shares">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">create</a>({ ...params }) -> ResourceSharingCreateResponse</code>
+- <code title="put /accounts/{account_id}/shares/{share_identifier}">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">update</a>(shareIdentifier, { ...params }) -> ResourceSharingUpdateResponse</code>
+- <code title="get /accounts/{account_id}/shares">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">list</a>({ ...params }) -> ResourceSharingListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_identifier}">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">delete</a>(shareIdentifier, { ...params }) -> ResourceSharingDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_identifier}">client.resourceSharing.<a href="./src/resources/resource-sharing/resource-sharing.ts">get</a>(shareIdentifier, { ...params }) -> ResourceSharingGetResponse</code>
+
+## Recipients
+
+Types:
+
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/recipients.ts">RecipientGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/shares/{share_identifier}/recipients">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">create</a>(shareIdentifier, { ...params }) -> RecipientCreateResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_identifier}/recipients">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">list</a>(shareIdentifier, { ...params }) -> RecipientListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_identifier}/recipients/{recipient_identifier}">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">delete</a>(shareIdentifier, recipientIdentifier, { ...params }) -> RecipientDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_identifier}/recipients/{recipient_identifier}">client.resourceSharing.recipients.<a href="./src/resources/resource-sharing/recipients.ts">get</a>(shareIdentifier, recipientIdentifier, { ...params }) -> RecipientGetResponse</code>
+
+## Resources
+
+Types:
+
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceCreateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceUpdateResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceListResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceDeleteResponse</a></code>
+- <code><a href="./src/resources/resource-sharing/resources.ts">ResourceGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/shares/{share_identifier}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">create</a>(shareIdentifier, { ...params }) -> ResourceCreateResponse</code>
+- <code title="put /accounts/{account_id}/shares/{share_identifier}/resources/{resource_identifier}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">update</a>(shareIdentifier, resourceIdentifier, { ...params }) -> ResourceUpdateResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_identifier}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">list</a>(shareIdentifier, { ...params }) -> ResourceListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/shares/{share_identifier}/resources/{resource_identifier}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">delete</a>(shareIdentifier, resourceIdentifier, { ...params }) -> ResourceDeleteResponse</code>
+- <code title="get /accounts/{account_id}/shares/{share_identifier}/resources/{resource_identifier}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">get</a>(shareIdentifier, resourceIdentifier, { ...params }) -> ResourceGetResponse</code>

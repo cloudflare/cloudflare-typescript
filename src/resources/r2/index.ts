@@ -9,7 +9,7 @@ export {
   BucketDeleteParams,
   BucketGetParams,
   Buckets,
-} from './buckets';
+} from './buckets/index';
 export { Domains } from './domains/index';
 export { EventNotifications } from './event-notifications/index';
 export {
