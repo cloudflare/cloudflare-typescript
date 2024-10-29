@@ -62,6 +62,20 @@ export { Radar } from './radar/radar';
 export { RateLimits } from './rate-limits';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
+export {
+  ResourceSharingCreateResponse,
+  ResourceSharingUpdateResponse,
+  ResourceSharingListResponse,
+  ResourceSharingDeleteResponse,
+  ResourceSharingGetResponse,
+  ResourceSharingCreateParams,
+  ResourceSharingUpdateParams,
+  ResourceSharingListParams,
+  ResourceSharingDeleteParams,
+  ResourceSharingGetParams,
+  ResourceSharingListResponsesV4PagePaginationArray,
+  ResourceSharing,
+} from './resource-sharing/resource-sharing';
 export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';

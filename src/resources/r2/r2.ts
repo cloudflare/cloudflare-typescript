@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as BucketsAPI from './buckets';
 import * as SippyAPI from './sippy';
 import * as TemporaryCredentialsAPI from './temporary-credentials';
+import * as BucketsAPI from './buckets/buckets';
 import * as DomainsAPI from './domains/domains';
 import * as EventNotificationsAPI from './event-notifications/event-notifications';
 

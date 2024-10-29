@@ -229,6 +229,7 @@ export class Cloudflare extends Core.APIClient {
   botnetFeed: API.BotnetFeed = new API.BotnetFeed(this);
   securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
   workflows: API.Workflows = new API.Workflows(this);
+  resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -576,6 +577,19 @@ export namespace Cloudflare {
   export import WorkflowUpdateParams = API.WorkflowUpdateParams;
   export import WorkflowListParams = API.WorkflowListParams;
   export import WorkflowGetParams = API.WorkflowGetParams;
+
+  export import ResourceSharing = API.ResourceSharing;
+  export import ResourceSharingCreateResponse = API.ResourceSharingCreateResponse;
+  export import ResourceSharingUpdateResponse = API.ResourceSharingUpdateResponse;
+  export import ResourceSharingListResponse = API.ResourceSharingListResponse;
+  export import ResourceSharingDeleteResponse = API.ResourceSharingDeleteResponse;
+  export import ResourceSharingGetResponse = API.ResourceSharingGetResponse;
+  export import ResourceSharingListResponsesV4PagePaginationArray = API.ResourceSharingListResponsesV4PagePaginationArray;
+  export import ResourceSharingCreateParams = API.ResourceSharingCreateParams;
+  export import ResourceSharingUpdateParams = API.ResourceSharingUpdateParams;
+  export import ResourceSharingListParams = API.ResourceSharingListParams;
+  export import ResourceSharingDeleteParams = API.ResourceSharingDeleteParams;
+  export import ResourceSharingGetParams = API.ResourceSharingGetParams;
 
   export import ASN = API.ASN;
   export import AuditLog = API.AuditLog;
