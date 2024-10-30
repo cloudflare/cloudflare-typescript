@@ -3895,19 +3895,75 @@ Methods:
 - <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">update</a>(bucketName, { ...params }) -> LifecycleUpdateResponse</code>
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">get</a>(bucketName, { ...params }) -> LifecycleGetResponse</code>
 
-## Sippy
+### Domains
+
+#### Custom
 
 Types:
 
-- <code><a href="./src/resources/r2/sippy.ts">Provider</a></code>
-- <code><a href="./src/resources/r2/sippy.ts">Sippy</a></code>
-- <code><a href="./src/resources/r2/sippy.ts">SippyDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomCreateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomListResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/custom.ts">CustomGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">update</a>(bucketName, { ...params }) -> Sippy</code>
-- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">delete</a>(bucketName, { ...params }) -> SippyDeleteResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.sippy.<a href="./src/resources/r2/sippy.ts">get</a>(bucketName, { ...params }) -> Sippy</code>
+- <code title="post /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">create</a>(bucketName, { ...params }) -> CustomCreateResponse</code>
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">update</a>(bucketName, domainName, { ...params }) -> CustomUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">list</a>(bucketName, { ...params }) -> CustomListResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">delete</a>(bucketName, domainName, { ...params }) -> CustomDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.buckets.domains.custom.<a href="./src/resources/r2/buckets/domains/custom.ts">get</a>(bucketName, domainName, { ...params }) -> CustomGetResponse</code>
+
+#### Managed
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/domains/managed.ts">ManagedUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/domains/managed.ts">ManagedListResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.buckets.domains.managed.<a href="./src/resources/r2/buckets/domains/managed.ts">update</a>(bucketName, { ...params }) -> ManagedUpdateResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.buckets.domains.managed.<a href="./src/resources/r2/buckets/domains/managed.ts">list</a>(bucketName, { ...params }) -> ManagedListResponse</code>
+
+### EventNotifications
+
+#### Configuration
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/event-notifications/configuration/configuration.ts">ConfigurationGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.r2.buckets.eventNotifications.configuration.<a href="./src/resources/r2/buckets/event-notifications/configuration/configuration.ts">get</a>(bucketName, { ...params }) -> ConfigurationGetResponse</code>
+
+##### Queues
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">QueueUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">QueueDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.configuration.queues.<a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.buckets.eventNotifications.configuration.queues.<a href="./src/resources/r2/buckets/event-notifications/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
+
+### Sippy
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/sippy.ts">Provider</a></code>
+- <code><a href="./src/resources/r2/buckets/sippy.ts">Sippy</a></code>
+- <code><a href="./src/resources/r2/buckets/sippy.ts">SippyDeleteResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">update</a>(bucketName, { ...params }) -> Sippy</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">delete</a>(bucketName, { ...params }) -> SippyDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/sippy">client.r2.buckets.sippy.<a href="./src/resources/r2/buckets/sippy.ts">get</a>(bucketName, { ...params }) -> Sippy</code>
 
 ## TemporaryCredentials
 
@@ -3919,62 +3975,6 @@ Types:
 Methods:
 
 - <code title="post /accounts/{account_id}/r2/temp-access-credentials">client.r2.temporaryCredentials.<a href="./src/resources/r2/temporary-credentials.ts">create</a>({ ...params }) -> TemporaryCredentialCreateResponse</code>
-
-## Domains
-
-### Custom
-
-Types:
-
-- <code><a href="./src/resources/r2/domains/custom.ts">CustomCreateResponse</a></code>
-- <code><a href="./src/resources/r2/domains/custom.ts">CustomUpdateResponse</a></code>
-- <code><a href="./src/resources/r2/domains/custom.ts">CustomListResponse</a></code>
-- <code><a href="./src/resources/r2/domains/custom.ts">CustomDeleteResponse</a></code>
-- <code><a href="./src/resources/r2/domains/custom.ts">CustomGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">create</a>(bucketName, { ...params }) -> CustomCreateResponse</code>
-- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">update</a>(bucketName, domainName, { ...params }) -> CustomUpdateResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">list</a>(bucketName, { ...params }) -> CustomListResponse</code>
-- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">delete</a>(bucketName, domainName, { ...params }) -> CustomDeleteResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain_name}">client.r2.domains.custom.<a href="./src/resources/r2/domains/custom.ts">get</a>(bucketName, domainName, { ...params }) -> CustomGetResponse</code>
-
-### Managed
-
-Types:
-
-- <code><a href="./src/resources/r2/domains/managed.ts">ManagedUpdateResponse</a></code>
-- <code><a href="./src/resources/r2/domains/managed.ts">ManagedListResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.domains.managed.<a href="./src/resources/r2/domains/managed.ts">update</a>(bucketName, { ...params }) -> ManagedUpdateResponse</code>
-- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed">client.r2.domains.managed.<a href="./src/resources/r2/domains/managed.ts">list</a>(bucketName, { ...params }) -> ManagedListResponse</code>
-
-## EventNotifications
-
-### Configuration
-
-Types:
-
-- <code><a href="./src/resources/r2/event-notifications/configuration/configuration.ts">ConfigurationGetResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration">client.r2.eventNotifications.configuration.<a href="./src/resources/r2/event-notifications/configuration/configuration.ts">get</a>(bucketName, { ...params }) -> ConfigurationGetResponse</code>
-
-#### Queues
-
-Types:
-
-- <code><a href="./src/resources/r2/event-notifications/configuration/queues.ts">QueueUpdateResponse</a></code>
-- <code><a href="./src/resources/r2/event-notifications/configuration/queues.ts">QueueDeleteResponse</a></code>
-
-Methods:
-
-- <code title="put /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.eventNotifications.configuration.queues.<a href="./src/resources/r2/event-notifications/configuration/queues.ts">update</a>(bucketName, queueId, { ...params }) -> QueueUpdateResponse</code>
-- <code title="delete /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}">client.r2.eventNotifications.configuration.queues.<a href="./src/resources/r2/event-notifications/configuration/queues.ts">delete</a>(bucketName, queueId, { ...params }) -> QueueDeleteResponse</code>
 
 # WARPConnector
 
