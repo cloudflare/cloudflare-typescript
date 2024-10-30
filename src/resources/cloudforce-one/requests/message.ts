@@ -5,7 +5,7 @@ import * as Core from '../../../core';
 import * as MessageAPI from './message';
 import * as Shared from '../../shared';
 
-export class MessageResource extends APIResource {
+export class Message extends APIResource {
   /**
    * Create a New Request Message
    */
@@ -14,12 +14,12 @@ export class MessageResource extends APIResource {
     requestIdentifier: string,
     body: MessageCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Message> {
+  ): Core.APIPromise<MessageCreateResponse> {
     return (
       this._client.post(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/new`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: Message }>
+      ) as Core.APIPromise<{ result: MessageCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -32,12 +32,12 @@ export class MessageResource extends APIResource {
     messageIdentifer: number,
     body: MessageUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Message> {
+  ): Core.APIPromise<MessageUpdateResponse> {
     return (
       this._client.put(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}/message/${messageIdentifer}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: Message }>
+      ) as Core.APIPromise<{ result: MessageUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -74,7 +74,39 @@ export class MessageResource extends APIResource {
   }
 }
 
-export interface Message {
+export interface MessageCreateResponse {
+  /**
+   * Message ID
+   */
+  id: number;
+
+  /**
+   * Author of message
+   */
+  author: string;
+
+  /**
+   * Content of message
+   */
+  content: string;
+
+  /**
+   * Whether the message is a follow-on request
+   */
+  is_follow_on_request: boolean;
+
+  /**
+   * Message last updated time
+   */
+  updated: string;
+
+  /**
+   * Message creation time
+   */
+  created?: string;
+}
+
+export interface MessageUpdateResponse {
   /**
    * Message ID
    */
@@ -117,7 +149,41 @@ export interface MessageDeleteResponse {
   success: true;
 }
 
-export type MessageGetResponse = Array<Message>;
+export type MessageGetResponse = Array<MessageGetResponse.MessageGetResponseItem>;
+
+export namespace MessageGetResponse {
+  export interface MessageGetResponseItem {
+    /**
+     * Message ID
+     */
+    id: number;
+
+    /**
+     * Author of message
+     */
+    author: string;
+
+    /**
+     * Content of message
+     */
+    content: string;
+
+    /**
+     * Whether the message is a follow-on request
+     */
+    is_follow_on_request: boolean;
+
+    /**
+     * Message last updated time
+     */
+    updated: string;
+
+    /**
+     * Message creation time
+     */
+    created?: string;
+  }
+}
 
 export interface MessageCreateParams {
   /**
@@ -165,8 +231,9 @@ export interface MessageGetParams {
   sort_order?: 'asc' | 'desc';
 }
 
-export namespace MessageResource {
-  export import Message = MessageAPI.Message;
+export namespace Message {
+  export import MessageCreateResponse = MessageAPI.MessageCreateResponse;
+  export import MessageUpdateResponse = MessageAPI.MessageUpdateResponse;
   export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
   export import MessageGetResponse = MessageAPI.MessageGetResponse;
   export import MessageCreateParams = MessageAPI.MessageCreateParams;
