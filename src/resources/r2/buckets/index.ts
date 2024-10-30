@@ -10,6 +10,8 @@ export {
   BucketGetParams,
   Buckets,
 } from './buckets';
+export { Domains } from './domains/index';
+export { EventNotifications } from './event-notifications/index';
 export {
   LifecycleUpdateResponse,
   LifecycleGetResponse,
@@ -17,3 +19,12 @@ export {
   LifecycleGetParams,
   Lifecycle,
 } from './lifecycle';
+export {
+  Provider,
+  Sippy,
+  SippyDeleteResponse,
+  SippyUpdateParams,
+  SippyDeleteParams,
+  SippyGetParams,
+  SippyResource,
+} from './sippy';
