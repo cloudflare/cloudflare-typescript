@@ -10,33 +10,37 @@ export {
   Assets,
 } from './assets';
 export {
-  Item,
-  ListItem,
-  Quota,
-  RequestConstants,
-  RequestTypes,
-  RequestDeleteResponse,
-  RequestCreateParams,
-  RequestUpdateParams,
-  RequestListParams,
-  ListItemsV4PagePaginationArray,
-  Requests,
-} from './requests';
-export {
-  Label,
-  Priority,
-  PriorityEdit,
-  PriorityDeleteResponse,
-  PriorityCreateParams,
-  PriorityUpdateParams,
-  PriorityResource,
-} from './priority';
-export {
-  Message,
+  MessageCreateResponse,
+  MessageUpdateResponse,
   MessageDeleteResponse,
   MessageGetResponse,
   MessageCreateParams,
   MessageUpdateParams,
   MessageGetParams,
-  MessageResource,
+  Message,
 } from './message';
+export {
+  PriorityCreateResponse,
+  PriorityUpdateResponse,
+  PriorityDeleteResponse,
+  PriorityGetResponse,
+  PriorityQuotaResponse,
+  PriorityCreateParams,
+  PriorityUpdateParams,
+  Priority,
+} from './priority';
+export {
+  RequestCreateResponse,
+  RequestUpdateResponse,
+  RequestListResponse,
+  RequestDeleteResponse,
+  RequestConstantsResponse,
+  RequestGetResponse,
+  RequestQuotaResponse,
+  RequestTypesResponse,
+  RequestCreateParams,
+  RequestUpdateParams,
+  RequestListParams,
+  RequestListResponsesV4PagePaginationArray,
+  Requests,
+} from './requests';
