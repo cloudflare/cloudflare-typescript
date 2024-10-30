@@ -10,17 +10,6 @@ export {
   BucketGetParams,
   Buckets,
 } from './buckets/index';
-export { Domains } from './domains/index';
-export { EventNotifications } from './event-notifications/index';
-export {
-  Provider,
-  Sippy,
-  SippyDeleteResponse,
-  SippyUpdateParams,
-  SippyDeleteParams,
-  SippyGetParams,
-  SippyResource,
-} from './sippy';
 export { R2 } from './r2';
 export {
   TemporaryCredential,

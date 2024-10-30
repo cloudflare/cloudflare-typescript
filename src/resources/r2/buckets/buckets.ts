@@ -4,9 +4,17 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as BucketsAPI from './buckets';
 import * as LifecycleAPI from './lifecycle';
+import * as SippyAPI from './sippy';
+import * as DomainsAPI from './domains/domains';
+import * as EventNotificationsAPI from './event-notifications/event-notifications';
 
 export class Buckets extends APIResource {
   lifecycle: LifecycleAPI.Lifecycle = new LifecycleAPI.Lifecycle(this._client);
+  domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
+  eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
+    this._client,
+  );
+  sippy: SippyAPI.SippyResource = new SippyAPI.SippyResource(this._client);
 
   /**
    * Creates a new R2 bucket.
@@ -228,4 +236,13 @@ export namespace Buckets {
   export import LifecycleGetResponse = LifecycleAPI.LifecycleGetResponse;
   export import LifecycleUpdateParams = LifecycleAPI.LifecycleUpdateParams;
   export import LifecycleGetParams = LifecycleAPI.LifecycleGetParams;
+  export import Domains = DomainsAPI.Domains;
+  export import EventNotifications = EventNotificationsAPI.EventNotifications;
+  export import SippyResource = SippyAPI.SippyResource;
+  export import Provider = SippyAPI.Provider;
+  export import Sippy = SippyAPI.Sippy;
+  export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
+  export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
+  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
+  export import SippyGetParams = SippyAPI.SippyGetParams;
 }
