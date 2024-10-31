@@ -2,15 +2,28 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OrderAPI from './order';
-import { Order, OrderCreateParams, OrderCreateResponse } from './order';
 import * as QuotaAPI from './quota';
 import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import { SinglePage } from '../../../pagination';
 
 export class CertificatePacks extends APIResource {
-  order: OrderAPI.Order = new OrderAPI.Order(this._client);
   quota: QuotaAPI.Quota = new QuotaAPI.Quota(this._client);
+
+  /**
+   * For a given zone, order an advanced certificate pack.
+   */
+  create(
+    params: CertificatePackCreateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CertificatePackCreateResponse> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.post(`/zones/${zone_id}/ssl/certificate_packs/order`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: CertificatePackCreateResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 
   /**
    * For a given zone, list all active certificate packs.
@@ -128,6 +141,52 @@ export type Status =
  */
 export type ValidationMethod = 'http' | 'cname' | 'txt';
 
+export interface CertificatePackCreateResponse {
+  /**
+   * Identifier
+   */
+  id?: string;
+
+  /**
+   * Certificate Authority selected for the order. For information on any certificate
+   * authority specific details or restrictions
+   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   */
+  certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
+
+  /**
+   * Whether or not to add Cloudflare Branding for the order. This will add
+   * sni.cloudflaressl.com as the Common Name if set true.
+   */
+  cloudflare_branding?: boolean;
+
+  /**
+   * Comma separated list of valid host names for the certificate packs. Must contain
+   * the zone apex, may not contain more than 50 hosts, and may not be empty.
+   */
+  hosts?: Array<Host>;
+
+  /**
+   * Status of certificate pack.
+   */
+  status?: Status;
+
+  /**
+   * Type of certificate pack.
+   */
+  type?: 'advanced';
+
+  /**
+   * Validation Method selected for the order.
+   */
+  validation_method?: 'txt' | 'http' | 'email';
+
+  /**
+   * Validity Days selected for the order.
+   */
+  validity_days?: 14 | 30 | 90 | 365;
+}
+
 export type CertificatePackListResponse = unknown;
 
 export interface CertificatePackDeleteResponse {
@@ -185,6 +244,48 @@ export interface CertificatePackEditResponse {
 
 export type CertificatePackGetResponse = unknown;
 
+export interface CertificatePackCreateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param: Certificate Authority selected for the order. For information on any
+   * certificate authority specific details or restrictions
+   * [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
+   */
+  certificate_authority: 'google' | 'lets_encrypt' | 'ssl_com';
+
+  /**
+   * Body param: Comma separated list of valid host names for the certificate packs.
+   * Must contain the zone apex, may not contain more than 50 hosts, and may not be
+   * empty.
+   */
+  hosts: Array<HostParam>;
+
+  /**
+   * Body param: Type of certificate pack.
+   */
+  type: 'advanced';
+
+  /**
+   * Body param: Validation Method selected for the order.
+   */
+  validation_method: 'txt' | 'http' | 'email';
+
+  /**
+   * Body param: Validity Days selected for the order.
+   */
+  validity_days: 14 | 30 | 90 | 365;
+
+  /**
+   * Body param: Whether or not to add Cloudflare Branding for the order. This will
+   * add sni.cloudflaressl.com as the Common Name if set true.
+   */
+  cloudflare_branding?: boolean;
+}
+
 export interface CertificatePackListParams {
   /**
    * Path param: Identifier
@@ -224,7 +325,6 @@ export interface CertificatePackGetParams {
 }
 
 CertificatePacks.CertificatePackListResponsesSinglePage = CertificatePackListResponsesSinglePage;
-CertificatePacks.Order = Order;
 CertificatePacks.Quota = Quota;
 
 export declare namespace CertificatePacks {
@@ -233,21 +333,17 @@ export declare namespace CertificatePacks {
     type RequestValidity as RequestValidity,
     type Status as Status,
     type ValidationMethod as ValidationMethod,
+    type CertificatePackCreateResponse as CertificatePackCreateResponse,
     type CertificatePackListResponse as CertificatePackListResponse,
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
     type CertificatePackEditResponse as CertificatePackEditResponse,
     type CertificatePackGetResponse as CertificatePackGetResponse,
     CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    type CertificatePackCreateParams as CertificatePackCreateParams,
     type CertificatePackListParams as CertificatePackListParams,
     type CertificatePackDeleteParams as CertificatePackDeleteParams,
     type CertificatePackEditParams as CertificatePackEditParams,
     type CertificatePackGetParams as CertificatePackGetParams,
-  };
-
-  export {
-    Order as Order,
-    type OrderCreateResponse as OrderCreateResponse,
-    type OrderCreateParams as OrderCreateParams,
   };
 
   export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
