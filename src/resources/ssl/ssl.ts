@@ -16,6 +16,8 @@ import {
 } from './verification';
 import * as CertificatePacksAPI from './certificate-packs/certificate-packs';
 import {
+  CertificatePackCreateParams,
+  CertificatePackCreateResponse,
   CertificatePackDeleteParams,
   CertificatePackDeleteResponse,
   CertificatePackEditParams,
@@ -64,11 +66,13 @@ export declare namespace SSL {
     type RequestValidity as RequestValidity,
     type Status as Status,
     type ValidationMethod as ValidationMethod,
+    type CertificatePackCreateResponse as CertificatePackCreateResponse,
     type CertificatePackListResponse as CertificatePackListResponse,
     type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
     type CertificatePackEditResponse as CertificatePackEditResponse,
     type CertificatePackGetResponse as CertificatePackGetResponse,
     CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    type CertificatePackCreateParams as CertificatePackCreateParams,
     type CertificatePackListParams as CertificatePackListParams,
     type CertificatePackDeleteParams as CertificatePackDeleteParams,
     type CertificatePackEditParams as CertificatePackEditParams,
