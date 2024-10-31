@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RecipientsAPI from './recipients';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Recipients extends APIResource {
@@ -245,14 +244,18 @@ export interface RecipientGetParams {
   account_id: string;
 }
 
-export namespace Recipients {
-  export import RecipientCreateResponse = RecipientsAPI.RecipientCreateResponse;
-  export import RecipientListResponse = RecipientsAPI.RecipientListResponse;
-  export import RecipientDeleteResponse = RecipientsAPI.RecipientDeleteResponse;
-  export import RecipientGetResponse = RecipientsAPI.RecipientGetResponse;
-  export import RecipientListResponsesV4PagePaginationArray = RecipientsAPI.RecipientListResponsesV4PagePaginationArray;
-  export import RecipientCreateParams = RecipientsAPI.RecipientCreateParams;
-  export import RecipientListParams = RecipientsAPI.RecipientListParams;
-  export import RecipientDeleteParams = RecipientsAPI.RecipientDeleteParams;
-  export import RecipientGetParams = RecipientsAPI.RecipientGetParams;
+Recipients.RecipientListResponsesV4PagePaginationArray = RecipientListResponsesV4PagePaginationArray;
+
+export declare namespace Recipients {
+  export {
+    type RecipientCreateResponse as RecipientCreateResponse,
+    type RecipientListResponse as RecipientListResponse,
+    type RecipientDeleteResponse as RecipientDeleteResponse,
+    type RecipientGetResponse as RecipientGetResponse,
+    RecipientListResponsesV4PagePaginationArray as RecipientListResponsesV4PagePaginationArray,
+    type RecipientCreateParams as RecipientCreateParams,
+    type RecipientListParams as RecipientListParams,
+    type RecipientDeleteParams as RecipientDeleteParams,
+    type RecipientGetParams as RecipientGetParams,
+  };
 }

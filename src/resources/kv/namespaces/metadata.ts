@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as MetadataAPI from './metadata';
 
 export class Metadata extends APIResource {
   /**
@@ -38,7 +37,6 @@ export interface MetadataGetParams {
   account_id: string;
 }
 
-export namespace Metadata {
-  export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
-  export import MetadataGetParams = MetadataAPI.MetadataGetParams;
+export declare namespace Metadata {
+  export { type MetadataGetResponse as MetadataGetResponse, type MetadataGetParams as MetadataGetParams };
 }

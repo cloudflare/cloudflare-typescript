@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as CurrentsAPI from './currents';
 
 export class Currents extends APIResource {
   /**
@@ -69,7 +68,6 @@ export interface CurrentGetParams {
   colo_name?: string;
 }
 
-export namespace Currents {
-  export import CurrentGetResponse = CurrentsAPI.CurrentGetResponse;
-  export import CurrentGetParams = CurrentsAPI.CurrentGetParams;
+export declare namespace Currents {
+  export { type CurrentGetResponse as CurrentGetResponse, type CurrentGetParams as CurrentGetParams };
 }

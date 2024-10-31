@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as FullAPI from './full';
 import * as ConfigsAPI from './configs';
 
 export class Full extends APIResource {
@@ -23,6 +22,6 @@ export interface FullGetParams {
   account_id: string;
 }
 
-export namespace Full {
-  export import FullGetParams = FullAPI.FullGetParams;
+export declare namespace Full {
+  export { type FullGetParams as FullGetParams };
 }

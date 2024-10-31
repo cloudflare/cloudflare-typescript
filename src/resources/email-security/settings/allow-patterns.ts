@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AllowPatternsAPI from './allow-patterns';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class AllowPatterns extends APIResource {
@@ -416,16 +415,20 @@ export interface AllowPatternGetParams {
   account_id: string;
 }
 
-export namespace AllowPatterns {
-  export import AllowPatternCreateResponse = AllowPatternsAPI.AllowPatternCreateResponse;
-  export import AllowPatternListResponse = AllowPatternsAPI.AllowPatternListResponse;
-  export import AllowPatternDeleteResponse = AllowPatternsAPI.AllowPatternDeleteResponse;
-  export import AllowPatternEditResponse = AllowPatternsAPI.AllowPatternEditResponse;
-  export import AllowPatternGetResponse = AllowPatternsAPI.AllowPatternGetResponse;
-  export import AllowPatternListResponsesV4PagePaginationArray = AllowPatternsAPI.AllowPatternListResponsesV4PagePaginationArray;
-  export import AllowPatternCreateParams = AllowPatternsAPI.AllowPatternCreateParams;
-  export import AllowPatternListParams = AllowPatternsAPI.AllowPatternListParams;
-  export import AllowPatternDeleteParams = AllowPatternsAPI.AllowPatternDeleteParams;
-  export import AllowPatternEditParams = AllowPatternsAPI.AllowPatternEditParams;
-  export import AllowPatternGetParams = AllowPatternsAPI.AllowPatternGetParams;
+AllowPatterns.AllowPatternListResponsesV4PagePaginationArray = AllowPatternListResponsesV4PagePaginationArray;
+
+export declare namespace AllowPatterns {
+  export {
+    type AllowPatternCreateResponse as AllowPatternCreateResponse,
+    type AllowPatternListResponse as AllowPatternListResponse,
+    type AllowPatternDeleteResponse as AllowPatternDeleteResponse,
+    type AllowPatternEditResponse as AllowPatternEditResponse,
+    type AllowPatternGetResponse as AllowPatternGetResponse,
+    AllowPatternListResponsesV4PagePaginationArray as AllowPatternListResponsesV4PagePaginationArray,
+    type AllowPatternCreateParams as AllowPatternCreateParams,
+    type AllowPatternListParams as AllowPatternListParams,
+    type AllowPatternDeleteParams as AllowPatternDeleteParams,
+    type AllowPatternEditParams as AllowPatternEditParams,
+    type AllowPatternGetParams as AllowPatternGetParams,
+  };
 }

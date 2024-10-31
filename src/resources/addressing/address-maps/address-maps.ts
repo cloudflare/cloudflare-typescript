@@ -5,8 +5,17 @@ import * as Core from '../../../core';
 import * as AddressMapsAPI from './address-maps';
 import * as Shared from '../../shared';
 import * as AccountsAPI from './accounts';
+import {
+  AccountDeleteParams,
+  AccountDeleteResponse,
+  AccountUpdateParams,
+  AccountUpdateResponse,
+  Accounts,
+} from './accounts';
 import * as IPsAPI from './ips';
+import { IPDeleteParams, IPDeleteResponse, IPUpdateParams, IPUpdateResponse, IPs } from './ips';
 import * as ZonesAPI from './zones';
+import { ZoneDeleteParams, ZoneDeleteResponse, ZoneUpdateParams, ZoneUpdateResponse, Zones } from './zones';
 import { SinglePage } from '../../../pagination';
 
 export class AddressMaps extends APIResource {
@@ -449,31 +458,47 @@ export interface AddressMapGetParams {
   account_id: string;
 }
 
-export namespace AddressMaps {
-  export import AddressMap = AddressMapsAPI.AddressMap;
-  export import Kind = AddressMapsAPI.Kind;
-  export import AddressMapCreateResponse = AddressMapsAPI.AddressMapCreateResponse;
-  export import AddressMapDeleteResponse = AddressMapsAPI.AddressMapDeleteResponse;
-  export import AddressMapGetResponse = AddressMapsAPI.AddressMapGetResponse;
-  export import AddressMapsSinglePage = AddressMapsAPI.AddressMapsSinglePage;
-  export import AddressMapCreateParams = AddressMapsAPI.AddressMapCreateParams;
-  export import AddressMapListParams = AddressMapsAPI.AddressMapListParams;
-  export import AddressMapDeleteParams = AddressMapsAPI.AddressMapDeleteParams;
-  export import AddressMapEditParams = AddressMapsAPI.AddressMapEditParams;
-  export import AddressMapGetParams = AddressMapsAPI.AddressMapGetParams;
-  export import Accounts = AccountsAPI.Accounts;
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
-  export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
-  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
-  export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
-  export import IPs = IPsAPI.IPs;
-  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
-  export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
-  export import IPUpdateParams = IPsAPI.IPUpdateParams;
-  export import IPDeleteParams = IPsAPI.IPDeleteParams;
-  export import Zones = ZonesAPI.Zones;
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
-  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
+AddressMaps.AddressMapsSinglePage = AddressMapsSinglePage;
+AddressMaps.Accounts = Accounts;
+AddressMaps.IPs = IPs;
+AddressMaps.Zones = Zones;
+
+export declare namespace AddressMaps {
+  export {
+    type AddressMap as AddressMap,
+    type Kind as Kind,
+    type AddressMapCreateResponse as AddressMapCreateResponse,
+    type AddressMapDeleteResponse as AddressMapDeleteResponse,
+    type AddressMapGetResponse as AddressMapGetResponse,
+    AddressMapsSinglePage as AddressMapsSinglePage,
+    type AddressMapCreateParams as AddressMapCreateParams,
+    type AddressMapListParams as AddressMapListParams,
+    type AddressMapDeleteParams as AddressMapDeleteParams,
+    type AddressMapEditParams as AddressMapEditParams,
+    type AddressMapGetParams as AddressMapGetParams,
+  };
+
+  export {
+    Accounts as Accounts,
+    type AccountUpdateResponse as AccountUpdateResponse,
+    type AccountDeleteResponse as AccountDeleteResponse,
+    type AccountUpdateParams as AccountUpdateParams,
+    type AccountDeleteParams as AccountDeleteParams,
+  };
+
+  export {
+    IPs as IPs,
+    type IPUpdateResponse as IPUpdateResponse,
+    type IPDeleteResponse as IPDeleteResponse,
+    type IPUpdateParams as IPUpdateParams,
+    type IPDeleteParams as IPDeleteParams,
+  };
+
+  export {
+    Zones as Zones,
+    type ZoneUpdateResponse as ZoneUpdateResponse,
+    type ZoneDeleteResponse as ZoneDeleteResponse,
+    type ZoneUpdateParams as ZoneUpdateParams,
+    type ZoneDeleteParams as ZoneDeleteParams,
+  };
 }

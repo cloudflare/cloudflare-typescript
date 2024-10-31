@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DefaultPolicyAPI from './default-policy';
 import * as ExcludesAPI from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
 import * as IncludesAPI from './includes';
@@ -117,7 +116,9 @@ export interface DefaultPolicyGetParams {
   account_id: string;
 }
 
-export namespace DefaultPolicy {
-  export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
-  export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
+export declare namespace DefaultPolicy {
+  export {
+    type DefaultPolicyGetResponse as DefaultPolicyGetResponse,
+    type DefaultPolicyGetParams as DefaultPolicyGetParams,
+  };
 }

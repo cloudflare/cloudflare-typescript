@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
@@ -215,7 +214,6 @@ export interface AseOriginParams {
   name?: Array<string>;
 }
 
-export namespace Ases {
-  export import AseOriginResponse = AsesAPI.AseOriginResponse;
-  export import AseOriginParams = AsesAPI.AseOriginParams;
+export declare namespace Ases {
+  export { type AseOriginResponse as AseOriginResponse, type AseOriginParams as AseOriginParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ASNAPI from './asn';
 
 export class ASN extends APIResource {
   /**
@@ -57,9 +56,11 @@ export interface ASNGetParams {
   account_id: string;
 }
 
-export namespace ASN {
-  export import ASNDeleteResponse = ASNAPI.ASNDeleteResponse;
-  export import ASNGetResponse = ASNAPI.ASNGetResponse;
-  export import ASNDeleteParams = ASNAPI.ASNDeleteParams;
-  export import ASNGetParams = ASNAPI.ASNGetParams;
+export declare namespace ASN {
+  export {
+    type ASNDeleteResponse as ASNDeleteResponse,
+    type ASNGetResponse as ASNGetResponse,
+    type ASNDeleteParams as ASNDeleteParams,
+    type ASNGetParams as ASNGetParams,
+  };
 }

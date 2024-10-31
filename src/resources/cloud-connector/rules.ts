@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RulesAPI from './rules';
 import { SinglePage } from '../../pagination';
 
 export class Rules extends APIResource {
@@ -161,10 +160,14 @@ export interface RuleListParams {
   zone_id: string;
 }
 
-export namespace Rules {
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
+Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
+
+export declare namespace Rules {
+  export {
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+  };
 }

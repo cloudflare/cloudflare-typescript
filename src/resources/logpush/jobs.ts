@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CloudflareError } from '../../error';
-import * as JobsAPI from './jobs';
 import { SinglePage } from '../../pagination';
 
 export class Jobs extends APIResource {
@@ -695,14 +694,18 @@ export interface JobGetParams {
   zone_id?: string;
 }
 
-export namespace Jobs {
-  export import LogpushJob = JobsAPI.LogpushJob;
-  export import OutputOptions = JobsAPI.OutputOptions;
-  export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
-  export import LogpushJobsSinglePage = JobsAPI.LogpushJobsSinglePage;
-  export import JobCreateParams = JobsAPI.JobCreateParams;
-  export import JobUpdateParams = JobsAPI.JobUpdateParams;
-  export import JobListParams = JobsAPI.JobListParams;
-  export import JobDeleteParams = JobsAPI.JobDeleteParams;
-  export import JobGetParams = JobsAPI.JobGetParams;
+Jobs.LogpushJobsSinglePage = LogpushJobsSinglePage;
+
+export declare namespace Jobs {
+  export {
+    type LogpushJob as LogpushJob,
+    type OutputOptions as OutputOptions,
+    type JobDeleteResponse as JobDeleteResponse,
+    LogpushJobsSinglePage as LogpushJobsSinglePage,
+    type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
+    type JobListParams as JobListParams,
+    type JobDeleteParams as JobDeleteParams,
+    type JobGetParams as JobGetParams,
+  };
 }

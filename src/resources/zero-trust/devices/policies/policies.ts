@@ -2,12 +2,50 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PoliciesAPI from './policies';
 import * as CertificatesAPI from './certificates';
+import {
+  CertificateGetResponse,
+  CertificateUpdateParams,
+  CertificateUpdateResponse,
+  Certificates,
+  DevicePolicyCertificates,
+} from './certificates';
 import * as DefaultPolicyAPI from './default-policy';
+import { DefaultPolicy, DefaultPolicyGetParams, DefaultPolicyGetResponse } from './default-policy';
 import * as ExcludesAPI from './excludes';
+import {
+  ExcludeGetParams,
+  ExcludeGetResponse,
+  ExcludeListParams,
+  ExcludeUpdateParams,
+  ExcludeUpdateResponse,
+  Excludes,
+  SplitTunnelExclude,
+  SplitTunnelExcludesSinglePage,
+} from './excludes';
 import * as FallbackDomainsAPI from './fallback-domains';
+import {
+  FallbackDomain,
+  FallbackDomainGetParams,
+  FallbackDomainGetResponse,
+  FallbackDomainListParams,
+  FallbackDomainPolicy,
+  FallbackDomainUpdateParams,
+  FallbackDomainUpdateResponse,
+  FallbackDomains,
+  FallbackDomainsSinglePage,
+} from './fallback-domains';
 import * as IncludesAPI from './includes';
+import {
+  IncludeGetParams,
+  IncludeGetResponse,
+  IncludeListParams,
+  IncludeUpdateParams,
+  IncludeUpdateResponse,
+  Includes,
+  SplitTunnelInclude,
+  SplitTunnelIncludesSinglePage,
+} from './includes';
 import { SinglePage } from '../../../../pagination';
 
 export class Policies extends APIResource {
@@ -483,46 +521,73 @@ export interface PolicyGetParams {
   account_id: string;
 }
 
-export namespace Policies {
-  export import SettingsPolicy = PoliciesAPI.SettingsPolicy;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import SettingsPoliciesSinglePage = PoliciesAPI.SettingsPoliciesSinglePage;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyEditParams = PoliciesAPI.PolicyEditParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
-  export import Certificates = CertificatesAPI.Certificates;
-  export import DevicePolicyCertificates = CertificatesAPI.DevicePolicyCertificates;
-  export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
-  export import DefaultPolicy = DefaultPolicyAPI.DefaultPolicy;
-  export import DefaultPolicyGetResponse = DefaultPolicyAPI.DefaultPolicyGetResponse;
-  export import DefaultPolicyGetParams = DefaultPolicyAPI.DefaultPolicyGetParams;
-  export import Excludes = ExcludesAPI.Excludes;
-  export import SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
-  export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
-  export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
-  export import SplitTunnelExcludesSinglePage = ExcludesAPI.SplitTunnelExcludesSinglePage;
-  export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
-  export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
-  export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
-  export import FallbackDomains = FallbackDomainsAPI.FallbackDomains;
-  export import FallbackDomain = FallbackDomainsAPI.FallbackDomain;
-  export import FallbackDomainPolicy = FallbackDomainsAPI.FallbackDomainPolicy;
-  export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
-  export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
-  export import FallbackDomainsSinglePage = FallbackDomainsAPI.FallbackDomainsSinglePage;
-  export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
-  export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
-  export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
-  export import Includes = IncludesAPI.Includes;
-  export import SplitTunnelInclude = IncludesAPI.SplitTunnelInclude;
-  export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
-  export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
-  export import SplitTunnelIncludesSinglePage = IncludesAPI.SplitTunnelIncludesSinglePage;
-  export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
-  export import IncludeListParams = IncludesAPI.IncludeListParams;
-  export import IncludeGetParams = IncludesAPI.IncludeGetParams;
+Policies.SettingsPoliciesSinglePage = SettingsPoliciesSinglePage;
+Policies.Certificates = Certificates;
+Policies.DefaultPolicy = DefaultPolicy;
+Policies.Excludes = Excludes;
+Policies.SplitTunnelExcludesSinglePage = SplitTunnelExcludesSinglePage;
+Policies.FallbackDomains = FallbackDomains;
+Policies.FallbackDomainsSinglePage = FallbackDomainsSinglePage;
+Policies.Includes = Includes;
+Policies.SplitTunnelIncludesSinglePage = SplitTunnelIncludesSinglePage;
+
+export declare namespace Policies {
+  export {
+    type SettingsPolicy as SettingsPolicy,
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    SettingsPoliciesSinglePage as SettingsPoliciesSinglePage,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyEditParams as PolicyEditParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
+
+  export {
+    Certificates as Certificates,
+    type DevicePolicyCertificates as DevicePolicyCertificates,
+    type CertificateUpdateResponse as CertificateUpdateResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    type CertificateUpdateParams as CertificateUpdateParams,
+  };
+
+  export {
+    DefaultPolicy as DefaultPolicy,
+    type DefaultPolicyGetResponse as DefaultPolicyGetResponse,
+    type DefaultPolicyGetParams as DefaultPolicyGetParams,
+  };
+
+  export {
+    Excludes as Excludes,
+    type SplitTunnelExclude as SplitTunnelExclude,
+    type ExcludeUpdateResponse as ExcludeUpdateResponse,
+    type ExcludeGetResponse as ExcludeGetResponse,
+    SplitTunnelExcludesSinglePage as SplitTunnelExcludesSinglePage,
+    type ExcludeUpdateParams as ExcludeUpdateParams,
+    type ExcludeListParams as ExcludeListParams,
+    type ExcludeGetParams as ExcludeGetParams,
+  };
+
+  export {
+    FallbackDomains as FallbackDomains,
+    type FallbackDomain as FallbackDomain,
+    type FallbackDomainPolicy as FallbackDomainPolicy,
+    type FallbackDomainUpdateResponse as FallbackDomainUpdateResponse,
+    type FallbackDomainGetResponse as FallbackDomainGetResponse,
+    FallbackDomainsSinglePage as FallbackDomainsSinglePage,
+    type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
+    type FallbackDomainListParams as FallbackDomainListParams,
+    type FallbackDomainGetParams as FallbackDomainGetParams,
+  };
+
+  export {
+    Includes as Includes,
+    type SplitTunnelInclude as SplitTunnelInclude,
+    type IncludeUpdateResponse as IncludeUpdateResponse,
+    type IncludeGetResponse as IncludeGetResponse,
+    SplitTunnelIncludesSinglePage as SplitTunnelIncludesSinglePage,
+    type IncludeUpdateParams as IncludeUpdateParams,
+    type IncludeListParams as IncludeListParams,
+    type IncludeGetParams as IncludeGetParams,
+  };
 }

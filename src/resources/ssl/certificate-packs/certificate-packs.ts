@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CertificatePacksAPI from './certificate-packs';
 import * as OrderAPI from './order';
+import { Order, OrderCreateParams, OrderCreateResponse } from './order';
 import * as QuotaAPI from './quota';
+import { Quota, QuotaGetParams, QuotaGetResponse } from './quota';
 import { SinglePage } from '../../../pagination';
 
 export class CertificatePacks extends APIResource {
@@ -222,24 +223,32 @@ export interface CertificatePackGetParams {
   zone_id: string;
 }
 
-export namespace CertificatePacks {
-  export import Host = CertificatePacksAPI.Host;
-  export import RequestValidity = CertificatePacksAPI.RequestValidity;
-  export import Status = CertificatePacksAPI.Status;
-  export import ValidationMethod = CertificatePacksAPI.ValidationMethod;
-  export import CertificatePackListResponse = CertificatePacksAPI.CertificatePackListResponse;
-  export import CertificatePackDeleteResponse = CertificatePacksAPI.CertificatePackDeleteResponse;
-  export import CertificatePackEditResponse = CertificatePacksAPI.CertificatePackEditResponse;
-  export import CertificatePackGetResponse = CertificatePacksAPI.CertificatePackGetResponse;
-  export import CertificatePackListResponsesSinglePage = CertificatePacksAPI.CertificatePackListResponsesSinglePage;
-  export import CertificatePackListParams = CertificatePacksAPI.CertificatePackListParams;
-  export import CertificatePackDeleteParams = CertificatePacksAPI.CertificatePackDeleteParams;
-  export import CertificatePackEditParams = CertificatePacksAPI.CertificatePackEditParams;
-  export import CertificatePackGetParams = CertificatePacksAPI.CertificatePackGetParams;
-  export import Order = OrderAPI.Order;
-  export import OrderCreateResponse = OrderAPI.OrderCreateResponse;
-  export import OrderCreateParams = OrderAPI.OrderCreateParams;
-  export import Quota = QuotaAPI.Quota;
-  export import QuotaGetResponse = QuotaAPI.QuotaGetResponse;
-  export import QuotaGetParams = QuotaAPI.QuotaGetParams;
+CertificatePacks.CertificatePackListResponsesSinglePage = CertificatePackListResponsesSinglePage;
+CertificatePacks.Order = Order;
+CertificatePacks.Quota = Quota;
+
+export declare namespace CertificatePacks {
+  export {
+    type Host as Host,
+    type RequestValidity as RequestValidity,
+    type Status as Status,
+    type ValidationMethod as ValidationMethod,
+    type CertificatePackListResponse as CertificatePackListResponse,
+    type CertificatePackDeleteResponse as CertificatePackDeleteResponse,
+    type CertificatePackEditResponse as CertificatePackEditResponse,
+    type CertificatePackGetResponse as CertificatePackGetResponse,
+    CertificatePackListResponsesSinglePage as CertificatePackListResponsesSinglePage,
+    type CertificatePackListParams as CertificatePackListParams,
+    type CertificatePackDeleteParams as CertificatePackDeleteParams,
+    type CertificatePackEditParams as CertificatePackEditParams,
+    type CertificatePackGetParams as CertificatePackGetParams,
+  };
+
+  export {
+    Order as Order,
+    type OrderCreateResponse as OrderCreateResponse,
+    type OrderCreateParams as OrderCreateParams,
+  };
+
+  export { Quota as Quota, type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
 }

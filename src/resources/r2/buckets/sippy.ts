@@ -311,11 +311,13 @@ export interface SippyGetParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace SippyResource {
-  export import Provider = SippyAPI.Provider;
-  export import Sippy = SippyAPI.Sippy;
-  export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
-  export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
-  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
-  export import SippyGetParams = SippyAPI.SippyGetParams;
+export declare namespace SippyResource {
+  export {
+    type Provider as Provider,
+    type Sippy as Sippy,
+    type SippyDeleteResponse as SippyDeleteResponse,
+    type SippyUpdateParams as SippyUpdateParams,
+    type SippyDeleteParams as SippyDeleteParams,
+    type SippyGetParams as SippyGetParams,
+  };
 }

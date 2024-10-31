@@ -3,8 +3,8 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SpeedAPI from './speed';
 import * as TopAPI from './top';
+import { Top, TopAsesParams, TopAsesResponse, TopLocationsParams, TopLocationsResponse } from './top';
 
 export class Speed extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
@@ -227,14 +227,21 @@ export interface SpeedSummaryParams {
   name?: Array<string>;
 }
 
-export namespace Speed {
-  export import SpeedHistogramResponse = SpeedAPI.SpeedHistogramResponse;
-  export import SpeedSummaryResponse = SpeedAPI.SpeedSummaryResponse;
-  export import SpeedHistogramParams = SpeedAPI.SpeedHistogramParams;
-  export import SpeedSummaryParams = SpeedAPI.SpeedSummaryParams;
-  export import Top = TopAPI.Top;
-  export import TopAsesResponse = TopAPI.TopAsesResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopAsesParams = TopAPI.TopAsesParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+Speed.Top = Top;
+
+export declare namespace Speed {
+  export {
+    type SpeedHistogramResponse as SpeedHistogramResponse,
+    type SpeedSummaryResponse as SpeedSummaryResponse,
+    type SpeedHistogramParams as SpeedHistogramParams,
+    type SpeedSummaryParams as SpeedSummaryParams,
+  };
+
+  export {
+    Top as Top,
+    type TopAsesResponse as TopAsesResponse,
+    type TopLocationsResponse as TopLocationsResponse,
+    type TopAsesParams as TopAsesParams,
+    type TopLocationsParams as TopLocationsParams,
+  };
 }

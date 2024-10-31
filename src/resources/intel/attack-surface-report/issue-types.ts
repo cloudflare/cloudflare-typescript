@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as IssueTypesAPI from './issue-types';
 
 export class IssueTypes extends APIResource {
   /**
@@ -28,7 +27,6 @@ export interface IssueTypeGetParams {
   account_id: string;
 }
 
-export namespace IssueTypes {
-  export import IssueTypeGetResponse = IssueTypesAPI.IssueTypeGetResponse;
-  export import IssueTypeGetParams = IssueTypesAPI.IssueTypeGetParams;
+export declare namespace IssueTypes {
+  export { type IssueTypeGetResponse as IssueTypeGetResponse, type IssueTypeGetParams as IssueTypeGetParams };
 }

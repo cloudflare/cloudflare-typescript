@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DatasetsAPI from './datasets';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Datasets extends APIResource {
@@ -454,16 +453,20 @@ export interface DatasetGetParams {
   account_id: string;
 }
 
-export namespace Datasets {
-  export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
-  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
-  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
-  export import DatasetDeleteResponse = DatasetsAPI.DatasetDeleteResponse;
-  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
-  export import DatasetListResponsesV4PagePaginationArray = DatasetsAPI.DatasetListResponsesV4PagePaginationArray;
-  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
-  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
+Datasets.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
+
+export declare namespace Datasets {
+  export {
+    type DatasetCreateResponse as DatasetCreateResponse,
+    type DatasetUpdateResponse as DatasetUpdateResponse,
+    type DatasetListResponse as DatasetListResponse,
+    type DatasetDeleteResponse as DatasetDeleteResponse,
+    type DatasetGetResponse as DatasetGetResponse,
+    DatasetListResponsesV4PagePaginationArray as DatasetListResponsesV4PagePaginationArray,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
 }

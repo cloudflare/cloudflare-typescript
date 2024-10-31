@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DatasetsAPI from './datasets';
 import * as UploadAPI from './upload';
+import { NewVersion, Upload as UploadAPIUpload, UploadCreateParams, UploadEditParams } from './upload';
 import * as VersionsAPI from './versions/versions';
+import { VersionCreateParams, VersionCreateResponse, Versions } from './versions/versions';
 import { SinglePage } from '../../../../pagination';
 
 export class Datasets extends APIResource {
@@ -216,21 +217,33 @@ export interface DatasetGetParams {
   account_id: string;
 }
 
-export namespace Datasets {
-  export import Dataset = DatasetsAPI.Dataset;
-  export import DatasetArray = DatasetsAPI.DatasetArray;
-  export import DatasetCreation = DatasetsAPI.DatasetCreation;
-  export import DatasetsSinglePage = DatasetsAPI.DatasetsSinglePage;
-  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
-  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
-  export import Upload = UploadAPI.Upload;
-  export import NewVersion = UploadAPI.NewVersion;
-  export import UploadCreateParams = UploadAPI.UploadCreateParams;
-  export import UploadEditParams = UploadAPI.UploadEditParams;
-  export import Versions = VersionsAPI.Versions;
-  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
-  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
+Datasets.DatasetsSinglePage = DatasetsSinglePage;
+Datasets.Upload = UploadAPIUpload;
+Datasets.Versions = Versions;
+
+export declare namespace Datasets {
+  export {
+    type Dataset as Dataset,
+    type DatasetArray as DatasetArray,
+    type DatasetCreation as DatasetCreation,
+    DatasetsSinglePage as DatasetsSinglePage,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
+
+  export {
+    UploadAPIUpload as Upload,
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionCreateResponse as VersionCreateResponse,
+    type VersionCreateParams as VersionCreateParams,
+  };
 }

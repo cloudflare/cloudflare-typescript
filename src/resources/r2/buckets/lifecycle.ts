@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LifecycleAPI from './lifecycle';
 
 export class Lifecycle extends APIResource {
   /**
@@ -362,9 +361,11 @@ export interface LifecycleGetParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace Lifecycle {
-  export import LifecycleUpdateResponse = LifecycleAPI.LifecycleUpdateResponse;
-  export import LifecycleGetResponse = LifecycleAPI.LifecycleGetResponse;
-  export import LifecycleUpdateParams = LifecycleAPI.LifecycleUpdateParams;
-  export import LifecycleGetParams = LifecycleAPI.LifecycleGetParams;
+export declare namespace Lifecycle {
+  export {
+    type LifecycleUpdateResponse as LifecycleUpdateResponse,
+    type LifecycleGetResponse as LifecycleGetResponse,
+    type LifecycleUpdateParams as LifecycleUpdateParams,
+    type LifecycleGetParams as LifecycleGetParams,
+  };
 }

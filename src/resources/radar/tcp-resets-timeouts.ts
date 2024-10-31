@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as TCPResetsTimeoutsAPI from './tcp-resets-timeouts';
 
 export class TCPResetsTimeouts extends APIResource {
   /**
@@ -333,9 +332,11 @@ export interface TCPResetsTimeoutTimeseriesGroupsParams {
   name?: Array<string>;
 }
 
-export namespace TCPResetsTimeouts {
-  export import TCPResetsTimeoutSummaryResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryResponse;
-  export import TCPResetsTimeoutTimeseriesGroupsResponse = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsResponse;
-  export import TCPResetsTimeoutSummaryParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutSummaryParams;
-  export import TCPResetsTimeoutTimeseriesGroupsParams = TCPResetsTimeoutsAPI.TCPResetsTimeoutTimeseriesGroupsParams;
+export declare namespace TCPResetsTimeouts {
+  export {
+    type TCPResetsTimeoutSummaryResponse as TCPResetsTimeoutSummaryResponse,
+    type TCPResetsTimeoutTimeseriesGroupsResponse as TCPResetsTimeoutTimeseriesGroupsResponse,
+    type TCPResetsTimeoutSummaryParams as TCPResetsTimeoutSummaryParams,
+    type TCPResetsTimeoutTimeseriesGroupsParams as TCPResetsTimeoutTimeseriesGroupsParams,
+  };
 }

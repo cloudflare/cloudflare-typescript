@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as UploadAPI from './upload';
 import * as DatasetsAPI from './datasets';
 
 export class Upload extends APIResource {
@@ -87,8 +86,10 @@ export interface UploadEditParams {
   body: string;
 }
 
-export namespace Upload {
-  export import NewVersion = UploadAPI.NewVersion;
-  export import UploadCreateParams = UploadAPI.UploadCreateParams;
-  export import UploadEditParams = UploadAPI.UploadEditParams;
+export declare namespace Upload {
+  export {
+    type NewVersion as NewVersion,
+    type UploadCreateParams as UploadCreateParams,
+    type UploadEditParams as UploadEditParams,
+  };
 }

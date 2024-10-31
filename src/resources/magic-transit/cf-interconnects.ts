@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as CfInterconnectsAPI from './cf-interconnects';
 import * as MagicTransitAPI from './magic-transit';
 
 export class CfInterconnects extends APIResource {
@@ -370,11 +369,13 @@ export interface CfInterconnectGetParams {
   'x-magic-new-hc-target'?: boolean;
 }
 
-export namespace CfInterconnects {
-  export import CfInterconnectUpdateResponse = CfInterconnectsAPI.CfInterconnectUpdateResponse;
-  export import CfInterconnectListResponse = CfInterconnectsAPI.CfInterconnectListResponse;
-  export import CfInterconnectGetResponse = CfInterconnectsAPI.CfInterconnectGetResponse;
-  export import CfInterconnectUpdateParams = CfInterconnectsAPI.CfInterconnectUpdateParams;
-  export import CfInterconnectListParams = CfInterconnectsAPI.CfInterconnectListParams;
-  export import CfInterconnectGetParams = CfInterconnectsAPI.CfInterconnectGetParams;
+export declare namespace CfInterconnects {
+  export {
+    type CfInterconnectUpdateResponse as CfInterconnectUpdateResponse,
+    type CfInterconnectListResponse as CfInterconnectListResponse,
+    type CfInterconnectGetResponse as CfInterconnectGetResponse,
+    type CfInterconnectUpdateParams as CfInterconnectUpdateParams,
+    type CfInterconnectListParams as CfInterconnectListParams,
+    type CfInterconnectGetParams as CfInterconnectGetParams,
+  };
 }

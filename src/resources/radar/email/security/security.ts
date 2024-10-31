@@ -2,8 +2,51 @@
 
 import { APIResource } from '../../../../resource';
 import * as SummaryAPI from './summary';
+import {
+  Summary,
+  SummaryARCParams,
+  SummaryARCResponse,
+  SummaryDKIMParams,
+  SummaryDKIMResponse,
+  SummaryDMARCParams,
+  SummaryDMARCResponse,
+  SummaryMaliciousParams,
+  SummaryMaliciousResponse,
+  SummarySPFParams,
+  SummarySPFResponse,
+  SummarySpamParams,
+  SummarySpamResponse,
+  SummarySpoofParams,
+  SummarySpoofResponse,
+  SummaryTLSVersionParams,
+  SummaryTLSVersionResponse,
+  SummaryThreatCategoryParams,
+  SummaryThreatCategoryResponse,
+} from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
+import {
+  TimeseriesGroupARCParams,
+  TimeseriesGroupARCResponse,
+  TimeseriesGroupDKIMParams,
+  TimeseriesGroupDKIMResponse,
+  TimeseriesGroupDMARCParams,
+  TimeseriesGroupDMARCResponse,
+  TimeseriesGroupMaliciousParams,
+  TimeseriesGroupMaliciousResponse,
+  TimeseriesGroupSPFParams,
+  TimeseriesGroupSPFResponse,
+  TimeseriesGroupSpamParams,
+  TimeseriesGroupSpamResponse,
+  TimeseriesGroupSpoofParams,
+  TimeseriesGroupSpoofResponse,
+  TimeseriesGroupTLSVersionParams,
+  TimeseriesGroupTLSVersionResponse,
+  TimeseriesGroupThreatCategoryParams,
+  TimeseriesGroupThreatCategoryResponse,
+  TimeseriesGroups,
+} from './timeseries-groups';
 import * as TopAPI from './top/top';
+import { Top } from './top/top';
 
 export class Security extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
@@ -13,44 +56,54 @@ export class Security extends APIResource {
   );
 }
 
-export namespace Security {
-  export import Top = TopAPI.Top;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
-  export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
-  export import SummaryMaliciousResponse = SummaryAPI.SummaryMaliciousResponse;
-  export import SummarySpamResponse = SummaryAPI.SummarySpamResponse;
-  export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
-  export import SummarySpoofResponse = SummaryAPI.SummarySpoofResponse;
-  export import SummaryThreatCategoryResponse = SummaryAPI.SummaryThreatCategoryResponse;
-  export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
-  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
-  export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
-  export import SummaryMaliciousParams = SummaryAPI.SummaryMaliciousParams;
-  export import SummarySpamParams = SummaryAPI.SummarySpamParams;
-  export import SummarySPFParams = SummaryAPI.SummarySPFParams;
-  export import SummarySpoofParams = SummaryAPI.SummarySpoofParams;
-  export import SummaryThreatCategoryParams = SummaryAPI.SummaryThreatCategoryParams;
-  export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
-  export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
-  export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
-  export import TimeseriesGroupMaliciousResponse = TimeseriesGroupsAPI.TimeseriesGroupMaliciousResponse;
-  export import TimeseriesGroupSpamResponse = TimeseriesGroupsAPI.TimeseriesGroupSpamResponse;
-  export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
-  export import TimeseriesGroupSpoofResponse = TimeseriesGroupsAPI.TimeseriesGroupSpoofResponse;
-  export import TimeseriesGroupThreatCategoryResponse = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryResponse;
-  export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
-  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
-  export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
-  export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
-  export import TimeseriesGroupMaliciousParams = TimeseriesGroupsAPI.TimeseriesGroupMaliciousParams;
-  export import TimeseriesGroupSpamParams = TimeseriesGroupsAPI.TimeseriesGroupSpamParams;
-  export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
-  export import TimeseriesGroupSpoofParams = TimeseriesGroupsAPI.TimeseriesGroupSpoofParams;
-  export import TimeseriesGroupThreatCategoryParams = TimeseriesGroupsAPI.TimeseriesGroupThreatCategoryParams;
-  export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
+Security.Top = Top;
+Security.Summary = Summary;
+Security.TimeseriesGroups = TimeseriesGroups;
+
+export declare namespace Security {
+  export { Top as Top };
+
+  export {
+    Summary as Summary,
+    type SummaryARCResponse as SummaryARCResponse,
+    type SummaryDKIMResponse as SummaryDKIMResponse,
+    type SummaryDMARCResponse as SummaryDMARCResponse,
+    type SummaryMaliciousResponse as SummaryMaliciousResponse,
+    type SummarySpamResponse as SummarySpamResponse,
+    type SummarySPFResponse as SummarySPFResponse,
+    type SummarySpoofResponse as SummarySpoofResponse,
+    type SummaryThreatCategoryResponse as SummaryThreatCategoryResponse,
+    type SummaryTLSVersionResponse as SummaryTLSVersionResponse,
+    type SummaryARCParams as SummaryARCParams,
+    type SummaryDKIMParams as SummaryDKIMParams,
+    type SummaryDMARCParams as SummaryDMARCParams,
+    type SummaryMaliciousParams as SummaryMaliciousParams,
+    type SummarySpamParams as SummarySpamParams,
+    type SummarySPFParams as SummarySPFParams,
+    type SummarySpoofParams as SummarySpoofParams,
+    type SummaryThreatCategoryParams as SummaryThreatCategoryParams,
+    type SummaryTLSVersionParams as SummaryTLSVersionParams,
+  };
+
+  export {
+    TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupARCResponse as TimeseriesGroupARCResponse,
+    type TimeseriesGroupDKIMResponse as TimeseriesGroupDKIMResponse,
+    type TimeseriesGroupDMARCResponse as TimeseriesGroupDMARCResponse,
+    type TimeseriesGroupMaliciousResponse as TimeseriesGroupMaliciousResponse,
+    type TimeseriesGroupSpamResponse as TimeseriesGroupSpamResponse,
+    type TimeseriesGroupSPFResponse as TimeseriesGroupSPFResponse,
+    type TimeseriesGroupSpoofResponse as TimeseriesGroupSpoofResponse,
+    type TimeseriesGroupThreatCategoryResponse as TimeseriesGroupThreatCategoryResponse,
+    type TimeseriesGroupTLSVersionResponse as TimeseriesGroupTLSVersionResponse,
+    type TimeseriesGroupARCParams as TimeseriesGroupARCParams,
+    type TimeseriesGroupDKIMParams as TimeseriesGroupDKIMParams,
+    type TimeseriesGroupDMARCParams as TimeseriesGroupDMARCParams,
+    type TimeseriesGroupMaliciousParams as TimeseriesGroupMaliciousParams,
+    type TimeseriesGroupSpamParams as TimeseriesGroupSpamParams,
+    type TimeseriesGroupSPFParams as TimeseriesGroupSPFParams,
+    type TimeseriesGroupSpoofParams as TimeseriesGroupSpoofParams,
+    type TimeseriesGroupThreatCategoryParams as TimeseriesGroupThreatCategoryParams,
+    type TimeseriesGroupTLSVersionParams as TimeseriesGroupTLSVersionParams,
+  };
 }

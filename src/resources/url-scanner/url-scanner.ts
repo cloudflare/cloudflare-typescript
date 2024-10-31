@@ -2,11 +2,27 @@
 
 import { APIResource } from '../../resource';
 import * as DOMAPI from './dom';
+import { DOM, DOMGetResponse } from './dom';
 import * as HARAPI from './har';
+import { HAR, HARGetResponse } from './har';
 import * as ResponsesAPI from './responses';
+import { ResponseGetResponse, Responses } from './responses';
 import * as ResultAPI from './result';
+import { Result, ResultGetResponse } from './result';
 import * as ScansAPI from './scans';
+import {
+  ScanCreateParams,
+  ScanCreateResponse,
+  ScanGetParams,
+  ScanGetResponse,
+  ScanHARResponse,
+  ScanListParams,
+  ScanListResponse,
+  ScanScreenshotParams,
+  Scans,
+} from './scans';
 import * as ScreenshotAPI from './screenshot';
+import { Screenshot, ScreenshotGetParams } from './screenshot';
 
 export class URLScanner extends APIResource {
   responses: ResponsesAPI.Responses = new ResponsesAPI.Responses(this._client);
@@ -53,24 +69,33 @@ export namespace URLScannerTask {
   }
 }
 
-export namespace URLScanner {
-  export import Responses = ResponsesAPI.Responses;
-  export import ResponseGetResponse = ResponsesAPI.ResponseGetResponse;
-  export import Scans = ScansAPI.Scans;
-  export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export import ScanListResponse = ScansAPI.ScanListResponse;
-  export import ScanGetResponse = ScansAPI.ScanGetResponse;
-  export import ScanHARResponse = ScansAPI.ScanHARResponse;
-  export import ScanCreateParams = ScansAPI.ScanCreateParams;
-  export import ScanListParams = ScansAPI.ScanListParams;
-  export import ScanGetParams = ScansAPI.ScanGetParams;
-  export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
-  export import DOM = DOMAPI.DOM;
-  export import DOMGetResponse = DOMAPI.DOMGetResponse;
-  export import HAR = HARAPI.HAR;
-  export import HARGetResponse = HARAPI.HARGetResponse;
-  export import Result = ResultAPI.Result;
-  export import ResultGetResponse = ResultAPI.ResultGetResponse;
-  export import Screenshot = ScreenshotAPI.Screenshot;
-  export import ScreenshotGetParams = ScreenshotAPI.ScreenshotGetParams;
+URLScanner.Responses = Responses;
+URLScanner.Scans = Scans;
+URLScanner.DOM = DOM;
+URLScanner.HAR = HAR;
+URLScanner.Result = Result;
+URLScanner.Screenshot = Screenshot;
+
+export declare namespace URLScanner {
+  export { Responses as Responses, type ResponseGetResponse as ResponseGetResponse };
+
+  export {
+    Scans as Scans,
+    type ScanCreateResponse as ScanCreateResponse,
+    type ScanListResponse as ScanListResponse,
+    type ScanGetResponse as ScanGetResponse,
+    type ScanHARResponse as ScanHARResponse,
+    type ScanCreateParams as ScanCreateParams,
+    type ScanListParams as ScanListParams,
+    type ScanGetParams as ScanGetParams,
+    type ScanScreenshotParams as ScanScreenshotParams,
+  };
+
+  export { DOM as DOM, type DOMGetResponse as DOMGetResponse };
+
+  export { HAR as HAR, type HARGetResponse as HARGetResponse };
+
+  export { Result as Result, type ResultGetResponse as ResultGetResponse };
+
+  export { Screenshot as Screenshot, type ScreenshotGetParams as ScreenshotGetParams };
 }

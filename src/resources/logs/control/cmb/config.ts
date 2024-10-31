@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ConfigAPI from './config';
 
 export class Config extends APIResource {
   /**
@@ -81,10 +80,12 @@ export interface ConfigGetParams {
   account_id: string;
 }
 
-export namespace Config {
-  export import CmbConfig = ConfigAPI.CmbConfig;
-  export import ConfigDeleteResponse = ConfigAPI.ConfigDeleteResponse;
-  export import ConfigCreateParams = ConfigAPI.ConfigCreateParams;
-  export import ConfigDeleteParams = ConfigAPI.ConfigDeleteParams;
-  export import ConfigGetParams = ConfigAPI.ConfigGetParams;
+export declare namespace Config {
+  export {
+    type CmbConfig as CmbConfig,
+    type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigCreateParams as ConfigCreateParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
+    type ConfigGetParams as ConfigGetParams,
+  };
 }

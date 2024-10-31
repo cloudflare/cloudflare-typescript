@@ -157,10 +157,12 @@ export interface DeploymentGetParams {
   account_id: string;
 }
 
-export namespace Deployments {
-  export import Deployment = DeploymentsAPI.Deployment;
-  export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
-  export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
-  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
+export declare namespace Deployments {
+  export {
+    type Deployment as Deployment,
+    type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentGetResponse as DeploymentGetResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentGetParams as DeploymentGetParams,
+  };
 }

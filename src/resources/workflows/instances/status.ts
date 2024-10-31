@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as StatusAPI from './status';
 
 export class Status extends APIResource {
   /**
@@ -54,7 +53,6 @@ export interface StatusEditParams {
   status: 'resume' | 'pause' | 'terminate';
 }
 
-export namespace Status {
-  export import StatusEditResponse = StatusAPI.StatusEditResponse;
-  export import StatusEditParams = StatusAPI.StatusEditParams;
+export declare namespace Status {
+  export { type StatusEditResponse as StatusEditResponse, type StatusEditParams as StatusEditParams };
 }

@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ConfigurationsAPI from './configurations';
 import * as CustomCertificateAPI from './custom-certificate';
+import { CustomCertificate, CustomCertificateGetParams } from './custom-certificate';
 
 export class Configurations extends APIResource {
   customCertificate: CustomCertificateAPI.CustomCertificate = new CustomCertificateAPI.CustomCertificate(
@@ -711,25 +711,32 @@ export interface ConfigurationGetParams {
   account_id: string;
 }
 
-export namespace Configurations {
-  export import ActivityLogSettings = ConfigurationsAPI.ActivityLogSettings;
-  export import AntiVirusSettings = ConfigurationsAPI.AntiVirusSettings;
-  export import BlockPageSettings = ConfigurationsAPI.BlockPageSettings;
-  export import BodyScanningSettings = ConfigurationsAPI.BodyScanningSettings;
-  export import BrowserIsolationSettings = ConfigurationsAPI.BrowserIsolationSettings;
-  export import CustomCertificateSettings = ConfigurationsAPI.CustomCertificateSettings;
-  export import ExtendedEmailMatching = ConfigurationsAPI.ExtendedEmailMatching;
-  export import FipsSettings = ConfigurationsAPI.FipsSettings;
-  export import GatewayConfigurationSettings = ConfigurationsAPI.GatewayConfigurationSettings;
-  export import NotificationSettings = ConfigurationsAPI.NotificationSettings;
-  export import ProtocolDetection = ConfigurationsAPI.ProtocolDetection;
-  export import TLSSettings = ConfigurationsAPI.TLSSettings;
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationEditResponse = ConfigurationsAPI.ConfigurationEditResponse;
-  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationEditParams = ConfigurationsAPI.ConfigurationEditParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
-  export import CustomCertificate = CustomCertificateAPI.CustomCertificate;
-  export import CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
+Configurations.CustomCertificate = CustomCertificate;
+
+export declare namespace Configurations {
+  export {
+    type ActivityLogSettings as ActivityLogSettings,
+    type AntiVirusSettings as AntiVirusSettings,
+    type BlockPageSettings as BlockPageSettings,
+    type BodyScanningSettings as BodyScanningSettings,
+    type BrowserIsolationSettings as BrowserIsolationSettings,
+    type CustomCertificateSettings as CustomCertificateSettings,
+    type ExtendedEmailMatching as ExtendedEmailMatching,
+    type FipsSettings as FipsSettings,
+    type GatewayConfigurationSettings as GatewayConfigurationSettings,
+    type NotificationSettings as NotificationSettings,
+    type ProtocolDetection as ProtocolDetection,
+    type TLSSettings as TLSSettings,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationEditResponse as ConfigurationEditResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationEditParams as ConfigurationEditParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
+
+  export {
+    CustomCertificate as CustomCertificate,
+    type CustomCertificateGetParams as CustomCertificateGetParams,
+  };
 }

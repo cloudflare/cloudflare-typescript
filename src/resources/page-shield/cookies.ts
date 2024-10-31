@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as CookiesAPI from './cookies';
 import { SinglePage } from '../../pagination';
 
 export class Cookies extends APIResource {
@@ -209,10 +208,14 @@ export interface CookieGetParams {
   zone_id: string;
 }
 
-export namespace Cookies {
-  export import CookieListResponse = CookiesAPI.CookieListResponse;
-  export import CookieGetResponse = CookiesAPI.CookieGetResponse;
-  export import CookieListResponsesSinglePage = CookiesAPI.CookieListResponsesSinglePage;
-  export import CookieListParams = CookiesAPI.CookieListParams;
-  export import CookieGetParams = CookiesAPI.CookieGetParams;
+Cookies.CookieListResponsesSinglePage = CookieListResponsesSinglePage;
+
+export declare namespace Cookies {
+  export {
+    type CookieListResponse as CookieListResponse,
+    type CookieGetResponse as CookieGetResponse,
+    CookieListResponsesSinglePage as CookieListResponsesSinglePage,
+    type CookieListParams as CookieListParams,
+    type CookieGetParams as CookieGetParams,
+  };
 }

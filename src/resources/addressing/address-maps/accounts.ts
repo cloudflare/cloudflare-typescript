@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AccountsAPI from './accounts';
 import * as Shared from '../../shared';
 
 export class Accounts extends APIResource {
@@ -130,9 +129,11 @@ export interface AccountDeleteParams {
   account_id: string;
 }
 
-export namespace Accounts {
-  export import AccountUpdateResponse = AccountsAPI.AccountUpdateResponse;
-  export import AccountDeleteResponse = AccountsAPI.AccountDeleteResponse;
-  export import AccountUpdateParams = AccountsAPI.AccountUpdateParams;
-  export import AccountDeleteParams = AccountsAPI.AccountDeleteParams;
+export declare namespace Accounts {
+  export {
+    type AccountUpdateResponse as AccountUpdateResponse,
+    type AccountDeleteResponse as AccountDeleteResponse,
+    type AccountUpdateParams as AccountUpdateParams,
+    type AccountDeleteParams as AccountDeleteParams,
+  };
 }

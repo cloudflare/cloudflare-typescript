@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -106,7 +105,9 @@ export interface TimeseriesGroupUserAgentParams {
   name?: Array<string>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupUserAgentResponse = TimeseriesGroupsAPI.TimeseriesGroupUserAgentResponse;
-  export import TimeseriesGroupUserAgentParams = TimeseriesGroupsAPI.TimeseriesGroupUserAgentParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupUserAgentResponse as TimeseriesGroupUserAgentResponse,
+    type TimeseriesGroupUserAgentParams as TimeseriesGroupUserAgentParams,
+  };
 }

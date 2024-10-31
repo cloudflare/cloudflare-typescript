@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as HARAPI from './har';
 
 export class HAR extends APIResource {
   /**
@@ -148,6 +147,6 @@ export namespace HARGetResponse {
   }
 }
 
-export namespace HAR {
-  export import HARGetResponse = HARAPI.HARGetResponse;
+export declare namespace HAR {
+  export { type HARGetResponse as HARGetResponse };
 }

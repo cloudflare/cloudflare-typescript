@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AddressesAPI from './addresses';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Addresses extends APIResource {
@@ -149,11 +148,15 @@ export interface AddressGetParams {
   account_id: string;
 }
 
-export namespace Addresses {
-  export import Address = AddressesAPI.Address;
-  export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
-  export import AddressCreateParams = AddressesAPI.AddressCreateParams;
-  export import AddressListParams = AddressesAPI.AddressListParams;
-  export import AddressDeleteParams = AddressesAPI.AddressDeleteParams;
-  export import AddressGetParams = AddressesAPI.AddressGetParams;
+Addresses.AddressesV4PagePaginationArray = AddressesV4PagePaginationArray;
+
+export declare namespace Addresses {
+  export {
+    type Address as Address,
+    AddressesV4PagePaginationArray as AddressesV4PagePaginationArray,
+    type AddressCreateParams as AddressCreateParams,
+    type AddressListParams as AddressListParams,
+    type AddressDeleteParams as AddressDeleteParams,
+    type AddressGetParams as AddressGetParams,
+  };
 }

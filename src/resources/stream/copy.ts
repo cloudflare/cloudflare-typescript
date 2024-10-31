@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as CopyAPI from './copy';
 import * as StreamAPI from './stream';
 
 export class Copy extends APIResource {
@@ -114,6 +113,6 @@ export namespace CopyCreateParams {
   }
 }
 
-export namespace Copy {
-  export import CopyCreateParams = CopyAPI.CopyCreateParams;
+export declare namespace Copy {
+  export { type CopyCreateParams as CopyCreateParams };
 }

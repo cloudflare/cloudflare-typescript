@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RecordsAPI from './records';
 import * as Shared from '../shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -4701,50 +4700,54 @@ export interface RecordScanParams {
   body: unknown;
 }
 
-export namespace Records {
-  export import ARecord = RecordsAPI.ARecord;
-  export import AAAARecord = RecordsAPI.AAAARecord;
-  export import CAARecord = RecordsAPI.CAARecord;
-  export import CERTRecord = RecordsAPI.CERTRecord;
-  export import CNAMERecord = RecordsAPI.CNAMERecord;
-  export import DNSKEYRecord = RecordsAPI.DNSKEYRecord;
-  export import DSRecord = RecordsAPI.DSRecord;
-  export import HTTPSRecord = RecordsAPI.HTTPSRecord;
-  export import LOCRecord = RecordsAPI.LOCRecord;
-  export import MXRecord = RecordsAPI.MXRecord;
-  export import NAPTRRecord = RecordsAPI.NAPTRRecord;
-  export import NSRecord = RecordsAPI.NSRecord;
-  export import PTRRecord = RecordsAPI.PTRRecord;
-  export import Record = RecordsAPI.Record;
-  export import RecordProcessTiming = RecordsAPI.RecordProcessTiming;
-  export import RecordTags = RecordsAPI.RecordTags;
-  export import SMIMEARecord = RecordsAPI.SMIMEARecord;
-  export import SRVRecord = RecordsAPI.SRVRecord;
-  export import SSHFPRecord = RecordsAPI.SSHFPRecord;
-  export import SVCBRecord = RecordsAPI.SVCBRecord;
-  export import TLSARecord = RecordsAPI.TLSARecord;
-  export import TTL = RecordsAPI.TTL;
-  export import TXTRecord = RecordsAPI.TXTRecord;
-  export import URIRecord = RecordsAPI.URIRecord;
-  export import RecordCreateResponse = RecordsAPI.RecordCreateResponse;
-  export import RecordUpdateResponse = RecordsAPI.RecordUpdateResponse;
-  export import RecordListResponse = RecordsAPI.RecordListResponse;
-  export import RecordDeleteResponse = RecordsAPI.RecordDeleteResponse;
-  export import RecordBatchResponse = RecordsAPI.RecordBatchResponse;
-  export import RecordEditResponse = RecordsAPI.RecordEditResponse;
-  export import RecordExportResponse = RecordsAPI.RecordExportResponse;
-  export import RecordGetResponse = RecordsAPI.RecordGetResponse;
-  export import RecordImportResponse = RecordsAPI.RecordImportResponse;
-  export import RecordScanResponse = RecordsAPI.RecordScanResponse;
-  export import RecordListResponsesV4PagePaginationArray = RecordsAPI.RecordListResponsesV4PagePaginationArray;
-  export import RecordCreateParams = RecordsAPI.RecordCreateParams;
-  export import RecordUpdateParams = RecordsAPI.RecordUpdateParams;
-  export import RecordListParams = RecordsAPI.RecordListParams;
-  export import RecordDeleteParams = RecordsAPI.RecordDeleteParams;
-  export import RecordBatchParams = RecordsAPI.RecordBatchParams;
-  export import RecordEditParams = RecordsAPI.RecordEditParams;
-  export import RecordExportParams = RecordsAPI.RecordExportParams;
-  export import RecordGetParams = RecordsAPI.RecordGetParams;
-  export import RecordImportParams = RecordsAPI.RecordImportParams;
-  export import RecordScanParams = RecordsAPI.RecordScanParams;
+Records.RecordListResponsesV4PagePaginationArray = RecordListResponsesV4PagePaginationArray;
+
+export declare namespace Records {
+  export {
+    type ARecord as ARecord,
+    type AAAARecord as AAAARecord,
+    type CAARecord as CAARecord,
+    type CERTRecord as CERTRecord,
+    type CNAMERecord as CNAMERecord,
+    type DNSKEYRecord as DNSKEYRecord,
+    type DSRecord as DSRecord,
+    type HTTPSRecord as HTTPSRecord,
+    type LOCRecord as LOCRecord,
+    type MXRecord as MXRecord,
+    type NAPTRRecord as NAPTRRecord,
+    type NSRecord as NSRecord,
+    type PTRRecord as PTRRecord,
+    type Record as Record,
+    type RecordProcessTiming as RecordProcessTiming,
+    type RecordTags as RecordTags,
+    type SMIMEARecord as SMIMEARecord,
+    type SRVRecord as SRVRecord,
+    type SSHFPRecord as SSHFPRecord,
+    type SVCBRecord as SVCBRecord,
+    type TLSARecord as TLSARecord,
+    type TTL as TTL,
+    type TXTRecord as TXTRecord,
+    type URIRecord as URIRecord,
+    type RecordCreateResponse as RecordCreateResponse,
+    type RecordUpdateResponse as RecordUpdateResponse,
+    type RecordListResponse as RecordListResponse,
+    type RecordDeleteResponse as RecordDeleteResponse,
+    type RecordBatchResponse as RecordBatchResponse,
+    type RecordEditResponse as RecordEditResponse,
+    type RecordExportResponse as RecordExportResponse,
+    type RecordGetResponse as RecordGetResponse,
+    type RecordImportResponse as RecordImportResponse,
+    type RecordScanResponse as RecordScanResponse,
+    RecordListResponsesV4PagePaginationArray as RecordListResponsesV4PagePaginationArray,
+    type RecordCreateParams as RecordCreateParams,
+    type RecordUpdateParams as RecordUpdateParams,
+    type RecordListParams as RecordListParams,
+    type RecordDeleteParams as RecordDeleteParams,
+    type RecordBatchParams as RecordBatchParams,
+    type RecordEditParams as RecordEditParams,
+    type RecordExportParams as RecordExportParams,
+    type RecordGetParams as RecordGetParams,
+    type RecordImportParams as RecordImportParams,
+    type RecordScanParams as RecordScanParams,
+  };
 }

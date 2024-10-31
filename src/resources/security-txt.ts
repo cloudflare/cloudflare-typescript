@@ -2,7 +2,6 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import * as SecurityTXTAPI from './security-txt';
 import * as Shared from './shared';
 
 export class SecurityTXT extends APIResource {
@@ -149,11 +148,13 @@ export interface SecurityTXTGetParams {
   zone_id: string;
 }
 
-export namespace SecurityTXT {
-  export import SecurityTXTUpdateResponse = SecurityTXTAPI.SecurityTXTUpdateResponse;
-  export import SecurityTXTDeleteResponse = SecurityTXTAPI.SecurityTXTDeleteResponse;
-  export import SecurityTXTGetResponse = SecurityTXTAPI.SecurityTXTGetResponse;
-  export import SecurityTXTUpdateParams = SecurityTXTAPI.SecurityTXTUpdateParams;
-  export import SecurityTXTDeleteParams = SecurityTXTAPI.SecurityTXTDeleteParams;
-  export import SecurityTXTGetParams = SecurityTXTAPI.SecurityTXTGetParams;
+export declare namespace SecurityTXT {
+  export {
+    type SecurityTXTUpdateResponse as SecurityTXTUpdateResponse,
+    type SecurityTXTDeleteResponse as SecurityTXTDeleteResponse,
+    type SecurityTXTGetResponse as SecurityTXTGetResponse,
+    type SecurityTXTUpdateParams as SecurityTXTUpdateParams,
+    type SecurityTXTDeleteParams as SecurityTXTDeleteParams,
+    type SecurityTXTGetParams as SecurityTXTGetParams,
+  };
 }

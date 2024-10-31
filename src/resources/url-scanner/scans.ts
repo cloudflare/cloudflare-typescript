@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as ScansAPI from './scans';
 import * as URLScannerAPI from './url-scanner';
 import { type Response as FetchResponse } from '../../_shims/index';
 
@@ -1003,13 +1002,15 @@ export interface ScanScreenshotParams {
   resolution?: 'desktop' | 'mobile' | 'tablet';
 }
 
-export namespace Scans {
-  export import ScanCreateResponse = ScansAPI.ScanCreateResponse;
-  export import ScanListResponse = ScansAPI.ScanListResponse;
-  export import ScanGetResponse = ScansAPI.ScanGetResponse;
-  export import ScanHARResponse = ScansAPI.ScanHARResponse;
-  export import ScanCreateParams = ScansAPI.ScanCreateParams;
-  export import ScanListParams = ScansAPI.ScanListParams;
-  export import ScanGetParams = ScansAPI.ScanGetParams;
-  export import ScanScreenshotParams = ScansAPI.ScanScreenshotParams;
+export declare namespace Scans {
+  export {
+    type ScanCreateResponse as ScanCreateResponse,
+    type ScanListResponse as ScanListResponse,
+    type ScanGetResponse as ScanGetResponse,
+    type ScanHARResponse as ScanHARResponse,
+    type ScanCreateParams as ScanCreateParams,
+    type ScanListParams as ScanListParams,
+    type ScanGetParams as ScanGetParams,
+    type ScanScreenshotParams as ScanScreenshotParams,
+  };
 }

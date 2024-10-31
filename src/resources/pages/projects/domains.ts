@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DomainsAPI from './domains';
 import { SinglePage } from '../../../pagination';
 
 export class Domains extends APIResource {
@@ -303,16 +302,20 @@ export interface DomainGetParams {
   account_id: string;
 }
 
-export namespace Domains {
-  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
-  export import DomainCreateParams = DomainsAPI.DomainCreateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+Domains.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
+
+export declare namespace Domains {
+  export {
+    type DomainCreateResponse as DomainCreateResponse,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainEditResponse as DomainEditResponse,
+    type DomainGetResponse as DomainGetResponse,
+    DomainListResponsesSinglePage as DomainListResponsesSinglePage,
+    type DomainCreateParams as DomainCreateParams,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainEditParams as DomainEditParams,
+    type DomainGetParams as DomainGetParams,
+  };
 }

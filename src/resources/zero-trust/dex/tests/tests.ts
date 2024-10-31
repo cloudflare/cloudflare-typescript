@@ -6,6 +6,7 @@ import * as TestsAPI from './tests';
 import * as Shared from '../../../shared';
 import * as DEXAPI from '../dex';
 import * as UniqueDevicesAPI from './unique-devices';
+import { UniqueDeviceListParams, UniqueDevices } from './unique-devices';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Tests extends APIResource {
@@ -349,12 +350,16 @@ export interface TestListParams extends V4PagePaginationParams {
   testName?: string;
 }
 
-export namespace Tests {
-  export import AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
-  export import Tests = TestsAPI.Tests;
-  export import TestListResponse = TestsAPI.TestListResponse;
-  export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import UniqueDevices = UniqueDevicesAPI.UniqueDevices;
-  export import UniqueDeviceListParams = UniqueDevicesAPI.UniqueDeviceListParams;
+Tests.TestListResponsesV4PagePagination = TestListResponsesV4PagePagination;
+
+export declare namespace Tests {
+  export {
+    type AggregateTimePeriod as AggregateTimePeriod,
+    type Tests as Tests,
+    type TestListResponse as TestListResponse,
+    TestListResponsesV4PagePagination as TestListResponsesV4PagePagination,
+    type TestListParams as TestListParams,
+  };
+
+  export { type UniqueDevices as UniqueDevices, type UniqueDeviceListParams as UniqueDeviceListParams };
 }

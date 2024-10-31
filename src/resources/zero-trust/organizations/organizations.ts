@@ -4,8 +4,8 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import * as OrganizationsAPI from './organizations';
 import * as DOHAPI from './doh';
+import { DOH, DOHGetParams, DOHGetResponse, DOHUpdateParams, DOHUpdateResponse } from './doh';
 
 export class Organizations extends APIResource {
   doh: DOHAPI.DOH = new DOHAPI.DOH(this._client);
@@ -479,17 +479,24 @@ export interface OrganizationRevokeUsersParams {
   zone_id?: string;
 }
 
-export namespace Organizations {
-  export import LoginDesign = OrganizationsAPI.LoginDesign;
-  export import Organization = OrganizationsAPI.Organization;
-  export import OrganizationRevokeUsersResponse = OrganizationsAPI.OrganizationRevokeUsersResponse;
-  export import OrganizationCreateParams = OrganizationsAPI.OrganizationCreateParams;
-  export import OrganizationUpdateParams = OrganizationsAPI.OrganizationUpdateParams;
-  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
-  export import OrganizationRevokeUsersParams = OrganizationsAPI.OrganizationRevokeUsersParams;
-  export import DOH = DOHAPI.DOH;
-  export import DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
-  export import DOHGetResponse = DOHAPI.DOHGetResponse;
-  export import DOHUpdateParams = DOHAPI.DOHUpdateParams;
-  export import DOHGetParams = DOHAPI.DOHGetParams;
+Organizations.DOH = DOH;
+
+export declare namespace Organizations {
+  export {
+    type LoginDesign as LoginDesign,
+    type Organization as Organization,
+    type OrganizationRevokeUsersResponse as OrganizationRevokeUsersResponse,
+    type OrganizationCreateParams as OrganizationCreateParams,
+    type OrganizationUpdateParams as OrganizationUpdateParams,
+    type OrganizationListParams as OrganizationListParams,
+    type OrganizationRevokeUsersParams as OrganizationRevokeUsersParams,
+  };
+
+  export {
+    DOH as DOH,
+    type DOHUpdateResponse as DOHUpdateResponse,
+    type DOHGetResponse as DOHGetResponse,
+    type DOHUpdateParams as DOHUpdateParams,
+    type DOHGetParams as DOHGetParams,
+  };
 }

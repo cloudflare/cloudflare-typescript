@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TopAPI from './top';
 
 export class Top extends APIResource {
   /**
@@ -185,9 +184,11 @@ export interface TopLocationsParams {
   name?: Array<string>;
 }
 
-export namespace Top {
-  export import TopAsesResponse = TopAPI.TopAsesResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopAsesParams = TopAPI.TopAsesParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+export declare namespace Top {
+  export {
+    type TopAsesResponse as TopAsesResponse,
+    type TopLocationsResponse as TopLocationsResponse,
+    type TopAsesParams as TopAsesParams,
+    type TopLocationsParams as TopLocationsParams,
+  };
 }

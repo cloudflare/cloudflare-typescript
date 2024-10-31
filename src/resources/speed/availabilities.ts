@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AvailabilitiesAPI from './availabilities';
 import * as SpeedAPI from './speed';
 
 export class Availabilities extends APIResource {
@@ -131,7 +130,6 @@ export interface AvailabilityListParams {
   zone_id: string;
 }
 
-export namespace Availabilities {
-  export import Availability = AvailabilitiesAPI.Availability;
-  export import AvailabilityListParams = AvailabilitiesAPI.AvailabilityListParams;
+export declare namespace Availabilities {
+  export { type Availability as Availability, type AvailabilityListParams as AvailabilityListParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BulkOperationsAPI from './bulk-operations';
 
 export class BulkOperations extends APIResource {
   /**
@@ -53,7 +52,9 @@ export interface BulkOperationGetResponse {
   error?: string;
 }
 
-export namespace BulkOperations {
-  export import OperationStatus = BulkOperationsAPI.OperationStatus;
-  export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
+export declare namespace BulkOperations {
+  export {
+    type OperationStatus as OperationStatus,
+    type BulkOperationGetResponse as BulkOperationGetResponse,
+  };
 }

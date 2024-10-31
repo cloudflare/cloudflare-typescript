@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as QuotaAPI from './quota';
 
 export class Quota extends APIResource {
   /**
@@ -43,7 +42,6 @@ export interface QuotaGetParams {
   zone_id: string;
 }
 
-export namespace Quota {
-  export import QuotaGetResponse = QuotaAPI.QuotaGetResponse;
-  export import QuotaGetParams = QuotaAPI.QuotaGetParams;
+export declare namespace Quota {
+  export { type QuotaGetResponse as QuotaGetResponse, type QuotaGetParams as QuotaGetParams };
 }

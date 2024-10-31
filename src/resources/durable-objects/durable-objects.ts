@@ -2,14 +2,20 @@
 
 import { APIResource } from '../../resource';
 import * as NamespacesAPI from './namespaces/namespaces';
+import { Namespace, NamespaceListParams, Namespaces, NamespacesSinglePage } from './namespaces/namespaces';
 
 export class DurableObjects extends APIResource {
   namespaces: NamespacesAPI.Namespaces = new NamespacesAPI.Namespaces(this._client);
 }
 
-export namespace DurableObjects {
-  export import Namespaces = NamespacesAPI.Namespaces;
-  export import Namespace = NamespacesAPI.Namespace;
-  export import NamespacesSinglePage = NamespacesAPI.NamespacesSinglePage;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
+DurableObjects.Namespaces = Namespaces;
+DurableObjects.NamespacesSinglePage = NamespacesSinglePage;
+
+export declare namespace DurableObjects {
+  export {
+    Namespaces as Namespaces,
+    type Namespace as Namespace,
+    NamespacesSinglePage as NamespacesSinglePage,
+    type NamespaceListParams as NamespaceListParams,
+  };
 }

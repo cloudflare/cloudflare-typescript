@@ -179,12 +179,14 @@ export interface TLSGetParams {
   zone_id: string;
 }
 
-export namespace TLS {
-  export import Setting = TLSAPI.Setting;
-  export import SettingValue = TLSAPI.SettingValue;
-  export import TLSDeleteResponse = TLSAPI.TLSDeleteResponse;
-  export import TLSGetResponse = TLSAPI.TLSGetResponse;
-  export import TLSUpdateParams = TLSAPI.TLSUpdateParams;
-  export import TLSDeleteParams = TLSAPI.TLSDeleteParams;
-  export import TLSGetParams = TLSAPI.TLSGetParams;
+export declare namespace TLS {
+  export {
+    type Setting as Setting,
+    type SettingValue as SettingValue,
+    type TLSDeleteResponse as TLSDeleteResponse,
+    type TLSGetResponse as TLSGetResponse,
+    type TLSUpdateParams as TLSUpdateParams,
+    type TLSDeleteParams as TLSDeleteParams,
+    type TLSGetParams as TLSGetParams,
+  };
 }

@@ -2,10 +2,45 @@
 
 import { APIResource } from '../../resource';
 import * as AccountSettingsAPI from './account-settings';
+import {
+  AccountSettingGetParams,
+  AccountSettingGetResponse,
+  AccountSettingUpdateParams,
+  AccountSettingUpdateResponse,
+  AccountSettings,
+} from './account-settings';
 import * as DomainsAPI from './domains';
+import {
+  Domain,
+  DomainDeleteParams,
+  DomainGetParams,
+  DomainListParams,
+  DomainUpdateParams,
+  Domains,
+  DomainsSinglePage,
+} from './domains';
 import * as SubdomainsAPI from './subdomains';
+import {
+  SubdomainGetParams,
+  SubdomainGetResponse,
+  SubdomainUpdateParams,
+  SubdomainUpdateResponse,
+  Subdomains,
+} from './subdomains';
 import * as AIAPI from './ai/ai';
+import { AI, AIRunParams, AIRunResponse } from './ai/ai';
 import * as ScriptsAPI from './scripts/scripts';
+import {
+  Script,
+  ScriptDeleteParams,
+  ScriptGetParams,
+  ScriptListParams,
+  ScriptSetting,
+  ScriptUpdateParams,
+  ScriptUpdateResponse,
+  Scripts,
+  ScriptsSinglePage,
+} from './scripts/scripts';
 
 export class Workers extends APIResource {
   ai: AIAPI.AI = new AIAPI.AI(this._client);
@@ -712,34 +747,52 @@ export interface WorkerMetadataParam {
   main_module?: string;
 }
 
-export namespace Workers {
-  export import AI = AIAPI.AI;
-  export import AIRunResponse = AIAPI.AIRunResponse;
-  export import AIRunParams = AIAPI.AIRunParams;
-  export import Scripts = ScriptsAPI.Scripts;
-  export import Script = ScriptsAPI.Script;
-  export import ScriptSetting = ScriptsAPI.ScriptSetting;
-  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
-  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
-  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
-  export import ScriptListParams = ScriptsAPI.ScriptListParams;
-  export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
-  export import AccountSettings = AccountSettingsAPI.AccountSettings;
-  export import AccountSettingUpdateResponse = AccountSettingsAPI.AccountSettingUpdateResponse;
-  export import AccountSettingGetResponse = AccountSettingsAPI.AccountSettingGetResponse;
-  export import AccountSettingUpdateParams = AccountSettingsAPI.AccountSettingUpdateParams;
-  export import AccountSettingGetParams = AccountSettingsAPI.AccountSettingGetParams;
-  export import Domains = DomainsAPI.Domains;
-  export import Domain = DomainsAPI.Domain;
-  export import DomainsSinglePage = DomainsAPI.DomainsSinglePage;
-  export import DomainUpdateParams = DomainsAPI.DomainUpdateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
-  export import Subdomains = SubdomainsAPI.Subdomains;
-  export import SubdomainUpdateResponse = SubdomainsAPI.SubdomainUpdateResponse;
-  export import SubdomainGetResponse = SubdomainsAPI.SubdomainGetResponse;
-  export import SubdomainUpdateParams = SubdomainsAPI.SubdomainUpdateParams;
-  export import SubdomainGetParams = SubdomainsAPI.SubdomainGetParams;
+Workers.AI = AI;
+Workers.Scripts = Scripts;
+Workers.ScriptsSinglePage = ScriptsSinglePage;
+Workers.AccountSettings = AccountSettings;
+Workers.Domains = Domains;
+Workers.DomainsSinglePage = DomainsSinglePage;
+Workers.Subdomains = Subdomains;
+
+export declare namespace Workers {
+  export { AI as AI, type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
+
+  export {
+    Scripts as Scripts,
+    type Script as Script,
+    type ScriptSetting as ScriptSetting,
+    type ScriptUpdateResponse as ScriptUpdateResponse,
+    ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptUpdateParams as ScriptUpdateParams,
+    type ScriptListParams as ScriptListParams,
+    type ScriptDeleteParams as ScriptDeleteParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
+
+  export {
+    AccountSettings as AccountSettings,
+    type AccountSettingUpdateResponse as AccountSettingUpdateResponse,
+    type AccountSettingGetResponse as AccountSettingGetResponse,
+    type AccountSettingUpdateParams as AccountSettingUpdateParams,
+    type AccountSettingGetParams as AccountSettingGetParams,
+  };
+
+  export {
+    Domains as Domains,
+    type Domain as Domain,
+    DomainsSinglePage as DomainsSinglePage,
+    type DomainUpdateParams as DomainUpdateParams,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainGetParams as DomainGetParams,
+  };
+
+  export {
+    Subdomains as Subdomains,
+    type SubdomainUpdateResponse as SubdomainUpdateResponse,
+    type SubdomainGetResponse as SubdomainGetResponse,
+    type SubdomainUpdateParams as SubdomainUpdateParams,
+    type SubdomainGetParams as SubdomainGetParams,
+  };
 }

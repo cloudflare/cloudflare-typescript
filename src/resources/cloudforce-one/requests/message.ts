@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as MessageAPI from './message';
 import * as Shared from '../../shared';
 
 export class Message extends APIResource {
@@ -231,12 +230,14 @@ export interface MessageGetParams {
   sort_order?: 'asc' | 'desc';
 }
 
-export namespace Message {
-  export import MessageCreateResponse = MessageAPI.MessageCreateResponse;
-  export import MessageUpdateResponse = MessageAPI.MessageUpdateResponse;
-  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
-  export import MessageGetResponse = MessageAPI.MessageGetResponse;
-  export import MessageCreateParams = MessageAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
-  export import MessageGetParams = MessageAPI.MessageGetParams;
+export declare namespace Message {
+  export {
+    type MessageCreateResponse as MessageCreateResponse,
+    type MessageUpdateResponse as MessageUpdateResponse,
+    type MessageDeleteResponse as MessageDeleteResponse,
+    type MessageGetResponse as MessageGetResponse,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageGetParams as MessageGetParams,
+  };
 }

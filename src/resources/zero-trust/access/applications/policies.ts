@@ -4,7 +4,6 @@ import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from '../../../../error';
-import * as ApplicationsPoliciesAPI from './policies';
 import * as AccessAPI from '../access';
 import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
@@ -505,13 +504,15 @@ export interface PolicyGetParams {
   zone_id?: string;
 }
 
-export namespace Policies {
-  export import PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
-  export import PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = ApplicationsPoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = ApplicationsPoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = ApplicationsPoliciesAPI.PolicyGetParams;
+export declare namespace Policies {
+  export {
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
 }
 
 export { ApplicationPoliciesSinglePage };

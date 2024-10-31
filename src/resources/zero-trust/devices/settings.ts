@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
   /**
@@ -141,9 +140,11 @@ export interface SettingEditParams {
   use_zt_virtual_ip?: boolean;
 }
 
-export namespace Settings {
-  export import DeviceSettings = SettingsAPI.DeviceSettings;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingListParams = SettingsAPI.SettingListParams;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
+export declare namespace Settings {
+  export {
+    type DeviceSettings as DeviceSettings,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingListParams as SettingListParams,
+    type SettingEditParams as SettingEditParams,
+  };
 }

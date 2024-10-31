@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PreviewsAPI from './previews';
 
 export class Previews extends APIResource {
   /**
@@ -58,7 +57,6 @@ export interface PreviewGetParams {
   account_id: string;
 }
 
-export namespace Previews {
-  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
+export declare namespace Previews {
+  export { type PreviewGetResponse as PreviewGetResponse, type PreviewGetParams as PreviewGetParams };
 }

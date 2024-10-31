@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as SecretsAPI from './secrets';
 import { SinglePage } from '../../../../../pagination';
 
 export class Secrets extends APIResource {
@@ -139,12 +138,16 @@ export interface SecretGetParams {
   account_id: string;
 }
 
-export namespace Secrets {
-  export import SecretUpdateResponse = SecretsAPI.SecretUpdateResponse;
-  export import SecretListResponse = SecretsAPI.SecretListResponse;
-  export import SecretGetResponse = SecretsAPI.SecretGetResponse;
-  export import SecretListResponsesSinglePage = SecretsAPI.SecretListResponsesSinglePage;
-  export import SecretUpdateParams = SecretsAPI.SecretUpdateParams;
-  export import SecretListParams = SecretsAPI.SecretListParams;
-  export import SecretGetParams = SecretsAPI.SecretGetParams;
+Secrets.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+
+export declare namespace Secrets {
+  export {
+    type SecretUpdateResponse as SecretUpdateResponse,
+    type SecretListResponse as SecretListResponse,
+    type SecretGetResponse as SecretGetResponse,
+    SecretListResponsesSinglePage as SecretListResponsesSinglePage,
+    type SecretUpdateParams as SecretUpdateParams,
+    type SecretListParams as SecretListParams,
+    type SecretGetParams as SecretGetParams,
+  };
 }

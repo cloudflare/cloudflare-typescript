@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TopAPI from './top';
 
 export class Top extends APIResource {
   /**
@@ -362,9 +361,11 @@ export interface TopBrowserFamilyParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace Top {
-  export import TopBrowserResponse = TopAPI.TopBrowserResponse;
-  export import TopBrowserFamilyResponse = TopAPI.TopBrowserFamilyResponse;
-  export import TopBrowserParams = TopAPI.TopBrowserParams;
-  export import TopBrowserFamilyParams = TopAPI.TopBrowserFamilyParams;
+export declare namespace Top {
+  export {
+    type TopBrowserResponse as TopBrowserResponse,
+    type TopBrowserFamilyResponse as TopBrowserFamilyResponse,
+    type TopBrowserParams as TopBrowserParams,
+    type TopBrowserFamilyParams as TopBrowserFamilyParams,
+  };
 }

@@ -4,7 +4,6 @@ import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from '../../../../error';
-import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
   /**
@@ -149,10 +148,12 @@ export interface SettingGetParams {
   zone_id?: string;
 }
 
-export namespace Settings {
-  export import CertificateSettings = SettingsAPI.CertificateSettings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type CertificateSettings as CertificateSettings,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

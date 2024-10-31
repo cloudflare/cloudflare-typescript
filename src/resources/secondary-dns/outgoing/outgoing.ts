@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OutgoingAPI from './outgoing';
 import * as StatusAPI from './status';
+import { Status, StatusGetParams } from './status';
 
 export class OutgoingResource extends APIResource {
   status: StatusAPI.Status = new StatusAPI.Status(this._client);
@@ -348,23 +348,27 @@ export interface OutgoingGetParams {
   zone_id: string;
 }
 
-export namespace OutgoingResource {
-  export import DisableTransfer = OutgoingAPI.DisableTransfer;
-  export import EnableTransfer = OutgoingAPI.EnableTransfer;
-  export import Outgoing = OutgoingAPI.Outgoing;
-  export import OutgoingStatus = OutgoingAPI.OutgoingStatus;
-  export import OutgoingCreateResponse = OutgoingAPI.OutgoingCreateResponse;
-  export import OutgoingUpdateResponse = OutgoingAPI.OutgoingUpdateResponse;
-  export import OutgoingDeleteResponse = OutgoingAPI.OutgoingDeleteResponse;
-  export import OutgoingForceNotifyResponse = OutgoingAPI.OutgoingForceNotifyResponse;
-  export import OutgoingGetResponse = OutgoingAPI.OutgoingGetResponse;
-  export import OutgoingCreateParams = OutgoingAPI.OutgoingCreateParams;
-  export import OutgoingUpdateParams = OutgoingAPI.OutgoingUpdateParams;
-  export import OutgoingDeleteParams = OutgoingAPI.OutgoingDeleteParams;
-  export import OutgoingDisableParams = OutgoingAPI.OutgoingDisableParams;
-  export import OutgoingEnableParams = OutgoingAPI.OutgoingEnableParams;
-  export import OutgoingForceNotifyParams = OutgoingAPI.OutgoingForceNotifyParams;
-  export import OutgoingGetParams = OutgoingAPI.OutgoingGetParams;
-  export import Status = StatusAPI.Status;
-  export import StatusGetParams = StatusAPI.StatusGetParams;
+OutgoingResource.Status = Status;
+
+export declare namespace OutgoingResource {
+  export {
+    type DisableTransfer as DisableTransfer,
+    type EnableTransfer as EnableTransfer,
+    type Outgoing as Outgoing,
+    type OutgoingStatus as OutgoingStatus,
+    type OutgoingCreateResponse as OutgoingCreateResponse,
+    type OutgoingUpdateResponse as OutgoingUpdateResponse,
+    type OutgoingDeleteResponse as OutgoingDeleteResponse,
+    type OutgoingForceNotifyResponse as OutgoingForceNotifyResponse,
+    type OutgoingGetResponse as OutgoingGetResponse,
+    type OutgoingCreateParams as OutgoingCreateParams,
+    type OutgoingUpdateParams as OutgoingUpdateParams,
+    type OutgoingDeleteParams as OutgoingDeleteParams,
+    type OutgoingDisableParams as OutgoingDisableParams,
+    type OutgoingEnableParams as OutgoingEnableParams,
+    type OutgoingForceNotifyParams as OutgoingForceNotifyParams,
+    type OutgoingGetParams as OutgoingGetParams,
+  };
+
+  export { Status as Status, type StatusGetParams as StatusGetParams };
 }

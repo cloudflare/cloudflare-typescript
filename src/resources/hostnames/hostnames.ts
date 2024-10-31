@@ -2,11 +2,14 @@
 
 import { APIResource } from '../../resource';
 import * as SettingsAPI from './settings/settings';
+import { Settings } from './settings/settings';
 
 export class Hostnames extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
-export namespace Hostnames {
-  export import Settings = SettingsAPI.Settings;
+Hostnames.Settings = Settings;
+
+export declare namespace Hostnames {
+  export { Settings as Settings };
 }

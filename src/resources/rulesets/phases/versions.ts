@@ -4,7 +4,6 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import * as VersionsAPI from './versions';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
 import { SinglePage } from '../../../pagination';
@@ -505,10 +504,14 @@ export interface VersionGetParams {
   zone_id?: string;
 }
 
-export namespace Versions {
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Versions.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
+
+export declare namespace Versions {
+  export {
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesSinglePage as VersionListResponsesSinglePage,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

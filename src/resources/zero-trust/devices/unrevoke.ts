@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as UnrevokeAPI from './unrevoke';
 
 export class Unrevoke extends APIResource {
   /**
@@ -36,7 +35,9 @@ export interface UnrevokeCreateParams {
   body: Array<string>;
 }
 
-export namespace Unrevoke {
-  export import UnrevokeCreateResponse = UnrevokeAPI.UnrevokeCreateResponse;
-  export import UnrevokeCreateParams = UnrevokeAPI.UnrevokeCreateParams;
+export declare namespace Unrevoke {
+  export {
+    type UnrevokeCreateResponse as UnrevokeCreateResponse,
+    type UnrevokeCreateParams as UnrevokeCreateParams,
+  };
 }

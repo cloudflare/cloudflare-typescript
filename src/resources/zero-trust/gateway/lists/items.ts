@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ItemsAPI from './items';
 import * as ListsAPI from './lists';
 import { SinglePage } from '../../../../pagination';
 
@@ -35,8 +34,12 @@ export interface ItemListParams {
   account_id: string;
 }
 
-export namespace Items {
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
-  export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
-  export import ItemListParams = ItemsAPI.ItemListParams;
+Items.ItemListResponsesSinglePage = ItemListResponsesSinglePage;
+
+export declare namespace Items {
+  export {
+    type ItemListResponse as ItemListResponse,
+    ItemListResponsesSinglePage as ItemListResponsesSinglePage,
+    type ItemListParams as ItemListParams,
+  };
 }

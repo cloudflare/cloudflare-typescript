@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as HostsAPI from './hosts';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Hosts extends APIResource {
@@ -50,8 +49,12 @@ export interface HostListParams extends V4PagePaginationArrayParams {
   zone_id: string;
 }
 
-export namespace Hosts {
-  export import HostListResponse = HostsAPI.HostListResponse;
-  export import HostListResponsesV4PagePaginationArray = HostsAPI.HostListResponsesV4PagePaginationArray;
-  export import HostListParams = HostsAPI.HostListParams;
+Hosts.HostListResponsesV4PagePaginationArray = HostListResponsesV4PagePaginationArray;
+
+export declare namespace Hosts {
+  export {
+    type HostListResponse as HostListResponse,
+    HostListResponsesV4PagePaginationArray as HostListResponsesV4PagePaginationArray,
+    type HostListParams as HostListParams,
+  };
 }

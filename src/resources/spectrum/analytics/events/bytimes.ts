@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as BytimesAPI from './bytimes';
 import * as EventsAPI from './events';
 
 export class Bytimes extends APIResource {
@@ -233,7 +232,6 @@ export interface BytimeGetParams {
   until?: string;
 }
 
-export namespace Bytimes {
-  export import BytimeGetResponse = BytimesAPI.BytimeGetResponse;
-  export import BytimeGetParams = BytimesAPI.BytimeGetParams;
+export declare namespace Bytimes {
+  export { type BytimeGetResponse as BytimeGetResponse, type BytimeGetParams as BytimeGetParams };
 }

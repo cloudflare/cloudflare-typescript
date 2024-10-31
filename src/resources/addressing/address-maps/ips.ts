@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as IPsAPI from './ips';
 import * as Shared from '../../shared';
 
 export class IPs extends APIResource {
@@ -132,9 +131,11 @@ export interface IPDeleteParams {
   account_id: string;
 }
 
-export namespace IPs {
-  export import IPUpdateResponse = IPsAPI.IPUpdateResponse;
-  export import IPDeleteResponse = IPsAPI.IPDeleteResponse;
-  export import IPUpdateParams = IPsAPI.IPUpdateParams;
-  export import IPDeleteParams = IPsAPI.IPDeleteParams;
+export declare namespace IPs {
+  export {
+    type IPUpdateResponse as IPUpdateResponse,
+    type IPDeleteResponse as IPDeleteResponse,
+    type IPUpdateParams as IPUpdateParams,
+    type IPDeleteParams as IPDeleteParams,
+  };
 }

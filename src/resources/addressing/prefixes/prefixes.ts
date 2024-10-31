@@ -2,10 +2,18 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PrefixesAPI from './prefixes';
 import * as Shared from '../../shared';
 import * as DelegationsAPI from './delegations';
+import {
+  DelegationCreateParams,
+  DelegationDeleteParams,
+  DelegationDeleteResponse,
+  DelegationListParams,
+  Delegations,
+  DelegationsSinglePage,
+} from './delegations';
 import * as BGPAPI from './bgp/bgp';
+import { BGP } from './bgp/bgp';
 import { SinglePage } from '../../../pagination';
 
 export class Prefixes extends APIResource {
@@ -238,20 +246,30 @@ export interface PrefixGetParams {
   account_id: string;
 }
 
-export namespace Prefixes {
-  export import Prefix = PrefixesAPI.Prefix;
-  export import PrefixDeleteResponse = PrefixesAPI.PrefixDeleteResponse;
-  export import PrefixesSinglePage = PrefixesAPI.PrefixesSinglePage;
-  export import PrefixCreateParams = PrefixesAPI.PrefixCreateParams;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixDeleteParams = PrefixesAPI.PrefixDeleteParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
-  export import BGP = BGPAPI.BGP;
-  export import Delegations = DelegationsAPI.Delegations;
-  export import DelegationDeleteResponse = DelegationsAPI.DelegationDeleteResponse;
-  export import DelegationsSinglePage = DelegationsAPI.DelegationsSinglePage;
-  export import DelegationCreateParams = DelegationsAPI.DelegationCreateParams;
-  export import DelegationListParams = DelegationsAPI.DelegationListParams;
-  export import DelegationDeleteParams = DelegationsAPI.DelegationDeleteParams;
+Prefixes.PrefixesSinglePage = PrefixesSinglePage;
+Prefixes.BGP = BGP;
+Prefixes.DelegationsSinglePage = DelegationsSinglePage;
+
+export declare namespace Prefixes {
+  export {
+    type Prefix as Prefix,
+    type PrefixDeleteResponse as PrefixDeleteResponse,
+    PrefixesSinglePage as PrefixesSinglePage,
+    type PrefixCreateParams as PrefixCreateParams,
+    type PrefixListParams as PrefixListParams,
+    type PrefixDeleteParams as PrefixDeleteParams,
+    type PrefixEditParams as PrefixEditParams,
+    type PrefixGetParams as PrefixGetParams,
+  };
+
+  export { BGP as BGP };
+
+  export {
+    type Delegations as Delegations,
+    type DelegationDeleteResponse as DelegationDeleteResponse,
+    DelegationsSinglePage as DelegationsSinglePage,
+    type DelegationCreateParams as DelegationCreateParams,
+    type DelegationListParams as DelegationListParams,
+    type DelegationDeleteParams as DelegationDeleteParams,
+  };
 }

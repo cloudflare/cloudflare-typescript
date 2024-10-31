@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RulesAPI from './rules';
 
 export class Rules extends APIResource {
   /**
@@ -275,16 +274,18 @@ export interface RuleGetParams {
   zone_id: string;
 }
 
-export namespace Rules {
-  export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+export declare namespace Rules {
+  export {
+    type WaitingRoomRule as WaitingRoomRule,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
 }

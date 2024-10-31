@@ -1,13 +1,37 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as DEXAPI from './dex';
 import * as ColosAPI from './colos';
+import { ColoListParams, ColoListResponse, ColoListResponsesSinglePage, Colos } from './colos';
 import * as TracerouteTestsAPI from './traceroute-tests';
+import {
+  Traceroute,
+  TracerouteTestGetParams,
+  TracerouteTestNetworkPathParams,
+  TracerouteTestPercentilesParams,
+  TracerouteTestPercentilesResponse,
+  TracerouteTests,
+} from './traceroute-tests';
 import * as FleetStatusAPI from './fleet-status/fleet-status';
+import {
+  FleetStatus,
+  FleetStatusLiveParams,
+  FleetStatusLiveResponse,
+  FleetStatusOverTimeParams,
+  LiveStat,
+} from './fleet-status/fleet-status';
 import * as HTTPTestsAPI from './http-tests/http-tests';
+import { HTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/http-tests';
 import * as TestsAPI from './tests/tests';
+import {
+  AggregateTimePeriod,
+  TestListParams,
+  TestListResponse,
+  TestListResponsesV4PagePagination,
+  Tests,
+} from './tests/tests';
 import * as TracerouteTestResultsAPI from './traceroute-test-results/traceroute-test-results';
+import { TracerouteTestResults } from './traceroute-test-results/traceroute-test-results';
 
 export class DEX extends APIResource {
   colos: ColosAPI.Colos = new ColosAPI.Colos(this._client);
@@ -130,33 +154,59 @@ export interface Percentiles {
   p99?: number | null;
 }
 
-export namespace DEX {
-  export import DigitalExperienceMonitor = DEXAPI.DigitalExperienceMonitor;
-  export import NetworkPath = DEXAPI.NetworkPath;
-  export import NetworkPathResponse = DEXAPI.NetworkPathResponse;
-  export import Percentiles = DEXAPI.Percentiles;
-  export import Colos = ColosAPI.Colos;
-  export import ColoListResponse = ColosAPI.ColoListResponse;
-  export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;
-  export import ColoListParams = ColosAPI.ColoListParams;
-  export import FleetStatus = FleetStatusAPI.FleetStatus;
-  export import LiveStat = FleetStatusAPI.LiveStat;
-  export import FleetStatusLiveResponse = FleetStatusAPI.FleetStatusLiveResponse;
-  export import FleetStatusLiveParams = FleetStatusAPI.FleetStatusLiveParams;
-  export import FleetStatusOverTimeParams = FleetStatusAPI.FleetStatusOverTimeParams;
-  export import HTTPTests = HTTPTestsAPI.HTTPTests;
-  export import HTTPDetails = HTTPTestsAPI.HTTPDetails;
-  export import HTTPTestGetParams = HTTPTestsAPI.HTTPTestGetParams;
-  export import Tests = TestsAPI.Tests;
-  export import AggregateTimePeriod = TestsAPI.AggregateTimePeriod;
-  export import TestListResponse = TestsAPI.TestListResponse;
-  export import TestListResponsesV4PagePagination = TestsAPI.TestListResponsesV4PagePagination;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import TracerouteTestResults = TracerouteTestResultsAPI.TracerouteTestResults;
-  export import TracerouteTests = TracerouteTestsAPI.TracerouteTests;
-  export import Traceroute = TracerouteTestsAPI.Traceroute;
-  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
-  export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
-  export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
-  export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
+DEX.Colos = Colos;
+DEX.ColoListResponsesSinglePage = ColoListResponsesSinglePage;
+DEX.FleetStatus = FleetStatus;
+DEX.HTTPTests = HTTPTests;
+DEX.TestListResponsesV4PagePagination = TestListResponsesV4PagePagination;
+DEX.TracerouteTestResults = TracerouteTestResults;
+DEX.TracerouteTests = TracerouteTests;
+
+export declare namespace DEX {
+  export {
+    type DigitalExperienceMonitor as DigitalExperienceMonitor,
+    type NetworkPath as NetworkPath,
+    type NetworkPathResponse as NetworkPathResponse,
+    type Percentiles as Percentiles,
+  };
+
+  export {
+    Colos as Colos,
+    type ColoListResponse as ColoListResponse,
+    ColoListResponsesSinglePage as ColoListResponsesSinglePage,
+    type ColoListParams as ColoListParams,
+  };
+
+  export {
+    FleetStatus as FleetStatus,
+    type LiveStat as LiveStat,
+    type FleetStatusLiveResponse as FleetStatusLiveResponse,
+    type FleetStatusLiveParams as FleetStatusLiveParams,
+    type FleetStatusOverTimeParams as FleetStatusOverTimeParams,
+  };
+
+  export {
+    HTTPTests as HTTPTests,
+    type HTTPDetails as HTTPDetails,
+    type HTTPTestGetParams as HTTPTestGetParams,
+  };
+
+  export {
+    type Tests as Tests,
+    type AggregateTimePeriod as AggregateTimePeriod,
+    type TestListResponse as TestListResponse,
+    TestListResponsesV4PagePagination as TestListResponsesV4PagePagination,
+    type TestListParams as TestListParams,
+  };
+
+  export { TracerouteTestResults as TracerouteTestResults };
+
+  export {
+    TracerouteTests as TracerouteTests,
+    type Traceroute as Traceroute,
+    type TracerouteTestPercentilesResponse as TracerouteTestPercentilesResponse,
+    type TracerouteTestGetParams as TracerouteTestGetParams,
+    type TracerouteTestNetworkPathParams as TracerouteTestNetworkPathParams,
+    type TracerouteTestPercentilesParams as TracerouteTestPercentilesParams,
+  };
 }

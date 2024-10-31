@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../../resource';
-import * as AnalyticsAPI from './analytics';
 import * as ReportsAPI from './reports/reports';
+import { ReportGetParams, Reports } from './reports/reports';
 
 export class Analytics extends APIResource {
   reports: ReportsAPI.Reports = new ReportsAPI.Reports(this._client);
@@ -38,8 +38,10 @@ export type DeltaParam =
   | 'dekaminute'
   | 'minute';
 
-export namespace Analytics {
-  export import Delta = AnalyticsAPI.Delta;
-  export import Reports = ReportsAPI.Reports;
-  export import ReportGetParams = ReportsAPI.ReportGetParams;
+Analytics.Reports = Reports;
+
+export declare namespace Analytics {
+  export { type Delta as Delta };
+
+  export { Reports as Reports, type ReportGetParams as ReportGetParams };
 }

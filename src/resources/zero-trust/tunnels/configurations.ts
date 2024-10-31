@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ConfigurationsAPI from './configurations';
 
 export class Configurations extends APIResource {
   /**
@@ -962,9 +961,11 @@ export interface ConfigurationGetParams {
   account_id: string;
 }
 
-export namespace Configurations {
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
+export declare namespace Configurations {
+  export {
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
 }

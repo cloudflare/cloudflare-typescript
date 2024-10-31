@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BlockSendersAPI from './block-senders';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class BlockSenders extends APIResource {
@@ -308,16 +307,20 @@ export interface BlockSenderGetParams {
   account_id: string;
 }
 
-export namespace BlockSenders {
-  export import BlockSenderCreateResponse = BlockSendersAPI.BlockSenderCreateResponse;
-  export import BlockSenderListResponse = BlockSendersAPI.BlockSenderListResponse;
-  export import BlockSenderDeleteResponse = BlockSendersAPI.BlockSenderDeleteResponse;
-  export import BlockSenderEditResponse = BlockSendersAPI.BlockSenderEditResponse;
-  export import BlockSenderGetResponse = BlockSendersAPI.BlockSenderGetResponse;
-  export import BlockSenderListResponsesV4PagePaginationArray = BlockSendersAPI.BlockSenderListResponsesV4PagePaginationArray;
-  export import BlockSenderCreateParams = BlockSendersAPI.BlockSenderCreateParams;
-  export import BlockSenderListParams = BlockSendersAPI.BlockSenderListParams;
-  export import BlockSenderDeleteParams = BlockSendersAPI.BlockSenderDeleteParams;
-  export import BlockSenderEditParams = BlockSendersAPI.BlockSenderEditParams;
-  export import BlockSenderGetParams = BlockSendersAPI.BlockSenderGetParams;
+BlockSenders.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;
+
+export declare namespace BlockSenders {
+  export {
+    type BlockSenderCreateResponse as BlockSenderCreateResponse,
+    type BlockSenderListResponse as BlockSenderListResponse,
+    type BlockSenderDeleteResponse as BlockSenderDeleteResponse,
+    type BlockSenderEditResponse as BlockSenderEditResponse,
+    type BlockSenderGetResponse as BlockSenderGetResponse,
+    BlockSenderListResponsesV4PagePaginationArray as BlockSenderListResponsesV4PagePaginationArray,
+    type BlockSenderCreateParams as BlockSenderCreateParams,
+    type BlockSenderListParams as BlockSenderListParams,
+    type BlockSenderDeleteParams as BlockSenderDeleteParams,
+    type BlockSenderEditParams as BlockSenderEditParams,
+    type BlockSenderGetParams as BlockSenderGetParams,
+  };
 }

@@ -2,10 +2,10 @@
 
 export { Cmb } from './cmb';
 export {
-  CmbConfig,
-  ConfigDeleteResponse,
-  ConfigCreateParams,
-  ConfigDeleteParams,
-  ConfigGetParams,
   Config,
+  type CmbConfig,
+  type ConfigDeleteResponse,
+  type ConfigCreateParams,
+  type ConfigDeleteParams,
+  type ConfigGetParams,
 } from './config';

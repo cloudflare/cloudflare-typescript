@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ASNAPI from './asn';
 import * as Shared from '../../shared';
 import * as SubnetsAPI from './subnets';
+import { SubnetGetParams, SubnetGetResponse, Subnets } from './subnets';
 
 export class ASN extends APIResource {
   subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
@@ -33,9 +33,14 @@ export interface ASNGetParams {
   account_id: string;
 }
 
-export namespace ASN {
-  export import ASNGetParams = ASNAPI.ASNGetParams;
-  export import Subnets = SubnetsAPI.Subnets;
-  export import SubnetGetResponse = SubnetsAPI.SubnetGetResponse;
-  export import SubnetGetParams = SubnetsAPI.SubnetGetParams;
+ASN.Subnets = Subnets;
+
+export declare namespace ASN {
+  export { type ASNGetParams as ASNGetParams };
+
+  export {
+    Subnets as Subnets,
+    type SubnetGetResponse as SubnetGetResponse,
+    type SubnetGetParams as SubnetGetParams,
+  };
 }

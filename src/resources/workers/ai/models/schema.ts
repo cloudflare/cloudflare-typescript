@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as SchemaAPI from './schema';
 
 export class Schema extends APIResource {
   /**
@@ -32,7 +31,6 @@ export interface SchemaGetParams {
   model: string;
 }
 
-export namespace Schema {
-  export import SchemaGetResponse = SchemaAPI.SchemaGetResponse;
-  export import SchemaGetParams = SchemaAPI.SchemaGetParams;
+export declare namespace Schema {
+  export { type SchemaGetResponse as SchemaGetResponse, type SchemaGetParams as SchemaGetParams };
 }

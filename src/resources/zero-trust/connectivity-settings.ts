@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConnectivitySettingsAPI from './connectivity-settings';
 
 export class ConnectivitySettings extends APIResource {
   /**
@@ -86,9 +85,11 @@ export interface ConnectivitySettingGetParams {
   account_id: string;
 }
 
-export namespace ConnectivitySettings {
-  export import ConnectivitySettingEditResponse = ConnectivitySettingsAPI.ConnectivitySettingEditResponse;
-  export import ConnectivitySettingGetResponse = ConnectivitySettingsAPI.ConnectivitySettingGetResponse;
-  export import ConnectivitySettingEditParams = ConnectivitySettingsAPI.ConnectivitySettingEditParams;
-  export import ConnectivitySettingGetParams = ConnectivitySettingsAPI.ConnectivitySettingGetParams;
+export declare namespace ConnectivitySettings {
+  export {
+    type ConnectivitySettingEditResponse as ConnectivitySettingEditResponse,
+    type ConnectivitySettingGetResponse as ConnectivitySettingGetResponse,
+    type ConnectivitySettingEditParams as ConnectivitySettingEditParams,
+    type ConnectivitySettingGetParams as ConnectivitySettingGetParams,
+  };
 }

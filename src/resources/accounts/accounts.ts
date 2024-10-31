@@ -4,8 +4,36 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import * as MembersAPI from './members';
+import {
+  MemberCreateParams,
+  MemberCreateResponse,
+  MemberDeleteParams,
+  MemberDeleteResponse,
+  MemberGetParams,
+  MemberGetResponse,
+  MemberListParams,
+  MemberListResponse,
+  MemberListResponsesV4PagePaginationArray,
+  MemberUpdateParams,
+  MemberUpdateResponse,
+  Members,
+  Status,
+  UserWithInviteCode,
+} from './members';
 import * as RolesAPI from './roles';
+import { RoleGetParams, RoleGetResponse, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
+import {
+  SubscriptionCreateParams,
+  SubscriptionCreateResponse,
+  SubscriptionDeleteParams,
+  SubscriptionDeleteResponse,
+  SubscriptionGetParams,
+  SubscriptionGetResponse,
+  SubscriptionUpdateParams,
+  SubscriptionUpdateResponse,
+  Subscriptions,
+} from './subscriptions';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Accounts extends APIResource {
@@ -268,32 +296,45 @@ export interface AccountGetParams {
   account_id: string;
 }
 
-export namespace Accounts {
-  export import Members = MembersAPI.Members;
-  export import Status = MembersAPI.Status;
-  export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
-  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
-  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
-  export import MemberListResponse = MembersAPI.MemberListResponse;
-  export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export import MemberGetResponse = MembersAPI.MemberGetResponse;
-  export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
-  export import MemberCreateParams = MembersAPI.MemberCreateParams;
-  export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
-  export import MemberListParams = MembersAPI.MemberListParams;
-  export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
-  export import MemberGetParams = MembersAPI.MemberGetParams;
-  export import Roles = RolesAPI.Roles;
-  export import RoleGetResponse = RolesAPI.RoleGetResponse;
-  export import RoleListParams = RolesAPI.RoleListParams;
-  export import RoleGetParams = RolesAPI.RoleGetParams;
-  export import Subscriptions = SubscriptionsAPI.Subscriptions;
-  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
-  export import SubscriptionGetParams = SubscriptionsAPI.SubscriptionGetParams;
+Accounts.Members = Members;
+Accounts.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
+Accounts.Roles = Roles;
+Accounts.Subscriptions = Subscriptions;
+
+export declare namespace Accounts {
+  export {
+    Members as Members,
+    type Status as Status,
+    type UserWithInviteCode as UserWithInviteCode,
+    type MemberCreateResponse as MemberCreateResponse,
+    type MemberUpdateResponse as MemberUpdateResponse,
+    type MemberListResponse as MemberListResponse,
+    type MemberDeleteResponse as MemberDeleteResponse,
+    type MemberGetResponse as MemberGetResponse,
+    MemberListResponsesV4PagePaginationArray as MemberListResponsesV4PagePaginationArray,
+    type MemberCreateParams as MemberCreateParams,
+    type MemberUpdateParams as MemberUpdateParams,
+    type MemberListParams as MemberListParams,
+    type MemberDeleteParams as MemberDeleteParams,
+    type MemberGetParams as MemberGetParams,
+  };
+
+  export {
+    Roles as Roles,
+    type RoleGetResponse as RoleGetResponse,
+    type RoleListParams as RoleListParams,
+    type RoleGetParams as RoleGetParams,
+  };
+
+  export {
+    Subscriptions as Subscriptions,
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionDeleteParams as SubscriptionDeleteParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
+  };
 }

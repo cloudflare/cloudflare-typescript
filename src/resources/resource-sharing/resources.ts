@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ResourcesAPI from './resources';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Resources extends APIResource {
@@ -403,16 +402,20 @@ export interface ResourceGetParams {
   account_id: string;
 }
 
-export namespace Resources {
-  export import ResourceCreateResponse = ResourcesAPI.ResourceCreateResponse;
-  export import ResourceUpdateResponse = ResourcesAPI.ResourceUpdateResponse;
-  export import ResourceListResponse = ResourcesAPI.ResourceListResponse;
-  export import ResourceDeleteResponse = ResourcesAPI.ResourceDeleteResponse;
-  export import ResourceGetResponse = ResourcesAPI.ResourceGetResponse;
-  export import ResourceListResponsesV4PagePaginationArray = ResourcesAPI.ResourceListResponsesV4PagePaginationArray;
-  export import ResourceCreateParams = ResourcesAPI.ResourceCreateParams;
-  export import ResourceUpdateParams = ResourcesAPI.ResourceUpdateParams;
-  export import ResourceListParams = ResourcesAPI.ResourceListParams;
-  export import ResourceDeleteParams = ResourcesAPI.ResourceDeleteParams;
-  export import ResourceGetParams = ResourcesAPI.ResourceGetParams;
+Resources.ResourceListResponsesV4PagePaginationArray = ResourceListResponsesV4PagePaginationArray;
+
+export declare namespace Resources {
+  export {
+    type ResourceCreateResponse as ResourceCreateResponse,
+    type ResourceUpdateResponse as ResourceUpdateResponse,
+    type ResourceListResponse as ResourceListResponse,
+    type ResourceDeleteResponse as ResourceDeleteResponse,
+    type ResourceGetResponse as ResourceGetResponse,
+    ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
+    type ResourceCreateParams as ResourceCreateParams,
+    type ResourceUpdateParams as ResourceUpdateParams,
+    type ResourceListParams as ResourceListParams,
+    type ResourceDeleteParams as ResourceDeleteParams,
+    type ResourceGetParams as ResourceGetParams,
+  };
 }

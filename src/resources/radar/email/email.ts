@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as EmailAPI from './email';
 import * as RoutingAPI from './routing/routing';
+import { Routing } from './routing/routing';
 import * as SecurityAPI from './security/security';
+import { Security } from './security/security';
 
 export class Email extends APIResource {
   routing: RoutingAPI.Routing = new RoutingAPI.Routing(this._client);
@@ -26,9 +27,13 @@ export interface RadarEmailSummary {
   PASS: string;
 }
 
-export namespace Email {
-  export import RadarEmailSeries = EmailAPI.RadarEmailSeries;
-  export import RadarEmailSummary = EmailAPI.RadarEmailSummary;
-  export import Routing = RoutingAPI.Routing;
-  export import Security = SecurityAPI.Security;
+Email.Routing = Routing;
+Email.Security = Security;
+
+export declare namespace Email {
+  export { type RadarEmailSeries as RadarEmailSeries, type RadarEmailSummary as RadarEmailSummary };
+
+  export { Routing as Routing };
+
+  export { Security as Security };
 }

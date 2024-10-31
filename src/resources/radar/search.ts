@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SearchAPI from './search';
 
 export class Search extends APIResource {
   /**
@@ -63,7 +62,6 @@ export interface SearchGlobalParams {
   limitPerGroup?: number;
 }
 
-export namespace Search {
-  export import SearchGlobalResponse = SearchAPI.SearchGlobalResponse;
-  export import SearchGlobalParams = SearchAPI.SearchGlobalParams;
+export declare namespace Search {
+  export { type SearchGlobalResponse as SearchGlobalResponse, type SearchGlobalParams as SearchGlobalParams };
 }

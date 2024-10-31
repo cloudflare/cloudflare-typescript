@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RulesAPI from './rules';
 import * as AdvertisementsAPI from './advertisements';
+import { Advertisement, AdvertisementEditParams, Advertisements } from './advertisements';
 import { SinglePage } from '../../../pagination';
 
 export class Rules extends APIResource {
@@ -315,16 +315,24 @@ export interface RuleGetParams {
   account_id: string;
 }
 
-export namespace Rules {
-  export import MagicNetworkMonitoringRule = RulesAPI.MagicNetworkMonitoringRule;
-  export import MagicNetworkMonitoringRulesSinglePage = RulesAPI.MagicNetworkMonitoringRulesSinglePage;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import Advertisements = AdvertisementsAPI.Advertisements;
-  export import Advertisement = AdvertisementsAPI.Advertisement;
-  export import AdvertisementEditParams = AdvertisementsAPI.AdvertisementEditParams;
+Rules.MagicNetworkMonitoringRulesSinglePage = MagicNetworkMonitoringRulesSinglePage;
+Rules.Advertisements = Advertisements;
+
+export declare namespace Rules {
+  export {
+    type MagicNetworkMonitoringRule as MagicNetworkMonitoringRule,
+    MagicNetworkMonitoringRulesSinglePage as MagicNetworkMonitoringRulesSinglePage,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    Advertisements as Advertisements,
+    type Advertisement as Advertisement,
+    type AdvertisementEditParams as AdvertisementEditParams,
+  };
 }

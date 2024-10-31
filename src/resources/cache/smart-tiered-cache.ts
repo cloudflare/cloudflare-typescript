@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SmartTieredCacheAPI from './smart-tiered-cache';
 
 export class SmartTieredCache extends APIResource {
   /**
@@ -146,11 +145,13 @@ export interface SmartTieredCacheGetParams {
   zone_id: string;
 }
 
-export namespace SmartTieredCache {
-  export import SmartTieredCacheDeleteResponse = SmartTieredCacheAPI.SmartTieredCacheDeleteResponse;
-  export import SmartTieredCacheEditResponse = SmartTieredCacheAPI.SmartTieredCacheEditResponse;
-  export import SmartTieredCacheGetResponse = SmartTieredCacheAPI.SmartTieredCacheGetResponse;
-  export import SmartTieredCacheDeleteParams = SmartTieredCacheAPI.SmartTieredCacheDeleteParams;
-  export import SmartTieredCacheEditParams = SmartTieredCacheAPI.SmartTieredCacheEditParams;
-  export import SmartTieredCacheGetParams = SmartTieredCacheAPI.SmartTieredCacheGetParams;
+export declare namespace SmartTieredCache {
+  export {
+    type SmartTieredCacheDeleteResponse as SmartTieredCacheDeleteResponse,
+    type SmartTieredCacheEditResponse as SmartTieredCacheEditResponse,
+    type SmartTieredCacheGetResponse as SmartTieredCacheGetResponse,
+    type SmartTieredCacheDeleteParams as SmartTieredCacheDeleteParams,
+    type SmartTieredCacheEditParams as SmartTieredCacheEditParams,
+    type SmartTieredCacheGetParams as SmartTieredCacheGetParams,
+  };
 }

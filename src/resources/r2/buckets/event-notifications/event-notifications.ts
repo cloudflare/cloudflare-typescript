@@ -2,13 +2,22 @@
 
 import { APIResource } from '../../../../resource';
 import * as ConfigurationAPI from './configuration/configuration';
+import {
+  Configuration,
+  ConfigurationGetParams,
+  ConfigurationGetResponse,
+} from './configuration/configuration';
 
 export class EventNotifications extends APIResource {
   configuration: ConfigurationAPI.Configuration = new ConfigurationAPI.Configuration(this._client);
 }
 
-export namespace EventNotifications {
-  export import Configuration = ConfigurationAPI.Configuration;
-  export import ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
-  export import ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
+EventNotifications.Configuration = Configuration;
+
+export declare namespace EventNotifications {
+  export {
+    Configuration as Configuration,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
 }

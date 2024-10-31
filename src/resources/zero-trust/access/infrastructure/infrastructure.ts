@@ -2,21 +2,39 @@
 
 import { APIResource } from '../../../../resource';
 import * as TargetsAPI from './targets';
+import {
+  TargetCreateParams,
+  TargetCreateResponse,
+  TargetDeleteParams,
+  TargetGetParams,
+  TargetGetResponse,
+  TargetListParams,
+  TargetListResponse,
+  TargetListResponsesV4PagePaginationArray,
+  TargetUpdateParams,
+  TargetUpdateResponse,
+  Targets,
+} from './targets';
 
 export class Infrastructure extends APIResource {
   targets: TargetsAPI.Targets = new TargetsAPI.Targets(this._client);
 }
 
-export namespace Infrastructure {
-  export import Targets = TargetsAPI.Targets;
-  export import TargetCreateResponse = TargetsAPI.TargetCreateResponse;
-  export import TargetUpdateResponse = TargetsAPI.TargetUpdateResponse;
-  export import TargetListResponse = TargetsAPI.TargetListResponse;
-  export import TargetGetResponse = TargetsAPI.TargetGetResponse;
-  export import TargetListResponsesV4PagePaginationArray = TargetsAPI.TargetListResponsesV4PagePaginationArray;
-  export import TargetCreateParams = TargetsAPI.TargetCreateParams;
-  export import TargetUpdateParams = TargetsAPI.TargetUpdateParams;
-  export import TargetListParams = TargetsAPI.TargetListParams;
-  export import TargetDeleteParams = TargetsAPI.TargetDeleteParams;
-  export import TargetGetParams = TargetsAPI.TargetGetParams;
+Infrastructure.Targets = Targets;
+Infrastructure.TargetListResponsesV4PagePaginationArray = TargetListResponsesV4PagePaginationArray;
+
+export declare namespace Infrastructure {
+  export {
+    Targets as Targets,
+    type TargetCreateResponse as TargetCreateResponse,
+    type TargetUpdateResponse as TargetUpdateResponse,
+    type TargetListResponse as TargetListResponse,
+    type TargetGetResponse as TargetGetResponse,
+    TargetListResponsesV4PagePaginationArray as TargetListResponsesV4PagePaginationArray,
+    type TargetCreateParams as TargetCreateParams,
+    type TargetUpdateParams as TargetUpdateParams,
+    type TargetListParams as TargetListParams,
+    type TargetDeleteParams as TargetDeleteParams,
+    type TargetGetParams as TargetGetParams,
+  };
 }

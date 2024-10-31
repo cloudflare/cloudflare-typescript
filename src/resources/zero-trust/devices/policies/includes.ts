@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as IncludesAPI from './includes';
 import { SinglePage } from '../../../../pagination';
 
 export class Includes extends APIResource {
@@ -120,12 +119,16 @@ export interface IncludeGetParams {
   account_id: string;
 }
 
-export namespace Includes {
-  export import SplitTunnelInclude = IncludesAPI.SplitTunnelInclude;
-  export import IncludeUpdateResponse = IncludesAPI.IncludeUpdateResponse;
-  export import IncludeGetResponse = IncludesAPI.IncludeGetResponse;
-  export import SplitTunnelIncludesSinglePage = IncludesAPI.SplitTunnelIncludesSinglePage;
-  export import IncludeUpdateParams = IncludesAPI.IncludeUpdateParams;
-  export import IncludeListParams = IncludesAPI.IncludeListParams;
-  export import IncludeGetParams = IncludesAPI.IncludeGetParams;
+Includes.SplitTunnelIncludesSinglePage = SplitTunnelIncludesSinglePage;
+
+export declare namespace Includes {
+  export {
+    type SplitTunnelInclude as SplitTunnelInclude,
+    type IncludeUpdateResponse as IncludeUpdateResponse,
+    type IncludeGetResponse as IncludeGetResponse,
+    SplitTunnelIncludesSinglePage as SplitTunnelIncludesSinglePage,
+    type IncludeUpdateParams as IncludeUpdateParams,
+    type IncludeListParams as IncludeListParams,
+    type IncludeGetParams as IncludeGetParams,
+  };
 }

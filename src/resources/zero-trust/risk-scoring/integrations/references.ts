@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ReferencesAPI from './references';
 
 export class References extends APIResource {
   /**
@@ -70,7 +69,6 @@ export interface ReferenceGetParams {
   account_id: string;
 }
 
-export namespace References {
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+export declare namespace References {
+  export { type ReferenceGetResponse as ReferenceGetResponse, type ReferenceGetParams as ReferenceGetParams };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
   /**
@@ -31,7 +30,6 @@ export interface SettingListParams {
   zone_id: string;
 }
 
-export namespace Settings {
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+export declare namespace Settings {
+  export { type SettingListResponse as SettingListResponse, type SettingListParams as SettingListParams };
 }

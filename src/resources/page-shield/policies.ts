@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PoliciesAPI from './policies';
 import { SinglePage } from '../../pagination';
 
 export class Policies extends APIResource {
@@ -330,16 +329,20 @@ export interface PolicyGetParams {
   zone_id: string;
 }
 
-export namespace Policies {
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyListResponse = PoliciesAPI.PolicyListResponse;
-  export import PolicyGetResponse = PoliciesAPI.PolicyGetResponse;
-  export import PolicyListResponsesSinglePage = PoliciesAPI.PolicyListResponsesSinglePage;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+Policies.PolicyListResponsesSinglePage = PolicyListResponsesSinglePage;
+
+export declare namespace Policies {
+  export {
+    type Policy as Policy,
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyListResponse as PolicyListResponse,
+    type PolicyGetResponse as PolicyGetResponse,
+    PolicyListResponsesSinglePage as PolicyListResponsesSinglePage,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
 }

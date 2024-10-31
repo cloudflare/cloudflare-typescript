@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TestsAPI from './tests';
 import * as SpeedAPI from '../speed';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -222,12 +221,16 @@ export interface TestGetParams {
   zone_id: string;
 }
 
-export namespace Tests {
-  export import Test = TestsAPI.Test;
-  export import TestDeleteResponse = TestsAPI.TestDeleteResponse;
-  export import TestsV4PagePaginationArray = TestsAPI.TestsV4PagePaginationArray;
-  export import TestCreateParams = TestsAPI.TestCreateParams;
-  export import TestListParams = TestsAPI.TestListParams;
-  export import TestDeleteParams = TestsAPI.TestDeleteParams;
-  export import TestGetParams = TestsAPI.TestGetParams;
+Tests.TestsV4PagePaginationArray = TestsV4PagePaginationArray;
+
+export declare namespace Tests {
+  export {
+    type Test as Test,
+    type TestDeleteResponse as TestDeleteResponse,
+    TestsV4PagePaginationArray as TestsV4PagePaginationArray,
+    type TestCreateParams as TestCreateParams,
+    type TestListParams as TestListParams,
+    type TestDeleteParams as TestDeleteParams,
+    type TestGetParams as TestGetParams,
+  };
 }

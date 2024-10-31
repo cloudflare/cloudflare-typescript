@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SnapshotsAPI from './snapshots';
 
 export class Snapshots extends APIResource {
   /**
@@ -52,7 +51,9 @@ export interface SnapshotUpdateParams {
   source?: string;
 }
 
-export namespace Snapshots {
-  export import SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
-  export import SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
+export declare namespace Snapshots {
+  export {
+    type SnapshotUpdateResponse as SnapshotUpdateResponse,
+    type SnapshotUpdateParams as SnapshotUpdateParams,
+  };
 }

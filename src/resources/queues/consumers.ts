@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConsumersAPI from './consumers';
 
 export class Consumers extends APIResource {
   /**
@@ -205,14 +204,16 @@ export interface ConsumerGetParams {
   account_id: string;
 }
 
-export namespace Consumers {
-  export import Consumer = ConsumersAPI.Consumer;
-  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
-  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
-  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
+export declare namespace Consumers {
+  export {
+    type Consumer as Consumer,
+    type ConsumerCreateResponse as ConsumerCreateResponse,
+    type ConsumerUpdateResponse as ConsumerUpdateResponse,
+    type ConsumerDeleteResponse as ConsumerDeleteResponse,
+    type ConsumerGetResponse as ConsumerGetResponse,
+    type ConsumerCreateParams as ConsumerCreateParams,
+    type ConsumerUpdateParams as ConsumerUpdateParams,
+    type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
+  };
 }

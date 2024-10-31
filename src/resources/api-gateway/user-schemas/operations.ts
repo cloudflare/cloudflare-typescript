@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as UserSchemasOperationsAPI from './operations';
 import * as OperationsAPI from '../operations/operations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -88,8 +87,12 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   operation_status?: 'new' | 'existing';
 }
 
-export namespace Operations {
-  export import OperationListResponse = UserSchemasOperationsAPI.OperationListResponse;
-  export import OperationListResponsesV4PagePaginationArray = UserSchemasOperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export import OperationListParams = UserSchemasOperationsAPI.OperationListParams;
+Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
+
+export declare namespace Operations {
+  export {
+    type OperationListResponse as OperationListResponse,
+    OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
+    type OperationListParams as OperationListParams,
+  };
 }

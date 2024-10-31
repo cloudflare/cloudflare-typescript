@@ -3,10 +3,48 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as PageAPI from './page';
+import { Page, PagePreviewParams, PagePreviewResponse } from './page';
 import * as RulesAPI from './rules';
+import {
+  RuleCreateParams,
+  RuleCreateResponse,
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleEditParams,
+  RuleEditResponse,
+  RuleGetParams,
+  RuleGetResponse,
+  RuleUpdateParams,
+  RuleUpdateResponse,
+  Rules,
+  WaitingRoomRule,
+} from './rules';
 import * as SettingsAPI from './settings';
+import {
+  Setting,
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingUpdateResponse,
+  Settings,
+} from './settings';
 import * as StatusesAPI from './statuses';
+import { StatusGetParams, StatusGetResponse, Statuses } from './statuses';
 import * as EventsAPI from './events/events';
+import {
+  Event,
+  EventCreateParams,
+  EventDeleteParams,
+  EventDeleteResponse,
+  EventEditParams,
+  EventGetParams,
+  EventListParams,
+  EventUpdateParams,
+  Events,
+  EventsV4PagePaginationArray,
+} from './events/events';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class WaitingRooms extends APIResource {
@@ -2029,41 +2067,62 @@ export interface WaitingRoomGetParams {
   zone_id: string;
 }
 
-export namespace WaitingRooms {
-  export import Page = PageAPI.Page;
-  export import PagePreviewResponse = PageAPI.PagePreviewResponse;
-  export import PagePreviewParams = PageAPI.PagePreviewParams;
-  export import Events = EventsAPI.Events;
-  export import Event = EventsAPI.Event;
-  export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
-  export import EventsV4PagePaginationArray = EventsAPI.EventsV4PagePaginationArray;
-  export import EventCreateParams = EventsAPI.EventCreateParams;
-  export import EventUpdateParams = EventsAPI.EventUpdateParams;
-  export import EventListParams = EventsAPI.EventListParams;
-  export import EventDeleteParams = EventsAPI.EventDeleteParams;
-  export import EventEditParams = EventsAPI.EventEditParams;
-  export import EventGetParams = EventsAPI.EventGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import WaitingRoomRule = RulesAPI.WaitingRoomRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import Statuses = StatusesAPI.Statuses;
-  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusGetParams = StatusesAPI.StatusGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import Setting = SettingsAPI.Setting;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+WaitingRooms.Page = Page;
+WaitingRooms.Events = Events;
+WaitingRooms.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
+WaitingRooms.Rules = Rules;
+WaitingRooms.Statuses = Statuses;
+WaitingRooms.Settings = Settings;
+
+export declare namespace WaitingRooms {
+  export {
+    Page as Page,
+    type PagePreviewResponse as PagePreviewResponse,
+    type PagePreviewParams as PagePreviewParams,
+  };
+
+  export {
+    Events as Events,
+    type Event as Event,
+    type EventDeleteResponse as EventDeleteResponse,
+    EventsV4PagePaginationArray as EventsV4PagePaginationArray,
+    type EventCreateParams as EventCreateParams,
+    type EventUpdateParams as EventUpdateParams,
+    type EventListParams as EventListParams,
+    type EventDeleteParams as EventDeleteParams,
+    type EventEditParams as EventEditParams,
+    type EventGetParams as EventGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type WaitingRoomRule as WaitingRoomRule,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    Statuses as Statuses,
+    type StatusGetResponse as StatusGetResponse,
+    type StatusGetParams as StatusGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type Setting as Setting,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

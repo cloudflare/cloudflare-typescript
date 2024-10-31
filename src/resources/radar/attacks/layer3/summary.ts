@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -853,17 +852,19 @@ export interface SummaryVectorParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace Summary {
-  export import SummaryBitrateResponse = SummaryAPI.SummaryBitrateResponse;
-  export import SummaryDurationResponse = SummaryAPI.SummaryDurationResponse;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryVectorResponse = SummaryAPI.SummaryVectorResponse;
-  export import SummaryBitrateParams = SummaryAPI.SummaryBitrateParams;
-  export import SummaryDurationParams = SummaryAPI.SummaryDurationParams;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryVectorParams = SummaryAPI.SummaryVectorParams;
+export declare namespace Summary {
+  export {
+    type SummaryBitrateResponse as SummaryBitrateResponse,
+    type SummaryDurationResponse as SummaryDurationResponse,
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryVectorResponse as SummaryVectorResponse,
+    type SummaryBitrateParams as SummaryBitrateParams,
+    type SummaryDurationParams as SummaryDurationParams,
+    type SummaryGetParams as SummaryGetParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryVectorParams as SummaryVectorParams,
+  };
 }

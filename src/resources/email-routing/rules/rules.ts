@@ -2,8 +2,16 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RulesAPI from './rules';
 import * as CatchAllsAPI from './catch-alls';
+import {
+  CatchAllAction,
+  CatchAllGetParams,
+  CatchAllGetResponse,
+  CatchAllMatcher,
+  CatchAllUpdateParams,
+  CatchAllUpdateResponse,
+  CatchAlls,
+} from './catch-alls';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Rules extends APIResource {
@@ -283,21 +291,29 @@ export interface RuleGetParams {
   zone_id: string;
 }
 
-export namespace Rules {
-  export import Action = RulesAPI.Action;
-  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
-  export import Matcher = RulesAPI.Matcher;
-  export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import CatchAlls = CatchAllsAPI.CatchAlls;
-  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
-  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
-  export import CatchAllGetParams = CatchAllsAPI.CatchAllGetParams;
+Rules.EmailRoutingRulesV4PagePaginationArray = EmailRoutingRulesV4PagePaginationArray;
+Rules.CatchAlls = CatchAlls;
+
+export declare namespace Rules {
+  export {
+    type Action as Action,
+    type EmailRoutingRule as EmailRoutingRule,
+    type Matcher as Matcher,
+    EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    CatchAlls as CatchAlls,
+    type CatchAllAction as CatchAllAction,
+    type CatchAllMatcher as CatchAllMatcher,
+    type CatchAllUpdateResponse as CatchAllUpdateResponse,
+    type CatchAllGetResponse as CatchAllGetResponse,
+    type CatchAllUpdateParams as CatchAllUpdateParams,
+    type CatchAllGetParams as CatchAllGetParams,
+  };
 }

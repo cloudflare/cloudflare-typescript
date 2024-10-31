@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AccountSettingsAPI from './account-settings';
 
 export class AccountSettings extends APIResource {
   /**
@@ -73,9 +72,11 @@ export interface AccountSettingGetParams {
   account_id: string;
 }
 
-export namespace AccountSettings {
-  export import AccountSettingUpdateResponse = AccountSettingsAPI.AccountSettingUpdateResponse;
-  export import AccountSettingGetResponse = AccountSettingsAPI.AccountSettingGetResponse;
-  export import AccountSettingUpdateParams = AccountSettingsAPI.AccountSettingUpdateParams;
-  export import AccountSettingGetParams = AccountSettingsAPI.AccountSettingGetParams;
+export declare namespace AccountSettings {
+  export {
+    type AccountSettingUpdateResponse as AccountSettingUpdateResponse,
+    type AccountSettingGetResponse as AccountSettingGetResponse,
+    type AccountSettingUpdateParams as AccountSettingUpdateParams,
+    type AccountSettingGetParams as AccountSettingGetParams,
+  };
 }

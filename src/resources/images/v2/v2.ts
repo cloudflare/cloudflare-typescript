@@ -2,9 +2,9 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as V2API from './v2';
 import * as V1API from '../v1/v1';
 import * as DirectUploadsAPI from './direct-uploads';
+import { DirectUploadCreateParams, DirectUploadCreateResponse, DirectUploads } from './direct-uploads';
 
 export class V2 extends APIResource {
   directUploads: DirectUploadsAPI.DirectUploads = new DirectUploadsAPI.DirectUploads(this._client);
@@ -57,10 +57,14 @@ export interface V2ListParams {
   sort_order?: 'asc' | 'desc';
 }
 
-export namespace V2 {
-  export import V2ListResponse = V2API.V2ListResponse;
-  export import V2ListParams = V2API.V2ListParams;
-  export import DirectUploads = DirectUploadsAPI.DirectUploads;
-  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
-  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
+V2.DirectUploads = DirectUploads;
+
+export declare namespace V2 {
+  export { type V2ListResponse as V2ListResponse, type V2ListParams as V2ListParams };
+
+  export {
+    DirectUploads as DirectUploads,
+    type DirectUploadCreateResponse as DirectUploadCreateResponse,
+    type DirectUploadCreateParams as DirectUploadCreateParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RevokeAPI from './revoke';
 
 export class Revoke extends APIResource {
   /**
@@ -33,7 +32,6 @@ export interface RevokeCreateParams {
   body: Array<string>;
 }
 
-export namespace Revoke {
-  export import RevokeCreateResponse = RevokeAPI.RevokeCreateResponse;
-  export import RevokeCreateParams = RevokeAPI.RevokeCreateParams;
+export declare namespace Revoke {
+  export { type RevokeCreateResponse as RevokeCreateResponse, type RevokeCreateParams as RevokeCreateParams };
 }

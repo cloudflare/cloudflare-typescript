@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NetworksAPI from './networks';
 import { SinglePage } from '../../../pagination';
 
 export class Networks extends APIResource {
@@ -233,13 +232,17 @@ export interface NetworkGetParams {
   account_id: string;
 }
 
-export namespace Networks {
-  export import DeviceNetwork = NetworksAPI.DeviceNetwork;
-  export import NetworkDeleteResponse = NetworksAPI.NetworkDeleteResponse;
-  export import DeviceNetworksSinglePage = NetworksAPI.DeviceNetworksSinglePage;
-  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
-  export import NetworkUpdateParams = NetworksAPI.NetworkUpdateParams;
-  export import NetworkListParams = NetworksAPI.NetworkListParams;
-  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
-  export import NetworkGetParams = NetworksAPI.NetworkGetParams;
+Networks.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
+
+export declare namespace Networks {
+  export {
+    type DeviceNetwork as DeviceNetwork,
+    type NetworkDeleteResponse as NetworkDeleteResponse,
+    DeviceNetworksSinglePage as DeviceNetworksSinglePage,
+    type NetworkCreateParams as NetworkCreateParams,
+    type NetworkUpdateParams as NetworkUpdateParams,
+    type NetworkListParams as NetworkListParams,
+    type NetworkDeleteParams as NetworkDeleteParams,
+    type NetworkGetParams as NetworkGetParams,
+  };
 }

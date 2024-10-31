@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as LocationsAPI from './locations';
 
 export class Locations extends APIResource {
   /**
@@ -297,9 +296,11 @@ export interface LocationTargetParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace Locations {
-  export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
-  export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
-  export import LocationOriginParams = LocationsAPI.LocationOriginParams;
-  export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+export declare namespace Locations {
+  export {
+    type LocationOriginResponse as LocationOriginResponse,
+    type LocationTargetResponse as LocationTargetResponse,
+    type LocationOriginParams as LocationOriginParams,
+    type LocationTargetParams as LocationTargetParams,
+  };
 }

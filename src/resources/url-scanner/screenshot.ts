@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as ScreenshotAPI from './screenshot';
 import { type Response } from '../../_shims/index';
 
 export class Screenshot extends APIResource {
@@ -41,6 +40,6 @@ export interface ScreenshotGetParams {
   resolution?: 'desktop' | 'mobile' | 'tablet';
 }
 
-export namespace Screenshot {
-  export import ScreenshotGetParams = ScreenshotAPI.ScreenshotGetParams;
+export declare namespace Screenshot {
+  export { type ScreenshotGetParams as ScreenshotGetParams };
 }

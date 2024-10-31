@@ -2,28 +2,56 @@
 
 import { APIResource } from '../../../../resource';
 import * as CustomAPI from './custom';
+import {
+  Custom,
+  CustomCreateParams,
+  CustomCreateResponse,
+  CustomDeleteParams,
+  CustomDeleteResponse,
+  CustomGetParams,
+  CustomGetResponse,
+  CustomListParams,
+  CustomListResponse,
+  CustomUpdateParams,
+  CustomUpdateResponse,
+} from './custom';
 import * as ManagedAPI from './managed';
+import {
+  Managed,
+  ManagedListParams,
+  ManagedListResponse,
+  ManagedUpdateParams,
+  ManagedUpdateResponse,
+} from './managed';
 
 export class Domains extends APIResource {
   custom: CustomAPI.Custom = new CustomAPI.Custom(this._client);
   managed: ManagedAPI.Managed = new ManagedAPI.Managed(this._client);
 }
 
-export namespace Domains {
-  export import Custom = CustomAPI.Custom;
-  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
-  export import CustomListResponse = CustomAPI.CustomListResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export import CustomGetResponse = CustomAPI.CustomGetResponse;
-  export import CustomCreateParams = CustomAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export import CustomListParams = CustomAPI.CustomListParams;
-  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomAPI.CustomGetParams;
-  export import Managed = ManagedAPI.Managed;
-  export import ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
-  export import ManagedListResponse = ManagedAPI.ManagedListResponse;
-  export import ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
-  export import ManagedListParams = ManagedAPI.ManagedListParams;
+Domains.Custom = Custom;
+Domains.Managed = Managed;
+
+export declare namespace Domains {
+  export {
+    Custom as Custom,
+    type CustomCreateResponse as CustomCreateResponse,
+    type CustomUpdateResponse as CustomUpdateResponse,
+    type CustomListResponse as CustomListResponse,
+    type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomGetResponse as CustomGetResponse,
+    type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
+    type CustomListParams as CustomListParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
+  };
+
+  export {
+    Managed as Managed,
+    type ManagedUpdateResponse as ManagedUpdateResponse,
+    type ManagedListResponse as ManagedListResponse,
+    type ManagedUpdateParams as ManagedUpdateParams,
+    type ManagedListParams as ManagedListParams,
+  };
 }

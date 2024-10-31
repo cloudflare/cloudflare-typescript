@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ReverseDNSAPI from './reverse-dns';
 
 export class ReverseDNS extends APIResource {
   /**
@@ -73,9 +72,11 @@ export interface ReverseDNSGetParams {
   account_id: string;
 }
 
-export namespace ReverseDNS {
-  export import ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
-  export import ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
-  export import ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
-  export import ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
+export declare namespace ReverseDNS {
+  export {
+    type ReverseDNSEditResponse as ReverseDNSEditResponse,
+    type ReverseDNSGetResponse as ReverseDNSGetResponse,
+    type ReverseDNSEditParams as ReverseDNSEditParams,
+    type ReverseDNSGetParams as ReverseDNSGetParams,
+  };
 }

@@ -2,9 +2,34 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ResourceSharingAPI from './resource-sharing';
 import * as RecipientsAPI from './recipients';
+import {
+  RecipientCreateParams,
+  RecipientCreateResponse,
+  RecipientDeleteParams,
+  RecipientDeleteResponse,
+  RecipientGetParams,
+  RecipientGetResponse,
+  RecipientListParams,
+  RecipientListResponse,
+  RecipientListResponsesV4PagePaginationArray,
+  Recipients,
+} from './recipients';
 import * as ResourcesAPI from './resources';
+import {
+  ResourceCreateParams,
+  ResourceCreateResponse,
+  ResourceDeleteParams,
+  ResourceDeleteResponse,
+  ResourceGetParams,
+  ResourceGetResponse,
+  ResourceListParams,
+  ResourceListResponse,
+  ResourceListResponsesV4PagePaginationArray,
+  ResourceUpdateParams,
+  ResourceUpdateResponse,
+  Resources,
+} from './resources';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class ResourceSharing extends APIResource {
@@ -429,38 +454,53 @@ export interface ResourceSharingGetParams {
   account_id: string;
 }
 
-export namespace ResourceSharing {
-  export import ResourceSharingCreateResponse = ResourceSharingAPI.ResourceSharingCreateResponse;
-  export import ResourceSharingUpdateResponse = ResourceSharingAPI.ResourceSharingUpdateResponse;
-  export import ResourceSharingListResponse = ResourceSharingAPI.ResourceSharingListResponse;
-  export import ResourceSharingDeleteResponse = ResourceSharingAPI.ResourceSharingDeleteResponse;
-  export import ResourceSharingGetResponse = ResourceSharingAPI.ResourceSharingGetResponse;
-  export import ResourceSharingListResponsesV4PagePaginationArray = ResourceSharingAPI.ResourceSharingListResponsesV4PagePaginationArray;
-  export import ResourceSharingCreateParams = ResourceSharingAPI.ResourceSharingCreateParams;
-  export import ResourceSharingUpdateParams = ResourceSharingAPI.ResourceSharingUpdateParams;
-  export import ResourceSharingListParams = ResourceSharingAPI.ResourceSharingListParams;
-  export import ResourceSharingDeleteParams = ResourceSharingAPI.ResourceSharingDeleteParams;
-  export import ResourceSharingGetParams = ResourceSharingAPI.ResourceSharingGetParams;
-  export import Recipients = RecipientsAPI.Recipients;
-  export import RecipientCreateResponse = RecipientsAPI.RecipientCreateResponse;
-  export import RecipientListResponse = RecipientsAPI.RecipientListResponse;
-  export import RecipientDeleteResponse = RecipientsAPI.RecipientDeleteResponse;
-  export import RecipientGetResponse = RecipientsAPI.RecipientGetResponse;
-  export import RecipientListResponsesV4PagePaginationArray = RecipientsAPI.RecipientListResponsesV4PagePaginationArray;
-  export import RecipientCreateParams = RecipientsAPI.RecipientCreateParams;
-  export import RecipientListParams = RecipientsAPI.RecipientListParams;
-  export import RecipientDeleteParams = RecipientsAPI.RecipientDeleteParams;
-  export import RecipientGetParams = RecipientsAPI.RecipientGetParams;
-  export import Resources = ResourcesAPI.Resources;
-  export import ResourceCreateResponse = ResourcesAPI.ResourceCreateResponse;
-  export import ResourceUpdateResponse = ResourcesAPI.ResourceUpdateResponse;
-  export import ResourceListResponse = ResourcesAPI.ResourceListResponse;
-  export import ResourceDeleteResponse = ResourcesAPI.ResourceDeleteResponse;
-  export import ResourceGetResponse = ResourcesAPI.ResourceGetResponse;
-  export import ResourceListResponsesV4PagePaginationArray = ResourcesAPI.ResourceListResponsesV4PagePaginationArray;
-  export import ResourceCreateParams = ResourcesAPI.ResourceCreateParams;
-  export import ResourceUpdateParams = ResourcesAPI.ResourceUpdateParams;
-  export import ResourceListParams = ResourcesAPI.ResourceListParams;
-  export import ResourceDeleteParams = ResourcesAPI.ResourceDeleteParams;
-  export import ResourceGetParams = ResourcesAPI.ResourceGetParams;
+ResourceSharing.ResourceSharingListResponsesV4PagePaginationArray =
+  ResourceSharingListResponsesV4PagePaginationArray;
+ResourceSharing.Recipients = Recipients;
+ResourceSharing.RecipientListResponsesV4PagePaginationArray = RecipientListResponsesV4PagePaginationArray;
+ResourceSharing.Resources = Resources;
+ResourceSharing.ResourceListResponsesV4PagePaginationArray = ResourceListResponsesV4PagePaginationArray;
+
+export declare namespace ResourceSharing {
+  export {
+    type ResourceSharingCreateResponse as ResourceSharingCreateResponse,
+    type ResourceSharingUpdateResponse as ResourceSharingUpdateResponse,
+    type ResourceSharingListResponse as ResourceSharingListResponse,
+    type ResourceSharingDeleteResponse as ResourceSharingDeleteResponse,
+    type ResourceSharingGetResponse as ResourceSharingGetResponse,
+    ResourceSharingListResponsesV4PagePaginationArray as ResourceSharingListResponsesV4PagePaginationArray,
+    type ResourceSharingCreateParams as ResourceSharingCreateParams,
+    type ResourceSharingUpdateParams as ResourceSharingUpdateParams,
+    type ResourceSharingListParams as ResourceSharingListParams,
+    type ResourceSharingDeleteParams as ResourceSharingDeleteParams,
+    type ResourceSharingGetParams as ResourceSharingGetParams,
+  };
+
+  export {
+    Recipients as Recipients,
+    type RecipientCreateResponse as RecipientCreateResponse,
+    type RecipientListResponse as RecipientListResponse,
+    type RecipientDeleteResponse as RecipientDeleteResponse,
+    type RecipientGetResponse as RecipientGetResponse,
+    RecipientListResponsesV4PagePaginationArray as RecipientListResponsesV4PagePaginationArray,
+    type RecipientCreateParams as RecipientCreateParams,
+    type RecipientListParams as RecipientListParams,
+    type RecipientDeleteParams as RecipientDeleteParams,
+    type RecipientGetParams as RecipientGetParams,
+  };
+
+  export {
+    Resources as Resources,
+    type ResourceCreateResponse as ResourceCreateResponse,
+    type ResourceUpdateResponse as ResourceUpdateResponse,
+    type ResourceListResponse as ResourceListResponse,
+    type ResourceDeleteResponse as ResourceDeleteResponse,
+    type ResourceGetResponse as ResourceGetResponse,
+    ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
+    type ResourceCreateParams as ResourceCreateParams,
+    type ResourceUpdateParams as ResourceUpdateParams,
+    type ResourceListParams as ResourceListParams,
+    type ResourceDeleteParams as ResourceDeleteParams,
+    type ResourceGetParams as ResourceGetParams,
+  };
 }

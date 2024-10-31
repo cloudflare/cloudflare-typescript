@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PayloadLogsAPI from './payload-logs';
 
 export class PayloadLogs extends APIResource {
   /**
@@ -61,9 +60,11 @@ export interface PayloadLogGetParams {
   account_id: string;
 }
 
-export namespace PayloadLogs {
-  export import PayloadLogUpdateResponse = PayloadLogsAPI.PayloadLogUpdateResponse;
-  export import PayloadLogGetResponse = PayloadLogsAPI.PayloadLogGetResponse;
-  export import PayloadLogUpdateParams = PayloadLogsAPI.PayloadLogUpdateParams;
-  export import PayloadLogGetParams = PayloadLogsAPI.PayloadLogGetParams;
+export declare namespace PayloadLogs {
+  export {
+    type PayloadLogUpdateResponse as PayloadLogUpdateResponse,
+    type PayloadLogGetResponse as PayloadLogGetResponse,
+    type PayloadLogUpdateParams as PayloadLogUpdateParams,
+    type PayloadLogGetParams as PayloadLogGetParams,
+  };
 }

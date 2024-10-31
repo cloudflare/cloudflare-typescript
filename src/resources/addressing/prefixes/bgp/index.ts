@@ -2,27 +2,27 @@
 
 export { BGP } from './bgp';
 export {
-  BGPPrefix,
-  PrefixListParams,
-  PrefixEditParams,
-  PrefixGetParams,
   BGPPrefixesSinglePage,
   Prefixes,
+  type BGPPrefix,
+  type PrefixListParams,
+  type PrefixEditParams,
+  type PrefixGetParams,
 } from './prefixes';
 export {
-  ServiceBinding,
-  BindingDeleteResponse,
-  BindingCreateParams,
-  BindingListParams,
-  BindingDeleteParams,
-  BindingGetParams,
   ServiceBindingsSinglePage,
   Bindings,
+  type ServiceBinding,
+  type BindingDeleteResponse,
+  type BindingCreateParams,
+  type BindingListParams,
+  type BindingDeleteParams,
+  type BindingGetParams,
 } from './bindings';
 export {
-  StatusEditResponse,
-  StatusGetResponse,
-  StatusEditParams,
-  StatusGetParams,
   Statuses,
+  type StatusEditResponse,
+  type StatusGetResponse,
+  type StatusEditParams,
+  type StatusGetParams,
 } from './statuses';

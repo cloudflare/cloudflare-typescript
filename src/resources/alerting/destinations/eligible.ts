@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as EligibleAPI from './eligible';
 
 export class Eligible extends APIResource {
   /**
@@ -48,7 +47,6 @@ export interface EligibleGetParams {
   account_id: string;
 }
 
-export namespace Eligible {
-  export import EligibleGetResponse = EligibleAPI.EligibleGetResponse;
-  export import EligibleGetParams = EligibleAPI.EligibleGetParams;
+export declare namespace Eligible {
+  export { type EligibleGetResponse as EligibleGetResponse, type EligibleGetParams as EligibleGetParams };
 }

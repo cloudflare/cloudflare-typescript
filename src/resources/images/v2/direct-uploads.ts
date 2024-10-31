@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DirectUploadsAPI from './direct-uploads';
 
 export class DirectUploads extends APIResource {
   /**
@@ -73,7 +72,9 @@ export interface DirectUploadCreateParams {
   requireSignedURLs?: boolean;
 }
 
-export namespace DirectUploads {
-  export import DirectUploadCreateResponse = DirectUploadsAPI.DirectUploadCreateResponse;
-  export import DirectUploadCreateParams = DirectUploadsAPI.DirectUploadCreateParams;
+export declare namespace DirectUploads {
+  export {
+    type DirectUploadCreateResponse as DirectUploadCreateResponse,
+    type DirectUploadCreateParams as DirectUploadCreateParams,
+  };
 }

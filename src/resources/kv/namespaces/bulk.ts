@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BulkAPI from './bulk';
 
 export class Bulk extends APIResource {
   /**
@@ -108,9 +107,11 @@ export interface BulkDeleteParams {
   account_id: string;
 }
 
-export namespace Bulk {
-  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
-  export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
-  export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
-  export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
+export declare namespace Bulk {
+  export {
+    type BulkUpdateResponse as BulkUpdateResponse,
+    type BulkDeleteResponse as BulkDeleteResponse,
+    type BulkUpdateParams as BulkUpdateParams,
+    type BulkDeleteParams as BulkDeleteParams,
+  };
 }

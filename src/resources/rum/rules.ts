@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RulesAPI from './rules';
 
 export class Rules extends APIResource {
   /**
@@ -211,12 +210,14 @@ export interface RuleDeleteParams {
   account_id: string;
 }
 
-export namespace Rules {
-  export import RUMRule = RulesAPI.RUMRule;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+export declare namespace Rules {
+  export {
+    type RUMRule as RUMRule,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+  };
 }

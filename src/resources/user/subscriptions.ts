@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SubscriptionsAPI from './subscriptions';
 import * as Shared from '../shared';
 
 export class Subscriptions extends APIResource {
@@ -63,9 +62,11 @@ export interface SubscriptionUpdateParams {
   rate_plan?: Shared.RatePlanParam;
 }
 
-export namespace Subscriptions {
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
+export declare namespace Subscriptions {
+  export {
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+  };
 }

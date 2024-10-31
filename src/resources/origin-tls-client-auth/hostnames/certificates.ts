@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CertificatesAPI from './certificates';
 import * as HostnamesAPI from './hostnames';
 import { AuthenticatedOriginPullsSinglePage } from './hostnames';
 
@@ -308,15 +307,17 @@ export interface CertificateGetParams {
   zone_id: string;
 }
 
-export namespace Certificates {
-  export import Certificate = CertificatesAPI.Certificate;
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+export declare namespace Certificates {
+  export {
+    type Certificate as Certificate,
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
 }
 
 export { AuthenticatedOriginPullsSinglePage };

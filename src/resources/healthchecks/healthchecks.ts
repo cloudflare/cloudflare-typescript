@@ -3,6 +3,13 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as PreviewsAPI from './previews';
+import {
+  PreviewCreateParams,
+  PreviewDeleteParams,
+  PreviewDeleteResponse,
+  PreviewGetParams,
+  Previews,
+} from './previews';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Healthchecks extends APIResource {
@@ -717,10 +724,14 @@ export interface HealthcheckGetParams {
   zone_id: string;
 }
 
-export namespace Healthchecks {
-  export import Previews = PreviewsAPI.Previews;
-  export import PreviewDeleteResponse = PreviewsAPI.PreviewDeleteResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
-  export import PreviewDeleteParams = PreviewsAPI.PreviewDeleteParams;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
+Healthchecks.Previews = Previews;
+
+export declare namespace Healthchecks {
+  export {
+    Previews as Previews,
+    type PreviewDeleteResponse as PreviewDeleteResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+    type PreviewDeleteParams as PreviewDeleteParams,
+    type PreviewGetParams as PreviewGetParams,
+  };
 }

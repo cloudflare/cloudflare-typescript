@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DownloadsAPI from './downloads';
 
 export class Downloads extends APIResource {
   /**
@@ -88,11 +87,13 @@ export interface DownloadGetParams {
   account_id: string;
 }
 
-export namespace Downloads {
-  export import DownloadCreateResponse = DownloadsAPI.DownloadCreateResponse;
-  export import DownloadDeleteResponse = DownloadsAPI.DownloadDeleteResponse;
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
-  export import DownloadCreateParams = DownloadsAPI.DownloadCreateParams;
-  export import DownloadDeleteParams = DownloadsAPI.DownloadDeleteParams;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
+export declare namespace Downloads {
+  export {
+    type DownloadCreateResponse as DownloadCreateResponse,
+    type DownloadDeleteResponse as DownloadDeleteResponse,
+    type DownloadGetResponse as DownloadGetResponse,
+    type DownloadCreateParams as DownloadCreateParams,
+    type DownloadDeleteParams as DownloadDeleteParams,
+    type DownloadGetParams as DownloadGetParams,
+  };
 }

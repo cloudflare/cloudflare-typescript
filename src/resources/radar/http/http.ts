@@ -3,12 +3,62 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as HTTPAPI from './http';
 import * as SummaryAPI from './summary';
+import {
+  Summary,
+  SummaryBotClassParams,
+  SummaryBotClassResponse,
+  SummaryDeviceTypeParams,
+  SummaryDeviceTypeResponse,
+  SummaryHTTPProtocolParams,
+  SummaryHTTPProtocolResponse,
+  SummaryHTTPVersionParams,
+  SummaryHTTPVersionResponse,
+  SummaryIPVersionParams,
+  SummaryIPVersionResponse,
+  SummaryOSParams,
+  SummaryOSResponse,
+  SummaryPostQuantumParams,
+  SummaryPostQuantumResponse,
+  SummaryTLSVersionParams,
+  SummaryTLSVersionResponse,
+} from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
+import {
+  TimeseriesGroupBotClassParams,
+  TimeseriesGroupBotClassResponse,
+  TimeseriesGroupBrowserFamilyParams,
+  TimeseriesGroupBrowserFamilyResponse,
+  TimeseriesGroupBrowserParams,
+  TimeseriesGroupBrowserResponse,
+  TimeseriesGroupDeviceTypeParams,
+  TimeseriesGroupDeviceTypeResponse,
+  TimeseriesGroupHTTPProtocolParams,
+  TimeseriesGroupHTTPProtocolResponse,
+  TimeseriesGroupHTTPVersionParams,
+  TimeseriesGroupHTTPVersionResponse,
+  TimeseriesGroupIPVersionParams,
+  TimeseriesGroupIPVersionResponse,
+  TimeseriesGroupOSParams,
+  TimeseriesGroupOSResponse,
+  TimeseriesGroupPostQuantumParams,
+  TimeseriesGroupPostQuantumResponse,
+  TimeseriesGroupTLSVersionParams,
+  TimeseriesGroupTLSVersionResponse,
+  TimeseriesGroups,
+} from './timeseries-groups';
 import * as TopAPI from './top';
+import {
+  Top,
+  TopBrowserFamilyParams,
+  TopBrowserFamilyResponse,
+  TopBrowserParams,
+  TopBrowserResponse,
+} from './top';
 import * as AsesAPI from './ases/ases';
+import { AseGetParams, AseGetResponse, Ases } from './ases/ases';
 import * as LocationsAPI from './locations/locations';
+import { LocationGetParams, LocationGetResponse, Locations } from './locations/locations';
 
 export class HTTP extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
@@ -167,56 +217,75 @@ export interface HTTPTimeseriesParams {
   normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
 }
 
-export namespace HTTP {
-  export import HTTPTimeseriesResponse = HTTPAPI.HTTPTimeseriesResponse;
-  export import HTTPTimeseriesParams = HTTPAPI.HTTPTimeseriesParams;
-  export import Locations = LocationsAPI.Locations;
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
-  export import Ases = AsesAPI.Ases;
-  export import AseGetResponse = AsesAPI.AseGetResponse;
-  export import AseGetParams = AsesAPI.AseGetParams;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryBotClassResponse = SummaryAPI.SummaryBotClassResponse;
-  export import SummaryDeviceTypeResponse = SummaryAPI.SummaryDeviceTypeResponse;
-  export import SummaryHTTPProtocolResponse = SummaryAPI.SummaryHTTPProtocolResponse;
-  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryOSResponse = SummaryAPI.SummaryOSResponse;
-  export import SummaryPostQuantumResponse = SummaryAPI.SummaryPostQuantumResponse;
-  export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
-  export import SummaryBotClassParams = SummaryAPI.SummaryBotClassParams;
-  export import SummaryDeviceTypeParams = SummaryAPI.SummaryDeviceTypeParams;
-  export import SummaryHTTPProtocolParams = SummaryAPI.SummaryHTTPProtocolParams;
-  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryOSParams = SummaryAPI.SummaryOSParams;
-  export import SummaryPostQuantumParams = SummaryAPI.SummaryPostQuantumParams;
-  export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
-  export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupBotClassResponse = TimeseriesGroupsAPI.TimeseriesGroupBotClassResponse;
-  export import TimeseriesGroupBrowserResponse = TimeseriesGroupsAPI.TimeseriesGroupBrowserResponse;
-  export import TimeseriesGroupBrowserFamilyResponse = TimeseriesGroupsAPI.TimeseriesGroupBrowserFamilyResponse;
-  export import TimeseriesGroupDeviceTypeResponse = TimeseriesGroupsAPI.TimeseriesGroupDeviceTypeResponse;
-  export import TimeseriesGroupHTTPProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPProtocolResponse;
-  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupOSResponse = TimeseriesGroupsAPI.TimeseriesGroupOSResponse;
-  export import TimeseriesGroupPostQuantumResponse = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumResponse;
-  export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
-  export import TimeseriesGroupBotClassParams = TimeseriesGroupsAPI.TimeseriesGroupBotClassParams;
-  export import TimeseriesGroupBrowserParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserParams;
-  export import TimeseriesGroupBrowserFamilyParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserFamilyParams;
-  export import TimeseriesGroupDeviceTypeParams = TimeseriesGroupsAPI.TimeseriesGroupDeviceTypeParams;
-  export import TimeseriesGroupHTTPProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPProtocolParams;
-  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
-  export import TimeseriesGroupPostQuantumParams = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumParams;
-  export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
-  export import Top = TopAPI.Top;
-  export import TopBrowserResponse = TopAPI.TopBrowserResponse;
-  export import TopBrowserFamilyResponse = TopAPI.TopBrowserFamilyResponse;
-  export import TopBrowserParams = TopAPI.TopBrowserParams;
-  export import TopBrowserFamilyParams = TopAPI.TopBrowserFamilyParams;
+HTTP.Locations = Locations;
+HTTP.Ases = Ases;
+HTTP.Summary = Summary;
+HTTP.TimeseriesGroups = TimeseriesGroups;
+HTTP.Top = Top;
+
+export declare namespace HTTP {
+  export {
+    type HTTPTimeseriesResponse as HTTPTimeseriesResponse,
+    type HTTPTimeseriesParams as HTTPTimeseriesParams,
+  };
+
+  export {
+    Locations as Locations,
+    type LocationGetResponse as LocationGetResponse,
+    type LocationGetParams as LocationGetParams,
+  };
+
+  export { Ases as Ases, type AseGetResponse as AseGetResponse, type AseGetParams as AseGetParams };
+
+  export {
+    Summary as Summary,
+    type SummaryBotClassResponse as SummaryBotClassResponse,
+    type SummaryDeviceTypeResponse as SummaryDeviceTypeResponse,
+    type SummaryHTTPProtocolResponse as SummaryHTTPProtocolResponse,
+    type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryOSResponse as SummaryOSResponse,
+    type SummaryPostQuantumResponse as SummaryPostQuantumResponse,
+    type SummaryTLSVersionResponse as SummaryTLSVersionResponse,
+    type SummaryBotClassParams as SummaryBotClassParams,
+    type SummaryDeviceTypeParams as SummaryDeviceTypeParams,
+    type SummaryHTTPProtocolParams as SummaryHTTPProtocolParams,
+    type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryOSParams as SummaryOSParams,
+    type SummaryPostQuantumParams as SummaryPostQuantumParams,
+    type SummaryTLSVersionParams as SummaryTLSVersionParams,
+  };
+
+  export {
+    TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupBotClassResponse as TimeseriesGroupBotClassResponse,
+    type TimeseriesGroupBrowserResponse as TimeseriesGroupBrowserResponse,
+    type TimeseriesGroupBrowserFamilyResponse as TimeseriesGroupBrowserFamilyResponse,
+    type TimeseriesGroupDeviceTypeResponse as TimeseriesGroupDeviceTypeResponse,
+    type TimeseriesGroupHTTPProtocolResponse as TimeseriesGroupHTTPProtocolResponse,
+    type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupOSResponse as TimeseriesGroupOSResponse,
+    type TimeseriesGroupPostQuantumResponse as TimeseriesGroupPostQuantumResponse,
+    type TimeseriesGroupTLSVersionResponse as TimeseriesGroupTLSVersionResponse,
+    type TimeseriesGroupBotClassParams as TimeseriesGroupBotClassParams,
+    type TimeseriesGroupBrowserParams as TimeseriesGroupBrowserParams,
+    type TimeseriesGroupBrowserFamilyParams as TimeseriesGroupBrowserFamilyParams,
+    type TimeseriesGroupDeviceTypeParams as TimeseriesGroupDeviceTypeParams,
+    type TimeseriesGroupHTTPProtocolParams as TimeseriesGroupHTTPProtocolParams,
+    type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupOSParams as TimeseriesGroupOSParams,
+    type TimeseriesGroupPostQuantumParams as TimeseriesGroupPostQuantumParams,
+    type TimeseriesGroupTLSVersionParams as TimeseriesGroupTLSVersionParams,
+  };
+
+  export {
+    Top as Top,
+    type TopBrowserResponse as TopBrowserResponse,
+    type TopBrowserFamilyResponse as TopBrowserFamilyResponse,
+    type TopBrowserParams as TopBrowserParams,
+    type TopBrowserFamilyParams as TopBrowserFamilyParams,
+  };
 }

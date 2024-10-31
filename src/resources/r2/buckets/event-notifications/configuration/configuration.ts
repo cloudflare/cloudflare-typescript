@@ -2,8 +2,14 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as ConfigurationAPI from './configuration';
 import * as QueuesAPI from './queues';
+import {
+  QueueDeleteParams,
+  QueueDeleteResponse,
+  QueueUpdateParams,
+  QueueUpdateResponse,
+  Queues,
+} from './queues';
 
 export class Configuration extends APIResource {
   queues: QueuesAPI.Queues = new QueuesAPI.Queues(this._client);
@@ -108,12 +114,19 @@ export interface ConfigurationGetParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace Configuration {
-  export import ConfigurationGetResponse = ConfigurationAPI.ConfigurationGetResponse;
-  export import ConfigurationGetParams = ConfigurationAPI.ConfigurationGetParams;
-  export import Queues = QueuesAPI.Queues;
-  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
-  export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
-  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
+Configuration.Queues = Queues;
+
+export declare namespace Configuration {
+  export {
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
+
+  export {
+    Queues as Queues,
+    type QueueUpdateResponse as QueueUpdateResponse,
+    type QueueDeleteResponse as QueueDeleteResponse,
+    type QueueUpdateParams as QueueUpdateParams,
+    type QueueDeleteParams as QueueDeleteParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ValueAPI from './value';
 
 export class ValueResource extends APIResource {
   /**
@@ -24,7 +23,6 @@ export type Value = string;
 
 export type ValueUpdateParams = unknown;
 
-export namespace ValueResource {
-  export import Value = ValueAPI.Value;
-  export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
+export declare namespace ValueResource {
+  export { type Value as Value, type ValueUpdateParams as ValueUpdateParams };
 }

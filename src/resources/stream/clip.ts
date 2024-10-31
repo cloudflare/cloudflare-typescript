@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ClipAPI from './clip';
 import * as StreamAPI from './stream';
 
 export class ClipResource extends APIResource {
@@ -193,7 +192,6 @@ export namespace ClipCreateParams {
   }
 }
 
-export namespace ClipResource {
-  export import Clip = ClipAPI.Clip;
-  export import ClipCreateParams = ClipAPI.ClipCreateParams;
+export declare namespace ClipResource {
+  export { type Clip as Clip, type ClipCreateParams as ClipCreateParams };
 }

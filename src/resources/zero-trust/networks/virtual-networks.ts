@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as VirtualNetworksAPI from './virtual-networks';
 import { SinglePage } from '../../../pagination';
 
 export class VirtualNetworks extends APIResource {
@@ -210,12 +209,16 @@ export interface VirtualNetworkGetParams {
   account_id: string;
 }
 
-export namespace VirtualNetworks {
-  export import VirtualNetwork = VirtualNetworksAPI.VirtualNetwork;
-  export import VirtualNetworksSinglePage = VirtualNetworksAPI.VirtualNetworksSinglePage;
-  export import VirtualNetworkCreateParams = VirtualNetworksAPI.VirtualNetworkCreateParams;
-  export import VirtualNetworkListParams = VirtualNetworksAPI.VirtualNetworkListParams;
-  export import VirtualNetworkDeleteParams = VirtualNetworksAPI.VirtualNetworkDeleteParams;
-  export import VirtualNetworkEditParams = VirtualNetworksAPI.VirtualNetworkEditParams;
-  export import VirtualNetworkGetParams = VirtualNetworksAPI.VirtualNetworkGetParams;
+VirtualNetworks.VirtualNetworksSinglePage = VirtualNetworksSinglePage;
+
+export declare namespace VirtualNetworks {
+  export {
+    type VirtualNetwork as VirtualNetwork,
+    VirtualNetworksSinglePage as VirtualNetworksSinglePage,
+    type VirtualNetworkCreateParams as VirtualNetworkCreateParams,
+    type VirtualNetworkListParams as VirtualNetworkListParams,
+    type VirtualNetworkDeleteParams as VirtualNetworkDeleteParams,
+    type VirtualNetworkEditParams as VirtualNetworkEditParams,
+    type VirtualNetworkGetParams as VirtualNetworkGetParams,
+  };
 }

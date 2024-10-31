@@ -2,11 +2,28 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BucketsAPI from './buckets';
 import * as LifecycleAPI from './lifecycle';
+import {
+  Lifecycle,
+  LifecycleGetParams,
+  LifecycleGetResponse,
+  LifecycleUpdateParams,
+  LifecycleUpdateResponse,
+} from './lifecycle';
 import * as SippyAPI from './sippy';
+import {
+  Provider,
+  Sippy,
+  SippyDeleteParams,
+  SippyDeleteResponse,
+  SippyGetParams,
+  SippyResource,
+  SippyUpdateParams,
+} from './sippy';
 import * as DomainsAPI from './domains/domains';
+import { Domains } from './domains/domains';
 import * as EventNotificationsAPI from './event-notifications/event-notifications';
+import { EventNotifications } from './event-notifications/event-notifications';
 
 export class Buckets extends APIResource {
   lifecycle: LifecycleAPI.Lifecycle = new LifecycleAPI.Lifecycle(this._client);
@@ -223,26 +240,41 @@ export interface BucketGetParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace Buckets {
-  export import Bucket = BucketsAPI.Bucket;
-  export import BucketListResponse = BucketsAPI.BucketListResponse;
-  export import BucketDeleteResponse = BucketsAPI.BucketDeleteResponse;
-  export import BucketCreateParams = BucketsAPI.BucketCreateParams;
-  export import BucketListParams = BucketsAPI.BucketListParams;
-  export import BucketDeleteParams = BucketsAPI.BucketDeleteParams;
-  export import BucketGetParams = BucketsAPI.BucketGetParams;
-  export import Lifecycle = LifecycleAPI.Lifecycle;
-  export import LifecycleUpdateResponse = LifecycleAPI.LifecycleUpdateResponse;
-  export import LifecycleGetResponse = LifecycleAPI.LifecycleGetResponse;
-  export import LifecycleUpdateParams = LifecycleAPI.LifecycleUpdateParams;
-  export import LifecycleGetParams = LifecycleAPI.LifecycleGetParams;
-  export import Domains = DomainsAPI.Domains;
-  export import EventNotifications = EventNotificationsAPI.EventNotifications;
-  export import SippyResource = SippyAPI.SippyResource;
-  export import Provider = SippyAPI.Provider;
-  export import Sippy = SippyAPI.Sippy;
-  export import SippyDeleteResponse = SippyAPI.SippyDeleteResponse;
-  export import SippyUpdateParams = SippyAPI.SippyUpdateParams;
-  export import SippyDeleteParams = SippyAPI.SippyDeleteParams;
-  export import SippyGetParams = SippyAPI.SippyGetParams;
+Buckets.Lifecycle = Lifecycle;
+Buckets.Domains = Domains;
+Buckets.EventNotifications = EventNotifications;
+Buckets.SippyResource = SippyResource;
+
+export declare namespace Buckets {
+  export {
+    type Bucket as Bucket,
+    type BucketListResponse as BucketListResponse,
+    type BucketDeleteResponse as BucketDeleteResponse,
+    type BucketCreateParams as BucketCreateParams,
+    type BucketListParams as BucketListParams,
+    type BucketDeleteParams as BucketDeleteParams,
+    type BucketGetParams as BucketGetParams,
+  };
+
+  export {
+    Lifecycle as Lifecycle,
+    type LifecycleUpdateResponse as LifecycleUpdateResponse,
+    type LifecycleGetResponse as LifecycleGetResponse,
+    type LifecycleUpdateParams as LifecycleUpdateParams,
+    type LifecycleGetParams as LifecycleGetParams,
+  };
+
+  export { Domains as Domains };
+
+  export { EventNotifications as EventNotifications };
+
+  export {
+    SippyResource as SippyResource,
+    type Provider as Provider,
+    type Sippy as Sippy,
+    type SippyDeleteResponse as SippyDeleteResponse,
+    type SippyUpdateParams as SippyUpdateParams,
+    type SippyDeleteParams as SippyDeleteParams,
+    type SippyGetParams as SippyGetParams,
+  };
 }

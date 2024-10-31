@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as MiscategorizationsAPI from './miscategorizations';
 import * as Shared from '../shared';
 
 export class Miscategorizations extends APIResource {
@@ -73,7 +72,9 @@ export interface MiscategorizationCreateParams {
   url?: string;
 }
 
-export namespace Miscategorizations {
-  export import MiscategorizationCreateResponse = MiscategorizationsAPI.MiscategorizationCreateResponse;
-  export import MiscategorizationCreateParams = MiscategorizationsAPI.MiscategorizationCreateParams;
+export declare namespace Miscategorizations {
+  export {
+    type MiscategorizationCreateResponse as MiscategorizationCreateResponse,
+    type MiscategorizationCreateParams as MiscategorizationCreateParams,
+  };
 }

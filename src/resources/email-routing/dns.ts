@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DNSAPI from './dns';
 import * as EmailRoutingAPI from './email-routing';
 
 export class DNS extends APIResource {
@@ -136,11 +135,13 @@ export interface DNSGetParams {
   zone_id: string;
 }
 
-export namespace DNS {
-  export import DNSRecord = DNSAPI.DNSRecord;
-  export import DNSGetResponse = DNSAPI.DNSGetResponse;
-  export import DNSCreateParams = DNSAPI.DNSCreateParams;
-  export import DNSDeleteParams = DNSAPI.DNSDeleteParams;
-  export import DNSEditParams = DNSAPI.DNSEditParams;
-  export import DNSGetParams = DNSAPI.DNSGetParams;
+export declare namespace DNS {
+  export {
+    type DNSRecord as DNSRecord,
+    type DNSGetResponse as DNSGetResponse,
+    type DNSCreateParams as DNSCreateParams,
+    type DNSDeleteParams as DNSDeleteParams,
+    type DNSEditParams as DNSEditParams,
+    type DNSGetParams as DNSGetParams,
+  };
 }

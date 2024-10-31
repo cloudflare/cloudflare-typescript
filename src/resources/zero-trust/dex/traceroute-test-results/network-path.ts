@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as NetworkPathAPI from './network-path';
 
 export class NetworkPath extends APIResource {
   /**
@@ -90,7 +89,9 @@ export interface NetworkPathGetParams {
   account_id: string;
 }
 
-export namespace NetworkPath {
-  export import NetworkPathGetResponse = NetworkPathAPI.NetworkPathGetResponse;
-  export import NetworkPathGetParams = NetworkPathAPI.NetworkPathGetParams;
+export declare namespace NetworkPath {
+  export {
+    type NetworkPathGetResponse as NetworkPathGetResponse,
+    type NetworkPathGetParams as NetworkPathGetParams,
+  };
 }

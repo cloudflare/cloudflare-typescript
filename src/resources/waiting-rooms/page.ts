@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PageAPI from './page';
 
 export class Page extends APIResource {
   /**
@@ -92,7 +91,6 @@ export interface PagePreviewParams {
   custom_html: string;
 }
 
-export namespace Page {
-  export import PagePreviewResponse = PageAPI.PagePreviewResponse;
-  export import PagePreviewParams = PageAPI.PagePreviewParams;
+export declare namespace Page {
+  export { type PagePreviewResponse as PagePreviewResponse, type PagePreviewParams as PagePreviewParams };
 }

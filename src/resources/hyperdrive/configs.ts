@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConfigsAPI from './configs';
 import * as HyperdriveAPI from './hyperdrive';
 import { HyperdrivesSinglePage } from './hyperdrive';
 
@@ -260,14 +259,16 @@ export interface ConfigGetParams {
   account_id: string;
 }
 
-export namespace Configs {
-  export import ConfigDeleteResponse = ConfigsAPI.ConfigDeleteResponse;
-  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
-  export import ConfigListParams = ConfigsAPI.ConfigListParams;
-  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
-  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
-  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
+export declare namespace Configs {
+  export {
+    type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigCreateParams as ConfigCreateParams,
+    type ConfigUpdateParams as ConfigUpdateParams,
+    type ConfigListParams as ConfigListParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
+    type ConfigEditParams as ConfigEditParams,
+    type ConfigGetParams as ConfigGetParams,
+  };
 }
 
 export { HyperdrivesSinglePage };

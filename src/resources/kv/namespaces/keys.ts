@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as KeysAPI from './keys';
 import { CursorLimitPagination, type CursorLimitPaginationParams } from '../../../pagination';
 
 export class Keys extends APIResource {
@@ -61,8 +60,12 @@ export interface KeyListParams extends CursorLimitPaginationParams {
   prefix?: string;
 }
 
-export namespace Keys {
-  export import Key = KeysAPI.Key;
-  export import KeysCursorLimitPagination = KeysAPI.KeysCursorLimitPagination;
-  export import KeyListParams = KeysAPI.KeyListParams;
+Keys.KeysCursorLimitPagination = KeysCursorLimitPagination;
+
+export declare namespace Keys {
+  export {
+    type Key as Key,
+    KeysCursorLimitPagination as KeysCursorLimitPagination,
+    type KeyListParams as KeyListParams,
+  };
 }

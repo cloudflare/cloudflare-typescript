@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 import * as EmailAPI from '../email';
 
 export class Summary extends APIResource {
@@ -800,17 +799,19 @@ export interface SummarySPFParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryARCResponse = SummaryAPI.SummaryARCResponse;
-  export import SummaryDKIMResponse = SummaryAPI.SummaryDKIMResponse;
-  export import SummaryDMARCResponse = SummaryAPI.SummaryDMARCResponse;
-  export import SummaryEncryptedResponse = SummaryAPI.SummaryEncryptedResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummarySPFResponse = SummaryAPI.SummarySPFResponse;
-  export import SummaryARCParams = SummaryAPI.SummaryARCParams;
-  export import SummaryDKIMParams = SummaryAPI.SummaryDKIMParams;
-  export import SummaryDMARCParams = SummaryAPI.SummaryDMARCParams;
-  export import SummaryEncryptedParams = SummaryAPI.SummaryEncryptedParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummarySPFParams = SummaryAPI.SummarySPFParams;
+export declare namespace Summary {
+  export {
+    type SummaryARCResponse as SummaryARCResponse,
+    type SummaryDKIMResponse as SummaryDKIMResponse,
+    type SummaryDMARCResponse as SummaryDMARCResponse,
+    type SummaryEncryptedResponse as SummaryEncryptedResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummarySPFResponse as SummarySPFResponse,
+    type SummaryARCParams as SummaryARCParams,
+    type SummaryDKIMParams as SummaryDKIMParams,
+    type SummaryDMARCParams as SummaryDMARCParams,
+    type SummaryEncryptedParams as SummaryEncryptedParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummarySPFParams as SummarySPFParams,
+  };
 }

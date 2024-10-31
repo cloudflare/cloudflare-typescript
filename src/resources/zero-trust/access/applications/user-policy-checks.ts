@@ -122,8 +122,10 @@ export interface UserPolicyCheckListParams {
   zone_id?: string;
 }
 
-export namespace UserPolicyChecks {
-  export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
-  export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
-  export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
+export declare namespace UserPolicyChecks {
+  export {
+    type UserPolicyCheckGeo as UserPolicyCheckGeo,
+    type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
+    type UserPolicyCheckListParams as UserPolicyCheckListParams,
+  };
 }

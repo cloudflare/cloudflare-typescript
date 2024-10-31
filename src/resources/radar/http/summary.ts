@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -1346,21 +1345,23 @@ export interface SummaryTLSVersionParams {
   os?: Array<'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV'>;
 }
 
-export namespace Summary {
-  export import SummaryBotClassResponse = SummaryAPI.SummaryBotClassResponse;
-  export import SummaryDeviceTypeResponse = SummaryAPI.SummaryDeviceTypeResponse;
-  export import SummaryHTTPProtocolResponse = SummaryAPI.SummaryHTTPProtocolResponse;
-  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryOSResponse = SummaryAPI.SummaryOSResponse;
-  export import SummaryPostQuantumResponse = SummaryAPI.SummaryPostQuantumResponse;
-  export import SummaryTLSVersionResponse = SummaryAPI.SummaryTLSVersionResponse;
-  export import SummaryBotClassParams = SummaryAPI.SummaryBotClassParams;
-  export import SummaryDeviceTypeParams = SummaryAPI.SummaryDeviceTypeParams;
-  export import SummaryHTTPProtocolParams = SummaryAPI.SummaryHTTPProtocolParams;
-  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryOSParams = SummaryAPI.SummaryOSParams;
-  export import SummaryPostQuantumParams = SummaryAPI.SummaryPostQuantumParams;
-  export import SummaryTLSVersionParams = SummaryAPI.SummaryTLSVersionParams;
+export declare namespace Summary {
+  export {
+    type SummaryBotClassResponse as SummaryBotClassResponse,
+    type SummaryDeviceTypeResponse as SummaryDeviceTypeResponse,
+    type SummaryHTTPProtocolResponse as SummaryHTTPProtocolResponse,
+    type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryOSResponse as SummaryOSResponse,
+    type SummaryPostQuantumResponse as SummaryPostQuantumResponse,
+    type SummaryTLSVersionResponse as SummaryTLSVersionResponse,
+    type SummaryBotClassParams as SummaryBotClassParams,
+    type SummaryDeviceTypeParams as SummaryDeviceTypeParams,
+    type SummaryHTTPProtocolParams as SummaryHTTPProtocolParams,
+    type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryOSParams as SummaryOSParams,
+    type SummaryPostQuantumParams as SummaryPostQuantumParams,
+    type SummaryTLSVersionParams as SummaryTLSVersionParams,
+  };
 }

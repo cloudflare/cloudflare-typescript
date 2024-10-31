@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PatternsAPI from './patterns';
 
 export class Patterns extends APIResource {
   /**
@@ -54,7 +53,9 @@ export interface PatternValidateParams {
   max_match_bytes?: number | null;
 }
 
-export namespace Patterns {
-  export import PatternValidateResponse = PatternsAPI.PatternValidateResponse;
-  export import PatternValidateParams = PatternsAPI.PatternValidateParams;
+export declare namespace Patterns {
+  export {
+    type PatternValidateResponse as PatternValidateResponse,
+    type PatternValidateParams as PatternValidateParams,
+  };
 }

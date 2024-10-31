@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ServicesAPI from './services';
 import { SinglePage } from '../../pagination';
 
 export class Services extends APIResource {
@@ -46,8 +45,12 @@ export interface ServiceListParams {
   account_id: string;
 }
 
-export namespace Services {
-  export import ServiceListResponse = ServicesAPI.ServiceListResponse;
-  export import ServiceListResponsesSinglePage = ServicesAPI.ServiceListResponsesSinglePage;
-  export import ServiceListParams = ServicesAPI.ServiceListParams;
+Services.ServiceListResponsesSinglePage = ServiceListResponsesSinglePage;
+
+export declare namespace Services {
+  export {
+    type ServiceListResponse as ServiceListResponse,
+    ServiceListResponsesSinglePage as ServiceListResponsesSinglePage,
+    type ServiceListParams as ServiceListParams,
+  };
 }

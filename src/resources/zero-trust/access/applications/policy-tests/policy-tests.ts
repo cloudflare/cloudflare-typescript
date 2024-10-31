@@ -2,11 +2,11 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as PolicyTestsAPI from './policy-tests';
 import * as AccessAPI from '../../access';
 import * as PoliciesAPI from '../../policies';
 import * as ApplicationsAPI from '../applications';
 import * as UsersAPI from './users';
+import { UserListParams, UserListResponse, Users } from './users';
 
 export class PolicyTests extends APIResource {
   users: UsersAPI.Users = new UsersAPI.Users(this._client);
@@ -211,12 +211,15 @@ export interface PolicyTestGetParams {
   account_id: string;
 }
 
-export namespace PolicyTests {
-  export import PolicyTestCreateResponse = PolicyTestsAPI.PolicyTestCreateResponse;
-  export import PolicyTestGetResponse = PolicyTestsAPI.PolicyTestGetResponse;
-  export import PolicyTestCreateParams = PolicyTestsAPI.PolicyTestCreateParams;
-  export import PolicyTestGetParams = PolicyTestsAPI.PolicyTestGetParams;
-  export import Users = UsersAPI.Users;
-  export import UserListResponse = UsersAPI.UserListResponse;
-  export import UserListParams = UsersAPI.UserListParams;
+PolicyTests.Users = Users;
+
+export declare namespace PolicyTests {
+  export {
+    type PolicyTestCreateResponse as PolicyTestCreateResponse,
+    type PolicyTestGetResponse as PolicyTestGetResponse,
+    type PolicyTestCreateParams as PolicyTestCreateParams,
+    type PolicyTestGetParams as PolicyTestGetParams,
+  };
+
+  export { Users as Users, type UserListResponse as UserListResponse, type UserListParams as UserListParams };
 }

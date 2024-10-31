@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SubscriptionsAPI from './subscriptions';
 import * as Shared from '../shared';
 
 export class Subscriptions extends APIResource {
@@ -132,13 +131,15 @@ export interface SubscriptionGetParams {
   account_id: string;
 }
 
-export namespace Subscriptions {
-  export import SubscriptionCreateResponse = SubscriptionsAPI.SubscriptionCreateResponse;
-  export import SubscriptionUpdateResponse = SubscriptionsAPI.SubscriptionUpdateResponse;
-  export import SubscriptionDeleteResponse = SubscriptionsAPI.SubscriptionDeleteResponse;
-  export import SubscriptionGetResponse = SubscriptionsAPI.SubscriptionGetResponse;
-  export import SubscriptionCreateParams = SubscriptionsAPI.SubscriptionCreateParams;
-  export import SubscriptionUpdateParams = SubscriptionsAPI.SubscriptionUpdateParams;
-  export import SubscriptionDeleteParams = SubscriptionsAPI.SubscriptionDeleteParams;
-  export import SubscriptionGetParams = SubscriptionsAPI.SubscriptionGetParams;
+export declare namespace Subscriptions {
+  export {
+    type SubscriptionCreateResponse as SubscriptionCreateResponse,
+    type SubscriptionUpdateResponse as SubscriptionUpdateResponse,
+    type SubscriptionDeleteResponse as SubscriptionDeleteResponse,
+    type SubscriptionGetResponse as SubscriptionGetResponse,
+    type SubscriptionCreateParams as SubscriptionCreateParams,
+    type SubscriptionUpdateParams as SubscriptionUpdateParams,
+    type SubscriptionDeleteParams as SubscriptionDeleteParams,
+    type SubscriptionGetParams as SubscriptionGetParams,
+  };
 }

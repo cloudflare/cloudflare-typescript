@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as MetadataIndexAPI from './metadata-index';
 
 export class MetadataIndex extends APIResource {
   /**
@@ -128,11 +127,13 @@ export interface MetadataIndexDeleteParams {
   propertyName: string;
 }
 
-export namespace MetadataIndex {
-  export import MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
-  export import MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
-  export import MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
-  export import MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
-  export import MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
-  export import MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
+export declare namespace MetadataIndex {
+  export {
+    type MetadataIndexCreateResponse as MetadataIndexCreateResponse,
+    type MetadataIndexListResponse as MetadataIndexListResponse,
+    type MetadataIndexDeleteResponse as MetadataIndexDeleteResponse,
+    type MetadataIndexCreateParams as MetadataIndexCreateParams,
+    type MetadataIndexListParams as MetadataIndexListParams,
+    type MetadataIndexDeleteParams as MetadataIndexDeleteParams,
+  };
 }

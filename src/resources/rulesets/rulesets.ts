@@ -5,8 +5,52 @@ import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CloudflareError } from '../../error';
 import * as RulesAPI from './rules';
+import {
+  BlockRule,
+  CompressResponseRule,
+  DDoSDynamicRule,
+  ExecuteRule,
+  ForceConnectionCloseRule,
+  LogCustomFieldRule,
+  LogRule,
+  Logging,
+  ManagedChallengeRule,
+  RedirectRule,
+  RewriteRule,
+  RewriteURIPart,
+  RouteRule,
+  RuleCreateParams,
+  RuleCreateResponse,
+  RuleDeleteParams,
+  RuleDeleteResponse,
+  RuleEditParams,
+  RuleEditResponse,
+  Rules,
+  RulesetRule,
+  ScoreRule,
+  ServeErrorRule,
+  SetCacheSettingsRule,
+  SetConfigRule,
+  SkipRule,
+} from './rules';
 import * as PhasesAPI from './phases/phases';
+import {
+  PhaseGetParams,
+  PhaseGetResponse,
+  PhaseUpdateParams,
+  PhaseUpdateResponse,
+  Phases,
+} from './phases/phases';
 import * as VersionsAPI from './versions/versions';
+import {
+  VersionDeleteParams,
+  VersionGetParams,
+  VersionGetResponse,
+  VersionListParams,
+  VersionListResponse,
+  VersionListResponsesSinglePage,
+  Versions,
+} from './versions/versions';
 import { SinglePage } from '../../pagination';
 
 export class Rulesets extends APIResource {
@@ -1982,43 +2026,56 @@ export interface RulesetGetParams {
   zone_id?: string;
 }
 
-export namespace Rulesets {
-  export import Phases = PhasesAPI.Phases;
-  export import PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
-  export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
-  export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
-  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import BlockRule = RulesAPI.BlockRule;
-  export import CompressResponseRule = RulesAPI.CompressResponseRule;
-  export import DDoSDynamicRule = RulesAPI.DDoSDynamicRule;
-  export import ExecuteRule = RulesAPI.ExecuteRule;
-  export import ForceConnectionCloseRule = RulesAPI.ForceConnectionCloseRule;
-  export import LogCustomFieldRule = RulesAPI.LogCustomFieldRule;
-  export import LogRule = RulesAPI.LogRule;
-  export import Logging = RulesAPI.Logging;
-  export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;
-  export import RedirectRule = RulesAPI.RedirectRule;
-  export import RewriteRule = RulesAPI.RewriteRule;
-  export import RewriteURIPart = RulesAPI.RewriteURIPart;
-  export import RouteRule = RulesAPI.RouteRule;
-  export import RulesetRule = RulesAPI.RulesetRule;
-  export import ScoreRule = RulesAPI.ScoreRule;
-  export import ServeErrorRule = RulesAPI.ServeErrorRule;
-  export import SetCacheSettingsRule = RulesAPI.SetCacheSettingsRule;
-  export import SetConfigRule = RulesAPI.SetConfigRule;
-  export import SkipRule = RulesAPI.SkipRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import Versions = VersionsAPI.Versions;
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Rulesets.Phases = Phases;
+Rulesets.Rules = Rules;
+Rulesets.Versions = Versions;
+Rulesets.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
+
+export declare namespace Rulesets {
+  export {
+    Phases as Phases,
+    type PhaseUpdateResponse as PhaseUpdateResponse,
+    type PhaseGetResponse as PhaseGetResponse,
+    type PhaseUpdateParams as PhaseUpdateParams,
+    type PhaseGetParams as PhaseGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type BlockRule as BlockRule,
+    type CompressResponseRule as CompressResponseRule,
+    type DDoSDynamicRule as DDoSDynamicRule,
+    type ExecuteRule as ExecuteRule,
+    type ForceConnectionCloseRule as ForceConnectionCloseRule,
+    type LogCustomFieldRule as LogCustomFieldRule,
+    type LogRule as LogRule,
+    type Logging as Logging,
+    type ManagedChallengeRule as ManagedChallengeRule,
+    type RedirectRule as RedirectRule,
+    type RewriteRule as RewriteRule,
+    type RewriteURIPart as RewriteURIPart,
+    type RouteRule as RouteRule,
+    type RulesetRule as RulesetRule,
+    type ScoreRule as ScoreRule,
+    type ServeErrorRule as ServeErrorRule,
+    type SetCacheSettingsRule as SetCacheSettingsRule,
+    type SetConfigRule as SetConfigRule,
+    type SkipRule as SkipRule,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesSinglePage as VersionListResponsesSinglePage,
+    type VersionListParams as VersionListParams,
+    type VersionDeleteParams as VersionDeleteParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

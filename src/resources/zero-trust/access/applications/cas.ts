@@ -4,7 +4,6 @@ import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from '../../../../error';
-import * as CAsAPI from './cas';
 import { SinglePage } from '../../../../pagination';
 
 export class CAs extends APIResource {
@@ -246,14 +245,18 @@ export interface CAGetParams {
   zone_id?: string;
 }
 
-export namespace CAs {
-  export import CA = CAsAPI.CA;
-  export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import CAGetResponse = CAsAPI.CAGetResponse;
-  export import CAsSinglePage = CAsAPI.CAsSinglePage;
-  export import CACreateParams = CAsAPI.CACreateParams;
-  export import CAListParams = CAsAPI.CAListParams;
-  export import CADeleteParams = CAsAPI.CADeleteParams;
-  export import CAGetParams = CAsAPI.CAGetParams;
+CAs.CAsSinglePage = CAsSinglePage;
+
+export declare namespace CAs {
+  export {
+    type CA as CA,
+    type CACreateResponse as CACreateResponse,
+    type CADeleteResponse as CADeleteResponse,
+    type CAGetResponse as CAGetResponse,
+    CAsSinglePage as CAsSinglePage,
+    type CACreateParams as CACreateParams,
+    type CAListParams as CAListParams,
+    type CADeleteParams as CADeleteParams,
+    type CAGetParams as CAGetParams,
+  };
 }

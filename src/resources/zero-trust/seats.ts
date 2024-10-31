@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SeatsAPI from './seats';
 
 export class Seats extends APIResource {
   /**
@@ -74,8 +73,10 @@ export namespace SeatEditParams {
   }
 }
 
-export namespace Seats {
-  export import Seat = SeatsAPI.Seat;
-  export import SeatEditResponse = SeatsAPI.SeatEditResponse;
-  export import SeatEditParams = SeatsAPI.SeatEditParams;
+export declare namespace Seats {
+  export {
+    type Seat as Seat,
+    type SeatEditResponse as SeatEditResponse,
+    type SeatEditParams as SeatEditParams,
+  };
 }

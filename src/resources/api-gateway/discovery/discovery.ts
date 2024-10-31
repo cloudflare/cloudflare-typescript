@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DiscoveryAPI from './discovery';
 import * as OperationsAPI from './operations';
+import { OperationEditParams, OperationEditResponse, OperationListParams, Operations } from './operations';
 import { V4PagePaginationArray } from '../../../pagination';
 
 export class Discovery extends APIResource {
@@ -103,12 +103,19 @@ export interface DiscoveryGetParams {
   zone_id: string;
 }
 
-export namespace Discovery {
-  export import DiscoveryOperation = DiscoveryAPI.DiscoveryOperation;
-  export import DiscoveryGetResponse = DiscoveryAPI.DiscoveryGetResponse;
-  export import DiscoveryGetParams = DiscoveryAPI.DiscoveryGetParams;
-  export import Operations = OperationsAPI.Operations;
-  export import OperationEditResponse = OperationsAPI.OperationEditResponse;
-  export import OperationListParams = OperationsAPI.OperationListParams;
-  export import OperationEditParams = OperationsAPI.OperationEditParams;
+Discovery.Operations = Operations;
+
+export declare namespace Discovery {
+  export {
+    type DiscoveryOperation as DiscoveryOperation,
+    type DiscoveryGetResponse as DiscoveryGetResponse,
+    type DiscoveryGetParams as DiscoveryGetParams,
+  };
+
+  export {
+    Operations as Operations,
+    type OperationEditResponse as OperationEditResponse,
+    type OperationListParams as OperationListParams,
+    type OperationEditParams as OperationEditParams,
+  };
 }

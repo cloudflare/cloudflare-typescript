@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RatePlansAPI from './rate-plans';
 
 export class RatePlans extends APIResource {
   /**
@@ -80,7 +79,6 @@ export interface RatePlanGetParams {
   zone_id: string;
 }
 
-export namespace RatePlans {
-  export import RatePlanGetResponse = RatePlansAPI.RatePlanGetResponse;
-  export import RatePlanGetParams = RatePlansAPI.RatePlanGetParams;
+export declare namespace RatePlans {
+  export { type RatePlanGetResponse as RatePlanGetResponse, type RatePlanGetParams as RatePlanGetParams };
 }

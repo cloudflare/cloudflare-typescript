@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ImpersonationRegistryAPI from './impersonation-registry';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class ImpersonationRegistry extends APIResource {
@@ -354,16 +353,21 @@ export interface ImpersonationRegistryGetParams {
   account_id: string;
 }
 
-export namespace ImpersonationRegistry {
-  export import ImpersonationRegistryCreateResponse = ImpersonationRegistryAPI.ImpersonationRegistryCreateResponse;
-  export import ImpersonationRegistryListResponse = ImpersonationRegistryAPI.ImpersonationRegistryListResponse;
-  export import ImpersonationRegistryDeleteResponse = ImpersonationRegistryAPI.ImpersonationRegistryDeleteResponse;
-  export import ImpersonationRegistryEditResponse = ImpersonationRegistryAPI.ImpersonationRegistryEditResponse;
-  export import ImpersonationRegistryGetResponse = ImpersonationRegistryAPI.ImpersonationRegistryGetResponse;
-  export import ImpersonationRegistryListResponsesV4PagePaginationArray = ImpersonationRegistryAPI.ImpersonationRegistryListResponsesV4PagePaginationArray;
-  export import ImpersonationRegistryCreateParams = ImpersonationRegistryAPI.ImpersonationRegistryCreateParams;
-  export import ImpersonationRegistryListParams = ImpersonationRegistryAPI.ImpersonationRegistryListParams;
-  export import ImpersonationRegistryDeleteParams = ImpersonationRegistryAPI.ImpersonationRegistryDeleteParams;
-  export import ImpersonationRegistryEditParams = ImpersonationRegistryAPI.ImpersonationRegistryEditParams;
-  export import ImpersonationRegistryGetParams = ImpersonationRegistryAPI.ImpersonationRegistryGetParams;
+ImpersonationRegistry.ImpersonationRegistryListResponsesV4PagePaginationArray =
+  ImpersonationRegistryListResponsesV4PagePaginationArray;
+
+export declare namespace ImpersonationRegistry {
+  export {
+    type ImpersonationRegistryCreateResponse as ImpersonationRegistryCreateResponse,
+    type ImpersonationRegistryListResponse as ImpersonationRegistryListResponse,
+    type ImpersonationRegistryDeleteResponse as ImpersonationRegistryDeleteResponse,
+    type ImpersonationRegistryEditResponse as ImpersonationRegistryEditResponse,
+    type ImpersonationRegistryGetResponse as ImpersonationRegistryGetResponse,
+    ImpersonationRegistryListResponsesV4PagePaginationArray as ImpersonationRegistryListResponsesV4PagePaginationArray,
+    type ImpersonationRegistryCreateParams as ImpersonationRegistryCreateParams,
+    type ImpersonationRegistryListParams as ImpersonationRegistryListParams,
+    type ImpersonationRegistryDeleteParams as ImpersonationRegistryDeleteParams,
+    type ImpersonationRegistryEditParams as ImpersonationRegistryEditParams,
+    type ImpersonationRegistryGetParams as ImpersonationRegistryGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DOMAPI from './dom';
 
 export class DOM extends APIResource {
   /**
@@ -22,6 +21,6 @@ export class DOM extends APIResource {
  */
 export type DOMGetResponse = string;
 
-export namespace DOM {
-  export import DOMGetResponse = DOMAPI.DOMGetResponse;
+export declare namespace DOM {
+  export { type DOMGetResponse as DOMGetResponse };
 }

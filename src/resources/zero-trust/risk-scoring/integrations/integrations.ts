@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as IntegrationsAPI from './integrations';
 import * as ReferencesAPI from './references';
+import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
 import { SinglePage } from '../../../../pagination';
 
 export class Integrations extends APIResource {
@@ -329,19 +329,27 @@ export interface IntegrationGetParams {
   account_id: string;
 }
 
-export namespace Integrations {
-  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
-  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
-  export import IntegrationListResponsesSinglePage = IntegrationsAPI.IntegrationListResponsesSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
-  export import References = ReferencesAPI.References;
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+Integrations.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
+Integrations.References = References;
+
+export declare namespace Integrations {
+  export {
+    type IntegrationCreateResponse as IntegrationCreateResponse,
+    type IntegrationUpdateResponse as IntegrationUpdateResponse,
+    type IntegrationListResponse as IntegrationListResponse,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    type IntegrationGetResponse as IntegrationGetResponse,
+    IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationUpdateParams as IntegrationUpdateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
+
+  export {
+    References as References,
+    type ReferenceGetResponse as ReferenceGetResponse,
+    type ReferenceGetParams as ReferenceGetParams,
+  };
 }

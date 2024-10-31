@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DirectUploadAPI from './direct-upload';
 import * as StreamAPI from './stream';
 import * as WatermarksAPI from './watermarks';
 
@@ -131,7 +130,9 @@ export namespace DirectUploadCreateParams {
   }
 }
 
-export namespace DirectUpload {
-  export import DirectUploadCreateResponse = DirectUploadAPI.DirectUploadCreateResponse;
-  export import DirectUploadCreateParams = DirectUploadAPI.DirectUploadCreateParams;
+export declare namespace DirectUpload {
+  export {
+    type DirectUploadCreateResponse as DirectUploadCreateResponse,
+    type DirectUploadCreateParams as DirectUploadCreateParams,
+  };
 }

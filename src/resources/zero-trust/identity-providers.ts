@@ -3828,18 +3828,22 @@ export interface IdentityProviderGetParams {
   zone_id?: string;
 }
 
-export namespace IdentityProviders {
-  export import AzureAD = IdentityProvidersAPI.AzureAD;
-  export import GenericOAuthConfig = IdentityProvidersAPI.GenericOAuthConfig;
-  export import IdentityProvider = IdentityProvidersAPI.IdentityProvider;
-  export import IdentityProviderSCIMConfig = IdentityProvidersAPI.IdentityProviderSCIMConfig;
-  export import IdentityProviderType = IdentityProvidersAPI.IdentityProviderType;
-  export import IdentityProviderListResponse = IdentityProvidersAPI.IdentityProviderListResponse;
-  export import IdentityProviderDeleteResponse = IdentityProvidersAPI.IdentityProviderDeleteResponse;
-  export import IdentityProviderListResponsesSinglePage = IdentityProvidersAPI.IdentityProviderListResponsesSinglePage;
-  export import IdentityProviderCreateParams = IdentityProvidersAPI.IdentityProviderCreateParams;
-  export import IdentityProviderUpdateParams = IdentityProvidersAPI.IdentityProviderUpdateParams;
-  export import IdentityProviderListParams = IdentityProvidersAPI.IdentityProviderListParams;
-  export import IdentityProviderDeleteParams = IdentityProvidersAPI.IdentityProviderDeleteParams;
-  export import IdentityProviderGetParams = IdentityProvidersAPI.IdentityProviderGetParams;
+IdentityProviders.IdentityProviderListResponsesSinglePage = IdentityProviderListResponsesSinglePage;
+
+export declare namespace IdentityProviders {
+  export {
+    type AzureAD as AzureAD,
+    type GenericOAuthConfig as GenericOAuthConfig,
+    type IdentityProvider as IdentityProvider,
+    type IdentityProviderSCIMConfig as IdentityProviderSCIMConfig,
+    type IdentityProviderType as IdentityProviderType,
+    type IdentityProviderListResponse as IdentityProviderListResponse,
+    type IdentityProviderDeleteResponse as IdentityProviderDeleteResponse,
+    IdentityProviderListResponsesSinglePage as IdentityProviderListResponsesSinglePage,
+    type IdentityProviderCreateParams as IdentityProviderCreateParams,
+    type IdentityProviderUpdateParams as IdentityProviderUpdateParams,
+    type IdentityProviderListParams as IdentityProviderListParams,
+    type IdentityProviderDeleteParams as IdentityProviderDeleteParams,
+    type IdentityProviderGetParams as IdentityProviderGetParams,
+  };
 }

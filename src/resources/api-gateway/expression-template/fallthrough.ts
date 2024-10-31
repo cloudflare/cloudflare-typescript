@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as FallthroughAPI from './fallthrough';
 
 export class Fallthrough extends APIResource {
   /**
@@ -46,7 +45,9 @@ export interface FallthroughCreateParams {
   hosts: Array<string>;
 }
 
-export namespace Fallthrough {
-  export import FallthroughCreateResponse = FallthroughAPI.FallthroughCreateResponse;
-  export import FallthroughCreateParams = FallthroughAPI.FallthroughCreateParams;
+export declare namespace Fallthrough {
+  export {
+    type FallthroughCreateResponse as FallthroughCreateResponse,
+    type FallthroughCreateParams as FallthroughCreateParams,
+  };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -1120,17 +1119,19 @@ export interface SummaryMitigationProductParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryHTTPMethodResponse = SummaryAPI.SummaryHTTPMethodResponse;
-  export import SummaryHTTPVersionResponse = SummaryAPI.SummaryHTTPVersionResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryManagedRulesResponse = SummaryAPI.SummaryManagedRulesResponse;
-  export import SummaryMitigationProductResponse = SummaryAPI.SummaryMitigationProductResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryHTTPMethodParams = SummaryAPI.SummaryHTTPMethodParams;
-  export import SummaryHTTPVersionParams = SummaryAPI.SummaryHTTPVersionParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryManagedRulesParams = SummaryAPI.SummaryManagedRulesParams;
-  export import SummaryMitigationProductParams = SummaryAPI.SummaryMitigationProductParams;
+export declare namespace Summary {
+  export {
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryHTTPMethodResponse as SummaryHTTPMethodResponse,
+    type SummaryHTTPVersionResponse as SummaryHTTPVersionResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryManagedRulesResponse as SummaryManagedRulesResponse,
+    type SummaryMitigationProductResponse as SummaryMitigationProductResponse,
+    type SummaryGetParams as SummaryGetParams,
+    type SummaryHTTPMethodParams as SummaryHTTPMethodParams,
+    type SummaryHTTPVersionParams as SummaryHTTPVersionParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryManagedRulesParams as SummaryManagedRulesParams,
+    type SummaryMitigationProductParams as SummaryMitigationProductParams,
+  };
 }
