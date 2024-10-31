@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ActivationCheckAPI from './activation-check';
 
 export class ActivationCheck extends APIResource {
   /**
@@ -36,7 +35,9 @@ export interface ActivationCheckTriggerParams {
   zone_id: string;
 }
 
-export namespace ActivationCheck {
-  export import ActivationCheckTriggerResponse = ActivationCheckAPI.ActivationCheckTriggerResponse;
-  export import ActivationCheckTriggerParams = ActivationCheckAPI.ActivationCheckTriggerParams;
+export declare namespace ActivationCheck {
+  export {
+    type ActivationCheckTriggerResponse as ActivationCheckTriggerResponse,
+    type ActivationCheckTriggerParams as ActivationCheckTriggerParams,
+  };
 }

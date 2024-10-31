@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as InvestigateAPI from './investigate';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Investigate extends APIResource {
@@ -561,18 +560,22 @@ export interface InvestigateTraceParams {
   account_id: string;
 }
 
-export namespace Investigate {
-  export import InvestigateListResponse = InvestigateAPI.InvestigateListResponse;
-  export import InvestigateDetectionsResponse = InvestigateAPI.InvestigateDetectionsResponse;
-  export import InvestigateGetResponse = InvestigateAPI.InvestigateGetResponse;
-  export import InvestigatePreviewResponse = InvestigateAPI.InvestigatePreviewResponse;
-  export import InvestigateRawResponse = InvestigateAPI.InvestigateRawResponse;
-  export import InvestigateTraceResponse = InvestigateAPI.InvestigateTraceResponse;
-  export import InvestigateListResponsesV4PagePaginationArray = InvestigateAPI.InvestigateListResponsesV4PagePaginationArray;
-  export import InvestigateListParams = InvestigateAPI.InvestigateListParams;
-  export import InvestigateDetectionsParams = InvestigateAPI.InvestigateDetectionsParams;
-  export import InvestigateGetParams = InvestigateAPI.InvestigateGetParams;
-  export import InvestigatePreviewParams = InvestigateAPI.InvestigatePreviewParams;
-  export import InvestigateRawParams = InvestigateAPI.InvestigateRawParams;
-  export import InvestigateTraceParams = InvestigateAPI.InvestigateTraceParams;
+Investigate.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
+
+export declare namespace Investigate {
+  export {
+    type InvestigateListResponse as InvestigateListResponse,
+    type InvestigateDetectionsResponse as InvestigateDetectionsResponse,
+    type InvestigateGetResponse as InvestigateGetResponse,
+    type InvestigatePreviewResponse as InvestigatePreviewResponse,
+    type InvestigateRawResponse as InvestigateRawResponse,
+    type InvestigateTraceResponse as InvestigateTraceResponse,
+    InvestigateListResponsesV4PagePaginationArray as InvestigateListResponsesV4PagePaginationArray,
+    type InvestigateListParams as InvestigateListParams,
+    type InvestigateDetectionsParams as InvestigateDetectionsParams,
+    type InvestigateGetParams as InvestigateGetParams,
+    type InvestigatePreviewParams as InvestigatePreviewParams,
+    type InvestigateRawParams as InvestigateRawParams,
+    type InvestigateTraceParams as InvestigateTraceParams,
+  };
 }

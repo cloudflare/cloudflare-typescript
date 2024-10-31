@@ -4,7 +4,17 @@ import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
+import { Download, DownloadGetParams } from './download';
 import * as OwnershipAPI from './ownership';
+import {
+  Ownership,
+  OwnershipCreateParams,
+  OwnershipDeleteParams,
+  OwnershipGetParams,
+  OwnershipGetResponse,
+  OwnershipResource,
+  OwnershipValidateParams,
+} from './ownership';
 import { SinglePage } from '../../../pagination';
 
 export class PCAPs extends APIResource {
@@ -488,23 +498,32 @@ export interface PCAPGetParams {
   account_id: string;
 }
 
-export namespace PCAPs {
-  export import PCAP = PCAPsAPI.PCAP;
-  export import PCAPFilter = PCAPsAPI.PCAPFilter;
-  export import PCAPCreateResponse = PCAPsAPI.PCAPCreateResponse;
-  export import PCAPListResponse = PCAPsAPI.PCAPListResponse;
-  export import PCAPGetResponse = PCAPsAPI.PCAPGetResponse;
-  export import PCAPListResponsesSinglePage = PCAPsAPI.PCAPListResponsesSinglePage;
-  export import PCAPCreateParams = PCAPsAPI.PCAPCreateParams;
-  export import PCAPListParams = PCAPsAPI.PCAPListParams;
-  export import PCAPGetParams = PCAPsAPI.PCAPGetParams;
-  export import OwnershipResource = OwnershipAPI.OwnershipResource;
-  export import Ownership = OwnershipAPI.Ownership;
-  export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
-  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export import OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
-  export import OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
-  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
-  export import Download = DownloadAPI.Download;
-  export import DownloadGetParams = DownloadAPI.DownloadGetParams;
+PCAPs.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
+PCAPs.OwnershipResource = OwnershipResource;
+PCAPs.Download = Download;
+
+export declare namespace PCAPs {
+  export {
+    type PCAP as PCAP,
+    type PCAPFilter as PCAPFilter,
+    type PCAPCreateResponse as PCAPCreateResponse,
+    type PCAPListResponse as PCAPListResponse,
+    type PCAPGetResponse as PCAPGetResponse,
+    PCAPListResponsesSinglePage as PCAPListResponsesSinglePage,
+    type PCAPCreateParams as PCAPCreateParams,
+    type PCAPListParams as PCAPListParams,
+    type PCAPGetParams as PCAPGetParams,
+  };
+
+  export {
+    OwnershipResource as OwnershipResource,
+    type Ownership as Ownership,
+    type OwnershipGetResponse as OwnershipGetResponse,
+    type OwnershipCreateParams as OwnershipCreateParams,
+    type OwnershipDeleteParams as OwnershipDeleteParams,
+    type OwnershipGetParams as OwnershipGetParams,
+    type OwnershipValidateParams as OwnershipValidateParams,
+  };
+
+  export { Download as Download, type DownloadGetParams as DownloadGetParams };
 }

@@ -3175,58 +3175,60 @@ export interface SettingGetParams {
   zone_id: string;
 }
 
-export namespace Settings {
-  export import AdvancedDDoS = SettingsAPI.AdvancedDDoS;
-  export import AlwaysOnline = SettingsAPI.AlwaysOnline;
-  export import AlwaysUseHTTPS = SettingsAPI.AlwaysUseHTTPS;
-  export import AutomaticHTTPSRewrites = SettingsAPI.AutomaticHTTPSRewrites;
-  export import AutomaticPlatformOptimization = SettingsAPI.AutomaticPlatformOptimization;
-  export import Brotli = SettingsAPI.Brotli;
-  export import BrowserCacheTTL = SettingsAPI.BrowserCacheTTL;
-  export import BrowserCheck = SettingsAPI.BrowserCheck;
-  export import CacheLevel = SettingsAPI.CacheLevel;
-  export import ChallengeTTL = SettingsAPI.ChallengeTTL;
-  export import Ciphers = SettingsAPI.Ciphers;
-  export import DevelopmentMode = SettingsAPI.DevelopmentMode;
-  export import EarlyHints = SettingsAPI.EarlyHints;
-  export import EmailObfuscation = SettingsAPI.EmailObfuscation;
-  export import FontSettings = SettingsAPI.FontSettings;
-  export import H2Prioritization = SettingsAPI.H2Prioritization;
-  export import HotlinkProtection = SettingsAPI.HotlinkProtection;
-  export import HTTP2 = SettingsAPI.HTTP2;
-  export import HTTP3 = SettingsAPI.HTTP3;
-  export import ImageResizing = SettingsAPI.ImageResizing;
-  export import IPGeolocation = SettingsAPI.IPGeolocation;
-  export import IPV6 = SettingsAPI.IPV6;
-  export import MinTLSVersion = SettingsAPI.MinTLSVersion;
-  export import Mirage = SettingsAPI.Mirage;
-  export import NEL = SettingsAPI.NEL;
-  export import OpportunisticEncryption = SettingsAPI.OpportunisticEncryption;
-  export import OpportunisticOnion = SettingsAPI.OpportunisticOnion;
-  export import OrangeToOrange = SettingsAPI.OrangeToOrange;
-  export import OriginErrorPagePassThru = SettingsAPI.OriginErrorPagePassThru;
-  export import OriginMaxHTTPVersion = SettingsAPI.OriginMaxHTTPVersion;
-  export import Polish = SettingsAPI.Polish;
-  export import PrefetchPreload = SettingsAPI.PrefetchPreload;
-  export import ProxyReadTimeout = SettingsAPI.ProxyReadTimeout;
-  export import PseudoIPV4 = SettingsAPI.PseudoIPV4;
-  export import ResponseBuffering = SettingsAPI.ResponseBuffering;
-  export import RocketLoader = SettingsAPI.RocketLoader;
-  export import SecurityHeaders = SettingsAPI.SecurityHeaders;
-  export import SecurityLevel = SettingsAPI.SecurityLevel;
-  export import ServerSideExcludes = SettingsAPI.ServerSideExcludes;
-  export import SortQueryStringForCache = SettingsAPI.SortQueryStringForCache;
-  export import SSL = SettingsAPI.SSL;
-  export import SSLRecommender = SettingsAPI.SSLRecommender;
-  export import TLS1_3 = SettingsAPI.TLS1_3;
-  export import TLSClientAuth = SettingsAPI.TLSClientAuth;
-  export import TrueClientIPHeader = SettingsAPI.TrueClientIPHeader;
-  export import WAF = SettingsAPI.WAF;
-  export import WebP = SettingsAPI.WebP;
-  export import Websocket = SettingsAPI.Websocket;
-  export import ZeroRTT = SettingsAPI.ZeroRTT;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type AdvancedDDoS as AdvancedDDoS,
+    type AlwaysOnline as AlwaysOnline,
+    type AlwaysUseHTTPS as AlwaysUseHTTPS,
+    type AutomaticHTTPSRewrites as AutomaticHTTPSRewrites,
+    type AutomaticPlatformOptimization as AutomaticPlatformOptimization,
+    type Brotli as Brotli,
+    type BrowserCacheTTL as BrowserCacheTTL,
+    type BrowserCheck as BrowserCheck,
+    type CacheLevel as CacheLevel,
+    type ChallengeTTL as ChallengeTTL,
+    type Ciphers as Ciphers,
+    type DevelopmentMode as DevelopmentMode,
+    type EarlyHints as EarlyHints,
+    type EmailObfuscation as EmailObfuscation,
+    type FontSettings as FontSettings,
+    type H2Prioritization as H2Prioritization,
+    type HotlinkProtection as HotlinkProtection,
+    type HTTP2 as HTTP2,
+    type HTTP3 as HTTP3,
+    type ImageResizing as ImageResizing,
+    type IPGeolocation as IPGeolocation,
+    type IPV6 as IPV6,
+    type MinTLSVersion as MinTLSVersion,
+    type Mirage as Mirage,
+    type NEL as NEL,
+    type OpportunisticEncryption as OpportunisticEncryption,
+    type OpportunisticOnion as OpportunisticOnion,
+    type OrangeToOrange as OrangeToOrange,
+    type OriginErrorPagePassThru as OriginErrorPagePassThru,
+    type OriginMaxHTTPVersion as OriginMaxHTTPVersion,
+    type Polish as Polish,
+    type PrefetchPreload as PrefetchPreload,
+    type ProxyReadTimeout as ProxyReadTimeout,
+    type PseudoIPV4 as PseudoIPV4,
+    type ResponseBuffering as ResponseBuffering,
+    type RocketLoader as RocketLoader,
+    type SecurityHeaders as SecurityHeaders,
+    type SecurityLevel as SecurityLevel,
+    type ServerSideExcludes as ServerSideExcludes,
+    type SortQueryStringForCache as SortQueryStringForCache,
+    type SSL as SSL,
+    type SSLRecommender as SSLRecommender,
+    type TLS1_3 as TLS1_3,
+    type TLSClientAuth as TLSClientAuth,
+    type TrueClientIPHeader as TrueClientIPHeader,
+    type WAF as WAF,
+    type WebP as WebP,
+    type Websocket as Websocket,
+    type ZeroRTT as ZeroRTT,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

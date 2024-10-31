@@ -2,21 +2,39 @@
 
 import { APIResource } from '../../resource';
 import * as WidgetsAPI from './widgets';
+import {
+  Widget,
+  WidgetCreateParams,
+  WidgetDeleteParams,
+  WidgetDomain,
+  WidgetGetParams,
+  WidgetListParams,
+  WidgetListResponse,
+  WidgetListResponsesV4PagePaginationArray,
+  WidgetRotateSecretParams,
+  WidgetUpdateParams,
+  Widgets,
+} from './widgets';
 
 export class Turnstile extends APIResource {
   widgets: WidgetsAPI.Widgets = new WidgetsAPI.Widgets(this._client);
 }
 
-export namespace Turnstile {
-  export import Widgets = WidgetsAPI.Widgets;
-  export import Widget = WidgetsAPI.Widget;
-  export import WidgetDomain = WidgetsAPI.WidgetDomain;
-  export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
-  export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
-  export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
-  export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
-  export import WidgetListParams = WidgetsAPI.WidgetListParams;
-  export import WidgetDeleteParams = WidgetsAPI.WidgetDeleteParams;
-  export import WidgetGetParams = WidgetsAPI.WidgetGetParams;
-  export import WidgetRotateSecretParams = WidgetsAPI.WidgetRotateSecretParams;
+Turnstile.Widgets = Widgets;
+Turnstile.WidgetListResponsesV4PagePaginationArray = WidgetListResponsesV4PagePaginationArray;
+
+export declare namespace Turnstile {
+  export {
+    Widgets as Widgets,
+    type Widget as Widget,
+    type WidgetDomain as WidgetDomain,
+    type WidgetListResponse as WidgetListResponse,
+    WidgetListResponsesV4PagePaginationArray as WidgetListResponsesV4PagePaginationArray,
+    type WidgetCreateParams as WidgetCreateParams,
+    type WidgetUpdateParams as WidgetUpdateParams,
+    type WidgetListParams as WidgetListParams,
+    type WidgetDeleteParams as WidgetDeleteParams,
+    type WidgetGetParams as WidgetGetParams,
+    type WidgetRotateSecretParams as WidgetRotateSecretParams,
+  };
 }

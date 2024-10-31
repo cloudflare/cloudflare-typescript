@@ -4,7 +4,24 @@ import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as ProfilesAPI from './profiles';
 import * as CustomAPI from './custom';
+import {
+  Custom as CustomAPICustom,
+  CustomCreateParams,
+  CustomCreateResponse,
+  CustomDeleteParams,
+  CustomDeleteResponse,
+  CustomGetParams,
+  CustomProfile,
+  CustomUpdateParams,
+  Pattern,
+} from './custom';
 import * as PredefinedAPI from './predefined';
+import {
+  Predefined as PredefinedAPIPredefined,
+  PredefinedGetParams,
+  PredefinedProfile,
+  PredefinedUpdateParams,
+} from './predefined';
 import { SinglePage } from '../../../../pagination';
 
 export class Profiles extends APIResource {
@@ -512,24 +529,36 @@ export interface ProfileGetParams {
   account_id: string;
 }
 
-export namespace Profiles {
-  export import ContextAwareness = ProfilesAPI.ContextAwareness;
-  export import Profile = ProfilesAPI.Profile;
-  export import SkipConfiguration = ProfilesAPI.SkipConfiguration;
-  export import ProfilesSinglePage = ProfilesAPI.ProfilesSinglePage;
-  export import ProfileListParams = ProfilesAPI.ProfileListParams;
-  export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
-  export import Custom = CustomAPI.Custom;
-  export import CustomProfile = CustomAPI.CustomProfile;
-  export import Pattern = CustomAPI.Pattern;
-  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export import CustomCreateParams = CustomAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomAPI.CustomGetParams;
-  export import Predefined = PredefinedAPI.Predefined;
-  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
-  export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
-  export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
+Profiles.ProfilesSinglePage = ProfilesSinglePage;
+Profiles.Custom = CustomAPICustom;
+Profiles.Predefined = PredefinedAPIPredefined;
+
+export declare namespace Profiles {
+  export {
+    type ContextAwareness as ContextAwareness,
+    type Profile as Profile,
+    type SkipConfiguration as SkipConfiguration,
+    ProfilesSinglePage as ProfilesSinglePage,
+    type ProfileListParams as ProfileListParams,
+    type ProfileGetParams as ProfileGetParams,
+  };
+
+  export {
+    CustomAPICustom as Custom,
+    type CustomProfile as CustomProfile,
+    type Pattern as Pattern,
+    type CustomCreateResponse as CustomCreateResponse,
+    type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
+  };
+
+  export {
+    PredefinedAPIPredefined as Predefined,
+    type PredefinedProfile as PredefinedProfile,
+    type PredefinedUpdateParams as PredefinedUpdateParams,
+    type PredefinedGetParams as PredefinedGetParams,
+  };
 }

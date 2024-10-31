@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
   /**
@@ -105,8 +104,10 @@ export interface SettingGetParams {
   zone_id: string;
 }
 
-export namespace Settings {
-  export import UniversalSSLSettings = SettingsAPI.UniversalSSLSettings;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type UniversalSSLSettings as UniversalSSLSettings,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

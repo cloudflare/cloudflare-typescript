@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PagerdutyAPI from './pagerduty';
 import * as Shared from '../../shared';
 
 export class PagerdutyResource extends APIResource {
@@ -157,14 +156,16 @@ export interface PagerdutyLinkParams {
   account_id: string;
 }
 
-export namespace PagerdutyResource {
-  export import Pagerduty = PagerdutyAPI.Pagerduty;
-  export import PagerdutyCreateResponse = PagerdutyAPI.PagerdutyCreateResponse;
-  export import PagerdutyDeleteResponse = PagerdutyAPI.PagerdutyDeleteResponse;
-  export import PagerdutyGetResponse = PagerdutyAPI.PagerdutyGetResponse;
-  export import PagerdutyLinkResponse = PagerdutyAPI.PagerdutyLinkResponse;
-  export import PagerdutyCreateParams = PagerdutyAPI.PagerdutyCreateParams;
-  export import PagerdutyDeleteParams = PagerdutyAPI.PagerdutyDeleteParams;
-  export import PagerdutyGetParams = PagerdutyAPI.PagerdutyGetParams;
-  export import PagerdutyLinkParams = PagerdutyAPI.PagerdutyLinkParams;
+export declare namespace PagerdutyResource {
+  export {
+    type Pagerduty as Pagerduty,
+    type PagerdutyCreateResponse as PagerdutyCreateResponse,
+    type PagerdutyDeleteResponse as PagerdutyDeleteResponse,
+    type PagerdutyGetResponse as PagerdutyGetResponse,
+    type PagerdutyLinkResponse as PagerdutyLinkResponse,
+    type PagerdutyCreateParams as PagerdutyCreateParams,
+    type PagerdutyDeleteParams as PagerdutyDeleteParams,
+    type PagerdutyGetParams as PagerdutyGetParams,
+    type PagerdutyLinkParams as PagerdutyLinkParams,
+  };
 }

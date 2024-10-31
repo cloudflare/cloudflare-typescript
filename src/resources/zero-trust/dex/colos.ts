@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ColosAPI from './colos';
 import { SinglePage } from '../../../pagination';
 
 export class Colos extends APIResource {
@@ -50,8 +49,12 @@ export interface ColoListParams {
   sortBy?: 'fleet-status-usage' | 'application-tests-usage';
 }
 
-export namespace Colos {
-  export import ColoListResponse = ColosAPI.ColoListResponse;
-  export import ColoListResponsesSinglePage = ColosAPI.ColoListResponsesSinglePage;
-  export import ColoListParams = ColosAPI.ColoListParams;
+Colos.ColoListResponsesSinglePage = ColoListResponsesSinglePage;
+
+export declare namespace Colos {
+  export {
+    type ColoListResponse as ColoListResponse,
+    ColoListResponsesSinglePage as ColoListResponsesSinglePage,
+    type ColoListParams as ColoListParams,
+  };
 }

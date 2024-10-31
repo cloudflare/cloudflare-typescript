@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**
@@ -78,8 +77,6 @@ export interface IPGetParams {
   ipv6?: string;
 }
 
-export namespace IPs {
-  export import IP = IPsAPI.IP;
-  export import IPGetResponse = IPsAPI.IPGetResponse;
-  export import IPGetParams = IPsAPI.IPGetParams;
+export declare namespace IPs {
+  export { type IP as IP, type IPGetResponse as IPGetResponse, type IPGetParams as IPGetParams };
 }

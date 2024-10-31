@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as UARulesAPI from './ua-rules';
 import * as AccessRulesAPI from './access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -226,16 +225,20 @@ export interface UARuleGetParams {
   zone_id: string;
 }
 
-export namespace UARules {
-  export import UARuleCreateResponse = UARulesAPI.UARuleCreateResponse;
-  export import UARuleUpdateResponse = UARulesAPI.UARuleUpdateResponse;
-  export import UARuleListResponse = UARulesAPI.UARuleListResponse;
-  export import UARuleDeleteResponse = UARulesAPI.UARuleDeleteResponse;
-  export import UARuleGetResponse = UARulesAPI.UARuleGetResponse;
-  export import UARuleListResponsesV4PagePaginationArray = UARulesAPI.UARuleListResponsesV4PagePaginationArray;
-  export import UARuleCreateParams = UARulesAPI.UARuleCreateParams;
-  export import UARuleUpdateParams = UARulesAPI.UARuleUpdateParams;
-  export import UARuleListParams = UARulesAPI.UARuleListParams;
-  export import UARuleDeleteParams = UARulesAPI.UARuleDeleteParams;
-  export import UARuleGetParams = UARulesAPI.UARuleGetParams;
+UARules.UARuleListResponsesV4PagePaginationArray = UARuleListResponsesV4PagePaginationArray;
+
+export declare namespace UARules {
+  export {
+    type UARuleCreateResponse as UARuleCreateResponse,
+    type UARuleUpdateResponse as UARuleUpdateResponse,
+    type UARuleListResponse as UARuleListResponse,
+    type UARuleDeleteResponse as UARuleDeleteResponse,
+    type UARuleGetResponse as UARuleGetResponse,
+    UARuleListResponsesV4PagePaginationArray as UARuleListResponsesV4PagePaginationArray,
+    type UARuleCreateParams as UARuleCreateParams,
+    type UARuleUpdateParams as UARuleUpdateParams,
+    type UARuleListParams as UARuleListParams,
+    type UARuleDeleteParams as UARuleDeleteParams,
+    type UARuleGetParams as UARuleGetParams,
+  };
 }

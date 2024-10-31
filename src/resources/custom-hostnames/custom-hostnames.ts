@@ -5,6 +5,15 @@ import * as Core from '../../core';
 import * as CustomHostnamesAPI from './custom-hostnames';
 import * as Shared from '../shared';
 import * as FallbackOriginAPI from './fallback-origin';
+import {
+  FallbackOrigin,
+  FallbackOriginDeleteParams,
+  FallbackOriginDeleteResponse,
+  FallbackOriginGetParams,
+  FallbackOriginGetResponse,
+  FallbackOriginUpdateParams,
+  FallbackOriginUpdateResponse,
+} from './fallback-origin';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class CustomHostnames extends APIResource {
@@ -1995,12 +2004,16 @@ export interface CustomHostnameGetParams {
   zone_id: string;
 }
 
-export namespace CustomHostnames {
-  export import FallbackOrigin = FallbackOriginAPI.FallbackOrigin;
-  export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
-  export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
-  export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
-  export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
-  export import FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
-  export import FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
+CustomHostnames.FallbackOrigin = FallbackOrigin;
+
+export declare namespace CustomHostnames {
+  export {
+    FallbackOrigin as FallbackOrigin,
+    type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,
+    type FallbackOriginDeleteResponse as FallbackOriginDeleteResponse,
+    type FallbackOriginGetResponse as FallbackOriginGetResponse,
+    type FallbackOriginUpdateParams as FallbackOriginUpdateParams,
+    type FallbackOriginDeleteParams as FallbackOriginDeleteParams,
+    type FallbackOriginGetParams as FallbackOriginGetParams,
+  };
 }

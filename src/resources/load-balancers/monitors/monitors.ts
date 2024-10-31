@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as MonitorsAPI from './monitors';
 import * as PreviewsAPI from './previews';
+import { PreviewCreateParams, PreviewCreateResponse, Previews } from './previews';
 import * as ReferencesAPI from './references';
+import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
 import { SinglePage } from '../../../pagination';
 
 export class Monitors extends APIResource {
@@ -554,20 +555,32 @@ export interface MonitorGetParams {
   account_id: string;
 }
 
-export namespace Monitors {
-  export import Monitor = MonitorsAPI.Monitor;
-  export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
-  export import MonitorsSinglePage = MonitorsAPI.MonitorsSinglePage;
-  export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
-  export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
-  export import MonitorListParams = MonitorsAPI.MonitorListParams;
-  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
-  export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
-  export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
-  export import Previews = PreviewsAPI.Previews;
-  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
-  export import References = ReferencesAPI.References;
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+Monitors.MonitorsSinglePage = MonitorsSinglePage;
+Monitors.Previews = Previews;
+Monitors.References = References;
+
+export declare namespace Monitors {
+  export {
+    type Monitor as Monitor,
+    type MonitorDeleteResponse as MonitorDeleteResponse,
+    MonitorsSinglePage as MonitorsSinglePage,
+    type MonitorCreateParams as MonitorCreateParams,
+    type MonitorUpdateParams as MonitorUpdateParams,
+    type MonitorListParams as MonitorListParams,
+    type MonitorDeleteParams as MonitorDeleteParams,
+    type MonitorEditParams as MonitorEditParams,
+    type MonitorGetParams as MonitorGetParams,
+  };
+
+  export {
+    Previews as Previews,
+    type PreviewCreateResponse as PreviewCreateResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+  };
+
+  export {
+    References as References,
+    type ReferenceGetResponse as ReferenceGetResponse,
+    type ReferenceGetParams as ReferenceGetParams,
+  };
 }

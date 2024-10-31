@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as DevicesAPI from './devices';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Devices extends APIResource {
@@ -122,8 +121,12 @@ export interface DeviceListParams extends V4PagePaginationArrayParams {
   version?: string;
 }
 
-export namespace Devices {
-  export import DeviceListResponse = DevicesAPI.DeviceListResponse;
-  export import DeviceListResponsesV4PagePaginationArray = DevicesAPI.DeviceListResponsesV4PagePaginationArray;
-  export import DeviceListParams = DevicesAPI.DeviceListParams;
+Devices.DeviceListResponsesV4PagePaginationArray = DeviceListResponsesV4PagePaginationArray;
+
+export declare namespace Devices {
+  export {
+    type DeviceListResponse as DeviceListResponse,
+    DeviceListResponsesV4PagePaginationArray as DeviceListResponsesV4PagePaginationArray,
+    type DeviceListParams as DeviceListParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ResultAPI from './result';
 
 export class Result extends APIResource {
   /**
@@ -906,6 +905,6 @@ export namespace ResultGetResponse {
   }
 }
 
-export namespace Result {
-  export import ResultGetResponse = ResultAPI.ResultGetResponse;
+export declare namespace Result {
+  export { type ResultGetResponse as ResultGetResponse };
 }

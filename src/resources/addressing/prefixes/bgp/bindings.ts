@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as BindingsAPI from './bindings';
 import * as Shared from '../../../shared';
 import { SinglePage } from '../../../../pagination';
 
@@ -174,12 +173,16 @@ export interface BindingGetParams {
   account_id: string;
 }
 
-export namespace Bindings {
-  export import ServiceBinding = BindingsAPI.ServiceBinding;
-  export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
-  export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
-  export import BindingCreateParams = BindingsAPI.BindingCreateParams;
-  export import BindingListParams = BindingsAPI.BindingListParams;
-  export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
+Bindings.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
+
+export declare namespace Bindings {
+  export {
+    type ServiceBinding as ServiceBinding,
+    type BindingDeleteResponse as BindingDeleteResponse,
+    ServiceBindingsSinglePage as ServiceBindingsSinglePage,
+    type BindingCreateParams as BindingCreateParams,
+    type BindingListParams as BindingListParams,
+    type BindingDeleteParams as BindingDeleteParams,
+    type BindingGetParams as BindingGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as IncomingAPI from './incoming';
 
 export class IncomingResource extends APIResource {
   /**
@@ -281,14 +280,16 @@ export interface IncomingGetParams {
   zone_id: string;
 }
 
-export namespace IncomingResource {
-  export import Incoming = IncomingAPI.Incoming;
-  export import IncomingCreateResponse = IncomingAPI.IncomingCreateResponse;
-  export import IncomingUpdateResponse = IncomingAPI.IncomingUpdateResponse;
-  export import IncomingDeleteResponse = IncomingAPI.IncomingDeleteResponse;
-  export import IncomingGetResponse = IncomingAPI.IncomingGetResponse;
-  export import IncomingCreateParams = IncomingAPI.IncomingCreateParams;
-  export import IncomingUpdateParams = IncomingAPI.IncomingUpdateParams;
-  export import IncomingDeleteParams = IncomingAPI.IncomingDeleteParams;
-  export import IncomingGetParams = IncomingAPI.IncomingGetParams;
+export declare namespace IncomingResource {
+  export {
+    type Incoming as Incoming,
+    type IncomingCreateResponse as IncomingCreateResponse,
+    type IncomingUpdateResponse as IncomingUpdateResponse,
+    type IncomingDeleteResponse as IncomingDeleteResponse,
+    type IncomingGetResponse as IncomingGetResponse,
+    type IncomingCreateParams as IncomingCreateParams,
+    type IncomingUpdateParams as IncomingUpdateParams,
+    type IncomingDeleteParams as IncomingDeleteParams,
+    type IncomingGetParams as IncomingGetParams,
+  };
 }

@@ -3,10 +3,52 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as Layer3API from './layer3';
 import * as SummaryAPI from './summary';
+import {
+  Summary,
+  SummaryBitrateParams,
+  SummaryBitrateResponse,
+  SummaryDurationParams,
+  SummaryDurationResponse,
+  SummaryGetParams,
+  SummaryGetResponse,
+  SummaryIPVersionParams,
+  SummaryIPVersionResponse,
+  SummaryProtocolParams,
+  SummaryProtocolResponse,
+  SummaryVectorParams,
+  SummaryVectorResponse,
+} from './summary';
 import * as TimeseriesGroupsAPI from './timeseries-groups';
+import {
+  TimeseriesGroupBitrateParams,
+  TimeseriesGroupBitrateResponse,
+  TimeseriesGroupDurationParams,
+  TimeseriesGroupDurationResponse,
+  TimeseriesGroupGetParams,
+  TimeseriesGroupGetResponse,
+  TimeseriesGroupIPVersionParams,
+  TimeseriesGroupIPVersionResponse,
+  TimeseriesGroupIndustryParams,
+  TimeseriesGroupIndustryResponse,
+  TimeseriesGroupProtocolParams,
+  TimeseriesGroupProtocolResponse,
+  TimeseriesGroupVectorParams,
+  TimeseriesGroupVectorResponse,
+  TimeseriesGroupVerticalParams,
+  TimeseriesGroupVerticalResponse,
+  TimeseriesGroups,
+} from './timeseries-groups';
 import * as TopAPI from './top/top';
+import {
+  Top,
+  TopAttacksParams,
+  TopAttacksResponse,
+  TopIndustryParams,
+  TopIndustryResponse,
+  TopVerticalParams,
+  TopVerticalResponse,
+} from './top/top';
 
 export class Layer3 extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
@@ -136,44 +178,59 @@ export interface Layer3TimeseriesParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace Layer3 {
-  export import Layer3TimeseriesResponse = Layer3API.Layer3TimeseriesResponse;
-  export import Layer3TimeseriesParams = Layer3API.Layer3TimeseriesParams;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryBitrateResponse = SummaryAPI.SummaryBitrateResponse;
-  export import SummaryDurationResponse = SummaryAPI.SummaryDurationResponse;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryVectorResponse = SummaryAPI.SummaryVectorResponse;
-  export import SummaryBitrateParams = SummaryAPI.SummaryBitrateParams;
-  export import SummaryDurationParams = SummaryAPI.SummaryDurationParams;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryVectorParams = SummaryAPI.SummaryVectorParams;
-  export import TimeseriesGroups = TimeseriesGroupsAPI.TimeseriesGroups;
-  export import TimeseriesGroupBitrateResponse = TimeseriesGroupsAPI.TimeseriesGroupBitrateResponse;
-  export import TimeseriesGroupDurationResponse = TimeseriesGroupsAPI.TimeseriesGroupDurationResponse;
-  export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
-  export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupVectorResponse = TimeseriesGroupsAPI.TimeseriesGroupVectorResponse;
-  export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupBitrateParams = TimeseriesGroupsAPI.TimeseriesGroupBitrateParams;
-  export import TimeseriesGroupDurationParams = TimeseriesGroupsAPI.TimeseriesGroupDurationParams;
-  export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
-  export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupVectorParams = TimeseriesGroupsAPI.TimeseriesGroupVectorParams;
-  export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
-  export import Top = TopAPI.Top;
-  export import TopAttacksResponse = TopAPI.TopAttacksResponse;
-  export import TopIndustryResponse = TopAPI.TopIndustryResponse;
-  export import TopVerticalResponse = TopAPI.TopVerticalResponse;
-  export import TopAttacksParams = TopAPI.TopAttacksParams;
-  export import TopIndustryParams = TopAPI.TopIndustryParams;
-  export import TopVerticalParams = TopAPI.TopVerticalParams;
+Layer3.Summary = Summary;
+Layer3.TimeseriesGroups = TimeseriesGroups;
+Layer3.Top = Top;
+
+export declare namespace Layer3 {
+  export {
+    type Layer3TimeseriesResponse as Layer3TimeseriesResponse,
+    type Layer3TimeseriesParams as Layer3TimeseriesParams,
+  };
+
+  export {
+    Summary as Summary,
+    type SummaryBitrateResponse as SummaryBitrateResponse,
+    type SummaryDurationResponse as SummaryDurationResponse,
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryVectorResponse as SummaryVectorResponse,
+    type SummaryBitrateParams as SummaryBitrateParams,
+    type SummaryDurationParams as SummaryDurationParams,
+    type SummaryGetParams as SummaryGetParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryVectorParams as SummaryVectorParams,
+  };
+
+  export {
+    TimeseriesGroups as TimeseriesGroups,
+    type TimeseriesGroupBitrateResponse as TimeseriesGroupBitrateResponse,
+    type TimeseriesGroupDurationResponse as TimeseriesGroupDurationResponse,
+    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
+    type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupProtocolResponse as TimeseriesGroupProtocolResponse,
+    type TimeseriesGroupVectorResponse as TimeseriesGroupVectorResponse,
+    type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
+    type TimeseriesGroupBitrateParams as TimeseriesGroupBitrateParams,
+    type TimeseriesGroupDurationParams as TimeseriesGroupDurationParams,
+    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
+    type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupProtocolParams as TimeseriesGroupProtocolParams,
+    type TimeseriesGroupVectorParams as TimeseriesGroupVectorParams,
+    type TimeseriesGroupVerticalParams as TimeseriesGroupVerticalParams,
+  };
+
+  export {
+    Top as Top,
+    type TopAttacksResponse as TopAttacksResponse,
+    type TopIndustryResponse as TopIndustryResponse,
+    type TopVerticalResponse as TopVerticalResponse,
+    type TopAttacksParams as TopAttacksParams,
+    type TopIndustryParams as TopIndustryParams,
+    type TopVerticalParams as TopVerticalParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as QueuesAPI from './queues';
 
 export class Queues extends APIResource {
   /**
@@ -120,9 +119,11 @@ export interface QueueDeleteParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace Queues {
-  export import QueueUpdateResponse = QueuesAPI.QueueUpdateResponse;
-  export import QueueDeleteResponse = QueuesAPI.QueueDeleteResponse;
-  export import QueueUpdateParams = QueuesAPI.QueueUpdateParams;
-  export import QueueDeleteParams = QueuesAPI.QueueDeleteParams;
+export declare namespace Queues {
+  export {
+    type QueueUpdateResponse as QueueUpdateResponse,
+    type QueueDeleteResponse as QueueDeleteResponse,
+    type QueueUpdateParams as QueueUpdateParams,
+    type QueueDeleteParams as QueueDeleteParams,
+  };
 }

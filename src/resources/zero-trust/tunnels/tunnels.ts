@@ -2,13 +2,30 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TunnelsAPI from './tunnels';
 import * as Shared from '../../shared';
 import * as ConfigurationsAPI from './configurations';
+import {
+  ConfigurationGetParams,
+  ConfigurationGetResponse,
+  ConfigurationUpdateParams,
+  ConfigurationUpdateResponse,
+  Configurations,
+} from './configurations';
 import * as ConnectionsAPI from './connections';
+import {
+  Client,
+  ConnectionDeleteParams,
+  ConnectionDeleteResponse,
+  ConnectionGetParams,
+  ConnectionGetResponse,
+  Connections,
+} from './connections';
 import * as ConnectorsAPI from './connectors';
+import { ConnectorGetParams, Connectors } from './connectors';
 import * as ManagementAPI from './management';
+import { Management, ManagementCreateParams, ManagementCreateResponse } from './management';
 import * as TokenAPI from './token';
+import { Token, TokenGetParams, TokenGetResponse } from './token';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tunnels extends APIResource {
@@ -832,36 +849,53 @@ export interface TunnelGetParams {
   account_id: string;
 }
 
-export namespace Tunnels {
-  export import Connection = TunnelsAPI.Connection;
-  export import TunnelCreateResponse = TunnelsAPI.TunnelCreateResponse;
-  export import TunnelListResponse = TunnelsAPI.TunnelListResponse;
-  export import TunnelDeleteResponse = TunnelsAPI.TunnelDeleteResponse;
-  export import TunnelEditResponse = TunnelsAPI.TunnelEditResponse;
-  export import TunnelGetResponse = TunnelsAPI.TunnelGetResponse;
-  export import TunnelListResponsesV4PagePaginationArray = TunnelsAPI.TunnelListResponsesV4PagePaginationArray;
-  export import TunnelCreateParams = TunnelsAPI.TunnelCreateParams;
-  export import TunnelListParams = TunnelsAPI.TunnelListParams;
-  export import TunnelDeleteParams = TunnelsAPI.TunnelDeleteParams;
-  export import TunnelEditParams = TunnelsAPI.TunnelEditParams;
-  export import TunnelGetParams = TunnelsAPI.TunnelGetParams;
-  export import Configurations = ConfigurationsAPI.Configurations;
-  export import ConfigurationUpdateResponse = ConfigurationsAPI.ConfigurationUpdateResponse;
-  export import ConfigurationGetResponse = ConfigurationsAPI.ConfigurationGetResponse;
-  export import ConfigurationUpdateParams = ConfigurationsAPI.ConfigurationUpdateParams;
-  export import ConfigurationGetParams = ConfigurationsAPI.ConfigurationGetParams;
-  export import Connections = ConnectionsAPI.Connections;
-  export import Client = ConnectionsAPI.Client;
-  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
-  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
-  export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
-  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
-  export import Token = TokenAPI.Token;
-  export import TokenGetResponse = TokenAPI.TokenGetResponse;
-  export import TokenGetParams = TokenAPI.TokenGetParams;
-  export import Connectors = ConnectorsAPI.Connectors;
-  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
-  export import Management = ManagementAPI.Management;
-  export import ManagementCreateResponse = ManagementAPI.ManagementCreateResponse;
-  export import ManagementCreateParams = ManagementAPI.ManagementCreateParams;
+Tunnels.TunnelListResponsesV4PagePaginationArray = TunnelListResponsesV4PagePaginationArray;
+Tunnels.Configurations = Configurations;
+Tunnels.Connections = Connections;
+Tunnels.Token = Token;
+Tunnels.Connectors = Connectors;
+Tunnels.Management = Management;
+
+export declare namespace Tunnels {
+  export {
+    type Connection as Connection,
+    type TunnelCreateResponse as TunnelCreateResponse,
+    type TunnelListResponse as TunnelListResponse,
+    type TunnelDeleteResponse as TunnelDeleteResponse,
+    type TunnelEditResponse as TunnelEditResponse,
+    type TunnelGetResponse as TunnelGetResponse,
+    TunnelListResponsesV4PagePaginationArray as TunnelListResponsesV4PagePaginationArray,
+    type TunnelCreateParams as TunnelCreateParams,
+    type TunnelListParams as TunnelListParams,
+    type TunnelDeleteParams as TunnelDeleteParams,
+    type TunnelEditParams as TunnelEditParams,
+    type TunnelGetParams as TunnelGetParams,
+  };
+
+  export {
+    Configurations as Configurations,
+    type ConfigurationUpdateResponse as ConfigurationUpdateResponse,
+    type ConfigurationGetResponse as ConfigurationGetResponse,
+    type ConfigurationUpdateParams as ConfigurationUpdateParams,
+    type ConfigurationGetParams as ConfigurationGetParams,
+  };
+
+  export {
+    Connections as Connections,
+    type Client as Client,
+    type ConnectionDeleteResponse as ConnectionDeleteResponse,
+    type ConnectionGetResponse as ConnectionGetResponse,
+    type ConnectionDeleteParams as ConnectionDeleteParams,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
+
+  export { Token as Token, type TokenGetResponse as TokenGetResponse, type TokenGetParams as TokenGetParams };
+
+  export { Connectors as Connectors, type ConnectorGetParams as ConnectorGetParams };
+
+  export {
+    Management as Management,
+    type ManagementCreateResponse as ManagementCreateResponse,
+    type ManagementCreateParams as ManagementCreateParams,
+  };
 }

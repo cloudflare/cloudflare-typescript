@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ConnectionsAPI from './connections';
 
 export class Connections extends APIResource {
   /**
@@ -155,10 +154,12 @@ export interface ConnectionGetParams {
   account_id: string;
 }
 
-export namespace Connections {
-  export import Client = ConnectionsAPI.Client;
-  export import ConnectionDeleteResponse = ConnectionsAPI.ConnectionDeleteResponse;
-  export import ConnectionGetResponse = ConnectionsAPI.ConnectionGetResponse;
-  export import ConnectionDeleteParams = ConnectionsAPI.ConnectionDeleteParams;
-  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
+export declare namespace Connections {
+  export {
+    type Client as Client,
+    type ConnectionDeleteResponse as ConnectionDeleteResponse,
+    type ConnectionGetResponse as ConnectionGetResponse,
+    type ConnectionDeleteParams as ConnectionDeleteParams,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
 }

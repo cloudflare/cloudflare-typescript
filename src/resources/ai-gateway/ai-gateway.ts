@@ -3,9 +3,52 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as DatasetsAPI from './datasets';
+import {
+  DatasetCreateParams,
+  DatasetCreateResponse,
+  DatasetDeleteParams,
+  DatasetDeleteResponse,
+  DatasetGetParams,
+  DatasetGetResponse,
+  DatasetListParams,
+  DatasetListResponse,
+  DatasetListResponsesV4PagePaginationArray,
+  DatasetUpdateParams,
+  DatasetUpdateResponse,
+  Datasets,
+} from './datasets';
 import * as EvaluationTypesAPI from './evaluation-types';
+import { EvaluationTypeGetParams, EvaluationTypeGetResponse, EvaluationTypes } from './evaluation-types';
 import * as EvaluationsAPI from './evaluations';
+import {
+  EvaluationCreateParams,
+  EvaluationCreateResponse,
+  EvaluationDeleteParams,
+  EvaluationDeleteResponse,
+  EvaluationGetParams,
+  EvaluationGetResponse,
+  EvaluationListParams,
+  EvaluationListResponse,
+  EvaluationListResponsesV4PagePaginationArray,
+  Evaluations,
+} from './evaluations';
 import * as LogsAPI from './logs';
+import {
+  LogDeleteParams,
+  LogDeleteResponse,
+  LogEditParams,
+  LogEditResponse,
+  LogGetParams,
+  LogGetResponse,
+  LogListParams,
+  LogListResponse,
+  LogListResponsesV4PagePaginationArray,
+  LogRequestParams,
+  LogRequestResponse,
+  LogResponseParams,
+  LogResponseResponse,
+  Logs,
+} from './logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AIGateway extends APIResource {
@@ -361,44 +404,63 @@ export interface AIGatewayGetParams {
   account_id: string;
 }
 
-export namespace AIGateway {
-  export import EvaluationTypes = EvaluationTypesAPI.EvaluationTypes;
-  export import EvaluationTypeGetResponse = EvaluationTypesAPI.EvaluationTypeGetResponse;
-  export import EvaluationTypeGetParams = EvaluationTypesAPI.EvaluationTypeGetParams;
-  export import Logs = LogsAPI.Logs;
-  export import LogListResponse = LogsAPI.LogListResponse;
-  export import LogDeleteResponse = LogsAPI.LogDeleteResponse;
-  export import LogEditResponse = LogsAPI.LogEditResponse;
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogRequestResponse = LogsAPI.LogRequestResponse;
-  export import LogResponseResponse = LogsAPI.LogResponseResponse;
-  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
-  export import LogListParams = LogsAPI.LogListParams;
-  export import LogDeleteParams = LogsAPI.LogDeleteParams;
-  export import LogEditParams = LogsAPI.LogEditParams;
-  export import LogGetParams = LogsAPI.LogGetParams;
-  export import LogRequestParams = LogsAPI.LogRequestParams;
-  export import LogResponseParams = LogsAPI.LogResponseParams;
-  export import Datasets = DatasetsAPI.Datasets;
-  export import DatasetCreateResponse = DatasetsAPI.DatasetCreateResponse;
-  export import DatasetUpdateResponse = DatasetsAPI.DatasetUpdateResponse;
-  export import DatasetListResponse = DatasetsAPI.DatasetListResponse;
-  export import DatasetDeleteResponse = DatasetsAPI.DatasetDeleteResponse;
-  export import DatasetGetResponse = DatasetsAPI.DatasetGetResponse;
-  export import DatasetListResponsesV4PagePaginationArray = DatasetsAPI.DatasetListResponsesV4PagePaginationArray;
-  export import DatasetCreateParams = DatasetsAPI.DatasetCreateParams;
-  export import DatasetUpdateParams = DatasetsAPI.DatasetUpdateParams;
-  export import DatasetListParams = DatasetsAPI.DatasetListParams;
-  export import DatasetDeleteParams = DatasetsAPI.DatasetDeleteParams;
-  export import DatasetGetParams = DatasetsAPI.DatasetGetParams;
-  export import Evaluations = EvaluationsAPI.Evaluations;
-  export import EvaluationCreateResponse = EvaluationsAPI.EvaluationCreateResponse;
-  export import EvaluationListResponse = EvaluationsAPI.EvaluationListResponse;
-  export import EvaluationDeleteResponse = EvaluationsAPI.EvaluationDeleteResponse;
-  export import EvaluationGetResponse = EvaluationsAPI.EvaluationGetResponse;
-  export import EvaluationListResponsesV4PagePaginationArray = EvaluationsAPI.EvaluationListResponsesV4PagePaginationArray;
-  export import EvaluationCreateParams = EvaluationsAPI.EvaluationCreateParams;
-  export import EvaluationListParams = EvaluationsAPI.EvaluationListParams;
-  export import EvaluationDeleteParams = EvaluationsAPI.EvaluationDeleteParams;
-  export import EvaluationGetParams = EvaluationsAPI.EvaluationGetParams;
+AIGateway.EvaluationTypes = EvaluationTypes;
+AIGateway.Logs = Logs;
+AIGateway.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;
+AIGateway.Datasets = Datasets;
+AIGateway.DatasetListResponsesV4PagePaginationArray = DatasetListResponsesV4PagePaginationArray;
+AIGateway.Evaluations = Evaluations;
+AIGateway.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
+
+export declare namespace AIGateway {
+  export {
+    EvaluationTypes as EvaluationTypes,
+    type EvaluationTypeGetResponse as EvaluationTypeGetResponse,
+    type EvaluationTypeGetParams as EvaluationTypeGetParams,
+  };
+
+  export {
+    Logs as Logs,
+    type LogListResponse as LogListResponse,
+    type LogDeleteResponse as LogDeleteResponse,
+    type LogEditResponse as LogEditResponse,
+    type LogGetResponse as LogGetResponse,
+    type LogRequestResponse as LogRequestResponse,
+    type LogResponseResponse as LogResponseResponse,
+    LogListResponsesV4PagePaginationArray as LogListResponsesV4PagePaginationArray,
+    type LogListParams as LogListParams,
+    type LogDeleteParams as LogDeleteParams,
+    type LogEditParams as LogEditParams,
+    type LogGetParams as LogGetParams,
+    type LogRequestParams as LogRequestParams,
+    type LogResponseParams as LogResponseParams,
+  };
+
+  export {
+    Datasets as Datasets,
+    type DatasetCreateResponse as DatasetCreateResponse,
+    type DatasetUpdateResponse as DatasetUpdateResponse,
+    type DatasetListResponse as DatasetListResponse,
+    type DatasetDeleteResponse as DatasetDeleteResponse,
+    type DatasetGetResponse as DatasetGetResponse,
+    DatasetListResponsesV4PagePaginationArray as DatasetListResponsesV4PagePaginationArray,
+    type DatasetCreateParams as DatasetCreateParams,
+    type DatasetUpdateParams as DatasetUpdateParams,
+    type DatasetListParams as DatasetListParams,
+    type DatasetDeleteParams as DatasetDeleteParams,
+    type DatasetGetParams as DatasetGetParams,
+  };
+
+  export {
+    Evaluations as Evaluations,
+    type EvaluationCreateResponse as EvaluationCreateResponse,
+    type EvaluationListResponse as EvaluationListResponse,
+    type EvaluationDeleteResponse as EvaluationDeleteResponse,
+    type EvaluationGetResponse as EvaluationGetResponse,
+    EvaluationListResponsesV4PagePaginationArray as EvaluationListResponsesV4PagePaginationArray,
+    type EvaluationCreateParams as EvaluationCreateParams,
+    type EvaluationListParams as EvaluationListParams,
+    type EvaluationDeleteParams as EvaluationDeleteParams,
+    type EvaluationGetParams as EvaluationGetParams,
+  };
 }

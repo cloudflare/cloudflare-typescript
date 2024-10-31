@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DOHAPI from './doh';
 
 export class DOH extends APIResource {
   /**
@@ -135,9 +134,11 @@ export interface DOHGetParams {
   account_id: string;
 }
 
-export namespace DOH {
-  export import DOHUpdateResponse = DOHAPI.DOHUpdateResponse;
-  export import DOHGetResponse = DOHAPI.DOHGetResponse;
-  export import DOHUpdateParams = DOHAPI.DOHUpdateParams;
-  export import DOHGetParams = DOHAPI.DOHGetParams;
+export declare namespace DOH {
+  export {
+    type DOHUpdateResponse as DOHUpdateResponse,
+    type DOHGetResponse as DOHGetResponse,
+    type DOHUpdateParams as DOHUpdateParams,
+    type DOHGetParams as DOHGetParams,
+  };
 }

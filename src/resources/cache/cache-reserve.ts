@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as CacheReserveAPI from './cache-reserve';
 
 export class CacheReserveResource extends APIResource {
   /**
@@ -252,16 +251,18 @@ export interface CacheReserveStatusParams {
   zone_id: string;
 }
 
-export namespace CacheReserveResource {
-  export import CacheReserve = CacheReserveAPI.CacheReserve;
-  export import CacheReserveClear = CacheReserveAPI.CacheReserveClear;
-  export import State = CacheReserveAPI.State;
-  export import CacheReserveClearResponse = CacheReserveAPI.CacheReserveClearResponse;
-  export import CacheReserveEditResponse = CacheReserveAPI.CacheReserveEditResponse;
-  export import CacheReserveGetResponse = CacheReserveAPI.CacheReserveGetResponse;
-  export import CacheReserveStatusResponse = CacheReserveAPI.CacheReserveStatusResponse;
-  export import CacheReserveClearParams = CacheReserveAPI.CacheReserveClearParams;
-  export import CacheReserveEditParams = CacheReserveAPI.CacheReserveEditParams;
-  export import CacheReserveGetParams = CacheReserveAPI.CacheReserveGetParams;
-  export import CacheReserveStatusParams = CacheReserveAPI.CacheReserveStatusParams;
+export declare namespace CacheReserveResource {
+  export {
+    type CacheReserve as CacheReserve,
+    type CacheReserveClear as CacheReserveClear,
+    type State as State,
+    type CacheReserveClearResponse as CacheReserveClearResponse,
+    type CacheReserveEditResponse as CacheReserveEditResponse,
+    type CacheReserveGetResponse as CacheReserveGetResponse,
+    type CacheReserveStatusResponse as CacheReserveStatusResponse,
+    type CacheReserveClearParams as CacheReserveClearParams,
+    type CacheReserveEditParams as CacheReserveEditParams,
+    type CacheReserveGetParams as CacheReserveGetParams,
+    type CacheReserveStatusParams as CacheReserveStatusParams,
+  };
 }

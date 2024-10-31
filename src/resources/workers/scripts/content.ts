@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ContentAPI from './content';
 import * as WorkersAPI from '../workers';
 import * as ScriptsAPI from './scripts';
 import { type Response } from '../../../_shims/index';
@@ -99,7 +98,6 @@ export interface ContentGetParams {
   account_id: string;
 }
 
-export namespace Content {
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
+export declare namespace Content {
+  export { type ContentUpdateParams as ContentUpdateParams, type ContentGetParams as ContentGetParams };
 }

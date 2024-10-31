@@ -3,7 +3,26 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as ConsumersAPI from './consumers';
+import {
+  Consumer,
+  ConsumerCreateParams,
+  ConsumerCreateResponse,
+  ConsumerDeleteParams,
+  ConsumerDeleteResponse,
+  ConsumerGetParams,
+  ConsumerGetResponse,
+  ConsumerUpdateParams,
+  ConsumerUpdateResponse,
+  Consumers,
+} from './consumers';
 import * as MessagesAPI from './messages';
+import {
+  MessageAckParams,
+  MessageAckResponse,
+  MessagePullParams,
+  MessagePullResponse,
+  Messages,
+} from './messages';
 import { SinglePage } from '../../pagination';
 
 export class Queues extends APIResource {
@@ -171,20 +190,28 @@ export interface QueueGetParams {
   account_id: string;
 }
 
-export namespace Queues {
-  export import Consumers = ConsumersAPI.Consumers;
-  export import Consumer = ConsumersAPI.Consumer;
-  export import ConsumerCreateResponse = ConsumersAPI.ConsumerCreateResponse;
-  export import ConsumerUpdateResponse = ConsumersAPI.ConsumerUpdateResponse;
-  export import ConsumerDeleteResponse = ConsumersAPI.ConsumerDeleteResponse;
-  export import ConsumerGetResponse = ConsumersAPI.ConsumerGetResponse;
-  export import ConsumerCreateParams = ConsumersAPI.ConsumerCreateParams;
-  export import ConsumerUpdateParams = ConsumersAPI.ConsumerUpdateParams;
-  export import ConsumerDeleteParams = ConsumersAPI.ConsumerDeleteParams;
-  export import ConsumerGetParams = ConsumersAPI.ConsumerGetParams;
-  export import Messages = MessagesAPI.Messages;
-  export import MessageAckResponse = MessagesAPI.MessageAckResponse;
-  export import MessagePullResponse = MessagesAPI.MessagePullResponse;
-  export import MessageAckParams = MessagesAPI.MessageAckParams;
-  export import MessagePullParams = MessagesAPI.MessagePullParams;
+Queues.Consumers = Consumers;
+Queues.Messages = Messages;
+
+export declare namespace Queues {
+  export {
+    Consumers as Consumers,
+    type Consumer as Consumer,
+    type ConsumerCreateResponse as ConsumerCreateResponse,
+    type ConsumerUpdateResponse as ConsumerUpdateResponse,
+    type ConsumerDeleteResponse as ConsumerDeleteResponse,
+    type ConsumerGetResponse as ConsumerGetResponse,
+    type ConsumerCreateParams as ConsumerCreateParams,
+    type ConsumerUpdateParams as ConsumerUpdateParams,
+    type ConsumerDeleteParams as ConsumerDeleteParams,
+    type ConsumerGetParams as ConsumerGetParams,
+  };
+
+  export {
+    Messages as Messages,
+    type MessageAckResponse as MessageAckResponse,
+    type MessagePullResponse as MessagePullResponse,
+    type MessageAckParams as MessageAckParams,
+    type MessagePullParams as MessagePullParams,
+  };
 }

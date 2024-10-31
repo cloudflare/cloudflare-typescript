@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as ReportsBytimesAPI from './bytimes';
 import * as BytimesAPI from '../../../analytics/reports/bytimes';
 import * as AnalyticsAPI from '../analytics';
 
@@ -77,6 +76,6 @@ export interface BytimeGetParams {
   until?: string;
 }
 
-export namespace Bytimes {
-  export import BytimeGetParams = ReportsBytimesAPI.BytimeGetParams;
+export declare namespace Bytimes {
+  export { type BytimeGetParams as BytimeGetParams };
 }

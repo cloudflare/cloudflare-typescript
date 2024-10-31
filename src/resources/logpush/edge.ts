@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as EdgeAPI from './edge';
 
 export class Edge extends APIResource {
   /**
@@ -90,9 +89,11 @@ export interface EdgeGetParams {
   zone_id: string;
 }
 
-export namespace Edge {
-  export import InstantLogpushJob = EdgeAPI.InstantLogpushJob;
-  export import EdgeGetResponse = EdgeAPI.EdgeGetResponse;
-  export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
-  export import EdgeGetParams = EdgeAPI.EdgeGetParams;
+export declare namespace Edge {
+  export {
+    type InstantLogpushJob as InstantLogpushJob,
+    type EdgeGetResponse as EdgeGetResponse,
+    type EdgeCreateParams as EdgeCreateParams,
+    type EdgeGetParams as EdgeGetParams,
+  };
 }

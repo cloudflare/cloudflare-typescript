@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as LocationsAPI from './locations';
 
 export class Locations extends APIResource {
   /**
@@ -72,7 +71,6 @@ export interface LocationGetParams {
   status?: 'VERIFIED' | 'UNVERIFIED';
 }
 
-export namespace Locations {
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+export declare namespace Locations {
+  export { type LocationGetResponse as LocationGetResponse, type LocationGetParams as LocationGetParams };
 }

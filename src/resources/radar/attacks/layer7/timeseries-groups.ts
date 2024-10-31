@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -1322,21 +1321,23 @@ export interface TimeseriesGroupVerticalParams {
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupGetResponse = TimeseriesGroupsAPI.TimeseriesGroupGetResponse;
-  export import TimeseriesGroupHTTPMethodResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodResponse;
-  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
-  export import TimeseriesGroupIndustryResponse = TimeseriesGroupsAPI.TimeseriesGroupIndustryResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupManagedRulesResponse = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesResponse;
-  export import TimeseriesGroupMitigationProductResponse = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductResponse;
-  export import TimeseriesGroupVerticalResponse = TimeseriesGroupsAPI.TimeseriesGroupVerticalResponse;
-  export import TimeseriesGroupGetParams = TimeseriesGroupsAPI.TimeseriesGroupGetParams;
-  export import TimeseriesGroupHTTPMethodParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPMethodParams;
-  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
-  export import TimeseriesGroupIndustryParams = TimeseriesGroupsAPI.TimeseriesGroupIndustryParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupManagedRulesParams = TimeseriesGroupsAPI.TimeseriesGroupManagedRulesParams;
-  export import TimeseriesGroupMitigationProductParams = TimeseriesGroupsAPI.TimeseriesGroupMitigationProductParams;
-  export import TimeseriesGroupVerticalParams = TimeseriesGroupsAPI.TimeseriesGroupVerticalParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupGetResponse as TimeseriesGroupGetResponse,
+    type TimeseriesGroupHTTPMethodResponse as TimeseriesGroupHTTPMethodResponse,
+    type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
+    type TimeseriesGroupIndustryResponse as TimeseriesGroupIndustryResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupManagedRulesResponse as TimeseriesGroupManagedRulesResponse,
+    type TimeseriesGroupMitigationProductResponse as TimeseriesGroupMitigationProductResponse,
+    type TimeseriesGroupVerticalResponse as TimeseriesGroupVerticalResponse,
+    type TimeseriesGroupGetParams as TimeseriesGroupGetParams,
+    type TimeseriesGroupHTTPMethodParams as TimeseriesGroupHTTPMethodParams,
+    type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
+    type TimeseriesGroupIndustryParams as TimeseriesGroupIndustryParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupManagedRulesParams as TimeseriesGroupManagedRulesParams,
+    type TimeseriesGroupMitigationProductParams as TimeseriesGroupMitigationProductParams,
+    type TimeseriesGroupVerticalParams as TimeseriesGroupVerticalParams,
+  };
 }

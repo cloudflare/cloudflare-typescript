@@ -2,8 +2,18 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PostureAPI from './posture';
 import * as IntegrationsAPI from './integrations';
+import {
+  Integration,
+  IntegrationCreateParams,
+  IntegrationDeleteParams,
+  IntegrationDeleteResponse,
+  IntegrationEditParams,
+  IntegrationGetParams,
+  IntegrationListParams,
+  Integrations,
+  IntegrationsSinglePage,
+} from './integrations';
 import { SinglePage } from '../../../../pagination';
 
 export class Posture extends APIResource {
@@ -1195,39 +1205,48 @@ export interface PostureGetParams {
   account_id: string;
 }
 
-export namespace Posture {
-  export import CarbonblackInput = PostureAPI.CarbonblackInput;
-  export import ClientCertificateInput = PostureAPI.ClientCertificateInput;
-  export import CrowdstrikeInput = PostureAPI.CrowdstrikeInput;
-  export import DeviceInput = PostureAPI.DeviceInput;
-  export import DeviceMatch = PostureAPI.DeviceMatch;
-  export import DevicePostureRule = PostureAPI.DevicePostureRule;
-  export import DiskEncryptionInput = PostureAPI.DiskEncryptionInput;
-  export import DomainJoinedInput = PostureAPI.DomainJoinedInput;
-  export import FileInput = PostureAPI.FileInput;
-  export import FirewallInput = PostureAPI.FirewallInput;
-  export import IntuneInput = PostureAPI.IntuneInput;
-  export import KolideInput = PostureAPI.KolideInput;
-  export import OSVersionInput = PostureAPI.OSVersionInput;
-  export import SentineloneInput = PostureAPI.SentineloneInput;
-  export import SentineloneS2sInput = PostureAPI.SentineloneS2sInput;
-  export import TaniumInput = PostureAPI.TaniumInput;
-  export import UniqueClientIDInput = PostureAPI.UniqueClientIDInput;
-  export import WorkspaceOneInput = PostureAPI.WorkspaceOneInput;
-  export import PostureDeleteResponse = PostureAPI.PostureDeleteResponse;
-  export import DevicePostureRulesSinglePage = PostureAPI.DevicePostureRulesSinglePage;
-  export import PostureCreateParams = PostureAPI.PostureCreateParams;
-  export import PostureUpdateParams = PostureAPI.PostureUpdateParams;
-  export import PostureListParams = PostureAPI.PostureListParams;
-  export import PostureDeleteParams = PostureAPI.PostureDeleteParams;
-  export import PostureGetParams = PostureAPI.PostureGetParams;
-  export import Integrations = IntegrationsAPI.Integrations;
-  export import Integration = IntegrationsAPI.Integration;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+Posture.DevicePostureRulesSinglePage = DevicePostureRulesSinglePage;
+Posture.Integrations = Integrations;
+Posture.IntegrationsSinglePage = IntegrationsSinglePage;
+
+export declare namespace Posture {
+  export {
+    type CarbonblackInput as CarbonblackInput,
+    type ClientCertificateInput as ClientCertificateInput,
+    type CrowdstrikeInput as CrowdstrikeInput,
+    type DeviceInput as DeviceInput,
+    type DeviceMatch as DeviceMatch,
+    type DevicePostureRule as DevicePostureRule,
+    type DiskEncryptionInput as DiskEncryptionInput,
+    type DomainJoinedInput as DomainJoinedInput,
+    type FileInput as FileInput,
+    type FirewallInput as FirewallInput,
+    type IntuneInput as IntuneInput,
+    type KolideInput as KolideInput,
+    type OSVersionInput as OSVersionInput,
+    type SentineloneInput as SentineloneInput,
+    type SentineloneS2sInput as SentineloneS2sInput,
+    type TaniumInput as TaniumInput,
+    type UniqueClientIDInput as UniqueClientIDInput,
+    type WorkspaceOneInput as WorkspaceOneInput,
+    type PostureDeleteResponse as PostureDeleteResponse,
+    DevicePostureRulesSinglePage as DevicePostureRulesSinglePage,
+    type PostureCreateParams as PostureCreateParams,
+    type PostureUpdateParams as PostureUpdateParams,
+    type PostureListParams as PostureListParams,
+    type PostureDeleteParams as PostureDeleteParams,
+    type PostureGetParams as PostureGetParams,
+  };
+
+  export {
+    Integrations as Integrations,
+    type Integration as Integration,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    IntegrationsSinglePage as IntegrationsSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationEditParams as IntegrationEditParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
 }

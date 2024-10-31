@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
-import * as SpamAPI from './spam';
 
 export class Spam extends APIResource {
   /**
@@ -156,7 +155,6 @@ export interface SpamGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export namespace Spam {
-  export import SpamGetResponse = SpamAPI.SpamGetResponse;
-  export import SpamGetParams = SpamAPI.SpamGetParams;
+export declare namespace Spam {
+  export { type SpamGetResponse as SpamGetResponse, type SpamGetParams as SpamGetParams };
 }

@@ -2,17 +2,17 @@
 
 export { Analytics } from './analytics/index';
 export {
-  AppCreateResponse,
-  AppUpdateResponse,
-  AppListResponse,
-  AppDeleteResponse,
-  AppGetResponse,
-  AppCreateParams,
-  AppUpdateParams,
-  AppListParams,
-  AppDeleteParams,
-  AppGetParams,
   AppListResponsesV4PagePaginationArray,
   Apps,
+  type AppCreateResponse,
+  type AppUpdateResponse,
+  type AppListResponse,
+  type AppDeleteResponse,
+  type AppGetResponse,
+  type AppCreateParams,
+  type AppUpdateParams,
+  type AppListParams,
+  type AppDeleteParams,
+  type AppGetParams,
 } from './apps';
 export { Spectrum } from './spectrum';

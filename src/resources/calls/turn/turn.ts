@@ -2,22 +2,41 @@
 
 import { APIResource } from '../../../resource';
 import * as KeysAPI from './keys';
+import {
+  KeyCreateParams,
+  KeyCreateResponse,
+  KeyDeleteParams,
+  KeyDeleteResponse,
+  KeyGetParams,
+  KeyGetResponse,
+  KeyListParams,
+  KeyListResponse,
+  KeyListResponsesSinglePage,
+  KeyUpdateParams,
+  KeyUpdateResponse,
+  Keys,
+} from './keys';
 
 export class TURN extends APIResource {
   keys: KeysAPI.Keys = new KeysAPI.Keys(this._client);
 }
 
-export namespace TURN {
-  export import Keys = KeysAPI.Keys;
-  export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyListResponsesSinglePage = KeysAPI.KeyListResponsesSinglePage;
-  export import KeyCreateParams = KeysAPI.KeyCreateParams;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyListParams = KeysAPI.KeyListParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
+TURN.Keys = Keys;
+TURN.KeyListResponsesSinglePage = KeyListResponsesSinglePage;
+
+export declare namespace TURN {
+  export {
+    Keys as Keys,
+    type KeyCreateResponse as KeyCreateResponse,
+    type KeyUpdateResponse as KeyUpdateResponse,
+    type KeyListResponse as KeyListResponse,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyGetResponse as KeyGetResponse,
+    KeyListResponsesSinglePage as KeyListResponsesSinglePage,
+    type KeyCreateParams as KeyCreateParams,
+    type KeyUpdateParams as KeyUpdateParams,
+    type KeyListParams as KeyListParams,
+    type KeyDeleteParams as KeyDeleteParams,
+    type KeyGetParams as KeyGetParams,
+  };
 }

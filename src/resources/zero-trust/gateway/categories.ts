@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CategoriesAPI from './categories';
 import { SinglePage } from '../../../pagination';
 
 export class Categories extends APIResource {
@@ -98,8 +97,12 @@ export interface CategoryListParams {
   account_id: string;
 }
 
-export namespace Categories {
-  export import Category = CategoriesAPI.Category;
-  export import CategoriesSinglePage = CategoriesAPI.CategoriesSinglePage;
-  export import CategoryListParams = CategoriesAPI.CategoryListParams;
+Categories.CategoriesSinglePage = CategoriesSinglePage;
+
+export declare namespace Categories {
+  export {
+    type Category as Category,
+    CategoriesSinglePage as CategoriesSinglePage,
+    type CategoryListParams as CategoryListParams,
+  };
 }

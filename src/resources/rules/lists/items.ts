@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ItemsAPI from './items';
 import * as ListsAPI from './lists';
 import { CursorPagination, type CursorPaginationParams } from '../../../pagination';
 
@@ -259,17 +258,21 @@ export interface ItemDeleteParams {
   account_id: string;
 }
 
-export namespace Items {
-  export import ListCursor = ItemsAPI.ListCursor;
-  export import ListItem = ItemsAPI.ListItem;
-  export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
-  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
-  export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
-  export import ItemGetResponse = ItemsAPI.ItemGetResponse;
-  export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
-  export import ItemCreateParams = ItemsAPI.ItemCreateParams;
-  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
-  export import ItemListParams = ItemsAPI.ItemListParams;
-  export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
+Items.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
+
+export declare namespace Items {
+  export {
+    type ListCursor as ListCursor,
+    type ListItem as ListItem,
+    type ItemCreateResponse as ItemCreateResponse,
+    type ItemUpdateResponse as ItemUpdateResponse,
+    type ItemListResponse as ItemListResponse,
+    type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemGetResponse as ItemGetResponse,
+    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    type ItemCreateParams as ItemCreateParams,
+    type ItemUpdateParams as ItemUpdateParams,
+    type ItemListParams as ItemListParams,
+    type ItemDeleteParams as ItemDeleteParams,
+  };
 }

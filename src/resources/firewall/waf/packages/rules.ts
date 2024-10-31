@@ -457,14 +457,18 @@ export interface RuleGetParams {
   zone_id: string;
 }
 
-export namespace Rules {
-  export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export import WAFRuleGroup = RulesAPI.WAFRuleGroup;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+Rules.RuleListResponsesV4PagePaginationArray = RuleListResponsesV4PagePaginationArray;
+
+export declare namespace Rules {
+  export {
+    type AllowedModesAnomaly as AllowedModesAnomaly,
+    type WAFRuleGroup as WAFRuleGroup,
+    type RuleListResponse as RuleListResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    RuleListResponsesV4PagePaginationArray as RuleListResponsesV4PagePaginationArray,
+    type RuleListParams as RuleListParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
 }

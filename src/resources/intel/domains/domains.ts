@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DomainsAPI from './domains';
 import * as BulksAPI from './bulks';
+import { BulkGetParams, BulkGetResponse, Bulks } from './bulks';
 
 export class Domains extends APIResource {
   bulks: BulksAPI.Bulks = new BulksAPI.Bulks(this._client);
@@ -148,10 +148,10 @@ export interface DomainGetParams {
   domain?: string;
 }
 
-export namespace Domains {
-  export import Domain = DomainsAPI.Domain;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
-  export import Bulks = BulksAPI.Bulks;
-  export import BulkGetResponse = BulksAPI.BulkGetResponse;
-  export import BulkGetParams = BulksAPI.BulkGetParams;
+Domains.Bulks = Bulks;
+
+export declare namespace Domains {
+  export { type Domain as Domain, type DomainGetParams as DomainGetParams };
+
+  export { Bulks as Bulks, type BulkGetResponse as BulkGetResponse, type BulkGetParams as BulkGetParams };
 }

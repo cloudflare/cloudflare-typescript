@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AppsAPI from './apps';
 import * as Shared from '../shared';
 import * as SpectrumAPI from './spectrum';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -882,16 +881,20 @@ export interface AppGetParams {
   zone_id: string;
 }
 
-export namespace Apps {
-  export import AppCreateResponse = AppsAPI.AppCreateResponse;
-  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
-  export import AppListResponse = AppsAPI.AppListResponse;
-  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
-  export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
-  export import AppCreateParams = AppsAPI.AppCreateParams;
-  export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import AppListParams = AppsAPI.AppListParams;
-  export import AppDeleteParams = AppsAPI.AppDeleteParams;
-  export import AppGetParams = AppsAPI.AppGetParams;
+Apps.AppListResponsesV4PagePaginationArray = AppListResponsesV4PagePaginationArray;
+
+export declare namespace Apps {
+  export {
+    type AppCreateResponse as AppCreateResponse,
+    type AppUpdateResponse as AppUpdateResponse,
+    type AppListResponse as AppListResponse,
+    type AppDeleteResponse as AppDeleteResponse,
+    type AppGetResponse as AppGetResponse,
+    AppListResponsesV4PagePaginationArray as AppListResponsesV4PagePaginationArray,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppDeleteParams as AppDeleteParams,
+    type AppGetParams as AppGetParams,
+  };
 }

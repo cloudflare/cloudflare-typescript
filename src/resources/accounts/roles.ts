@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RolesAPI from './roles';
 import * as Shared from '../shared';
 import { RolesSinglePage } from '../shared';
 
@@ -51,10 +50,12 @@ export interface RoleGetParams {
   account_id: string;
 }
 
-export namespace Roles {
-  export import RoleGetResponse = RolesAPI.RoleGetResponse;
-  export import RoleListParams = RolesAPI.RoleListParams;
-  export import RoleGetParams = RolesAPI.RoleGetParams;
+export declare namespace Roles {
+  export {
+    type RoleGetResponse as RoleGetResponse,
+    type RoleListParams as RoleListParams,
+    type RoleGetParams as RoleGetParams,
+  };
 }
 
 export { RolesSinglePage };

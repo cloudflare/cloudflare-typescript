@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as EvaluationsAPI from './evaluations';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Evaluations extends APIResource {
@@ -474,14 +473,18 @@ export interface EvaluationGetParams {
   account_id: string;
 }
 
-export namespace Evaluations {
-  export import EvaluationCreateResponse = EvaluationsAPI.EvaluationCreateResponse;
-  export import EvaluationListResponse = EvaluationsAPI.EvaluationListResponse;
-  export import EvaluationDeleteResponse = EvaluationsAPI.EvaluationDeleteResponse;
-  export import EvaluationGetResponse = EvaluationsAPI.EvaluationGetResponse;
-  export import EvaluationListResponsesV4PagePaginationArray = EvaluationsAPI.EvaluationListResponsesV4PagePaginationArray;
-  export import EvaluationCreateParams = EvaluationsAPI.EvaluationCreateParams;
-  export import EvaluationListParams = EvaluationsAPI.EvaluationListParams;
-  export import EvaluationDeleteParams = EvaluationsAPI.EvaluationDeleteParams;
-  export import EvaluationGetParams = EvaluationsAPI.EvaluationGetParams;
+Evaluations.EvaluationListResponsesV4PagePaginationArray = EvaluationListResponsesV4PagePaginationArray;
+
+export declare namespace Evaluations {
+  export {
+    type EvaluationCreateResponse as EvaluationCreateResponse,
+    type EvaluationListResponse as EvaluationListResponse,
+    type EvaluationDeleteResponse as EvaluationDeleteResponse,
+    type EvaluationGetResponse as EvaluationGetResponse,
+    EvaluationListResponsesV4PagePaginationArray as EvaluationListResponsesV4PagePaginationArray,
+    type EvaluationCreateParams as EvaluationCreateParams,
+    type EvaluationListParams as EvaluationListParams,
+    type EvaluationDeleteParams as EvaluationDeleteParams,
+    type EvaluationGetParams as EvaluationGetParams,
+  };
 }

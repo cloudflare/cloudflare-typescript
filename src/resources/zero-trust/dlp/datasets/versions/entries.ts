@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as EntriesAPI from './entries';
 
 export class Entries extends APIResource {
   /**
@@ -53,7 +52,6 @@ export interface EntryCreateParams {
   body: string;
 }
 
-export namespace Entries {
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
+export declare namespace Entries {
+  export { type EntryCreateResponse as EntryCreateResponse, type EntryCreateParams as EntryCreateParams };
 }

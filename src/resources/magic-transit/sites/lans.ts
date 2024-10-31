@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LANsAPI from './lans';
 import { SinglePage } from '../../../pagination';
 
 export class LANs extends APIResource {
@@ -454,19 +453,23 @@ export interface LANGetParams {
   account_id: string;
 }
 
-export namespace LANs {
-  export import DHCPRelay = LANsAPI.DHCPRelay;
-  export import DHCPServer = LANsAPI.DHCPServer;
-  export import LAN = LANsAPI.LAN;
-  export import LANStaticAddressing = LANsAPI.LANStaticAddressing;
-  export import Nat = LANsAPI.Nat;
-  export import RoutedSubnet = LANsAPI.RoutedSubnet;
-  export import LANCreateResponse = LANsAPI.LANCreateResponse;
-  export import LANsSinglePage = LANsAPI.LANsSinglePage;
-  export import LANCreateParams = LANsAPI.LANCreateParams;
-  export import LANUpdateParams = LANsAPI.LANUpdateParams;
-  export import LANListParams = LANsAPI.LANListParams;
-  export import LANDeleteParams = LANsAPI.LANDeleteParams;
-  export import LANEditParams = LANsAPI.LANEditParams;
-  export import LANGetParams = LANsAPI.LANGetParams;
+LANs.LANsSinglePage = LANsSinglePage;
+
+export declare namespace LANs {
+  export {
+    type DHCPRelay as DHCPRelay,
+    type DHCPServer as DHCPServer,
+    type LAN as LAN,
+    type LANStaticAddressing as LANStaticAddressing,
+    type Nat as Nat,
+    type RoutedSubnet as RoutedSubnet,
+    type LANCreateResponse as LANCreateResponse,
+    LANsSinglePage as LANsSinglePage,
+    type LANCreateParams as LANCreateParams,
+    type LANUpdateParams as LANUpdateParams,
+    type LANListParams as LANListParams,
+    type LANDeleteParams as LANDeleteParams,
+    type LANEditParams as LANEditParams,
+    type LANGetParams as LANGetParams,
+  };
 }

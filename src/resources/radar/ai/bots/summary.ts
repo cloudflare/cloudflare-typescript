@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -136,7 +135,9 @@ export interface SummaryUserAgentParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryUserAgentResponse = SummaryAPI.SummaryUserAgentResponse;
-  export import SummaryUserAgentParams = SummaryAPI.SummaryUserAgentParams;
+export declare namespace Summary {
+  export {
+    type SummaryUserAgentResponse as SummaryUserAgentResponse,
+    type SummaryUserAgentParams as SummaryUserAgentParams,
+  };
 }

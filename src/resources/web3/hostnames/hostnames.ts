@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as HostnamesAPI from './hostnames';
 import * as IPFSUniversalPathsAPI from './ipfs-universal-paths/ipfs-universal-paths';
+import { IPFSUniversalPaths } from './ipfs-universal-paths/ipfs-universal-paths';
 import { SinglePage } from '../../../pagination';
 
 export class Hostnames extends APIResource {
@@ -194,14 +194,20 @@ export interface HostnameGetParams {
   zone_id: string;
 }
 
-export namespace Hostnames {
-  export import Hostname = HostnamesAPI.Hostname;
-  export import HostnameDeleteResponse = HostnamesAPI.HostnameDeleteResponse;
-  export import HostnamesSinglePage = HostnamesAPI.HostnamesSinglePage;
-  export import HostnameCreateParams = HostnamesAPI.HostnameCreateParams;
-  export import HostnameListParams = HostnamesAPI.HostnameListParams;
-  export import HostnameDeleteParams = HostnamesAPI.HostnameDeleteParams;
-  export import HostnameEditParams = HostnamesAPI.HostnameEditParams;
-  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
-  export import IPFSUniversalPaths = IPFSUniversalPathsAPI.IPFSUniversalPaths;
+Hostnames.HostnamesSinglePage = HostnamesSinglePage;
+Hostnames.IPFSUniversalPaths = IPFSUniversalPaths;
+
+export declare namespace Hostnames {
+  export {
+    type Hostname as Hostname,
+    type HostnameDeleteResponse as HostnameDeleteResponse,
+    HostnamesSinglePage as HostnamesSinglePage,
+    type HostnameCreateParams as HostnameCreateParams,
+    type HostnameListParams as HostnameListParams,
+    type HostnameDeleteParams as HostnameDeleteParams,
+    type HostnameEditParams as HostnameEditParams,
+    type HostnameGetParams as HostnameGetParams,
+  };
+
+  export { IPFSUniversalPaths as IPFSUniversalPaths };
 }

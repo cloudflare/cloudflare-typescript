@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as InstancesAPI from './instances';
 import * as StatusAPI from './status';
+import { Status, StatusEditParams, StatusEditResponse } from './status';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Instances extends APIResource {
@@ -292,15 +292,23 @@ export interface InstanceGetParams {
   account_id: string;
 }
 
-export namespace Instances {
-  export import InstanceCreateResponse = InstancesAPI.InstanceCreateResponse;
-  export import InstanceListResponse = InstancesAPI.InstanceListResponse;
-  export import InstanceGetResponse = InstancesAPI.InstanceGetResponse;
-  export import InstanceListResponsesV4PagePaginationArray = InstancesAPI.InstanceListResponsesV4PagePaginationArray;
-  export import InstanceCreateParams = InstancesAPI.InstanceCreateParams;
-  export import InstanceListParams = InstancesAPI.InstanceListParams;
-  export import InstanceGetParams = InstancesAPI.InstanceGetParams;
-  export import Status = StatusAPI.Status;
-  export import StatusEditResponse = StatusAPI.StatusEditResponse;
-  export import StatusEditParams = StatusAPI.StatusEditParams;
+Instances.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
+Instances.Status = Status;
+
+export declare namespace Instances {
+  export {
+    type InstanceCreateResponse as InstanceCreateResponse,
+    type InstanceListResponse as InstanceListResponse,
+    type InstanceGetResponse as InstanceGetResponse,
+    InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
+    type InstanceCreateParams as InstanceCreateParams,
+    type InstanceListParams as InstanceListParams,
+    type InstanceGetParams as InstanceGetParams,
+  };
+
+  export {
+    Status as Status,
+    type StatusEditResponse as StatusEditResponse,
+    type StatusEditParams as StatusEditParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as LockdownsAPI from './lockdowns';
 import * as OverridesAPI from './waf/overrides';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -314,17 +313,21 @@ export interface LockdownGetParams {
   zone_id: string;
 }
 
-export namespace Lockdowns {
-  export import Configuration = LockdownsAPI.Configuration;
-  export import Lockdown = LockdownsAPI.Lockdown;
-  export import LockdownCIDRConfiguration = LockdownsAPI.LockdownCIDRConfiguration;
-  export import LockdownIPConfiguration = LockdownsAPI.LockdownIPConfiguration;
-  export import LockdownURL = LockdownsAPI.LockdownURL;
-  export import LockdownDeleteResponse = LockdownsAPI.LockdownDeleteResponse;
-  export import LockdownsV4PagePaginationArray = LockdownsAPI.LockdownsV4PagePaginationArray;
-  export import LockdownCreateParams = LockdownsAPI.LockdownCreateParams;
-  export import LockdownUpdateParams = LockdownsAPI.LockdownUpdateParams;
-  export import LockdownListParams = LockdownsAPI.LockdownListParams;
-  export import LockdownDeleteParams = LockdownsAPI.LockdownDeleteParams;
-  export import LockdownGetParams = LockdownsAPI.LockdownGetParams;
+Lockdowns.LockdownsV4PagePaginationArray = LockdownsV4PagePaginationArray;
+
+export declare namespace Lockdowns {
+  export {
+    type Configuration as Configuration,
+    type Lockdown as Lockdown,
+    type LockdownCIDRConfiguration as LockdownCIDRConfiguration,
+    type LockdownIPConfiguration as LockdownIPConfiguration,
+    type LockdownURL as LockdownURL,
+    type LockdownDeleteResponse as LockdownDeleteResponse,
+    LockdownsV4PagePaginationArray as LockdownsV4PagePaginationArray,
+    type LockdownCreateParams as LockdownCreateParams,
+    type LockdownUpdateParams as LockdownUpdateParams,
+    type LockdownListParams as LockdownListParams,
+    type LockdownDeleteParams as LockdownDeleteParams,
+    type LockdownGetParams as LockdownGetParams,
+  };
 }

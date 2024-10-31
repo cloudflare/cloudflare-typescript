@@ -2,10 +2,76 @@
 
 import { APIResource } from '../../../resource';
 import * as AllowPatternsAPI from './allow-patterns';
+import {
+  AllowPatternCreateParams,
+  AllowPatternCreateResponse,
+  AllowPatternDeleteParams,
+  AllowPatternDeleteResponse,
+  AllowPatternEditParams,
+  AllowPatternEditResponse,
+  AllowPatternGetParams,
+  AllowPatternGetResponse,
+  AllowPatternListParams,
+  AllowPatternListResponse,
+  AllowPatternListResponsesV4PagePaginationArray,
+  AllowPatterns,
+} from './allow-patterns';
 import * as BlockSendersAPI from './block-senders';
+import {
+  BlockSenderCreateParams,
+  BlockSenderCreateResponse,
+  BlockSenderDeleteParams,
+  BlockSenderDeleteResponse,
+  BlockSenderEditParams,
+  BlockSenderEditResponse,
+  BlockSenderGetParams,
+  BlockSenderGetResponse,
+  BlockSenderListParams,
+  BlockSenderListResponse,
+  BlockSenderListResponsesV4PagePaginationArray,
+  BlockSenders,
+} from './block-senders';
 import * as DomainsAPI from './domains';
+import {
+  DomainDeleteParams,
+  DomainDeleteResponse,
+  DomainEditParams,
+  DomainEditResponse,
+  DomainListParams,
+  DomainListResponse,
+  DomainListResponsesV4PagePaginationArray,
+  Domains,
+} from './domains';
 import * as ImpersonationRegistryAPI from './impersonation-registry';
+import {
+  ImpersonationRegistry,
+  ImpersonationRegistryCreateParams,
+  ImpersonationRegistryCreateResponse,
+  ImpersonationRegistryDeleteParams,
+  ImpersonationRegistryDeleteResponse,
+  ImpersonationRegistryEditParams,
+  ImpersonationRegistryEditResponse,
+  ImpersonationRegistryGetParams,
+  ImpersonationRegistryGetResponse,
+  ImpersonationRegistryListParams,
+  ImpersonationRegistryListResponse,
+  ImpersonationRegistryListResponsesV4PagePaginationArray,
+} from './impersonation-registry';
 import * as TrustedDomainsAPI from './trusted-domains';
+import {
+  TrustedDomainCreateParams,
+  TrustedDomainCreateResponse,
+  TrustedDomainDeleteParams,
+  TrustedDomainDeleteResponse,
+  TrustedDomainEditParams,
+  TrustedDomainEditResponse,
+  TrustedDomainGetParams,
+  TrustedDomainGetResponse,
+  TrustedDomainListParams,
+  TrustedDomainListResponse,
+  TrustedDomainListResponsesV4PagePaginationArray,
+  TrustedDomains,
+} from './trusted-domains';
 
 export class Settings extends APIResource {
   allowPatterns: AllowPatternsAPI.AllowPatterns = new AllowPatternsAPI.AllowPatterns(this._client);
@@ -16,61 +82,87 @@ export class Settings extends APIResource {
   trustedDomains: TrustedDomainsAPI.TrustedDomains = new TrustedDomainsAPI.TrustedDomains(this._client);
 }
 
-export namespace Settings {
-  export import AllowPatterns = AllowPatternsAPI.AllowPatterns;
-  export import AllowPatternCreateResponse = AllowPatternsAPI.AllowPatternCreateResponse;
-  export import AllowPatternListResponse = AllowPatternsAPI.AllowPatternListResponse;
-  export import AllowPatternDeleteResponse = AllowPatternsAPI.AllowPatternDeleteResponse;
-  export import AllowPatternEditResponse = AllowPatternsAPI.AllowPatternEditResponse;
-  export import AllowPatternGetResponse = AllowPatternsAPI.AllowPatternGetResponse;
-  export import AllowPatternListResponsesV4PagePaginationArray = AllowPatternsAPI.AllowPatternListResponsesV4PagePaginationArray;
-  export import AllowPatternCreateParams = AllowPatternsAPI.AllowPatternCreateParams;
-  export import AllowPatternListParams = AllowPatternsAPI.AllowPatternListParams;
-  export import AllowPatternDeleteParams = AllowPatternsAPI.AllowPatternDeleteParams;
-  export import AllowPatternEditParams = AllowPatternsAPI.AllowPatternEditParams;
-  export import AllowPatternGetParams = AllowPatternsAPI.AllowPatternGetParams;
-  export import BlockSenders = BlockSendersAPI.BlockSenders;
-  export import BlockSenderCreateResponse = BlockSendersAPI.BlockSenderCreateResponse;
-  export import BlockSenderListResponse = BlockSendersAPI.BlockSenderListResponse;
-  export import BlockSenderDeleteResponse = BlockSendersAPI.BlockSenderDeleteResponse;
-  export import BlockSenderEditResponse = BlockSendersAPI.BlockSenderEditResponse;
-  export import BlockSenderGetResponse = BlockSendersAPI.BlockSenderGetResponse;
-  export import BlockSenderListResponsesV4PagePaginationArray = BlockSendersAPI.BlockSenderListResponsesV4PagePaginationArray;
-  export import BlockSenderCreateParams = BlockSendersAPI.BlockSenderCreateParams;
-  export import BlockSenderListParams = BlockSendersAPI.BlockSenderListParams;
-  export import BlockSenderDeleteParams = BlockSendersAPI.BlockSenderDeleteParams;
-  export import BlockSenderEditParams = BlockSendersAPI.BlockSenderEditParams;
-  export import BlockSenderGetParams = BlockSendersAPI.BlockSenderGetParams;
-  export import Domains = DomainsAPI.Domains;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainListResponsesV4PagePaginationArray = DomainsAPI.DomainListResponsesV4PagePaginationArray;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
-  export import ImpersonationRegistry = ImpersonationRegistryAPI.ImpersonationRegistry;
-  export import ImpersonationRegistryCreateResponse = ImpersonationRegistryAPI.ImpersonationRegistryCreateResponse;
-  export import ImpersonationRegistryListResponse = ImpersonationRegistryAPI.ImpersonationRegistryListResponse;
-  export import ImpersonationRegistryDeleteResponse = ImpersonationRegistryAPI.ImpersonationRegistryDeleteResponse;
-  export import ImpersonationRegistryEditResponse = ImpersonationRegistryAPI.ImpersonationRegistryEditResponse;
-  export import ImpersonationRegistryGetResponse = ImpersonationRegistryAPI.ImpersonationRegistryGetResponse;
-  export import ImpersonationRegistryListResponsesV4PagePaginationArray = ImpersonationRegistryAPI.ImpersonationRegistryListResponsesV4PagePaginationArray;
-  export import ImpersonationRegistryCreateParams = ImpersonationRegistryAPI.ImpersonationRegistryCreateParams;
-  export import ImpersonationRegistryListParams = ImpersonationRegistryAPI.ImpersonationRegistryListParams;
-  export import ImpersonationRegistryDeleteParams = ImpersonationRegistryAPI.ImpersonationRegistryDeleteParams;
-  export import ImpersonationRegistryEditParams = ImpersonationRegistryAPI.ImpersonationRegistryEditParams;
-  export import ImpersonationRegistryGetParams = ImpersonationRegistryAPI.ImpersonationRegistryGetParams;
-  export import TrustedDomains = TrustedDomainsAPI.TrustedDomains;
-  export import TrustedDomainCreateResponse = TrustedDomainsAPI.TrustedDomainCreateResponse;
-  export import TrustedDomainListResponse = TrustedDomainsAPI.TrustedDomainListResponse;
-  export import TrustedDomainDeleteResponse = TrustedDomainsAPI.TrustedDomainDeleteResponse;
-  export import TrustedDomainEditResponse = TrustedDomainsAPI.TrustedDomainEditResponse;
-  export import TrustedDomainGetResponse = TrustedDomainsAPI.TrustedDomainGetResponse;
-  export import TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainsAPI.TrustedDomainListResponsesV4PagePaginationArray;
-  export import TrustedDomainCreateParams = TrustedDomainsAPI.TrustedDomainCreateParams;
-  export import TrustedDomainListParams = TrustedDomainsAPI.TrustedDomainListParams;
-  export import TrustedDomainDeleteParams = TrustedDomainsAPI.TrustedDomainDeleteParams;
-  export import TrustedDomainEditParams = TrustedDomainsAPI.TrustedDomainEditParams;
-  export import TrustedDomainGetParams = TrustedDomainsAPI.TrustedDomainGetParams;
+Settings.AllowPatterns = AllowPatterns;
+Settings.AllowPatternListResponsesV4PagePaginationArray = AllowPatternListResponsesV4PagePaginationArray;
+Settings.BlockSenders = BlockSenders;
+Settings.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;
+Settings.Domains = Domains;
+Settings.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;
+Settings.ImpersonationRegistry = ImpersonationRegistry;
+Settings.ImpersonationRegistryListResponsesV4PagePaginationArray =
+  ImpersonationRegistryListResponsesV4PagePaginationArray;
+Settings.TrustedDomains = TrustedDomains;
+Settings.TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainListResponsesV4PagePaginationArray;
+
+export declare namespace Settings {
+  export {
+    AllowPatterns as AllowPatterns,
+    type AllowPatternCreateResponse as AllowPatternCreateResponse,
+    type AllowPatternListResponse as AllowPatternListResponse,
+    type AllowPatternDeleteResponse as AllowPatternDeleteResponse,
+    type AllowPatternEditResponse as AllowPatternEditResponse,
+    type AllowPatternGetResponse as AllowPatternGetResponse,
+    AllowPatternListResponsesV4PagePaginationArray as AllowPatternListResponsesV4PagePaginationArray,
+    type AllowPatternCreateParams as AllowPatternCreateParams,
+    type AllowPatternListParams as AllowPatternListParams,
+    type AllowPatternDeleteParams as AllowPatternDeleteParams,
+    type AllowPatternEditParams as AllowPatternEditParams,
+    type AllowPatternGetParams as AllowPatternGetParams,
+  };
+
+  export {
+    BlockSenders as BlockSenders,
+    type BlockSenderCreateResponse as BlockSenderCreateResponse,
+    type BlockSenderListResponse as BlockSenderListResponse,
+    type BlockSenderDeleteResponse as BlockSenderDeleteResponse,
+    type BlockSenderEditResponse as BlockSenderEditResponse,
+    type BlockSenderGetResponse as BlockSenderGetResponse,
+    BlockSenderListResponsesV4PagePaginationArray as BlockSenderListResponsesV4PagePaginationArray,
+    type BlockSenderCreateParams as BlockSenderCreateParams,
+    type BlockSenderListParams as BlockSenderListParams,
+    type BlockSenderDeleteParams as BlockSenderDeleteParams,
+    type BlockSenderEditParams as BlockSenderEditParams,
+    type BlockSenderGetParams as BlockSenderGetParams,
+  };
+
+  export {
+    Domains as Domains,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainEditResponse as DomainEditResponse,
+    DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainEditParams as DomainEditParams,
+  };
+
+  export {
+    ImpersonationRegistry as ImpersonationRegistry,
+    type ImpersonationRegistryCreateResponse as ImpersonationRegistryCreateResponse,
+    type ImpersonationRegistryListResponse as ImpersonationRegistryListResponse,
+    type ImpersonationRegistryDeleteResponse as ImpersonationRegistryDeleteResponse,
+    type ImpersonationRegistryEditResponse as ImpersonationRegistryEditResponse,
+    type ImpersonationRegistryGetResponse as ImpersonationRegistryGetResponse,
+    ImpersonationRegistryListResponsesV4PagePaginationArray as ImpersonationRegistryListResponsesV4PagePaginationArray,
+    type ImpersonationRegistryCreateParams as ImpersonationRegistryCreateParams,
+    type ImpersonationRegistryListParams as ImpersonationRegistryListParams,
+    type ImpersonationRegistryDeleteParams as ImpersonationRegistryDeleteParams,
+    type ImpersonationRegistryEditParams as ImpersonationRegistryEditParams,
+    type ImpersonationRegistryGetParams as ImpersonationRegistryGetParams,
+  };
+
+  export {
+    TrustedDomains as TrustedDomains,
+    type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
+    type TrustedDomainListResponse as TrustedDomainListResponse,
+    type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,
+    type TrustedDomainEditResponse as TrustedDomainEditResponse,
+    type TrustedDomainGetResponse as TrustedDomainGetResponse,
+    TrustedDomainListResponsesV4PagePaginationArray as TrustedDomainListResponsesV4PagePaginationArray,
+    type TrustedDomainCreateParams as TrustedDomainCreateParams,
+    type TrustedDomainListParams as TrustedDomainListParams,
+    type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
+    type TrustedDomainEditParams as TrustedDomainEditParams,
+    type TrustedDomainGetParams as TrustedDomainGetParams,
+  };
 }

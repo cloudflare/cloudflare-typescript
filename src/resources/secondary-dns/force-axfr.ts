@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ForceAXFRAPI from './force-axfr';
 
 export class ForceAXFRResource extends APIResource {
   /**
@@ -36,7 +35,6 @@ export interface ForceAXFRCreateParams {
   body: unknown;
 }
 
-export namespace ForceAXFRResource {
-  export import ForceAXFR = ForceAXFRAPI.ForceAXFR;
-  export import ForceAXFRCreateParams = ForceAXFRAPI.ForceAXFRCreateParams;
+export declare namespace ForceAXFRResource {
+  export { type ForceAXFR as ForceAXFR, type ForceAXFRCreateParams as ForceAXFRCreateParams };
 }

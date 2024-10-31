@@ -4,10 +4,37 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as LoadBalancersAPI from './load-balancers';
 import * as PreviewsAPI from './previews';
+import { PreviewGetParams, PreviewGetResponse, Previews } from './previews';
 import * as RegionsAPI from './regions';
+import { RegionGetParams, RegionGetResponse, RegionListParams, RegionListResponse, Regions } from './regions';
 import * as SearchesAPI from './searches';
+import { SearchGetParams, SearchGetResponse, Searches } from './searches';
 import * as MonitorsAPI from './monitors/monitors';
+import {
+  Monitor,
+  MonitorCreateParams,
+  MonitorDeleteParams,
+  MonitorDeleteResponse,
+  MonitorEditParams,
+  MonitorGetParams,
+  MonitorListParams,
+  MonitorUpdateParams,
+  Monitors,
+  MonitorsSinglePage,
+} from './monitors/monitors';
 import * as PoolsAPI from './pools/pools';
+import {
+  Pool,
+  PoolCreateParams,
+  PoolDeleteParams,
+  PoolDeleteResponse,
+  PoolEditParams,
+  PoolGetParams,
+  PoolListParams,
+  PoolUpdateParams,
+  Pools,
+  PoolsSinglePage,
+} from './pools/pools';
 import { SinglePage } from '../../pagination';
 
 export class LoadBalancers extends APIResource {
@@ -2060,36 +2087,58 @@ export interface LoadBalancerGetParams {
   zone_id: string;
 }
 
-export namespace LoadBalancers {
-  export import Monitors = MonitorsAPI.Monitors;
-  export import Monitor = MonitorsAPI.Monitor;
-  export import MonitorDeleteResponse = MonitorsAPI.MonitorDeleteResponse;
-  export import MonitorsSinglePage = MonitorsAPI.MonitorsSinglePage;
-  export import MonitorCreateParams = MonitorsAPI.MonitorCreateParams;
-  export import MonitorUpdateParams = MonitorsAPI.MonitorUpdateParams;
-  export import MonitorListParams = MonitorsAPI.MonitorListParams;
-  export import MonitorDeleteParams = MonitorsAPI.MonitorDeleteParams;
-  export import MonitorEditParams = MonitorsAPI.MonitorEditParams;
-  export import MonitorGetParams = MonitorsAPI.MonitorGetParams;
-  export import Pools = PoolsAPI.Pools;
-  export import Pool = PoolsAPI.Pool;
-  export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
-  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
-  export import PoolCreateParams = PoolsAPI.PoolCreateParams;
-  export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
-  export import PoolListParams = PoolsAPI.PoolListParams;
-  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
-  export import PoolEditParams = PoolsAPI.PoolEditParams;
-  export import PoolGetParams = PoolsAPI.PoolGetParams;
-  export import Previews = PreviewsAPI.Previews;
-  export import PreviewGetResponse = PreviewsAPI.PreviewGetResponse;
-  export import PreviewGetParams = PreviewsAPI.PreviewGetParams;
-  export import Regions = RegionsAPI.Regions;
-  export import RegionListResponse = RegionsAPI.RegionListResponse;
-  export import RegionGetResponse = RegionsAPI.RegionGetResponse;
-  export import RegionListParams = RegionsAPI.RegionListParams;
-  export import RegionGetParams = RegionsAPI.RegionGetParams;
-  export import Searches = SearchesAPI.Searches;
-  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
-  export import SearchGetParams = SearchesAPI.SearchGetParams;
+LoadBalancers.Monitors = Monitors;
+LoadBalancers.MonitorsSinglePage = MonitorsSinglePage;
+LoadBalancers.Pools = Pools;
+LoadBalancers.PoolsSinglePage = PoolsSinglePage;
+LoadBalancers.Previews = Previews;
+LoadBalancers.Regions = Regions;
+LoadBalancers.Searches = Searches;
+
+export declare namespace LoadBalancers {
+  export {
+    Monitors as Monitors,
+    type Monitor as Monitor,
+    type MonitorDeleteResponse as MonitorDeleteResponse,
+    MonitorsSinglePage as MonitorsSinglePage,
+    type MonitorCreateParams as MonitorCreateParams,
+    type MonitorUpdateParams as MonitorUpdateParams,
+    type MonitorListParams as MonitorListParams,
+    type MonitorDeleteParams as MonitorDeleteParams,
+    type MonitorEditParams as MonitorEditParams,
+    type MonitorGetParams as MonitorGetParams,
+  };
+
+  export {
+    Pools as Pools,
+    type Pool as Pool,
+    type PoolDeleteResponse as PoolDeleteResponse,
+    PoolsSinglePage as PoolsSinglePage,
+    type PoolCreateParams as PoolCreateParams,
+    type PoolUpdateParams as PoolUpdateParams,
+    type PoolListParams as PoolListParams,
+    type PoolDeleteParams as PoolDeleteParams,
+    type PoolEditParams as PoolEditParams,
+    type PoolGetParams as PoolGetParams,
+  };
+
+  export {
+    Previews as Previews,
+    type PreviewGetResponse as PreviewGetResponse,
+    type PreviewGetParams as PreviewGetParams,
+  };
+
+  export {
+    Regions as Regions,
+    type RegionListResponse as RegionListResponse,
+    type RegionGetResponse as RegionGetResponse,
+    type RegionListParams as RegionListParams,
+    type RegionGetParams as RegionGetParams,
+  };
+
+  export {
+    Searches as Searches,
+    type SearchGetResponse as SearchGetResponse,
+    type SearchGetParams as SearchGetParams,
+  };
 }

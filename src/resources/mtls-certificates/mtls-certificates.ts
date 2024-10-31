@@ -3,6 +3,12 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as AssociationsAPI from './associations';
+import {
+  AssociationGetParams,
+  AssociationGetResponse,
+  Associations,
+  CertificateAsssociation,
+} from './associations';
 import { SinglePage } from '../../pagination';
 
 export class MTLSCertificates extends APIResource {
@@ -225,9 +231,13 @@ export interface MTLSCertificateGetParams {
   account_id: string;
 }
 
-export namespace MTLSCertificates {
-  export import Associations = AssociationsAPI.Associations;
-  export import CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
-  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
-  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
+MTLSCertificates.Associations = Associations;
+
+export declare namespace MTLSCertificates {
+  export {
+    Associations as Associations,
+    type CertificateAsssociation as CertificateAsssociation,
+    type AssociationGetResponse as AssociationGetResponse,
+    type AssociationGetParams as AssociationGetParams,
+  };
 }

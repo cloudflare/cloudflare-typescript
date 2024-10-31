@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PlansAPI from './plans';
 import { SinglePage } from '../../pagination';
 
 export class Plans extends APIResource {
@@ -106,9 +105,13 @@ export interface PlanGetParams {
   zone_id: string;
 }
 
-export namespace Plans {
-  export import AvailableRatePlan = PlansAPI.AvailableRatePlan;
-  export import AvailableRatePlansSinglePage = PlansAPI.AvailableRatePlansSinglePage;
-  export import PlanListParams = PlansAPI.PlanListParams;
-  export import PlanGetParams = PlansAPI.PlanGetParams;
+Plans.AvailableRatePlansSinglePage = AvailableRatePlansSinglePage;
+
+export declare namespace Plans {
+  export {
+    type AvailableRatePlan as AvailableRatePlan,
+    AvailableRatePlansSinglePage as AvailableRatePlansSinglePage,
+    type PlanListParams as PlanListParams,
+    type PlanGetParams as PlanGetParams,
+  };
 }

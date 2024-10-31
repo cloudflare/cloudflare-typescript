@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CertificatesAPI from './certificates';
 import { SinglePage } from '../../../pagination';
 
 export class Certificates extends APIResource {
@@ -464,18 +463,22 @@ export interface CertificateGetParams {
   account_id: string;
 }
 
-export namespace Certificates {
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateListResponse = CertificatesAPI.CertificateListResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateActivateResponse = CertificatesAPI.CertificateActivateResponse;
-  export import CertificateDeactivateResponse = CertificatesAPI.CertificateDeactivateResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateListResponsesSinglePage = CertificatesAPI.CertificateListResponsesSinglePage;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateActivateParams = CertificatesAPI.CertificateActivateParams;
-  export import CertificateDeactivateParams = CertificatesAPI.CertificateDeactivateParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+Certificates.CertificateListResponsesSinglePage = CertificateListResponsesSinglePage;
+
+export declare namespace Certificates {
+  export {
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateListResponse as CertificateListResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateActivateResponse as CertificateActivateResponse,
+    type CertificateDeactivateResponse as CertificateDeactivateResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    CertificateListResponsesSinglePage as CertificateListResponsesSinglePage,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateActivateParams as CertificateActivateParams,
+    type CertificateDeactivateParams as CertificateDeactivateParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
 }

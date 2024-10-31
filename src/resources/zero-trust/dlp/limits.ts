@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LimitsAPI from './limits';
 
 export class Limits extends APIResource {
   /**
@@ -26,7 +25,6 @@ export interface LimitListParams {
   account_id: string;
 }
 
-export namespace Limits {
-  export import LimitListResponse = LimitsAPI.LimitListResponse;
-  export import LimitListParams = LimitsAPI.LimitListParams;
+export declare namespace Limits {
+  export { type LimitListResponse as LimitListResponse, type LimitListParams as LimitListParams };
 }

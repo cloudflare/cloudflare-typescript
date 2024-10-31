@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as SummariesAPI from './summaries';
 import * as EventsAPI from './events';
 
 export class Summaries extends APIResource {
@@ -228,7 +227,6 @@ export interface SummaryGetParams {
   until?: string;
 }
 
-export namespace Summaries {
-  export import SummaryGetResponse = SummariesAPI.SummaryGetResponse;
-  export import SummaryGetParams = SummariesAPI.SummaryGetParams;
+export declare namespace Summaries {
+  export { type SummaryGetResponse as SummaryGetResponse, type SummaryGetParams as SummaryGetParams };
 }

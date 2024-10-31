@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SubdomainAPI from './subdomain';
 
 export class Subdomain extends APIResource {
   /**
@@ -66,9 +65,11 @@ export interface SubdomainGetParams {
   account_id: string;
 }
 
-export namespace Subdomain {
-  export import SubdomainCreateResponse = SubdomainAPI.SubdomainCreateResponse;
-  export import SubdomainGetResponse = SubdomainAPI.SubdomainGetResponse;
-  export import SubdomainCreateParams = SubdomainAPI.SubdomainCreateParams;
-  export import SubdomainGetParams = SubdomainAPI.SubdomainGetParams;
+export declare namespace Subdomain {
+  export {
+    type SubdomainCreateResponse as SubdomainCreateResponse,
+    type SubdomainGetResponse as SubdomainGetResponse,
+    type SubdomainCreateParams as SubdomainCreateParams,
+    type SubdomainGetParams as SubdomainGetParams,
+  };
 }

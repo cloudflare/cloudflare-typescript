@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TotalTLSAPI from './total-tls';
 
 export class TotalTLS extends APIResource {
   /**
@@ -105,10 +104,12 @@ export interface TotalTLSGetParams {
   zone_id: string;
 }
 
-export namespace TotalTLS {
-  export import CertificateAuthority = TotalTLSAPI.CertificateAuthority;
-  export import TotalTLSCreateResponse = TotalTLSAPI.TotalTLSCreateResponse;
-  export import TotalTLSGetResponse = TotalTLSAPI.TotalTLSGetResponse;
-  export import TotalTLSCreateParams = TotalTLSAPI.TotalTLSCreateParams;
-  export import TotalTLSGetParams = TotalTLSAPI.TotalTLSGetParams;
+export declare namespace TotalTLS {
+  export {
+    type CertificateAuthority as CertificateAuthority,
+    type TotalTLSCreateResponse as TotalTLSCreateResponse,
+    type TotalTLSGetResponse as TotalTLSGetResponse,
+    type TotalTLSCreateParams as TotalTLSCreateParams,
+    type TotalTLSGetParams as TotalTLSGetParams,
+  };
 }

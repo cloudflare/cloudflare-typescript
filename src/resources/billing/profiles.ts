@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ProfilesAPI from './profiles';
 
 export class Profiles extends APIResource {
   /**
@@ -108,7 +107,6 @@ export interface ProfileGetParams {
   account_id: string;
 }
 
-export namespace Profiles {
-  export import ProfileGetResponse = ProfilesAPI.ProfileGetResponse;
-  export import ProfileGetParams = ProfilesAPI.ProfileGetParams;
+export declare namespace Profiles {
+  export { type ProfileGetResponse as ProfileGetResponse, type ProfileGetParams as ProfileGetParams };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as AuditLogsAPI from './audit-logs';
 import * as Shared from '../shared';
 import { AuditLogsV4PagePaginationArray } from '../shared';
 import { type V4PagePaginationArrayParams } from '../../pagination';
@@ -98,8 +97,8 @@ export namespace AuditLogListParams {
   }
 }
 
-export namespace AuditLogs {
-  export import AuditLogListParams = AuditLogsAPI.AuditLogListParams;
+export declare namespace AuditLogs {
+  export { type AuditLogListParams as AuditLogListParams };
 }
 
 export { AuditLogsV4PagePaginationArray };

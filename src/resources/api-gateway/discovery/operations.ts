@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OperationsAPI from './operations';
 import * as DiscoveryAPI from './discovery';
 import { DiscoveryOperationsV4PagePaginationArray } from './discovery';
 import { type V4PagePaginationArrayParams } from '../../../pagination';
@@ -127,10 +126,12 @@ export interface OperationEditParams {
   state?: 'review' | 'ignored';
 }
 
-export namespace Operations {
-  export import OperationEditResponse = OperationsAPI.OperationEditResponse;
-  export import OperationListParams = OperationsAPI.OperationListParams;
-  export import OperationEditParams = OperationsAPI.OperationEditParams;
+export declare namespace Operations {
+  export {
+    type OperationEditResponse as OperationEditResponse,
+    type OperationListParams as OperationListParams,
+    type OperationEditParams as OperationEditParams,
+  };
 }
 
 export { DiscoveryOperationsV4PagePaginationArray };

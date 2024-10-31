@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as VideosAPI from './videos';
 
 export class Videos extends APIResource {
   /**
@@ -56,7 +55,9 @@ export interface VideoStorageUsageParams {
   creator?: string;
 }
 
-export namespace Videos {
-  export import VideoStorageUsageResponse = VideosAPI.VideoStorageUsageResponse;
-  export import VideoStorageUsageParams = VideosAPI.VideoStorageUsageParams;
+export declare namespace Videos {
+  export {
+    type VideoStorageUsageResponse as VideoStorageUsageResponse,
+    type VideoStorageUsageParams as VideoStorageUsageParams,
+  };
 }

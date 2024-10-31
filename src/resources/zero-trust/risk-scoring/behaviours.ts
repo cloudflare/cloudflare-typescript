@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BehavioursAPI from './behaviours';
 
 export class Behaviours extends APIResource {
   /**
@@ -86,9 +85,11 @@ export interface BehaviourGetParams {
   account_id: string;
 }
 
-export namespace Behaviours {
-  export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
-  export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
-  export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
-  export import BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
+export declare namespace Behaviours {
+  export {
+    type BehaviourUpdateResponse as BehaviourUpdateResponse,
+    type BehaviourGetResponse as BehaviourGetResponse,
+    type BehaviourUpdateParams as BehaviourUpdateParams,
+    type BehaviourGetParams as BehaviourGetParams,
+  };
 }

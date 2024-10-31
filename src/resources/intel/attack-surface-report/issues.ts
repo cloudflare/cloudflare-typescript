@@ -461,18 +461,22 @@ export interface IssueTypeParams {
   'subject~neq'?: Array<string>;
 }
 
-export namespace Issues {
-  export import IssueType = IssuesAPI.IssueType;
-  export import SeverityQueryParam = IssuesAPI.SeverityQueryParam;
-  export import IssueListResponse = IssuesAPI.IssueListResponse;
-  export import IssueClassResponse = IssuesAPI.IssueClassResponse;
-  export import IssueDismissResponse = IssuesAPI.IssueDismissResponse;
-  export import IssueSeverityResponse = IssuesAPI.IssueSeverityResponse;
-  export import IssueTypeResponse = IssuesAPI.IssueTypeResponse;
-  export import IssueListResponsesV4PagePagination = IssuesAPI.IssueListResponsesV4PagePagination;
-  export import IssueListParams = IssuesAPI.IssueListParams;
-  export import IssueClassParams = IssuesAPI.IssueClassParams;
-  export import IssueDismissParams = IssuesAPI.IssueDismissParams;
-  export import IssueSeverityParams = IssuesAPI.IssueSeverityParams;
-  export import IssueTypeParams = IssuesAPI.IssueTypeParams;
+Issues.IssueListResponsesV4PagePagination = IssueListResponsesV4PagePagination;
+
+export declare namespace Issues {
+  export {
+    type IssueType as IssueType,
+    type SeverityQueryParam as SeverityQueryParam,
+    type IssueListResponse as IssueListResponse,
+    type IssueClassResponse as IssueClassResponse,
+    type IssueDismissResponse as IssueDismissResponse,
+    type IssueSeverityResponse as IssueSeverityResponse,
+    type IssueTypeResponse as IssueTypeResponse,
+    IssueListResponsesV4PagePagination as IssueListResponsesV4PagePagination,
+    type IssueListParams as IssueListParams,
+    type IssueClassParams as IssueClassParams,
+    type IssueDismissParams as IssueDismissParams,
+    type IssueSeverityParams as IssueSeverityParams,
+    type IssueTypeParams as IssueTypeParams,
+  };
 }

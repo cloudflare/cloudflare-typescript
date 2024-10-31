@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CloudflareError } from '../../error';
-import * as AccessRulesAPI from './access-rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class AccessRules extends APIResource {
@@ -788,21 +787,25 @@ export interface AccessRuleGetParams {
   zone_id?: string;
 }
 
-export namespace AccessRules {
-  export import AccessRuleCIDRConfiguration = AccessRulesAPI.AccessRuleCIDRConfiguration;
-  export import AccessRuleIPConfiguration = AccessRulesAPI.AccessRuleIPConfiguration;
-  export import ASNConfiguration = AccessRulesAPI.ASNConfiguration;
-  export import CountryConfiguration = AccessRulesAPI.CountryConfiguration;
-  export import IPV6Configuration = AccessRulesAPI.IPV6Configuration;
-  export import AccessRuleCreateResponse = AccessRulesAPI.AccessRuleCreateResponse;
-  export import AccessRuleListResponse = AccessRulesAPI.AccessRuleListResponse;
-  export import AccessRuleDeleteResponse = AccessRulesAPI.AccessRuleDeleteResponse;
-  export import AccessRuleEditResponse = AccessRulesAPI.AccessRuleEditResponse;
-  export import AccessRuleGetResponse = AccessRulesAPI.AccessRuleGetResponse;
-  export import AccessRuleListResponsesV4PagePaginationArray = AccessRulesAPI.AccessRuleListResponsesV4PagePaginationArray;
-  export import AccessRuleCreateParams = AccessRulesAPI.AccessRuleCreateParams;
-  export import AccessRuleListParams = AccessRulesAPI.AccessRuleListParams;
-  export import AccessRuleDeleteParams = AccessRulesAPI.AccessRuleDeleteParams;
-  export import AccessRuleEditParams = AccessRulesAPI.AccessRuleEditParams;
-  export import AccessRuleGetParams = AccessRulesAPI.AccessRuleGetParams;
+AccessRules.AccessRuleListResponsesV4PagePaginationArray = AccessRuleListResponsesV4PagePaginationArray;
+
+export declare namespace AccessRules {
+  export {
+    type AccessRuleCIDRConfiguration as AccessRuleCIDRConfiguration,
+    type AccessRuleIPConfiguration as AccessRuleIPConfiguration,
+    type ASNConfiguration as ASNConfiguration,
+    type CountryConfiguration as CountryConfiguration,
+    type IPV6Configuration as IPV6Configuration,
+    type AccessRuleCreateResponse as AccessRuleCreateResponse,
+    type AccessRuleListResponse as AccessRuleListResponse,
+    type AccessRuleDeleteResponse as AccessRuleDeleteResponse,
+    type AccessRuleEditResponse as AccessRuleEditResponse,
+    type AccessRuleGetResponse as AccessRuleGetResponse,
+    AccessRuleListResponsesV4PagePaginationArray as AccessRuleListResponsesV4PagePaginationArray,
+    type AccessRuleCreateParams as AccessRuleCreateParams,
+    type AccessRuleListParams as AccessRuleListParams,
+    type AccessRuleDeleteParams as AccessRuleDeleteParams,
+    type AccessRuleEditParams as AccessRuleEditParams,
+    type AccessRuleGetParams as AccessRuleGetParams,
+  };
 }

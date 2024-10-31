@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AuditSSHSettingsAPI from './audit-ssh-settings';
 
 export class AuditSSHSettings extends APIResource {
   /**
@@ -92,9 +91,11 @@ export interface AuditSSHSettingRotateSeedParams {
   account_id: string;
 }
 
-export namespace AuditSSHSettings {
-  export import GatewaySettings = AuditSSHSettingsAPI.GatewaySettings;
-  export import AuditSSHSettingUpdateParams = AuditSSHSettingsAPI.AuditSSHSettingUpdateParams;
-  export import AuditSSHSettingGetParams = AuditSSHSettingsAPI.AuditSSHSettingGetParams;
-  export import AuditSSHSettingRotateSeedParams = AuditSSHSettingsAPI.AuditSSHSettingRotateSeedParams;
+export declare namespace AuditSSHSettings {
+  export {
+    type GatewaySettings as GatewaySettings,
+    type AuditSSHSettingUpdateParams as AuditSSHSettingUpdateParams,
+    type AuditSSHSettingGetParams as AuditSSHSettingGetParams,
+    type AuditSSHSettingRotateSeedParams as AuditSSHSettingRotateSeedParams,
+  };
 }

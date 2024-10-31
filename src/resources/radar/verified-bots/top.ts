@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TopAPI from './top';
 
 export class Top extends APIResource {
   /**
@@ -279,9 +278,11 @@ export interface TopCategoriesParams {
   name?: Array<string>;
 }
 
-export namespace Top {
-  export import TopBotsResponse = TopAPI.TopBotsResponse;
-  export import TopCategoriesResponse = TopAPI.TopCategoriesResponse;
-  export import TopBotsParams = TopAPI.TopBotsParams;
-  export import TopCategoriesParams = TopAPI.TopCategoriesParams;
+export declare namespace Top {
+  export {
+    type TopBotsResponse as TopBotsResponse,
+    type TopCategoriesResponse as TopCategoriesResponse,
+    type TopBotsParams as TopBotsParams,
+    type TopCategoriesParams as TopCategoriesParams,
+  };
 }

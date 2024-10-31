@@ -2,18 +2,28 @@
 
 import { APIResource } from '../../../resource';
 import * as Layer3API from './layer3/layer3';
+import { Layer3, Layer3TimeseriesParams, Layer3TimeseriesResponse } from './layer3/layer3';
 import * as Layer7API from './layer7/layer7';
+import { Layer7, Layer7TimeseriesParams, Layer7TimeseriesResponse } from './layer7/layer7';
 
 export class Attacks extends APIResource {
   layer3: Layer3API.Layer3 = new Layer3API.Layer3(this._client);
   layer7: Layer7API.Layer7 = new Layer7API.Layer7(this._client);
 }
 
-export namespace Attacks {
-  export import Layer3 = Layer3API.Layer3;
-  export import Layer3TimeseriesResponse = Layer3API.Layer3TimeseriesResponse;
-  export import Layer3TimeseriesParams = Layer3API.Layer3TimeseriesParams;
-  export import Layer7 = Layer7API.Layer7;
-  export import Layer7TimeseriesResponse = Layer7API.Layer7TimeseriesResponse;
-  export import Layer7TimeseriesParams = Layer7API.Layer7TimeseriesParams;
+Attacks.Layer3 = Layer3;
+Attacks.Layer7 = Layer7;
+
+export declare namespace Attacks {
+  export {
+    Layer3 as Layer3,
+    type Layer3TimeseriesResponse as Layer3TimeseriesResponse,
+    type Layer3TimeseriesParams as Layer3TimeseriesParams,
+  };
+
+  export {
+    Layer7 as Layer7,
+    type Layer7TimeseriesResponse as Layer7TimeseriesResponse,
+    type Layer7TimeseriesParams as Layer7TimeseriesParams,
+  };
 }

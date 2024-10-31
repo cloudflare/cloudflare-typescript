@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as WidgetsAPI from './widgets';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Widgets extends APIResource {
@@ -407,15 +406,19 @@ export interface WidgetRotateSecretParams {
   invalidate_immediately?: boolean;
 }
 
-export namespace Widgets {
-  export import Widget = WidgetsAPI.Widget;
-  export import WidgetDomain = WidgetsAPI.WidgetDomain;
-  export import WidgetListResponse = WidgetsAPI.WidgetListResponse;
-  export import WidgetListResponsesV4PagePaginationArray = WidgetsAPI.WidgetListResponsesV4PagePaginationArray;
-  export import WidgetCreateParams = WidgetsAPI.WidgetCreateParams;
-  export import WidgetUpdateParams = WidgetsAPI.WidgetUpdateParams;
-  export import WidgetListParams = WidgetsAPI.WidgetListParams;
-  export import WidgetDeleteParams = WidgetsAPI.WidgetDeleteParams;
-  export import WidgetGetParams = WidgetsAPI.WidgetGetParams;
-  export import WidgetRotateSecretParams = WidgetsAPI.WidgetRotateSecretParams;
+Widgets.WidgetListResponsesV4PagePaginationArray = WidgetListResponsesV4PagePaginationArray;
+
+export declare namespace Widgets {
+  export {
+    type Widget as Widget,
+    type WidgetDomain as WidgetDomain,
+    type WidgetListResponse as WidgetListResponse,
+    WidgetListResponsesV4PagePaginationArray as WidgetListResponsesV4PagePaginationArray,
+    type WidgetCreateParams as WidgetCreateParams,
+    type WidgetUpdateParams as WidgetUpdateParams,
+    type WidgetListParams as WidgetListParams,
+    type WidgetDeleteParams as WidgetDeleteParams,
+    type WidgetGetParams as WidgetGetParams,
+    type WidgetRotateSecretParams as WidgetRotateSecretParams,
+  };
 }

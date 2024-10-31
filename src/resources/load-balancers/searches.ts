@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as SearchesAPI from './searches';
 
 export class Searches extends APIResource {
   /**
@@ -91,7 +90,6 @@ export namespace SearchGetParams {
   }
 }
 
-export namespace Searches {
-  export import SearchGetResponse = SearchesAPI.SearchGetResponse;
-  export import SearchGetParams = SearchesAPI.SearchGetParams;
+export declare namespace Searches {
+  export { type SearchGetResponse as SearchGetResponse, type SearchGetParams as SearchGetParams };
 }

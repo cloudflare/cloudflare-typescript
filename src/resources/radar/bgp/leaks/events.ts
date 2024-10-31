@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as EventsAPI from './events';
 import { V4PagePagination, type V4PagePaginationParams } from '../../../../pagination';
 
 export class Events extends APIResource {
@@ -150,8 +149,12 @@ export interface EventListParams extends V4PagePaginationParams {
   sortOrder?: 'ASC' | 'DESC';
 }
 
-export namespace Events {
-  export import EventListResponse = EventsAPI.EventListResponse;
-  export import EventListResponsesV4PagePagination = EventsAPI.EventListResponsesV4PagePagination;
-  export import EventListParams = EventsAPI.EventListParams;
+Events.EventListResponsesV4PagePagination = EventListResponsesV4PagePagination;
+
+export declare namespace Events {
+  export {
+    type EventListResponse as EventListResponse,
+    EventListResponsesV4PagePagination as EventListResponsesV4PagePagination,
+    type EventListParams as EventListParams,
+  };
 }

@@ -3,8 +3,14 @@
 import { APIResource } from '../../../../../resource';
 import { isRequestOptions } from '../../../../../core';
 import * as Core from '../../../../../core';
-import * as TopAPI from './top';
 import * as LocationsAPI from './locations';
+import {
+  LocationOriginParams,
+  LocationOriginResponse,
+  LocationTargetParams,
+  LocationTargetResponse,
+  Locations,
+} from './locations';
 
 export class Top extends APIResource {
   locations: LocationsAPI.Locations = new LocationsAPI.Locations(this._client);
@@ -445,16 +451,23 @@ export interface TopVerticalParams {
   protocol?: Array<'UDP' | 'TCP' | 'ICMP' | 'GRE'>;
 }
 
-export namespace Top {
-  export import TopAttacksResponse = TopAPI.TopAttacksResponse;
-  export import TopIndustryResponse = TopAPI.TopIndustryResponse;
-  export import TopVerticalResponse = TopAPI.TopVerticalResponse;
-  export import TopAttacksParams = TopAPI.TopAttacksParams;
-  export import TopIndustryParams = TopAPI.TopIndustryParams;
-  export import TopVerticalParams = TopAPI.TopVerticalParams;
-  export import Locations = LocationsAPI.Locations;
-  export import LocationOriginResponse = LocationsAPI.LocationOriginResponse;
-  export import LocationTargetResponse = LocationsAPI.LocationTargetResponse;
-  export import LocationOriginParams = LocationsAPI.LocationOriginParams;
-  export import LocationTargetParams = LocationsAPI.LocationTargetParams;
+Top.Locations = Locations;
+
+export declare namespace Top {
+  export {
+    type TopAttacksResponse as TopAttacksResponse,
+    type TopIndustryResponse as TopIndustryResponse,
+    type TopVerticalResponse as TopVerticalResponse,
+    type TopAttacksParams as TopAttacksParams,
+    type TopIndustryParams as TopIndustryParams,
+    type TopVerticalParams as TopVerticalParams,
+  };
+
+  export {
+    Locations as Locations,
+    type LocationOriginResponse as LocationOriginResponse,
+    type LocationTargetResponse as LocationTargetResponse,
+    type LocationOriginParams as LocationOriginParams,
+    type LocationTargetParams as LocationTargetParams,
+  };
 }

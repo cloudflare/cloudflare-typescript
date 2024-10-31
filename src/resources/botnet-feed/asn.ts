@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ASNAPI from './asn';
 
 export class ASN extends APIResource {
   /**
@@ -78,9 +77,11 @@ export interface ASNFullReportParams {
   account_id: string;
 }
 
-export namespace ASN {
-  export import ASNDayReportResponse = ASNAPI.ASNDayReportResponse;
-  export import ASNFullReportResponse = ASNAPI.ASNFullReportResponse;
-  export import ASNDayReportParams = ASNAPI.ASNDayReportParams;
-  export import ASNFullReportParams = ASNAPI.ASNFullReportParams;
+export declare namespace ASN {
+  export {
+    type ASNDayReportResponse as ASNDayReportResponse,
+    type ASNFullReportResponse as ASNFullReportResponse,
+    type ASNDayReportParams as ASNDayReportParams,
+    type ASNFullReportParams as ASNFullReportParams,
+  };
 }

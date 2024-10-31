@@ -1112,18 +1112,20 @@ export interface IPSECTunnelPSKGenerateParams {
   body: unknown;
 }
 
-export namespace IPSECTunnels {
-  export import PSKMetadata = IPSECTunnelsAPI.PSKMetadata;
-  export import IPSECTunnelCreateResponse = IPSECTunnelsAPI.IPSECTunnelCreateResponse;
-  export import IPSECTunnelUpdateResponse = IPSECTunnelsAPI.IPSECTunnelUpdateResponse;
-  export import IPSECTunnelListResponse = IPSECTunnelsAPI.IPSECTunnelListResponse;
-  export import IPSECTunnelDeleteResponse = IPSECTunnelsAPI.IPSECTunnelDeleteResponse;
-  export import IPSECTunnelGetResponse = IPSECTunnelsAPI.IPSECTunnelGetResponse;
-  export import IPSECTunnelPSKGenerateResponse = IPSECTunnelsAPI.IPSECTunnelPSKGenerateResponse;
-  export import IPSECTunnelCreateParams = IPSECTunnelsAPI.IPSECTunnelCreateParams;
-  export import IPSECTunnelUpdateParams = IPSECTunnelsAPI.IPSECTunnelUpdateParams;
-  export import IPSECTunnelListParams = IPSECTunnelsAPI.IPSECTunnelListParams;
-  export import IPSECTunnelDeleteParams = IPSECTunnelsAPI.IPSECTunnelDeleteParams;
-  export import IPSECTunnelGetParams = IPSECTunnelsAPI.IPSECTunnelGetParams;
-  export import IPSECTunnelPSKGenerateParams = IPSECTunnelsAPI.IPSECTunnelPSKGenerateParams;
+export declare namespace IPSECTunnels {
+  export {
+    type PSKMetadata as PSKMetadata,
+    type IPSECTunnelCreateResponse as IPSECTunnelCreateResponse,
+    type IPSECTunnelUpdateResponse as IPSECTunnelUpdateResponse,
+    type IPSECTunnelListResponse as IPSECTunnelListResponse,
+    type IPSECTunnelDeleteResponse as IPSECTunnelDeleteResponse,
+    type IPSECTunnelGetResponse as IPSECTunnelGetResponse,
+    type IPSECTunnelPSKGenerateResponse as IPSECTunnelPSKGenerateResponse,
+    type IPSECTunnelCreateParams as IPSECTunnelCreateParams,
+    type IPSECTunnelUpdateParams as IPSECTunnelUpdateParams,
+    type IPSECTunnelListParams as IPSECTunnelListParams,
+    type IPSECTunnelDeleteParams as IPSECTunnelDeleteParams,
+    type IPSECTunnelGetParams as IPSECTunnelGetParams,
+    type IPSECTunnelPSKGenerateParams as IPSECTunnelPSKGenerateParams,
+  };
 }

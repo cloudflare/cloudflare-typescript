@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as MembersAPI from './members';
 import * as Shared from '../shared';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -1138,18 +1137,22 @@ export interface MemberGetParams {
   account_id: string;
 }
 
-export namespace Members {
-  export import Status = MembersAPI.Status;
-  export import UserWithInviteCode = MembersAPI.UserWithInviteCode;
-  export import MemberCreateResponse = MembersAPI.MemberCreateResponse;
-  export import MemberUpdateResponse = MembersAPI.MemberUpdateResponse;
-  export import MemberListResponse = MembersAPI.MemberListResponse;
-  export import MemberDeleteResponse = MembersAPI.MemberDeleteResponse;
-  export import MemberGetResponse = MembersAPI.MemberGetResponse;
-  export import MemberListResponsesV4PagePaginationArray = MembersAPI.MemberListResponsesV4PagePaginationArray;
-  export import MemberCreateParams = MembersAPI.MemberCreateParams;
-  export import MemberUpdateParams = MembersAPI.MemberUpdateParams;
-  export import MemberListParams = MembersAPI.MemberListParams;
-  export import MemberDeleteParams = MembersAPI.MemberDeleteParams;
-  export import MemberGetParams = MembersAPI.MemberGetParams;
+Members.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
+
+export declare namespace Members {
+  export {
+    type Status as Status,
+    type UserWithInviteCode as UserWithInviteCode,
+    type MemberCreateResponse as MemberCreateResponse,
+    type MemberUpdateResponse as MemberUpdateResponse,
+    type MemberListResponse as MemberListResponse,
+    type MemberDeleteResponse as MemberDeleteResponse,
+    type MemberGetResponse as MemberGetResponse,
+    MemberListResponsesV4PagePaginationArray as MemberListResponsesV4PagePaginationArray,
+    type MemberCreateParams as MemberCreateParams,
+    type MemberUpdateParams as MemberUpdateParams,
+    type MemberListParams as MemberListParams,
+    type MemberDeleteParams as MemberDeleteParams,
+    type MemberGetParams as MemberGetParams,
+  };
 }

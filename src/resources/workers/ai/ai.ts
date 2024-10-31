@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AIAPI from './ai';
 import * as ModelsAPI from './models/models';
+import { Models } from './models/models';
 
 export class AI extends APIResource {
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
@@ -752,8 +752,10 @@ export namespace AIRunParams {
   }
 }
 
-export namespace AI {
-  export import AIRunResponse = AIAPI.AIRunResponse;
-  export import AIRunParams = AIAPI.AIRunParams;
-  export import Models = ModelsAPI.Models;
+AI.Models = Models;
+
+export declare namespace AI {
+  export { type AIRunResponse as AIRunResponse, type AIRunParams as AIRunParams };
+
+  export { Models as Models };
 }

@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as KeylessCertificatesAPI from '../keyless-certificates';
 import * as PrioritizeAPI from './prioritize';
+import { Prioritize, PrioritizeUpdateParams, PrioritizeUpdateResponse } from './prioritize';
 import * as CustomHostnamesAPI from '../custom-hostnames/custom-hostnames';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -358,8 +359,12 @@ export interface CustomCertificateGetParams {
   zone_id: string;
 }
 
-export namespace CustomCertificates {
-  export import Prioritize = PrioritizeAPI.Prioritize;
-  export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
-  export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
+CustomCertificates.Prioritize = Prioritize;
+
+export declare namespace CustomCertificates {
+  export {
+    Prioritize as Prioritize,
+    type PrioritizeUpdateResponse as PrioritizeUpdateResponse,
+    type PrioritizeUpdateParams as PrioritizeUpdateParams,
+  };
 }

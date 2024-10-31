@@ -4,10 +4,10 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import * as VersionsAPI from './versions';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
 import * as ByTagAPI from './by-tag';
+import { ByTag } from './by-tag';
 import { SinglePage } from '../../../pagination';
 
 export class Versions extends APIResource {
@@ -562,12 +562,18 @@ export interface VersionGetParams {
   zone_id?: string;
 }
 
-export namespace Versions {
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionDeleteParams = VersionsAPI.VersionDeleteParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
-  export import ByTag = ByTagAPI.ByTag;
+Versions.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
+Versions.ByTag = ByTag;
+
+export declare namespace Versions {
+  export {
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesSinglePage as VersionListResponsesSinglePage,
+    type VersionListParams as VersionListParams,
+    type VersionDeleteParams as VersionDeleteParams,
+    type VersionGetParams as VersionGetParams,
+  };
+
+  export { ByTag as ByTag };
 }

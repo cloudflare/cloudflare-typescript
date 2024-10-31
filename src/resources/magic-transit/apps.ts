@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AppsAPI from './apps';
 import { SinglePage } from '../../pagination';
 
 export class Apps extends APIResource {
@@ -320,14 +319,18 @@ export interface AppDeleteParams {
   account_id: string;
 }
 
-export namespace Apps {
-  export import AppCreateResponse = AppsAPI.AppCreateResponse;
-  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
-  export import AppListResponse = AppsAPI.AppListResponse;
-  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
-  export import AppListResponsesSinglePage = AppsAPI.AppListResponsesSinglePage;
-  export import AppCreateParams = AppsAPI.AppCreateParams;
-  export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import AppListParams = AppsAPI.AppListParams;
-  export import AppDeleteParams = AppsAPI.AppDeleteParams;
+Apps.AppListResponsesSinglePage = AppListResponsesSinglePage;
+
+export declare namespace Apps {
+  export {
+    type AppCreateResponse as AppCreateResponse,
+    type AppUpdateResponse as AppUpdateResponse,
+    type AppListResponse as AppListResponse,
+    type AppDeleteResponse as AppDeleteResponse,
+    AppListResponsesSinglePage as AppListResponsesSinglePage,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppDeleteParams as AppDeleteParams,
+  };
 }

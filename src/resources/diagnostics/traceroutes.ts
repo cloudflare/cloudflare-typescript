@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TraceroutesAPI from './traceroutes';
 
 export class Traceroutes extends APIResource {
   /**
@@ -202,8 +201,10 @@ export namespace TracerouteCreateParams {
   }
 }
 
-export namespace Traceroutes {
-  export import Traceroute = TraceroutesAPI.Traceroute;
-  export import TracerouteCreateResponse = TraceroutesAPI.TracerouteCreateResponse;
-  export import TracerouteCreateParams = TraceroutesAPI.TracerouteCreateParams;
+export declare namespace Traceroutes {
+  export {
+    type Traceroute as Traceroute,
+    type TracerouteCreateResponse as TracerouteCreateResponse,
+    type TracerouteCreateParams as TracerouteCreateParams,
+  };
 }

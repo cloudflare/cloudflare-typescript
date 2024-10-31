@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as AssetsAPI from './assets';
 import * as Shared from '../../shared';
 
 export class Assets extends APIResource {
@@ -193,11 +192,13 @@ export interface AssetUpdateParams {
   source?: string;
 }
 
-export namespace Assets {
-  export import AssetCreateResponse = AssetsAPI.AssetCreateResponse;
-  export import AssetUpdateResponse = AssetsAPI.AssetUpdateResponse;
-  export import AssetDeleteResponse = AssetsAPI.AssetDeleteResponse;
-  export import AssetGetResponse = AssetsAPI.AssetGetResponse;
-  export import AssetCreateParams = AssetsAPI.AssetCreateParams;
-  export import AssetUpdateParams = AssetsAPI.AssetUpdateParams;
+export declare namespace Assets {
+  export {
+    type AssetCreateResponse as AssetCreateResponse,
+    type AssetUpdateResponse as AssetUpdateResponse,
+    type AssetDeleteResponse as AssetDeleteResponse,
+    type AssetGetResponse as AssetGetResponse,
+    type AssetCreateParams as AssetCreateParams,
+    type AssetUpdateParams as AssetUpdateParams,
+  };
 }

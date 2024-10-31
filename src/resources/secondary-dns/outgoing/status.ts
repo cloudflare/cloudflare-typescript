@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as StatusAPI from './status';
 import * as OutgoingAPI from './outgoing';
 
 export class Status extends APIResource {
@@ -23,6 +22,6 @@ export interface StatusGetParams {
   zone_id: string;
 }
 
-export namespace Status {
-  export import StatusGetParams = StatusAPI.StatusGetParams;
+export declare namespace Status {
+  export { type StatusGetParams as StatusGetParams };
 }

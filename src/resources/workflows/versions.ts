@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as VersionsAPI from './versions';
 import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
 export class Versions extends APIResource {
@@ -114,10 +113,14 @@ export interface VersionGetParams {
   account_id: string;
 }
 
-export namespace Versions {
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Versions.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
+
+export declare namespace Versions {
+  export {
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesV4PagePagination as VersionListResponsesV4PagePagination,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

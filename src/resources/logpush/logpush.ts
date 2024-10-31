@@ -2,10 +2,38 @@
 
 import { APIResource } from '../../resource';
 import * as EdgeAPI from './edge';
+import { Edge, EdgeCreateParams, EdgeGetParams, EdgeGetResponse, InstantLogpushJob } from './edge';
 import * as JobsAPI from './jobs';
+import {
+  JobCreateParams,
+  JobDeleteParams,
+  JobDeleteResponse,
+  JobGetParams,
+  JobListParams,
+  JobUpdateParams,
+  Jobs,
+  LogpushJob,
+  LogpushJobsSinglePage,
+  OutputOptions,
+} from './jobs';
 import * as OwnershipAPI from './ownership';
+import {
+  Ownership,
+  OwnershipCreateParams,
+  OwnershipCreateResponse,
+  OwnershipValidateParams,
+  OwnershipValidation,
+} from './ownership';
 import * as ValidateAPI from './validate';
+import {
+  Validate,
+  ValidateDestinationParams,
+  ValidateDestinationResponse,
+  ValidateOriginParams,
+  ValidateOriginResponse,
+} from './validate';
 import * as DatasetsAPI from './datasets/datasets';
+import { Datasets } from './datasets/datasets';
 
 export class Logpush extends APIResource {
   datasets: DatasetsAPI.Datasets = new DatasetsAPI.Datasets(this._client);
@@ -15,31 +43,50 @@ export class Logpush extends APIResource {
   validate: ValidateAPI.Validate = new ValidateAPI.Validate(this._client);
 }
 
-export namespace Logpush {
-  export import Datasets = DatasetsAPI.Datasets;
-  export import Edge = EdgeAPI.Edge;
-  export import InstantLogpushJob = EdgeAPI.InstantLogpushJob;
-  export import EdgeGetResponse = EdgeAPI.EdgeGetResponse;
-  export import EdgeCreateParams = EdgeAPI.EdgeCreateParams;
-  export import EdgeGetParams = EdgeAPI.EdgeGetParams;
-  export import Jobs = JobsAPI.Jobs;
-  export import LogpushJob = JobsAPI.LogpushJob;
-  export import OutputOptions = JobsAPI.OutputOptions;
-  export import JobDeleteResponse = JobsAPI.JobDeleteResponse;
-  export import LogpushJobsSinglePage = JobsAPI.LogpushJobsSinglePage;
-  export import JobCreateParams = JobsAPI.JobCreateParams;
-  export import JobUpdateParams = JobsAPI.JobUpdateParams;
-  export import JobListParams = JobsAPI.JobListParams;
-  export import JobDeleteParams = JobsAPI.JobDeleteParams;
-  export import JobGetParams = JobsAPI.JobGetParams;
-  export import Ownership = OwnershipAPI.Ownership;
-  export import OwnershipValidation = OwnershipAPI.OwnershipValidation;
-  export import OwnershipCreateResponse = OwnershipAPI.OwnershipCreateResponse;
-  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
-  export import Validate = ValidateAPI.Validate;
-  export import ValidateDestinationResponse = ValidateAPI.ValidateDestinationResponse;
-  export import ValidateOriginResponse = ValidateAPI.ValidateOriginResponse;
-  export import ValidateDestinationParams = ValidateAPI.ValidateDestinationParams;
-  export import ValidateOriginParams = ValidateAPI.ValidateOriginParams;
+Logpush.Datasets = Datasets;
+Logpush.Edge = Edge;
+Logpush.Jobs = Jobs;
+Logpush.LogpushJobsSinglePage = LogpushJobsSinglePage;
+Logpush.Ownership = Ownership;
+Logpush.Validate = Validate;
+
+export declare namespace Logpush {
+  export { Datasets as Datasets };
+
+  export {
+    Edge as Edge,
+    type InstantLogpushJob as InstantLogpushJob,
+    type EdgeGetResponse as EdgeGetResponse,
+    type EdgeCreateParams as EdgeCreateParams,
+    type EdgeGetParams as EdgeGetParams,
+  };
+
+  export {
+    Jobs as Jobs,
+    type LogpushJob as LogpushJob,
+    type OutputOptions as OutputOptions,
+    type JobDeleteResponse as JobDeleteResponse,
+    LogpushJobsSinglePage as LogpushJobsSinglePage,
+    type JobCreateParams as JobCreateParams,
+    type JobUpdateParams as JobUpdateParams,
+    type JobListParams as JobListParams,
+    type JobDeleteParams as JobDeleteParams,
+    type JobGetParams as JobGetParams,
+  };
+
+  export {
+    Ownership as Ownership,
+    type OwnershipValidation as OwnershipValidation,
+    type OwnershipCreateResponse as OwnershipCreateResponse,
+    type OwnershipCreateParams as OwnershipCreateParams,
+    type OwnershipValidateParams as OwnershipValidateParams,
+  };
+
+  export {
+    Validate as Validate,
+    type ValidateDestinationResponse as ValidateDestinationResponse,
+    type ValidateOriginResponse as ValidateOriginResponse,
+    type ValidateDestinationParams as ValidateDestinationParams,
+    type ValidateOriginParams as ValidateOriginParams,
+  };
 }

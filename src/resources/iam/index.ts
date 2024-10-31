@@ -2,24 +2,24 @@
 
 export { IAM } from './iam';
 export {
-  PermissionGroupListResponse,
-  PermissionGroupGetResponse,
-  PermissionGroupListParams,
-  PermissionGroupGetParams,
   PermissionGroupListResponsesV4PagePaginationArray,
   PermissionGroups,
+  type PermissionGroupListResponse,
+  type PermissionGroupGetResponse,
+  type PermissionGroupListParams,
+  type PermissionGroupGetParams,
 } from './permission-groups';
 export {
-  ResourceGroupCreateResponse,
-  ResourceGroupUpdateResponse,
-  ResourceGroupListResponse,
-  ResourceGroupDeleteResponse,
-  ResourceGroupGetResponse,
-  ResourceGroupCreateParams,
-  ResourceGroupUpdateParams,
-  ResourceGroupListParams,
-  ResourceGroupDeleteParams,
-  ResourceGroupGetParams,
   ResourceGroupListResponsesV4PagePaginationArray,
   ResourceGroups,
+  type ResourceGroupCreateResponse,
+  type ResourceGroupUpdateResponse,
+  type ResourceGroupListResponse,
+  type ResourceGroupDeleteResponse,
+  type ResourceGroupGetResponse,
+  type ResourceGroupCreateParams,
+  type ResourceGroupUpdateParams,
+  type ResourceGroupListParams,
+  type ResourceGroupDeleteParams,
+  type ResourceGroupGetParams,
 } from './resource-groups';

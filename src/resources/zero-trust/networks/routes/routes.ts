@@ -2,9 +2,10 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as RoutesAPI from './routes';
 import * as IPsAPI from './ips';
+import { IPGetParams, IPs } from './ips';
 import * as NetworksAPI from './networks';
+import { NetworkCreateParams, NetworkDeleteParams, NetworkEditParams, Networks } from './networks';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Routes extends APIResource {
@@ -331,20 +332,29 @@ export interface RouteGetParams {
   account_id: string;
 }
 
-export namespace Routes {
-  export import NetworkRoute = RoutesAPI.NetworkRoute;
-  export import Route = RoutesAPI.Route;
-  export import Teamnet = RoutesAPI.Teamnet;
-  export import TeamnetsV4PagePaginationArray = RoutesAPI.TeamnetsV4PagePaginationArray;
-  export import RouteCreateParams = RoutesAPI.RouteCreateParams;
-  export import RouteListParams = RoutesAPI.RouteListParams;
-  export import RouteDeleteParams = RoutesAPI.RouteDeleteParams;
-  export import RouteEditParams = RoutesAPI.RouteEditParams;
-  export import RouteGetParams = RoutesAPI.RouteGetParams;
-  export import IPs = IPsAPI.IPs;
-  export import IPGetParams = IPsAPI.IPGetParams;
-  export import Networks = NetworksAPI.Networks;
-  export import NetworkCreateParams = NetworksAPI.NetworkCreateParams;
-  export import NetworkDeleteParams = NetworksAPI.NetworkDeleteParams;
-  export import NetworkEditParams = NetworksAPI.NetworkEditParams;
+Routes.TeamnetsV4PagePaginationArray = TeamnetsV4PagePaginationArray;
+Routes.IPs = IPs;
+Routes.Networks = Networks;
+
+export declare namespace Routes {
+  export {
+    type NetworkRoute as NetworkRoute,
+    type Route as Route,
+    type Teamnet as Teamnet,
+    TeamnetsV4PagePaginationArray as TeamnetsV4PagePaginationArray,
+    type RouteCreateParams as RouteCreateParams,
+    type RouteListParams as RouteListParams,
+    type RouteDeleteParams as RouteDeleteParams,
+    type RouteEditParams as RouteEditParams,
+    type RouteGetParams as RouteGetParams,
+  };
+
+  export { IPs as IPs, type IPGetParams as IPGetParams };
+
+  export {
+    Networks as Networks,
+    type NetworkCreateParams as NetworkCreateParams,
+    type NetworkDeleteParams as NetworkDeleteParams,
+    type NetworkEditParams as NetworkEditParams,
+  };
 }

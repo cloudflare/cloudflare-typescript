@@ -2,10 +2,20 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as IndicatorFeedsAPI from './indicator-feeds';
 import * as DownloadsAPI from './downloads';
+import { DownloadGetParams, DownloadGetResponse, Downloads } from './downloads';
 import * as PermissionsAPI from './permissions';
+import {
+  PermissionCreateParams,
+  PermissionCreateResponse,
+  PermissionDeleteParams,
+  PermissionDeleteResponse,
+  PermissionListParams,
+  PermissionListResponse,
+  Permissions,
+} from './permissions';
 import * as SnapshotsAPI from './snapshots';
+import { SnapshotUpdateParams, SnapshotUpdateResponse, Snapshots } from './snapshots';
 import { SinglePage } from '../../../pagination';
 
 export class IndicatorFeeds extends APIResource {
@@ -351,29 +361,45 @@ export interface IndicatorFeedGetParams {
   account_id: string;
 }
 
-export namespace IndicatorFeeds {
-  export import IndicatorFeedCreateResponse = IndicatorFeedsAPI.IndicatorFeedCreateResponse;
-  export import IndicatorFeedUpdateResponse = IndicatorFeedsAPI.IndicatorFeedUpdateResponse;
-  export import IndicatorFeedListResponse = IndicatorFeedsAPI.IndicatorFeedListResponse;
-  export import IndicatorFeedDataResponse = IndicatorFeedsAPI.IndicatorFeedDataResponse;
-  export import IndicatorFeedGetResponse = IndicatorFeedsAPI.IndicatorFeedGetResponse;
-  export import IndicatorFeedListResponsesSinglePage = IndicatorFeedsAPI.IndicatorFeedListResponsesSinglePage;
-  export import IndicatorFeedCreateParams = IndicatorFeedsAPI.IndicatorFeedCreateParams;
-  export import IndicatorFeedUpdateParams = IndicatorFeedsAPI.IndicatorFeedUpdateParams;
-  export import IndicatorFeedListParams = IndicatorFeedsAPI.IndicatorFeedListParams;
-  export import IndicatorFeedDataParams = IndicatorFeedsAPI.IndicatorFeedDataParams;
-  export import IndicatorFeedGetParams = IndicatorFeedsAPI.IndicatorFeedGetParams;
-  export import Snapshots = SnapshotsAPI.Snapshots;
-  export import SnapshotUpdateResponse = SnapshotsAPI.SnapshotUpdateResponse;
-  export import SnapshotUpdateParams = SnapshotsAPI.SnapshotUpdateParams;
-  export import Permissions = PermissionsAPI.Permissions;
-  export import PermissionCreateResponse = PermissionsAPI.PermissionCreateResponse;
-  export import PermissionListResponse = PermissionsAPI.PermissionListResponse;
-  export import PermissionDeleteResponse = PermissionsAPI.PermissionDeleteResponse;
-  export import PermissionCreateParams = PermissionsAPI.PermissionCreateParams;
-  export import PermissionListParams = PermissionsAPI.PermissionListParams;
-  export import PermissionDeleteParams = PermissionsAPI.PermissionDeleteParams;
-  export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadGetResponse = DownloadsAPI.DownloadGetResponse;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
+IndicatorFeeds.IndicatorFeedListResponsesSinglePage = IndicatorFeedListResponsesSinglePage;
+IndicatorFeeds.Snapshots = Snapshots;
+IndicatorFeeds.Permissions = Permissions;
+IndicatorFeeds.Downloads = Downloads;
+
+export declare namespace IndicatorFeeds {
+  export {
+    type IndicatorFeedCreateResponse as IndicatorFeedCreateResponse,
+    type IndicatorFeedUpdateResponse as IndicatorFeedUpdateResponse,
+    type IndicatorFeedListResponse as IndicatorFeedListResponse,
+    type IndicatorFeedDataResponse as IndicatorFeedDataResponse,
+    type IndicatorFeedGetResponse as IndicatorFeedGetResponse,
+    IndicatorFeedListResponsesSinglePage as IndicatorFeedListResponsesSinglePage,
+    type IndicatorFeedCreateParams as IndicatorFeedCreateParams,
+    type IndicatorFeedUpdateParams as IndicatorFeedUpdateParams,
+    type IndicatorFeedListParams as IndicatorFeedListParams,
+    type IndicatorFeedDataParams as IndicatorFeedDataParams,
+    type IndicatorFeedGetParams as IndicatorFeedGetParams,
+  };
+
+  export {
+    Snapshots as Snapshots,
+    type SnapshotUpdateResponse as SnapshotUpdateResponse,
+    type SnapshotUpdateParams as SnapshotUpdateParams,
+  };
+
+  export {
+    Permissions as Permissions,
+    type PermissionCreateResponse as PermissionCreateResponse,
+    type PermissionListResponse as PermissionListResponse,
+    type PermissionDeleteResponse as PermissionDeleteResponse,
+    type PermissionCreateParams as PermissionCreateParams,
+    type PermissionListParams as PermissionListParams,
+    type PermissionDeleteParams as PermissionDeleteParams,
+  };
+
+  export {
+    Downloads as Downloads,
+    type DownloadGetResponse as DownloadGetResponse,
+    type DownloadGetParams as DownloadGetParams,
+  };
 }

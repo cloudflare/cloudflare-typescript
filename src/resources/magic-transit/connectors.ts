@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConnectorsAPI from './connectors';
 import { SinglePage } from '../../pagination';
 
 export class Connectors extends APIResource {
@@ -273,14 +272,18 @@ export interface ConnectorGetParams {
   account_id: string;
 }
 
-export namespace Connectors {
-  export import ConnectorUpdateResponse = ConnectorsAPI.ConnectorUpdateResponse;
-  export import ConnectorListResponse = ConnectorsAPI.ConnectorListResponse;
-  export import ConnectorEditResponse = ConnectorsAPI.ConnectorEditResponse;
-  export import ConnectorGetResponse = ConnectorsAPI.ConnectorGetResponse;
-  export import ConnectorListResponsesSinglePage = ConnectorsAPI.ConnectorListResponsesSinglePage;
-  export import ConnectorUpdateParams = ConnectorsAPI.ConnectorUpdateParams;
-  export import ConnectorListParams = ConnectorsAPI.ConnectorListParams;
-  export import ConnectorEditParams = ConnectorsAPI.ConnectorEditParams;
-  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
+Connectors.ConnectorListResponsesSinglePage = ConnectorListResponsesSinglePage;
+
+export declare namespace Connectors {
+  export {
+    type ConnectorUpdateResponse as ConnectorUpdateResponse,
+    type ConnectorListResponse as ConnectorListResponse,
+    type ConnectorEditResponse as ConnectorEditResponse,
+    type ConnectorGetResponse as ConnectorGetResponse,
+    ConnectorListResponsesSinglePage as ConnectorListResponsesSinglePage,
+    type ConnectorUpdateParams as ConnectorUpdateParams,
+    type ConnectorListParams as ConnectorListParams,
+    type ConnectorEditParams as ConnectorEditParams,
+    type ConnectorGetParams as ConnectorGetParams,
+  };
 }

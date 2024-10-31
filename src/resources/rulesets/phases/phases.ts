@@ -4,10 +4,17 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import * as PhasesAPI from './phases';
 import * as RulesAPI from '../rules';
 import * as RulesetsAPI from '../rulesets';
 import * as VersionsAPI from './versions';
+import {
+  VersionGetParams,
+  VersionGetResponse,
+  VersionListParams,
+  VersionListResponse,
+  VersionListResponsesSinglePage,
+  Versions,
+} from './versions';
 
 export class Phases extends APIResource {
   versions: VersionsAPI.Versions = new VersionsAPI.Versions(this._client);
@@ -1063,15 +1070,23 @@ export interface PhaseGetParams {
   zone_id?: string;
 }
 
-export namespace Phases {
-  export import PhaseUpdateResponse = PhasesAPI.PhaseUpdateResponse;
-  export import PhaseGetResponse = PhasesAPI.PhaseGetResponse;
-  export import PhaseUpdateParams = PhasesAPI.PhaseUpdateParams;
-  export import PhaseGetParams = PhasesAPI.PhaseGetParams;
-  export import Versions = VersionsAPI.Versions;
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesSinglePage = VersionsAPI.VersionListResponsesSinglePage;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Phases.Versions = Versions;
+Phases.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
+
+export declare namespace Phases {
+  export {
+    type PhaseUpdateResponse as PhaseUpdateResponse,
+    type PhaseGetResponse as PhaseGetResponse,
+    type PhaseUpdateParams as PhaseUpdateParams,
+    type PhaseGetParams as PhaseGetParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesSinglePage as VersionListResponsesSinglePage,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

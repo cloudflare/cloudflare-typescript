@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RulesAPI from './rules';
 import * as FiltersAPI from '../filters';
 import * as RateLimitsAPI from '../rate-limits';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -375,17 +374,21 @@ export interface RuleGetParams {
   id?: string;
 }
 
-export namespace Rules {
-  export import FirewallRule = RulesAPI.FirewallRule;
-  export import Product = RulesAPI.Product;
-  export import DeletedFilter = RulesAPI.DeletedFilter;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import FirewallRulesV4PagePaginationArray = RulesAPI.FirewallRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+Rules.FirewallRulesV4PagePaginationArray = FirewallRulesV4PagePaginationArray;
+
+export declare namespace Rules {
+  export {
+    type FirewallRule as FirewallRule,
+    type Product as Product,
+    type DeletedFilter as DeletedFilter,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleEditResponse as RuleEditResponse,
+    FirewallRulesV4PagePaginationArray as FirewallRulesV4PagePaginationArray,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
 }

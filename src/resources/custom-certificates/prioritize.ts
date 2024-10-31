@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PrioritizeAPI from './prioritize';
 import * as CustomCertificatesAPI from './custom-certificates';
 
 export class Prioritize extends APIResource {
@@ -56,7 +55,9 @@ export namespace PrioritizeUpdateParams {
   }
 }
 
-export namespace Prioritize {
-  export import PrioritizeUpdateResponse = PrioritizeAPI.PrioritizeUpdateResponse;
-  export import PrioritizeUpdateParams = PrioritizeAPI.PrioritizeUpdateParams;
+export declare namespace Prioritize {
+  export {
+    type PrioritizeUpdateResponse as PrioritizeUpdateResponse,
+    type PrioritizeUpdateParams as PrioritizeUpdateParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as WANsAPI from './wans';
 import { SinglePage } from '../../../pagination';
 
 export class WANs extends APIResource {
@@ -310,15 +309,19 @@ export interface WANGetParams {
   account_id: string;
 }
 
-export namespace WANs {
-  export import WAN = WANsAPI.WAN;
-  export import WANStaticAddressing = WANsAPI.WANStaticAddressing;
-  export import WANCreateResponse = WANsAPI.WANCreateResponse;
-  export import WANsSinglePage = WANsAPI.WANsSinglePage;
-  export import WANCreateParams = WANsAPI.WANCreateParams;
-  export import WANUpdateParams = WANsAPI.WANUpdateParams;
-  export import WANListParams = WANsAPI.WANListParams;
-  export import WANDeleteParams = WANsAPI.WANDeleteParams;
-  export import WANEditParams = WANsAPI.WANEditParams;
-  export import WANGetParams = WANsAPI.WANGetParams;
+WANs.WANsSinglePage = WANsSinglePage;
+
+export declare namespace WANs {
+  export {
+    type WAN as WAN,
+    type WANStaticAddressing as WANStaticAddressing,
+    type WANCreateResponse as WANCreateResponse,
+    WANsSinglePage as WANsSinglePage,
+    type WANCreateParams as WANCreateParams,
+    type WANUpdateParams as WANUpdateParams,
+    type WANListParams as WANListParams,
+    type WANDeleteParams as WANDeleteParams,
+    type WANEditParams as WANEditParams,
+    type WANGetParams as WANGetParams,
+  };
 }

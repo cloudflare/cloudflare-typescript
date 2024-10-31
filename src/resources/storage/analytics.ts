@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AnalyticsAPI from './analytics';
 
 export class Analytics extends APIResource {
   /**
@@ -388,9 +387,11 @@ export namespace AnalyticsStoredParams {
   }
 }
 
-export namespace Analytics {
-  export import Components = AnalyticsAPI.Components;
-  export import Schema = AnalyticsAPI.Schema;
-  export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
-  export import AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
+export declare namespace Analytics {
+  export {
+    type Components as Components,
+    type Schema as Schema,
+    type AnalyticsListParams as AnalyticsListParams,
+    type AnalyticsStoredParams as AnalyticsStoredParams,
+  };
 }

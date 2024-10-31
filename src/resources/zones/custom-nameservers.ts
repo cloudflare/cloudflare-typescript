@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as CustomNameserversAPI from './custom-nameservers';
 import * as Shared from '../shared';
 
 export class CustomNameservers extends APIResource {
@@ -116,9 +115,11 @@ export interface CustomNameserverGetParams {
   zone_id: string;
 }
 
-export namespace CustomNameservers {
-  export import CustomNameserverUpdateResponse = CustomNameserversAPI.CustomNameserverUpdateResponse;
-  export import CustomNameserverGetResponse = CustomNameserversAPI.CustomNameserverGetResponse;
-  export import CustomNameserverUpdateParams = CustomNameserversAPI.CustomNameserverUpdateParams;
-  export import CustomNameserverGetParams = CustomNameserversAPI.CustomNameserverGetParams;
+export declare namespace CustomNameservers {
+  export {
+    type CustomNameserverUpdateResponse as CustomNameserverUpdateResponse,
+    type CustomNameserverGetResponse as CustomNameserverGetResponse,
+    type CustomNameserverUpdateParams as CustomNameserverUpdateParams,
+    type CustomNameserverGetParams as CustomNameserverGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as FallbackOriginAPI from './fallback-origin';
 
 export class FallbackOrigin extends APIResource {
   /**
@@ -181,11 +180,13 @@ export interface FallbackOriginGetParams {
   zone_id: string;
 }
 
-export namespace FallbackOrigin {
-  export import FallbackOriginUpdateResponse = FallbackOriginAPI.FallbackOriginUpdateResponse;
-  export import FallbackOriginDeleteResponse = FallbackOriginAPI.FallbackOriginDeleteResponse;
-  export import FallbackOriginGetResponse = FallbackOriginAPI.FallbackOriginGetResponse;
-  export import FallbackOriginUpdateParams = FallbackOriginAPI.FallbackOriginUpdateParams;
-  export import FallbackOriginDeleteParams = FallbackOriginAPI.FallbackOriginDeleteParams;
-  export import FallbackOriginGetParams = FallbackOriginAPI.FallbackOriginGetParams;
+export declare namespace FallbackOrigin {
+  export {
+    type FallbackOriginUpdateResponse as FallbackOriginUpdateResponse,
+    type FallbackOriginDeleteResponse as FallbackOriginDeleteResponse,
+    type FallbackOriginGetResponse as FallbackOriginGetResponse,
+    type FallbackOriginUpdateParams as FallbackOriginUpdateParams,
+    type FallbackOriginDeleteParams as FallbackOriginDeleteParams,
+    type FallbackOriginGetParams as FallbackOriginGetParams,
+  };
 }

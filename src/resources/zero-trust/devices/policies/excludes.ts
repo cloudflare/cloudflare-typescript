@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ExcludesAPI from './excludes';
 import { SinglePage } from '../../../../pagination';
 
 export class Excludes extends APIResource {
@@ -120,12 +119,16 @@ export interface ExcludeGetParams {
   account_id: string;
 }
 
-export namespace Excludes {
-  export import SplitTunnelExclude = ExcludesAPI.SplitTunnelExclude;
-  export import ExcludeUpdateResponse = ExcludesAPI.ExcludeUpdateResponse;
-  export import ExcludeGetResponse = ExcludesAPI.ExcludeGetResponse;
-  export import SplitTunnelExcludesSinglePage = ExcludesAPI.SplitTunnelExcludesSinglePage;
-  export import ExcludeUpdateParams = ExcludesAPI.ExcludeUpdateParams;
-  export import ExcludeListParams = ExcludesAPI.ExcludeListParams;
-  export import ExcludeGetParams = ExcludesAPI.ExcludeGetParams;
+Excludes.SplitTunnelExcludesSinglePage = SplitTunnelExcludesSinglePage;
+
+export declare namespace Excludes {
+  export {
+    type SplitTunnelExclude as SplitTunnelExclude,
+    type ExcludeUpdateResponse as ExcludeUpdateResponse,
+    type ExcludeGetResponse as ExcludeGetResponse,
+    SplitTunnelExcludesSinglePage as SplitTunnelExcludesSinglePage,
+    type ExcludeUpdateParams as ExcludeUpdateParams,
+    type ExcludeListParams as ExcludeListParams,
+    type ExcludeGetParams as ExcludeGetParams,
+  };
 }

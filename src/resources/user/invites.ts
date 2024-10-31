@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as InvitesAPI from './invites';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
@@ -104,10 +103,14 @@ export interface InviteEditParams {
   status: 'accepted' | 'rejected';
 }
 
-export namespace Invites {
-  export import Invite = InvitesAPI.Invite;
-  export import InviteEditResponse = InvitesAPI.InviteEditResponse;
-  export import InviteGetResponse = InvitesAPI.InviteGetResponse;
-  export import InvitesSinglePage = InvitesAPI.InvitesSinglePage;
-  export import InviteEditParams = InvitesAPI.InviteEditParams;
+Invites.InvitesSinglePage = InvitesSinglePage;
+
+export declare namespace Invites {
+  export {
+    type Invite as Invite,
+    type InviteEditResponse as InviteEditResponse,
+    type InviteGetResponse as InviteGetResponse,
+    InvitesSinglePage as InvitesSinglePage,
+    type InviteEditParams as InviteEditParams,
+  };
 }

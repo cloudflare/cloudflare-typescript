@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LocationsAPI from './locations';
 import { SinglePage } from '../../../pagination';
 
 export class Locations extends APIResource {
@@ -452,20 +451,24 @@ export interface LocationGetParams {
   account_id: string;
 }
 
-export namespace Locations {
-  export import DOHEndpoint = LocationsAPI.DOHEndpoint;
-  export import DOTEndpoint = LocationsAPI.DOTEndpoint;
-  export import Endpoint = LocationsAPI.Endpoint;
-  export import IPNetwork = LocationsAPI.IPNetwork;
-  export import IPV4Endpoint = LocationsAPI.IPV4Endpoint;
-  export import IPV6Endpoint = LocationsAPI.IPV6Endpoint;
-  export import IPV6Network = LocationsAPI.IPV6Network;
-  export import Location = LocationsAPI.Location;
-  export import LocationDeleteResponse = LocationsAPI.LocationDeleteResponse;
-  export import LocationsSinglePage = LocationsAPI.LocationsSinglePage;
-  export import LocationCreateParams = LocationsAPI.LocationCreateParams;
-  export import LocationUpdateParams = LocationsAPI.LocationUpdateParams;
-  export import LocationListParams = LocationsAPI.LocationListParams;
-  export import LocationDeleteParams = LocationsAPI.LocationDeleteParams;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+Locations.LocationsSinglePage = LocationsSinglePage;
+
+export declare namespace Locations {
+  export {
+    type DOHEndpoint as DOHEndpoint,
+    type DOTEndpoint as DOTEndpoint,
+    type Endpoint as Endpoint,
+    type IPNetwork as IPNetwork,
+    type IPV4Endpoint as IPV4Endpoint,
+    type IPV6Endpoint as IPV6Endpoint,
+    type IPV6Network as IPV6Network,
+    type Location as Location,
+    type LocationDeleteResponse as LocationDeleteResponse,
+    LocationsSinglePage as LocationsSinglePage,
+    type LocationCreateParams as LocationCreateParams,
+    type LocationUpdateParams as LocationUpdateParams,
+    type LocationListParams as LocationListParams,
+    type LocationDeleteParams as LocationDeleteParams,
+    type LocationGetParams as LocationGetParams,
+  };
 }

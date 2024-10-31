@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as IPVersionAPI from './ip-version';
 
 export class IPVersion extends APIResource {
   /**
@@ -186,7 +185,6 @@ export interface IPVersionGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace IPVersion {
-  export import IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
-  export import IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
+export declare namespace IPVersion {
+  export { type IPVersionGetResponse as IPVersionGetResponse, type IPVersionGetParams as IPVersionGetParams };
 }

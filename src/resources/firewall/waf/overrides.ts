@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OverridesAPI from './overrides';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Overrides extends APIResource {
@@ -317,16 +316,20 @@ export interface OverrideGetParams {
   zone_id: string;
 }
 
-export namespace Overrides {
-  export import Override = OverridesAPI.Override;
-  export import OverrideURL = OverridesAPI.OverrideURL;
-  export import RewriteAction = OverridesAPI.RewriteAction;
-  export import WAFRule = OverridesAPI.WAFRule;
-  export import OverrideDeleteResponse = OverridesAPI.OverrideDeleteResponse;
-  export import OverridesV4PagePaginationArray = OverridesAPI.OverridesV4PagePaginationArray;
-  export import OverrideCreateParams = OverridesAPI.OverrideCreateParams;
-  export import OverrideUpdateParams = OverridesAPI.OverrideUpdateParams;
-  export import OverrideListParams = OverridesAPI.OverrideListParams;
-  export import OverrideDeleteParams = OverridesAPI.OverrideDeleteParams;
-  export import OverrideGetParams = OverridesAPI.OverrideGetParams;
+Overrides.OverridesV4PagePaginationArray = OverridesV4PagePaginationArray;
+
+export declare namespace Overrides {
+  export {
+    type Override as Override,
+    type OverrideURL as OverrideURL,
+    type RewriteAction as RewriteAction,
+    type WAFRule as WAFRule,
+    type OverrideDeleteResponse as OverrideDeleteResponse,
+    OverridesV4PagePaginationArray as OverridesV4PagePaginationArray,
+    type OverrideCreateParams as OverrideCreateParams,
+    type OverrideUpdateParams as OverrideUpdateParams,
+    type OverrideListParams as OverrideListParams,
+    type OverrideDeleteParams as OverrideDeleteParams,
+    type OverrideGetParams as OverrideGetParams,
+  };
 }

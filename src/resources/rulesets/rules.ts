@@ -14096,30 +14096,32 @@ export namespace RuleEditParams {
   }
 }
 
-export namespace Rules {
-  export import BlockRule = RulesAPI.BlockRule;
-  export import CompressResponseRule = RulesAPI.CompressResponseRule;
-  export import DDoSDynamicRule = RulesAPI.DDoSDynamicRule;
-  export import ExecuteRule = RulesAPI.ExecuteRule;
-  export import ForceConnectionCloseRule = RulesAPI.ForceConnectionCloseRule;
-  export import LogCustomFieldRule = RulesAPI.LogCustomFieldRule;
-  export import LogRule = RulesAPI.LogRule;
-  export import Logging = RulesAPI.Logging;
-  export import ManagedChallengeRule = RulesAPI.ManagedChallengeRule;
-  export import RedirectRule = RulesAPI.RedirectRule;
-  export import RewriteRule = RulesAPI.RewriteRule;
-  export import RewriteURIPart = RulesAPI.RewriteURIPart;
-  export import RouteRule = RulesAPI.RouteRule;
-  export import RulesetRule = RulesAPI.RulesetRule;
-  export import ScoreRule = RulesAPI.ScoreRule;
-  export import ServeErrorRule = RulesAPI.ServeErrorRule;
-  export import SetCacheSettingsRule = RulesAPI.SetCacheSettingsRule;
-  export import SetConfigRule = RulesAPI.SetConfigRule;
-  export import SkipRule = RulesAPI.SkipRule;
-  export import RuleCreateResponse = RulesAPI.RuleCreateResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
+export declare namespace Rules {
+  export {
+    type BlockRule as BlockRule,
+    type CompressResponseRule as CompressResponseRule,
+    type DDoSDynamicRule as DDoSDynamicRule,
+    type ExecuteRule as ExecuteRule,
+    type ForceConnectionCloseRule as ForceConnectionCloseRule,
+    type LogCustomFieldRule as LogCustomFieldRule,
+    type LogRule as LogRule,
+    type Logging as Logging,
+    type ManagedChallengeRule as ManagedChallengeRule,
+    type RedirectRule as RedirectRule,
+    type RewriteRule as RewriteRule,
+    type RewriteURIPart as RewriteURIPart,
+    type RouteRule as RouteRule,
+    type RulesetRule as RulesetRule,
+    type ScoreRule as ScoreRule,
+    type ServeErrorRule as ServeErrorRule,
+    type SetCacheSettingsRule as SetCacheSettingsRule,
+    type SetConfigRule as SetConfigRule,
+    type SkipRule as SkipRule,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleEditParams as RuleEditParams,
+  };
 }

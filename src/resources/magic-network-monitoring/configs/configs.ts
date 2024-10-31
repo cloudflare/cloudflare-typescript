@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ConfigsAPI from './configs';
 import * as FullAPI from './full';
+import { Full, FullGetParams } from './full';
 
 export class Configs extends APIResource {
   full: FullAPI.Full = new FullAPI.Full(this._client);
@@ -271,13 +271,17 @@ export interface ConfigGetParams {
   account_id: string;
 }
 
-export namespace Configs {
-  export import Configuration = ConfigsAPI.Configuration;
-  export import ConfigCreateParams = ConfigsAPI.ConfigCreateParams;
-  export import ConfigUpdateParams = ConfigsAPI.ConfigUpdateParams;
-  export import ConfigDeleteParams = ConfigsAPI.ConfigDeleteParams;
-  export import ConfigEditParams = ConfigsAPI.ConfigEditParams;
-  export import ConfigGetParams = ConfigsAPI.ConfigGetParams;
-  export import Full = FullAPI.Full;
-  export import FullGetParams = FullAPI.FullGetParams;
+Configs.Full = Full;
+
+export declare namespace Configs {
+  export {
+    type Configuration as Configuration,
+    type ConfigCreateParams as ConfigCreateParams,
+    type ConfigUpdateParams as ConfigUpdateParams,
+    type ConfigDeleteParams as ConfigDeleteParams,
+    type ConfigEditParams as ConfigEditParams,
+    type ConfigGetParams as ConfigGetParams,
+  };
+
+  export { Full as Full, type FullGetParams as FullGetParams };
 }

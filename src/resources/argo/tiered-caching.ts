@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TieredCachingAPI from './tiered-caching';
 
 export class TieredCaching extends APIResource {
   /**
@@ -99,9 +98,11 @@ export interface TieredCachingGetParams {
   zone_id: string;
 }
 
-export namespace TieredCaching {
-  export import TieredCachingEditResponse = TieredCachingAPI.TieredCachingEditResponse;
-  export import TieredCachingGetResponse = TieredCachingAPI.TieredCachingGetResponse;
-  export import TieredCachingEditParams = TieredCachingAPI.TieredCachingEditParams;
-  export import TieredCachingGetParams = TieredCachingAPI.TieredCachingGetParams;
+export declare namespace TieredCaching {
+  export {
+    type TieredCachingEditResponse as TieredCachingEditResponse,
+    type TieredCachingGetResponse as TieredCachingGetResponse,
+    type TieredCachingEditParams as TieredCachingEditParams,
+    type TieredCachingGetParams as TieredCachingGetParams,
+  };
 }

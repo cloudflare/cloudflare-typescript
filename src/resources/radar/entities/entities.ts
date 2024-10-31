@@ -2,9 +2,26 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as EntitiesAPI from './entities';
 import * as ASNsAPI from './asns';
+import {
+  ASNGetParams,
+  ASNGetResponse,
+  ASNIPParams,
+  ASNIPResponse,
+  ASNListParams,
+  ASNListResponse,
+  ASNRelParams,
+  ASNRelResponse,
+  ASNs,
+} from './asns';
 import * as LocationsAPI from './locations';
+import {
+  LocationGetParams,
+  LocationGetResponse,
+  LocationListParams,
+  LocationListResponse,
+  Locations,
+} from './locations';
 
 export class Entities extends APIResource {
   asns: ASNsAPI.ASNs = new ASNsAPI.ASNs(this._client);
@@ -58,21 +75,29 @@ export interface EntityGetParams {
   format?: 'JSON' | 'CSV';
 }
 
-export namespace Entities {
-  export import EntityGetResponse = EntitiesAPI.EntityGetResponse;
-  export import EntityGetParams = EntitiesAPI.EntityGetParams;
-  export import ASNs = ASNsAPI.ASNs;
-  export import ASNListResponse = ASNsAPI.ASNListResponse;
-  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
-  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
-  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
-  export import ASNListParams = ASNsAPI.ASNListParams;
-  export import ASNGetParams = ASNsAPI.ASNGetParams;
-  export import ASNIPParams = ASNsAPI.ASNIPParams;
-  export import ASNRelParams = ASNsAPI.ASNRelParams;
-  export import Locations = LocationsAPI.Locations;
-  export import LocationListResponse = LocationsAPI.LocationListResponse;
-  export import LocationGetResponse = LocationsAPI.LocationGetResponse;
-  export import LocationListParams = LocationsAPI.LocationListParams;
-  export import LocationGetParams = LocationsAPI.LocationGetParams;
+Entities.ASNs = ASNs;
+Entities.Locations = Locations;
+
+export declare namespace Entities {
+  export { type EntityGetResponse as EntityGetResponse, type EntityGetParams as EntityGetParams };
+
+  export {
+    ASNs as ASNs,
+    type ASNListResponse as ASNListResponse,
+    type ASNGetResponse as ASNGetResponse,
+    type ASNIPResponse as ASNIPResponse,
+    type ASNRelResponse as ASNRelResponse,
+    type ASNListParams as ASNListParams,
+    type ASNGetParams as ASNGetParams,
+    type ASNIPParams as ASNIPParams,
+    type ASNRelParams as ASNRelParams,
+  };
+
+  export {
+    Locations as Locations,
+    type LocationListResponse as LocationListResponse,
+    type LocationGetResponse as LocationGetResponse,
+    type LocationListParams as LocationListParams,
+    type LocationGetParams as LocationGetParams,
+  };
 }

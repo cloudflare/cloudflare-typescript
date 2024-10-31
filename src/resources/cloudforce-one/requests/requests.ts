@@ -2,11 +2,39 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RequestsAPI from './requests';
 import * as Shared from '../../shared';
 import * as AssetsAPI from './assets';
+import {
+  AssetCreateParams,
+  AssetCreateResponse,
+  AssetDeleteResponse,
+  AssetGetResponse,
+  AssetUpdateParams,
+  AssetUpdateResponse,
+  Assets,
+} from './assets';
 import * as MessageAPI from './message';
+import {
+  Message,
+  MessageCreateParams,
+  MessageCreateResponse,
+  MessageDeleteResponse,
+  MessageGetParams,
+  MessageGetResponse,
+  MessageUpdateParams,
+  MessageUpdateResponse,
+} from './message';
 import * as PriorityAPI from './priority';
+import {
+  Priority,
+  PriorityCreateParams,
+  PriorityCreateResponse,
+  PriorityDeleteResponse,
+  PriorityGetResponse,
+  PriorityQuotaResponse,
+  PriorityUpdateParams,
+  PriorityUpdateResponse,
+} from './priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Requests extends APIResource {
@@ -501,40 +529,56 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
   status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
 }
 
-export namespace Requests {
-  export import RequestCreateResponse = RequestsAPI.RequestCreateResponse;
-  export import RequestUpdateResponse = RequestsAPI.RequestUpdateResponse;
-  export import RequestListResponse = RequestsAPI.RequestListResponse;
-  export import RequestDeleteResponse = RequestsAPI.RequestDeleteResponse;
-  export import RequestConstantsResponse = RequestsAPI.RequestConstantsResponse;
-  export import RequestGetResponse = RequestsAPI.RequestGetResponse;
-  export import RequestQuotaResponse = RequestsAPI.RequestQuotaResponse;
-  export import RequestTypesResponse = RequestsAPI.RequestTypesResponse;
-  export import RequestListResponsesV4PagePaginationArray = RequestsAPI.RequestListResponsesV4PagePaginationArray;
-  export import RequestCreateParams = RequestsAPI.RequestCreateParams;
-  export import RequestUpdateParams = RequestsAPI.RequestUpdateParams;
-  export import RequestListParams = RequestsAPI.RequestListParams;
-  export import Message = MessageAPI.Message;
-  export import MessageCreateResponse = MessageAPI.MessageCreateResponse;
-  export import MessageUpdateResponse = MessageAPI.MessageUpdateResponse;
-  export import MessageDeleteResponse = MessageAPI.MessageDeleteResponse;
-  export import MessageGetResponse = MessageAPI.MessageGetResponse;
-  export import MessageCreateParams = MessageAPI.MessageCreateParams;
-  export import MessageUpdateParams = MessageAPI.MessageUpdateParams;
-  export import MessageGetParams = MessageAPI.MessageGetParams;
-  export import Priority = PriorityAPI.Priority;
-  export import PriorityCreateResponse = PriorityAPI.PriorityCreateResponse;
-  export import PriorityUpdateResponse = PriorityAPI.PriorityUpdateResponse;
-  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityGetResponse = PriorityAPI.PriorityGetResponse;
-  export import PriorityQuotaResponse = PriorityAPI.PriorityQuotaResponse;
-  export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
-  export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
-  export import Assets = AssetsAPI.Assets;
-  export import AssetCreateResponse = AssetsAPI.AssetCreateResponse;
-  export import AssetUpdateResponse = AssetsAPI.AssetUpdateResponse;
-  export import AssetDeleteResponse = AssetsAPI.AssetDeleteResponse;
-  export import AssetGetResponse = AssetsAPI.AssetGetResponse;
-  export import AssetCreateParams = AssetsAPI.AssetCreateParams;
-  export import AssetUpdateParams = AssetsAPI.AssetUpdateParams;
+Requests.RequestListResponsesV4PagePaginationArray = RequestListResponsesV4PagePaginationArray;
+Requests.Message = Message;
+Requests.Priority = Priority;
+Requests.Assets = Assets;
+
+export declare namespace Requests {
+  export {
+    type RequestCreateResponse as RequestCreateResponse,
+    type RequestUpdateResponse as RequestUpdateResponse,
+    type RequestListResponse as RequestListResponse,
+    type RequestDeleteResponse as RequestDeleteResponse,
+    type RequestConstantsResponse as RequestConstantsResponse,
+    type RequestGetResponse as RequestGetResponse,
+    type RequestQuotaResponse as RequestQuotaResponse,
+    type RequestTypesResponse as RequestTypesResponse,
+    RequestListResponsesV4PagePaginationArray as RequestListResponsesV4PagePaginationArray,
+    type RequestCreateParams as RequestCreateParams,
+    type RequestUpdateParams as RequestUpdateParams,
+    type RequestListParams as RequestListParams,
+  };
+
+  export {
+    Message as Message,
+    type MessageCreateResponse as MessageCreateResponse,
+    type MessageUpdateResponse as MessageUpdateResponse,
+    type MessageDeleteResponse as MessageDeleteResponse,
+    type MessageGetResponse as MessageGetResponse,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageGetParams as MessageGetParams,
+  };
+
+  export {
+    Priority as Priority,
+    type PriorityCreateResponse as PriorityCreateResponse,
+    type PriorityUpdateResponse as PriorityUpdateResponse,
+    type PriorityDeleteResponse as PriorityDeleteResponse,
+    type PriorityGetResponse as PriorityGetResponse,
+    type PriorityQuotaResponse as PriorityQuotaResponse,
+    type PriorityCreateParams as PriorityCreateParams,
+    type PriorityUpdateParams as PriorityUpdateParams,
+  };
+
+  export {
+    Assets as Assets,
+    type AssetCreateResponse as AssetCreateResponse,
+    type AssetUpdateResponse as AssetUpdateResponse,
+    type AssetDeleteResponse as AssetDeleteResponse,
+    type AssetGetResponse as AssetGetResponse,
+    type AssetCreateParams as AssetCreateParams,
+    type AssetUpdateParams as AssetUpdateParams,
+  };
 }

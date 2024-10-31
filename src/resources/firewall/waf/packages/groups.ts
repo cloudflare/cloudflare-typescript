@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as GroupsAPI from './groups';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Groups extends APIResource {
@@ -178,12 +177,16 @@ export interface GroupGetParams {
   zone_id: string;
 }
 
-export namespace Groups {
-  export import Group = GroupsAPI.Group;
-  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
-  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
-  export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
-  export import GroupListParams = GroupsAPI.GroupListParams;
-  export import GroupEditParams = GroupsAPI.GroupEditParams;
-  export import GroupGetParams = GroupsAPI.GroupGetParams;
+Groups.GroupsV4PagePaginationArray = GroupsV4PagePaginationArray;
+
+export declare namespace Groups {
+  export {
+    type Group as Group,
+    type GroupEditResponse as GroupEditResponse,
+    type GroupGetResponse as GroupGetResponse,
+    GroupsV4PagePaginationArray as GroupsV4PagePaginationArray,
+    type GroupListParams as GroupListParams,
+    type GroupEditParams as GroupEditParams,
+    type GroupGetParams as GroupGetParams,
+  };
 }

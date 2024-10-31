@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as TURNAPI from './turn/turn';
+import { TURN } from './turn/turn';
 import { SinglePage } from '../../pagination';
 
 export class Calls extends APIResource {
@@ -175,6 +176,8 @@ export interface CallGetParams {
   account_id: string;
 }
 
-export namespace Calls {
-  export import TURN = TURNAPI.TURN;
+Calls.TURN = TURN;
+
+export declare namespace Calls {
+  export { TURN as TURN };
 }

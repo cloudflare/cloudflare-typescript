@@ -2,9 +2,16 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as FirewallAPI from './firewall';
 import * as ReverseDNSAPI from './reverse-dns';
+import {
+  ReverseDNS,
+  ReverseDNSEditParams,
+  ReverseDNSEditResponse,
+  ReverseDNSGetParams,
+  ReverseDNSGetResponse,
+} from './reverse-dns';
 import * as AnalyticsAPI from './analytics/analytics';
+import { Analytics, Delta } from './analytics/analytics';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Firewall extends APIResource {
@@ -571,26 +578,35 @@ export interface FirewallGetParams {
   account_id: string;
 }
 
-export namespace Firewall {
-  export import AttackMitigation = FirewallAPI.AttackMitigation;
-  export import FirewallIPs = FirewallAPI.FirewallIPs;
-  export import UpstreamIPs = FirewallAPI.UpstreamIPs;
-  export import FirewallCreateResponse = FirewallAPI.FirewallCreateResponse;
-  export import FirewallListResponse = FirewallAPI.FirewallListResponse;
-  export import FirewallDeleteResponse = FirewallAPI.FirewallDeleteResponse;
-  export import FirewallEditResponse = FirewallAPI.FirewallEditResponse;
-  export import FirewallGetResponse = FirewallAPI.FirewallGetResponse;
-  export import FirewallListResponsesV4PagePaginationArray = FirewallAPI.FirewallListResponsesV4PagePaginationArray;
-  export import FirewallCreateParams = FirewallAPI.FirewallCreateParams;
-  export import FirewallListParams = FirewallAPI.FirewallListParams;
-  export import FirewallDeleteParams = FirewallAPI.FirewallDeleteParams;
-  export import FirewallEditParams = FirewallAPI.FirewallEditParams;
-  export import FirewallGetParams = FirewallAPI.FirewallGetParams;
-  export import Analytics = AnalyticsAPI.Analytics;
-  export import Delta = AnalyticsAPI.Delta;
-  export import ReverseDNS = ReverseDNSAPI.ReverseDNS;
-  export import ReverseDNSEditResponse = ReverseDNSAPI.ReverseDNSEditResponse;
-  export import ReverseDNSGetResponse = ReverseDNSAPI.ReverseDNSGetResponse;
-  export import ReverseDNSEditParams = ReverseDNSAPI.ReverseDNSEditParams;
-  export import ReverseDNSGetParams = ReverseDNSAPI.ReverseDNSGetParams;
+Firewall.FirewallListResponsesV4PagePaginationArray = FirewallListResponsesV4PagePaginationArray;
+Firewall.Analytics = Analytics;
+Firewall.ReverseDNS = ReverseDNS;
+
+export declare namespace Firewall {
+  export {
+    type AttackMitigation as AttackMitigation,
+    type FirewallIPs as FirewallIPs,
+    type UpstreamIPs as UpstreamIPs,
+    type FirewallCreateResponse as FirewallCreateResponse,
+    type FirewallListResponse as FirewallListResponse,
+    type FirewallDeleteResponse as FirewallDeleteResponse,
+    type FirewallEditResponse as FirewallEditResponse,
+    type FirewallGetResponse as FirewallGetResponse,
+    FirewallListResponsesV4PagePaginationArray as FirewallListResponsesV4PagePaginationArray,
+    type FirewallCreateParams as FirewallCreateParams,
+    type FirewallListParams as FirewallListParams,
+    type FirewallDeleteParams as FirewallDeleteParams,
+    type FirewallEditParams as FirewallEditParams,
+    type FirewallGetParams as FirewallGetParams,
+  };
+
+  export { Analytics as Analytics, type Delta as Delta };
+
+  export {
+    ReverseDNS as ReverseDNS,
+    type ReverseDNSEditResponse as ReverseDNSEditResponse,
+    type ReverseDNSGetResponse as ReverseDNSGetResponse,
+    type ReverseDNSEditParams as ReverseDNSEditParams,
+    type ReverseDNSGetParams as ReverseDNSGetParams,
+  };
 }

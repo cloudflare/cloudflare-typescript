@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as TargetsAPI from './targets';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Targets extends APIResource {
@@ -580,15 +579,19 @@ export interface TargetGetParams {
   account_id: string;
 }
 
-export namespace Targets {
-  export import TargetCreateResponse = TargetsAPI.TargetCreateResponse;
-  export import TargetUpdateResponse = TargetsAPI.TargetUpdateResponse;
-  export import TargetListResponse = TargetsAPI.TargetListResponse;
-  export import TargetGetResponse = TargetsAPI.TargetGetResponse;
-  export import TargetListResponsesV4PagePaginationArray = TargetsAPI.TargetListResponsesV4PagePaginationArray;
-  export import TargetCreateParams = TargetsAPI.TargetCreateParams;
-  export import TargetUpdateParams = TargetsAPI.TargetUpdateParams;
-  export import TargetListParams = TargetsAPI.TargetListParams;
-  export import TargetDeleteParams = TargetsAPI.TargetDeleteParams;
-  export import TargetGetParams = TargetsAPI.TargetGetParams;
+Targets.TargetListResponsesV4PagePaginationArray = TargetListResponsesV4PagePaginationArray;
+
+export declare namespace Targets {
+  export {
+    type TargetCreateResponse as TargetCreateResponse,
+    type TargetUpdateResponse as TargetUpdateResponse,
+    type TargetListResponse as TargetListResponse,
+    type TargetGetResponse as TargetGetResponse,
+    TargetListResponsesV4PagePaginationArray as TargetListResponsesV4PagePaginationArray,
+    type TargetCreateParams as TargetCreateParams,
+    type TargetUpdateParams as TargetUpdateParams,
+    type TargetListParams as TargetListParams,
+    type TargetDeleteParams as TargetDeleteParams,
+    type TargetGetParams as TargetGetParams,
+  };
 }

@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as EventsAPI from './events';
 import * as DetailsAPI from './details';
+import { DetailGetParams, DetailGetResponse, Details, EventQuery } from './details';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Events extends APIResource {
@@ -527,18 +527,26 @@ export interface EventGetParams {
   zone_id: string;
 }
 
-export namespace Events {
-  export import Event = EventsAPI.Event;
-  export import EventDeleteResponse = EventsAPI.EventDeleteResponse;
-  export import EventsV4PagePaginationArray = EventsAPI.EventsV4PagePaginationArray;
-  export import EventCreateParams = EventsAPI.EventCreateParams;
-  export import EventUpdateParams = EventsAPI.EventUpdateParams;
-  export import EventListParams = EventsAPI.EventListParams;
-  export import EventDeleteParams = EventsAPI.EventDeleteParams;
-  export import EventEditParams = EventsAPI.EventEditParams;
-  export import EventGetParams = EventsAPI.EventGetParams;
-  export import Details = DetailsAPI.Details;
-  export import EventQuery = DetailsAPI.EventQuery;
-  export import DetailGetResponse = DetailsAPI.DetailGetResponse;
-  export import DetailGetParams = DetailsAPI.DetailGetParams;
+Events.EventsV4PagePaginationArray = EventsV4PagePaginationArray;
+Events.Details = Details;
+
+export declare namespace Events {
+  export {
+    type Event as Event,
+    type EventDeleteResponse as EventDeleteResponse,
+    EventsV4PagePaginationArray as EventsV4PagePaginationArray,
+    type EventCreateParams as EventCreateParams,
+    type EventUpdateParams as EventUpdateParams,
+    type EventListParams as EventListParams,
+    type EventDeleteParams as EventDeleteParams,
+    type EventEditParams as EventEditParams,
+    type EventGetParams as EventGetParams,
+  };
+
+  export {
+    Details as Details,
+    type EventQuery as EventQuery,
+    type DetailGetResponse as DetailGetResponse,
+    type DetailGetParams as DetailGetParams,
+  };
 }

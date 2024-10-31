@@ -2,10 +2,31 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RiskScoringAPI from './risk-scoring';
 import * as BehavioursAPI from './behaviours';
+import {
+  BehaviourGetParams,
+  BehaviourGetResponse,
+  BehaviourUpdateParams,
+  BehaviourUpdateResponse,
+  Behaviours,
+} from './behaviours';
 import * as SummaryAPI from './summary';
+import { Summary, SummaryGetParams, SummaryGetResponse } from './summary';
 import * as IntegrationsAPI from './integrations/integrations';
+import {
+  IntegrationCreateParams,
+  IntegrationCreateResponse,
+  IntegrationDeleteParams,
+  IntegrationDeleteResponse,
+  IntegrationGetParams,
+  IntegrationGetResponse,
+  IntegrationListParams,
+  IntegrationListResponse,
+  IntegrationListResponsesSinglePage,
+  IntegrationUpdateParams,
+  IntegrationUpdateResponse,
+  Integrations,
+} from './integrations/integrations';
 
 export class RiskScoring extends APIResource {
   behaviours: BehavioursAPI.Behaviours = new BehavioursAPI.Behaviours(this._client);
@@ -82,29 +103,45 @@ export interface RiskScoringResetParams {
   account_id: string;
 }
 
-export namespace RiskScoring {
-  export import RiskScoringGetResponse = RiskScoringAPI.RiskScoringGetResponse;
-  export import RiskScoringResetResponse = RiskScoringAPI.RiskScoringResetResponse;
-  export import RiskScoringGetParams = RiskScoringAPI.RiskScoringGetParams;
-  export import RiskScoringResetParams = RiskScoringAPI.RiskScoringResetParams;
-  export import Behaviours = BehavioursAPI.Behaviours;
-  export import BehaviourUpdateResponse = BehavioursAPI.BehaviourUpdateResponse;
-  export import BehaviourGetResponse = BehavioursAPI.BehaviourGetResponse;
-  export import BehaviourUpdateParams = BehavioursAPI.BehaviourUpdateParams;
-  export import BehaviourGetParams = BehavioursAPI.BehaviourGetParams;
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
-  export import Integrations = IntegrationsAPI.Integrations;
-  export import IntegrationCreateResponse = IntegrationsAPI.IntegrationCreateResponse;
-  export import IntegrationUpdateResponse = IntegrationsAPI.IntegrationUpdateResponse;
-  export import IntegrationListResponse = IntegrationsAPI.IntegrationListResponse;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationGetResponse = IntegrationsAPI.IntegrationGetResponse;
-  export import IntegrationListResponsesSinglePage = IntegrationsAPI.IntegrationListResponsesSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationUpdateParams = IntegrationsAPI.IntegrationUpdateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+RiskScoring.Behaviours = Behaviours;
+RiskScoring.Summary = Summary;
+RiskScoring.Integrations = Integrations;
+RiskScoring.IntegrationListResponsesSinglePage = IntegrationListResponsesSinglePage;
+
+export declare namespace RiskScoring {
+  export {
+    type RiskScoringGetResponse as RiskScoringGetResponse,
+    type RiskScoringResetResponse as RiskScoringResetResponse,
+    type RiskScoringGetParams as RiskScoringGetParams,
+    type RiskScoringResetParams as RiskScoringResetParams,
+  };
+
+  export {
+    Behaviours as Behaviours,
+    type BehaviourUpdateResponse as BehaviourUpdateResponse,
+    type BehaviourGetResponse as BehaviourGetResponse,
+    type BehaviourUpdateParams as BehaviourUpdateParams,
+    type BehaviourGetParams as BehaviourGetParams,
+  };
+
+  export {
+    Summary as Summary,
+    type SummaryGetResponse as SummaryGetResponse,
+    type SummaryGetParams as SummaryGetParams,
+  };
+
+  export {
+    Integrations as Integrations,
+    type IntegrationCreateResponse as IntegrationCreateResponse,
+    type IntegrationUpdateResponse as IntegrationUpdateResponse,
+    type IntegrationListResponse as IntegrationListResponse,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    type IntegrationGetResponse as IntegrationGetResponse,
+    IntegrationListResponsesSinglePage as IntegrationListResponsesSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationUpdateParams as IntegrationUpdateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
 }

@@ -2,7 +2,22 @@
 
 import { APIResource } from '../../resource';
 import * as AppsAPI from './apps';
+import {
+  AppCreateParams,
+  AppCreateResponse,
+  AppDeleteParams,
+  AppDeleteResponse,
+  AppGetParams,
+  AppGetResponse,
+  AppListParams,
+  AppListResponse,
+  AppListResponsesV4PagePaginationArray,
+  AppUpdateParams,
+  AppUpdateResponse,
+  Apps,
+} from './apps';
 import * as AnalyticsAPI from './analytics/analytics';
+import { Analytics } from './analytics/analytics';
 
 export class Spectrum extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
@@ -171,18 +186,25 @@ export type OriginPort = number | string;
  */
 export type OriginPortParam = number | string;
 
-export namespace Spectrum {
-  export import Analytics = AnalyticsAPI.Analytics;
-  export import Apps = AppsAPI.Apps;
-  export import AppCreateResponse = AppsAPI.AppCreateResponse;
-  export import AppUpdateResponse = AppsAPI.AppUpdateResponse;
-  export import AppListResponse = AppsAPI.AppListResponse;
-  export import AppDeleteResponse = AppsAPI.AppDeleteResponse;
-  export import AppGetResponse = AppsAPI.AppGetResponse;
-  export import AppListResponsesV4PagePaginationArray = AppsAPI.AppListResponsesV4PagePaginationArray;
-  export import AppCreateParams = AppsAPI.AppCreateParams;
-  export import AppUpdateParams = AppsAPI.AppUpdateParams;
-  export import AppListParams = AppsAPI.AppListParams;
-  export import AppDeleteParams = AppsAPI.AppDeleteParams;
-  export import AppGetParams = AppsAPI.AppGetParams;
+Spectrum.Analytics = Analytics;
+Spectrum.Apps = Apps;
+Spectrum.AppListResponsesV4PagePaginationArray = AppListResponsesV4PagePaginationArray;
+
+export declare namespace Spectrum {
+  export { Analytics as Analytics };
+
+  export {
+    Apps as Apps,
+    type AppCreateResponse as AppCreateResponse,
+    type AppUpdateResponse as AppUpdateResponse,
+    type AppListResponse as AppListResponse,
+    type AppDeleteResponse as AppDeleteResponse,
+    type AppGetResponse as AppGetResponse,
+    AppListResponsesV4PagePaginationArray as AppListResponsesV4PagePaginationArray,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+    type AppDeleteParams as AppDeleteParams,
+    type AppGetParams as AppGetParams,
+  };
 }

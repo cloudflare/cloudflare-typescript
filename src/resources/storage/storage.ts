@@ -2,15 +2,20 @@
 
 import { APIResource } from '../../resource';
 import * as AnalyticsAPI from './analytics';
+import { Analytics, AnalyticsListParams, AnalyticsStoredParams, Components, Schema } from './analytics';
 
 export class Storage extends APIResource {
   analytics: AnalyticsAPI.Analytics = new AnalyticsAPI.Analytics(this._client);
 }
 
-export namespace Storage {
-  export import Analytics = AnalyticsAPI.Analytics;
-  export import Components = AnalyticsAPI.Components;
-  export import Schema = AnalyticsAPI.Schema;
-  export import AnalyticsListParams = AnalyticsAPI.AnalyticsListParams;
-  export import AnalyticsStoredParams = AnalyticsAPI.AnalyticsStoredParams;
+Storage.Analytics = Analytics;
+
+export declare namespace Storage {
+  export {
+    Analytics as Analytics,
+    type Components as Components,
+    type Schema as Schema,
+    type AnalyticsListParams as AnalyticsListParams,
+    type AnalyticsStoredParams as AnalyticsStoredParams,
+  };
 }

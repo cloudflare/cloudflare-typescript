@@ -3,8 +3,8 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as RankingAPI from './ranking';
 import * as DomainAPI from './domain';
+import { Domain, DomainGetParams, DomainGetResponse } from './domain';
 
 export class Ranking extends APIResource {
   domain: DomainAPI.Domain = new DomainAPI.Domain(this._client);
@@ -207,12 +207,19 @@ export interface RankingTopParams {
   rankingType?: 'POPULAR' | 'TRENDING_RISE' | 'TRENDING_STEADY';
 }
 
-export namespace Ranking {
-  export import RankingTimeseriesGroupsResponse = RankingAPI.RankingTimeseriesGroupsResponse;
-  export import RankingTopResponse = RankingAPI.RankingTopResponse;
-  export import RankingTimeseriesGroupsParams = RankingAPI.RankingTimeseriesGroupsParams;
-  export import RankingTopParams = RankingAPI.RankingTopParams;
-  export import Domain = DomainAPI.Domain;
-  export import DomainGetResponse = DomainAPI.DomainGetResponse;
-  export import DomainGetParams = DomainAPI.DomainGetParams;
+Ranking.Domain = Domain;
+
+export declare namespace Ranking {
+  export {
+    type RankingTimeseriesGroupsResponse as RankingTimeseriesGroupsResponse,
+    type RankingTopResponse as RankingTopResponse,
+    type RankingTimeseriesGroupsParams as RankingTimeseriesGroupsParams,
+    type RankingTopParams as RankingTopParams,
+  };
+
+  export {
+    Domain as Domain,
+    type DomainGetResponse as DomainGetResponse,
+    type DomainGetParams as DomainGetParams,
+  };
 }
