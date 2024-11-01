@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as MessagesAPI from './messages';
 
 export class Messages extends APIResource {
   /**
@@ -129,9 +128,11 @@ export interface MessagePullParams {
   visibility_timeout?: number;
 }
 
-export namespace Messages {
-  export import MessageAckResponse = MessagesAPI.MessageAckResponse;
-  export import MessagePullResponse = MessagesAPI.MessagePullResponse;
-  export import MessageAckParams = MessagesAPI.MessageAckParams;
-  export import MessagePullParams = MessagesAPI.MessagePullParams;
+export declare namespace Messages {
+  export {
+    type MessageAckResponse as MessageAckResponse,
+    type MessagePullResponse as MessagePullResponse,
+    type MessageAckParams as MessageAckParams,
+    type MessagePullParams as MessagePullParams,
+  };
 }

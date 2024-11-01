@@ -3,8 +3,38 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as AddressesAPI from './addresses';
+import {
+  Address,
+  AddressCreateParams,
+  AddressDeleteParams,
+  AddressGetParams,
+  AddressListParams,
+  Addresses,
+  AddressesV4PagePaginationArray,
+} from './addresses';
 import * as DNSAPI from './dns';
+import {
+  DNS,
+  DNSCreateParams,
+  DNSDeleteParams,
+  DNSEditParams,
+  DNSGetParams,
+  DNSGetResponse,
+  DNSRecord,
+} from './dns';
 import * as RulesAPI from './rules/rules';
+import {
+  Action,
+  EmailRoutingRule,
+  EmailRoutingRulesV4PagePaginationArray,
+  Matcher,
+  RuleCreateParams,
+  RuleDeleteParams,
+  RuleGetParams,
+  RuleListParams,
+  RuleUpdateParams,
+  Rules,
+} from './rules/rules';
 
 export class EmailRouting extends APIResource {
   dns: DNSAPI.DNS = new DNSAPI.DNS(this._client);
@@ -123,29 +153,43 @@ export interface EmailRoutingGetParams {
   zone_id: string;
 }
 
-export namespace EmailRouting {
-  export import DNS = DNSAPI.DNS;
-  export import DNSRecord = DNSAPI.DNSRecord;
-  export import DNSGetResponse = DNSAPI.DNSGetResponse;
-  export import DNSCreateParams = DNSAPI.DNSCreateParams;
-  export import DNSDeleteParams = DNSAPI.DNSDeleteParams;
-  export import DNSEditParams = DNSAPI.DNSEditParams;
-  export import DNSGetParams = DNSAPI.DNSGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import Action = RulesAPI.Action;
-  export import EmailRoutingRule = RulesAPI.EmailRoutingRule;
-  export import Matcher = RulesAPI.Matcher;
-  export import EmailRoutingRulesV4PagePaginationArray = RulesAPI.EmailRoutingRulesV4PagePaginationArray;
-  export import RuleCreateParams = RulesAPI.RuleCreateParams;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
-  export import Addresses = AddressesAPI.Addresses;
-  export import Address = AddressesAPI.Address;
-  export import AddressesV4PagePaginationArray = AddressesAPI.AddressesV4PagePaginationArray;
-  export import AddressCreateParams = AddressesAPI.AddressCreateParams;
-  export import AddressListParams = AddressesAPI.AddressListParams;
-  export import AddressDeleteParams = AddressesAPI.AddressDeleteParams;
-  export import AddressGetParams = AddressesAPI.AddressGetParams;
+EmailRouting.DNS = DNS;
+EmailRouting.Rules = Rules;
+EmailRouting.EmailRoutingRulesV4PagePaginationArray = EmailRoutingRulesV4PagePaginationArray;
+EmailRouting.Addresses = Addresses;
+EmailRouting.AddressesV4PagePaginationArray = AddressesV4PagePaginationArray;
+
+export declare namespace EmailRouting {
+  export {
+    DNS as DNS,
+    type DNSRecord as DNSRecord,
+    type DNSGetResponse as DNSGetResponse,
+    type DNSCreateParams as DNSCreateParams,
+    type DNSDeleteParams as DNSDeleteParams,
+    type DNSEditParams as DNSEditParams,
+    type DNSGetParams as DNSGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type Action as Action,
+    type EmailRoutingRule as EmailRoutingRule,
+    type Matcher as Matcher,
+    EmailRoutingRulesV4PagePaginationArray as EmailRoutingRulesV4PagePaginationArray,
+    type RuleCreateParams as RuleCreateParams,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+    type RuleGetParams as RuleGetParams,
+  };
+
+  export {
+    Addresses as Addresses,
+    type Address as Address,
+    AddressesV4PagePaginationArray as AddressesV4PagePaginationArray,
+    type AddressCreateParams as AddressCreateParams,
+    type AddressListParams as AddressListParams,
+    type AddressDeleteParams as AddressDeleteParams,
+    type AddressGetParams as AddressGetParams,
+  };
 }

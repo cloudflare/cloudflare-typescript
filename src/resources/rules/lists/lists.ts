@@ -2,9 +2,24 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ListsAPI from './lists';
 import * as BulkOperationsAPI from './bulk-operations';
+import { BulkOperationGetResponse, BulkOperations, OperationStatus } from './bulk-operations';
 import * as ItemsAPI from './items';
+import {
+  ItemCreateParams,
+  ItemCreateResponse,
+  ItemDeleteParams,
+  ItemDeleteResponse,
+  ItemGetResponse,
+  ItemListParams,
+  ItemListResponse,
+  ItemListResponsesCursorPagination,
+  ItemUpdateParams,
+  ItemUpdateResponse,
+  Items,
+  ListCursor,
+  ListItem,
+} from './items';
 import { SinglePage } from '../../../pagination';
 
 export class Lists extends APIResource {
@@ -243,31 +258,44 @@ export interface ListGetParams {
   account_id: string;
 }
 
-export namespace Lists {
-  export import Hostname = ListsAPI.Hostname;
-  export import ListsList = ListsAPI.ListsList;
-  export import Redirect = ListsAPI.Redirect;
-  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import ListsListsSinglePage = ListsAPI.ListsListsSinglePage;
-  export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListListParams = ListsAPI.ListListParams;
-  export import ListDeleteParams = ListsAPI.ListDeleteParams;
-  export import ListGetParams = ListsAPI.ListGetParams;
-  export import BulkOperations = BulkOperationsAPI.BulkOperations;
-  export import OperationStatus = BulkOperationsAPI.OperationStatus;
-  export import BulkOperationGetResponse = BulkOperationsAPI.BulkOperationGetResponse;
-  export import Items = ItemsAPI.Items;
-  export import ListCursor = ItemsAPI.ListCursor;
-  export import ListItem = ItemsAPI.ListItem;
-  export import ItemCreateResponse = ItemsAPI.ItemCreateResponse;
-  export import ItemUpdateResponse = ItemsAPI.ItemUpdateResponse;
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
-  export import ItemDeleteResponse = ItemsAPI.ItemDeleteResponse;
-  export import ItemGetResponse = ItemsAPI.ItemGetResponse;
-  export import ItemListResponsesCursorPagination = ItemsAPI.ItemListResponsesCursorPagination;
-  export import ItemCreateParams = ItemsAPI.ItemCreateParams;
-  export import ItemUpdateParams = ItemsAPI.ItemUpdateParams;
-  export import ItemListParams = ItemsAPI.ItemListParams;
-  export import ItemDeleteParams = ItemsAPI.ItemDeleteParams;
+Lists.ListsListsSinglePage = ListsListsSinglePage;
+Lists.BulkOperations = BulkOperations;
+Lists.Items = Items;
+Lists.ItemListResponsesCursorPagination = ItemListResponsesCursorPagination;
+
+export declare namespace Lists {
+  export {
+    type Hostname as Hostname,
+    type ListsList as ListsList,
+    type Redirect as Redirect,
+    type ListDeleteResponse as ListDeleteResponse,
+    ListsListsSinglePage as ListsListsSinglePage,
+    type ListCreateParams as ListCreateParams,
+    type ListUpdateParams as ListUpdateParams,
+    type ListListParams as ListListParams,
+    type ListDeleteParams as ListDeleteParams,
+    type ListGetParams as ListGetParams,
+  };
+
+  export {
+    BulkOperations as BulkOperations,
+    type OperationStatus as OperationStatus,
+    type BulkOperationGetResponse as BulkOperationGetResponse,
+  };
+
+  export {
+    Items as Items,
+    type ListCursor as ListCursor,
+    type ListItem as ListItem,
+    type ItemCreateResponse as ItemCreateResponse,
+    type ItemUpdateResponse as ItemUpdateResponse,
+    type ItemListResponse as ItemListResponse,
+    type ItemDeleteResponse as ItemDeleteResponse,
+    type ItemGetResponse as ItemGetResponse,
+    ItemListResponsesCursorPagination as ItemListResponsesCursorPagination,
+    type ItemCreateParams as ItemCreateParams,
+    type ItemUpdateParams as ItemUpdateParams,
+    type ItemListParams as ItemListParams,
+    type ItemDeleteParams as ItemDeleteParams,
+  };
 }

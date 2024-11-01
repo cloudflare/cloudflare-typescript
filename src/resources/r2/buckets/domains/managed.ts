@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ManagedAPI from './managed';
 
 export class Managed extends APIResource {
   /**
@@ -114,9 +113,11 @@ export interface ManagedListParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace Managed {
-  export import ManagedUpdateResponse = ManagedAPI.ManagedUpdateResponse;
-  export import ManagedListResponse = ManagedAPI.ManagedListResponse;
-  export import ManagedUpdateParams = ManagedAPI.ManagedUpdateParams;
-  export import ManagedListParams = ManagedAPI.ManagedListParams;
+export declare namespace Managed {
+  export {
+    type ManagedUpdateResponse as ManagedUpdateResponse,
+    type ManagedListResponse as ManagedListResponse,
+    type ManagedUpdateParams as ManagedUpdateParams,
+    type ManagedListParams as ManagedListParams,
+  };
 }

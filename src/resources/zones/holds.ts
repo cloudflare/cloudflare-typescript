@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as HoldsAPI from './holds';
 
 export class Holds extends APIResource {
   /**
@@ -89,9 +88,11 @@ export interface HoldGetParams {
   zone_id: string;
 }
 
-export namespace Holds {
-  export import ZoneHold = HoldsAPI.ZoneHold;
-  export import HoldCreateParams = HoldsAPI.HoldCreateParams;
-  export import HoldDeleteParams = HoldsAPI.HoldDeleteParams;
-  export import HoldGetParams = HoldsAPI.HoldGetParams;
+export declare namespace Holds {
+  export {
+    type ZoneHold as ZoneHold,
+    type HoldCreateParams as HoldCreateParams,
+    type HoldDeleteParams as HoldDeleteParams,
+    type HoldGetParams as HoldGetParams,
+  };
 }

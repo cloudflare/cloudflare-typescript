@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DNSAPI from './dns';
 import * as Shared from '../shared';
 import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
@@ -109,9 +108,13 @@ export namespace DNSListParams {
   }
 }
 
-export namespace DNS {
-  export import DNS = DNSAPI.DNS;
-  export import DNSListResponse = DNSAPI.DNSListResponse;
-  export import DNSListResponsesV4PagePagination = DNSAPI.DNSListResponsesV4PagePagination;
-  export import DNSListParams = DNSAPI.DNSListParams;
+DNS.DNSListResponsesV4PagePagination = DNSListResponsesV4PagePagination;
+
+export declare namespace DNS {
+  export {
+    type DNS as DNS,
+    type DNSListResponse as DNSListResponse,
+    DNSListResponsesV4PagePagination as DNSListResponsesV4PagePagination,
+    type DNSListParams as DNSListParams,
+  };
 }

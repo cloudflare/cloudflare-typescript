@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -1302,25 +1301,27 @@ export interface TimeseriesGroupTLSVersionParams {
   os?: Array<'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV'>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupBotClassResponse = TimeseriesGroupsAPI.TimeseriesGroupBotClassResponse;
-  export import TimeseriesGroupBrowserResponse = TimeseriesGroupsAPI.TimeseriesGroupBrowserResponse;
-  export import TimeseriesGroupBrowserFamilyResponse = TimeseriesGroupsAPI.TimeseriesGroupBrowserFamilyResponse;
-  export import TimeseriesGroupDeviceTypeResponse = TimeseriesGroupsAPI.TimeseriesGroupDeviceTypeResponse;
-  export import TimeseriesGroupHTTPProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPProtocolResponse;
-  export import TimeseriesGroupHTTPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupOSResponse = TimeseriesGroupsAPI.TimeseriesGroupOSResponse;
-  export import TimeseriesGroupPostQuantumResponse = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumResponse;
-  export import TimeseriesGroupTLSVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionResponse;
-  export import TimeseriesGroupBotClassParams = TimeseriesGroupsAPI.TimeseriesGroupBotClassParams;
-  export import TimeseriesGroupBrowserParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserParams;
-  export import TimeseriesGroupBrowserFamilyParams = TimeseriesGroupsAPI.TimeseriesGroupBrowserFamilyParams;
-  export import TimeseriesGroupDeviceTypeParams = TimeseriesGroupsAPI.TimeseriesGroupDeviceTypeParams;
-  export import TimeseriesGroupHTTPProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPProtocolParams;
-  export import TimeseriesGroupHTTPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupHTTPVersionParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupOSParams = TimeseriesGroupsAPI.TimeseriesGroupOSParams;
-  export import TimeseriesGroupPostQuantumParams = TimeseriesGroupsAPI.TimeseriesGroupPostQuantumParams;
-  export import TimeseriesGroupTLSVersionParams = TimeseriesGroupsAPI.TimeseriesGroupTLSVersionParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupBotClassResponse as TimeseriesGroupBotClassResponse,
+    type TimeseriesGroupBrowserResponse as TimeseriesGroupBrowserResponse,
+    type TimeseriesGroupBrowserFamilyResponse as TimeseriesGroupBrowserFamilyResponse,
+    type TimeseriesGroupDeviceTypeResponse as TimeseriesGroupDeviceTypeResponse,
+    type TimeseriesGroupHTTPProtocolResponse as TimeseriesGroupHTTPProtocolResponse,
+    type TimeseriesGroupHTTPVersionResponse as TimeseriesGroupHTTPVersionResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupOSResponse as TimeseriesGroupOSResponse,
+    type TimeseriesGroupPostQuantumResponse as TimeseriesGroupPostQuantumResponse,
+    type TimeseriesGroupTLSVersionResponse as TimeseriesGroupTLSVersionResponse,
+    type TimeseriesGroupBotClassParams as TimeseriesGroupBotClassParams,
+    type TimeseriesGroupBrowserParams as TimeseriesGroupBrowserParams,
+    type TimeseriesGroupBrowserFamilyParams as TimeseriesGroupBrowserFamilyParams,
+    type TimeseriesGroupDeviceTypeParams as TimeseriesGroupDeviceTypeParams,
+    type TimeseriesGroupHTTPProtocolParams as TimeseriesGroupHTTPProtocolParams,
+    type TimeseriesGroupHTTPVersionParams as TimeseriesGroupHTTPVersionParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupOSParams as TimeseriesGroupOSParams,
+    type TimeseriesGroupPostQuantumParams as TimeseriesGroupPostQuantumParams,
+    type TimeseriesGroupTLSVersionParams as TimeseriesGroupTLSVersionParams,
+  };
 }

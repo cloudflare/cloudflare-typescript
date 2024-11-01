@@ -430,13 +430,15 @@ export interface CustomGetParams {
   account_id: string;
 }
 
-export namespace Custom {
-  export import CustomProfile = CustomAPI.CustomProfile;
-  export import Pattern = CustomAPI.Pattern;
-  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export import CustomCreateParams = CustomAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomAPI.CustomGetParams;
+export declare namespace Custom {
+  export {
+    type CustomProfile as CustomProfile,
+    type Pattern as Pattern,
+    type CustomCreateResponse as CustomCreateResponse,
+    type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
+  };
 }

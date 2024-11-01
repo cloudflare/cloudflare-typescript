@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as AsesAPI from './ases';
 
 export class Ases extends APIResource {
   /**
@@ -180,9 +179,11 @@ export interface AsePrefixesParams {
   limit?: number;
 }
 
-export namespace Ases {
-  export import AseGetResponse = AsesAPI.AseGetResponse;
-  export import AsePrefixesResponse = AsesAPI.AsePrefixesResponse;
-  export import AseGetParams = AsesAPI.AseGetParams;
-  export import AsePrefixesParams = AsesAPI.AsePrefixesParams;
+export declare namespace Ases {
+  export {
+    type AseGetResponse as AseGetResponse,
+    type AsePrefixesResponse as AsePrefixesResponse,
+    type AseGetParams as AseGetParams,
+    type AsePrefixesParams as AsePrefixesParams,
+  };
 }

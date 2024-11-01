@@ -2,11 +2,11 @@
 
 export { ByTag } from './by-tag';
 export {
-  VersionListResponse,
-  VersionGetResponse,
-  VersionListParams,
-  VersionDeleteParams,
-  VersionGetParams,
   VersionListResponsesSinglePage,
   Versions,
+  type VersionListResponse,
+  type VersionGetResponse,
+  type VersionListParams,
+  type VersionDeleteParams,
+  type VersionGetParams,
 } from './versions';

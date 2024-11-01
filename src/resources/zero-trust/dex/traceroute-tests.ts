@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TracerouteTestsAPI from './traceroute-tests';
 import * as DEXAPI from './dex';
 import * as PercentilesAPI from './http-tests/percentiles';
 
@@ -332,10 +331,12 @@ export interface TracerouteTestPercentilesParams {
   deviceId?: Array<string>;
 }
 
-export namespace TracerouteTests {
-  export import Traceroute = TracerouteTestsAPI.Traceroute;
-  export import TracerouteTestPercentilesResponse = TracerouteTestsAPI.TracerouteTestPercentilesResponse;
-  export import TracerouteTestGetParams = TracerouteTestsAPI.TracerouteTestGetParams;
-  export import TracerouteTestNetworkPathParams = TracerouteTestsAPI.TracerouteTestNetworkPathParams;
-  export import TracerouteTestPercentilesParams = TracerouteTestsAPI.TracerouteTestPercentilesParams;
+export declare namespace TracerouteTests {
+  export {
+    type Traceroute as Traceroute,
+    type TracerouteTestPercentilesResponse as TracerouteTestPercentilesResponse,
+    type TracerouteTestGetParams as TracerouteTestGetParams,
+    type TracerouteTestNetworkPathParams as TracerouteTestNetworkPathParams,
+    type TracerouteTestPercentilesParams as TracerouteTestPercentilesParams,
+  };
 }

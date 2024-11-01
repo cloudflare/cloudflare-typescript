@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AvailableAlertsAPI from './available-alerts';
 
 export class AvailableAlerts extends APIResource {
   /**
@@ -55,7 +54,9 @@ export interface AvailableAlertListParams {
   account_id: string;
 }
 
-export namespace AvailableAlerts {
-  export import AvailableAlertListResponse = AvailableAlertsAPI.AvailableAlertListResponse;
-  export import AvailableAlertListParams = AvailableAlertsAPI.AvailableAlertListParams;
+export declare namespace AvailableAlerts {
+  export {
+    type AvailableAlertListResponse as AvailableAlertListResponse,
+    type AvailableAlertListParams as AvailableAlertListParams,
+  };
 }

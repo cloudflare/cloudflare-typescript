@@ -5,7 +5,13 @@ import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as TokensAPI from './tokens';
 import * as PermissionGroupsAPI from './permission-groups';
+import {
+  PermissionGroupListResponse,
+  PermissionGroupListResponsesSinglePage,
+  PermissionGroups,
+} from './permission-groups';
 import * as ValueAPI from './value';
+import { Value, ValueResource, ValueUpdateParams } from './value';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
@@ -749,24 +755,33 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 }
 
-export namespace Tokens {
-  export import CIDRList = TokensAPI.CIDRList;
-  export import Policy = TokensAPI.Policy;
-  export import Token = TokensAPI.Token;
-  export import TokenCreateResponse = TokensAPI.TokenCreateResponse;
-  export import TokenUpdateResponse = TokensAPI.TokenUpdateResponse;
-  export import TokenListResponse = TokensAPI.TokenListResponse;
-  export import TokenDeleteResponse = TokensAPI.TokenDeleteResponse;
-  export import TokenGetResponse = TokensAPI.TokenGetResponse;
-  export import TokenVerifyResponse = TokensAPI.TokenVerifyResponse;
-  export import TokenListResponsesV4PagePaginationArray = TokensAPI.TokenListResponsesV4PagePaginationArray;
-  export import TokenCreateParams = TokensAPI.TokenCreateParams;
-  export import TokenUpdateParams = TokensAPI.TokenUpdateParams;
-  export import TokenListParams = TokensAPI.TokenListParams;
-  export import PermissionGroups = PermissionGroupsAPI.PermissionGroups;
-  export import PermissionGroupListResponse = PermissionGroupsAPI.PermissionGroupListResponse;
-  export import PermissionGroupListResponsesSinglePage = PermissionGroupsAPI.PermissionGroupListResponsesSinglePage;
-  export import ValueResource = ValueAPI.ValueResource;
-  export import Value = ValueAPI.Value;
-  export import ValueUpdateParams = ValueAPI.ValueUpdateParams;
+Tokens.TokenListResponsesV4PagePaginationArray = TokenListResponsesV4PagePaginationArray;
+Tokens.PermissionGroups = PermissionGroups;
+Tokens.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
+Tokens.ValueResource = ValueResource;
+
+export declare namespace Tokens {
+  export {
+    type CIDRList as CIDRList,
+    type Policy as Policy,
+    type Token as Token,
+    type TokenCreateResponse as TokenCreateResponse,
+    type TokenUpdateResponse as TokenUpdateResponse,
+    type TokenListResponse as TokenListResponse,
+    type TokenDeleteResponse as TokenDeleteResponse,
+    type TokenGetResponse as TokenGetResponse,
+    type TokenVerifyResponse as TokenVerifyResponse,
+    TokenListResponsesV4PagePaginationArray as TokenListResponsesV4PagePaginationArray,
+    type TokenCreateParams as TokenCreateParams,
+    type TokenUpdateParams as TokenUpdateParams,
+    type TokenListParams as TokenListParams,
+  };
+
+  export {
+    PermissionGroups as PermissionGroups,
+    type PermissionGroupListResponse as PermissionGroupListResponse,
+    PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
+  };
+
+  export { ValueResource as ValueResource, type Value as Value, type ValueUpdateParams as ValueUpdateParams };
 }

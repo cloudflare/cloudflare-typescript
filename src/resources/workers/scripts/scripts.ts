@@ -2,15 +2,59 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ScriptsAPI from './scripts';
 import * as WorkersAPI from '../workers';
 import * as ContentAPI from './content';
+import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as DeploymentsAPI from './deployments';
+import {
+  Deployment,
+  DeploymentCreateParams,
+  DeploymentCreateResponse,
+  DeploymentGetParams,
+  DeploymentGetResponse,
+  Deployments,
+} from './deployments';
 import * as SchedulesAPI from './schedules';
+import {
+  Schedule,
+  ScheduleGetParams,
+  ScheduleGetResponse,
+  ScheduleUpdateParams,
+  ScheduleUpdateResponse,
+  Schedules,
+} from './schedules';
 import * as SettingsAPI from './settings';
+import { SettingEditParams, SettingGetParams, Settings } from './settings';
 import * as SubdomainAPI from './subdomain';
+import {
+  Subdomain,
+  SubdomainCreateParams,
+  SubdomainCreateResponse,
+  SubdomainGetParams,
+  SubdomainGetResponse,
+} from './subdomain';
 import * as TailAPI from './tail';
+import {
+  ConsumerScript,
+  Tail,
+  TailCreateParams,
+  TailCreateResponse,
+  TailDeleteParams,
+  TailDeleteResponse,
+  TailGetParams,
+  TailGetResponse,
+} from './tail';
 import * as VersionsAPI from './versions';
+import {
+  VersionCreateParams,
+  VersionCreateResponse,
+  VersionGetParams,
+  VersionGetResponse,
+  VersionListParams,
+  VersionListResponse,
+  VersionListResponsesV4PagePagination,
+  Versions,
+} from './versions';
 import { SinglePage } from '../../../pagination';
 import { type Response } from '../../../_shims/index';
 
@@ -400,52 +444,85 @@ export interface ScriptGetParams {
   account_id: string;
 }
 
-export namespace Scripts {
-  export import Script = ScriptsAPI.Script;
-  export import ScriptSetting = ScriptsAPI.ScriptSetting;
-  export import ScriptUpdateResponse = ScriptsAPI.ScriptUpdateResponse;
-  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
-  export import ScriptUpdateParams = ScriptsAPI.ScriptUpdateParams;
-  export import ScriptListParams = ScriptsAPI.ScriptListParams;
-  export import ScriptDeleteParams = ScriptsAPI.ScriptDeleteParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
-  export import Subdomain = SubdomainAPI.Subdomain;
-  export import SubdomainCreateResponse = SubdomainAPI.SubdomainCreateResponse;
-  export import SubdomainGetResponse = SubdomainAPI.SubdomainGetResponse;
-  export import SubdomainCreateParams = SubdomainAPI.SubdomainCreateParams;
-  export import SubdomainGetParams = SubdomainAPI.SubdomainGetParams;
-  export import Schedules = SchedulesAPI.Schedules;
-  export import Schedule = SchedulesAPI.Schedule;
-  export import ScheduleUpdateResponse = SchedulesAPI.ScheduleUpdateResponse;
-  export import ScheduleGetResponse = SchedulesAPI.ScheduleGetResponse;
-  export import ScheduleUpdateParams = SchedulesAPI.ScheduleUpdateParams;
-  export import ScheduleGetParams = SchedulesAPI.ScheduleGetParams;
-  export import Tail = TailAPI.Tail;
-  export import ConsumerScript = TailAPI.ConsumerScript;
-  export import TailCreateResponse = TailAPI.TailCreateResponse;
-  export import TailDeleteResponse = TailAPI.TailDeleteResponse;
-  export import TailGetResponse = TailAPI.TailGetResponse;
-  export import TailCreateParams = TailAPI.TailCreateParams;
-  export import TailDeleteParams = TailAPI.TailDeleteParams;
-  export import TailGetParams = TailAPI.TailGetParams;
-  export import Content = ContentAPI.Content;
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
-  export import Deployments = DeploymentsAPI.Deployments;
-  export import Deployment = DeploymentsAPI.Deployment;
-  export import DeploymentCreateResponse = DeploymentsAPI.DeploymentCreateResponse;
-  export import DeploymentGetResponse = DeploymentsAPI.DeploymentGetResponse;
-  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
-  export import Versions = VersionsAPI.Versions;
-  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
-  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Scripts.ScriptsSinglePage = ScriptsSinglePage;
+Scripts.Subdomain = Subdomain;
+Scripts.Schedules = Schedules;
+Scripts.Tail = Tail;
+Scripts.Content = Content;
+Scripts.Settings = Settings;
+Scripts.Deployments = Deployments;
+Scripts.Versions = Versions;
+Scripts.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
+
+export declare namespace Scripts {
+  export {
+    type Script as Script,
+    type ScriptSetting as ScriptSetting,
+    type ScriptUpdateResponse as ScriptUpdateResponse,
+    ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptUpdateParams as ScriptUpdateParams,
+    type ScriptListParams as ScriptListParams,
+    type ScriptDeleteParams as ScriptDeleteParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
+
+  export {
+    Subdomain as Subdomain,
+    type SubdomainCreateResponse as SubdomainCreateResponse,
+    type SubdomainGetResponse as SubdomainGetResponse,
+    type SubdomainCreateParams as SubdomainCreateParams,
+    type SubdomainGetParams as SubdomainGetParams,
+  };
+
+  export {
+    Schedules as Schedules,
+    type Schedule as Schedule,
+    type ScheduleUpdateResponse as ScheduleUpdateResponse,
+    type ScheduleGetResponse as ScheduleGetResponse,
+    type ScheduleUpdateParams as ScheduleUpdateParams,
+    type ScheduleGetParams as ScheduleGetParams,
+  };
+
+  export {
+    Tail as Tail,
+    type ConsumerScript as ConsumerScript,
+    type TailCreateResponse as TailCreateResponse,
+    type TailDeleteResponse as TailDeleteResponse,
+    type TailGetResponse as TailGetResponse,
+    type TailCreateParams as TailCreateParams,
+    type TailDeleteParams as TailDeleteParams,
+    type TailGetParams as TailGetParams,
+  };
+
+  export {
+    Content as Content,
+    type ContentUpdateParams as ContentUpdateParams,
+    type ContentGetParams as ContentGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    Deployments as Deployments,
+    type Deployment as Deployment,
+    type DeploymentCreateResponse as DeploymentCreateResponse,
+    type DeploymentGetResponse as DeploymentGetResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentGetParams as DeploymentGetParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionCreateResponse as VersionCreateResponse,
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesV4PagePagination as VersionListResponsesV4PagePagination,
+    type VersionCreateParams as VersionCreateParams,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

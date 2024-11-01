@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as WhoisAPI from './whois';
 
 export class Whois extends APIResource {
   /**
@@ -226,8 +225,10 @@ export interface WhoisGetParams {
   domain?: string;
 }
 
-export namespace Whois {
-  export import Whois = WhoisAPI.Whois;
-  export import WhoisGetResponse = WhoisAPI.WhoisGetResponse;
-  export import WhoisGetParams = WhoisAPI.WhoisGetParams;
+export declare namespace Whois {
+  export {
+    type Whois as Whois,
+    type WhoisGetResponse as WhoisGetResponse,
+    type WhoisGetParams as WhoisGetParams,
+  };
 }

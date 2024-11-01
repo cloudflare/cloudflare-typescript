@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -811,17 +810,19 @@ export interface SummaryResponseCodesParams {
   name?: Array<string>;
 }
 
-export namespace Summary {
-  export import SummaryDNSSECResponse = SummaryAPI.SummaryDNSSECResponse;
-  export import SummaryEdnsResponse = SummaryAPI.SummaryEdnsResponse;
-  export import SummaryIPVersionResponse = SummaryAPI.SummaryIPVersionResponse;
-  export import SummaryProtocolResponse = SummaryAPI.SummaryProtocolResponse;
-  export import SummaryQueryTypeResponse = SummaryAPI.SummaryQueryTypeResponse;
-  export import SummaryResponseCodesResponse = SummaryAPI.SummaryResponseCodesResponse;
-  export import SummaryDNSSECParams = SummaryAPI.SummaryDNSSECParams;
-  export import SummaryEdnsParams = SummaryAPI.SummaryEdnsParams;
-  export import SummaryIPVersionParams = SummaryAPI.SummaryIPVersionParams;
-  export import SummaryProtocolParams = SummaryAPI.SummaryProtocolParams;
-  export import SummaryQueryTypeParams = SummaryAPI.SummaryQueryTypeParams;
-  export import SummaryResponseCodesParams = SummaryAPI.SummaryResponseCodesParams;
+export declare namespace Summary {
+  export {
+    type SummaryDNSSECResponse as SummaryDNSSECResponse,
+    type SummaryEdnsResponse as SummaryEdnsResponse,
+    type SummaryIPVersionResponse as SummaryIPVersionResponse,
+    type SummaryProtocolResponse as SummaryProtocolResponse,
+    type SummaryQueryTypeResponse as SummaryQueryTypeResponse,
+    type SummaryResponseCodesResponse as SummaryResponseCodesResponse,
+    type SummaryDNSSECParams as SummaryDNSSECParams,
+    type SummaryEdnsParams as SummaryEdnsParams,
+    type SummaryIPVersionParams as SummaryIPVersionParams,
+    type SummaryProtocolParams as SummaryProtocolParams,
+    type SummaryQueryTypeParams as SummaryQueryTypeParams,
+    type SummaryResponseCodesParams as SummaryResponseCodesParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as HostnameAssociationsAPI from './hostname-associations';
 
 export class HostnameAssociations extends APIResource {
   /**
@@ -95,11 +94,13 @@ export interface HostnameAssociationGetParams {
   mtls_certificate_id?: string;
 }
 
-export namespace HostnameAssociations {
-  export import HostnameAssociation = HostnameAssociationsAPI.HostnameAssociation;
-  export import TLSHostnameAssociation = HostnameAssociationsAPI.TLSHostnameAssociation;
-  export import HostnameAssociationUpdateResponse = HostnameAssociationsAPI.HostnameAssociationUpdateResponse;
-  export import HostnameAssociationGetResponse = HostnameAssociationsAPI.HostnameAssociationGetResponse;
-  export import HostnameAssociationUpdateParams = HostnameAssociationsAPI.HostnameAssociationUpdateParams;
-  export import HostnameAssociationGetParams = HostnameAssociationsAPI.HostnameAssociationGetParams;
+export declare namespace HostnameAssociations {
+  export {
+    type HostnameAssociation as HostnameAssociation,
+    type TLSHostnameAssociation as TLSHostnameAssociation,
+    type HostnameAssociationUpdateResponse as HostnameAssociationUpdateResponse,
+    type HostnameAssociationGetResponse as HostnameAssociationGetResponse,
+    type HostnameAssociationUpdateParams as HostnameAssociationUpdateParams,
+    type HostnameAssociationGetParams as HostnameAssociationGetParams,
+  };
 }

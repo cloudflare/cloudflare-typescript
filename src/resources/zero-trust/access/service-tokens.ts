@@ -4,7 +4,6 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import * as ServiceTokensAPI from './service-tokens';
 import { SinglePage } from '../../../pagination';
 
 export class ServiceTokens extends APIResource {
@@ -438,16 +437,20 @@ export interface ServiceTokenRotateParams {
   account_id: string;
 }
 
-export namespace ServiceTokens {
-  export import ServiceToken = ServiceTokensAPI.ServiceToken;
-  export import ServiceTokenCreateResponse = ServiceTokensAPI.ServiceTokenCreateResponse;
-  export import ServiceTokenRotateResponse = ServiceTokensAPI.ServiceTokenRotateResponse;
-  export import ServiceTokensSinglePage = ServiceTokensAPI.ServiceTokensSinglePage;
-  export import ServiceTokenCreateParams = ServiceTokensAPI.ServiceTokenCreateParams;
-  export import ServiceTokenUpdateParams = ServiceTokensAPI.ServiceTokenUpdateParams;
-  export import ServiceTokenListParams = ServiceTokensAPI.ServiceTokenListParams;
-  export import ServiceTokenDeleteParams = ServiceTokensAPI.ServiceTokenDeleteParams;
-  export import ServiceTokenGetParams = ServiceTokensAPI.ServiceTokenGetParams;
-  export import ServiceTokenRefreshParams = ServiceTokensAPI.ServiceTokenRefreshParams;
-  export import ServiceTokenRotateParams = ServiceTokensAPI.ServiceTokenRotateParams;
+ServiceTokens.ServiceTokensSinglePage = ServiceTokensSinglePage;
+
+export declare namespace ServiceTokens {
+  export {
+    type ServiceToken as ServiceToken,
+    type ServiceTokenCreateResponse as ServiceTokenCreateResponse,
+    type ServiceTokenRotateResponse as ServiceTokenRotateResponse,
+    ServiceTokensSinglePage as ServiceTokensSinglePage,
+    type ServiceTokenCreateParams as ServiceTokenCreateParams,
+    type ServiceTokenUpdateParams as ServiceTokenUpdateParams,
+    type ServiceTokenListParams as ServiceTokenListParams,
+    type ServiceTokenDeleteParams as ServiceTokenDeleteParams,
+    type ServiceTokenGetParams as ServiceTokenGetParams,
+    type ServiceTokenRefreshParams as ServiceTokenRefreshParams,
+    type ServiceTokenRotateParams as ServiceTokenRotateParams,
+  };
 }

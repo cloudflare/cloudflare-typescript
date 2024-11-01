@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as FallbackDomainsAPI from './fallback-domains';
 import { SinglePage } from '../../../../pagination';
 
 export class FallbackDomains extends APIResource {
@@ -123,13 +122,17 @@ export interface FallbackDomainGetParams {
   account_id: string;
 }
 
-export namespace FallbackDomains {
-  export import FallbackDomain = FallbackDomainsAPI.FallbackDomain;
-  export import FallbackDomainPolicy = FallbackDomainsAPI.FallbackDomainPolicy;
-  export import FallbackDomainUpdateResponse = FallbackDomainsAPI.FallbackDomainUpdateResponse;
-  export import FallbackDomainGetResponse = FallbackDomainsAPI.FallbackDomainGetResponse;
-  export import FallbackDomainsSinglePage = FallbackDomainsAPI.FallbackDomainsSinglePage;
-  export import FallbackDomainUpdateParams = FallbackDomainsAPI.FallbackDomainUpdateParams;
-  export import FallbackDomainListParams = FallbackDomainsAPI.FallbackDomainListParams;
-  export import FallbackDomainGetParams = FallbackDomainsAPI.FallbackDomainGetParams;
+FallbackDomains.FallbackDomainsSinglePage = FallbackDomainsSinglePage;
+
+export declare namespace FallbackDomains {
+  export {
+    type FallbackDomain as FallbackDomain,
+    type FallbackDomainPolicy as FallbackDomainPolicy,
+    type FallbackDomainUpdateResponse as FallbackDomainUpdateResponse,
+    type FallbackDomainGetResponse as FallbackDomainGetResponse,
+    FallbackDomainsSinglePage as FallbackDomainsSinglePage,
+    type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
+    type FallbackDomainListParams as FallbackDomainListParams,
+    type FallbackDomainGetParams as FallbackDomainGetParams,
+  };
 }

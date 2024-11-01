@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BlobsAPI from './blobs';
 import { type Response } from '../../../_shims/index';
 
 export class Blobs extends APIResource {
@@ -26,6 +25,6 @@ export interface BlobGetParams {
   account_id: string;
 }
 
-export namespace Blobs {
-  export import BlobGetParams = BlobsAPI.BlobGetParams;
+export declare namespace Blobs {
+  export { type BlobGetParams as BlobGetParams };
 }

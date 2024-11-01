@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as IQIAPI from './iqi';
 
 export class IQI extends APIResource {
   /**
@@ -237,9 +236,11 @@ export interface IQITimeseriesGroupsParams {
   name?: Array<string>;
 }
 
-export namespace IQI {
-  export import IQISummaryResponse = IQIAPI.IQISummaryResponse;
-  export import IQITimeseriesGroupsResponse = IQIAPI.IQITimeseriesGroupsResponse;
-  export import IQISummaryParams = IQIAPI.IQISummaryParams;
-  export import IQITimeseriesGroupsParams = IQIAPI.IQITimeseriesGroupsParams;
+export declare namespace IQI {
+  export {
+    type IQISummaryResponse as IQISummaryResponse,
+    type IQITimeseriesGroupsResponse as IQITimeseriesGroupsResponse,
+    type IQISummaryParams as IQISummaryParams,
+    type IQITimeseriesGroupsParams as IQITimeseriesGroupsParams,
+  };
 }

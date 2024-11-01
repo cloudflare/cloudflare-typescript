@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as LogsAPI from './logs';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Logs extends APIResource {
@@ -465,18 +464,22 @@ export interface LogResponseParams {
   account_id: string;
 }
 
-export namespace Logs {
-  export import LogListResponse = LogsAPI.LogListResponse;
-  export import LogDeleteResponse = LogsAPI.LogDeleteResponse;
-  export import LogEditResponse = LogsAPI.LogEditResponse;
-  export import LogGetResponse = LogsAPI.LogGetResponse;
-  export import LogRequestResponse = LogsAPI.LogRequestResponse;
-  export import LogResponseResponse = LogsAPI.LogResponseResponse;
-  export import LogListResponsesV4PagePaginationArray = LogsAPI.LogListResponsesV4PagePaginationArray;
-  export import LogListParams = LogsAPI.LogListParams;
-  export import LogDeleteParams = LogsAPI.LogDeleteParams;
-  export import LogEditParams = LogsAPI.LogEditParams;
-  export import LogGetParams = LogsAPI.LogGetParams;
-  export import LogRequestParams = LogsAPI.LogRequestParams;
-  export import LogResponseParams = LogsAPI.LogResponseParams;
+Logs.LogListResponsesV4PagePaginationArray = LogListResponsesV4PagePaginationArray;
+
+export declare namespace Logs {
+  export {
+    type LogListResponse as LogListResponse,
+    type LogDeleteResponse as LogDeleteResponse,
+    type LogEditResponse as LogEditResponse,
+    type LogGetResponse as LogGetResponse,
+    type LogRequestResponse as LogRequestResponse,
+    type LogResponseResponse as LogResponseResponse,
+    LogListResponsesV4PagePaginationArray as LogListResponsesV4PagePaginationArray,
+    type LogListParams as LogListParams,
+    type LogDeleteParams as LogDeleteParams,
+    type LogEditParams as LogEditParams,
+    type LogGetParams as LogGetParams,
+    type LogRequestParams as LogRequestParams,
+    type LogResponseParams as LogResponseParams,
+  };
 }

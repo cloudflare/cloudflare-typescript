@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DownloadAPI from './download';
 import { type Response } from '../../../_shims/index';
 
 export class Download extends APIResource {
@@ -25,6 +24,6 @@ export interface DownloadGetParams {
   account_id: string;
 }
 
-export namespace Download {
-  export import DownloadGetParams = DownloadAPI.DownloadGetParams;
+export declare namespace Download {
+  export { type DownloadGetParams as DownloadGetParams };
 }

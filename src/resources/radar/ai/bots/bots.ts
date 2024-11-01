@@ -2,13 +2,18 @@
 
 import { APIResource } from '../../../../resource';
 import * as SummaryAPI from './summary';
+import { Summary, SummaryUserAgentParams, SummaryUserAgentResponse } from './summary';
 
 export class Bots extends APIResource {
   summary: SummaryAPI.Summary = new SummaryAPI.Summary(this._client);
 }
 
-export namespace Bots {
-  export import Summary = SummaryAPI.Summary;
-  export import SummaryUserAgentResponse = SummaryAPI.SummaryUserAgentResponse;
-  export import SummaryUserAgentParams = SummaryAPI.SummaryUserAgentParams;
+Bots.Summary = Summary;
+
+export declare namespace Bots {
+  export {
+    Summary as Summary,
+    type SummaryUserAgentResponse as SummaryUserAgentResponse,
+    type SummaryUserAgentParams as SummaryUserAgentParams,
+  };
 }

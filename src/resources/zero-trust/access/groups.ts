@@ -4,7 +4,6 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import { CloudflareError } from '../../../error';
-import * as GroupsAPI from './groups';
 import * as AccessAPI from './access';
 import { SinglePage } from '../../../pagination';
 
@@ -364,13 +363,17 @@ export interface GroupGetParams {
   zone_id?: string;
 }
 
-export namespace Groups {
-  export import ZeroTrustGroup = GroupsAPI.ZeroTrustGroup;
-  export import GroupDeleteResponse = GroupsAPI.GroupDeleteResponse;
-  export import ZeroTrustGroupsSinglePage = GroupsAPI.ZeroTrustGroupsSinglePage;
-  export import GroupCreateParams = GroupsAPI.GroupCreateParams;
-  export import GroupUpdateParams = GroupsAPI.GroupUpdateParams;
-  export import GroupListParams = GroupsAPI.GroupListParams;
-  export import GroupDeleteParams = GroupsAPI.GroupDeleteParams;
-  export import GroupGetParams = GroupsAPI.GroupGetParams;
+Groups.ZeroTrustGroupsSinglePage = ZeroTrustGroupsSinglePage;
+
+export declare namespace Groups {
+  export {
+    type ZeroTrustGroup as ZeroTrustGroup,
+    type GroupDeleteResponse as GroupDeleteResponse,
+    ZeroTrustGroupsSinglePage as ZeroTrustGroupsSinglePage,
+    type GroupCreateParams as GroupCreateParams,
+    type GroupUpdateParams as GroupUpdateParams,
+    type GroupListParams as GroupListParams,
+    type GroupDeleteParams as GroupDeleteParams,
+    type GroupGetParams as GroupGetParams,
+  };
 }

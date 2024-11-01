@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PhishguardAPI from './phishguard';
 import { SinglePage } from '../../pagination';
 
 export class Phishguard extends APIResource {
@@ -87,8 +86,12 @@ export interface PhishguardListParams {
   to_date: string;
 }
 
-export namespace Phishguard {
-  export import PhishguardListResponse = PhishguardAPI.PhishguardListResponse;
-  export import PhishguardListResponsesSinglePage = PhishguardAPI.PhishguardListResponsesSinglePage;
-  export import PhishguardListParams = PhishguardAPI.PhishguardListParams;
+Phishguard.PhishguardListResponsesSinglePage = PhishguardListResponsesSinglePage;
+
+export declare namespace Phishguard {
+  export {
+    type PhishguardListResponse as PhishguardListResponse,
+    PhishguardListResponsesSinglePage as PhishguardListResponsesSinglePage,
+    type PhishguardListParams as PhishguardListParams,
+  };
 }

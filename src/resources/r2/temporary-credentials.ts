@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TemporaryCredentialsAPI from './temporary-credentials';
 
 export class TemporaryCredentials extends APIResource {
   /**
@@ -109,8 +108,10 @@ export interface TemporaryCredentialCreateParams {
   prefixes?: Array<string>;
 }
 
-export namespace TemporaryCredentials {
-  export import TemporaryCredential = TemporaryCredentialsAPI.TemporaryCredential;
-  export import TemporaryCredentialCreateResponse = TemporaryCredentialsAPI.TemporaryCredentialCreateResponse;
-  export import TemporaryCredentialCreateParams = TemporaryCredentialsAPI.TemporaryCredentialCreateParams;
+export declare namespace TemporaryCredentials {
+  export {
+    type TemporaryCredential as TemporaryCredential,
+    type TemporaryCredentialCreateResponse as TemporaryCredentialCreateResponse,
+    type TemporaryCredentialCreateParams as TemporaryCredentialCreateParams,
+  };
 }

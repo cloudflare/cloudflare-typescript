@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TrustedDomainsAPI from './trusted-domains';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class TrustedDomains extends APIResource {
@@ -335,16 +334,21 @@ export interface TrustedDomainGetParams {
   account_id: string;
 }
 
-export namespace TrustedDomains {
-  export import TrustedDomainCreateResponse = TrustedDomainsAPI.TrustedDomainCreateResponse;
-  export import TrustedDomainListResponse = TrustedDomainsAPI.TrustedDomainListResponse;
-  export import TrustedDomainDeleteResponse = TrustedDomainsAPI.TrustedDomainDeleteResponse;
-  export import TrustedDomainEditResponse = TrustedDomainsAPI.TrustedDomainEditResponse;
-  export import TrustedDomainGetResponse = TrustedDomainsAPI.TrustedDomainGetResponse;
-  export import TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainsAPI.TrustedDomainListResponsesV4PagePaginationArray;
-  export import TrustedDomainCreateParams = TrustedDomainsAPI.TrustedDomainCreateParams;
-  export import TrustedDomainListParams = TrustedDomainsAPI.TrustedDomainListParams;
-  export import TrustedDomainDeleteParams = TrustedDomainsAPI.TrustedDomainDeleteParams;
-  export import TrustedDomainEditParams = TrustedDomainsAPI.TrustedDomainEditParams;
-  export import TrustedDomainGetParams = TrustedDomainsAPI.TrustedDomainGetParams;
+TrustedDomains.TrustedDomainListResponsesV4PagePaginationArray =
+  TrustedDomainListResponsesV4PagePaginationArray;
+
+export declare namespace TrustedDomains {
+  export {
+    type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
+    type TrustedDomainListResponse as TrustedDomainListResponse,
+    type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,
+    type TrustedDomainEditResponse as TrustedDomainEditResponse,
+    type TrustedDomainGetResponse as TrustedDomainGetResponse,
+    TrustedDomainListResponsesV4PagePaginationArray as TrustedDomainListResponsesV4PagePaginationArray,
+    type TrustedDomainCreateParams as TrustedDomainCreateParams,
+    type TrustedDomainListParams as TrustedDomainListParams,
+    type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
+    type TrustedDomainEditParams as TrustedDomainEditParams,
+    type TrustedDomainGetParams as TrustedDomainGetParams,
+  };
 }

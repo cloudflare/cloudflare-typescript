@@ -2,9 +2,32 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ProjectsAPI from './projects';
 import * as DomainsAPI from './domains';
+import {
+  DomainCreateParams,
+  DomainCreateResponse,
+  DomainDeleteParams,
+  DomainDeleteResponse,
+  DomainEditParams,
+  DomainEditResponse,
+  DomainGetParams,
+  DomainGetResponse,
+  DomainListParams,
+  DomainListResponse,
+  DomainListResponsesSinglePage,
+  Domains,
+} from './domains';
 import * as DeploymentsAPI from './deployments/deployments';
+import {
+  DeploymentCreateParams,
+  DeploymentDeleteParams,
+  DeploymentDeleteResponse,
+  DeploymentGetParams,
+  DeploymentListParams,
+  DeploymentRetryParams,
+  DeploymentRollbackParams,
+  Deployments,
+} from './deployments/deployments';
 import { SinglePage } from '../../../pagination';
 
 export class Projects extends APIResource {
@@ -2046,37 +2069,50 @@ export interface ProjectPurgeBuildCacheParams {
   account_id: string;
 }
 
-export namespace Projects {
-  export import Deployment = ProjectsAPI.Deployment;
-  export import Project = ProjectsAPI.Project;
-  export import Stage = ProjectsAPI.Stage;
-  export import ProjectDeleteResponse = ProjectsAPI.ProjectDeleteResponse;
-  export import ProjectPurgeBuildCacheResponse = ProjectsAPI.ProjectPurgeBuildCacheResponse;
-  export import DeploymentsSinglePage = ProjectsAPI.DeploymentsSinglePage;
-  export import ProjectCreateParams = ProjectsAPI.ProjectCreateParams;
-  export import ProjectListParams = ProjectsAPI.ProjectListParams;
-  export import ProjectDeleteParams = ProjectsAPI.ProjectDeleteParams;
-  export import ProjectEditParams = ProjectsAPI.ProjectEditParams;
-  export import ProjectGetParams = ProjectsAPI.ProjectGetParams;
-  export import ProjectPurgeBuildCacheParams = ProjectsAPI.ProjectPurgeBuildCacheParams;
-  export import Deployments = DeploymentsAPI.Deployments;
-  export import DeploymentDeleteResponse = DeploymentsAPI.DeploymentDeleteResponse;
-  export import DeploymentCreateParams = DeploymentsAPI.DeploymentCreateParams;
-  export import DeploymentListParams = DeploymentsAPI.DeploymentListParams;
-  export import DeploymentDeleteParams = DeploymentsAPI.DeploymentDeleteParams;
-  export import DeploymentGetParams = DeploymentsAPI.DeploymentGetParams;
-  export import DeploymentRetryParams = DeploymentsAPI.DeploymentRetryParams;
-  export import DeploymentRollbackParams = DeploymentsAPI.DeploymentRollbackParams;
-  export import Domains = DomainsAPI.Domains;
-  export import DomainCreateResponse = DomainsAPI.DomainCreateResponse;
-  export import DomainListResponse = DomainsAPI.DomainListResponse;
-  export import DomainDeleteResponse = DomainsAPI.DomainDeleteResponse;
-  export import DomainEditResponse = DomainsAPI.DomainEditResponse;
-  export import DomainGetResponse = DomainsAPI.DomainGetResponse;
-  export import DomainListResponsesSinglePage = DomainsAPI.DomainListResponsesSinglePage;
-  export import DomainCreateParams = DomainsAPI.DomainCreateParams;
-  export import DomainListParams = DomainsAPI.DomainListParams;
-  export import DomainDeleteParams = DomainsAPI.DomainDeleteParams;
-  export import DomainEditParams = DomainsAPI.DomainEditParams;
-  export import DomainGetParams = DomainsAPI.DomainGetParams;
+Projects.DeploymentsSinglePage = DeploymentsSinglePage;
+Projects.Deployments = Deployments;
+Projects.Domains = Domains;
+Projects.DomainListResponsesSinglePage = DomainListResponsesSinglePage;
+
+export declare namespace Projects {
+  export {
+    type Deployment as Deployment,
+    type Project as Project,
+    type Stage as Stage,
+    type ProjectDeleteResponse as ProjectDeleteResponse,
+    type ProjectPurgeBuildCacheResponse as ProjectPurgeBuildCacheResponse,
+    DeploymentsSinglePage as DeploymentsSinglePage,
+    type ProjectCreateParams as ProjectCreateParams,
+    type ProjectListParams as ProjectListParams,
+    type ProjectDeleteParams as ProjectDeleteParams,
+    type ProjectEditParams as ProjectEditParams,
+    type ProjectGetParams as ProjectGetParams,
+    type ProjectPurgeBuildCacheParams as ProjectPurgeBuildCacheParams,
+  };
+
+  export {
+    Deployments as Deployments,
+    type DeploymentDeleteResponse as DeploymentDeleteResponse,
+    type DeploymentCreateParams as DeploymentCreateParams,
+    type DeploymentListParams as DeploymentListParams,
+    type DeploymentDeleteParams as DeploymentDeleteParams,
+    type DeploymentGetParams as DeploymentGetParams,
+    type DeploymentRetryParams as DeploymentRetryParams,
+    type DeploymentRollbackParams as DeploymentRollbackParams,
+  };
+
+  export {
+    Domains as Domains,
+    type DomainCreateResponse as DomainCreateResponse,
+    type DomainListResponse as DomainListResponse,
+    type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainEditResponse as DomainEditResponse,
+    type DomainGetResponse as DomainGetResponse,
+    DomainListResponsesSinglePage as DomainListResponsesSinglePage,
+    type DomainCreateParams as DomainCreateParams,
+    type DomainListParams as DomainListParams,
+    type DomainDeleteParams as DomainDeleteParams,
+    type DomainEditParams as DomainEditParams,
+    type DomainGetParams as DomainGetParams,
+  };
 }

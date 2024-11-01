@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as ASNsAPI from './asns';
 
 export class ASNs extends APIResource {
   /**
@@ -351,13 +350,15 @@ export interface ASNRelParams {
   format?: 'JSON' | 'CSV';
 }
 
-export namespace ASNs {
-  export import ASNListResponse = ASNsAPI.ASNListResponse;
-  export import ASNGetResponse = ASNsAPI.ASNGetResponse;
-  export import ASNIPResponse = ASNsAPI.ASNIPResponse;
-  export import ASNRelResponse = ASNsAPI.ASNRelResponse;
-  export import ASNListParams = ASNsAPI.ASNListParams;
-  export import ASNGetParams = ASNsAPI.ASNGetParams;
-  export import ASNIPParams = ASNsAPI.ASNIPParams;
-  export import ASNRelParams = ASNsAPI.ASNRelParams;
+export declare namespace ASNs {
+  export {
+    type ASNListResponse as ASNListResponse,
+    type ASNGetResponse as ASNGetResponse,
+    type ASNIPResponse as ASNIPResponse,
+    type ASNRelResponse as ASNRelResponse,
+    type ASNListParams as ASNListParams,
+    type ASNGetParams as ASNGetParams,
+    type ASNIPParams as ASNIPParams,
+    type ASNRelParams as ASNRelParams,
+  };
 }

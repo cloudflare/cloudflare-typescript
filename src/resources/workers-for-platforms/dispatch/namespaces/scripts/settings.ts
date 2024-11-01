@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as SettingsAPI from './settings';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as TailAPI from '../../../../workers/scripts/tail';
 
@@ -311,9 +310,11 @@ export interface SettingGetParams {
   account_id: string;
 }
 
-export namespace Settings {
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

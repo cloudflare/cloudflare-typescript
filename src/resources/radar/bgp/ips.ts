@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as IPsAPI from './ips';
 
 export class IPs extends APIResource {
   /**
@@ -117,7 +116,6 @@ export interface IPTimeseriesParams {
   name?: Array<string>;
 }
 
-export namespace IPs {
-  export import IPTimeseriesResponse = IPsAPI.IPTimeseriesResponse;
-  export import IPTimeseriesParams = IPsAPI.IPTimeseriesParams;
+export declare namespace IPs {
+  export { type IPTimeseriesResponse as IPTimeseriesResponse, type IPTimeseriesParams as IPTimeseriesParams };
 }

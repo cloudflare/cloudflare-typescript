@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PredefinedAPI from './predefined';
 import * as CustomAPI from './custom';
 import * as ProfilesAPI from './profiles';
 
@@ -219,8 +218,10 @@ export interface PredefinedGetParams {
   account_id: string;
 }
 
-export namespace Predefined {
-  export import PredefinedProfile = PredefinedAPI.PredefinedProfile;
-  export import PredefinedUpdateParams = PredefinedAPI.PredefinedUpdateParams;
-  export import PredefinedGetParams = PredefinedAPI.PredefinedGetParams;
+export declare namespace Predefined {
+  export {
+    type PredefinedProfile as PredefinedProfile,
+    type PredefinedUpdateParams as PredefinedUpdateParams,
+    type PredefinedGetParams as PredefinedGetParams,
+  };
 }

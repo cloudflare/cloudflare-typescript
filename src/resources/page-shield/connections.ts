@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ConnectionsAPI from './connections';
 import { SinglePage } from '../../pagination';
 
 export class Connections extends APIResource {
@@ -166,9 +165,13 @@ export interface ConnectionGetParams {
   zone_id: string;
 }
 
-export namespace Connections {
-  export import Connection = ConnectionsAPI.Connection;
-  export import ConnectionsSinglePage = ConnectionsAPI.ConnectionsSinglePage;
-  export import ConnectionListParams = ConnectionsAPI.ConnectionListParams;
-  export import ConnectionGetParams = ConnectionsAPI.ConnectionGetParams;
+Connections.ConnectionsSinglePage = ConnectionsSinglePage;
+
+export declare namespace Connections {
+  export {
+    type Connection as Connection,
+    ConnectionsSinglePage as ConnectionsSinglePage,
+    type ConnectionListParams as ConnectionListParams,
+    type ConnectionGetParams as ConnectionGetParams,
+  };
 }

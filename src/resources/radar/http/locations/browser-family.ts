@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as BrowserFamilyAPI from './browser-family';
 
 export class BrowserFamily extends APIResource {
   /**
@@ -189,7 +188,9 @@ export interface BrowserFamilyGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace BrowserFamily {
-  export import BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
-  export import BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
+export declare namespace BrowserFamily {
+  export {
+    type BrowserFamilyGetResponse as BrowserFamilyGetResponse,
+    type BrowserFamilyGetParams as BrowserFamilyGetParams,
+  };
 }

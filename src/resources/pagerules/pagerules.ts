@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
+import { SettingListParams, SettingListResponse, Settings } from './settings';
 
 export class Pagerules extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -429,8 +430,12 @@ export interface PageruleGetParams {
   zone_id: string;
 }
 
-export namespace Pagerules {
-  export import Settings = SettingsAPI.Settings;
-  export import SettingListResponse = SettingsAPI.SettingListResponse;
-  export import SettingListParams = SettingsAPI.SettingListParams;
+Pagerules.Settings = Settings;
+
+export declare namespace Pagerules {
+  export {
+    Settings as Settings,
+    type SettingListResponse as SettingListResponse,
+    type SettingListParams as SettingListParams,
+  };
 }

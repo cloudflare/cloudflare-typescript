@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as KeysAPI from './keys';
 import { SinglePage } from '../../../pagination';
 
 export class Keys extends APIResource {
@@ -169,16 +168,20 @@ export interface KeyGetParams {
   account_id: string;
 }
 
-export namespace Keys {
-  export import KeyCreateResponse = KeysAPI.KeyCreateResponse;
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyListResponse = KeysAPI.KeyListResponse;
-  export import KeyDeleteResponse = KeysAPI.KeyDeleteResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyListResponsesSinglePage = KeysAPI.KeyListResponsesSinglePage;
-  export import KeyCreateParams = KeysAPI.KeyCreateParams;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyListParams = KeysAPI.KeyListParams;
-  export import KeyDeleteParams = KeysAPI.KeyDeleteParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
+Keys.KeyListResponsesSinglePage = KeyListResponsesSinglePage;
+
+export declare namespace Keys {
+  export {
+    type KeyCreateResponse as KeyCreateResponse,
+    type KeyUpdateResponse as KeyUpdateResponse,
+    type KeyListResponse as KeyListResponse,
+    type KeyDeleteResponse as KeyDeleteResponse,
+    type KeyGetResponse as KeyGetResponse,
+    KeyListResponsesSinglePage as KeyListResponsesSinglePage,
+    type KeyCreateParams as KeyCreateParams,
+    type KeyUpdateParams as KeyUpdateParams,
+    type KeyListParams as KeyListParams,
+    type KeyDeleteParams as KeyDeleteParams,
+    type KeyGetParams as KeyGetParams,
+  };
 }

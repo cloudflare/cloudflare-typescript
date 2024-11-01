@@ -2,15 +2,43 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as ScriptsScriptsAPI from './scripts';
 import * as WorkersAPI from '../../../../workers/workers';
 import * as ScriptsAPI from '../../../../workers/scripts/scripts';
 import * as TailAPI from '../../../../workers/scripts/tail';
 import * as BindingsAPI from './bindings';
+import { BindingGetParams, BindingGetResponse, Bindings } from './bindings';
 import * as ContentAPI from './content';
+import { Content, ContentGetParams, ContentUpdateParams } from './content';
 import * as SecretsAPI from './secrets';
+import {
+  SecretGetParams,
+  SecretGetResponse,
+  SecretListParams,
+  SecretListResponse,
+  SecretListResponsesSinglePage,
+  SecretUpdateParams,
+  SecretUpdateResponse,
+  Secrets,
+} from './secrets';
 import * as SettingsAPI from './settings';
+import {
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  Settings,
+} from './settings';
 import * as TagsAPI from './tags';
+import {
+  TagDeleteParams,
+  TagDeleteResponse,
+  TagListParams,
+  TagListResponse,
+  TagListResponsesSinglePage,
+  TagUpdateParams,
+  TagUpdateResponse,
+  Tags,
+} from './tags';
 
 export class Scripts extends APIResource {
   content: ContentAPI.Content = new ContentAPI.Content(this._client);
@@ -317,35 +345,62 @@ export interface ScriptGetParams {
   account_id: string;
 }
 
-export namespace Scripts {
-  export import Script = ScriptsScriptsAPI.Script;
-  export import ScriptUpdateResponse = ScriptsScriptsAPI.ScriptUpdateResponse;
-  export import ScriptUpdateParams = ScriptsScriptsAPI.ScriptUpdateParams;
-  export import ScriptDeleteParams = ScriptsScriptsAPI.ScriptDeleteParams;
-  export import ScriptGetParams = ScriptsScriptsAPI.ScriptGetParams;
-  export import Content = ContentAPI.Content;
-  export import ContentUpdateParams = ContentAPI.ContentUpdateParams;
-  export import ContentGetParams = ContentAPI.ContentGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
-  export import Bindings = BindingsAPI.Bindings;
-  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
-  export import Secrets = SecretsAPI.Secrets;
-  export import SecretUpdateResponse = SecretsAPI.SecretUpdateResponse;
-  export import SecretListResponse = SecretsAPI.SecretListResponse;
-  export import SecretListResponsesSinglePage = SecretsAPI.SecretListResponsesSinglePage;
-  export import SecretUpdateParams = SecretsAPI.SecretUpdateParams;
-  export import SecretListParams = SecretsAPI.SecretListParams;
-  export import Tags = TagsAPI.Tags;
-  export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
-  export import TagListResponse = TagsAPI.TagListResponse;
-  export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
-  export import TagListResponsesSinglePage = TagsAPI.TagListResponsesSinglePage;
-  export import TagUpdateParams = TagsAPI.TagUpdateParams;
-  export import TagListParams = TagsAPI.TagListParams;
-  export import TagDeleteParams = TagsAPI.TagDeleteParams;
+Scripts.Content = Content;
+Scripts.Settings = Settings;
+Scripts.Bindings = Bindings;
+Scripts.Secrets = Secrets;
+Scripts.SecretListResponsesSinglePage = SecretListResponsesSinglePage;
+Scripts.Tags = Tags;
+Scripts.TagListResponsesSinglePage = TagListResponsesSinglePage;
+
+export declare namespace Scripts {
+  export {
+    type Script as Script,
+    type ScriptUpdateResponse as ScriptUpdateResponse,
+    type ScriptUpdateParams as ScriptUpdateParams,
+    type ScriptDeleteParams as ScriptDeleteParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
+
+  export {
+    Content as Content,
+    type ContentUpdateParams as ContentUpdateParams,
+    type ContentGetParams as ContentGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
+
+  export {
+    Bindings as Bindings,
+    type BindingGetResponse as BindingGetResponse,
+    type BindingGetParams as BindingGetParams,
+  };
+
+  export {
+    Secrets as Secrets,
+    type SecretUpdateResponse as SecretUpdateResponse,
+    type SecretListResponse as SecretListResponse,
+    type SecretGetResponse as SecretGetResponse,
+    SecretListResponsesSinglePage as SecretListResponsesSinglePage,
+    type SecretUpdateParams as SecretUpdateParams,
+    type SecretListParams as SecretListParams,
+    type SecretGetParams as SecretGetParams,
+  };
+
+  export {
+    Tags as Tags,
+    type TagUpdateResponse as TagUpdateResponse,
+    type TagListResponse as TagListResponse,
+    type TagDeleteResponse as TagDeleteResponse,
+    TagListResponsesSinglePage as TagListResponsesSinglePage,
+    type TagUpdateParams as TagUpdateParams,
+    type TagListParams as TagListParams,
+    type TagDeleteParams as TagDeleteParams,
+  };
 }

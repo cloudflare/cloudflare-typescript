@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RecommendationsAPI from './recommendations';
 
 export class Recommendations extends APIResource {
   /**
@@ -31,6 +30,6 @@ export interface RecommendationGetResponse {
   value?: 'flexible' | 'full' | 'strict';
 }
 
-export namespace Recommendations {
-  export import RecommendationGetResponse = RecommendationsAPI.RecommendationGetResponse;
+export declare namespace Recommendations {
+  export { type RecommendationGetResponse as RecommendationGetResponse };
 }

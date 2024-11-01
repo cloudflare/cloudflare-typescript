@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as CustomAPI from './custom';
 
 export class Custom extends APIResource {
   /**
@@ -352,15 +351,17 @@ export interface CustomGetParams {
   'cf-r2-jurisdiction'?: 'default' | 'eu' | 'fedramp';
 }
 
-export namespace Custom {
-  export import CustomCreateResponse = CustomAPI.CustomCreateResponse;
-  export import CustomUpdateResponse = CustomAPI.CustomUpdateResponse;
-  export import CustomListResponse = CustomAPI.CustomListResponse;
-  export import CustomDeleteResponse = CustomAPI.CustomDeleteResponse;
-  export import CustomGetResponse = CustomAPI.CustomGetResponse;
-  export import CustomCreateParams = CustomAPI.CustomCreateParams;
-  export import CustomUpdateParams = CustomAPI.CustomUpdateParams;
-  export import CustomListParams = CustomAPI.CustomListParams;
-  export import CustomDeleteParams = CustomAPI.CustomDeleteParams;
-  export import CustomGetParams = CustomAPI.CustomGetParams;
+export declare namespace Custom {
+  export {
+    type CustomCreateResponse as CustomCreateResponse,
+    type CustomUpdateResponse as CustomUpdateResponse,
+    type CustomListResponse as CustomListResponse,
+    type CustomDeleteResponse as CustomDeleteResponse,
+    type CustomGetResponse as CustomGetResponse,
+    type CustomCreateParams as CustomCreateParams,
+    type CustomUpdateParams as CustomUpdateParams,
+    type CustomListParams as CustomListParams,
+    type CustomDeleteParams as CustomDeleteParams,
+    type CustomGetParams as CustomGetParams,
+  };
 }

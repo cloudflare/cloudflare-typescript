@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ScheduleAPI from './schedule';
 import * as TestsAPI from './pages/tests';
 
 export class ScheduleResource extends APIResource {
@@ -210,11 +209,13 @@ export interface ScheduleGetParams {
     | 'us-west1';
 }
 
-export namespace ScheduleResource {
-  export import Schedule = ScheduleAPI.Schedule;
-  export import ScheduleCreateResponse = ScheduleAPI.ScheduleCreateResponse;
-  export import ScheduleDeleteResponse = ScheduleAPI.ScheduleDeleteResponse;
-  export import ScheduleCreateParams = ScheduleAPI.ScheduleCreateParams;
-  export import ScheduleDeleteParams = ScheduleAPI.ScheduleDeleteParams;
-  export import ScheduleGetParams = ScheduleAPI.ScheduleGetParams;
+export declare namespace ScheduleResource {
+  export {
+    type Schedule as Schedule,
+    type ScheduleCreateResponse as ScheduleCreateResponse,
+    type ScheduleDeleteResponse as ScheduleDeleteResponse,
+    type ScheduleCreateParams as ScheduleCreateParams,
+    type ScheduleDeleteParams as ScheduleDeleteParams,
+    type ScheduleGetParams as ScheduleGetParams,
+  };
 }

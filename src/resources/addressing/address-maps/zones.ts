@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ZonesAPI from './zones';
 import * as Shared from '../../shared';
 
 export class Zones extends APIResource {
@@ -140,9 +139,11 @@ export interface ZoneDeleteParams {
   account_id: string;
 }
 
-export namespace Zones {
-  export import ZoneUpdateResponse = ZonesAPI.ZoneUpdateResponse;
-  export import ZoneDeleteResponse = ZonesAPI.ZoneDeleteResponse;
-  export import ZoneUpdateParams = ZonesAPI.ZoneUpdateParams;
-  export import ZoneDeleteParams = ZonesAPI.ZoneDeleteParams;
+export declare namespace Zones {
+  export {
+    type ZoneUpdateResponse as ZoneUpdateResponse,
+    type ZoneDeleteResponse as ZoneDeleteResponse,
+    type ZoneUpdateParams as ZoneUpdateParams,
+    type ZoneDeleteParams as ZoneDeleteParams,
+  };
 }

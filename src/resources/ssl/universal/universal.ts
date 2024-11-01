@@ -2,14 +2,19 @@
 
 import { APIResource } from '../../../resource';
 import * as SettingsAPI from './settings';
+import { SettingEditParams, SettingGetParams, Settings, UniversalSSLSettings } from './settings';
 
 export class Universal extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
 }
 
-export namespace Universal {
-  export import Settings = SettingsAPI.Settings;
-  export import UniversalSSLSettings = SettingsAPI.UniversalSSLSettings;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+Universal.Settings = Settings;
+
+export declare namespace Universal {
+  export {
+    Settings as Settings,
+    type UniversalSSLSettings as UniversalSSLSettings,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

@@ -2,11 +2,21 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as NamespacesAPI from './namespaces';
 import * as BulkAPI from './bulk';
+import { Bulk, BulkDeleteParams, BulkDeleteResponse, BulkUpdateParams, BulkUpdateResponse } from './bulk';
 import * as KeysAPI from './keys';
+import { Key, KeyListParams, Keys, KeysCursorLimitPagination } from './keys';
 import * as MetadataAPI from './metadata';
+import { Metadata, MetadataGetParams, MetadataGetResponse } from './metadata';
 import * as ValuesAPI from './values';
+import {
+  ValueDeleteParams,
+  ValueDeleteResponse,
+  ValueGetParams,
+  ValueUpdateParams,
+  ValueUpdateResponse,
+  Values,
+} from './values';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Namespaces extends APIResource {
@@ -176,32 +186,53 @@ export interface NamespaceGetParams {
   account_id: string;
 }
 
-export namespace Namespaces {
-  export import Namespace = NamespacesAPI.Namespace;
-  export import NamespaceUpdateResponse = NamespacesAPI.NamespaceUpdateResponse;
-  export import NamespaceDeleteResponse = NamespacesAPI.NamespaceDeleteResponse;
-  export import NamespacesV4PagePaginationArray = NamespacesAPI.NamespacesV4PagePaginationArray;
-  export import NamespaceCreateParams = NamespacesAPI.NamespaceCreateParams;
-  export import NamespaceUpdateParams = NamespacesAPI.NamespaceUpdateParams;
-  export import NamespaceListParams = NamespacesAPI.NamespaceListParams;
-  export import NamespaceDeleteParams = NamespacesAPI.NamespaceDeleteParams;
-  export import NamespaceGetParams = NamespacesAPI.NamespaceGetParams;
-  export import Bulk = BulkAPI.Bulk;
-  export import BulkUpdateResponse = BulkAPI.BulkUpdateResponse;
-  export import BulkDeleteResponse = BulkAPI.BulkDeleteResponse;
-  export import BulkUpdateParams = BulkAPI.BulkUpdateParams;
-  export import BulkDeleteParams = BulkAPI.BulkDeleteParams;
-  export import Keys = KeysAPI.Keys;
-  export import Key = KeysAPI.Key;
-  export import KeysCursorLimitPagination = KeysAPI.KeysCursorLimitPagination;
-  export import KeyListParams = KeysAPI.KeyListParams;
-  export import Metadata = MetadataAPI.Metadata;
-  export import MetadataGetResponse = MetadataAPI.MetadataGetResponse;
-  export import MetadataGetParams = MetadataAPI.MetadataGetParams;
-  export import Values = ValuesAPI.Values;
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
-  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
-  export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
-  export import ValueGetParams = ValuesAPI.ValueGetParams;
+Namespaces.NamespacesV4PagePaginationArray = NamespacesV4PagePaginationArray;
+Namespaces.Bulk = Bulk;
+Namespaces.Keys = Keys;
+Namespaces.KeysCursorLimitPagination = KeysCursorLimitPagination;
+Namespaces.Metadata = Metadata;
+Namespaces.Values = Values;
+
+export declare namespace Namespaces {
+  export {
+    type Namespace as Namespace,
+    type NamespaceUpdateResponse as NamespaceUpdateResponse,
+    type NamespaceDeleteResponse as NamespaceDeleteResponse,
+    NamespacesV4PagePaginationArray as NamespacesV4PagePaginationArray,
+    type NamespaceCreateParams as NamespaceCreateParams,
+    type NamespaceUpdateParams as NamespaceUpdateParams,
+    type NamespaceListParams as NamespaceListParams,
+    type NamespaceDeleteParams as NamespaceDeleteParams,
+    type NamespaceGetParams as NamespaceGetParams,
+  };
+
+  export {
+    Bulk as Bulk,
+    type BulkUpdateResponse as BulkUpdateResponse,
+    type BulkDeleteResponse as BulkDeleteResponse,
+    type BulkUpdateParams as BulkUpdateParams,
+    type BulkDeleteParams as BulkDeleteParams,
+  };
+
+  export {
+    Keys as Keys,
+    type Key as Key,
+    KeysCursorLimitPagination as KeysCursorLimitPagination,
+    type KeyListParams as KeyListParams,
+  };
+
+  export {
+    Metadata as Metadata,
+    type MetadataGetResponse as MetadataGetResponse,
+    type MetadataGetParams as MetadataGetParams,
+  };
+
+  export {
+    Values as Values,
+    type ValueUpdateResponse as ValueUpdateResponse,
+    type ValueDeleteResponse as ValueDeleteResponse,
+    type ValueUpdateParams as ValueUpdateParams,
+    type ValueDeleteParams as ValueDeleteParams,
+    type ValueGetParams as ValueGetParams,
+  };
 }

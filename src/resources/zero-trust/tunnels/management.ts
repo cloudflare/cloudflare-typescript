@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ManagementAPI from './management';
 
 export class Management extends APIResource {
   /**
@@ -38,7 +37,9 @@ export interface ManagementCreateParams {
   resources: Array<'logs'>;
 }
 
-export namespace Management {
-  export import ManagementCreateResponse = ManagementAPI.ManagementCreateResponse;
-  export import ManagementCreateParams = ManagementAPI.ManagementCreateParams;
+export declare namespace Management {
+  export {
+    type ManagementCreateResponse as ManagementCreateResponse,
+    type ManagementCreateParams as ManagementCreateParams,
+  };
 }

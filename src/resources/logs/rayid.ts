@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RayIDAPI from './rayid';
 
 export class RayID extends APIResource {
   /**
@@ -52,7 +51,6 @@ export interface RayIDGetParams {
   timestamps?: 'unix' | 'unixnano' | 'rfc3339';
 }
 
-export namespace RayID {
-  export import RayIDGetResponse = RayIDAPI.RayIDGetResponse;
-  export import RayIDGetParams = RayIDAPI.RayIDGetParams;
+export declare namespace RayID {
+  export { type RayIDGetResponse as RayIDGetResponse, type RayIDGetParams as RayIDGetParams };
 }

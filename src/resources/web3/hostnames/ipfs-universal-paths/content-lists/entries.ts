@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as EntriesAPI from './entries';
 
 export class Entries extends APIResource {
   /**
@@ -291,15 +290,17 @@ export interface EntryGetParams {
   zone_id: string;
 }
 
-export namespace Entries {
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryUpdateResponse = EntriesAPI.EntryUpdateResponse;
-  export import EntryListResponse = EntriesAPI.EntryListResponse;
-  export import EntryDeleteResponse = EntriesAPI.EntryDeleteResponse;
-  export import EntryGetResponse = EntriesAPI.EntryGetResponse;
-  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
-  export import EntryUpdateParams = EntriesAPI.EntryUpdateParams;
-  export import EntryListParams = EntriesAPI.EntryListParams;
-  export import EntryDeleteParams = EntriesAPI.EntryDeleteParams;
-  export import EntryGetParams = EntriesAPI.EntryGetParams;
+export declare namespace Entries {
+  export {
+    type EntryCreateResponse as EntryCreateResponse,
+    type EntryUpdateResponse as EntryUpdateResponse,
+    type EntryListResponse as EntryListResponse,
+    type EntryDeleteResponse as EntryDeleteResponse,
+    type EntryGetResponse as EntryGetResponse,
+    type EntryCreateParams as EntryCreateParams,
+    type EntryUpdateParams as EntryUpdateParams,
+    type EntryListParams as EntryListParams,
+    type EntryDeleteParams as EntryDeleteParams,
+    type EntryGetParams as EntryGetParams,
+  };
 }

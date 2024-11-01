@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as BindingsAPI from './bindings';
 import * as WorkersAPI from '../../../../workers/workers';
 
 export class Bindings extends APIResource {
@@ -38,7 +37,6 @@ export interface BindingGetParams {
   account_id: string;
 }
 
-export namespace Bindings {
-  export import BindingGetResponse = BindingsAPI.BindingGetResponse;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
+export declare namespace Bindings {
+  export { type BindingGetResponse as BindingGetResponse, type BindingGetParams as BindingGetParams };
 }

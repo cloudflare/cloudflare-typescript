@@ -2,10 +2,17 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PoolsAPI from './pools';
 import * as LoadBalancersAPI from '../load-balancers';
 import * as HealthAPI from './health';
+import {
+  Health,
+  HealthCreateParams,
+  HealthCreateResponse,
+  HealthGetParams,
+  HealthGetResponse,
+} from './health';
 import * as ReferencesAPI from './references';
+import { ReferenceGetParams, ReferenceGetResponse, References } from './references';
 import { SinglePage } from '../../../pagination';
 
 export class Pools extends APIResource {
@@ -486,22 +493,34 @@ export interface PoolGetParams {
   account_id: string;
 }
 
-export namespace Pools {
-  export import Pool = PoolsAPI.Pool;
-  export import PoolDeleteResponse = PoolsAPI.PoolDeleteResponse;
-  export import PoolsSinglePage = PoolsAPI.PoolsSinglePage;
-  export import PoolCreateParams = PoolsAPI.PoolCreateParams;
-  export import PoolUpdateParams = PoolsAPI.PoolUpdateParams;
-  export import PoolListParams = PoolsAPI.PoolListParams;
-  export import PoolDeleteParams = PoolsAPI.PoolDeleteParams;
-  export import PoolEditParams = PoolsAPI.PoolEditParams;
-  export import PoolGetParams = PoolsAPI.PoolGetParams;
-  export import Health = HealthAPI.Health;
-  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
-  export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthCreateParams = HealthAPI.HealthCreateParams;
-  export import HealthGetParams = HealthAPI.HealthGetParams;
-  export import References = ReferencesAPI.References;
-  export import ReferenceGetResponse = ReferencesAPI.ReferenceGetResponse;
-  export import ReferenceGetParams = ReferencesAPI.ReferenceGetParams;
+Pools.PoolsSinglePage = PoolsSinglePage;
+Pools.Health = Health;
+Pools.References = References;
+
+export declare namespace Pools {
+  export {
+    type Pool as Pool,
+    type PoolDeleteResponse as PoolDeleteResponse,
+    PoolsSinglePage as PoolsSinglePage,
+    type PoolCreateParams as PoolCreateParams,
+    type PoolUpdateParams as PoolUpdateParams,
+    type PoolListParams as PoolListParams,
+    type PoolDeleteParams as PoolDeleteParams,
+    type PoolEditParams as PoolEditParams,
+    type PoolGetParams as PoolGetParams,
+  };
+
+  export {
+    Health as Health,
+    type HealthCreateResponse as HealthCreateResponse,
+    type HealthGetResponse as HealthGetResponse,
+    type HealthCreateParams as HealthCreateParams,
+    type HealthGetParams as HealthGetParams,
+  };
+
+  export {
+    References as References,
+    type ReferenceGetResponse as ReferenceGetResponse,
+    type ReferenceGetParams as ReferenceGetParams,
+  };
 }

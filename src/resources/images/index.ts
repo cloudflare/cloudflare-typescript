@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export { Images } from './images';
 export {
-  Image,
-  V1ListResponse,
-  V1DeleteResponse,
-  V1CreateParams,
-  V1ListParams,
-  V1DeleteParams,
-  V1EditParams,
-  V1GetParams,
   V1ListResponsesV4PagePagination,
   V1,
+  type Image,
+  type V1ListResponse,
+  type V1DeleteResponse,
+  type V1CreateParams,
+  type V1ListParams,
+  type V1DeleteParams,
+  type V1EditParams,
+  type V1GetParams,
 } from './v1/index';
-export { Images } from './images';
-export { V2ListResponse, V2ListParams, V2 } from './v2/index';
+export { V2, type V2ListResponse, type V2ListParams } from './v2/index';

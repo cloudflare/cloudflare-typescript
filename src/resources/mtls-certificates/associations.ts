@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as AssociationsAPI from './associations';
 
 export class Associations extends APIResource {
   /**
@@ -44,8 +43,10 @@ export interface AssociationGetParams {
   account_id: string;
 }
 
-export namespace Associations {
-  export import CertificateAsssociation = AssociationsAPI.CertificateAsssociation;
-  export import AssociationGetResponse = AssociationsAPI.AssociationGetResponse;
-  export import AssociationGetParams = AssociationsAPI.AssociationGetParams;
+export declare namespace Associations {
+  export {
+    type CertificateAsssociation as CertificateAsssociation,
+    type AssociationGetResponse as AssociationGetResponse,
+    type AssociationGetParams as AssociationGetParams,
+  };
 }

@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as ListsAPI from './lists';
 import * as ItemsAPI from './items';
+import { ItemListParams, ItemListResponse, ItemListResponsesSinglePage, Items } from './items';
 import { SinglePage } from '../../../../pagination';
 
 export class Lists extends APIResource {
@@ -267,20 +267,29 @@ export interface ListGetParams {
   account_id: string;
 }
 
-export namespace Lists {
-  export import GatewayItem = ListsAPI.GatewayItem;
-  export import GatewayList = ListsAPI.GatewayList;
-  export import ListCreateResponse = ListsAPI.ListCreateResponse;
-  export import ListDeleteResponse = ListsAPI.ListDeleteResponse;
-  export import GatewayListsSinglePage = ListsAPI.GatewayListsSinglePage;
-  export import ListCreateParams = ListsAPI.ListCreateParams;
-  export import ListUpdateParams = ListsAPI.ListUpdateParams;
-  export import ListListParams = ListsAPI.ListListParams;
-  export import ListDeleteParams = ListsAPI.ListDeleteParams;
-  export import ListEditParams = ListsAPI.ListEditParams;
-  export import ListGetParams = ListsAPI.ListGetParams;
-  export import Items = ItemsAPI.Items;
-  export import ItemListResponse = ItemsAPI.ItemListResponse;
-  export import ItemListResponsesSinglePage = ItemsAPI.ItemListResponsesSinglePage;
-  export import ItemListParams = ItemsAPI.ItemListParams;
+Lists.GatewayListsSinglePage = GatewayListsSinglePage;
+Lists.Items = Items;
+Lists.ItemListResponsesSinglePage = ItemListResponsesSinglePage;
+
+export declare namespace Lists {
+  export {
+    type GatewayItem as GatewayItem,
+    type GatewayList as GatewayList,
+    type ListCreateResponse as ListCreateResponse,
+    type ListDeleteResponse as ListDeleteResponse,
+    GatewayListsSinglePage as GatewayListsSinglePage,
+    type ListCreateParams as ListCreateParams,
+    type ListUpdateParams as ListUpdateParams,
+    type ListListParams as ListListParams,
+    type ListDeleteParams as ListDeleteParams,
+    type ListEditParams as ListEditParams,
+    type ListGetParams as ListGetParams,
+  };
+
+  export {
+    Items as Items,
+    type ItemListResponse as ItemListResponse,
+    ItemListResponsesSinglePage as ItemListResponsesSinglePage,
+    type ItemListParams as ItemListParams,
+  };
 }

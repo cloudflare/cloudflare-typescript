@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RegionsAPI from './regions';
 import { SinglePage } from '../../../pagination';
 
 export class Regions extends APIResource {
@@ -43,8 +42,12 @@ export interface RegionListParams {
   account_id: string;
 }
 
-export namespace Regions {
-  export import RegionListResponse = RegionsAPI.RegionListResponse;
-  export import RegionListResponsesSinglePage = RegionsAPI.RegionListResponsesSinglePage;
-  export import RegionListParams = RegionsAPI.RegionListParams;
+Regions.RegionListResponsesSinglePage = RegionListResponsesSinglePage;
+
+export declare namespace Regions {
+  export {
+    type RegionListResponse as RegionListResponse,
+    RegionListResponsesSinglePage as RegionListResponsesSinglePage,
+    type RegionListParams as RegionListParams,
+  };
 }

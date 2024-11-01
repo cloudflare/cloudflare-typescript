@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as CatchAllsAPI from './catch-alls';
 
 export class CatchAlls extends APIResource {
   /**
@@ -177,11 +176,13 @@ export interface CatchAllGetParams {
   zone_id: string;
 }
 
-export namespace CatchAlls {
-  export import CatchAllAction = CatchAllsAPI.CatchAllAction;
-  export import CatchAllMatcher = CatchAllsAPI.CatchAllMatcher;
-  export import CatchAllUpdateResponse = CatchAllsAPI.CatchAllUpdateResponse;
-  export import CatchAllGetResponse = CatchAllsAPI.CatchAllGetResponse;
-  export import CatchAllUpdateParams = CatchAllsAPI.CatchAllUpdateParams;
-  export import CatchAllGetParams = CatchAllsAPI.CatchAllGetParams;
+export declare namespace CatchAlls {
+  export {
+    type CatchAllAction as CatchAllAction,
+    type CatchAllMatcher as CatchAllMatcher,
+    type CatchAllUpdateResponse as CatchAllUpdateResponse,
+    type CatchAllGetResponse as CatchAllGetResponse,
+    type CatchAllUpdateParams as CatchAllUpdateParams,
+    type CatchAllGetParams as CatchAllGetParams,
+  };
 }

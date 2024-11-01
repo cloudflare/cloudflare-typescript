@@ -3,7 +3,6 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 
 export class TimeseriesGroups extends APIResource {
   /**
@@ -575,17 +574,19 @@ export interface TimeseriesGroupResponseCodesParams {
   name?: Array<string>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupDNSSECResponse = TimeseriesGroupsAPI.TimeseriesGroupDNSSECResponse;
-  export import TimeseriesGroupEdnsResponse = TimeseriesGroupsAPI.TimeseriesGroupEdnsResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupProtocolResponse = TimeseriesGroupsAPI.TimeseriesGroupProtocolResponse;
-  export import TimeseriesGroupQueryTypeResponse = TimeseriesGroupsAPI.TimeseriesGroupQueryTypeResponse;
-  export import TimeseriesGroupResponseCodesResponse = TimeseriesGroupsAPI.TimeseriesGroupResponseCodesResponse;
-  export import TimeseriesGroupDNSSECParams = TimeseriesGroupsAPI.TimeseriesGroupDNSSECParams;
-  export import TimeseriesGroupEdnsParams = TimeseriesGroupsAPI.TimeseriesGroupEdnsParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupProtocolParams = TimeseriesGroupsAPI.TimeseriesGroupProtocolParams;
-  export import TimeseriesGroupQueryTypeParams = TimeseriesGroupsAPI.TimeseriesGroupQueryTypeParams;
-  export import TimeseriesGroupResponseCodesParams = TimeseriesGroupsAPI.TimeseriesGroupResponseCodesParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupDNSSECResponse as TimeseriesGroupDNSSECResponse,
+    type TimeseriesGroupEdnsResponse as TimeseriesGroupEdnsResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupProtocolResponse as TimeseriesGroupProtocolResponse,
+    type TimeseriesGroupQueryTypeResponse as TimeseriesGroupQueryTypeResponse,
+    type TimeseriesGroupResponseCodesResponse as TimeseriesGroupResponseCodesResponse,
+    type TimeseriesGroupDNSSECParams as TimeseriesGroupDNSSECParams,
+    type TimeseriesGroupEdnsParams as TimeseriesGroupEdnsParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupProtocolParams as TimeseriesGroupProtocolParams,
+    type TimeseriesGroupQueryTypeParams as TimeseriesGroupQueryTypeParams,
+    type TimeseriesGroupResponseCodesParams as TimeseriesGroupResponseCodesParams,
+  };
 }

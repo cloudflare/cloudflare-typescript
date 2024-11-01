@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PoliciesAPI from './policies';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
@@ -947,17 +946,21 @@ export interface PolicyGetParams {
   account_id: string;
 }
 
-export namespace Policies {
-  export import Mechanism = PoliciesAPI.Mechanism;
-  export import Policy = PoliciesAPI.Policy;
-  export import PolicyFilter = PoliciesAPI.PolicyFilter;
-  export import PolicyCreateResponse = PoliciesAPI.PolicyCreateResponse;
-  export import PolicyUpdateResponse = PoliciesAPI.PolicyUpdateResponse;
-  export import PolicyDeleteResponse = PoliciesAPI.PolicyDeleteResponse;
-  export import PoliciesSinglePage = PoliciesAPI.PoliciesSinglePage;
-  export import PolicyCreateParams = PoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = PoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = PoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = PoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = PoliciesAPI.PolicyGetParams;
+Policies.PoliciesSinglePage = PoliciesSinglePage;
+
+export declare namespace Policies {
+  export {
+    type Mechanism as Mechanism,
+    type Policy as Policy,
+    type PolicyFilter as PolicyFilter,
+    type PolicyCreateResponse as PolicyCreateResponse,
+    type PolicyUpdateResponse as PolicyUpdateResponse,
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    PoliciesSinglePage as PoliciesSinglePage,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
 }

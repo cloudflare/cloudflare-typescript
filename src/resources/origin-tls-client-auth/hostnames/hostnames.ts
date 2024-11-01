@@ -2,8 +2,18 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as HostnamesAPI from './hostnames';
 import * as CertificatesAPI from './certificates';
+import {
+  Certificate,
+  CertificateCreateParams,
+  CertificateCreateResponse,
+  CertificateDeleteParams,
+  CertificateDeleteResponse,
+  CertificateGetParams,
+  CertificateGetResponse,
+  CertificateListParams,
+  Certificates,
+} from './certificates';
 import { SinglePage } from '../../../pagination';
 
 export class Hostnames extends APIResource {
@@ -179,18 +189,25 @@ export interface HostnameGetParams {
   zone_id: string;
 }
 
-export namespace Hostnames {
-  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
-  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
-  export import Certificates = CertificatesAPI.Certificates;
-  export import Certificate = CertificatesAPI.Certificate;
-  export import CertificateCreateResponse = CertificatesAPI.CertificateCreateResponse;
-  export import CertificateDeleteResponse = CertificatesAPI.CertificateDeleteResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateCreateParams = CertificatesAPI.CertificateCreateParams;
-  export import CertificateListParams = CertificatesAPI.CertificateListParams;
-  export import CertificateDeleteParams = CertificatesAPI.CertificateDeleteParams;
-  export import CertificateGetParams = CertificatesAPI.CertificateGetParams;
+Hostnames.Certificates = Certificates;
+
+export declare namespace Hostnames {
+  export {
+    type AuthenticatedOriginPull as AuthenticatedOriginPull,
+    type HostnameUpdateResponse as HostnameUpdateResponse,
+    type HostnameUpdateParams as HostnameUpdateParams,
+    type HostnameGetParams as HostnameGetParams,
+  };
+
+  export {
+    Certificates as Certificates,
+    type Certificate as Certificate,
+    type CertificateCreateResponse as CertificateCreateResponse,
+    type CertificateDeleteResponse as CertificateDeleteResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    type CertificateCreateParams as CertificateCreateParams,
+    type CertificateListParams as CertificateListParams,
+    type CertificateDeleteParams as CertificateDeleteParams,
+    type CertificateGetParams as CertificateGetParams,
+  };
 }

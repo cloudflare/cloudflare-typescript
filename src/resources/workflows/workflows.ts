@@ -2,9 +2,26 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as WorkflowsAPI from './workflows';
 import * as VersionsAPI from './versions';
+import {
+  VersionGetParams,
+  VersionGetResponse,
+  VersionListParams,
+  VersionListResponse,
+  VersionListResponsesV4PagePagination,
+  Versions,
+} from './versions';
 import * as InstancesAPI from './instances/instances';
+import {
+  InstanceCreateParams,
+  InstanceCreateResponse,
+  InstanceGetParams,
+  InstanceGetResponse,
+  InstanceListParams,
+  InstanceListResponse,
+  InstanceListResponsesV4PagePaginationArray,
+  Instances as InstancesAPIInstances,
+} from './instances/instances';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Workflows extends APIResource {
@@ -188,26 +205,40 @@ export interface WorkflowGetParams {
   account_id: string;
 }
 
-export namespace Workflows {
-  export import WorkflowUpdateResponse = WorkflowsAPI.WorkflowUpdateResponse;
-  export import WorkflowListResponse = WorkflowsAPI.WorkflowListResponse;
-  export import WorkflowGetResponse = WorkflowsAPI.WorkflowGetResponse;
-  export import WorkflowListResponsesV4PagePaginationArray = WorkflowsAPI.WorkflowListResponsesV4PagePaginationArray;
-  export import WorkflowUpdateParams = WorkflowsAPI.WorkflowUpdateParams;
-  export import WorkflowListParams = WorkflowsAPI.WorkflowListParams;
-  export import WorkflowGetParams = WorkflowsAPI.WorkflowGetParams;
-  export import Instances = InstancesAPI.Instances;
-  export import InstanceCreateResponse = InstancesAPI.InstanceCreateResponse;
-  export import InstanceListResponse = InstancesAPI.InstanceListResponse;
-  export import InstanceGetResponse = InstancesAPI.InstanceGetResponse;
-  export import InstanceListResponsesV4PagePaginationArray = InstancesAPI.InstanceListResponsesV4PagePaginationArray;
-  export import InstanceCreateParams = InstancesAPI.InstanceCreateParams;
-  export import InstanceListParams = InstancesAPI.InstanceListParams;
-  export import InstanceGetParams = InstancesAPI.InstanceGetParams;
-  export import Versions = VersionsAPI.Versions;
-  export import VersionListResponse = VersionsAPI.VersionListResponse;
-  export import VersionGetResponse = VersionsAPI.VersionGetResponse;
-  export import VersionListResponsesV4PagePagination = VersionsAPI.VersionListResponsesV4PagePagination;
-  export import VersionListParams = VersionsAPI.VersionListParams;
-  export import VersionGetParams = VersionsAPI.VersionGetParams;
+Workflows.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4PagePaginationArray;
+Workflows.Instances = InstancesAPIInstances;
+Workflows.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
+Workflows.Versions = Versions;
+Workflows.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
+
+export declare namespace Workflows {
+  export {
+    type WorkflowUpdateResponse as WorkflowUpdateResponse,
+    type WorkflowListResponse as WorkflowListResponse,
+    type WorkflowGetResponse as WorkflowGetResponse,
+    WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
+    type WorkflowUpdateParams as WorkflowUpdateParams,
+    type WorkflowListParams as WorkflowListParams,
+    type WorkflowGetParams as WorkflowGetParams,
+  };
+
+  export {
+    InstancesAPIInstances as Instances,
+    type InstanceCreateResponse as InstanceCreateResponse,
+    type InstanceListResponse as InstanceListResponse,
+    type InstanceGetResponse as InstanceGetResponse,
+    InstanceListResponsesV4PagePaginationArray as InstanceListResponsesV4PagePaginationArray,
+    type InstanceCreateParams as InstanceCreateParams,
+    type InstanceListParams as InstanceListParams,
+    type InstanceGetParams as InstanceGetParams,
+  };
+
+  export {
+    Versions as Versions,
+    type VersionListResponse as VersionListResponse,
+    type VersionGetResponse as VersionGetResponse,
+    VersionListResponsesV4PagePagination as VersionListResponsesV4PagePagination,
+    type VersionListParams as VersionListParams,
+    type VersionGetParams as VersionGetParams,
+  };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../../../resource';
 import { isRequestOptions } from '../../../../../../core';
 import * as Core from '../../../../../../core';
-import * as MaliciousAPI from './malicious';
 
 export class Malicious extends APIResource {
   /**
@@ -159,7 +158,6 @@ export interface MaliciousGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3'>;
 }
 
-export namespace Malicious {
-  export import MaliciousGetResponse = MaliciousAPI.MaliciousGetResponse;
-  export import MaliciousGetParams = MaliciousAPI.MaliciousGetParams;
+export declare namespace Malicious {
+  export { type MaliciousGetResponse as MaliciousGetResponse, type MaliciousGetParams as MaliciousGetParams };
 }

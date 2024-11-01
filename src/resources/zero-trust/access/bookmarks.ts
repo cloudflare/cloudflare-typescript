@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BookmarksAPI from './bookmarks';
 import { SinglePage } from '../../../pagination';
 
 export class Bookmarks extends APIResource {
@@ -161,13 +160,17 @@ export interface BookmarkGetParams {
   account_id: string;
 }
 
-export namespace Bookmarks {
-  export import Bookmark = BookmarksAPI.Bookmark;
-  export import BookmarkDeleteResponse = BookmarksAPI.BookmarkDeleteResponse;
-  export import BookmarksSinglePage = BookmarksAPI.BookmarksSinglePage;
-  export import BookmarkCreateParams = BookmarksAPI.BookmarkCreateParams;
-  export import BookmarkUpdateParams = BookmarksAPI.BookmarkUpdateParams;
-  export import BookmarkListParams = BookmarksAPI.BookmarkListParams;
-  export import BookmarkDeleteParams = BookmarksAPI.BookmarkDeleteParams;
-  export import BookmarkGetParams = BookmarksAPI.BookmarkGetParams;
+Bookmarks.BookmarksSinglePage = BookmarksSinglePage;
+
+export declare namespace Bookmarks {
+  export {
+    type Bookmark as Bookmark,
+    type BookmarkDeleteResponse as BookmarkDeleteResponse,
+    BookmarksSinglePage as BookmarksSinglePage,
+    type BookmarkCreateParams as BookmarkCreateParams,
+    type BookmarkUpdateParams as BookmarkUpdateParams,
+    type BookmarkListParams as BookmarkListParams,
+    type BookmarkDeleteParams as BookmarkDeleteParams,
+    type BookmarkGetParams as BookmarkGetParams,
+  };
 }

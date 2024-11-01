@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as RetentionAPI from './retention';
 
 export class Retention extends APIResource {
   /**
@@ -70,9 +69,11 @@ export interface RetentionGetParams {
   zone_id: string;
 }
 
-export namespace Retention {
-  export import RetentionCreateResponse = RetentionAPI.RetentionCreateResponse;
-  export import RetentionGetResponse = RetentionAPI.RetentionGetResponse;
-  export import RetentionCreateParams = RetentionAPI.RetentionCreateParams;
-  export import RetentionGetParams = RetentionAPI.RetentionGetParams;
+export declare namespace Retention {
+  export {
+    type RetentionCreateResponse as RetentionCreateResponse,
+    type RetentionGetResponse as RetentionGetResponse,
+    type RetentionCreateParams as RetentionCreateParams,
+    type RetentionGetParams as RetentionGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as PeersAPI from './peers';
 import { SinglePage } from '../../pagination';
 
 export class Peers extends APIResource {
@@ -173,13 +172,17 @@ export interface PeerGetParams {
   account_id: string;
 }
 
-export namespace Peers {
-  export import Peer = PeersAPI.Peer;
-  export import PeerDeleteResponse = PeersAPI.PeerDeleteResponse;
-  export import PeersSinglePage = PeersAPI.PeersSinglePage;
-  export import PeerCreateParams = PeersAPI.PeerCreateParams;
-  export import PeerUpdateParams = PeersAPI.PeerUpdateParams;
-  export import PeerListParams = PeersAPI.PeerListParams;
-  export import PeerDeleteParams = PeersAPI.PeerDeleteParams;
-  export import PeerGetParams = PeersAPI.PeerGetParams;
+Peers.PeersSinglePage = PeersSinglePage;
+
+export declare namespace Peers {
+  export {
+    type Peer as Peer,
+    type PeerDeleteResponse as PeerDeleteResponse,
+    PeersSinglePage as PeersSinglePage,
+    type PeerCreateParams as PeerCreateParams,
+    type PeerUpdateParams as PeerUpdateParams,
+    type PeerListParams as PeerListParams,
+    type PeerDeleteParams as PeerDeleteParams,
+    type PeerGetParams as PeerGetParams,
+  };
 }

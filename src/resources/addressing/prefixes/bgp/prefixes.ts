@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PrefixesAPI from './prefixes';
 import { SinglePage } from '../../../../pagination';
 
 export class Prefixes extends APIResource {
@@ -164,10 +163,14 @@ export interface PrefixGetParams {
   account_id: string;
 }
 
-export namespace Prefixes {
-  export import BGPPrefix = PrefixesAPI.BGPPrefix;
-  export import BGPPrefixesSinglePage = PrefixesAPI.BGPPrefixesSinglePage;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
+Prefixes.BGPPrefixesSinglePage = BGPPrefixesSinglePage;
+
+export declare namespace Prefixes {
+  export {
+    type BGPPrefix as BGPPrefix,
+    BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type PrefixListParams as PrefixListParams,
+    type PrefixEditParams as PrefixEditParams,
+    type PrefixGetParams as PrefixGetParams,
+  };
 }

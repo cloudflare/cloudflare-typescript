@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SettingsAPI from './settings';
 import * as ScriptsAPI from './scripts';
 import * as TailAPI from './tail';
 
@@ -93,7 +92,6 @@ export interface SettingGetParams {
   account_id: string;
 }
 
-export namespace Settings {
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export { type SettingEditParams as SettingEditParams, type SettingGetParams as SettingGetParams };
 }

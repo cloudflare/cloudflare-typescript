@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as KeysAPI from './keys';
 
 export class Keys extends APIResource {
   /**
@@ -119,11 +118,13 @@ export interface KeyRotateParams {
   account_id: string;
 }
 
-export namespace Keys {
-  export import KeyUpdateResponse = KeysAPI.KeyUpdateResponse;
-  export import KeyGetResponse = KeysAPI.KeyGetResponse;
-  export import KeyRotateResponse = KeysAPI.KeyRotateResponse;
-  export import KeyUpdateParams = KeysAPI.KeyUpdateParams;
-  export import KeyGetParams = KeysAPI.KeyGetParams;
-  export import KeyRotateParams = KeysAPI.KeyRotateParams;
+export declare namespace Keys {
+  export {
+    type KeyUpdateResponse as KeyUpdateResponse,
+    type KeyGetResponse as KeyGetResponse,
+    type KeyRotateResponse as KeyRotateResponse,
+    type KeyUpdateParams as KeyUpdateParams,
+    type KeyGetParams as KeyGetParams,
+    type KeyRotateParams as KeyRotateParams,
+  };
 }

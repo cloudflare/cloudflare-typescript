@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ReceivedAPI from './received';
 import * as FieldsAPI from './fields';
+import { FieldGetParams, FieldGetResponse, Fields } from './fields';
 
 export class Received extends APIResource {
   fields: FieldsAPI.Fields = new FieldsAPI.Fields(this._client);
@@ -94,10 +94,14 @@ export interface ReceivedGetParams {
   timestamps?: 'unix' | 'unixnano' | 'rfc3339';
 }
 
-export namespace Received {
-  export import ReceivedGetResponse = ReceivedAPI.ReceivedGetResponse;
-  export import ReceivedGetParams = ReceivedAPI.ReceivedGetParams;
-  export import Fields = FieldsAPI.Fields;
-  export import FieldGetResponse = FieldsAPI.FieldGetResponse;
-  export import FieldGetParams = FieldsAPI.FieldGetParams;
+Received.Fields = Fields;
+
+export declare namespace Received {
+  export { type ReceivedGetResponse as ReceivedGetResponse, type ReceivedGetParams as ReceivedGetParams };
+
+  export {
+    Fields as Fields,
+    type FieldGetResponse as FieldGetResponse,
+    type FieldGetParams as FieldGetParams,
+  };
 }

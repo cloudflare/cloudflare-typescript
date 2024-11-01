@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as CustomCertificateAPI from './custom-certificate';
 import * as ConfigurationsAPI from './configurations';
 
 export class CustomCertificate extends APIResource {
@@ -22,6 +21,6 @@ export interface CustomCertificateGetParams {
   account_id: string;
 }
 
-export namespace CustomCertificate {
-  export import CustomCertificateGetParams = CustomCertificateAPI.CustomCertificateGetParams;
+export declare namespace CustomCertificate {
+  export { type CustomCertificateGetParams as CustomCertificateGetParams };
 }

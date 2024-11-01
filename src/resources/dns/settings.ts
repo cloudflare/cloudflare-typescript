@@ -4,7 +4,6 @@ import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { CloudflareError } from '../../error';
-import * as SettingsAPI from './settings';
 
 export class Settings extends APIResource {
   /**
@@ -326,11 +325,13 @@ export interface SettingGetParams {
   zone_id?: string;
 }
 
-export namespace Settings {
-  export import DNSSetting = SettingsAPI.DNSSetting;
-  export import Nameserver = SettingsAPI.Nameserver;
-  export import SettingEditResponse = SettingsAPI.SettingEditResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingEditParams = SettingsAPI.SettingEditParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+export declare namespace Settings {
+  export {
+    type DNSSetting as DNSSetting,
+    type Nameserver as Nameserver,
+    type SettingEditResponse as SettingEditResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingEditParams as SettingEditParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

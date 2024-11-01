@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as LOADocumentsAPI from './loa-documents';
 import * as DownloadsAPI from './downloads';
+import { DownloadGetParams, Downloads } from './downloads';
 
 export class LOADocuments extends APIResource {
   downloads: DownloadsAPI.Downloads = new DownloadsAPI.Downloads(this._client);
@@ -71,9 +71,13 @@ export interface LOADocumentCreateParams {
   loa_document: string;
 }
 
-export namespace LOADocuments {
-  export import LOADocumentCreateResponse = LOADocumentsAPI.LOADocumentCreateResponse;
-  export import LOADocumentCreateParams = LOADocumentsAPI.LOADocumentCreateParams;
-  export import Downloads = DownloadsAPI.Downloads;
-  export import DownloadGetParams = DownloadsAPI.DownloadGetParams;
+LOADocuments.Downloads = Downloads;
+
+export declare namespace LOADocuments {
+  export {
+    type LOADocumentCreateResponse as LOADocumentCreateResponse,
+    type LOADocumentCreateParams as LOADocumentCreateParams,
+  };
+
+  export { Downloads as Downloads, type DownloadGetParams as DownloadGetParams };
 }

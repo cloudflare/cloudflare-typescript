@@ -2,8 +2,16 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as IndexesAPI from './indexes';
 import * as MetadataIndexAPI from './metadata-index';
+import {
+  MetadataIndex,
+  MetadataIndexCreateParams,
+  MetadataIndexCreateResponse,
+  MetadataIndexDeleteParams,
+  MetadataIndexDeleteResponse,
+  MetadataIndexListParams,
+  MetadataIndexListResponse,
+} from './metadata-index';
 import { SinglePage } from '../../../pagination';
 
 export class Indexes extends APIResource {
@@ -536,36 +544,44 @@ export interface IndexUpsertParams {
   'unparsable-behavior'?: 'error' | 'discard';
 }
 
-export namespace Indexes {
-  export import CreateIndex = IndexesAPI.CreateIndex;
-  export import IndexDeleteVectorsByID = IndexesAPI.IndexDeleteVectorsByID;
-  export import IndexDimensionConfiguration = IndexesAPI.IndexDimensionConfiguration;
-  export import IndexInsert = IndexesAPI.IndexInsert;
-  export import IndexQuery = IndexesAPI.IndexQuery;
-  export import IndexUpsert = IndexesAPI.IndexUpsert;
-  export import IndexDeleteResponse = IndexesAPI.IndexDeleteResponse;
-  export import IndexDeleteByIDsResponse = IndexesAPI.IndexDeleteByIDsResponse;
-  export import IndexGetByIDsResponse = IndexesAPI.IndexGetByIDsResponse;
-  export import IndexInfoResponse = IndexesAPI.IndexInfoResponse;
-  export import IndexInsertResponse = IndexesAPI.IndexInsertResponse;
-  export import IndexQueryResponse = IndexesAPI.IndexQueryResponse;
-  export import IndexUpsertResponse = IndexesAPI.IndexUpsertResponse;
-  export import CreateIndicesSinglePage = IndexesAPI.CreateIndicesSinglePage;
-  export import IndexCreateParams = IndexesAPI.IndexCreateParams;
-  export import IndexListParams = IndexesAPI.IndexListParams;
-  export import IndexDeleteParams = IndexesAPI.IndexDeleteParams;
-  export import IndexDeleteByIDsParams = IndexesAPI.IndexDeleteByIDsParams;
-  export import IndexGetParams = IndexesAPI.IndexGetParams;
-  export import IndexGetByIDsParams = IndexesAPI.IndexGetByIDsParams;
-  export import IndexInfoParams = IndexesAPI.IndexInfoParams;
-  export import IndexInsertParams = IndexesAPI.IndexInsertParams;
-  export import IndexQueryParams = IndexesAPI.IndexQueryParams;
-  export import IndexUpsertParams = IndexesAPI.IndexUpsertParams;
-  export import MetadataIndex = MetadataIndexAPI.MetadataIndex;
-  export import MetadataIndexCreateResponse = MetadataIndexAPI.MetadataIndexCreateResponse;
-  export import MetadataIndexListResponse = MetadataIndexAPI.MetadataIndexListResponse;
-  export import MetadataIndexDeleteResponse = MetadataIndexAPI.MetadataIndexDeleteResponse;
-  export import MetadataIndexCreateParams = MetadataIndexAPI.MetadataIndexCreateParams;
-  export import MetadataIndexListParams = MetadataIndexAPI.MetadataIndexListParams;
-  export import MetadataIndexDeleteParams = MetadataIndexAPI.MetadataIndexDeleteParams;
+Indexes.CreateIndicesSinglePage = CreateIndicesSinglePage;
+Indexes.MetadataIndex = MetadataIndex;
+
+export declare namespace Indexes {
+  export {
+    type CreateIndex as CreateIndex,
+    type IndexDeleteVectorsByID as IndexDeleteVectorsByID,
+    type IndexDimensionConfiguration as IndexDimensionConfiguration,
+    type IndexInsert as IndexInsert,
+    type IndexQuery as IndexQuery,
+    type IndexUpsert as IndexUpsert,
+    type IndexDeleteResponse as IndexDeleteResponse,
+    type IndexDeleteByIDsResponse as IndexDeleteByIDsResponse,
+    type IndexGetByIDsResponse as IndexGetByIDsResponse,
+    type IndexInfoResponse as IndexInfoResponse,
+    type IndexInsertResponse as IndexInsertResponse,
+    type IndexQueryResponse as IndexQueryResponse,
+    type IndexUpsertResponse as IndexUpsertResponse,
+    CreateIndicesSinglePage as CreateIndicesSinglePage,
+    type IndexCreateParams as IndexCreateParams,
+    type IndexListParams as IndexListParams,
+    type IndexDeleteParams as IndexDeleteParams,
+    type IndexDeleteByIDsParams as IndexDeleteByIDsParams,
+    type IndexGetParams as IndexGetParams,
+    type IndexGetByIDsParams as IndexGetByIDsParams,
+    type IndexInfoParams as IndexInfoParams,
+    type IndexInsertParams as IndexInsertParams,
+    type IndexQueryParams as IndexQueryParams,
+    type IndexUpsertParams as IndexUpsertParams,
+  };
+
+  export {
+    MetadataIndex as MetadataIndex,
+    type MetadataIndexCreateResponse as MetadataIndexCreateResponse,
+    type MetadataIndexListResponse as MetadataIndexListResponse,
+    type MetadataIndexDeleteResponse as MetadataIndexDeleteResponse,
+    type MetadataIndexCreateParams as MetadataIndexCreateParams,
+    type MetadataIndexListParams as MetadataIndexListParams,
+    type MetadataIndexDeleteParams as MetadataIndexDeleteParams,
+  };
 }

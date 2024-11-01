@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ACLsAPI from './acls';
 import { SinglePage } from '../../pagination';
 
 export class ACLs extends APIResource {
@@ -147,13 +146,17 @@ export interface ACLGetParams {
   account_id: string;
 }
 
-export namespace ACLs {
-  export import ACL = ACLsAPI.ACL;
-  export import ACLDeleteResponse = ACLsAPI.ACLDeleteResponse;
-  export import ACLsSinglePage = ACLsAPI.ACLsSinglePage;
-  export import ACLCreateParams = ACLsAPI.ACLCreateParams;
-  export import ACLUpdateParams = ACLsAPI.ACLUpdateParams;
-  export import ACLListParams = ACLsAPI.ACLListParams;
-  export import ACLDeleteParams = ACLsAPI.ACLDeleteParams;
-  export import ACLGetParams = ACLsAPI.ACLGetParams;
+ACLs.ACLsSinglePage = ACLsSinglePage;
+
+export declare namespace ACLs {
+  export {
+    type ACL as ACL,
+    type ACLDeleteResponse as ACLDeleteResponse,
+    ACLsSinglePage as ACLsSinglePage,
+    type ACLCreateParams as ACLCreateParams,
+    type ACLUpdateParams as ACLUpdateParams,
+    type ACLListParams as ACLListParams,
+    type ACLDeleteParams as ACLDeleteParams,
+    type ACLGetParams as ACLGetParams,
+  };
 }

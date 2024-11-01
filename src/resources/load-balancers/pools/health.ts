@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as HealthAPI from './health';
 
 export class Health extends APIResource {
   /**
@@ -223,9 +222,11 @@ export interface HealthGetParams {
   account_id: string;
 }
 
-export namespace Health {
-  export import HealthCreateResponse = HealthAPI.HealthCreateResponse;
-  export import HealthGetResponse = HealthAPI.HealthGetResponse;
-  export import HealthCreateParams = HealthAPI.HealthCreateParams;
-  export import HealthGetParams = HealthAPI.HealthGetParams;
+export declare namespace Health {
+  export {
+    type HealthCreateResponse as HealthCreateResponse,
+    type HealthGetResponse as HealthGetResponse,
+    type HealthCreateParams as HealthCreateParams,
+    type HealthGetParams as HealthGetParams,
+  };
 }

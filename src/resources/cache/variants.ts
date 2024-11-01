@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as VariantsAPI from './variants';
 
 export class Variants extends APIResource {
   /**
@@ -371,12 +370,14 @@ export interface VariantGetParams {
   zone_id: string;
 }
 
-export namespace Variants {
-  export import CacheVariantIdentifier = VariantsAPI.CacheVariantIdentifier;
-  export import VariantDeleteResponse = VariantsAPI.VariantDeleteResponse;
-  export import VariantEditResponse = VariantsAPI.VariantEditResponse;
-  export import VariantGetResponse = VariantsAPI.VariantGetResponse;
-  export import VariantDeleteParams = VariantsAPI.VariantDeleteParams;
-  export import VariantEditParams = VariantsAPI.VariantEditParams;
-  export import VariantGetParams = VariantsAPI.VariantGetParams;
+export declare namespace Variants {
+  export {
+    type CacheVariantIdentifier as CacheVariantIdentifier,
+    type VariantDeleteResponse as VariantDeleteResponse,
+    type VariantEditResponse as VariantEditResponse,
+    type VariantGetResponse as VariantGetResponse,
+    type VariantDeleteParams as VariantDeleteParams,
+    type VariantEditParams as VariantEditParams,
+    type VariantGetParams as VariantGetParams,
+  };
 }

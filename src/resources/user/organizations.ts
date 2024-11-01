@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import * as OrganizationsAPI from './organizations';
 import * as Shared from '../shared';
 import * as MembersAPI from '../accounts/members';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
@@ -114,10 +113,14 @@ export interface OrganizationListParams extends V4PagePaginationArrayParams {
   status?: 'member' | 'invited';
 }
 
-export namespace Organizations {
-  export import Organization = OrganizationsAPI.Organization;
-  export import OrganizationDeleteResponse = OrganizationsAPI.OrganizationDeleteResponse;
-  export import OrganizationGetResponse = OrganizationsAPI.OrganizationGetResponse;
-  export import OrganizationsV4PagePaginationArray = OrganizationsAPI.OrganizationsV4PagePaginationArray;
-  export import OrganizationListParams = OrganizationsAPI.OrganizationListParams;
+Organizations.OrganizationsV4PagePaginationArray = OrganizationsV4PagePaginationArray;
+
+export declare namespace Organizations {
+  export {
+    type Organization as Organization,
+    type OrganizationDeleteResponse as OrganizationDeleteResponse,
+    type OrganizationGetResponse as OrganizationGetResponse,
+    OrganizationsV4PagePaginationArray as OrganizationsV4PagePaginationArray,
+    type OrganizationListParams as OrganizationListParams,
+  };
 }

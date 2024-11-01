@@ -8,9 +8,43 @@ import * as ApplicationsAPI from './applications';
 import * as AccessAPI from '../access';
 import * as PoliciesAPI from '../policies';
 import * as CAsAPI from './cas';
+import {
+  CA,
+  CACreateParams,
+  CACreateResponse,
+  CADeleteParams,
+  CADeleteResponse,
+  CAGetParams,
+  CAGetResponse,
+  CAListParams,
+  CAs,
+  CAsSinglePage,
+} from './cas';
 import * as ApplicationsPoliciesAPI from './policies';
+import {
+  Policies,
+  PolicyCreateParams,
+  PolicyDeleteParams,
+  PolicyDeleteResponse,
+  PolicyGetParams,
+  PolicyListParams,
+  PolicyUpdateParams,
+} from './policies';
 import * as UserPolicyChecksAPI from './user-policy-checks';
+import {
+  UserPolicyCheckGeo,
+  UserPolicyCheckListParams,
+  UserPolicyCheckListResponse,
+  UserPolicyChecks,
+} from './user-policy-checks';
 import * as PolicyTestsAPI from './policy-tests/policy-tests';
+import {
+  PolicyTestCreateParams,
+  PolicyTestCreateResponse,
+  PolicyTestGetParams,
+  PolicyTestGetResponse,
+  PolicyTests,
+} from './policy-tests/policy-tests';
 import { SinglePage } from '../../../../pagination';
 
 export class Applications extends APIResource {
@@ -12959,65 +12993,86 @@ export interface ApplicationRevokeTokensParams {
   zone_id?: string;
 }
 
-export namespace Applications {
-  export import AllowedHeaders = ApplicationsAPI.AllowedHeaders;
-  export import AllowedIdPs = ApplicationsAPI.AllowedIdPs;
-  export import AllowedMethods = ApplicationsAPI.AllowedMethods;
-  export import AllowedOrigins = ApplicationsAPI.AllowedOrigins;
-  export import AppID = ApplicationsAPI.AppID;
-  export import Application = ApplicationsAPI.Application;
-  export import ApplicationPolicy = ApplicationsAPI.ApplicationPolicy;
-  export import ApplicationSCIMConfig = ApplicationsAPI.ApplicationSCIMConfig;
-  export import ApplicationType = ApplicationsAPI.ApplicationType;
-  export import CORSHeaders = ApplicationsAPI.CORSHeaders;
-  export import Decision = ApplicationsAPI.Decision;
-  export import OIDCSaaSApp = ApplicationsAPI.OIDCSaaSApp;
-  export import SaaSAppNameFormat = ApplicationsAPI.SaaSAppNameFormat;
-  export import SaaSAppNameIDFormat = ApplicationsAPI.SaaSAppNameIDFormat;
-  export import SaaSAppSource = ApplicationsAPI.SaaSAppSource;
-  export import SAMLSaaSApp = ApplicationsAPI.SAMLSaaSApp;
-  export import SCIMConfigAuthenticationHTTPBasic = ApplicationsAPI.SCIMConfigAuthenticationHTTPBasic;
-  export import SCIMConfigAuthenticationOAuthBearerToken = ApplicationsAPI.SCIMConfigAuthenticationOAuthBearerToken;
-  export import SCIMConfigAuthenticationOauth2 = ApplicationsAPI.SCIMConfigAuthenticationOauth2;
-  export import SCIMConfigMapping = ApplicationsAPI.SCIMConfigMapping;
-  export import SelfHostedDomains = ApplicationsAPI.SelfHostedDomains;
-  export import ApplicationCreateResponse = ApplicationsAPI.ApplicationCreateResponse;
-  export import ApplicationUpdateResponse = ApplicationsAPI.ApplicationUpdateResponse;
-  export import ApplicationListResponse = ApplicationsAPI.ApplicationListResponse;
-  export import ApplicationDeleteResponse = ApplicationsAPI.ApplicationDeleteResponse;
-  export import ApplicationGetResponse = ApplicationsAPI.ApplicationGetResponse;
-  export import ApplicationRevokeTokensResponse = ApplicationsAPI.ApplicationRevokeTokensResponse;
-  export import ApplicationListResponsesSinglePage = ApplicationsAPI.ApplicationListResponsesSinglePage;
-  export import ApplicationCreateParams = ApplicationsAPI.ApplicationCreateParams;
-  export import ApplicationUpdateParams = ApplicationsAPI.ApplicationUpdateParams;
-  export import ApplicationListParams = ApplicationsAPI.ApplicationListParams;
-  export import ApplicationDeleteParams = ApplicationsAPI.ApplicationDeleteParams;
-  export import ApplicationGetParams = ApplicationsAPI.ApplicationGetParams;
-  export import ApplicationRevokeTokensParams = ApplicationsAPI.ApplicationRevokeTokensParams;
-  export import CAs = CAsAPI.CAs;
-  export import CA = CAsAPI.CA;
-  export import CACreateResponse = CAsAPI.CACreateResponse;
-  export import CADeleteResponse = CAsAPI.CADeleteResponse;
-  export import CAGetResponse = CAsAPI.CAGetResponse;
-  export import CAsSinglePage = CAsAPI.CAsSinglePage;
-  export import CACreateParams = CAsAPI.CACreateParams;
-  export import CAListParams = CAsAPI.CAListParams;
-  export import CADeleteParams = CAsAPI.CADeleteParams;
-  export import CAGetParams = CAsAPI.CAGetParams;
-  export import UserPolicyChecks = UserPolicyChecksAPI.UserPolicyChecks;
-  export import UserPolicyCheckGeo = UserPolicyChecksAPI.UserPolicyCheckGeo;
-  export import UserPolicyCheckListResponse = UserPolicyChecksAPI.UserPolicyCheckListResponse;
-  export import UserPolicyCheckListParams = UserPolicyChecksAPI.UserPolicyCheckListParams;
-  export import Policies = ApplicationsPoliciesAPI.Policies;
-  export import PolicyDeleteResponse = ApplicationsPoliciesAPI.PolicyDeleteResponse;
-  export import PolicyCreateParams = ApplicationsPoliciesAPI.PolicyCreateParams;
-  export import PolicyUpdateParams = ApplicationsPoliciesAPI.PolicyUpdateParams;
-  export import PolicyListParams = ApplicationsPoliciesAPI.PolicyListParams;
-  export import PolicyDeleteParams = ApplicationsPoliciesAPI.PolicyDeleteParams;
-  export import PolicyGetParams = ApplicationsPoliciesAPI.PolicyGetParams;
-  export import PolicyTests = PolicyTestsAPI.PolicyTests;
-  export import PolicyTestCreateResponse = PolicyTestsAPI.PolicyTestCreateResponse;
-  export import PolicyTestGetResponse = PolicyTestsAPI.PolicyTestGetResponse;
-  export import PolicyTestCreateParams = PolicyTestsAPI.PolicyTestCreateParams;
-  export import PolicyTestGetParams = PolicyTestsAPI.PolicyTestGetParams;
+Applications.ApplicationListResponsesSinglePage = ApplicationListResponsesSinglePage;
+Applications.CAs = CAs;
+Applications.CAsSinglePage = CAsSinglePage;
+Applications.UserPolicyChecks = UserPolicyChecks;
+Applications.Policies = Policies;
+Applications.PolicyTests = PolicyTests;
+
+export declare namespace Applications {
+  export {
+    type AllowedHeaders as AllowedHeaders,
+    type AllowedIdPs as AllowedIdPs,
+    type AllowedMethods as AllowedMethods,
+    type AllowedOrigins as AllowedOrigins,
+    type AppID as AppID,
+    type Application as Application,
+    type ApplicationPolicy as ApplicationPolicy,
+    type ApplicationSCIMConfig as ApplicationSCIMConfig,
+    type ApplicationType as ApplicationType,
+    type CORSHeaders as CORSHeaders,
+    type Decision as Decision,
+    type OIDCSaaSApp as OIDCSaaSApp,
+    type SaaSAppNameFormat as SaaSAppNameFormat,
+    type SaaSAppNameIDFormat as SaaSAppNameIDFormat,
+    type SaaSAppSource as SaaSAppSource,
+    type SAMLSaaSApp as SAMLSaaSApp,
+    type SCIMConfigAuthenticationHTTPBasic as SCIMConfigAuthenticationHTTPBasic,
+    type SCIMConfigAuthenticationOAuthBearerToken as SCIMConfigAuthenticationOAuthBearerToken,
+    type SCIMConfigAuthenticationOauth2 as SCIMConfigAuthenticationOauth2,
+    type SCIMConfigMapping as SCIMConfigMapping,
+    type SelfHostedDomains as SelfHostedDomains,
+    type ApplicationCreateResponse as ApplicationCreateResponse,
+    type ApplicationUpdateResponse as ApplicationUpdateResponse,
+    type ApplicationListResponse as ApplicationListResponse,
+    type ApplicationDeleteResponse as ApplicationDeleteResponse,
+    type ApplicationGetResponse as ApplicationGetResponse,
+    type ApplicationRevokeTokensResponse as ApplicationRevokeTokensResponse,
+    ApplicationListResponsesSinglePage as ApplicationListResponsesSinglePage,
+    type ApplicationCreateParams as ApplicationCreateParams,
+    type ApplicationUpdateParams as ApplicationUpdateParams,
+    type ApplicationListParams as ApplicationListParams,
+    type ApplicationDeleteParams as ApplicationDeleteParams,
+    type ApplicationGetParams as ApplicationGetParams,
+    type ApplicationRevokeTokensParams as ApplicationRevokeTokensParams,
+  };
+
+  export {
+    CAs as CAs,
+    type CA as CA,
+    type CACreateResponse as CACreateResponse,
+    type CADeleteResponse as CADeleteResponse,
+    type CAGetResponse as CAGetResponse,
+    CAsSinglePage as CAsSinglePage,
+    type CACreateParams as CACreateParams,
+    type CAListParams as CAListParams,
+    type CADeleteParams as CADeleteParams,
+    type CAGetParams as CAGetParams,
+  };
+
+  export {
+    UserPolicyChecks as UserPolicyChecks,
+    type UserPolicyCheckGeo as UserPolicyCheckGeo,
+    type UserPolicyCheckListResponse as UserPolicyCheckListResponse,
+    type UserPolicyCheckListParams as UserPolicyCheckListParams,
+  };
+
+  export {
+    Policies as Policies,
+    type PolicyDeleteResponse as PolicyDeleteResponse,
+    type PolicyCreateParams as PolicyCreateParams,
+    type PolicyUpdateParams as PolicyUpdateParams,
+    type PolicyListParams as PolicyListParams,
+    type PolicyDeleteParams as PolicyDeleteParams,
+    type PolicyGetParams as PolicyGetParams,
+  };
+
+  export {
+    PolicyTests as PolicyTests,
+    type PolicyTestCreateResponse as PolicyTestCreateResponse,
+    type PolicyTestGetResponse as PolicyTestGetResponse,
+    type PolicyTestCreateParams as PolicyTestCreateParams,
+    type PolicyTestGetParams as PolicyTestGetParams,
+  };
 }

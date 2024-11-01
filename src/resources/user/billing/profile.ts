@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ProfileAPI from './profile';
 
 export class Profile extends APIResource {
   /**
@@ -98,6 +97,6 @@ export interface ProfileGetResponse {
   zipcode?: string;
 }
 
-export namespace Profile {
-  export import ProfileGetResponse = ProfileAPI.ProfileGetResponse;
+export declare namespace Profile {
+  export { type ProfileGetResponse as ProfileGetResponse };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as RulesAPI from './rules';
 import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
@@ -130,12 +129,16 @@ export interface RuleDeleteParams {
   zone_id: string;
 }
 
-export namespace Rules {
-  export import RuleUpdateResponse = RulesAPI.RuleUpdateResponse;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleDeleteResponse = RulesAPI.RuleDeleteResponse;
-  export import RuleListResponsesSinglePage = RulesAPI.RuleListResponsesSinglePage;
-  export import RuleUpdateParams = RulesAPI.RuleUpdateParams;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleDeleteParams = RulesAPI.RuleDeleteParams;
+Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
+
+export declare namespace Rules {
+  export {
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
+    type RuleUpdateParams as RuleUpdateParams,
+    type RuleListParams as RuleListParams,
+    type RuleDeleteParams as RuleDeleteParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as DEXTestsAPI from './dex-tests';
 import { SinglePage } from '../../../pagination';
 
 export class DEXTests extends APIResource {
@@ -388,15 +387,19 @@ export interface DEXTestGetParams {
   account_id: string;
 }
 
-export namespace DEXTests {
-  export import DEXTest = DEXTestsAPI.DEXTest;
-  export import SchemaData = DEXTestsAPI.SchemaData;
-  export import SchemaHTTP = DEXTestsAPI.SchemaHTTP;
-  export import DEXTestDeleteResponse = DEXTestsAPI.DEXTestDeleteResponse;
-  export import SchemaHTTPSSinglePage = DEXTestsAPI.SchemaHTTPSSinglePage;
-  export import DEXTestCreateParams = DEXTestsAPI.DEXTestCreateParams;
-  export import DEXTestUpdateParams = DEXTestsAPI.DEXTestUpdateParams;
-  export import DEXTestListParams = DEXTestsAPI.DEXTestListParams;
-  export import DEXTestDeleteParams = DEXTestsAPI.DEXTestDeleteParams;
-  export import DEXTestGetParams = DEXTestsAPI.DEXTestGetParams;
+DEXTests.SchemaHTTPSSinglePage = SchemaHTTPSSinglePage;
+
+export declare namespace DEXTests {
+  export {
+    type DEXTest as DEXTest,
+    type SchemaData as SchemaData,
+    type SchemaHTTP as SchemaHTTP,
+    type DEXTestDeleteResponse as DEXTestDeleteResponse,
+    SchemaHTTPSSinglePage as SchemaHTTPSSinglePage,
+    type DEXTestCreateParams as DEXTestCreateParams,
+    type DEXTestUpdateParams as DEXTestUpdateParams,
+    type DEXTestListParams as DEXTestListParams,
+    type DEXTestDeleteParams as DEXTestDeleteParams,
+    type DEXTestGetParams as DEXTestGetParams,
+  };
 }

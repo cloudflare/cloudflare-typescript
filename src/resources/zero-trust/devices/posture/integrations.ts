@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as IntegrationsAPI from './integrations';
 import { SinglePage } from '../../../../pagination';
 
 export class Integrations extends APIResource {
@@ -557,13 +556,17 @@ export interface IntegrationGetParams {
   account_id: string;
 }
 
-export namespace Integrations {
-  export import Integration = IntegrationsAPI.Integration;
-  export import IntegrationDeleteResponse = IntegrationsAPI.IntegrationDeleteResponse;
-  export import IntegrationsSinglePage = IntegrationsAPI.IntegrationsSinglePage;
-  export import IntegrationCreateParams = IntegrationsAPI.IntegrationCreateParams;
-  export import IntegrationListParams = IntegrationsAPI.IntegrationListParams;
-  export import IntegrationDeleteParams = IntegrationsAPI.IntegrationDeleteParams;
-  export import IntegrationEditParams = IntegrationsAPI.IntegrationEditParams;
-  export import IntegrationGetParams = IntegrationsAPI.IntegrationGetParams;
+Integrations.IntegrationsSinglePage = IntegrationsSinglePage;
+
+export declare namespace Integrations {
+  export {
+    type Integration as Integration,
+    type IntegrationDeleteResponse as IntegrationDeleteResponse,
+    IntegrationsSinglePage as IntegrationsSinglePage,
+    type IntegrationCreateParams as IntegrationCreateParams,
+    type IntegrationListParams as IntegrationListParams,
+    type IntegrationDeleteParams as IntegrationDeleteParams,
+    type IntegrationEditParams as IntegrationEditParams,
+    type IntegrationGetParams as IntegrationGetParams,
+  };
 }

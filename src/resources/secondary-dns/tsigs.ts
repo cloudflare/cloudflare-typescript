@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as TSIGsAPI from './tsigs';
 import { SinglePage } from '../../pagination';
 
 export class TSIGs extends APIResource {
@@ -151,13 +150,17 @@ export interface TSIGGetParams {
   account_id: string;
 }
 
-export namespace TSIGs {
-  export import TSIG = TSIGsAPI.TSIG;
-  export import TSIGDeleteResponse = TSIGsAPI.TSIGDeleteResponse;
-  export import TSIGsSinglePage = TSIGsAPI.TSIGsSinglePage;
-  export import TSIGCreateParams = TSIGsAPI.TSIGCreateParams;
-  export import TSIGUpdateParams = TSIGsAPI.TSIGUpdateParams;
-  export import TSIGListParams = TSIGsAPI.TSIGListParams;
-  export import TSIGDeleteParams = TSIGsAPI.TSIGDeleteParams;
-  export import TSIGGetParams = TSIGsAPI.TSIGGetParams;
+TSIGs.TSIGsSinglePage = TSIGsSinglePage;
+
+export declare namespace TSIGs {
+  export {
+    type TSIG as TSIG,
+    type TSIGDeleteResponse as TSIGDeleteResponse,
+    TSIGsSinglePage as TSIGsSinglePage,
+    type TSIGCreateParams as TSIGCreateParams,
+    type TSIGUpdateParams as TSIGUpdateParams,
+    type TSIGListParams as TSIGListParams,
+    type TSIGDeleteParams as TSIGDeleteParams,
+    type TSIGGetParams as TSIGGetParams,
+  };
 }

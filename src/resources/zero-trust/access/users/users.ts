@@ -2,10 +2,24 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as UsersAPI from './users';
 import * as ActiveSessionsAPI from './active-sessions';
+import {
+  ActiveSessionGetParams,
+  ActiveSessionGetResponse,
+  ActiveSessionListParams,
+  ActiveSessionListResponse,
+  ActiveSessionListResponsesSinglePage,
+  ActiveSessions,
+} from './active-sessions';
 import * as FailedLoginsAPI from './failed-logins';
+import {
+  FailedLoginListParams,
+  FailedLoginListResponse,
+  FailedLoginListResponsesSinglePage,
+  FailedLogins,
+} from './failed-logins';
 import * as LastSeenIdentityAPI from './last-seen-identity';
+import { Identity, LastSeenIdentity, LastSeenIdentityGetParams } from './last-seen-identity';
 import { SinglePage } from '../../../../pagination';
 
 export class Users extends APIResource {
@@ -87,21 +101,39 @@ export interface UserListParams {
   account_id: string;
 }
 
-export namespace Users {
-  export import AccessUser = UsersAPI.AccessUser;
-  export import AccessUsersSinglePage = UsersAPI.AccessUsersSinglePage;
-  export import UserListParams = UsersAPI.UserListParams;
-  export import ActiveSessions = ActiveSessionsAPI.ActiveSessions;
-  export import ActiveSessionListResponse = ActiveSessionsAPI.ActiveSessionListResponse;
-  export import ActiveSessionGetResponse = ActiveSessionsAPI.ActiveSessionGetResponse;
-  export import ActiveSessionListResponsesSinglePage = ActiveSessionsAPI.ActiveSessionListResponsesSinglePage;
-  export import ActiveSessionListParams = ActiveSessionsAPI.ActiveSessionListParams;
-  export import ActiveSessionGetParams = ActiveSessionsAPI.ActiveSessionGetParams;
-  export import LastSeenIdentity = LastSeenIdentityAPI.LastSeenIdentity;
-  export import Identity = LastSeenIdentityAPI.Identity;
-  export import LastSeenIdentityGetParams = LastSeenIdentityAPI.LastSeenIdentityGetParams;
-  export import FailedLogins = FailedLoginsAPI.FailedLogins;
-  export import FailedLoginListResponse = FailedLoginsAPI.FailedLoginListResponse;
-  export import FailedLoginListResponsesSinglePage = FailedLoginsAPI.FailedLoginListResponsesSinglePage;
-  export import FailedLoginListParams = FailedLoginsAPI.FailedLoginListParams;
+Users.AccessUsersSinglePage = AccessUsersSinglePage;
+Users.ActiveSessions = ActiveSessions;
+Users.ActiveSessionListResponsesSinglePage = ActiveSessionListResponsesSinglePage;
+Users.LastSeenIdentity = LastSeenIdentity;
+Users.FailedLogins = FailedLogins;
+Users.FailedLoginListResponsesSinglePage = FailedLoginListResponsesSinglePage;
+
+export declare namespace Users {
+  export {
+    type AccessUser as AccessUser,
+    AccessUsersSinglePage as AccessUsersSinglePage,
+    type UserListParams as UserListParams,
+  };
+
+  export {
+    ActiveSessions as ActiveSessions,
+    type ActiveSessionListResponse as ActiveSessionListResponse,
+    type ActiveSessionGetResponse as ActiveSessionGetResponse,
+    ActiveSessionListResponsesSinglePage as ActiveSessionListResponsesSinglePage,
+    type ActiveSessionListParams as ActiveSessionListParams,
+    type ActiveSessionGetParams as ActiveSessionGetParams,
+  };
+
+  export {
+    LastSeenIdentity as LastSeenIdentity,
+    type Identity as Identity,
+    type LastSeenIdentityGetParams as LastSeenIdentityGetParams,
+  };
+
+  export {
+    FailedLogins as FailedLogins,
+    type FailedLoginListResponse as FailedLoginListResponse,
+    FailedLoginListResponsesSinglePage as FailedLoginListResponsesSinglePage,
+    type FailedLoginListParams as FailedLoginListParams,
+  };
 }

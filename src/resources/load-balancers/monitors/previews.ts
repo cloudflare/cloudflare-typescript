@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PreviewsAPI from './previews';
 
 export class Previews extends APIResource {
   /**
@@ -139,7 +138,9 @@ export interface PreviewCreateParams {
   type?: 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_ping' | 'smtp';
 }
 
-export namespace Previews {
-  export import PreviewCreateResponse = PreviewsAPI.PreviewCreateResponse;
-  export import PreviewCreateParams = PreviewsAPI.PreviewCreateParams;
+export declare namespace Previews {
+  export {
+    type PreviewCreateResponse as PreviewCreateResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+  };
 }

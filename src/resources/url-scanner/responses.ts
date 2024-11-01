@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ResponsesAPI from './responses';
 
 export class Responses extends APIResource {
   /**
@@ -22,6 +21,6 @@ export class Responses extends APIResource {
  */
 export type ResponseGetResponse = string;
 
-export namespace Responses {
-  export import ResponseGetResponse = ResponsesAPI.ResponseGetResponse;
+export declare namespace Responses {
+  export { type ResponseGetResponse as ResponseGetResponse };
 }

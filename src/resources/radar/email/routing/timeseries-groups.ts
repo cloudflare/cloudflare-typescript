@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as TimeseriesGroupsAPI from './timeseries-groups';
 import * as EmailAPI from '../email';
 
 export class TimeseriesGroups extends APIResource {
@@ -564,17 +563,19 @@ export interface TimeseriesGroupSPFParams {
   name?: Array<string>;
 }
 
-export namespace TimeseriesGroups {
-  export import TimeseriesGroupARCResponse = TimeseriesGroupsAPI.TimeseriesGroupARCResponse;
-  export import TimeseriesGroupDKIMResponse = TimeseriesGroupsAPI.TimeseriesGroupDKIMResponse;
-  export import TimeseriesGroupDMARCResponse = TimeseriesGroupsAPI.TimeseriesGroupDMARCResponse;
-  export import TimeseriesGroupEncryptedResponse = TimeseriesGroupsAPI.TimeseriesGroupEncryptedResponse;
-  export import TimeseriesGroupIPVersionResponse = TimeseriesGroupsAPI.TimeseriesGroupIPVersionResponse;
-  export import TimeseriesGroupSPFResponse = TimeseriesGroupsAPI.TimeseriesGroupSPFResponse;
-  export import TimeseriesGroupARCParams = TimeseriesGroupsAPI.TimeseriesGroupARCParams;
-  export import TimeseriesGroupDKIMParams = TimeseriesGroupsAPI.TimeseriesGroupDKIMParams;
-  export import TimeseriesGroupDMARCParams = TimeseriesGroupsAPI.TimeseriesGroupDMARCParams;
-  export import TimeseriesGroupEncryptedParams = TimeseriesGroupsAPI.TimeseriesGroupEncryptedParams;
-  export import TimeseriesGroupIPVersionParams = TimeseriesGroupsAPI.TimeseriesGroupIPVersionParams;
-  export import TimeseriesGroupSPFParams = TimeseriesGroupsAPI.TimeseriesGroupSPFParams;
+export declare namespace TimeseriesGroups {
+  export {
+    type TimeseriesGroupARCResponse as TimeseriesGroupARCResponse,
+    type TimeseriesGroupDKIMResponse as TimeseriesGroupDKIMResponse,
+    type TimeseriesGroupDMARCResponse as TimeseriesGroupDMARCResponse,
+    type TimeseriesGroupEncryptedResponse as TimeseriesGroupEncryptedResponse,
+    type TimeseriesGroupIPVersionResponse as TimeseriesGroupIPVersionResponse,
+    type TimeseriesGroupSPFResponse as TimeseriesGroupSPFResponse,
+    type TimeseriesGroupARCParams as TimeseriesGroupARCParams,
+    type TimeseriesGroupDKIMParams as TimeseriesGroupDKIMParams,
+    type TimeseriesGroupDMARCParams as TimeseriesGroupDMARCParams,
+    type TimeseriesGroupEncryptedParams as TimeseriesGroupEncryptedParams,
+    type TimeseriesGroupIPVersionParams as TimeseriesGroupIPVersionParams,
+    type TimeseriesGroupSPFParams as TimeseriesGroupSPFParams,
+  };
 }

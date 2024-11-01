@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ProxyEndpointsAPI from './proxy-endpoints';
 
 export class ProxyEndpoints extends APIResource {
   /**
@@ -167,14 +166,16 @@ export interface ProxyEndpointGetParams {
   account_id: string;
 }
 
-export namespace ProxyEndpoints {
-  export import GatewayIPs = ProxyEndpointsAPI.GatewayIPs;
-  export import ProxyEndpoint = ProxyEndpointsAPI.ProxyEndpoint;
-  export import ProxyEndpointDeleteResponse = ProxyEndpointsAPI.ProxyEndpointDeleteResponse;
-  export import ProxyEndpointGetResponse = ProxyEndpointsAPI.ProxyEndpointGetResponse;
-  export import ProxyEndpointCreateParams = ProxyEndpointsAPI.ProxyEndpointCreateParams;
-  export import ProxyEndpointListParams = ProxyEndpointsAPI.ProxyEndpointListParams;
-  export import ProxyEndpointDeleteParams = ProxyEndpointsAPI.ProxyEndpointDeleteParams;
-  export import ProxyEndpointEditParams = ProxyEndpointsAPI.ProxyEndpointEditParams;
-  export import ProxyEndpointGetParams = ProxyEndpointsAPI.ProxyEndpointGetParams;
+export declare namespace ProxyEndpoints {
+  export {
+    type GatewayIPs as GatewayIPs,
+    type ProxyEndpoint as ProxyEndpoint,
+    type ProxyEndpointDeleteResponse as ProxyEndpointDeleteResponse,
+    type ProxyEndpointGetResponse as ProxyEndpointGetResponse,
+    type ProxyEndpointCreateParams as ProxyEndpointCreateParams,
+    type ProxyEndpointListParams as ProxyEndpointListParams,
+    type ProxyEndpointDeleteParams as ProxyEndpointDeleteParams,
+    type ProxyEndpointEditParams as ProxyEndpointEditParams,
+    type ProxyEndpointGetParams as ProxyEndpointGetParams,
+  };
 }

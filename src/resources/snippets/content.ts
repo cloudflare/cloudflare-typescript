@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ContentAPI from './content';
 import { type Response } from '../../_shims/index';
 
 export class Content extends APIResource {
@@ -29,6 +28,6 @@ export interface ContentGetParams {
   zone_id: string;
 }
 
-export namespace Content {
-  export import ContentGetParams = ContentAPI.ContentGetParams;
+export declare namespace Content {
+  export { type ContentGetParams as ContentGetParams };
 }

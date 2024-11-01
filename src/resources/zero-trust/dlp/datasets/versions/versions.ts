@@ -2,8 +2,8 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as VersionsAPI from './versions';
 import * as EntriesAPI from './entries';
+import { Entries, EntryCreateParams, EntryCreateResponse } from './entries';
 
 export class Versions extends APIResource {
   entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
@@ -73,10 +73,17 @@ export namespace VersionCreateParams {
   }
 }
 
-export namespace Versions {
-  export import VersionCreateResponse = VersionsAPI.VersionCreateResponse;
-  export import VersionCreateParams = VersionsAPI.VersionCreateParams;
-  export import Entries = EntriesAPI.Entries;
-  export import EntryCreateResponse = EntriesAPI.EntryCreateResponse;
-  export import EntryCreateParams = EntriesAPI.EntryCreateParams;
+Versions.Entries = Entries;
+
+export declare namespace Versions {
+  export {
+    type VersionCreateResponse as VersionCreateResponse,
+    type VersionCreateParams as VersionCreateParams,
+  };
+
+  export {
+    Entries as Entries,
+    type EntryCreateResponse as EntryCreateResponse,
+    type EntryCreateParams as EntryCreateParams,
+  };
 }

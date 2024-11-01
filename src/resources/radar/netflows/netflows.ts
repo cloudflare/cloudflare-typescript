@@ -3,8 +3,8 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as NetflowsAPI from './netflows';
 import * as TopAPI from './top';
+import { Top, TopAsesParams, TopAsesResponse, TopLocationsParams, TopLocationsResponse } from './top';
 
 export class Netflows extends APIResource {
   top: TopAPI.Top = new TopAPI.Top(this._client);
@@ -294,14 +294,21 @@ export interface NetflowTimeseriesParams {
   product?: Array<'HTTP' | 'ALL'>;
 }
 
-export namespace Netflows {
-  export import NetflowSummaryResponse = NetflowsAPI.NetflowSummaryResponse;
-  export import NetflowTimeseriesResponse = NetflowsAPI.NetflowTimeseriesResponse;
-  export import NetflowSummaryParams = NetflowsAPI.NetflowSummaryParams;
-  export import NetflowTimeseriesParams = NetflowsAPI.NetflowTimeseriesParams;
-  export import Top = TopAPI.Top;
-  export import TopAsesResponse = TopAPI.TopAsesResponse;
-  export import TopLocationsResponse = TopAPI.TopLocationsResponse;
-  export import TopAsesParams = TopAPI.TopAsesParams;
-  export import TopLocationsParams = TopAPI.TopLocationsParams;
+Netflows.Top = Top;
+
+export declare namespace Netflows {
+  export {
+    type NetflowSummaryResponse as NetflowSummaryResponse,
+    type NetflowTimeseriesResponse as NetflowTimeseriesResponse,
+    type NetflowSummaryParams as NetflowSummaryParams,
+    type NetflowTimeseriesParams as NetflowTimeseriesParams,
+  };
+
+  export {
+    Top as Top,
+    type TopAsesResponse as TopAsesResponse,
+    type TopLocationsResponse as TopLocationsResponse,
+    type TopAsesParams as TopAsesParams,
+    type TopLocationsParams as TopLocationsParams,
+  };
 }

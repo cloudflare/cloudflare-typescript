@@ -2,10 +2,31 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as PackagesAPI from './packages';
 import * as Shared from '../../../shared';
 import * as GroupsAPI from './groups';
+import {
+  Group,
+  GroupEditParams,
+  GroupEditResponse,
+  GroupGetParams,
+  GroupGetResponse,
+  GroupListParams,
+  Groups,
+  GroupsV4PagePaginationArray,
+} from './groups';
 import * as RulesAPI from './rules';
+import {
+  AllowedModesAnomaly,
+  RuleEditParams,
+  RuleEditResponse,
+  RuleGetParams,
+  RuleGetResponse,
+  RuleListParams,
+  RuleListResponse,
+  RuleListResponsesV4PagePaginationArray,
+  Rules,
+  WAFRuleGroup,
+} from './rules';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../../pagination';
 
 export class Packages extends APIResource {
@@ -106,28 +127,42 @@ export interface PackageGetParams {
   zone_id: string;
 }
 
-export namespace Packages {
-  export import PackageListResponse = PackagesAPI.PackageListResponse;
-  export import PackageGetResponse = PackagesAPI.PackageGetResponse;
-  export import PackageListResponsesV4PagePaginationArray = PackagesAPI.PackageListResponsesV4PagePaginationArray;
-  export import PackageListParams = PackagesAPI.PackageListParams;
-  export import PackageGetParams = PackagesAPI.PackageGetParams;
-  export import Groups = GroupsAPI.Groups;
-  export import Group = GroupsAPI.Group;
-  export import GroupEditResponse = GroupsAPI.GroupEditResponse;
-  export import GroupGetResponse = GroupsAPI.GroupGetResponse;
-  export import GroupsV4PagePaginationArray = GroupsAPI.GroupsV4PagePaginationArray;
-  export import GroupListParams = GroupsAPI.GroupListParams;
-  export import GroupEditParams = GroupsAPI.GroupEditParams;
-  export import GroupGetParams = GroupsAPI.GroupGetParams;
-  export import Rules = RulesAPI.Rules;
-  export import AllowedModesAnomaly = RulesAPI.AllowedModesAnomaly;
-  export import WAFRuleGroup = RulesAPI.WAFRuleGroup;
-  export import RuleListResponse = RulesAPI.RuleListResponse;
-  export import RuleEditResponse = RulesAPI.RuleEditResponse;
-  export import RuleGetResponse = RulesAPI.RuleGetResponse;
-  export import RuleListResponsesV4PagePaginationArray = RulesAPI.RuleListResponsesV4PagePaginationArray;
-  export import RuleListParams = RulesAPI.RuleListParams;
-  export import RuleEditParams = RulesAPI.RuleEditParams;
-  export import RuleGetParams = RulesAPI.RuleGetParams;
+Packages.PackageListResponsesV4PagePaginationArray = PackageListResponsesV4PagePaginationArray;
+Packages.Groups = Groups;
+Packages.GroupsV4PagePaginationArray = GroupsV4PagePaginationArray;
+Packages.Rules = Rules;
+Packages.RuleListResponsesV4PagePaginationArray = RuleListResponsesV4PagePaginationArray;
+
+export declare namespace Packages {
+  export {
+    type PackageListResponse as PackageListResponse,
+    type PackageGetResponse as PackageGetResponse,
+    PackageListResponsesV4PagePaginationArray as PackageListResponsesV4PagePaginationArray,
+    type PackageListParams as PackageListParams,
+    type PackageGetParams as PackageGetParams,
+  };
+
+  export {
+    Groups as Groups,
+    type Group as Group,
+    type GroupEditResponse as GroupEditResponse,
+    type GroupGetResponse as GroupGetResponse,
+    GroupsV4PagePaginationArray as GroupsV4PagePaginationArray,
+    type GroupListParams as GroupListParams,
+    type GroupEditParams as GroupEditParams,
+    type GroupGetParams as GroupGetParams,
+  };
+
+  export {
+    Rules as Rules,
+    type AllowedModesAnomaly as AllowedModesAnomaly,
+    type WAFRuleGroup as WAFRuleGroup,
+    type RuleListResponse as RuleListResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    RuleListResponsesV4PagePaginationArray as RuleListResponsesV4PagePaginationArray,
+    type RuleListParams as RuleListParams,
+    type RuleEditParams as RuleEditParams,
+    type RuleGetParams as RuleGetParams,
+  };
 }

@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as CertificatesAPI from './certificates';
 
 export class Certificates extends APIResource {
   /**
@@ -55,9 +54,11 @@ export interface CertificateUpdateParams {
   enabled: boolean;
 }
 
-export namespace Certificates {
-  export import DevicePolicyCertificates = CertificatesAPI.DevicePolicyCertificates;
-  export import CertificateUpdateResponse = CertificatesAPI.CertificateUpdateResponse;
-  export import CertificateGetResponse = CertificatesAPI.CertificateGetResponse;
-  export import CertificateUpdateParams = CertificatesAPI.CertificateUpdateParams;
+export declare namespace Certificates {
+  export {
+    type DevicePolicyCertificates as DevicePolicyCertificates,
+    type CertificateUpdateResponse as CertificateUpdateResponse,
+    type CertificateGetResponse as CertificateGetResponse,
+    type CertificateUpdateParams as CertificateUpdateParams,
+  };
 }

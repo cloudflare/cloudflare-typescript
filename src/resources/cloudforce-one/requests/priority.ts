@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as PriorityAPI from './priority';
 import * as Shared from '../../shared';
 
 export class Priority extends APIResource {
@@ -306,12 +305,14 @@ export interface PriorityUpdateParams {
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
-export namespace Priority {
-  export import PriorityCreateResponse = PriorityAPI.PriorityCreateResponse;
-  export import PriorityUpdateResponse = PriorityAPI.PriorityUpdateResponse;
-  export import PriorityDeleteResponse = PriorityAPI.PriorityDeleteResponse;
-  export import PriorityGetResponse = PriorityAPI.PriorityGetResponse;
-  export import PriorityQuotaResponse = PriorityAPI.PriorityQuotaResponse;
-  export import PriorityCreateParams = PriorityAPI.PriorityCreateParams;
-  export import PriorityUpdateParams = PriorityAPI.PriorityUpdateParams;
+export declare namespace Priority {
+  export {
+    type PriorityCreateResponse as PriorityCreateResponse,
+    type PriorityUpdateResponse as PriorityUpdateResponse,
+    type PriorityDeleteResponse as PriorityDeleteResponse,
+    type PriorityGetResponse as PriorityGetResponse,
+    type PriorityQuotaResponse as PriorityQuotaResponse,
+    type PriorityCreateParams as PriorityCreateParams,
+    type PriorityUpdateParams as PriorityUpdateParams,
+  };
 }

@@ -3,8 +3,14 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import * as AnnotationsAPI from './annotations';
 import * as OutagesAPI from './outages';
+import {
+  OutageGetParams,
+  OutageGetResponse,
+  OutageLocationsParams,
+  OutageLocationsResponse,
+  Outages,
+} from './outages';
 
 export class Annotations extends APIResource {
   outages: OutagesAPI.Outages = new OutagesAPI.Outages(this._client);
@@ -136,12 +142,19 @@ export interface AnnotationListParams {
   offset?: number;
 }
 
-export namespace Annotations {
-  export import AnnotationListResponse = AnnotationsAPI.AnnotationListResponse;
-  export import AnnotationListParams = AnnotationsAPI.AnnotationListParams;
-  export import Outages = OutagesAPI.Outages;
-  export import OutageGetResponse = OutagesAPI.OutageGetResponse;
-  export import OutageLocationsResponse = OutagesAPI.OutageLocationsResponse;
-  export import OutageGetParams = OutagesAPI.OutageGetParams;
-  export import OutageLocationsParams = OutagesAPI.OutageLocationsParams;
+Annotations.Outages = Outages;
+
+export declare namespace Annotations {
+  export {
+    type AnnotationListResponse as AnnotationListResponse,
+    type AnnotationListParams as AnnotationListParams,
+  };
+
+  export {
+    Outages as Outages,
+    type OutageGetResponse as OutageGetResponse,
+    type OutageLocationsResponse as OutageLocationsResponse,
+    type OutageGetParams as OutageGetParams,
+    type OutageLocationsParams as OutageLocationsParams,
+  };
 }

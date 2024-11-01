@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as EmbedAPI from './embed';
 
 export class Embed extends APIResource {
   /**
@@ -28,7 +27,6 @@ export interface EmbedGetParams {
   account_id: string;
 }
 
-export namespace Embed {
-  export import EmbedGetResponse = EmbedAPI.EmbedGetResponse;
-  export import EmbedGetParams = EmbedAPI.EmbedGetParams;
+export declare namespace Embed {
+  export { type EmbedGetResponse as EmbedGetResponse, type EmbedGetParams as EmbedGetParams };
 }

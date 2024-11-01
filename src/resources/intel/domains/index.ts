@@ -1,4 +1,4 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { BulkGetResponse, BulkGetParams, Bulks } from './bulks';
-export { Domain, DomainGetParams, Domains } from './domains';
+export { Bulks, type BulkGetResponse, type BulkGetParams } from './bulks';
+export { Domains, type Domain, type DomainGetParams } from './domains';

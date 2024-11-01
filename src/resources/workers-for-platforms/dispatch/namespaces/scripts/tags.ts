@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
-import * as TagsAPI from './tags';
 import { SinglePage } from '../../../../../pagination';
 
 export class Tags extends APIResource {
@@ -98,12 +97,16 @@ export interface TagDeleteParams {
   account_id: string;
 }
 
-export namespace Tags {
-  export import TagUpdateResponse = TagsAPI.TagUpdateResponse;
-  export import TagListResponse = TagsAPI.TagListResponse;
-  export import TagDeleteResponse = TagsAPI.TagDeleteResponse;
-  export import TagListResponsesSinglePage = TagsAPI.TagListResponsesSinglePage;
-  export import TagUpdateParams = TagsAPI.TagUpdateParams;
-  export import TagListParams = TagsAPI.TagListParams;
-  export import TagDeleteParams = TagsAPI.TagDeleteParams;
+Tags.TagListResponsesSinglePage = TagListResponsesSinglePage;
+
+export declare namespace Tags {
+  export {
+    type TagUpdateResponse as TagUpdateResponse,
+    type TagListResponse as TagListResponse,
+    type TagDeleteResponse as TagDeleteResponse,
+    TagListResponsesSinglePage as TagListResponsesSinglePage,
+    type TagUpdateParams as TagUpdateParams,
+    type TagListParams as TagListParams,
+    type TagDeleteParams as TagDeleteParams,
+  };
 }

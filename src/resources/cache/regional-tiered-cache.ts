@@ -151,10 +151,12 @@ export interface RegionalTieredCacheGetParams {
   zone_id: string;
 }
 
-export namespace RegionalTieredCacheResource {
-  export import RegionalTieredCache = RegionalTieredCacheAPI.RegionalTieredCache;
-  export import RegionalTieredCacheEditResponse = RegionalTieredCacheAPI.RegionalTieredCacheEditResponse;
-  export import RegionalTieredCacheGetResponse = RegionalTieredCacheAPI.RegionalTieredCacheGetResponse;
-  export import RegionalTieredCacheEditParams = RegionalTieredCacheAPI.RegionalTieredCacheEditParams;
-  export import RegionalTieredCacheGetParams = RegionalTieredCacheAPI.RegionalTieredCacheGetParams;
+export declare namespace RegionalTieredCacheResource {
+  export {
+    type RegionalTieredCache as RegionalTieredCache,
+    type RegionalTieredCacheEditResponse as RegionalTieredCacheEditResponse,
+    type RegionalTieredCacheGetResponse as RegionalTieredCacheGetResponse,
+    type RegionalTieredCacheEditParams as RegionalTieredCacheEditParams,
+    type RegionalTieredCacheGetParams as RegionalTieredCacheGetParams,
+  };
 }

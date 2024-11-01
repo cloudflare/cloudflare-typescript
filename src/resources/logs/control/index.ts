@@ -3,9 +3,9 @@
 export { Cmb } from './cmb/index';
 export { Control } from './control';
 export {
-  RetentionCreateResponse,
-  RetentionGetResponse,
-  RetentionCreateParams,
-  RetentionGetParams,
   Retention,
+  type RetentionCreateResponse,
+  type RetentionGetResponse,
+  type RetentionCreateParams,
+  type RetentionGetParams,
 } from './retention';

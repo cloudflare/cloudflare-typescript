@@ -2,8 +2,33 @@
 
 import { APIResource } from '../../../../resource';
 import * as BindingsAPI from './bindings';
+import {
+  BindingCreateParams,
+  BindingDeleteParams,
+  BindingDeleteResponse,
+  BindingGetParams,
+  BindingListParams,
+  Bindings,
+  ServiceBinding,
+  ServiceBindingsSinglePage,
+} from './bindings';
 import * as PrefixesAPI from './prefixes';
+import {
+  BGPPrefix,
+  BGPPrefixesSinglePage,
+  PrefixEditParams,
+  PrefixGetParams,
+  PrefixListParams,
+  Prefixes,
+} from './prefixes';
 import * as StatusesAPI from './statuses';
+import {
+  StatusEditParams,
+  StatusEditResponse,
+  StatusGetParams,
+  StatusGetResponse,
+  Statuses,
+} from './statuses';
 
 export class BGP extends APIResource {
   bindings: BindingsAPI.Bindings = new BindingsAPI.Bindings(this._client);
@@ -11,24 +36,38 @@ export class BGP extends APIResource {
   statuses: StatusesAPI.Statuses = new StatusesAPI.Statuses(this._client);
 }
 
-export namespace BGP {
-  export import Bindings = BindingsAPI.Bindings;
-  export import ServiceBinding = BindingsAPI.ServiceBinding;
-  export import BindingDeleteResponse = BindingsAPI.BindingDeleteResponse;
-  export import ServiceBindingsSinglePage = BindingsAPI.ServiceBindingsSinglePage;
-  export import BindingCreateParams = BindingsAPI.BindingCreateParams;
-  export import BindingListParams = BindingsAPI.BindingListParams;
-  export import BindingDeleteParams = BindingsAPI.BindingDeleteParams;
-  export import BindingGetParams = BindingsAPI.BindingGetParams;
-  export import Prefixes = PrefixesAPI.Prefixes;
-  export import BGPPrefix = PrefixesAPI.BGPPrefix;
-  export import BGPPrefixesSinglePage = PrefixesAPI.BGPPrefixesSinglePage;
-  export import PrefixListParams = PrefixesAPI.PrefixListParams;
-  export import PrefixEditParams = PrefixesAPI.PrefixEditParams;
-  export import PrefixGetParams = PrefixesAPI.PrefixGetParams;
-  export import Statuses = StatusesAPI.Statuses;
-  export import StatusEditResponse = StatusesAPI.StatusEditResponse;
-  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusEditParams = StatusesAPI.StatusEditParams;
-  export import StatusGetParams = StatusesAPI.StatusGetParams;
+BGP.Bindings = Bindings;
+BGP.ServiceBindingsSinglePage = ServiceBindingsSinglePage;
+BGP.Prefixes = Prefixes;
+BGP.BGPPrefixesSinglePage = BGPPrefixesSinglePage;
+BGP.Statuses = Statuses;
+
+export declare namespace BGP {
+  export {
+    Bindings as Bindings,
+    type ServiceBinding as ServiceBinding,
+    type BindingDeleteResponse as BindingDeleteResponse,
+    ServiceBindingsSinglePage as ServiceBindingsSinglePage,
+    type BindingCreateParams as BindingCreateParams,
+    type BindingListParams as BindingListParams,
+    type BindingDeleteParams as BindingDeleteParams,
+    type BindingGetParams as BindingGetParams,
+  };
+
+  export {
+    Prefixes as Prefixes,
+    type BGPPrefix as BGPPrefix,
+    BGPPrefixesSinglePage as BGPPrefixesSinglePage,
+    type PrefixListParams as PrefixListParams,
+    type PrefixEditParams as PrefixEditParams,
+    type PrefixGetParams as PrefixGetParams,
+  };
+
+  export {
+    Statuses as Statuses,
+    type StatusEditResponse as StatusEditResponse,
+    type StatusGetResponse as StatusGetResponse,
+    type StatusEditParams as StatusEditParams,
+    type StatusGetParams as StatusGetParams,
+  };
 }

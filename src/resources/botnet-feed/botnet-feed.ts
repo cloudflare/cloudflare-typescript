@@ -2,18 +2,32 @@
 
 import { APIResource } from '../../resource';
 import * as ASNAPI from './asn';
+import {
+  ASN,
+  ASNDayReportParams,
+  ASNDayReportResponse,
+  ASNFullReportParams,
+  ASNFullReportResponse,
+} from './asn';
 import * as ConfigsAPI from './configs/configs';
+import { Configs } from './configs/configs';
 
 export class BotnetFeed extends APIResource {
   asn: ASNAPI.ASN = new ASNAPI.ASN(this._client);
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
 
-export namespace BotnetFeed {
-  export import ASN = ASNAPI.ASN;
-  export import ASNDayReportResponse = ASNAPI.ASNDayReportResponse;
-  export import ASNFullReportResponse = ASNAPI.ASNFullReportResponse;
-  export import ASNDayReportParams = ASNAPI.ASNDayReportParams;
-  export import ASNFullReportParams = ASNAPI.ASNFullReportParams;
-  export import Configs = ConfigsAPI.Configs;
+BotnetFeed.ASN = ASN;
+BotnetFeed.Configs = Configs;
+
+export declare namespace BotnetFeed {
+  export {
+    ASN as ASN,
+    type ASNDayReportResponse as ASNDayReportResponse,
+    type ASNFullReportResponse as ASNFullReportResponse,
+    type ASNDayReportParams as ASNDayReportParams,
+    type ASNFullReportParams as ASNFullReportParams,
+  };
+
+  export { Configs as Configs };
 }

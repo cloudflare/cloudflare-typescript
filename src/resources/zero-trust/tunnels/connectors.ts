@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ConnectorsAPI from './connectors';
 import * as ConnectionsAPI from './connections';
 
 export class Connectors extends APIResource {
@@ -32,6 +31,6 @@ export interface ConnectorGetParams {
   account_id: string;
 }
 
-export namespace Connectors {
-  export import ConnectorGetParams = ConnectorsAPI.ConnectorGetParams;
+export declare namespace Connectors {
+  export { type ConnectorGetParams as ConnectorGetParams };
 }

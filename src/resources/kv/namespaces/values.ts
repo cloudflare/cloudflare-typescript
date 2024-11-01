@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as ValuesAPI from './values';
 import { type Response } from '../../../_shims/index';
 
 export class Values extends APIResource {
@@ -123,10 +122,12 @@ export interface ValueGetParams {
   account_id: string;
 }
 
-export namespace Values {
-  export import ValueUpdateResponse = ValuesAPI.ValueUpdateResponse;
-  export import ValueDeleteResponse = ValuesAPI.ValueDeleteResponse;
-  export import ValueUpdateParams = ValuesAPI.ValueUpdateParams;
-  export import ValueDeleteParams = ValuesAPI.ValueDeleteParams;
-  export import ValueGetParams = ValuesAPI.ValueGetParams;
+export declare namespace Values {
+  export {
+    type ValueUpdateResponse as ValueUpdateResponse,
+    type ValueDeleteResponse as ValueDeleteResponse,
+    type ValueUpdateParams as ValueUpdateParams,
+    type ValueDeleteParams as ValueDeleteParams,
+    type ValueGetParams as ValueGetParams,
+  };
 }

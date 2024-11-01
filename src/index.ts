@@ -1,12 +1,138 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Errors from './error';
-import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as qs from './internal/qs';
 import * as Core from './core';
+import * as Errors from './error';
 import * as Pagination from './pagination';
+import {
+  type CursorLimitPaginationParams,
+  CursorLimitPaginationResponse,
+  type CursorPaginationParams,
+  CursorPaginationResponse,
+  SinglePageResponse,
+  type V4PagePaginationArrayParams,
+  V4PagePaginationArrayResponse,
+  type V4PagePaginationParams,
+  V4PagePaginationResponse,
+} from './pagination';
+import * as Uploads from './uploads';
 import * as API from './resources/index';
+import { AuditLogs } from './resources/audit-logs';
+import { BotManagement } from './resources/bot-management';
+import { BrandProtection } from './resources/brand-protection';
+import { ClientCertificates } from './resources/client-certificates';
+import { CustomNameservers } from './resources/custom-nameservers';
+import { DCVDelegation } from './resources/dcv-delegation';
+import { DNSSECResource } from './resources/dnssec';
+import { Filters } from './resources/filters';
+import { IPs } from './resources/ips';
+import { KeylessCertificates } from './resources/keyless-certificates';
+import { ManagedTransforms } from './resources/managed-transforms';
+import { Memberships } from './resources/memberships';
+import { OriginCACertificates } from './resources/origin-ca-certificates';
+import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
+import { RateLimits } from './resources/rate-limits';
+import {
+  SecurityTXT,
+  SecurityTXTDeleteParams,
+  SecurityTXTDeleteResponse,
+  SecurityTXTGetParams,
+  SecurityTXTGetResponse,
+  SecurityTXTUpdateParams,
+  SecurityTXTUpdateResponse,
+} from './resources/security-txt';
+import { URLNormalization } from './resources/url-normalization';
+import { WARPConnector } from './resources/warp-connector';
+import { Accounts } from './resources/accounts/accounts';
+import { ACM } from './resources/acm/acm';
+import { Addressing } from './resources/addressing/addressing';
+import { AIGateway } from './resources/ai-gateway/ai-gateway';
+import { Alerting } from './resources/alerting/alerting';
+import { APIGateway } from './resources/api-gateway/api-gateway';
+import { Argo } from './resources/argo/argo';
+import { Billing } from './resources/billing/billing';
+import { BotnetFeed } from './resources/botnet-feed/botnet-feed';
+import { Cache } from './resources/cache/cache';
+import { Calls } from './resources/calls/calls';
+import { CertificateAuthorities } from './resources/certificate-authorities/certificate-authorities';
+import { CloudConnector } from './resources/cloud-connector/cloud-connector';
+import { CloudforceOne } from './resources/cloudforce-one/cloudforce-one';
+import { CustomCertificates } from './resources/custom-certificates/custom-certificates';
+import { CustomHostnames } from './resources/custom-hostnames/custom-hostnames';
+import { D1Resource } from './resources/d1/d1';
+import { Diagnostics } from './resources/diagnostics/diagnostics';
+import { DNS } from './resources/dns/dns';
+import { DurableObjects } from './resources/durable-objects/durable-objects';
+import { EmailRouting } from './resources/email-routing/email-routing';
+import { EmailSecurity } from './resources/email-security/email-security';
+import { Firewall } from './resources/firewall/firewall';
+import { Healthchecks } from './resources/healthchecks/healthchecks';
+import { Hostnames } from './resources/hostnames/hostnames';
+import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
+import { IAM } from './resources/iam/iam';
+import { Images } from './resources/images/images';
+import { Intel } from './resources/intel/intel';
+import { KV } from './resources/kv/kv';
+import { LoadBalancers } from './resources/load-balancers/load-balancers';
+import { Logpush } from './resources/logpush/logpush';
+import { Logs } from './resources/logs/logs';
+import { MagicNetworkMonitoring } from './resources/magic-network-monitoring/magic-network-monitoring';
+import { MagicTransit } from './resources/magic-transit/magic-transit';
+import { MTLSCertificates } from './resources/mtls-certificates/mtls-certificates';
+import { OriginTLSClientAuth } from './resources/origin-tls-client-auth/origin-tls-client-auth';
+import { PageShield } from './resources/page-shield/page-shield';
+import { Pagerules } from './resources/pagerules/pagerules';
+import { Pages } from './resources/pages/pages';
+import { Queues } from './resources/queues/queues';
+import { R2 } from './resources/r2/r2';
+import { Radar } from './resources/radar/radar';
+import { Registrar } from './resources/registrar/registrar';
+import { RequestTracers } from './resources/request-tracers/request-tracers';
+import {
+  ResourceSharing,
+  ResourceSharingCreateParams,
+  ResourceSharingCreateResponse,
+  ResourceSharingDeleteParams,
+  ResourceSharingDeleteResponse,
+  ResourceSharingGetParams,
+  ResourceSharingGetResponse,
+  ResourceSharingListParams,
+  ResourceSharingListResponse,
+  ResourceSharingListResponsesV4PagePaginationArray,
+  ResourceSharingUpdateParams,
+  ResourceSharingUpdateResponse,
+} from './resources/resource-sharing/resource-sharing';
+import { Rules } from './resources/rules/rules';
+import { Rulesets } from './resources/rulesets/rulesets';
+import { RUM } from './resources/rum/rum';
+import { SecondaryDNS } from './resources/secondary-dns/secondary-dns';
+import { Snippets } from './resources/snippets/snippets';
+import { Spectrum } from './resources/spectrum/spectrum';
+import { Speed } from './resources/speed/speed';
+import { SSL } from './resources/ssl/ssl';
+import { Storage } from './resources/storage/storage';
+import { Stream } from './resources/stream/stream';
+import { Turnstile } from './resources/turnstile/turnstile';
+import { URLScanner } from './resources/url-scanner/url-scanner';
+import { User } from './resources/user/user';
+import { Vectorize } from './resources/vectorize/vectorize';
+import { WaitingRooms } from './resources/waiting-rooms/waiting-rooms';
+import { Web3 } from './resources/web3/web3';
+import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
+import { Workers } from './resources/workers/workers';
+import {
+  WorkflowGetParams,
+  WorkflowGetResponse,
+  WorkflowListParams,
+  WorkflowListResponse,
+  WorkflowListResponsesV4PagePaginationArray,
+  WorkflowUpdateParams,
+  WorkflowUpdateResponse,
+  Workflows,
+} from './resources/workflows/workflows';
+import { ZeroTrust } from './resources/zero-trust/zero-trust';
+import { Zones } from './resources/zones/zones';
 
 export interface ClientOptions {
   /**
@@ -356,261 +482,362 @@ export class Cloudflare extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
-  CloudflareError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} = Errors;
+export const CloudflareError = Errors.CloudflareError;
+export const APIError = Errors.APIError;
+export const APIConnectionError = Errors.APIConnectionError;
+export const APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
+export const APIUserAbortError = Errors.APIUserAbortError;
+export const NotFoundError = Errors.NotFoundError;
+export const ConflictError = Errors.ConflictError;
+export const RateLimitError = Errors.RateLimitError;
+export const BadRequestError = Errors.BadRequestError;
+export const AuthenticationError = Errors.AuthenticationError;
+export const InternalServerError = Errors.InternalServerError;
+export const PermissionDeniedError = Errors.PermissionDeniedError;
+export const UnprocessableEntityError = Errors.UnprocessableEntityError;
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-export namespace Cloudflare {
-  export import RequestOptions = Core.RequestOptions;
+Cloudflare.Accounts = Accounts;
+Cloudflare.OriginCACertificates = OriginCACertificates;
+Cloudflare.IPs = IPs;
+Cloudflare.Memberships = Memberships;
+Cloudflare.User = User;
+Cloudflare.Zones = Zones;
+Cloudflare.LoadBalancers = LoadBalancers;
+Cloudflare.Cache = Cache;
+Cloudflare.SSL = SSL;
+Cloudflare.ACM = ACM;
+Cloudflare.Argo = Argo;
+Cloudflare.CertificateAuthorities = CertificateAuthorities;
+Cloudflare.ClientCertificates = ClientCertificates;
+Cloudflare.CustomCertificates = CustomCertificates;
+Cloudflare.CustomHostnames = CustomHostnames;
+Cloudflare.CustomNameservers = CustomNameservers;
+Cloudflare.DNS = DNS;
+Cloudflare.DNSSECResource = DNSSECResource;
+Cloudflare.EmailSecurity = EmailSecurity;
+Cloudflare.EmailRouting = EmailRouting;
+Cloudflare.Filters = Filters;
+Cloudflare.Firewall = Firewall;
+Cloudflare.Healthchecks = Healthchecks;
+Cloudflare.KeylessCertificates = KeylessCertificates;
+Cloudflare.Logpush = Logpush;
+Cloudflare.Logs = Logs;
+Cloudflare.OriginTLSClientAuth = OriginTLSClientAuth;
+Cloudflare.Pagerules = Pagerules;
+Cloudflare.RateLimits = RateLimits;
+Cloudflare.SecondaryDNS = SecondaryDNS;
+Cloudflare.WaitingRooms = WaitingRooms;
+Cloudflare.Web3 = Web3;
+Cloudflare.Workers = Workers;
+Cloudflare.KV = KV;
+Cloudflare.DurableObjects = DurableObjects;
+Cloudflare.Queues = Queues;
+Cloudflare.APIGateway = APIGateway;
+Cloudflare.ManagedTransforms = ManagedTransforms;
+Cloudflare.PageShield = PageShield;
+Cloudflare.Rulesets = Rulesets;
+Cloudflare.URLNormalization = URLNormalization;
+Cloudflare.Spectrum = Spectrum;
+Cloudflare.Addressing = Addressing;
+Cloudflare.AuditLogs = AuditLogs;
+Cloudflare.Billing = Billing;
+Cloudflare.BrandProtection = BrandProtection;
+Cloudflare.Diagnostics = Diagnostics;
+Cloudflare.Images = Images;
+Cloudflare.Intel = Intel;
+Cloudflare.MagicTransit = MagicTransit;
+Cloudflare.MagicNetworkMonitoring = MagicNetworkMonitoring;
+Cloudflare.MTLSCertificates = MTLSCertificates;
+Cloudflare.Pages = Pages;
+Cloudflare.Registrar = Registrar;
+Cloudflare.RequestTracers = RequestTracers;
+Cloudflare.Rules = Rules;
+Cloudflare.Storage = Storage;
+Cloudflare.Stream = Stream;
+Cloudflare.Alerting = Alerting;
+Cloudflare.D1Resource = D1Resource;
+Cloudflare.R2 = R2;
+Cloudflare.WARPConnector = WARPConnector;
+Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
+Cloudflare.ZeroTrust = ZeroTrust;
+Cloudflare.Turnstile = Turnstile;
+Cloudflare.HyperdriveResource = HyperdriveResource;
+Cloudflare.RUM = RUM;
+Cloudflare.Vectorize = Vectorize;
+Cloudflare.URLScanner = URLScanner;
+Cloudflare.Radar = Radar;
+Cloudflare.BotManagement = BotManagement;
+Cloudflare.OriginPostQuantumEncryption = OriginPostQuantumEncryption;
+Cloudflare.Speed = Speed;
+Cloudflare.DCVDelegation = DCVDelegation;
+Cloudflare.Hostnames = Hostnames;
+Cloudflare.Snippets = Snippets;
+Cloudflare.Calls = Calls;
+Cloudflare.CloudforceOne = CloudforceOne;
+Cloudflare.AIGateway = AIGateway;
+Cloudflare.IAM = IAM;
+Cloudflare.CloudConnector = CloudConnector;
+Cloudflare.BotnetFeed = BotnetFeed;
+Cloudflare.SecurityTXT = SecurityTXT;
+Cloudflare.Workflows = Workflows;
+Cloudflare.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4PagePaginationArray;
+Cloudflare.ResourceSharing = ResourceSharing;
+Cloudflare.ResourceSharingListResponsesV4PagePaginationArray =
+  ResourceSharingListResponsesV4PagePaginationArray;
+
+export declare namespace Cloudflare {
+  export type RequestOptions = Core.RequestOptions;
 
   export import V4PagePagination = Pagination.V4PagePagination;
-  export import V4PagePaginationParams = Pagination.V4PagePaginationParams;
-  export import V4PagePaginationResponse = Pagination.V4PagePaginationResponse;
+  export {
+    type V4PagePaginationParams as V4PagePaginationParams,
+    type V4PagePaginationResponse as V4PagePaginationResponse,
+  };
 
   export import V4PagePaginationArray = Pagination.V4PagePaginationArray;
-  export import V4PagePaginationArrayParams = Pagination.V4PagePaginationArrayParams;
-  export import V4PagePaginationArrayResponse = Pagination.V4PagePaginationArrayResponse;
+  export {
+    type V4PagePaginationArrayParams as V4PagePaginationArrayParams,
+    type V4PagePaginationArrayResponse as V4PagePaginationArrayResponse,
+  };
 
   export import CursorPagination = Pagination.CursorPagination;
-  export import CursorPaginationParams = Pagination.CursorPaginationParams;
-  export import CursorPaginationResponse = Pagination.CursorPaginationResponse;
+  export {
+    type CursorPaginationParams as CursorPaginationParams,
+    type CursorPaginationResponse as CursorPaginationResponse,
+  };
 
   export import CursorLimitPagination = Pagination.CursorLimitPagination;
-  export import CursorLimitPaginationParams = Pagination.CursorLimitPaginationParams;
-  export import CursorLimitPaginationResponse = Pagination.CursorLimitPaginationResponse;
+  export {
+    type CursorLimitPaginationParams as CursorLimitPaginationParams,
+    type CursorLimitPaginationResponse as CursorLimitPaginationResponse,
+  };
 
   export import SinglePage = Pagination.SinglePage;
-  export import SinglePageResponse = Pagination.SinglePageResponse;
+  export { type SinglePageResponse as SinglePageResponse };
 
-  export import Accounts = API.Accounts;
+  export { Accounts as Accounts };
 
-  export import OriginCACertificates = API.OriginCACertificates;
+  export { OriginCACertificates as OriginCACertificates };
 
-  export import IPs = API.IPs;
+  export { IPs as IPs };
 
-  export import Memberships = API.Memberships;
+  export { Memberships as Memberships };
 
-  export import User = API.User;
+  export { User as User };
 
-  export import Zones = API.Zones;
+  export { Zones as Zones };
 
-  export import LoadBalancers = API.LoadBalancers;
+  export { LoadBalancers as LoadBalancers };
 
-  export import Cache = API.Cache;
+  export { Cache as Cache };
 
-  export import SSL = API.SSL;
+  export { SSL as SSL };
 
-  export import ACM = API.ACM;
+  export { ACM as ACM };
 
-  export import Argo = API.Argo;
+  export { Argo as Argo };
 
-  export import CertificateAuthorities = API.CertificateAuthorities;
+  export { CertificateAuthorities as CertificateAuthorities };
 
-  export import ClientCertificates = API.ClientCertificates;
+  export { ClientCertificates as ClientCertificates };
 
-  export import CustomCertificates = API.CustomCertificates;
+  export { CustomCertificates as CustomCertificates };
 
-  export import CustomHostnames = API.CustomHostnames;
+  export { CustomHostnames as CustomHostnames };
 
-  export import CustomNameservers = API.CustomNameservers;
+  export { CustomNameservers as CustomNameservers };
 
-  export import DNS = API.DNS;
+  export { DNS as DNS };
 
-  export import DNSSECResource = API.DNSSECResource;
+  export { DNSSECResource as DNSSECResource };
 
-  export import EmailSecurity = API.EmailSecurity;
+  export { EmailSecurity as EmailSecurity };
 
-  export import EmailRouting = API.EmailRouting;
+  export { EmailRouting as EmailRouting };
 
-  export import Filters = API.Filters;
+  export { Filters as Filters };
 
-  export import Firewall = API.Firewall;
+  export { Firewall as Firewall };
 
-  export import Healthchecks = API.Healthchecks;
+  export { Healthchecks as Healthchecks };
 
-  export import KeylessCertificates = API.KeylessCertificates;
+  export { KeylessCertificates as KeylessCertificates };
 
-  export import Logpush = API.Logpush;
+  export { Logpush as Logpush };
 
-  export import Logs = API.Logs;
+  export { Logs as Logs };
 
-  export import OriginTLSClientAuth = API.OriginTLSClientAuth;
+  export { OriginTLSClientAuth as OriginTLSClientAuth };
 
-  export import Pagerules = API.Pagerules;
+  export { Pagerules as Pagerules };
 
-  export import RateLimits = API.RateLimits;
+  export { RateLimits as RateLimits };
 
-  export import SecondaryDNS = API.SecondaryDNS;
+  export { SecondaryDNS as SecondaryDNS };
 
-  export import WaitingRooms = API.WaitingRooms;
+  export { WaitingRooms as WaitingRooms };
 
-  export import Web3 = API.Web3;
+  export { Web3 as Web3 };
 
-  export import Workers = API.Workers;
+  export { Workers as Workers };
 
-  export import KV = API.KV;
+  export { KV as KV };
 
-  export import DurableObjects = API.DurableObjects;
+  export { DurableObjects as DurableObjects };
 
-  export import Queues = API.Queues;
+  export { Queues as Queues };
 
-  export import APIGateway = API.APIGateway;
+  export { APIGateway as APIGateway };
 
-  export import ManagedTransforms = API.ManagedTransforms;
+  export { ManagedTransforms as ManagedTransforms };
 
-  export import PageShield = API.PageShield;
+  export { PageShield as PageShield };
 
-  export import Rulesets = API.Rulesets;
+  export { Rulesets as Rulesets };
 
-  export import URLNormalization = API.URLNormalization;
+  export { URLNormalization as URLNormalization };
 
-  export import Spectrum = API.Spectrum;
+  export { Spectrum as Spectrum };
 
-  export import Addressing = API.Addressing;
+  export { Addressing as Addressing };
 
-  export import AuditLogs = API.AuditLogs;
+  export { AuditLogs as AuditLogs };
 
-  export import Billing = API.Billing;
+  export { Billing as Billing };
 
-  export import BrandProtection = API.BrandProtection;
+  export { BrandProtection as BrandProtection };
 
-  export import Diagnostics = API.Diagnostics;
+  export { Diagnostics as Diagnostics };
 
-  export import Images = API.Images;
+  export { Images as Images };
 
-  export import Intel = API.Intel;
+  export { Intel as Intel };
 
-  export import MagicTransit = API.MagicTransit;
+  export { MagicTransit as MagicTransit };
 
-  export import MagicNetworkMonitoring = API.MagicNetworkMonitoring;
+  export { MagicNetworkMonitoring as MagicNetworkMonitoring };
 
-  export import MTLSCertificates = API.MTLSCertificates;
+  export { MTLSCertificates as MTLSCertificates };
 
-  export import Pages = API.Pages;
+  export { Pages as Pages };
 
-  export import Registrar = API.Registrar;
+  export { Registrar as Registrar };
 
-  export import RequestTracers = API.RequestTracers;
+  export { RequestTracers as RequestTracers };
 
-  export import Rules = API.Rules;
+  export { Rules as Rules };
 
-  export import Storage = API.Storage;
+  export { Storage as Storage };
 
-  export import Stream = API.Stream;
+  export { Stream as Stream };
 
-  export import Alerting = API.Alerting;
+  export { Alerting as Alerting };
 
-  export import D1Resource = API.D1Resource;
+  export { D1Resource as D1Resource };
 
-  export import R2 = API.R2;
+  export { R2 as R2 };
 
-  export import WARPConnector = API.WARPConnector;
+  export { WARPConnector as WARPConnector };
 
-  export import WorkersForPlatforms = API.WorkersForPlatforms;
+  export { WorkersForPlatforms as WorkersForPlatforms };
 
-  export import ZeroTrust = API.ZeroTrust;
+  export { ZeroTrust as ZeroTrust };
 
-  export import Turnstile = API.Turnstile;
+  export { Turnstile as Turnstile };
 
-  export import HyperdriveResource = API.HyperdriveResource;
+  export { HyperdriveResource as HyperdriveResource };
 
-  export import RUM = API.RUM;
+  export { RUM as RUM };
 
-  export import Vectorize = API.Vectorize;
+  export { Vectorize as Vectorize };
 
-  export import URLScanner = API.URLScanner;
+  export { URLScanner as URLScanner };
 
-  export import Radar = API.Radar;
+  export { Radar as Radar };
 
-  export import BotManagement = API.BotManagement;
+  export { BotManagement as BotManagement };
 
-  export import OriginPostQuantumEncryption = API.OriginPostQuantumEncryption;
+  export { OriginPostQuantumEncryption as OriginPostQuantumEncryption };
 
-  export import Speed = API.Speed;
+  export { Speed as Speed };
 
-  export import DCVDelegation = API.DCVDelegation;
+  export { DCVDelegation as DCVDelegation };
 
-  export import Hostnames = API.Hostnames;
+  export { Hostnames as Hostnames };
 
-  export import Snippets = API.Snippets;
+  export { Snippets as Snippets };
 
-  export import Calls = API.Calls;
+  export { Calls as Calls };
 
-  export import CloudforceOne = API.CloudforceOne;
+  export { CloudforceOne as CloudforceOne };
 
-  export import AIGateway = API.AIGateway;
+  export { AIGateway as AIGateway };
 
-  export import IAM = API.IAM;
+  export { IAM as IAM };
 
-  export import CloudConnector = API.CloudConnector;
+  export { CloudConnector as CloudConnector };
 
-  export import BotnetFeed = API.BotnetFeed;
+  export { BotnetFeed as BotnetFeed };
 
-  export import SecurityTXT = API.SecurityTXT;
-  export import SecurityTXTUpdateResponse = API.SecurityTXTUpdateResponse;
-  export import SecurityTXTDeleteResponse = API.SecurityTXTDeleteResponse;
-  export import SecurityTXTGetResponse = API.SecurityTXTGetResponse;
-  export import SecurityTXTUpdateParams = API.SecurityTXTUpdateParams;
-  export import SecurityTXTDeleteParams = API.SecurityTXTDeleteParams;
-  export import SecurityTXTGetParams = API.SecurityTXTGetParams;
+  export {
+    SecurityTXT as SecurityTXT,
+    type SecurityTXTUpdateResponse as SecurityTXTUpdateResponse,
+    type SecurityTXTDeleteResponse as SecurityTXTDeleteResponse,
+    type SecurityTXTGetResponse as SecurityTXTGetResponse,
+    type SecurityTXTUpdateParams as SecurityTXTUpdateParams,
+    type SecurityTXTDeleteParams as SecurityTXTDeleteParams,
+    type SecurityTXTGetParams as SecurityTXTGetParams,
+  };
 
-  export import Workflows = API.Workflows;
-  export import WorkflowUpdateResponse = API.WorkflowUpdateResponse;
-  export import WorkflowListResponse = API.WorkflowListResponse;
-  export import WorkflowGetResponse = API.WorkflowGetResponse;
-  export import WorkflowListResponsesV4PagePaginationArray = API.WorkflowListResponsesV4PagePaginationArray;
-  export import WorkflowUpdateParams = API.WorkflowUpdateParams;
-  export import WorkflowListParams = API.WorkflowListParams;
-  export import WorkflowGetParams = API.WorkflowGetParams;
+  export {
+    Workflows as Workflows,
+    type WorkflowUpdateResponse as WorkflowUpdateResponse,
+    type WorkflowListResponse as WorkflowListResponse,
+    type WorkflowGetResponse as WorkflowGetResponse,
+    WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
+    type WorkflowUpdateParams as WorkflowUpdateParams,
+    type WorkflowListParams as WorkflowListParams,
+    type WorkflowGetParams as WorkflowGetParams,
+  };
 
-  export import ResourceSharing = API.ResourceSharing;
-  export import ResourceSharingCreateResponse = API.ResourceSharingCreateResponse;
-  export import ResourceSharingUpdateResponse = API.ResourceSharingUpdateResponse;
-  export import ResourceSharingListResponse = API.ResourceSharingListResponse;
-  export import ResourceSharingDeleteResponse = API.ResourceSharingDeleteResponse;
-  export import ResourceSharingGetResponse = API.ResourceSharingGetResponse;
-  export import ResourceSharingListResponsesV4PagePaginationArray = API.ResourceSharingListResponsesV4PagePaginationArray;
-  export import ResourceSharingCreateParams = API.ResourceSharingCreateParams;
-  export import ResourceSharingUpdateParams = API.ResourceSharingUpdateParams;
-  export import ResourceSharingListParams = API.ResourceSharingListParams;
-  export import ResourceSharingDeleteParams = API.ResourceSharingDeleteParams;
-  export import ResourceSharingGetParams = API.ResourceSharingGetParams;
+  export {
+    ResourceSharing as ResourceSharing,
+    type ResourceSharingCreateResponse as ResourceSharingCreateResponse,
+    type ResourceSharingUpdateResponse as ResourceSharingUpdateResponse,
+    type ResourceSharingListResponse as ResourceSharingListResponse,
+    type ResourceSharingDeleteResponse as ResourceSharingDeleteResponse,
+    type ResourceSharingGetResponse as ResourceSharingGetResponse,
+    ResourceSharingListResponsesV4PagePaginationArray as ResourceSharingListResponsesV4PagePaginationArray,
+    type ResourceSharingCreateParams as ResourceSharingCreateParams,
+    type ResourceSharingUpdateParams as ResourceSharingUpdateParams,
+    type ResourceSharingListParams as ResourceSharingListParams,
+    type ResourceSharingDeleteParams as ResourceSharingDeleteParams,
+    type ResourceSharingGetParams as ResourceSharingGetParams,
+  };
 
-  export import ASN = API.ASN;
-  export import AuditLog = API.AuditLog;
-  export import CertificateCA = API.CertificateCA;
-  export import CertificateRequestType = API.CertificateRequestType;
-  export import CloudflareTunnel = API.CloudflareTunnel;
-  export import ErrorData = API.ErrorData;
-  export import Identifier = API.Identifier;
-  export import LoadBalancerPreview = API.LoadBalancerPreview;
-  export import Member = API.Member;
-  export import PaginationInfo = API.PaginationInfo;
-  export import Permission = API.Permission;
-  export import PermissionGrant = API.PermissionGrant;
-  export import RatePlan = API.RatePlan;
-  export import ResponseInfo = API.ResponseInfo;
-  export import Result = API.Result;
-  export import Role = API.Role;
-  export import SortDirection = API.SortDirection;
-  export import Subscription = API.Subscription;
-  export import SubscriptionComponent = API.SubscriptionComponent;
-  export import SubscriptionZone = API.SubscriptionZone;
+  export type ASN = API.ASN;
+  export type AuditLog = API.AuditLog;
+  export type CertificateCA = API.CertificateCA;
+  export type CertificateRequestType = API.CertificateRequestType;
+  export type CloudflareTunnel = API.CloudflareTunnel;
+  export type ErrorData = API.ErrorData;
+  export type Identifier = API.Identifier;
+  export type LoadBalancerPreview = API.LoadBalancerPreview;
+  export type Member = API.Member;
+  export type PaginationInfo = API.PaginationInfo;
+  export type Permission = API.Permission;
+  export type PermissionGrant = API.PermissionGrant;
+  export type RatePlan = API.RatePlan;
+  export type ResponseInfo = API.ResponseInfo;
+  export type Result = API.Result;
+  export type Role = API.Role;
+  export type SortDirection = API.SortDirection;
+  export type Subscription = API.Subscription;
+  export type SubscriptionComponent = API.SubscriptionComponent;
+  export type SubscriptionZone = API.SubscriptionZone;
 }
 
 export default Cloudflare;

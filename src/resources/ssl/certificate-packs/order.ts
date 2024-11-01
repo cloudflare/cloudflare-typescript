@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OrderAPI from './order';
 import * as CertificatePacksAPI from './certificate-packs';
 
 export class Order extends APIResource {
@@ -108,7 +107,6 @@ export interface OrderCreateParams {
   cloudflare_branding?: boolean;
 }
 
-export namespace Order {
-  export import OrderCreateResponse = OrderAPI.OrderCreateResponse;
-  export import OrderCreateParams = OrderAPI.OrderCreateParams;
+export declare namespace Order {
+  export { type OrderCreateResponse as OrderCreateResponse, type OrderCreateParams as OrderCreateParams };
 }

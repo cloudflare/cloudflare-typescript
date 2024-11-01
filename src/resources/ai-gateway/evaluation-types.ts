@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as EvaluationTypesAPI from './evaluation-types';
 
 export class EvaluationTypes extends APIResource {
   /**
@@ -71,7 +70,9 @@ export interface EvaluationTypeGetParams {
   per_page?: number;
 }
 
-export namespace EvaluationTypes {
-  export import EvaluationTypeGetResponse = EvaluationTypesAPI.EvaluationTypeGetResponse;
-  export import EvaluationTypeGetParams = EvaluationTypesAPI.EvaluationTypeGetParams;
+export declare namespace EvaluationTypes {
+  export {
+    type EvaluationTypeGetResponse as EvaluationTypeGetResponse,
+    type EvaluationTypeGetParams as EvaluationTypeGetParams,
+  };
 }

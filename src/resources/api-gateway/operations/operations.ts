@@ -2,8 +2,16 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OperationsAPI from './operations';
 import * as SchemaValidationAPI from './schema-validation';
+import {
+  SchemaValidation,
+  SchemaValidationEditParams,
+  SchemaValidationGetParams,
+  SchemaValidationGetResponse,
+  SchemaValidationUpdateParams,
+  SchemaValidationUpdateResponse,
+  SettingsMultipleRequest,
+} from './schema-validation';
 import * as UserSchemasAPI from '../user-schemas/user-schemas';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
@@ -1015,22 +1023,30 @@ export interface OperationGetParams {
   feature?: Array<'thresholds' | 'parameter_schemas' | 'schema_info'>;
 }
 
-export namespace Operations {
-  export import APIShield = OperationsAPI.APIShield;
-  export import OperationCreateResponse = OperationsAPI.OperationCreateResponse;
-  export import OperationListResponse = OperationsAPI.OperationListResponse;
-  export import OperationDeleteResponse = OperationsAPI.OperationDeleteResponse;
-  export import OperationGetResponse = OperationsAPI.OperationGetResponse;
-  export import OperationListResponsesV4PagePaginationArray = OperationsAPI.OperationListResponsesV4PagePaginationArray;
-  export import OperationCreateParams = OperationsAPI.OperationCreateParams;
-  export import OperationListParams = OperationsAPI.OperationListParams;
-  export import OperationDeleteParams = OperationsAPI.OperationDeleteParams;
-  export import OperationGetParams = OperationsAPI.OperationGetParams;
-  export import SchemaValidation = SchemaValidationAPI.SchemaValidation;
-  export import SettingsMultipleRequest = SchemaValidationAPI.SettingsMultipleRequest;
-  export import SchemaValidationUpdateResponse = SchemaValidationAPI.SchemaValidationUpdateResponse;
-  export import SchemaValidationGetResponse = SchemaValidationAPI.SchemaValidationGetResponse;
-  export import SchemaValidationUpdateParams = SchemaValidationAPI.SchemaValidationUpdateParams;
-  export import SchemaValidationEditParams = SchemaValidationAPI.SchemaValidationEditParams;
-  export import SchemaValidationGetParams = SchemaValidationAPI.SchemaValidationGetParams;
+Operations.OperationListResponsesV4PagePaginationArray = OperationListResponsesV4PagePaginationArray;
+Operations.SchemaValidation = SchemaValidation;
+
+export declare namespace Operations {
+  export {
+    type APIShield as APIShield,
+    type OperationCreateResponse as OperationCreateResponse,
+    type OperationListResponse as OperationListResponse,
+    type OperationDeleteResponse as OperationDeleteResponse,
+    type OperationGetResponse as OperationGetResponse,
+    OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
+    type OperationCreateParams as OperationCreateParams,
+    type OperationListParams as OperationListParams,
+    type OperationDeleteParams as OperationDeleteParams,
+    type OperationGetParams as OperationGetParams,
+  };
+
+  export {
+    SchemaValidation as SchemaValidation,
+    type SettingsMultipleRequest as SettingsMultipleRequest,
+    type SchemaValidationUpdateResponse as SchemaValidationUpdateResponse,
+    type SchemaValidationGetResponse as SchemaValidationGetResponse,
+    type SchemaValidationUpdateParams as SchemaValidationUpdateParams,
+    type SchemaValidationEditParams as SchemaValidationEditParams,
+    type SchemaValidationGetParams as SchemaValidationGetParams,
+  };
 }

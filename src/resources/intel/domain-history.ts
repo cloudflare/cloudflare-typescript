@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as DomainHistoryAPI from './domain-history';
 
 export class DomainHistoryResource extends APIResource {
   /**
@@ -52,8 +51,10 @@ export interface DomainHistoryGetParams {
   domain?: string;
 }
 
-export namespace DomainHistoryResource {
-  export import DomainHistory = DomainHistoryAPI.DomainHistory;
-  export import DomainHistoryGetResponse = DomainHistoryAPI.DomainHistoryGetResponse;
-  export import DomainHistoryGetParams = DomainHistoryAPI.DomainHistoryGetParams;
+export declare namespace DomainHistoryResource {
+  export {
+    type DomainHistory as DomainHistory,
+    type DomainHistoryGetResponse as DomainHistoryGetResponse,
+    type DomainHistoryGetParams as DomainHistoryGetParams,
+  };
 }

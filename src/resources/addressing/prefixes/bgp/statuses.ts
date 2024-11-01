@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
-import * as StatusesAPI from './statuses';
 
 export class Statuses extends APIResource {
   /**
@@ -85,9 +84,11 @@ export interface StatusGetParams {
   account_id: string;
 }
 
-export namespace Statuses {
-  export import StatusEditResponse = StatusesAPI.StatusEditResponse;
-  export import StatusGetResponse = StatusesAPI.StatusGetResponse;
-  export import StatusEditParams = StatusesAPI.StatusEditParams;
-  export import StatusGetParams = StatusesAPI.StatusGetParams;
+export declare namespace Statuses {
+  export {
+    type StatusEditResponse as StatusEditResponse,
+    type StatusGetResponse as StatusGetResponse,
+    type StatusEditParams as StatusEditParams,
+    type StatusGetParams as StatusGetParams,
+  };
 }

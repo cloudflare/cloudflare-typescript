@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as OwnershipAPI from './ownership';
 
 export class OwnershipResource extends APIResource {
   /**
@@ -140,11 +139,13 @@ export interface OwnershipValidateParams {
   ownership_challenge: string;
 }
 
-export namespace OwnershipResource {
-  export import Ownership = OwnershipAPI.Ownership;
-  export import OwnershipGetResponse = OwnershipAPI.OwnershipGetResponse;
-  export import OwnershipCreateParams = OwnershipAPI.OwnershipCreateParams;
-  export import OwnershipDeleteParams = OwnershipAPI.OwnershipDeleteParams;
-  export import OwnershipGetParams = OwnershipAPI.OwnershipGetParams;
-  export import OwnershipValidateParams = OwnershipAPI.OwnershipValidateParams;
+export declare namespace OwnershipResource {
+  export {
+    type Ownership as Ownership,
+    type OwnershipGetResponse as OwnershipGetResponse,
+    type OwnershipCreateParams as OwnershipCreateParams,
+    type OwnershipDeleteParams as OwnershipDeleteParams,
+    type OwnershipGetParams as OwnershipGetParams,
+    type OwnershipValidateParams as OwnershipValidateParams,
+  };
 }

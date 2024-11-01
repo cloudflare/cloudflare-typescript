@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as GRETunnelsAPI from './gre-tunnels';
 import * as MagicTransitAPI from './magic-transit';
 
 export class GRETunnels extends APIResource {
@@ -921,15 +920,17 @@ export interface GRETunnelGetParams {
   'x-magic-new-hc-target'?: boolean;
 }
 
-export namespace GRETunnels {
-  export import GRETunnelCreateResponse = GRETunnelsAPI.GRETunnelCreateResponse;
-  export import GRETunnelUpdateResponse = GRETunnelsAPI.GRETunnelUpdateResponse;
-  export import GRETunnelListResponse = GRETunnelsAPI.GRETunnelListResponse;
-  export import GRETunnelDeleteResponse = GRETunnelsAPI.GRETunnelDeleteResponse;
-  export import GRETunnelGetResponse = GRETunnelsAPI.GRETunnelGetResponse;
-  export import GRETunnelCreateParams = GRETunnelsAPI.GRETunnelCreateParams;
-  export import GRETunnelUpdateParams = GRETunnelsAPI.GRETunnelUpdateParams;
-  export import GRETunnelListParams = GRETunnelsAPI.GRETunnelListParams;
-  export import GRETunnelDeleteParams = GRETunnelsAPI.GRETunnelDeleteParams;
-  export import GRETunnelGetParams = GRETunnelsAPI.GRETunnelGetParams;
+export declare namespace GRETunnels {
+  export {
+    type GRETunnelCreateResponse as GRETunnelCreateResponse,
+    type GRETunnelUpdateResponse as GRETunnelUpdateResponse,
+    type GRETunnelListResponse as GRETunnelListResponse,
+    type GRETunnelDeleteResponse as GRETunnelDeleteResponse,
+    type GRETunnelGetResponse as GRETunnelGetResponse,
+    type GRETunnelCreateParams as GRETunnelCreateParams,
+    type GRETunnelUpdateParams as GRETunnelUpdateParams,
+    type GRETunnelListParams as GRETunnelListParams,
+    type GRETunnelDeleteParams as GRETunnelDeleteParams,
+    type GRETunnelGetParams as GRETunnelGetParams,
+  };
 }

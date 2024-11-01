@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as BulksAPI from './bulks';
 
 export class Bulks extends APIResource {
   /**
@@ -132,7 +131,6 @@ export interface BulkGetParams {
   domain?: unknown;
 }
 
-export namespace Bulks {
-  export import BulkGetResponse = BulksAPI.BulkGetResponse;
-  export import BulkGetParams = BulksAPI.BulkGetParams;
+export declare namespace Bulks {
+  export { type BulkGetResponse as BulkGetResponse, type BulkGetParams as BulkGetParams };
 }

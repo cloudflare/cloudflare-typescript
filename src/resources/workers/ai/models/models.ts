@@ -2,13 +2,18 @@
 
 import { APIResource } from '../../../../resource';
 import * as SchemaAPI from './schema';
+import { Schema, SchemaGetParams, SchemaGetResponse } from './schema';
 
 export class Models extends APIResource {
   schema: SchemaAPI.Schema = new SchemaAPI.Schema(this._client);
 }
 
-export namespace Models {
-  export import Schema = SchemaAPI.Schema;
-  export import SchemaGetResponse = SchemaAPI.SchemaGetResponse;
-  export import SchemaGetParams = SchemaAPI.SchemaGetParams;
+Models.Schema = Schema;
+
+export declare namespace Models {
+  export {
+    Schema as Schema,
+    type SchemaGetResponse as SchemaGetResponse,
+    type SchemaGetParams as SchemaGetParams,
+  };
 }

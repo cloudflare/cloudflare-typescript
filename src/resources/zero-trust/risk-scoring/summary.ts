@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as SummaryAPI from './summary';
 
 export class Summary extends APIResource {
   /**
@@ -42,7 +41,6 @@ export interface SummaryGetParams {
   account_id: string;
 }
 
-export namespace Summary {
-  export import SummaryGetResponse = SummaryAPI.SummaryGetResponse;
-  export import SummaryGetParams = SummaryAPI.SummaryGetParams;
+export declare namespace Summary {
+  export { type SummaryGetResponse as SummaryGetResponse, type SummaryGetParams as SummaryGetParams };
 }

@@ -3,7 +3,21 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
+import {
+  SettingGetParams,
+  SettingGetResponse,
+  SettingUpdateParams,
+  SettingUpdateResponse,
+  Settings,
+} from './settings';
 import * as HostnamesAPI from './hostnames/hostnames';
+import {
+  AuthenticatedOriginPull,
+  HostnameGetParams,
+  HostnameUpdateParams,
+  HostnameUpdateResponse,
+  Hostnames,
+} from './hostnames/hostnames';
 import { SinglePage } from '../../pagination';
 
 export class OriginTLSClientAuth extends APIResource {
@@ -163,15 +177,23 @@ export interface OriginTLSClientAuthGetParams {
   zone_id: string;
 }
 
-export namespace OriginTLSClientAuth {
-  export import Hostnames = HostnamesAPI.Hostnames;
-  export import AuthenticatedOriginPull = HostnamesAPI.AuthenticatedOriginPull;
-  export import HostnameUpdateResponse = HostnamesAPI.HostnameUpdateResponse;
-  export import HostnameUpdateParams = HostnamesAPI.HostnameUpdateParams;
-  export import HostnameGetParams = HostnamesAPI.HostnameGetParams;
-  export import Settings = SettingsAPI.Settings;
-  export import SettingUpdateResponse = SettingsAPI.SettingUpdateResponse;
-  export import SettingGetResponse = SettingsAPI.SettingGetResponse;
-  export import SettingUpdateParams = SettingsAPI.SettingUpdateParams;
-  export import SettingGetParams = SettingsAPI.SettingGetParams;
+OriginTLSClientAuth.Hostnames = Hostnames;
+OriginTLSClientAuth.Settings = Settings;
+
+export declare namespace OriginTLSClientAuth {
+  export {
+    Hostnames as Hostnames,
+    type AuthenticatedOriginPull as AuthenticatedOriginPull,
+    type HostnameUpdateResponse as HostnameUpdateResponse,
+    type HostnameUpdateParams as HostnameUpdateParams,
+    type HostnameGetParams as HostnameGetParams,
+  };
+
+  export {
+    Settings as Settings,
+    type SettingUpdateResponse as SettingUpdateResponse,
+    type SettingGetResponse as SettingGetResponse,
+    type SettingUpdateParams as SettingUpdateParams,
+    type SettingGetParams as SettingGetParams,
+  };
 }

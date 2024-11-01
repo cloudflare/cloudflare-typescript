@@ -3,15 +3,22 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as AsesAPI from './ases';
 import * as BotClassAPI from './bot-class';
+import { BotClass, BotClassGetParams, BotClassGetResponse } from './bot-class';
 import * as BrowserFamilyAPI from './browser-family';
+import { BrowserFamily, BrowserFamilyGetParams, BrowserFamilyGetResponse } from './browser-family';
 import * as DeviceTypeAPI from './device-type';
+import { DeviceType, DeviceTypeGetParams, DeviceTypeGetResponse } from './device-type';
 import * as HTTPMethodAPI from './http-method';
+import { HTTPMethod, HTTPMethodGetParams, HTTPMethodGetResponse } from './http-method';
 import * as HTTPProtocolAPI from './http-protocol';
+import { HTTPProtocol, HTTPProtocolGetParams, HTTPProtocolGetResponse } from './http-protocol';
 import * as IPVersionAPI from './ip-version';
+import { IPVersion, IPVersionGetParams, IPVersionGetResponse } from './ip-version';
 import * as OSAPI from './os';
+import { OS, OSGetParams, OSGetResponse } from './os';
 import * as TLSVersionAPI from './tls-version';
+import { TLSVersion, TLSVersionGetParams, TLSVersionGetResponse } from './tls-version';
 
 export class Ases extends APIResource {
   botClass: BotClassAPI.BotClass = new BotClassAPI.BotClass(this._client);
@@ -202,31 +209,59 @@ export interface AseGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace Ases {
-  export import AseGetResponse = AsesAPI.AseGetResponse;
-  export import AseGetParams = AsesAPI.AseGetParams;
-  export import BotClass = BotClassAPI.BotClass;
-  export import BotClassGetResponse = BotClassAPI.BotClassGetResponse;
-  export import BotClassGetParams = BotClassAPI.BotClassGetParams;
-  export import DeviceType = DeviceTypeAPI.DeviceType;
-  export import DeviceTypeGetResponse = DeviceTypeAPI.DeviceTypeGetResponse;
-  export import DeviceTypeGetParams = DeviceTypeAPI.DeviceTypeGetParams;
-  export import HTTPProtocol = HTTPProtocolAPI.HTTPProtocol;
-  export import HTTPProtocolGetResponse = HTTPProtocolAPI.HTTPProtocolGetResponse;
-  export import HTTPProtocolGetParams = HTTPProtocolAPI.HTTPProtocolGetParams;
-  export import HTTPMethod = HTTPMethodAPI.HTTPMethod;
-  export import HTTPMethodGetResponse = HTTPMethodAPI.HTTPMethodGetResponse;
-  export import HTTPMethodGetParams = HTTPMethodAPI.HTTPMethodGetParams;
-  export import IPVersion = IPVersionAPI.IPVersion;
-  export import IPVersionGetResponse = IPVersionAPI.IPVersionGetResponse;
-  export import IPVersionGetParams = IPVersionAPI.IPVersionGetParams;
-  export import OS = OSAPI.OS;
-  export import OSGetResponse = OSAPI.OSGetResponse;
-  export import OSGetParams = OSAPI.OSGetParams;
-  export import TLSVersion = TLSVersionAPI.TLSVersion;
-  export import TLSVersionGetResponse = TLSVersionAPI.TLSVersionGetResponse;
-  export import TLSVersionGetParams = TLSVersionAPI.TLSVersionGetParams;
-  export import BrowserFamily = BrowserFamilyAPI.BrowserFamily;
-  export import BrowserFamilyGetResponse = BrowserFamilyAPI.BrowserFamilyGetResponse;
-  export import BrowserFamilyGetParams = BrowserFamilyAPI.BrowserFamilyGetParams;
+Ases.BotClass = BotClass;
+Ases.DeviceType = DeviceType;
+Ases.HTTPProtocol = HTTPProtocol;
+Ases.HTTPMethod = HTTPMethod;
+Ases.IPVersion = IPVersion;
+Ases.OS = OS;
+Ases.TLSVersion = TLSVersion;
+Ases.BrowserFamily = BrowserFamily;
+
+export declare namespace Ases {
+  export { type AseGetResponse as AseGetResponse, type AseGetParams as AseGetParams };
+
+  export {
+    BotClass as BotClass,
+    type BotClassGetResponse as BotClassGetResponse,
+    type BotClassGetParams as BotClassGetParams,
+  };
+
+  export {
+    DeviceType as DeviceType,
+    type DeviceTypeGetResponse as DeviceTypeGetResponse,
+    type DeviceTypeGetParams as DeviceTypeGetParams,
+  };
+
+  export {
+    HTTPProtocol as HTTPProtocol,
+    type HTTPProtocolGetResponse as HTTPProtocolGetResponse,
+    type HTTPProtocolGetParams as HTTPProtocolGetParams,
+  };
+
+  export {
+    HTTPMethod as HTTPMethod,
+    type HTTPMethodGetResponse as HTTPMethodGetResponse,
+    type HTTPMethodGetParams as HTTPMethodGetParams,
+  };
+
+  export {
+    IPVersion as IPVersion,
+    type IPVersionGetResponse as IPVersionGetResponse,
+    type IPVersionGetParams as IPVersionGetParams,
+  };
+
+  export { OS as OS, type OSGetResponse as OSGetResponse, type OSGetParams as OSGetParams };
+
+  export {
+    TLSVersion as TLSVersion,
+    type TLSVersionGetResponse as TLSVersionGetResponse,
+    type TLSVersionGetParams as TLSVersionGetParams,
+  };
+
+  export {
+    BrowserFamily as BrowserFamily,
+    type BrowserFamilyGetResponse as BrowserFamilyGetResponse,
+    type BrowserFamilyGetParams as BrowserFamilyGetParams,
+  };
 }

@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
-import * as BotClassAPI from './bot-class';
 
 export class BotClass extends APIResource {
   /**
@@ -190,7 +189,6 @@ export interface BotClassGetParams {
   tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
-export namespace BotClass {
-  export import BotClassGetResponse = BotClassAPI.BotClassGetResponse;
-  export import BotClassGetParams = BotClassAPI.BotClassGetParams;
+export declare namespace BotClass {
+  export { type BotClassGetResponse as BotClassGetResponse, type BotClassGetParams as BotClassGetParams };
 }

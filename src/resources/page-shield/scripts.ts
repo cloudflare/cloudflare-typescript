@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as ScriptsAPI from './scripts';
 import { SinglePage } from '../../pagination';
 
 export class Scripts extends APIResource {
@@ -328,10 +327,14 @@ export interface ScriptGetParams {
   zone_id: string;
 }
 
-export namespace Scripts {
-  export import Script = ScriptsAPI.Script;
-  export import ScriptGetResponse = ScriptsAPI.ScriptGetResponse;
-  export import ScriptsSinglePage = ScriptsAPI.ScriptsSinglePage;
-  export import ScriptListParams = ScriptsAPI.ScriptListParams;
-  export import ScriptGetParams = ScriptsAPI.ScriptGetParams;
+Scripts.ScriptsSinglePage = ScriptsSinglePage;
+
+export declare namespace Scripts {
+  export {
+    type Script as Script,
+    type ScriptGetResponse as ScriptGetResponse,
+    ScriptsSinglePage as ScriptsSinglePage,
+    type ScriptListParams as ScriptListParams,
+    type ScriptGetParams as ScriptGetParams,
+  };
 }
