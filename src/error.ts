@@ -53,7 +53,7 @@ export class APIError extends CloudflareError {
     errorResponse: Object | undefined,
     message: string | undefined,
     headers: Headers | undefined,
-  ) {
+  ): APIError {
     if (!status) {
       return new APIConnectionError({ message, cause: castToError(errorResponse) });
     }
