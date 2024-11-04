@@ -108,7 +108,7 @@ export namespace LifecycleGetResponse {
     export interface AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       condition?: AbortMultipartUploadsTransition.Condition;
     }
@@ -116,7 +116,7 @@ export namespace LifecycleGetResponse {
     export namespace AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       export interface Condition {
         maxAge: number;
@@ -131,7 +131,7 @@ export namespace LifecycleGetResponse {
     export interface DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       condition?:
         | DeleteObjectsTransition.R2LifecycleAgeCondition
@@ -141,7 +141,7 @@ export namespace LifecycleGetResponse {
     export namespace DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -162,7 +162,7 @@ export namespace LifecycleGetResponse {
     export interface StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       condition:
         | StorageClassTransition.R2LifecycleAgeCondition
@@ -174,7 +174,7 @@ export namespace LifecycleGetResponse {
     export namespace StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -263,7 +263,7 @@ export namespace LifecycleUpdateParams {
     export interface AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       condition?: AbortMultipartUploadsTransition.Condition;
     }
@@ -271,7 +271,7 @@ export namespace LifecycleUpdateParams {
     export namespace AbortMultipartUploadsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       export interface Condition {
         maxAge: number;
@@ -286,7 +286,7 @@ export namespace LifecycleUpdateParams {
     export interface DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       condition?:
         | DeleteObjectsTransition.R2LifecycleAgeCondition
@@ -296,7 +296,7 @@ export namespace LifecycleUpdateParams {
     export namespace DeleteObjectsTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
@@ -317,7 +317,7 @@ export namespace LifecycleUpdateParams {
     export interface StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       condition:
         | StorageClassTransition.R2LifecycleAgeCondition
@@ -329,7 +329,7 @@ export namespace LifecycleUpdateParams {
     export namespace StorageClassTransition {
       /**
        * Condition for lifecycle transitions to apply after an object reaches an age in
-       * days
+       * seconds
        */
       export interface R2LifecycleAgeCondition {
         maxAge: number;
