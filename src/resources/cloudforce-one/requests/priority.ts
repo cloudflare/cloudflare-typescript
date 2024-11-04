@@ -3,8 +3,9 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import * as RequestsAPI from './requests';
 
-export class Priority extends APIResource {
+export class PriorityResource extends APIResource {
   /**
    * Create a New Priority Intelligence Requirement
    */
@@ -12,12 +13,12 @@ export class Priority extends APIResource {
     accountIdentifier: string,
     body: PriorityCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityCreateResponse> {
+  ): Core.APIPromise<Priority> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/priority/new`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: PriorityCreateResponse }>
+      }) as Core.APIPromise<{ result: Priority }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -29,12 +30,12 @@ export class Priority extends APIResource {
     priorityIdentifer: string,
     body: PriorityUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityUpdateResponse> {
+  ): Core.APIPromise<RequestsAPI.Item> {
     return (
       this._client.put(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         { body, ...options },
-      ) as Core.APIPromise<{ result: PriorityUpdateResponse }>
+      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -59,29 +60,33 @@ export class Priority extends APIResource {
     accountIdentifier: string,
     priorityIdentifer: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<PriorityGetResponse> {
+  ): Core.APIPromise<RequestsAPI.Item> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/${priorityIdentifer}`,
         options,
-      ) as Core.APIPromise<{ result: PriorityGetResponse }>
+      ) as Core.APIPromise<{ result: RequestsAPI.Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Priority Intelligence Requirement Quota
    */
-  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<PriorityQuotaResponse> {
+  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestsAPI.Quota> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/priority/quota`,
         options,
-      ) as Core.APIPromise<{ result: PriorityQuotaResponse }>
+      ) as Core.APIPromise<{ result: RequestsAPI.Quota }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface PriorityCreateResponse {
+export type Label = string;
+
+export type LabelParam = string;
+
+export interface Priority {
   /**
    * UUID
    */
@@ -95,7 +100,7 @@ export interface PriorityCreateResponse {
   /**
    * List of labels
    */
-  labels: Array<string>;
+  labels: Array<Label>;
 
   /**
    * Priority
@@ -118,59 +123,26 @@ export interface PriorityCreateResponse {
   updated: string;
 }
 
-export interface PriorityUpdateResponse {
+export interface PriorityEdit {
   /**
-   * UUID
+   * List of labels
    */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
+  labels: Array<Label>;
 
   /**
-   * Requested information from request
+   * Priority
    */
-  request: string;
+  priority: number;
 
   /**
-   * Brief description of the request
+   * Requirement
    */
-  summary: string;
+  requirement: string;
 
   /**
    * The CISA defined Traffic Light Protocol (TLP)
    */
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
 }
 
 export interface PriorityDeleteResponse {
@@ -184,88 +156,11 @@ export interface PriorityDeleteResponse {
   success: true;
 }
 
-export interface PriorityGetResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
-export interface PriorityQuotaResponse {
-  /**
-   * Anniversary date is when annual quota limit is refresh
-   */
-  anniversary_date?: string;
-
-  /**
-   * Quater anniversary date is when quota limit is refreshed each quarter
-   */
-  quarter_anniversary_date?: string;
-
-  /**
-   * Tokens for the quarter
-   */
-  quota?: number;
-
-  /**
-   * Tokens remaining for the quarter
-   */
-  remaining?: number;
-}
-
 export interface PriorityCreateParams {
   /**
    * List of labels
    */
-  labels: Array<string>;
+  labels: Array<LabelParam>;
 
   /**
    * Priority
@@ -287,7 +182,7 @@ export interface PriorityUpdateParams {
   /**
    * List of labels
    */
-  labels: Array<string>;
+  labels: Array<LabelParam>;
 
   /**
    * Priority
@@ -305,13 +200,12 @@ export interface PriorityUpdateParams {
   tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 }
 
-export declare namespace Priority {
+export declare namespace PriorityResource {
   export {
-    type PriorityCreateResponse as PriorityCreateResponse,
-    type PriorityUpdateResponse as PriorityUpdateResponse,
+    type Label as Label,
+    type Priority as Priority,
+    type PriorityEdit as PriorityEdit,
     type PriorityDeleteResponse as PriorityDeleteResponse,
-    type PriorityGetResponse as PriorityGetResponse,
-    type PriorityQuotaResponse as PriorityQuotaResponse,
     type PriorityCreateParams as PriorityCreateParams,
     type PriorityUpdateParams as PriorityUpdateParams,
   };

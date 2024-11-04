@@ -17,29 +17,27 @@ import * as MessageAPI from './message';
 import {
   Message,
   MessageCreateParams,
-  MessageCreateResponse,
   MessageDeleteResponse,
   MessageGetParams,
   MessageGetResponse,
+  MessageResource,
   MessageUpdateParams,
-  MessageUpdateResponse,
 } from './message';
 import * as PriorityAPI from './priority';
 import {
+  Label,
   Priority,
   PriorityCreateParams,
-  PriorityCreateResponse,
   PriorityDeleteResponse,
-  PriorityGetResponse,
-  PriorityQuotaResponse,
+  PriorityEdit,
+  PriorityResource,
   PriorityUpdateParams,
-  PriorityUpdateResponse,
 } from './priority';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Requests extends APIResource {
-  message: MessageAPI.Message = new MessageAPI.Message(this._client);
-  priority: PriorityAPI.Priority = new PriorityAPI.Priority(this._client);
+  message: MessageAPI.MessageResource = new MessageAPI.MessageResource(this._client);
+  priority: PriorityAPI.PriorityResource = new PriorityAPI.PriorityResource(this._client);
   assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
 
   /**
@@ -51,12 +49,12 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestCreateResponse> {
+  ): Core.APIPromise<Item> {
     return (
       this._client.post(`/accounts/${accountIdentifier}/cloudforce-one/requests/new`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RequestCreateResponse }>
+      }) as Core.APIPromise<{ result: Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -70,12 +68,12 @@ export class Requests extends APIResource {
     requestIdentifier: string,
     body: RequestUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestUpdateResponse> {
+  ): Core.APIPromise<Item> {
     return (
       this._client.put(`/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: RequestUpdateResponse }>
+      }) as Core.APIPromise<{ result: Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -86,10 +84,10 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     body: RequestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<RequestListResponsesV4PagePaginationArray, RequestListResponse> {
+  ): Core.PagePromise<ListItemsV4PagePaginationArray, ListItem> {
     return this._client.getAPIList(
       `/accounts/${accountIdentifier}/cloudforce-one/requests`,
-      RequestListResponsesV4PagePaginationArray,
+      ListItemsV4PagePaginationArray,
       { body, method: 'post', ...options },
     );
   }
@@ -111,15 +109,12 @@ export class Requests extends APIResource {
   /**
    * Get Request Priority, Status, and TLP constants
    */
-  constants(
-    accountIdentifier: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestConstantsResponse> {
+  constants(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestConstants> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/constants`,
         options,
-      ) as Core.APIPromise<{ result: RequestConstantsResponse }>
+      ) as Core.APIPromise<{ result: RequestConstants }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -130,43 +125,43 @@ export class Requests extends APIResource {
     accountIdentifier: string,
     requestIdentifier: string,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<RequestGetResponse> {
+  ): Core.APIPromise<Item> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/${requestIdentifier}`,
         options,
-      ) as Core.APIPromise<{ result: RequestGetResponse }>
+      ) as Core.APIPromise<{ result: Item }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Request Quota
    */
-  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestQuotaResponse> {
+  quota(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<Quota> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/quota`,
         options,
-      ) as Core.APIPromise<{ result: RequestQuotaResponse }>
+      ) as Core.APIPromise<{ result: Quota }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
    * Get Request Types
    */
-  types(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestTypesResponse> {
+  types(accountIdentifier: string, options?: Core.RequestOptions): Core.APIPromise<RequestTypes> {
     return (
       this._client.get(
         `/accounts/${accountIdentifier}/cloudforce-one/requests/types`,
         options,
-      ) as Core.APIPromise<{ result: RequestTypesResponse }>
+      ) as Core.APIPromise<{ result: RequestTypes }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class RequestListResponsesV4PagePaginationArray extends V4PagePaginationArray<RequestListResponse> {}
+export class ListItemsV4PagePaginationArray extends V4PagePaginationArray<ListItem> {}
 
-export interface RequestCreateResponse {
+export interface Item {
   /**
    * UUID
    */
@@ -221,62 +216,7 @@ export interface RequestCreateResponse {
   tokens?: number;
 }
 
-export interface RequestUpdateResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
-export interface RequestListResponse {
+export interface ListItem {
   /**
    * UUID
    */
@@ -335,81 +275,7 @@ export interface RequestListResponse {
   tokens?: number;
 }
 
-export interface RequestDeleteResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
-
-export interface RequestConstantsResponse {
-  priority?: Array<'routine' | 'high' | 'urgent'>;
-
-  status?: Array<'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined'>;
-
-  tlp?: Array<'clear' | 'amber' | 'amber-strict' | 'green' | 'red'>;
-}
-
-export interface RequestGetResponse {
-  /**
-   * UUID
-   */
-  id: string;
-
-  /**
-   * Request content
-   */
-  content: string;
-
-  created: string;
-
-  priority: string;
-
-  /**
-   * Requested information from request
-   */
-  request: string;
-
-  /**
-   * Brief description of the request
-   */
-  summary: string;
-
-  /**
-   * The CISA defined Traffic Light Protocol (TLP)
-   */
-  tlp: 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
-
-  updated: string;
-
-  completed?: string;
-
-  /**
-   * Tokens for the request messages
-   */
-  message_tokens?: number;
-
-  /**
-   * Readable Request ID
-   */
-  readable_id?: string;
-
-  /**
-   * Request Status
-   */
-  status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
-
-  /**
-   * Tokens for the request
-   */
-  tokens?: number;
-}
-
-export interface RequestQuotaResponse {
+export interface Quota {
   /**
    * Anniversary date is when annual quota limit is refresh
    */
@@ -431,7 +297,26 @@ export interface RequestQuotaResponse {
   remaining?: number;
 }
 
-export type RequestTypesResponse = Array<string>;
+export interface RequestConstants {
+  priority?: Array<'routine' | 'high' | 'urgent'>;
+
+  status?: Array<'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined'>;
+
+  tlp?: Array<'clear' | 'amber' | 'amber-strict' | 'green' | 'red'>;
+}
+
+export type RequestTypes = Array<string>;
+
+export interface RequestDeleteResponse {
+  errors: Array<Shared.ResponseInfo>;
+
+  messages: Array<Shared.ResponseInfo>;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
 
 export interface RequestCreateParams {
   /**
@@ -529,31 +414,28 @@ export interface RequestListParams extends V4PagePaginationArrayParams {
   status?: 'open' | 'accepted' | 'reported' | 'approved' | 'completed' | 'declined';
 }
 
-Requests.RequestListResponsesV4PagePaginationArray = RequestListResponsesV4PagePaginationArray;
-Requests.Message = Message;
-Requests.Priority = Priority;
+Requests.ListItemsV4PagePaginationArray = ListItemsV4PagePaginationArray;
+Requests.MessageResource = MessageResource;
+Requests.PriorityResource = PriorityResource;
 Requests.Assets = Assets;
 
 export declare namespace Requests {
   export {
-    type RequestCreateResponse as RequestCreateResponse,
-    type RequestUpdateResponse as RequestUpdateResponse,
-    type RequestListResponse as RequestListResponse,
+    type Item as Item,
+    type ListItem as ListItem,
+    type Quota as Quota,
+    type RequestConstants as RequestConstants,
+    type RequestTypes as RequestTypes,
     type RequestDeleteResponse as RequestDeleteResponse,
-    type RequestConstantsResponse as RequestConstantsResponse,
-    type RequestGetResponse as RequestGetResponse,
-    type RequestQuotaResponse as RequestQuotaResponse,
-    type RequestTypesResponse as RequestTypesResponse,
-    RequestListResponsesV4PagePaginationArray as RequestListResponsesV4PagePaginationArray,
+    ListItemsV4PagePaginationArray as ListItemsV4PagePaginationArray,
     type RequestCreateParams as RequestCreateParams,
     type RequestUpdateParams as RequestUpdateParams,
     type RequestListParams as RequestListParams,
   };
 
   export {
-    Message as Message,
-    type MessageCreateResponse as MessageCreateResponse,
-    type MessageUpdateResponse as MessageUpdateResponse,
+    MessageResource as MessageResource,
+    type Message as Message,
     type MessageDeleteResponse as MessageDeleteResponse,
     type MessageGetResponse as MessageGetResponse,
     type MessageCreateParams as MessageCreateParams,
@@ -562,12 +444,11 @@ export declare namespace Requests {
   };
 
   export {
-    Priority as Priority,
-    type PriorityCreateResponse as PriorityCreateResponse,
-    type PriorityUpdateResponse as PriorityUpdateResponse,
+    PriorityResource as PriorityResource,
+    type Label as Label,
+    type Priority as Priority,
+    type PriorityEdit as PriorityEdit,
     type PriorityDeleteResponse as PriorityDeleteResponse,
-    type PriorityGetResponse as PriorityGetResponse,
-    type PriorityQuotaResponse as PriorityQuotaResponse,
     type PriorityCreateParams as PriorityCreateParams,
     type PriorityUpdateParams as PriorityUpdateParams,
   };

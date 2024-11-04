@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as VariantsAPI from './variants';
 
 export class CacheReserveResource extends APIResource {
   /**
@@ -217,7 +218,7 @@ export interface CacheReserveClearParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id: VariantsAPI.CacheVariantIdentifierParam;
 
   /**
    * Body param:
@@ -229,7 +230,7 @@ export interface CacheReserveEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id: VariantsAPI.CacheVariantIdentifierParam;
 
   /**
    * Body param: Value of the Cache Reserve zone setting.
@@ -241,14 +242,14 @@ export interface CacheReserveGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id: VariantsAPI.CacheVariantIdentifierParam;
 }
 
 export interface CacheReserveStatusParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id: VariantsAPI.CacheVariantIdentifierParam;
 }
 
 export declare namespace CacheReserveResource {

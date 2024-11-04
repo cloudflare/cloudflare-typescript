@@ -38,9 +38,9 @@ import {
 } from './smart-tiered-cache';
 import * as VariantsAPI from './variants';
 import {
+  CacheVariant,
   CacheVariantIdentifier,
   VariantDeleteParams,
-  VariantDeleteResponse,
   VariantEditParams,
   VariantEditResponse,
   VariantGetParams,
@@ -273,8 +273,8 @@ export declare namespace Cache {
 
   export {
     Variants as Variants,
+    type CacheVariant as CacheVariant,
     type CacheVariantIdentifier as CacheVariantIdentifier,
-    type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,
     type VariantDeleteParams as VariantDeleteParams,
