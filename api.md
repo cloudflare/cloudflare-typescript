@@ -584,7 +584,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/cache/variants.ts">CacheVariant</a></code>
-- <code><a href="./src/resources/cache/variants.ts">CacheVariantIdentifier</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantEditResponse</a></code>
 - <code><a href="./src/resources/cache/variants.ts">VariantGetResponse</a></code>
 
