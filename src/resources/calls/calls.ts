@@ -1,174 +1,75 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as Core from '../../core';
-import * as TURNAPI from './turn/turn';
-import { TURN } from './turn/turn';
-import { SinglePage } from '../../pagination';
+import * as SfuAPI from './sfu';
+import {
+  Sfu,
+  SfuCreateParams,
+  SfuCreateResponse,
+  SfuDeleteParams,
+  SfuDeleteResponse,
+  SfuGetParams,
+  SfuGetResponse,
+  SfuListParams,
+  SfuListResponse,
+  SfuListResponsesSinglePage,
+  SfuUpdateParams,
+  SfuUpdateResponse,
+} from './sfu';
+import * as TURNAPI from './turn';
+import {
+  TURN,
+  TURNCreateParams,
+  TURNCreateResponse,
+  TURNDeleteParams,
+  TURNDeleteResponse,
+  TURNGetParams,
+  TURNGetResponse,
+  TURNListParams,
+  TURNListResponse,
+  TURNListResponsesSinglePage,
+  TURNUpdateParams,
+  TURNUpdateResponse,
+} from './turn';
 
 export class Calls extends APIResource {
+  sfu: SfuAPI.Sfu = new SfuAPI.Sfu(this._client);
   turn: TURNAPI.TURN = new TURNAPI.TURN(this._client);
-
-  /**
-   * Creates a new Cloudflare calls app. An app is an unique enviroment where each
-   * Session can access all Tracks within the app.
-   */
-  create(params: CallCreateParams, options?: Core.RequestOptions): Core.APIPromise<CallsAppWithSecret> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.post(`/accounts/${account_id}/calls/apps`, { body, ...options }) as Core.APIPromise<{
-        result: CallsAppWithSecret;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Edit details for a single app.
-   */
-  update(appId: string, params: CallUpdateParams, options?: Core.RequestOptions): Core.APIPromise<CallsApp> {
-    const { account_id, ...body } = params;
-    return (
-      this._client.put(`/accounts/${account_id}/calls/apps/${appId}`, {
-        body,
-        ...options,
-      }) as Core.APIPromise<{ result: CallsApp }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Lists all apps in the Cloudflare account
-   */
-  list(
-    params: CallListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<CallsAppsSinglePage, CallsApp> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, CallsAppsSinglePage, options);
-  }
-
-  /**
-   * Deletes an app from Cloudflare Calls
-   */
-  delete(appId: string, params: CallDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CallsApp> {
-    const { account_id } = params;
-    return (
-      this._client.delete(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
-        result: CallsApp;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Fetches details for a single Calls app.
-   */
-  get(appId: string, params: CallGetParams, options?: Core.RequestOptions): Core.APIPromise<CallsApp> {
-    const { account_id } = params;
-    return (
-      this._client.get(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
-        result: CallsApp;
-      }>
-    )._thenUnwrap((obj) => obj.result);
-  }
 }
 
-export class CallsAppsSinglePage extends SinglePage<CallsApp> {}
-
-export interface CallsApp {
-  /**
-   * The date and time the item was created.
-   */
-  created?: string;
-
-  /**
-   * The date and time the item was last modified.
-   */
-  modified?: string;
-
-  /**
-   * A short description of Calls app, not shown to end users.
-   */
-  name?: string;
-
-  /**
-   * A Cloudflare-generated unique identifier for a item.
-   */
-  uid?: string;
-}
-
-export interface CallsAppWithSecret {
-  /**
-   * The date and time the item was created.
-   */
-  created?: string;
-
-  /**
-   * The date and time the item was last modified.
-   */
-  modified?: string;
-
-  /**
-   * A short description of Calls app, not shown to end users.
-   */
-  name?: string;
-
-  /**
-   * Bearer token
-   */
-  secret?: string;
-
-  /**
-   * A Cloudflare-generated unique identifier for a item.
-   */
-  uid?: string;
-}
-
-export interface CallCreateParams {
-  /**
-   * Path param: The account identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Body param: A short description of Calls app, not shown to end users.
-   */
-  name?: string;
-}
-
-export interface CallUpdateParams {
-  /**
-   * Path param: The account identifier tag.
-   */
-  account_id: string;
-
-  /**
-   * Body param: A short description of Calls app, not shown to end users.
-   */
-  name?: string;
-}
-
-export interface CallListParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id: string;
-}
-
-export interface CallDeleteParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id: string;
-}
-
-export interface CallGetParams {
-  /**
-   * The account identifier tag.
-   */
-  account_id: string;
-}
-
+Calls.Sfu = Sfu;
+Calls.SfuListResponsesSinglePage = SfuListResponsesSinglePage;
 Calls.TURN = TURN;
+Calls.TURNListResponsesSinglePage = TURNListResponsesSinglePage;
 
 export declare namespace Calls {
-  export { TURN as TURN };
+  export {
+    Sfu as Sfu,
+    type SfuCreateResponse as SfuCreateResponse,
+    type SfuUpdateResponse as SfuUpdateResponse,
+    type SfuListResponse as SfuListResponse,
+    type SfuDeleteResponse as SfuDeleteResponse,
+    type SfuGetResponse as SfuGetResponse,
+    SfuListResponsesSinglePage as SfuListResponsesSinglePage,
+    type SfuCreateParams as SfuCreateParams,
+    type SfuUpdateParams as SfuUpdateParams,
+    type SfuListParams as SfuListParams,
+    type SfuDeleteParams as SfuDeleteParams,
+    type SfuGetParams as SfuGetParams,
+  };
+
+  export {
+    TURN as TURN,
+    type TURNCreateResponse as TURNCreateResponse,
+    type TURNUpdateResponse as TURNUpdateResponse,
+    type TURNListResponse as TURNListResponse,
+    type TURNDeleteResponse as TURNDeleteResponse,
+    type TURNGetResponse as TURNGetResponse,
+    TURNListResponsesSinglePage as TURNListResponsesSinglePage,
+    type TURNCreateParams as TURNCreateParams,
+    type TURNUpdateParams as TURNUpdateParams,
+    type TURNListParams as TURNListParams,
+    type TURNDeleteParams as TURNDeleteParams,
+    type TURNGetParams as TURNGetParams,
+  };
 }

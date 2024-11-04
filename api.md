@@ -6624,38 +6624,41 @@ Methods:
 
 # Calls
 
+## Sfu
+
 Types:
 
-- <code><a href="./src/resources/calls/calls.ts">CallsApp</a></code>
-- <code><a href="./src/resources/calls/calls.ts">CallsAppWithSecret</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SfuCreateResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SfuUpdateResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SfuListResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SfuDeleteResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SfuGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls/calls.ts">create</a>({ ...params }) -> CallsAppWithSecret</code>
-- <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls/calls.ts">update</a>(appId, { ...params }) -> CallsApp</code>
-- <code title="get /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls/calls.ts">list</a>({ ...params }) -> CallsAppsSinglePage</code>
-- <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls/calls.ts">delete</a>(appId, { ...params }) -> CallsApp</code>
-- <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls/calls.ts">get</a>(appId, { ...params }) -> CallsApp</code>
+- <code title="post /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">create</a>({ ...params }) -> SfuCreateResponse</code>
+- <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">update</a>(appId, { ...params }) -> SfuUpdateResponse</code>
+- <code title="get /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">list</a>({ ...params }) -> SfuListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">delete</a>(appId, { ...params }) -> SfuDeleteResponse</code>
+- <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">get</a>(appId, { ...params }) -> SfuGetResponse</code>
 
 ## TURN
 
-### Keys
-
 Types:
 
-- <code><a href="./src/resources/calls/turn/keys.ts">KeyCreateResponse</a></code>
-- <code><a href="./src/resources/calls/turn/keys.ts">KeyUpdateResponse</a></code>
-- <code><a href="./src/resources/calls/turn/keys.ts">KeyListResponse</a></code>
-- <code><a href="./src/resources/calls/turn/keys.ts">KeyDeleteResponse</a></code>
-- <code><a href="./src/resources/calls/turn/keys.ts">KeyGetResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNCreateResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNUpdateResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNListResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNDeleteResponse</a></code>
+- <code><a href="./src/resources/calls/turn.ts">TURNGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/calls/turn_keys">client.calls.turn.keys.<a href="./src/resources/calls/turn/keys.ts">create</a>({ ...params }) -> KeyCreateResponse</code>
-- <code title="put /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.keys.<a href="./src/resources/calls/turn/keys.ts">update</a>(keyId, { ...params }) -> KeyUpdateResponse</code>
-- <code title="get /accounts/{account_id}/calls/turn_keys">client.calls.turn.keys.<a href="./src/resources/calls/turn/keys.ts">list</a>({ ...params }) -> KeyListResponsesSinglePage</code>
-- <code title="delete /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.keys.<a href="./src/resources/calls/turn/keys.ts">delete</a>(keyId, { ...params }) -> KeyDeleteResponse</code>
-- <code title="get /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.keys.<a href="./src/resources/calls/turn/keys.ts">get</a>(keyId, { ...params }) -> KeyGetResponse</code>
+- <code title="post /accounts/{account_id}/calls/turn_keys">client.calls.turn.<a href="./src/resources/calls/turn.ts">create</a>({ ...params }) -> TURNCreateResponse</code>
+- <code title="put /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.<a href="./src/resources/calls/turn.ts">update</a>(keyId, { ...params }) -> TURNUpdateResponse</code>
+- <code title="get /accounts/{account_id}/calls/turn_keys">client.calls.turn.<a href="./src/resources/calls/turn.ts">list</a>({ ...params }) -> TURNListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.<a href="./src/resources/calls/turn.ts">delete</a>(keyId, { ...params }) -> TURNDeleteResponse</code>
+- <code title="get /accounts/{account_id}/calls/turn_keys/{key_id}">client.calls.turn.<a href="./src/resources/calls/turn.ts">get</a>(keyId, { ...params }) -> TURNGetResponse</code>
 
 # CloudforceOne
 

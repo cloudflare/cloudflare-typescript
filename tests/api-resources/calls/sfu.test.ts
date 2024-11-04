@@ -9,9 +9,9 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource keys', () => {
+describe('resource sfu', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.calls.turn.keys.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.calls.sfu.create({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,14 +22,14 @@ describe('resource keys', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.calls.turn.keys.create({
+    const response = await client.calls.sfu.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'my-turn-key',
+      name: 'production-realtime-app',
     });
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.calls.turn.keys.update('2a95132c15732412d22c1476fa83f27a', {
+    const responsePromise = client.calls.sfu.update('2a95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -42,14 +42,14 @@ describe('resource keys', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.calls.turn.keys.update('2a95132c15732412d22c1476fa83f27a', {
+    const response = await client.calls.sfu.update('2a95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'my-turn-key',
+      name: 'production-realtime-app',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.calls.turn.keys.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.calls.sfu.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -60,11 +60,11 @@ describe('resource keys', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.calls.turn.keys.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.calls.sfu.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.calls.turn.keys.delete('2a95132c15732412d22c1476fa83f27a', {
+    const responsePromise = client.calls.sfu.delete('2a95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -77,13 +77,13 @@ describe('resource keys', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.calls.turn.keys.delete('2a95132c15732412d22c1476fa83f27a', {
+    const response = await client.calls.sfu.delete('2a95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.calls.turn.keys.get('2a95132c15732412d22c1476fa83f27a', {
+    const responsePromise = client.calls.sfu.get('2a95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -96,7 +96,7 @@ describe('resource keys', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.calls.turn.keys.get('2a95132c15732412d22c1476fa83f27a', {
+    const response = await client.calls.sfu.get('2a95132c15732412d22c1476fa83f27a', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
