@@ -167,6 +167,11 @@ export interface DomainEditParams {
   /**
    * Body param:
    */
+  integration_id?: string | null;
+
+  /**
+   * Body param:
+   */
   lookback_hops?: number | null;
 }
 
