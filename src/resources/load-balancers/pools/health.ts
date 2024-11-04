@@ -62,23 +62,23 @@ export interface HealthGetResponse {
   /**
    * List of regions and associated health status.
    */
-  pop_health?: HealthGetResponse.PopHealth;
+  pop_health?: HealthGetResponse.POPHealth;
 }
 
 export namespace HealthGetResponse {
   /**
    * List of regions and associated health status.
    */
-  export interface PopHealth {
+  export interface POPHealth {
     /**
      * Whether health check in region is healthy.
      */
     healthy?: boolean;
 
-    origins?: Array<PopHealth.Origin>;
+    origins?: Array<POPHealth.Origin>;
   }
 
-  export namespace PopHealth {
+  export namespace POPHealth {
     export interface Origin {
       ip?: Origin.IP;
     }
