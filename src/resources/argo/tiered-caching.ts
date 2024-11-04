@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as VariantsAPI from '../cache/variants';
 
 export class TieredCaching extends APIResource {
   /**
@@ -83,7 +84,7 @@ export interface TieredCachingEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id: VariantsAPI.CacheVariantIdentifierParam;
 
   /**
    * Body param: Enables Tiered Caching.
@@ -95,7 +96,7 @@ export interface TieredCachingGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id: VariantsAPI.CacheVariantIdentifierParam;
 }
 
 export declare namespace TieredCaching {

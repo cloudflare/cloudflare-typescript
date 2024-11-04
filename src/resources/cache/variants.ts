@@ -11,11 +11,11 @@ export class Variants extends APIResource {
    * does not serve the variant requested, the response will not be cached. This will
    * be indicated with BYPASS cache status in the response headers.
    */
-  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<VariantDeleteResponse> {
+  delete(params: VariantDeleteParams, options?: Core.RequestOptions): Core.APIPromise<CacheVariant> {
     const { zone_id } = params;
     return (
       this._client.delete(`/zones/${zone_id}/cache/variants`, options) as Core.APIPromise<{
-        result: VariantDeleteResponse;
+        result: CacheVariant;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -54,28 +54,33 @@ export class Variants extends APIResource {
 }
 
 /**
- * ID of the zone setting.
- */
-export type CacheVariantIdentifier = 'variants';
-
-/**
  * Variant support enables caching variants of images with certain file extensions
  * in addition to the original. This only applies when the origin server sends the
  * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
  * does not serve the variant requested, the response will not be cached. This will
  * be indicated with BYPASS cache status in the response headers.
  */
-export interface VariantDeleteResponse {
+export interface CacheVariant {
   /**
    * ID of the zone setting.
    */
-  id: CacheVariantIdentifier;
+  id: 'variants';
 
   /**
    * last time this setting was modified.
    */
   modified_on: string | null;
 }
+
+/**
+ * Identifier
+ */
+export type CacheVariantIdentifier = string;
+
+/**
+ * Identifier
+ */
+export type CacheVariantIdentifierParam = string;
 
 /**
  * Variant support enables caching variants of images with certain file extensions
@@ -88,7 +93,7 @@ export interface VariantEditResponse {
   /**
    * ID of the zone setting.
    */
-  id: CacheVariantIdentifier;
+  id: 'variants';
 
   /**
    * last time this setting was modified.
@@ -185,7 +190,7 @@ export interface VariantGetResponse {
   /**
    * ID of the zone setting.
    */
-  id: CacheVariantIdentifier;
+  id: 'variants';
 
   /**
    * last time this setting was modified.
@@ -275,14 +280,14 @@ export interface VariantDeleteParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id: CacheVariantIdentifierParam;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: string;
+  zone_id: CacheVariantIdentifierParam;
 
   /**
    * Body param: Value of the zone setting.
@@ -367,13 +372,13 @@ export interface VariantGetParams {
   /**
    * Identifier
    */
-  zone_id: string;
+  zone_id: CacheVariantIdentifierParam;
 }
 
 export declare namespace Variants {
   export {
+    type CacheVariant as CacheVariant,
     type CacheVariantIdentifier as CacheVariantIdentifier,
-    type VariantDeleteResponse as VariantDeleteResponse,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,
     type VariantDeleteParams as VariantDeleteParams,

@@ -3,18 +3,16 @@
 import { APIResource } from '../../resource';
 import * as RequestsAPI from './requests/requests';
 import {
-  RequestConstantsResponse,
+  Item,
+  ListItem,
+  ListItemsV4PagePaginationArray,
+  Quota,
+  RequestConstants,
   RequestCreateParams,
-  RequestCreateResponse,
   RequestDeleteResponse,
-  RequestGetResponse,
   RequestListParams,
-  RequestListResponse,
-  RequestListResponsesV4PagePaginationArray,
-  RequestQuotaResponse,
-  RequestTypesResponse,
+  RequestTypes,
   RequestUpdateParams,
-  RequestUpdateResponse,
   Requests,
 } from './requests/requests';
 
@@ -23,20 +21,18 @@ export class CloudforceOne extends APIResource {
 }
 
 CloudforceOne.Requests = Requests;
-CloudforceOne.RequestListResponsesV4PagePaginationArray = RequestListResponsesV4PagePaginationArray;
+CloudforceOne.ListItemsV4PagePaginationArray = ListItemsV4PagePaginationArray;
 
 export declare namespace CloudforceOne {
   export {
     Requests as Requests,
-    type RequestCreateResponse as RequestCreateResponse,
-    type RequestUpdateResponse as RequestUpdateResponse,
-    type RequestListResponse as RequestListResponse,
+    type Item as Item,
+    type ListItem as ListItem,
+    type Quota as Quota,
+    type RequestConstants as RequestConstants,
+    type RequestTypes as RequestTypes,
     type RequestDeleteResponse as RequestDeleteResponse,
-    type RequestConstantsResponse as RequestConstantsResponse,
-    type RequestGetResponse as RequestGetResponse,
-    type RequestQuotaResponse as RequestQuotaResponse,
-    type RequestTypesResponse as RequestTypesResponse,
-    RequestListResponsesV4PagePaginationArray as RequestListResponsesV4PagePaginationArray,
+    ListItemsV4PagePaginationArray as ListItemsV4PagePaginationArray,
     type RequestCreateParams as RequestCreateParams,
     type RequestUpdateParams as RequestUpdateParams,
     type RequestListParams as RequestListParams,

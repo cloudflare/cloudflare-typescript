@@ -2,16 +2,14 @@
 
 export { CloudforceOne } from './cloudforce-one';
 export {
-  RequestListResponsesV4PagePaginationArray,
+  ListItemsV4PagePaginationArray,
   Requests,
-  type RequestCreateResponse,
-  type RequestUpdateResponse,
-  type RequestListResponse,
+  type Item,
+  type ListItem,
+  type Quota,
+  type RequestConstants,
+  type RequestTypes,
   type RequestDeleteResponse,
-  type RequestConstantsResponse,
-  type RequestGetResponse,
-  type RequestQuotaResponse,
-  type RequestTypesResponse,
   type RequestCreateParams,
   type RequestUpdateParams,
   type RequestListParams,
