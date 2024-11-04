@@ -398,7 +398,7 @@ export namespace SummaryIPVersionResponse {
 export interface SummaryManagedRulesResponse {
   meta: SummaryManagedRulesResponse.Meta;
 
-  summary_0: SummaryManagedRulesResponse.Summary0;
+  summary_0: Record<string, Array<string>>;
 }
 
 export namespace SummaryManagedRulesResponse {
@@ -448,12 +448,6 @@ export namespace SummaryManagedRulesResponse {
         startTime?: string;
       }
     }
-  }
-
-  export interface Summary0 {
-    Bot: string;
-
-    'HTTP Anomaly': string;
   }
 }
 
