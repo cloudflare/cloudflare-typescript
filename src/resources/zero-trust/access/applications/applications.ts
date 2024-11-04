@@ -1318,27 +1318,11 @@ export interface ApplicationPolicy {
    */
   id?: string;
 
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<PoliciesAPI.ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  connection_rules?: ApplicationPolicy.ConnectionRules;
-
   created_at?: string;
 
   /**
-   * The action Access will take if a user matches this policy.
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
    */
   decision?: Decision;
 
@@ -1355,26 +1339,9 @@ export interface ApplicationPolicy {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
    * The name of the Access policy.
    */
   name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -1382,144 +1349,7 @@ export interface ApplicationPolicy {
    */
   require?: Array<AccessAPI.AccessRule>;
 
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
   updated_at?: string;
-}
-
-export namespace ApplicationPolicy {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
-}
-
-export interface ApplicationPolicyParam {
-  /**
-   * The UUID of the policy
-   */
-  id?: string;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<PoliciesAPI.ApprovalGroupParam>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  connection_rules?: ApplicationPolicyParam.ConnectionRules;
-
-  /**
-   * The action Access will take if a user matches this policy.
-   */
-  decision?: DecisionParam;
-
-  /**
-   * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-   * meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Rules evaluated with an OR logical operator. A user needs to meet only one of
-   * the Include rules.
-   */
-  include?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * The name of the Access policy.
-   */
-  name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
-   * Rules evaluated with an AND logical operator. To match the policy, a user must
-   * meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-}
-
-export namespace ApplicationPolicyParam {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 /**
@@ -1683,12 +1513,14 @@ export interface CORSHeadersParam {
 }
 
 /**
- * The action Access will take if a user matches this policy.
+ * The action Access will take if a user matches this policy. Infrastructure
+ * application policies can only use the Allow action.
  */
 export type Decision = 'allow' | 'deny' | 'non_identity' | 'bypass';
 
 /**
- * The action Access will take if a user matches this policy.
+ * The action Access will take if a user matches this policy. Infrastructure
+ * application policies can only use the Allow action.
  */
 export type DecisionParam = 'allow' | 'deny' | 'non_identity' | 'bypass';
 
@@ -3849,7 +3681,7 @@ export namespace ApplicationCreateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<InfrastructureApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -3877,6 +3709,46 @@ export namespace ApplicationCreateResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: Record<string, Array<string>>;
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      updated_at?: string;
     }
 
     /**
@@ -5304,7 +5176,7 @@ export namespace ApplicationUpdateResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<InfrastructureApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -5332,6 +5204,46 @@ export namespace ApplicationUpdateResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: Record<string, Array<string>>;
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      updated_at?: string;
     }
 
     /**
@@ -6759,7 +6671,7 @@ export namespace ApplicationListResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<InfrastructureApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -6787,6 +6699,46 @@ export namespace ApplicationListResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: Record<string, Array<string>>;
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      updated_at?: string;
     }
 
     /**
@@ -8221,7 +8173,7 @@ export namespace ApplicationGetResponse {
      */
     name?: string;
 
-    policies?: Array<ApplicationsAPI.ApplicationPolicy>;
+    policies?: Array<InfrastructureApplication.Policy>;
 
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
@@ -8249,6 +8201,46 @@ export namespace ApplicationGetResponse {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: Record<string, Array<string>>;
+    }
+
+    export interface Policy {
+      /**
+       * The UUID of the policy
+       */
+      id?: string;
+
+      created_at?: string;
+
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision?: ApplicationsAPI.Decision;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include?: Array<AccessAPI.AccessRule>;
+
+      /**
+       * The name of the Access policy.
+       */
+      name?: string;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRule>;
+
+      updated_at?: string;
     }
 
     /**
@@ -8425,9 +8417,9 @@ export namespace ApplicationCreateParams {
     path_cookie_attribute?: boolean;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.SelfHostedApplication.AccessAppPolicyLink
@@ -8496,22 +8488,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -8526,18 +8502,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -8563,44 +8527,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -8695,9 +8626,9 @@ export namespace ApplicationCreateParams {
     name?: string;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.SaaSApplication.AccessAppPolicyLink
@@ -8747,22 +8678,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -8777,18 +8692,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -8814,44 +8717,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -9013,9 +8883,9 @@ export namespace ApplicationCreateParams {
     path_cookie_attribute?: boolean;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.BrowserSSHApplication.AccessAppPolicyLink
@@ -9084,22 +8954,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -9114,18 +8968,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -9151,44 +8993,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -9350,9 +9159,9 @@ export namespace ApplicationCreateParams {
     path_cookie_attribute?: boolean;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.BrowserVNCApplication.AccessAppPolicyLink
@@ -9421,22 +9230,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -9451,18 +9244,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -9488,44 +9269,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -9630,9 +9378,9 @@ export namespace ApplicationCreateParams {
     landing_page_design?: ApplicationCreateParams.AppLauncherApplication.LandingPageDesign;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.AppLauncherApplication.AccessAppPolicyLink
@@ -9720,22 +9468,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -9750,18 +9482,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -9787,44 +9507,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -9929,9 +9616,9 @@ export namespace ApplicationCreateParams {
     landing_page_design?: ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
@@ -10019,22 +9706,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -10049,18 +9720,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -10086,44 +9745,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -10228,9 +9854,9 @@ export namespace ApplicationCreateParams {
     landing_page_design?: ApplicationCreateParams.BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationCreateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
@@ -10318,22 +9944,6 @@ export namespace ApplicationCreateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -10348,18 +9958,6 @@ export namespace ApplicationCreateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -10385,44 +9983,11 @@ export namespace ApplicationCreateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -10596,9 +10161,9 @@ export namespace ApplicationCreateParams {
     name?: string;
 
     /**
-     * Body param:
+     * Body param: The policies that Access applies to the application.
      */
-    policies?: Array<ApplicationPolicyParam>;
+    policies?: Array<ApplicationCreateParams.InfrastructureApplication.Policy>;
   }
 
   export namespace InfrastructureApplication {
@@ -10618,6 +10183,37 @@ export namespace ApplicationCreateParams {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: Record<string, Array<string>>;
+    }
+
+    export interface Policy {
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision: ApplicationsAPI.DecisionParam;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include: Array<AccessAPI.AccessRuleParam>;
+
+      /**
+       * The name of the Access policy.
+       */
+      name: string;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRuleParam>;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRuleParam>;
     }
   }
 }
@@ -10748,9 +10344,9 @@ export namespace ApplicationUpdateParams {
     path_cookie_attribute?: boolean;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.SelfHostedApplication.AccessAppPolicyLink
@@ -10819,22 +10415,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -10849,18 +10429,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -10886,44 +10454,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -11018,9 +10553,9 @@ export namespace ApplicationUpdateParams {
     name?: string;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.SaaSApplication.AccessAppPolicyLink
@@ -11070,22 +10605,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -11100,18 +10619,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -11137,44 +10644,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -11336,9 +10810,9 @@ export namespace ApplicationUpdateParams {
     path_cookie_attribute?: boolean;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.BrowserSSHApplication.AccessAppPolicyLink
@@ -11407,22 +10881,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -11437,18 +10895,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -11474,44 +10920,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -11673,9 +11086,9 @@ export namespace ApplicationUpdateParams {
     path_cookie_attribute?: boolean;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.BrowserVNCApplication.AccessAppPolicyLink
@@ -11744,22 +11157,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -11774,18 +11171,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -11811,44 +11196,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -11953,9 +11305,9 @@ export namespace ApplicationUpdateParams {
     landing_page_design?: ApplicationUpdateParams.AppLauncherApplication.LandingPageDesign;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.AppLauncherApplication.AccessAppPolicyLink
@@ -12043,22 +11395,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -12073,18 +11409,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -12110,44 +11434,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -12252,9 +11543,9 @@ export namespace ApplicationUpdateParams {
     landing_page_design?: ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.LandingPageDesign;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.DeviceEnrollmentPermissionsApplication.AccessAppPolicyLink
@@ -12342,22 +11633,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -12372,18 +11647,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -12409,44 +11672,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -12551,9 +11781,9 @@ export namespace ApplicationUpdateParams {
     landing_page_design?: ApplicationUpdateParams.BrowserIsolationPermissionsApplication.LandingPageDesign;
 
     /**
-     * Body param: The policies that will apply to the application, in ascending order
-     * of precedence. Items can reference existing policies or create new policies
-     * exclusive to the application.
+     * Body param: The policies that Access applies to the application, in ascending
+     * order of precedence. Items can reference existing policies or create new
+     * policies exclusive to the application.
      */
     policies?: Array<
       | ApplicationUpdateParams.BrowserIsolationPermissionsApplication.AccessAppPolicyLink
@@ -12641,22 +11871,6 @@ export namespace ApplicationUpdateParams {
 
     export interface UnionMember2 {
       /**
-       * The action Access will take if a user matches this policy.
-       */
-      decision: ApplicationsAPI.DecisionParam;
-
-      /**
-       * Rules evaluated with an OR logical operator. A user needs to meet only one of
-       * the Include rules.
-       */
-      include: Array<AccessAPI.AccessRuleParam>;
-
-      /**
-       * The name of the Access policy.
-       */
-      name: string;
-
-      /**
        * The UUID of the policy
        */
       id?: string;
@@ -12671,18 +11885,6 @@ export namespace ApplicationUpdateParams {
        * session.
        */
       approval_required?: boolean;
-
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      connection_rules?: UnionMember2.ConnectionRules;
-
-      /**
-       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
-       * meet any of the Exclude rules.
-       */
-      exclude?: Array<AccessAPI.AccessRuleParam>;
 
       /**
        * Require this application to be served in an isolated browser for users matching
@@ -12708,44 +11910,11 @@ export namespace ApplicationUpdateParams {
       purpose_justification_required?: boolean;
 
       /**
-       * Rules evaluated with an AND logical operator. To match the policy, a user must
-       * meet all of the Require rules.
-       */
-      require?: Array<AccessAPI.AccessRuleParam>;
-
-      /**
        * The amount of time that tokens issued for the application will be valid. Must be
        * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
        * m, h.
        */
       session_duration?: string;
-    }
-
-    export namespace UnionMember2 {
-      /**
-       * The rules that define how users may connect to the targets secured by your
-       * application.
-       */
-      export interface ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        ssh?: ConnectionRules.SSH;
-      }
-
-      export namespace ConnectionRules {
-        /**
-         * The SSH-specific rules that define how users may connect to the targets secured
-         * by your application.
-         */
-        export interface SSH {
-          /**
-           * Contains the Unix usernames that may be used when connecting over SSH.
-           */
-          usernames: Array<string>;
-        }
-      }
     }
 
     /**
@@ -12919,9 +12088,9 @@ export namespace ApplicationUpdateParams {
     name?: string;
 
     /**
-     * Body param:
+     * Body param: The policies that Access applies to the application.
      */
-    policies?: Array<ApplicationPolicyParam>;
+    policies?: Array<ApplicationUpdateParams.InfrastructureApplication.Policy>;
   }
 
   export namespace InfrastructureApplication {
@@ -12941,6 +12110,37 @@ export namespace ApplicationUpdateParams {
        * Contains a map of target attribute keys to target attribute values.
        */
       target_attributes: Record<string, Array<string>>;
+    }
+
+    export interface Policy {
+      /**
+       * The action Access will take if a user matches this policy. Infrastructure
+       * application policies can only use the Allow action.
+       */
+      decision: ApplicationsAPI.DecisionParam;
+
+      /**
+       * Rules evaluated with an OR logical operator. A user needs to meet only one of
+       * the Include rules.
+       */
+      include: Array<AccessAPI.AccessRuleParam>;
+
+      /**
+       * The name of the Access policy.
+       */
+      name: string;
+
+      /**
+       * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
+       * meet any of the Exclude rules.
+       */
+      exclude?: Array<AccessAPI.AccessRuleParam>;
+
+      /**
+       * Rules evaluated with an AND logical operator. To match the policy, a user must
+       * meet all of the Require rules.
+       */
+      require?: Array<AccessAPI.AccessRuleParam>;
     }
   }
 }

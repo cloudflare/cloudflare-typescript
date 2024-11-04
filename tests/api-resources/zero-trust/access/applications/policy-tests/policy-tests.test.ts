@@ -27,20 +27,6 @@ describe('resource policyTests', () => {
     const response = await client.zeroTrust.access.applications.policyTests.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
-      approval_groups: [
-        {
-          approvals_needed: 1,
-          email_addresses: ['test1@cloudflare.com', 'test2@cloudflare.com'],
-          email_list_uuid: 'email_list_uuid',
-        },
-        {
-          approvals_needed: 3,
-          email_addresses: ['test@cloudflare.com', 'test2@cloudflare.com'],
-          email_list_uuid: '597147a1-976b-4ef2-9af0-81d5d007fc34',
-        },
-      ],
-      approval_required: true,
-      connection_rules: { ssh: { usernames: ['root', 'ubuntu'] } },
       decision: 'allow',
       exclude: [
         { email: { email: 'test@example.com' } },
@@ -52,16 +38,12 @@ describe('resource policyTests', () => {
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
       ],
-      isolation_required: false,
       name: 'Allow devs',
-      purpose_justification_prompt: 'Please enter a justification for entering this protected domain.',
-      purpose_justification_required: true,
       require: [
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
         { email: { email: 'test@example.com' } },
       ],
-      session_duration: '24h',
     });
   });
 

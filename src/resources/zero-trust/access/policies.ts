@@ -148,7 +148,7 @@ export interface Policy {
   /**
    * The action Access will take if a user matches this policy.
    */
-  decision?: ApplicationsAPI.Decision;
+  decision?: 'allow' | 'deny' | 'non_identity' | 'bypass';
 
   /**
    * Rules evaluated with a NOT logical operator. To match the policy, a user cannot
@@ -225,32 +225,11 @@ export interface PolicyCreateResponse {
    */
   id?: string;
 
-  /**
-   * Number of access applications currently using this policy.
-   */
-  app_count?: number;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  connection_rules?: PolicyCreateResponse.ConnectionRules;
-
   created_at?: string;
 
   /**
-   * The action Access will take if a user matches this policy.
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
    */
   decision?: ApplicationsAPI.Decision;
 
@@ -267,26 +246,9 @@ export interface PolicyCreateResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
    * The name of the Access policy.
    */
   name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -294,43 +256,7 @@ export interface PolicyCreateResponse {
    */
   require?: Array<AccessAPI.AccessRule>;
 
-  reusable?: true;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
   updated_at?: string;
-}
-
-export namespace PolicyCreateResponse {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyUpdateResponse {
@@ -339,32 +265,11 @@ export interface PolicyUpdateResponse {
    */
   id?: string;
 
-  /**
-   * Number of access applications currently using this policy.
-   */
-  app_count?: number;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  connection_rules?: PolicyUpdateResponse.ConnectionRules;
-
   created_at?: string;
 
   /**
-   * The action Access will take if a user matches this policy.
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
    */
   decision?: ApplicationsAPI.Decision;
 
@@ -381,26 +286,9 @@ export interface PolicyUpdateResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
    * The name of the Access policy.
    */
   name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -408,43 +296,7 @@ export interface PolicyUpdateResponse {
    */
   require?: Array<AccessAPI.AccessRule>;
 
-  reusable?: true;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
   updated_at?: string;
-}
-
-export namespace PolicyUpdateResponse {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyListResponse {
@@ -453,32 +305,11 @@ export interface PolicyListResponse {
    */
   id?: string;
 
-  /**
-   * Number of access applications currently using this policy.
-   */
-  app_count?: number;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  connection_rules?: PolicyListResponse.ConnectionRules;
-
   created_at?: string;
 
   /**
-   * The action Access will take if a user matches this policy.
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
    */
   decision?: ApplicationsAPI.Decision;
 
@@ -495,26 +326,9 @@ export interface PolicyListResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
    * The name of the Access policy.
    */
   name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -522,43 +336,7 @@ export interface PolicyListResponse {
    */
   require?: Array<AccessAPI.AccessRule>;
 
-  reusable?: true;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
   updated_at?: string;
-}
-
-export namespace PolicyListResponse {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyDeleteResponse {
@@ -574,32 +352,11 @@ export interface PolicyGetResponse {
    */
   id?: string;
 
-  /**
-   * Number of access applications currently using this policy.
-   */
-  app_count?: number;
-
-  /**
-   * Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroup>;
-
-  /**
-   * Requires the user to request access from an administrator at the start of each
-   * session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  connection_rules?: PolicyGetResponse.ConnectionRules;
-
   created_at?: string;
 
   /**
-   * The action Access will take if a user matches this policy.
+   * The action Access will take if a user matches this policy. Infrastructure
+   * application policies can only use the Allow action.
    */
   decision?: ApplicationsAPI.Decision;
 
@@ -616,26 +373,9 @@ export interface PolicyGetResponse {
   include?: Array<AccessAPI.AccessRule>;
 
   /**
-   * Require this application to be served in an isolated browser for users matching
-   * this policy. 'Client Web Isolation' must be on for the account in order to use
-   * this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
    * The name of the Access policy.
    */
   name?: string;
-
-  /**
-   * A custom message that will appear on the purpose justification screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Require users to enter a justification when they log in to the application.
-   */
-  purpose_justification_required?: boolean;
 
   /**
    * Rules evaluated with an AND logical operator. To match the policy, a user must
@@ -643,43 +383,7 @@ export interface PolicyGetResponse {
    */
   require?: Array<AccessAPI.AccessRule>;
 
-  reusable?: true;
-
-  /**
-   * The amount of time that tokens issued for the application will be valid. Must be
-   * in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s,
-   * m, h.
-   */
-  session_duration?: string;
-
   updated_at?: string;
-}
-
-export namespace PolicyGetResponse {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyCreateParams {
@@ -690,6 +394,7 @@ export interface PolicyCreateParams {
 
   /**
    * Body param: The action Access will take if a user matches this policy.
+   * Infrastructure application policies can only use the Allow action.
    */
   decision: ApplicationsAPI.DecisionParam;
 
@@ -705,86 +410,16 @@ export interface PolicyCreateParams {
   name: string;
 
   /**
-   * Body param: Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroupParam>;
-
-  /**
-   * Body param: Requires the user to request access from an administrator at the
-   * start of each session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * Body param: The rules that define how users may connect to the targets secured
-   * by your application.
-   */
-  connection_rules?: PolicyCreateParams.ConnectionRules;
-
-  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
-   * Body param: Require this application to be served in an isolated browser for
-   * users matching this policy. 'Client Web Isolation' must be on for the account in
-   * order to use this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * Body param: A custom message that will appear on the purpose justification
-   * screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Body param: Require users to enter a justification when they log in to the
-   * application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Body param: The amount of time that tokens issued for the application will be
-   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-   * (or µs), ms, s, m, h.
-   */
-  session_duration?: string;
-}
-
-export namespace PolicyCreateParams {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyUpdateParams {
@@ -795,6 +430,7 @@ export interface PolicyUpdateParams {
 
   /**
    * Body param: The action Access will take if a user matches this policy.
+   * Infrastructure application policies can only use the Allow action.
    */
   decision: ApplicationsAPI.DecisionParam;
 
@@ -810,86 +446,16 @@ export interface PolicyUpdateParams {
   name: string;
 
   /**
-   * Body param: Administrators who can approve a temporary authentication request.
-   */
-  approval_groups?: Array<ApprovalGroupParam>;
-
-  /**
-   * Body param: Requires the user to request access from an administrator at the
-   * start of each session.
-   */
-  approval_required?: boolean;
-
-  /**
-   * Body param: The rules that define how users may connect to the targets secured
-   * by your application.
-   */
-  connection_rules?: PolicyUpdateParams.ConnectionRules;
-
-  /**
    * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
    * user cannot meet any of the Exclude rules.
    */
   exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
-   * Body param: Require this application to be served in an isolated browser for
-   * users matching this policy. 'Client Web Isolation' must be on for the account in
-   * order to use this feature.
-   */
-  isolation_required?: boolean;
-
-  /**
-   * Body param: A custom message that will appear on the purpose justification
-   * screen.
-   */
-  purpose_justification_prompt?: string;
-
-  /**
-   * Body param: Require users to enter a justification when they log in to the
-   * application.
-   */
-  purpose_justification_required?: boolean;
-
-  /**
    * Body param: Rules evaluated with an AND logical operator. To match the policy, a
    * user must meet all of the Require rules.
    */
   require?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Body param: The amount of time that tokens issued for the application will be
-   * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
-   * (or µs), ms, s, m, h.
-   */
-  session_duration?: string;
-}
-
-export namespace PolicyUpdateParams {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyListParams {
