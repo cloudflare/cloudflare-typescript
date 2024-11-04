@@ -10,9 +10,21 @@ export {
   type AssetUpdateParams,
 } from './assets';
 export {
-  Message,
-  type MessageCreateResponse,
-  type MessageUpdateResponse,
+  ListItemsV4PagePaginationArray,
+  Requests,
+  type Item,
+  type ListItem,
+  type Quota,
+  type RequestConstants,
+  type RequestTypes,
+  type RequestDeleteResponse,
+  type RequestCreateParams,
+  type RequestUpdateParams,
+  type RequestListParams,
+} from './requests';
+export {
+  MessageResource,
+  type Message,
   type MessageDeleteResponse,
   type MessageGetResponse,
   type MessageCreateParams,
@@ -20,27 +32,11 @@ export {
   type MessageGetParams,
 } from './message';
 export {
-  Priority,
-  type PriorityCreateResponse,
-  type PriorityUpdateResponse,
+  PriorityResource,
+  type Label,
+  type Priority,
+  type PriorityEdit,
   type PriorityDeleteResponse,
-  type PriorityGetResponse,
-  type PriorityQuotaResponse,
   type PriorityCreateParams,
   type PriorityUpdateParams,
 } from './priority';
-export {
-  RequestListResponsesV4PagePaginationArray,
-  Requests,
-  type RequestCreateResponse,
-  type RequestUpdateResponse,
-  type RequestListResponse,
-  type RequestDeleteResponse,
-  type RequestConstantsResponse,
-  type RequestGetResponse,
-  type RequestQuotaResponse,
-  type RequestTypesResponse,
-  type RequestCreateParams,
-  type RequestUpdateParams,
-  type RequestListParams,
-} from './requests';

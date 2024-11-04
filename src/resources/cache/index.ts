@@ -34,8 +34,8 @@ export {
 } from './smart-tiered-cache';
 export {
   Variants,
+  type CacheVariant,
   type CacheVariantIdentifier,
-  type VariantDeleteResponse,
   type VariantEditResponse,
   type VariantGetResponse,
   type VariantDeleteParams,
