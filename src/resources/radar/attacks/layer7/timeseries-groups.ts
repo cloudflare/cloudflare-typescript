@@ -328,9 +328,8 @@ export interface TimeseriesGroupManagedRulesResponse {
 
 export namespace TimeseriesGroupManagedRulesResponse {
   export interface Serie0 {
-    Bot: Array<string>;
-
     timestamps: Array<string>;
+    [k: string]: Array<string> | undefined;
   }
 }
 
