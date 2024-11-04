@@ -6628,13 +6628,12 @@ Types:
 
 - <code><a href="./src/resources/calls/calls.ts">CallsApp</a></code>
 - <code><a href="./src/resources/calls/calls.ts">CallsAppWithSecret</a></code>
-- <code><a href="./src/resources/calls/calls.ts">CallListResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls/calls.ts">create</a>({ ...params }) -> CallsAppWithSecret</code>
 - <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls/calls.ts">update</a>(appId, { ...params }) -> CallsApp</code>
-- <code title="get /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls/calls.ts">list</a>({ ...params }) -> CallListResponsesSinglePage</code>
+- <code title="get /accounts/{account_id}/calls/apps">client.calls.<a href="./src/resources/calls/calls.ts">list</a>({ ...params }) -> CallsAppsSinglePage</code>
 - <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls/calls.ts">delete</a>(appId, { ...params }) -> CallsApp</code>
 - <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.<a href="./src/resources/calls/calls.ts">get</a>(appId, { ...params }) -> CallsApp</code>
 
