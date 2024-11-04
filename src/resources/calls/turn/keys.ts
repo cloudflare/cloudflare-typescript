@@ -103,25 +103,93 @@ export interface KeyCreateResponse {
   uid?: string;
 }
 
-/**
- * Bearer token
- */
-export type KeyUpdateResponse = string;
+export interface KeyUpdateResponse {
+  /**
+   * The date and time the item was created.
+   */
+  created?: string;
 
-/**
- * Bearer token
- */
-export type KeyListResponse = string;
+  /**
+   * The date and time the item was last modified.
+   */
+  modified?: string;
 
-/**
- * Bearer token
- */
-export type KeyDeleteResponse = string;
+  /**
+   * A short description of Calls app, not shown to end users.
+   */
+  name?: string;
 
-/**
- * Bearer token
- */
-export type KeyGetResponse = string;
+  /**
+   * A Cloudflare-generated unique identifier for a item.
+   */
+  uid?: string;
+}
+
+export interface KeyListResponse {
+  /**
+   * The date and time the item was created.
+   */
+  created?: string;
+
+  /**
+   * The date and time the item was last modified.
+   */
+  modified?: string;
+
+  /**
+   * A short description of Calls app, not shown to end users.
+   */
+  name?: string;
+
+  /**
+   * A Cloudflare-generated unique identifier for a item.
+   */
+  uid?: string;
+}
+
+export interface KeyDeleteResponse {
+  /**
+   * The date and time the item was created.
+   */
+  created?: string;
+
+  /**
+   * The date and time the item was last modified.
+   */
+  modified?: string;
+
+  /**
+   * A short description of Calls app, not shown to end users.
+   */
+  name?: string;
+
+  /**
+   * A Cloudflare-generated unique identifier for a item.
+   */
+  uid?: string;
+}
+
+export interface KeyGetResponse {
+  /**
+   * The date and time the item was created.
+   */
+  created?: string;
+
+  /**
+   * The date and time the item was last modified.
+   */
+  modified?: string;
+
+  /**
+   * A short description of Calls app, not shown to end users.
+   */
+  name?: string;
+
+  /**
+   * A Cloudflare-generated unique identifier for a item.
+   */
+  uid?: string;
+}
 
 export interface KeyCreateParams {
   /**
