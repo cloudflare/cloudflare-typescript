@@ -6624,23 +6624,23 @@ Methods:
 
 # Calls
 
-## Sfu
+## SFU
 
 Types:
 
-- <code><a href="./src/resources/calls/sfu.ts">SfuCreateResponse</a></code>
-- <code><a href="./src/resources/calls/sfu.ts">SfuUpdateResponse</a></code>
-- <code><a href="./src/resources/calls/sfu.ts">SfuListResponse</a></code>
-- <code><a href="./src/resources/calls/sfu.ts">SfuDeleteResponse</a></code>
-- <code><a href="./src/resources/calls/sfu.ts">SfuGetResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUCreateResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUUpdateResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUListResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUDeleteResponse</a></code>
+- <code><a href="./src/resources/calls/sfu.ts">SFUGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">create</a>({ ...params }) -> SfuCreateResponse</code>
-- <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">update</a>(appId, { ...params }) -> SfuUpdateResponse</code>
-- <code title="get /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">list</a>({ ...params }) -> SfuListResponsesSinglePage</code>
-- <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">delete</a>(appId, { ...params }) -> SfuDeleteResponse</code>
-- <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">get</a>(appId, { ...params }) -> SfuGetResponse</code>
+- <code title="post /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">create</a>({ ...params }) -> SFUCreateResponse</code>
+- <code title="put /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">update</a>(appId, { ...params }) -> SFUUpdateResponse</code>
+- <code title="get /accounts/{account_id}/calls/apps">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">list</a>({ ...params }) -> SFUListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">delete</a>(appId, { ...params }) -> SFUDeleteResponse</code>
+- <code title="get /accounts/{account_id}/calls/apps/{app_id}">client.calls.sfu.<a href="./src/resources/calls/sfu.ts">get</a>(appId, { ...params }) -> SFUGetResponse</code>
 
 ## TURN
 
