@@ -1,14 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
-import { SinglePage } from '../../../pagination';
+import { APIResource } from '../../resource';
+import * as Core from '../../core';
+import { SinglePage } from '../../pagination';
 
-export class Keys extends APIResource {
+export class TURN extends APIResource {
   /**
    * Creates a new Cloudflare Calls TURN key.
    */
-  create(params: KeyCreateParams, options?: Core.RequestOptions): Core.APIPromise<KeyCreateResponse> {
+  create(params: TURNCreateParams, options?: Core.RequestOptions): Core.APIPromise<TURNCreateResponse> {
     const { account_id, ...body } = params;
     return this._client.post(`/accounts/${account_id}/calls/turn_keys`, { body, ...options });
   }
@@ -18,15 +18,15 @@ export class Keys extends APIResource {
    */
   update(
     keyId: string,
-    params: KeyUpdateParams,
+    params: TURNUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyUpdateResponse> {
+  ): Core.APIPromise<TURNUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/calls/turn_keys/${keyId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: KeyUpdateResponse }>
+      }) as Core.APIPromise<{ result: TURNUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,13 +34,13 @@ export class Keys extends APIResource {
    * Lists all TURN keys in the Cloudflare account
    */
   list(
-    params: KeyListParams,
+    params: TURNListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<KeyListResponsesSinglePage, KeyListResponse> {
+  ): Core.PagePromise<TURNListResponsesSinglePage, TURNListResponse> {
     const { account_id } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/calls/turn_keys`,
-      KeyListResponsesSinglePage,
+      TURNListResponsesSinglePage,
       options,
     );
   }
@@ -50,13 +50,13 @@ export class Keys extends APIResource {
    */
   delete(
     keyId: string,
-    params: KeyDeleteParams,
+    params: TURNDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<KeyDeleteResponse> {
+  ): Core.APIPromise<TURNDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{
-        result: KeyDeleteResponse;
+        result: TURNDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -64,19 +64,19 @@ export class Keys extends APIResource {
   /**
    * Fetches details for a single TURN key.
    */
-  get(keyId: string, params: KeyGetParams, options?: Core.RequestOptions): Core.APIPromise<KeyGetResponse> {
+  get(keyId: string, params: TURNGetParams, options?: Core.RequestOptions): Core.APIPromise<TURNGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/calls/turn_keys/${keyId}`, options) as Core.APIPromise<{
-        result: KeyGetResponse;
+        result: TURNGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class KeyListResponsesSinglePage extends SinglePage<KeyListResponse> {}
+export class TURNListResponsesSinglePage extends SinglePage<TURNListResponse> {}
 
-export interface KeyCreateResponse {
+export interface TURNCreateResponse {
   /**
    * The date and time the item was created.
    */
@@ -103,7 +103,7 @@ export interface KeyCreateResponse {
   uid?: string;
 }
 
-export interface KeyUpdateResponse {
+export interface TURNUpdateResponse {
   /**
    * The date and time the item was created.
    */
@@ -125,7 +125,7 @@ export interface KeyUpdateResponse {
   uid?: string;
 }
 
-export interface KeyListResponse {
+export interface TURNListResponse {
   /**
    * The date and time the item was created.
    */
@@ -147,7 +147,7 @@ export interface KeyListResponse {
   uid?: string;
 }
 
-export interface KeyDeleteResponse {
+export interface TURNDeleteResponse {
   /**
    * The date and time the item was created.
    */
@@ -169,7 +169,7 @@ export interface KeyDeleteResponse {
   uid?: string;
 }
 
-export interface KeyGetResponse {
+export interface TURNGetResponse {
   /**
    * The date and time the item was created.
    */
@@ -191,7 +191,7 @@ export interface KeyGetResponse {
   uid?: string;
 }
 
-export interface KeyCreateParams {
+export interface TURNCreateParams {
   /**
    * Path param: The account identifier tag.
    */
@@ -203,7 +203,7 @@ export interface KeyCreateParams {
   name?: string;
 }
 
-export interface KeyUpdateParams {
+export interface TURNUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
@@ -215,41 +215,41 @@ export interface KeyUpdateParams {
   name?: string;
 }
 
-export interface KeyListParams {
+export interface TURNListParams {
   /**
    * The account identifier tag.
    */
   account_id: string;
 }
 
-export interface KeyDeleteParams {
+export interface TURNDeleteParams {
   /**
    * The account identifier tag.
    */
   account_id: string;
 }
 
-export interface KeyGetParams {
+export interface TURNGetParams {
   /**
    * The account identifier tag.
    */
   account_id: string;
 }
 
-Keys.KeyListResponsesSinglePage = KeyListResponsesSinglePage;
+TURN.TURNListResponsesSinglePage = TURNListResponsesSinglePage;
 
-export declare namespace Keys {
+export declare namespace TURN {
   export {
-    type KeyCreateResponse as KeyCreateResponse,
-    type KeyUpdateResponse as KeyUpdateResponse,
-    type KeyListResponse as KeyListResponse,
-    type KeyDeleteResponse as KeyDeleteResponse,
-    type KeyGetResponse as KeyGetResponse,
-    KeyListResponsesSinglePage as KeyListResponsesSinglePage,
-    type KeyCreateParams as KeyCreateParams,
-    type KeyUpdateParams as KeyUpdateParams,
-    type KeyListParams as KeyListParams,
-    type KeyDeleteParams as KeyDeleteParams,
-    type KeyGetParams as KeyGetParams,
+    type TURNCreateResponse as TURNCreateResponse,
+    type TURNUpdateResponse as TURNUpdateResponse,
+    type TURNListResponse as TURNListResponse,
+    type TURNDeleteResponse as TURNDeleteResponse,
+    type TURNGetResponse as TURNGetResponse,
+    TURNListResponsesSinglePage as TURNListResponsesSinglePage,
+    type TURNCreateParams as TURNCreateParams,
+    type TURNUpdateParams as TURNUpdateParams,
+    type TURNListParams as TURNListParams,
+    type TURNDeleteParams as TURNDeleteParams,
+    type TURNGetParams as TURNGetParams,
   };
 }
