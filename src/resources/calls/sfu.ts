@@ -4,16 +4,16 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import { SinglePage } from '../../pagination';
 
-export class Sfu extends APIResource {
+export class SFU extends APIResource {
   /**
    * Creates a new Cloudflare calls app. An app is an unique enviroment where each
    * Session can access all Tracks within the app.
    */
-  create(params: SfuCreateParams, options?: Core.RequestOptions): Core.APIPromise<SfuCreateResponse> {
+  create(params: SFUCreateParams, options?: Core.RequestOptions): Core.APIPromise<SFUCreateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/calls/apps`, { body, ...options }) as Core.APIPromise<{
-        result: SfuCreateResponse;
+        result: SFUCreateResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -23,15 +23,15 @@ export class Sfu extends APIResource {
    */
   update(
     appId: string,
-    params: SfuUpdateParams,
+    params: SFUUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SfuUpdateResponse> {
+  ): Core.APIPromise<SFUUpdateResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/calls/apps/${appId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: SfuUpdateResponse }>
+      }) as Core.APIPromise<{ result: SFUUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -39,11 +39,11 @@ export class Sfu extends APIResource {
    * Lists all apps in the Cloudflare account
    */
   list(
-    params: SfuListParams,
+    params: SFUListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SfuListResponsesSinglePage, SfuListResponse> {
+  ): Core.PagePromise<SFUListResponsesSinglePage, SFUListResponse> {
     const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, SfuListResponsesSinglePage, options);
+    return this._client.getAPIList(`/accounts/${account_id}/calls/apps`, SFUListResponsesSinglePage, options);
   }
 
   /**
@@ -51,13 +51,13 @@ export class Sfu extends APIResource {
    */
   delete(
     appId: string,
-    params: SfuDeleteParams,
+    params: SFUDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SfuDeleteResponse> {
+  ): Core.APIPromise<SFUDeleteResponse> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
-        result: SfuDeleteResponse;
+        result: SFUDeleteResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -65,19 +65,19 @@ export class Sfu extends APIResource {
   /**
    * Fetches details for a single Calls app.
    */
-  get(appId: string, params: SfuGetParams, options?: Core.RequestOptions): Core.APIPromise<SfuGetResponse> {
+  get(appId: string, params: SFUGetParams, options?: Core.RequestOptions): Core.APIPromise<SFUGetResponse> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/calls/apps/${appId}`, options) as Core.APIPromise<{
-        result: SfuGetResponse;
+        result: SFUGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class SfuListResponsesSinglePage extends SinglePage<SfuListResponse> {}
+export class SFUListResponsesSinglePage extends SinglePage<SFUListResponse> {}
 
-export interface SfuCreateResponse {
+export interface SFUCreateResponse {
   /**
    * The date and time the item was created.
    */
@@ -104,7 +104,7 @@ export interface SfuCreateResponse {
   uid?: string;
 }
 
-export interface SfuUpdateResponse {
+export interface SFUUpdateResponse {
   /**
    * The date and time the item was created.
    */
@@ -126,7 +126,7 @@ export interface SfuUpdateResponse {
   uid?: string;
 }
 
-export interface SfuListResponse {
+export interface SFUListResponse {
   /**
    * The date and time the item was created.
    */
@@ -148,7 +148,7 @@ export interface SfuListResponse {
   uid?: string;
 }
 
-export interface SfuDeleteResponse {
+export interface SFUDeleteResponse {
   /**
    * The date and time the item was created.
    */
@@ -170,7 +170,7 @@ export interface SfuDeleteResponse {
   uid?: string;
 }
 
-export interface SfuGetResponse {
+export interface SFUGetResponse {
   /**
    * The date and time the item was created.
    */
@@ -192,7 +192,7 @@ export interface SfuGetResponse {
   uid?: string;
 }
 
-export interface SfuCreateParams {
+export interface SFUCreateParams {
   /**
    * Path param: The account identifier tag.
    */
@@ -204,7 +204,7 @@ export interface SfuCreateParams {
   name?: string;
 }
 
-export interface SfuUpdateParams {
+export interface SFUUpdateParams {
   /**
    * Path param: The account identifier tag.
    */
@@ -216,41 +216,41 @@ export interface SfuUpdateParams {
   name?: string;
 }
 
-export interface SfuListParams {
+export interface SFUListParams {
   /**
    * The account identifier tag.
    */
   account_id: string;
 }
 
-export interface SfuDeleteParams {
+export interface SFUDeleteParams {
   /**
    * The account identifier tag.
    */
   account_id: string;
 }
 
-export interface SfuGetParams {
+export interface SFUGetParams {
   /**
    * The account identifier tag.
    */
   account_id: string;
 }
 
-Sfu.SfuListResponsesSinglePage = SfuListResponsesSinglePage;
+SFU.SFUListResponsesSinglePage = SFUListResponsesSinglePage;
 
-export declare namespace Sfu {
+export declare namespace SFU {
   export {
-    type SfuCreateResponse as SfuCreateResponse,
-    type SfuUpdateResponse as SfuUpdateResponse,
-    type SfuListResponse as SfuListResponse,
-    type SfuDeleteResponse as SfuDeleteResponse,
-    type SfuGetResponse as SfuGetResponse,
-    SfuListResponsesSinglePage as SfuListResponsesSinglePage,
-    type SfuCreateParams as SfuCreateParams,
-    type SfuUpdateParams as SfuUpdateParams,
-    type SfuListParams as SfuListParams,
-    type SfuDeleteParams as SfuDeleteParams,
-    type SfuGetParams as SfuGetParams,
+    type SFUCreateResponse as SFUCreateResponse,
+    type SFUUpdateResponse as SFUUpdateResponse,
+    type SFUListResponse as SFUListResponse,
+    type SFUDeleteResponse as SFUDeleteResponse,
+    type SFUGetResponse as SFUGetResponse,
+    SFUListResponsesSinglePage as SFUListResponsesSinglePage,
+    type SFUCreateParams as SFUCreateParams,
+    type SFUUpdateParams as SFUUpdateParams,
+    type SFUListParams as SFUListParams,
+    type SFUDeleteParams as SFUDeleteParams,
+    type SFUGetParams as SFUGetParams,
   };
 }
