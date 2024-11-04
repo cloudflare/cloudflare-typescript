@@ -1,20 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
-import * as SfuAPI from './sfu';
+import * as SFUAPI from './sfu';
 import {
-  Sfu,
-  SfuCreateParams,
-  SfuCreateResponse,
-  SfuDeleteParams,
-  SfuDeleteResponse,
-  SfuGetParams,
-  SfuGetResponse,
-  SfuListParams,
-  SfuListResponse,
-  SfuListResponsesSinglePage,
-  SfuUpdateParams,
-  SfuUpdateResponse,
+  SFU,
+  SFUCreateParams,
+  SFUCreateResponse,
+  SFUDeleteParams,
+  SFUDeleteResponse,
+  SFUGetParams,
+  SFUGetResponse,
+  SFUListParams,
+  SFUListResponse,
+  SFUListResponsesSinglePage,
+  SFUUpdateParams,
+  SFUUpdateResponse,
 } from './sfu';
 import * as TURNAPI from './turn';
 import {
@@ -33,29 +33,29 @@ import {
 } from './turn';
 
 export class Calls extends APIResource {
-  sfu: SfuAPI.Sfu = new SfuAPI.Sfu(this._client);
+  sfu: SFUAPI.SFU = new SFUAPI.SFU(this._client);
   turn: TURNAPI.TURN = new TURNAPI.TURN(this._client);
 }
 
-Calls.Sfu = Sfu;
-Calls.SfuListResponsesSinglePage = SfuListResponsesSinglePage;
+Calls.SFU = SFU;
+Calls.SFUListResponsesSinglePage = SFUListResponsesSinglePage;
 Calls.TURN = TURN;
 Calls.TURNListResponsesSinglePage = TURNListResponsesSinglePage;
 
 export declare namespace Calls {
   export {
-    Sfu as Sfu,
-    type SfuCreateResponse as SfuCreateResponse,
-    type SfuUpdateResponse as SfuUpdateResponse,
-    type SfuListResponse as SfuListResponse,
-    type SfuDeleteResponse as SfuDeleteResponse,
-    type SfuGetResponse as SfuGetResponse,
-    SfuListResponsesSinglePage as SfuListResponsesSinglePage,
-    type SfuCreateParams as SfuCreateParams,
-    type SfuUpdateParams as SfuUpdateParams,
-    type SfuListParams as SfuListParams,
-    type SfuDeleteParams as SfuDeleteParams,
-    type SfuGetParams as SfuGetParams,
+    SFU as SFU,
+    type SFUCreateResponse as SFUCreateResponse,
+    type SFUUpdateResponse as SFUUpdateResponse,
+    type SFUListResponse as SFUListResponse,
+    type SFUDeleteResponse as SFUDeleteResponse,
+    type SFUGetResponse as SFUGetResponse,
+    SFUListResponsesSinglePage as SFUListResponsesSinglePage,
+    type SFUCreateParams as SFUCreateParams,
+    type SFUUpdateParams as SFUUpdateParams,
+    type SFUListParams as SFUListParams,
+    type SFUDeleteParams as SFUDeleteParams,
+    type SFUGetParams as SFUGetParams,
   };
 
   export {

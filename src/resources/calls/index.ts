@@ -2,18 +2,18 @@
 
 export { Calls } from './calls';
 export {
-  SfuListResponsesSinglePage,
-  Sfu,
-  type SfuCreateResponse,
-  type SfuUpdateResponse,
-  type SfuListResponse,
-  type SfuDeleteResponse,
-  type SfuGetResponse,
-  type SfuCreateParams,
-  type SfuUpdateParams,
-  type SfuListParams,
-  type SfuDeleteParams,
-  type SfuGetParams,
+  SFUListResponsesSinglePage,
+  SFU,
+  type SFUCreateResponse,
+  type SFUUpdateResponse,
+  type SFUListResponse,
+  type SFUDeleteResponse,
+  type SFUGetResponse,
+  type SFUCreateParams,
+  type SFUUpdateParams,
+  type SFUListParams,
+  type SFUDeleteParams,
+  type SFUGetParams,
 } from './sfu';
 export {
   TURNListResponsesSinglePage,
