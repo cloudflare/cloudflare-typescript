@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as RegionalTieredCacheAPI from './regional-tiered-cache';
-import * as VariantsAPI from './variants';
 
 export class RegionalTieredCacheResource extends APIResource {
   /**
@@ -137,7 +136,7 @@ export interface RegionalTieredCacheEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: VariantsAPI.CacheVariantIdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Value of the Regional Tiered Cache zone setting.
@@ -149,7 +148,7 @@ export interface RegionalTieredCacheGetParams {
   /**
    * Identifier
    */
-  zone_id: VariantsAPI.CacheVariantIdentifierParam;
+  zone_id: string;
 }
 
 export declare namespace RegionalTieredCacheResource {

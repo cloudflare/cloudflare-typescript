@@ -73,16 +73,6 @@ export interface CacheVariant {
 }
 
 /**
- * Identifier
- */
-export type CacheVariantIdentifier = string;
-
-/**
- * Identifier
- */
-export type CacheVariantIdentifierParam = string;
-
-/**
  * Variant support enables caching variants of images with certain file extensions
  * in addition to the original. This only applies when the origin server sends the
  * 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but
@@ -280,14 +270,14 @@ export interface VariantDeleteParams {
   /**
    * Identifier
    */
-  zone_id: CacheVariantIdentifierParam;
+  zone_id: string;
 }
 
 export interface VariantEditParams {
   /**
    * Path param: Identifier
    */
-  zone_id: CacheVariantIdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Value of the zone setting.
@@ -372,13 +362,12 @@ export interface VariantGetParams {
   /**
    * Identifier
    */
-  zone_id: CacheVariantIdentifierParam;
+  zone_id: string;
 }
 
 export declare namespace Variants {
   export {
     type CacheVariant as CacheVariant,
-    type CacheVariantIdentifier as CacheVariantIdentifier,
     type VariantEditResponse as VariantEditResponse,
     type VariantGetResponse as VariantGetResponse,
     type VariantDeleteParams as VariantDeleteParams,

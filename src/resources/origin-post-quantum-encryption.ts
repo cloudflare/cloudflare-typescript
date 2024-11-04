@@ -2,7 +2,6 @@
 
 import { APIResource } from '../resource';
 import * as Core from '../core';
-import * as VariantsAPI from './cache/variants';
 
 export class OriginPostQuantumEncryption extends APIResource {
   /**
@@ -55,7 +54,7 @@ export interface OriginPostQuantumEncryptionUpdateParams {
   /**
    * Path param: Identifier
    */
-  zone_id: VariantsAPI.CacheVariantIdentifierParam;
+  zone_id: string;
 
   /**
    * Body param: Value of the Origin Post Quantum Encryption Setting.
@@ -67,5 +66,5 @@ export interface OriginPostQuantumEncryptionGetParams {
   /**
    * Identifier
    */
-  zone_id: VariantsAPI.CacheVariantIdentifierParam;
+  zone_id: string;
 }
