@@ -4,7 +4,6 @@ import { APIResource } from '../../../../resource';
 import { isRequestOptions } from '../../../../core';
 import * as Core from '../../../../core';
 import { CloudflareError } from '../../../../error';
-import * as AccessAPI from '../access';
 import * as PoliciesAPI from '../policies';
 import * as ApplicationsAPI from './applications';
 import { ApplicationPoliciesSinglePage } from './applications';
@@ -234,22 +233,6 @@ export interface PolicyDeleteResponse {
 
 export interface PolicyCreateParams {
   /**
-   * Body param: The action Access will take if a user matches this policy.
-   */
-  decision: ApplicationsAPI.DecisionParam;
-
-  /**
-   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-   * only one of the Include rules.
-   */
-  include: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Body param: The name of the Access policy.
-   */
-  name: string;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -271,18 +254,6 @@ export interface PolicyCreateParams {
    * start of each session.
    */
   approval_required?: boolean;
-
-  /**
-   * Body param: The rules that define how users may connect to the targets secured
-   * by your application.
-   */
-  connection_rules?: PolicyCreateParams.ConnectionRules;
-
-  /**
-   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-   * user cannot meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -310,64 +281,15 @@ export interface PolicyCreateParams {
   purpose_justification_required?: boolean;
 
   /**
-   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-   * user must meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
    * Body param: The amount of time that tokens issued for the application will be
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
-}
-
-export namespace PolicyCreateParams {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyUpdateParams {
   /**
-   * Body param: The action Access will take if a user matches this policy.
-   */
-  decision: ApplicationsAPI.DecisionParam;
-
-  /**
-   * Body param: Rules evaluated with an OR logical operator. A user needs to meet
-   * only one of the Include rules.
-   */
-  include: Array<AccessAPI.AccessRuleParam>;
-
-  /**
-   * Body param: The name of the Access policy.
-   */
-  name: string;
-
-  /**
    * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
    * Zone ID.
    */
@@ -389,18 +311,6 @@ export interface PolicyUpdateParams {
    * start of each session.
    */
   approval_required?: boolean;
-
-  /**
-   * Body param: The rules that define how users may connect to the targets secured
-   * by your application.
-   */
-  connection_rules?: PolicyUpdateParams.ConnectionRules;
-
-  /**
-   * Body param: Rules evaluated with a NOT logical operator. To match the policy, a
-   * user cannot meet any of the Exclude rules.
-   */
-  exclude?: Array<AccessAPI.AccessRuleParam>;
 
   /**
    * Body param: Require this application to be served in an isolated browser for
@@ -428,44 +338,11 @@ export interface PolicyUpdateParams {
   purpose_justification_required?: boolean;
 
   /**
-   * Body param: Rules evaluated with an AND logical operator. To match the policy, a
-   * user must meet all of the Require rules.
-   */
-  require?: Array<AccessAPI.AccessRuleParam>;
-
-  /**
    * Body param: The amount of time that tokens issued for the application will be
    * valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us
    * (or µs), ms, s, m, h.
    */
   session_duration?: string;
-}
-
-export namespace PolicyUpdateParams {
-  /**
-   * The rules that define how users may connect to the targets secured by your
-   * application.
-   */
-  export interface ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    ssh?: ConnectionRules.SSH;
-  }
-
-  export namespace ConnectionRules {
-    /**
-     * The SSH-specific rules that define how users may connect to the targets secured
-     * by your application.
-     */
-    export interface SSH {
-      /**
-       * Contains the Unix usernames that may be used when connecting over SSH.
-       */
-      usernames: Array<string>;
-    }
-  }
 }
 
 export interface PolicyListParams {
