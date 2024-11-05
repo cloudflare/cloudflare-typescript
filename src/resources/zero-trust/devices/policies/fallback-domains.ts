@@ -15,10 +15,10 @@ export class FallbackDomains extends APIResource {
     params: FallbackDomainUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FallbackDomainUpdateResponse | null> {
-    const { account_id, body } = params;
+    const { account_id, domains } = params;
     return (
       this._client.put(`/accounts/${account_id}/devices/policy/${policyId}/fallback_domains`, {
-        body: body,
+        body: domains,
         ...options,
       }) as Core.APIPromise<{ result: FallbackDomainUpdateResponse | null }>
     )._thenUnwrap((obj) => obj.result);
@@ -111,7 +111,7 @@ export interface FallbackDomainUpdateParams {
   /**
    * Body param:
    */
-  body: Array<FallbackDomainParam>;
+  domains: Array<FallbackDomainParam>;
 }
 
 export interface FallbackDomainListParams {
