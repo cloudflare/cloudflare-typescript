@@ -4186,7 +4186,7 @@ Types:
 
 Methods:
 
-- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">update</a>(policyId, [ ...body ]) -> FallbackDomainUpdateResponse | null</code>
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">update</a>(policyId, [ ...domains ]) -> FallbackDomainUpdateResponse | null</code>
 - <code title="get /accounts/{account_id}/devices/policy/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">list</a>({ ...params }) -> FallbackDomainsSinglePage</code>
 - <code title="get /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">get</a>(policyId, { ...params }) -> FallbackDomainGetResponse | null</code>
 
