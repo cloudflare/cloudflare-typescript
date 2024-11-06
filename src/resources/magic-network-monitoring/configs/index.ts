@@ -2,11 +2,15 @@
 
 export {
   Configs,
-  type Configuration,
+  type ConfigCreateResponse,
+  type ConfigUpdateResponse,
+  type ConfigDeleteResponse,
+  type ConfigEditResponse,
+  type ConfigGetResponse,
   type ConfigCreateParams,
   type ConfigUpdateParams,
   type ConfigDeleteParams,
   type ConfigEditParams,
   type ConfigGetParams,
 } from './configs';
-export { Full, type FullGetParams } from './full';
+export { Full, type FullGetResponse, type FullGetParams } from './full';
