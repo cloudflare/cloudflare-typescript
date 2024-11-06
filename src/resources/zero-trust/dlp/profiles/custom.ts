@@ -7,7 +7,7 @@ import * as ProfilesAPI from './profiles';
 
 export class Custom extends APIResource {
   /**
-   * Creates a set of DLP custom profiles.
+   * Creates a DLP custom profile.
    */
   create(params: CustomCreateParams, options?: Core.RequestOptions): Core.APIPromise<CustomCreateResponse> {
     const { account_id, ...body } = params;
@@ -228,56 +228,575 @@ export interface PatternParam {
   validation?: 'luhn';
 }
 
-export type CustomCreateResponse = Array<ProfilesAPI.Profile>;
+export type CustomCreateResponse =
+  | CustomCreateResponse.CustomProfile
+  | CustomCreateResponse.PredefinedProfile
+  | CustomCreateResponse.IntegrationProfile
+  | Array<ProfilesAPI.Profile>;
 
-export type CustomDeleteResponse = unknown;
-
-export interface CustomCreateParams {
-  /**
-   * Path param:
-   */
-  account_id: string;
-
-  /**
-   * Body param:
-   */
-  profiles: Array<CustomCreateParams.Profile>;
-}
-
-export namespace CustomCreateParams {
-  export interface Profile {
-    entries: Array<Profile.DLPNewCustomEntry | Profile.DLPNewWordListEntry>;
-
-    name: string;
+export namespace CustomCreateResponse {
+  export interface CustomProfile {
+    /**
+     * The id of the profile (uuid)
+     */
+    id: string;
 
     /**
      * Related DLP policies will trigger when the match count exceeds the number set.
      */
-    allowed_match_count?: number;
-
-    confidence_threshold?: string | null;
+    allowed_match_count: number;
 
     /**
      * Scan the context of predefined entries to only return matches surrounded by
      * keywords.
      */
-    context_awareness?: ProfilesAPI.ContextAwarenessParam;
+    context_awareness: ProfilesAPI.ContextAwareness;
+
+    /**
+     * When the profile was created
+     */
+    created_at: string;
+
+    entries: Array<
+      | CustomProfile.Custom
+      | CustomProfile.Predefined
+      | CustomProfile.Integration
+      | CustomProfile.ExactData
+      | CustomProfile.WordList
+    >;
+
+    /**
+     * The name of the profile
+     */
+    name: string;
+
+    ocr_enabled: boolean;
+
+    type: 'custom';
+
+    /**
+     * When the profile was lasted updated
+     */
+    updated_at: string;
+
+    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
 
     /**
      * The description of the profile
      */
     description?: string | null;
+  }
+
+  export namespace CustomProfile {
+    export interface Custom {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface Predefined {
+      id: string;
+
+      confidence: Predefined.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      profile_id?: string | null;
+    }
+
+    export namespace Predefined {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry can be made more or less sensitive by setting a
+         * confidence threshold. Profiles that use an entry with `available` set to true
+         * can use confidence thresholds
+         */
+        available: boolean;
+      }
+    }
+
+    export interface Integration {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactData {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface WordList {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+  }
+
+  export interface PredefinedProfile {
+    /**
+     * The id of the predefined profile (uuid)
+     */
+    id: string;
+
+    allowed_match_count: number;
+
+    entries: Array<
+      | PredefinedProfile.Custom
+      | PredefinedProfile.Predefined
+      | PredefinedProfile.Integration
+      | PredefinedProfile.ExactData
+      | PredefinedProfile.WordList
+    >;
+
+    /**
+     * The name of the predefined profile
+     */
+    name: string;
+
+    type: 'predefined';
+
+    confidence_threshold?: 'low' | 'medium' | 'high' | 'very_high';
+
+    /**
+     * Scan the context of predefined entries to only return matches surrounded by
+     * keywords.
+     */
+    context_awareness?: ProfilesAPI.ContextAwareness;
 
     ocr_enabled?: boolean;
 
     /**
-     * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your
-     * Microsoft Information Protection profiles).
+     * Whether this profile can be accessed by anyone
      */
-    shared_entries?: Array<Profile.Custom | Profile.Predefined | Profile.Integration | Profile.ExactData>;
+    open_access?: boolean;
   }
 
-  export namespace Profile {
+  export namespace PredefinedProfile {
+    export interface Custom {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface Predefined {
+      id: string;
+
+      confidence: Predefined.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      profile_id?: string | null;
+    }
+
+    export namespace Predefined {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry can be made more or less sensitive by setting a
+         * confidence threshold. Profiles that use an entry with `available` set to true
+         * can use confidence thresholds
+         */
+        available: boolean;
+      }
+    }
+
+    export interface Integration {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactData {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface WordList {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+  }
+
+  export interface IntegrationProfile {
+    id: string;
+
+    created_at: string;
+
+    entries: Array<
+      | IntegrationProfile.Custom
+      | IntegrationProfile.Predefined
+      | IntegrationProfile.Integration
+      | IntegrationProfile.ExactData
+      | IntegrationProfile.WordList
+    >;
+
+    name: string;
+
+    type: 'integration';
+
+    updated_at: string;
+
+    /**
+     * The description of the profile
+     */
+    description?: string | null;
+  }
+
+  export namespace IntegrationProfile {
+    export interface Custom {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      pattern: CustomAPI.Pattern;
+
+      type: 'custom';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface Predefined {
+      id: string;
+
+      confidence: Predefined.Confidence;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'predefined';
+
+      profile_id?: string | null;
+    }
+
+    export namespace Predefined {
+      export interface Confidence {
+        /**
+         * Indicates whether this entry can be made more or less sensitive by setting a
+         * confidence threshold. Profiles that use an entry with `available` set to true
+         * can use confidence thresholds
+         */
+        available: boolean;
+      }
+    }
+
+    export interface Integration {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'integration';
+
+      updated_at: string;
+
+      profile_id?: string | null;
+    }
+
+    export interface ExactData {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      secret: boolean;
+
+      type: 'exact_data';
+
+      updated_at: string;
+    }
+
+    export interface WordList {
+      id: string;
+
+      created_at: string;
+
+      enabled: boolean;
+
+      name: string;
+
+      type: 'word_list';
+
+      updated_at: string;
+
+      word_list: unknown;
+
+      profile_id?: string | null;
+    }
+  }
+}
+
+export type CustomDeleteResponse = unknown;
+
+export type CustomCreateParams = CustomCreateParams.Variant0 | CustomCreateParams.DLPNewCustomProfile;
+
+export namespace CustomCreateParams {
+  export interface Variant0 {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    profiles: Array<CustomCreateParams.Variant0.Profile>;
+  }
+
+  export namespace Variant0 {
+    export interface Profile {
+      entries: Array<Profile.DLPNewCustomEntry | Profile.DLPNewWordListEntry>;
+
+      name: string;
+
+      /**
+       * Related DLP policies will trigger when the match count exceeds the number set.
+       */
+      allowed_match_count?: number;
+
+      confidence_threshold?: string | null;
+
+      /**
+       * Scan the context of predefined entries to only return matches surrounded by
+       * keywords.
+       */
+      context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+      /**
+       * The description of the profile
+       */
+      description?: string | null;
+
+      ocr_enabled?: boolean;
+
+      /**
+       * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your
+       * Microsoft Information Protection profiles).
+       */
+      shared_entries?: Array<Profile.Custom | Profile.Predefined | Profile.Integration | Profile.ExactData>;
+    }
+
+    export namespace Profile {
+      export interface DLPNewCustomEntry {
+        enabled: boolean;
+
+        name: string;
+
+        pattern: CustomAPI.PatternParam;
+      }
+
+      export interface DLPNewWordListEntry {
+        enabled: boolean;
+
+        name: string;
+
+        words: Array<string>;
+      }
+
+      export interface Custom {
+        enabled: boolean;
+
+        entry_id: string;
+
+        entry_type: 'custom';
+      }
+
+      export interface Predefined {
+        enabled: boolean;
+
+        entry_id: string;
+
+        entry_type: 'predefined';
+      }
+
+      export interface Integration {
+        enabled: boolean;
+
+        entry_id: string;
+
+        entry_type: 'integration';
+      }
+
+      export interface ExactData {
+        enabled: boolean;
+
+        entry_id: string;
+
+        entry_type: 'exact_data';
+      }
+    }
+  }
+
+  export interface DLPNewCustomProfile {
+    /**
+     * Path param:
+     */
+    account_id: string;
+
+    /**
+     * Body param:
+     */
+    entries: Array<
+      | CustomCreateParams.DLPNewCustomProfile.DLPNewCustomEntry
+      | CustomCreateParams.DLPNewCustomProfile.DLPNewWordListEntry
+    >;
+
+    /**
+     * Body param:
+     */
+    name: string;
+
+    /**
+     * Body param: Related DLP policies will trigger when the match count exceeds the
+     * number set.
+     */
+    allowed_match_count?: number;
+
+    /**
+     * Body param:
+     */
+    confidence_threshold?: string | null;
+
+    /**
+     * Body param: Scan the context of predefined entries to only return matches
+     * surrounded by keywords.
+     */
+    context_awareness?: ProfilesAPI.ContextAwarenessParam;
+
+    /**
+     * Body param: The description of the profile
+     */
+    description?: string | null;
+
+    /**
+     * Body param:
+     */
+    ocr_enabled?: boolean;
+
+    /**
+     * Body param: Entries from other profiles (e.g. pre-defined Cloudflare profiles,
+     * or your Microsoft Information Protection profiles).
+     */
+    shared_entries?: Array<
+      | CustomCreateParams.DLPNewCustomProfile.Custom
+      | CustomCreateParams.DLPNewCustomProfile.Predefined
+      | CustomCreateParams.DLPNewCustomProfile.Integration
+      | CustomCreateParams.DLPNewCustomProfile.ExactData
+    >;
+  }
+
+  export namespace DLPNewCustomProfile {
     export interface DLPNewCustomEntry {
       enabled: boolean;
 
@@ -335,11 +854,6 @@ export interface CustomUpdateParams {
   account_id: string;
 
   /**
-   * Body param: Custom entries from this profile
-   */
-  entries: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry>;
-
-  /**
    * Body param:
    */
   name: string;
@@ -364,6 +878,12 @@ export interface CustomUpdateParams {
    * Body param: The description of the profile
    */
   description?: string | null;
+
+  /**
+   * Body param: Custom entries from this profile. If this field is omitted, entries
+   * owned by this profile will not be changed.
+   */
+  entries?: Array<CustomUpdateParams.DLPNewCustomEntryWithID | CustomUpdateParams.DLPNewCustomEntry> | null;
 
   /**
    * Body param:
