@@ -3,7 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as AdvertisementsAPI from './advertisements';
-import { Advertisement, AdvertisementEditParams, Advertisements } from './advertisements';
+import { AdvertisementEditParams, AdvertisementEditResponse, Advertisements } from './advertisements';
 import { SinglePage } from '../../../pagination';
 
 export class Rules extends APIResource {
@@ -16,11 +16,11 @@ export class Rules extends APIResource {
   create(
     params: RuleCreateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  ): Core.APIPromise<RuleCreateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/mnm/rules`, { body, ...options }) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
+        result: RuleCreateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,11 +31,11 @@ export class Rules extends APIResource {
   update(
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  ): Core.APIPromise<RuleUpdateResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/mnm/rules`, { body, ...options }) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
+        result: RuleUpdateResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -46,13 +46,9 @@ export class Rules extends APIResource {
   list(
     params: RuleListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<MagicNetworkMonitoringRulesSinglePage, MagicNetworkMonitoringRule | null> {
+  ): Core.PagePromise<RuleListResponsesSinglePage, RuleListResponse | null> {
     const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/mnm/rules`,
-      MagicNetworkMonitoringRulesSinglePage,
-      options,
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/mnm/rules`, RuleListResponsesSinglePage, options);
   }
 
   /**
@@ -62,11 +58,11 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleDeleteParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  ): Core.APIPromise<RuleDeleteResponse | null> {
     const { account_id } = params;
     return (
       this._client.delete(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
+        result: RuleDeleteResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -78,13 +74,13 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  ): Core.APIPromise<RuleEditResponse | null> {
     const { account_id, ...body } = params;
     return (
       this._client.patch(`/accounts/${account_id}/mnm/rules/${ruleId}`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MagicNetworkMonitoringRule | null }>
+      }) as Core.APIPromise<{ result: RuleEditResponse | null }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -95,19 +91,239 @@ export class Rules extends APIResource {
     ruleId: string,
     params: RuleGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MagicNetworkMonitoringRule | null> {
+  ): Core.APIPromise<RuleGetResponse | null> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/mnm/rules/${ruleId}`, options) as Core.APIPromise<{
-        result: MagicNetworkMonitoringRule | null;
+        result: RuleGetResponse | null;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export class MagicNetworkMonitoringRulesSinglePage extends SinglePage<MagicNetworkMonitoringRule | null> {}
+export class RuleListResponsesSinglePage extends SinglePage<RuleListResponse | null> {}
 
-export interface MagicNetworkMonitoringRule {
+export interface RuleCreateResponse {
+  /**
+   * Toggle on if you would like Cloudflare to automatically advertise the IP
+   * Prefixes within the rule via Magic Transit when the rule is triggered. Only
+   * available for users of Magic Transit.
+   */
+  automatic_advertisement: boolean | null;
+
+  /**
+   * The amount of time that the rule threshold must be exceeded to send an alert
+   * notification. The final value must be equivalent to one of the following 8
+   * values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format is
+   * AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9,
+   * underscore (\_), dash (-), period (.), and tilde (~). You can’t have a space in
+   * the rule name. Max 256 characters.
+   */
+  name: string;
+
+  prefixes: Array<string>;
+
+  /**
+   * The id of the rule. Must be unique.
+   */
+  id?: string;
+
+  /**
+   * The number of bits per second for the rule. When this value is exceeded for the
+   * set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  bandwidth_threshold?: number;
+
+  /**
+   * The number of packets per second for the rule. When this value is exceeded for
+   * the set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  packet_threshold?: number;
+}
+
+export interface RuleUpdateResponse {
+  /**
+   * Toggle on if you would like Cloudflare to automatically advertise the IP
+   * Prefixes within the rule via Magic Transit when the rule is triggered. Only
+   * available for users of Magic Transit.
+   */
+  automatic_advertisement: boolean | null;
+
+  /**
+   * The amount of time that the rule threshold must be exceeded to send an alert
+   * notification. The final value must be equivalent to one of the following 8
+   * values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format is
+   * AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9,
+   * underscore (\_), dash (-), period (.), and tilde (~). You can’t have a space in
+   * the rule name. Max 256 characters.
+   */
+  name: string;
+
+  prefixes: Array<string>;
+
+  /**
+   * The id of the rule. Must be unique.
+   */
+  id?: string;
+
+  /**
+   * The number of bits per second for the rule. When this value is exceeded for the
+   * set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  bandwidth_threshold?: number;
+
+  /**
+   * The number of packets per second for the rule. When this value is exceeded for
+   * the set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  packet_threshold?: number;
+}
+
+export interface RuleListResponse {
+  /**
+   * Toggle on if you would like Cloudflare to automatically advertise the IP
+   * Prefixes within the rule via Magic Transit when the rule is triggered. Only
+   * available for users of Magic Transit.
+   */
+  automatic_advertisement: boolean | null;
+
+  /**
+   * The amount of time that the rule threshold must be exceeded to send an alert
+   * notification. The final value must be equivalent to one of the following 8
+   * values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format is
+   * AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9,
+   * underscore (\_), dash (-), period (.), and tilde (~). You can’t have a space in
+   * the rule name. Max 256 characters.
+   */
+  name: string;
+
+  prefixes: Array<string>;
+
+  /**
+   * The id of the rule. Must be unique.
+   */
+  id?: string;
+
+  /**
+   * The number of bits per second for the rule. When this value is exceeded for the
+   * set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  bandwidth_threshold?: number;
+
+  /**
+   * The number of packets per second for the rule. When this value is exceeded for
+   * the set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  packet_threshold?: number;
+}
+
+export interface RuleDeleteResponse {
+  /**
+   * Toggle on if you would like Cloudflare to automatically advertise the IP
+   * Prefixes within the rule via Magic Transit when the rule is triggered. Only
+   * available for users of Magic Transit.
+   */
+  automatic_advertisement: boolean | null;
+
+  /**
+   * The amount of time that the rule threshold must be exceeded to send an alert
+   * notification. The final value must be equivalent to one of the following 8
+   * values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format is
+   * AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9,
+   * underscore (\_), dash (-), period (.), and tilde (~). You can’t have a space in
+   * the rule name. Max 256 characters.
+   */
+  name: string;
+
+  prefixes: Array<string>;
+
+  /**
+   * The id of the rule. Must be unique.
+   */
+  id?: string;
+
+  /**
+   * The number of bits per second for the rule. When this value is exceeded for the
+   * set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  bandwidth_threshold?: number;
+
+  /**
+   * The number of packets per second for the rule. When this value is exceeded for
+   * the set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  packet_threshold?: number;
+}
+
+export interface RuleEditResponse {
+  /**
+   * Toggle on if you would like Cloudflare to automatically advertise the IP
+   * Prefixes within the rule via Magic Transit when the rule is triggered. Only
+   * available for users of Magic Transit.
+   */
+  automatic_advertisement: boolean | null;
+
+  /**
+   * The amount of time that the rule threshold must be exceeded to send an alert
+   * notification. The final value must be equivalent to one of the following 8
+   * values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format is
+   * AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at
+   * least one unit must be provided.
+   */
+  duration: string;
+
+  /**
+   * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9,
+   * underscore (\_), dash (-), period (.), and tilde (~). You can’t have a space in
+   * the rule name. Max 256 characters.
+   */
+  name: string;
+
+  prefixes: Array<string>;
+
+  /**
+   * The id of the rule. Must be unique.
+   */
+  id?: string;
+
+  /**
+   * The number of bits per second for the rule. When this value is exceeded for the
+   * set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  bandwidth_threshold?: number;
+
+  /**
+   * The number of packets per second for the rule. When this value is exceeded for
+   * the set duration, an alert notification is sent. Minimum of 1 and no maximum.
+   */
+  packet_threshold?: number;
+}
+
+export interface RuleGetResponse {
   /**
    * Toggle on if you would like Cloudflare to automatically advertise the IP
    * Prefixes within the rule via Magic Transit when the rule is triggered. Only
@@ -315,13 +531,18 @@ export interface RuleGetParams {
   account_id: string;
 }
 
-Rules.MagicNetworkMonitoringRulesSinglePage = MagicNetworkMonitoringRulesSinglePage;
+Rules.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 Rules.Advertisements = Advertisements;
 
 export declare namespace Rules {
   export {
-    type MagicNetworkMonitoringRule as MagicNetworkMonitoringRule,
-    MagicNetworkMonitoringRulesSinglePage as MagicNetworkMonitoringRulesSinglePage,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
@@ -332,7 +553,7 @@ export declare namespace Rules {
 
   export {
     Advertisements as Advertisements,
-    type Advertisement as Advertisement,
+    type AdvertisementEditResponse as AdvertisementEditResponse,
     type AdvertisementEditParams as AdvertisementEditParams,
   };
 }
