@@ -4,23 +4,32 @@ import { APIResource } from '../../resource';
 import * as ConfigsAPI from './configs/configs';
 import {
   ConfigCreateParams,
+  ConfigCreateResponse,
   ConfigDeleteParams,
+  ConfigDeleteResponse,
   ConfigEditParams,
+  ConfigEditResponse,
   ConfigGetParams,
+  ConfigGetResponse,
   ConfigUpdateParams,
+  ConfigUpdateResponse,
   Configs,
-  Configuration,
 } from './configs/configs';
 import * as RulesAPI from './rules/rules';
 import {
-  MagicNetworkMonitoringRule,
-  MagicNetworkMonitoringRulesSinglePage,
   RuleCreateParams,
+  RuleCreateResponse,
   RuleDeleteParams,
+  RuleDeleteResponse,
   RuleEditParams,
+  RuleEditResponse,
   RuleGetParams,
+  RuleGetResponse,
   RuleListParams,
+  RuleListResponse,
+  RuleListResponsesSinglePage,
   RuleUpdateParams,
+  RuleUpdateResponse,
   Rules,
 } from './rules/rules';
 
@@ -31,12 +40,16 @@ export class MagicNetworkMonitoring extends APIResource {
 
 MagicNetworkMonitoring.Configs = Configs;
 MagicNetworkMonitoring.Rules = Rules;
-MagicNetworkMonitoring.MagicNetworkMonitoringRulesSinglePage = MagicNetworkMonitoringRulesSinglePage;
+MagicNetworkMonitoring.RuleListResponsesSinglePage = RuleListResponsesSinglePage;
 
 export declare namespace MagicNetworkMonitoring {
   export {
     Configs as Configs,
-    type Configuration as Configuration,
+    type ConfigCreateResponse as ConfigCreateResponse,
+    type ConfigUpdateResponse as ConfigUpdateResponse,
+    type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigEditResponse as ConfigEditResponse,
+    type ConfigGetResponse as ConfigGetResponse,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigDeleteParams as ConfigDeleteParams,
@@ -46,8 +59,13 @@ export declare namespace MagicNetworkMonitoring {
 
   export {
     Rules as Rules,
-    type MagicNetworkMonitoringRule as MagicNetworkMonitoringRule,
-    MagicNetworkMonitoringRulesSinglePage as MagicNetworkMonitoringRulesSinglePage,
+    type RuleCreateResponse as RuleCreateResponse,
+    type RuleUpdateResponse as RuleUpdateResponse,
+    type RuleListResponse as RuleListResponse,
+    type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleEditResponse as RuleEditResponse,
+    type RuleGetResponse as RuleGetResponse,
+    RuleListResponsesSinglePage as RuleListResponsesSinglePage,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
