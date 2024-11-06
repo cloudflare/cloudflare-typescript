@@ -114,30 +114,7 @@ describe('resource custom', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.dlp.profiles.custom.update(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-      {
-        account_id: 'account_id',
-        entries: [
-          {
-            enabled: true,
-            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            name: 'name',
-            pattern: { regex: 'regex' },
-          },
-          {
-            enabled: true,
-            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            name: 'name',
-            pattern: { regex: 'regex' },
-          },
-          {
-            enabled: true,
-            entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            name: 'name',
-            pattern: { regex: 'regex' },
-          },
-        ],
-        name: 'name',
-      },
+      { account_id: 'account_id', name: 'name' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -153,6 +130,11 @@ describe('resource custom', () => {
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       {
         account_id: 'account_id',
+        name: 'name',
+        allowed_match_count: 0,
+        confidence_threshold: 'confidence_threshold',
+        context_awareness: { enabled: true, skip: { files: true } },
+        description: 'description',
         entries: [
           {
             enabled: true,
@@ -173,11 +155,6 @@ describe('resource custom', () => {
             pattern: { regex: 'regex', validation: 'luhn' },
           },
         ],
-        name: 'name',
-        allowed_match_count: 0,
-        confidence_threshold: 'confidence_threshold',
-        context_awareness: { enabled: true, skip: { files: true } },
-        description: 'description',
         ocr_enabled: true,
         shared_entries: [
           { enabled: true, entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', entry_type: 'predefined' },
