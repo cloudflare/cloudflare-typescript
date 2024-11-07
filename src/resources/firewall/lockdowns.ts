@@ -90,14 +90,14 @@ export class LockdownsV4PagePaginationArray extends V4PagePaginationArray<Lockdo
  * specified in the Zone Lockdown rule. You can include any number of `ip` or
  * `ip_range` configurations.
  */
-export type Configuration = LockdownIPConfiguration | LockdownCIDRConfiguration;
+export type Configuration = Array<LockdownIPConfiguration | LockdownCIDRConfiguration>;
 
 /**
  * A list of IP addresses or CIDR ranges that will be allowed to access the URLs
  * specified in the Zone Lockdown rule. You can include any number of `ip` or
  * `ip_range` configurations.
  */
-export type ConfigurationParam = LockdownIPConfigurationParam | LockdownCIDRConfigurationParam;
+export type ConfigurationParam = Array<LockdownIPConfigurationParam | LockdownCIDRConfigurationParam>;
 
 export interface Lockdown {
   /**
