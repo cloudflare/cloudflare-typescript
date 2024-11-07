@@ -1,18 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
-import * as RulesAPI from '../rules';
-import * as RulesetsAPI from '../rulesets';
-import * as ByTagAPI from './by-tag';
-import { ByTag } from './by-tag';
-import { SinglePage } from '../../../pagination';
+import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
+import * as Core from '../../core';
+import { CloudflareError } from '../../error';
+import * as RulesAPI from './rules';
+import * as RulesetsAPI from './rulesets';
+import { SinglePage } from '../../pagination';
 
 export class Versions extends APIResource {
-  byTag: ByTagAPI.ByTag = new ByTagAPI.ByTag(this._client);
-
   /**
    * Fetches the versions of an account or zone ruleset.
    */
@@ -563,7 +559,6 @@ export interface VersionGetParams {
 }
 
 Versions.VersionListResponsesSinglePage = VersionListResponsesSinglePage;
-Versions.ByTag = ByTag;
 
 export declare namespace Versions {
   export {
@@ -574,6 +569,4 @@ export declare namespace Versions {
     type VersionDeleteParams as VersionDeleteParams,
     type VersionGetParams as VersionGetParams,
   };
-
-  export { ByTag as ByTag };
 }

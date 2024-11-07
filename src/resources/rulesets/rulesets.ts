@@ -33,15 +33,7 @@ import {
   SetConfigRule,
   SkipRule,
 } from './rules';
-import * as PhasesAPI from './phases/phases';
-import {
-  PhaseGetParams,
-  PhaseGetResponse,
-  PhaseUpdateParams,
-  PhaseUpdateResponse,
-  Phases,
-} from './phases/phases';
-import * as VersionsAPI from './versions/versions';
+import * as VersionsAPI from './versions';
 import {
   VersionDeleteParams,
   VersionGetParams,
@@ -50,7 +42,15 @@ import {
   VersionListResponse,
   VersionListResponsesSinglePage,
   Versions,
-} from './versions/versions';
+} from './versions';
+import * as PhasesAPI from './phases/phases';
+import {
+  PhaseGetParams,
+  PhaseGetResponse,
+  PhaseUpdateParams,
+  PhaseUpdateResponse,
+  Phases,
+} from './phases/phases';
 import { SinglePage } from '../../pagination';
 
 export class Rulesets extends APIResource {
