@@ -44,4 +44,4 @@ export {
   type VersionListParams,
   type VersionDeleteParams,
   type VersionGetParams,
-} from './versions/index';
+} from './versions';
