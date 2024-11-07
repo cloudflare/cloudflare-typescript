@@ -10,17 +10,13 @@ export class CAs extends APIResource {
   /**
    * Generates a new short-lived certificate CA and public key.
    */
-  create(
-    appId: string,
-    params?: CACreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<CACreateResponse>;
-  create(appId: string, options?: Core.RequestOptions): Core.APIPromise<CACreateResponse>;
+  create(appId: string, params?: CACreateParams, options?: Core.RequestOptions): Core.APIPromise<CA>;
+  create(appId: string, options?: Core.RequestOptions): Core.APIPromise<CA>;
   create(
     appId: string,
     params: CACreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CACreateResponse> {
+  ): Core.APIPromise<CA> {
     if (isRequestOptions(params)) {
       return this.create(appId, {}, params);
     }
@@ -45,7 +41,7 @@ export class CAs extends APIResource {
       this._client.post(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
-      ) as Core.APIPromise<{ result: CACreateResponse }>
+      ) as Core.APIPromise<{ result: CA }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -130,13 +126,13 @@ export class CAs extends APIResource {
   /**
    * Fetches a short-lived certificate CA and its public key.
    */
-  get(appId: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
-  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<CAGetResponse>;
+  get(appId: string, params?: CAGetParams, options?: Core.RequestOptions): Core.APIPromise<CA>;
+  get(appId: string, options?: Core.RequestOptions): Core.APIPromise<CA>;
   get(
     appId: string,
     params: CAGetParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CAGetResponse> {
+  ): Core.APIPromise<CA> {
     if (isRequestOptions(params)) {
       return this.get(appId, {}, params);
     }
@@ -161,7 +157,7 @@ export class CAs extends APIResource {
       this._client.get(
         `/${accountOrZone}/${accountOrZoneId}/access/apps/${appId}/ca`,
         options,
-      ) as Core.APIPromise<{ result: CAGetResponse }>
+      ) as Core.APIPromise<{ result: CA }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -186,16 +182,12 @@ export interface CA {
   public_key?: string;
 }
 
-export type CACreateResponse = unknown;
-
 export interface CADeleteResponse {
   /**
    * The ID of the CA.
    */
   id?: string;
 }
-
-export type CAGetResponse = unknown;
 
 export interface CACreateParams {
   /**
@@ -250,9 +242,7 @@ CAs.CAsSinglePage = CAsSinglePage;
 export declare namespace CAs {
   export {
     type CA as CA,
-    type CACreateResponse as CACreateResponse,
     type CADeleteResponse as CADeleteResponse,
-    type CAGetResponse as CAGetResponse,
     CAsSinglePage as CAsSinglePage,
     type CACreateParams as CACreateParams,
     type CAListParams as CAListParams,

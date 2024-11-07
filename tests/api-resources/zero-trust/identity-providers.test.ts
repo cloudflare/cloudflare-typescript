@@ -47,7 +47,6 @@ describe('resource identityProviders', () => {
         enabled: true,
         group_member_deprovision: true,
         seat_deprovision: true,
-        secret: 'secret',
         user_deprovision: true,
       },
     });
@@ -88,7 +87,6 @@ describe('resource identityProviders', () => {
         enabled: true,
         group_member_deprovision: true,
         seat_deprovision: true,
-        secret: 'secret',
         user_deprovision: true,
       },
     });
