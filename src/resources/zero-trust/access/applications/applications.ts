@@ -11,11 +11,9 @@ import * as CAsAPI from './cas';
 import {
   CA,
   CACreateParams,
-  CACreateResponse,
   CADeleteParams,
   CADeleteResponse,
   CAGetParams,
-  CAGetResponse,
   CAListParams,
   CAs,
   CAsSinglePage,
@@ -587,7 +585,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_attributes?: AccessSchemasSAMLSaaSApp.CustomAttributes;
+      custom_attributes?: Array<AccessSchemasSAMLSaaSApp.CustomAttribute>;
 
       /**
        * The unique identifier for your SaaS application.
@@ -626,7 +624,7 @@ export namespace Application {
     }
 
     export namespace AccessSchemasSAMLSaaSApp {
-      export interface CustomAttributes {
+      export interface CustomAttribute {
         /**
          * The SAML FriendlyName of the attribute.
          */
@@ -640,14 +638,31 @@ export namespace Application {
         /**
          * A globally unique name for an identity or service provider.
          */
-        name_format?: ApplicationsAPI.SaaSAppNameFormat;
+        name_format?:
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+          | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
 
         /**
          * If the attribute is required when building a SAML assertion.
          */
         required?: boolean;
 
-        source?: ApplicationsAPI.SaaSAppSource;
+        source?: CustomAttribute.Source;
+      }
+
+      export namespace CustomAttribute {
+        export interface Source {
+          /**
+           * The name of the IdP attribute.
+           */
+          name?: string;
+
+          /**
+           * A mapping from IdP ID to attribute name.
+           */
+          name_by_idp?: Record<string, string>;
+        }
       }
     }
 
@@ -687,7 +702,7 @@ export namespace Application {
 
       created_at?: string;
 
-      custom_claims?: AccessSchemasOIDCSaaSApp.CustomClaims;
+      custom_claims?: Array<AccessSchemasOIDCSaaSApp.CustomClaim>;
 
       /**
        * The OIDC flows supported by this application
@@ -726,7 +741,7 @@ export namespace Application {
     }
 
     export namespace AccessSchemasOIDCSaaSApp {
-      export interface CustomClaims {
+      export interface CustomClaim {
         /**
          * The name of the claim.
          */
@@ -742,10 +757,10 @@ export namespace Application {
          */
         scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-        source?: CustomClaims.Source;
+        source?: CustomClaim.Source;
       }
 
-      export namespace CustomClaims {
+      export namespace CustomClaim {
         export interface Source {
           /**
            * The name of the IdP claim.
@@ -1560,7 +1575,7 @@ export interface OIDCSaaSApp {
 
   created_at?: string;
 
-  custom_claims?: OIDCSaaSApp.CustomClaims;
+  custom_claims?: Array<OIDCSaaSApp.CustomClaim>;
 
   /**
    * The OIDC flows supported by this application
@@ -1599,7 +1614,7 @@ export interface OIDCSaaSApp {
 }
 
 export namespace OIDCSaaSApp {
-  export interface CustomClaims {
+  export interface CustomClaim {
     /**
      * The name of the claim.
      */
@@ -1615,10 +1630,10 @@ export namespace OIDCSaaSApp {
      */
     scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-    source?: CustomClaims.Source;
+    source?: CustomClaim.Source;
   }
 
-  export namespace CustomClaims {
+  export namespace CustomClaim {
     export interface Source {
       /**
        * The name of the IdP claim.
@@ -1687,7 +1702,7 @@ export interface OIDCSaaSAppParam {
    */
   client_secret?: string;
 
-  custom_claims?: OIDCSaaSAppParam.CustomClaims;
+  custom_claims?: Array<OIDCSaaSAppParam.CustomClaim>;
 
   /**
    * The OIDC flows supported by this application
@@ -1724,7 +1739,7 @@ export interface OIDCSaaSAppParam {
 }
 
 export namespace OIDCSaaSAppParam {
-  export interface CustomClaims {
+  export interface CustomClaim {
     /**
      * The name of the claim.
      */
@@ -1740,10 +1755,10 @@ export namespace OIDCSaaSAppParam {
      */
     scope?: 'groups' | 'profile' | 'email' | 'openid';
 
-    source?: CustomClaims.Source;
+    source?: CustomClaim.Source;
   }
 
-  export namespace CustomClaims {
+  export namespace CustomClaim {
     export interface Source {
       /**
        * The name of the IdP claim.
@@ -1779,22 +1794,6 @@ export namespace OIDCSaaSAppParam {
 }
 
 /**
- * A globally unique name for an identity or service provider.
- */
-export type SaaSAppNameFormat =
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
-
-/**
- * A globally unique name for an identity or service provider.
- */
-export type SaaSAppNameFormatParam =
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
-  | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
-
-/**
  * The format of the name identifier sent to the SaaS application.
  */
 export type SaaSAppNameIDFormat = 'id' | 'email';
@@ -1803,30 +1802,6 @@ export type SaaSAppNameIDFormat = 'id' | 'email';
  * The format of the name identifier sent to the SaaS application.
  */
 export type SaaSAppNameIDFormatParam = 'id' | 'email';
-
-export interface SaaSAppSource {
-  /**
-   * The name of the IdP attribute.
-   */
-  name?: string;
-
-  /**
-   * A mapping from IdP ID to attribute name.
-   */
-  name_by_idp?: Record<string, string>;
-}
-
-export interface SaaSAppSourceParam {
-  /**
-   * The name of the IdP attribute.
-   */
-  name?: string;
-
-  /**
-   * A mapping from IdP ID to attribute name.
-   */
-  name_by_idp?: Record<string, string>;
-}
 
 export interface SAMLSaaSApp {
   /**
@@ -1843,7 +1818,7 @@ export interface SAMLSaaSApp {
 
   created_at?: string;
 
-  custom_attributes?: SAMLSaaSApp.CustomAttributes;
+  custom_attributes?: Array<SAMLSaaSApp.CustomAttribute>;
 
   /**
    * The URL that the user will be redirected to after a successful login for IDP
@@ -1897,7 +1872,7 @@ export interface SAMLSaaSApp {
 }
 
 export namespace SAMLSaaSApp {
-  export interface CustomAttributes {
+  export interface CustomAttribute {
     /**
      * The SAML FriendlyName of the attribute.
      */
@@ -1911,14 +1886,31 @@ export namespace SAMLSaaSApp {
     /**
      * A globally unique name for an identity or service provider.
      */
-    name_format?: ApplicationsAPI.SaaSAppNameFormat;
+    name_format?:
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
 
     /**
      * If the attribute is required when building a SAML assertion.
      */
     required?: boolean;
 
-    source?: ApplicationsAPI.SaaSAppSource;
+    source?: CustomAttribute.Source;
+  }
+
+  export namespace CustomAttribute {
+    export interface Source {
+      /**
+       * The name of the IdP attribute.
+       */
+      name?: string;
+
+      /**
+       * A mapping from IdP ID to attribute name.
+       */
+      name_by_idp?: Record<string, string>;
+    }
   }
 }
 
@@ -1935,7 +1927,7 @@ export interface SAMLSaaSAppParam {
    */
   consumer_service_url?: string;
 
-  custom_attributes?: SAMLSaaSAppParam.CustomAttributes;
+  custom_attributes?: Array<SAMLSaaSAppParam.CustomAttribute>;
 
   /**
    * The URL that the user will be redirected to after a successful login for IDP
@@ -1987,7 +1979,7 @@ export interface SAMLSaaSAppParam {
 }
 
 export namespace SAMLSaaSAppParam {
-  export interface CustomAttributes {
+  export interface CustomAttribute {
     /**
      * The SAML FriendlyName of the attribute.
      */
@@ -2001,14 +1993,31 @@ export namespace SAMLSaaSAppParam {
     /**
      * A globally unique name for an identity or service provider.
      */
-    name_format?: ApplicationsAPI.SaaSAppNameFormatParam;
+    name_format?:
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic'
+      | 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri';
 
     /**
      * If the attribute is required when building a SAML assertion.
      */
     required?: boolean;
 
-    source?: ApplicationsAPI.SaaSAppSourceParam;
+    source?: CustomAttribute.Source;
+  }
+
+  export namespace CustomAttribute {
+    export interface Source {
+      /**
+       * The name of the IdP attribute.
+       */
+      name?: string;
+
+      /**
+       * A mapping from IdP ID to attribute name.
+       */
+      name_by_idp?: Record<string, string>;
+    }
   }
 }
 
@@ -12214,9 +12223,7 @@ export declare namespace Applications {
     type CORSHeaders as CORSHeaders,
     type Decision as Decision,
     type OIDCSaaSApp as OIDCSaaSApp,
-    type SaaSAppNameFormat as SaaSAppNameFormat,
     type SaaSAppNameIDFormat as SaaSAppNameIDFormat,
-    type SaaSAppSource as SaaSAppSource,
     type SAMLSaaSApp as SAMLSaaSApp,
     type SCIMConfigAuthenticationHTTPBasic as SCIMConfigAuthenticationHTTPBasic,
     type SCIMConfigAuthenticationOAuthBearerToken as SCIMConfigAuthenticationOAuthBearerToken,
@@ -12241,9 +12248,7 @@ export declare namespace Applications {
   export {
     CAs as CAs,
     type CA as CA,
-    type CACreateResponse as CACreateResponse,
     type CADeleteResponse as CADeleteResponse,
-    type CAGetResponse as CAGetResponse,
     CAsSinglePage as CAsSinglePage,
     type CACreateParams as CACreateParams,
     type CAListParams as CAListParams,
