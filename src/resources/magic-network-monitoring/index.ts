@@ -2,11 +2,7 @@
 
 export {
   Configs,
-  type ConfigCreateResponse,
-  type ConfigUpdateResponse,
-  type ConfigDeleteResponse,
-  type ConfigEditResponse,
-  type ConfigGetResponse,
+  type Configuration,
   type ConfigCreateParams,
   type ConfigUpdateParams,
   type ConfigDeleteParams,
@@ -15,14 +11,9 @@ export {
 } from './configs/index';
 export { MagicNetworkMonitoring } from './magic-network-monitoring';
 export {
-  RuleListResponsesSinglePage,
+  MagicNetworkMonitoringRulesSinglePage,
   Rules,
-  type RuleCreateResponse,
-  type RuleUpdateResponse,
-  type RuleListResponse,
-  type RuleDeleteResponse,
-  type RuleEditResponse,
-  type RuleGetResponse,
+  type MagicNetworkMonitoringRule,
   type RuleCreateParams,
   type RuleUpdateParams,
   type RuleListParams,
