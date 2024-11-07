@@ -13,6 +13,7 @@ describe('resource tags', () => {
   test('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.tags.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: 'engineers',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,7 +27,7 @@ describe('resource tags', () => {
   test('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.tags.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'engineers',
+      body: 'engineers',
     });
   });
 
