@@ -75,7 +75,7 @@ export interface SettingEditResponse {
   migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
 
   /**
-   * Observability settings for the Worker
+   * Observability settings for the Worker.
    */
   observability?: SettingEditResponse.Observability;
 
@@ -109,11 +109,11 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Observability settings for the Worker
+   * Observability settings for the Worker.
    */
   export interface Observability {
     /**
-     * Whether observability is enabled for the Worker
+     * Whether observability is enabled for the Worker.
      */
     enabled: boolean;
 
@@ -157,7 +157,7 @@ export interface SettingGetResponse {
   migrations?: WorkersAPI.SingleStepMigration | WorkersAPI.SteppedMigration;
 
   /**
-   * Observability settings for the Worker
+   * Observability settings for the Worker.
    */
   observability?: SettingGetResponse.Observability;
 
@@ -191,11 +191,11 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Observability settings for the Worker
+   * Observability settings for the Worker.
    */
   export interface Observability {
     /**
-     * Whether observability is enabled for the Worker
+     * Whether observability is enabled for the Worker.
      */
     enabled: boolean;
 
@@ -252,7 +252,7 @@ export namespace SettingEditParams {
     migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
 
     /**
-     * Observability settings for the Worker
+     * Observability settings for the Worker.
      */
     observability?: Settings.Observability;
 
@@ -286,11 +286,11 @@ export namespace SettingEditParams {
     }
 
     /**
-     * Observability settings for the Worker
+     * Observability settings for the Worker.
      */
     export interface Observability {
       /**
-       * Whether observability is enabled for the Worker
+       * Whether observability is enabled for the Worker.
        */
       enabled: boolean;
 
