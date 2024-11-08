@@ -146,6 +146,16 @@ export interface ScriptUpdateResponse {
   etag?: string;
 
   /**
+   * Whether a Worker contains assets.
+   */
+  has_assets?: boolean;
+
+  /**
+   * Whether a Worker contains modules.
+   */
+  has_modules?: boolean;
+
+  /**
    * Whether Logpush is turned on for the Worker.
    */
   logpush?: boolean;
@@ -204,6 +214,11 @@ export namespace ScriptUpdateParams {
      */
     export interface Metadata {
       /**
+       * Configuration for assets within a Worker
+       */
+      assets?: Metadata.Assets;
+
+      /**
        * List of bindings available to the worker.
        */
       bindings?: Array<Metadata.Binding>;
@@ -229,6 +244,12 @@ export namespace ScriptUpdateParams {
       compatibility_flags?: Array<string>;
 
       /**
+       * Retain assets which exist for a previously uploaded Worker version; used in lieu
+       * of providing a completion token.
+       */
+      keep_assets?: boolean;
+
+      /**
        * List of binding types to keep from previous_upload.
        */
       keep_bindings?: Array<string>;
@@ -250,14 +271,14 @@ export namespace ScriptUpdateParams {
       migrations?: WorkersAPI.SingleStepMigrationParam | WorkersAPI.SteppedMigrationParam;
 
       /**
-       * Observability settings for the Worker
+       * Observability settings for the Worker.
        */
       observability?: Metadata.Observability;
 
       placement?: WorkersAPI.PlacementConfigurationParam;
 
       /**
-       * List of strings to use as tags for this Worker
+       * List of strings to use as tags for this Worker.
        */
       tags?: Array<string>;
 
@@ -272,12 +293,45 @@ export namespace ScriptUpdateParams {
       usage_model?: 'bundled' | 'unbound';
 
       /**
-       * Key-value pairs to use as tags for this version of this Worker
+       * Key-value pairs to use as tags for this version of this Worker.
        */
       version_tags?: Record<string, string>;
     }
 
     export namespace Metadata {
+      /**
+       * Configuration for assets within a Worker
+       */
+      export interface Assets {
+        /**
+         * Configuration for assets within a Worker.
+         */
+        config?: Assets.Config;
+
+        /**
+         * Token provided upon successful upload of all files from a registered manifest.
+         */
+        jwt?: string;
+      }
+
+      export namespace Assets {
+        /**
+         * Configuration for assets within a Worker.
+         */
+        export interface Config {
+          /**
+           * Determines the redirects and rewrites of requests for HTML content.
+           */
+          html_handling?: 'auto-trailing-slash' | 'force-trailing-slash' | 'drop-trailing-slash' | 'none';
+
+          /**
+           * Determines the response when a request does not match a static asset, and there
+           * is no Worker script.
+           */
+          not_found_handling?: 'none' | '404-page' | 'single-page-application';
+        }
+      }
+
       export interface Binding {
         /**
          * Name of the binding variable.
@@ -293,11 +347,11 @@ export namespace ScriptUpdateParams {
       }
 
       /**
-       * Observability settings for the Worker
+       * Observability settings for the Worker.
        */
       export interface Observability {
         /**
-         * Whether observability is enabled for the Worker
+         * Whether observability is enabled for the Worker.
          */
         enabled: boolean;
 

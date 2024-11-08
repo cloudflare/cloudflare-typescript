@@ -57,7 +57,7 @@ export interface SettingEditParams {
   logpush?: boolean;
 
   /**
-   * Body param: Observability settings for the Worker
+   * Body param: Observability settings for the Worker.
    */
   observability?: SettingEditParams.Observability;
 
@@ -69,11 +69,11 @@ export interface SettingEditParams {
 
 export namespace SettingEditParams {
   /**
-   * Observability settings for the Worker
+   * Observability settings for the Worker.
    */
   export interface Observability {
     /**
-     * Whether observability is enabled for the Worker
+     * Whether observability is enabled for the Worker.
      */
     enabled: boolean;
 
