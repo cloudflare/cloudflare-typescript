@@ -125,7 +125,9 @@ import {
   SCIMConfigAuthenticationOAuthBearerToken,
   SCIMConfigAuthenticationOauth2,
   SCIMConfigMapping,
+  SaaSAppNameFormat,
   SaaSAppNameIDFormat,
+  SaaSAppSource,
   SelfHostedDomains,
 } from './applications/applications';
 import * as CertificatesAPI from './certificates/certificates';
@@ -951,7 +953,9 @@ export declare namespace Access {
     type CORSHeaders as CORSHeaders,
     type Decision as Decision,
     type OIDCSaaSApp as OIDCSaaSApp,
+    type SaaSAppNameFormat as SaaSAppNameFormat,
     type SaaSAppNameIDFormat as SaaSAppNameIDFormat,
+    type SaaSAppSource as SaaSAppSource,
     type SAMLSaaSApp as SAMLSaaSApp,
     type SCIMConfigAuthenticationHTTPBasic as SCIMConfigAuthenticationHTTPBasic,
     type SCIMConfigAuthenticationOAuthBearerToken as SCIMConfigAuthenticationOAuthBearerToken,
