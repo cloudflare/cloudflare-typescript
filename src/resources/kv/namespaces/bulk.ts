@@ -45,29 +45,9 @@ export class Bulk extends APIResource {
   }
 }
 
-export interface BulkUpdateResponse {
-  /**
-   * Number of keys successfully updated
-   */
-  successful_key_count?: number;
+export interface BulkUpdateResponse {}
 
-  /**
-   * Name of the keys that failed to be fully updated
-   */
-  unsuccessful_keys?: Array<string>;
-}
-
-export interface BulkDeleteResponse {
-  /**
-   * Number of keys successfully updated
-   */
-  successful_key_count?: number;
-
-  /**
-   * Name of the keys that failed to be fully updated
-   */
-  unsuccessful_keys?: Array<string>;
-}
+export interface BulkDeleteResponse {}
 
 export interface BulkUpdateParams {
   /**
