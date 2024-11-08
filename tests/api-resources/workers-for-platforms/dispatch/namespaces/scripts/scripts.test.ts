@@ -39,10 +39,15 @@ describe('resource scripts', () => {
           await toFile(Buffer.from('# my file contents'), 'README.md'),
         ],
         metadata: {
+          assets: {
+            config: { html_handling: 'auto-trailing-slash', not_found_handling: 'none' },
+            jwt: 'jwt',
+          },
           bindings: [{ name: 'MY_ENV_VAR', type: 'plain_text' }],
           body_part: 'worker.js',
           compatibility_date: '2023-07-25',
           compatibility_flags: ['string', 'string', 'string'],
+          keep_assets: false,
           keep_bindings: ['string', 'string', 'string'],
           logpush: false,
           main_module: 'worker.js',
