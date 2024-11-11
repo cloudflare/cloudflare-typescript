@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
-import * as Core from '../../../../core';
+import { APIResource } from '../../../../../resource';
+import * as Core from '../../../../../core';
 
 export class Certificates extends APIResource {
   /**
@@ -9,16 +9,16 @@ export class Certificates extends APIResource {
    * and referenced by Access device posture policies when the client visits MTLS
    * protected domains. This facilitates device posture without a WARP session.
    */
-  update(
+  edit(
     zoneTag: string,
-    body: CertificateUpdateParams,
+    body: CertificateEditParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<CertificateUpdateResponse> {
+  ): Core.APIPromise<CertificateEditResponse> {
     return (
       this._client.patch(`/zones/${zoneTag}/devices/policy/certificates`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: CertificateUpdateResponse }>
+      }) as Core.APIPromise<{ result: CertificateEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -34,19 +34,11 @@ export class Certificates extends APIResource {
   }
 }
 
-export interface DevicePolicyCertificates {
-  /**
-   * The current status of the device policy certificate provisioning feature for
-   * WARP clients.
-   */
-  enabled: boolean;
-}
-
-export type CertificateUpdateResponse = unknown | string | null;
+export type CertificateEditResponse = unknown | string | null;
 
 export type CertificateGetResponse = unknown | string | null;
 
-export interface CertificateUpdateParams {
+export interface CertificateEditParams {
   /**
    * The current status of the device policy certificate provisioning feature for
    * WARP clients.
@@ -56,9 +48,8 @@ export interface CertificateUpdateParams {
 
 export declare namespace Certificates {
   export {
-    type DevicePolicyCertificates as DevicePolicyCertificates,
-    type CertificateUpdateResponse as CertificateUpdateResponse,
+    type CertificateEditResponse as CertificateEditResponse,
     type CertificateGetResponse as CertificateGetResponse,
-    type CertificateUpdateParams as CertificateUpdateParams,
+    type CertificateEditParams as CertificateEditParams,
   };
 }
