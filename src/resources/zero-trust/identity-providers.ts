@@ -1042,7 +1042,7 @@ export namespace IdentityProvider {
      * parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: unknown;
+    config: AccessOnetimepin.Config;
 
     /**
      * The name of the identity provider, shown to users on the login page.
@@ -1066,6 +1066,17 @@ export namespace IdentityProvider {
      * Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProvidersAPI.IdentityProviderSCIMConfig;
+  }
+
+  export namespace AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {
+      redirect_url?: string;
+    }
   }
 }
 
@@ -2812,7 +2823,7 @@ export namespace IdentityProviderCreateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: unknown;
+    config: IdentityProviderCreateParams.AccessOnetimepin.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -2843,6 +2854,15 @@ export namespace IdentityProviderCreateParams {
      * Identity Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {}
   }
 }
 
@@ -3751,7 +3771,7 @@ export namespace IdentityProviderUpdateParams {
      * required parameters for a specific provider, refer to our
      * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
      */
-    config: unknown;
+    config: IdentityProviderUpdateParams.AccessOnetimepin.Config;
 
     /**
      * Body param: The name of the identity provider, shown to users on the login page.
@@ -3782,6 +3802,15 @@ export namespace IdentityProviderUpdateParams {
      * Identity Management (SCIM) with the identity provider.
      */
     scim_config?: IdentityProviderSCIMConfigParam;
+  }
+
+  export namespace AccessOnetimepin {
+    /**
+     * The configuration parameters for the identity provider. To view the required
+     * parameters for a specific provider, refer to our
+     * [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
+     */
+    export interface Config {}
   }
 }
 

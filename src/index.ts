@@ -482,25 +482,6 @@ export class Cloudflare extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export {
-  CloudflareError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} from './error';
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
 Cloudflare.Accounts = Accounts;
 Cloudflare.OriginCACertificates = OriginCACertificates;
 Cloudflare.IPs = IPs;
@@ -589,7 +570,6 @@ Cloudflare.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4P
 Cloudflare.ResourceSharing = ResourceSharing;
 Cloudflare.ResourceSharingListResponsesV4PagePaginationArray =
   ResourceSharingListResponsesV4PagePaginationArray;
-
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -841,5 +821,22 @@ export declare namespace Cloudflare {
   export type SubscriptionComponent = API.SubscriptionComponent;
   export type SubscriptionZone = API.SubscriptionZone;
 }
+
+export { toFile, fileFromPath } from 'cloudflare/uploads';
+export {
+  CloudflareError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from 'cloudflare/error';
 
 export default Cloudflare;
