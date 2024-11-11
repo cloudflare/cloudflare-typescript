@@ -4124,82 +4124,122 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">DevicePolicyCertificates</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">FallbackDomain</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">FallbackDomainPolicy</a></code>
 - <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SettingsPolicy</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">PolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SplitTunnelExclude</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/policies.ts">SplitTunnelInclude</a></code>
 
-Methods:
-
-- <code title="post /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">create</a>({ ...params }) -> SettingsPolicy | null</code>
-- <code title="get /accounts/{account_id}/devices/policies">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">list</a>({ ...params }) -> SettingsPoliciesSinglePage</code>
-- <code title="delete /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">delete</a>(policyId, { ...params }) -> PolicyDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">edit</a>(policyId, { ...params }) -> SettingsPolicy | null</code>
-- <code title="get /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.<a href="./src/resources/zero-trust/devices/policies/policies.ts">get</a>(policyId, { ...params }) -> SettingsPolicy | null</code>
-
-#### Certificates
+#### Default
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/certificates.ts">DevicePolicyCertificates</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/certificates.ts">CertificateUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/certificates.ts">CertificateGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/default.ts">DefaultEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/default.ts">DefaultGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.certificates.<a href="./src/resources/zero-trust/devices/policies/certificates.ts">update</a>(zoneTag, { ...params }) -> CertificateUpdateResponse</code>
-- <code title="get /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.certificates.<a href="./src/resources/zero-trust/devices/policies/certificates.ts">get</a>(zoneTag) -> CertificateGetResponse</code>
+- <code title="patch /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.default.<a href="./src/resources/zero-trust/devices/policies/default/default.ts">edit</a>({ ...params }) -> DefaultEditResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.default.<a href="./src/resources/zero-trust/devices/policies/default/default.ts">get</a>({ ...params }) -> DefaultGetResponse | null</code>
 
-#### DefaultPolicy
+##### Excludes
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/default-policy.ts">DefaultPolicyGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/excludes.ts">ExcludeUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/excludes.ts">ExcludeGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.defaultPolicy.<a href="./src/resources/zero-trust/devices/policies/default-policy.ts">get</a>({ ...params }) -> DefaultPolicyGetResponse | null</code>
+- <code title="put /accounts/{account_id}/devices/policy/exclude">client.zeroTrust.devices.policies.default.excludes.<a href="./src/resources/zero-trust/devices/policies/default/excludes.ts">update</a>([ ...body ]) -> ExcludeUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/exclude">client.zeroTrust.devices.policies.default.excludes.<a href="./src/resources/zero-trust/devices/policies/default/excludes.ts">get</a>({ ...params }) -> ExcludeGetResponse | null</code>
 
-#### Excludes
+##### Includes
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">SplitTunnelExclude</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">ExcludeUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/excludes.ts">ExcludeGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/includes.ts">IncludeUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/includes.ts">IncludeGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/devices/policy/exclude">client.zeroTrust.devices.policies.excludes.<a href="./src/resources/zero-trust/devices/policies/excludes.ts">update</a>([ ...body ]) -> ExcludeUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/devices/policy/exclude">client.zeroTrust.devices.policies.excludes.<a href="./src/resources/zero-trust/devices/policies/excludes.ts">list</a>({ ...params }) -> SplitTunnelExcludesSinglePage</code>
-- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/exclude">client.zeroTrust.devices.policies.excludes.<a href="./src/resources/zero-trust/devices/policies/excludes.ts">get</a>(policyId, { ...params }) -> ExcludeGetResponse | null</code>
+- <code title="put /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.default.includes.<a href="./src/resources/zero-trust/devices/policies/default/includes.ts">update</a>([ ...body ]) -> IncludeUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.default.includes.<a href="./src/resources/zero-trust/devices/policies/default/includes.ts">get</a>({ ...params }) -> IncludeGetResponse | null</code>
 
-#### FallbackDomains
+##### FallbackDomains
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomain</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomainPolicy</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomainUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">FallbackDomainGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/fallback-domains.ts">FallbackDomainUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/fallback-domains.ts">FallbackDomainGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">update</a>(policyId, [ ...domains ]) -> FallbackDomainUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/devices/policy/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">list</a>({ ...params }) -> FallbackDomainsSinglePage</code>
-- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/fallback-domains.ts">get</a>(policyId, { ...params }) -> FallbackDomainGetResponse | null</code>
+- <code title="put /accounts/{account_id}/devices/policy/fallback_domains">client.zeroTrust.devices.policies.default.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/default/fallback-domains.ts">update</a>([ ...domains ]) -> FallbackDomainUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/fallback_domains">client.zeroTrust.devices.policies.default.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/default/fallback-domains.ts">get</a>({ ...params }) -> FallbackDomainGetResponse | null</code>
 
-#### Includes
+##### Certificates
 
 Types:
 
-- <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">SplitTunnelInclude</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">IncludeUpdateResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/includes.ts">IncludeGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">CertificateEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">CertificateGetResponse</a></code>
 
 Methods:
 
-- <code title="put /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.includes.<a href="./src/resources/zero-trust/devices/policies/includes.ts">update</a>([ ...body ]) -> IncludeUpdateResponse | null</code>
-- <code title="get /accounts/{account_id}/devices/policy/include">client.zeroTrust.devices.policies.includes.<a href="./src/resources/zero-trust/devices/policies/includes.ts">list</a>({ ...params }) -> SplitTunnelIncludesSinglePage</code>
-- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/include">client.zeroTrust.devices.policies.includes.<a href="./src/resources/zero-trust/devices/policies/includes.ts">get</a>(policyId, { ...params }) -> IncludeGetResponse | null</code>
+- <code title="patch /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.default.certificates.<a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">edit</a>(zoneTag, { ...params }) -> CertificateEditResponse</code>
+- <code title="get /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.default.certificates.<a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">get</a>(zoneTag) -> CertificateGetResponse</code>
+
+#### Custom
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">CustomDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/devices/policy">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">create</a>({ ...params }) -> SettingsPolicy | null</code>
+- <code title="get /accounts/{account_id}/devices/policies">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">list</a>({ ...params }) -> SettingsPoliciesSinglePage</code>
+- <code title="delete /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">delete</a>(policyId, { ...params }) -> CustomDeleteResponse | null</code>
+- <code title="patch /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">edit</a>(policyId, { ...params }) -> SettingsPolicy | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}">client.zeroTrust.devices.policies.custom.<a href="./src/resources/zero-trust/devices/policies/custom/custom.ts">get</a>(policyId, { ...params }) -> SettingsPolicy | null</code>
+
+##### Excludes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/excludes.ts">ExcludeUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/excludes.ts">ExcludeGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/exclude">client.zeroTrust.devices.policies.custom.excludes.<a href="./src/resources/zero-trust/devices/policies/custom/excludes.ts">update</a>(policyId, [ ...body ]) -> ExcludeUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/exclude">client.zeroTrust.devices.policies.custom.excludes.<a href="./src/resources/zero-trust/devices/policies/custom/excludes.ts">get</a>(policyId, { ...params }) -> ExcludeGetResponse | null</code>
+
+##### Includes
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/includes.ts">IncludeUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/includes.ts">IncludeGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/include">client.zeroTrust.devices.policies.custom.includes.<a href="./src/resources/zero-trust/devices/policies/custom/includes.ts">update</a>(policyId, [ ...body ]) -> IncludeUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/include">client.zeroTrust.devices.policies.custom.includes.<a href="./src/resources/zero-trust/devices/policies/custom/includes.ts">get</a>(policyId, { ...params }) -> IncludeGetResponse | null</code>
+
+##### FallbackDomains
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/fallback-domains.ts">FallbackDomainUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/devices/policies/custom/fallback-domains.ts">FallbackDomainGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.custom.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/custom/fallback-domains.ts">update</a>(policyId, [ ...domains ]) -> FallbackDomainUpdateResponse | null</code>
+- <code title="get /accounts/{account_id}/devices/policy/{policy_id}/fallback_domains">client.zeroTrust.devices.policies.custom.fallbackDomains.<a href="./src/resources/zero-trust/devices/policies/custom/fallback-domains.ts">get</a>(policyId, { ...params }) -> FallbackDomainGetResponse | null</code>
 
 ### Posture
 

@@ -44,15 +44,13 @@ import * as UnrevokeAPI from './unrevoke';
 import { Unrevoke, UnrevokeCreateParams, UnrevokeCreateResponse } from './unrevoke';
 import * as PoliciesAPI from './policies/policies';
 import {
+  DevicePolicyCertificates,
+  FallbackDomain,
+  FallbackDomainPolicy,
   Policies,
-  PolicyCreateParams,
-  PolicyDeleteParams,
-  PolicyDeleteResponse,
-  PolicyEditParams,
-  PolicyGetParams,
-  PolicyListParams,
-  SettingsPoliciesSinglePage,
   SettingsPolicy,
+  SplitTunnelExclude,
+  SplitTunnelInclude,
 } from './policies/policies';
 import * as PostureAPI from './posture/posture';
 import {
@@ -253,7 +251,6 @@ Devices.SchemaHTTPSSinglePage = SchemaHTTPSSinglePage;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
 Devices.Policies = Policies;
-Devices.SettingsPoliciesSinglePage = SettingsPoliciesSinglePage;
 Devices.Posture = Posture;
 Devices.DevicePostureRulesSinglePage = DevicePostureRulesSinglePage;
 Devices.Revoke = Revoke;
@@ -298,14 +295,12 @@ export declare namespace Devices {
 
   export {
     Policies as Policies,
+    type DevicePolicyCertificates as DevicePolicyCertificates,
+    type FallbackDomain as FallbackDomain,
+    type FallbackDomainPolicy as FallbackDomainPolicy,
     type SettingsPolicy as SettingsPolicy,
-    type PolicyDeleteResponse as PolicyDeleteResponse,
-    SettingsPoliciesSinglePage as SettingsPoliciesSinglePage,
-    type PolicyCreateParams as PolicyCreateParams,
-    type PolicyListParams as PolicyListParams,
-    type PolicyDeleteParams as PolicyDeleteParams,
-    type PolicyEditParams as PolicyEditParams,
-    type PolicyGetParams as PolicyGetParams,
+    type SplitTunnelExclude as SplitTunnelExclude,
+    type SplitTunnelInclude as SplitTunnelInclude,
   };
 
   export {
