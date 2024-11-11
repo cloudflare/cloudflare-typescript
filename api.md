@@ -3271,8 +3271,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAP</a></code>
-- <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPFilter</a></code>
 - <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPCreateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPListResponse</a></code>
 - <code><a href="./src/resources/magic-transit/pcaps/pcaps.ts">PCAPGetResponse</a></code>
@@ -3287,15 +3285,16 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/magic-transit/pcaps/ownership.ts">Ownership</a></code>
+- <code><a href="./src/resources/magic-transit/pcaps/ownership.ts">OwnershipCreateResponse</a></code>
 - <code><a href="./src/resources/magic-transit/pcaps/ownership.ts">OwnershipGetResponse</a></code>
+- <code><a href="./src/resources/magic-transit/pcaps/ownership.ts">OwnershipValidateResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/pcaps/ownership">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">create</a>({ ...params }) -> Ownership</code>
+- <code title="post /accounts/{account_id}/pcaps/ownership">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">create</a>({ ...params }) -> OwnershipCreateResponse</code>
 - <code title="delete /accounts/{account_id}/pcaps/ownership/{ownership_id}">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">delete</a>(ownershipId, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/pcaps/ownership">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">get</a>({ ...params }) -> OwnershipGetResponse | null</code>
-- <code title="post /accounts/{account_id}/pcaps/ownership/validate">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">validate</a>({ ...params }) -> Ownership</code>
+- <code title="post /accounts/{account_id}/pcaps/ownership/validate">client.magicTransit.pcaps.ownership.<a href="./src/resources/magic-transit/pcaps/ownership.ts">validate</a>({ ...params }) -> OwnershipValidateResponse</code>
 
 ### Download
 
