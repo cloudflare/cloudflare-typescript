@@ -72,12 +72,11 @@ export {
 export {
   SettingsPoliciesSinglePage,
   Policies,
+  type DevicePolicyCertificates,
+  type FallbackDomain,
+  type FallbackDomainPolicy,
   type SettingsPolicy,
-  type PolicyDeleteResponse,
-  type PolicyCreateParams,
-  type PolicyListParams,
-  type PolicyDeleteParams,
-  type PolicyEditParams,
-  type PolicyGetParams,
+  type SplitTunnelExclude,
+  type SplitTunnelInclude,
 } from './policies/index';
 export { Unrevoke, type UnrevokeCreateResponse, type UnrevokeCreateParams } from './unrevoke';

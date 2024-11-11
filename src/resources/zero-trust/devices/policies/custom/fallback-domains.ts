@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../../resource';
-import * as Core from '../../../../core';
-import { SinglePage } from '../../../../pagination';
+import { APIResource } from '../../../../../resource';
+import * as Core from '../../../../../core';
+import * as PoliciesAPI from '../policies';
 
 export class FallbackDomains extends APIResource {
   /**
@@ -25,22 +25,6 @@ export class FallbackDomains extends APIResource {
   }
 
   /**
-   * Fetches a list of domains to bypass Gateway DNS resolution. These domains will
-   * use the specified local DNS resolver instead.
-   */
-  list(
-    params: FallbackDomainListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<FallbackDomainsSinglePage, FallbackDomain> {
-    const { account_id } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/devices/policy/fallback_domains`,
-      FallbackDomainsSinglePage,
-      options,
-    );
-  }
-
-  /**
    * Fetches the list of domains to bypass Gateway DNS resolution from a specified
    * device settings profile. These domains will use the specified local DNS resolver
    * instead.
@@ -60,47 +44,9 @@ export class FallbackDomains extends APIResource {
   }
 }
 
-export class FallbackDomainsSinglePage extends SinglePage<FallbackDomain> {}
+export type FallbackDomainUpdateResponse = Array<PoliciesAPI.FallbackDomain>;
 
-export interface FallbackDomain {
-  /**
-   * The domain suffix to match when resolving locally.
-   */
-  suffix: string;
-
-  /**
-   * A description of the fallback domain, displayed in the client UI.
-   */
-  description?: string;
-
-  /**
-   * A list of IP addresses to handle domain resolution.
-   */
-  dns_server?: Array<string>;
-}
-
-export interface FallbackDomainParam {
-  /**
-   * The domain suffix to match when resolving locally.
-   */
-  suffix: string;
-
-  /**
-   * A description of the fallback domain, displayed in the client UI.
-   */
-  description?: string;
-
-  /**
-   * A list of IP addresses to handle domain resolution.
-   */
-  dns_server?: Array<string>;
-}
-
-export type FallbackDomainPolicy = Array<FallbackDomain>;
-
-export type FallbackDomainUpdateResponse = Array<FallbackDomain>;
-
-export type FallbackDomainGetResponse = Array<FallbackDomain>;
+export type FallbackDomainGetResponse = Array<PoliciesAPI.FallbackDomain>;
 
 export interface FallbackDomainUpdateParams {
   /**
@@ -111,28 +57,18 @@ export interface FallbackDomainUpdateParams {
   /**
    * Body param:
    */
-  domains: Array<FallbackDomainParam>;
-}
-
-export interface FallbackDomainListParams {
-  account_id: string;
+  domains: Array<PoliciesAPI.FallbackDomainParam>;
 }
 
 export interface FallbackDomainGetParams {
   account_id: string;
 }
 
-FallbackDomains.FallbackDomainsSinglePage = FallbackDomainsSinglePage;
-
 export declare namespace FallbackDomains {
   export {
-    type FallbackDomain as FallbackDomain,
-    type FallbackDomainPolicy as FallbackDomainPolicy,
     type FallbackDomainUpdateResponse as FallbackDomainUpdateResponse,
     type FallbackDomainGetResponse as FallbackDomainGetResponse,
-    FallbackDomainsSinglePage as FallbackDomainsSinglePage,
     type FallbackDomainUpdateParams as FallbackDomainUpdateParams,
-    type FallbackDomainListParams as FallbackDomainListParams,
     type FallbackDomainGetParams as FallbackDomainGetParams,
   };
 }
