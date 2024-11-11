@@ -87,10 +87,8 @@ import {
 } from './routes';
 import * as PCAPsAPI from './pcaps/pcaps';
 import {
-  PCAP,
   PCAPCreateParams,
   PCAPCreateResponse,
-  PCAPFilter,
   PCAPGetParams,
   PCAPGetResponse,
   PCAPListParams,
@@ -353,8 +351,6 @@ export declare namespace MagicTransit {
 
   export {
     PCAPs as PCAPs,
-    type PCAP as PCAP,
-    type PCAPFilter as PCAPFilter,
     type PCAPCreateResponse as PCAPCreateResponse,
     type PCAPListResponse as PCAPListResponse,
     type PCAPGetResponse as PCAPGetResponse,
