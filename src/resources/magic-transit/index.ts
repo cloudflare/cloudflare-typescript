@@ -66,8 +66,6 @@ export { MagicTransit } from './magic-transit';
 export {
   PCAPListResponsesSinglePage,
   PCAPs,
-  type PCAP,
-  type PCAPFilter,
   type PCAPCreateResponse,
   type PCAPListResponse,
   type PCAPGetResponse,

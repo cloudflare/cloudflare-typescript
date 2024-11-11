@@ -2,9 +2,10 @@
 
 export { Download, type DownloadGetParams } from './download';
 export {
-  OwnershipResource,
-  type Ownership,
+  Ownership,
+  type OwnershipCreateResponse,
   type OwnershipGetResponse,
+  type OwnershipValidateResponse,
   type OwnershipCreateParams,
   type OwnershipDeleteParams,
   type OwnershipGetParams,
@@ -13,8 +14,6 @@ export {
 export {
   PCAPListResponsesSinglePage,
   PCAPs,
-  type PCAP,
-  type PCAPFilter,
   type PCAPCreateResponse,
   type PCAPListResponse,
   type PCAPGetResponse,
