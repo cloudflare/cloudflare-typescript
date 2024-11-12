@@ -2,23 +2,23 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as PCAPsAPI from './pcaps';
 import * as DownloadAPI from './download';
 import { Download, DownloadGetParams } from './download';
 import * as OwnershipAPI from './ownership';
 import {
   Ownership,
   OwnershipCreateParams,
-  OwnershipCreateResponse,
   OwnershipDeleteParams,
   OwnershipGetParams,
   OwnershipGetResponse,
+  OwnershipResource,
   OwnershipValidateParams,
-  OwnershipValidateResponse,
 } from './ownership';
 import { SinglePage } from '../../../pagination';
 
 export class PCAPs extends APIResource {
-  ownership: OwnershipAPI.Ownership = new OwnershipAPI.Ownership(this._client);
+  ownership: OwnershipAPI.OwnershipResource = new OwnershipAPI.OwnershipResource(this._client);
   download: DownloadAPI.Download = new DownloadAPI.Download(this._client);
 
   /**
@@ -63,89 +63,115 @@ export class PCAPs extends APIResource {
 
 export class PCAPListResponsesSinglePage extends SinglePage<PCAPListResponse> {}
 
-export type PCAPCreateResponse =
-  | PCAPCreateResponse.MagicVisibilityPCAPsPCAPsResponseSimple
-  | PCAPCreateResponse.MagicVisibilityPCAPsPCAPsResponseFull;
+export interface PCAP {
+  /**
+   * The ID for the packet capture.
+   */
+  id?: string;
+
+  /**
+   * The packet capture filter. When this field is empty, all packets are captured.
+   */
+  filter_v1?: PCAPFilter;
+
+  /**
+   * The status of the packet capture request.
+   */
+  status?:
+    | 'unknown'
+    | 'success'
+    | 'pending'
+    | 'running'
+    | 'conversion_pending'
+    | 'conversion_running'
+    | 'complete'
+    | 'failed';
+
+  /**
+   * The RFC 3339 timestamp when the packet capture was created.
+   */
+  submitted?: string;
+
+  /**
+   * The system used to collect packet captures.
+   */
+  system?: 'magic-transit';
+
+  /**
+   * The packet capture duration in seconds.
+   */
+  time_limit?: number;
+
+  /**
+   * The type of packet capture. `Simple` captures sampled packets, and `full`
+   * captures entire payloads and non-sampled packets.
+   */
+  type?: 'simple' | 'full';
+}
+
+/**
+ * The packet capture filter. When this field is empty, all packets are captured.
+ */
+export interface PCAPFilter {
+  /**
+   * The destination IP address of the packet.
+   */
+  destination_address?: string;
+
+  /**
+   * The destination port of the packet.
+   */
+  destination_port?: number;
+
+  /**
+   * The protocol number of the packet.
+   */
+  protocol?: number;
+
+  /**
+   * The source IP address of the packet.
+   */
+  source_address?: string;
+
+  /**
+   * The source port of the packet.
+   */
+  source_port?: number;
+}
+
+/**
+ * The packet capture filter. When this field is empty, all packets are captured.
+ */
+export interface PCAPFilterParam {
+  /**
+   * The destination IP address of the packet.
+   */
+  destination_address?: string;
+
+  /**
+   * The destination port of the packet.
+   */
+  destination_port?: number;
+
+  /**
+   * The protocol number of the packet.
+   */
+  protocol?: number;
+
+  /**
+   * The source IP address of the packet.
+   */
+  source_address?: string;
+
+  /**
+   * The source port of the packet.
+   */
+  source_port?: number;
+}
+
+export type PCAPCreateResponse = PCAP | PCAPCreateResponse.MagicVisibilityPCAPsPCAPsResponseFull;
 
 export namespace PCAPCreateResponse {
-  export interface MagicVisibilityPCAPsPCAPsResponseSimple {
-    /**
-     * The ID for the packet capture.
-     */
-    id?: string;
-
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    filter_v1?: MagicVisibilityPCAPsPCAPsResponseSimple.FilterV1;
-
-    /**
-     * The status of the packet capture request.
-     */
-    status?:
-      | 'unknown'
-      | 'success'
-      | 'pending'
-      | 'running'
-      | 'conversion_pending'
-      | 'conversion_running'
-      | 'complete'
-      | 'failed';
-
-    /**
-     * The RFC 3339 timestamp when the packet capture was created.
-     */
-    submitted?: string;
-
-    /**
-     * The system used to collect packet captures.
-     */
-    system?: 'magic-transit';
-
-    /**
-     * The packet capture duration in seconds.
-     */
-    time_limit?: number;
-
-    /**
-     * The type of packet capture. `Simple` captures sampled packets, and `full`
-     * captures entire payloads and non-sampled packets.
-     */
-    type?: 'simple' | 'full';
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsResponseSimple {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
-  }
-
   export interface MagicVisibilityPCAPsPCAPsResponseFull {
     /**
      * The ID for the packet capture.
@@ -179,7 +205,7 @@ export namespace PCAPCreateResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: MagicVisibilityPCAPsPCAPsResponseFull.FilterV1;
+    filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
      * The status of the packet capture request.
@@ -215,123 +241,11 @@ export namespace PCAPCreateResponse {
      */
     type?: 'simple' | 'full';
   }
-
-  export namespace MagicVisibilityPCAPsPCAPsResponseFull {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
-  }
 }
 
-export type PCAPListResponse =
-  | PCAPListResponse.MagicVisibilityPCAPsPCAPsResponseSimple
-  | PCAPListResponse.MagicVisibilityPCAPsPCAPsResponseFull;
+export type PCAPListResponse = PCAP | PCAPListResponse.MagicVisibilityPCAPsPCAPsResponseFull;
 
 export namespace PCAPListResponse {
-  export interface MagicVisibilityPCAPsPCAPsResponseSimple {
-    /**
-     * The ID for the packet capture.
-     */
-    id?: string;
-
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    filter_v1?: MagicVisibilityPCAPsPCAPsResponseSimple.FilterV1;
-
-    /**
-     * The status of the packet capture request.
-     */
-    status?:
-      | 'unknown'
-      | 'success'
-      | 'pending'
-      | 'running'
-      | 'conversion_pending'
-      | 'conversion_running'
-      | 'complete'
-      | 'failed';
-
-    /**
-     * The RFC 3339 timestamp when the packet capture was created.
-     */
-    submitted?: string;
-
-    /**
-     * The system used to collect packet captures.
-     */
-    system?: 'magic-transit';
-
-    /**
-     * The packet capture duration in seconds.
-     */
-    time_limit?: number;
-
-    /**
-     * The type of packet capture. `Simple` captures sampled packets, and `full`
-     * captures entire payloads and non-sampled packets.
-     */
-    type?: 'simple' | 'full';
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsResponseSimple {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
-  }
-
   export interface MagicVisibilityPCAPsPCAPsResponseFull {
     /**
      * The ID for the packet capture.
@@ -365,7 +279,7 @@ export namespace PCAPListResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: MagicVisibilityPCAPsPCAPsResponseFull.FilterV1;
+    filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
      * The status of the packet capture request.
@@ -400,124 +314,12 @@ export namespace PCAPListResponse {
      * captures entire payloads and non-sampled packets.
      */
     type?: 'simple' | 'full';
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsResponseFull {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
   }
 }
 
-export type PCAPGetResponse =
-  | PCAPGetResponse.MagicVisibilityPCAPsPCAPsResponseSimple
-  | PCAPGetResponse.MagicVisibilityPCAPsPCAPsResponseFull;
+export type PCAPGetResponse = PCAP | PCAPGetResponse.MagicVisibilityPCAPsPCAPsResponseFull;
 
 export namespace PCAPGetResponse {
-  export interface MagicVisibilityPCAPsPCAPsResponseSimple {
-    /**
-     * The ID for the packet capture.
-     */
-    id?: string;
-
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    filter_v1?: MagicVisibilityPCAPsPCAPsResponseSimple.FilterV1;
-
-    /**
-     * The status of the packet capture request.
-     */
-    status?:
-      | 'unknown'
-      | 'success'
-      | 'pending'
-      | 'running'
-      | 'conversion_pending'
-      | 'conversion_running'
-      | 'complete'
-      | 'failed';
-
-    /**
-     * The RFC 3339 timestamp when the packet capture was created.
-     */
-    submitted?: string;
-
-    /**
-     * The system used to collect packet captures.
-     */
-    system?: 'magic-transit';
-
-    /**
-     * The packet capture duration in seconds.
-     */
-    time_limit?: number;
-
-    /**
-     * The type of packet capture. `Simple` captures sampled packets, and `full`
-     * captures entire payloads and non-sampled packets.
-     */
-    type?: 'simple' | 'full';
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsResponseSimple {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
-  }
-
   export interface MagicVisibilityPCAPsPCAPsResponseFull {
     /**
      * The ID for the packet capture.
@@ -551,7 +353,7 @@ export namespace PCAPGetResponse {
     /**
      * The packet capture filter. When this field is empty, all packets are captured.
      */
-    filter_v1?: MagicVisibilityPCAPsPCAPsResponseFull.FilterV1;
+    filter_v1?: PCAPsAPI.PCAPFilter;
 
     /**
      * The status of the packet capture request.
@@ -586,38 +388,6 @@ export namespace PCAPGetResponse {
      * captures entire payloads and non-sampled packets.
      */
     type?: 'simple' | 'full';
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsResponseFull {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
   }
 }
 
@@ -657,39 +427,7 @@ export namespace PCAPCreateParams {
      * Body param: The packet capture filter. When this field is empty, all packets are
      * captured.
      */
-    filter_v1?: PCAPCreateParams.MagicVisibilityPCAPsPCAPsRequestSimple.FilterV1;
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsRequestSimple {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
+    filter_v1?: PCAPFilterParam;
   }
 
   export interface MagicVisibilityPCAPsPCAPsRequestFull {
@@ -737,44 +475,12 @@ export namespace PCAPCreateParams {
      * Body param: The packet capture filter. When this field is empty, all packets are
      * captured.
      */
-    filter_v1?: PCAPCreateParams.MagicVisibilityPCAPsPCAPsRequestFull.FilterV1;
+    filter_v1?: PCAPFilterParam;
 
     /**
      * Body param: The limit of packets contained in a packet capture.
      */
     packet_limit?: number;
-  }
-
-  export namespace MagicVisibilityPCAPsPCAPsRequestFull {
-    /**
-     * The packet capture filter. When this field is empty, all packets are captured.
-     */
-    export interface FilterV1 {
-      /**
-       * The destination IP address of the packet.
-       */
-      destination_address?: string;
-
-      /**
-       * The destination port of the packet.
-       */
-      destination_port?: number;
-
-      /**
-       * The protocol number of the packet.
-       */
-      protocol?: number;
-
-      /**
-       * The source IP address of the packet.
-       */
-      source_address?: string;
-
-      /**
-       * The source port of the packet.
-       */
-      source_port?: number;
-    }
   }
 }
 
@@ -793,11 +499,13 @@ export interface PCAPGetParams {
 }
 
 PCAPs.PCAPListResponsesSinglePage = PCAPListResponsesSinglePage;
-PCAPs.Ownership = Ownership;
+PCAPs.OwnershipResource = OwnershipResource;
 PCAPs.Download = Download;
 
 export declare namespace PCAPs {
   export {
+    type PCAP as PCAP,
+    type PCAPFilter as PCAPFilter,
     type PCAPCreateResponse as PCAPCreateResponse,
     type PCAPListResponse as PCAPListResponse,
     type PCAPGetResponse as PCAPGetResponse,
@@ -808,10 +516,9 @@ export declare namespace PCAPs {
   };
 
   export {
-    Ownership as Ownership,
-    type OwnershipCreateResponse as OwnershipCreateResponse,
+    OwnershipResource as OwnershipResource,
+    type Ownership as Ownership,
     type OwnershipGetResponse as OwnershipGetResponse,
-    type OwnershipValidateResponse as OwnershipValidateResponse,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipDeleteParams as OwnershipDeleteParams,
     type OwnershipGetParams as OwnershipGetParams,

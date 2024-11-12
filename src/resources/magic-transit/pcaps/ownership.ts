@@ -3,18 +3,15 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 
-export class Ownership extends APIResource {
+export class OwnershipResource extends APIResource {
   /**
    * Adds an AWS or GCP bucket to use with full packet captures.
    */
-  create(
-    params: OwnershipCreateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipCreateResponse> {
+  create(params: OwnershipCreateParams, options?: Core.RequestOptions): Core.APIPromise<Ownership> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership`, { body, ...options }) as Core.APIPromise<{
-        result: OwnershipCreateResponse;
+        result: Ownership;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -52,21 +49,18 @@ export class Ownership extends APIResource {
   /**
    * Validates buckets added to the packet captures API.
    */
-  validate(
-    params: OwnershipValidateParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<OwnershipValidateResponse> {
+  validate(params: OwnershipValidateParams, options?: Core.RequestOptions): Core.APIPromise<Ownership> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/pcaps/ownership/validate`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: OwnershipValidateResponse }>
+      }) as Core.APIPromise<{ result: Ownership }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
 
-export interface OwnershipCreateResponse {
+export interface Ownership {
   /**
    * The bucket ID associated with the packet captures API.
    */
@@ -98,73 +92,7 @@ export interface OwnershipCreateResponse {
   validated?: string;
 }
 
-export type OwnershipGetResponse = Array<OwnershipGetResponse.OwnershipGetResponseItem>;
-
-export namespace OwnershipGetResponse {
-  export interface OwnershipGetResponseItem {
-    /**
-     * The bucket ID associated with the packet captures API.
-     */
-    id: string;
-
-    /**
-     * The full URI for the bucket. This field only applies to `full` packet captures.
-     */
-    destination_conf: string;
-
-    /**
-     * The ownership challenge filename stored in the bucket.
-     */
-    filename: string;
-
-    /**
-     * The status of the ownership challenge. Can be pending, success or failed.
-     */
-    status: 'pending' | 'success' | 'failed';
-
-    /**
-     * The RFC 3339 timestamp when the bucket was added to packet captures API.
-     */
-    submitted: string;
-
-    /**
-     * The RFC 3339 timestamp when the bucket was validated.
-     */
-    validated?: string;
-  }
-}
-
-export interface OwnershipValidateResponse {
-  /**
-   * The bucket ID associated with the packet captures API.
-   */
-  id: string;
-
-  /**
-   * The full URI for the bucket. This field only applies to `full` packet captures.
-   */
-  destination_conf: string;
-
-  /**
-   * The ownership challenge filename stored in the bucket.
-   */
-  filename: string;
-
-  /**
-   * The status of the ownership challenge. Can be pending, success or failed.
-   */
-  status: 'pending' | 'success' | 'failed';
-
-  /**
-   * The RFC 3339 timestamp when the bucket was added to packet captures API.
-   */
-  submitted: string;
-
-  /**
-   * The RFC 3339 timestamp when the bucket was validated.
-   */
-  validated?: string;
-}
+export type OwnershipGetResponse = Array<Ownership>;
 
 export interface OwnershipCreateParams {
   /**
@@ -211,11 +139,10 @@ export interface OwnershipValidateParams {
   ownership_challenge: string;
 }
 
-export declare namespace Ownership {
+export declare namespace OwnershipResource {
   export {
-    type OwnershipCreateResponse as OwnershipCreateResponse,
+    type Ownership as Ownership,
     type OwnershipGetResponse as OwnershipGetResponse,
-    type OwnershipValidateResponse as OwnershipValidateResponse,
     type OwnershipCreateParams as OwnershipCreateParams,
     type OwnershipDeleteParams as OwnershipDeleteParams,
     type OwnershipGetParams as OwnershipGetParams,
