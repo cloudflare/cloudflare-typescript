@@ -5,7 +5,6 @@ export {
   MemberListResponsesV4PagePaginationArray,
   Members,
   type Status,
-  type UserWithInviteCode,
   type MemberCreateResponse,
   type MemberUpdateResponse,
   type MemberListResponse,
@@ -17,7 +16,14 @@ export {
   type MemberDeleteParams,
   type MemberGetParams,
 } from './members';
-export { Roles, type RoleGetResponse, type RoleListParams, type RoleGetParams } from './roles';
+export {
+  RoleListResponsesSinglePage,
+  Roles,
+  type RoleListResponse,
+  type RoleGetResponse,
+  type RoleListParams,
+  type RoleGetParams,
+} from './roles';
 export {
   Subscriptions,
   type SubscriptionCreateResponse,

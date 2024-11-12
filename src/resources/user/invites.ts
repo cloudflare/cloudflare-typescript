@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import { SinglePage } from '../../pagination';
 
 export class Invites extends APIResource {
@@ -16,14 +15,10 @@ export class Invites extends APIResource {
   /**
    * Responds to an invitation.
    */
-  edit(
-    inviteId: string,
-    body: InviteEditParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InviteEditResponse> {
+  edit(inviteId: string, body: InviteEditParams, options?: Core.RequestOptions): Core.APIPromise<Invite> {
     return (
       this._client.patch(`/user/invites/${inviteId}`, { body, ...options }) as Core.APIPromise<{
-        result: InviteEditResponse;
+        result: Invite;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -31,9 +26,9 @@ export class Invites extends APIResource {
   /**
    * Gets the details of an invitation.
    */
-  get(inviteId: string, options?: Core.RequestOptions): Core.APIPromise<InviteGetResponse> {
+  get(inviteId: string, options?: Core.RequestOptions): Core.APIPromise<Invite> {
     return (
-      this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: InviteGetResponse }>
+      this._client.get(`/user/invites/${inviteId}`, options) as Core.APIPromise<{ result: Invite }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -76,25 +71,23 @@ export interface Invite {
    */
   invited_on?: string;
 
+  organization_is_enforcing_twofactor?: boolean;
+
   /**
    * Organization name.
    */
   organization_name?: string;
 
   /**
-   * Roles to be assigned to this user.
+   * List of role names the membership has for this account.
    */
-  roles?: Array<Shared.Role>;
+  roles?: Array<string>;
 
   /**
    * Current status of the invitation.
    */
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
 }
-
-export type InviteEditResponse = unknown;
-
-export type InviteGetResponse = unknown;
 
 export interface InviteEditParams {
   /**
@@ -108,8 +101,6 @@ Invites.InvitesSinglePage = InvitesSinglePage;
 export declare namespace Invites {
   export {
     type Invite as Invite,
-    type InviteEditResponse as InviteEditResponse,
-    type InviteGetResponse as InviteGetResponse,
     InvitesSinglePage as InvitesSinglePage,
     type InviteEditParams as InviteEditParams,
   };

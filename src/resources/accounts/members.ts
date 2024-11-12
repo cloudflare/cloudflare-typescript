@@ -90,113 +90,6 @@ export class MemberListResponsesV4PagePaginationArray extends V4PagePaginationAr
  */
 export type Status = 'member' | 'invited';
 
-export interface UserWithInviteCode {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * The unique activation code for the account membership.
-   */
-  code?: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles?: Array<UserWithInviteCode.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: UserWithInviteCode.User;
-}
-
-export namespace UserWithInviteCode {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: Shared.PermissionGrant;
-
-      billing?: Shared.PermissionGrant;
-
-      cache_purge?: Shared.PermissionGrant;
-
-      dns?: Shared.PermissionGrant;
-
-      dns_records?: Shared.PermissionGrant;
-
-      lb?: Shared.PermissionGrant;
-
-      logs?: Shared.PermissionGrant;
-
-      organization?: Shared.PermissionGrant;
-
-      ssl?: Shared.PermissionGrant;
-
-      waf?: Shared.PermissionGrant;
-
-      zone_settings?: Shared.PermissionGrant;
-
-      zones?: Shared.PermissionGrant;
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
 export interface MemberCreateResponse {
   /**
    * Membership identifier tag.
@@ -211,7 +104,7 @@ export interface MemberCreateResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles?: Array<Shared.Role>;
+  roles?: Array<MemberCreateResponse.Role>;
 
   /**
    * A member's status in the account.
@@ -347,6 +240,53 @@ export namespace MemberCreateResponse {
     }
   }
 
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Shared.PermissionGrant;
+
+      billing?: Shared.PermissionGrant;
+
+      cache_purge?: Shared.PermissionGrant;
+
+      dns?: Shared.PermissionGrant;
+
+      dns_records?: Shared.PermissionGrant;
+
+      lb?: Shared.PermissionGrant;
+
+      logs?: Shared.PermissionGrant;
+
+      organization?: Shared.PermissionGrant;
+
+      ssl?: Shared.PermissionGrant;
+
+      waf?: Shared.PermissionGrant;
+
+      zone_settings?: Shared.PermissionGrant;
+
+      zones?: Shared.PermissionGrant;
+    }
+  }
+
   /**
    * Details of the user associated to the membership.
    */
@@ -393,7 +333,7 @@ export interface MemberUpdateResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles?: Array<Shared.Role>;
+  roles?: Array<MemberUpdateResponse.Role>;
 
   /**
    * A member's status in the account.
@@ -529,6 +469,53 @@ export namespace MemberUpdateResponse {
     }
   }
 
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Shared.PermissionGrant;
+
+      billing?: Shared.PermissionGrant;
+
+      cache_purge?: Shared.PermissionGrant;
+
+      dns?: Shared.PermissionGrant;
+
+      dns_records?: Shared.PermissionGrant;
+
+      lb?: Shared.PermissionGrant;
+
+      logs?: Shared.PermissionGrant;
+
+      organization?: Shared.PermissionGrant;
+
+      ssl?: Shared.PermissionGrant;
+
+      waf?: Shared.PermissionGrant;
+
+      zone_settings?: Shared.PermissionGrant;
+
+      zones?: Shared.PermissionGrant;
+    }
+  }
+
   /**
    * Details of the user associated to the membership.
    */
@@ -575,7 +562,7 @@ export interface MemberListResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles?: Array<Shared.Role>;
+  roles?: Array<MemberListResponse.Role>;
 
   /**
    * A member's status in the account.
@@ -711,6 +698,53 @@ export namespace MemberListResponse {
     }
   }
 
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Shared.PermissionGrant;
+
+      billing?: Shared.PermissionGrant;
+
+      cache_purge?: Shared.PermissionGrant;
+
+      dns?: Shared.PermissionGrant;
+
+      dns_records?: Shared.PermissionGrant;
+
+      lb?: Shared.PermissionGrant;
+
+      logs?: Shared.PermissionGrant;
+
+      organization?: Shared.PermissionGrant;
+
+      ssl?: Shared.PermissionGrant;
+
+      waf?: Shared.PermissionGrant;
+
+      zone_settings?: Shared.PermissionGrant;
+
+      zones?: Shared.PermissionGrant;
+    }
+  }
+
   /**
    * Details of the user associated to the membership.
    */
@@ -764,7 +798,7 @@ export interface MemberGetResponse {
   /**
    * Roles assigned to this Member.
    */
-  roles?: Array<Shared.Role>;
+  roles?: Array<MemberGetResponse.Role>;
 
   /**
    * A member's status in the account.
@@ -900,6 +934,53 @@ export namespace MemberGetResponse {
     }
   }
 
+  export interface Role {
+    /**
+     * Role identifier tag.
+     */
+    id: string;
+
+    /**
+     * Description of role's permissions.
+     */
+    description: string;
+
+    /**
+     * Role name.
+     */
+    name: string;
+
+    permissions: Role.Permissions;
+  }
+
+  export namespace Role {
+    export interface Permissions {
+      analytics?: Shared.PermissionGrant;
+
+      billing?: Shared.PermissionGrant;
+
+      cache_purge?: Shared.PermissionGrant;
+
+      dns?: Shared.PermissionGrant;
+
+      dns_records?: Shared.PermissionGrant;
+
+      lb?: Shared.PermissionGrant;
+
+      logs?: Shared.PermissionGrant;
+
+      organization?: Shared.PermissionGrant;
+
+      ssl?: Shared.PermissionGrant;
+
+      waf?: Shared.PermissionGrant;
+
+      zone_settings?: Shared.PermissionGrant;
+
+      zones?: Shared.PermissionGrant;
+    }
+  }
+
   /**
    * Details of the user associated to the membership.
    */
@@ -1023,10 +1104,12 @@ export namespace MemberCreateParams {
   }
 }
 
-export type MemberUpdateParams = MemberUpdateParams.Member | MemberUpdateParams.IAMUpdateMemberWithPolicies;
+export type MemberUpdateParams =
+  | MemberUpdateParams.IAMUpdateMemberWithRoles
+  | MemberUpdateParams.IAMUpdateMemberWithPolicies;
 
 export namespace MemberUpdateParams {
-  export interface Member {
+  export interface IAMUpdateMemberWithRoles {
     /**
      * Path param: Account identifier tag.
      */
@@ -1035,10 +1118,10 @@ export namespace MemberUpdateParams {
     /**
      * Body param: Roles assigned to this member.
      */
-    roles?: Array<MemberUpdateParams.Member.Role>;
+    roles?: Array<MemberUpdateParams.IAMUpdateMemberWithRoles.Role>;
   }
 
-  export namespace Member {
+  export namespace IAMUpdateMemberWithRoles {
     export interface Role {
       /**
        * Role identifier tag.
@@ -1142,7 +1225,6 @@ Members.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePagi
 export declare namespace Members {
   export {
     type Status as Status,
-    type UserWithInviteCode as UserWithInviteCode,
     type MemberCreateResponse as MemberCreateResponse,
     type MemberUpdateResponse as MemberUpdateResponse,
     type MemberListResponse as MemberListResponse,
