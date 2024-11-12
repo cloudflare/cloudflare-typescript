@@ -5,14 +5,7 @@ import * as Core from '../../core';
 import * as AuditLogsAPI from './audit-logs';
 import { AuditLogListParams, AuditLogs } from './audit-logs';
 import * as InvitesAPI from './invites';
-import {
-  Invite,
-  InviteEditParams,
-  InviteEditResponse,
-  InviteGetResponse,
-  Invites,
-  InvitesSinglePage,
-} from './invites';
+import { Invite, InviteEditParams, Invites, InvitesSinglePage } from './invites';
 import * as OrganizationsAPI from './organizations';
 import {
   Organization,
@@ -126,8 +119,6 @@ export declare namespace User {
   export {
     Invites as Invites,
     type Invite as Invite,
-    type InviteEditResponse as InviteEditResponse,
-    type InviteGetResponse as InviteGetResponse,
     InvitesSinglePage as InvitesSinglePage,
     type InviteEditParams as InviteEditParams,
   };

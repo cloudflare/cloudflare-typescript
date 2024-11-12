@@ -18,10 +18,16 @@ import {
   MemberUpdateResponse,
   Members,
   Status,
-  UserWithInviteCode,
 } from './members';
 import * as RolesAPI from './roles';
-import { RoleGetParams, RoleGetResponse, RoleListParams, Roles } from './roles';
+import {
+  RoleGetParams,
+  RoleGetResponse,
+  RoleListParams,
+  RoleListResponse,
+  RoleListResponsesSinglePage,
+  Roles,
+} from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionCreateParams,
@@ -143,8 +149,8 @@ export namespace Account {
     abuse_contact_email?: string;
 
     /**
-     * Specifies the default nameservers to be used for new zones added to this
-     * account.
+     * @deprecated: Specifies the default nameservers to be used for new zones added to
+     * this account.
      *
      * - `cloudflare.standard` for Cloudflare-branded nameservers
      * - `custom.account` for account custom nameservers
@@ -153,6 +159,9 @@ export namespace Account {
      * See
      * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
      * for more information.
+     *
+     * Deprecated in favor of
+     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
      */
     default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
 
@@ -166,7 +175,8 @@ export namespace Account {
      * @deprecated: Indicates whether new zones should use the account-level custom
      * nameservers by default.
      *
-     * Deprecated in favor of `default_nameservers`.
+     * Deprecated in favor of
+     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
      */
     use_account_custom_ns_by_default?: boolean;
   }
@@ -241,8 +251,8 @@ export namespace AccountUpdateParams {
     abuse_contact_email?: string;
 
     /**
-     * Specifies the default nameservers to be used for new zones added to this
-     * account.
+     * @deprecated: Specifies the default nameservers to be used for new zones added to
+     * this account.
      *
      * - `cloudflare.standard` for Cloudflare-branded nameservers
      * - `custom.account` for account custom nameservers
@@ -251,6 +261,9 @@ export namespace AccountUpdateParams {
      * See
      * [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
      * for more information.
+     *
+     * Deprecated in favor of
+     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
      */
     default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
 
@@ -264,7 +277,8 @@ export namespace AccountUpdateParams {
      * @deprecated: Indicates whether new zones should use the account-level custom
      * nameservers by default.
      *
-     * Deprecated in favor of `default_nameservers`.
+     * Deprecated in favor of
+     * [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
      */
     use_account_custom_ns_by_default?: boolean;
   }
@@ -299,13 +313,13 @@ export interface AccountGetParams {
 Accounts.Members = Members;
 Accounts.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
 Accounts.Roles = Roles;
+Accounts.RoleListResponsesSinglePage = RoleListResponsesSinglePage;
 Accounts.Subscriptions = Subscriptions;
 
 export declare namespace Accounts {
   export {
     Members as Members,
     type Status as Status,
-    type UserWithInviteCode as UserWithInviteCode,
     type MemberCreateResponse as MemberCreateResponse,
     type MemberUpdateResponse as MemberUpdateResponse,
     type MemberListResponse as MemberListResponse,
@@ -321,7 +335,9 @@ export declare namespace Accounts {
 
   export {
     Roles as Roles,
+    type RoleListResponse as RoleListResponse,
     type RoleGetResponse as RoleGetResponse,
+    RoleListResponsesSinglePage as RoleListResponsesSinglePage,
     type RoleListParams as RoleListParams,
     type RoleGetParams as RoleGetParams,
   };

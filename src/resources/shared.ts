@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
-import { SinglePage, V4PagePaginationArray } from '../pagination';
+import { V4PagePaginationArray } from '../pagination';
 
 export type ASN = number;
 
@@ -267,108 +267,6 @@ export interface LoadBalancerPreview {
   preview_id?: string;
 }
 
-export interface Member {
-  /**
-   * Membership identifier tag.
-   */
-  id?: string;
-
-  /**
-   * Roles assigned to this member.
-   */
-  roles?: Array<Member.Role>;
-
-  /**
-   * A member's status in the account.
-   */
-  status?: 'accepted' | 'pending';
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  user?: Member.User;
-}
-
-export namespace Member {
-  export interface Role {
-    /**
-     * Role identifier tag.
-     */
-    id: string;
-
-    /**
-     * Description of role's permissions.
-     */
-    description: string;
-
-    /**
-     * Role name.
-     */
-    name: string;
-
-    permissions: Role.Permissions;
-  }
-
-  export namespace Role {
-    export interface Permissions {
-      analytics?: Shared.PermissionGrant;
-
-      billing?: Shared.PermissionGrant;
-
-      cache_purge?: Shared.PermissionGrant;
-
-      dns?: Shared.PermissionGrant;
-
-      dns_records?: Shared.PermissionGrant;
-
-      lb?: Shared.PermissionGrant;
-
-      logs?: Shared.PermissionGrant;
-
-      organization?: Shared.PermissionGrant;
-
-      ssl?: Shared.PermissionGrant;
-
-      waf?: Shared.PermissionGrant;
-
-      zone_settings?: Shared.PermissionGrant;
-
-      zones?: Shared.PermissionGrant;
-    }
-  }
-
-  /**
-   * Details of the user associated to the membership.
-   */
-  export interface User {
-    /**
-     * The contact email address of the user.
-     */
-    email: string;
-
-    /**
-     * Identifier
-     */
-    id?: string;
-
-    /**
-     * User's first name
-     */
-    first_name?: string | null;
-
-    /**
-     * User's last name
-     */
-    last_name?: string | null;
-
-    /**
-     * Indicates whether two-factor authentication is enabled for the user account.
-     * Does not apply to API authentication.
-     */
-    two_factor_authentication_enabled?: boolean;
-  }
-}
-
 export interface PaginationInfo {
   /**
    * Total number of results for the requested service
@@ -516,28 +414,6 @@ export namespace Result {
   }
 }
 
-export interface Role {
-  /**
-   * Role identifier tag.
-   */
-  id: string;
-
-  /**
-   * Description of role's permissions.
-   */
-  description: string;
-
-  /**
-   * Role Name.
-   */
-  name: string;
-
-  /**
-   * Access permissions for this User.
-   */
-  permissions: Array<Permission>;
-}
-
 /**
  * Direction to order DNS records in.
  */
@@ -630,7 +506,5 @@ export interface SubscriptionZone {
    */
   name?: string;
 }
-
-export class RolesSinglePage extends SinglePage<Role> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}
