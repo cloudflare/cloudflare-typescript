@@ -13,10 +13,10 @@ export class Rules extends APIResource {
     params: RuleCreateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleCreateResponse> {
-    const { zone_id, ...body } = params;
+    const { zone_id, rules } = params;
     return (
       this._client.post(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
-        body,
+        body: rules,
         ...options,
       }) as Core.APIPromise<{ result: RuleCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -31,10 +31,10 @@ export class Rules extends APIResource {
     params: RuleUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<RuleUpdateResponse> {
-    const { zone_id, body } = params;
+    const { zone_id, rules } = params;
     return (
       this._client.put(`/zones/${zone_id}/waiting_rooms/${waitingRoomId}/rules`, {
-        body: body,
+        body: rules,
         ...options,
       }) as Core.APIPromise<{ result: RuleUpdateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -144,24 +144,33 @@ export interface RuleCreateParams {
   zone_id: string;
 
   /**
-   * Body param: The action to take when the expression matches.
+   * Body param:
    */
-  action: 'bypass_waiting_room';
+  rules: RuleCreateParams.Rules;
+}
 
-  /**
-   * Body param: Criteria defining when there is a match for the current rule.
-   */
-  expression: string;
+export namespace RuleCreateParams {
+  export interface Rules {
+    /**
+     * The action to take when the expression matches.
+     */
+    action: 'bypass_waiting_room';
 
-  /**
-   * Body param: The description of the rule.
-   */
-  description?: string;
+    /**
+     * Criteria defining when there is a match for the current rule.
+     */
+    expression: string;
 
-  /**
-   * Body param: When set to true, the rule is enabled.
-   */
-  enabled?: boolean;
+    /**
+     * The description of the rule.
+     */
+    description?: string;
+
+    /**
+     * When set to true, the rule is enabled.
+     */
+    enabled?: boolean;
+  }
 }
 
 export interface RuleUpdateParams {
@@ -173,11 +182,11 @@ export interface RuleUpdateParams {
   /**
    * Body param:
    */
-  body: Array<RuleUpdateParams.Body>;
+  rules: Array<RuleUpdateParams.Rule>;
 }
 
 export namespace RuleUpdateParams {
-  export interface Body {
+  export interface Rule {
     /**
      * The action to take when the expression matches.
      */
