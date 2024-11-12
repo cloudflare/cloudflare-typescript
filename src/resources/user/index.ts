@@ -2,14 +2,7 @@
 
 export { AuditLogs, type AuditLogListParams } from './audit-logs';
 export { Billing } from './billing/index';
-export {
-  InvitesSinglePage,
-  Invites,
-  type Invite,
-  type InviteEditResponse,
-  type InviteGetResponse,
-  type InviteEditParams,
-} from './invites';
+export { InvitesSinglePage, Invites, type Invite, type InviteEditParams } from './invites';
 export {
   OrganizationsV4PagePaginationArray,
   Organizations,

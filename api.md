@@ -10,14 +10,12 @@ Types:
 - <code><a href="./src/resources/shared.ts">ErrorData</a></code>
 - <code><a href="./src/resources/shared.ts">Identifier</a></code>
 - <code><a href="./src/resources/shared.ts">LoadBalancerPreview</a></code>
-- <code><a href="./src/resources/shared.ts">Member</a></code>
 - <code><a href="./src/resources/shared.ts">PaginationInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Permission</a></code>
 - <code><a href="./src/resources/shared.ts">PermissionGrant</a></code>
 - <code><a href="./src/resources/shared.ts">RatePlan</a></code>
 - <code><a href="./src/resources/shared.ts">ResponseInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Result</a></code>
-- <code><a href="./src/resources/shared.ts">Role</a></code>
 - <code><a href="./src/resources/shared.ts">SortDirection</a></code>
 - <code><a href="./src/resources/shared.ts">Subscription</a></code>
 - <code><a href="./src/resources/shared.ts">SubscriptionComponent</a></code>
@@ -43,7 +41,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/members.ts">Status</a></code>
-- <code><a href="./src/resources/accounts/members.ts">UserWithInviteCode</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberCreateResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberUpdateResponse</a></code>
 - <code><a href="./src/resources/accounts/members.ts">MemberListResponse</a></code>
@@ -62,11 +59,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/accounts/roles.ts">RoleListResponse</a></code>
 - <code><a href="./src/resources/accounts/roles.ts">RoleGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RolesSinglePage</code>
+- <code title="get /accounts/{account_id}/roles">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">list</a>({ ...params }) -> RoleListResponsesSinglePage</code>
 - <code title="get /accounts/{account_id}/roles/{role_id}">client.accounts.roles.<a href="./src/resources/accounts/roles.ts">get</a>(roleId, { ...params }) -> RoleGetResponse</code>
 
 ## Subscriptions
@@ -172,14 +170,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/user/invites.ts">Invite</a></code>
-- <code><a href="./src/resources/user/invites.ts">InviteEditResponse</a></code>
-- <code><a href="./src/resources/user/invites.ts">InviteGetResponse</a></code>
 
 Methods:
 
 - <code title="get /user/invites">client.user.invites.<a href="./src/resources/user/invites.ts">list</a>() -> InvitesSinglePage</code>
-- <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteId, { ...params }) -> InviteEditResponse</code>
-- <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteId) -> InviteGetResponse</code>
+- <code title="patch /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">edit</a>(inviteId, { ...params }) -> Invite</code>
+- <code title="get /user/invites/{invite_id}">client.user.invites.<a href="./src/resources/user/invites.ts">get</a>(inviteId) -> Invite</code>
 
 ## Organizations
 

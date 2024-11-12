@@ -86,7 +86,7 @@ export interface Membership {
   permissions?: Membership.Permissions;
 
   /**
-   * List of role names for the user at the account.
+   * List of role names the membership has for this account.
    */
   roles?: Array<string>;
 
@@ -152,7 +152,7 @@ export interface MembershipUpdateResponse {
   policies?: Array<MembershipUpdateResponse.Policy>;
 
   /**
-   * List of role names for the user at the account.
+   * List of role names the membership has for this account.
    */
   roles?: Array<string>;
 
@@ -347,7 +347,7 @@ export interface MembershipGetResponse {
   policies?: Array<MembershipGetResponse.Policy>;
 
   /**
-   * List of role names for the user at the account.
+   * List of role names the membership has for this account.
    */
   roles?: Array<string>;
 
