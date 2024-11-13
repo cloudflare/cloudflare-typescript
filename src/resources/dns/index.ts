@@ -75,4 +75,4 @@ export {
   type SettingGetResponse,
   type SettingEditParams,
   type SettingGetParams,
-} from './settings';
+} from './settings/index';

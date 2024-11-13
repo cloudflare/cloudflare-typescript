@@ -8,6 +8,7 @@ export {
   type AccountSettingUpdateParams,
   type AccountSettingGetParams,
 } from './account-settings';
+export { Assets } from './assets/index';
 export {
   DomainsSinglePage,
   Domains,
