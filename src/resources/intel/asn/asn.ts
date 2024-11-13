@@ -10,7 +10,8 @@ export class ASN extends APIResource {
   subnets: SubnetsAPI.Subnets = new SubnetsAPI.Subnets(this._client);
 
   /**
-   * Get ASN Overview
+   * Gets an overview of the Autonomous System Number (ASN) and a list of subnets for
+   * it.
    */
   get(
     asn: Shared.ASNParam,
