@@ -18,7 +18,7 @@ export class BrandProtection extends APIResource {
   }
 
   /**
-   * Get results for a URL scan
+   * Gets phishing details about a URL.
    */
   urlInfo(params: BrandProtectionURLInfoParams, options?: Core.RequestOptions): Core.APIPromise<Info> {
     const { account_id, ...query } = params;

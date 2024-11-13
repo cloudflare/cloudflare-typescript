@@ -5,7 +5,8 @@ import * as Core from '../../core';
 
 export class IPs extends APIResource {
   /**
-   * Same as summary
+   * Gets the geolocation, ASN, infrastructure type of the ASN, and any security
+   * threat categories of an IP address.
    */
   get(params: IPGetParams, options?: Core.RequestOptions): Core.APIPromise<IPGetResponse | null> {
     const { account_id, ...query } = params;
