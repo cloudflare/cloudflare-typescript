@@ -83,6 +83,42 @@ Methods:
 - <code title="delete /accounts/{account_id}/subscriptions/{subscription_identifier}">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">delete</a>(subscriptionIdentifier, { ...params }) -> SubscriptionDeleteResponse</code>
 - <code title="get /accounts/{account_id}/subscriptions">client.accounts.subscriptions.<a href="./src/resources/accounts/subscriptions.ts">get</a>({ ...params }) -> SubscriptionGetResponse | null</code>
 
+## Tokens
+
+Types:
+
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenCreateResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenUpdateResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenListResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenDeleteResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenGetResponse</a></code>
+- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenVerifyResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
+- <code title="put /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> TokenUpdateResponse</code>
+- <code title="get /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">delete</a>(tokenId, { ...params }) -> TokenDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">get</a>(tokenId, { ...params }) -> TokenGetResponse</code>
+- <code title="get /accounts/{account_id}/tokens/verify">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">verify</a>({ ...params }) -> TokenVerifyResponse</code>
+
+### PermissionGroups
+
+Types:
+
+- <code><a href="./src/resources/accounts/tokens/permission-groups.ts">PermissionGroupListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/tokens/permission_groups">client.accounts.tokens.permissionGroups.<a href="./src/resources/accounts/tokens/permission-groups.ts">list</a>({ ...params }) -> PermissionGroupListResponsesSinglePage</code>
+
+### Value
+
+Methods:
+
+- <code title="put /accounts/{account_id}/tokens/{token_id}/value">client.accounts.tokens.value.<a href="./src/resources/accounts/tokens/value.ts">update</a>(tokenId, { ...params }) -> Value</code>
+
 # OriginCACertificates
 
 Types:
@@ -895,15 +931,33 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/dns/settings.ts">DNSSetting</a></code>
-- <code><a href="./src/resources/dns/settings.ts">Nameserver</a></code>
-- <code><a href="./src/resources/dns/settings.ts">SettingEditResponse</a></code>
-- <code><a href="./src/resources/dns/settings.ts">SettingGetResponse</a></code>
+- <code><a href="./src/resources/dns/settings/settings.ts">DNSSetting</a></code>
+- <code><a href="./src/resources/dns/settings/settings.ts">Nameserver</a></code>
+- <code><a href="./src/resources/dns/settings/settings.ts">SettingEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/settings.ts">SettingGetResponse</a></code>
 
 Methods:
 
-- <code title="patch /{account_or_zone}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
-- <code title="get /{account_or_zone}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+- <code title="patch /{account_or_zone}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings/settings.ts">edit</a>({ ...params }) -> SettingEditResponse</code>
+- <code title="get /{account_or_zone}/{account_or_zone_id}/dns_settings">client.dns.settings.<a href="./src/resources/dns/settings/settings.ts">get</a>({ ...params }) -> SettingGetResponse</code>
+
+### Views
+
+Types:
+
+- <code><a href="./src/resources/dns/settings/views.ts">ViewCreateResponse</a></code>
+- <code><a href="./src/resources/dns/settings/views.ts">ViewListResponse</a></code>
+- <code><a href="./src/resources/dns/settings/views.ts">ViewDeleteResponse</a></code>
+- <code><a href="./src/resources/dns/settings/views.ts">ViewEditResponse</a></code>
+- <code><a href="./src/resources/dns/settings/views.ts">ViewGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dns_settings/views">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">create</a>({ ...params }) -> ViewCreateResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">list</a>({ ...params }) -> ViewListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">delete</a>(viewId, { ...params }) -> ViewDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">edit</a>(viewId, { ...params }) -> ViewEditResponse</code>
+- <code title="get /accounts/{account_id}/dns_settings/views/{view_id}">client.dns.settings.views.<a href="./src/resources/dns/settings/views.ts">get</a>(viewId, { ...params }) -> ViewGetResponse</code>
 
 ## Analytics
 
@@ -1839,6 +1893,18 @@ Methods:
 
 - <code title="get /accounts/{account_id}/ai/models/schema">client.workers.ai.models.schema.<a href="./src/resources/workers/ai/models/schema.ts">get</a>({ ...params }) -> SchemaGetResponse</code>
 
+## Assets
+
+### Upload
+
+Types:
+
+- <code><a href="./src/resources/workers/assets/upload.ts">UploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/assets/upload">client.workers.assets.upload.<a href="./src/resources/workers/assets/upload.ts">create</a>({ ...params }) -> UploadCreateResponse</code>
+
 ## Scripts
 
 Types:
@@ -1853,6 +1919,10 @@ Methods:
 - <code title="get /accounts/{account_id}/workers/scripts">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">list</a>({ ...params }) -> ScriptsSinglePage</code>
 - <code title="delete /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">delete</a>(scriptName, { ...params }) -> void</code>
 - <code title="get /accounts/{account_id}/workers/scripts/{script_name}">client.workers.scripts.<a href="./src/resources/workers/scripts/scripts.ts">get</a>(scriptName, { ...params }) -> Response</code>
+
+### Assets
+
+#### Upload
 
 ### Subdomain
 
@@ -4037,6 +4107,16 @@ Methods:
 - <code title="get /accounts/{account_id}/devices/networks">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">list</a>({ ...params }) -> DeviceNetworksSinglePage</code>
 - <code title="delete /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">delete</a>(networkId, { ...params }) -> NetworkDeleteResponse | null</code>
 - <code title="get /accounts/{account_id}/devices/networks/{network_id}">client.zeroTrust.devices.networks.<a href="./src/resources/zero-trust/devices/networks.ts">get</a>(networkId, { ...params }) -> DeviceNetwork | null</code>
+
+### FleetStatus
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/fleet-status.ts">FleetStatusGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{accountTag}/devices/{deviceId}/fleet-status/live">client.zeroTrust.devices.fleetStatus.<a href="./src/resources/zero-trust/devices/fleet-status.ts">get</a>(accountTag, deviceId, { ...params }) -> FleetStatusGetResponse</code>
 
 ### Policies
 

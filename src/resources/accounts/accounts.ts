@@ -40,12 +40,30 @@ import {
   SubscriptionUpdateResponse,
   Subscriptions,
 } from './subscriptions';
+import * as TokensAPI from './tokens/tokens';
+import {
+  TokenCreateParams,
+  TokenCreateResponse,
+  TokenDeleteParams,
+  TokenDeleteResponse,
+  TokenGetParams,
+  TokenGetResponse,
+  TokenListParams,
+  TokenListResponse,
+  TokenListResponsesV4PagePaginationArray,
+  TokenUpdateParams,
+  TokenUpdateResponse,
+  TokenVerifyParams,
+  TokenVerifyResponse,
+  Tokens,
+} from './tokens/tokens';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Accounts extends APIResource {
   members: MembersAPI.Members = new MembersAPI.Members(this._client);
   roles: RolesAPI.Roles = new RolesAPI.Roles(this._client);
   subscriptions: SubscriptionsAPI.Subscriptions = new SubscriptionsAPI.Subscriptions(this._client);
+  tokens: TokensAPI.Tokens = new TokensAPI.Tokens(this._client);
 
   /**
    * Create an account (only available for tenant admins at this time)
@@ -315,6 +333,8 @@ Accounts.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePag
 Accounts.Roles = Roles;
 Accounts.RoleListResponsesSinglePage = RoleListResponsesSinglePage;
 Accounts.Subscriptions = Subscriptions;
+Accounts.Tokens = Tokens;
+Accounts.TokenListResponsesV4PagePaginationArray = TokenListResponsesV4PagePaginationArray;
 
 export declare namespace Accounts {
   export {
@@ -352,5 +372,22 @@ export declare namespace Accounts {
     type SubscriptionUpdateParams as SubscriptionUpdateParams,
     type SubscriptionDeleteParams as SubscriptionDeleteParams,
     type SubscriptionGetParams as SubscriptionGetParams,
+  };
+
+  export {
+    Tokens as Tokens,
+    type TokenCreateResponse as TokenCreateResponse,
+    type TokenUpdateResponse as TokenUpdateResponse,
+    type TokenListResponse as TokenListResponse,
+    type TokenDeleteResponse as TokenDeleteResponse,
+    type TokenGetResponse as TokenGetResponse,
+    type TokenVerifyResponse as TokenVerifyResponse,
+    TokenListResponsesV4PagePaginationArray as TokenListResponsesV4PagePaginationArray,
+    type TokenCreateParams as TokenCreateParams,
+    type TokenUpdateParams as TokenUpdateParams,
+    type TokenListParams as TokenListParams,
+    type TokenDeleteParams as TokenDeleteParams,
+    type TokenGetParams as TokenGetParams,
+    type TokenVerifyParams as TokenVerifyParams,
   };
 }

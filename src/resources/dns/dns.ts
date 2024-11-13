@@ -50,16 +50,6 @@ import {
   TXTRecord,
   URIRecord,
 } from './records';
-import * as SettingsAPI from './settings';
-import {
-  DNSSetting,
-  Nameserver,
-  SettingEditParams,
-  SettingEditResponse,
-  SettingGetParams,
-  SettingGetResponse,
-  Settings,
-} from './settings';
 import * as AnalyticsAPI from './analytics/analytics';
 import { Analytics } from './analytics/analytics';
 import * as FirewallAPI from './firewall/firewall';
@@ -80,6 +70,16 @@ import {
   FirewallListResponsesV4PagePaginationArray,
   UpstreamIPs,
 } from './firewall/firewall';
+import * as SettingsAPI from './settings/settings';
+import {
+  DNSSetting,
+  Nameserver,
+  SettingEditParams,
+  SettingEditResponse,
+  SettingGetParams,
+  SettingGetResponse,
+  Settings,
+} from './settings/settings';
 import * as AnalyticsAnalyticsAPI from './firewall/analytics/analytics';
 
 export class DNS extends APIResource {
