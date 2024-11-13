@@ -7,7 +7,7 @@ import { V4PagePagination, type V4PagePaginationParams } from '../../pagination'
 
 export class DNS extends APIResource {
   /**
-   * Get Passive DNS by IP
+   * Gets a list of all the domains that have resolved to a specific IP address.
    */
   list(
     params: DNSListParams,

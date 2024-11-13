@@ -9,7 +9,7 @@ export class Domains extends APIResource {
   bulks: BulksAPI.Bulks = new BulksAPI.Bulks(this._client);
 
   /**
-   * Get Domain Details
+   * Gets security details and statistics about a domain.
    */
   get(params: DomainGetParams, options?: Core.RequestOptions): Core.APIPromise<Domain> {
     const { account_id, ...query } = params;

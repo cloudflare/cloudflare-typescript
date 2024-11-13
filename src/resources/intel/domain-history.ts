@@ -5,7 +5,8 @@ import * as Core from '../../core';
 
 export class DomainHistoryResource extends APIResource {
   /**
-   * Get Domain History
+   * Gets historical security threat and content categories currently and previously
+   * assigned to a domain.
    */
   get(
     params: DomainHistoryGetParams,

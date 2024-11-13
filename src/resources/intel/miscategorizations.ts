@@ -6,7 +6,7 @@ import * as Shared from '../shared';
 
 export class Miscategorizations extends APIResource {
   /**
-   * Create Miscategorization
+   * Allows you to submit requests to change a domain’s category.
    */
   create(
     params: MiscategorizationCreateParams,
