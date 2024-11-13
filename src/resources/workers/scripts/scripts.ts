@@ -55,10 +55,13 @@ import {
   VersionListResponsesV4PagePagination,
   Versions,
 } from './versions';
+import * as AssetsAPI from './assets/assets';
+import { Assets as AssetsAPIAssets } from './assets/assets';
 import { SinglePage } from '../../../pagination';
 import { type Response } from '../../../_shims/index';
 
 export class Scripts extends APIResource {
+  assets: AssetsAPI.Assets = new AssetsAPI.Assets(this._client);
   subdomain: SubdomainAPI.Subdomain = new SubdomainAPI.Subdomain(this._client);
   schedules: SchedulesAPI.Schedules = new SchedulesAPI.Schedules(this._client);
   tail: TailAPI.Tail = new TailAPI.Tail(this._client);
@@ -509,6 +512,7 @@ export interface ScriptGetParams {
 }
 
 Scripts.ScriptsSinglePage = ScriptsSinglePage;
+Scripts.Assets = AssetsAPIAssets;
 Scripts.Subdomain = Subdomain;
 Scripts.Schedules = Schedules;
 Scripts.Tail = Tail;
@@ -529,6 +533,8 @@ export declare namespace Scripts {
     type ScriptDeleteParams as ScriptDeleteParams,
     type ScriptGetParams as ScriptGetParams,
   };
+
+  export { AssetsAPIAssets as Assets };
 
   export {
     Subdomain as Subdomain,

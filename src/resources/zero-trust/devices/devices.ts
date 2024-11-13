@@ -16,6 +16,8 @@ import {
   SchemaHTTP,
   SchemaHTTPSSinglePage,
 } from './dex-tests';
+import * as FleetStatusAPI from './fleet-status';
+import { FleetStatus, FleetStatusGetParams, FleetStatusGetResponse } from './fleet-status';
 import * as NetworksAPI from './networks';
 import {
   DeviceNetwork,
@@ -86,6 +88,7 @@ import { SinglePage } from '../../../pagination';
 export class Devices extends APIResource {
   dexTests: DEXTestsAPI.DEXTests = new DEXTestsAPI.DEXTests(this._client);
   networks: NetworksAPI.Networks = new NetworksAPI.Networks(this._client);
+  fleetStatus: FleetStatusAPI.FleetStatus = new FleetStatusAPI.FleetStatus(this._client);
   policies: PoliciesAPI.Policies = new PoliciesAPI.Policies(this._client);
   posture: PostureAPI.Posture = new PostureAPI.Posture(this._client);
   revoke: RevokeAPI.Revoke = new RevokeAPI.Revoke(this._client);
@@ -250,6 +253,7 @@ Devices.DEXTests = DEXTests;
 Devices.SchemaHTTPSSinglePage = SchemaHTTPSSinglePage;
 Devices.Networks = Networks;
 Devices.DeviceNetworksSinglePage = DeviceNetworksSinglePage;
+Devices.FleetStatus = FleetStatus;
 Devices.Policies = Policies;
 Devices.Posture = Posture;
 Devices.DevicePostureRulesSinglePage = DevicePostureRulesSinglePage;
@@ -291,6 +295,12 @@ export declare namespace Devices {
     type NetworkListParams as NetworkListParams,
     type NetworkDeleteParams as NetworkDeleteParams,
     type NetworkGetParams as NetworkGetParams,
+  };
+
+  export {
+    FleetStatus as FleetStatus,
+    type FleetStatusGetResponse as FleetStatusGetResponse,
+    type FleetStatusGetParams as FleetStatusGetParams,
   };
 
   export {
