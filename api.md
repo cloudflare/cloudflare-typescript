@@ -2003,6 +2003,14 @@ Methods:
 
 #### Upload
 
+Types:
+
+- <code><a href="./src/resources/workers/scripts/assets/upload.ts">UploadCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/workers/scripts/{script_name}/assets-upload-session">client.workers.scripts.assets.upload.<a href="./src/resources/workers/scripts/assets/upload.ts">create</a>(scriptName, { ...params }) -> UploadCreateResponse</code>
+
 ### Subdomain
 
 Types:
