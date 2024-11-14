@@ -22,7 +22,7 @@ export class ImpersonationRegistry extends APIResource {
   }
 
   /**
-   * List, search, and sort entries in impersonation registry.
+   * Lists, searches, and sorts entries in the impersonation registry.
    */
   list(
     params: ImpersonationRegistryListParams,
