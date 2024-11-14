@@ -9,13 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource accessRules', () => {
+describe('resource filters', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.accessRules.create({
-      configuration: {},
-      mode: 'block',
-      account_id: 'account_id',
+    const responsePromise = client.filters.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expression:
+        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,30 +28,18 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.accessRules.create({
-      configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'block',
-      account_id: 'account_id',
-      notes: 'This rule is enabled because of an event that occurred on date X.',
+    const response = await client.filters.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      expression:
+        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
     });
   });
 
   // TODO: investigate broken test
-  test.skip('list', async () => {
-    const responsePromise = client.firewall.accessRules.list({ account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete', async () => {
-    const responsePromise = client.firewall.accessRules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: 'account_id',
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.filters.update('372e67954025e0ba6aaa6d586b9e0b61', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -63,11 +51,40 @@ describe('resource accessRules', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
-    const responsePromise = client.firewall.accessRules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      configuration: {},
-      mode: 'block',
-      account_id: 'account_id',
+  test.skip('update: required and optional params', async () => {
+    const response = await client.filters.update('372e67954025e0ba6aaa6d586b9e0b61', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+  });
+
+  test('list: only required params', async () => {
+    const responsePromise = client.filters.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.filters.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      id: '372e67954025e0ba6aaa6d586b9e0b61',
+      description: 'browsers',
+      expression: 'php',
+      page: 1,
+      paused: false,
+      per_page: 5,
+      ref: 'FIL-100',
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.filters.delete('372e67954025e0ba6aaa6d586b9e0b61', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,20 +95,15 @@ describe('resource accessRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
-    const response = await client.firewall.accessRules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'block',
-      account_id: 'account_id',
-      notes: 'This rule is enabled because of an event that occurred on date X.',
+  test('delete: required and optional params', async () => {
+    const response = await client.filters.delete('372e67954025e0ba6aaa6d586b9e0b61', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = client.firewall.accessRules.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: 'account_id',
+  test('get: only required params', async () => {
+    const responsePromise = client.filters.get('372e67954025e0ba6aaa6d586b9e0b61', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -100,5 +112,11 @@ describe('resource accessRules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.filters.get('372e67954025e0ba6aaa6d586b9e0b61', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });
