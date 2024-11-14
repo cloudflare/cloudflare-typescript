@@ -1091,11 +1091,13 @@ export interface IdentityProviderSCIMConfig {
   enabled?: boolean;
 
   /**
-   * A flag to revoke a user's session in Access and force a reauthentication on the
-   * user's Gateway session when they have been added or removed from a group in the
-   * Identity Provider.
+   * Indicates how a SCIM event updates an Access identity. Use "automatic" to
+   * automatically update a user's Access identity and augment it with fields from
+   * the SCIM user resource. Use "reauth" to force re-authentication on group
+   * membership updates. With "reauth" Access identities will not contain fields from
+   * the SCIM user resource.
    */
-  group_member_deprovision?: boolean;
+  identity_update_behavior?: 'automatic' | 'reauth';
 
   /**
    * A flag to remove a user's seat in Zero Trust when they have been deprovisioned
@@ -1129,11 +1131,13 @@ export interface IdentityProviderSCIMConfigParam {
   enabled?: boolean;
 
   /**
-   * A flag to revoke a user's session in Access and force a reauthentication on the
-   * user's Gateway session when they have been added or removed from a group in the
-   * Identity Provider.
+   * Indicates how a SCIM event updates an Access identity. Use "automatic" to
+   * automatically update a user's Access identity and augment it with fields from
+   * the SCIM user resource. Use "reauth" to force re-authentication on group
+   * membership updates. With "reauth" Access identities will not contain fields from
+   * the SCIM user resource.
    */
-  group_member_deprovision?: boolean;
+  identity_update_behavior?: 'automatic' | 'reauth';
 
   /**
    * A flag to remove a user's seat in Zero Trust when they have been deprovisioned

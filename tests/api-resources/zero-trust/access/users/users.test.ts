@@ -26,6 +26,9 @@ describe('resource users', () => {
   test('list: required and optional params', async () => {
     const response = await client.zeroTrust.access.users.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      email: 'email',
+      name: 'name',
+      search: 'search',
     });
   });
 });

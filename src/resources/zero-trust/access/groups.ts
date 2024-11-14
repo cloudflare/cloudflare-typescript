@@ -85,7 +85,7 @@ export class Groups extends APIResource {
     if (isRequestOptions(params)) {
       return this.list({}, params);
     }
-    const { account_id, zone_id } = params;
+    const { account_id, zone_id, ...query } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -105,7 +105,7 @@ export class Groups extends APIResource {
     return this._client.getAPIList(
       `/${accountOrZone}/${accountOrZoneId}/access/groups`,
       ZeroTrustGroupsSinglePage,
-      options,
+      { query, ...options },
     );
   }
 
@@ -329,14 +329,26 @@ export interface GroupUpdateParams {
 
 export interface GroupListParams {
   /**
-   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
    */
   account_id?: string;
 
   /**
-   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
    */
   zone_id?: string;
+
+  /**
+   * Query param: The name of the group.
+   */
+  name?: string;
+
+  /**
+   * Query param: Search for groups by other listed query parameters.
+   */
+  search?: string;
 }
 
 export interface GroupDeleteParams {

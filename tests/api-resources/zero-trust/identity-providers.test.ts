@@ -45,7 +45,7 @@ describe('resource identityProviders', () => {
       account_id: 'account_id',
       scim_config: {
         enabled: true,
-        group_member_deprovision: true,
+        identity_update_behavior: 'automatic',
         seat_deprovision: true,
         user_deprovision: true,
       },
@@ -85,7 +85,7 @@ describe('resource identityProviders', () => {
       account_id: 'account_id',
       scim_config: {
         enabled: true,
-        group_member_deprovision: true,
+        identity_update_behavior: 'automatic',
         seat_deprovision: true,
         user_deprovision: true,
       },
