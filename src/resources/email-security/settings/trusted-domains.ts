@@ -22,7 +22,7 @@ export class TrustedDomains extends APIResource {
   }
 
   /**
-   * List, search, and sort an account's trusted email domains.
+   * Lists, searches, and sorts an account’s trusted email domains.
    */
   list(
     params: TrustedDomainListParams,

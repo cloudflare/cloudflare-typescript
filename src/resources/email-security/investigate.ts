@@ -6,8 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Investigate extends APIResource {
   /**
-   * This endpoint returns information for each email that matches the search
-   * parameter(s).
+   * Returns information for each email that matches the search parameter(s).
    */
   list(
     params: InvestigateListParams,
@@ -22,8 +21,8 @@ export class Investigate extends APIResource {
   }
 
   /**
-   * For emails that have a detection, this endpoint returns detection details such
-   * as threat categories, sender information, and links.
+   * Returns detection details such as threat categories and sender information for
+   * non-benign messages.
    */
   detections(
     postfixId: string,
@@ -57,8 +56,8 @@ export class Investigate extends APIResource {
   }
 
   /**
-   * For emails that have a detection, this endpoint returns a preview of the message
-   * body as a base64 encoded PNG image.
+   * Returns a preview of the message body as a base64 encoded PNG image for
+   * non-benign messages.
    */
   preview(
     postfixId: string,
@@ -75,8 +74,7 @@ export class Investigate extends APIResource {
   }
 
   /**
-   * For emails that have a detection, this endpoint returns the raw email as an EML
-   * file.
+   * Returns the raw eml of any non-benign message.
    */
   raw(
     postfixId: string,
@@ -126,7 +124,7 @@ export interface InvestigateListResponse {
   is_quarantined: boolean;
 
   /**
-   * Message identifier
+   * The identifier of the message.
    */
   postfix_id: string;
 
@@ -261,12 +259,12 @@ export namespace InvestigateDetectionsResponse {
 
   export interface SenderInfo {
     /**
-     * Name of the autonomous system
+     * The name of the autonomous system.
      */
     as_name?: string | null;
 
     /**
-     * Number of the autonomous system
+     * The number of the autonomous system.
      */
     as_number?: number | null;
 
@@ -310,7 +308,7 @@ export interface InvestigateGetResponse {
   is_quarantined: boolean;
 
   /**
-   * Message identifier
+   * The identifier of the message.
    */
   postfix_id: string;
 
@@ -380,14 +378,14 @@ export namespace InvestigateGetResponse {
 
 export interface InvestigatePreviewResponse {
   /**
-   * Base64 encoded PNG image
+   * A base64 encoded PNG image of the email.
    */
   screenshot: string;
 }
 
 export interface InvestigateRawResponse {
   /**
-   * UTF-8 encoded eml file
+   * A UTF-8 encoded eml file of the email.
    */
   raw: string;
 }
@@ -435,8 +433,7 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: Controls whether the message action log in included in the
-   * response.
+   * Query param: Determines if the message action log is included in the response.
    */
   action_log?: boolean;
 
@@ -446,12 +443,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   alert_id?: string;
 
   /**
-   * Query param: If `false`, the search includes non-detections.
+   * Query param: Determines if the search results will include detections or not.
    */
   detections_only?: boolean;
 
   /**
-   * Query param: Filter by the sender domain
+   * Query param: The sender domains the search filters by.
    */
   domain?: string;
 
@@ -461,12 +458,12 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   end?: string;
 
   /**
-   * Query param: Filter messages by the provided disposition.
+   * Query param: The dispositions the search filters by.
    */
   final_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK';
 
   /**
-   * Query param: Filter messages by actions applied to them
+   * Query param: The message actions the search filters by.
    */
   message_action?: 'PREVIEW' | 'QUARANTINE_RELEASED' | 'MOVED';
 
@@ -481,7 +478,8 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   metric?: string;
 
   /**
-   * Query param: Space delimited query term(s). The search is case-insensitive.
+   * Query param: The space-delimited term used in the query. The search is
+   * case-insensitive.
    *
    * The content of the following email metadata fields are searched:
    *

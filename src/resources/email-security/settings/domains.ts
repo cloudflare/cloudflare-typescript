@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../.
 
 export class Domains extends APIResource {
   /**
-   * List, search, and sort an account's email domains.
+   * Lists, searches, and sorts an account’s email domains.
    */
   list(
     params: DomainListParams,
@@ -59,7 +59,7 @@ export class DomainListResponsesV4PagePaginationArray extends V4PagePaginationAr
 
 export interface DomainListResponse {
   /**
-   * Unique domain identifier
+   * The unique identifier for the domain.
    */
   id: number;
 
@@ -82,14 +82,14 @@ export interface DomainListResponse {
 
 export interface DomainDeleteResponse {
   /**
-   * Unique domain identifier
+   * The unique identifier for the domain.
    */
   id: number;
 }
 
 export interface DomainEditResponse {
   /**
-   * Unique domain identifier
+   * The unique identifier for the domain.
    */
   id: number;
 
@@ -117,8 +117,7 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: If present, the response contains only domains with the provided
-   * delivery mode.
+   * Query param: Filters response to domains with the provided delivery mode.
    */
   allowed_delivery_mode?: 'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN';
 
@@ -128,8 +127,8 @@ export interface DomainListParams extends V4PagePaginationArrayParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Filter result by the provided domains. Allows for multiple
-   * occurrences, e.g., `domain=example.com&domain=example.xyz`.
+   * Query param: Filters results by the provided domains, allowing for multiple
+   * occurrences.
    */
   domain?: Array<string>;
 

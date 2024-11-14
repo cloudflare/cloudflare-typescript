@@ -22,7 +22,7 @@ export class AllowPatterns extends APIResource {
   }
 
   /**
-   * List, search, and sort an accounts's email allow patterns.
+   * Lists, searches, and sorts an account’s email allow patterns.
    */
   list(
     params: AllowPatternListParams,
