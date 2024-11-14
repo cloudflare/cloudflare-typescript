@@ -36,8 +36,11 @@ export class Users extends APIResource {
     params: UserListParams,
     options?: Core.RequestOptions,
   ): Core.PagePromise<AccessUsersSinglePage, AccessUser> {
-    const { account_id } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/access/users`, AccessUsersSinglePage, options);
+    const { account_id, ...query } = params;
+    return this._client.getAPIList(`/accounts/${account_id}/access/users`, AccessUsersSinglePage, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -96,9 +99,24 @@ export interface AccessUser {
 
 export interface UserListParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   account_id: string;
+
+  /**
+   * Query param: The email of the user.
+   */
+  email?: string;
+
+  /**
+   * Query param: The name of the user.
+   */
+  name?: string;
+
+  /**
+   * Query param: Search for users by other listed query parameters.
+   */
+  search?: string;
 }
 
 Users.AccessUsersSinglePage = AccessUsersSinglePage;
