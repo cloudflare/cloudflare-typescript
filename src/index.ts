@@ -820,6 +820,7 @@ export declare namespace Cloudflare {
   export type Subscription = API.Subscription;
   export type SubscriptionComponent = API.SubscriptionComponent;
   export type SubscriptionZone = API.SubscriptionZone;
+  export type TokenValue = API.TokenValue;
 }
 
 export { toFile, fileFromPath } from './uploads';

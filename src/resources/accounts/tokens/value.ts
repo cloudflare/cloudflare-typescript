@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as TokensValueAPI from '../../user/tokens/value';
+import * as Shared from '../../shared';
 
 export class Value extends APIResource {
   /**
@@ -12,13 +12,13 @@ export class Value extends APIResource {
     tokenId: string,
     params: ValueUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokensValueAPI.Value> {
+  ): Core.APIPromise<Shared.TokenValue> {
     const { account_id, body } = params;
     return (
       this._client.put(`/accounts/${account_id}/tokens/${tokenId}/value`, {
         body: body,
         ...options,
-      }) as Core.APIPromise<{ result: TokensValueAPI.Value }>
+      }) as Core.APIPromise<{ result: Shared.TokenValue }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
