@@ -820,6 +820,9 @@ export declare namespace Cloudflare {
   export type Subscription = API.Subscription;
   export type SubscriptionComponent = API.SubscriptionComponent;
   export type SubscriptionZone = API.SubscriptionZone;
+  export type Token = API.Token;
+  export type TokenConditionCIDRList = API.TokenConditionCIDRList;
+  export type TokenPolicy = API.TokenPolicy;
   export type TokenValue = API.TokenValue;
 }
 
