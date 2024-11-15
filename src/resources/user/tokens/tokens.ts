@@ -4,6 +4,7 @@ import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
 import * as TokensAPI from './tokens';
+import * as Shared from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   PermissionGroupListResponse,
@@ -11,14 +12,14 @@ import {
   PermissionGroups,
 } from './permission-groups';
 import * as ValueAPI from './value';
-import { Value, ValueResource, ValueUpdateParams } from './value';
+import { Value, ValueUpdateParams } from './value';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
     this._client,
   );
-  value: ValueAPI.ValueResource = new ValueAPI.ValueResource(this._client);
+  value: ValueAPI.Value = new ValueAPI.Value(this._client);
 
   /**
    * Create a new access token.
@@ -343,7 +344,7 @@ export interface TokenCreateResponse {
   /**
    * The token value.
    */
-  value?: ValueAPI.Value;
+  value?: Shared.TokenValue;
 }
 
 export namespace TokenCreateResponse {
@@ -519,7 +520,7 @@ export interface TokenListParams extends V4PagePaginationArrayParams {
 Tokens.TokensV4PagePaginationArray = TokensV4PagePaginationArray;
 Tokens.PermissionGroups = PermissionGroups;
 Tokens.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
-Tokens.ValueResource = ValueResource;
+Tokens.Value = Value;
 
 export declare namespace Tokens {
   export {
@@ -541,5 +542,5 @@ export declare namespace Tokens {
     PermissionGroupListResponsesSinglePage as PermissionGroupListResponsesSinglePage,
   };
 
-  export { ValueResource as ValueResource, type Value as Value, type ValueUpdateParams as ValueUpdateParams };
+  export { Value as Value, type ValueUpdateParams as ValueUpdateParams };
 }
