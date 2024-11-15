@@ -381,11 +381,6 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
   account_id: string;
 
   /**
-   * Query param: gateway id
-   */
-  id?: string;
-
-  /**
    * Query param: Order By Column Name
    */
   order_by?: string;

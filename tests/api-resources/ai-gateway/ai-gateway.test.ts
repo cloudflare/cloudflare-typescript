@@ -92,16 +92,17 @@ describe('resource aiGateway', () => {
   test('list: required and optional params', async () => {
     const response = await client.aiGateway.list({
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
-      id: 'my-gateway',
       order_by: 'order_by',
       order_by_direction: 'asc',
       page: 1,
-      per_page: 5,
+      per_page: 1,
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.aiGateway.delete('id', { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' });
+    const responsePromise = client.aiGateway.delete('my-gateway', {
+      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -112,7 +113,9 @@ describe('resource aiGateway', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.aiGateway.delete('id', { account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0' });
+    const response = await client.aiGateway.delete('my-gateway', {
+      account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
+    });
   });
 
   test('get: only required params', async () => {
