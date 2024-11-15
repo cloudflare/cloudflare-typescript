@@ -19,16 +19,13 @@ export {
   type SubscriptionUpdateParams,
 } from './subscriptions';
 export {
-  TokenListResponsesV4PagePaginationArray,
+  TokensV4PagePaginationArray,
   Tokens,
   type CIDRList,
   type Policy,
   type Token,
   type TokenCreateResponse,
-  type TokenUpdateResponse,
-  type TokenListResponse,
   type TokenDeleteResponse,
-  type TokenGetResponse,
   type TokenVerifyResponse,
   type TokenCreateParams,
   type TokenUpdateParams,
