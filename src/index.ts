@@ -820,7 +820,7 @@ export declare namespace Cloudflare {
   export type SubscriptionZone = API.SubscriptionZone;
 }
 
-export { toFile, fileFromPath } from 'cloudflare/uploads';
+export { toFile, fileFromPath } from './uploads';
 export {
   CloudflareError,
   APIError,
@@ -835,6 +835,6 @@ export {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} from 'cloudflare/error';
+} from './error';
 
 export default Cloudflare;
