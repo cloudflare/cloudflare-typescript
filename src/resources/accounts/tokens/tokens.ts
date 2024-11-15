@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as Shared from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   PermissionGroupListParams,
@@ -13,7 +14,6 @@ import * as ValueAPI from './value';
 import { Value, ValueUpdateParams } from './value';
 import * as TokensTokensAPI from '../../user/tokens/tokens';
 import { TokensV4PagePaginationArray } from '../../user/tokens/tokens';
-import * as TokensValueAPI from '../../user/tokens/value';
 import { type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
@@ -161,7 +161,7 @@ export interface TokenCreateResponse {
   /**
    * The token value.
    */
-  value?: TokensValueAPI.Value;
+  value?: Shared.TokenValue;
 }
 
 export namespace TokenCreateResponse {

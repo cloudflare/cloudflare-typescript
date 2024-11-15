@@ -22,6 +22,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Subscription</a></code>
 - <code><a href="./src/resources/shared.ts">SubscriptionComponent</a></code>
 - <code><a href="./src/resources/shared.ts">SubscriptionZone</a></code>
+- <code><a href="./src/resources/shared.ts">TokenValue</a></code>
 
 # Accounts
 
@@ -107,7 +108,7 @@ Methods:
 
 Methods:
 
-- <code title="put /accounts/{account_id}/tokens/{token_id}/value">client.accounts.tokens.value.<a href="./src/resources/accounts/tokens/value.ts">update</a>(tokenId, { ...params }) -> Value</code>
+- <code title="put /accounts/{account_id}/tokens/{token_id}/value">client.accounts.tokens.value.<a href="./src/resources/accounts/tokens/value.ts">update</a>(tokenId, { ...params }) -> TokenValue</code>
 
 # OriginCACertificates
 
@@ -263,13 +264,9 @@ Methods:
 
 ### Value
 
-Types:
-
-- <code><a href="./src/resources/user/tokens/value.ts">Value</a></code>
-
 Methods:
 
-- <code title="put /user/tokens/{token_id}/value">client.user.tokens.value.<a href="./src/resources/user/tokens/value.ts">update</a>(tokenId, { ...params }) -> Value</code>
+- <code title="put /user/tokens/{token_id}/value">client.user.tokens.value.<a href="./src/resources/user/tokens/value.ts">update</a>(tokenId, { ...params }) -> TokenValue</code>
 
 # Zones
 

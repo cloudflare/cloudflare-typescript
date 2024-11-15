@@ -18,4 +18,4 @@ export {
   type TokenUpdateParams,
   type TokenListParams,
 } from './tokens';
-export { ValueResource, type Value, type ValueUpdateParams } from './value';
+export { Value, type ValueUpdateParams } from './value';
