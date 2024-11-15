@@ -4197,6 +4197,14 @@ Methods:
 
 ### FleetStatus
 
+Types:
+
+- <code><a href="./src/resources/zero-trust/devices/fleet-status.ts">FleetStatusGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/devices/{device_id}/fleet-status/live">client.zeroTrust.devices.fleetStatus.<a href="./src/resources/zero-trust/devices/fleet-status.ts">get</a>(deviceId, { ...params }) -> FleetStatusGetResponse</code>
+
 ### Policies
 
 Types:
