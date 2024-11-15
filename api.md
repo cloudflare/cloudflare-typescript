@@ -81,19 +81,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenCreateResponse</a></code>
-- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenUpdateResponse</a></code>
-- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenListResponse</a></code>
 - <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenDeleteResponse</a></code>
-- <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenGetResponse</a></code>
 - <code><a href="./src/resources/accounts/tokens/tokens.ts">TokenVerifyResponse</a></code>
 
 Methods:
 
 - <code title="post /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
-- <code title="put /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> TokenUpdateResponse</code>
-- <code title="get /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
+- <code title="put /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> Token</code>
+- <code title="get /accounts/{account_id}/tokens">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">list</a>({ ...params }) -> TokensV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">delete</a>(tokenId, { ...params }) -> TokenDeleteResponse | null</code>
-- <code title="get /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">get</a>(tokenId, { ...params }) -> TokenGetResponse</code>
+- <code title="get /accounts/{account_id}/tokens/{token_id}">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">get</a>(tokenId, { ...params }) -> Token</code>
 - <code title="get /accounts/{account_id}/tokens/verify">client.accounts.tokens.<a href="./src/resources/accounts/tokens/tokens.ts">verify</a>({ ...params }) -> TokenVerifyResponse</code>
 
 ### PermissionGroups
@@ -242,19 +239,16 @@ Types:
 - <code><a href="./src/resources/user/tokens/tokens.ts">Policy</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">Token</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
-- <code><a href="./src/resources/user/tokens/tokens.ts">TokenUpdateResponse</a></code>
-- <code><a href="./src/resources/user/tokens/tokens.ts">TokenListResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenDeleteResponse</a></code>
-- <code><a href="./src/resources/user/tokens/tokens.ts">TokenGetResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenVerifyResponse</a></code>
 
 Methods:
 
 - <code title="post /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">create</a>({ ...params }) -> TokenCreateResponse</code>
-- <code title="put /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> TokenUpdateResponse</code>
-- <code title="get /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">list</a>({ ...params }) -> TokenListResponsesV4PagePaginationArray</code>
+- <code title="put /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">update</a>(tokenId, { ...params }) -> Token</code>
+- <code title="get /user/tokens">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">list</a>({ ...params }) -> TokensV4PagePaginationArray</code>
 - <code title="delete /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">delete</a>(tokenId) -> TokenDeleteResponse | null</code>
-- <code title="get /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">get</a>(tokenId) -> TokenGetResponse</code>
+- <code title="get /user/tokens/{token_id}">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">get</a>(tokenId) -> Token</code>
 - <code title="get /user/tokens/verify">client.user.tokens.<a href="./src/resources/user/tokens/tokens.ts">verify</a>() -> TokenVerifyResponse</code>
 
 ### PermissionGroups
