@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
-import { V4PagePaginationArray } from '../pagination';
+import { SinglePage, V4PagePaginationArray } from '../pagination';
 
 export type ASN = number;
 
@@ -267,6 +267,188 @@ export interface LoadBalancerPreview {
   preview_id?: string;
 }
 
+export interface Member {
+  /**
+   * Membership identifier tag.
+   */
+  id?: string;
+
+  /**
+   * Access policy for the membership
+   */
+  policies?: Array<Member.Policy>;
+
+  /**
+   * Roles assigned to this Member.
+   */
+  roles?: Array<Role>;
+
+  /**
+   * A member's status in the account.
+   */
+  status?: 'accepted' | 'pending';
+
+  /**
+   * Details of the user associated to the membership.
+   */
+  user?: Member.User;
+}
+
+export namespace Member {
+  export interface Policy {
+    /**
+     * Policy identifier.
+     */
+    id?: string;
+
+    /**
+     * Allow or deny operations against the resources.
+     */
+    access?: 'allow' | 'deny';
+
+    /**
+     * A set of permission groups that are specified to the policy.
+     */
+    permission_groups?: Array<Policy.PermissionGroup>;
+
+    /**
+     * A list of resource groups that the policy applies to.
+     */
+    resource_groups?: Array<Policy.ResourceGroup>;
+  }
+
+  export namespace Policy {
+    /**
+     * A named group of permissions that map to a group of operations against
+     * resources.
+     */
+    export interface PermissionGroup {
+      /**
+       * Identifier of the group.
+       */
+      id: string;
+
+      /**
+       * Attributes associated to the permission group.
+       */
+      meta?: PermissionGroup.Meta;
+
+      /**
+       * Name of the group.
+       */
+      name?: string;
+    }
+
+    export namespace PermissionGroup {
+      /**
+       * Attributes associated to the permission group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
+    }
+
+    /**
+     * A group of scoped resources.
+     */
+    export interface ResourceGroup {
+      /**
+       * Identifier of the group.
+       */
+      id: string;
+
+      /**
+       * The scope associated to the resource group
+       */
+      scope: Array<ResourceGroup.Scope>;
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      meta?: ResourceGroup.Meta;
+
+      /**
+       * Name of the resource group.
+       */
+      name?: string;
+    }
+
+    export namespace ResourceGroup {
+      /**
+       * A scope is a combination of scope objects which provides additional context.
+       */
+      export interface Scope {
+        /**
+         * This is a combination of pre-defined resource name and identifier (like Account
+         * ID etc.)
+         */
+        key: string;
+
+        /**
+         * A list of scope objects for additional context.
+         */
+        objects: Array<Scope.Object>;
+      }
+
+      export namespace Scope {
+        /**
+         * A scope object represents any resource that can have actions applied against
+         * invite.
+         */
+        export interface Object {
+          /**
+           * This is a combination of pre-defined resource name and identifier (like Zone ID
+           * etc.)
+           */
+          key: string;
+        }
+      }
+
+      /**
+       * Attributes associated to the resource group.
+       */
+      export interface Meta {
+        key?: string;
+
+        value?: string;
+      }
+    }
+  }
+
+  /**
+   * Details of the user associated to the membership.
+   */
+  export interface User {
+    /**
+     * The contact email address of the user.
+     */
+    email: string;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * User's first name
+     */
+    first_name?: string | null;
+
+    /**
+     * User's last name
+     */
+    last_name?: string | null;
+
+    /**
+     * Indicates whether two-factor authentication is enabled for the user account.
+     * Does not apply to API authentication.
+     */
+    two_factor_authentication_enabled?: boolean;
+  }
+}
+
 export interface PaginationInfo {
   /**
    * Total number of results for the requested service
@@ -414,6 +596,60 @@ export namespace Result {
   }
 }
 
+export interface Role {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+
+  /**
+   * Description of role's permissions.
+   */
+  description: string;
+
+  /**
+   * Role name.
+   */
+  name: string;
+
+  permissions: Role.Permissions;
+}
+
+export namespace Role {
+  export interface Permissions {
+    analytics?: Shared.PermissionGrant;
+
+    billing?: Shared.PermissionGrant;
+
+    cache_purge?: Shared.PermissionGrant;
+
+    dns?: Shared.PermissionGrant;
+
+    dns_records?: Shared.PermissionGrant;
+
+    lb?: Shared.PermissionGrant;
+
+    logs?: Shared.PermissionGrant;
+
+    organization?: Shared.PermissionGrant;
+
+    ssl?: Shared.PermissionGrant;
+
+    waf?: Shared.PermissionGrant;
+
+    zone_settings?: Shared.PermissionGrant;
+
+    zones?: Shared.PermissionGrant;
+  }
+}
+
+export interface RoleParam {
+  /**
+   * Role identifier tag.
+   */
+  id: string;
+}
+
 /**
  * Direction to order DNS records in.
  */
@@ -506,5 +742,9 @@ export interface SubscriptionZone {
    */
   name?: string;
 }
+
+export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> {}
+
+export class RolesSinglePage extends SinglePage<Role> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

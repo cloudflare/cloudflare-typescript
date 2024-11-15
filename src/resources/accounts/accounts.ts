@@ -6,28 +6,16 @@ import * as Core from '../../core';
 import * as MembersAPI from './members';
 import {
   MemberCreateParams,
-  MemberCreateResponse,
   MemberDeleteParams,
   MemberDeleteResponse,
   MemberGetParams,
-  MemberGetResponse,
   MemberListParams,
-  MemberListResponse,
-  MemberListResponsesV4PagePaginationArray,
   MemberUpdateParams,
-  MemberUpdateResponse,
   Members,
   Status,
 } from './members';
 import * as RolesAPI from './roles';
-import {
-  RoleGetParams,
-  RoleGetResponse,
-  RoleListParams,
-  RoleListResponse,
-  RoleListResponsesSinglePage,
-  Roles,
-} from './roles';
+import { RoleGetParams, RoleListParams, Roles } from './roles';
 import * as SubscriptionsAPI from './subscriptions';
 import {
   SubscriptionCreateParams,
@@ -329,9 +317,7 @@ export interface AccountGetParams {
 }
 
 Accounts.Members = Members;
-Accounts.MemberListResponsesV4PagePaginationArray = MemberListResponsesV4PagePaginationArray;
 Accounts.Roles = Roles;
-Accounts.RoleListResponsesSinglePage = RoleListResponsesSinglePage;
 Accounts.Subscriptions = Subscriptions;
 Accounts.Tokens = Tokens;
 Accounts.TokenListResponsesV4PagePaginationArray = TokenListResponsesV4PagePaginationArray;
@@ -340,12 +326,7 @@ export declare namespace Accounts {
   export {
     Members as Members,
     type Status as Status,
-    type MemberCreateResponse as MemberCreateResponse,
-    type MemberUpdateResponse as MemberUpdateResponse,
-    type MemberListResponse as MemberListResponse,
     type MemberDeleteResponse as MemberDeleteResponse,
-    type MemberGetResponse as MemberGetResponse,
-    MemberListResponsesV4PagePaginationArray as MemberListResponsesV4PagePaginationArray,
     type MemberCreateParams as MemberCreateParams,
     type MemberUpdateParams as MemberUpdateParams,
     type MemberListParams as MemberListParams,
@@ -353,14 +334,7 @@ export declare namespace Accounts {
     type MemberGetParams as MemberGetParams,
   };
 
-  export {
-    Roles as Roles,
-    type RoleListResponse as RoleListResponse,
-    type RoleGetResponse as RoleGetResponse,
-    RoleListResponsesSinglePage as RoleListResponsesSinglePage,
-    type RoleListParams as RoleListParams,
-    type RoleGetParams as RoleGetParams,
-  };
+  export { Roles as Roles, type RoleListParams as RoleListParams, type RoleGetParams as RoleGetParams };
 
   export {
     Subscriptions as Subscriptions,

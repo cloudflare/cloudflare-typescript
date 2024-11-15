@@ -2,28 +2,16 @@
 
 export { Accounts } from './accounts';
 export {
-  MemberListResponsesV4PagePaginationArray,
   Members,
   type Status,
-  type MemberCreateResponse,
-  type MemberUpdateResponse,
-  type MemberListResponse,
   type MemberDeleteResponse,
-  type MemberGetResponse,
   type MemberCreateParams,
   type MemberUpdateParams,
   type MemberListParams,
   type MemberDeleteParams,
   type MemberGetParams,
 } from './members';
-export {
-  RoleListResponsesSinglePage,
-  Roles,
-  type RoleListResponse,
-  type RoleGetResponse,
-  type RoleListParams,
-  type RoleGetParams,
-} from './roles';
+export { Roles, type RoleListParams, type RoleGetParams } from './roles';
 export {
   Subscriptions,
   type SubscriptionCreateResponse,
