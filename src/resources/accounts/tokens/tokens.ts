@@ -3,6 +3,7 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as Shared from '../../shared';
+import { TokensV4PagePaginationArray } from '../../shared';
 import * as PermissionGroupsAPI from './permission-groups';
 import {
   PermissionGroupListParams,
@@ -12,8 +13,6 @@ import {
 } from './permission-groups';
 import * as ValueAPI from './value';
 import { Value, ValueUpdateParams } from './value';
-import * as TokensTokensAPI from '../../user/tokens/tokens';
-import { TokensV4PagePaginationArray } from '../../user/tokens/tokens';
 import { type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
@@ -41,11 +40,11 @@ export class Tokens extends APIResource {
     tokenId: string,
     params: TokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokensTokensAPI.Token> {
+  ): Core.APIPromise<Shared.Token> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
-        result: TokensTokensAPI.Token;
+        result: Shared.Token;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -56,7 +55,7 @@ export class Tokens extends APIResource {
   list(
     params: TokenListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<TokensV4PagePaginationArray, TokensTokensAPI.Token> {
+  ): Core.PagePromise<TokensV4PagePaginationArray, Shared.Token> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(`/accounts/${account_id}/tokens`, TokensV4PagePaginationArray, {
       query,
@@ -83,15 +82,11 @@ export class Tokens extends APIResource {
   /**
    * Get information about a specific Account Owned API token.
    */
-  get(
-    tokenId: string,
-    params: TokenGetParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TokensTokensAPI.Token> {
+  get(tokenId: string, params: TokenGetParams, options?: Core.RequestOptions): Core.APIPromise<Shared.Token> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/tokens/${tokenId}`, options) as Core.APIPromise<{
-        result: TokensTokensAPI.Token;
+        result: Shared.Token;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -151,7 +146,7 @@ export interface TokenCreateResponse {
   /**
    * List of access policies assigned to the token.
    */
-  policies?: Array<TokensTokensAPI.Policy>;
+  policies?: Array<Shared.TokenPolicy>;
 
   /**
    * Status of the token.
@@ -180,12 +175,12 @@ export namespace TokenCreateResponse {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensTokensAPI.CIDRList>;
+      in?: Array<Shared.TokenConditionCIDRList>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensTokensAPI.CIDRList>;
+      not_in?: Array<Shared.TokenConditionCIDRList>;
     }
   }
 }
@@ -234,7 +229,7 @@ export interface TokenCreateParams {
   /**
    * Body param: List of access policies assigned to the token.
    */
-  policies: Array<TokensTokensAPI.PolicyParam>;
+  policies: Array<Shared.TokenPolicyParam>;
 
   /**
    * Body param:
@@ -269,12 +264,12 @@ export namespace TokenCreateParams {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensTokensAPI.CIDRListParam>;
+      in?: Array<Shared.TokenConditionCIDRListParam>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensTokensAPI.CIDRListParam>;
+      not_in?: Array<Shared.TokenConditionCIDRListParam>;
     }
   }
 }
@@ -293,7 +288,7 @@ export interface TokenUpdateParams {
   /**
    * Body param: List of access policies assigned to the token.
    */
-  policies: Array<TokensTokensAPI.PolicyParam>;
+  policies: Array<Shared.TokenPolicyParam>;
 
   /**
    * Body param: Status of the token.
@@ -333,12 +328,12 @@ export namespace TokenUpdateParams {
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      in?: Array<TokensTokensAPI.CIDRListParam>;
+      in?: Array<Shared.TokenConditionCIDRListParam>;
 
       /**
        * List of IPv4/IPv6 CIDR addresses.
        */
-      not_in?: Array<TokensTokensAPI.CIDRListParam>;
+      not_in?: Array<Shared.TokenConditionCIDRListParam>;
     }
   }
 }

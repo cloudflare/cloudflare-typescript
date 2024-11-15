@@ -27,9 +27,6 @@ import * as BillingAPI from './billing/billing';
 import { Billing } from './billing/billing';
 import * as TokensAPI from './tokens/tokens';
 import {
-  CIDRList,
-  Policy,
-  Token,
   TokenCreateParams,
   TokenCreateResponse,
   TokenDeleteResponse,
@@ -37,7 +34,6 @@ import {
   TokenUpdateParams,
   TokenVerifyResponse,
   Tokens,
-  TokensV4PagePaginationArray,
 } from './tokens/tokens';
 
 export class User extends APIResource {
@@ -106,7 +102,6 @@ User.Organizations = Organizations;
 User.OrganizationsV4PagePaginationArray = OrganizationsV4PagePaginationArray;
 User.Subscriptions = Subscriptions;
 User.Tokens = Tokens;
-User.TokensV4PagePaginationArray = TokensV4PagePaginationArray;
 
 export declare namespace User {
   export { AuditLogs as AuditLogs, type AuditLogListParams as AuditLogListParams };
@@ -139,13 +134,9 @@ export declare namespace User {
 
   export {
     Tokens as Tokens,
-    type CIDRList as CIDRList,
-    type Policy as Policy,
-    type Token as Token,
     type TokenCreateResponse as TokenCreateResponse,
     type TokenDeleteResponse as TokenDeleteResponse,
     type TokenVerifyResponse as TokenVerifyResponse,
-    TokensV4PagePaginationArray as TokensV4PagePaginationArray,
     type TokenCreateParams as TokenCreateParams,
     type TokenUpdateParams as TokenUpdateParams,
     type TokenListParams as TokenListParams,

@@ -743,6 +743,207 @@ export interface SubscriptionZone {
   name?: string;
 }
 
+export interface Token {
+  /**
+   * Token identifier tag.
+   */
+  id?: string;
+
+  condition?: Token.Condition;
+
+  /**
+   * The expiration time on or after which the JWT MUST NOT be accepted for
+   * processing.
+   */
+  expires_on?: string;
+
+  /**
+   * The time on which the token was created.
+   */
+  issued_on?: string;
+
+  /**
+   * Last time the token was used.
+   */
+  last_used_on?: string;
+
+  /**
+   * Last time the token was modified.
+   */
+  modified_on?: string;
+
+  /**
+   * Token name.
+   */
+  name?: string;
+
+  /**
+   * The time before which the token MUST NOT be accepted for processing.
+   */
+  not_before?: string;
+
+  /**
+   * List of access policies assigned to the token.
+   */
+  policies?: Array<TokenPolicy>;
+
+  /**
+   * Status of the token.
+   */
+  status?: 'active' | 'disabled' | 'expired';
+}
+
+export namespace Token {
+  export interface Condition {
+    /**
+     * Client IP restrictions.
+     */
+    'request.ip'?: Condition.RequestIP;
+  }
+
+  export namespace Condition {
+    /**
+     * Client IP restrictions.
+     */
+    export interface RequestIP {
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      in?: Array<Shared.TokenConditionCIDRList>;
+
+      /**
+       * List of IPv4/IPv6 CIDR addresses.
+       */
+      not_in?: Array<Shared.TokenConditionCIDRList>;
+    }
+  }
+}
+
+/**
+ * IPv4/IPv6 CIDR.
+ */
+export type TokenConditionCIDRList = string;
+
+/**
+ * IPv4/IPv6 CIDR.
+ */
+export type TokenConditionCIDRListParam = string;
+
+export interface TokenPolicy {
+  /**
+   * Policy identifier.
+   */
+  id: string;
+
+  /**
+   * Allow or deny operations against the resources.
+   */
+  effect: 'allow' | 'deny';
+
+  /**
+   * A set of permission groups that are specified to the policy.
+   */
+  permission_groups: Array<TokenPolicy.PermissionGroup>;
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  resources: TokenPolicy.Resources;
+}
+
+export namespace TokenPolicy {
+  /**
+   * A named group of permissions that map to a group of operations against
+   * resources.
+   */
+  export interface PermissionGroup {
+    /**
+     * Identifier of the group.
+     */
+    id: string;
+
+    /**
+     * Attributes associated to the permission group.
+     */
+    meta?: PermissionGroup.Meta;
+
+    /**
+     * Name of the group.
+     */
+    name?: string;
+  }
+
+  export namespace PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    export interface Meta {
+      key?: string;
+
+      value?: string;
+    }
+  }
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  export interface Resources {
+    resource?: string;
+
+    scope?: string;
+  }
+}
+
+export interface TokenPolicyParam {
+  /**
+   * Allow or deny operations against the resources.
+   */
+  effect: 'allow' | 'deny';
+
+  /**
+   * A set of permission groups that are specified to the policy.
+   */
+  permission_groups: Array<TokenPolicyParam.PermissionGroup>;
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  resources: TokenPolicyParam.Resources;
+}
+
+export namespace TokenPolicyParam {
+  /**
+   * A named group of permissions that map to a group of operations against
+   * resources.
+   */
+  export interface PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    meta?: PermissionGroup.Meta;
+  }
+
+  export namespace PermissionGroup {
+    /**
+     * Attributes associated to the permission group.
+     */
+    export interface Meta {
+      key?: string;
+
+      value?: string;
+    }
+  }
+
+  /**
+   * A list of resource names that the policy applies to.
+   */
+  export interface Resources {
+    resource?: string;
+
+    scope?: string;
+  }
+}
+
 /**
  * The token value.
  */
@@ -751,5 +952,7 @@ export type TokenValue = string;
 export class MembersV4PagePaginationArray extends V4PagePaginationArray<Member> {}
 
 export class RolesSinglePage extends SinglePage<Role> {}
+
+export class TokensV4PagePaginationArray extends V4PagePaginationArray<Token> {}
 
 export class AuditLogsV4PagePaginationArray extends V4PagePaginationArray<AuditLog> {}

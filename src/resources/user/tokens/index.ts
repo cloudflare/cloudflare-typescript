@@ -6,11 +6,7 @@ export {
   type PermissionGroupListResponse,
 } from './permission-groups';
 export {
-  TokensV4PagePaginationArray,
   Tokens,
-  type CIDRList,
-  type Policy,
-  type Token,
   type TokenCreateResponse,
   type TokenDeleteResponse,
   type TokenVerifyResponse,
