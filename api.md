@@ -22,6 +22,9 @@ Types:
 - <code><a href="./src/resources/shared.ts">Subscription</a></code>
 - <code><a href="./src/resources/shared.ts">SubscriptionComponent</a></code>
 - <code><a href="./src/resources/shared.ts">SubscriptionZone</a></code>
+- <code><a href="./src/resources/shared.ts">Token</a></code>
+- <code><a href="./src/resources/shared.ts">TokenConditionCIDRList</a></code>
+- <code><a href="./src/resources/shared.ts">TokenPolicy</a></code>
 - <code><a href="./src/resources/shared.ts">TokenValue</a></code>
 
 # Accounts
@@ -236,9 +239,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/user/tokens/tokens.ts">CIDRList</a></code>
-- <code><a href="./src/resources/user/tokens/tokens.ts">Policy</a></code>
-- <code><a href="./src/resources/user/tokens/tokens.ts">Token</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenCreateResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenDeleteResponse</a></code>
 - <code><a href="./src/resources/user/tokens/tokens.ts">TokenVerifyResponse</a></code>
