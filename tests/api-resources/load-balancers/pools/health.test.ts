@@ -13,7 +13,6 @@ describe('resource health', () => {
   test('create: only required params', async () => {
     const responsePromise = client.loadBalancers.pools.health.create('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expected_codes: '2xx',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,12 +26,12 @@ describe('resource health', () => {
   test('create: required and optional params', async () => {
     const response = await client.loadBalancers.pools.health.create('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expected_codes: '2xx',
       allow_insecure: true,
       consecutive_down: 0,
       consecutive_up: 0,
       description: 'Login page monitor',
       expected_body: 'alive',
+      expected_codes: '2xx',
       follow_redirects: true,
       header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
       interval: 0,

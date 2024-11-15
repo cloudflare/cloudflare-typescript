@@ -13,7 +13,7 @@ describe('resource previews', () => {
   test('create: only required params', async () => {
     const responsePromise = client.loadBalancers.monitors.previews.create(
       'f1aba936b94213e5b8dca0c0dbf1f9cc',
-      { account_id: '023e105f4ecef8ad9ca31a8372d0c353', expected_codes: '2xx' },
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,12 +27,12 @@ describe('resource previews', () => {
   test('create: required and optional params', async () => {
     const response = await client.loadBalancers.monitors.previews.create('f1aba936b94213e5b8dca0c0dbf1f9cc', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      expected_codes: '2xx',
       allow_insecure: true,
       consecutive_down: 0,
       consecutive_up: 0,
       description: 'Login page monitor',
       expected_body: 'alive',
+      expected_codes: '2xx',
       follow_redirects: true,
       header: { Host: ['example.com'], 'X-App-ID': ['abc123'] },
       interval: 0,
