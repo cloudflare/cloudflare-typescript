@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { CloudflareError } from 'cloudflare/error';
 
 export class Ownership extends APIResource {
   /**

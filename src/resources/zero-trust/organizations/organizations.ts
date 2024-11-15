@@ -3,7 +3,7 @@
 import { APIResource } from '../../../resource';
 import { isRequestOptions } from '../../../core';
 import * as Core from '../../../core';
-import { CloudflareError } from '../../../error';
+import { CloudflareError } from 'cloudflare/error';
 import * as DOHAPI from './doh';
 import { DOH, DOHGetParams, DOHGetResponse, DOHUpdateParams, DOHUpdateResponse } from './doh';
 

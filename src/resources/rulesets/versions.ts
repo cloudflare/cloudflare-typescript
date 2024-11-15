@@ -3,7 +3,7 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { CloudflareError } from '../../error';
+import { CloudflareError } from 'cloudflare/error';
 import * as RulesAPI from './rules';
 import * as RulesetsAPI from './rulesets';
 import { SinglePage } from '../../pagination';
