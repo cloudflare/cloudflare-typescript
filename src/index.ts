@@ -808,12 +808,14 @@ export declare namespace Cloudflare {
   export type ErrorData = API.ErrorData;
   export type Identifier = API.Identifier;
   export type LoadBalancerPreview = API.LoadBalancerPreview;
+  export type Member = API.Member;
   export type PaginationInfo = API.PaginationInfo;
   export type Permission = API.Permission;
   export type PermissionGrant = API.PermissionGrant;
   export type RatePlan = API.RatePlan;
   export type ResponseInfo = API.ResponseInfo;
   export type Result = API.Result;
+  export type Role = API.Role;
   export type SortDirection = API.SortDirection;
   export type Subscription = API.Subscription;
   export type SubscriptionComponent = API.SubscriptionComponent;
