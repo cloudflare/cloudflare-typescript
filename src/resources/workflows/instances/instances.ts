@@ -87,7 +87,11 @@ export interface InstanceListResponse {
 
   created_on: string;
 
+  ended_on: string | null;
+
   modified_on: string;
+
+  started_on: string | null;
 
   status:
     | 'queued'
