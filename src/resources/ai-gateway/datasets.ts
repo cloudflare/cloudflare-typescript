@@ -104,6 +104,9 @@ export interface DatasetCreateResponse {
 
   filters: Array<DatasetCreateResponse.Filter>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -143,6 +146,9 @@ export interface DatasetUpdateResponse {
 
   filters: Array<DatasetUpdateResponse.Filter>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -182,6 +188,9 @@ export interface DatasetListResponse {
 
   filters: Array<DatasetListResponse.Filter>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -221,6 +230,9 @@ export interface DatasetDeleteResponse {
 
   filters: Array<DatasetDeleteResponse.Filter>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -260,6 +272,9 @@ export interface DatasetGetResponse {
 
   filters: Array<DatasetGetResponse.Filter>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -389,17 +404,7 @@ export interface DatasetListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  id?: string;
-
-  /**
-   * Query param:
-   */
   enable?: boolean;
-
-  /**
-   * Query param:
-   */
-  filters?: Array<DatasetListParams.Filter>;
 
   /**
    * Query param:
@@ -420,29 +425,6 @@ export interface DatasetListParams extends V4PagePaginationArrayParams {
    * Query param: Search by id, name, filters
    */
   search?: string;
-}
-
-export namespace DatasetListParams {
-  export interface Filter {
-    key:
-      | 'created_at'
-      | 'request_content_type'
-      | 'response_content_type'
-      | 'success'
-      | 'cached'
-      | 'provider'
-      | 'model'
-      | 'cost'
-      | 'tokens'
-      | 'tokens_in'
-      | 'tokens_out'
-      | 'duration'
-      | 'feedback';
-
-    operator: 'eq' | 'contains' | 'lt' | 'gt';
-
-    value: Array<string | number | boolean>;
-  }
 }
 
 export interface DatasetDeleteParams {

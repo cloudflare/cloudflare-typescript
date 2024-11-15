@@ -6,7 +6,7 @@ import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../p
 
 export class Evaluations extends APIResource {
   /**
-   * Create a new Evaluations
+   * Create a new Evaluation
    */
   create(
     gatewayId: string,
@@ -23,7 +23,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * List Evaluationss
+   * List Evaluations
    */
   list(
     gatewayId: string,
@@ -39,7 +39,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * Delete a Evaluations
+   * Delete a Evaluation
    */
   delete(
     gatewayId: string,
@@ -57,7 +57,7 @@ export class Evaluations extends APIResource {
   }
 
   /**
-   * Fetch a Evaluations
+   * Fetch a Evaluation
    */
   get(
     gatewayId: string,
@@ -84,6 +84,9 @@ export interface EvaluationCreateResponse {
 
   datasets: Array<EvaluationCreateResponse.Dataset>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -107,6 +110,9 @@ export namespace EvaluationCreateResponse {
 
     filters: Array<Dataset.Filter>;
 
+    /**
+     * gateway id
+     */
     gateway_id: string;
 
     modified_at: string;
@@ -165,6 +171,9 @@ export interface EvaluationListResponse {
 
   datasets: Array<EvaluationListResponse.Dataset>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -188,6 +197,9 @@ export namespace EvaluationListResponse {
 
     filters: Array<Dataset.Filter>;
 
+    /**
+     * gateway id
+     */
     gateway_id: string;
 
     modified_at: string;
@@ -246,6 +258,9 @@ export interface EvaluationDeleteResponse {
 
   datasets: Array<EvaluationDeleteResponse.Dataset>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -269,6 +284,9 @@ export namespace EvaluationDeleteResponse {
 
     filters: Array<Dataset.Filter>;
 
+    /**
+     * gateway id
+     */
     gateway_id: string;
 
     modified_at: string;
@@ -327,6 +345,9 @@ export interface EvaluationGetResponse {
 
   datasets: Array<EvaluationGetResponse.Dataset>;
 
+  /**
+   * gateway id
+   */
   gateway_id: string;
 
   modified_at: string;
@@ -350,6 +371,9 @@ export namespace EvaluationGetResponse {
 
     filters: Array<Dataset.Filter>;
 
+    /**
+     * gateway id
+     */
     gateway_id: string;
 
     modified_at: string;
@@ -432,11 +456,6 @@ export interface EvaluationListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
-  id?: string;
-
-  /**
-   * Query param:
-   */
   name?: string;
 
   /**
@@ -458,11 +477,6 @@ export interface EvaluationListParams extends V4PagePaginationArrayParams {
    * Query param: Search by id, name
    */
   search?: string;
-
-  /**
-   * Query param:
-   */
-  total_logs?: number;
 }
 
 export interface EvaluationDeleteParams {

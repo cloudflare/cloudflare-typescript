@@ -11,7 +11,7 @@ const client = new Cloudflare({
 
 describe('resource datasets', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.aiGateway.datasets.create('gateway_id', {
+    const responsePromise = client.aiGateway.datasets.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
       filters: [
@@ -31,7 +31,7 @@ describe('resource datasets', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.aiGateway.datasets.create('gateway_id', {
+    const response = await client.aiGateway.datasets.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
       filters: [
@@ -44,7 +44,7 @@ describe('resource datasets', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.aiGateway.datasets.update('gateway_id', 'id', {
+    const responsePromise = client.aiGateway.datasets.update('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
       filters: [
@@ -64,7 +64,7 @@ describe('resource datasets', () => {
   });
 
   test('update: required and optional params', async () => {
-    const response = await client.aiGateway.datasets.update('gateway_id', 'id', {
+    const response = await client.aiGateway.datasets.update('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
       enable: true,
       filters: [
@@ -77,7 +77,7 @@ describe('resource datasets', () => {
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.aiGateway.datasets.list('gateway_id', {
+    const responsePromise = client.aiGateway.datasets.list('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -90,26 +90,20 @@ describe('resource datasets', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.aiGateway.datasets.list('gateway_id', {
+    const response = await client.aiGateway.datasets.list('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
-      id: 'id',
       enable: true,
-      filters: [
-        { key: 'created_at', operator: 'eq', value: ['string', 'string', 'string'] },
-        { key: 'created_at', operator: 'eq', value: ['string', 'string', 'string'] },
-        { key: 'created_at', operator: 'eq', value: ['string', 'string', 'string'] },
-      ],
       name: 'name',
       order_by: 'order_by',
       order_by_direction: 'asc',
       page: 1,
-      per_page: 5,
+      per_page: 1,
       search: 'search',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.aiGateway.datasets.delete('gateway_id', 'id', {
+    const responsePromise = client.aiGateway.datasets.delete('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -122,13 +116,13 @@ describe('resource datasets', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.aiGateway.datasets.delete('gateway_id', 'id', {
+    const response = await client.aiGateway.datasets.delete('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.aiGateway.datasets.get('gateway_id', 'id', {
+    const responsePromise = client.aiGateway.datasets.get('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -141,7 +135,7 @@ describe('resource datasets', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.aiGateway.datasets.get('gateway_id', 'id', {
+    const response = await client.aiGateway.datasets.get('my-gateway', 'id', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
     });
   });
