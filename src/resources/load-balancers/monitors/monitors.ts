@@ -223,12 +223,6 @@ export interface MonitorCreateParams {
   account_id: string;
 
   /**
-   * Body param: The expected HTTP response code or code range of the health check.
-   * This parameter is only valid for HTTP and HTTPS monitors.
-   */
-  expected_codes: string;
-
-  /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
    * parameter is currently only valid for HTTP and HTTPS monitors.
    */
@@ -257,6 +251,12 @@ export interface MonitorCreateParams {
    * is only valid for HTTP and HTTPS monitors.
    */
   expected_body?: string;
+
+  /**
+   * Body param: The expected HTTP response code or code range of the health check.
+   * This parameter is only valid for HTTP and HTTPS monitors.
+   */
+  expected_codes?: string;
 
   /**
    * Body param: Follow redirects if returned by the origin. This parameter is only
@@ -329,12 +329,6 @@ export interface MonitorUpdateParams {
   account_id: string;
 
   /**
-   * Body param: The expected HTTP response code or code range of the health check.
-   * This parameter is only valid for HTTP and HTTPS monitors.
-   */
-  expected_codes: string;
-
-  /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
    * parameter is currently only valid for HTTP and HTTPS monitors.
    */
@@ -363,6 +357,12 @@ export interface MonitorUpdateParams {
    * is only valid for HTTP and HTTPS monitors.
    */
   expected_body?: string;
+
+  /**
+   * Body param: The expected HTTP response code or code range of the health check.
+   * This parameter is only valid for HTTP and HTTPS monitors.
+   */
+  expected_codes?: string;
 
   /**
    * Body param: Follow redirects if returned by the origin. This parameter is only
@@ -449,12 +449,6 @@ export interface MonitorEditParams {
   account_id: string;
 
   /**
-   * Body param: The expected HTTP response code or code range of the health check.
-   * This parameter is only valid for HTTP and HTTPS monitors.
-   */
-  expected_codes: string;
-
-  /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
    * parameter is currently only valid for HTTP and HTTPS monitors.
    */
@@ -483,6 +477,12 @@ export interface MonitorEditParams {
    * is only valid for HTTP and HTTPS monitors.
    */
   expected_body?: string;
+
+  /**
+   * Body param: The expected HTTP response code or code range of the health check.
+   * This parameter is only valid for HTTP and HTTPS monitors.
+   */
+  expected_codes?: string;
 
   /**
    * Body param: Follow redirects if returned by the origin. This parameter is only

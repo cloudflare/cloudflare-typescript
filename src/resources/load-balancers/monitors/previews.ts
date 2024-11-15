@@ -39,12 +39,6 @@ export interface PreviewCreateParams {
   account_id: string;
 
   /**
-   * Body param: The expected HTTP response code or code range of the health check.
-   * This parameter is only valid for HTTP and HTTPS monitors.
-   */
-  expected_codes: string;
-
-  /**
    * Body param: Do not validate the certificate when monitor use HTTPS. This
    * parameter is currently only valid for HTTP and HTTPS monitors.
    */
@@ -73,6 +67,12 @@ export interface PreviewCreateParams {
    * is only valid for HTTP and HTTPS monitors.
    */
   expected_body?: string;
+
+  /**
+   * Body param: The expected HTTP response code or code range of the health check.
+   * This parameter is only valid for HTTP and HTTPS monitors.
+   */
+  expected_codes?: string;
 
   /**
    * Body param: Follow redirects if returned by the origin. This parameter is only
