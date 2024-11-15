@@ -12,8 +12,9 @@ import {
 import * as ValueAPI from './value';
 import { Value, ValueUpdateParams } from './value';
 import * as TokensTokensAPI from '../../user/tokens/tokens';
+import { TokensV4PagePaginationArray } from '../../user/tokens/tokens';
 import * as TokensValueAPI from '../../user/tokens/value';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
+import { type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tokens extends APIResource {
   permissionGroups: PermissionGroupsAPI.PermissionGroups = new PermissionGroupsAPI.PermissionGroups(
@@ -40,11 +41,11 @@ export class Tokens extends APIResource {
     tokenId: string,
     params: TokenUpdateParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenUpdateResponse> {
+  ): Core.APIPromise<TokensTokensAPI.Token> {
     const { account_id, ...body } = params;
     return (
       this._client.put(`/accounts/${account_id}/tokens/${tokenId}`, { body, ...options }) as Core.APIPromise<{
-        result: TokenUpdateResponse;
+        result: TokensTokensAPI.Token;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -55,13 +56,12 @@ export class Tokens extends APIResource {
   list(
     params: TokenListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<TokenListResponsesV4PagePaginationArray, TokenListResponse> {
+  ): Core.PagePromise<TokensV4PagePaginationArray, TokensTokensAPI.Token> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/tokens`,
-      TokenListResponsesV4PagePaginationArray,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/tokens`, TokensV4PagePaginationArray, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -87,11 +87,11 @@ export class Tokens extends APIResource {
     tokenId: string,
     params: TokenGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<TokenGetResponse> {
+  ): Core.APIPromise<TokensTokensAPI.Token> {
     const { account_id } = params;
     return (
       this._client.get(`/accounts/${account_id}/tokens/${tokenId}`, options) as Core.APIPromise<{
-        result: TokenGetResponse;
+        result: TokensTokensAPI.Token;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -108,8 +108,6 @@ export class Tokens extends APIResource {
     )._thenUnwrap((obj) => obj.result);
   }
 }
-
-export class TokenListResponsesV4PagePaginationArray extends V4PagePaginationArray<TokenListResponse> {}
 
 export interface TokenCreateResponse {
   /**
@@ -192,239 +190,11 @@ export namespace TokenCreateResponse {
   }
 }
 
-export interface TokenUpdateResponse {
-  /**
-   * Token identifier tag.
-   */
-  id?: string;
-
-  condition?: TokenUpdateResponse.Condition;
-
-  /**
-   * The expiration time on or after which the JWT MUST NOT be accepted for
-   * processing.
-   */
-  expires_on?: string;
-
-  /**
-   * The time on which the token was created.
-   */
-  issued_on?: string;
-
-  /**
-   * Last time the token was used.
-   */
-  last_used_on?: string;
-
-  /**
-   * Last time the token was modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Token name.
-   */
-  name?: string;
-
-  /**
-   * The time before which the token MUST NOT be accepted for processing.
-   */
-  not_before?: string;
-
-  /**
-   * List of access policies assigned to the token.
-   */
-  policies?: Array<TokensTokensAPI.Policy>;
-
-  /**
-   * Status of the token.
-   */
-  status?: 'active' | 'disabled' | 'expired';
-}
-
-export namespace TokenUpdateResponse {
-  export interface Condition {
-    /**
-     * Client IP restrictions.
-     */
-    'request.ip'?: Condition.RequestIP;
-  }
-
-  export namespace Condition {
-    /**
-     * Client IP restrictions.
-     */
-    export interface RequestIP {
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      in?: Array<TokensTokensAPI.CIDRList>;
-
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      not_in?: Array<TokensTokensAPI.CIDRList>;
-    }
-  }
-}
-
-export interface TokenListResponse {
-  /**
-   * Token identifier tag.
-   */
-  id?: string;
-
-  condition?: TokenListResponse.Condition;
-
-  /**
-   * The expiration time on or after which the JWT MUST NOT be accepted for
-   * processing.
-   */
-  expires_on?: string;
-
-  /**
-   * The time on which the token was created.
-   */
-  issued_on?: string;
-
-  /**
-   * Last time the token was used.
-   */
-  last_used_on?: string;
-
-  /**
-   * Last time the token was modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Token name.
-   */
-  name?: string;
-
-  /**
-   * The time before which the token MUST NOT be accepted for processing.
-   */
-  not_before?: string;
-
-  /**
-   * List of access policies assigned to the token.
-   */
-  policies?: Array<TokensTokensAPI.Policy>;
-
-  /**
-   * Status of the token.
-   */
-  status?: 'active' | 'disabled' | 'expired';
-}
-
-export namespace TokenListResponse {
-  export interface Condition {
-    /**
-     * Client IP restrictions.
-     */
-    'request.ip'?: Condition.RequestIP;
-  }
-
-  export namespace Condition {
-    /**
-     * Client IP restrictions.
-     */
-    export interface RequestIP {
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      in?: Array<TokensTokensAPI.CIDRList>;
-
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      not_in?: Array<TokensTokensAPI.CIDRList>;
-    }
-  }
-}
-
 export interface TokenDeleteResponse {
   /**
    * Identifier
    */
   id: string;
-}
-
-export interface TokenGetResponse {
-  /**
-   * Token identifier tag.
-   */
-  id?: string;
-
-  condition?: TokenGetResponse.Condition;
-
-  /**
-   * The expiration time on or after which the JWT MUST NOT be accepted for
-   * processing.
-   */
-  expires_on?: string;
-
-  /**
-   * The time on which the token was created.
-   */
-  issued_on?: string;
-
-  /**
-   * Last time the token was used.
-   */
-  last_used_on?: string;
-
-  /**
-   * Last time the token was modified.
-   */
-  modified_on?: string;
-
-  /**
-   * Token name.
-   */
-  name?: string;
-
-  /**
-   * The time before which the token MUST NOT be accepted for processing.
-   */
-  not_before?: string;
-
-  /**
-   * List of access policies assigned to the token.
-   */
-  policies?: Array<TokensTokensAPI.Policy>;
-
-  /**
-   * Status of the token.
-   */
-  status?: 'active' | 'disabled' | 'expired';
-}
-
-export namespace TokenGetResponse {
-  export interface Condition {
-    /**
-     * Client IP restrictions.
-     */
-    'request.ip'?: Condition.RequestIP;
-  }
-
-  export namespace Condition {
-    /**
-     * Client IP restrictions.
-     */
-    export interface RequestIP {
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      in?: Array<TokensTokensAPI.CIDRList>;
-
-      /**
-       * List of IPv4/IPv6 CIDR addresses.
-       */
-      not_in?: Array<TokensTokensAPI.CIDRList>;
-    }
-  }
 }
 
 export interface TokenVerifyResponse {
@@ -606,7 +376,6 @@ export interface TokenVerifyParams {
   account_id: string;
 }
 
-Tokens.TokenListResponsesV4PagePaginationArray = TokenListResponsesV4PagePaginationArray;
 Tokens.PermissionGroups = PermissionGroups;
 Tokens.PermissionGroupListResponsesSinglePage = PermissionGroupListResponsesSinglePage;
 Tokens.Value = Value;
@@ -614,12 +383,8 @@ Tokens.Value = Value;
 export declare namespace Tokens {
   export {
     type TokenCreateResponse as TokenCreateResponse,
-    type TokenUpdateResponse as TokenUpdateResponse,
-    type TokenListResponse as TokenListResponse,
     type TokenDeleteResponse as TokenDeleteResponse,
-    type TokenGetResponse as TokenGetResponse,
     type TokenVerifyResponse as TokenVerifyResponse,
-    TokenListResponsesV4PagePaginationArray as TokenListResponsesV4PagePaginationArray,
     type TokenCreateParams as TokenCreateParams,
     type TokenUpdateParams as TokenUpdateParams,
     type TokenListParams as TokenListParams,
@@ -637,3 +402,5 @@ export declare namespace Tokens {
 
   export { Value as Value, type ValueUpdateParams as ValueUpdateParams };
 }
+
+export { TokensV4PagePaginationArray };

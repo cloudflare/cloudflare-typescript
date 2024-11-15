@@ -35,12 +35,8 @@ import {
   TokenDeleteParams,
   TokenDeleteResponse,
   TokenGetParams,
-  TokenGetResponse,
   TokenListParams,
-  TokenListResponse,
-  TokenListResponsesV4PagePaginationArray,
   TokenUpdateParams,
-  TokenUpdateResponse,
   TokenVerifyParams,
   TokenVerifyResponse,
   Tokens,
@@ -320,7 +316,6 @@ Accounts.Members = Members;
 Accounts.Roles = Roles;
 Accounts.Subscriptions = Subscriptions;
 Accounts.Tokens = Tokens;
-Accounts.TokenListResponsesV4PagePaginationArray = TokenListResponsesV4PagePaginationArray;
 
 export declare namespace Accounts {
   export {
@@ -351,12 +346,8 @@ export declare namespace Accounts {
   export {
     Tokens as Tokens,
     type TokenCreateResponse as TokenCreateResponse,
-    type TokenUpdateResponse as TokenUpdateResponse,
-    type TokenListResponse as TokenListResponse,
     type TokenDeleteResponse as TokenDeleteResponse,
-    type TokenGetResponse as TokenGetResponse,
     type TokenVerifyResponse as TokenVerifyResponse,
-    TokenListResponsesV4PagePaginationArray as TokenListResponsesV4PagePaginationArray,
     type TokenCreateParams as TokenCreateParams,
     type TokenUpdateParams as TokenUpdateParams,
     type TokenListParams as TokenListParams,

@@ -33,14 +33,11 @@ import {
   TokenCreateParams,
   TokenCreateResponse,
   TokenDeleteResponse,
-  TokenGetResponse,
   TokenListParams,
-  TokenListResponse,
-  TokenListResponsesV4PagePaginationArray,
   TokenUpdateParams,
-  TokenUpdateResponse,
   TokenVerifyResponse,
   Tokens,
+  TokensV4PagePaginationArray,
 } from './tokens/tokens';
 
 export class User extends APIResource {
@@ -109,7 +106,7 @@ User.Organizations = Organizations;
 User.OrganizationsV4PagePaginationArray = OrganizationsV4PagePaginationArray;
 User.Subscriptions = Subscriptions;
 User.Tokens = Tokens;
-User.TokenListResponsesV4PagePaginationArray = TokenListResponsesV4PagePaginationArray;
+User.TokensV4PagePaginationArray = TokensV4PagePaginationArray;
 
 export declare namespace User {
   export { AuditLogs as AuditLogs, type AuditLogListParams as AuditLogListParams };
@@ -146,12 +143,9 @@ export declare namespace User {
     type Policy as Policy,
     type Token as Token,
     type TokenCreateResponse as TokenCreateResponse,
-    type TokenUpdateResponse as TokenUpdateResponse,
-    type TokenListResponse as TokenListResponse,
     type TokenDeleteResponse as TokenDeleteResponse,
-    type TokenGetResponse as TokenGetResponse,
     type TokenVerifyResponse as TokenVerifyResponse,
-    TokenListResponsesV4PagePaginationArray as TokenListResponsesV4PagePaginationArray,
+    TokensV4PagePaginationArray as TokensV4PagePaginationArray,
     type TokenCreateParams as TokenCreateParams,
     type TokenUpdateParams as TokenUpdateParams,
     type TokenListParams as TokenListParams,
