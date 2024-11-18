@@ -18,13 +18,4 @@ export {
   type VersionListParams,
   type VersionGetParams,
 } from './versions';
-export {
-  WorkflowListResponsesV4PagePaginationArray,
-  Workflows,
-  type WorkflowUpdateResponse,
-  type WorkflowListResponse,
-  type WorkflowGetResponse,
-  type WorkflowUpdateParams,
-  type WorkflowListParams,
-  type WorkflowGetParams,
-} from './workflows';
+export { Workflows } from './workflows';
