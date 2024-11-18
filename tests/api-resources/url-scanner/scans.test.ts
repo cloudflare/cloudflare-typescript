@@ -25,7 +25,7 @@ describe('resource scans', () => {
     const response = await client.urlScanner.scans.create('accountId', {
       url: 'https://www.example.com',
       customHeaders: { foo: 'string' },
-      screenshotsResolutions: ['desktop', 'mobile', 'tablet'],
+      screenshotsResolutions: ['desktop'],
       visibility: 'Public',
     });
   });

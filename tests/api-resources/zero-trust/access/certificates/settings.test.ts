@@ -15,8 +15,6 @@ describe('resource settings', () => {
     const responsePromise = client.zeroTrust.access.certificates.settings.update({
       settings: [
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
-        { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
-        { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
       ],
       account_id: 'account_id',
     });
@@ -33,8 +31,6 @@ describe('resource settings', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.certificates.settings.update({
       settings: [
-        { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
-        { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
         { china_network: false, client_certificate_forwarding: true, hostname: 'admin.example.com' },
       ],
       account_id: 'account_id',

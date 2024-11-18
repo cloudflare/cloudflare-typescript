@@ -33,15 +33,15 @@ describe('resource ases', () => {
     await expect(
       client.radar.bgp.top.ases.get(
         {
-          asn: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          asn: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           limit: 5,
-          name: ['string', 'string', 'string'],
-          prefix: ['1.1.1.0/24', '1.1.1.0/24', '1.1.1.0/24'],
-          updateType: ['ANNOUNCEMENT', 'WITHDRAWAL'],
+          name: ['string'],
+          prefix: ['1.1.1.0/24'],
+          updateType: ['ANNOUNCEMENT'],
         },
         { path: '/_stainless_unknown_path' },
       ),

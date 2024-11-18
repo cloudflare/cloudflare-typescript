@@ -28,7 +28,7 @@ describe('resource upload', () => {
     const response = await client.workers.assets.upload.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       base64: true,
-      '<any file hash>': ['string', 'string', 'string'],
+      '<any file hash>': ['string'],
     });
   });
 });

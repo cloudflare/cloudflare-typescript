@@ -33,13 +33,7 @@ describe('resource domain', () => {
     await expect(
       client.radar.ranking.domain.get(
         'google.com',
-        {
-          date: ['string', 'string', 'string'],
-          format: 'JSON',
-          limit: 5,
-          name: ['string', 'string', 'string'],
-          rankingType: 'POPULAR',
-        },
+        { date: ['string'], format: 'JSON', limit: 5, name: ['string'], rankingType: 'POPULAR' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Cloudflare.NotFoundError);

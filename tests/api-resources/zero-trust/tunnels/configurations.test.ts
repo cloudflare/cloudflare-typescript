@@ -35,7 +35,7 @@ describe('resource configurations', () => {
               hostname: 'tunnel.example.com',
               service: 'https://localhost:8001',
               originRequest: {
-                access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
+                access: { audTag: ['string'], teamName: 'teamName', required: true },
                 caPool: 'caPool',
                 connectTimeout: 0,
                 disableChunkedEncoding: true,
@@ -54,7 +54,7 @@ describe('resource configurations', () => {
             },
           ],
           originRequest: {
-            access: { audTag: ['string', 'string', 'string'], teamName: 'teamName', required: true },
+            access: { audTag: ['string'], teamName: 'teamName', required: true },
             caPool: 'caPool',
             connectTimeout: 0,
             disableChunkedEncoding: true,

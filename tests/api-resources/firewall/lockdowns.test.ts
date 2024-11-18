@@ -14,8 +14,8 @@ describe('resource lockdowns', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.firewall.lockdowns.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      configurations: [{}, {}, {}],
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      configurations: [{}],
+      urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -30,12 +30,8 @@ describe('resource lockdowns', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.firewall.lockdowns.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      configurations: [
-        { target: 'ip', value: '198.51.100.4' },
-        { target: 'ip', value: '198.51.100.4' },
-        { target: 'ip', value: '198.51.100.4' },
-      ],
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      configurations: [{ target: 'ip', value: '198.51.100.4' }],
+      urls: ['shop.example.com/*'],
     });
   });
 
@@ -43,8 +39,8 @@ describe('resource lockdowns', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.firewall.lockdowns.update('372e67954025e0ba6aaa6d586b9e0b59', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      configurations: [{}, {}, {}],
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      configurations: [{}],
+      urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -59,12 +55,8 @@ describe('resource lockdowns', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.firewall.lockdowns.update('372e67954025e0ba6aaa6d586b9e0b59', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      configurations: [
-        { target: 'ip', value: '198.51.100.4' },
-        { target: 'ip', value: '198.51.100.4' },
-        { target: 'ip', value: '198.51.100.4' },
-      ],
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      configurations: [{ target: 'ip', value: '198.51.100.4' }],
+      urls: ['shop.example.com/*'],
     });
   });
 

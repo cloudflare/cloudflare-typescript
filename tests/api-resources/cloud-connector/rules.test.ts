@@ -13,7 +13,7 @@ describe('resource rules', () => {
   test('update: only required params', async () => {
     const responsePromise = client.cloudConnector.rules.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}, {}, {}],
+      body: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,22 +28,6 @@ describe('resource rules', () => {
     const response = await client.cloudConnector.rules.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
-        {
-          id: '95c365e17e1b46599cd99e5b231fac4e',
-          description: 'Rule description',
-          enabled: true,
-          expression: 'http.cookie eq "a=b"',
-          parameters: { host: 'examplebucket.s3.eu-north-1.amazonaws.com' },
-          provider: 'aws_s3',
-        },
-        {
-          id: '95c365e17e1b46599cd99e5b231fac4e',
-          description: 'Rule description',
-          enabled: true,
-          expression: 'http.cookie eq "a=b"',
-          parameters: { host: 'examplebucket.s3.eu-north-1.amazonaws.com' },
-          provider: 'aws_s3',
-        },
         {
           id: '95c365e17e1b46599cd99e5b231fac4e',
           description: 'Rule description',

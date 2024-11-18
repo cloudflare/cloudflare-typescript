@@ -13,7 +13,7 @@ describe('resource contentLists', () => {
   test('update: only required params', async () => {
     const responsePromise = client.web3.hostnames.ipfsUniversalPaths.contentLists.update(
       '023e105f4ecef8ad9ca31a8372d0c353',
-      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'block', entries: [{}, {}, {}] },
+      { zone_id: '023e105f4ecef8ad9ca31a8372d0c353', action: 'block', entries: [{}] },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,16 +31,6 @@ describe('resource contentLists', () => {
         zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
         action: 'block',
         entries: [
-          {
-            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
-            description: 'this is my content list entry',
-            type: 'cid',
-          },
-          {
-            content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
-            description: 'this is my content list entry',
-            type: 'cid',
-          },
           {
             content: 'QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB',
             description: 'this is my content list entry',

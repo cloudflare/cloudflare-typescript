@@ -34,7 +34,7 @@ describe('resource subscriptions', () => {
         is_contract: false,
         public_name: 'Business Plan',
         scope: 'zone',
-        sets: ['string', 'string', 'string'],
+        sets: ['string'],
       },
     });
   });
@@ -63,7 +63,7 @@ describe('resource subscriptions', () => {
         is_contract: false,
         public_name: 'Business Plan',
         scope: 'zone',
-        sets: ['string', 'string', 'string'],
+        sets: ['string'],
       },
     });
   });

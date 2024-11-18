@@ -40,7 +40,7 @@ describe('resource apps', () => {
       traffic_type: 'direct',
       argo_smart_routing: true,
       edge_ips: { connectivity: 'all', type: 'dynamic' },
-      origin_direct: ['tcp://127.0.0.1:8080', 'tcp://127.0.0.1:8080', 'tcp://127.0.0.1:8080'],
+      origin_direct: ['tcp://127.0.0.1:8080'],
       origin_dns: { name: 'origin.example.com', ttl: 600, type: '' },
       origin_port: 22,
     });
@@ -76,7 +76,7 @@ describe('resource apps', () => {
       traffic_type: 'direct',
       argo_smart_routing: true,
       edge_ips: { connectivity: 'all', type: 'dynamic' },
-      origin_direct: ['tcp://127.0.0.1:8080', 'tcp://127.0.0.1:8080', 'tcp://127.0.0.1:8080'],
+      origin_direct: ['tcp://127.0.0.1:8080'],
       origin_dns: { name: 'origin.example.com', ttl: 600, type: '' },
       origin_port: 22,
     });

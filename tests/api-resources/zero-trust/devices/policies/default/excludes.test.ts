@@ -13,11 +13,7 @@ describe('resource excludes', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.excludes.update({
       account_id: '699d98642c564d2e855e9661899b7252',
-      body: [
-        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-        { address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' },
-      ],
+      body: [{ address: '192.0.2.0/24', description: 'Exclude testing domains from the tunnel' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,16 +28,6 @@ describe('resource excludes', () => {
     const response = await client.zeroTrust.devices.policies.default.excludes.update({
       account_id: '699d98642c564d2e855e9661899b7252',
       body: [
-        {
-          address: '192.0.2.0/24',
-          description: 'Exclude testing domains from the tunnel',
-          host: '*.example.com',
-        },
-        {
-          address: '192.0.2.0/24',
-          description: 'Exclude testing domains from the tunnel',
-          host: '*.example.com',
-        },
         {
           address: '192.0.2.0/24',
           description: 'Exclude testing domains from the tunnel',

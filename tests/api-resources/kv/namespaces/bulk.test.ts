@@ -13,7 +13,7 @@ describe('resource bulk', () => {
   test('update: only required params', async () => {
     const responsePromise = client.kv.namespaces.bulk.update('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: [{}, {}, {}],
+      body: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,22 +28,6 @@ describe('resource bulk', () => {
     const response = await client.kv.namespaces.bulk.update('0f2ac74b498b48028cb68387c421e279', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       body: [
-        {
-          base64: true,
-          expiration: 1578435000,
-          expiration_ttl: 300,
-          key: 'My-Key',
-          metadata: { someMetadataKey: 'bar' },
-          value: 'Some string',
-        },
-        {
-          base64: true,
-          expiration: 1578435000,
-          expiration_ttl: 300,
-          key: 'My-Key',
-          metadata: { someMetadataKey: 'bar' },
-          value: 'Some string',
-        },
         {
           base64: true,
           expiration: 1578435000,

@@ -13,8 +13,8 @@ describe('resource evaluations', () => {
   test('create: only required params', async () => {
     const responsePromise = client.aiGateway.evaluations.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
-      dataset_ids: ['string', 'string', 'string'],
-      evaluation_type_ids: ['string', 'string', 'string'],
+      dataset_ids: ['string'],
+      evaluation_type_ids: ['string'],
       name: 'name',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,8 +29,8 @@ describe('resource evaluations', () => {
   test('create: required and optional params', async () => {
     const response = await client.aiGateway.evaluations.create('my-gateway', {
       account_id: '3ebbcb006d4d46d7bb6a8c7f14676cb0',
-      dataset_ids: ['string', 'string', 'string'],
-      evaluation_type_ids: ['string', 'string', 'string'],
+      dataset_ids: ['string'],
+      evaluation_type_ids: ['string'],
       name: 'name',
     });
   });
