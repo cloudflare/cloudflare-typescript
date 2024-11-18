@@ -136,26 +136,10 @@ describe('resource records', () => {
   test('batch: required and optional params', async () => {
     const response = await client.dns.records.batch({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      deletes: [
-        { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-        { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-        { id: '023e105f4ecef8ad9ca31a8372d0c353' },
-      ],
-      patches: [
-        { content: '198.51.100.4', type: 'A' },
-        { content: '198.51.100.4', type: 'A' },
-        { content: '198.51.100.4', type: 'A' },
-      ],
-      posts: [
-        { content: '198.51.100.4', type: 'A' },
-        { content: '198.51.100.4', type: 'A' },
-        { content: '198.51.100.4', type: 'A' },
-      ],
-      puts: [
-        { content: '198.51.100.4', type: 'A' },
-        { content: '198.51.100.4', type: 'A' },
-        { content: '198.51.100.4', type: 'A' },
-      ],
+      deletes: [{ id: '023e105f4ecef8ad9ca31a8372d0c353' }],
+      patches: [{ content: '198.51.100.4', type: 'A' }],
+      posts: [{ content: '198.51.100.4', type: 'A' }],
+      puts: [{ content: '198.51.100.4', type: 'A' }],
     });
   });
 

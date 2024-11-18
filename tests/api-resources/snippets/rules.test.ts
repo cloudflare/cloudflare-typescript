@@ -31,18 +31,6 @@ describe('resource rules', () => {
           expression: 'http.cookie eq "a=b"',
           snippet_name: 'snippet_name_01',
         },
-        {
-          description: 'Rule description',
-          enabled: true,
-          expression: 'http.cookie eq "a=b"',
-          snippet_name: 'snippet_name_01',
-        },
-        {
-          description: 'Rule description',
-          enabled: true,
-          expression: 'http.cookie eq "a=b"',
-          snippet_name: 'snippet_name_01',
-        },
       ],
     });
   });

@@ -36,7 +36,7 @@ describe('resource percentiles', () => {
         from: '2023-09-20T17:00:00Z',
         to: '2023-09-20T17:00:00Z',
         colo: 'colo',
-        deviceId: ['string', 'string', 'string'],
+        deviceId: ['string'],
       },
     );
   });

@@ -14,14 +14,7 @@ describe('resource versions', () => {
     const responsePromise = client.zeroTrust.dlp.datasets.versions.create(
       '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       0,
-      {
-        account_id: 'account_id',
-        body: [
-          { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-          { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-          { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
-        ],
-      },
+      { account_id: 'account_id', body: [{ entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }] },
     );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -39,8 +32,6 @@ describe('resource versions', () => {
       {
         account_id: 'account_id',
         body: [
-          { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', header_name: 'header_name', num_cells: 0 },
-          { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', header_name: 'header_name', num_cells: 0 },
           { entry_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', header_name: 'header_name', num_cells: 0 },
         ],
       },

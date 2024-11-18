@@ -33,11 +33,7 @@ describe('resource applications', () => {
       type: 'self_hosted',
       account_id: 'account_id',
       allow_authenticate_via_warp: true,
-      allowed_idps: [
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-      ],
+      allowed_idps: ['699d98642c564d2e855e9661899b7252'],
       app_launcher_visible: true,
       auto_redirect_to_identity: true,
       cors_headers: {
@@ -45,7 +41,7 @@ describe('resource applications', () => {
         allow_all_methods: true,
         allow_all_origins: true,
         allow_credentials: true,
-        allowed_headers: ['string', 'string', 'string'],
+        allowed_headers: ['string'],
         allowed_methods: ['GET'],
         allowed_origins: ['https://example.com'],
         max_age: -1,
@@ -53,22 +49,14 @@ describe('resource applications', () => {
       custom_deny_message: 'custom_deny_message',
       custom_deny_url: 'custom_deny_url',
       custom_non_identity_deny_url: 'custom_non_identity_deny_url',
-      custom_pages: [
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-      ],
+      custom_pages: ['699d98642c564d2e855e9661899b7252'],
       enable_binding_cookie: true,
       http_only_cookie_attribute: true,
       logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
       name: 'Admin Site',
       options_preflight_bypass: true,
       path_cookie_attribute: true,
-      policies: [
-        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
-        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
-        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
-      ],
+      policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 }],
       same_site_cookie_attribute: 'strict',
       scim_config: {
         idp_uid: 'idp_uid',
@@ -86,31 +74,13 @@ describe('resource applications', () => {
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
-          {
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
-            enabled: true,
-            filter: 'title pr or userType eq "Intern"',
-            operations: { create: true, delete: true, update: true },
-            strictness: 'strict',
-            transform_jsonata:
-              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
-          },
-          {
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
-            enabled: true,
-            filter: 'title pr or userType eq "Intern"',
-            operations: { create: true, delete: true, update: true },
-            strictness: 'strict',
-            transform_jsonata:
-              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
-          },
         ],
       },
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,
       session_duration: '24h',
       skip_interstitial: true,
-      tags: ['engineers', 'engineers', 'engineers'],
+      tags: ['engineers'],
     });
   });
 
@@ -137,11 +107,7 @@ describe('resource applications', () => {
       type: 'self_hosted',
       account_id: 'account_id',
       allow_authenticate_via_warp: true,
-      allowed_idps: [
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-      ],
+      allowed_idps: ['699d98642c564d2e855e9661899b7252'],
       app_launcher_visible: true,
       auto_redirect_to_identity: true,
       cors_headers: {
@@ -149,7 +115,7 @@ describe('resource applications', () => {
         allow_all_methods: true,
         allow_all_origins: true,
         allow_credentials: true,
-        allowed_headers: ['string', 'string', 'string'],
+        allowed_headers: ['string'],
         allowed_methods: ['GET'],
         allowed_origins: ['https://example.com'],
         max_age: -1,
@@ -157,22 +123,14 @@ describe('resource applications', () => {
       custom_deny_message: 'custom_deny_message',
       custom_deny_url: 'custom_deny_url',
       custom_non_identity_deny_url: 'custom_non_identity_deny_url',
-      custom_pages: [
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-        '699d98642c564d2e855e9661899b7252',
-      ],
+      custom_pages: ['699d98642c564d2e855e9661899b7252'],
       enable_binding_cookie: true,
       http_only_cookie_attribute: true,
       logo_url: 'https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg',
       name: 'Admin Site',
       options_preflight_bypass: true,
       path_cookie_attribute: true,
-      policies: [
-        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
-        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
-        { id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 },
-      ],
+      policies: [{ id: 'f174e90a-fafe-4643-bbbc-4a0ed4fc8415', precedence: 0 }],
       same_site_cookie_attribute: 'strict',
       scim_config: {
         idp_uid: 'idp_uid',
@@ -190,31 +148,13 @@ describe('resource applications', () => {
             transform_jsonata:
               "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
           },
-          {
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
-            enabled: true,
-            filter: 'title pr or userType eq "Intern"',
-            operations: { create: true, delete: true, update: true },
-            strictness: 'strict',
-            transform_jsonata:
-              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
-          },
-          {
-            schema: 'urn:ietf:params:scim:schemas:core:2.0:User',
-            enabled: true,
-            filter: 'title pr or userType eq "Intern"',
-            operations: { create: true, delete: true, update: true },
-            strictness: 'strict',
-            transform_jsonata:
-              "$merge([$, {'userName': $substringBefore($.userName, '@') & '+test@' & $substringAfter($.userName, '@')}])",
-          },
         ],
       },
       self_hosted_domains: ['test.example.com/admin', 'test.anotherexample.com/staff'],
       service_auth_401_redirect: true,
       session_duration: '24h',
       skip_interstitial: true,
-      tags: ['engineers', 'engineers', 'engineers'],
+      tags: ['engineers'],
     });
   });
 

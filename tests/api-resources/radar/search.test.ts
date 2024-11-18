@@ -24,9 +24,9 @@ describe('resource search', () => {
   test('global: required and optional params', async () => {
     const response = await client.radar.search.global({
       query: 'United',
-      exclude: ['SPECIAL_EVENTS', 'NOTEBOOKS', 'LOCATIONS'],
+      exclude: ['SPECIAL_EVENTS'],
       format: 'JSON',
-      include: ['SPECIAL_EVENTS', 'NOTEBOOKS', 'LOCATIONS'],
+      include: ['SPECIAL_EVENTS'],
       limit: 5,
       limitPerGroup: 0,
     });

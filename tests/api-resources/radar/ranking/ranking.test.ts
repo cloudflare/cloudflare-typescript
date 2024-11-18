@@ -33,14 +33,14 @@ describe('resource ranking', () => {
     await expect(
       client.radar.ranking.timeseriesGroups(
         {
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          dateRange: ['7d', '7d', '7d'],
-          dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-          domains: ['string', 'string', 'string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
+          dateRange: ['7d'],
+          dateStart: ['2019-12-27T18:11:19.117Z'],
+          domains: ['string'],
           format: 'JSON',
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
           rankingType: 'POPULAR',
         },
         { path: '/_stainless_unknown_path' },
@@ -71,11 +71,11 @@ describe('resource ranking', () => {
     await expect(
       client.radar.ranking.top(
         {
-          date: ['string', 'string', 'string'],
+          date: ['string'],
           format: 'JSON',
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
           rankingType: 'POPULAR',
         },
         { path: '/_stainless_unknown_path' },

@@ -13,7 +13,7 @@ describe('resource fallbackDomains', () => {
   test('update: only required params', async () => {
     const responsePromise = client.zeroTrust.devices.policies.default.fallbackDomains.update({
       account_id: '699d98642c564d2e855e9661899b7252',
-      domains: [{ suffix: 'example.com' }, { suffix: 'example.com' }, { suffix: 'example.com' }],
+      domains: [{ suffix: 'example.com' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -31,17 +31,7 @@ describe('resource fallbackDomains', () => {
         {
           suffix: 'example.com',
           description: 'Domain bypass for local development',
-          dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
-        },
-        {
-          suffix: 'example.com',
-          description: 'Domain bypass for local development',
-          dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
-        },
-        {
-          suffix: 'example.com',
-          description: 'Domain bypass for local development',
-          dns_server: ['1.1.1.1', '1.1.1.1', '1.1.1.1'],
+          dns_server: ['1.1.1.1'],
         },
       ],
     });

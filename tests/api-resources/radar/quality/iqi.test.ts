@@ -24,14 +24,14 @@ describe('resource iqi', () => {
   test('summary: required and optional params', async () => {
     const response = await client.radar.quality.iqi.summary({
       metric: 'BANDWIDTH',
-      asn: ['string', 'string', 'string'],
-      continent: ['string', 'string', 'string'],
-      dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-      dateRange: ['7d', '7d', '7d'],
-      dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+      asn: ['string'],
+      continent: ['string'],
+      dateEnd: ['2019-12-27T18:11:19.117Z'],
+      dateRange: ['7d'],
+      dateStart: ['2019-12-27T18:11:19.117Z'],
       format: 'JSON',
-      location: ['string', 'string', 'string'],
-      name: ['string', 'string', 'string'],
+      location: ['string'],
+      name: ['string'],
     });
   });
 
@@ -50,15 +50,15 @@ describe('resource iqi', () => {
     const response = await client.radar.quality.iqi.timeseriesGroups({
       metric: 'BANDWIDTH',
       aggInterval: '15m',
-      asn: ['string', 'string', 'string'],
-      continent: ['string', 'string', 'string'],
-      dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
-      dateRange: ['7d', '7d', '7d'],
-      dateStart: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+      asn: ['string'],
+      continent: ['string'],
+      dateEnd: ['2019-12-27T18:11:19.117Z'],
+      dateRange: ['7d'],
+      dateStart: ['2019-12-27T18:11:19.117Z'],
       format: 'JSON',
       interpolation: true,
-      location: ['string', 'string', 'string'],
-      name: ['string', 'string', 'string'],
+      location: ['string'],
+      name: ['string'],
     });
   });
 });

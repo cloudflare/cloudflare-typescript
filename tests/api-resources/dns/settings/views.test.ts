@@ -14,11 +14,7 @@ describe('resource views', () => {
     const responsePromise = client.dns.settings.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',
-      zones: [
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-      ],
+      zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -33,11 +29,7 @@ describe('resource views', () => {
     const response = await client.dns.settings.views.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',
-      zones: [
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-      ],
+      zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
     });
   });
 
@@ -104,11 +96,7 @@ describe('resource views', () => {
     const response = await client.dns.settings.views.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'my view',
-      zones: [
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-        '372e67954025e0ba6aaa6d586b9e0b59',
-      ],
+      zones: ['372e67954025e0ba6aaa6d586b9e0b59'],
     });
   });
 

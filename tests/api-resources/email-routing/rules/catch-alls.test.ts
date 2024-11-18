@@ -13,8 +13,8 @@ describe('resource catchAlls', () => {
   test('update: only required params', async () => {
     const responsePromise = client.emailRouting.rules.catchAlls.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{ type: 'drop' }, { type: 'drop' }, { type: 'drop' }],
-      matchers: [{ type: 'all' }, { type: 'all' }, { type: 'all' }],
+      actions: [{ type: 'drop' }],
+      matchers: [{ type: 'all' }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,33 +28,8 @@ describe('resource catchAlls', () => {
   test('update: required and optional params', async () => {
     const response = await client.emailRouting.rules.catchAlls.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          type: 'drop',
-          value: [
-            'destinationaddress@example.net',
-            'destinationaddress@example.net',
-            'destinationaddress@example.net',
-          ],
-        },
-        {
-          type: 'drop',
-          value: [
-            'destinationaddress@example.net',
-            'destinationaddress@example.net',
-            'destinationaddress@example.net',
-          ],
-        },
-        {
-          type: 'drop',
-          value: [
-            'destinationaddress@example.net',
-            'destinationaddress@example.net',
-            'destinationaddress@example.net',
-          ],
-        },
-      ],
-      matchers: [{ type: 'all' }, { type: 'all' }, { type: 'all' }],
+      actions: [{ type: 'drop', value: ['destinationaddress@example.net'] }],
+      matchers: [{ type: 'all' }],
       enabled: true,
       name: 'Send to user@example.net rule.',
     });

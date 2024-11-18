@@ -35,32 +35,6 @@ describe('resource lifecycle', () => {
           deleteObjectsTransition: { condition: { maxAge: 0, type: 'Age' } },
           storageClassTransitions: [
             { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-          ],
-        },
-        {
-          id: 'Expire all objects older than 24 hours',
-          conditions: { prefix: 'prefix' },
-          enabled: true,
-          abortMultipartUploadsTransition: { condition: { maxAge: 0, type: 'Age' } },
-          deleteObjectsTransition: { condition: { maxAge: 0, type: 'Age' } },
-          storageClassTransitions: [
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-          ],
-        },
-        {
-          id: 'Expire all objects older than 24 hours',
-          conditions: { prefix: 'prefix' },
-          enabled: true,
-          abortMultipartUploadsTransition: { condition: { maxAge: 0, type: 'Age' } },
-          deleteObjectsTransition: { condition: { maxAge: 0, type: 'Age' } },
-          storageClassTransitions: [
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
-            { condition: { maxAge: 0, type: 'Age' }, storageClass: 'InfrequentAccess' },
           ],
         },
       ],

@@ -35,12 +35,10 @@ describe('resource lans', () => {
       nat: { static_prefix: '192.0.2.0/24' },
       routed_subnets: [
         { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
-        { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
-        { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
       ],
       static_addressing: {
         address: '192.0.2.0/24',
-        dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+        dhcp_relay: { server_addresses: ['192.0.2.1'] },
         dhcp_server: {
           dhcp_pool_end: '192.0.2.1',
           dhcp_pool_start: '192.0.2.1',
@@ -79,12 +77,10 @@ describe('resource lans', () => {
         physport: 1,
         routed_subnets: [
           { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
-          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
-          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
         ],
         static_addressing: {
           address: '192.0.2.0/24',
-          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_relay: { server_addresses: ['192.0.2.1'] },
           dhcp_server: {
             dhcp_pool_end: '192.0.2.1',
             dhcp_pool_start: '192.0.2.1',
@@ -167,12 +163,10 @@ describe('resource lans', () => {
         physport: 1,
         routed_subnets: [
           { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
-          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
-          { next_hop: '192.0.2.1', prefix: '192.0.2.0/24', nat: { static_prefix: '192.0.2.0/24' } },
         ],
         static_addressing: {
           address: '192.0.2.0/24',
-          dhcp_relay: { server_addresses: ['192.0.2.1', '192.0.2.1', '192.0.2.1'] },
+          dhcp_relay: { server_addresses: ['192.0.2.1'] },
           dhcp_server: {
             dhcp_pool_end: '192.0.2.1',
             dhcp_pool_start: '192.0.2.1',

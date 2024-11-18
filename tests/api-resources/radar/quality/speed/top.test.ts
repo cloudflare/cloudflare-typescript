@@ -33,13 +33,13 @@ describe('resource top', () => {
     await expect(
       client.radar.quality.speed.top.ases(
         {
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
           orderBy: 'BANDWIDTH_DOWNLOAD',
           reverse: true,
         },
@@ -71,13 +71,13 @@ describe('resource top', () => {
     await expect(
       client.radar.quality.speed.top.locations(
         {
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
           limit: 5,
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
           orderBy: 'BANDWIDTH_DOWNLOAD',
           reverse: true,
         },

@@ -26,7 +26,7 @@ describe('resource hostnameAssociations', () => {
   test('update: required and optional params', async () => {
     const response = await client.certificateAuthorities.hostnameAssociations.update({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      hostnames: ['api.example.com', 'api.example.com', 'api.example.com'],
+      hostnames: ['api.example.com'],
       mtls_certificate_id: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     });
   });

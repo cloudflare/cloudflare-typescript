@@ -39,7 +39,7 @@ describe('resource posture', () => {
         sha256: 'https://api.us-2.crowdstrike.com',
         thumbprint: '0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e',
       },
-      match: [{ platform: 'windows' }, { platform: 'windows' }, { platform: 'windows' }],
+      match: [{ platform: 'windows' }],
       schedule: '1h',
     });
   });
@@ -73,7 +73,7 @@ describe('resource posture', () => {
         sha256: 'https://api.us-2.crowdstrike.com',
         thumbprint: '0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e',
       },
-      match: [{ platform: 'windows' }, { platform: 'windows' }, { platform: 'windows' }],
+      match: [{ platform: 'windows' }],
       schedule: '1h',
     });
   });

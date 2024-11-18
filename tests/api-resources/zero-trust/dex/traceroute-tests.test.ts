@@ -33,7 +33,7 @@ describe('resource tracerouteTests', () => {
       interval: 'minute',
       to: '1689606812000',
       colo: 'colo',
-      deviceId: ['string', 'string', 'string'],
+      deviceId: ['string'],
     });
   });
 
@@ -96,7 +96,7 @@ describe('resource tracerouteTests', () => {
         from: '2023-09-20T17:00:00Z',
         to: '2023-09-20T17:00:00Z',
         colo: 'colo',
-        deviceId: ['string', 'string', 'string'],
+        deviceId: ['string'],
       },
     );
   });

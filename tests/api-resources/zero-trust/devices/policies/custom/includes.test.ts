@@ -15,11 +15,7 @@ describe('resource includes', () => {
       'f174e90a-fafe-4643-bbbc-4a0ed4fc8415',
       {
         account_id: '699d98642c564d2e855e9661899b7252',
-        body: [
-          { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
-          { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
-          { address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' },
-        ],
+        body: [{ address: '192.0.2.0/24', description: 'Include testing domains from the tunnel' }],
       },
     );
     const rawResponse = await responsePromise.asResponse();
@@ -37,16 +33,6 @@ describe('resource includes', () => {
       {
         account_id: '699d98642c564d2e855e9661899b7252',
         body: [
-          {
-            address: '192.0.2.0/24',
-            description: 'Include testing domains from the tunnel',
-            host: '*.example.com',
-          },
-          {
-            address: '192.0.2.0/24',
-            description: 'Include testing domains from the tunnel',
-            host: '*.example.com',
-          },
           {
             address: '192.0.2.0/24',
             description: 'Include testing domains from the tunnel',
