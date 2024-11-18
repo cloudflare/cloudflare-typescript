@@ -30,11 +30,8 @@ describe('resource pagerules', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
         {
-          name: 'forward_url',
-          value: {
-            type: 'temporary',
-            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
-          },
+          id: 'forwarding_url',
+          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
         },
       ],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
@@ -63,11 +60,8 @@ describe('resource pagerules', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
         {
-          name: 'forward_url',
-          value: {
-            type: 'temporary',
-            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
-          },
+          id: 'forwarding_url',
+          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
         },
       ],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
@@ -134,11 +128,8 @@ describe('resource pagerules', () => {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
       actions: [
         {
-          name: 'forward_url',
-          value: {
-            type: 'temporary',
-            url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3',
-          },
+          id: 'forwarding_url',
+          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
         },
       ],
       priority: 0,
