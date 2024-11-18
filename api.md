@@ -916,7 +916,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/dns/settings/settings.ts">DNSSetting</a></code>
-- <code><a href="./src/resources/dns/settings/settings.ts">Nameserver</a></code>
 - <code><a href="./src/resources/dns/settings/settings.ts">SettingEditResponse</a></code>
 - <code><a href="./src/resources/dns/settings/settings.ts">SettingGetResponse</a></code>
 
