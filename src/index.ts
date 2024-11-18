@@ -33,15 +33,7 @@ import { Memberships } from './resources/memberships';
 import { OriginCACertificates } from './resources/origin-ca-certificates';
 import { OriginPostQuantumEncryption } from './resources/origin-post-quantum-encryption';
 import { RateLimits } from './resources/rate-limits';
-import {
-  SecurityTXT,
-  SecurityTXTDeleteParams,
-  SecurityTXTDeleteResponse,
-  SecurityTXTGetParams,
-  SecurityTXTGetResponse,
-  SecurityTXTUpdateParams,
-  SecurityTXTUpdateResponse,
-} from './resources/security-txt';
+import { SecurityTXT } from './resources/security-txt';
 import { URLNormalization } from './resources/url-normalization';
 import { WARPConnector } from './resources/warp-connector';
 import { Accounts } from './resources/accounts/accounts';
@@ -89,20 +81,7 @@ import { R2 } from './resources/r2/r2';
 import { Radar } from './resources/radar/radar';
 import { Registrar } from './resources/registrar/registrar';
 import { RequestTracers } from './resources/request-tracers/request-tracers';
-import {
-  ResourceSharing,
-  ResourceSharingCreateParams,
-  ResourceSharingCreateResponse,
-  ResourceSharingDeleteParams,
-  ResourceSharingDeleteResponse,
-  ResourceSharingGetParams,
-  ResourceSharingGetResponse,
-  ResourceSharingListParams,
-  ResourceSharingListResponse,
-  ResourceSharingListResponsesV4PagePaginationArray,
-  ResourceSharingUpdateParams,
-  ResourceSharingUpdateResponse,
-} from './resources/resource-sharing/resource-sharing';
+import { ResourceSharing } from './resources/resource-sharing/resource-sharing';
 import { Rules } from './resources/rules/rules';
 import { Rulesets } from './resources/rulesets/rulesets';
 import { RUM } from './resources/rum/rum';
@@ -121,16 +100,7 @@ import { WaitingRooms } from './resources/waiting-rooms/waiting-rooms';
 import { Web3 } from './resources/web3/web3';
 import { WorkersForPlatforms } from './resources/workers-for-platforms/workers-for-platforms';
 import { Workers } from './resources/workers/workers';
-import {
-  WorkflowGetParams,
-  WorkflowGetResponse,
-  WorkflowListParams,
-  WorkflowListResponse,
-  WorkflowListResponsesV4PagePaginationArray,
-  WorkflowUpdateParams,
-  WorkflowUpdateResponse,
-  Workflows,
-} from './resources/workflows/workflows';
+import { Workflows } from './resources/workflows/workflows';
 import { ZeroTrust } from './resources/zero-trust/zero-trust';
 import { Zones } from './resources/zones/zones';
 
@@ -566,10 +536,7 @@ Cloudflare.CloudConnector = CloudConnector;
 Cloudflare.BotnetFeed = BotnetFeed;
 Cloudflare.SecurityTXT = SecurityTXT;
 Cloudflare.Workflows = Workflows;
-Cloudflare.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4PagePaginationArray;
 Cloudflare.ResourceSharing = ResourceSharing;
-Cloudflare.ResourceSharingListResponsesV4PagePaginationArray =
-  ResourceSharingListResponsesV4PagePaginationArray;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -764,41 +731,11 @@ export declare namespace Cloudflare {
 
   export { BotnetFeed as BotnetFeed };
 
-  export {
-    SecurityTXT as SecurityTXT,
-    type SecurityTXTUpdateResponse as SecurityTXTUpdateResponse,
-    type SecurityTXTDeleteResponse as SecurityTXTDeleteResponse,
-    type SecurityTXTGetResponse as SecurityTXTGetResponse,
-    type SecurityTXTUpdateParams as SecurityTXTUpdateParams,
-    type SecurityTXTDeleteParams as SecurityTXTDeleteParams,
-    type SecurityTXTGetParams as SecurityTXTGetParams,
-  };
+  export { SecurityTXT as SecurityTXT };
 
-  export {
-    Workflows as Workflows,
-    type WorkflowUpdateResponse as WorkflowUpdateResponse,
-    type WorkflowListResponse as WorkflowListResponse,
-    type WorkflowGetResponse as WorkflowGetResponse,
-    WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
-    type WorkflowUpdateParams as WorkflowUpdateParams,
-    type WorkflowListParams as WorkflowListParams,
-    type WorkflowGetParams as WorkflowGetParams,
-  };
+  export { Workflows as Workflows };
 
-  export {
-    ResourceSharing as ResourceSharing,
-    type ResourceSharingCreateResponse as ResourceSharingCreateResponse,
-    type ResourceSharingUpdateResponse as ResourceSharingUpdateResponse,
-    type ResourceSharingListResponse as ResourceSharingListResponse,
-    type ResourceSharingDeleteResponse as ResourceSharingDeleteResponse,
-    type ResourceSharingGetResponse as ResourceSharingGetResponse,
-    ResourceSharingListResponsesV4PagePaginationArray as ResourceSharingListResponsesV4PagePaginationArray,
-    type ResourceSharingCreateParams as ResourceSharingCreateParams,
-    type ResourceSharingUpdateParams as ResourceSharingUpdateParams,
-    type ResourceSharingListParams as ResourceSharingListParams,
-    type ResourceSharingDeleteParams as ResourceSharingDeleteParams,
-    type ResourceSharingGetParams as ResourceSharingGetParams,
-  };
+  export { ResourceSharing as ResourceSharing };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

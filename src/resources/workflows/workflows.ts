@@ -205,23 +205,12 @@ export interface WorkflowGetParams {
   account_id: string;
 }
 
-Workflows.WorkflowListResponsesV4PagePaginationArray = WorkflowListResponsesV4PagePaginationArray;
 Workflows.Instances = InstancesAPIInstances;
 Workflows.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Workflows.Versions = Versions;
 Workflows.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
 
 export declare namespace Workflows {
-  export {
-    type WorkflowUpdateResponse as WorkflowUpdateResponse,
-    type WorkflowListResponse as WorkflowListResponse,
-    type WorkflowGetResponse as WorkflowGetResponse,
-    WorkflowListResponsesV4PagePaginationArray as WorkflowListResponsesV4PagePaginationArray,
-    type WorkflowUpdateParams as WorkflowUpdateParams,
-    type WorkflowListParams as WorkflowListParams,
-    type WorkflowGetParams as WorkflowGetParams,
-  };
-
   export {
     InstancesAPIInstances as Instances,
     type InstanceCreateResponse as InstanceCreateResponse,
