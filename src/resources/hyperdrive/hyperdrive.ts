@@ -4,121 +4,98 @@ import { APIResource } from '../../resource';
 import * as ConfigsAPI from './configs';
 import {
   ConfigCreateParams,
+  ConfigCreateResponse,
   ConfigDeleteParams,
   ConfigDeleteResponse,
   ConfigEditParams,
+  ConfigEditResponse,
   ConfigGetParams,
+  ConfigGetResponse,
   ConfigListParams,
+  ConfigListResponse,
+  ConfigListResponsesSinglePage,
   ConfigUpdateParams,
+  ConfigUpdateResponse,
   Configs,
 } from './configs';
-import { SinglePage } from '../../pagination';
 
-export class HyperdriveResource extends APIResource {
+export class Hyperdrive extends APIResource {
   configs: ConfigsAPI.Configs = new ConfigsAPI.Configs(this._client);
 }
 
-export class HyperdrivesSinglePage extends SinglePage<Hyperdrive> {}
+export type Configuration =
+  | Configuration.HyperdriveHyperdriveInternetOrigin
+  | Configuration.HyperdriveHyperdriveOverAccessOrigin;
 
-export interface Configuration {
-  /**
-   * The name of your origin database.
-   */
-  database: string;
-
-  /**
-   * The host (hostname or IP) of your origin database.
-   */
-  host: string;
-
-  /**
-   * Specifies the URL scheme used to connect to your origin database.
-   */
-  scheme: 'postgres' | 'postgresql' | 'mysql';
-
-  /**
-   * The user of your origin database.
-   */
-  user: string;
-
-  /**
-   * The Client ID of the Access token to use when connecting to the origin database
-   */
-  access_client_id?: string;
-
-  /**
-   * The port (default: 5432 for Postgres) of your origin database.
-   */
-  port?: number;
-}
-
-export interface ConfigurationParam {
-  /**
-   * The name of your origin database.
-   */
-  database: string;
-
-  /**
-   * The host (hostname or IP) of your origin database.
-   */
-  host: string;
-
-  /**
-   * Specifies the URL scheme used to connect to your origin database.
-   */
-  scheme: 'postgres' | 'postgresql' | 'mysql';
-
-  /**
-   * The user of your origin database.
-   */
-  user: string;
-
-  /**
-   * The Client ID of the Access token to use when connecting to the origin database
-   */
-  access_client_id?: string;
-
-  /**
-   * The port (default: 5432 for Postgres) of your origin database.
-   */
-  port?: number;
-}
-
-export interface Hyperdrive {
-  caching?: Hyperdrive.Caching;
-
-  name?: string;
-
-  origin?: Configuration;
-}
-
-export namespace Hyperdrive {
-  export interface Caching {
+export namespace Configuration {
+  export interface HyperdriveHyperdriveInternetOrigin {
     /**
-     * When set to true, disables the caching of SQL responses. (Default: false)
+     * The host (hostname or IP) of your origin database.
      */
-    disabled?: boolean;
+    host: string;
 
     /**
-     * When present, specifies max duration for which items should persist in the
-     * cache. (Default: 60)
+     * The port (default: 5432 for Postgres) of your origin database.
      */
-    max_age?: number;
+    port: number;
 
     /**
-     * When present, indicates the number of seconds cache may serve the response after
-     * it becomes stale. (Default: 15)
+     * The name of your origin database.
      */
-    stale_while_revalidate?: number;
+    database?: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme?: 'postgres' | 'postgresql';
+
+    /**
+     * The user of your origin database.
+     */
+    user?: string;
+  }
+
+  export interface HyperdriveHyperdriveOverAccessOrigin {
+    /**
+     * The Client ID of the Access token to use when connecting to the origin database
+     */
+    access_client_id: string;
+
+    /**
+     * The host (hostname or IP) of your origin database.
+     */
+    host: string;
+
+    /**
+     * The name of your origin database.
+     */
+    database?: string;
+
+    /**
+     * Specifies the URL scheme used to connect to your origin database.
+     */
+    scheme?: 'postgres' | 'postgresql';
+
+    /**
+     * The user of your origin database.
+     */
+    user?: string;
   }
 }
 
-HyperdriveResource.Configs = Configs;
+Hyperdrive.Configs = Configs;
+Hyperdrive.ConfigListResponsesSinglePage = ConfigListResponsesSinglePage;
 
-export declare namespace HyperdriveResource {
+export declare namespace Hyperdrive {
   export {
     Configs as Configs,
+    type ConfigCreateResponse as ConfigCreateResponse,
+    type ConfigUpdateResponse as ConfigUpdateResponse,
+    type ConfigListResponse as ConfigListResponse,
     type ConfigDeleteResponse as ConfigDeleteResponse,
+    type ConfigEditResponse as ConfigEditResponse,
+    type ConfigGetResponse as ConfigGetResponse,
+    ConfigListResponsesSinglePage as ConfigListResponsesSinglePage,
     type ConfigCreateParams as ConfigCreateParams,
     type ConfigUpdateParams as ConfigUpdateParams,
     type ConfigListParams as ConfigListParams,

@@ -15,7 +15,14 @@ describe('resource configs', () => {
     const responsePromise = client.hyperdrive.configs.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-hyperdrive',
-      origin: { database: 'postgres', host: 'database.example.com', scheme: 'postgres', user: 'postgres' },
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        password: 'password',
+        port: 5432,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -34,12 +41,12 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
+        password: 'password',
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
-        access_client_id: '0123456789abcdef0123456789abcdef.access',
-        port: 5432,
       },
-      caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
+      caching: { disabled: true },
     });
   });
 
@@ -48,7 +55,14 @@ describe('resource configs', () => {
     const responsePromise = client.hyperdrive.configs.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'example-hyperdrive',
-      origin: { database: 'postgres', host: 'database.example.com', scheme: 'postgres', user: 'postgres' },
+      origin: {
+        database: 'postgres',
+        host: 'database.example.com',
+        password: 'password',
+        port: 5432,
+        scheme: 'postgres',
+        user: 'postgres',
+      },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -67,12 +81,12 @@ describe('resource configs', () => {
       origin: {
         database: 'postgres',
         host: 'database.example.com',
+        password: 'password',
+        port: 5432,
         scheme: 'postgres',
         user: 'postgres',
-        access_client_id: '0123456789abcdef0123456789abcdef.access',
-        port: 5432,
       },
-      caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
+      caching: { disabled: true },
     });
   });
 
@@ -130,16 +144,9 @@ describe('resource configs', () => {
   test.skip('edit: required and optional params', async () => {
     const response = await client.hyperdrive.configs.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      caching: { disabled: false, max_age: 60, stale_while_revalidate: 15 },
+      caching: { disabled: true },
       name: 'example-hyperdrive',
-      origin: {
-        database: 'postgres',
-        host: 'database.example.com',
-        scheme: 'postgres',
-        user: 'postgres',
-        access_client_id: '0123456789abcdef0123456789abcdef.access',
-        port: 5432,
-      },
+      origin: { database: 'postgres', password: 'password', scheme: 'postgres', user: 'postgres' },
     });
   });
 

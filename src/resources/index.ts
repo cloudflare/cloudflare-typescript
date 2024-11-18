@@ -34,7 +34,7 @@ export { Filters } from './filters';
 export { Firewall } from './firewall/firewall';
 export { Healthchecks } from './healthchecks/healthchecks';
 export { Hostnames } from './hostnames/hostnames';
-export { HyperdriveResource } from './hyperdrive/hyperdrive';
+export { Hyperdrive } from './hyperdrive/hyperdrive';
 export { IAM } from './iam/iam';
 export { IPs } from './ips';
 export { Images } from './images/images';
