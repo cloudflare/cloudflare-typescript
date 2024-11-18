@@ -29,22 +29,12 @@ describe('resource acls', () => {
   test('create: required and optional params', async () => {
     const response = await client.magicTransit.sites.acls.create('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      lan_1: {
-        lan_id: 'lan_id',
-        lan_name: 'lan_name',
-        ports: [1, 1, 1],
-        subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-      },
-      lan_2: {
-        lan_id: 'lan_id',
-        lan_name: 'lan_name',
-        ports: [1, 1, 1],
-        subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-      },
+      lan_1: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
+      lan_2: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
       name: 'PIN Pad - Cash Register',
       description: 'Allows local traffic between PIN pads and cash register.',
       forward_locally: true,
-      protocols: ['tcp', 'udp', 'icmp'],
+      protocols: ['tcp'],
     });
   });
 
@@ -71,20 +61,10 @@ describe('resource acls', () => {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         description: 'Allows local traffic between PIN pads and cash register.',
         forward_locally: true,
-        lan_1: {
-          lan_id: 'lan_id',
-          lan_name: 'lan_name',
-          ports: [1, 1, 1],
-          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-        },
-        lan_2: {
-          lan_id: 'lan_id',
-          lan_name: 'lan_name',
-          ports: [1, 1, 1],
-          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-        },
+        lan_1: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
+        lan_2: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
         name: 'PIN Pad - Cash Register',
-        protocols: ['tcp', 'udp', 'icmp'],
+        protocols: ['tcp'],
       },
     );
   });
@@ -154,20 +134,10 @@ describe('resource acls', () => {
         account_id: '023e105f4ecef8ad9ca31a8372d0c353',
         description: 'Allows local traffic between PIN pads and cash register.',
         forward_locally: true,
-        lan_1: {
-          lan_id: 'lan_id',
-          lan_name: 'lan_name',
-          ports: [1, 1, 1],
-          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-        },
-        lan_2: {
-          lan_id: 'lan_id',
-          lan_name: 'lan_name',
-          ports: [1, 1, 1],
-          subnets: ['192.0.2.1', '192.0.2.1', '192.0.2.1'],
-        },
+        lan_1: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
+        lan_2: { lan_id: 'lan_id', lan_name: 'lan_name', ports: [1], subnets: ['192.0.2.1'] },
         name: 'PIN Pad - Cash Register',
-        protocols: ['tcp', 'udp', 'icmp'],
+        protocols: ['tcp'],
       },
     );
   });

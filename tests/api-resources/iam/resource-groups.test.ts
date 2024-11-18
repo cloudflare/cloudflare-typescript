@@ -15,11 +15,7 @@ describe('resource resourceGroups', () => {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       scope: {
         key: 'com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4',
-        objects: [
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-        ],
+        objects: [{ key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' }],
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -36,11 +32,7 @@ describe('resource resourceGroups', () => {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       scope: {
         key: 'com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4',
-        objects: [
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-        ],
+        objects: [{ key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' }],
       },
       meta: { editable: 'false' },
     });
@@ -51,11 +43,7 @@ describe('resource resourceGroups', () => {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       scope: {
         key: 'com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4',
-        objects: [
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-        ],
+        objects: [{ key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' }],
       },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -72,11 +60,7 @@ describe('resource resourceGroups', () => {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       scope: {
         key: 'com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4',
-        objects: [
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-          { key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' },
-        ],
+        objects: [{ key: 'com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5' }],
       },
       meta: { editable: 'false' },
     });

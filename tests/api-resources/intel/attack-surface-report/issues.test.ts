@@ -37,8 +37,8 @@ describe('resource issues', () => {
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
-      subject: ['example.com', 'example.com', 'example.com'],
-      'subject~neq': ['example.com', 'example.com', 'example.com'],
+      subject: ['example.com'],
+      'subject~neq': ['example.com'],
     });
   });
 
@@ -67,8 +67,8 @@ describe('resource issues', () => {
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
-      subject: ['example.com', 'example.com', 'example.com'],
-      'subject~neq': ['example.com', 'example.com', 'example.com'],
+      subject: ['example.com'],
+      'subject~neq': ['example.com'],
     });
   });
 
@@ -117,8 +117,8 @@ describe('resource issues', () => {
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
-      subject: ['example.com', 'example.com', 'example.com'],
-      'subject~neq': ['example.com', 'example.com', 'example.com'],
+      subject: ['example.com'],
+      'subject~neq': ['example.com'],
     });
   });
 
@@ -147,8 +147,8 @@ describe('resource issues', () => {
       'product~neq': ['access', 'dns'],
       severity: ['low', 'moderate'],
       'severity~neq': ['low', 'moderate'],
-      subject: ['example.com', 'example.com', 'example.com'],
-      'subject~neq': ['example.com', 'example.com', 'example.com'],
+      subject: ['example.com'],
+      'subject~neq': ['example.com'],
     });
   });
 });

@@ -14,11 +14,7 @@ describe('resource tokens', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.user.tokens.create({
       name: 'readonly token',
-      policies: [
-        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
-        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
-        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
-      ],
+      policies: [{ effect: 'allow', permission_groups: [{}, {}], resources: {} }],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -34,22 +30,6 @@ describe('resource tokens', () => {
     const response = await client.user.tokens.create({
       name: 'readonly token',
       policies: [
-        {
-          effect: 'allow',
-          permission_groups: [
-            { meta: { key: 'key', value: 'value' } },
-            { meta: { key: 'key', value: 'value' } },
-          ],
-          resources: { resource: 'resource', scope: 'scope' },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [
-            { meta: { key: 'key', value: 'value' } },
-            { meta: { key: 'key', value: 'value' } },
-          ],
-          resources: { resource: 'resource', scope: 'scope' },
-        },
         {
           effect: 'allow',
           permission_groups: [
@@ -74,11 +54,7 @@ describe('resource tokens', () => {
   test.skip('update: only required params', async () => {
     const responsePromise = client.user.tokens.update('ed17574386854bf78a67040be0a770b0', {
       name: 'readonly token',
-      policies: [
-        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
-        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
-        { effect: 'allow', permission_groups: [{}, {}], resources: {} },
-      ],
+      policies: [{ effect: 'allow', permission_groups: [{}, {}], resources: {} }],
       status: 'active',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -95,22 +71,6 @@ describe('resource tokens', () => {
     const response = await client.user.tokens.update('ed17574386854bf78a67040be0a770b0', {
       name: 'readonly token',
       policies: [
-        {
-          effect: 'allow',
-          permission_groups: [
-            { meta: { key: 'key', value: 'value' } },
-            { meta: { key: 'key', value: 'value' } },
-          ],
-          resources: { resource: 'resource', scope: 'scope' },
-        },
-        {
-          effect: 'allow',
-          permission_groups: [
-            { meta: { key: 'key', value: 'value' } },
-            { meta: { key: 'key', value: 'value' } },
-          ],
-          resources: { resource: 'resource', scope: 'scope' },
-        },
         {
           effect: 'allow',
           permission_groups: [

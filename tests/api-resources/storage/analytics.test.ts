@@ -25,10 +25,10 @@ describe('resource analytics', () => {
     const response = await client.storage.analytics.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       query: {
-        dimensions: ['accountId', 'responseCode', 'requestType'],
+        dimensions: ['accountId'],
         filters: 'requestType==read AND responseCode!=200',
         limit: 0,
-        metrics: ['requests', 'writeKiB', 'readKiB'],
+        metrics: ['requests'],
         since: '2019-01-02T02:20:00Z',
         sort: ['+requests', '-responseCode'],
         until: '2019-01-02T03:20:00Z',
@@ -56,7 +56,7 @@ describe('resource analytics', () => {
         dimensions: ['namespaceId'],
         filters: 'namespaceId==a4e8cbb7-1b58-4990-925e-e026d40c4c64',
         limit: 0,
-        metrics: ['storedBytes', 'storedKeys'],
+        metrics: ['storedBytes'],
         since: '2019-01-02T02:20:00Z',
         sort: ['+storedBytes', '-namespaceId'],
         until: '2019-01-02T03:20:00Z',

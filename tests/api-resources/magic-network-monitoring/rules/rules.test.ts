@@ -33,7 +33,7 @@ describe('resource rules', () => {
       automatic_advertisement: true,
       bandwidth: 1000,
       packet_threshold: 10000,
-      prefixes: ['203.0.113.1/32', '203.0.113.1/32', '203.0.113.1/32'],
+      prefixes: ['203.0.113.1/32'],
     });
   });
 
@@ -61,7 +61,7 @@ describe('resource rules', () => {
       automatic_advertisement: true,
       bandwidth: 1000,
       packet_threshold: 10000,
-      prefixes: ['203.0.113.1/32', '203.0.113.1/32', '203.0.113.1/32'],
+      prefixes: ['203.0.113.1/32'],
     });
   });
 
@@ -124,7 +124,7 @@ describe('resource rules', () => {
       duration: '300s',
       name: 'my_rule_1',
       packet_threshold: 10000,
-      prefixes: ['203.0.113.1/32', '203.0.113.1/32', '203.0.113.1/32'],
+      prefixes: ['203.0.113.1/32'],
     });
   });
 

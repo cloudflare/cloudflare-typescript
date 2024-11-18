@@ -38,11 +38,7 @@ describe('resource rateLimits', () => {
         timeout: 86400,
       },
       match: {
-        headers: [
-          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
-        ],
+        headers: [{ name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' }],
         request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
         response: { origin_traffic: true },
       },
@@ -117,11 +113,7 @@ describe('resource rateLimits', () => {
         timeout: 86400,
       },
       match: {
-        headers: [
-          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
-          { name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' },
-        ],
+        headers: [{ name: 'Cf-Cache-Status', op: 'eq', value: 'HIT' }],
         request: { methods: ['GET', 'POST'], schemes: ['HTTP', 'HTTPS'], url: '*.example.org/path*' },
         response: { origin_traffic: true },
       },

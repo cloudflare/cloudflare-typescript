@@ -33,14 +33,14 @@ describe('resource speed', () => {
     await expect(
       client.radar.quality.speed.histogram(
         {
-          asn: ['string', 'string', 'string'],
+          asn: ['string'],
           bucketSize: 0,
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          location: ['string', 'string', 'string'],
+          location: ['string'],
           metricGroup: 'BANDWIDTH',
-          name: ['string', 'string', 'string'],
+          name: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -70,12 +70,12 @@ describe('resource speed', () => {
     await expect(
       client.radar.quality.speed.summary(
         {
-          asn: ['string', 'string', 'string'],
-          continent: ['string', 'string', 'string'],
-          dateEnd: ['2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z', '2019-12-27T18:11:19.117Z'],
+          asn: ['string'],
+          continent: ['string'],
+          dateEnd: ['2019-12-27T18:11:19.117Z'],
           format: 'JSON',
-          location: ['string', 'string', 'string'],
-          name: ['string', 'string', 'string'],
+          location: ['string'],
+          name: ['string'],
         },
         { path: '/_stainless_unknown_path' },
       ),

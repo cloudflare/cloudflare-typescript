@@ -14,11 +14,7 @@ describe('resource policies', () => {
     const responsePromise = client.zeroTrust.access.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       decision: 'allow',
-      include: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
+      include: [{ email: { email: 'test@example.com' } }],
       name: 'Allow devs',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -34,22 +30,10 @@ describe('resource policies', () => {
     const response = await client.zeroTrust.access.policies.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       decision: 'allow',
-      include: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
+      include: [{ email: { email: 'test@example.com' } }],
       name: 'Allow devs',
-      exclude: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
-      require: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
+      exclude: [{ email: { email: 'test@example.com' } }],
+      require: [{ email: { email: 'test@example.com' } }],
     });
   });
 
@@ -57,11 +41,7 @@ describe('resource policies', () => {
     const responsePromise = client.zeroTrust.access.policies.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       decision: 'allow',
-      include: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
+      include: [{ email: { email: 'test@example.com' } }],
       name: 'Allow devs',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -77,22 +57,10 @@ describe('resource policies', () => {
     const response = await client.zeroTrust.access.policies.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       decision: 'allow',
-      include: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
+      include: [{ email: { email: 'test@example.com' } }],
       name: 'Allow devs',
-      exclude: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
-      require: [
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-        { email: { email: 'test@example.com' } },
-      ],
+      exclude: [{ email: { email: 'test@example.com' } }],
+      require: [{ email: { email: 'test@example.com' } }],
     });
   });
 

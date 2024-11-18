@@ -34,11 +34,7 @@ describe('resource waitingRooms', () => {
       name: 'production_webinar',
       new_users_per_minute: 200,
       total_active_users: 200,
-      additional_routes: [
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-      ],
+      additional_routes: [{ host: 'shop2.example.com', path: '/shop2/checkout' }],
       cookie_attributes: { samesite: 'auto', secure: 'auto' },
       cookie_suffix: 'abcd',
       custom_page_html:
@@ -81,11 +77,7 @@ describe('resource waitingRooms', () => {
       name: 'production_webinar',
       new_users_per_minute: 200,
       total_active_users: 200,
-      additional_routes: [
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-      ],
+      additional_routes: [{ host: 'shop2.example.com', path: '/shop2/checkout' }],
       cookie_attributes: { samesite: 'auto', secure: 'auto' },
       cookie_suffix: 'abcd',
       custom_page_html:
@@ -166,11 +158,7 @@ describe('resource waitingRooms', () => {
       name: 'production_webinar',
       new_users_per_minute: 200,
       total_active_users: 200,
-      additional_routes: [
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-        { host: 'shop2.example.com', path: '/shop2/checkout' },
-      ],
+      additional_routes: [{ host: 'shop2.example.com', path: '/shop2/checkout' }],
       cookie_attributes: { samesite: 'auto', secure: 'auto' },
       cookie_suffix: 'abcd',
       custom_page_html:

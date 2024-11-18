@@ -14,20 +14,8 @@ describe('resource resourceSharing', () => {
     const responsePromise = client.resourceSharing.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       name: 'My Shared WAF Managed Rule',
-      recipients: [{}, {}, {}],
+      recipients: [{}],
       resources: [
-        {
-          meta: {},
-          resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_type: 'custom-ruleset',
-        },
-        {
-          meta: {},
-          resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_type: 'custom-ruleset',
-        },
         {
           meta: {},
           resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
@@ -54,28 +42,8 @@ describe('resource resourceSharing', () => {
           account_id: '023e105f4ecef8ad9ca31a8372d0c353',
           organization_id: '023e105f4ecef8ad9ca31a8372d0c353',
         },
-        {
-          account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          organization_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        },
-        {
-          account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          organization_id: '023e105f4ecef8ad9ca31a8372d0c353',
-        },
       ],
       resources: [
-        {
-          meta: {},
-          resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_type: 'custom-ruleset',
-        },
-        {
-          meta: {},
-          resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_id: '023e105f4ecef8ad9ca31a8372d0c353',
-          resource_type: 'custom-ruleset',
-        },
         {
           meta: {},
           resource_account_id: '023e105f4ecef8ad9ca31a8372d0c353',

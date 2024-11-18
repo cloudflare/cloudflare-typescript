@@ -15,11 +15,7 @@ describe('resource members', () => {
     const responsePromise = client.accounts.members.create({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       email: 'user@example.com',
-      roles: [
-        '3536bcfad5faccb999b47003c79917fb',
-        '3536bcfad5faccb999b47003c79917fb',
-        '3536bcfad5faccb999b47003c79917fb',
-      ],
+      roles: ['3536bcfad5faccb999b47003c79917fb'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -35,11 +31,7 @@ describe('resource members', () => {
     const response = await client.accounts.members.create({
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
       email: 'user@example.com',
-      roles: [
-        '3536bcfad5faccb999b47003c79917fb',
-        '3536bcfad5faccb999b47003c79917fb',
-        '3536bcfad5faccb999b47003c79917fb',
-      ],
+      roles: ['3536bcfad5faccb999b47003c79917fb'],
       status: 'accepted',
     });
   });
@@ -62,11 +54,7 @@ describe('resource members', () => {
   test.skip('update: required and optional params', async () => {
     const response = await client.accounts.members.update('4536bcfad5faccb111b47003c79917fa', {
       account_id: 'eb78d65290b24279ba6f44721b3ea3c4',
-      roles: [
-        { id: '3536bcfad5faccb999b47003c79917fb' },
-        { id: '3536bcfad5faccb999b47003c79917fb' },
-        { id: '3536bcfad5faccb999b47003c79917fb' },
-      ],
+      roles: [{ id: '3536bcfad5faccb999b47003c79917fb' }],
     });
   });
 

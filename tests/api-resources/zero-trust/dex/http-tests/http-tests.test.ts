@@ -33,7 +33,7 @@ describe('resource httpTests', () => {
       interval: 'minute',
       to: '1689606812000',
       colo: 'colo',
-      deviceId: ['string', 'string', 'string'],
+      deviceId: ['string'],
     });
   });
 });

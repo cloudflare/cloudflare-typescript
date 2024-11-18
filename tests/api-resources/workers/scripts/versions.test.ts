@@ -28,17 +28,13 @@ describe('resource versions', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.workers.scripts.versions.create('this-is_my_script-01', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      '<any part name>': [
-        await toFile(Buffer.from('# my file contents'), 'README.md'),
-        await toFile(Buffer.from('# my file contents'), 'README.md'),
-        await toFile(Buffer.from('# my file contents'), 'README.md'),
-      ],
+      '<any part name>': [await toFile(Buffer.from('# my file contents'), 'README.md')],
       metadata: {
         annotations: { 'workers/message': 'Fixed worker code.', 'workers/tag': 'workers/tag' },
         bindings: [{ name: 'MY_ENV_VAR', text: 'my_data', type: 'plain_text' }],
         compatibility_date: '2023-07-25',
-        compatibility_flags: ['string', 'string', 'string'],
-        keep_bindings: ['string', 'string', 'string'],
+        compatibility_flags: ['string'],
+        keep_bindings: ['string'],
         main_module: 'worker.js',
         usage_model: 'standard',
       },

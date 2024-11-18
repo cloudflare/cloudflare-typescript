@@ -28,7 +28,7 @@ describe('resource domains', () => {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       allowed_delivery_mode: 'DIRECT',
       direction: 'asc',
-      domain: ['string', 'string', 'string'],
+      domain: ['string'],
       order: 'domain',
       page: 1,
       per_page: 1,

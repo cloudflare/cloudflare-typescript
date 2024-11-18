@@ -28,8 +28,8 @@ describe('resource managedTransforms', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.managedTransforms.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      managed_request_headers: [{}, {}, {}],
-      managed_response_headers: [{}, {}, {}],
+      managed_request_headers: [{}],
+      managed_response_headers: [{}],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,16 +43,8 @@ describe('resource managedTransforms', () => {
   test('edit: required and optional params', async () => {
     const response = await client.managedTransforms.edit({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      managed_request_headers: [
-        { id: 'add_cf-bot-score_header', enabled: true },
-        { id: 'add_cf-bot-score_header', enabled: true },
-        { id: 'add_cf-bot-score_header', enabled: true },
-      ],
-      managed_response_headers: [
-        { id: 'add_cf-bot-score_header', enabled: true },
-        { id: 'add_cf-bot-score_header', enabled: true },
-        { id: 'add_cf-bot-score_header', enabled: true },
-      ],
+      managed_request_headers: [{ id: 'add_cf-bot-score_header', enabled: true }],
+      managed_response_headers: [{ id: 'add_cf-bot-score_header', enabled: true }],
     });
   });
 });

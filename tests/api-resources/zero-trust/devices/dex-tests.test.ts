@@ -35,11 +35,7 @@ describe('resource dexTests', () => {
       interval: '30m',
       name: 'HTTP dash health check',
       description: 'Checks the dash endpoint every 30 minutes',
-      target_policies: [
-        { id: 'id', default: true, name: 'name' },
-        { id: 'id', default: true, name: 'name' },
-        { id: 'id', default: true, name: 'name' },
-      ],
+      target_policies: [{ id: 'id', default: true, name: 'name' }],
       targeted: true,
     });
   });
@@ -69,11 +65,7 @@ describe('resource dexTests', () => {
       interval: '30m',
       name: 'HTTP dash health check',
       description: 'Checks the dash endpoint every 30 minutes',
-      target_policies: [
-        { id: 'id', default: true, name: 'name' },
-        { id: 'id', default: true, name: 'name' },
-        { id: 'id', default: true, name: 'name' },
-      ],
+      target_policies: [{ id: 'id', default: true, name: 'name' }],
       targeted: true,
     });
   });

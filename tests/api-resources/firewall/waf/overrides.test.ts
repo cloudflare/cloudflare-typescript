@@ -14,7 +14,7 @@ describe('resource overrides', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.firewall.waf.overrides.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -29,7 +29,7 @@ describe('resource overrides', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.firewall.waf.overrides.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      urls: ['shop.example.com/*'],
     });
   });
 
@@ -40,7 +40,7 @@ describe('resource overrides', () => {
       id: '023e105f4ecef8ad9ca31a8372d0c353',
       rewrite_action: {},
       rules: { '100015': 'challenge' },
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,7 +64,7 @@ describe('resource overrides', () => {
         simulate: 'challenge',
       },
       rules: { '100015': 'challenge' },
-      urls: ['shop.example.com/*', 'shop.example.com/*', 'shop.example.com/*'],
+      urls: ['shop.example.com/*'],
     });
   });
 

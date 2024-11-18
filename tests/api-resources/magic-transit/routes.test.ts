@@ -56,7 +56,7 @@ describe('resource routes', () => {
       prefix: '192.0.2.0/24',
       priority: 0,
       description: 'New route for new prefix 203.0.113.1',
-      scope: { colo_names: ['den01', 'den01', 'den01'], colo_regions: ['APAC', 'APAC', 'APAC'] },
+      scope: { colo_names: ['den01'], colo_regions: ['APAC'] },
       weight: 0,
     });
   });

@@ -38,18 +38,6 @@ describe('resource queues', () => {
             prefix: 'img/',
             suffix: '.jpeg',
           },
-          {
-            actions: ['PutObject', 'CopyObject'],
-            description: 'Notifications from source bucket to queue',
-            prefix: 'img/',
-            suffix: '.jpeg',
-          },
-          {
-            actions: ['PutObject', 'CopyObject'],
-            description: 'Notifications from source bucket to queue',
-            prefix: 'img/',
-            suffix: '.jpeg',
-          },
         ],
         'cf-r2-jurisdiction': 'default',
       },
