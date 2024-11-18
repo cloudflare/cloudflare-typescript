@@ -73,7 +73,6 @@ import {
 import * as SettingsAPI from './settings/settings';
 import {
   DNSSetting,
-  Nameserver,
   SettingEditParams,
   SettingEditResponse,
   SettingGetParams,
@@ -197,7 +196,6 @@ export declare namespace DNS {
   export {
     Settings as Settings,
     type DNSSetting as DNSSetting,
-    type Nameserver as Nameserver,
     type SettingEditResponse as SettingEditResponse,
     type SettingGetResponse as SettingGetResponse,
     type SettingEditParams as SettingEditParams,

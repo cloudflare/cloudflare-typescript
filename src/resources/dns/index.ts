@@ -70,7 +70,6 @@ export {
 export {
   Settings,
   type DNSSetting,
-  type Nameserver,
   type SettingEditResponse,
   type SettingGetResponse,
   type SettingEditParams,
