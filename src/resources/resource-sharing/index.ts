@@ -26,17 +26,4 @@ export {
   type ResourceDeleteParams,
   type ResourceGetParams,
 } from './resources';
-export {
-  ResourceSharingListResponsesV4PagePaginationArray,
-  ResourceSharing,
-  type ResourceSharingCreateResponse,
-  type ResourceSharingUpdateResponse,
-  type ResourceSharingListResponse,
-  type ResourceSharingDeleteResponse,
-  type ResourceSharingGetResponse,
-  type ResourceSharingCreateParams,
-  type ResourceSharingUpdateParams,
-  type ResourceSharingListParams,
-  type ResourceSharingDeleteParams,
-  type ResourceSharingGetParams,
-} from './resource-sharing';
+export { ResourceSharing } from './resource-sharing';

@@ -62,33 +62,12 @@ export { Radar } from './radar/radar';
 export { RateLimits } from './rate-limits';
 export { Registrar } from './registrar/registrar';
 export { RequestTracers } from './request-tracers/request-tracers';
-export {
-  ResourceSharingListResponsesV4PagePaginationArray,
-  ResourceSharing,
-  type ResourceSharingCreateResponse,
-  type ResourceSharingUpdateResponse,
-  type ResourceSharingListResponse,
-  type ResourceSharingDeleteResponse,
-  type ResourceSharingGetResponse,
-  type ResourceSharingCreateParams,
-  type ResourceSharingUpdateParams,
-  type ResourceSharingListParams,
-  type ResourceSharingDeleteParams,
-  type ResourceSharingGetParams,
-} from './resource-sharing/resource-sharing';
+export { ResourceSharing } from './resource-sharing/resource-sharing';
 export { Rules } from './rules/rules';
 export { Rulesets } from './rulesets/rulesets';
 export { SSL } from './ssl/ssl';
 export { SecondaryDNS } from './secondary-dns/secondary-dns';
-export {
-  SecurityTXT,
-  type SecurityTXTUpdateResponse,
-  type SecurityTXTDeleteResponse,
-  type SecurityTXTGetResponse,
-  type SecurityTXTUpdateParams,
-  type SecurityTXTDeleteParams,
-  type SecurityTXTGetParams,
-} from './security-txt';
+export { SecurityTXT } from './security-txt';
 export { Snippets } from './snippets/snippets';
 export { Spectrum } from './spectrum/spectrum';
 export { Speed } from './speed/speed';
@@ -104,15 +83,6 @@ export { WaitingRooms } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';
 export { WorkersForPlatforms } from './workers-for-platforms/workers-for-platforms';
-export {
-  WorkflowListResponsesV4PagePaginationArray,
-  Workflows,
-  type WorkflowUpdateResponse,
-  type WorkflowListResponse,
-  type WorkflowGetResponse,
-  type WorkflowUpdateParams,
-  type WorkflowListParams,
-  type WorkflowGetParams,
-} from './workflows/workflows';
+export { Workflows } from './workflows/workflows';
 export { ZeroTrust } from './zero-trust/zero-trust';
 export { Zones } from './zones/zones';
