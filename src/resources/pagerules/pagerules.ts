@@ -2,6 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as PagerulesAPI from './pagerules';
 import * as SettingsAPI from './settings';
 import { SettingListParams, SettingListResponse, Settings } from './settings';
 
@@ -114,101 +115,6 @@ export class Pagerules extends APIResource {
   }
 }
 
-export interface PageRule {
-  /**
-   * Identifier
-   */
-  id: string;
-
-  /**
-   * The set of actions to perform if the targets of this rule match the request.
-   * Actions can redirect to another URL or override settings, but not both.
-   */
-  actions: Array<Route>;
-
-  /**
-   * The timestamp of when the Page Rule was created.
-   */
-  created_on: string;
-
-  /**
-   * The timestamp of when the Page Rule was last modified.
-   */
-  modified_on: string;
-
-  /**
-   * The priority of the rule, used to define which Page Rule is processed over
-   * another. A higher number indicates a higher priority. For example, if you have a
-   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
-   * take precedence (rule B: `/images/special/*`), specify a higher priority for
-   * rule B so it overrides rule A.
-   */
-  priority: number;
-
-  /**
-   * The status of the Page Rule.
-   */
-  status: 'active' | 'disabled';
-
-  /**
-   * The rule targets to evaluate on each request.
-   */
-  targets: Array<Target>;
-}
-
-export interface Route {
-  /**
-   * The timestamp of when the override was last modified.
-   */
-  modified_on?: string;
-
-  /**
-   * The type of route.
-   */
-  name?: 'forward_url';
-
-  value?: Route.Value;
-}
-
-export namespace Route {
-  export interface Value {
-    /**
-     * The response type for the URL redirect.
-     */
-    type?: 'temporary' | 'permanent';
-
-    /**
-     * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-     * in the constraint value.
-     */
-    url?: string;
-  }
-}
-
-export interface RouteParam {
-  /**
-   * The type of route.
-   */
-  name?: 'forward_url';
-
-  value?: RouteParam.Value;
-}
-
-export namespace RouteParam {
-  export interface Value {
-    /**
-     * The response type for the URL redirect.
-     */
-    type?: 'temporary' | 'permanent';
-
-    /**
-     * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
-     * in the constraint value.
-     */
-    url?: string;
-  }
-}
-
 /**
  * URL target.
  */
@@ -275,11 +181,219 @@ export namespace TargetParam {
   }
 }
 
-export type PageruleCreateResponse = unknown | string | null;
+export interface PageruleCreateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
 
-export type PageruleUpdateResponse = unknown | string | null;
+  /**
+   * The set of actions to perform if the targets of this rule match the request.
+   * Actions can redirect to another URL or override settings, but not both.
+   */
+  actions: Array<PageruleCreateResponse.Action>;
 
-export type PageruleListResponse = Array<PageRule>;
+  /**
+   * The timestamp of when the Page Rule was created.
+   */
+  created_on: string;
+
+  /**
+   * The timestamp of when the Page Rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The priority of the rule, used to define which Page Rule is processed over
+   * another. A higher number indicates a higher priority. For example, if you have a
+   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
+   * take precedence (rule B: `/images/special/*`), specify a higher priority for
+   * rule B so it overrides rule A.
+   */
+  priority: number;
+
+  /**
+   * The status of the Page Rule.
+   */
+  status: 'active' | 'disabled';
+
+  /**
+   * The rule targets to evaluate on each request.
+   */
+  targets: Array<Target>;
+}
+
+export namespace PageruleCreateResponse {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
+}
+
+export interface PageruleUpdateResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The set of actions to perform if the targets of this rule match the request.
+   * Actions can redirect to another URL or override settings, but not both.
+   */
+  actions: Array<PageruleUpdateResponse.Action>;
+
+  /**
+   * The timestamp of when the Page Rule was created.
+   */
+  created_on: string;
+
+  /**
+   * The timestamp of when the Page Rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The priority of the rule, used to define which Page Rule is processed over
+   * another. A higher number indicates a higher priority. For example, if you have a
+   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
+   * take precedence (rule B: `/images/special/*`), specify a higher priority for
+   * rule B so it overrides rule A.
+   */
+  priority: number;
+
+  /**
+   * The status of the Page Rule.
+   */
+  status: 'active' | 'disabled';
+
+  /**
+   * The rule targets to evaluate on each request.
+   */
+  targets: Array<Target>;
+}
+
+export namespace PageruleUpdateResponse {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
+}
+
+export type PageruleListResponse = Array<PageruleListResponse.PageruleListResponseItem>;
+
+export namespace PageruleListResponse {
+  export interface PageruleListResponseItem {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * The set of actions to perform if the targets of this rule match the request.
+     * Actions can redirect to another URL or override settings, but not both.
+     */
+    actions: Array<PageruleListResponseItem.Action>;
+
+    /**
+     * The timestamp of when the Page Rule was created.
+     */
+    created_on: string;
+
+    /**
+     * The timestamp of when the Page Rule was last modified.
+     */
+    modified_on: string;
+
+    /**
+     * The priority of the rule, used to define which Page Rule is processed over
+     * another. A higher number indicates a higher priority. For example, if you have a
+     * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
+     * take precedence (rule B: `/images/special/*`), specify a higher priority for
+     * rule B so it overrides rule A.
+     */
+    priority: number;
+
+    /**
+     * The status of the Page Rule.
+     */
+    status: 'active' | 'disabled';
+
+    /**
+     * The rule targets to evaluate on each request.
+     */
+    targets: Array<PagerulesAPI.Target>;
+  }
+
+  export namespace PageruleListResponseItem {
+    export interface Action {
+      /**
+       * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+       * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+       */
+      id?: 'forwarding_url';
+
+      value?: Action.Value;
+    }
+
+    export namespace Action {
+      export interface Value {
+        /**
+         * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+         * a temporary redirect.
+         */
+        status_code?: 301 | 302;
+
+        /**
+         * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+         * in the constraint value.
+         */
+        url?: string;
+      }
+    }
+  }
+}
 
 export interface PageruleDeleteResponse {
   /**
@@ -288,9 +402,145 @@ export interface PageruleDeleteResponse {
   id: string;
 }
 
-export type PageruleEditResponse = unknown | string | null;
+export interface PageruleEditResponse {
+  /**
+   * Identifier
+   */
+  id: string;
 
-export type PageruleGetResponse = unknown | string | null;
+  /**
+   * The set of actions to perform if the targets of this rule match the request.
+   * Actions can redirect to another URL or override settings, but not both.
+   */
+  actions: Array<PageruleEditResponse.Action>;
+
+  /**
+   * The timestamp of when the Page Rule was created.
+   */
+  created_on: string;
+
+  /**
+   * The timestamp of when the Page Rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The priority of the rule, used to define which Page Rule is processed over
+   * another. A higher number indicates a higher priority. For example, if you have a
+   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
+   * take precedence (rule B: `/images/special/*`), specify a higher priority for
+   * rule B so it overrides rule A.
+   */
+  priority: number;
+
+  /**
+   * The status of the Page Rule.
+   */
+  status: 'active' | 'disabled';
+
+  /**
+   * The rule targets to evaluate on each request.
+   */
+  targets: Array<Target>;
+}
+
+export namespace PageruleEditResponse {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
+}
+
+export interface PageruleGetResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+
+  /**
+   * The set of actions to perform if the targets of this rule match the request.
+   * Actions can redirect to another URL or override settings, but not both.
+   */
+  actions: Array<PageruleGetResponse.Action>;
+
+  /**
+   * The timestamp of when the Page Rule was created.
+   */
+  created_on: string;
+
+  /**
+   * The timestamp of when the Page Rule was last modified.
+   */
+  modified_on: string;
+
+  /**
+   * The priority of the rule, used to define which Page Rule is processed over
+   * another. A higher number indicates a higher priority. For example, if you have a
+   * catch-all Page Rule (rule A: `/images/*`) but want a more specific Page Rule to
+   * take precedence (rule B: `/images/special/*`), specify a higher priority for
+   * rule B so it overrides rule A.
+   */
+  priority: number;
+
+  /**
+   * The status of the Page Rule.
+   */
+  status: 'active' | 'disabled';
+
+  /**
+   * The rule targets to evaluate on each request.
+   */
+  targets: Array<Target>;
+}
+
+export namespace PageruleGetResponse {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
+}
 
 export interface PageruleCreateParams {
   /**
@@ -302,7 +552,7 @@ export interface PageruleCreateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<RouteParam>;
+  actions: Array<PageruleCreateParams.Action>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
@@ -322,6 +572,34 @@ export interface PageruleCreateParams {
    * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
+}
+
+export namespace PageruleCreateParams {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
 }
 
 export interface PageruleUpdateParams {
@@ -334,7 +612,7 @@ export interface PageruleUpdateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<RouteParam>;
+  actions: Array<PageruleUpdateParams.Action>;
 
   /**
    * Body param: The rule targets to evaluate on each request.
@@ -354,6 +632,34 @@ export interface PageruleUpdateParams {
    * Body param: The status of the Page Rule.
    */
   status?: 'active' | 'disabled';
+}
+
+export namespace PageruleUpdateParams {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
 }
 
 export interface PageruleListParams {
@@ -401,7 +707,7 @@ export interface PageruleEditParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions?: Array<RouteParam>;
+  actions?: Array<PageruleEditParams.Action>;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -421,6 +727,34 @@ export interface PageruleEditParams {
    * Body param: The rule targets to evaluate on each request.
    */
   targets?: Array<TargetParam>;
+}
+
+export namespace PageruleEditParams {
+  export interface Action {
+    /**
+     * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
+     * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
+     */
+    id?: 'forwarding_url';
+
+    value?: Action.Value;
+  }
+
+  export namespace Action {
+    export interface Value {
+      /**
+       * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
+       * a temporary redirect.
+       */
+      status_code?: 301 | 302;
+
+      /**
+       * The URL to redirect the request to. Notes: ${num} refers to the position of '\*'
+       * in the constraint value.
+       */
+      url?: string;
+    }
+  }
 }
 
 export interface PageruleGetParams {

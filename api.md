@@ -1617,8 +1617,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/pagerules/pagerules.ts">PageRule</a></code>
-- <code><a href="./src/resources/pagerules/pagerules.ts">Route</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">Target</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleCreateResponse</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleUpdateResponse</a></code>

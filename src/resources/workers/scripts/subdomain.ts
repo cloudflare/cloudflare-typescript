@@ -37,6 +37,12 @@ export interface SubdomainCreateResponse {
    * Whether the Worker is available on the workers.dev subdomain.
    */
   enabled?: boolean;
+
+  /**
+   * Whether the Worker's Preview URLs should be available on the workers.dev
+   * subdomain.
+   */
+  previews_enabled?: boolean;
 }
 
 export interface SubdomainGetResponse {
@@ -44,6 +50,12 @@ export interface SubdomainGetResponse {
    * Whether the Worker is available on the workers.dev subdomain.
    */
   enabled?: boolean;
+
+  /**
+   * Whether the Worker's Preview URLs should be available on the workers.dev
+   * subdomain.
+   */
+  previews_enabled?: boolean;
 }
 
 export interface SubdomainCreateParams {
@@ -55,7 +67,13 @@ export interface SubdomainCreateParams {
   /**
    * Body param: Whether the Worker should be available on the workers.dev subdomain.
    */
-  enabled?: boolean;
+  enabled: boolean;
+
+  /**
+   * Body param: Whether the Worker's Preview URLs should be available on the
+   * workers.dev subdomain.
+   */
+  previews_enabled?: boolean;
 }
 
 export interface SubdomainGetParams {
