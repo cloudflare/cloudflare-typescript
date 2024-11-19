@@ -13,7 +13,7 @@ describe('resource groups', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
     const responsePromise = client.zeroTrust.access.groups.create({
-      include: [{ email: { email: 'test@example.com' } }],
+      include: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       name: 'Allow devs',
       account_id: 'account_id',
     });
@@ -29,19 +29,19 @@ describe('resource groups', () => {
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
     const response = await client.zeroTrust.access.groups.create({
-      include: [{ email: { email: 'test@example.com' } }],
+      include: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       name: 'Allow devs',
       account_id: 'account_id',
-      exclude: [{ email: { email: 'test@example.com' } }],
+      exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       is_default: true,
-      require: [{ email: { email: 'test@example.com' } }],
+      require: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
     });
   });
 
   // TODO: investigate broken test
   test.skip('update: only required params', async () => {
     const responsePromise = client.zeroTrust.access.groups.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      include: [{ email: { email: 'test@example.com' } }],
+      include: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       name: 'Allow devs',
       account_id: 'account_id',
     });
@@ -57,12 +57,12 @@ describe('resource groups', () => {
   // TODO: investigate broken test
   test.skip('update: required and optional params', async () => {
     const response = await client.zeroTrust.access.groups.update('f174e90a-fafe-4643-bbbc-4a0ed4fc8415', {
-      include: [{ email: { email: 'test@example.com' } }],
+      include: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       name: 'Allow devs',
       account_id: 'account_id',
-      exclude: [{ email: { email: 'test@example.com' } }],
+      exclude: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
       is_default: true,
-      require: [{ email: { email: 'test@example.com' } }],
+      require: [{ group: { id: 'aa0a4aab-672b-4bdb-bc33-a59f1130a11f' } }],
     });
   });
 

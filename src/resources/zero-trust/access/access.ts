@@ -196,52 +196,144 @@ export namespace AccessDevicePostureRuleParam {
 }
 
 /**
- * Matches a specific email.
+ * Matches an Access group.
  */
 export type AccessRule =
-  | EmailRule
-  | EmailListRule
-  | DomainRule
-  | EveryoneRule
-  | IPRule
-  | IPListRule
-  | CertificateRule
   | GroupRule
+  | AnyValidServiceTokenRule
+  | AccessRule.AccessAuthContextRule
+  | AuthenticationMethodRule
   | AzureGroupRule
+  | CertificateRule
+  | AccessRule.AccessCommonNameRule
+  | CountryRule
+  | AccessDevicePostureRule
+  | DomainRule
+  | EmailListRule
+  | EmailRule
+  | EveryoneRule
+  | ExternalEvaluationRule
   | GitHubOrganizationRule
   | GSuiteGroupRule
+  | IPListRule
+  | IPRule
   | OktaGroupRule
   | SAMLGroupRule
-  | ServiceTokenRule
-  | AnyValidServiceTokenRule
-  | ExternalEvaluationRule
-  | CountryRule
-  | AuthenticationMethodRule
-  | AccessDevicePostureRule;
+  | ServiceTokenRule;
+
+export namespace AccessRule {
+  /**
+   * Matches an Azure Authentication Context. Requires an Azure identity provider.
+   */
+  export interface AccessAuthContextRule {
+    auth_context: AccessAuthContextRule.AuthContext;
+  }
+
+  export namespace AccessAuthContextRule {
+    export interface AuthContext {
+      /**
+       * The ID of an Authentication context.
+       */
+      id: string;
+
+      /**
+       * The ACID of an Authentication context.
+       */
+      ac_id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      identity_provider_id: string;
+    }
+  }
+
+  /**
+   * Matches a specific common name.
+   */
+  export interface AccessCommonNameRule {
+    common_name: AccessCommonNameRule.CommonName;
+  }
+
+  export namespace AccessCommonNameRule {
+    export interface CommonName {
+      /**
+       * The common name to match.
+       */
+      common_name: string;
+    }
+  }
+}
 
 /**
- * Matches a specific email.
+ * Matches an Access group.
  */
 export type AccessRuleParam =
-  | EmailRuleParam
-  | EmailListRuleParam
-  | DomainRuleParam
-  | EveryoneRuleParam
-  | IPRuleParam
-  | IPListRuleParam
-  | CertificateRuleParam
   | GroupRuleParam
+  | AnyValidServiceTokenRuleParam
+  | AccessRuleParam.AccessAuthContextRule
+  | AuthenticationMethodRuleParam
   | AzureGroupRuleParam
+  | CertificateRuleParam
+  | AccessRuleParam.AccessCommonNameRule
+  | CountryRuleParam
+  | AccessDevicePostureRuleParam
+  | DomainRuleParam
+  | EmailListRuleParam
+  | EmailRuleParam
+  | EveryoneRuleParam
+  | ExternalEvaluationRuleParam
   | GitHubOrganizationRuleParam
   | GSuiteGroupRuleParam
+  | IPListRuleParam
+  | IPRuleParam
   | OktaGroupRuleParam
   | SAMLGroupRuleParam
-  | ServiceTokenRuleParam
-  | AnyValidServiceTokenRuleParam
-  | ExternalEvaluationRuleParam
-  | CountryRuleParam
-  | AuthenticationMethodRuleParam
-  | AccessDevicePostureRuleParam;
+  | ServiceTokenRuleParam;
+
+export namespace AccessRuleParam {
+  /**
+   * Matches an Azure Authentication Context. Requires an Azure identity provider.
+   */
+  export interface AccessAuthContextRule {
+    auth_context: AccessAuthContextRule.AuthContext;
+  }
+
+  export namespace AccessAuthContextRule {
+    export interface AuthContext {
+      /**
+       * The ID of an Authentication context.
+       */
+      id: string;
+
+      /**
+       * The ACID of an Authentication context.
+       */
+      ac_id: string;
+
+      /**
+       * The ID of your Azure identity provider.
+       */
+      identity_provider_id: string;
+    }
+  }
+
+  /**
+   * Matches a specific common name.
+   */
+  export interface AccessCommonNameRule {
+    common_name: AccessCommonNameRule.CommonName;
+  }
+
+  export namespace AccessCommonNameRule {
+    export interface CommonName {
+      /**
+       * The common name to match.
+       */
+      common_name: string;
+    }
+  }
+}
 
 /**
  * Matches any valid Access Service Token
@@ -599,6 +691,11 @@ export namespace GitHubOrganizationRule {
      * The name of the organization.
      */
     name: string;
+
+    /**
+     * The name of the team
+     */
+    team?: string;
   }
 }
 
@@ -620,6 +717,11 @@ export namespace GitHubOrganizationRuleParam {
      * The name of the organization.
      */
     name: string;
+
+    /**
+     * The name of the team
+     */
+    team?: string;
   }
 }
 
