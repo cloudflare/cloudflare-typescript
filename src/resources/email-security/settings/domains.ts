@@ -75,6 +75,8 @@ export interface DomainListResponse {
 
   folder?: 'AllItems' | 'Inbox' | null;
 
+  inbox_provider?: 'Microsoft' | 'Google' | null;
+
   integration_id?: string | null;
 
   o365_tenant_id?: string | null;
@@ -104,6 +106,8 @@ export interface DomainEditResponse {
   lookback_hops: number;
 
   folder?: 'AllItems' | 'Inbox' | null;
+
+  inbox_provider?: 'Microsoft' | 'Google' | null;
 
   integration_id?: string | null;
 
@@ -162,6 +166,11 @@ export interface DomainEditParams {
    * Body param:
    */
   domain?: string | null;
+
+  /**
+   * Body param:
+   */
+  folder?: 'AllItems' | 'Inbox';
 
   /**
    * Body param:

@@ -2,20 +2,7 @@
 
 import { APIResource } from '../../../resource';
 import * as AllowPatternsAPI from './allow-patterns';
-import {
-  AllowPatternCreateParams,
-  AllowPatternCreateResponse,
-  AllowPatternDeleteParams,
-  AllowPatternDeleteResponse,
-  AllowPatternEditParams,
-  AllowPatternEditResponse,
-  AllowPatternGetParams,
-  AllowPatternGetResponse,
-  AllowPatternListParams,
-  AllowPatternListResponse,
-  AllowPatternListResponsesV4PagePaginationArray,
-  AllowPatterns,
-} from './allow-patterns';
+import { AllowPatterns } from './allow-patterns';
 import * as BlockSendersAPI from './block-senders';
 import {
   BlockSenderCreateParams,
@@ -83,7 +70,6 @@ export class Settings extends APIResource {
 }
 
 Settings.AllowPatterns = AllowPatterns;
-Settings.AllowPatternListResponsesV4PagePaginationArray = AllowPatternListResponsesV4PagePaginationArray;
 Settings.BlockSenders = BlockSenders;
 Settings.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;
 Settings.Domains = Domains;
@@ -95,20 +81,7 @@ Settings.TrustedDomains = TrustedDomains;
 Settings.TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainListResponsesV4PagePaginationArray;
 
 export declare namespace Settings {
-  export {
-    AllowPatterns as AllowPatterns,
-    type AllowPatternCreateResponse as AllowPatternCreateResponse,
-    type AllowPatternListResponse as AllowPatternListResponse,
-    type AllowPatternDeleteResponse as AllowPatternDeleteResponse,
-    type AllowPatternEditResponse as AllowPatternEditResponse,
-    type AllowPatternGetResponse as AllowPatternGetResponse,
-    AllowPatternListResponsesV4PagePaginationArray as AllowPatternListResponsesV4PagePaginationArray,
-    type AllowPatternCreateParams as AllowPatternCreateParams,
-    type AllowPatternListParams as AllowPatternListParams,
-    type AllowPatternDeleteParams as AllowPatternDeleteParams,
-    type AllowPatternEditParams as AllowPatternEditParams,
-    type AllowPatternGetParams as AllowPatternGetParams,
-  };
+  export { AllowPatterns as AllowPatterns };
 
   export {
     BlockSenders as BlockSenders,

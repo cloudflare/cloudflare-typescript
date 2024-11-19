@@ -1052,33 +1052,9 @@ Methods:
 
 ## Phishguard
 
-Types:
-
-- <code><a href="./src/resources/email-security/phishguard.ts">PhishguardListResponse</a></code>
-
-Methods:
-
-- <code title="get /accounts/{account_id}/email-security/phishguard/reports">client.emailSecurity.phishguard.<a href="./src/resources/email-security/phishguard.ts">list</a>({ ...params }) -> PhishguardListResponsesSinglePage</code>
-
 ## Settings
 
 ### AllowPatterns
-
-Types:
-
-- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternCreateResponse</a></code>
-- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternListResponse</a></code>
-- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternDeleteResponse</a></code>
-- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternEditResponse</a></code>
-- <code><a href="./src/resources/email-security/settings/allow-patterns.ts">AllowPatternGetResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/email-security/settings/allow_patterns">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">create</a>({ ...params }) -> AllowPatternCreateResponse</code>
-- <code title="get /accounts/{account_id}/email-security/settings/allow_patterns">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">list</a>({ ...params }) -> AllowPatternListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/email-security/settings/allow_patterns/{pattern_id}">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">delete</a>(patternId, { ...params }) -> AllowPatternDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/email-security/settings/allow_patterns/{pattern_id}">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">edit</a>(patternId, { ...params }) -> AllowPatternEditResponse</code>
-- <code title="get /accounts/{account_id}/email-security/settings/allow_patterns/{pattern_id}">client.emailSecurity.settings.allowPatterns.<a href="./src/resources/email-security/settings/allow-patterns.ts">get</a>(patternId, { ...params }) -> AllowPatternGetResponse</code>
 
 ### BlockSenders
 

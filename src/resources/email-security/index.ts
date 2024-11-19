@@ -17,10 +17,5 @@ export {
   type InvestigateRawParams,
   type InvestigateTraceParams,
 } from './investigate';
-export {
-  PhishguardListResponsesSinglePage,
-  Phishguard,
-  type PhishguardListResponse,
-  type PhishguardListParams,
-} from './phishguard';
+export { Phishguard } from './phishguard';
 export { Settings } from './settings/index';
