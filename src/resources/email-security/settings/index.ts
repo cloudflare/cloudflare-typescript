@@ -1,19 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  AllowPatternListResponsesV4PagePaginationArray,
-  AllowPatterns,
-  type AllowPatternCreateResponse,
-  type AllowPatternListResponse,
-  type AllowPatternDeleteResponse,
-  type AllowPatternEditResponse,
-  type AllowPatternGetResponse,
-  type AllowPatternCreateParams,
-  type AllowPatternListParams,
-  type AllowPatternDeleteParams,
-  type AllowPatternEditParams,
-  type AllowPatternGetParams,
-} from './allow-patterns';
+export { AllowPatterns } from './allow-patterns';
 export {
   BlockSenderListResponsesV4PagePaginationArray,
   BlockSenders,

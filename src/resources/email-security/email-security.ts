@@ -19,12 +19,7 @@ import {
   InvestigateTraceResponse,
 } from './investigate';
 import * as PhishguardAPI from './phishguard';
-import {
-  Phishguard,
-  PhishguardListParams,
-  PhishguardListResponse,
-  PhishguardListResponsesSinglePage,
-} from './phishguard';
+import { Phishguard } from './phishguard';
 import * as SettingsAPI from './settings/settings';
 import { Settings } from './settings/settings';
 
@@ -37,7 +32,6 @@ export class EmailSecurity extends APIResource {
 EmailSecurity.Investigate = Investigate;
 EmailSecurity.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
 EmailSecurity.Phishguard = Phishguard;
-EmailSecurity.PhishguardListResponsesSinglePage = PhishguardListResponsesSinglePage;
 EmailSecurity.Settings = Settings;
 
 export declare namespace EmailSecurity {
@@ -58,12 +52,7 @@ export declare namespace EmailSecurity {
     type InvestigateTraceParams as InvestigateTraceParams,
   };
 
-  export {
-    Phishguard as Phishguard,
-    type PhishguardListResponse as PhishguardListResponse,
-    PhishguardListResponsesSinglePage as PhishguardListResponsesSinglePage,
-    type PhishguardListParams as PhishguardListParams,
-  };
+  export { Phishguard as Phishguard };
 
   export { Settings as Settings };
 }

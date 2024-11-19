@@ -72,6 +72,7 @@ describe('resource domains', () => {
     const response = await client.emailSecurity.settings.domains.edit(2400, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       domain: 'domain',
+      folder: 'AllItems',
       integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       lookback_hops: 1,
     });
