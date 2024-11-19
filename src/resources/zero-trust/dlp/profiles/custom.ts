@@ -94,11 +94,11 @@ export interface CustomProfile {
   created_at: string;
 
   entries: Array<
-    | CustomProfile.Custom
-    | CustomProfile.Predefined
-    | CustomProfile.Integration
-    | CustomProfile.ExactData
-    | CustomProfile.WordList
+    | CustomProfile.CustomEntry
+    | CustomProfile.PredefinedEntry
+    | CustomProfile.IntegrationEntry
+    | CustomProfile.ExactDataEntry
+    | CustomProfile.WordListEntry
   >;
 
   /**
@@ -122,7 +122,7 @@ export interface CustomProfile {
 }
 
 export namespace CustomProfile {
-  export interface Custom {
+  export interface CustomEntry {
     id: string;
 
     created_at: string;
@@ -140,10 +140,10 @@ export namespace CustomProfile {
     profile_id?: string | null;
   }
 
-  export interface Predefined {
+  export interface PredefinedEntry {
     id: string;
 
-    confidence: Predefined.Confidence;
+    confidence: PredefinedEntry.Confidence;
 
     enabled: boolean;
 
@@ -154,7 +154,7 @@ export namespace CustomProfile {
     profile_id?: string | null;
   }
 
-  export namespace Predefined {
+  export namespace PredefinedEntry {
     export interface Confidence {
       /**
        * Indicates whether this entry can be made more or less sensitive by setting a
@@ -165,7 +165,7 @@ export namespace CustomProfile {
     }
   }
 
-  export interface Integration {
+  export interface IntegrationEntry {
     id: string;
 
     created_at: string;
@@ -181,7 +181,7 @@ export namespace CustomProfile {
     profile_id?: string | null;
   }
 
-  export interface ExactData {
+  export interface ExactDataEntry {
     id: string;
 
     created_at: string;
@@ -197,7 +197,7 @@ export namespace CustomProfile {
     updated_at: string;
   }
 
-  export interface WordList {
+  export interface WordListEntry {
     id: string;
 
     created_at: string;
@@ -258,11 +258,11 @@ export namespace CustomCreateResponse {
     created_at: string;
 
     entries: Array<
-      | CustomProfile.Custom
-      | CustomProfile.Predefined
-      | CustomProfile.Integration
-      | CustomProfile.ExactData
-      | CustomProfile.WordList
+      | CustomProfile.CustomEntry
+      | CustomProfile.PredefinedEntry
+      | CustomProfile.IntegrationEntry
+      | CustomProfile.ExactDataEntry
+      | CustomProfile.WordListEntry
     >;
 
     /**
@@ -288,7 +288,7 @@ export namespace CustomCreateResponse {
   }
 
   export namespace CustomProfile {
-    export interface Custom {
+    export interface CustomEntry {
       id: string;
 
       created_at: string;
@@ -306,10 +306,10 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export interface Predefined {
+    export interface PredefinedEntry {
       id: string;
 
-      confidence: Predefined.Confidence;
+      confidence: PredefinedEntry.Confidence;
 
       enabled: boolean;
 
@@ -320,7 +320,7 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export namespace Predefined {
+    export namespace PredefinedEntry {
       export interface Confidence {
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
@@ -331,7 +331,7 @@ export namespace CustomCreateResponse {
       }
     }
 
-    export interface Integration {
+    export interface IntegrationEntry {
       id: string;
 
       created_at: string;
@@ -347,7 +347,7 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export interface ExactData {
+    export interface ExactDataEntry {
       id: string;
 
       created_at: string;
@@ -363,7 +363,7 @@ export namespace CustomCreateResponse {
       updated_at: string;
     }
 
-    export interface WordList {
+    export interface WordListEntry {
       id: string;
 
       created_at: string;
@@ -391,11 +391,11 @@ export namespace CustomCreateResponse {
     allowed_match_count: number;
 
     entries: Array<
-      | PredefinedProfile.Custom
-      | PredefinedProfile.Predefined
-      | PredefinedProfile.Integration
-      | PredefinedProfile.ExactData
-      | PredefinedProfile.WordList
+      | PredefinedProfile.CustomEntry
+      | PredefinedProfile.PredefinedEntry
+      | PredefinedProfile.IntegrationEntry
+      | PredefinedProfile.ExactDataEntry
+      | PredefinedProfile.WordListEntry
     >;
 
     /**
@@ -422,7 +422,7 @@ export namespace CustomCreateResponse {
   }
 
   export namespace PredefinedProfile {
-    export interface Custom {
+    export interface CustomEntry {
       id: string;
 
       created_at: string;
@@ -440,10 +440,10 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export interface Predefined {
+    export interface PredefinedEntry {
       id: string;
 
-      confidence: Predefined.Confidence;
+      confidence: PredefinedEntry.Confidence;
 
       enabled: boolean;
 
@@ -454,7 +454,7 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export namespace Predefined {
+    export namespace PredefinedEntry {
       export interface Confidence {
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
@@ -465,7 +465,7 @@ export namespace CustomCreateResponse {
       }
     }
 
-    export interface Integration {
+    export interface IntegrationEntry {
       id: string;
 
       created_at: string;
@@ -481,7 +481,7 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export interface ExactData {
+    export interface ExactDataEntry {
       id: string;
 
       created_at: string;
@@ -497,7 +497,7 @@ export namespace CustomCreateResponse {
       updated_at: string;
     }
 
-    export interface WordList {
+    export interface WordListEntry {
       id: string;
 
       created_at: string;
@@ -522,11 +522,11 @@ export namespace CustomCreateResponse {
     created_at: string;
 
     entries: Array<
-      | IntegrationProfile.Custom
-      | IntegrationProfile.Predefined
-      | IntegrationProfile.Integration
-      | IntegrationProfile.ExactData
-      | IntegrationProfile.WordList
+      | IntegrationProfile.CustomEntry
+      | IntegrationProfile.PredefinedEntry
+      | IntegrationProfile.IntegrationEntry
+      | IntegrationProfile.ExactDataEntry
+      | IntegrationProfile.WordListEntry
     >;
 
     name: string;
@@ -542,7 +542,7 @@ export namespace CustomCreateResponse {
   }
 
   export namespace IntegrationProfile {
-    export interface Custom {
+    export interface CustomEntry {
       id: string;
 
       created_at: string;
@@ -560,10 +560,10 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export interface Predefined {
+    export interface PredefinedEntry {
       id: string;
 
-      confidence: Predefined.Confidence;
+      confidence: PredefinedEntry.Confidence;
 
       enabled: boolean;
 
@@ -574,7 +574,7 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export namespace Predefined {
+    export namespace PredefinedEntry {
       export interface Confidence {
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
@@ -585,7 +585,7 @@ export namespace CustomCreateResponse {
       }
     }
 
-    export interface Integration {
+    export interface IntegrationEntry {
       id: string;
 
       created_at: string;
@@ -601,7 +601,7 @@ export namespace CustomCreateResponse {
       profile_id?: string | null;
     }
 
-    export interface ExactData {
+    export interface ExactDataEntry {
       id: string;
 
       created_at: string;
@@ -617,7 +617,7 @@ export namespace CustomCreateResponse {
       updated_at: string;
     }
 
-    export interface WordList {
+    export interface WordListEntry {
       id: string;
 
       created_at: string;
@@ -684,7 +684,9 @@ export namespace CustomCreateParams {
        * Entries from other profiles (e.g. pre-defined Cloudflare profiles, or your
        * Microsoft Information Protection profiles).
        */
-      shared_entries?: Array<Profile.Custom | Profile.Predefined | Profile.Integration | Profile.ExactData>;
+      shared_entries?: Array<
+        Profile.UnionMember0 | Profile.UnionMember1 | Profile.UnionMember2 | Profile.UnionMember3
+      >;
     }
 
     export namespace Profile {
@@ -704,7 +706,7 @@ export namespace CustomCreateParams {
         words: Array<string>;
       }
 
-      export interface Custom {
+      export interface UnionMember0 {
         enabled: boolean;
 
         entry_id: string;
@@ -712,7 +714,7 @@ export namespace CustomCreateParams {
         entry_type: 'custom';
       }
 
-      export interface Predefined {
+      export interface UnionMember1 {
         enabled: boolean;
 
         entry_id: string;
@@ -720,7 +722,7 @@ export namespace CustomCreateParams {
         entry_type: 'predefined';
       }
 
-      export interface Integration {
+      export interface UnionMember2 {
         enabled: boolean;
 
         entry_id: string;
@@ -728,7 +730,7 @@ export namespace CustomCreateParams {
         entry_type: 'integration';
       }
 
-      export interface ExactData {
+      export interface UnionMember3 {
         enabled: boolean;
 
         entry_id: string;
@@ -789,10 +791,10 @@ export namespace CustomCreateParams {
      * or your Microsoft Information Protection profiles).
      */
     shared_entries?: Array<
-      | CustomCreateParams.DLPNewCustomProfile.Custom
-      | CustomCreateParams.DLPNewCustomProfile.Predefined
-      | CustomCreateParams.DLPNewCustomProfile.Integration
-      | CustomCreateParams.DLPNewCustomProfile.ExactData
+      | CustomCreateParams.DLPNewCustomProfile.UnionMember0
+      | CustomCreateParams.DLPNewCustomProfile.UnionMember1
+      | CustomCreateParams.DLPNewCustomProfile.UnionMember2
+      | CustomCreateParams.DLPNewCustomProfile.UnionMember3
     >;
   }
 
@@ -813,7 +815,7 @@ export namespace CustomCreateParams {
       words: Array<string>;
     }
 
-    export interface Custom {
+    export interface UnionMember0 {
       enabled: boolean;
 
       entry_id: string;
@@ -821,7 +823,7 @@ export namespace CustomCreateParams {
       entry_type: 'custom';
     }
 
-    export interface Predefined {
+    export interface UnionMember1 {
       enabled: boolean;
 
       entry_id: string;
@@ -829,7 +831,7 @@ export namespace CustomCreateParams {
       entry_type: 'predefined';
     }
 
-    export interface Integration {
+    export interface UnionMember2 {
       enabled: boolean;
 
       entry_id: string;
@@ -837,7 +839,7 @@ export namespace CustomCreateParams {
       entry_type: 'integration';
     }
 
-    export interface ExactData {
+    export interface UnionMember3 {
       enabled: boolean;
 
       entry_id: string;
@@ -894,7 +896,7 @@ export interface CustomUpdateParams {
    * Body param: Other entries, e.g. predefined or integration.
    */
   shared_entries?: Array<
-    CustomUpdateParams.Predefined | CustomUpdateParams.Integration | CustomUpdateParams.ExactData
+    CustomUpdateParams.UnionMember0 | CustomUpdateParams.UnionMember1 | CustomUpdateParams.UnionMember2
   >;
 }
 
@@ -917,7 +919,7 @@ export namespace CustomUpdateParams {
     pattern: CustomAPI.PatternParam;
   }
 
-  export interface Predefined {
+  export interface UnionMember0 {
     enabled: boolean;
 
     entry_id: string;
@@ -925,7 +927,7 @@ export namespace CustomUpdateParams {
     entry_type: 'predefined';
   }
 
-  export interface Integration {
+  export interface UnionMember1 {
     enabled: boolean;
 
     entry_id: string;
@@ -933,7 +935,7 @@ export namespace CustomUpdateParams {
     entry_type: 'integration';
   }
 
-  export interface ExactData {
+  export interface UnionMember2 {
     enabled: boolean;
 
     entry_id: string;
