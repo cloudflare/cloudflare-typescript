@@ -50,11 +50,11 @@ export interface PredefinedProfile {
   allowed_match_count: number;
 
   entries: Array<
-    | PredefinedProfile.Custom
-    | PredefinedProfile.Predefined
-    | PredefinedProfile.Integration
-    | PredefinedProfile.ExactData
-    | PredefinedProfile.WordList
+    | PredefinedProfile.CustomEntry
+    | PredefinedProfile.PredefinedEntry
+    | PredefinedProfile.IntegrationEntry
+    | PredefinedProfile.ExactDataEntry
+    | PredefinedProfile.WordListEntry
   >;
 
   /**
@@ -79,7 +79,7 @@ export interface PredefinedProfile {
 }
 
 export namespace PredefinedProfile {
-  export interface Custom {
+  export interface CustomEntry {
     id: string;
 
     created_at: string;
@@ -97,10 +97,10 @@ export namespace PredefinedProfile {
     profile_id?: string | null;
   }
 
-  export interface Predefined {
+  export interface PredefinedEntry {
     id: string;
 
-    confidence: Predefined.Confidence;
+    confidence: PredefinedEntry.Confidence;
 
     enabled: boolean;
 
@@ -111,7 +111,7 @@ export namespace PredefinedProfile {
     profile_id?: string | null;
   }
 
-  export namespace Predefined {
+  export namespace PredefinedEntry {
     export interface Confidence {
       /**
        * Indicates whether this entry can be made more or less sensitive by setting a
@@ -122,7 +122,7 @@ export namespace PredefinedProfile {
     }
   }
 
-  export interface Integration {
+  export interface IntegrationEntry {
     id: string;
 
     created_at: string;
@@ -138,7 +138,7 @@ export namespace PredefinedProfile {
     profile_id?: string | null;
   }
 
-  export interface ExactData {
+  export interface ExactDataEntry {
     id: string;
 
     created_at: string;
@@ -154,7 +154,7 @@ export namespace PredefinedProfile {
     updated_at: string;
   }
 
-  export interface WordList {
+  export interface WordListEntry {
     id: string;
 
     created_at: string;
