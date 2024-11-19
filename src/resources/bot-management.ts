@@ -14,7 +14,58 @@ export class BotManagement extends APIResource {
    * - **Bot Management for Enterprise**
    *
    * See [Bot Plans](https://developers.cloudflare.com/bots/plans/) for more
-   * information on the different plans
+   * information on the different plans \
+   * If you recently upgraded or downgraded your plan, refer to the following examples
+   * to clean up old configurations. Copy and paste the example body to remove old zone
+   * configurations based on your current plan.
+   *
+   * #### Clean up configuration for Bot Fight Mode plan
+   *
+   * ```json
+   * {
+   *   "sbfm_likely_automated": "allow",
+   *   "sbfm_definitely_automated": "allow",
+   *   "sbfm_verified_bots": "allow",
+   *   "sbfm_static_resource_protection": false,
+   *   "optimize_wordpress": false,
+   *   "suppress_session_score": false
+   * }
+   * ```
+   *
+   * #### Clean up configuration for SBFM Pro plan
+   *
+   * ```json
+   * {
+   *   "sbfm_likely_automated": "allow",
+   *   "fight_mode": false
+   * }
+   * ```
+   *
+   * #### Clean up configuration for SBFM Biz plan
+   *
+   * ```json
+   * {
+   *   "fight_mode": false
+   * }
+   * ```
+   *
+   * #### Clean up configuration for BM Enterprise Subscription plan
+   *
+   * It is strongly recommended that you ensure you have
+   * [custom rules](https://developers.cloudflare.com/waf/custom-rules/) in place to
+   * protect your zone before disabling the SBFM rules. Without these protections,
+   * your zone is vulnerable to attacks.
+   *
+   * ```json
+   * {
+   *   "sbfm_likely_automated": "allow",
+   *   "sbfm_definitely_automated": "allow",
+   *   "sbfm_verified_bots": "allow",
+   *   "sbfm_static_resource_protection": false,
+   *   "optimize_wordpress": false,
+   *   "fight_mode": false
+   * }
+   * ```
    */
   update(
     params: BotManagementUpdateParams,
@@ -62,10 +113,56 @@ export interface BotFightModeConfiguration {
   fight_mode?: boolean;
 
   /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  stale_zone_configuration?: BotFightModeConfiguration.StaleZoneConfiguration;
+
+  /**
    * A read-only field that indicates whether the zone currently is running the
    * latest ML model.
    */
   using_latest_model?: boolean;
+}
+
+export namespace BotFightModeConfiguration {
+  /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  export interface StaleZoneConfiguration {
+    /**
+     * Indicates that the zone's wordpress optimization for SBFM is turned on.
+     */
+    optimize_wordpress?: boolean;
+
+    /**
+     * Indicates that the zone's definitely automated requests are being blocked or
+     * challenged.
+     */
+    sbfm_definitely_automated?: string;
+
+    /**
+     * Indicates that the zone's likely automated requests are being blocked or
+     * challenged.
+     */
+    sbfm_likely_automated?: string;
+
+    /**
+     * Indicates that the zone's static resource protection is turned on.
+     */
+    sbfm_static_resource_protection?: string;
+
+    /**
+     * Indicates that the zone's verified bot requests are being blocked.
+     */
+    sbfm_verified_bots?: string;
+
+    /**
+     * Indicates that the zone's session score tracking is disabled.
+     */
+    suppress_session_score?: boolean;
+  }
 }
 
 export interface SubscriptionConfiguration {
@@ -88,6 +185,12 @@ export interface SubscriptionConfiguration {
   enable_js?: boolean;
 
   /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  stale_zone_configuration?: SubscriptionConfiguration.StaleZoneConfiguration;
+
+  /**
    * Whether to disable tracking the highest bot score for a session in the Bot
    * Management cookie.
    */
@@ -98,6 +201,46 @@ export interface SubscriptionConfiguration {
    * latest ML model.
    */
   using_latest_model?: boolean;
+}
+
+export namespace SubscriptionConfiguration {
+  /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  export interface StaleZoneConfiguration {
+    /**
+     * Indicates that the zone's Bot Fight Mode is turned on.
+     */
+    fight_mode?: boolean;
+
+    /**
+     * Indicates that the zone's wordpress optimization for SBFM is turned on.
+     */
+    optimize_wordpress?: boolean;
+
+    /**
+     * Indicates that the zone's definitely automated requests are being blocked or
+     * challenged.
+     */
+    sbfm_definitely_automated?: string;
+
+    /**
+     * Indicates that the zone's likely automated requests are being blocked or
+     * challenged.
+     */
+    sbfm_likely_automated?: string;
+
+    /**
+     * Indicates that the zone's static resource protection is turned on.
+     */
+    sbfm_static_resource_protection?: string;
+
+    /**
+     * Indicates that the zone's verified bot requests are being blocked.
+     */
+    sbfm_verified_bots?: string;
+  }
 }
 
 export interface SuperBotFightModeDefinitelyConfiguration {
@@ -135,10 +278,35 @@ export interface SuperBotFightModeDefinitelyConfiguration {
   sbfm_verified_bots?: 'allow' | 'block';
 
   /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  stale_zone_configuration?: SuperBotFightModeDefinitelyConfiguration.StaleZoneConfiguration;
+
+  /**
    * A read-only field that indicates whether the zone currently is running the
    * latest ML model.
    */
   using_latest_model?: boolean;
+}
+
+export namespace SuperBotFightModeDefinitelyConfiguration {
+  /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  export interface StaleZoneConfiguration {
+    /**
+     * Indicates that the zone's Bot Fight Mode is turned on.
+     */
+    fight_mode?: boolean;
+
+    /**
+     * Indicates that the zone's likely automated requests are being blocked or
+     * challenged.
+     */
+    sbfm_likely_automated?: string;
+  }
 }
 
 export interface SuperBotFightModeLikelyConfiguration {
@@ -181,10 +349,29 @@ export interface SuperBotFightModeLikelyConfiguration {
   sbfm_verified_bots?: 'allow' | 'block';
 
   /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  stale_zone_configuration?: SuperBotFightModeLikelyConfiguration.StaleZoneConfiguration;
+
+  /**
    * A read-only field that indicates whether the zone currently is running the
    * latest ML model.
    */
   using_latest_model?: boolean;
+}
+
+export namespace SuperBotFightModeLikelyConfiguration {
+  /**
+   * A read-only field that shows which unauthorized settings are currently active on
+   * the zone. These settings typically result from upgrades or downgrades.
+   */
+  export interface StaleZoneConfiguration {
+    /**
+     * Indicates that the zone's Bot Fight Mode is turned on.
+     */
+    fight_mode?: boolean;
+  }
 }
 
 export type BotManagementUpdateResponse =

@@ -11,7 +11,10 @@ const client = new Cloudflare({
 
 describe('resource dns', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.emailRouting.dns.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.emailRouting.dns.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.net',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +25,10 @@ describe('resource dns', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.emailRouting.dns.create({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.emailRouting.dns.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.net',
+    });
   });
 
   test('delete: only required params', async () => {
@@ -41,7 +47,10 @@ describe('resource dns', () => {
   });
 
   test('edit: only required params', async () => {
-    const responsePromise = client.emailRouting.dns.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.emailRouting.dns.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.net',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,7 +61,10 @@ describe('resource dns', () => {
   });
 
   test('edit: required and optional params', async () => {
-    const response = await client.emailRouting.dns.edit({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.emailRouting.dns.edit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      name: 'example.net',
+    });
   });
 
   test('get: only required params', async () => {
@@ -67,6 +79,9 @@ describe('resource dns', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailRouting.dns.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const response = await client.emailRouting.dns.get({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      subdomain: 'example.net',
+    });
   });
 });

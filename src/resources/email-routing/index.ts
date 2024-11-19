@@ -12,6 +12,7 @@ export {
 export {
   DNS,
   type DNSRecord,
+  type DNSDeleteResponse,
   type DNSGetResponse,
   type DNSCreateParams,
   type DNSDeleteParams,
