@@ -170,6 +170,12 @@ export interface HTTPTimeseriesParams {
   asn?: Array<string>;
 
   /**
+   * Filter for bot class. Refer to
+   * [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
+   */
+  botClass?: Array<'LIKELY_AUTOMATED' | 'LIKELY_HUMAN'>;
+
+  /**
    * Array of comma separated list of continents (alpha-2 continent codes). Start
    * with `-` to exclude from results. For example, `-EU,NA` excludes results from
    * Europe, but includes results from North America.
@@ -194,9 +200,29 @@ export interface HTTPTimeseriesParams {
   dateStart?: Array<string>;
 
   /**
+   * Filter for device type.
+   */
+  deviceType?: Array<'DESKTOP' | 'MOBILE' | 'OTHER'>;
+
+  /**
    * Format results are returned in.
    */
   format?: 'JSON' | 'CSV';
+
+  /**
+   * Filter for http protocol.
+   */
+  httpProtocol?: Array<'HTTP' | 'HTTPS'>;
+
+  /**
+   * Filter for http version.
+   */
+  httpVersion?: Array<'HTTPv1' | 'HTTPv2' | 'HTTPv3'>;
+
+  /**
+   * Filter for ip version.
+   */
+  ipVersion?: Array<'IPv4' | 'IPv6'>;
 
   /**
    * Array of comma separated list of locations (alpha-2 country codes). Start with
@@ -215,6 +241,16 @@ export interface HTTPTimeseriesParams {
    * [Normalization methods](https://developers.cloudflare.com/radar/concepts/normalization/).
    */
   normalization?: 'PERCENTAGE_CHANGE' | 'MIN0_MAX';
+
+  /**
+   * Filter for os name.
+   */
+  os?: Array<'WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV'>;
+
+  /**
+   * Filter for tls version.
+   */
+  tlsVersion?: Array<'TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC'>;
 }
 
 HTTP.Locations = Locations;
