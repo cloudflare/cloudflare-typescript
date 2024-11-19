@@ -5,21 +5,21 @@ import * as Core from '../../../../core';
 import * as ProfilesAPI from './profiles';
 import * as CustomAPI from './custom';
 import {
-  Custom as CustomAPICustom,
+  Custom,
   CustomCreateParams,
   CustomCreateResponse,
   CustomDeleteParams,
   CustomDeleteResponse,
   CustomGetParams,
-  CustomProfile,
+  CustomProfile as CustomAPICustomProfile,
   CustomUpdateParams,
   Pattern,
 } from './custom';
 import * as PredefinedAPI from './predefined';
 import {
-  Predefined as PredefinedAPIPredefined,
+  Predefined,
   PredefinedGetParams,
-  PredefinedProfile,
+  PredefinedProfile as PredefinedAPIPredefinedProfile,
   PredefinedUpdateParams,
 } from './predefined';
 import { SinglePage } from '../../../../pagination';
@@ -91,10 +91,10 @@ export interface ContextAwarenessParam {
   skip: SkipConfigurationParam;
 }
 
-export type Profile = Profile.Custom | Profile.Predefined | Profile.Integration;
+export type Profile = Profile.CustomProfile | Profile.PredefinedProfile | Profile.IntegrationProfile;
 
 export namespace Profile {
-  export interface Custom {
+  export interface CustomProfile {
     /**
      * The id of the profile (uuid)
      */
@@ -117,7 +117,11 @@ export namespace Profile {
     created_at: string;
 
     entries: Array<
-      Custom.Custom | Custom.Predefined | Custom.Integration | Custom.ExactData | Custom.WordList
+      | CustomProfile.CustomEntry
+      | CustomProfile.PredefinedEntry
+      | CustomProfile.IntegrationEntry
+      | CustomProfile.ExactDataEntry
+      | CustomProfile.WordListEntry
     >;
 
     /**
@@ -142,8 +146,8 @@ export namespace Profile {
     description?: string | null;
   }
 
-  export namespace Custom {
-    export interface Custom {
+  export namespace CustomProfile {
+    export interface CustomEntry {
       id: string;
 
       created_at: string;
@@ -161,10 +165,10 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export interface Predefined {
+    export interface PredefinedEntry {
       id: string;
 
-      confidence: Predefined.Confidence;
+      confidence: PredefinedEntry.Confidence;
 
       enabled: boolean;
 
@@ -175,7 +179,7 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export namespace Predefined {
+    export namespace PredefinedEntry {
       export interface Confidence {
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
@@ -186,7 +190,7 @@ export namespace Profile {
       }
     }
 
-    export interface Integration {
+    export interface IntegrationEntry {
       id: string;
 
       created_at: string;
@@ -202,7 +206,7 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export interface ExactData {
+    export interface ExactDataEntry {
       id: string;
 
       created_at: string;
@@ -218,7 +222,7 @@ export namespace Profile {
       updated_at: string;
     }
 
-    export interface WordList {
+    export interface WordListEntry {
       id: string;
 
       created_at: string;
@@ -237,7 +241,7 @@ export namespace Profile {
     }
   }
 
-  export interface Predefined {
+  export interface PredefinedProfile {
     /**
      * The id of the predefined profile (uuid)
      */
@@ -246,11 +250,11 @@ export namespace Profile {
     allowed_match_count: number;
 
     entries: Array<
-      | Predefined.Custom
-      | Predefined.Predefined
-      | Predefined.Integration
-      | Predefined.ExactData
-      | Predefined.WordList
+      | PredefinedProfile.CustomEntry
+      | PredefinedProfile.PredefinedEntry
+      | PredefinedProfile.IntegrationEntry
+      | PredefinedProfile.ExactDataEntry
+      | PredefinedProfile.WordListEntry
     >;
 
     /**
@@ -276,8 +280,8 @@ export namespace Profile {
     open_access?: boolean;
   }
 
-  export namespace Predefined {
-    export interface Custom {
+  export namespace PredefinedProfile {
+    export interface CustomEntry {
       id: string;
 
       created_at: string;
@@ -295,10 +299,10 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export interface Predefined {
+    export interface PredefinedEntry {
       id: string;
 
-      confidence: Predefined.Confidence;
+      confidence: PredefinedEntry.Confidence;
 
       enabled: boolean;
 
@@ -309,7 +313,7 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export namespace Predefined {
+    export namespace PredefinedEntry {
       export interface Confidence {
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
@@ -320,7 +324,7 @@ export namespace Profile {
       }
     }
 
-    export interface Integration {
+    export interface IntegrationEntry {
       id: string;
 
       created_at: string;
@@ -336,7 +340,7 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export interface ExactData {
+    export interface ExactDataEntry {
       id: string;
 
       created_at: string;
@@ -352,7 +356,7 @@ export namespace Profile {
       updated_at: string;
     }
 
-    export interface WordList {
+    export interface WordListEntry {
       id: string;
 
       created_at: string;
@@ -371,17 +375,17 @@ export namespace Profile {
     }
   }
 
-  export interface Integration {
+  export interface IntegrationProfile {
     id: string;
 
     created_at: string;
 
     entries: Array<
-      | Integration.Custom
-      | Integration.Predefined
-      | Integration.Integration
-      | Integration.ExactData
-      | Integration.WordList
+      | IntegrationProfile.CustomEntry
+      | IntegrationProfile.PredefinedEntry
+      | IntegrationProfile.IntegrationEntry
+      | IntegrationProfile.ExactDataEntry
+      | IntegrationProfile.WordListEntry
     >;
 
     name: string;
@@ -396,8 +400,8 @@ export namespace Profile {
     description?: string | null;
   }
 
-  export namespace Integration {
-    export interface Custom {
+  export namespace IntegrationProfile {
+    export interface CustomEntry {
       id: string;
 
       created_at: string;
@@ -415,10 +419,10 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export interface Predefined {
+    export interface PredefinedEntry {
       id: string;
 
-      confidence: Predefined.Confidence;
+      confidence: PredefinedEntry.Confidence;
 
       enabled: boolean;
 
@@ -429,7 +433,7 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export namespace Predefined {
+    export namespace PredefinedEntry {
       export interface Confidence {
         /**
          * Indicates whether this entry can be made more or less sensitive by setting a
@@ -440,7 +444,7 @@ export namespace Profile {
       }
     }
 
-    export interface Integration {
+    export interface IntegrationEntry {
       id: string;
 
       created_at: string;
@@ -456,7 +460,7 @@ export namespace Profile {
       profile_id?: string | null;
     }
 
-    export interface ExactData {
+    export interface ExactDataEntry {
       id: string;
 
       created_at: string;
@@ -472,7 +476,7 @@ export namespace Profile {
       updated_at: string;
     }
 
-    export interface WordList {
+    export interface WordListEntry {
       id: string;
 
       created_at: string;
@@ -530,8 +534,8 @@ export interface ProfileGetParams {
 }
 
 Profiles.ProfilesSinglePage = ProfilesSinglePage;
-Profiles.Custom = CustomAPICustom;
-Profiles.Predefined = PredefinedAPIPredefined;
+Profiles.Custom = Custom;
+Profiles.Predefined = Predefined;
 
 export declare namespace Profiles {
   export {
@@ -544,8 +548,8 @@ export declare namespace Profiles {
   };
 
   export {
-    CustomAPICustom as Custom,
-    type CustomProfile as CustomProfile,
+    Custom as Custom,
+    type CustomAPICustomProfile as CustomProfile,
     type Pattern as Pattern,
     type CustomCreateResponse as CustomCreateResponse,
     type CustomDeleteResponse as CustomDeleteResponse,
@@ -556,8 +560,8 @@ export declare namespace Profiles {
   };
 
   export {
-    PredefinedAPIPredefined as Predefined,
-    type PredefinedProfile as PredefinedProfile,
+    Predefined as Predefined,
+    type PredefinedAPIPredefinedProfile as PredefinedProfile,
     type PredefinedUpdateParams as PredefinedUpdateParams,
     type PredefinedGetParams as PredefinedGetParams,
   };
