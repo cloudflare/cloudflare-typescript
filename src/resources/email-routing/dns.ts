@@ -2,6 +2,8 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
+import * as DNSAPI from './dns';
+import * as Shared from '../shared';
 import * as EmailRoutingAPI from './email-routing';
 
 export class DNS extends APIResource {
@@ -9,9 +11,9 @@ export class DNS extends APIResource {
    * Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
    */
   create(params: DNSCreateParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    const { zone_id } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.post(`/zones/${zone_id}/email/routing/dns`, options) as Core.APIPromise<{
+      this._client.post(`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as Core.APIPromise<{
         result: EmailRoutingAPI.Settings;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -21,22 +23,18 @@ export class DNS extends APIResource {
    * Disable your Email Routing zone. Also removes additional MX records previously
    * required for Email Routing to work.
    */
-  delete(params: DNSDeleteParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
+  delete(params: DNSDeleteParams, options?: Core.RequestOptions): Core.APIPromise<DNSDeleteResponse> {
     const { zone_id } = params;
-    return (
-      this._client.delete(`/zones/${zone_id}/email/routing/dns`, options) as Core.APIPromise<{
-        result: EmailRoutingAPI.Settings;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    return this._client.delete(`/zones/${zone_id}/email/routing/dns`, options);
   }
 
   /**
    * Unlock MX Records previously locked by Email Routing.
    */
   edit(params: DNSEditParams, options?: Core.RequestOptions): Core.APIPromise<EmailRoutingAPI.Settings> {
-    const { zone_id } = params;
+    const { zone_id, ...body } = params;
     return (
-      this._client.patch(`/zones/${zone_id}/email/routing/dns`, options) as Core.APIPromise<{
+      this._client.patch(`/zones/${zone_id}/email/routing/dns`, { body, ...options }) as Core.APIPromise<{
         result: EmailRoutingAPI.Settings;
       }>
     )._thenUnwrap((obj) => obj.result);
@@ -46,12 +44,8 @@ export class DNS extends APIResource {
    * Show the DNS records needed to configure your Email Routing zone.
    */
   get(params: DNSGetParams, options?: Core.RequestOptions): Core.APIPromise<DNSGetResponse> {
-    const { zone_id } = params;
-    return (
-      this._client.get(`/zones/${zone_id}/email/routing/dns`, options) as Core.APIPromise<{
-        result: DNSGetResponse;
-      }>
-    )._thenUnwrap((obj) => obj.result);
+    const { zone_id, ...query } = params;
+    return this._client.get(`/zones/${zone_id}/email/routing/dns`, { query, ...options });
   }
 }
 
@@ -105,13 +99,173 @@ export interface DNSRecord {
     | 'URI';
 }
 
-export type DNSGetResponse = Array<DNSRecord>;
+export type DNSDeleteResponse =
+  | DNSDeleteResponse.EmailAPIResponseCommon
+  | DNSDeleteResponse.EmailDNSSettingsResponseCollection;
+
+export namespace DNSDeleteResponse {
+  export interface EmailAPIResponseCommon {
+    errors: Array<Shared.ResponseInfo>;
+
+    messages: Array<Shared.ResponseInfo>;
+
+    /**
+     * Whether the API call was successful
+     */
+    success: true;
+  }
+
+  export interface EmailDNSSettingsResponseCollection {
+    errors: Array<Shared.ResponseInfo>;
+
+    messages: Array<Shared.ResponseInfo>;
+
+    /**
+     * Whether the API call was successful
+     */
+    success: true;
+
+    result?: Array<DNSAPI.DNSRecord>;
+
+    result_info?: EmailDNSSettingsResponseCollection.ResultInfo;
+  }
+
+  export namespace EmailDNSSettingsResponseCollection {
+    export interface ResultInfo {
+      /**
+       * Total number of results for the requested service
+       */
+      count?: number;
+
+      /**
+       * Current page within paginated list of results
+       */
+      page?: number;
+
+      /**
+       * Number of results per page of results
+       */
+      per_page?: number;
+
+      /**
+       * Total results available without any search parameters
+       */
+      total_count?: number;
+    }
+  }
+}
+
+export type DNSGetResponse =
+  | DNSGetResponse.EmailEmailRoutingDNSQueryResponse
+  | DNSGetResponse.EmailDNSSettingsResponseCollection;
+
+export namespace DNSGetResponse {
+  export interface EmailEmailRoutingDNSQueryResponse {
+    errors: Array<Shared.ResponseInfo>;
+
+    messages: Array<Shared.ResponseInfo>;
+
+    /**
+     * Whether the API call was successful
+     */
+    success: true;
+
+    result?: EmailEmailRoutingDNSQueryResponse.Result;
+
+    result_info?: EmailEmailRoutingDNSQueryResponse.ResultInfo;
+  }
+
+  export namespace EmailEmailRoutingDNSQueryResponse {
+    export interface Result {
+      errors?: Array<Result.Error>;
+
+      record?: Array<DNSAPI.DNSRecord>;
+    }
+
+    export namespace Result {
+      export interface Error {
+        code?: string;
+
+        /**
+         * List of records needed to enable an Email Routing zone.
+         */
+        missing?: DNSAPI.DNSRecord;
+      }
+    }
+
+    export interface ResultInfo {
+      /**
+       * Total number of results for the requested service
+       */
+      count?: number;
+
+      /**
+       * Current page within paginated list of results
+       */
+      page?: number;
+
+      /**
+       * Number of results per page of results
+       */
+      per_page?: number;
+
+      /**
+       * Total results available without any search parameters
+       */
+      total_count?: number;
+    }
+  }
+
+  export interface EmailDNSSettingsResponseCollection {
+    errors: Array<Shared.ResponseInfo>;
+
+    messages: Array<Shared.ResponseInfo>;
+
+    /**
+     * Whether the API call was successful
+     */
+    success: true;
+
+    result?: Array<DNSAPI.DNSRecord>;
+
+    result_info?: EmailDNSSettingsResponseCollection.ResultInfo;
+  }
+
+  export namespace EmailDNSSettingsResponseCollection {
+    export interface ResultInfo {
+      /**
+       * Total number of results for the requested service
+       */
+      count?: number;
+
+      /**
+       * Current page within paginated list of results
+       */
+      page?: number;
+
+      /**
+       * Number of results per page of results
+       */
+      per_page?: number;
+
+      /**
+       * Total results available without any search parameters
+       */
+      total_count?: number;
+    }
+  }
+}
 
 export interface DNSCreateParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param: Domain of your zone.
+   */
+  name: string;
 }
 
 export interface DNSDeleteParams {
@@ -123,21 +277,32 @@ export interface DNSDeleteParams {
 
 export interface DNSEditParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Body param: Domain of your zone.
+   */
+  name: string;
 }
 
 export interface DNSGetParams {
   /**
-   * Identifier
+   * Path param: Identifier
    */
   zone_id: string;
+
+  /**
+   * Query param: Domain of your zone.
+   */
+  subdomain?: string;
 }
 
 export declare namespace DNS {
   export {
     type DNSRecord as DNSRecord,
+    type DNSDeleteResponse as DNSDeleteResponse,
     type DNSGetResponse as DNSGetResponse,
     type DNSCreateParams as DNSCreateParams,
     type DNSDeleteParams as DNSDeleteParams,

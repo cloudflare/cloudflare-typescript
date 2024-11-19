@@ -17,6 +17,7 @@ import {
   DNS,
   DNSCreateParams,
   DNSDeleteParams,
+  DNSDeleteResponse,
   DNSEditParams,
   DNSGetParams,
   DNSGetResponse,
@@ -83,7 +84,17 @@ export interface Settings {
   /**
    * Email Routing settings identifier.
    */
-  id?: string;
+  id: string;
+
+  /**
+   * State of the zone settings for Email Routing.
+   */
+  enabled: true | false;
+
+  /**
+   * Domain of your zone.
+   */
+  name: string;
 
   /**
    * The date and time the settings have been created.
@@ -91,19 +102,9 @@ export interface Settings {
   created?: string;
 
   /**
-   * State of the zone settings for Email Routing.
-   */
-  enabled?: true | false;
-
-  /**
    * The date and time the settings have been modified.
    */
   modified?: string;
-
-  /**
-   * Domain of your zone.
-   */
-  name?: string;
 
   /**
    * Flag to check if the user skipped the configuration wizard.
@@ -163,6 +164,7 @@ export declare namespace EmailRouting {
   export {
     DNS as DNS,
     type DNSRecord as DNSRecord,
+    type DNSDeleteResponse as DNSDeleteResponse,
     type DNSGetResponse as DNSGetResponse,
     type DNSCreateParams as DNSCreateParams,
     type DNSDeleteParams as DNSDeleteParams,
