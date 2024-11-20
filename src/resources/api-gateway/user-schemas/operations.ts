@@ -26,11 +26,17 @@ export class Operations extends APIResource {
 
 export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
 
+/**
+ * foo
+ */
 export type OperationListResponse =
   | OperationListResponse.APIShieldOperation
   | OperationsAPI.APIShieldOperation;
 
 export namespace OperationListResponse {
+  /**
+   * foo
+   */
   export interface APIShieldOperation {
     /**
      * The endpoint which can contain path parameter templates in curly braces, each
