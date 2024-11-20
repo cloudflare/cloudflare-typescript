@@ -16,6 +16,8 @@ import {
 } from './apps';
 import * as CfInterconnectsAPI from './cf-interconnects';
 import {
+  CfInterconnectBulkUpdateParams,
+  CfInterconnectBulkUpdateResponse,
   CfInterconnectGetParams,
   CfInterconnectGetResponse,
   CfInterconnectListParams,
@@ -39,6 +41,8 @@ import {
 } from './connectors';
 import * as GRETunnelsAPI from './gre-tunnels';
 import {
+  GRETunnelBulkUpdateParams,
+  GRETunnelBulkUpdateResponse,
   GRETunnelCreateParams,
   GRETunnelCreateResponse,
   GRETunnelDeleteParams,
@@ -53,6 +57,8 @@ import {
 } from './gre-tunnels';
 import * as IPSECTunnelsAPI from './ipsec-tunnels';
 import {
+  IPSECTunnelBulkUpdateParams,
+  IPSECTunnelBulkUpdateResponse,
   IPSECTunnelCreateParams,
   IPSECTunnelCreateResponse,
   IPSECTunnelDeleteParams,
@@ -70,6 +76,8 @@ import {
 } from './ipsec-tunnels';
 import * as RoutesAPI from './routes';
 import {
+  RouteBulkUpdateParams,
+  RouteBulkUpdateResponse,
   RouteCreateParams,
   RouteCreateResponse,
   RouteDeleteParams,
@@ -271,9 +279,11 @@ export declare namespace MagicTransit {
     CfInterconnects as CfInterconnects,
     type CfInterconnectUpdateResponse as CfInterconnectUpdateResponse,
     type CfInterconnectListResponse as CfInterconnectListResponse,
+    type CfInterconnectBulkUpdateResponse as CfInterconnectBulkUpdateResponse,
     type CfInterconnectGetResponse as CfInterconnectGetResponse,
     type CfInterconnectUpdateParams as CfInterconnectUpdateParams,
     type CfInterconnectListParams as CfInterconnectListParams,
+    type CfInterconnectBulkUpdateParams as CfInterconnectBulkUpdateParams,
     type CfInterconnectGetParams as CfInterconnectGetParams,
   };
 
@@ -283,11 +293,13 @@ export declare namespace MagicTransit {
     type GRETunnelUpdateResponse as GRETunnelUpdateResponse,
     type GRETunnelListResponse as GRETunnelListResponse,
     type GRETunnelDeleteResponse as GRETunnelDeleteResponse,
+    type GRETunnelBulkUpdateResponse as GRETunnelBulkUpdateResponse,
     type GRETunnelGetResponse as GRETunnelGetResponse,
     type GRETunnelCreateParams as GRETunnelCreateParams,
     type GRETunnelUpdateParams as GRETunnelUpdateParams,
     type GRETunnelListParams as GRETunnelListParams,
     type GRETunnelDeleteParams as GRETunnelDeleteParams,
+    type GRETunnelBulkUpdateParams as GRETunnelBulkUpdateParams,
     type GRETunnelGetParams as GRETunnelGetParams,
   };
 
@@ -298,12 +310,14 @@ export declare namespace MagicTransit {
     type IPSECTunnelUpdateResponse as IPSECTunnelUpdateResponse,
     type IPSECTunnelListResponse as IPSECTunnelListResponse,
     type IPSECTunnelDeleteResponse as IPSECTunnelDeleteResponse,
+    type IPSECTunnelBulkUpdateResponse as IPSECTunnelBulkUpdateResponse,
     type IPSECTunnelGetResponse as IPSECTunnelGetResponse,
     type IPSECTunnelPSKGenerateResponse as IPSECTunnelPSKGenerateResponse,
     type IPSECTunnelCreateParams as IPSECTunnelCreateParams,
     type IPSECTunnelUpdateParams as IPSECTunnelUpdateParams,
     type IPSECTunnelListParams as IPSECTunnelListParams,
     type IPSECTunnelDeleteParams as IPSECTunnelDeleteParams,
+    type IPSECTunnelBulkUpdateParams as IPSECTunnelBulkUpdateParams,
     type IPSECTunnelGetParams as IPSECTunnelGetParams,
     type IPSECTunnelPSKGenerateParams as IPSECTunnelPSKGenerateParams,
   };
@@ -315,12 +329,14 @@ export declare namespace MagicTransit {
     type RouteUpdateResponse as RouteUpdateResponse,
     type RouteListResponse as RouteListResponse,
     type RouteDeleteResponse as RouteDeleteResponse,
+    type RouteBulkUpdateResponse as RouteBulkUpdateResponse,
     type RouteEmptyResponse as RouteEmptyResponse,
     type RouteGetResponse as RouteGetResponse,
     type RouteCreateParams as RouteCreateParams,
     type RouteUpdateParams as RouteUpdateParams,
     type RouteListParams as RouteListParams,
     type RouteDeleteParams as RouteDeleteParams,
+    type RouteBulkUpdateParams as RouteBulkUpdateParams,
     type RouteEmptyParams as RouteEmptyParams,
     type RouteGetParams as RouteGetParams,
   };

@@ -68,6 +68,17 @@ export class Operations extends APIResource {
   }
 
   /**
+   * Delete multiple operations
+   */
+  bulkDelete(
+    params: OperationBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationBulkDeleteResponse> {
+    const { zone_id } = params;
+    return this._client.delete(`/zones/${zone_id}/api_gateway/operations`, options);
+  }
+
+  /**
    * Retrieve information about an operation
    */
   get(
@@ -652,6 +663,17 @@ export interface OperationDeleteResponse {
   success: true;
 }
 
+export interface OperationBulkDeleteResponse {
+  errors: UserSchemasAPI.Message;
+
+  messages: UserSchemasAPI.Message;
+
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+}
+
 export interface OperationGetResponse {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
@@ -1009,6 +1031,13 @@ export interface OperationDeleteParams {
   zone_id: string;
 }
 
+export interface OperationBulkDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
 export interface OperationGetParams {
   /**
    * Path param: Identifier
@@ -1032,11 +1061,13 @@ export declare namespace Operations {
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,
+    type OperationBulkDeleteResponse as OperationBulkDeleteResponse,
     type OperationGetResponse as OperationGetResponse,
     OperationListResponsesV4PagePaginationArray as OperationListResponsesV4PagePaginationArray,
     type OperationCreateParams as OperationCreateParams,
     type OperationListParams as OperationListParams,
     type OperationDeleteParams as OperationDeleteParams,
+    type OperationBulkDeleteParams as OperationBulkDeleteParams,
     type OperationGetParams as OperationGetParams,
   };
 

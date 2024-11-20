@@ -55,6 +55,25 @@ describe('resource domains', () => {
     });
   });
 
+  test('bulkDelete: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.bulkDelete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkDelete: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.bulkDelete({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
+
   test('edit: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.domains.edit(2400, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

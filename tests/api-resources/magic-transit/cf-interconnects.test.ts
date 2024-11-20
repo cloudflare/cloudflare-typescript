@@ -55,6 +55,28 @@ describe('resource cfInterconnects', () => {
     });
   });
 
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.magicTransit.cfInterconnects.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.magicTransit.cfInterconnects.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+      'x-magic-new-hc-target': true,
+    });
+  });
+
   test('get: only required params', async () => {
     const responsePromise = client.magicTransit.cfInterconnects.get('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

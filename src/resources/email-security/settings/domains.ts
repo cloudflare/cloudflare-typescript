@@ -38,6 +38,22 @@ export class Domains extends APIResource {
   }
 
   /**
+   * Unprotect multiple email domains
+   */
+  bulkDelete(
+    params: DomainBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainBulkDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/email-security/settings/domains`,
+        options,
+      ) as Core.APIPromise<{ result: DomainBulkDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Update an email domain
    */
   edit(
@@ -104,6 +120,17 @@ export interface DomainDeleteResponse {
    * The unique identifier for the domain.
    */
   id: number;
+}
+
+export type DomainBulkDeleteResponse = Array<DomainBulkDeleteResponse.DomainBulkDeleteResponseItem>;
+
+export namespace DomainBulkDeleteResponse {
+  export interface DomainBulkDeleteResponseItem {
+    /**
+     * The unique identifier for the domain.
+     */
+    id: number;
+  }
 }
 
 export interface DomainEditResponse {
@@ -198,6 +225,13 @@ export interface DomainDeleteParams {
   account_id: string;
 }
 
+export interface DomainBulkDeleteParams {
+  /**
+   * Account Identifier
+   */
+  account_id: string;
+}
+
 export interface DomainEditParams {
   /**
    * Path param: Account Identifier
@@ -238,11 +272,13 @@ export declare namespace Domains {
   export {
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
+    type DomainBulkDeleteResponse as DomainBulkDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
     type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
+    type DomainBulkDeleteParams as DomainBulkDeleteParams,
     type DomainEditParams as DomainEditParams,
     type DomainGetParams as DomainGetParams,
   };

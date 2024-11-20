@@ -77,6 +77,40 @@ export class Filters extends APIResource {
   }
 
   /**
+   * Deletes one or more existing filters.
+   *
+   * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkDelete(
+    params: FilterBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterBulkDeleteResponse | null> {
+    const { zone_id } = params;
+    return (
+      this._client.delete(`/zones/${zone_id}/filters`, options) as Core.APIPromise<{
+        result: FilterBulkDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates one or more existing filters.
+   *
+   * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkUpdate(
+    params: FilterBulkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilterBulkUpdateResponse | null> {
+    const { zone_id, ...body } = params;
+    return (
+      this._client.put(`/zones/${zone_id}/filters`, { body, ...options }) as Core.APIPromise<{
+        result: FilterBulkUpdateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Fetches the details of a filter.
    *
    * @deprecated The Filters API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -150,6 +184,10 @@ export interface FirewallFilterParam {
 
 export type FilterCreateResponse = Array<FirewallFilter>;
 
+export type FilterBulkDeleteResponse = Array<FirewallFilter>;
+
+export type FilterBulkUpdateResponse = Array<FirewallFilter>;
+
 export interface FilterCreateParams {
   /**
    * Path param: Identifier
@@ -209,6 +247,20 @@ export interface FilterListParams extends V4PagePaginationArrayParams {
 }
 
 export interface FilterDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface FilterBulkDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface FilterBulkUpdateParams {
   /**
    * Identifier
    */

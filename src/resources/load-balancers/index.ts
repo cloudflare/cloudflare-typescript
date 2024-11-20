@@ -18,10 +18,12 @@ export {
   Pools,
   type Pool,
   type PoolDeleteResponse,
+  type PoolBulkEditResponse,
   type PoolCreateParams,
   type PoolUpdateParams,
   type PoolListParams,
   type PoolDeleteParams,
+  type PoolBulkEditParams,
   type PoolEditParams,
   type PoolGetParams,
 } from './pools/index';

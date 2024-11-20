@@ -3,7 +3,14 @@
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
 import * as OperationsAPI from './operations';
-import { OperationEditParams, OperationEditResponse, OperationListParams, Operations } from './operations';
+import {
+  OperationBulkEditParams,
+  OperationBulkEditResponse,
+  OperationEditParams,
+  OperationEditResponse,
+  OperationListParams,
+  Operations,
+} from './operations';
 import { V4PagePaginationArray } from '../../../pagination';
 
 export class Discovery extends APIResource {
@@ -114,8 +121,10 @@ export declare namespace Discovery {
 
   export {
     Operations as Operations,
+    type OperationBulkEditResponse as OperationBulkEditResponse,
     type OperationEditResponse as OperationEditResponse,
     type OperationListParams as OperationListParams,
+    type OperationBulkEditParams as OperationBulkEditParams,
     type OperationEditParams as OperationEditParams,
   };
 }
