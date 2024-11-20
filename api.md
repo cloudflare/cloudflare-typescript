@@ -2345,7 +2345,7 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/api-gateway/operations/operations.ts">APIShield</a></code>
+- <code><a href="./src/resources/api-gateway/operations/operations.ts">APIShieldOperation</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationCreateResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationListResponse</a></code>
 - <code><a href="./src/resources/api-gateway/operations/operations.ts">OperationDeleteResponse</a></code>
