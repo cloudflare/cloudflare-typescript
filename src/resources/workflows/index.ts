@@ -11,7 +11,7 @@ export {
   type InstanceGetParams,
 } from './instances/index';
 export {
-  VersionListResponsesV4PagePagination,
+  VersionListResponsesV4PagePaginationArray,
   Versions,
   type VersionListResponse,
   type VersionGetResponse,
