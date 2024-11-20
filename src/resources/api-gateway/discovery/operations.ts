@@ -23,6 +23,22 @@ export class Operations extends APIResource {
   }
 
   /**
+   * Update the `state` on one or more discovered operations
+   */
+  bulkEdit(
+    params: OperationBulkEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<OperationBulkEditResponse> {
+    const { zone_id, body } = params;
+    return (
+      this._client.patch(`/zones/${zone_id}/api_gateway/discovery/operations`, {
+        body: body,
+        ...options,
+      }) as Core.APIPromise<{ result: OperationBulkEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Update the `state` on a discovered operation
    */
   edit(
@@ -37,6 +53,23 @@ export class Operations extends APIResource {
         ...options,
       }) as Core.APIPromise<{ result: OperationEditResponse }>
     )._thenUnwrap((obj) => obj.result);
+  }
+}
+
+export type OperationBulkEditResponse = Record<string, OperationBulkEditResponse.item>;
+
+export namespace OperationBulkEditResponse {
+  /**
+   * Mappings of discovered operations (keys) to objects describing their state
+   */
+  export interface item {
+    /**
+     * Mark state of operation in API Discovery
+     *
+     * - `review` - Mark operation as for review
+     * - `ignored` - Mark operation as ignored
+     */
+    state?: 'review' | 'ignored';
   }
 }
 
@@ -111,6 +144,33 @@ export interface OperationListParams extends V4PagePaginationArrayParams {
   state?: 'review' | 'saved' | 'ignored';
 }
 
+export interface OperationBulkEditParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: Record<string, OperationBulkEditParams.Body>;
+}
+
+export namespace OperationBulkEditParams {
+  /**
+   * Mappings of discovered operations (keys) to objects describing their state
+   */
+  export interface Body {
+    /**
+     * Mark state of operation in API Discovery
+     *
+     * - `review` - Mark operation as for review
+     * - `ignored` - Mark operation as ignored
+     */
+    state?: 'review' | 'ignored';
+  }
+}
+
 export interface OperationEditParams {
   /**
    * Path param: Identifier
@@ -128,8 +188,10 @@ export interface OperationEditParams {
 
 export declare namespace Operations {
   export {
+    type OperationBulkEditResponse as OperationBulkEditResponse,
     type OperationEditResponse as OperationEditResponse,
     type OperationListParams as OperationListParams,
+    type OperationBulkEditParams as OperationBulkEditParams,
     type OperationEditParams as OperationEditParams,
   };
 }

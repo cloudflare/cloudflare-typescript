@@ -150,6 +150,26 @@ describe('resource pools', () => {
     });
   });
 
+  test('bulkEdit: only required params', async () => {
+    const responsePromise = client.loadBalancers.pools.bulkEdit({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkEdit: required and optional params', async () => {
+    const response = await client.loadBalancers.pools.bulkEdit({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      notification_email: '',
+    });
+  });
+
   test('edit: only required params', async () => {
     const responsePromise = client.loadBalancers.pools.edit('17b5962d775c646f3f9725cbc7a53df4', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

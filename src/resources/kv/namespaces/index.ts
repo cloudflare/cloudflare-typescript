@@ -1,12 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Bulk,
-  type BulkUpdateResponse,
-  type BulkDeleteResponse,
-  type BulkUpdateParams,
-  type BulkDeleteParams,
-} from './bulk';
 export { KeysCursorLimitPagination, Keys, type Key, type KeyListParams } from './keys';
 export { Metadata, type MetadataGetResponse, type MetadataGetParams } from './metadata';
 export {
@@ -15,10 +8,14 @@ export {
   type Namespace,
   type NamespaceUpdateResponse,
   type NamespaceDeleteResponse,
+  type NamespaceBulkDeleteResponse,
+  type NamespaceBulkUpdateResponse,
   type NamespaceCreateParams,
   type NamespaceUpdateParams,
   type NamespaceListParams,
   type NamespaceDeleteParams,
+  type NamespaceBulkDeleteParams,
+  type NamespaceBulkUpdateParams,
   type NamespaceGetParams,
 } from './namespaces';
 export {

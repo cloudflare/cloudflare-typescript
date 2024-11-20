@@ -4,6 +4,8 @@ import { APIResource } from '../../resource';
 import * as RulesAPI from './rules';
 import {
   RUMRule,
+  RuleBulkCreateParams,
+  RuleBulkCreateResponse,
   RuleCreateParams,
   RuleDeleteParams,
   RuleDeleteResponse,
@@ -52,9 +54,11 @@ export declare namespace RUM {
     type RUMRule as RUMRule,
     type RuleListResponse as RuleListResponse,
     type RuleDeleteResponse as RuleDeleteResponse,
+    type RuleBulkCreateResponse as RuleBulkCreateResponse,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
+    type RuleBulkCreateParams as RuleBulkCreateParams,
   };
 }
