@@ -98,10 +98,7 @@ export class Operations extends APIResource {
 
 export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
 
-/**
- * basic op.
- */
-export interface APIShieldOperationModel {
+export interface APIShield {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
    * will be replaced from left to right with {varN}, starting with {var1}, during
@@ -115,321 +112,270 @@ export interface APIShieldOperationModel {
    */
   host: string;
 
-  /**
-   * The HTTP method used to access the endpoint.
-   */
-  method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
-}
-
-/**
- * basic op.
- */
-export interface APIShieldOperationModelParam {
-  /**
-   * The endpoint which can contain path parameter templates in curly braces, each
-   * will be replaced from left to right with {varN}, starting with {var1}, during
-   * insertion. This will further be Cloudflare-normalized upon insertion. See:
-   * https://developers.cloudflare.com/rules/normalization/how-it-works/.
-   */
-  endpoint: string;
-
-  /**
-   * RFC3986-compliant host.
-   */
-  host: string;
+  last_updated: string;
 
   /**
    * The HTTP method used to access the endpoint.
    */
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
+
+  /**
+   * UUID
+   */
+  operation_id: string;
+
+  features?:
+    | APIShield.APIShieldOperationFeatureThresholds
+    | APIShield.APIShieldOperationFeatureParameterSchemas
+    | APIShield.APIShieldOperationFeatureAPIRouting
+    | APIShield.APIShieldOperationFeatureConfidenceIntervals
+    | APIShield.APIShieldOperationFeatureSchemaInfo;
 }
 
-export type OperationCreateResponse = Array<OperationCreateResponse.OperationCreateResponseItem>;
-
-export namespace OperationCreateResponse {
-  /**
-   * basic op.
-   */
-  export interface OperationCreateResponseItem {
-    /**
-     * The endpoint which can contain path parameter templates in curly braces, each
-     * will be replaced from left to right with {varN}, starting with {var1}, during
-     * insertion. This will further be Cloudflare-normalized upon insertion. See:
-     * https://developers.cloudflare.com/rules/normalization/how-it-works/.
-     */
-    endpoint: string;
-
-    /**
-     * RFC3986-compliant host.
-     */
-    host: string;
-
-    last_updated: string;
-
-    /**
-     * The HTTP method used to access the endpoint.
-     */
-    method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
-
-    /**
-     * UUID
-     */
-    operation_id: string;
-
-    features?:
-      | OperationCreateResponseItem.APIShieldOperationFeatureThresholds
-      | OperationCreateResponseItem.APIShieldOperationFeatureParameterSchemas
-      | OperationCreateResponseItem.APIShieldOperationFeatureAPIRouting
-      | OperationCreateResponseItem.APIShieldOperationFeatureConfidenceIntervals
-      | OperationCreateResponseItem.APIShieldOperationFeatureSchemaInfo;
+export namespace APIShield {
+  export interface APIShieldOperationFeatureThresholds {
+    thresholds?: APIShieldOperationFeatureThresholds.Thresholds;
   }
 
-  export namespace OperationCreateResponseItem {
-    export interface APIShieldOperationFeatureThresholds {
-      thresholds?: APIShieldOperationFeatureThresholds.Thresholds;
+  export namespace APIShieldOperationFeatureThresholds {
+    export interface Thresholds {
+      /**
+       * The total number of auth-ids seen across this calculation.
+       */
+      auth_id_tokens?: number;
+
+      /**
+       * The number of data points used for the threshold suggestion calculation.
+       */
+      data_points?: number;
+
+      last_updated?: string;
+
+      /**
+       * The p50 quantile of requests (in period_seconds).
+       */
+      p50?: number;
+
+      /**
+       * The p90 quantile of requests (in period_seconds).
+       */
+      p90?: number;
+
+      /**
+       * The p99 quantile of requests (in period_seconds).
+       */
+      p99?: number;
+
+      /**
+       * The period over which this threshold is suggested.
+       */
+      period_seconds?: number;
+
+      /**
+       * The estimated number of requests covered by these calculations.
+       */
+      requests?: number;
+
+      /**
+       * The suggested threshold in requests done by the same auth_id or period_seconds.
+       */
+      suggested_threshold?: number;
+    }
+  }
+
+  export interface APIShieldOperationFeatureParameterSchemas {
+    parameter_schemas: APIShieldOperationFeatureParameterSchemas.ParameterSchemas;
+  }
+
+  export namespace APIShieldOperationFeatureParameterSchemas {
+    export interface ParameterSchemas {
+      last_updated?: string;
+
+      /**
+       * An operation schema object containing a response.
+       */
+      parameter_schemas?: ParameterSchemas.ParameterSchemas;
     }
 
-    export namespace APIShieldOperationFeatureThresholds {
-      export interface Thresholds {
-        /**
-         * The total number of auth-ids seen across this calculation foo.
-         */
-        auth_id_tokens?: number;
-
-        /**
-         * The number of data points used for the threshold suggestion calculation.
-         */
-        data_points?: number;
-
-        last_updated?: string;
-
-        /**
-         * The p50 quantile of requests (in period_seconds).
-         */
-        p50?: number;
-
-        /**
-         * The p90 quantile of requests (in period_seconds).
-         */
-        p90?: number;
-
-        /**
-         * The p99 quantile of requests (in period_seconds).
-         */
-        p99?: number;
-
-        /**
-         * The period over which this threshold is suggested.
-         */
-        period_seconds?: number;
-
-        /**
-         * The estimated number of requests covered by these calculations.
-         */
-        requests?: number;
-
-        /**
-         * The suggested threshold in requests done by the same auth_id or period_seconds.
-         */
-        suggested_threshold?: number;
-      }
-    }
-
-    export interface APIShieldOperationFeatureParameterSchemas {
-      parameter_schemas: APIShieldOperationFeatureParameterSchemas.ParameterSchemas;
-    }
-
-    export namespace APIShieldOperationFeatureParameterSchemas {
+    export namespace ParameterSchemas {
+      /**
+       * An operation schema object containing a response.
+       */
       export interface ParameterSchemas {
-        last_updated?: string;
+        /**
+         * An array containing the learned parameter schemas.
+         */
+        parameters?: Array<unknown>;
 
         /**
-         * An operation schema object containing a response.
+         * An empty response object. This field is required to yield a valid operation
+         * schema.
          */
-        parameter_schemas?: ParameterSchemas.ParameterSchemas;
-      }
-
-      export namespace ParameterSchemas {
-        /**
-         * An operation schema object containing a response.
-         */
-        export interface ParameterSchemas {
-          /**
-           * An array containing the learned parameter schemas.
-           */
-          parameters?: Array<unknown>;
-
-          /**
-           * An empty response object. This field is required to yield a valid operation
-           * schema.
-           */
-          responses?: unknown | null;
-        }
+        responses?: unknown | null;
       }
     }
+  }
 
-    export interface APIShieldOperationFeatureAPIRouting {
+  export interface APIShieldOperationFeatureAPIRouting {
+    /**
+     * API Routing settings on endpoint.
+     */
+    api_routing?: APIShieldOperationFeatureAPIRouting.APIRouting;
+  }
+
+  export namespace APIShieldOperationFeatureAPIRouting {
+    /**
+     * API Routing settings on endpoint.
+     */
+    export interface APIRouting {
+      last_updated?: string;
+
       /**
-       * API Routing settings on endpoint.
+       * Target route.
        */
-      api_routing?: APIShieldOperationFeatureAPIRouting.APIRouting;
+      route?: string;
+    }
+  }
+
+  export interface APIShieldOperationFeatureConfidenceIntervals {
+    confidence_intervals?: APIShieldOperationFeatureConfidenceIntervals.ConfidenceIntervals;
+  }
+
+  export namespace APIShieldOperationFeatureConfidenceIntervals {
+    export interface ConfidenceIntervals {
+      last_updated?: string;
+
+      suggested_threshold?: ConfidenceIntervals.SuggestedThreshold;
     }
 
-    export namespace APIShieldOperationFeatureAPIRouting {
-      /**
-       * API Routing settings on endpoint.
-       */
-      export interface APIRouting {
-        last_updated?: string;
+    export namespace ConfidenceIntervals {
+      export interface SuggestedThreshold {
+        confidence_intervals?: SuggestedThreshold.ConfidenceIntervals;
 
         /**
-         * Target route.
+         * Suggested threshold.
          */
-        route?: string;
-      }
-    }
-
-    export interface APIShieldOperationFeatureConfidenceIntervals {
-      confidence_intervals?: APIShieldOperationFeatureConfidenceIntervals.ConfidenceIntervals;
-    }
-
-    export namespace APIShieldOperationFeatureConfidenceIntervals {
-      export interface ConfidenceIntervals {
-        last_updated?: string;
-
-        suggested_threshold?: ConfidenceIntervals.SuggestedThreshold;
+        mean?: number;
       }
 
-      export namespace ConfidenceIntervals {
-        export interface SuggestedThreshold {
-          confidence_intervals?: SuggestedThreshold.ConfidenceIntervals;
+      export namespace SuggestedThreshold {
+        export interface ConfidenceIntervals {
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          p90?: ConfidenceIntervals.P90;
 
           /**
-           * Suggested threshold.
+           * Upper and lower bound for percentile estimate
            */
-          mean?: number;
+          p95?: ConfidenceIntervals.P95;
+
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          p99?: ConfidenceIntervals.P99;
         }
 
-        export namespace SuggestedThreshold {
-          export interface ConfidenceIntervals {
+        export namespace ConfidenceIntervals {
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          export interface P90 {
             /**
-             * Upper and lower bound for percentile estimate
+             * Lower bound for percentile estimate
              */
-            p90?: ConfidenceIntervals.P90;
+            lower?: number;
 
             /**
-             * Upper and lower bound for percentile estimate
+             * Upper bound for percentile estimate
              */
-            p95?: ConfidenceIntervals.P95;
-
-            /**
-             * Upper and lower bound for percentile estimate
-             */
-            p99?: ConfidenceIntervals.P99;
+            upper?: number;
           }
 
-          export namespace ConfidenceIntervals {
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          export interface P95 {
             /**
-             * Upper and lower bound for percentile estimate
+             * Lower bound for percentile estimate
              */
-            export interface P90 {
-              /**
-               * Lower bound for percentile estimate
-               */
-              lower?: number;
-
-              /**
-               * Upper bound for percentile estimate
-               */
-              upper?: number;
-            }
+            lower?: number;
 
             /**
-             * Upper and lower bound for percentile estimate
+             * Upper bound for percentile estimate
              */
-            export interface P95 {
-              /**
-               * Lower bound for percentile estimate
-               */
-              lower?: number;
+            upper?: number;
+          }
 
-              /**
-               * Upper bound for percentile estimate
-               */
-              upper?: number;
-            }
+          /**
+           * Upper and lower bound for percentile estimate
+           */
+          export interface P99 {
+            /**
+             * Lower bound for percentile estimate
+             */
+            lower?: number;
 
             /**
-             * Upper and lower bound for percentile estimate
+             * Upper bound for percentile estimate
              */
-            export interface P99 {
-              /**
-               * Lower bound for percentile estimate
-               */
-              lower?: number;
-
-              /**
-               * Upper bound for percentile estimate
-               */
-              upper?: number;
-            }
+            upper?: number;
           }
         }
       }
     }
+  }
 
-    export interface APIShieldOperationFeatureSchemaInfo {
-      schema_info?: APIShieldOperationFeatureSchemaInfo.SchemaInfo;
+  export interface APIShieldOperationFeatureSchemaInfo {
+    schema_info?: APIShieldOperationFeatureSchemaInfo.SchemaInfo;
+  }
+
+  export namespace APIShieldOperationFeatureSchemaInfo {
+    export interface SchemaInfo {
+      /**
+       * Schema active on endpoint.
+       */
+      active_schema?: SchemaInfo.ActiveSchema;
+
+      /**
+       * True if a Cloudflare-provided learned schema is available for this endpoint.
+       */
+      learned_available?: boolean;
+
+      /**
+       * Action taken on requests failing validation.
+       */
+      mitigation_action?: 'none' | 'log' | 'block' | null;
     }
 
-    export namespace APIShieldOperationFeatureSchemaInfo {
-      export interface SchemaInfo {
+    export namespace SchemaInfo {
+      /**
+       * Schema active on endpoint.
+       */
+      export interface ActiveSchema {
         /**
-         * Schema active on endpoint.
+         * UUID
          */
-        active_schema?: SchemaInfo.ActiveSchema;
+        id?: string;
+
+        created_at?: string;
 
         /**
-         * True if a Cloudflare-provided learned schema is available for this endpoint.
+         * True if schema is Cloudflare-provided.
          */
-        learned_available?: boolean;
+        is_learned?: boolean;
 
         /**
-         * Action taken on requests failing validation.
+         * Schema file name.
          */
-        mitigation_action?: 'none' | 'log' | 'block' | null;
-      }
-
-      export namespace SchemaInfo {
-        /**
-         * Schema active on endpoint.
-         */
-        export interface ActiveSchema {
-          /**
-           * UUID
-           */
-          id?: string;
-
-          created_at?: string;
-
-          /**
-           * True if schema is Cloudflare-provided.
-           */
-          is_learned?: boolean;
-
-          /**
-           * Schema file name.
-           */
-          name?: string;
-        }
+        name?: string;
       }
     }
   }
 }
 
-/**
- * basic op.
- */
+export type OperationCreateResponse = Array<APIShield>;
+
 export interface OperationListResponse {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
@@ -472,7 +418,7 @@ export namespace OperationListResponse {
   export namespace APIShieldOperationFeatureThresholds {
     export interface Thresholds {
       /**
-       * The total number of auth-ids seen across this calculation foo.
+       * The total number of auth-ids seen across this calculation.
        */
       auth_id_tokens?: number;
 
@@ -728,9 +674,6 @@ export interface OperationBulkDeleteResponse {
   success: true;
 }
 
-/**
- * basic op.
- */
 export interface OperationGetResponse {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
@@ -773,7 +716,7 @@ export namespace OperationGetResponse {
   export namespace APIShieldOperationFeatureThresholds {
     export interface Thresholds {
       /**
-       * The total number of auth-ids seen across this calculation foo.
+       * The total number of auth-ids seen across this calculation.
        */
       auth_id_tokens?: number;
 
@@ -1016,7 +959,29 @@ export interface OperationCreateParams {
   /**
    * Body param:
    */
-  body: Array<APIShieldOperationModelParam>;
+  body: Array<OperationCreateParams.Body>;
+}
+
+export namespace OperationCreateParams {
+  export interface Body {
+    /**
+     * The endpoint which can contain path parameter templates in curly braces, each
+     * will be replaced from left to right with {varN}, starting with {var1}, during
+     * insertion. This will further be Cloudflare-normalized upon insertion. See:
+     * https://developers.cloudflare.com/rules/normalization/how-it-works/.
+     */
+    endpoint: string;
+
+    /**
+     * RFC3986-compliant host.
+     */
+    host: string;
+
+    /**
+     * The HTTP method used to access the endpoint.
+     */
+    method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
+  }
 }
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
@@ -1092,7 +1057,7 @@ Operations.SchemaValidation = SchemaValidation;
 
 export declare namespace Operations {
   export {
-    type APIShieldOperationModel as APIShieldOperationModel,
+    type APIShield as APIShield,
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,
