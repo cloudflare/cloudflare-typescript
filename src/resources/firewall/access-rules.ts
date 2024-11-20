@@ -85,6 +85,127 @@ export class AccessRules extends APIResource {
       { query, ...options },
     );
   }
+
+  /**
+   * Deletes an existing IP Access rule defined.
+   *
+   * Note: This operation will affect all zones in the account or zone.
+   */
+  delete(
+    ruleId: string,
+    params?: AccessRuleDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleDeleteResponse | null>;
+  delete(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<AccessRuleDeleteResponse | null>;
+  delete(
+    ruleId: string,
+    params: AccessRuleDeleteParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleDeleteResponse | null> {
+    if (isRequestOptions(params)) {
+      return this.delete(ruleId, {}, params);
+    }
+    const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.delete(
+        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${ruleId}`,
+        options,
+      ) as Core.APIPromise<{ result: AccessRuleDeleteResponse | null }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates an IP Access rule defined.
+   *
+   * Note: This operation will affect all zones in the account or zone.
+   */
+  edit(
+    ruleId: string,
+    params: AccessRuleEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleEditResponse> {
+    const { account_id, zone_id, ...body } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.patch(`/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${ruleId}`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: AccessRuleEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches the details of an IP Access rule defined.
+   */
+  get(
+    ruleId: string,
+    params?: AccessRuleGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleGetResponse>;
+  get(ruleId: string, options?: Core.RequestOptions): Core.APIPromise<AccessRuleGetResponse>;
+  get(
+    ruleId: string,
+    params: AccessRuleGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<AccessRuleGetResponse> {
+    if (isRequestOptions(params)) {
+      return this.get(ruleId, {}, params);
+    }
+    const { account_id, zone_id } = params;
+    if (!account_id && !zone_id) {
+      throw new CloudflareError('You must provide either account_id or zone_id.');
+    }
+    if (account_id && zone_id) {
+      throw new CloudflareError('You cannot provide both account_id and zone_id.');
+    }
+    const { accountOrZone, accountOrZoneId } =
+      account_id ?
+        {
+          accountOrZone: 'accounts',
+          accountOrZoneId: account_id,
+        }
+      : {
+          accountOrZone: 'zones',
+          accountOrZoneId: zone_id,
+        };
+    return (
+      this._client.get(
+        `/${accountOrZone}/${accountOrZoneId}/firewall/access_rules/rules/${ruleId}`,
+        options,
+      ) as Core.APIPromise<{ result: AccessRuleGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class AccessRuleListResponsesV4PagePaginationArray extends V4PagePaginationArray<AccessRuleListResponse> {}
@@ -225,9 +346,288 @@ export interface IPV6ConfigurationParam {
   value?: string;
 }
 
-export type AccessRuleCreateResponse = unknown | string | null;
+export interface AccessRuleCreateResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
 
-export type AccessRuleListResponse = unknown;
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | AccessRuleIPConfiguration
+    | IPV6Configuration
+    | AccessRuleCIDRConfiguration
+    | ASNConfiguration
+    | CountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  scope?: AccessRuleCreateResponse.Scope;
+}
+
+export namespace AccessRuleCreateResponse {
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  export interface Scope {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * The scope of the rule.
+     */
+    type?: 'user' | 'organization';
+  }
+}
+
+export interface AccessRuleListResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
+
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | AccessRuleIPConfiguration
+    | IPV6Configuration
+    | AccessRuleCIDRConfiguration
+    | ASNConfiguration
+    | CountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  scope?: AccessRuleListResponse.Scope;
+}
+
+export namespace AccessRuleListResponse {
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  export interface Scope {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * The scope of the rule.
+     */
+    type?: 'user' | 'organization';
+  }
+}
+
+export interface AccessRuleDeleteResponse {
+  /**
+   * Identifier
+   */
+  id: string;
+}
+
+export interface AccessRuleEditResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
+
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | AccessRuleIPConfiguration
+    | IPV6Configuration
+    | AccessRuleCIDRConfiguration
+    | ASNConfiguration
+    | CountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  scope?: AccessRuleEditResponse.Scope;
+}
+
+export namespace AccessRuleEditResponse {
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  export interface Scope {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * The scope of the rule.
+     */
+    type?: 'user' | 'organization';
+  }
+}
+
+export interface AccessRuleGetResponse {
+  /**
+   * The unique identifier of the IP Access rule.
+   */
+  id: string;
+
+  /**
+   * The available actions that a rule can apply to a matched request.
+   */
+  allowed_modes: Array<'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge'>;
+
+  /**
+   * The rule configuration.
+   */
+  configuration:
+    | AccessRuleIPConfiguration
+    | IPV6Configuration
+    | AccessRuleCIDRConfiguration
+    | ASNConfiguration
+    | CountryConfiguration;
+
+  /**
+   * The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * The timestamp of when the rule was created.
+   */
+  created_on?: string;
+
+  /**
+   * The timestamp of when the rule was last modified.
+   */
+  modified_on?: string;
+
+  /**
+   * An informative summary of the rule, typically used as a reminder or explanation.
+   */
+  notes?: string;
+
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  scope?: AccessRuleGetResponse.Scope;
+}
+
+export namespace AccessRuleGetResponse {
+  /**
+   * All zones owned by the user will have the rule applied.
+   */
+  export interface Scope {
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * The contact email address of the user.
+     */
+    email?: string;
+
+    /**
+     * The scope of the rule.
+     */
+    type?: 'user' | 'organization';
+  }
+}
 
 export interface AccessRuleCreateParams {
   /**
@@ -328,6 +728,65 @@ export namespace AccessRuleListParams {
   }
 }
 
+export interface AccessRuleDeleteParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
+export interface AccessRuleEditParams {
+  /**
+   * Body param: The rule configuration.
+   */
+  configuration:
+    | AccessRuleIPConfigurationParam
+    | IPV6ConfigurationParam
+    | AccessRuleCIDRConfigurationParam
+    | ASNConfigurationParam
+    | CountryConfigurationParam;
+
+  /**
+   * Body param: The action to apply to a matched request.
+   */
+  mode: 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
+
+  /**
+   * Path param: The Account ID to use for this endpoint. Mutually exclusive with the
+   * Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * Path param: The Zone ID to use for this endpoint. Mutually exclusive with the
+   * Account ID.
+   */
+  zone_id?: string;
+
+  /**
+   * Body param: An informative summary of the rule, typically used as a reminder or
+   * explanation.
+   */
+  notes?: string;
+}
+
+export interface AccessRuleGetParams {
+  /**
+   * The Account ID to use for this endpoint. Mutually exclusive with the Zone ID.
+   */
+  account_id?: string;
+
+  /**
+   * The Zone ID to use for this endpoint. Mutually exclusive with the Account ID.
+   */
+  zone_id?: string;
+}
+
 AccessRules.AccessRuleListResponsesV4PagePaginationArray = AccessRuleListResponsesV4PagePaginationArray;
 
 export declare namespace AccessRules {
@@ -339,8 +798,14 @@ export declare namespace AccessRules {
     type IPV6Configuration as IPV6Configuration,
     type AccessRuleCreateResponse as AccessRuleCreateResponse,
     type AccessRuleListResponse as AccessRuleListResponse,
+    type AccessRuleDeleteResponse as AccessRuleDeleteResponse,
+    type AccessRuleEditResponse as AccessRuleEditResponse,
+    type AccessRuleGetResponse as AccessRuleGetResponse,
     AccessRuleListResponsesV4PagePaginationArray as AccessRuleListResponsesV4PagePaginationArray,
     type AccessRuleCreateParams as AccessRuleCreateParams,
     type AccessRuleListParams as AccessRuleListParams,
+    type AccessRuleDeleteParams as AccessRuleDeleteParams,
+    type AccessRuleEditParams as AccessRuleEditParams,
+    type AccessRuleGetParams as AccessRuleGetParams,
   };
 }

@@ -9,13 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource accessRules', () => {
+describe('resource lockdowns', () => {
   // TODO: investigate broken test
   test.skip('create: only required params', async () => {
-    const responsePromise = client.firewall.accessRules.create({
-      configuration: {},
-      mode: 'block',
-      account_id: 'account_id',
+    const responsePromise = client.firewall.lockdowns.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      configurations: [{}],
+      urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,30 +28,19 @@ describe('resource accessRules', () => {
 
   // TODO: investigate broken test
   test.skip('create: required and optional params', async () => {
-    const response = await client.firewall.accessRules.create({
-      configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'block',
-      account_id: 'account_id',
-      notes: 'This rule is enabled because of an event that occurred on date X.',
+    const response = await client.firewall.lockdowns.create({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      configurations: [{ target: 'ip', value: '198.51.100.4' }],
+      urls: ['shop.example.com/*'],
     });
   });
 
   // TODO: investigate broken test
-  test.skip('list', async () => {
-    const responsePromise = client.firewall.accessRules.list({ account_id: 'account_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // TODO: investigate broken test
-  test.skip('delete', async () => {
-    const responsePromise = client.firewall.accessRules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: 'account_id',
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.firewall.lockdowns.update('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      configurations: [{}],
+      urls: ['shop.example.com/*'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -63,11 +52,45 @@ describe('resource accessRules', () => {
   });
 
   // TODO: investigate broken test
-  test.skip('edit: only required params', async () => {
-    const responsePromise = client.firewall.accessRules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      configuration: {},
-      mode: 'block',
-      account_id: 'account_id',
+  test.skip('update: required and optional params', async () => {
+    const response = await client.firewall.lockdowns.update('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      configurations: [{ target: 'ip', value: '198.51.100.4' }],
+      urls: ['shop.example.com/*'],
+    });
+  });
+
+  test('list: only required params', async () => {
+    const responsePromise = client.firewall.lockdowns.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('list: required and optional params', async () => {
+    const response = await client.firewall.lockdowns.list({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      created_on: '2014-01-01T05:20:00.12345Z',
+      description: 'endpoints',
+      description_search: 'endpoints',
+      ip: '1.2.3.4',
+      ip_range_search: '1.2.3.0/16',
+      ip_search: '1.2.3.4',
+      modified_on: '2014-01-01T05:20:00.12345Z',
+      page: 1,
+      per_page: 1,
+      priority: 5,
+      uri_search: '/some/path',
+    });
+  });
+
+  test('delete: only required params', async () => {
+    const responsePromise = client.firewall.lockdowns.delete('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -78,20 +101,15 @@ describe('resource accessRules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // TODO: investigate broken test
-  test.skip('edit: required and optional params', async () => {
-    const response = await client.firewall.accessRules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      configuration: { target: 'ip', value: '198.51.100.4' },
-      mode: 'block',
-      account_id: 'account_id',
-      notes: 'This rule is enabled because of an event that occurred on date X.',
+  test('delete: required and optional params', async () => {
+    const response = await client.firewall.lockdowns.delete('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  // TODO: investigate broken test
-  test.skip('get', async () => {
-    const responsePromise = client.firewall.accessRules.get('023e105f4ecef8ad9ca31a8372d0c353', {
-      account_id: 'account_id',
+  test('get: only required params', async () => {
+    const responsePromise = client.firewall.lockdowns.get('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -100,5 +118,11 @@ describe('resource accessRules', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.firewall.lockdowns.get('372e67954025e0ba6aaa6d586b9e0b59', {
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
   });
 });
