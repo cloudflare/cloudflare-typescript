@@ -1700,22 +1700,19 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageRule</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">Target</a></code>
-- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleCreateResponse</a></code>
-- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleUpdateResponse</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleListResponse</a></code>
 - <code><a href="./src/resources/pagerules/pagerules.ts">PageruleDeleteResponse</a></code>
-- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleEditResponse</a></code>
-- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleGetResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">create</a>({ ...params }) -> PageruleCreateResponse</code>
-- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">update</a>(pageruleId, { ...params }) -> PageruleUpdateResponse</code>
+- <code title="post /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">create</a>({ ...params }) -> PageRule</code>
+- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">update</a>(pageruleId, { ...params }) -> PageRule</code>
 - <code title="get /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">list</a>({ ...params }) -> PageruleListResponse</code>
 - <code title="delete /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">delete</a>(pageruleId, { ...params }) -> PageruleDeleteResponse | null</code>
-- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">edit</a>(pageruleId, { ...params }) -> PageruleEditResponse</code>
-- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">get</a>(pageruleId, { ...params }) -> PageruleGetResponse</code>
+- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">edit</a>(pageruleId, { ...params }) -> PageRule</code>
+- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">get</a>(pageruleId, { ...params }) -> PageRule</code>
 
 ## Settings
 
@@ -5539,26 +5536,22 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/hyperdrive/hyperdrive.ts">Configuration</a></code>
+- <code><a href="./src/resources/hyperdrive/hyperdrive.ts">Hyperdrive</a></code>
 
 ## Configs
 
 Types:
 
-- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigCreateResponse</a></code>
-- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigUpdateResponse</a></code>
-- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigListResponse</a></code>
 - <code><a href="./src/resources/hyperdrive/configs.ts">ConfigDeleteResponse</a></code>
-- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigEditResponse</a></code>
-- <code><a href="./src/resources/hyperdrive/configs.ts">ConfigGetResponse</a></code>
 
 Methods:
 
-- <code title="post /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">create</a>({ ...params }) -> ConfigCreateResponse</code>
-- <code title="put /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">update</a>(hyperdriveId, { ...params }) -> ConfigUpdateResponse</code>
-- <code title="get /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">list</a>({ ...params }) -> ConfigListResponsesSinglePage</code>
+- <code title="post /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">create</a>({ ...params }) -> Hyperdrive</code>
+- <code title="put /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">update</a>(hyperdriveId, { ...params }) -> Hyperdrive</code>
+- <code title="get /accounts/{account_id}/hyperdrive/configs">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">list</a>({ ...params }) -> HyperdrivesSinglePage</code>
 - <code title="delete /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">delete</a>(hyperdriveId, { ...params }) -> ConfigDeleteResponse | null</code>
-- <code title="patch /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">edit</a>(hyperdriveId, { ...params }) -> ConfigEditResponse</code>
-- <code title="get /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">get</a>(hyperdriveId, { ...params }) -> ConfigGetResponse</code>
+- <code title="patch /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">edit</a>(hyperdriveId, { ...params }) -> Hyperdrive</code>
+- <code title="get /accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}">client.hyperdrive.configs.<a href="./src/resources/hyperdrive/configs.ts">get</a>(hyperdriveId, { ...params }) -> Hyperdrive</code>
 
 # RUM
 

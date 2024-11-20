@@ -61,7 +61,7 @@ import { EmailSecurity } from './resources/email-security/email-security';
 import { Firewall } from './resources/firewall/firewall';
 import { Healthchecks } from './resources/healthchecks/healthchecks';
 import { Hostnames } from './resources/hostnames/hostnames';
-import { Hyperdrive } from './resources/hyperdrive/hyperdrive';
+import { HyperdriveResource } from './resources/hyperdrive/hyperdrive';
 import { IAM } from './resources/iam/iam';
 import { Images } from './resources/images/images';
 import { Intel } from './resources/intel/intel';
@@ -313,7 +313,7 @@ export class Cloudflare extends Core.APIClient {
   workersForPlatforms: API.WorkersForPlatforms = new API.WorkersForPlatforms(this);
   zeroTrust: API.ZeroTrust = new API.ZeroTrust(this);
   turnstile: API.Turnstile = new API.Turnstile(this);
-  hyperdrive: API.Hyperdrive = new API.Hyperdrive(this);
+  hyperdrive: API.HyperdriveResource = new API.HyperdriveResource(this);
   rum: API.RUM = new API.RUM(this);
   vectorize: API.Vectorize = new API.Vectorize(this);
   urlScanner: API.URLScanner = new API.URLScanner(this);
@@ -525,7 +525,7 @@ Cloudflare.WARPConnector = WARPConnector;
 Cloudflare.WorkersForPlatforms = WorkersForPlatforms;
 Cloudflare.ZeroTrust = ZeroTrust;
 Cloudflare.Turnstile = Turnstile;
-Cloudflare.Hyperdrive = Hyperdrive;
+Cloudflare.HyperdriveResource = HyperdriveResource;
 Cloudflare.RUM = RUM;
 Cloudflare.Vectorize = Vectorize;
 Cloudflare.URLScanner = URLScanner;
@@ -706,7 +706,7 @@ export declare namespace Cloudflare {
 
   export { Turnstile as Turnstile };
 
-  export { Hyperdrive as Hyperdrive };
+  export { HyperdriveResource as HyperdriveResource };
 
   export { RUM as RUM };
 
