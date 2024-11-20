@@ -218,7 +218,7 @@ export namespace AddressMapCreateResponse {
     created_at?: string;
 
     /**
-     * An IPv4 or IPv6 address.
+     * An IPv4 or IPv6 address. foo
      */
     ip?: string;
   }
@@ -340,7 +340,7 @@ export namespace AddressMapGetResponse {
     created_at?: string;
 
     /**
-     * An IPv4 or IPv6 address.
+     * An IPv4 or IPv6 address. foo
      */
     ip?: string;
   }
