@@ -8,7 +8,13 @@ export {
   type ConfigurationUpdateParams,
   type ConfigurationGetParams,
 } from './configurations';
-export { Discovery, type DiscoveryGetResponse, type DiscoveryGetParams } from './discovery/index';
+export {
+  DiscoveryOperationsV4PagePaginationArray,
+  Discovery,
+  type DiscoveryOperation,
+  type DiscoveryGetResponse,
+  type DiscoveryGetParams,
+} from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
 export {
   OperationListResponsesV4PagePaginationArray,
