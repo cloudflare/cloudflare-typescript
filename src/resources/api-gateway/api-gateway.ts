@@ -12,7 +12,12 @@ import {
 import * as SchemasAPI from './schemas';
 import { SchemaListParams, SchemaListResponse, Schemas } from './schemas';
 import * as DiscoveryAPI from './discovery/discovery';
-import { Discovery, DiscoveryGetParams, DiscoveryGetResponse } from './discovery/discovery';
+import {
+  Discovery,
+  DiscoveryGetParams,
+  DiscoveryGetResponse,
+  DiscoveryOperation,
+} from './discovery/discovery';
 import * as ExpressionTemplateAPI from './expression-template/expression-template';
 import { ExpressionTemplate } from './expression-template/expression-template';
 import * as OperationsAPI from './operations/operations';
@@ -80,6 +85,7 @@ export declare namespace APIGateway {
 
   export {
     Discovery as Discovery,
+    type DiscoveryOperation as DiscoveryOperation,
     type DiscoveryGetResponse as DiscoveryGetResponse,
     type DiscoveryGetParams as DiscoveryGetParams,
   };
