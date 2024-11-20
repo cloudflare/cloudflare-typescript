@@ -28,7 +28,7 @@ export class OperationListResponsesV4PagePaginationArray extends V4PagePaginatio
 
 export type OperationListResponse =
   | OperationListResponse.APIShieldOperation
-  | OperationsAPI.APIShieldOperation;
+  | OperationsAPI.APIShieldOperationModel;
 
 export namespace OperationListResponse {
   export interface APIShieldOperation {

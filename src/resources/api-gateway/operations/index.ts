@@ -3,7 +3,7 @@
 export {
   OperationListResponsesV4PagePaginationArray,
   Operations,
-  type APIShieldOperation,
+  type APIShieldOperationModel,
   type OperationCreateResponse,
   type OperationListResponse,
   type OperationDeleteResponse,

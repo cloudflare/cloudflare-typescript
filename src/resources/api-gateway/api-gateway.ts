@@ -17,7 +17,7 @@ import * as ExpressionTemplateAPI from './expression-template/expression-templat
 import { ExpressionTemplate } from './expression-template/expression-template';
 import * as OperationsAPI from './operations/operations';
 import {
-  APIShieldOperation,
+  APIShieldOperationModel,
   OperationBulkDeleteParams,
   OperationBulkDeleteResponse,
   OperationCreateParams,
@@ -86,7 +86,7 @@ export declare namespace APIGateway {
 
   export {
     Operations as Operations,
-    type APIShieldOperation as APIShieldOperation,
+    type APIShieldOperationModel as APIShieldOperationModel,
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,
