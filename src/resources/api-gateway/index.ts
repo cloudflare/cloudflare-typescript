@@ -8,18 +8,12 @@ export {
   type ConfigurationUpdateParams,
   type ConfigurationGetParams,
 } from './configurations';
-export {
-  DiscoveryOperationsV4PagePaginationArray,
-  Discovery,
-  type DiscoveryOperation,
-  type DiscoveryGetResponse,
-  type DiscoveryGetParams,
-} from './discovery/index';
+export { Discovery, type DiscoveryGetResponse, type DiscoveryGetParams } from './discovery/index';
 export { ExpressionTemplate } from './expression-template/index';
 export {
   OperationListResponsesV4PagePaginationArray,
   Operations,
-  type APIShield,
+  type APIShieldOperation,
   type OperationCreateResponse,
   type OperationListResponse,
   type OperationDeleteResponse,
