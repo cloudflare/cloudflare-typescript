@@ -1620,19 +1620,29 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/pagerules.ts">PageRule</a></code>
-- <code><a href="./src/resources/pagerules.ts">Target</a></code>
-- <code><a href="./src/resources/pagerules.ts">PageruleListResponse</a></code>
-- <code><a href="./src/resources/pagerules.ts">PageruleDeleteResponse</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageRule</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">Target</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleListResponse</a></code>
+- <code><a href="./src/resources/pagerules/pagerules.ts">PageruleDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules.ts">create</a>({ ...params }) -> PageRule</code>
-- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules.ts">update</a>(pageruleId, { ...params }) -> PageRule</code>
-- <code title="get /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules.ts">list</a>({ ...params }) -> PageruleListResponse</code>
-- <code title="delete /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules.ts">delete</a>(pageruleId, { ...params }) -> PageruleDeleteResponse | null</code>
-- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules.ts">edit</a>(pageruleId, { ...params }) -> PageRule</code>
-- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules.ts">get</a>(pageruleId, { ...params }) -> PageRule</code>
+- <code title="post /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">create</a>({ ...params }) -> PageRule</code>
+- <code title="put /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">update</a>(pageruleId, { ...params }) -> PageRule</code>
+- <code title="get /zones/{zone_id}/pagerules">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">list</a>({ ...params }) -> PageruleListResponse</code>
+- <code title="delete /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">delete</a>(pageruleId, { ...params }) -> PageruleDeleteResponse | null</code>
+- <code title="patch /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">edit</a>(pageruleId, { ...params }) -> PageRule</code>
+- <code title="get /zones/{zone_id}/pagerules/{pagerule_id}">client.pagerules.<a href="./src/resources/pagerules/pagerules.ts">get</a>(pageruleId, { ...params }) -> PageRule</code>
+
+## Settings
+
+Types:
+
+- <code><a href="./src/resources/pagerules/settings.ts">SettingListResponse</a></code>
+
+Methods:
+
+- <code title="get /zones/{zone_id}/pagerules/settings">client.pagerules.settings.<a href="./src/resources/pagerules/settings.ts">list</a>({ ...params }) -> SettingListResponse</code>
 
 # RateLimits
 
