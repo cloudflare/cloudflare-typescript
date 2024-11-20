@@ -192,7 +192,7 @@ export namespace OperationCreateResponse {
     export namespace APIShieldOperationFeatureThresholds {
       export interface Thresholds {
         /**
-         * The total number of auth-ids seen across this calculation.
+         * The total number of auth-ids seen across this calculation foo.
          */
         auth_id_tokens?: number;
 
@@ -472,7 +472,7 @@ export namespace OperationListResponse {
   export namespace APIShieldOperationFeatureThresholds {
     export interface Thresholds {
       /**
-       * The total number of auth-ids seen across this calculation.
+       * The total number of auth-ids seen across this calculation foo.
        */
       auth_id_tokens?: number;
 
@@ -773,7 +773,7 @@ export namespace OperationGetResponse {
   export namespace APIShieldOperationFeatureThresholds {
     export interface Thresholds {
       /**
-       * The total number of auth-ids seen across this calculation.
+       * The total number of auth-ids seen across this calculation foo.
        */
       auth_id_tokens?: number;
 
