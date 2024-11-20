@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class Versions extends APIResource {
   /**
@@ -12,11 +12,11 @@ export class Versions extends APIResource {
     workflowName: string,
     params: VersionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<VersionListResponsesV4PagePagination, VersionListResponse> {
+  ): Core.PagePromise<VersionListResponsesV4PagePaginationArray, VersionListResponse> {
     const { account_id, ...query } = params;
     return this._client.getAPIList(
       `/accounts/${account_id}/workflows/${workflowName}/versions`,
-      VersionListResponsesV4PagePagination,
+      VersionListResponsesV4PagePaginationArray,
       { query, ...options },
     );
   }
@@ -40,54 +40,18 @@ export class Versions extends APIResource {
   }
 }
 
-export class VersionListResponsesV4PagePagination extends V4PagePagination<VersionListResponse> {}
+export class VersionListResponsesV4PagePaginationArray extends V4PagePaginationArray<VersionListResponse> {}
 
 export interface VersionListResponse {
-  errors: Array<VersionListResponse.Error>;
+  id: string;
 
-  messages: Array<VersionListResponse.Message>;
+  class_name: string;
 
-  result: VersionListResponse.Result;
+  created_on: string;
 
-  success: true;
+  modified_on: string;
 
-  result_info?: VersionListResponse.ResultInfo;
-}
-
-export namespace VersionListResponse {
-  export interface Error {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Message {
-    code: number;
-
-    message: string;
-  }
-
-  export interface Result {
-    id: string;
-
-    class_name: string;
-
-    created_on: string;
-
-    modified_on: string;
-
-    workflow_id: string;
-  }
-
-  export interface ResultInfo {
-    count: number;
-
-    page: number;
-
-    per_page: number;
-
-    total_count: number;
-  }
+  workflow_id: string;
 }
 
 export interface VersionGetResponse {
@@ -102,7 +66,7 @@ export interface VersionGetResponse {
   workflow_id: string;
 }
 
-export interface VersionListParams extends V4PagePaginationParams {
+export interface VersionListParams extends V4PagePaginationArrayParams {
   /**
    * Path param:
    */
@@ -113,13 +77,13 @@ export interface VersionGetParams {
   account_id: string;
 }
 
-Versions.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
+Versions.VersionListResponsesV4PagePaginationArray = VersionListResponsesV4PagePaginationArray;
 
 export declare namespace Versions {
   export {
     type VersionListResponse as VersionListResponse,
     type VersionGetResponse as VersionGetResponse,
-    VersionListResponsesV4PagePagination as VersionListResponsesV4PagePagination,
+    VersionListResponsesV4PagePaginationArray as VersionListResponsesV4PagePaginationArray,
     type VersionListParams as VersionListParams,
     type VersionGetParams as VersionGetParams,
   };

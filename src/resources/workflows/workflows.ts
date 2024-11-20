@@ -8,7 +8,7 @@ import {
   VersionGetResponse,
   VersionListParams,
   VersionListResponse,
-  VersionListResponsesV4PagePagination,
+  VersionListResponsesV4PagePaginationArray,
   Versions,
 } from './versions';
 import * as InstancesAPI from './instances/instances';
@@ -208,7 +208,7 @@ export interface WorkflowGetParams {
 Workflows.Instances = InstancesAPIInstances;
 Workflows.InstanceListResponsesV4PagePaginationArray = InstanceListResponsesV4PagePaginationArray;
 Workflows.Versions = Versions;
-Workflows.VersionListResponsesV4PagePagination = VersionListResponsesV4PagePagination;
+Workflows.VersionListResponsesV4PagePaginationArray = VersionListResponsesV4PagePaginationArray;
 
 export declare namespace Workflows {
   export {
@@ -226,7 +226,7 @@ export declare namespace Workflows {
     Versions as Versions,
     type VersionListResponse as VersionListResponse,
     type VersionGetResponse as VersionGetResponse,
-    VersionListResponsesV4PagePagination as VersionListResponsesV4PagePagination,
+    VersionListResponsesV4PagePaginationArray as VersionListResponsesV4PagePaginationArray,
     type VersionListParams as VersionListParams,
     type VersionGetParams as VersionGetParams,
   };
