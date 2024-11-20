@@ -1,18 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
-import * as SettingsAPI from './settings';
-import { SettingListParams, SettingListResponse, Settings } from './settings';
-import * as ZonesSettingsAPI from '../zones/settings';
+import { APIResource } from '../resource';
+import * as Core from '../core';
+import * as SettingsAPI from './zones/settings';
 
 export class Pagerules extends APIResource {
-  settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
-
   /**
    * Creates a new Page Rule.
-   *
-   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   create(params: PageruleCreateParams, options?: Core.RequestOptions): Core.APIPromise<PageRule> {
     const { zone_id, ...body } = params;
@@ -26,8 +20,6 @@ export class Pagerules extends APIResource {
   /**
    * Replaces the configuration of an existing Page Rule. The configuration of the
    * updated Page Rule will exactly match the data passed in the API request.
-   *
-   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   update(
     pageruleId: string,
@@ -44,8 +36,6 @@ export class Pagerules extends APIResource {
 
   /**
    * Fetches Page Rules in a zone.
-   *
-   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   list(params: PageruleListParams, options?: Core.RequestOptions): Core.APIPromise<PageruleListResponse> {
     const { zone_id, ...query } = params;
@@ -58,8 +48,6 @@ export class Pagerules extends APIResource {
 
   /**
    * Deletes an existing Page Rule.
-   *
-   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   delete(
     pageruleId: string,
@@ -76,8 +64,6 @@ export class Pagerules extends APIResource {
 
   /**
    * Updates one or more fields of an existing Page Rule.
-   *
-   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   edit(
     pageruleId: string,
@@ -95,8 +81,6 @@ export class Pagerules extends APIResource {
 
   /**
    * Fetches the details of a Page Rule.
-   *
-   * @deprecated The Page Rules API is deprecated in favour of the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#page-rules for full details.
    */
   get(
     pageruleId: string,
@@ -123,47 +107,47 @@ export interface PageRule {
    * Actions can redirect to another URL or override settings, but not both.
    */
   actions: Array<
-    | ZonesSettingsAPI.AlwaysUseHTTPS
-    | ZonesSettingsAPI.AutomaticHTTPSRewrites
-    | ZonesSettingsAPI.BrowserCacheTTL
-    | ZonesSettingsAPI.BrowserCheck
+    | SettingsAPI.AlwaysUseHTTPS
+    | SettingsAPI.AutomaticHTTPSRewrites
+    | SettingsAPI.BrowserCacheTTL
+    | SettingsAPI.BrowserCheck
     | PageRule.BypassCacheOnCookie
     | PageRule.CacheByDeviceType
     | PageRule.CacheDeceptionArmor
     | PageRule.CacheKey
     | PageRule.CacheKeyFields
-    | ZonesSettingsAPI.CacheLevel
+    | SettingsAPI.CacheLevel
     | PageRule.CacheOnCookie
     | PageRule.CacheTTLByStatus
     | PageRule.DDoSProtection
-    | ZonesSettingsAPI.DevelopmentMode
+    | SettingsAPI.DevelopmentMode
     | PageRule.DisableApps
     | PageRule.DisablePerformance
     | PageRule.DisableSecurity
     | PageRule.DisableZaraz
     | PageRule.EdgeCacheTTL
-    | ZonesSettingsAPI.EmailObfuscation
+    | SettingsAPI.EmailObfuscation
     | PageRule.ExplicitCacheControl
     | PageRule.ForwardingURL
     | PageRule.HostHeaderOverride
-    | ZonesSettingsAPI.HotlinkProtection
-    | ZonesSettingsAPI.IPGeolocation
+    | SettingsAPI.HotlinkProtection
+    | SettingsAPI.IPGeolocation
     | PageRule.Minify
-    | ZonesSettingsAPI.Mirage
-    | ZonesSettingsAPI.OpportunisticEncryption
-    | ZonesSettingsAPI.OriginErrorPagePassThru
-    | ZonesSettingsAPI.Polish
+    | SettingsAPI.Mirage
+    | SettingsAPI.OpportunisticEncryption
+    | SettingsAPI.OriginErrorPagePassThru
+    | SettingsAPI.Polish
     | PageRule.PurgeByPageRule
     | PageRule.ResolveOverride
     | PageRule.RespectStrongEtag
-    | ZonesSettingsAPI.ResponseBuffering
-    | ZonesSettingsAPI.RocketLoader
-    | ZonesSettingsAPI.SecurityLevel
-    | ZonesSettingsAPI.ServerSideExcludes
-    | ZonesSettingsAPI.SortQueryStringForCache
-    | ZonesSettingsAPI.SSL
-    | ZonesSettingsAPI.TrueClientIPHeader
-    | ZonesSettingsAPI.WAF
+    | SettingsAPI.ResponseBuffering
+    | SettingsAPI.RocketLoader
+    | SettingsAPI.SecurityLevel
+    | SettingsAPI.ServerSideExcludes
+    | SettingsAPI.SortQueryStringForCache
+    | SettingsAPI.SSL
+    | SettingsAPI.TrueClientIPHeader
+    | SettingsAPI.WAF
   >;
 
   /**
@@ -601,47 +585,47 @@ export interface PageruleCreateParams {
    * request. Actions can redirect to another URL or override settings, but not both.
    */
   actions: Array<
-    | ZonesSettingsAPI.AlwaysUseHTTPSParam
-    | ZonesSettingsAPI.AutomaticHTTPSRewritesParam
-    | ZonesSettingsAPI.BrowserCacheTTLParam
-    | ZonesSettingsAPI.BrowserCheckParam
+    | SettingsAPI.AlwaysUseHTTPSParam
+    | SettingsAPI.AutomaticHTTPSRewritesParam
+    | SettingsAPI.BrowserCacheTTLParam
+    | SettingsAPI.BrowserCheckParam
     | PageruleCreateParams.BypassCacheOnCookie
     | PageruleCreateParams.CacheByDeviceType
     | PageruleCreateParams.CacheDeceptionArmor
     | PageruleCreateParams.CacheKey
     | PageruleCreateParams.CacheKeyFields
-    | ZonesSettingsAPI.CacheLevelParam
+    | SettingsAPI.CacheLevelParam
     | PageruleCreateParams.CacheOnCookie
     | PageruleCreateParams.CacheTTLByStatus
     | PageruleCreateParams.DDoSProtection
-    | ZonesSettingsAPI.DevelopmentModeParam
+    | SettingsAPI.DevelopmentModeParam
     | PageruleCreateParams.DisableApps
     | PageruleCreateParams.DisablePerformance
     | PageruleCreateParams.DisableSecurity
     | PageruleCreateParams.DisableZaraz
     | PageruleCreateParams.EdgeCacheTTL
-    | ZonesSettingsAPI.EmailObfuscationParam
+    | SettingsAPI.EmailObfuscationParam
     | PageruleCreateParams.ExplicitCacheControl
     | PageruleCreateParams.ForwardingURL
     | PageruleCreateParams.HostHeaderOverride
-    | ZonesSettingsAPI.HotlinkProtectionParam
-    | ZonesSettingsAPI.IPGeolocationParam
+    | SettingsAPI.HotlinkProtectionParam
+    | SettingsAPI.IPGeolocationParam
     | PageruleCreateParams.Minify
-    | ZonesSettingsAPI.MirageParam
-    | ZonesSettingsAPI.OpportunisticEncryptionParam
-    | ZonesSettingsAPI.OriginErrorPagePassThruParam
-    | ZonesSettingsAPI.PolishParam
+    | SettingsAPI.MirageParam
+    | SettingsAPI.OpportunisticEncryptionParam
+    | SettingsAPI.OriginErrorPagePassThruParam
+    | SettingsAPI.PolishParam
     | PageruleCreateParams.PurgeByPageRule
     | PageruleCreateParams.ResolveOverride
     | PageruleCreateParams.RespectStrongEtag
-    | ZonesSettingsAPI.ResponseBufferingParam
-    | ZonesSettingsAPI.RocketLoaderParam
-    | ZonesSettingsAPI.SecurityLevelParam
-    | ZonesSettingsAPI.ServerSideExcludesParam
-    | ZonesSettingsAPI.SortQueryStringForCacheParam
-    | ZonesSettingsAPI.SSLParam
-    | ZonesSettingsAPI.TrueClientIPHeaderParam
-    | ZonesSettingsAPI.WAFParam
+    | SettingsAPI.ResponseBufferingParam
+    | SettingsAPI.RocketLoaderParam
+    | SettingsAPI.SecurityLevelParam
+    | SettingsAPI.ServerSideExcludesParam
+    | SettingsAPI.SortQueryStringForCacheParam
+    | SettingsAPI.SSLParam
+    | SettingsAPI.TrueClientIPHeaderParam
+    | SettingsAPI.WAFParam
   >;
 
   /**
@@ -994,47 +978,47 @@ export interface PageruleUpdateParams {
    * request. Actions can redirect to another URL or override settings, but not both.
    */
   actions: Array<
-    | ZonesSettingsAPI.AlwaysUseHTTPSParam
-    | ZonesSettingsAPI.AutomaticHTTPSRewritesParam
-    | ZonesSettingsAPI.BrowserCacheTTLParam
-    | ZonesSettingsAPI.BrowserCheckParam
+    | SettingsAPI.AlwaysUseHTTPSParam
+    | SettingsAPI.AutomaticHTTPSRewritesParam
+    | SettingsAPI.BrowserCacheTTLParam
+    | SettingsAPI.BrowserCheckParam
     | PageruleUpdateParams.BypassCacheOnCookie
     | PageruleUpdateParams.CacheByDeviceType
     | PageruleUpdateParams.CacheDeceptionArmor
     | PageruleUpdateParams.CacheKey
     | PageruleUpdateParams.CacheKeyFields
-    | ZonesSettingsAPI.CacheLevelParam
+    | SettingsAPI.CacheLevelParam
     | PageruleUpdateParams.CacheOnCookie
     | PageruleUpdateParams.CacheTTLByStatus
     | PageruleUpdateParams.DDoSProtection
-    | ZonesSettingsAPI.DevelopmentModeParam
+    | SettingsAPI.DevelopmentModeParam
     | PageruleUpdateParams.DisableApps
     | PageruleUpdateParams.DisablePerformance
     | PageruleUpdateParams.DisableSecurity
     | PageruleUpdateParams.DisableZaraz
     | PageruleUpdateParams.EdgeCacheTTL
-    | ZonesSettingsAPI.EmailObfuscationParam
+    | SettingsAPI.EmailObfuscationParam
     | PageruleUpdateParams.ExplicitCacheControl
     | PageruleUpdateParams.ForwardingURL
     | PageruleUpdateParams.HostHeaderOverride
-    | ZonesSettingsAPI.HotlinkProtectionParam
-    | ZonesSettingsAPI.IPGeolocationParam
+    | SettingsAPI.HotlinkProtectionParam
+    | SettingsAPI.IPGeolocationParam
     | PageruleUpdateParams.Minify
-    | ZonesSettingsAPI.MirageParam
-    | ZonesSettingsAPI.OpportunisticEncryptionParam
-    | ZonesSettingsAPI.OriginErrorPagePassThruParam
-    | ZonesSettingsAPI.PolishParam
+    | SettingsAPI.MirageParam
+    | SettingsAPI.OpportunisticEncryptionParam
+    | SettingsAPI.OriginErrorPagePassThruParam
+    | SettingsAPI.PolishParam
     | PageruleUpdateParams.PurgeByPageRule
     | PageruleUpdateParams.ResolveOverride
     | PageruleUpdateParams.RespectStrongEtag
-    | ZonesSettingsAPI.ResponseBufferingParam
-    | ZonesSettingsAPI.RocketLoaderParam
-    | ZonesSettingsAPI.SecurityLevelParam
-    | ZonesSettingsAPI.ServerSideExcludesParam
-    | ZonesSettingsAPI.SortQueryStringForCacheParam
-    | ZonesSettingsAPI.SSLParam
-    | ZonesSettingsAPI.TrueClientIPHeaderParam
-    | ZonesSettingsAPI.WAFParam
+    | SettingsAPI.ResponseBufferingParam
+    | SettingsAPI.RocketLoaderParam
+    | SettingsAPI.SecurityLevelParam
+    | SettingsAPI.ServerSideExcludesParam
+    | SettingsAPI.SortQueryStringForCacheParam
+    | SettingsAPI.SSLParam
+    | SettingsAPI.TrueClientIPHeaderParam
+    | SettingsAPI.WAFParam
   >;
 
   /**
@@ -1422,47 +1406,47 @@ export interface PageruleEditParams {
    * request. Actions can redirect to another URL or override settings, but not both.
    */
   actions?: Array<
-    | ZonesSettingsAPI.AlwaysUseHTTPSParam
-    | ZonesSettingsAPI.AutomaticHTTPSRewritesParam
-    | ZonesSettingsAPI.BrowserCacheTTLParam
-    | ZonesSettingsAPI.BrowserCheckParam
+    | SettingsAPI.AlwaysUseHTTPSParam
+    | SettingsAPI.AutomaticHTTPSRewritesParam
+    | SettingsAPI.BrowserCacheTTLParam
+    | SettingsAPI.BrowserCheckParam
     | PageruleEditParams.BypassCacheOnCookie
     | PageruleEditParams.CacheByDeviceType
     | PageruleEditParams.CacheDeceptionArmor
     | PageruleEditParams.CacheKey
     | PageruleEditParams.CacheKeyFields
-    | ZonesSettingsAPI.CacheLevelParam
+    | SettingsAPI.CacheLevelParam
     | PageruleEditParams.CacheOnCookie
     | PageruleEditParams.CacheTTLByStatus
     | PageruleEditParams.DDoSProtection
-    | ZonesSettingsAPI.DevelopmentModeParam
+    | SettingsAPI.DevelopmentModeParam
     | PageruleEditParams.DisableApps
     | PageruleEditParams.DisablePerformance
     | PageruleEditParams.DisableSecurity
     | PageruleEditParams.DisableZaraz
     | PageruleEditParams.EdgeCacheTTL
-    | ZonesSettingsAPI.EmailObfuscationParam
+    | SettingsAPI.EmailObfuscationParam
     | PageruleEditParams.ExplicitCacheControl
     | PageruleEditParams.ForwardingURL
     | PageruleEditParams.HostHeaderOverride
-    | ZonesSettingsAPI.HotlinkProtectionParam
-    | ZonesSettingsAPI.IPGeolocationParam
+    | SettingsAPI.HotlinkProtectionParam
+    | SettingsAPI.IPGeolocationParam
     | PageruleEditParams.Minify
-    | ZonesSettingsAPI.MirageParam
-    | ZonesSettingsAPI.OpportunisticEncryptionParam
-    | ZonesSettingsAPI.OriginErrorPagePassThruParam
-    | ZonesSettingsAPI.PolishParam
+    | SettingsAPI.MirageParam
+    | SettingsAPI.OpportunisticEncryptionParam
+    | SettingsAPI.OriginErrorPagePassThruParam
+    | SettingsAPI.PolishParam
     | PageruleEditParams.PurgeByPageRule
     | PageruleEditParams.ResolveOverride
     | PageruleEditParams.RespectStrongEtag
-    | ZonesSettingsAPI.ResponseBufferingParam
-    | ZonesSettingsAPI.RocketLoaderParam
-    | ZonesSettingsAPI.SecurityLevelParam
-    | ZonesSettingsAPI.ServerSideExcludesParam
-    | ZonesSettingsAPI.SortQueryStringForCacheParam
-    | ZonesSettingsAPI.SSLParam
-    | ZonesSettingsAPI.TrueClientIPHeaderParam
-    | ZonesSettingsAPI.WAFParam
+    | SettingsAPI.ResponseBufferingParam
+    | SettingsAPI.RocketLoaderParam
+    | SettingsAPI.SecurityLevelParam
+    | SettingsAPI.ServerSideExcludesParam
+    | SettingsAPI.SortQueryStringForCacheParam
+    | SettingsAPI.SSLParam
+    | SettingsAPI.TrueClientIPHeaderParam
+    | SettingsAPI.WAFParam
   >;
 
   /**
@@ -1809,14 +1793,4 @@ export interface PageruleGetParams {
    * Identifier
    */
   zone_id: string;
-}
-
-Pagerules.Settings = Settings;
-
-export declare namespace Pagerules {
-  export {
-    Settings as Settings,
-    type SettingListResponse as SettingListResponse,
-    type SettingListParams as SettingListParams,
-  };
 }

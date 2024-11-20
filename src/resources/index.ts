@@ -59,7 +59,7 @@ export { OriginCACertificates } from './origin-ca-certificates';
 export { OriginPostQuantumEncryption } from './origin-post-quantum-encryption';
 export { OriginTLSClientAuth } from './origin-tls-client-auth/origin-tls-client-auth';
 export { PageShield } from './page-shield/page-shield';
-export { Pagerules } from './pagerules/pagerules';
+export { Pagerules } from './pagerules';
 export { Pages } from './pages/pages';
 export { Queues } from './queues/queues';
 export { R2 } from './r2/r2';
