@@ -98,7 +98,7 @@ export class Operations extends APIResource {
 
 export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
 
-export interface APIShieldOperation {
+export interface APIShieldOperationModel {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
    * will be replaced from left to right with {varN}, starting with {var1}, during
@@ -118,7 +118,7 @@ export interface APIShieldOperation {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 }
 
-export interface APIShieldOperationParam {
+export interface APIShieldOperationModelParam {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
    * will be replaced from left to right with {varN}, starting with {var1}, during
@@ -1001,7 +1001,7 @@ export interface OperationCreateParams {
   /**
    * Body param:
    */
-  body: Array<APIShieldOperationParam>;
+  body: Array<APIShieldOperationModelParam>;
 }
 
 export interface OperationListParams extends V4PagePaginationArrayParams {
@@ -1077,7 +1077,7 @@ Operations.SchemaValidation = SchemaValidation;
 
 export declare namespace Operations {
   export {
-    type APIShieldOperation as APIShieldOperation,
+    type APIShieldOperationModel as APIShieldOperationModel,
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,
