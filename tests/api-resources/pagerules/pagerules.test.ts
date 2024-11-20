@@ -28,12 +28,7 @@ describe('resource pagerules', () => {
   test('create: required and optional params', async () => {
     const response = await client.pagerules.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          id: 'forwarding_url',
-          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
-        },
-      ],
+      actions: [{ id: 'browser_check', value: 'on' }],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
       priority: 0,
       status: 'active',
@@ -58,12 +53,7 @@ describe('resource pagerules', () => {
   test('update: required and optional params', async () => {
     const response = await client.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          id: 'forwarding_url',
-          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
-        },
-      ],
+      actions: [{ id: 'browser_check', value: 'on' }],
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
       priority: 0,
       status: 'active',
@@ -126,12 +116,7 @@ describe('resource pagerules', () => {
   test('edit: required and optional params', async () => {
     const response = await client.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          id: 'forwarding_url',
-          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
-        },
-      ],
+      actions: [{ id: 'browser_check', value: 'on' }],
       priority: 0,
       status: 'active',
       targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
