@@ -1,6 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
+import * as EntriesAPI from './entries';
+import {
+  Entries,
+  EntryCreateParams,
+  EntryCreateResponse,
+  EntryDeleteParams,
+  EntryDeleteResponse,
+  EntryGetParams,
+  EntryGetResponse,
+  EntryListParams,
+  EntryListResponse,
+  EntryListResponsesSinglePage,
+  EntryUpdateParams,
+  EntryUpdateResponse,
+} from './entries';
 import * as LimitsAPI from './limits';
 import { LimitListParams, LimitListResponse, Limits } from './limits';
 import * as PatternsAPI from './patterns';
@@ -43,6 +58,7 @@ export class DLP extends APIResource {
   payloadLogs: PayloadLogsAPI.PayloadLogs = new PayloadLogsAPI.PayloadLogs(this._client);
   profiles: ProfilesAPI.Profiles = new ProfilesAPI.Profiles(this._client);
   limits: LimitsAPI.Limits = new LimitsAPI.Limits(this._client);
+  entries: EntriesAPI.Entries = new EntriesAPI.Entries(this._client);
 }
 
 DLP.Datasets = Datasets;
@@ -52,6 +68,8 @@ DLP.PayloadLogs = PayloadLogs;
 DLP.Profiles = Profiles;
 DLP.ProfilesSinglePage = ProfilesSinglePage;
 DLP.Limits = Limits;
+DLP.Entries = Entries;
+DLP.EntryListResponsesSinglePage = EntryListResponsesSinglePage;
 
 export declare namespace DLP {
   export {
@@ -95,5 +113,20 @@ export declare namespace DLP {
     Limits as Limits,
     type LimitListResponse as LimitListResponse,
     type LimitListParams as LimitListParams,
+  };
+
+  export {
+    Entries as Entries,
+    type EntryCreateResponse as EntryCreateResponse,
+    type EntryUpdateResponse as EntryUpdateResponse,
+    type EntryListResponse as EntryListResponse,
+    type EntryDeleteResponse as EntryDeleteResponse,
+    type EntryGetResponse as EntryGetResponse,
+    EntryListResponsesSinglePage as EntryListResponsesSinglePage,
+    type EntryCreateParams as EntryCreateParams,
+    type EntryUpdateParams as EntryUpdateParams,
+    type EntryListParams as EntryListParams,
+    type EntryDeleteParams as EntryDeleteParams,
+    type EntryGetParams as EntryGetParams,
   };
 }

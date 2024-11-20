@@ -9,9 +9,46 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource investigate', () => {
+describe('resource allowPolicies', () => {
+  test('create: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.allowPolicies.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      is_acceptable_sender: false,
+      is_exempt_recipient: false,
+      is_regex: false,
+      is_trusted_sender: true,
+      pattern: 'test@example.com',
+      pattern_type: 'EMAIL',
+      verify_sender: true,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.allowPolicies.create({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      is_acceptable_sender: false,
+      is_exempt_recipient: false,
+      is_regex: false,
+      is_trusted_sender: true,
+      pattern: 'test@example.com',
+      pattern_type: 'EMAIL',
+      verify_sender: true,
+      comments: 'Trust all messages send from test@example.com',
+      is_recipient: false,
+      is_sender: true,
+      is_spoof: false,
+    });
+  });
+
   test('list: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.list({
+    const responsePromise = client.emailSecurity.settings.allowPolicies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,28 +61,23 @@ describe('resource investigate', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.list({
+    const response = await client.emailSecurity.settings.allowPolicies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      action_log: true,
-      alert_id: 'alert_id',
-      detections_only: true,
-      domain: 'domain',
-      end: '2019-12-27T18:11:19.117Z',
-      final_disposition: 'MALICIOUS',
-      message_action: 'PREVIEW',
-      message_id: 'message_id',
-      metric: 'metric',
+      direction: 'asc',
+      is_recipient: true,
+      is_sender: true,
+      is_spoof: true,
+      order: 'pattern',
       page: 1,
+      pattern_type: 'EMAIL',
       per_page: 1,
-      query: 'query',
-      recipient: 'recipient',
-      sender: 'sender',
-      start: '2019-12-27T18:11:19.117Z',
+      search: 'search',
+      verify_sender: true,
     });
   });
 
-  test('detections: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.detections('4Njp3P0STMz2c02Q', {
+  test('delete: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.allowPolicies.delete(2401, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -57,14 +89,41 @@ describe('resource investigate', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('detections: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.detections('4Njp3P0STMz2c02Q', {
+  test('delete: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.allowPolicies.delete(2401, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
+  test('edit: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.allowPolicies.edit(2401, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('edit: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.allowPolicies.edit(2401, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      comments: 'comments',
+      is_acceptable_sender: true,
+      is_exempt_recipient: true,
+      is_regex: true,
+      is_trusted_sender: true,
+      pattern: 'x',
+      pattern_type: 'EMAIL',
+      verify_sender: true,
+    });
+  });
+
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
+    const responsePromise = client.emailSecurity.settings.allowPolicies.get(2401, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -77,64 +136,7 @@ describe('resource investigate', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.get('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('preview: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.preview('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('preview: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.preview('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('raw: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.raw('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('raw: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.raw('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('trace: only required params', async () => {
-    const responsePromise = client.emailSecurity.investigate.trace('4Njp3P0STMz2c02Q', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('trace: required and optional params', async () => {
-    const response = await client.emailSecurity.investigate.trace('4Njp3P0STMz2c02Q', {
+    const response = await client.emailSecurity.settings.allowPolicies.get(2401, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });

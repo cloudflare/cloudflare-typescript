@@ -77,4 +77,23 @@ describe('resource domains', () => {
       lookback_hops: 1,
     });
   });
+
+  test('get: only required params', async () => {
+    const responsePromise = client.emailSecurity.settings.domains.get(2400, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('get: required and optional params', async () => {
+    const response = await client.emailSecurity.settings.domains.get(2400, {
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+    });
+  });
 });

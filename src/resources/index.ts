@@ -40,6 +40,13 @@ export { Images } from './images/images';
 export { Intel } from './intel/intel';
 export { KV } from './kv/kv';
 export { KeylessCertificates } from './keyless-certificates';
+export {
+  LeakedCredentialChecks,
+  type LeakedCredentialCheckCreateResponse,
+  type LeakedCredentialCheckListResponse,
+  type LeakedCredentialCheckCreateParams,
+  type LeakedCredentialCheckListParams,
+} from './leaked-credential-checks/leaked-credential-checks';
 export { LoadBalancers } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';
 export { Logs } from './logs/logs';
