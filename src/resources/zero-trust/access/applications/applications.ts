@@ -449,8 +449,7 @@ export namespace Application {
     scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -892,8 +891,7 @@ export namespace Application {
     scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -1052,8 +1050,7 @@ export namespace Application {
     scim_config?: ApplicationsAPI.ApplicationSCIMConfig;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -2454,8 +2451,7 @@ export namespace ApplicationCreateResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -2769,8 +2765,7 @@ export namespace ApplicationCreateResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -2969,8 +2964,7 @@ export namespace ApplicationCreateResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -3952,8 +3946,7 @@ export namespace ApplicationUpdateResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -4267,8 +4260,7 @@ export namespace ApplicationUpdateResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -4467,8 +4459,7 @@ export namespace ApplicationUpdateResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -5450,8 +5441,7 @@ export namespace ApplicationListResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -5765,8 +5755,7 @@ export namespace ApplicationListResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -5965,8 +5954,7 @@ export namespace ApplicationListResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -6955,8 +6943,7 @@ export namespace ApplicationGetResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -7270,8 +7257,7 @@ export namespace ApplicationGetResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -7470,8 +7456,7 @@ export namespace ApplicationGetResponse {
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
     /**
-     * Returns a 401 status code when the request is blocked by a Service Auth policy
-     * foo.
+     * Returns a 401 status code when the request is blocked by a Service Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -8470,7 +8455,7 @@ export namespace ApplicationCreateParams {
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
-     * Auth policy foo.
+     * Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -8936,7 +8921,7 @@ export namespace ApplicationCreateParams {
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
-     * Auth policy foo.
+     * Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -9212,7 +9197,7 @@ export namespace ApplicationCreateParams {
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
-     * Auth policy foo.
+     * Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -10397,7 +10382,7 @@ export namespace ApplicationUpdateParams {
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
-     * Auth policy foo.
+     * Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -10863,7 +10848,7 @@ export namespace ApplicationUpdateParams {
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
-     * Auth policy foo.
+     * Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
@@ -11139,7 +11124,7 @@ export namespace ApplicationUpdateParams {
 
     /**
      * Body param: Returns a 401 status code when the request is blocked by a Service
-     * Auth policy foo.
+     * Auth policy.
      */
     service_auth_401_redirect?: boolean;
 
