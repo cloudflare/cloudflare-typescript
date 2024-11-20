@@ -4,6 +4,7 @@ import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as SettingsAPI from './settings';
 import { SettingListParams, SettingListResponse, Settings } from './settings';
+import * as ZonesSettingsAPI from '../zones/settings';
 
 export class Pagerules extends APIResource {
   settings: SettingsAPI.Settings = new SettingsAPI.Settings(this._client);
@@ -121,7 +122,49 @@ export interface PageRule {
    * The set of actions to perform if the targets of this rule match the request.
    * Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<PageRule.Action>;
+  actions: Array<
+    | ZonesSettingsAPI.AlwaysUseHTTPS
+    | ZonesSettingsAPI.AutomaticHTTPSRewrites
+    | ZonesSettingsAPI.BrowserCacheTTL
+    | ZonesSettingsAPI.BrowserCheck
+    | PageRule.BypassCacheOnCookie
+    | PageRule.CacheByDeviceType
+    | PageRule.CacheDeceptionArmor
+    | PageRule.CacheKey
+    | PageRule.CacheKeyFields
+    | ZonesSettingsAPI.CacheLevel
+    | PageRule.CacheOnCookie
+    | PageRule.CacheTTLByStatus
+    | PageRule.DDoSProtection
+    | ZonesSettingsAPI.DevelopmentMode
+    | PageRule.DisableApps
+    | PageRule.DisablePerformance
+    | PageRule.DisableSecurity
+    | PageRule.DisableZaraz
+    | PageRule.EdgeCacheTTL
+    | ZonesSettingsAPI.EmailObfuscation
+    | PageRule.ExplicitCacheControl
+    | PageRule.ForwardingURL
+    | PageRule.HostHeaderOverride
+    | ZonesSettingsAPI.HotlinkProtection
+    | ZonesSettingsAPI.IPGeolocation
+    | PageRule.Minify
+    | ZonesSettingsAPI.Mirage
+    | ZonesSettingsAPI.OpportunisticEncryption
+    | ZonesSettingsAPI.OriginErrorPagePassThru
+    | ZonesSettingsAPI.Polish
+    | PageRule.PurgeByPageRule
+    | PageRule.ResolveOverride
+    | PageRule.RespectStrongEtag
+    | ZonesSettingsAPI.ResponseBuffering
+    | ZonesSettingsAPI.RocketLoader
+    | ZonesSettingsAPI.SecurityLevel
+    | ZonesSettingsAPI.ServerSideExcludes
+    | ZonesSettingsAPI.SortQueryStringForCache
+    | ZonesSettingsAPI.SSL
+    | ZonesSettingsAPI.TrueClientIPHeader
+    | ZonesSettingsAPI.WAF
+  >;
 
   /**
    * The timestamp of when the Page Rule was created.
@@ -154,17 +197,257 @@ export interface PageRule {
 }
 
 export namespace PageRule {
-  export interface Action {
+  export interface BypassCacheOnCookie {
+    /**
+     * Bypass cache and fetch resources from the origin server if a regular expression
+     * matches against a cookie name present in the request.
+     */
+    id?: 'bypass_cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request. Refer to
+     * [Bypass Cache on Cookie setting](https://developers.cloudflare.com/rules/page-rules/reference/additional-reference/#bypass-cache-on-cookie-setting)
+     * to learn about limited regular expression support.
+     */
+    value?: string;
+  }
+
+  export interface CacheByDeviceType {
+    /**
+     * Separate cached content based on the visitor's device type.
+     */
+    id?: 'cache_by_device_type';
+
+    /**
+     * The status of Cache By Device Type.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheDeceptionArmor {
+    /**
+     * Protect from web cache deception attacks while still allowing static assets to
+     * be cached. This setting verifies that the URL's extension matches the returned
+     * `Content-Type`.
+     */
+    id?: 'cache_deception_armor';
+
+    /**
+     * The status of Cache Deception Armor.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheKey {
+    /**
+     * Control specifically what variables to include when deciding which resources to
+     * cache. This allows customers to determine what to cache based on something other
+     * than just the URL.
+     */
+    id?: 'cache_key';
+
+    value?: CacheKey.Value;
+  }
+
+  export namespace CacheKey {
+    export interface Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      cookie?: Value.Cookie;
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      header?: Value.Header;
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      host?: Value.Host;
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      query_string?: Value.QueryString;
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      user?: Value.User;
+    }
+
+    export namespace Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      export interface Cookie {
+        /**
+         * A list of cookies to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of cookies to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      export interface Header {
+        /**
+         * A list of headers to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of headers to ignore.
+         */
+        exclude?: Array<string>;
+
+        /**
+         * A list of headers to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      export interface Host {
+        /**
+         * Whether to include the Host header in the HTTP request sent to the origin.
+         */
+        resolved?: boolean;
+      }
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      export interface QueryString {
+        /**
+         * Ignore all query string parameters.
+         */
+        exclude?: '*' | Array<string>;
+
+        /**
+         * Include all query string parameters.
+         */
+        include?: '*' | Array<string>;
+      }
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      export interface User {
+        /**
+         * Classifies a request as `mobile`, `desktop`, or `tablet` based on the User
+         * Agent.
+         */
+        device_type?: boolean;
+
+        /**
+         * Includes the client's country, derived from the IP address.
+         */
+        geo?: boolean;
+
+        /**
+         * Includes the first language code contained in the `Accept-Language` header sent
+         * by the client.
+         */
+        lang?: boolean;
+      }
+    }
+  }
+
+  export interface CacheKeyFields {
+    id?: 'cache_key_fields';
+  }
+
+  export interface CacheOnCookie {
+    id?: 'cache_on_cookie';
+  }
+
+  export interface CacheTTLByStatus {
+    id?: 'cache_ttl_by_status';
+  }
+
+  export interface DDoSProtection {
+    id?: 'ddos_protection';
+  }
+
+  export interface DisableApps {
+    /**
+     * Turn off all active
+     * [Cloudflare Apps](https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-apps/)
+     * (deprecated).
+     */
+    id?: 'disable_apps';
+  }
+
+  export interface DisablePerformance {
+    /**
+     * Turn off
+     * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
+     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
+     * and [Polish](https://developers.cloudflare.com/images/polish/).
+     */
+    id?: 'disable_performance';
+  }
+
+  export interface DisableSecurity {
+    /**
+     * Turn off
+     * [Email Obfuscation](https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/),
+     * [Rate Limiting (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-rate-limiting/),
+     * [Scrape Shield](https://developers.cloudflare.com/waf/tools/scrape-shield/),
+     * [URL (Zone) Lockdown](https://developers.cloudflare.com/waf/tools/zone-lockdown/),
+     * and
+     * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
+     */
+    id?: 'disable_security';
+  }
+
+  export interface DisableZaraz {
+    /**
+     * Turn off [Zaraz](https://developers.cloudflare.com/zaraz/).
+     */
+    id?: 'disable_zaraz';
+  }
+
+  export interface EdgeCacheTTL {
+    /**
+     * Specify how long to cache a resource in the Cloudflare global network. _Edge
+     * Cache TTL_ is not visible in response headers.
+     */
+    id?: 'edge_cache_ttl';
+
+    value?: number;
+  }
+
+  export interface ExplicitCacheControl {
+    id?: 'explicit_cache_control';
+  }
+
+  export interface ForwardingURL {
     /**
      * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
      * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
      */
     id?: 'forwarding_url';
 
-    value?: Action.Value;
+    value?: ForwardingURL.Value;
   }
 
-  export namespace Action {
+  export namespace ForwardingURL {
     export interface Value {
       /**
        * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
@@ -178,6 +461,57 @@ export namespace PageRule {
        */
       url?: string;
     }
+  }
+
+  export interface HostHeaderOverride {
+    /**
+     * Apply a specific host header.
+     */
+    id?: 'host_header_override';
+
+    /**
+     * The hostname to use in the `Host` header
+     */
+    value?: string;
+  }
+
+  export interface Minify {
+    id?: 'minify';
+  }
+
+  export interface PurgeByPageRule {
+    id?: 'purge_by_page_rule';
+  }
+
+  export interface ResolveOverride {
+    /**
+     * Change the origin address to the value specified in this setting.
+     */
+    id?: 'resolve_override';
+
+    value?: ResolveOverride.Value;
+  }
+
+  export namespace ResolveOverride {
+    export interface Value {
+      /**
+       * The origin address you want to override with.
+       */
+      value?: string;
+    }
+  }
+
+  export interface RespectStrongEtag {
+    /**
+     * Turn on or off byte-for-byte equivalency checks between the Cloudflare cache and
+     * the origin server.
+     */
+    id?: 'respect_strong_etag';
+
+    /**
+     * The status of Respect Strong ETags
+     */
+    value?: 'on' | 'off';
   }
 }
 
@@ -266,7 +600,49 @@ export interface PageruleCreateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<PageruleCreateParams.Action>;
+  actions: Array<
+    | ZonesSettingsAPI.AlwaysUseHTTPSParam
+    | ZonesSettingsAPI.AutomaticHTTPSRewritesParam
+    | ZonesSettingsAPI.BrowserCacheTTLParam
+    | ZonesSettingsAPI.BrowserCheckParam
+    | PageruleCreateParams.BypassCacheOnCookie
+    | PageruleCreateParams.CacheByDeviceType
+    | PageruleCreateParams.CacheDeceptionArmor
+    | PageruleCreateParams.CacheKey
+    | PageruleCreateParams.CacheKeyFields
+    | ZonesSettingsAPI.CacheLevelParam
+    | PageruleCreateParams.CacheOnCookie
+    | PageruleCreateParams.CacheTTLByStatus
+    | PageruleCreateParams.DDoSProtection
+    | ZonesSettingsAPI.DevelopmentModeParam
+    | PageruleCreateParams.DisableApps
+    | PageruleCreateParams.DisablePerformance
+    | PageruleCreateParams.DisableSecurity
+    | PageruleCreateParams.DisableZaraz
+    | PageruleCreateParams.EdgeCacheTTL
+    | ZonesSettingsAPI.EmailObfuscationParam
+    | PageruleCreateParams.ExplicitCacheControl
+    | PageruleCreateParams.ForwardingURL
+    | PageruleCreateParams.HostHeaderOverride
+    | ZonesSettingsAPI.HotlinkProtectionParam
+    | ZonesSettingsAPI.IPGeolocationParam
+    | PageruleCreateParams.Minify
+    | ZonesSettingsAPI.MirageParam
+    | ZonesSettingsAPI.OpportunisticEncryptionParam
+    | ZonesSettingsAPI.OriginErrorPagePassThruParam
+    | ZonesSettingsAPI.PolishParam
+    | PageruleCreateParams.PurgeByPageRule
+    | PageruleCreateParams.ResolveOverride
+    | PageruleCreateParams.RespectStrongEtag
+    | ZonesSettingsAPI.ResponseBufferingParam
+    | ZonesSettingsAPI.RocketLoaderParam
+    | ZonesSettingsAPI.SecurityLevelParam
+    | ZonesSettingsAPI.ServerSideExcludesParam
+    | ZonesSettingsAPI.SortQueryStringForCacheParam
+    | ZonesSettingsAPI.SSLParam
+    | ZonesSettingsAPI.TrueClientIPHeaderParam
+    | ZonesSettingsAPI.WAFParam
+  >;
 
   /**
    * Body param: The rule targets to evaluate on each request.
@@ -289,17 +665,257 @@ export interface PageruleCreateParams {
 }
 
 export namespace PageruleCreateParams {
-  export interface Action {
+  export interface BypassCacheOnCookie {
+    /**
+     * Bypass cache and fetch resources from the origin server if a regular expression
+     * matches against a cookie name present in the request.
+     */
+    id?: 'bypass_cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request. Refer to
+     * [Bypass Cache on Cookie setting](https://developers.cloudflare.com/rules/page-rules/reference/additional-reference/#bypass-cache-on-cookie-setting)
+     * to learn about limited regular expression support.
+     */
+    value?: string;
+  }
+
+  export interface CacheByDeviceType {
+    /**
+     * Separate cached content based on the visitor's device type.
+     */
+    id?: 'cache_by_device_type';
+
+    /**
+     * The status of Cache By Device Type.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheDeceptionArmor {
+    /**
+     * Protect from web cache deception attacks while still allowing static assets to
+     * be cached. This setting verifies that the URL's extension matches the returned
+     * `Content-Type`.
+     */
+    id?: 'cache_deception_armor';
+
+    /**
+     * The status of Cache Deception Armor.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheKey {
+    /**
+     * Control specifically what variables to include when deciding which resources to
+     * cache. This allows customers to determine what to cache based on something other
+     * than just the URL.
+     */
+    id?: 'cache_key';
+
+    value?: CacheKey.Value;
+  }
+
+  export namespace CacheKey {
+    export interface Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      cookie?: Value.Cookie;
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      header?: Value.Header;
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      host?: Value.Host;
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      query_string?: Value.QueryString;
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      user?: Value.User;
+    }
+
+    export namespace Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      export interface Cookie {
+        /**
+         * A list of cookies to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of cookies to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      export interface Header {
+        /**
+         * A list of headers to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of headers to ignore.
+         */
+        exclude?: Array<string>;
+
+        /**
+         * A list of headers to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      export interface Host {
+        /**
+         * Whether to include the Host header in the HTTP request sent to the origin.
+         */
+        resolved?: boolean;
+      }
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      export interface QueryString {
+        /**
+         * Ignore all query string parameters.
+         */
+        exclude?: '*' | Array<string>;
+
+        /**
+         * Include all query string parameters.
+         */
+        include?: '*' | Array<string>;
+      }
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      export interface User {
+        /**
+         * Classifies a request as `mobile`, `desktop`, or `tablet` based on the User
+         * Agent.
+         */
+        device_type?: boolean;
+
+        /**
+         * Includes the client's country, derived from the IP address.
+         */
+        geo?: boolean;
+
+        /**
+         * Includes the first language code contained in the `Accept-Language` header sent
+         * by the client.
+         */
+        lang?: boolean;
+      }
+    }
+  }
+
+  export interface CacheKeyFields {
+    id?: 'cache_key_fields';
+  }
+
+  export interface CacheOnCookie {
+    id?: 'cache_on_cookie';
+  }
+
+  export interface CacheTTLByStatus {
+    id?: 'cache_ttl_by_status';
+  }
+
+  export interface DDoSProtection {
+    id?: 'ddos_protection';
+  }
+
+  export interface DisableApps {
+    /**
+     * Turn off all active
+     * [Cloudflare Apps](https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-apps/)
+     * (deprecated).
+     */
+    id?: 'disable_apps';
+  }
+
+  export interface DisablePerformance {
+    /**
+     * Turn off
+     * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
+     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
+     * and [Polish](https://developers.cloudflare.com/images/polish/).
+     */
+    id?: 'disable_performance';
+  }
+
+  export interface DisableSecurity {
+    /**
+     * Turn off
+     * [Email Obfuscation](https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/),
+     * [Rate Limiting (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-rate-limiting/),
+     * [Scrape Shield](https://developers.cloudflare.com/waf/tools/scrape-shield/),
+     * [URL (Zone) Lockdown](https://developers.cloudflare.com/waf/tools/zone-lockdown/),
+     * and
+     * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
+     */
+    id?: 'disable_security';
+  }
+
+  export interface DisableZaraz {
+    /**
+     * Turn off [Zaraz](https://developers.cloudflare.com/zaraz/).
+     */
+    id?: 'disable_zaraz';
+  }
+
+  export interface EdgeCacheTTL {
+    /**
+     * Specify how long to cache a resource in the Cloudflare global network. _Edge
+     * Cache TTL_ is not visible in response headers.
+     */
+    id?: 'edge_cache_ttl';
+
+    value?: number;
+  }
+
+  export interface ExplicitCacheControl {
+    id?: 'explicit_cache_control';
+  }
+
+  export interface ForwardingURL {
     /**
      * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
      * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
      */
     id?: 'forwarding_url';
 
-    value?: Action.Value;
+    value?: ForwardingURL.Value;
   }
 
-  export namespace Action {
+  export namespace ForwardingURL {
     export interface Value {
       /**
        * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
@@ -314,6 +930,57 @@ export namespace PageruleCreateParams {
       url?: string;
     }
   }
+
+  export interface HostHeaderOverride {
+    /**
+     * Apply a specific host header.
+     */
+    id?: 'host_header_override';
+
+    /**
+     * The hostname to use in the `Host` header
+     */
+    value?: string;
+  }
+
+  export interface Minify {
+    id?: 'minify';
+  }
+
+  export interface PurgeByPageRule {
+    id?: 'purge_by_page_rule';
+  }
+
+  export interface ResolveOverride {
+    /**
+     * Change the origin address to the value specified in this setting.
+     */
+    id?: 'resolve_override';
+
+    value?: ResolveOverride.Value;
+  }
+
+  export namespace ResolveOverride {
+    export interface Value {
+      /**
+       * The origin address you want to override with.
+       */
+      value?: string;
+    }
+  }
+
+  export interface RespectStrongEtag {
+    /**
+     * Turn on or off byte-for-byte equivalency checks between the Cloudflare cache and
+     * the origin server.
+     */
+    id?: 'respect_strong_etag';
+
+    /**
+     * The status of Respect Strong ETags
+     */
+    value?: 'on' | 'off';
+  }
 }
 
 export interface PageruleUpdateParams {
@@ -326,7 +993,49 @@ export interface PageruleUpdateParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions: Array<PageruleUpdateParams.Action>;
+  actions: Array<
+    | ZonesSettingsAPI.AlwaysUseHTTPSParam
+    | ZonesSettingsAPI.AutomaticHTTPSRewritesParam
+    | ZonesSettingsAPI.BrowserCacheTTLParam
+    | ZonesSettingsAPI.BrowserCheckParam
+    | PageruleUpdateParams.BypassCacheOnCookie
+    | PageruleUpdateParams.CacheByDeviceType
+    | PageruleUpdateParams.CacheDeceptionArmor
+    | PageruleUpdateParams.CacheKey
+    | PageruleUpdateParams.CacheKeyFields
+    | ZonesSettingsAPI.CacheLevelParam
+    | PageruleUpdateParams.CacheOnCookie
+    | PageruleUpdateParams.CacheTTLByStatus
+    | PageruleUpdateParams.DDoSProtection
+    | ZonesSettingsAPI.DevelopmentModeParam
+    | PageruleUpdateParams.DisableApps
+    | PageruleUpdateParams.DisablePerformance
+    | PageruleUpdateParams.DisableSecurity
+    | PageruleUpdateParams.DisableZaraz
+    | PageruleUpdateParams.EdgeCacheTTL
+    | ZonesSettingsAPI.EmailObfuscationParam
+    | PageruleUpdateParams.ExplicitCacheControl
+    | PageruleUpdateParams.ForwardingURL
+    | PageruleUpdateParams.HostHeaderOverride
+    | ZonesSettingsAPI.HotlinkProtectionParam
+    | ZonesSettingsAPI.IPGeolocationParam
+    | PageruleUpdateParams.Minify
+    | ZonesSettingsAPI.MirageParam
+    | ZonesSettingsAPI.OpportunisticEncryptionParam
+    | ZonesSettingsAPI.OriginErrorPagePassThruParam
+    | ZonesSettingsAPI.PolishParam
+    | PageruleUpdateParams.PurgeByPageRule
+    | PageruleUpdateParams.ResolveOverride
+    | PageruleUpdateParams.RespectStrongEtag
+    | ZonesSettingsAPI.ResponseBufferingParam
+    | ZonesSettingsAPI.RocketLoaderParam
+    | ZonesSettingsAPI.SecurityLevelParam
+    | ZonesSettingsAPI.ServerSideExcludesParam
+    | ZonesSettingsAPI.SortQueryStringForCacheParam
+    | ZonesSettingsAPI.SSLParam
+    | ZonesSettingsAPI.TrueClientIPHeaderParam
+    | ZonesSettingsAPI.WAFParam
+  >;
 
   /**
    * Body param: The rule targets to evaluate on each request.
@@ -349,17 +1058,257 @@ export interface PageruleUpdateParams {
 }
 
 export namespace PageruleUpdateParams {
-  export interface Action {
+  export interface BypassCacheOnCookie {
+    /**
+     * Bypass cache and fetch resources from the origin server if a regular expression
+     * matches against a cookie name present in the request.
+     */
+    id?: 'bypass_cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request. Refer to
+     * [Bypass Cache on Cookie setting](https://developers.cloudflare.com/rules/page-rules/reference/additional-reference/#bypass-cache-on-cookie-setting)
+     * to learn about limited regular expression support.
+     */
+    value?: string;
+  }
+
+  export interface CacheByDeviceType {
+    /**
+     * Separate cached content based on the visitor's device type.
+     */
+    id?: 'cache_by_device_type';
+
+    /**
+     * The status of Cache By Device Type.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheDeceptionArmor {
+    /**
+     * Protect from web cache deception attacks while still allowing static assets to
+     * be cached. This setting verifies that the URL's extension matches the returned
+     * `Content-Type`.
+     */
+    id?: 'cache_deception_armor';
+
+    /**
+     * The status of Cache Deception Armor.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheKey {
+    /**
+     * Control specifically what variables to include when deciding which resources to
+     * cache. This allows customers to determine what to cache based on something other
+     * than just the URL.
+     */
+    id?: 'cache_key';
+
+    value?: CacheKey.Value;
+  }
+
+  export namespace CacheKey {
+    export interface Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      cookie?: Value.Cookie;
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      header?: Value.Header;
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      host?: Value.Host;
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      query_string?: Value.QueryString;
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      user?: Value.User;
+    }
+
+    export namespace Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      export interface Cookie {
+        /**
+         * A list of cookies to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of cookies to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      export interface Header {
+        /**
+         * A list of headers to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of headers to ignore.
+         */
+        exclude?: Array<string>;
+
+        /**
+         * A list of headers to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      export interface Host {
+        /**
+         * Whether to include the Host header in the HTTP request sent to the origin.
+         */
+        resolved?: boolean;
+      }
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      export interface QueryString {
+        /**
+         * Ignore all query string parameters.
+         */
+        exclude?: '*' | Array<string>;
+
+        /**
+         * Include all query string parameters.
+         */
+        include?: '*' | Array<string>;
+      }
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      export interface User {
+        /**
+         * Classifies a request as `mobile`, `desktop`, or `tablet` based on the User
+         * Agent.
+         */
+        device_type?: boolean;
+
+        /**
+         * Includes the client's country, derived from the IP address.
+         */
+        geo?: boolean;
+
+        /**
+         * Includes the first language code contained in the `Accept-Language` header sent
+         * by the client.
+         */
+        lang?: boolean;
+      }
+    }
+  }
+
+  export interface CacheKeyFields {
+    id?: 'cache_key_fields';
+  }
+
+  export interface CacheOnCookie {
+    id?: 'cache_on_cookie';
+  }
+
+  export interface CacheTTLByStatus {
+    id?: 'cache_ttl_by_status';
+  }
+
+  export interface DDoSProtection {
+    id?: 'ddos_protection';
+  }
+
+  export interface DisableApps {
+    /**
+     * Turn off all active
+     * [Cloudflare Apps](https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-apps/)
+     * (deprecated).
+     */
+    id?: 'disable_apps';
+  }
+
+  export interface DisablePerformance {
+    /**
+     * Turn off
+     * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
+     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
+     * and [Polish](https://developers.cloudflare.com/images/polish/).
+     */
+    id?: 'disable_performance';
+  }
+
+  export interface DisableSecurity {
+    /**
+     * Turn off
+     * [Email Obfuscation](https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/),
+     * [Rate Limiting (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-rate-limiting/),
+     * [Scrape Shield](https://developers.cloudflare.com/waf/tools/scrape-shield/),
+     * [URL (Zone) Lockdown](https://developers.cloudflare.com/waf/tools/zone-lockdown/),
+     * and
+     * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
+     */
+    id?: 'disable_security';
+  }
+
+  export interface DisableZaraz {
+    /**
+     * Turn off [Zaraz](https://developers.cloudflare.com/zaraz/).
+     */
+    id?: 'disable_zaraz';
+  }
+
+  export interface EdgeCacheTTL {
+    /**
+     * Specify how long to cache a resource in the Cloudflare global network. _Edge
+     * Cache TTL_ is not visible in response headers.
+     */
+    id?: 'edge_cache_ttl';
+
+    value?: number;
+  }
+
+  export interface ExplicitCacheControl {
+    id?: 'explicit_cache_control';
+  }
+
+  export interface ForwardingURL {
     /**
      * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
      * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
      */
     id?: 'forwarding_url';
 
-    value?: Action.Value;
+    value?: ForwardingURL.Value;
   }
 
-  export namespace Action {
+  export namespace ForwardingURL {
     export interface Value {
       /**
        * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
@@ -373,6 +1322,57 @@ export namespace PageruleUpdateParams {
        */
       url?: string;
     }
+  }
+
+  export interface HostHeaderOverride {
+    /**
+     * Apply a specific host header.
+     */
+    id?: 'host_header_override';
+
+    /**
+     * The hostname to use in the `Host` header
+     */
+    value?: string;
+  }
+
+  export interface Minify {
+    id?: 'minify';
+  }
+
+  export interface PurgeByPageRule {
+    id?: 'purge_by_page_rule';
+  }
+
+  export interface ResolveOverride {
+    /**
+     * Change the origin address to the value specified in this setting.
+     */
+    id?: 'resolve_override';
+
+    value?: ResolveOverride.Value;
+  }
+
+  export namespace ResolveOverride {
+    export interface Value {
+      /**
+       * The origin address you want to override with.
+       */
+      value?: string;
+    }
+  }
+
+  export interface RespectStrongEtag {
+    /**
+     * Turn on or off byte-for-byte equivalency checks between the Cloudflare cache and
+     * the origin server.
+     */
+    id?: 'respect_strong_etag';
+
+    /**
+     * The status of Respect Strong ETags
+     */
+    value?: 'on' | 'off';
   }
 }
 
@@ -421,7 +1421,49 @@ export interface PageruleEditParams {
    * Body param: The set of actions to perform if the targets of this rule match the
    * request. Actions can redirect to another URL or override settings, but not both.
    */
-  actions?: Array<PageruleEditParams.Action>;
+  actions?: Array<
+    | ZonesSettingsAPI.AlwaysUseHTTPSParam
+    | ZonesSettingsAPI.AutomaticHTTPSRewritesParam
+    | ZonesSettingsAPI.BrowserCacheTTLParam
+    | ZonesSettingsAPI.BrowserCheckParam
+    | PageruleEditParams.BypassCacheOnCookie
+    | PageruleEditParams.CacheByDeviceType
+    | PageruleEditParams.CacheDeceptionArmor
+    | PageruleEditParams.CacheKey
+    | PageruleEditParams.CacheKeyFields
+    | ZonesSettingsAPI.CacheLevelParam
+    | PageruleEditParams.CacheOnCookie
+    | PageruleEditParams.CacheTTLByStatus
+    | PageruleEditParams.DDoSProtection
+    | ZonesSettingsAPI.DevelopmentModeParam
+    | PageruleEditParams.DisableApps
+    | PageruleEditParams.DisablePerformance
+    | PageruleEditParams.DisableSecurity
+    | PageruleEditParams.DisableZaraz
+    | PageruleEditParams.EdgeCacheTTL
+    | ZonesSettingsAPI.EmailObfuscationParam
+    | PageruleEditParams.ExplicitCacheControl
+    | PageruleEditParams.ForwardingURL
+    | PageruleEditParams.HostHeaderOverride
+    | ZonesSettingsAPI.HotlinkProtectionParam
+    | ZonesSettingsAPI.IPGeolocationParam
+    | PageruleEditParams.Minify
+    | ZonesSettingsAPI.MirageParam
+    | ZonesSettingsAPI.OpportunisticEncryptionParam
+    | ZonesSettingsAPI.OriginErrorPagePassThruParam
+    | ZonesSettingsAPI.PolishParam
+    | PageruleEditParams.PurgeByPageRule
+    | PageruleEditParams.ResolveOverride
+    | PageruleEditParams.RespectStrongEtag
+    | ZonesSettingsAPI.ResponseBufferingParam
+    | ZonesSettingsAPI.RocketLoaderParam
+    | ZonesSettingsAPI.SecurityLevelParam
+    | ZonesSettingsAPI.ServerSideExcludesParam
+    | ZonesSettingsAPI.SortQueryStringForCacheParam
+    | ZonesSettingsAPI.SSLParam
+    | ZonesSettingsAPI.TrueClientIPHeaderParam
+    | ZonesSettingsAPI.WAFParam
+  >;
 
   /**
    * Body param: The priority of the rule, used to define which Page Rule is
@@ -444,17 +1486,257 @@ export interface PageruleEditParams {
 }
 
 export namespace PageruleEditParams {
-  export interface Action {
+  export interface BypassCacheOnCookie {
+    /**
+     * Bypass cache and fetch resources from the origin server if a regular expression
+     * matches against a cookie name present in the request.
+     */
+    id?: 'bypass_cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request. Refer to
+     * [Bypass Cache on Cookie setting](https://developers.cloudflare.com/rules/page-rules/reference/additional-reference/#bypass-cache-on-cookie-setting)
+     * to learn about limited regular expression support.
+     */
+    value?: string;
+  }
+
+  export interface CacheByDeviceType {
+    /**
+     * Separate cached content based on the visitor's device type.
+     */
+    id?: 'cache_by_device_type';
+
+    /**
+     * The status of Cache By Device Type.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheDeceptionArmor {
+    /**
+     * Protect from web cache deception attacks while still allowing static assets to
+     * be cached. This setting verifies that the URL's extension matches the returned
+     * `Content-Type`.
+     */
+    id?: 'cache_deception_armor';
+
+    /**
+     * The status of Cache Deception Armor.
+     */
+    value?: 'on' | 'off';
+  }
+
+  export interface CacheKey {
+    /**
+     * Control specifically what variables to include when deciding which resources to
+     * cache. This allows customers to determine what to cache based on something other
+     * than just the URL.
+     */
+    id?: 'cache_key';
+
+    value?: CacheKey.Value;
+  }
+
+  export namespace CacheKey {
+    export interface Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      cookie?: Value.Cookie;
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      header?: Value.Header;
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      host?: Value.Host;
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      query_string?: Value.QueryString;
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      user?: Value.User;
+    }
+
+    export namespace Value {
+      /**
+       * Controls which cookies appear in the Cache Key.
+       */
+      export interface Cookie {
+        /**
+         * A list of cookies to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of cookies to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Controls which headers go into the Cache Key. Exactly one of `include` or
+       * `exclude` is expected.
+       */
+      export interface Header {
+        /**
+         * A list of headers to check for the presence of, without including their actual
+         * values.
+         */
+        check_presence?: Array<string>;
+
+        /**
+         * A list of headers to ignore.
+         */
+        exclude?: Array<string>;
+
+        /**
+         * A list of headers to include.
+         */
+        include?: Array<string>;
+      }
+
+      /**
+       * Determines which host header to include in the Cache Key.
+       */
+      export interface Host {
+        /**
+         * Whether to include the Host header in the HTTP request sent to the origin.
+         */
+        resolved?: boolean;
+      }
+
+      /**
+       * Controls which URL query string parameters go into the Cache Key. Exactly one of
+       * `include` or `exclude` is expected.
+       */
+      export interface QueryString {
+        /**
+         * Ignore all query string parameters.
+         */
+        exclude?: '*' | Array<string>;
+
+        /**
+         * Include all query string parameters.
+         */
+        include?: '*' | Array<string>;
+      }
+
+      /**
+       * Feature fields to add features about the end-user (client) into the Cache Key.
+       */
+      export interface User {
+        /**
+         * Classifies a request as `mobile`, `desktop`, or `tablet` based on the User
+         * Agent.
+         */
+        device_type?: boolean;
+
+        /**
+         * Includes the client's country, derived from the IP address.
+         */
+        geo?: boolean;
+
+        /**
+         * Includes the first language code contained in the `Accept-Language` header sent
+         * by the client.
+         */
+        lang?: boolean;
+      }
+    }
+  }
+
+  export interface CacheKeyFields {
+    id?: 'cache_key_fields';
+  }
+
+  export interface CacheOnCookie {
+    id?: 'cache_on_cookie';
+  }
+
+  export interface CacheTTLByStatus {
+    id?: 'cache_ttl_by_status';
+  }
+
+  export interface DDoSProtection {
+    id?: 'ddos_protection';
+  }
+
+  export interface DisableApps {
+    /**
+     * Turn off all active
+     * [Cloudflare Apps](https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-apps/)
+     * (deprecated).
+     */
+    id?: 'disable_apps';
+  }
+
+  export interface DisablePerformance {
+    /**
+     * Turn off
+     * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
+     * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/),
+     * and [Polish](https://developers.cloudflare.com/images/polish/).
+     */
+    id?: 'disable_performance';
+  }
+
+  export interface DisableSecurity {
+    /**
+     * Turn off
+     * [Email Obfuscation](https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/),
+     * [Rate Limiting (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-rate-limiting/),
+     * [Scrape Shield](https://developers.cloudflare.com/waf/tools/scrape-shield/),
+     * [URL (Zone) Lockdown](https://developers.cloudflare.com/waf/tools/zone-lockdown/),
+     * and
+     * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
+     */
+    id?: 'disable_security';
+  }
+
+  export interface DisableZaraz {
+    /**
+     * Turn off [Zaraz](https://developers.cloudflare.com/zaraz/).
+     */
+    id?: 'disable_zaraz';
+  }
+
+  export interface EdgeCacheTTL {
+    /**
+     * Specify how long to cache a resource in the Cloudflare global network. _Edge
+     * Cache TTL_ is not visible in response headers.
+     */
+    id?: 'edge_cache_ttl';
+
+    value?: number;
+  }
+
+  export interface ExplicitCacheControl {
+    id?: 'explicit_cache_control';
+  }
+
+  export interface ForwardingURL {
     /**
      * Redirects one URL to another using an `HTTP 301/302` redirect. Refer to
      * [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
      */
     id?: 'forwarding_url';
 
-    value?: Action.Value;
+    value?: ForwardingURL.Value;
   }
 
-  export namespace Action {
+  export namespace ForwardingURL {
     export interface Value {
       /**
        * The status code to use for the URL redirect. 301 is a permanent redirect. 302 is
@@ -468,6 +1750,57 @@ export namespace PageruleEditParams {
        */
       url?: string;
     }
+  }
+
+  export interface HostHeaderOverride {
+    /**
+     * Apply a specific host header.
+     */
+    id?: 'host_header_override';
+
+    /**
+     * The hostname to use in the `Host` header
+     */
+    value?: string;
+  }
+
+  export interface Minify {
+    id?: 'minify';
+  }
+
+  export interface PurgeByPageRule {
+    id?: 'purge_by_page_rule';
+  }
+
+  export interface ResolveOverride {
+    /**
+     * Change the origin address to the value specified in this setting.
+     */
+    id?: 'resolve_override';
+
+    value?: ResolveOverride.Value;
+  }
+
+  export namespace ResolveOverride {
+    export interface Value {
+      /**
+       * The origin address you want to override with.
+       */
+      value?: string;
+    }
+  }
+
+  export interface RespectStrongEtag {
+    /**
+     * Turn on or off byte-for-byte equivalency checks between the Cloudflare cache and
+     * the origin server.
+     */
+    id?: 'respect_strong_etag';
+
+    /**
+     * The status of Respect Strong ETags
+     */
+    value?: 'on' | 'off';
   }
 }
 
