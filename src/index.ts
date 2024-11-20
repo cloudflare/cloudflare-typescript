@@ -66,6 +66,13 @@ import { IAM } from './resources/iam/iam';
 import { Images } from './resources/images/images';
 import { Intel } from './resources/intel/intel';
 import { KV } from './resources/kv/kv';
+import {
+  LeakedCredentialCheckCreateParams,
+  LeakedCredentialCheckCreateResponse,
+  LeakedCredentialCheckListParams,
+  LeakedCredentialCheckListResponse,
+  LeakedCredentialChecks,
+} from './resources/leaked-credential-checks/leaked-credential-checks';
 import { LoadBalancers } from './resources/load-balancers/load-balancers';
 import { Logpush } from './resources/logpush/logpush';
 import { Logs } from './resources/logs/logs';
@@ -326,6 +333,7 @@ export class Cloudflare extends Core.APIClient {
   securityTXT: API.SecurityTXT = new API.SecurityTXT(this);
   workflows: API.Workflows = new API.Workflows(this);
   resourceSharing: API.ResourceSharing = new API.ResourceSharing(this);
+  leakedCredentialChecks: API.LeakedCredentialChecks = new API.LeakedCredentialChecks(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -537,6 +545,7 @@ Cloudflare.BotnetFeed = BotnetFeed;
 Cloudflare.SecurityTXT = SecurityTXT;
 Cloudflare.Workflows = Workflows;
 Cloudflare.ResourceSharing = ResourceSharing;
+Cloudflare.LeakedCredentialChecks = LeakedCredentialChecks;
 export declare namespace Cloudflare {
   export type RequestOptions = Core.RequestOptions;
 
@@ -736,6 +745,14 @@ export declare namespace Cloudflare {
   export { Workflows as Workflows };
 
   export { ResourceSharing as ResourceSharing };
+
+  export {
+    LeakedCredentialChecks as LeakedCredentialChecks,
+    type LeakedCredentialCheckCreateResponse as LeakedCredentialCheckCreateResponse,
+    type LeakedCredentialCheckListResponse as LeakedCredentialCheckListResponse,
+    type LeakedCredentialCheckCreateParams as LeakedCredentialCheckCreateParams,
+    type LeakedCredentialCheckListParams as LeakedCredentialCheckListParams,
+  };
 
   export type ASN = API.ASN;
   export type AuditLog = API.AuditLog;

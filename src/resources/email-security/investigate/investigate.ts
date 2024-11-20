@@ -1,10 +1,38 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../resource';
-import * as Core from '../../core';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import * as DetectionsAPI from './detections';
+import { DetectionGetParams, DetectionGetResponse, Detections } from './detections';
+import * as MoveAPI from './move';
+import { Move, MoveBulkParams, MoveBulkResponse, MoveCreateParams, MoveCreateResponse } from './move';
+import * as PreviewAPI from './preview';
+import {
+  Preview,
+  PreviewCreateParams,
+  PreviewCreateResponse,
+  PreviewGetParams,
+  PreviewGetResponse,
+} from './preview';
+import * as RawAPI from './raw';
+import { Raw, RawGetParams, RawGetResponse } from './raw';
+import * as ReclassifyAPI from './reclassify';
+import { Reclassify, ReclassifyCreateParams, ReclassifyCreateResponse } from './reclassify';
+import * as ReleaseAPI from './release';
+import { Release, ReleaseBulkParams, ReleaseBulkResponse } from './release';
+import * as TraceAPI from './trace';
+import { Trace, TraceGetParams, TraceGetResponse } from './trace';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Investigate extends APIResource {
+  detections: DetectionsAPI.Detections = new DetectionsAPI.Detections(this._client);
+  preview: PreviewAPI.Preview = new PreviewAPI.Preview(this._client);
+  raw: RawAPI.Raw = new RawAPI.Raw(this._client);
+  trace: TraceAPI.Trace = new TraceAPI.Trace(this._client);
+  move: MoveAPI.Move = new MoveAPI.Move(this._client);
+  reclassify: ReclassifyAPI.Reclassify = new ReclassifyAPI.Reclassify(this._client);
+  release: ReleaseAPI.Release = new ReleaseAPI.Release(this._client);
+
   /**
    * Returns information for each email that matches the search parameter(s).
    */
@@ -21,24 +49,6 @@ export class Investigate extends APIResource {
   }
 
   /**
-   * Returns detection details such as threat categories and sender information for
-   * non-benign messages.
-   */
-  detections(
-    postfixId: string,
-    params: InvestigateDetectionsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateDetectionsResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/detections`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateDetectionsResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
    * Get message details
    */
   get(
@@ -52,58 +62,6 @@ export class Investigate extends APIResource {
         `/accounts/${account_id}/email-security/investigate/${postfixId}`,
         options,
       ) as Core.APIPromise<{ result: InvestigateGetResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns a preview of the message body as a base64 encoded PNG image for
-   * non-benign messages.
-   */
-  preview(
-    postfixId: string,
-    params: InvestigatePreviewParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigatePreviewResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/preview`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigatePreviewResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Returns the raw eml of any non-benign message.
-   */
-  raw(
-    postfixId: string,
-    params: InvestigateRawParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateRawResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/raw`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateRawResponse }>
-    )._thenUnwrap((obj) => obj.result);
-  }
-
-  /**
-   * Get email trace
-   */
-  trace(
-    postfixId: string,
-    params: InvestigateTraceParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<InvestigateTraceResponse> {
-    const { account_id } = params;
-    return (
-      this._client.get(
-        `/accounts/${account_id}/email-security/investigate/${postfixId}/trace`,
-        options,
-      ) as Core.APIPromise<{ result: InvestigateTraceResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -181,108 +139,6 @@ export interface InvestigateListResponse {
 }
 
 export namespace InvestigateListResponse {
-  export interface Validation {
-    comment?: string | null;
-
-    dkim?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
-
-    dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
-
-    spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
-  }
-}
-
-export interface InvestigateDetectionsResponse {
-  action: string;
-
-  attachments: Array<InvestigateDetectionsResponse.Attachment>;
-
-  headers: Array<InvestigateDetectionsResponse.Header>;
-
-  links: Array<InvestigateDetectionsResponse.Link>;
-
-  sender_info: InvestigateDetectionsResponse.SenderInfo;
-
-  threat_categories: Array<InvestigateDetectionsResponse.ThreatCategory>;
-
-  validation: InvestigateDetectionsResponse.Validation;
-
-  final_disposition?:
-    | 'MALICIOUS'
-    | 'MALICIOUS-BEC'
-    | 'SUSPICIOUS'
-    | 'SPOOF'
-    | 'SPAM'
-    | 'BULK'
-    | 'ENCRYPTED'
-    | 'EXTERNAL'
-    | 'UNKNOWN'
-    | 'NONE'
-    | null;
-}
-
-export namespace InvestigateDetectionsResponse {
-  export interface Attachment {
-    size: number;
-
-    content_type?: string | null;
-
-    detection?:
-      | 'MALICIOUS'
-      | 'MALICIOUS-BEC'
-      | 'SUSPICIOUS'
-      | 'SPOOF'
-      | 'SPAM'
-      | 'BULK'
-      | 'ENCRYPTED'
-      | 'EXTERNAL'
-      | 'UNKNOWN'
-      | 'NONE'
-      | null;
-
-    encrypted?: boolean | null;
-
-    name?: string | null;
-  }
-
-  export interface Header {
-    name: string;
-
-    value: string;
-  }
-
-  export interface Link {
-    href: string;
-
-    text?: string | null;
-  }
-
-  export interface SenderInfo {
-    /**
-     * The name of the autonomous system.
-     */
-    as_name?: string | null;
-
-    /**
-     * The number of the autonomous system.
-     */
-    as_number?: number | null;
-
-    geo?: string | null;
-
-    ip?: string | null;
-
-    pld?: string | null;
-  }
-
-  export interface ThreatCategory {
-    id: number;
-
-    description?: string | null;
-
-    name?: string | null;
-  }
-
   export interface Validation {
     comment?: string | null;
 
@@ -373,56 +229,6 @@ export namespace InvestigateGetResponse {
     dmarc?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
 
     spf?: 'pass' | 'neutral' | 'fail' | 'error' | 'none' | null;
-  }
-}
-
-export interface InvestigatePreviewResponse {
-  /**
-   * A base64 encoded PNG image of the email.
-   */
-  screenshot: string;
-}
-
-export interface InvestigateRawResponse {
-  /**
-   * A UTF-8 encoded eml file of the email.
-   */
-  raw: string;
-}
-
-export interface InvestigateTraceResponse {
-  inbound: InvestigateTraceResponse.Inbound;
-
-  outbound: InvestigateTraceResponse.Outbound;
-}
-
-export namespace InvestigateTraceResponse {
-  export interface Inbound {
-    lines?: Array<Inbound.Line> | null;
-  }
-
-  export namespace Inbound {
-    export interface Line {
-      lineno: number;
-
-      message: string;
-
-      ts: string;
-    }
-  }
-
-  export interface Outbound {
-    lines?: Array<Outbound.Line> | null;
-  }
-
-  export namespace Outbound {
-    export interface Line {
-      lineno: number;
-
-      message: string;
-
-      ts: string;
-    }
   }
 }
 
@@ -523,13 +329,6 @@ export interface InvestigateListParams extends V4PagePaginationArrayParams {
   start?: string;
 }
 
-export interface InvestigateDetectionsParams {
-  /**
-   * Account Identifier
-   */
-  account_id: string;
-}
-
 export interface InvestigateGetParams {
   /**
    * Account Identifier
@@ -537,43 +336,59 @@ export interface InvestigateGetParams {
   account_id: string;
 }
 
-export interface InvestigatePreviewParams {
-  /**
-   * Account Identifier
-   */
-  account_id: string;
-}
-
-export interface InvestigateRawParams {
-  /**
-   * Account Identifier
-   */
-  account_id: string;
-}
-
-export interface InvestigateTraceParams {
-  /**
-   * Account Identifier
-   */
-  account_id: string;
-}
-
 Investigate.InvestigateListResponsesV4PagePaginationArray = InvestigateListResponsesV4PagePaginationArray;
+Investigate.Detections = Detections;
+Investigate.Preview = Preview;
+Investigate.Raw = Raw;
+Investigate.Trace = Trace;
+Investigate.Move = Move;
+Investigate.Reclassify = Reclassify;
+Investigate.Release = Release;
 
 export declare namespace Investigate {
   export {
     type InvestigateListResponse as InvestigateListResponse,
-    type InvestigateDetectionsResponse as InvestigateDetectionsResponse,
     type InvestigateGetResponse as InvestigateGetResponse,
-    type InvestigatePreviewResponse as InvestigatePreviewResponse,
-    type InvestigateRawResponse as InvestigateRawResponse,
-    type InvestigateTraceResponse as InvestigateTraceResponse,
     InvestigateListResponsesV4PagePaginationArray as InvestigateListResponsesV4PagePaginationArray,
     type InvestigateListParams as InvestigateListParams,
-    type InvestigateDetectionsParams as InvestigateDetectionsParams,
     type InvestigateGetParams as InvestigateGetParams,
-    type InvestigatePreviewParams as InvestigatePreviewParams,
-    type InvestigateRawParams as InvestigateRawParams,
-    type InvestigateTraceParams as InvestigateTraceParams,
+  };
+
+  export {
+    Detections as Detections,
+    type DetectionGetResponse as DetectionGetResponse,
+    type DetectionGetParams as DetectionGetParams,
+  };
+
+  export {
+    Preview as Preview,
+    type PreviewCreateResponse as PreviewCreateResponse,
+    type PreviewGetResponse as PreviewGetResponse,
+    type PreviewCreateParams as PreviewCreateParams,
+    type PreviewGetParams as PreviewGetParams,
+  };
+
+  export { Raw as Raw, type RawGetResponse as RawGetResponse, type RawGetParams as RawGetParams };
+
+  export { Trace as Trace, type TraceGetResponse as TraceGetResponse, type TraceGetParams as TraceGetParams };
+
+  export {
+    Move as Move,
+    type MoveCreateResponse as MoveCreateResponse,
+    type MoveBulkResponse as MoveBulkResponse,
+    type MoveCreateParams as MoveCreateParams,
+    type MoveBulkParams as MoveBulkParams,
+  };
+
+  export {
+    Reclassify as Reclassify,
+    type ReclassifyCreateResponse as ReclassifyCreateResponse,
+    type ReclassifyCreateParams as ReclassifyCreateParams,
+  };
+
+  export {
+    Release as Release,
+    type ReleaseBulkResponse as ReleaseBulkResponse,
+    type ReleaseBulkParams as ReleaseBulkParams,
   };
 }

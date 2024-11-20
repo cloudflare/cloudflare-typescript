@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import * as Core from '../../core';
 import * as DOMAPI from './dom';
 import { DOM, DOMGetResponse } from './dom';
 import * as HARAPI from './har';
@@ -31,6 +32,20 @@ export class URLScanner extends APIResource {
   har: HARAPI.HAR = new HARAPI.HAR(this._client);
   result: ResultAPI.Result = new ResultAPI.Result(this._client);
   screenshot: ScreenshotAPI.Screenshot = new ScreenshotAPI.Screenshot(this._client);
+
+  /**
+   * Submit URLs to scan. Check limits at
+   * https://developers.cloudflare.com/security-center/investigate/scan-limits/ and
+   * take into account scans submitted in bulk have lower priority and may take
+   * longer to finish.
+   */
+  bulk(
+    accountId: string,
+    body: URLScannerBulkParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<URLScannerBulkResponse> {
+    return this._client.post(`/accounts/${accountId}/urlscanner/v2/bulk`, { body, ...options });
+  }
 }
 
 export interface URLScannerDomain {
@@ -66,6 +81,76 @@ export interface URLScannerTask {
 export namespace URLScannerTask {
   export interface Error {
     message: string;
+  }
+}
+
+export type URLScannerBulkResponse = Array<URLScannerBulkResponse.URLScannerBulkResponseItem>;
+
+export namespace URLScannerBulkResponse {
+  export interface URLScannerBulkResponseItem {
+    /**
+     * URL to api report.
+     */
+    api: string;
+
+    /**
+     * URL to report.
+     */
+    result: string;
+
+    /**
+     * Submitted URL
+     */
+    url: string;
+
+    /**
+     * Scan ID.
+     */
+    uuid: string;
+
+    /**
+     * Submitted visibility status.
+     */
+    visibility: string;
+
+    options?: URLScannerBulkResponseItem.Options;
+  }
+
+  export namespace URLScannerBulkResponseItem {
+    export interface Options {
+      useragent?: string;
+    }
+  }
+}
+
+export type URLScannerBulkParams = Array<URLScannerBulkParams.Body>;
+
+export namespace URLScannerBulkParams {
+  export interface Body {
+    url: string;
+
+    customagent?: string;
+
+    /**
+     * Set custom headers.
+     */
+    customHeaders?: Record<string, string>;
+
+    referer?: string;
+
+    /**
+     * Take multiple screenshots targeting different device types.
+     */
+    screenshotsResolutions?: Array<'desktop' | 'mobile' | 'tablet'>;
+
+    /**
+     * The option `Public` means it will be included in listings like recent scans and
+     * search results. `Unlisted` means it will not be included in the aforementioned
+     * listings, users will need to have the scan's ID to access it. A a scan will be
+     * automatically marked as unlisted if it fails, if it contains potential PII or
+     * other sensitive material.
+     */
+    visibility?: 'Public' | 'Unlisted';
   }
 }
 

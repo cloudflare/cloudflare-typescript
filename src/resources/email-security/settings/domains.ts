@@ -53,6 +53,23 @@ export class Domains extends APIResource {
       }) as Core.APIPromise<{ result: DomainEditResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
+
+  /**
+   * Get an email domain
+   */
+  get(
+    domainId: number,
+    params: DomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<DomainGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/email-security/settings/domains/${domainId}`,
+        options,
+      ) as Core.APIPromise<{ result: DomainGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class DomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<DomainListResponse> {}
@@ -90,6 +107,31 @@ export interface DomainDeleteResponse {
 }
 
 export interface DomainEditResponse {
+  /**
+   * The unique identifier for the domain.
+   */
+  id: number;
+
+  allowed_delivery_modes: Array<'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN'>;
+
+  created_at: string;
+
+  domain: string;
+
+  last_modified: string;
+
+  lookback_hops: number;
+
+  folder?: 'AllItems' | 'Inbox' | null;
+
+  inbox_provider?: 'Microsoft' | 'Google' | null;
+
+  integration_id?: string | null;
+
+  o365_tenant_id?: string | null;
+}
+
+export interface DomainGetResponse {
   /**
    * The unique identifier for the domain.
    */
@@ -183,6 +225,13 @@ export interface DomainEditParams {
   lookback_hops?: number | null;
 }
 
+export interface DomainGetParams {
+  /**
+   * Account Identifier
+   */
+  account_id: string;
+}
+
 Domains.DomainListResponsesV4PagePaginationArray = DomainListResponsesV4PagePaginationArray;
 
 export declare namespace Domains {
@@ -190,9 +239,11 @@ export declare namespace Domains {
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
+    type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
     type DomainEditParams as DomainEditParams,
+    type DomainGetParams as DomainGetParams,
   };
 }
