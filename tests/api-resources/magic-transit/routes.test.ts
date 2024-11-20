@@ -99,6 +99,44 @@ describe('resource routes', () => {
     });
   });
 
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.magicTransit.routes.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      routes: [
+        {
+          id: '023e105f4ecef8ad9ca31a8372d0c353',
+          nexthop: '203.0.113.1',
+          prefix: '192.0.2.0/24',
+          priority: 0,
+        },
+      ],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.magicTransit.routes.bulkUpdate({
+      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      routes: [
+        {
+          id: '023e105f4ecef8ad9ca31a8372d0c353',
+          nexthop: '203.0.113.1',
+          prefix: '192.0.2.0/24',
+          priority: 0,
+          description: 'New route for new prefix 203.0.113.1',
+          scope: { colo_names: ['den01'], colo_regions: ['APAC'] },
+          weight: 0,
+        },
+      ],
+    });
+  });
+
   test('empty: only required params', async () => {
     const responsePromise = client.magicTransit.routes.empty({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',

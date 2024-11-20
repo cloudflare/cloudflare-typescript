@@ -74,6 +74,22 @@ export class Pools extends APIResource {
   }
 
   /**
+   * Apply changes to a number of existing pools, overwriting the supplied
+   * properties. Pools are ordered by ascending `name`. Returns the list of affected
+   * pools. Supports the standard pagination query parameters, either
+   * `limit`/`offset` or `per_page`/`page`.
+   */
+  bulkEdit(params: PoolBulkEditParams, options?: Core.RequestOptions): Core.APIPromise<PoolBulkEditResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(`/accounts/${account_id}/load_balancers/pools`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: PoolBulkEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Apply changes to an existing pool, overwriting the supplied properties.
    */
   edit(poolId: string, params: PoolEditParams, options?: Core.RequestOptions): Core.APIPromise<Pool> {
@@ -204,6 +220,8 @@ export interface Pool {
 export interface PoolDeleteResponse {
   id?: string;
 }
+
+export type PoolBulkEditResponse = Array<Pool>;
 
 export interface PoolCreateParams {
   /**
@@ -397,6 +415,20 @@ export interface PoolDeleteParams {
   account_id: string;
 }
 
+export interface PoolBulkEditParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param: The email address to send health status notifications to. This field
+   * is now deprecated in favor of Cloudflare Notifications for Load Balancing, so
+   * only resetting this field with an empty string `""` is accepted.
+   */
+  notification_email?: '';
+}
+
 export interface PoolEditParams {
   /**
    * Path param: Identifier
@@ -501,11 +533,13 @@ export declare namespace Pools {
   export {
     type Pool as Pool,
     type PoolDeleteResponse as PoolDeleteResponse,
+    type PoolBulkEditResponse as PoolBulkEditResponse,
     PoolsSinglePage as PoolsSinglePage,
     type PoolCreateParams as PoolCreateParams,
     type PoolUpdateParams as PoolUpdateParams,
     type PoolListParams as PoolListParams,
     type PoolDeleteParams as PoolDeleteParams,
+    type PoolBulkEditParams as PoolBulkEditParams,
     type PoolEditParams as PoolEditParams,
     type PoolGetParams as PoolGetParams,
   };

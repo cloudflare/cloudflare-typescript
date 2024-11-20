@@ -6,10 +6,12 @@ export {
   type RUMRule,
   type RuleListResponse,
   type RuleDeleteResponse,
+  type RuleBulkCreateResponse,
   type RuleCreateParams,
   type RuleUpdateParams,
   type RuleListParams,
   type RuleDeleteParams,
+  type RuleBulkCreateParams,
 } from './rules';
 export {
   SitesV4PagePaginationArray,

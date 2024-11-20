@@ -122,6 +122,63 @@ describe('resource rules', () => {
     });
   });
 
+  test('bulkDelete: only required params', async () => {
+    const responsePromise = client.firewall.rules.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkDelete: required and optional params', async () => {
+    const response = await client.firewall.rules.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  });
+
+  test('bulkEdit: only required params', async () => {
+    const responsePromise = client.firewall.rules.bulkEdit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkEdit: required and optional params', async () => {
+    const response = await client.firewall.rules.bulkEdit({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+  });
+
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.firewall.rules.bulkUpdate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.firewall.rules.bulkUpdate({
+      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body: {},
+    });
+  });
+
   // TODO: investigate broken test
   test.skip('edit: only required params', async () => {
     const responsePromise = client.firewall.rules.edit('372e67954025e0ba6aaa6d586b9e0b60', {

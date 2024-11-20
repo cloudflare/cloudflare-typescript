@@ -7,10 +7,12 @@ export {
   type OperationCreateResponse,
   type OperationListResponse,
   type OperationDeleteResponse,
+  type OperationBulkDeleteResponse,
   type OperationGetResponse,
   type OperationCreateParams,
   type OperationListParams,
   type OperationDeleteParams,
+  type OperationBulkDeleteParams,
   type OperationGetParams,
 } from './operations';
 export {

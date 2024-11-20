@@ -79,6 +79,57 @@ export class Rules extends APIResource {
   }
 
   /**
+   * Deletes existing firewall rules.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkDelete(
+    params: RuleBulkDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleBulkDeleteResponse | null> {
+    const { zone_id } = params;
+    return (
+      this._client.delete(`/zones/${zone_id}/firewall/rules`, options) as Core.APIPromise<{
+        result: RuleBulkDeleteResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates the priority of existing firewall rules.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkEdit(
+    params: RuleBulkEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleBulkEditResponse | null> {
+    const { zone_id, body } = params;
+    return (
+      this._client.patch(`/zones/${zone_id}/firewall/rules`, { body: body, ...options }) as Core.APIPromise<{
+        result: RuleBulkEditResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Updates one or more existing firewall rules.
+   *
+   * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
+   */
+  bulkUpdate(
+    params: RuleBulkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RuleBulkUpdateResponse | null> {
+    const { zone_id, body } = params;
+    return (
+      this._client.put(`/zones/${zone_id}/firewall/rules`, { body: body, ...options }) as Core.APIPromise<{
+        result: RuleBulkUpdateResponse | null;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Updates the priority of an existing firewall rule.
    *
    * @deprecated The Firewall Rules API is deprecated in favour of using the Ruleset Engine. See https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#firewall-rules-api-and-filters-api for full details.
@@ -172,6 +223,12 @@ export interface DeletedFilter {
 }
 
 export type RuleCreateResponse = Array<FirewallRule>;
+
+export type RuleBulkDeleteResponse = Array<FirewallRule>;
+
+export type RuleBulkEditResponse = Array<FirewallRule>;
+
+export type RuleBulkUpdateResponse = Array<FirewallRule>;
 
 export type RuleEditResponse = Array<FirewallRule>;
 
@@ -355,6 +412,37 @@ export interface RuleDeleteParams {
   zone_id: string;
 }
 
+export interface RuleBulkDeleteParams {
+  /**
+   * Identifier
+   */
+  zone_id: string;
+}
+
+export interface RuleBulkEditParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
+export interface RuleBulkUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  zone_id: string;
+
+  /**
+   * Body param:
+   */
+  body: unknown;
+}
+
 export interface RuleEditParams {
   /**
    * Identifier
@@ -382,12 +470,18 @@ export declare namespace Rules {
     type Product as Product,
     type DeletedFilter as DeletedFilter,
     type RuleCreateResponse as RuleCreateResponse,
+    type RuleBulkDeleteResponse as RuleBulkDeleteResponse,
+    type RuleBulkEditResponse as RuleBulkEditResponse,
+    type RuleBulkUpdateResponse as RuleBulkUpdateResponse,
     type RuleEditResponse as RuleEditResponse,
     FirewallRulesV4PagePaginationArray as FirewallRulesV4PagePaginationArray,
     type RuleCreateParams as RuleCreateParams,
     type RuleUpdateParams as RuleUpdateParams,
     type RuleListParams as RuleListParams,
     type RuleDeleteParams as RuleDeleteParams,
+    type RuleBulkDeleteParams as RuleBulkDeleteParams,
+    type RuleBulkEditParams as RuleBulkEditParams,
+    type RuleBulkUpdateParams as RuleBulkUpdateParams,
     type RuleEditParams as RuleEditParams,
     type RuleGetParams as RuleGetParams,
   };

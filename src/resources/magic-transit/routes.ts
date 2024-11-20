@@ -66,6 +66,23 @@ export class Routes extends APIResource {
   }
 
   /**
+   * Update multiple Magic static routes. Use `?validate_only=true` as an optional
+   * query parameter to run validation only without persisting changes. Only fields
+   * for a route that need to be changed need be provided.
+   */
+  bulkUpdate(
+    params: RouteBulkUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<RouteBulkUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/magic/routes`, { body, ...options }) as Core.APIPromise<{
+        result: RouteBulkUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Delete multiple Magic static routes.
    */
   empty(params: RouteEmptyParams, options?: Core.RequestOptions): Core.APIPromise<RouteEmptyResponse> {
@@ -340,6 +357,61 @@ export namespace RouteDeleteResponse {
   }
 }
 
+export interface RouteBulkUpdateResponse {
+  modified?: boolean;
+
+  modified_routes?: Array<RouteBulkUpdateResponse.ModifiedRoute>;
+}
+
+export namespace RouteBulkUpdateResponse {
+  export interface ModifiedRoute {
+    /**
+     * The next-hop IP Address for the static route.
+     */
+    nexthop: string;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    prefix: string;
+
+    /**
+     * Priority of the static route.
+     */
+    priority: number;
+
+    /**
+     * Identifier
+     */
+    id?: string;
+
+    /**
+     * When the route was created.
+     */
+    created_on?: string;
+
+    /**
+     * An optional human provided description of the static route.
+     */
+    description?: string;
+
+    /**
+     * When the route was last modified.
+     */
+    modified_on?: string;
+
+    /**
+     * Used only for ECMP routes.
+     */
+    scope?: RoutesAPI.Scope;
+
+    /**
+     * Optional weight of the ECMP scope - if provided.
+     */
+    weight?: number;
+  }
+}
+
 export interface RouteEmptyResponse {
   deleted?: boolean;
 
@@ -511,6 +583,57 @@ export interface RouteDeleteParams {
   account_id: string;
 }
 
+export interface RouteBulkUpdateParams {
+  /**
+   * Path param: Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  routes: Array<RouteBulkUpdateParams.Route>;
+}
+
+export namespace RouteBulkUpdateParams {
+  export interface Route {
+    /**
+     * Identifier
+     */
+    id: string;
+
+    /**
+     * The next-hop IP Address for the static route.
+     */
+    nexthop: string;
+
+    /**
+     * IP Prefix in Classless Inter-Domain Routing format.
+     */
+    prefix: string;
+
+    /**
+     * Priority of the static route.
+     */
+    priority: number;
+
+    /**
+     * An optional human provided description of the static route.
+     */
+    description?: string;
+
+    /**
+     * Used only for ECMP routes.
+     */
+    scope?: RoutesAPI.ScopeParam;
+
+    /**
+     * Optional weight of the ECMP scope - if provided.
+     */
+    weight?: number;
+  }
+}
+
 export interface RouteEmptyParams {
   /**
    * Identifier
@@ -532,12 +655,14 @@ export declare namespace Routes {
     type RouteUpdateResponse as RouteUpdateResponse,
     type RouteListResponse as RouteListResponse,
     type RouteDeleteResponse as RouteDeleteResponse,
+    type RouteBulkUpdateResponse as RouteBulkUpdateResponse,
     type RouteEmptyResponse as RouteEmptyResponse,
     type RouteGetResponse as RouteGetResponse,
     type RouteCreateParams as RouteCreateParams,
     type RouteUpdateParams as RouteUpdateParams,
     type RouteListParams as RouteListParams,
     type RouteDeleteParams as RouteDeleteParams,
+    type RouteBulkUpdateParams as RouteBulkUpdateParams,
     type RouteEmptyParams as RouteEmptyParams,
     type RouteGetParams as RouteGetParams,
   };
