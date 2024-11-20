@@ -96,28 +96,58 @@ export interface AlwaysOnline {
   modified_on?: string | null;
 }
 
+/**
+ * Reply to all requests for URLs that use "http" with a 301 redirect to the
+ * equivalent "https" URL. If you only want to redirect for a subset of requests,
+ * consider creating an "Always use HTTPS" page rule.
+ */
 export interface AlwaysUseHTTPS {
   /**
-   * If enabled, any ` http://`` URL is converted to  `https://` through a 301
-   * redirect.
+   * ID of the zone setting.
    */
-  id?: 'always_use_https';
-}
+  id: 'always_use_https';
 
-export interface AlwaysUseHTTPSParam {
   /**
-   * If enabled, any ` http://`` URL is converted to  `https://` through a 301
-   * redirect.
+   * Current value of the zone setting.
    */
-  id?: 'always_use_https';
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
+/**
+ * Enable the Automatic HTTPS Rewrites feature for this zone.
+ */
 export interface AutomaticHTTPSRewrites {
-  id?: 'automatic_https_rewrites';
-}
+  /**
+   * ID of the zone setting.
+   */
+  id: 'automatic_https_rewrites';
 
-export interface AutomaticHTTPSRewritesParam {
-  id?: 'automatic_https_rewrites';
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 export interface AutomaticPlatformOptimization {
@@ -221,94 +251,121 @@ export interface Brotli {
   modified_on?: string | null;
 }
 
+/**
+ * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
+ * will remain on your visitors' computers. Cloudflare will honor any larger times
+ * specified by your server.
+ * (https://support.cloudflare.com/hc/en-us/articles/200168276).
+ */
 export interface BrowserCacheTTL {
   /**
-   * Control how long resources cached by client browsers remain valid.
+   * ID of the zone setting.
    */
-  id?: 'browser_cache_ttl';
+  id: 'browser_cache_ttl';
 
   /**
-   * The number of seconds to cache resources for. The API prohibits setting this to
-   * 0 for non-Enterprise domains.
+   * Current value of the zone setting.
    */
-  value?: number;
+  value:
+    | 0
+    | 30
+    | 60
+    | 120
+    | 300
+    | 1200
+    | 1800
+    | 3600
+    | 7200
+    | 10800
+    | 14400
+    | 18000
+    | 28800
+    | 43200
+    | 57600
+    | 72000
+    | 86400
+    | 172800
+    | 259200
+    | 345600
+    | 432000
+    | 691200
+    | 1382400
+    | 2073600
+    | 2678400
+    | 5356800
+    | 16070400
+    | 31536000;
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export interface BrowserCacheTTLParam {
-  /**
-   * Control how long resources cached by client browsers remain valid.
-   */
-  id?: 'browser_cache_ttl';
-
-  /**
-   * The number of seconds to cache resources for. The API prohibits setting this to
-   * 0 for non-Enterprise domains.
-   */
-  value?: number;
-}
-
+/**
+ * Browser Integrity Check is similar to Bad Behavior and looks for common HTTP
+ * headers abused most commonly by spammers and denies access to your page. It will
+ * also challenge visitors that do not have a user agent or a non standard user
+ * agent (also commonly used by abuse bots, crawlers or visitors).
+ * (https://support.cloudflare.com/hc/en-us/articles/200170086).
+ */
 export interface BrowserCheck {
   /**
-   * Inspect the visitor's browser for headers commonly associated with spammers and
-   * certain bots.
+   * ID of the zone setting.
    */
-  id?: 'browser_check';
+  id: 'browser_check';
 
   /**
-   * The status of Browser Integrity Check.
+   * Current value of the zone setting.
    */
-  value?: 'on' | 'off';
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export interface BrowserCheckParam {
-  /**
-   * Inspect the visitor's browser for headers commonly associated with spammers and
-   * certain bots.
-   */
-  id?: 'browser_check';
-
-  /**
-   * The status of Browser Integrity Check.
-   */
-  value?: 'on' | 'off';
-}
-
+/**
+ * Cache Level functions based off the setting level. The basic setting will cache
+ * most static resources (i.e., css, images, and JavaScript). The simplified
+ * setting will ignore the query string when delivering a cached resource. The
+ * aggressive setting will cache all static resources, including ones with a query
+ * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
+ */
 export interface CacheLevel {
   /**
-   * Apply custom caching based on the option selected.
+   * ID of the zone setting.
    */
-  id?: 'cache_level';
+  id: 'cache_level';
 
   /**
-   * - `bypass`: Cloudflare does not cache.
-   * - `basic`: Delivers resources from cache when there is no query string.
-   * - `simplified`: Delivers the same resource to everyone independent of the query
-   *   string.
-   * - `aggressive`: Caches all static content that has a query string.
-   * - `cache_everything`: Treats all content as static and caches all file types
-   *   beyond the
-   *   [Cloudflare default cached content](https://developers.cloudflare.com/cache/concepts/default-cache-behavior/#default-cached-file-extensions).
+   * Current value of the zone setting.
    */
-  value?: 'bypass' | 'basic' | 'simplified' | 'aggressive' | 'cache_everything';
-}
-
-export interface CacheLevelParam {
-  /**
-   * Apply custom caching based on the option selected.
-   */
-  id?: 'cache_level';
+  value: 'aggressive' | 'basic' | 'simplified';
 
   /**
-   * - `bypass`: Cloudflare does not cache.
-   * - `basic`: Delivers resources from cache when there is no query string.
-   * - `simplified`: Delivers the same resource to everyone independent of the query
-   *   string.
-   * - `aggressive`: Caches all static content that has a query string.
-   * - `cache_everything`: Treats all content as static and caches all file types
-   *   beyond the
-   *   [Cloudflare default cached content](https://developers.cloudflare.com/cache/concepts/default-cache-behavior/#default-cached-file-extensions).
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
    */
-  value?: 'bypass' | 'basic' | 'simplified' | 'aggressive' | 'cache_everything';
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -382,12 +439,42 @@ export interface Ciphers {
   modified_on?: string | null;
 }
 
+/**
+ * Development Mode temporarily allows you to enter development mode for your
+ * websites if you need to make changes to your site. This will bypass Cloudflare's
+ * accelerated cache and slow down your site, but is useful if you are making
+ * changes to cacheable content (like images, css, or JavaScript) and would like to
+ * see those changes right away. Once entered, development mode will last for 3
+ * hours and then automatically toggle off.
+ */
 export interface DevelopmentMode {
-  id?: 'development_mode';
-}
+  /**
+   * ID of the zone setting.
+   */
+  id: 'development_mode';
 
-export interface DevelopmentModeParam {
-  id?: 'development_mode';
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+
+  /**
+   * Value of the zone setting. Notes: The interval (in seconds) from when
+   * development mode expires (positive integer) or last expired (negative integer)
+   * for the domain. If development mode has never been enabled, this value is false.
+   */
+  time_remaining?: number;
 }
 
 /**
@@ -419,28 +506,31 @@ export interface EarlyHints {
   modified_on?: string | null;
 }
 
+/**
+ * Encrypt email adresses on your web page from bots, while keeping them visible to
+ * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
+ */
 export interface EmailObfuscation {
   /**
-   * Turn on or off **Email Obfuscation**.
+   * ID of the zone setting.
    */
-  id?: 'email_obfuscation';
+  id: 'email_obfuscation';
 
   /**
-   * The status of Email Obfuscation.
+   * Current value of the zone setting.
    */
-  value?: 'on' | 'off';
-}
-
-export interface EmailObfuscationParam {
-  /**
-   * Turn on or off **Email Obfuscation**.
-   */
-  id?: 'email_obfuscation';
+  value: 'on' | 'off';
 
   /**
-   * The status of Email Obfuscation.
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
    */
-  value?: 'on' | 'off';
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -499,12 +589,36 @@ export interface H2Prioritization {
   modified_on?: string | null;
 }
 
+/**
+ * When enabled, the Hotlink Protection option ensures that other sites cannot suck
+ * up your bandwidth by building pages that use images hosted on your site. Anytime
+ * a request for an image on your site hits Cloudflare, we check to ensure that
+ * it's not another site requesting them. People will still be able to download and
+ * view images from your page, but other sites won't be able to steal them for use
+ * on their own pages.
+ * (https://support.cloudflare.com/hc/en-us/articles/200170026).
+ */
 export interface HotlinkProtection {
-  id?: 'hotlink_protection';
-}
+  /**
+   * ID of the zone setting.
+   */
+  id: 'hotlink_protection';
 
-export interface HotlinkProtectionParam {
-  id?: 'hotlink_protection';
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -588,42 +702,32 @@ export interface ImageResizing {
   modified_on?: string | null;
 }
 
+/**
+ * Enable IP Geolocation to have Cloudflare geolocate visitors to your website and
+ * pass the country code to you.
+ * (https://support.cloudflare.com/hc/en-us/articles/200168236).
+ */
 export interface IPGeolocation {
   /**
-   * Cloudflare adds a CF-IPCountry HTTP header containing the country code that
-   * corresponds to the visitor.
+   * ID of the zone setting.
    */
-  id?: 'ip_geolocation';
+  id: 'ip_geolocation';
 
-  value?: IPGeolocation.Value;
-}
-
-export namespace IPGeolocation {
-  export interface Value {
-    /**
-     * The status of adding the IP Geolocation Header.
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface IPGeolocationParam {
   /**
-   * Cloudflare adds a CF-IPCountry HTTP header containing the country code that
-   * corresponds to the visitor.
+   * Current value of the zone setting.
    */
-  id?: 'ip_geolocation';
+  value: 'on' | 'off';
 
-  value?: IPGeolocationParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace IPGeolocationParam {
-  export interface Value {
-    /**
-     * The status of adding the IP Geolocation Header.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -681,44 +785,33 @@ export interface MinTLSVersion {
   modified_on?: string | null;
 }
 
+/**
+ * Automatically optimize image loading for website visitors on mobile devices.
+ * Refer to
+ * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
+ * more information.
+ */
 export interface Mirage {
   /**
-   * Cloudflare Mirage reduces bandwidth used by images in mobile browsers. It can
-   * accelerate loading of image-heavy websites on very slow mobile connections and
-   * HTTP/1.
+   * ID of the zone setting.
    */
-  id?: 'mirage';
+  id: 'mirage';
 
-  value?: Mirage.Value;
-}
-
-export namespace Mirage {
-  export interface Value {
-    /**
-     * The status of Mirage.
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface MirageParam {
   /**
-   * Cloudflare Mirage reduces bandwidth used by images in mobile browsers. It can
-   * accelerate loading of image-heavy websites on very slow mobile connections and
-   * HTTP/1.
+   * Current value of the zone setting.
    */
-  id?: 'mirage';
+  value: 'on' | 'off';
 
-  value?: MirageParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace MirageParam {
-  export interface Value {
-    /**
-     * The status of Mirage.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -756,44 +849,30 @@ export namespace NEL {
   }
 }
 
+/**
+ * Enables the Opportunistic Encryption feature for a zone.
+ */
 export interface OpportunisticEncryption {
   /**
-   * Opportunistic Encryption allows browsers to access HTTP URIs over an encrypted
-   * TLS channel. It's not a substitute for HTTPS, but provides additional security
-   * for otherwise vulnerable requests.
+   * ID of the zone setting.
    */
-  id?: 'opportunistic_encryption';
+  id: 'opportunistic_encryption';
 
-  value?: OpportunisticEncryption.Value;
-}
-
-export namespace OpportunisticEncryption {
-  export interface Value {
-    /**
-     * The status of Opportunistic Encryption.
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface OpportunisticEncryptionParam {
   /**
-   * Opportunistic Encryption allows browsers to access HTTP URIs over an encrypted
-   * TLS channel. It's not a substitute for HTTPS, but provides additional security
-   * for otherwise vulnerable requests.
+   * Current value of the zone setting.
    */
-  id?: 'opportunistic_encryption';
+  value: 'on' | 'off';
 
-  value?: OpportunisticEncryptionParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace OpportunisticEncryptionParam {
-  export interface Value {
-    /**
-     * The status of Opportunistic Encryption.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -850,42 +929,32 @@ export interface OrangeToOrange {
   modified_on?: string | null;
 }
 
+/**
+ * Cloudflare will proxy customer error pages on any 502,504 errors on origin
+ * server instead of showing a default Cloudflare error page. This does not apply
+ * to 522 errors and is limited to Enterprise Zones.
+ */
 export interface OriginErrorPagePassThru {
   /**
-   * Turn on or off Cloudflare error pages generated from issues sent from the origin
-   * server. If enabled, this setting triggers error pages issued by the origin.
+   * ID of the zone setting.
    */
-  id?: 'origin_error_page_pass_thru';
+  id: 'origin_error_page_pass_thru';
 
-  value?: OriginErrorPagePassThru.Value;
-}
-
-export namespace OriginErrorPagePassThru {
-  export interface Value {
-    /**
-     * The status of Origin Error Page Passthru.
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface OriginErrorPagePassThruParam {
   /**
-   * Turn on or off Cloudflare error pages generated from issues sent from the origin
-   * server. If enabled, this setting triggers error pages issued by the origin.
+   * Current value of the zone setting.
    */
-  id?: 'origin_error_page_pass_thru';
+  value: 'on' | 'off';
 
-  value?: OriginErrorPagePassThruParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace OriginErrorPagePassThruParam {
-  export interface Value {
-    /**
-     * The status of Origin Error Page Passthru.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -893,40 +962,35 @@ export namespace OriginErrorPagePassThruParam {
  */
 export type OriginMaxHTTPVersion = 'origin_max_http_version';
 
+/**
+ * Removes metadata and compresses your images for faster page load times. Basic
+ * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
+ * quality. Basic + JPEG (Lossy): Further reduce the size of JPEG files for faster
+ * image loading. Larger JPEGs are converted to progressive images, loading a
+ * lower-resolution image first and ending in a higher-resolution version. Not
+ * recommended for hi-res photography sites.
+ */
 export interface Polish {
   /**
-   * Apply options from the Polish feature of the Cloudflare Speed app.
+   * ID of the zone setting.
    */
-  id?: 'polish';
+  id: 'polish';
 
-  value?: Polish.Value;
-}
-
-export namespace Polish {
-  export interface Value {
-    /**
-     * The level of Polish you want applied to your origin.
-     */
-    value?: 'off' | 'lossless' | 'lossy';
-  }
-}
-
-export interface PolishParam {
   /**
-   * Apply options from the Polish feature of the Cloudflare Speed app.
+   * Current value of the zone setting.
    */
-  id?: 'polish';
+  value: 'off' | 'lossless' | 'lossy';
 
-  value?: PolishParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace PolishParam {
-  export interface Value {
-    /**
-     * The level of Polish you want applied to your origin.
-     */
-    value?: 'off' | 'lossless' | 'lossy';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -1008,56 +1072,68 @@ export interface PseudoIPV4 {
   modified_on?: string | null;
 }
 
+/**
+ * Enables or disables buffering of responses from the proxied server. Cloudflare
+ * may buffer the whole payload to deliver it at once to the client versus allowing
+ * it to be delivered in chunks. By default, the proxied server streams directly
+ * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
+ */
 export interface ResponseBuffering {
   /**
-   * Turn on or off whether Cloudflare should wait for an entire file from the origin
-   * server before forwarding it to the site visitor. By default, Cloudflare sends
-   * packets to the client as they arrive from the origin server.
+   * ID of the zone setting.
    */
-  id?: 'response_buffering';
+  id: 'response_buffering';
 
   /**
-   * The status of Response Buffering
+   * Current value of the zone setting.
    */
-  value?: 'on' | 'off';
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export interface ResponseBufferingParam {
-  /**
-   * Turn on or off whether Cloudflare should wait for an entire file from the origin
-   * server before forwarding it to the site visitor. By default, Cloudflare sends
-   * packets to the client as they arrive from the origin server.
-   */
-  id?: 'response_buffering';
-
-  /**
-   * The status of Response Buffering
-   */
-  value?: 'on' | 'off';
-}
-
+/**
+ * Rocket Loader is a general-purpose asynchronous JavaScript optimisation that
+ * prioritises rendering your content while loading your site's Javascript
+ * asynchronously. Turning on Rocket Loader will immediately improve a web page's
+ * rendering time sometimes measured as Time to First Paint (TTFP), and also the
+ * `window.onload` time (assuming there is JavaScript on the page). This can have a
+ * positive impact on your Google search ranking. When turned on, Rocket Loader
+ * will automatically defer the loading of all Javascript referenced in your HTML,
+ * with no configuration required. Refer to
+ * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
+ * for more information.
+ */
 export interface RocketLoader {
   /**
-   * Turn on or off Rocket Loader in the Cloudflare Speed app.
+   * ID of the zone setting.
    */
-  id?: 'rocket_loader';
+  id: 'rocket_loader';
 
   /**
-   * The status of Rocket Loader
+   * Current value of the zone setting.
    */
-  value?: 'on' | 'off';
-}
-
-export interface RocketLoaderParam {
-  /**
-   * Turn on or off Rocket Loader in the Cloudflare Speed app.
-   */
-  id?: 'rocket_loader';
+  value: 'on' | 'off';
 
   /**
-   * The status of Rocket Loader
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
    */
-  value?: 'on' | 'off';
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -1130,106 +1206,138 @@ export namespace SecurityHeaders {
   }
 }
 
+/**
+ * Choose the appropriate security profile for your website, which will
+ * automatically adjust each of the security settings. If you choose to customize
+ * an individual security setting, the profile will become Custom.
+ * (https://support.cloudflare.com/hc/en-us/articles/200170056).
+ */
 export interface SecurityLevel {
   /**
-   * Control options for the **Security Level** feature from the **Security** app.
+   * ID of the zone setting.
    */
-  id?: 'security_level';
+  id: 'security_level';
 
-  value?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-}
-
-export interface SecurityLevelParam {
   /**
-   * Control options for the **Security Level** feature from the **Security** app.
+   * Current value of the zone setting.
    */
-  id?: 'security_level';
+  value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
 
-  value?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
+/**
+ * If there is sensitive content on your website that you want visible to real
+ * visitors, but that you want to hide from suspicious visitors, all you have to do
+ * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
+ * be excluded from suspicious visitors in the following SSE tags:
+ * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
+ * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
+ * have HTML minification enabled, you won't see the SSE tags in your HTML source
+ * when it's served through Cloudflare. SSE will still function in this case, as
+ * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
+ * resource moves through our network to the visitor's computer.
+ * (https://support.cloudflare.com/hc/en-us/articles/200170036).
+ */
 export interface ServerSideExcludes {
-  id?: 'server_side_exclude';
+  /**
+   * ID of the zone setting.
+   */
+  id: 'server_side_exclude';
+
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export interface ServerSideExcludesParam {
-  id?: 'server_side_exclude';
-}
-
+/**
+ * Cloudflare will treat files with the same query strings as the same file in
+ * cache, regardless of the order of the query strings. This is limited to
+ * Enterprise Zones.
+ */
 export interface SortQueryStringForCache {
   /**
-   * Turn on or off the reordering of query strings. When query strings have the same
-   * structure, caching improves.
+   * ID of the zone setting.
    */
-  id?: 'sort_query_string_for_cache';
+  id: 'sort_query_string_for_cache';
 
-  value?: SortQueryStringForCache.Value;
-}
-
-export namespace SortQueryStringForCache {
-  export interface Value {
-    /**
-     * The status of Query String Sort
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface SortQueryStringForCacheParam {
   /**
-   * Turn on or off the reordering of query strings. When query strings have the same
-   * structure, caching improves.
+   * Current value of the zone setting.
    */
-  id?: 'sort_query_string_for_cache';
+  value: 'on' | 'off';
 
-  value?: SortQueryStringForCacheParam.Value;
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export namespace SortQueryStringForCacheParam {
-  export interface Value {
-    /**
-     * The status of Query String Sort
-     */
-    value?: 'on' | 'off';
-  }
-}
-
+/**
+ * SSL encrypts your visitor's connection and safeguards credit card numbers and
+ * other personal data to and from your website. SSL can take up to 5 minutes to
+ * fully activate. Requires Cloudflare active on your root domain or www domain.
+ * Off: no SSL between the visitor and Cloudflare, and no SSL between Cloudflare
+ * and your web server (all HTTP traffic). Flexible: SSL between the visitor and
+ * Cloudflare -- visitor sees HTTPS on your site, but no SSL between Cloudflare and
+ * your web server. You don't need to have an SSL cert on your web server, but your
+ * vistors will still see the site as being HTTPS enabled. Full: SSL between the
+ * visitor and Cloudflare -- visitor sees HTTPS on your site, and SSL between
+ * Cloudflare and your web server. You'll need to have your own SSL cert or
+ * self-signed cert at the very least. Full (Strict): SSL between the visitor and
+ * Cloudflare -- visitor sees HTTPS on your site, and SSL between Cloudflare and
+ * your web server. You'll need to have a valid SSL certificate installed on your
+ * web server. This certificate must be signed by a certificate authority, have an
+ * expiration date in the future, and respond for the request domain name
+ * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
+ */
 export interface SSL {
   /**
-   * Control options for the SSL feature of the Edge Certificates tab in the
-   * Cloudflare SSL/TLS app.
+   * ID of the zone setting.
    */
-  id?: 'ssl';
+  id: 'ssl';
 
-  value?: SSL.Value;
-}
-
-export namespace SSL {
-  export interface Value {
-    /**
-     * The encryption mode that Cloudflare uses to connect to your origin server.
-     */
-    value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-  }
-}
-
-export interface SSLParam {
   /**
-   * Control options for the SSL feature of the Edge Certificates tab in the
-   * Cloudflare SSL/TLS app.
+   * Current value of the zone setting.
    */
-  id?: 'ssl';
+  value: 'off' | 'flexible' | 'full' | 'strict';
 
-  value?: SSLParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace SSLParam {
-  export interface Value {
-    /**
-     * The encryption mode that Cloudflare uses to connect to your origin server.
-     */
-    value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -1302,80 +1410,66 @@ export interface TLSClientAuth {
   modified_on?: string | null;
 }
 
+/**
+ * Allows customer to continue to use True Client IP (Akamai feature) in the
+ * headers we send to the origin. This is limited to Enterprise Zones.
+ */
 export interface TrueClientIPHeader {
   /**
-   * Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.
+   * ID of the zone setting.
    */
-  id?: 'true_client_ip_header';
+  id: 'true_client_ip_header';
 
-  value?: TrueClientIPHeader.Value;
-}
-
-export namespace TrueClientIPHeader {
-  export interface Value {
-    /**
-     * The status of True Client IP Header.
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface TrueClientIPHeaderParam {
   /**
-   * Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.
+   * Current value of the zone setting.
    */
-  id?: 'true_client_ip_header';
+  value: 'on' | 'off';
 
-  value?: TrueClientIPHeaderParam.Value;
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
-export namespace TrueClientIPHeaderParam {
-  export interface Value {
-    /**
-     * The status of True Client IP Header.
-     */
-    value?: 'on' | 'off';
-  }
-}
-
+/**
+ * The WAF examines HTTP requests to your website. It inspects both GET and POST
+ * requests and applies rules to help filter out illegitimate traffic from
+ * legitimate website visitors. The Cloudflare WAF inspects website addresses or
+ * URLs to detect anything out of the ordinary. If the Cloudflare WAF determines
+ * suspicious user behavior, then the WAF will 'challenge' the web visitor with a
+ * page that asks them to submit a CAPTCHA successfully to continue their action.
+ * If the challenge is failed, the action will be stopped. What this means is that
+ * Cloudflare's WAF will block any traffic identified as illegitimate before it
+ * reaches your origin web server.
+ * (https://support.cloudflare.com/hc/en-us/articles/200172016).
+ */
 export interface WAF {
   /**
-   * Turn on or off
-   * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
-   * You cannot enable or disable individual WAF managed rules via Page Rules.
+   * ID of the zone setting.
    */
-  id?: 'waf';
+  id: 'waf';
 
-  value?: WAF.Value;
-}
-
-export namespace WAF {
-  export interface Value {
-    /**
-     * The status of WAF managed rules (previous version).
-     */
-    value?: 'on' | 'off';
-  }
-}
-
-export interface WAFParam {
   /**
-   * Turn on or off
-   * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
-   * You cannot enable or disable individual WAF managed rules via Page Rules.
+   * Current value of the zone setting.
    */
-  id?: 'waf';
+  value: 'on' | 'off';
 
-  value?: WAFParam.Value;
-}
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
 
-export namespace WAFParam {
-  export interface Value {
-    /**
-     * The status of WAF managed rules (previous version).
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -1471,229 +1565,58 @@ export type SettingEditResponse =
   | ZeroRTT
   | AdvancedDDoS
   | AlwaysOnline
-  | SettingEditResponse.ZonesSchemasAlwaysUseHTTPS
-  | SettingEditResponse.ZonesSchemasAutomaticHTTPSRewrites
+  | AlwaysUseHTTPS
+  | AutomaticHTTPSRewrites
   | Brotli
-  | SettingEditResponse.ZonesSchemasBrowserCacheTTL
-  | SettingEditResponse.ZonesSchemasBrowserCheck
-  | SettingEditResponse.ZonesSchemasCacheLevel
+  | BrowserCacheTTL
+  | BrowserCheck
+  | CacheLevel
   | ChallengeTTL
   | Ciphers
   | SettingEditResponse.ZonesCNAMEFlattening
-  | SettingEditResponse.ZonesSchemasDevelopmentMode
+  | DevelopmentMode
   | EarlyHints
-  | SettingEditResponse.ZonesSchemasEdgeCacheTTL
-  | SettingEditResponse.ZonesSchemasEmailObfuscation
+  | SettingEditResponse.ZonesEdgeCacheTTL
+  | EmailObfuscation
   | H2Prioritization
-  | SettingEditResponse.ZonesSchemasHotlinkProtection
+  | HotlinkProtection
   | HTTP2
   | HTTP3
   | ImageResizing
-  | SettingEditResponse.ZonesSchemasIPGeolocation
+  | IPGeolocation
   | IPV6
   | SettingEditResponse.ZonesMaxUpload
   | MinTLSVersion
-  | SettingEditResponse.ZonesSchemasMirage
+  | Mirage
   | NEL
-  | SettingEditResponse.ZonesSchemasOpportunisticEncryption
+  | OpportunisticEncryption
   | OpportunisticOnion
   | OrangeToOrange
-  | SettingEditResponse.ZonesSchemasOriginErrorPagePassThru
-  | SettingEditResponse.ZonesSchemasPolish
+  | OriginErrorPagePassThru
+  | Polish
   | PrefetchPreload
   | ProxyReadTimeout
   | PseudoIPV4
   | SettingEditResponse.ZonesReplaceInsecureJS
-  | SettingEditResponse.ZonesSchemasResponseBuffering
-  | SettingEditResponse.ZonesSchemasRocketLoader
+  | ResponseBuffering
+  | RocketLoader
   | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization
   | SecurityHeaders
-  | SettingEditResponse.ZonesSchemasSecurityLevel
-  | SettingEditResponse.ZonesSchemasServerSideExclude
+  | SecurityLevel
+  | ServerSideExcludes
   | SettingEditResponse.ZonesSha1Support
-  | SettingEditResponse.ZonesSchemasSortQueryStringForCache
-  | SettingEditResponse.ZonesSchemasSSL
+  | SortQueryStringForCache
+  | SSL
   | SSLRecommender
   | SettingEditResponse.ZonesTLS1_2Only
   | TLS1_3
   | TLSClientAuth
-  | SettingEditResponse.ZonesSchemasTrueClientIPHeader
-  | SettingEditResponse.ZonesSchemasWAF
+  | TrueClientIPHeader
+  | WAF
   | WebP
   | Websocket;
 
 export namespace SettingEditResponse {
-  /**
-   * Reply to all requests for URLs that use "http" with a 301 redirect to the
-   * equivalent "https" URL. If you only want to redirect for a subset of requests,
-   * consider creating an "Always use HTTPS" page rule.
-   */
-  export interface ZonesSchemasAlwaysUseHTTPS {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'always_use_https';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enable the Automatic HTTPS Rewrites feature for this zone.
-   */
-  export interface ZonesSchemasAutomaticHTTPSRewrites {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'automatic_https_rewrites';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
-   * will remain on your visitors' computers. Cloudflare will honor any larger times
-   * specified by your server.
-   * (https://support.cloudflare.com/hc/en-us/articles/200168276).
-   */
-  export interface ZonesSchemasBrowserCacheTTL {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'browser_cache_ttl';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value:
-      | 0
-      | 30
-      | 60
-      | 120
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 691200
-      | 1382400
-      | 2073600
-      | 2678400
-      | 5356800
-      | 16070400
-      | 31536000;
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Browser Integrity Check is similar to Bad Behavior and looks for common HTTP
-   * headers abused most commonly by spammers and denies access to your page. It will
-   * also challenge visitors that do not have a user agent or a non standard user
-   * agent (also commonly used by abuse bots, crawlers or visitors).
-   * (https://support.cloudflare.com/hc/en-us/articles/200170086).
-   */
-  export interface ZonesSchemasBrowserCheck {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'browser_check';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Cache Level functions based off the setting level. The basic setting will cache
-   * most static resources (i.e., css, images, and JavaScript). The simplified
-   * setting will ignore the query string when delivering a cached resource. The
-   * aggressive setting will cache all static resources, including ones with a query
-   * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
-   */
-  export interface ZonesSchemasCacheLevel {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'cache_level';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'aggressive' | 'basic' | 'simplified';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
   /**
    * Whether or not cname flattening is on.
    */
@@ -1721,48 +1644,10 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Development Mode temporarily allows you to enter development mode for your
-   * websites if you need to make changes to your site. This will bypass Cloudflare's
-   * accelerated cache and slow down your site, but is useful if you are making
-   * changes to cacheable content (like images, css, or JavaScript) and would like to
-   * see those changes right away. Once entered, development mode will last for 3
-   * hours and then automatically toggle off.
-   */
-  export interface ZonesSchemasDevelopmentMode {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'development_mode';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-
-    /**
-     * Value of the zone setting. Notes: The interval (in seconds) from when
-     * development mode expires (positive integer) or last expired (negative integer)
-     * for the domain. If development mode has never been enabled, this value is false.
-     */
-    time_remaining?: number;
-  }
-
-  /**
    * Time (in seconds) that a resource will be ensured to remain on Cloudflare's
    * cache servers.
    */
-  export interface ZonesSchemasEdgeCacheTTL {
+  export interface ZonesEdgeCacheTTL {
     /**
      * ID of the zone setting.
      */
@@ -1807,93 +1692,6 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Encrypt email adresses on your web page from bots, while keeping them visible to
-   * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
-   */
-  export interface ZonesSchemasEmailObfuscation {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'email_obfuscation';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * When enabled, the Hotlink Protection option ensures that other sites cannot suck
-   * up your bandwidth by building pages that use images hosted on your site. Anytime
-   * a request for an image on your site hits Cloudflare, we check to ensure that
-   * it's not another site requesting them. People will still be able to download and
-   * view images from your page, but other sites won't be able to steal them for use
-   * on their own pages.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170026).
-   */
-  export interface ZonesSchemasHotlinkProtection {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'hotlink_protection';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enable IP Geolocation to have Cloudflare geolocate visitors to your website and
-   * pass the country code to you.
-   * (https://support.cloudflare.com/hc/en-us/articles/200168236).
-   */
-  export interface ZonesSchemasIPGeolocation {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'ip_geolocation';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Maximum size of an allowable upload.
    */
   export interface ZonesMaxUpload {
@@ -1920,120 +1718,6 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Automatically optimize image loading for website visitors on mobile devices.
-   * Refer to
-   * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
-   * more information.
-   */
-  export interface ZonesSchemasMirage {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'mirage';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enables the Opportunistic Encryption feature for a zone.
-   */
-  export interface ZonesSchemasOpportunisticEncryption {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'opportunistic_encryption';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Cloudflare will proxy customer error pages on any 502,504 errors on origin
-   * server instead of showing a default Cloudflare error page. This does not apply
-   * to 522 errors and is limited to Enterprise Zones.
-   */
-  export interface ZonesSchemasOriginErrorPagePassThru {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'origin_error_page_pass_thru';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Removes metadata and compresses your images for faster page load times. Basic
-   * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
-   * quality. Basic + JPEG (Lossy): Further reduce the size of JPEG files for faster
-   * image loading. Larger JPEGs are converted to progressive images, loading a
-   * lower-resolution image first and ending in a higher-resolution version. Not
-   * recommended for hi-res photography sites.
-   */
-  export interface ZonesSchemasPolish {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'polish';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'off' | 'lossless' | 'lossy';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Automatically replace insecure JavaScript libraries with safer and faster
    * alternatives provided under cdnjs and powered by Cloudflare. Currently supports
    * the following libraries: Polyfill under polyfill.io.
@@ -2043,70 +1727,6 @@ export namespace SettingEditResponse {
      * ID of the zone setting.
      */
     id: 'replace_insecure_js';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enables or disables buffering of responses from the proxied server. Cloudflare
-   * may buffer the whole payload to deliver it at once to the client versus allowing
-   * it to be delivered in chunks. By default, the proxied server streams directly
-   * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
-   */
-  export interface ZonesSchemasResponseBuffering {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'response_buffering';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Rocket Loader is a general-purpose asynchronous JavaScript optimisation that
-   * prioritises rendering your content while loading your site's Javascript
-   * asynchronously. Turning on Rocket Loader will immediately improve a web page's
-   * rendering time sometimes measured as Time to First Paint (TTFP), and also the
-   * `window.onload` time (assuming there is JavaScript on the page). This can have a
-   * positive impact on your Google search ranking. When turned on, Rocket Loader
-   * will automatically defer the loading of all Javascript referenced in your HTML,
-   * with no configuration required. Refer to
-   * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
-   * for more information.
-   */
-  export interface ZonesSchemasRocketLoader {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'rocket_loader';
 
     /**
      * Current value of the zone setting.
@@ -2154,71 +1774,6 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Choose the appropriate security profile for your website, which will
-   * automatically adjust each of the security settings. If you choose to customize
-   * an individual security setting, the profile will become Custom.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170056).
-   */
-  export interface ZonesSchemasSecurityLevel {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'security_level';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * If there is sensitive content on your website that you want visible to real
-   * visitors, but that you want to hide from suspicious visitors, all you have to do
-   * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
-   * be excluded from suspicious visitors in the following SSE tags:
-   * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
-   * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
-   * have HTML minification enabled, you won't see the SSE tags in your HTML source
-   * when it's served through Cloudflare. SSE will still function in this case, as
-   * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
-   * resource moves through our network to the visitor's computer.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170036).
-   */
-  export interface ZonesSchemasServerSideExclude {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'server_side_exclude';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Allow SHA1 support.
    */
   export interface ZonesSha1Support {
@@ -2245,75 +1800,6 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Cloudflare will treat files with the same query strings as the same file in
-   * cache, regardless of the order of the query strings. This is limited to
-   * Enterprise Zones.
-   */
-  export interface ZonesSchemasSortQueryStringForCache {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'sort_query_string_for_cache';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * SSL encrypts your visitor's connection and safeguards credit card numbers and
-   * other personal data to and from your website. SSL can take up to 5 minutes to
-   * fully activate. Requires Cloudflare active on your root domain or www domain.
-   * Off: no SSL between the visitor and Cloudflare, and no SSL between Cloudflare
-   * and your web server (all HTTP traffic). Flexible: SSL between the visitor and
-   * Cloudflare -- visitor sees HTTPS on your site, but no SSL between Cloudflare and
-   * your web server. You don't need to have an SSL cert on your web server, but your
-   * vistors will still see the site as being HTTPS enabled. Full: SSL between the
-   * visitor and Cloudflare -- visitor sees HTTPS on your site, and SSL between
-   * Cloudflare and your web server. You'll need to have your own SSL cert or
-   * self-signed cert at the very least. Full (Strict): SSL between the visitor and
-   * Cloudflare -- visitor sees HTTPS on your site, and SSL between Cloudflare and
-   * your web server. You'll need to have a valid SSL certificate installed on your
-   * web server. This certificate must be signed by a certificate authority, have an
-   * expiration date in the future, and respond for the request domain name
-   * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
-   */
-  export interface ZonesSchemasSSL {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'ssl';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'off' | 'flexible' | 'full' | 'strict';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Only allows TLS1.2.
    */
   export interface ZonesTLS1_2Only {
@@ -2326,68 +1812,6 @@ export namespace SettingEditResponse {
      * Current value of the zone setting.
      */
     value: 'off' | 'on';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Allows customer to continue to use True Client IP (Akamai feature) in the
-   * headers we send to the origin. This is limited to Enterprise Zones.
-   */
-  export interface ZonesSchemasTrueClientIPHeader {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'true_client_ip_header';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * The WAF examines HTTP requests to your website. It inspects both GET and POST
-   * requests and applies rules to help filter out illegitimate traffic from
-   * legitimate website visitors. The Cloudflare WAF inspects website addresses or
-   * URLs to detect anything out of the ordinary. If the Cloudflare WAF determines
-   * suspicious user behavior, then the WAF will 'challenge' the web visitor with a
-   * page that asks them to submit a CAPTCHA successfully to continue their action.
-   * If the challenge is failed, the action will be stopped. What this means is that
-   * Cloudflare's WAF will block any traffic identified as illegitimate before it
-   * reaches your origin web server.
-   * (https://support.cloudflare.com/hc/en-us/articles/200172016).
-   */
-  export interface ZonesSchemasWAF {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'waf';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2409,229 +1833,58 @@ export type SettingGetResponse =
   | ZeroRTT
   | AdvancedDDoS
   | AlwaysOnline
-  | SettingGetResponse.ZonesSchemasAlwaysUseHTTPS
-  | SettingGetResponse.ZonesSchemasAutomaticHTTPSRewrites
+  | AlwaysUseHTTPS
+  | AutomaticHTTPSRewrites
   | Brotli
-  | SettingGetResponse.ZonesSchemasBrowserCacheTTL
-  | SettingGetResponse.ZonesSchemasBrowserCheck
-  | SettingGetResponse.ZonesSchemasCacheLevel
+  | BrowserCacheTTL
+  | BrowserCheck
+  | CacheLevel
   | ChallengeTTL
   | Ciphers
   | SettingGetResponse.ZonesCNAMEFlattening
-  | SettingGetResponse.ZonesSchemasDevelopmentMode
+  | DevelopmentMode
   | EarlyHints
-  | SettingGetResponse.ZonesSchemasEdgeCacheTTL
-  | SettingGetResponse.ZonesSchemasEmailObfuscation
+  | SettingGetResponse.ZonesEdgeCacheTTL
+  | EmailObfuscation
   | H2Prioritization
-  | SettingGetResponse.ZonesSchemasHotlinkProtection
+  | HotlinkProtection
   | HTTP2
   | HTTP3
   | ImageResizing
-  | SettingGetResponse.ZonesSchemasIPGeolocation
+  | IPGeolocation
   | IPV6
   | SettingGetResponse.ZonesMaxUpload
   | MinTLSVersion
-  | SettingGetResponse.ZonesSchemasMirage
+  | Mirage
   | NEL
-  | SettingGetResponse.ZonesSchemasOpportunisticEncryption
+  | OpportunisticEncryption
   | OpportunisticOnion
   | OrangeToOrange
-  | SettingGetResponse.ZonesSchemasOriginErrorPagePassThru
-  | SettingGetResponse.ZonesSchemasPolish
+  | OriginErrorPagePassThru
+  | Polish
   | PrefetchPreload
   | ProxyReadTimeout
   | PseudoIPV4
   | SettingGetResponse.ZonesReplaceInsecureJS
-  | SettingGetResponse.ZonesSchemasResponseBuffering
-  | SettingGetResponse.ZonesSchemasRocketLoader
+  | ResponseBuffering
+  | RocketLoader
   | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization
   | SecurityHeaders
-  | SettingGetResponse.ZonesSchemasSecurityLevel
-  | SettingGetResponse.ZonesSchemasServerSideExclude
+  | SecurityLevel
+  | ServerSideExcludes
   | SettingGetResponse.ZonesSha1Support
-  | SettingGetResponse.ZonesSchemasSortQueryStringForCache
-  | SettingGetResponse.ZonesSchemasSSL
+  | SortQueryStringForCache
+  | SSL
   | SSLRecommender
   | SettingGetResponse.ZonesTLS1_2Only
   | TLS1_3
   | TLSClientAuth
-  | SettingGetResponse.ZonesSchemasTrueClientIPHeader
-  | SettingGetResponse.ZonesSchemasWAF
+  | TrueClientIPHeader
+  | WAF
   | WebP
   | Websocket;
 
 export namespace SettingGetResponse {
-  /**
-   * Reply to all requests for URLs that use "http" with a 301 redirect to the
-   * equivalent "https" URL. If you only want to redirect for a subset of requests,
-   * consider creating an "Always use HTTPS" page rule.
-   */
-  export interface ZonesSchemasAlwaysUseHTTPS {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'always_use_https';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enable the Automatic HTTPS Rewrites feature for this zone.
-   */
-  export interface ZonesSchemasAutomaticHTTPSRewrites {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'automatic_https_rewrites';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Browser Cache TTL (in seconds) specifies how long Cloudflare-cached resources
-   * will remain on your visitors' computers. Cloudflare will honor any larger times
-   * specified by your server.
-   * (https://support.cloudflare.com/hc/en-us/articles/200168276).
-   */
-  export interface ZonesSchemasBrowserCacheTTL {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'browser_cache_ttl';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value:
-      | 0
-      | 30
-      | 60
-      | 120
-      | 300
-      | 1200
-      | 1800
-      | 3600
-      | 7200
-      | 10800
-      | 14400
-      | 18000
-      | 28800
-      | 43200
-      | 57600
-      | 72000
-      | 86400
-      | 172800
-      | 259200
-      | 345600
-      | 432000
-      | 691200
-      | 1382400
-      | 2073600
-      | 2678400
-      | 5356800
-      | 16070400
-      | 31536000;
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Browser Integrity Check is similar to Bad Behavior and looks for common HTTP
-   * headers abused most commonly by spammers and denies access to your page. It will
-   * also challenge visitors that do not have a user agent or a non standard user
-   * agent (also commonly used by abuse bots, crawlers or visitors).
-   * (https://support.cloudflare.com/hc/en-us/articles/200170086).
-   */
-  export interface ZonesSchemasBrowserCheck {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'browser_check';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Cache Level functions based off the setting level. The basic setting will cache
-   * most static resources (i.e., css, images, and JavaScript). The simplified
-   * setting will ignore the query string when delivering a cached resource. The
-   * aggressive setting will cache all static resources, including ones with a query
-   * string. (https://support.cloudflare.com/hc/en-us/articles/200168256).
-   */
-  export interface ZonesSchemasCacheLevel {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'cache_level';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'aggressive' | 'basic' | 'simplified';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
   /**
    * Whether or not cname flattening is on.
    */
@@ -2659,48 +1912,10 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Development Mode temporarily allows you to enter development mode for your
-   * websites if you need to make changes to your site. This will bypass Cloudflare's
-   * accelerated cache and slow down your site, but is useful if you are making
-   * changes to cacheable content (like images, css, or JavaScript) and would like to
-   * see those changes right away. Once entered, development mode will last for 3
-   * hours and then automatically toggle off.
-   */
-  export interface ZonesSchemasDevelopmentMode {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'development_mode';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-
-    /**
-     * Value of the zone setting. Notes: The interval (in seconds) from when
-     * development mode expires (positive integer) or last expired (negative integer)
-     * for the domain. If development mode has never been enabled, this value is false.
-     */
-    time_remaining?: number;
-  }
-
-  /**
    * Time (in seconds) that a resource will be ensured to remain on Cloudflare's
    * cache servers.
    */
-  export interface ZonesSchemasEdgeCacheTTL {
+  export interface ZonesEdgeCacheTTL {
     /**
      * ID of the zone setting.
      */
@@ -2745,93 +1960,6 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Encrypt email adresses on your web page from bots, while keeping them visible to
-   * humans. (https://support.cloudflare.com/hc/en-us/articles/200170016).
-   */
-  export interface ZonesSchemasEmailObfuscation {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'email_obfuscation';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * When enabled, the Hotlink Protection option ensures that other sites cannot suck
-   * up your bandwidth by building pages that use images hosted on your site. Anytime
-   * a request for an image on your site hits Cloudflare, we check to ensure that
-   * it's not another site requesting them. People will still be able to download and
-   * view images from your page, but other sites won't be able to steal them for use
-   * on their own pages.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170026).
-   */
-  export interface ZonesSchemasHotlinkProtection {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'hotlink_protection';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enable IP Geolocation to have Cloudflare geolocate visitors to your website and
-   * pass the country code to you.
-   * (https://support.cloudflare.com/hc/en-us/articles/200168236).
-   */
-  export interface ZonesSchemasIPGeolocation {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'ip_geolocation';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Maximum size of an allowable upload.
    */
   export interface ZonesMaxUpload {
@@ -2858,120 +1986,6 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Automatically optimize image loading for website visitors on mobile devices.
-   * Refer to
-   * [our blog post](http://blog.cloudflare.com/mirage2-solving-mobile-speed) for
-   * more information.
-   */
-  export interface ZonesSchemasMirage {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'mirage';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enables the Opportunistic Encryption feature for a zone.
-   */
-  export interface ZonesSchemasOpportunisticEncryption {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'opportunistic_encryption';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Cloudflare will proxy customer error pages on any 502,504 errors on origin
-   * server instead of showing a default Cloudflare error page. This does not apply
-   * to 522 errors and is limited to Enterprise Zones.
-   */
-  export interface ZonesSchemasOriginErrorPagePassThru {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'origin_error_page_pass_thru';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Removes metadata and compresses your images for faster page load times. Basic
-   * (Lossless): Reduce the size of PNG, JPEG, and GIF files - no impact on visual
-   * quality. Basic + JPEG (Lossy): Further reduce the size of JPEG files for faster
-   * image loading. Larger JPEGs are converted to progressive images, loading a
-   * lower-resolution image first and ending in a higher-resolution version. Not
-   * recommended for hi-res photography sites.
-   */
-  export interface ZonesSchemasPolish {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'polish';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'off' | 'lossless' | 'lossy';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Automatically replace insecure JavaScript libraries with safer and faster
    * alternatives provided under cdnjs and powered by Cloudflare. Currently supports
    * the following libraries: Polyfill under polyfill.io.
@@ -2981,70 +1995,6 @@ export namespace SettingGetResponse {
      * ID of the zone setting.
      */
     id: 'replace_insecure_js';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Enables or disables buffering of responses from the proxied server. Cloudflare
-   * may buffer the whole payload to deliver it at once to the client versus allowing
-   * it to be delivered in chunks. By default, the proxied server streams directly
-   * and is not buffered by Cloudflare. This is limited to Enterprise Zones.
-   */
-  export interface ZonesSchemasResponseBuffering {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'response_buffering';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Rocket Loader is a general-purpose asynchronous JavaScript optimisation that
-   * prioritises rendering your content while loading your site's Javascript
-   * asynchronously. Turning on Rocket Loader will immediately improve a web page's
-   * rendering time sometimes measured as Time to First Paint (TTFP), and also the
-   * `window.onload` time (assuming there is JavaScript on the page). This can have a
-   * positive impact on your Google search ranking. When turned on, Rocket Loader
-   * will automatically defer the loading of all Javascript referenced in your HTML,
-   * with no configuration required. Refer to
-   * [Understanding Rocket Loader](https://support.cloudflare.com/hc/articles/200168056)
-   * for more information.
-   */
-  export interface ZonesSchemasRocketLoader {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'rocket_loader';
 
     /**
      * Current value of the zone setting.
@@ -3092,71 +2042,6 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Choose the appropriate security profile for your website, which will
-   * automatically adjust each of the security settings. If you choose to customize
-   * an individual security setting, the profile will become Custom.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170056).
-   */
-  export interface ZonesSchemasSecurityLevel {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'security_level';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * If there is sensitive content on your website that you want visible to real
-   * visitors, but that you want to hide from suspicious visitors, all you have to do
-   * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
-   * be excluded from suspicious visitors in the following SSE tags:
-   * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
-   * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
-   * have HTML minification enabled, you won't see the SSE tags in your HTML source
-   * when it's served through Cloudflare. SSE will still function in this case, as
-   * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
-   * resource moves through our network to the visitor's computer.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170036).
-   */
-  export interface ZonesSchemasServerSideExclude {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'server_side_exclude';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Allow SHA1 support.
    */
   export interface ZonesSha1Support {
@@ -3169,75 +2054,6 @@ export namespace SettingGetResponse {
      * Current value of the zone setting.
      */
     value: 'off' | 'on';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * Cloudflare will treat files with the same query strings as the same file in
-   * cache, regardless of the order of the query strings. This is limited to
-   * Enterprise Zones.
-   */
-  export interface ZonesSchemasSortQueryStringForCache {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'sort_query_string_for_cache';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * SSL encrypts your visitor's connection and safeguards credit card numbers and
-   * other personal data to and from your website. SSL can take up to 5 minutes to
-   * fully activate. Requires Cloudflare active on your root domain or www domain.
-   * Off: no SSL between the visitor and Cloudflare, and no SSL between Cloudflare
-   * and your web server (all HTTP traffic). Flexible: SSL between the visitor and
-   * Cloudflare -- visitor sees HTTPS on your site, but no SSL between Cloudflare and
-   * your web server. You don't need to have an SSL cert on your web server, but your
-   * vistors will still see the site as being HTTPS enabled. Full: SSL between the
-   * visitor and Cloudflare -- visitor sees HTTPS on your site, and SSL between
-   * Cloudflare and your web server. You'll need to have your own SSL cert or
-   * self-signed cert at the very least. Full (Strict): SSL between the visitor and
-   * Cloudflare -- visitor sees HTTPS on your site, and SSL between Cloudflare and
-   * your web server. You'll need to have a valid SSL certificate installed on your
-   * web server. This certificate must be signed by a certificate authority, have an
-   * expiration date in the future, and respond for the request domain name
-   * (hostname). (https://support.cloudflare.com/hc/en-us/articles/200170416).
-   */
-  export interface ZonesSchemasSSL {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'ssl';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'off' | 'flexible' | 'full' | 'strict';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -3276,122 +2092,60 @@ export namespace SettingGetResponse {
      */
     modified_on?: string | null;
   }
-
-  /**
-   * Allows customer to continue to use True Client IP (Akamai feature) in the
-   * headers we send to the origin. This is limited to Enterprise Zones.
-   */
-  export interface ZonesSchemasTrueClientIPHeader {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'true_client_ip_header';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * The WAF examines HTTP requests to your website. It inspects both GET and POST
-   * requests and applies rules to help filter out illegitimate traffic from
-   * legitimate website visitors. The Cloudflare WAF inspects website addresses or
-   * URLs to detect anything out of the ordinary. If the Cloudflare WAF determines
-   * suspicious user behavior, then the WAF will 'challenge' the web visitor with a
-   * page that asks them to submit a CAPTCHA successfully to continue their action.
-   * If the challenge is failed, the action will be stopped. What this means is that
-   * Cloudflare's WAF will block any traffic identified as illegitimate before it
-   * reaches your origin web server.
-   * (https://support.cloudflare.com/hc/en-us/articles/200172016).
-   */
-  export interface ZonesSchemasWAF {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'waf';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
 }
 
 export type SettingEditParams =
   | SettingEditParams.ZeroRTT
   | SettingEditParams.AdvancedDDoS
   | SettingEditParams.AlwaysOnline
-  | SettingEditParams.ZonesSchemasAlwaysUseHTTPS
-  | SettingEditParams.ZonesSchemasAutomaticHTTPSRewrites
+  | SettingEditParams.AlwaysUseHTTPS
+  | SettingEditParams.AutomaticHTTPSRewrites
   | SettingEditParams.Brotli
-  | SettingEditParams.ZonesSchemasBrowserCacheTTL
-  | SettingEditParams.ZonesSchemasBrowserCheck
-  | SettingEditParams.ZonesSchemasCacheLevel
+  | SettingEditParams.BrowserCacheTTL
+  | SettingEditParams.BrowserCheck
+  | SettingEditParams.CacheLevel
   | SettingEditParams.ChallengeTTL
   | SettingEditParams.Ciphers
   | SettingEditParams.ZonesCNAMEFlattening
-  | SettingEditParams.ZonesSchemasDevelopmentMode
+  | SettingEditParams.DevelopmentMode
   | SettingEditParams.EarlyHints
-  | SettingEditParams.ZonesSchemasEdgeCacheTTL
-  | SettingEditParams.ZonesSchemasEmailObfuscation
+  | SettingEditParams.ZonesEdgeCacheTTL
+  | SettingEditParams.EmailObfuscation
   | SettingEditParams.H2Prioritization
-  | SettingEditParams.ZonesSchemasHotlinkProtection
+  | SettingEditParams.HotlinkProtection
   | SettingEditParams.HTTP2
   | SettingEditParams.HTTP3
   | SettingEditParams.ImageResizing
-  | SettingEditParams.ZonesSchemasIPGeolocation
+  | SettingEditParams.IPGeolocation
   | SettingEditParams.IPV6
   | SettingEditParams.ZonesMaxUpload
   | SettingEditParams.MinTLSVersion
-  | SettingEditParams.ZonesSchemasMirage
+  | SettingEditParams.Mirage
   | SettingEditParams.NEL
-  | SettingEditParams.ZonesSchemasOpportunisticEncryption
+  | SettingEditParams.OpportunisticEncryption
   | SettingEditParams.OpportunisticOnion
   | SettingEditParams.OrangeToOrange
-  | SettingEditParams.ZonesSchemasOriginErrorPagePassThru
-  | SettingEditParams.ZonesSchemasPolish
+  | SettingEditParams.OriginErrorPagePassThru
+  | SettingEditParams.Polish
   | SettingEditParams.PrefetchPreload
   | SettingEditParams.ProxyReadTimeout
   | SettingEditParams.PseudoIPV4
   | SettingEditParams.ZonesReplaceInsecureJS
-  | SettingEditParams.ZonesSchemasResponseBuffering
-  | SettingEditParams.ZonesSchemasRocketLoader
+  | SettingEditParams.ResponseBuffering
+  | SettingEditParams.RocketLoader
   | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization
   | SettingEditParams.SecurityHeaders
-  | SettingEditParams.ZonesSchemasSecurityLevel
-  | SettingEditParams.ZonesSchemasServerSideExclude
+  | SettingEditParams.SecurityLevel
+  | SettingEditParams.ServerSideExcludes
   | SettingEditParams.ZonesSha1Support
-  | SettingEditParams.ZonesSchemasSortQueryStringForCache
-  | SettingEditParams.ZonesSchemasSSL
+  | SettingEditParams.SortQueryStringForCache
+  | SettingEditParams.SSL
   | SettingEditParams.SSLRecommender
   | SettingEditParams.ZonesTLS1_2Only
   | SettingEditParams.TLS1_3
   | SettingEditParams.TLSClientAuth
-  | SettingEditParams.ZonesSchemasTrueClientIPHeader
-  | SettingEditParams.ZonesSchemasWAF
+  | SettingEditParams.TrueClientIPHeader
+  | SettingEditParams.WAF
   | SettingEditParams.WebP
   | SettingEditParams.Websocket;
 
@@ -3447,7 +2201,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasAlwaysUseHTTPS {
+  export interface AlwaysUseHTTPS {
     /**
      * Path param: Identifier
      */
@@ -3464,7 +2218,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasAutomaticHTTPSRewrites {
+  export interface AutomaticHTTPSRewrites {
     /**
      * Path param: Identifier
      */
@@ -3498,7 +2252,7 @@ export namespace SettingEditParams {
     value: 'off' | 'on';
   }
 
-  export interface ZonesSchemasBrowserCacheTTL {
+  export interface BrowserCacheTTL {
     /**
      * Path param: Identifier
      */
@@ -3543,7 +2297,7 @@ export namespace SettingEditParams {
       | 31536000;
   }
 
-  export interface ZonesSchemasBrowserCheck {
+  export interface BrowserCheck {
     /**
      * Path param: Identifier
      */
@@ -3560,7 +2314,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasCacheLevel {
+  export interface CacheLevel {
     /**
      * Path param: Identifier
      */
@@ -3642,7 +2396,7 @@ export namespace SettingEditParams {
     value: 'flatten_at_root' | 'flatten_all';
   }
 
-  export interface ZonesSchemasDevelopmentMode {
+  export interface DevelopmentMode {
     /**
      * Path param: Identifier
      */
@@ -3676,7 +2430,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasEdgeCacheTTL {
+  export interface ZonesEdgeCacheTTL {
     /**
      * Path param: Identifier
      */
@@ -3714,7 +2468,7 @@ export namespace SettingEditParams {
       | 604800;
   }
 
-  export interface ZonesSchemasEmailObfuscation {
+  export interface EmailObfuscation {
     /**
      * Path param: Identifier
      */
@@ -3748,7 +2502,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off' | 'custom';
   }
 
-  export interface ZonesSchemasHotlinkProtection {
+  export interface HotlinkProtection {
     /**
      * Path param: Identifier
      */
@@ -3816,7 +2570,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off' | 'open';
   }
 
-  export interface ZonesSchemasIPGeolocation {
+  export interface IPGeolocation {
     /**
      * Path param: Identifier
      */
@@ -3884,7 +2638,7 @@ export namespace SettingEditParams {
     value: '1.0' | '1.1' | '1.2' | '1.3';
   }
 
-  export interface ZonesSchemasMirage {
+  export interface Mirage {
     /**
      * Path param: Identifier
      */
@@ -3927,7 +2681,7 @@ export namespace SettingEditParams {
     }
   }
 
-  export interface ZonesSchemasOpportunisticEncryption {
+  export interface OpportunisticEncryption {
     /**
      * Path param: Identifier
      */
@@ -3978,7 +2732,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasOriginErrorPagePassThru {
+  export interface OriginErrorPagePassThru {
     /**
      * Path param: Identifier
      */
@@ -3995,7 +2749,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasPolish {
+  export interface Polish {
     /**
      * Path param: Identifier
      */
@@ -4080,7 +2834,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasResponseBuffering {
+  export interface ResponseBuffering {
     /**
      * Path param: Identifier
      */
@@ -4097,7 +2851,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasRocketLoader {
+  export interface RocketLoader {
     /**
      * Path param: Identifier
      */
@@ -4192,7 +2946,7 @@ export namespace SettingEditParams {
     }
   }
 
-  export interface ZonesSchemasSecurityLevel {
+  export interface SecurityLevel {
     /**
      * Path param: Identifier
      */
@@ -4209,7 +2963,7 @@ export namespace SettingEditParams {
     value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
   }
 
-  export interface ZonesSchemasServerSideExclude {
+  export interface ServerSideExcludes {
     /**
      * Path param: Identifier
      */
@@ -4243,7 +2997,7 @@ export namespace SettingEditParams {
     value: 'off' | 'on';
   }
 
-  export interface ZonesSchemasSortQueryStringForCache {
+  export interface SortQueryStringForCache {
     /**
      * Path param: Identifier
      */
@@ -4260,7 +3014,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasSSL {
+  export interface SSL {
     /**
      * Path param: Identifier
      */
@@ -4345,7 +3099,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasTrueClientIPHeader {
+  export interface TrueClientIPHeader {
     /**
      * Path param: Identifier
      */
@@ -4362,7 +3116,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off';
   }
 
-  export interface ZonesSchemasWAF {
+  export interface WAF {
     /**
      * Path param: Identifier
      */
