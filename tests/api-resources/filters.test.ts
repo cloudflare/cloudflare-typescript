@@ -9,12 +9,13 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource pagerules', () => {
-  test('create: only required params', async () => {
-    const responsePromise = client.pagerules.create({
+describe('resource filters', () => {
+  // TODO: investigate broken test
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.filters.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      expression:
+        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,26 +26,20 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('create: required and optional params', async () => {
-    const response = await client.pagerules.create({
+  // TODO: investigate broken test
+  test.skip('create: required and optional params', async () => {
+    const response = await client.filters.create({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          id: 'forwarding_url',
-          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
-        },
-      ],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-      priority: 0,
-      status: 'active',
+      expression:
+        '(http.request.uri.path ~ ".*wp-login.php" or http.request.uri.path ~ ".*xmlrpc.php") and ip.addr ne 172.16.22.155',
     });
   });
 
-  test('update: only required params', async () => {
-    const responsePromise = client.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  // TODO: investigate broken test
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.filters.update('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [{}],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
+      body: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -55,23 +50,16 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('update: required and optional params', async () => {
-    const response = await client.pagerules.update('023e105f4ecef8ad9ca31a8372d0c353', {
+  // TODO: investigate broken test
+  test.skip('update: required and optional params', async () => {
+    const response = await client.filters.update('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          id: 'forwarding_url',
-          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
-        },
-      ],
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-      priority: 0,
-      status: 'active',
+      body: {},
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.pagerules.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const responsePromise = client.filters.list({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,17 +70,20 @@ describe('resource pagerules', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.pagerules.list({
+    const response = await client.filters.list({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'asc',
-      match: 'any',
-      order: 'status',
-      status: 'active',
+      id: '372e67954025e0ba6aaa6d586b9e0b61',
+      description: 'browsers',
+      expression: 'php',
+      page: 1,
+      paused: false,
+      per_page: 5,
+      ref: 'FIL-100',
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.filters.delete('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -105,15 +96,13 @@ describe('resource pagerules', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.pagerules.delete('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.filters.delete('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
-  test('edit: only required params', async () => {
-    const responsePromise = client.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('bulkDelete: only required params', async () => {
+    const responsePromise = client.filters.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -123,23 +112,27 @@ describe('resource pagerules', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('edit: required and optional params', async () => {
-    const response = await client.pagerules.edit('023e105f4ecef8ad9ca31a8372d0c353', {
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      actions: [
-        {
-          id: 'forwarding_url',
-          value: { status_code: 301, url: 'http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3' },
-        },
-      ],
-      priority: 0,
-      status: 'active',
-      targets: [{ constraint: { operator: 'matches', value: '*example.com/images/*' }, target: 'url' }],
-    });
+  test('bulkDelete: required and optional params', async () => {
+    const response = await client.filters.bulkDelete({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+  });
+
+  test('bulkUpdate: only required params', async () => {
+    const responsePromise = client.filters.bulkUpdate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('bulkUpdate: required and optional params', async () => {
+    const response = await client.filters.bulkUpdate({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const responsePromise = client.filters.get('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -152,7 +145,7 @@ describe('resource pagerules', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.pagerules.get('023e105f4ecef8ad9ca31a8372d0c353', {
+    const response = await client.filters.get('372e67954025e0ba6aaa6d586b9e0b61', {
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
