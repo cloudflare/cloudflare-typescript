@@ -1,8 +1,21 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../resource';
-import * as AllowPatternsAPI from './allow-patterns';
-import { AllowPatterns } from './allow-patterns';
+import * as AllowPoliciesAPI from './allow-policies';
+import {
+  AllowPolicies,
+  AllowPolicyCreateParams,
+  AllowPolicyCreateResponse,
+  AllowPolicyDeleteParams,
+  AllowPolicyDeleteResponse,
+  AllowPolicyEditParams,
+  AllowPolicyEditResponse,
+  AllowPolicyGetParams,
+  AllowPolicyGetResponse,
+  AllowPolicyListParams,
+  AllowPolicyListResponse,
+  AllowPolicyListResponsesV4PagePaginationArray,
+} from './allow-policies';
 import * as BlockSendersAPI from './block-senders';
 import {
   BlockSenderCreateParams,
@@ -24,6 +37,8 @@ import {
   DomainDeleteResponse,
   DomainEditParams,
   DomainEditResponse,
+  DomainGetParams,
+  DomainGetResponse,
   DomainListParams,
   DomainListResponse,
   DomainListResponsesV4PagePaginationArray,
@@ -61,7 +76,7 @@ import {
 } from './trusted-domains';
 
 export class Settings extends APIResource {
-  allowPatterns: AllowPatternsAPI.AllowPatterns = new AllowPatternsAPI.AllowPatterns(this._client);
+  allowPolicies: AllowPoliciesAPI.AllowPolicies = new AllowPoliciesAPI.AllowPolicies(this._client);
   blockSenders: BlockSendersAPI.BlockSenders = new BlockSendersAPI.BlockSenders(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   impersonationRegistry: ImpersonationRegistryAPI.ImpersonationRegistry =
@@ -69,7 +84,8 @@ export class Settings extends APIResource {
   trustedDomains: TrustedDomainsAPI.TrustedDomains = new TrustedDomainsAPI.TrustedDomains(this._client);
 }
 
-Settings.AllowPatterns = AllowPatterns;
+Settings.AllowPolicies = AllowPolicies;
+Settings.AllowPolicyListResponsesV4PagePaginationArray = AllowPolicyListResponsesV4PagePaginationArray;
 Settings.BlockSenders = BlockSenders;
 Settings.BlockSenderListResponsesV4PagePaginationArray = BlockSenderListResponsesV4PagePaginationArray;
 Settings.Domains = Domains;
@@ -81,7 +97,20 @@ Settings.TrustedDomains = TrustedDomains;
 Settings.TrustedDomainListResponsesV4PagePaginationArray = TrustedDomainListResponsesV4PagePaginationArray;
 
 export declare namespace Settings {
-  export { AllowPatterns as AllowPatterns };
+  export {
+    AllowPolicies as AllowPolicies,
+    type AllowPolicyCreateResponse as AllowPolicyCreateResponse,
+    type AllowPolicyListResponse as AllowPolicyListResponse,
+    type AllowPolicyDeleteResponse as AllowPolicyDeleteResponse,
+    type AllowPolicyEditResponse as AllowPolicyEditResponse,
+    type AllowPolicyGetResponse as AllowPolicyGetResponse,
+    AllowPolicyListResponsesV4PagePaginationArray as AllowPolicyListResponsesV4PagePaginationArray,
+    type AllowPolicyCreateParams as AllowPolicyCreateParams,
+    type AllowPolicyListParams as AllowPolicyListParams,
+    type AllowPolicyDeleteParams as AllowPolicyDeleteParams,
+    type AllowPolicyEditParams as AllowPolicyEditParams,
+    type AllowPolicyGetParams as AllowPolicyGetParams,
+  };
 
   export {
     BlockSenders as BlockSenders,
@@ -103,10 +132,12 @@ export declare namespace Settings {
     type DomainListResponse as DomainListResponse,
     type DomainDeleteResponse as DomainDeleteResponse,
     type DomainEditResponse as DomainEditResponse,
+    type DomainGetResponse as DomainGetResponse,
     DomainListResponsesV4PagePaginationArray as DomainListResponsesV4PagePaginationArray,
     type DomainListParams as DomainListParams,
     type DomainDeleteParams as DomainDeleteParams,
     type DomainEditParams as DomainEditParams,
+    type DomainGetParams as DomainGetParams,
   };
 
   export {

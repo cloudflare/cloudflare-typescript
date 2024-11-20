@@ -1034,27 +1034,107 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/email-security/investigate.ts">InvestigateListResponse</a></code>
-- <code><a href="./src/resources/email-security/investigate.ts">InvestigateDetectionsResponse</a></code>
-- <code><a href="./src/resources/email-security/investigate.ts">InvestigateGetResponse</a></code>
-- <code><a href="./src/resources/email-security/investigate.ts">InvestigatePreviewResponse</a></code>
-- <code><a href="./src/resources/email-security/investigate.ts">InvestigateRawResponse</a></code>
-- <code><a href="./src/resources/email-security/investigate.ts">InvestigateTraceResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/investigate.ts">InvestigateListResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/investigate.ts">InvestigateGetResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/email-security/investigate">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">list</a>({ ...params }) -> InvestigateListResponsesV4PagePaginationArray</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/detections">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">detections</a>(postfixId, { ...params }) -> InvestigateDetectionsResponse</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">get</a>(postfixId, { ...params }) -> InvestigateGetResponse</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/preview">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">preview</a>(postfixId, { ...params }) -> InvestigatePreviewResponse</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/raw">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">raw</a>(postfixId, { ...params }) -> InvestigateRawResponse</code>
-- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/trace">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate.ts">trace</a>(postfixId, { ...params }) -> InvestigateTraceResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">list</a>({ ...params }) -> InvestigateListResponsesV4PagePaginationArray</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}">client.emailSecurity.investigate.<a href="./src/resources/email-security/investigate/investigate.ts">get</a>(postfixId, { ...params }) -> InvestigateGetResponse</code>
 
-## Phishguard
+### Detections
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/detections.ts">DetectionGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/detections">client.emailSecurity.investigate.detections.<a href="./src/resources/email-security/investigate/detections.ts">get</a>(postfixId, { ...params }) -> DetectionGetResponse</code>
+
+### Preview
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/preview.ts">PreviewCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/preview.ts">PreviewGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">create</a>([ ...body ]) -> PreviewCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/preview">client.emailSecurity.investigate.preview.<a href="./src/resources/email-security/investigate/preview.ts">get</a>(postfixId, { ...params }) -> PreviewGetResponse</code>
+
+### Raw
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/raw.ts">RawGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/raw">client.emailSecurity.investigate.raw.<a href="./src/resources/email-security/investigate/raw.ts">get</a>(postfixId, { ...params }) -> RawGetResponse</code>
+
+### Trace
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/trace.ts">TraceGetResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/investigate/{postfix_id}/trace">client.emailSecurity.investigate.trace.<a href="./src/resources/email-security/investigate/trace.ts">get</a>(postfixId, { ...params }) -> TraceGetResponse</code>
+
+### Move
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/move.ts">MoveCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/investigate/move.ts">MoveBulkResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">create</a>(postfixId, { ...params }) -> MoveCreateResponse</code>
+- <code title="post /accounts/{account_id}/email-security/investigate/move">client.emailSecurity.investigate.move.<a href="./src/resources/email-security/investigate/move.ts">bulk</a>({ ...params }) -> MoveBulkResponse</code>
+
+### Reclassify
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/reclassify.ts">ReclassifyCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify">client.emailSecurity.investigate.reclassify.<a href="./src/resources/email-security/investigate/reclassify.ts">create</a>(postfixId, { ...params }) -> ReclassifyCreateResponse</code>
+
+### Release
+
+Types:
+
+- <code><a href="./src/resources/email-security/investigate/release.ts">ReleaseBulkResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/investigate/release">client.emailSecurity.investigate.release.<a href="./src/resources/email-security/investigate/release.ts">bulk</a>([ ...body ]) -> ReleaseBulkResponse</code>
 
 ## Settings
 
-### AllowPatterns
+### AllowPolicies
+
+Types:
+
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyCreateResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyListResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyDeleteResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/allow-policies.ts">AllowPolicyGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/email-security/settings/allow_policies">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">create</a>({ ...params }) -> AllowPolicyCreateResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/allow_policies">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">list</a>({ ...params }) -> AllowPolicyListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">delete</a>(policyId, { ...params }) -> AllowPolicyDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">edit</a>(policyId, { ...params }) -> AllowPolicyEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/allow_policies/{policy_id}">client.emailSecurity.settings.allowPolicies.<a href="./src/resources/email-security/settings/allow-policies.ts">get</a>(policyId, { ...params }) -> AllowPolicyGetResponse</code>
 
 ### BlockSenders
 
@@ -1081,12 +1161,14 @@ Types:
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainListResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainDeleteResponse</a></code>
 - <code><a href="./src/resources/email-security/settings/domains.ts">DomainEditResponse</a></code>
+- <code><a href="./src/resources/email-security/settings/domains.ts">DomainGetResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts/{account_id}/email-security/settings/domains">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">list</a>({ ...params }) -> DomainListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">delete</a>(domainId, { ...params }) -> DomainDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">edit</a>(domainId, { ...params }) -> DomainEditResponse</code>
+- <code title="get /accounts/{account_id}/email-security/settings/domains/{domain_id}">client.emailSecurity.settings.domains.<a href="./src/resources/email-security/settings/domains.ts">get</a>(domainId, { ...params }) -> DomainGetResponse</code>
 
 ### ImpersonationRegistry
 
@@ -1123,6 +1205,16 @@ Methods:
 - <code title="delete /accounts/{account_id}/email-security/settings/trusted_domains/{pattern_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">delete</a>(patternId, { ...params }) -> TrustedDomainDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/email-security/settings/trusted_domains/{pattern_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">edit</a>(patternId, { ...params }) -> TrustedDomainEditResponse</code>
 - <code title="get /accounts/{account_id}/email-security/settings/trusted_domains/{pattern_id}">client.emailSecurity.settings.trustedDomains.<a href="./src/resources/email-security/settings/trusted-domains.ts">get</a>(patternId, { ...params }) -> TrustedDomainGetResponse</code>
+
+## Submissions
+
+Types:
+
+- <code><a href="./src/resources/email-security/submissions.ts">SubmissionListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts/{account_id}/email-security/submissions">client.emailSecurity.submissions.<a href="./src/resources/email-security/submissions.ts">list</a>({ ...params }) -> SubmissionListResponsesV4PagePaginationArray</code>
 
 # EmailRouting
 
@@ -5084,6 +5176,24 @@ Methods:
 
 - <code title="get /accounts/{account_id}/dlp/limits">client.zeroTrust.dlp.limits.<a href="./src/resources/zero-trust/dlp/limits.ts">list</a>({ ...params }) -> LimitListResponse</code>
 
+### Entries
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryUpdateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/dlp/entries.ts">EntryGetResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">create</a>({ ...params }) -> EntryCreateResponse</code>
+- <code title="put /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">update</a>(entryId, { ...params }) -> EntryUpdateResponse</code>
+- <code title="get /accounts/{account_id}/dlp/entries">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">list</a>({ ...params }) -> EntryListResponsesSinglePage</code>
+- <code title="delete /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">delete</a>(entryId, { ...params }) -> EntryDeleteResponse | null</code>
+- <code title="get /accounts/{account_id}/dlp/entries/{entry_id}">client.zeroTrust.dlp.entries.<a href="./src/resources/zero-trust/dlp/entries.ts">get</a>(entryId, { ...params }) -> EntryGetResponse</code>
+
 ## Gateway
 
 Types:
@@ -5517,6 +5627,11 @@ Types:
 
 - <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerDomain</a></code>
 - <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerTask</a></code>
+- <code><a href="./src/resources/url-scanner/url-scanner.ts">URLScannerBulkResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{accountId}/urlscanner/v2/bulk">client.urlScanner.<a href="./src/resources/url-scanner/url-scanner.ts">bulk</a>(accountId, [ ...body ]) -> URLScannerBulkResponse</code>
 
 ## Responses
 
@@ -7083,3 +7198,31 @@ Methods:
 - <code title="get /accounts/{account_id}/shares/{share_identifier}/resources">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">list</a>(shareIdentifier, { ...params }) -> ResourceListResponsesV4PagePaginationArray</code>
 - <code title="delete /accounts/{account_id}/shares/{share_identifier}/resources/{resource_identifier}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">delete</a>(shareIdentifier, resourceIdentifier, { ...params }) -> ResourceDeleteResponse</code>
 - <code title="get /accounts/{account_id}/shares/{share_identifier}/resources/{resource_identifier}">client.resourceSharing.resources.<a href="./src/resources/resource-sharing/resources.ts">get</a>(shareIdentifier, resourceIdentifier, { ...params }) -> ResourceGetResponse</code>
+
+# LeakedCredentialChecks
+
+Types:
+
+- <code><a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">LeakedCredentialCheckCreateResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">LeakedCredentialCheckListResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/leaked-credential-checks">client.leakedCredentialChecks.<a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">create</a>({ ...params }) -> LeakedCredentialCheckCreateResponse</code>
+- <code title="get /zones/{zone_id}/leaked-credential-checks">client.leakedCredentialChecks.<a href="./src/resources/leaked-credential-checks/leaked-credential-checks.ts">list</a>({ ...params }) -> LeakedCredentialCheckListResponse</code>
+
+## Detections
+
+Types:
+
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionCreateResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionUpdateResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionListResponse</a></code>
+- <code><a href="./src/resources/leaked-credential-checks/detections.ts">DetectionDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">create</a>({ ...params }) -> DetectionCreateResponse</code>
+- <code title="put /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">update</a>(detectionId, { ...params }) -> DetectionUpdateResponse</code>
+- <code title="get /zones/{zone_id}/leaked-credential-checks/detections">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">list</a>({ ...params }) -> DetectionListResponsesSinglePage</code>
+- <code title="delete /zones/{zone_id}/leaked-credential-checks/detections/{detection_id}">client.leakedCredentialChecks.detections.<a href="./src/resources/leaked-credential-checks/detections.ts">delete</a>(detectionId, { ...params }) -> DetectionDeleteResponse</code>

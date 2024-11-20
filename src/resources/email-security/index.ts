@@ -5,17 +5,14 @@ export {
   InvestigateListResponsesV4PagePaginationArray,
   Investigate,
   type InvestigateListResponse,
-  type InvestigateDetectionsResponse,
   type InvestigateGetResponse,
-  type InvestigatePreviewResponse,
-  type InvestigateRawResponse,
-  type InvestigateTraceResponse,
   type InvestigateListParams,
-  type InvestigateDetectionsParams,
   type InvestigateGetParams,
-  type InvestigatePreviewParams,
-  type InvestigateRawParams,
-  type InvestigateTraceParams,
-} from './investigate';
-export { Phishguard } from './phishguard';
+} from './investigate/index';
 export { Settings } from './settings/index';
+export {
+  SubmissionListResponsesV4PagePaginationArray,
+  Submissions,
+  type SubmissionListResponse,
+  type SubmissionListParams,
+} from './submissions';

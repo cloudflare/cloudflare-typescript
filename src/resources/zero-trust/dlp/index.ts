@@ -13,6 +13,20 @@ export {
   type DatasetDeleteParams,
   type DatasetGetParams,
 } from './datasets/index';
+export {
+  EntryListResponsesSinglePage,
+  Entries,
+  type EntryCreateResponse,
+  type EntryUpdateResponse,
+  type EntryListResponse,
+  type EntryDeleteResponse,
+  type EntryGetResponse,
+  type EntryCreateParams,
+  type EntryUpdateParams,
+  type EntryListParams,
+  type EntryDeleteParams,
+  type EntryGetParams,
+} from './entries';
 export { Limits, type LimitListResponse, type LimitListParams } from './limits';
 export { Patterns, type PatternValidateResponse, type PatternValidateParams } from './patterns';
 export {

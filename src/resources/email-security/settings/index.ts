@@ -1,6 +1,19 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { AllowPatterns } from './allow-patterns';
+export {
+  AllowPolicyListResponsesV4PagePaginationArray,
+  AllowPolicies,
+  type AllowPolicyCreateResponse,
+  type AllowPolicyListResponse,
+  type AllowPolicyDeleteResponse,
+  type AllowPolicyEditResponse,
+  type AllowPolicyGetResponse,
+  type AllowPolicyCreateParams,
+  type AllowPolicyListParams,
+  type AllowPolicyDeleteParams,
+  type AllowPolicyEditParams,
+  type AllowPolicyGetParams,
+} from './allow-policies';
 export {
   BlockSenderListResponsesV4PagePaginationArray,
   BlockSenders,
@@ -21,9 +34,11 @@ export {
   type DomainListResponse,
   type DomainDeleteResponse,
   type DomainEditResponse,
+  type DomainGetResponse,
   type DomainListParams,
   type DomainDeleteParams,
   type DomainEditParams,
+  type DomainGetParams,
 } from './domains';
 export {
   ImpersonationRegistryListResponsesV4PagePaginationArray,
