@@ -98,6 +98,9 @@ export class Operations extends APIResource {
 
 export class OperationListResponsesV4PagePaginationArray extends V4PagePaginationArray<OperationListResponse> {}
 
+/**
+ * basic op.
+ */
 export interface APIShieldOperationModel {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
@@ -118,6 +121,9 @@ export interface APIShieldOperationModel {
   method: 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 }
 
+/**
+ * basic op.
+ */
 export interface APIShieldOperationModelParam {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
@@ -141,6 +147,9 @@ export interface APIShieldOperationModelParam {
 export type OperationCreateResponse = Array<OperationCreateResponse.OperationCreateResponseItem>;
 
 export namespace OperationCreateResponse {
+  /**
+   * basic op.
+   */
   export interface OperationCreateResponseItem {
     /**
      * The endpoint which can contain path parameter templates in curly braces, each
@@ -418,6 +427,9 @@ export namespace OperationCreateResponse {
   }
 }
 
+/**
+ * basic op.
+ */
 export interface OperationListResponse {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
@@ -716,6 +728,9 @@ export interface OperationBulkDeleteResponse {
   success: true;
 }
 
+/**
+ * basic op.
+ */
 export interface OperationGetResponse {
   /**
    * The endpoint which can contain path parameter templates in curly braces, each
