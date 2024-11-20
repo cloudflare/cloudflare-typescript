@@ -22,7 +22,7 @@ import * as ExpressionTemplateAPI from './expression-template/expression-templat
 import { ExpressionTemplate } from './expression-template/expression-template';
 import * as OperationsAPI from './operations/operations';
 import {
-  APIShield,
+  APIShieldOperation,
   OperationBulkDeleteParams,
   OperationBulkDeleteResponse,
   OperationCreateParams,
@@ -92,7 +92,7 @@ export declare namespace APIGateway {
 
   export {
     Operations as Operations,
-    type APIShield as APIShield,
+    type APIShieldOperation as APIShieldOperation,
     type OperationCreateResponse as OperationCreateResponse,
     type OperationListResponse as OperationListResponse,
     type OperationDeleteResponse as OperationDeleteResponse,
