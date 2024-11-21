@@ -93,6 +93,10 @@ describe('resource organizations', () => {
     const response = await client.zeroTrust.organizations.revokeUsers({
       email: 'test@example.com',
       account_id: 'account_id',
+      query_devices: true,
+      body_devices: true,
+      user_uid: '699d98642c564d2e855e9661899b7252',
+      warp_session_reauth: true,
     });
   });
 });
