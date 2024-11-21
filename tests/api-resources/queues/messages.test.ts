@@ -59,7 +59,7 @@ describe('resource messages', () => {
     const response = await client.queues.messages.pull('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       batch_size: 50,
-      visibility_timeout: 6000,
+      visibility_timeout_ms: 6000,
     });
   });
 });

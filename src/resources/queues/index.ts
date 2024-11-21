@@ -3,8 +3,6 @@
 export {
   Consumers,
   type Consumer,
-  type ConsumerCreateResponse,
-  type ConsumerUpdateResponse,
   type ConsumerDeleteResponse,
   type ConsumerGetResponse,
   type ConsumerCreateParams,

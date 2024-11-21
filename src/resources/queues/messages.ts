@@ -5,36 +5,36 @@ import * as Core from '../../core';
 
 export class Messages extends APIResource {
   /**
-   * Acknowledge + Retry messages from a Queue.
+   * Acknowledge + Retry messages from a Queue
    */
   ack(
     queueId: string,
     params: MessageAckParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MessageAckResponse | null> {
+  ): Core.APIPromise<MessageAckResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/ack`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MessageAckResponse | null }>
+      }) as Core.APIPromise<{ result: MessageAckResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
   /**
-   * Pull a batch of messages from a Queue.
+   * Pull a batch of messages from a Queue
    */
   pull(
     queueId: string,
     params: MessagePullParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<MessagePullResponse | null> {
+  ): Core.APIPromise<MessagePullResponse> {
     const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/queues/${queueId}/messages/pull`, {
         body,
         ...options,
-      }) as Core.APIPromise<{ result: MessagePullResponse | null }>
+      }) as Core.APIPromise<{ result: MessagePullResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 }
@@ -63,6 +63,10 @@ export namespace MessagePullResponse {
 
     body?: string;
 
+    /**
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
+     */
     lease_id?: string;
 
     metadata?: unknown;
@@ -73,7 +77,7 @@ export namespace MessagePullResponse {
 
 export interface MessageAckParams {
   /**
-   * Path param: Identifier.
+   * Path param: A Resource identifier.
    */
   account_id: string;
 
@@ -91,7 +95,8 @@ export interface MessageAckParams {
 export namespace MessageAckParams {
   export interface Ack {
     /**
-     * Lease ID for a message to acknowledge.
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
      */
     lease_id?: string;
   }
@@ -104,7 +109,8 @@ export namespace MessageAckParams {
     delay_seconds?: number;
 
     /**
-     * Lease ID for a message to retry.
+     * An ID that represents an "in-flight" message that has been pulled from a Queue.
+     * You must hold on to this ID and use it to acknowledge this message.
      */
     lease_id?: string;
   }
@@ -112,7 +118,7 @@ export namespace MessageAckParams {
 
 export interface MessagePullParams {
   /**
-   * Path param: Identifier.
+   * Path param: A Resource identifier.
    */
   account_id: string;
 
@@ -125,7 +131,7 @@ export interface MessagePullParams {
    * Body param: The number of milliseconds that a message is exclusively leased.
    * After the timeout, the message becomes available for another attempt.
    */
-  visibility_timeout?: number;
+  visibility_timeout_ms?: number;
 }
 
 export declare namespace Messages {

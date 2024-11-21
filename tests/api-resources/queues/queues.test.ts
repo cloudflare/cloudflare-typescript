@@ -34,7 +34,6 @@ describe('resource queues', () => {
   test('update: only required params', async () => {
     const responsePromise = client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { queue_name: 'renamed-example-queue' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -48,7 +47,8 @@ describe('resource queues', () => {
   test('update: required and optional params', async () => {
     const response = await client.queues.update('023e105f4ecef8ad9ca31a8372d0c353', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: { queue_name: 'renamed-example-queue' },
+      queue_name: 'example-queue',
+      settings: { delivery_delay: 5, message_retention_period: 345600 },
     });
   });
 
