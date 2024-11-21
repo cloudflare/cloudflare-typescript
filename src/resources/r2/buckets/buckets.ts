@@ -2,6 +2,16 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
+import * as CORSAPI from './cors';
+import {
+  CORS,
+  CORSDeleteParams,
+  CORSDeleteResponse,
+  CORSGetParams,
+  CORSGetResponse,
+  CORSUpdateParams,
+  CORSUpdateResponse,
+} from './cors';
 import * as LifecycleAPI from './lifecycle';
 import {
   Lifecycle,
@@ -27,6 +37,7 @@ import { EventNotifications } from './event-notifications/event-notifications';
 
 export class Buckets extends APIResource {
   lifecycle: LifecycleAPI.Lifecycle = new LifecycleAPI.Lifecycle(this._client);
+  cors: CORSAPI.CORS = new CORSAPI.CORS(this._client);
   domains: DomainsAPI.Domains = new DomainsAPI.Domains(this._client);
   eventNotifications: EventNotificationsAPI.EventNotifications = new EventNotificationsAPI.EventNotifications(
     this._client,
@@ -241,6 +252,7 @@ export interface BucketGetParams {
 }
 
 Buckets.Lifecycle = Lifecycle;
+Buckets.CORS = CORS;
 Buckets.Domains = Domains;
 Buckets.EventNotifications = EventNotifications;
 Buckets.SippyResource = SippyResource;
@@ -262,6 +274,16 @@ export declare namespace Buckets {
     type LifecycleGetResponse as LifecycleGetResponse,
     type LifecycleUpdateParams as LifecycleUpdateParams,
     type LifecycleGetParams as LifecycleGetParams,
+  };
+
+  export {
+    CORS as CORS,
+    type CORSUpdateResponse as CORSUpdateResponse,
+    type CORSDeleteResponse as CORSDeleteResponse,
+    type CORSGetResponse as CORSGetResponse,
+    type CORSUpdateParams as CORSUpdateParams,
+    type CORSDeleteParams as CORSDeleteParams,
+    type CORSGetParams as CORSGetParams,
   };
 
   export { Domains as Domains };
