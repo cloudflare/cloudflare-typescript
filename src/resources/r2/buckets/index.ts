@@ -10,6 +10,15 @@ export {
   type BucketDeleteParams,
   type BucketGetParams,
 } from './buckets';
+export {
+  CORS,
+  type CORSUpdateResponse,
+  type CORSDeleteResponse,
+  type CORSGetResponse,
+  type CORSUpdateParams,
+  type CORSDeleteParams,
+  type CORSGetParams,
+} from './cors';
 export { Domains } from './domains/index';
 export { EventNotifications } from './event-notifications/index';
 export {
