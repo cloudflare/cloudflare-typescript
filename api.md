@@ -4331,16 +4331,6 @@ Methods:
 
 ##### Certificates
 
-Types:
-
-- <code><a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">CertificateEditResponse</a></code>
-- <code><a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">CertificateGetResponse</a></code>
-
-Methods:
-
-- <code title="patch /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.default.certificates.<a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">edit</a>(zoneTag, { ...params }) -> CertificateEditResponse</code>
-- <code title="get /zones/{zone_tag}/devices/policy/certificates">client.zeroTrust.devices.policies.default.certificates.<a href="./src/resources/zero-trust/devices/policies/default/certificates.ts">get</a>(zoneTag) -> CertificateGetResponse</code>
-
 #### Custom
 
 Types:
