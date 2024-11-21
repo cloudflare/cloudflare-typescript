@@ -4013,6 +4013,20 @@ Methods:
 - <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">update</a>(bucketName, { ...params }) -> LifecycleUpdateResponse</code>
 - <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle">client.r2.buckets.lifecycle.<a href="./src/resources/r2/buckets/lifecycle.ts">get</a>(bucketName, { ...params }) -> LifecycleGetResponse</code>
 
+### CORS
+
+Types:
+
+- <code><a href="./src/resources/r2/buckets/cors.ts">CORSUpdateResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/cors.ts">CORSDeleteResponse</a></code>
+- <code><a href="./src/resources/r2/buckets/cors.ts">CORSGetResponse</a></code>
+
+Methods:
+
+- <code title="put /accounts/{account_id}/r2/buckets/{bucket_name}/cors">client.r2.buckets.cors.<a href="./src/resources/r2/buckets/cors.ts">update</a>(bucketName, { ...params }) -> CORSUpdateResponse</code>
+- <code title="delete /accounts/{account_id}/r2/buckets/{bucket_name}/cors">client.r2.buckets.cors.<a href="./src/resources/r2/buckets/cors.ts">delete</a>(bucketName, { ...params }) -> CORSDeleteResponse</code>
+- <code title="get /accounts/{account_id}/r2/buckets/{bucket_name}/cors">client.r2.buckets.cors.<a href="./src/resources/r2/buckets/cors.ts">get</a>(bucketName, { ...params }) -> CORSGetResponse</code>
+
 ### Domains
 
 #### Custom
