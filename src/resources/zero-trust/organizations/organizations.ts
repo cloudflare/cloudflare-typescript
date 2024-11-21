@@ -112,7 +112,7 @@ export class Organizations extends APIResource {
     params: OrganizationRevokeUsersParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<OrganizationRevokeUsersResponse> {
-    const { account_id, zone_id, query_devices, body_devices, ...body } = params;
+    const { account_id, zone_id, ...body } = params;
     if (!account_id && !zone_id) {
       throw new CloudflareError('You must provide either account_id or zone_id.');
     }
@@ -131,8 +131,7 @@ export class Organizations extends APIResource {
         };
     return (
       this._client.post(`/${accountOrZone}/${accountOrZoneId}/access/organizations/revoke_user`, {
-        query: { devices: query_devices },
-        body: { devices: body_devices, ...body },
+        body,
         ...options,
       }) as Core.APIPromise<{ result: OrganizationRevokeUsersResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -478,30 +477,6 @@ export interface OrganizationRevokeUsersParams {
    * Account ID.
    */
   zone_id?: string;
-
-  /**
-   * Query param: When set to `true`, all devices associated with the user will be
-   * revoked.
-   */
-  query_devices?: boolean;
-
-  /**
-   * Body param: When set to `true`, all devices associated with the user will be
-   * revoked.
-   */
-  body_devices?: boolean;
-
-  /**
-   * Body param: The uuid of the user to revoke.
-   */
-  user_uid?: string;
-
-  /**
-   * Body param: When set to `true`, the user will be required to re-authenticate to
-   * WARP for all Gateway policies that enforce a WARP client session duration. When
-   * `false`, the user’s WARP session will remain active
-   */
-  warp_session_reauth?: boolean;
 }
 
 Organizations.DOH = DOH;
