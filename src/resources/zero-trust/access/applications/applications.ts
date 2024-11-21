@@ -2325,8 +2325,8 @@ export type ApplicationCreateResponse =
 export namespace ApplicationCreateResponse {
   export interface SelfHostedApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -2398,6 +2398,13 @@ export namespace ApplicationCreateResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<SelfHostedApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -2446,7 +2453,10 @@ export namespace ApplicationCreateResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -2477,6 +2487,20 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2639,8 +2663,8 @@ export namespace ApplicationCreateResponse {
 
   export interface BrowserSSHApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -2710,6 +2734,13 @@ export namespace ApplicationCreateResponse {
      * The custom pages that will be displayed when applicable for this application
      */
     custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -2760,7 +2791,10 @@ export namespace ApplicationCreateResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -2791,6 +2825,20 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -2838,8 +2886,8 @@ export namespace ApplicationCreateResponse {
 
   export interface BrowserVNCApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -2911,6 +2959,13 @@ export namespace ApplicationCreateResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserVNCApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -2959,7 +3014,10 @@ export namespace ApplicationCreateResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -2990,6 +3048,20 @@ export namespace ApplicationCreateResponse {
   }
 
   export namespace BrowserVNCApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -3076,8 +3148,8 @@ export namespace ApplicationCreateResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -3253,8 +3325,8 @@ export namespace ApplicationCreateResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -3430,8 +3502,8 @@ export namespace ApplicationCreateResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -3820,8 +3892,8 @@ export type ApplicationUpdateResponse =
 export namespace ApplicationUpdateResponse {
   export interface SelfHostedApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -3893,6 +3965,13 @@ export namespace ApplicationUpdateResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<SelfHostedApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -3941,7 +4020,10 @@ export namespace ApplicationUpdateResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -3972,6 +4054,20 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4134,8 +4230,8 @@ export namespace ApplicationUpdateResponse {
 
   export interface BrowserSSHApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -4205,6 +4301,13 @@ export namespace ApplicationUpdateResponse {
      * The custom pages that will be displayed when applicable for this application
      */
     custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -4255,7 +4358,10 @@ export namespace ApplicationUpdateResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -4286,6 +4392,20 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4333,8 +4453,8 @@ export namespace ApplicationUpdateResponse {
 
   export interface BrowserVNCApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -4406,6 +4526,13 @@ export namespace ApplicationUpdateResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserVNCApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -4454,7 +4581,10 @@ export namespace ApplicationUpdateResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -4485,6 +4615,20 @@ export namespace ApplicationUpdateResponse {
   }
 
   export namespace BrowserVNCApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -4571,8 +4715,8 @@ export namespace ApplicationUpdateResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -4748,8 +4892,8 @@ export namespace ApplicationUpdateResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -4925,8 +5069,8 @@ export namespace ApplicationUpdateResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -5315,8 +5459,8 @@ export type ApplicationListResponse =
 export namespace ApplicationListResponse {
   export interface SelfHostedApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -5388,6 +5532,13 @@ export namespace ApplicationListResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<SelfHostedApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -5436,7 +5587,10 @@ export namespace ApplicationListResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -5467,6 +5621,20 @@ export namespace ApplicationListResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5629,8 +5797,8 @@ export namespace ApplicationListResponse {
 
   export interface BrowserSSHApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -5700,6 +5868,13 @@ export namespace ApplicationListResponse {
      * The custom pages that will be displayed when applicable for this application
      */
     custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -5750,7 +5925,10 @@ export namespace ApplicationListResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -5781,6 +5959,20 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -5828,8 +6020,8 @@ export namespace ApplicationListResponse {
 
   export interface BrowserVNCApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -5901,6 +6093,13 @@ export namespace ApplicationListResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserVNCApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -5949,7 +6148,10 @@ export namespace ApplicationListResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -5980,6 +6182,20 @@ export namespace ApplicationListResponse {
   }
 
   export namespace BrowserVNCApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -6066,8 +6282,8 @@ export namespace ApplicationListResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -6243,8 +6459,8 @@ export namespace ApplicationListResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -6420,8 +6636,8 @@ export namespace ApplicationListResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -6817,8 +7033,8 @@ export type ApplicationGetResponse =
 export namespace ApplicationGetResponse {
   export interface SelfHostedApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -6890,6 +7106,13 @@ export namespace ApplicationGetResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<SelfHostedApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -6938,7 +7161,10 @@ export namespace ApplicationGetResponse {
     scim_config?: SelfHostedApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -6969,6 +7195,20 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace SelfHostedApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -7131,8 +7371,8 @@ export namespace ApplicationGetResponse {
 
   export interface BrowserSSHApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -7202,6 +7442,13 @@ export namespace ApplicationGetResponse {
      * The custom pages that will be displayed when applicable for this application
      */
     custom_pages?: Array<string>;
+
+    /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserSSHApplication.Destination>;
 
     /**
      * Enables the binding cookie, which increases security against compromised
@@ -7252,7 +7499,10 @@ export namespace ApplicationGetResponse {
     scim_config?: BrowserSSHApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -7283,6 +7533,20 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -7330,8 +7594,8 @@ export namespace ApplicationGetResponse {
 
   export interface BrowserVNCApplication {
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -7403,6 +7667,13 @@ export namespace ApplicationGetResponse {
     custom_pages?: Array<string>;
 
     /**
+     * List of destinations secured by Access. This supersedes `self_hosted_domains` to
+     * allow for more flexibility in defining different types of domains. If
+     * `destinations` are provided, then `self_hosted_domains` will be ignored.
+     */
+    destinations?: Array<BrowserVNCApplication.Destination>;
+
+    /**
      * Enables the binding cookie, which increases security against compromised
      * authorization tokens and CSRF attacks.
      */
@@ -7451,7 +7722,10 @@ export namespace ApplicationGetResponse {
     scim_config?: BrowserVNCApplication.SCIMConfig;
 
     /**
-     * List of domains that Access will secure.
+     * @deprecated: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<ApplicationsAPI.SelfHostedDomains>;
 
@@ -7482,6 +7756,20 @@ export namespace ApplicationGetResponse {
   }
 
   export namespace BrowserVNCApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * Configuration for provisioning to this application via SCIM. This is currently
      * in closed beta.
@@ -7568,8 +7856,8 @@ export namespace ApplicationGetResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -7745,8 +8033,8 @@ export namespace ApplicationGetResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -7922,8 +8210,8 @@ export namespace ApplicationGetResponse {
     created_at?: string;
 
     /**
-     * The primary hostname and path that Access will secure. If the app is visible in
-     * the App Launcher dashboard, this is the domain that will be displayed.
+     * The primary hostname and path secured by Access. This domain will be displayed
+     * if the app is visible in the App Launcher.
      */
     domain?: string;
 
@@ -8314,9 +8602,8 @@ export type ApplicationCreateParams =
 export namespace ApplicationCreateParams {
   export interface SelfHostedApplication {
     /**
-     * Body param: The primary hostname and path that Access will secure. If the app is
-     * visible in the App Launcher dashboard, this is the domain that will be
-     * displayed.
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -8392,6 +8679,14 @@ export namespace ApplicationCreateParams {
     custom_pages?: Array<string>;
 
     /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<ApplicationCreateParams.SelfHostedApplication.Destination>;
+
+    /**
      * Body param: Enables the binding cookie, which increases security against
      * compromised authorization tokens and CSRF attacks.
      */
@@ -8449,7 +8744,10 @@ export namespace ApplicationCreateParams {
     scim_config?: ApplicationCreateParams.SelfHostedApplication.SCIMConfig;
 
     /**
-     * Body param: List of domains that Access will secure.
+     * Body param: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -8479,6 +8777,20 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace SelfHostedApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -8780,9 +9092,8 @@ export namespace ApplicationCreateParams {
 
   export interface BrowserSSHApplication {
     /**
-     * Body param: The primary hostname and path that Access will secure. If the app is
-     * visible in the App Launcher dashboard, this is the domain that will be
-     * displayed.
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -8858,6 +9169,14 @@ export namespace ApplicationCreateParams {
     custom_pages?: Array<string>;
 
     /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<ApplicationCreateParams.BrowserSSHApplication.Destination>;
+
+    /**
      * Body param: Enables the binding cookie, which increases security against
      * compromised authorization tokens and CSRF attacks.
      */
@@ -8915,7 +9234,10 @@ export namespace ApplicationCreateParams {
     scim_config?: ApplicationCreateParams.BrowserSSHApplication.SCIMConfig;
 
     /**
-     * Body param: List of domains that Access will secure.
+     * Body param: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -8945,6 +9267,20 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -9056,9 +9392,8 @@ export namespace ApplicationCreateParams {
 
   export interface BrowserVNCApplication {
     /**
-     * Body param: The primary hostname and path that Access will secure. If the app is
-     * visible in the App Launcher dashboard, this is the domain that will be
-     * displayed.
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -9134,6 +9469,14 @@ export namespace ApplicationCreateParams {
     custom_pages?: Array<string>;
 
     /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<ApplicationCreateParams.BrowserVNCApplication.Destination>;
+
+    /**
      * Body param: Enables the binding cookie, which increases security against
      * compromised authorization tokens and CSRF attacks.
      */
@@ -9191,7 +9534,10 @@ export namespace ApplicationCreateParams {
     scim_config?: ApplicationCreateParams.BrowserVNCApplication.SCIMConfig;
 
     /**
-     * Body param: List of domains that Access will secure.
+     * Body param: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -9221,6 +9567,20 @@ export namespace ApplicationCreateParams {
   }
 
   export namespace BrowserVNCApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -10241,9 +10601,8 @@ export type ApplicationUpdateParams =
 export namespace ApplicationUpdateParams {
   export interface SelfHostedApplication {
     /**
-     * Body param: The primary hostname and path that Access will secure. If the app is
-     * visible in the App Launcher dashboard, this is the domain that will be
-     * displayed.
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -10319,6 +10678,14 @@ export namespace ApplicationUpdateParams {
     custom_pages?: Array<string>;
 
     /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<ApplicationUpdateParams.SelfHostedApplication.Destination>;
+
+    /**
      * Body param: Enables the binding cookie, which increases security against
      * compromised authorization tokens and CSRF attacks.
      */
@@ -10376,7 +10743,10 @@ export namespace ApplicationUpdateParams {
     scim_config?: ApplicationUpdateParams.SelfHostedApplication.SCIMConfig;
 
     /**
-     * Body param: List of domains that Access will secure.
+     * Body param: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -10406,6 +10776,20 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace SelfHostedApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -10707,9 +11091,8 @@ export namespace ApplicationUpdateParams {
 
   export interface BrowserSSHApplication {
     /**
-     * Body param: The primary hostname and path that Access will secure. If the app is
-     * visible in the App Launcher dashboard, this is the domain that will be
-     * displayed.
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -10785,6 +11168,14 @@ export namespace ApplicationUpdateParams {
     custom_pages?: Array<string>;
 
     /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<ApplicationUpdateParams.BrowserSSHApplication.Destination>;
+
+    /**
      * Body param: Enables the binding cookie, which increases security against
      * compromised authorization tokens and CSRF attacks.
      */
@@ -10842,7 +11233,10 @@ export namespace ApplicationUpdateParams {
     scim_config?: ApplicationUpdateParams.BrowserSSHApplication.SCIMConfig;
 
     /**
-     * Body param: List of domains that Access will secure.
+     * Body param: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -10872,6 +11266,20 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserSSHApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
@@ -10983,9 +11391,8 @@ export namespace ApplicationUpdateParams {
 
   export interface BrowserVNCApplication {
     /**
-     * Body param: The primary hostname and path that Access will secure. If the app is
-     * visible in the App Launcher dashboard, this is the domain that will be
-     * displayed.
+     * Body param: The primary hostname and path secured by Access. This domain will be
+     * displayed if the app is visible in the App Launcher.
      */
     domain: string;
 
@@ -11061,6 +11468,14 @@ export namespace ApplicationUpdateParams {
     custom_pages?: Array<string>;
 
     /**
+     * Body param: List of destinations secured by Access. This supersedes
+     * `self_hosted_domains` to allow for more flexibility in defining different types
+     * of domains. If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
+     */
+    destinations?: Array<ApplicationUpdateParams.BrowserVNCApplication.Destination>;
+
+    /**
      * Body param: Enables the binding cookie, which increases security against
      * compromised authorization tokens and CSRF attacks.
      */
@@ -11118,7 +11533,10 @@ export namespace ApplicationUpdateParams {
     scim_config?: ApplicationUpdateParams.BrowserVNCApplication.SCIMConfig;
 
     /**
-     * Body param: List of domains that Access will secure.
+     * Body param: List of public domains that Access will secure. This field is
+     * deprecated in favor of `destinations` and will be supported until **November
+     * 21, 2025.** If `destinations` are provided, then `self_hosted_domains` will be
+     * ignored.
      */
     self_hosted_domains?: Array<SelfHostedDomainsParam>;
 
@@ -11148,6 +11566,20 @@ export namespace ApplicationUpdateParams {
   }
 
   export namespace BrowserVNCApplication {
+    export interface Destination {
+      /**
+       * A destination secured by Access. Public destinations can include a domain and
+       * path with
+       * [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       * Private destinations are an early access feature and gated behind a feature
+       * flag. Private destinations support private IPv4, IPv6, and Server Name
+       * Indications (SNI) with optional port ranges.
+       */
+      destination?: string;
+
+      type?: 'public' | 'private';
+    }
+
     /**
      * A JSON that links a reusable policy to an application.
      */
