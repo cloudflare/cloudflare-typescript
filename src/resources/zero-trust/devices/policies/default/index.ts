@@ -1,11 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Certificates,
-  type CertificateEditResponse,
-  type CertificateGetResponse,
-  type CertificateEditParams,
-} from './certificates';
+export { Certificates } from './certificates';
 export {
   Default,
   type DefaultEditResponse,

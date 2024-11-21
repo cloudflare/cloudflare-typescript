@@ -4,12 +4,7 @@ import { APIResource } from '../../../../../resource';
 import * as Core from '../../../../../core';
 import * as PoliciesAPI from '../policies';
 import * as CertificatesAPI from './certificates';
-import {
-  CertificateEditParams,
-  CertificateEditResponse,
-  CertificateGetResponse,
-  Certificates,
-} from './certificates';
+import { Certificates } from './certificates';
 import * as ExcludesAPI from './excludes';
 import {
   ExcludeGetParams,
@@ -369,10 +364,5 @@ export declare namespace Default {
     type FallbackDomainGetParams as FallbackDomainGetParams,
   };
 
-  export {
-    Certificates as Certificates,
-    type CertificateEditResponse as CertificateEditResponse,
-    type CertificateGetResponse as CertificateGetResponse,
-    type CertificateEditParams as CertificateEditParams,
-  };
+  export { Certificates as Certificates };
 }
