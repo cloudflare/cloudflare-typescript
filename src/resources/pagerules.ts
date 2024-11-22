@@ -357,7 +357,16 @@ export namespace PageRule {
   }
 
   export interface CacheOnCookie {
+    /**
+     * Apply the Cache Everything option (Cache Level setting) based on a regular
+     * expression match against a cookie name.
+     */
     id?: 'cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request.
+     */
+    value?: string;
   }
 
   export interface CacheTTLByStatus {
@@ -418,7 +427,16 @@ export namespace PageRule {
   }
 
   export interface ExplicitCacheControl {
+    /**
+     * Origin Cache Control is enabled by default for Free, Pro, and Business domains
+     * and disabled by default for Enterprise domains.
+     */
     id?: 'explicit_cache_control';
+
+    /**
+     * The status of Origin Cache Control.
+     */
+    value?: 'on' | 'off';
   }
 
   export interface ForwardingURL {
@@ -473,16 +491,10 @@ export namespace PageRule {
      */
     id?: 'resolve_override';
 
-    value?: ResolveOverride.Value;
-  }
-
-  export namespace ResolveOverride {
-    export interface Value {
-      /**
-       * The origin address you want to override with.
-       */
-      value?: string;
-    }
+    /**
+     * The origin address you want to override with.
+     */
+    value?: string;
   }
 
   export interface RespectStrongEtag {
@@ -825,7 +837,16 @@ export namespace PageruleCreateParams {
   }
 
   export interface CacheOnCookie {
+    /**
+     * Apply the Cache Everything option (Cache Level setting) based on a regular
+     * expression match against a cookie name.
+     */
     id?: 'cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request.
+     */
+    value?: string;
   }
 
   export interface CacheTTLByStatus {
@@ -886,7 +907,16 @@ export namespace PageruleCreateParams {
   }
 
   export interface ExplicitCacheControl {
+    /**
+     * Origin Cache Control is enabled by default for Free, Pro, and Business domains
+     * and disabled by default for Enterprise domains.
+     */
     id?: 'explicit_cache_control';
+
+    /**
+     * The status of Origin Cache Control.
+     */
+    value?: 'on' | 'off';
   }
 
   export interface ForwardingURL {
@@ -941,16 +971,10 @@ export namespace PageruleCreateParams {
      */
     id?: 'resolve_override';
 
-    value?: ResolveOverride.Value;
-  }
-
-  export namespace ResolveOverride {
-    export interface Value {
-      /**
-       * The origin address you want to override with.
-       */
-      value?: string;
-    }
+    /**
+     * The origin address you want to override with.
+     */
+    value?: string;
   }
 
   export interface RespectStrongEtag {
@@ -1218,7 +1242,16 @@ export namespace PageruleUpdateParams {
   }
 
   export interface CacheOnCookie {
+    /**
+     * Apply the Cache Everything option (Cache Level setting) based on a regular
+     * expression match against a cookie name.
+     */
     id?: 'cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request.
+     */
+    value?: string;
   }
 
   export interface CacheTTLByStatus {
@@ -1279,7 +1312,16 @@ export namespace PageruleUpdateParams {
   }
 
   export interface ExplicitCacheControl {
+    /**
+     * Origin Cache Control is enabled by default for Free, Pro, and Business domains
+     * and disabled by default for Enterprise domains.
+     */
     id?: 'explicit_cache_control';
+
+    /**
+     * The status of Origin Cache Control.
+     */
+    value?: 'on' | 'off';
   }
 
   export interface ForwardingURL {
@@ -1334,16 +1376,10 @@ export namespace PageruleUpdateParams {
      */
     id?: 'resolve_override';
 
-    value?: ResolveOverride.Value;
-  }
-
-  export namespace ResolveOverride {
-    export interface Value {
-      /**
-       * The origin address you want to override with.
-       */
-      value?: string;
-    }
+    /**
+     * The origin address you want to override with.
+     */
+    value?: string;
   }
 
   export interface RespectStrongEtag {
@@ -1646,7 +1682,16 @@ export namespace PageruleEditParams {
   }
 
   export interface CacheOnCookie {
+    /**
+     * Apply the Cache Everything option (Cache Level setting) based on a regular
+     * expression match against a cookie name.
+     */
     id?: 'cache_on_cookie';
+
+    /**
+     * The regular expression to use for matching cookie names in the request.
+     */
+    value?: string;
   }
 
   export interface CacheTTLByStatus {
@@ -1707,7 +1752,16 @@ export namespace PageruleEditParams {
   }
 
   export interface ExplicitCacheControl {
+    /**
+     * Origin Cache Control is enabled by default for Free, Pro, and Business domains
+     * and disabled by default for Enterprise domains.
+     */
     id?: 'explicit_cache_control';
+
+    /**
+     * The status of Origin Cache Control.
+     */
+    value?: 'on' | 'off';
   }
 
   export interface ForwardingURL {
@@ -1762,16 +1816,10 @@ export namespace PageruleEditParams {
      */
     id?: 'resolve_override';
 
-    value?: ResolveOverride.Value;
-  }
-
-  export namespace ResolveOverride {
-    export interface Value {
-      /**
-       * The origin address you want to override with.
-       */
-      value?: string;
-    }
+    /**
+     * The origin address you want to override with.
+     */
+    value?: string;
   }
 
   export interface RespectStrongEtag {
