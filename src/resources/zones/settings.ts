@@ -113,11 +113,27 @@ export interface AlwaysUseHTTPSParam {
 }
 
 export interface AutomaticHTTPSRewrites {
+  /**
+   * Turn on or off Automatic HTTPS Rewrites.
+   */
   id?: 'automatic_https_rewrites';
+
+  /**
+   * The status of Automatic HTTPS Rewrites.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface AutomaticHTTPSRewritesParam {
+  /**
+   * Turn on or off Automatic HTTPS Rewrites.
+   */
   id?: 'automatic_https_rewrites';
+
+  /**
+   * The status of Automatic HTTPS Rewrites.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface AutomaticPlatformOptimization {
@@ -595,16 +611,10 @@ export interface IPGeolocation {
    */
   id?: 'ip_geolocation';
 
-  value?: IPGeolocation.Value;
-}
-
-export namespace IPGeolocation {
-  export interface Value {
-    /**
-     * The status of adding the IP Geolocation Header.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of adding the IP Geolocation Header.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface IPGeolocationParam {
@@ -614,16 +624,10 @@ export interface IPGeolocationParam {
    */
   id?: 'ip_geolocation';
 
-  value?: IPGeolocationParam.Value;
-}
-
-export namespace IPGeolocationParam {
-  export interface Value {
-    /**
-     * The status of adding the IP Geolocation Header.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of adding the IP Geolocation Header.
+   */
+  value?: 'on' | 'off';
 }
 
 /**
@@ -689,16 +693,10 @@ export interface Mirage {
    */
   id?: 'mirage';
 
-  value?: Mirage.Value;
-}
-
-export namespace Mirage {
-  export interface Value {
-    /**
-     * The status of Mirage.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Mirage.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface MirageParam {
@@ -709,16 +707,10 @@ export interface MirageParam {
    */
   id?: 'mirage';
 
-  value?: MirageParam.Value;
-}
-
-export namespace MirageParam {
-  export interface Value {
-    /**
-     * The status of Mirage.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Mirage.
+   */
+  value?: 'on' | 'off';
 }
 
 /**
@@ -764,16 +756,10 @@ export interface OpportunisticEncryption {
    */
   id?: 'opportunistic_encryption';
 
-  value?: OpportunisticEncryption.Value;
-}
-
-export namespace OpportunisticEncryption {
-  export interface Value {
-    /**
-     * The status of Opportunistic Encryption.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Opportunistic Encryption.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface OpportunisticEncryptionParam {
@@ -784,16 +770,10 @@ export interface OpportunisticEncryptionParam {
    */
   id?: 'opportunistic_encryption';
 
-  value?: OpportunisticEncryptionParam.Value;
-}
-
-export namespace OpportunisticEncryptionParam {
-  export interface Value {
-    /**
-     * The status of Opportunistic Encryption.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Opportunistic Encryption.
+   */
+  value?: 'on' | 'off';
 }
 
 /**
@@ -857,16 +837,10 @@ export interface OriginErrorPagePassThru {
    */
   id?: 'origin_error_page_pass_thru';
 
-  value?: OriginErrorPagePassThru.Value;
-}
-
-export namespace OriginErrorPagePassThru {
-  export interface Value {
-    /**
-     * The status of Origin Error Page Passthru.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Origin Error Page Passthru.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface OriginErrorPagePassThruParam {
@@ -876,16 +850,10 @@ export interface OriginErrorPagePassThruParam {
    */
   id?: 'origin_error_page_pass_thru';
 
-  value?: OriginErrorPagePassThruParam.Value;
-}
-
-export namespace OriginErrorPagePassThruParam {
-  export interface Value {
-    /**
-     * The status of Origin Error Page Passthru.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Origin Error Page Passthru.
+   */
+  value?: 'on' | 'off';
 }
 
 /**
@@ -899,16 +867,10 @@ export interface Polish {
    */
   id?: 'polish';
 
-  value?: Polish.Value;
-}
-
-export namespace Polish {
-  export interface Value {
-    /**
-     * The level of Polish you want applied to your origin.
-     */
-    value?: 'off' | 'lossless' | 'lossy';
-  }
+  /**
+   * The level of Polish you want applied to your origin.
+   */
+  value?: 'off' | 'lossless' | 'lossy';
 }
 
 export interface PolishParam {
@@ -917,16 +879,10 @@ export interface PolishParam {
    */
   id?: 'polish';
 
-  value?: PolishParam.Value;
-}
-
-export namespace PolishParam {
-  export interface Value {
-    /**
-     * The level of Polish you want applied to your origin.
-     */
-    value?: 'off' | 'lossless' | 'lossy';
-  }
+  /**
+   * The level of Polish you want applied to your origin.
+   */
+  value?: 'off' | 'lossless' | 'lossy';
 }
 
 /**
@@ -1163,16 +1119,10 @@ export interface SortQueryStringForCache {
    */
   id?: 'sort_query_string_for_cache';
 
-  value?: SortQueryStringForCache.Value;
-}
-
-export namespace SortQueryStringForCache {
-  export interface Value {
-    /**
-     * The status of Query String Sort
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Query String Sort
+   */
+  value?: 'on' | 'off';
 }
 
 export interface SortQueryStringForCacheParam {
@@ -1182,16 +1132,10 @@ export interface SortQueryStringForCacheParam {
    */
   id?: 'sort_query_string_for_cache';
 
-  value?: SortQueryStringForCacheParam.Value;
-}
-
-export namespace SortQueryStringForCacheParam {
-  export interface Value {
-    /**
-     * The status of Query String Sort
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of Query String Sort
+   */
+  value?: 'on' | 'off';
 }
 
 export interface SSL {
@@ -1201,16 +1145,10 @@ export interface SSL {
    */
   id?: 'ssl';
 
-  value?: SSL.Value;
-}
-
-export namespace SSL {
-  export interface Value {
-    /**
-     * The encryption mode that Cloudflare uses to connect to your origin server.
-     */
-    value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-  }
+  /**
+   * The encryption mode that Cloudflare uses to connect to your origin server.
+   */
+  value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 }
 
 export interface SSLParam {
@@ -1220,16 +1158,10 @@ export interface SSLParam {
    */
   id?: 'ssl';
 
-  value?: SSLParam.Value;
-}
-
-export namespace SSLParam {
-  export interface Value {
-    /**
-     * The encryption mode that Cloudflare uses to connect to your origin server.
-     */
-    value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
-  }
+  /**
+   * The encryption mode that Cloudflare uses to connect to your origin server.
+   */
+  value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 }
 
 /**
@@ -1308,16 +1240,10 @@ export interface TrueClientIPHeader {
    */
   id?: 'true_client_ip_header';
 
-  value?: TrueClientIPHeader.Value;
-}
-
-export namespace TrueClientIPHeader {
-  export interface Value {
-    /**
-     * The status of True Client IP Header.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of True Client IP Header.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface TrueClientIPHeaderParam {
@@ -1326,16 +1252,10 @@ export interface TrueClientIPHeaderParam {
    */
   id?: 'true_client_ip_header';
 
-  value?: TrueClientIPHeaderParam.Value;
-}
-
-export namespace TrueClientIPHeaderParam {
-  export interface Value {
-    /**
-     * The status of True Client IP Header.
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of True Client IP Header.
+   */
+  value?: 'on' | 'off';
 }
 
 export interface WAF {
@@ -1346,16 +1266,10 @@ export interface WAF {
    */
   id?: 'waf';
 
-  value?: WAF.Value;
-}
-
-export namespace WAF {
-  export interface Value {
-    /**
-     * The status of WAF managed rules (previous version).
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of WAF managed rules (previous version).
+   */
+  value?: 'on' | 'off';
 }
 
 export interface WAFParam {
@@ -1366,16 +1280,10 @@ export interface WAFParam {
    */
   id?: 'waf';
 
-  value?: WAFParam.Value;
-}
-
-export namespace WAFParam {
-  export interface Value {
-    /**
-     * The status of WAF managed rules (previous version).
-     */
-    value?: 'on' | 'off';
-  }
+  /**
+   * The status of WAF managed rules (previous version).
+   */
+  value?: 'on' | 'off';
 }
 
 /**
