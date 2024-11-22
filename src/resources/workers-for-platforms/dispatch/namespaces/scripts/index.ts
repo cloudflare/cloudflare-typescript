@@ -13,6 +13,7 @@ export {
 export {
   SecretListResponsesSinglePage,
   Secrets,
+  type WorkersSecretModel,
   type SecretUpdateResponse,
   type SecretListResponse,
   type SecretGetResponse,

@@ -4190,6 +4190,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">WorkersSecretModel</a></code>
 - <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretUpdateResponse</a></code>
 - <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretListResponse</a></code>
 - <code><a href="./src/resources/workers-for-platforms/dispatch/namespaces/scripts/secrets.ts">SecretGetResponse</a></code>
