@@ -47,14 +47,14 @@ export class Deployments extends APIResource {
 
 export interface Deployment {
   /**
-   * Human-readable message about the deployment.
+   * Human-readable message about the deployment. Truncated to 100 bytes.
    */
   'workers/message'?: string;
 }
 
 export interface DeploymentParam {
   /**
-   * Human-readable message about the deployment.
+   * Human-readable message about the deployment. Truncated to 100 bytes.
    */
   'workers/message'?: string;
 }
