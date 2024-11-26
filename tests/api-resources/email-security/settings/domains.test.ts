@@ -77,6 +77,7 @@ describe('resource domains', () => {
   test('edit: only required params', async () => {
     const responsePromise = client.emailSecurity.settings.domains.edit(2400, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -90,10 +91,15 @@ describe('resource domains', () => {
   test('edit: required and optional params', async () => {
     const response = await client.emailSecurity.settings.domains.edit(2400, {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      ip_restrictions: ['192.0.2.0/24', '2001:db8::/32'],
       domain: 'domain',
+      drop_dispositions: ['MALICIOUS'],
       folder: 'AllItems',
       integration_id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       lookback_hops: 1,
+      require_tls_inbound: true,
+      require_tls_outbound: true,
+      transport: 'transport',
     });
   });
 

@@ -64,9 +64,12 @@ describe('resource allowPolicies', () => {
     const response = await client.emailSecurity.settings.allowPolicies.list({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
       direction: 'asc',
+      is_acceptable_sender: true,
+      is_exempt_recipient: true,
       is_recipient: true,
       is_sender: true,
       is_spoof: true,
+      is_trusted_sender: true,
       order: 'pattern',
       page: 1,
       pattern_type: 'EMAIL',
