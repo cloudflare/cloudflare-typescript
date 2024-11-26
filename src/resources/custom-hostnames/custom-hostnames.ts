@@ -1773,6 +1773,12 @@ export namespace CustomHostnameCreateParams {
     certificate_authority?: Shared.CertificateCAParam;
 
     /**
+     * Whether or not to add Cloudflare Branding for the order. This will add a
+     * subdomain of sni.cloudflaressl.com as the Common Name if set to true
+     */
+    cloudflare_branding?: boolean;
+
+    /**
      * If a custom uploaded certificate is used.
      */
     custom_certificate?: string;
@@ -1930,6 +1936,12 @@ export namespace CustomHostnameEditParams {
      * The Certificate Authority that will issue the certificate
      */
     certificate_authority?: Shared.CertificateCAParam;
+
+    /**
+     * Whether or not to add Cloudflare Branding for the order. This will add a
+     * subdomain of sni.cloudflaressl.com as the Common Name if set to true
+     */
+    cloudflare_branding?: boolean;
 
     /**
      * If a custom uploaded certificate is used.

@@ -9,8 +9,8 @@ import { SinglePage } from '../pagination';
 
 export class OriginCACertificates extends APIResource {
   /**
-   * Create an Origin CA certificate. Use your Origin CA Key as your User Service Key
-   * when calling this endpoint ([see above](#requests)).
+   * Create an Origin CA certificate. You can use an Origin CA Key as your User
+   * Service Key or an API token when calling this endpoint ([see above](#requests)).
    */
   create(
     body: OriginCACertificateCreateParams,
@@ -24,8 +24,8 @@ export class OriginCACertificates extends APIResource {
   }
 
   /**
-   * List all existing Origin CA certificates for a given zone. Use your Origin CA
-   * Key as your User Service Key when calling this endpoint
+   * List all existing Origin CA certificates for a given zone. You can use an Origin
+   * CA Key as your User Service Key or an API token when calling this endpoint
    * ([see above](#requests)).
    */
   list(
@@ -44,9 +44,9 @@ export class OriginCACertificates extends APIResource {
   }
 
   /**
-   * Revoke an existing Origin CA certificate by its serial number. Use your Origin
-   * CA Key as your User Service Key when calling this endpoint
-   * ([see above](#requests)).
+   * Revoke an existing Origin CA certificate by its serial number. You can use an
+   * Origin CA Key as your User Service Key or an API token when calling this
+   * endpoint ([see above](#requests)).
    */
   delete(
     certificateId: string,
@@ -60,9 +60,9 @@ export class OriginCACertificates extends APIResource {
   }
 
   /**
-   * Get an existing Origin CA certificate by its serial number. Use your Origin CA
-   * Key as your User Service Key when calling this endpoint
-   * ([see above](#requests)).
+   * Get an existing Origin CA certificate by its serial number. You can use an
+   * Origin CA Key as your User Service Key or an API token when calling this
+   * endpoint ([see above](#requests)).
    */
   get(certificateId: string, options?: Core.RequestOptions): Core.APIPromise<OriginCACertificate> {
     return (
