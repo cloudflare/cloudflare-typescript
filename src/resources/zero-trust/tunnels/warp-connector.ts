@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../resource';
-import * as Core from '../core';
-import * as Shared from './shared';
-import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../pagination';
+import { APIResource } from '../../../resource';
+import * as Core from '../../../core';
+import * as Shared from '../../shared';
+import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class WARPConnector extends APIResource {
   /**
@@ -825,4 +825,25 @@ export interface WARPConnectorTokenParams {
    * Cloudflare account ID
    */
   account_id: string;
+}
+
+WARPConnector.WARPConnectorListResponsesV4PagePaginationArray =
+  WARPConnectorListResponsesV4PagePaginationArray;
+
+export declare namespace WARPConnector {
+  export {
+    type WARPConnectorCreateResponse as WARPConnectorCreateResponse,
+    type WARPConnectorListResponse as WARPConnectorListResponse,
+    type WARPConnectorDeleteResponse as WARPConnectorDeleteResponse,
+    type WARPConnectorEditResponse as WARPConnectorEditResponse,
+    type WARPConnectorGetResponse as WARPConnectorGetResponse,
+    type WARPConnectorTokenResponse as WARPConnectorTokenResponse,
+    WARPConnectorListResponsesV4PagePaginationArray as WARPConnectorListResponsesV4PagePaginationArray,
+    type WARPConnectorCreateParams as WARPConnectorCreateParams,
+    type WARPConnectorListParams as WARPConnectorListParams,
+    type WARPConnectorDeleteParams as WARPConnectorDeleteParams,
+    type WARPConnectorEditParams as WARPConnectorEditParams,
+    type WARPConnectorGetParams as WARPConnectorGetParams,
+    type WARPConnectorTokenParams as WARPConnectorTokenParams,
+  };
 }
