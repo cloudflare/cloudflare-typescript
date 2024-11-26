@@ -54,27 +54,6 @@ describe('resource resourceSharing', () => {
     });
   });
 
-  test('update: only required params', async () => {
-    const responsePromise = client.resourceSharing.update('3fd85f74b32742f1bff64a85009dda07', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'My Shared WAF Managed Rule',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('update: required and optional params', async () => {
-    const response = await client.resourceSharing.update('3fd85f74b32742f1bff64a85009dda07', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      name: 'My Shared WAF Managed Rule',
-    });
-  });
-
   test('list: only required params', async () => {
     const responsePromise = client.resourceSharing.list({ account_id: '023e105f4ecef8ad9ca31a8372d0c353' });
     const rawResponse = await responsePromise.asResponse();
@@ -96,44 +75,6 @@ describe('resource resourceSharing', () => {
       per_page: 20,
       status: 'active',
       target_type: 'account',
-    });
-  });
-
-  test('delete: only required params', async () => {
-    const responsePromise = client.resourceSharing.delete('3fd85f74b32742f1bff64a85009dda07', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('delete: required and optional params', async () => {
-    const response = await client.resourceSharing.delete('3fd85f74b32742f1bff64a85009dda07', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('get: only required params', async () => {
-    const responsePromise = client.resourceSharing.get('3fd85f74b32742f1bff64a85009dda07', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('get: required and optional params', async () => {
-    const response = await client.resourceSharing.get('3fd85f74b32742f1bff64a85009dda07', {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 });
