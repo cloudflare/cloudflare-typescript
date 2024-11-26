@@ -398,12 +398,42 @@ export interface Ciphers {
   modified_on?: string | null;
 }
 
+/**
+ * Development Mode temporarily allows you to enter development mode for your
+ * websites if you need to make changes to your site. This will bypass Cloudflare's
+ * accelerated cache and slow down your site, but is useful if you are making
+ * changes to cacheable content (like images, css, or JavaScript) and would like to
+ * see those changes right away. Once entered, development mode will last for 3
+ * hours and then automatically toggle off.
+ */
 export interface DevelopmentMode {
-  id?: 'development_mode';
-}
+  /**
+   * ID of the zone setting.
+   */
+  id: 'development_mode';
 
-export interface DevelopmentModeParam {
-  id?: 'development_mode';
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
+
+  /**
+   * Value of the zone setting. Notes: The interval (in seconds) from when
+   * development mode expires (positive integer) or last expired (negative integer)
+   * for the domain. If development mode has never been enabled, this value is false.
+   */
+  time_remaining?: number;
 }
 
 /**
@@ -515,12 +545,36 @@ export interface H2Prioritization {
   modified_on?: string | null;
 }
 
+/**
+ * When enabled, the Hotlink Protection option ensures that other sites cannot suck
+ * up your bandwidth by building pages that use images hosted on your site. Anytime
+ * a request for an image on your site hits Cloudflare, we check to ensure that
+ * it's not another site requesting them. People will still be able to download and
+ * view images from your page, but other sites won't be able to steal them for use
+ * on their own pages.
+ * (https://support.cloudflare.com/hc/en-us/articles/200170026).
+ */
 export interface HotlinkProtection {
-  id?: 'hotlink_protection';
-}
+  /**
+   * ID of the zone setting.
+   */
+  id: 'hotlink_protection';
 
-export interface HotlinkProtectionParam {
-  id?: 'hotlink_protection';
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 /**
@@ -1104,12 +1158,40 @@ export interface SecurityLevelParam {
   value?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
 }
 
+/**
+ * If there is sensitive content on your website that you want visible to real
+ * visitors, but that you want to hide from suspicious visitors, all you have to do
+ * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
+ * be excluded from suspicious visitors in the following SSE tags:
+ * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
+ * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
+ * have HTML minification enabled, you won't see the SSE tags in your HTML source
+ * when it's served through Cloudflare. SSE will still function in this case, as
+ * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
+ * resource moves through our network to the visitor's computer.
+ * (https://support.cloudflare.com/hc/en-us/articles/200170036).
+ */
 export interface ServerSideExcludes {
-  id?: 'server_side_exclude';
-}
+  /**
+   * ID of the zone setting.
+   */
+  id: 'server_side_exclude';
 
-export interface ServerSideExcludesParam {
-  id?: 'server_side_exclude';
+  /**
+   * Current value of the zone setting.
+   */
+  value: 'on' | 'off';
+
+  /**
+   * Whether or not this setting can be modified for this zone (based on your
+   * Cloudflare plan level).
+   */
+  editable?: true | false;
+
+  /**
+   * last time this setting was modified.
+   */
+  modified_on?: string | null;
 }
 
 export interface SortQueryStringForCache {
@@ -1388,12 +1470,12 @@ export type SettingEditResponse =
   | ChallengeTTL
   | Ciphers
   | SettingEditResponse.ZonesCNAMEFlattening
-  | SettingEditResponse.ZonesSchemasDevelopmentMode
+  | DevelopmentMode
   | EarlyHints
   | SettingEditResponse.ZonesSchemasEdgeCacheTTL
   | SettingEditResponse.ZonesSchemasEmailObfuscation
   | H2Prioritization
-  | SettingEditResponse.ZonesSchemasHotlinkProtection
+  | HotlinkProtection
   | HTTP2
   | HTTP3
   | ImageResizing
@@ -1417,7 +1499,7 @@ export type SettingEditResponse =
   | SettingEditResponse.ZonesSchemasAutomaticPlatformOptimization
   | SecurityHeaders
   | SettingEditResponse.ZonesSchemasSecurityLevel
-  | SettingEditResponse.ZonesSchemasServerSideExclude
+  | ServerSideExcludes
   | SettingEditResponse.ZonesSha1Support
   | SettingEditResponse.ZonesSchemasSortQueryStringForCache
   | SettingEditResponse.ZonesSchemasSSL
@@ -1629,44 +1711,6 @@ export namespace SettingEditResponse {
   }
 
   /**
-   * Development Mode temporarily allows you to enter development mode for your
-   * websites if you need to make changes to your site. This will bypass Cloudflare's
-   * accelerated cache and slow down your site, but is useful if you are making
-   * changes to cacheable content (like images, css, or JavaScript) and would like to
-   * see those changes right away. Once entered, development mode will last for 3
-   * hours and then automatically toggle off.
-   */
-  export interface ZonesSchemasDevelopmentMode {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'development_mode';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-
-    /**
-     * Value of the zone setting. Notes: The interval (in seconds) from when
-     * development mode expires (positive integer) or last expired (negative integer)
-     * for the domain. If development mode has never been enabled, this value is false.
-     */
-    time_remaining?: number;
-  }
-
-  /**
    * Time (in seconds) that a resource will be ensured to remain on Cloudflare's
    * cache servers.
    */
@@ -1723,38 +1767,6 @@ export namespace SettingEditResponse {
      * ID of the zone setting.
      */
     id: 'email_obfuscation';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * When enabled, the Hotlink Protection option ensures that other sites cannot suck
-   * up your bandwidth by building pages that use images hosted on your site. Anytime
-   * a request for an image on your site hits Cloudflare, we check to ensure that
-   * it's not another site requesting them. People will still be able to download and
-   * view images from your page, but other sites won't be able to steal them for use
-   * on their own pages.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170026).
-   */
-  export interface ZonesSchemasHotlinkProtection {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'hotlink_protection';
 
     /**
      * Current value of the zone setting.
@@ -2077,42 +2089,6 @@ export namespace SettingEditResponse {
      * Current value of the zone setting.
      */
     value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * If there is sensitive content on your website that you want visible to real
-   * visitors, but that you want to hide from suspicious visitors, all you have to do
-   * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
-   * be excluded from suspicious visitors in the following SSE tags:
-   * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
-   * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
-   * have HTML minification enabled, you won't see the SSE tags in your HTML source
-   * when it's served through Cloudflare. SSE will still function in this case, as
-   * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
-   * resource moves through our network to the visitor's computer.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170036).
-   */
-  export interface ZonesSchemasServerSideExclude {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'server_side_exclude';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
 
     /**
      * Whether or not this setting can be modified for this zone (based on your
@@ -2326,12 +2302,12 @@ export type SettingGetResponse =
   | ChallengeTTL
   | Ciphers
   | SettingGetResponse.ZonesCNAMEFlattening
-  | SettingGetResponse.ZonesSchemasDevelopmentMode
+  | DevelopmentMode
   | EarlyHints
   | SettingGetResponse.ZonesSchemasEdgeCacheTTL
   | SettingGetResponse.ZonesSchemasEmailObfuscation
   | H2Prioritization
-  | SettingGetResponse.ZonesSchemasHotlinkProtection
+  | HotlinkProtection
   | HTTP2
   | HTTP3
   | ImageResizing
@@ -2355,7 +2331,7 @@ export type SettingGetResponse =
   | SettingGetResponse.ZonesSchemasAutomaticPlatformOptimization
   | SecurityHeaders
   | SettingGetResponse.ZonesSchemasSecurityLevel
-  | SettingGetResponse.ZonesSchemasServerSideExclude
+  | ServerSideExcludes
   | SettingGetResponse.ZonesSha1Support
   | SettingGetResponse.ZonesSchemasSortQueryStringForCache
   | SettingGetResponse.ZonesSchemasSSL
@@ -2567,44 +2543,6 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * Development Mode temporarily allows you to enter development mode for your
-   * websites if you need to make changes to your site. This will bypass Cloudflare's
-   * accelerated cache and slow down your site, but is useful if you are making
-   * changes to cacheable content (like images, css, or JavaScript) and would like to
-   * see those changes right away. Once entered, development mode will last for 3
-   * hours and then automatically toggle off.
-   */
-  export interface ZonesSchemasDevelopmentMode {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'development_mode';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-
-    /**
-     * Value of the zone setting. Notes: The interval (in seconds) from when
-     * development mode expires (positive integer) or last expired (negative integer)
-     * for the domain. If development mode has never been enabled, this value is false.
-     */
-    time_remaining?: number;
-  }
-
-  /**
    * Time (in seconds) that a resource will be ensured to remain on Cloudflare's
    * cache servers.
    */
@@ -2661,38 +2599,6 @@ export namespace SettingGetResponse {
      * ID of the zone setting.
      */
     id: 'email_obfuscation';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
-   * When enabled, the Hotlink Protection option ensures that other sites cannot suck
-   * up your bandwidth by building pages that use images hosted on your site. Anytime
-   * a request for an image on your site hits Cloudflare, we check to ensure that
-   * it's not another site requesting them. People will still be able to download and
-   * view images from your page, but other sites won't be able to steal them for use
-   * on their own pages.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170026).
-   */
-  export interface ZonesSchemasHotlinkProtection {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'hotlink_protection';
 
     /**
      * Current value of the zone setting.
@@ -3029,42 +2935,6 @@ export namespace SettingGetResponse {
   }
 
   /**
-   * If there is sensitive content on your website that you want visible to real
-   * visitors, but that you want to hide from suspicious visitors, all you have to do
-   * is wrap the content with Cloudflare SSE tags. Wrap any content that you want to
-   * be excluded from suspicious visitors in the following SSE tags:
-   * <!--sse--><!--/sse-->. For example: <!--sse--> Bad visitors won't see my phone
-   * number, 555-555-5555 <!--/sse-->. Note: SSE only will work with HTML. If you
-   * have HTML minification enabled, you won't see the SSE tags in your HTML source
-   * when it's served through Cloudflare. SSE will still function in this case, as
-   * Cloudflare's HTML minification and SSE functionality occur on-the-fly as the
-   * resource moves through our network to the visitor's computer.
-   * (https://support.cloudflare.com/hc/en-us/articles/200170036).
-   */
-  export interface ZonesSchemasServerSideExclude {
-    /**
-     * ID of the zone setting.
-     */
-    id: 'server_side_exclude';
-
-    /**
-     * Current value of the zone setting.
-     */
-    value: 'on' | 'off';
-
-    /**
-     * Whether or not this setting can be modified for this zone (based on your
-     * Cloudflare plan level).
-     */
-    editable?: true | false;
-
-    /**
-     * last time this setting was modified.
-     */
-    modified_on?: string | null;
-  }
-
-  /**
    * Allow SHA1 support.
    */
   export interface ZonesSha1Support {
@@ -3261,12 +3131,12 @@ export type SettingEditParams =
   | SettingEditParams.ChallengeTTL
   | SettingEditParams.Ciphers
   | SettingEditParams.ZonesCNAMEFlattening
-  | SettingEditParams.ZonesSchemasDevelopmentMode
+  | SettingEditParams.DevelopmentMode
   | SettingEditParams.EarlyHints
   | SettingEditParams.ZonesSchemasEdgeCacheTTL
   | SettingEditParams.ZonesSchemasEmailObfuscation
   | SettingEditParams.H2Prioritization
-  | SettingEditParams.ZonesSchemasHotlinkProtection
+  | SettingEditParams.HotlinkProtection
   | SettingEditParams.HTTP2
   | SettingEditParams.HTTP3
   | SettingEditParams.ImageResizing
@@ -3290,7 +3160,7 @@ export type SettingEditParams =
   | SettingEditParams.ZonesSchemasAutomaticPlatformOptimization
   | SettingEditParams.SecurityHeaders
   | SettingEditParams.ZonesSchemasSecurityLevel
-  | SettingEditParams.ZonesSchemasServerSideExclude
+  | SettingEditParams.ServerSideExcludes
   | SettingEditParams.ZonesSha1Support
   | SettingEditParams.ZonesSchemasSortQueryStringForCache
   | SettingEditParams.ZonesSchemasSSL
@@ -3550,7 +3420,7 @@ export namespace SettingEditParams {
     value: 'flatten_at_root' | 'flatten_all';
   }
 
-  export interface ZonesSchemasDevelopmentMode {
+  export interface DevelopmentMode {
     /**
      * Path param: Identifier
      */
@@ -3656,7 +3526,7 @@ export namespace SettingEditParams {
     value: 'on' | 'off' | 'custom';
   }
 
-  export interface ZonesSchemasHotlinkProtection {
+  export interface HotlinkProtection {
     /**
      * Path param: Identifier
      */
@@ -4117,7 +3987,7 @@ export namespace SettingEditParams {
     value: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
   }
 
-  export interface ZonesSchemasServerSideExclude {
+  export interface ServerSideExcludes {
     /**
      * Path param: Identifier
      */

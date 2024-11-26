@@ -115,12 +115,8 @@ export interface PageRule {
     | PageRule.CacheByDeviceType
     | PageRule.CacheDeceptionArmor
     | PageRule.CacheKey
-    | PageRule.CacheKeyFields
     | SettingsAPI.CacheLevel
     | PageRule.CacheOnCookie
-    | PageRule.CacheTTLByStatus
-    | PageRule.DDoSProtection
-    | SettingsAPI.DevelopmentMode
     | PageRule.DisableApps
     | PageRule.DisablePerformance
     | PageRule.DisableSecurity
@@ -130,20 +126,16 @@ export interface PageRule {
     | PageRule.ExplicitCacheControl
     | PageRule.ForwardingURL
     | PageRule.HostHeaderOverride
-    | SettingsAPI.HotlinkProtection
     | SettingsAPI.IPGeolocation
-    | PageRule.Minify
     | SettingsAPI.Mirage
     | SettingsAPI.OpportunisticEncryption
     | SettingsAPI.OriginErrorPagePassThru
     | SettingsAPI.Polish
-    | PageRule.PurgeByPageRule
     | PageRule.ResolveOverride
     | PageRule.RespectStrongEtag
     | SettingsAPI.ResponseBuffering
     | SettingsAPI.RocketLoader
     | SettingsAPI.SecurityLevel
-    | SettingsAPI.ServerSideExcludes
     | SettingsAPI.SortQueryStringForCache
     | SettingsAPI.SSL
     | SettingsAPI.TrueClientIPHeader
@@ -352,10 +344,6 @@ export namespace PageRule {
     }
   }
 
-  export interface CacheKeyFields {
-    id?: 'cache_key_fields';
-  }
-
   export interface CacheOnCookie {
     /**
      * Apply the Cache Everything option (Cache Level setting) based on a regular
@@ -367,14 +355,6 @@ export namespace PageRule {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
-  }
-
-  export interface CacheTTLByStatus {
-    id?: 'cache_ttl_by_status';
-  }
-
-  export interface DDoSProtection {
-    id?: 'ddos_protection';
   }
 
   export interface DisableApps {
@@ -475,14 +455,6 @@ export namespace PageRule {
      * The hostname to use in the `Host` header
      */
     value?: string;
-  }
-
-  export interface Minify {
-    id?: 'minify';
-  }
-
-  export interface PurgeByPageRule {
-    id?: 'purge_by_page_rule';
   }
 
   export interface ResolveOverride {
@@ -605,12 +577,8 @@ export interface PageruleCreateParams {
     | PageruleCreateParams.CacheByDeviceType
     | PageruleCreateParams.CacheDeceptionArmor
     | PageruleCreateParams.CacheKey
-    | PageruleCreateParams.CacheKeyFields
     | SettingsAPI.CacheLevelParam
     | PageruleCreateParams.CacheOnCookie
-    | PageruleCreateParams.CacheTTLByStatus
-    | PageruleCreateParams.DDoSProtection
-    | SettingsAPI.DevelopmentModeParam
     | PageruleCreateParams.DisableApps
     | PageruleCreateParams.DisablePerformance
     | PageruleCreateParams.DisableSecurity
@@ -620,20 +588,16 @@ export interface PageruleCreateParams {
     | PageruleCreateParams.ExplicitCacheControl
     | PageruleCreateParams.ForwardingURL
     | PageruleCreateParams.HostHeaderOverride
-    | SettingsAPI.HotlinkProtectionParam
     | SettingsAPI.IPGeolocationParam
-    | PageruleCreateParams.Minify
     | SettingsAPI.MirageParam
     | SettingsAPI.OpportunisticEncryptionParam
     | SettingsAPI.OriginErrorPagePassThruParam
     | SettingsAPI.PolishParam
-    | PageruleCreateParams.PurgeByPageRule
     | PageruleCreateParams.ResolveOverride
     | PageruleCreateParams.RespectStrongEtag
     | SettingsAPI.ResponseBufferingParam
     | SettingsAPI.RocketLoaderParam
     | SettingsAPI.SecurityLevelParam
-    | SettingsAPI.ServerSideExcludesParam
     | SettingsAPI.SortQueryStringForCacheParam
     | SettingsAPI.SSLParam
     | SettingsAPI.TrueClientIPHeaderParam
@@ -832,10 +796,6 @@ export namespace PageruleCreateParams {
     }
   }
 
-  export interface CacheKeyFields {
-    id?: 'cache_key_fields';
-  }
-
   export interface CacheOnCookie {
     /**
      * Apply the Cache Everything option (Cache Level setting) based on a regular
@@ -847,14 +807,6 @@ export namespace PageruleCreateParams {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
-  }
-
-  export interface CacheTTLByStatus {
-    id?: 'cache_ttl_by_status';
-  }
-
-  export interface DDoSProtection {
-    id?: 'ddos_protection';
   }
 
   export interface DisableApps {
@@ -957,14 +909,6 @@ export namespace PageruleCreateParams {
     value?: string;
   }
 
-  export interface Minify {
-    id?: 'minify';
-  }
-
-  export interface PurgeByPageRule {
-    id?: 'purge_by_page_rule';
-  }
-
   export interface ResolveOverride {
     /**
      * Change the origin address to the value specified in this setting.
@@ -1010,12 +954,8 @@ export interface PageruleUpdateParams {
     | PageruleUpdateParams.CacheByDeviceType
     | PageruleUpdateParams.CacheDeceptionArmor
     | PageruleUpdateParams.CacheKey
-    | PageruleUpdateParams.CacheKeyFields
     | SettingsAPI.CacheLevelParam
     | PageruleUpdateParams.CacheOnCookie
-    | PageruleUpdateParams.CacheTTLByStatus
-    | PageruleUpdateParams.DDoSProtection
-    | SettingsAPI.DevelopmentModeParam
     | PageruleUpdateParams.DisableApps
     | PageruleUpdateParams.DisablePerformance
     | PageruleUpdateParams.DisableSecurity
@@ -1025,20 +965,16 @@ export interface PageruleUpdateParams {
     | PageruleUpdateParams.ExplicitCacheControl
     | PageruleUpdateParams.ForwardingURL
     | PageruleUpdateParams.HostHeaderOverride
-    | SettingsAPI.HotlinkProtectionParam
     | SettingsAPI.IPGeolocationParam
-    | PageruleUpdateParams.Minify
     | SettingsAPI.MirageParam
     | SettingsAPI.OpportunisticEncryptionParam
     | SettingsAPI.OriginErrorPagePassThruParam
     | SettingsAPI.PolishParam
-    | PageruleUpdateParams.PurgeByPageRule
     | PageruleUpdateParams.ResolveOverride
     | PageruleUpdateParams.RespectStrongEtag
     | SettingsAPI.ResponseBufferingParam
     | SettingsAPI.RocketLoaderParam
     | SettingsAPI.SecurityLevelParam
-    | SettingsAPI.ServerSideExcludesParam
     | SettingsAPI.SortQueryStringForCacheParam
     | SettingsAPI.SSLParam
     | SettingsAPI.TrueClientIPHeaderParam
@@ -1237,10 +1173,6 @@ export namespace PageruleUpdateParams {
     }
   }
 
-  export interface CacheKeyFields {
-    id?: 'cache_key_fields';
-  }
-
   export interface CacheOnCookie {
     /**
      * Apply the Cache Everything option (Cache Level setting) based on a regular
@@ -1252,14 +1184,6 @@ export namespace PageruleUpdateParams {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
-  }
-
-  export interface CacheTTLByStatus {
-    id?: 'cache_ttl_by_status';
-  }
-
-  export interface DDoSProtection {
-    id?: 'ddos_protection';
   }
 
   export interface DisableApps {
@@ -1362,14 +1286,6 @@ export namespace PageruleUpdateParams {
     value?: string;
   }
 
-  export interface Minify {
-    id?: 'minify';
-  }
-
-  export interface PurgeByPageRule {
-    id?: 'purge_by_page_rule';
-  }
-
   export interface ResolveOverride {
     /**
      * Change the origin address to the value specified in this setting.
@@ -1450,12 +1366,8 @@ export interface PageruleEditParams {
     | PageruleEditParams.CacheByDeviceType
     | PageruleEditParams.CacheDeceptionArmor
     | PageruleEditParams.CacheKey
-    | PageruleEditParams.CacheKeyFields
     | SettingsAPI.CacheLevelParam
     | PageruleEditParams.CacheOnCookie
-    | PageruleEditParams.CacheTTLByStatus
-    | PageruleEditParams.DDoSProtection
-    | SettingsAPI.DevelopmentModeParam
     | PageruleEditParams.DisableApps
     | PageruleEditParams.DisablePerformance
     | PageruleEditParams.DisableSecurity
@@ -1465,20 +1377,16 @@ export interface PageruleEditParams {
     | PageruleEditParams.ExplicitCacheControl
     | PageruleEditParams.ForwardingURL
     | PageruleEditParams.HostHeaderOverride
-    | SettingsAPI.HotlinkProtectionParam
     | SettingsAPI.IPGeolocationParam
-    | PageruleEditParams.Minify
     | SettingsAPI.MirageParam
     | SettingsAPI.OpportunisticEncryptionParam
     | SettingsAPI.OriginErrorPagePassThruParam
     | SettingsAPI.PolishParam
-    | PageruleEditParams.PurgeByPageRule
     | PageruleEditParams.ResolveOverride
     | PageruleEditParams.RespectStrongEtag
     | SettingsAPI.ResponseBufferingParam
     | SettingsAPI.RocketLoaderParam
     | SettingsAPI.SecurityLevelParam
-    | SettingsAPI.ServerSideExcludesParam
     | SettingsAPI.SortQueryStringForCacheParam
     | SettingsAPI.SSLParam
     | SettingsAPI.TrueClientIPHeaderParam
@@ -1677,10 +1585,6 @@ export namespace PageruleEditParams {
     }
   }
 
-  export interface CacheKeyFields {
-    id?: 'cache_key_fields';
-  }
-
   export interface CacheOnCookie {
     /**
      * Apply the Cache Everything option (Cache Level setting) based on a regular
@@ -1692,14 +1596,6 @@ export namespace PageruleEditParams {
      * The regular expression to use for matching cookie names in the request.
      */
     value?: string;
-  }
-
-  export interface CacheTTLByStatus {
-    id?: 'cache_ttl_by_status';
-  }
-
-  export interface DDoSProtection {
-    id?: 'ddos_protection';
   }
 
   export interface DisableApps {
@@ -1800,14 +1696,6 @@ export namespace PageruleEditParams {
      * The hostname to use in the `Host` header
      */
     value?: string;
-  }
-
-  export interface Minify {
-    id?: 'minify';
-  }
-
-  export interface PurgeByPageRule {
-    id?: 'purge_by_page_rule';
   }
 
   export interface ResolveOverride {
