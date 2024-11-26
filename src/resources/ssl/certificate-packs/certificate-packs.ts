@@ -58,19 +58,19 @@ export class CertificatePacks extends APIResource {
   }
 
   /**
-   * For a given zone, restart validation for an advanced certificate pack. This is
-   * only a validation operation for a Certificate Pack in a validation_timed_out
-   * status.
+   * For a given zone, restart validation or add cloudflare branding for an advanced
+   * certificate pack. The former is only a validation operation for a Certificate
+   * Pack in a validation_timed_out status.
    */
   edit(
     certificatePackId: string,
     params: CertificatePackEditParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<CertificatePackEditResponse> {
-    const { zone_id, body } = params;
+    const { zone_id, ...body } = params;
     return (
       this._client.patch(`/zones/${zone_id}/ssl/certificate_packs/${certificatePackId}`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: CertificatePackEditResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -155,8 +155,8 @@ export interface CertificatePackCreateResponse {
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
   /**
-   * Whether or not to add Cloudflare Branding for the order. This will add
-   * sni.cloudflaressl.com as the Common Name if set true.
+   * Whether or not to add Cloudflare Branding for the order. This will add a
+   * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
 
@@ -210,8 +210,8 @@ export interface CertificatePackEditResponse {
   certificate_authority?: 'google' | 'lets_encrypt' | 'ssl_com';
 
   /**
-   * Whether or not to add Cloudflare Branding for the order. This will add
-   * sni.cloudflaressl.com as the Common Name if set true.
+   * Whether or not to add Cloudflare Branding for the order. This will add a
+   * subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
 
@@ -281,7 +281,7 @@ export interface CertificatePackCreateParams {
 
   /**
    * Body param: Whether or not to add Cloudflare Branding for the order. This will
-   * add sni.cloudflaressl.com as the Common Name if set true.
+   * add a subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
   cloudflare_branding?: boolean;
 }
@@ -312,9 +312,10 @@ export interface CertificatePackEditParams {
   zone_id: string;
 
   /**
-   * Body param:
+   * Body param: Whether or not to add Cloudflare Branding for the order. This will
+   * add a subdomain of sni.cloudflaressl.com as the Common Name if set to true.
    */
-  body: unknown;
+  cloudflare_branding?: boolean;
 }
 
 export interface CertificatePackGetParams {
