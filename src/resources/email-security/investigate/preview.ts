@@ -8,10 +8,10 @@ export class Preview extends APIResource {
    * Preview for non-detection messages
    */
   create(params: PreviewCreateParams, options?: Core.RequestOptions): Core.APIPromise<PreviewCreateResponse> {
-    const { account_id, body } = params;
+    const { account_id, ...body } = params;
     return (
       this._client.post(`/accounts/${account_id}/email-security/investigate/preview`, {
-        body: body,
+        body,
         ...options,
       }) as Core.APIPromise<{ result: PreviewCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
@@ -56,10 +56,9 @@ export interface PreviewCreateParams {
   account_id: string;
 
   /**
-   * Body param: A list of messages identfied by their `postfix_id`s that should be
-   * released.
+   * Body param: The identifier of the message.
    */
-  body: Array<string>;
+  postfix_id: string;
 }
 
 export interface PreviewGetParams {

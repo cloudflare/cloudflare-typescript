@@ -102,9 +102,26 @@ export interface DomainListResponse {
 
   domain: string;
 
+  drop_dispositions: Array<
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE'
+  >;
+
+  ip_restrictions: Array<string>;
+
   last_modified: string;
 
   lookback_hops: number;
+
+  transport: string;
 
   folder?: 'AllItems' | 'Inbox' | null;
 
@@ -113,6 +130,10 @@ export interface DomainListResponse {
   integration_id?: string | null;
 
   o365_tenant_id?: string | null;
+
+  require_tls_inbound?: boolean | null;
+
+  require_tls_outbound?: boolean | null;
 }
 
 export interface DomainDeleteResponse {
@@ -145,9 +166,26 @@ export interface DomainEditResponse {
 
   domain: string;
 
+  drop_dispositions: Array<
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE'
+  >;
+
+  ip_restrictions: Array<string>;
+
   last_modified: string;
 
   lookback_hops: number;
+
+  transport: string;
 
   folder?: 'AllItems' | 'Inbox' | null;
 
@@ -156,6 +194,10 @@ export interface DomainEditResponse {
   integration_id?: string | null;
 
   o365_tenant_id?: string | null;
+
+  require_tls_inbound?: boolean | null;
+
+  require_tls_outbound?: boolean | null;
 }
 
 export interface DomainGetResponse {
@@ -170,9 +212,26 @@ export interface DomainGetResponse {
 
   domain: string;
 
+  drop_dispositions: Array<
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE'
+  >;
+
+  ip_restrictions: Array<string>;
+
   last_modified: string;
 
   lookback_hops: number;
+
+  transport: string;
 
   folder?: 'AllItems' | 'Inbox' | null;
 
@@ -181,6 +240,10 @@ export interface DomainGetResponse {
   integration_id?: string | null;
 
   o365_tenant_id?: string | null;
+
+  require_tls_inbound?: boolean | null;
+
+  require_tls_outbound?: boolean | null;
 }
 
 export interface DomainListParams extends V4PagePaginationArrayParams {
@@ -241,7 +304,28 @@ export interface DomainEditParams {
   /**
    * Body param:
    */
+  ip_restrictions: Array<string>;
+
+  /**
+   * Body param:
+   */
   domain?: string | null;
+
+  /**
+   * Body param:
+   */
+  drop_dispositions?: Array<
+    | 'MALICIOUS'
+    | 'MALICIOUS-BEC'
+    | 'SUSPICIOUS'
+    | 'SPOOF'
+    | 'SPAM'
+    | 'BULK'
+    | 'ENCRYPTED'
+    | 'EXTERNAL'
+    | 'UNKNOWN'
+    | 'NONE'
+  >;
 
   /**
    * Body param:
@@ -257,6 +341,21 @@ export interface DomainEditParams {
    * Body param:
    */
   lookback_hops?: number | null;
+
+  /**
+   * Body param:
+   */
+  require_tls_inbound?: boolean;
+
+  /**
+   * Body param:
+   */
+  require_tls_outbound?: boolean;
+
+  /**
+   * Body param:
+   */
+  transport?: string;
 }
 
 export interface DomainGetParams {

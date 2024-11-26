@@ -91,6 +91,9 @@ export class AllowPolicies extends APIResource {
 export class AllowPolicyListResponsesV4PagePaginationArray extends V4PagePaginationArray<AllowPolicyListResponse> {}
 
 export interface AllowPolicyCreateResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -145,6 +148,9 @@ export interface AllowPolicyCreateResponse {
 }
 
 export interface AllowPolicyListResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -199,10 +205,16 @@ export interface AllowPolicyListResponse {
 }
 
 export interface AllowPolicyDeleteResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 }
 
 export interface AllowPolicyEditResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -257,6 +269,9 @@ export interface AllowPolicyEditResponse {
 }
 
 export interface AllowPolicyGetResponse {
+  /**
+   * The unique identifier for the allow policy.
+   */
   id: number;
 
   created_at: string;
@@ -390,6 +405,16 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
   /**
    * Query param:
    */
+  is_acceptable_sender?: boolean;
+
+  /**
+   * Query param:
+   */
+  is_exempt_recipient?: boolean;
+
+  /**
+   * Query param:
+   */
   is_recipient?: boolean;
 
   /**
@@ -401,6 +426,11 @@ export interface AllowPolicyListParams extends V4PagePaginationArrayParams {
    * Query param:
    */
   is_spoof?: boolean;
+
+  /**
+   * Query param:
+   */
+  is_trusted_sender?: boolean;
 
   /**
    * Query param: The field to sort by.
