@@ -13,7 +13,7 @@ describe('resource preview', () => {
   test('create: only required params', async () => {
     const responsePromise = client.emailSecurity.investigate.preview.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: ['4Njp3P0STMz2c02Q'],
+      postfix_id: '4Njp3P0STMz2c02Q',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,7 +27,7 @@ describe('resource preview', () => {
   test('create: required and optional params', async () => {
     const response = await client.emailSecurity.investigate.preview.create({
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      body: ['4Njp3P0STMz2c02Q'],
+      postfix_id: '4Njp3P0STMz2c02Q',
     });
   });
 

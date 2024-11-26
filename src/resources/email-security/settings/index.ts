@@ -62,12 +62,6 @@ export {
   TrustedDomains,
   type TrustedDomainCreateResponse,
   type TrustedDomainListResponse,
-  type TrustedDomainDeleteResponse,
-  type TrustedDomainEditResponse,
-  type TrustedDomainGetResponse,
   type TrustedDomainCreateParams,
   type TrustedDomainListParams,
-  type TrustedDomainDeleteParams,
-  type TrustedDomainEditParams,
-  type TrustedDomainGetParams,
 } from './trusted-domains';
