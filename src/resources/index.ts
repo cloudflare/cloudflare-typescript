@@ -84,7 +84,6 @@ export { URLNormalization } from './url-normalization';
 export { URLScanner } from './url-scanner/url-scanner';
 export { User } from './user/user';
 export { Vectorize } from './vectorize/vectorize';
-export { WARPConnector } from './warp-connector';
 export { WaitingRooms } from './waiting-rooms/waiting-rooms';
 export { Web3 } from './web3/web3';
 export { Workers } from './workers/workers';

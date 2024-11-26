@@ -4098,26 +4098,6 @@ Methods:
 
 - <code title="post /accounts/{account_id}/r2/temp-access-credentials">client.r2.temporaryCredentials.<a href="./src/resources/r2/temporary-credentials.ts">create</a>({ ...params }) -> TemporaryCredentialCreateResponse</code>
 
-# WARPConnector
-
-Types:
-
-- <code><a href="./src/resources/warp-connector.ts">WARPConnectorCreateResponse</a></code>
-- <code><a href="./src/resources/warp-connector.ts">WARPConnectorListResponse</a></code>
-- <code><a href="./src/resources/warp-connector.ts">WARPConnectorDeleteResponse</a></code>
-- <code><a href="./src/resources/warp-connector.ts">WARPConnectorEditResponse</a></code>
-- <code><a href="./src/resources/warp-connector.ts">WARPConnectorGetResponse</a></code>
-- <code><a href="./src/resources/warp-connector.ts">WARPConnectorTokenResponse</a></code>
-
-Methods:
-
-- <code title="post /accounts/{account_id}/warp_connector">client.warpConnector.<a href="./src/resources/warp-connector.ts">create</a>({ ...params }) -> WARPConnectorCreateResponse</code>
-- <code title="get /accounts/{account_id}/warp_connector">client.warpConnector.<a href="./src/resources/warp-connector.ts">list</a>({ ...params }) -> WARPConnectorListResponsesV4PagePaginationArray</code>
-- <code title="delete /accounts/{account_id}/warp_connector/{tunnel_id}">client.warpConnector.<a href="./src/resources/warp-connector.ts">delete</a>(tunnelId, { ...params }) -> WARPConnectorDeleteResponse</code>
-- <code title="patch /accounts/{account_id}/warp_connector/{tunnel_id}">client.warpConnector.<a href="./src/resources/warp-connector.ts">edit</a>(tunnelId, { ...params }) -> WARPConnectorEditResponse</code>
-- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}">client.warpConnector.<a href="./src/resources/warp-connector.ts">get</a>(tunnelId, { ...params }) -> WARPConnectorGetResponse</code>
-- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/token">client.warpConnector.<a href="./src/resources/warp-connector.ts">token</a>(tunnelId, { ...params }) -> WARPConnectorTokenResponse</code>
-
 # WorkersForPlatforms
 
 ## Dispatch
@@ -5001,6 +4981,26 @@ Methods:
 - <code title="delete /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.<a href="./src/resources/zero-trust/tunnels/tunnels.ts">delete</a>(tunnelId, { ...params }) -> TunnelDeleteResponse</code>
 - <code title="patch /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.<a href="./src/resources/zero-trust/tunnels/tunnels.ts">edit</a>(tunnelId, { ...params }) -> TunnelEditResponse</code>
 - <code title="get /accounts/{account_id}/cfd_tunnel/{tunnel_id}">client.zeroTrust.tunnels.<a href="./src/resources/zero-trust/tunnels/tunnels.ts">get</a>(tunnelId, { ...params }) -> TunnelGetResponse</code>
+
+### WARPConnector
+
+Types:
+
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector.ts">WARPConnectorCreateResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector.ts">WARPConnectorListResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector.ts">WARPConnectorDeleteResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector.ts">WARPConnectorEditResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector.ts">WARPConnectorGetResponse</a></code>
+- <code><a href="./src/resources/zero-trust/tunnels/warp-connector.ts">WARPConnectorTokenResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/{account_id}/warp_connector">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector.ts">create</a>({ ...params }) -> WARPConnectorCreateResponse</code>
+- <code title="get /accounts/{account_id}/warp_connector">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector.ts">list</a>({ ...params }) -> WARPConnectorListResponsesV4PagePaginationArray</code>
+- <code title="delete /accounts/{account_id}/warp_connector/{tunnel_id}">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector.ts">delete</a>(tunnelId, { ...params }) -> WARPConnectorDeleteResponse</code>
+- <code title="patch /accounts/{account_id}/warp_connector/{tunnel_id}">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector.ts">edit</a>(tunnelId, { ...params }) -> WARPConnectorEditResponse</code>
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector.ts">get</a>(tunnelId, { ...params }) -> WARPConnectorGetResponse</code>
+- <code title="get /accounts/{account_id}/warp_connector/{tunnel_id}/token">client.zeroTrust.tunnels.warpConnector.<a href="./src/resources/zero-trust/tunnels/warp-connector.ts">token</a>(tunnelId, { ...params }) -> WARPConnectorTokenResponse</code>
 
 ### Configurations
 

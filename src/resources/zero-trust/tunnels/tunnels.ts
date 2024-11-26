@@ -26,9 +26,27 @@ import * as ManagementAPI from './management';
 import { Management, ManagementCreateParams, ManagementCreateResponse } from './management';
 import * as TokenAPI from './token';
 import { Token, TokenGetParams, TokenGetResponse } from './token';
+import * as WARPConnectorAPI from './warp-connector';
+import {
+  WARPConnector,
+  WARPConnectorCreateParams,
+  WARPConnectorCreateResponse,
+  WARPConnectorDeleteParams,
+  WARPConnectorDeleteResponse,
+  WARPConnectorEditParams,
+  WARPConnectorEditResponse,
+  WARPConnectorGetParams,
+  WARPConnectorGetResponse,
+  WARPConnectorListParams,
+  WARPConnectorListResponse,
+  WARPConnectorListResponsesV4PagePaginationArray,
+  WARPConnectorTokenParams,
+  WARPConnectorTokenResponse,
+} from './warp-connector';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../../pagination';
 
 export class Tunnels extends APIResource {
+  warpConnector: WARPConnectorAPI.WARPConnector = new WARPConnectorAPI.WARPConnector(this._client);
   configurations: ConfigurationsAPI.Configurations = new ConfigurationsAPI.Configurations(this._client);
   connections: ConnectionsAPI.Connections = new ConnectionsAPI.Connections(this._client);
   token: TokenAPI.Token = new TokenAPI.Token(this._client);
@@ -850,6 +868,8 @@ export interface TunnelGetParams {
 }
 
 Tunnels.TunnelListResponsesV4PagePaginationArray = TunnelListResponsesV4PagePaginationArray;
+Tunnels.WARPConnector = WARPConnector;
+Tunnels.WARPConnectorListResponsesV4PagePaginationArray = WARPConnectorListResponsesV4PagePaginationArray;
 Tunnels.Configurations = Configurations;
 Tunnels.Connections = Connections;
 Tunnels.Token = Token;
@@ -870,6 +890,23 @@ export declare namespace Tunnels {
     type TunnelDeleteParams as TunnelDeleteParams,
     type TunnelEditParams as TunnelEditParams,
     type TunnelGetParams as TunnelGetParams,
+  };
+
+  export {
+    WARPConnector as WARPConnector,
+    type WARPConnectorCreateResponse as WARPConnectorCreateResponse,
+    type WARPConnectorListResponse as WARPConnectorListResponse,
+    type WARPConnectorDeleteResponse as WARPConnectorDeleteResponse,
+    type WARPConnectorEditResponse as WARPConnectorEditResponse,
+    type WARPConnectorGetResponse as WARPConnectorGetResponse,
+    type WARPConnectorTokenResponse as WARPConnectorTokenResponse,
+    WARPConnectorListResponsesV4PagePaginationArray as WARPConnectorListResponsesV4PagePaginationArray,
+    type WARPConnectorCreateParams as WARPConnectorCreateParams,
+    type WARPConnectorListParams as WARPConnectorListParams,
+    type WARPConnectorDeleteParams as WARPConnectorDeleteParams,
+    type WARPConnectorEditParams as WARPConnectorEditParams,
+    type WARPConnectorGetParams as WARPConnectorGetParams,
+    type WARPConnectorTokenParams as WARPConnectorTokenParams,
   };
 
   export {
