@@ -484,18 +484,18 @@ export namespace PageRule {
 }
 
 /**
- * A request condition target.
+ * URL target.
  */
 export interface Target {
   /**
    * String constraint.
    */
-  constraint: Target.Constraint;
+  constraint?: Target.Constraint;
 
   /**
    * A target based on the URL of the request.
    */
-  target: 'url';
+  target?: 'url';
 }
 
 export namespace Target {
@@ -517,18 +517,18 @@ export namespace Target {
 }
 
 /**
- * A request condition target.
+ * URL target.
  */
 export interface TargetParam {
   /**
    * String constraint.
    */
-  constraint: TargetParam.Constraint;
+  constraint?: TargetParam.Constraint;
 
   /**
    * A target based on the URL of the request.
    */
-  target: 'url';
+  target?: 'url';
 }
 
 export namespace TargetParam {
