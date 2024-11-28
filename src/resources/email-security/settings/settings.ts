@@ -65,6 +65,12 @@ import * as TrustedDomainsAPI from './trusted-domains';
 import {
   TrustedDomainCreateParams,
   TrustedDomainCreateResponse,
+  TrustedDomainDeleteParams,
+  TrustedDomainDeleteResponse,
+  TrustedDomainEditParams,
+  TrustedDomainEditResponse,
+  TrustedDomainGetParams,
+  TrustedDomainGetResponse,
   TrustedDomainListParams,
   TrustedDomainListResponse,
   TrustedDomainListResponsesV4PagePaginationArray,
@@ -157,8 +163,14 @@ export declare namespace Settings {
     TrustedDomains as TrustedDomains,
     type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
     type TrustedDomainListResponse as TrustedDomainListResponse,
+    type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,
+    type TrustedDomainEditResponse as TrustedDomainEditResponse,
+    type TrustedDomainGetResponse as TrustedDomainGetResponse,
     TrustedDomainListResponsesV4PagePaginationArray as TrustedDomainListResponsesV4PagePaginationArray,
     type TrustedDomainCreateParams as TrustedDomainCreateParams,
     type TrustedDomainListParams as TrustedDomainListParams,
+    type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
+    type TrustedDomainEditParams as TrustedDomainEditParams,
+    type TrustedDomainGetParams as TrustedDomainGetParams,
   };
 }

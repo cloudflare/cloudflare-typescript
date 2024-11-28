@@ -3,9 +3,33 @@
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
 import * as RecipientsAPI from './recipients';
-import { Recipients } from './recipients';
+import {
+  RecipientCreateParams,
+  RecipientCreateResponse,
+  RecipientDeleteParams,
+  RecipientDeleteResponse,
+  RecipientGetParams,
+  RecipientGetResponse,
+  RecipientListParams,
+  RecipientListResponse,
+  RecipientListResponsesV4PagePaginationArray,
+  Recipients,
+} from './recipients';
 import * as ResourcesAPI from './resources';
-import { Resources } from './resources';
+import {
+  ResourceCreateParams,
+  ResourceCreateResponse,
+  ResourceDeleteParams,
+  ResourceDeleteResponse,
+  ResourceGetParams,
+  ResourceGetResponse,
+  ResourceListParams,
+  ResourceListResponse,
+  ResourceListResponsesV4PagePaginationArray,
+  ResourceUpdateParams,
+  ResourceUpdateResponse,
+  Resources,
+} from './resources';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
 export class ResourceSharing extends APIResource {
@@ -28,6 +52,23 @@ export class ResourceSharing extends APIResource {
   }
 
   /**
+   * Updating is not immediate, an updated share object with a new status will be
+   * returned.
+   */
+  update(
+    shareId: string,
+    params: ResourceSharingUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceSharingUpdateResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.put(`/accounts/${account_id}/shares/${shareId}`, { body, ...options }) as Core.APIPromise<{
+        result: ResourceSharingUpdateResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
    * Lists all account shares.
    */
   list(
@@ -40,6 +81,39 @@ export class ResourceSharing extends APIResource {
       ResourceSharingListResponsesV4PagePaginationArray,
       { query, ...options },
     );
+  }
+
+  /**
+   * Deletion is not immediate, an updated share object with a new status will be
+   * returned.
+   */
+  delete(
+    shareId: string,
+    params: ResourceSharingDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceSharingDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(`/accounts/${account_id}/shares/${shareId}`, options) as Core.APIPromise<{
+        result: ResourceSharingDeleteResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Fetches share by ID.
+   */
+  get(
+    shareId: string,
+    params: ResourceSharingGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ResourceSharingGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(`/accounts/${account_id}/shares/${shareId}`, options) as Core.APIPromise<{
+        result: ResourceSharingGetResponse;
+      }>
+    )._thenUnwrap((obj) => obj.result);
   }
 }
 
@@ -88,7 +162,136 @@ export interface ResourceSharingCreateResponse {
   kind?: 'sent' | 'received';
 }
 
+export interface ResourceSharingUpdateResponse {
+  /**
+   * Share identifier tag.
+   */
+  id: string;
+
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * The display name of an account.
+   */
+  account_name: string;
+
+  /**
+   * When the share was created.
+   */
+  created: string;
+
+  /**
+   * When the share was modified.
+   */
+  modified: string;
+
+  /**
+   * The name of the share.
+   */
+  name: string;
+
+  /**
+   * Organization identifier.
+   */
+  organization_id: string;
+
+  status: 'active' | 'deleting' | 'deleted';
+
+  target_type: 'account' | 'organization';
+
+  kind?: 'sent' | 'received';
+}
+
 export interface ResourceSharingListResponse {
+  /**
+   * Share identifier tag.
+   */
+  id: string;
+
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * The display name of an account.
+   */
+  account_name: string;
+
+  /**
+   * When the share was created.
+   */
+  created: string;
+
+  /**
+   * When the share was modified.
+   */
+  modified: string;
+
+  /**
+   * The name of the share.
+   */
+  name: string;
+
+  /**
+   * Organization identifier.
+   */
+  organization_id: string;
+
+  status: 'active' | 'deleting' | 'deleted';
+
+  target_type: 'account' | 'organization';
+
+  kind?: 'sent' | 'received';
+}
+
+export interface ResourceSharingDeleteResponse {
+  /**
+   * Share identifier tag.
+   */
+  id: string;
+
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * The display name of an account.
+   */
+  account_name: string;
+
+  /**
+   * When the share was created.
+   */
+  created: string;
+
+  /**
+   * When the share was modified.
+   */
+  modified: string;
+
+  /**
+   * The name of the share.
+   */
+  name: string;
+
+  /**
+   * Organization identifier.
+   */
+  organization_id: string;
+
+  status: 'active' | 'deleting' | 'deleted';
+
+  target_type: 'account' | 'organization';
+
+  kind?: 'sent' | 'received';
+}
+
+export interface ResourceSharingGetResponse {
   /**
    * Share identifier tag.
    */
@@ -192,6 +395,18 @@ export namespace ResourceSharingCreateParams {
   }
 }
 
+export interface ResourceSharingUpdateParams {
+  /**
+   * Path param: Account identifier.
+   */
+  account_id: string;
+
+  /**
+   * Body param: The name of the share.
+   */
+  name: string;
+}
+
 export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
   /**
    * Path param: Account identifier.
@@ -224,11 +439,51 @@ export interface ResourceSharingListParams extends V4PagePaginationArrayParams {
   target_type?: 'account' | 'organization';
 }
 
+export interface ResourceSharingDeleteParams {
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+}
+
+export interface ResourceSharingGetParams {
+  /**
+   * Account identifier.
+   */
+  account_id: string;
+}
+
 ResourceSharing.Recipients = Recipients;
+ResourceSharing.RecipientListResponsesV4PagePaginationArray = RecipientListResponsesV4PagePaginationArray;
 ResourceSharing.Resources = Resources;
+ResourceSharing.ResourceListResponsesV4PagePaginationArray = ResourceListResponsesV4PagePaginationArray;
 
 export declare namespace ResourceSharing {
-  export { Recipients as Recipients };
+  export {
+    Recipients as Recipients,
+    type RecipientCreateResponse as RecipientCreateResponse,
+    type RecipientListResponse as RecipientListResponse,
+    type RecipientDeleteResponse as RecipientDeleteResponse,
+    type RecipientGetResponse as RecipientGetResponse,
+    RecipientListResponsesV4PagePaginationArray as RecipientListResponsesV4PagePaginationArray,
+    type RecipientCreateParams as RecipientCreateParams,
+    type RecipientListParams as RecipientListParams,
+    type RecipientDeleteParams as RecipientDeleteParams,
+    type RecipientGetParams as RecipientGetParams,
+  };
 
-  export { Resources as Resources };
+  export {
+    Resources as Resources,
+    type ResourceCreateResponse as ResourceCreateResponse,
+    type ResourceUpdateResponse as ResourceUpdateResponse,
+    type ResourceListResponse as ResourceListResponse,
+    type ResourceDeleteResponse as ResourceDeleteResponse,
+    type ResourceGetResponse as ResourceGetResponse,
+    ResourceListResponsesV4PagePaginationArray as ResourceListResponsesV4PagePaginationArray,
+    type ResourceCreateParams as ResourceCreateParams,
+    type ResourceUpdateParams as ResourceUpdateParams,
+    type ResourceListParams as ResourceListParams,
+    type ResourceDeleteParams as ResourceDeleteParams,
+    type ResourceGetParams as ResourceGetParams,
+  };
 }
