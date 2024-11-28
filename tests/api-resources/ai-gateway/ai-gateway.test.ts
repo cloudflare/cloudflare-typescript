@@ -96,7 +96,6 @@ describe('resource aiGateway', () => {
       order_by_direction: 'asc',
       page: 1,
       per_page: 1,
-      search: 'search',
     });
   });
 
