@@ -9,14 +9,10 @@ const client = new Cloudflare({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource trustedDomains', () => {
+describe('resource recipients', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.trustedDomains.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      is_recent: true,
-      is_regex: false,
-      is_similarity: false,
-      pattern: 'example.com',
+    const responsePromise = client.resourceSharing.recipients.create('3fd85f74b32742f1bff64a85009dda07', {
+      path_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -28,18 +24,15 @@ describe('resource trustedDomains', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.trustedDomains.create({
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      is_recent: true,
-      is_regex: false,
-      is_similarity: false,
-      pattern: 'example.com',
-      comments: null,
+    const response = await client.resourceSharing.recipients.create('3fd85f74b32742f1bff64a85009dda07', {
+      path_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      body_account_id: '023e105f4ecef8ad9ca31a8372d0c353',
+      organization_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
   });
 
   test('list: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.trustedDomains.list({
+    const responsePromise = client.resourceSharing.recipients.list('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -52,22 +45,19 @@ describe('resource trustedDomains', () => {
   });
 
   test('list: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.trustedDomains.list({
+    const response = await client.resourceSharing.recipients.list('3fd85f74b32742f1bff64a85009dda07', {
       account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      direction: 'asc',
-      is_recent: true,
-      is_similarity: true,
-      order: 'pattern',
-      page: 1,
-      per_page: 1,
-      search: 'search',
+      page: 2,
+      per_page: 20,
     });
   });
 
   test('delete: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.trustedDomains.delete(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.resourceSharing.recipients.delete(
+      '3fd85f74b32742f1bff64a85009dda07',
+      '3fd85f74b32742f1bff64a85009dda07',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,39 +68,19 @@ describe('resource trustedDomains', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.trustedDomains.delete(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-  });
-
-  test('edit: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.trustedDomains.edit(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('edit: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.trustedDomains.edit(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-      comments: 'comments',
-      is_recent: true,
-      is_regex: true,
-      is_similarity: true,
-      pattern: 'x',
-    });
+    const response = await client.resourceSharing.recipients.delete(
+      '3fd85f74b32742f1bff64a85009dda07',
+      '3fd85f74b32742f1bff64a85009dda07',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 
   test('get: only required params', async () => {
-    const responsePromise = client.emailSecurity.settings.trustedDomains.get(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const responsePromise = client.resourceSharing.recipients.get(
+      '3fd85f74b32742f1bff64a85009dda07',
+      '3fd85f74b32742f1bff64a85009dda07',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,8 +91,10 @@ describe('resource trustedDomains', () => {
   });
 
   test('get: required and optional params', async () => {
-    const response = await client.emailSecurity.settings.trustedDomains.get(2401, {
-      account_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+    const response = await client.resourceSharing.recipients.get(
+      '3fd85f74b32742f1bff64a85009dda07',
+      '3fd85f74b32742f1bff64a85009dda07',
+      { account_id: '023e105f4ecef8ad9ca31a8372d0c353' },
+    );
   });
 });

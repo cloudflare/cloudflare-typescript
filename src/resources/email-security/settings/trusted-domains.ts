@@ -35,6 +35,57 @@ export class TrustedDomains extends APIResource {
       { query, ...options },
     );
   }
+
+  /**
+   * Delete a trusted email domain
+   */
+  delete(
+    trustedDomainId: number,
+    params: TrustedDomainDeleteParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TrustedDomainDeleteResponse> {
+    const { account_id } = params;
+    return (
+      this._client.delete(
+        `/accounts/${account_id}/email-security/settings/trusted_domains/${trustedDomainId}`,
+        options,
+      ) as Core.APIPromise<{ result: TrustedDomainDeleteResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Update a trusted email domain
+   */
+  edit(
+    trustedDomainId: number,
+    params: TrustedDomainEditParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TrustedDomainEditResponse> {
+    const { account_id, ...body } = params;
+    return (
+      this._client.patch(
+        `/accounts/${account_id}/email-security/settings/trusted_domains/${trustedDomainId}`,
+        { body, ...options },
+      ) as Core.APIPromise<{ result: TrustedDomainEditResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
+
+  /**
+   * Get a trusted email domain
+   */
+  get(
+    trustedDomainId: number,
+    params: TrustedDomainGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TrustedDomainGetResponse> {
+    const { account_id } = params;
+    return (
+      this._client.get(
+        `/accounts/${account_id}/email-security/settings/trusted_domains/${trustedDomainId}`,
+        options,
+      ) as Core.APIPromise<{ result: TrustedDomainGetResponse }>
+    )._thenUnwrap((obj) => obj.result);
+  }
 }
 
 export class TrustedDomainListResponsesV4PagePaginationArray extends V4PagePaginationArray<TrustedDomainListResponse> {}
@@ -104,6 +155,71 @@ export namespace TrustedDomainCreateResponse {
 }
 
 export interface TrustedDomainListResponse {
+  /**
+   * The unique identifier for the trusted domain.
+   */
+  id: number;
+
+  created_at: string;
+
+  /**
+   * Select to prevent recently registered domains from triggering a Suspicious or
+   * Malicious disposition.
+   */
+  is_recent: boolean;
+
+  is_regex: boolean;
+
+  /**
+   * Select for partner or other approved domains that have similar spelling to your
+   * connected domains. Prevents listed domains from triggering a Spoof disposition.
+   */
+  is_similarity: boolean;
+
+  last_modified: string;
+
+  pattern: string;
+
+  comments?: string | null;
+}
+
+export interface TrustedDomainDeleteResponse {
+  /**
+   * The unique identifier for the trusted domain.
+   */
+  id: number;
+}
+
+export interface TrustedDomainEditResponse {
+  /**
+   * The unique identifier for the trusted domain.
+   */
+  id: number;
+
+  created_at: string;
+
+  /**
+   * Select to prevent recently registered domains from triggering a Suspicious or
+   * Malicious disposition.
+   */
+  is_recent: boolean;
+
+  is_regex: boolean;
+
+  /**
+   * Select for partner or other approved domains that have similar spelling to your
+   * connected domains. Prevents listed domains from triggering a Spoof disposition.
+   */
+  is_similarity: boolean;
+
+  last_modified: string;
+
+  pattern: string;
+
+  comments?: string | null;
+}
+
+export interface TrustedDomainGetResponse {
   /**
    * The unique identifier for the trusted domain.
    */
@@ -241,6 +357,55 @@ export interface TrustedDomainListParams extends V4PagePaginationArrayParams {
   search?: string;
 }
 
+export interface TrustedDomainDeleteParams {
+  /**
+   * Account Identifier
+   */
+  account_id: string;
+}
+
+export interface TrustedDomainEditParams {
+  /**
+   * Path param: Account Identifier
+   */
+  account_id: string;
+
+  /**
+   * Body param:
+   */
+  comments?: string | null;
+
+  /**
+   * Body param: Select to prevent recently registered domains from triggering a
+   * Suspicious or Malicious disposition.
+   */
+  is_recent?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  is_regex?: boolean | null;
+
+  /**
+   * Body param: Select for partner or other approved domains that have similar
+   * spelling to your connected domains. Prevents listed domains from triggering a
+   * Spoof disposition.
+   */
+  is_similarity?: boolean | null;
+
+  /**
+   * Body param:
+   */
+  pattern?: string | null;
+}
+
+export interface TrustedDomainGetParams {
+  /**
+   * Account Identifier
+   */
+  account_id: string;
+}
+
 TrustedDomains.TrustedDomainListResponsesV4PagePaginationArray =
   TrustedDomainListResponsesV4PagePaginationArray;
 
@@ -248,8 +413,14 @@ export declare namespace TrustedDomains {
   export {
     type TrustedDomainCreateResponse as TrustedDomainCreateResponse,
     type TrustedDomainListResponse as TrustedDomainListResponse,
+    type TrustedDomainDeleteResponse as TrustedDomainDeleteResponse,
+    type TrustedDomainEditResponse as TrustedDomainEditResponse,
+    type TrustedDomainGetResponse as TrustedDomainGetResponse,
     TrustedDomainListResponsesV4PagePaginationArray as TrustedDomainListResponsesV4PagePaginationArray,
     type TrustedDomainCreateParams as TrustedDomainCreateParams,
     type TrustedDomainListParams as TrustedDomainListParams,
+    type TrustedDomainDeleteParams as TrustedDomainDeleteParams,
+    type TrustedDomainEditParams as TrustedDomainEditParams,
+    type TrustedDomainGetParams as TrustedDomainGetParams,
   };
 }
