@@ -8,8 +8,7 @@ import { type Response as FetchResponse } from '../../_shims/index';
 
 export class Scans extends APIResource {
   /**
-   * Submit a URL to scan. You can also set some options, like the visibility level
-   * and custom headers. Check limits at
+   * Submit a URL to scan. Check limits at
    * https://developers.cloudflare.com/security-center/investigate/scan-limits/.
    */
   create(
@@ -18,9 +17,10 @@ export class Scans extends APIResource {
     options?: Core.RequestOptions,
   ): Core.APIPromise<ScanCreateResponse> {
     return (
-      this._client.post(`/accounts/${accountId}/urlscanner/scan`, { body, ...options }) as Core.APIPromise<{
-        result: ScanCreateResponse;
-      }>
+      this._client.post(`/accounts/${accountId}/urlscanner/v2/scan`, {
+        body,
+        ...options,
+      }) as Core.APIPromise<{ result: ScanCreateResponse }>
     )._thenUnwrap((obj) => obj.result);
   }
 
@@ -123,27 +123,10 @@ export class Scans extends APIResource {
   }
 }
 
-export interface ScanCreateResponse {
-  /**
-   * Time when url was submitted for scanning.
-   */
-  time: string;
-
-  /**
-   * Canonical form of submitted URL. Use this if you want to later search by URL.
-   */
-  url: string;
-
-  /**
-   * Scan ID.
-   */
-  uuid: string;
-
-  /**
-   * Submitted visibility status.
-   */
-  visibility: string;
-}
+/**
+ * URL to report.
+ */
+export type ScanCreateResponse = string;
 
 export interface ScanListResponse {
   tasks: Array<ScanListResponse.Task>;
@@ -875,10 +858,14 @@ export namespace ScanHARResponse {
 export interface ScanCreateParams {
   url: string;
 
+  customagent?: string;
+
   /**
    * Set custom headers.
    */
   customHeaders?: Record<string, string>;
+
+  referer?: string;
 
   /**
    * Take multiple screenshots targeting different device types.
