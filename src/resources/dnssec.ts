@@ -119,7 +119,7 @@ export interface DNSSEC {
   status?: 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
 }
 
-export type DNSSECDeleteResponse = unknown | string;
+export type DNSSECDeleteResponse = string;
 
 export interface DNSSECDeleteParams {
   /**
