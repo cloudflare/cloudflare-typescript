@@ -389,6 +389,11 @@ export interface AIGatewayListParams extends V4PagePaginationArrayParams {
    * Query param: Order By Direction
    */
   order_by_direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Search by id
+   */
+  search?: string;
 }
 
 export interface AIGatewayDeleteParams {
