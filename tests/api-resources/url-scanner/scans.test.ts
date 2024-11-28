@@ -24,7 +24,9 @@ describe('resource scans', () => {
   test('create: required and optional params', async () => {
     const response = await client.urlScanner.scans.create('accountId', {
       url: 'https://www.example.com',
+      customagent: 'customagent',
       customHeaders: { foo: 'string' },
+      referer: 'referer',
       screenshotsResolutions: ['desktop'],
       visibility: 'Public',
     });
