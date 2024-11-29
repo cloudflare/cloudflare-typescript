@@ -2,8 +2,6 @@
 
 import { APIResource } from '../../../resource';
 import * as Core from '../../../core';
-import * as V1API from './v1';
-import * as Shared from '../../shared';
 import * as BlobsAPI from './blobs';
 import { BlobGetParams, Blobs } from './blobs';
 import * as KeysAPI from './keys';
@@ -152,22 +150,7 @@ export interface Image {
 }
 
 export interface V1ListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  result: V1ListResponse.Result;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-}
-
-export namespace V1ListResponse {
-  export interface Result {
-    images?: Array<V1API.Image>;
-  }
+  images?: Array<Image>;
 }
 
 export type V1DeleteResponse = unknown | string | null;

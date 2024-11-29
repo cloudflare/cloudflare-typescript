@@ -2,7 +2,7 @@
 
 export { ASN, type ASNGetParams } from './asn/index';
 export { AttackSurfaceReport } from './attack-surface-report/index';
-export { DNSListResponsesV4PagePagination, type DNS, type DNSListResponse, type DNSListParams } from './dns';
+export { DNSV4PagePagination, type DNS, type DNSListParams } from './dns';
 export {
   DomainHistoryResource,
   type DomainHistory,

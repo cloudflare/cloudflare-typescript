@@ -23,13 +23,7 @@ import {
 import * as HTTPTestsAPI from './http-tests/http-tests';
 import { HTTPDetails, HTTPTestGetParams, HTTPTests } from './http-tests/http-tests';
 import * as TestsAPI from './tests/tests';
-import {
-  AggregateTimePeriod,
-  TestListParams,
-  TestListResponse,
-  TestListResponsesV4PagePagination,
-  Tests,
-} from './tests/tests';
+import { AggregateTimePeriod, TestListParams, Tests, TestsV4PagePagination } from './tests/tests';
 import * as TracerouteTestResultsAPI from './traceroute-test-results/traceroute-test-results';
 import { TracerouteTestResults } from './traceroute-test-results/traceroute-test-results';
 
@@ -158,7 +152,7 @@ DEX.Colos = Colos;
 DEX.ColoListResponsesSinglePage = ColoListResponsesSinglePage;
 DEX.FleetStatus = FleetStatus;
 DEX.HTTPTests = HTTPTests;
-DEX.TestListResponsesV4PagePagination = TestListResponsesV4PagePagination;
+DEX.TestsV4PagePagination = TestsV4PagePagination;
 DEX.TracerouteTestResults = TracerouteTestResults;
 DEX.TracerouteTests = TracerouteTests;
 
@@ -194,8 +188,7 @@ export declare namespace DEX {
   export {
     type Tests as Tests,
     type AggregateTimePeriod as AggregateTimePeriod,
-    type TestListResponse as TestListResponse,
-    TestListResponsesV4PagePagination as TestListResponsesV4PagePagination,
+    TestsV4PagePagination as TestsV4PagePagination,
     type TestListParams as TestListParams,
   };
 

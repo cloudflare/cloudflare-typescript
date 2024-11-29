@@ -3,7 +3,6 @@
 import { APIResource } from '../../../../resource';
 import * as Core from '../../../../core';
 import * as TestsAPI from './tests';
-import * as Shared from '../../../shared';
 import * as DEXAPI from '../dex';
 import * as UniqueDevicesAPI from './unique-devices';
 import { UniqueDeviceListParams, UniqueDevices } from './unique-devices';
@@ -18,17 +17,16 @@ export class Tests extends APIResource {
   list(
     params: TestListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<TestListResponsesV4PagePagination, TestListResponse> {
+  ): Core.PagePromise<TestsV4PagePagination, Tests> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(
-      `/accounts/${account_id}/dex/tests/overview`,
-      TestListResponsesV4PagePagination,
-      { query, ...options },
-    );
+    return this._client.getAPIList(`/accounts/${account_id}/dex/tests/overview`, TestsV4PagePagination, {
+      query,
+      ...options,
+    });
   }
 }
 
-export class TestListResponsesV4PagePagination extends V4PagePagination<TestListResponse> {}
+export class TestsV4PagePagination extends V4PagePagination<Tests> {}
 
 export interface AggregateTimePeriod {
   units: 'hours' | 'days' | 'testRuns';
@@ -287,45 +285,6 @@ export namespace Tests {
   }
 }
 
-export interface TestListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-
-  result?: Tests;
-
-  result_info?: TestListResponse.ResultInfo;
-}
-
-export namespace TestListResponse {
-  export interface ResultInfo {
-    /**
-     * Total number of results for the requested service
-     */
-    count?: number;
-
-    /**
-     * Current page within paginated list of results
-     */
-    page?: number;
-
-    /**
-     * Number of results per page of results
-     */
-    per_page?: number;
-
-    /**
-     * Total results available without any search parameters
-     */
-    total_count?: number;
-  }
-}
-
 export interface TestListParams extends V4PagePaginationParams {
   /**
    * Path param: unique identifier linked to an account in the API request path.
@@ -350,14 +309,13 @@ export interface TestListParams extends V4PagePaginationParams {
   testName?: string;
 }
 
-Tests.TestListResponsesV4PagePagination = TestListResponsesV4PagePagination;
+Tests.TestsV4PagePagination = TestsV4PagePagination;
 
 export declare namespace Tests {
   export {
     type AggregateTimePeriod as AggregateTimePeriod,
     type Tests as Tests,
-    type TestListResponse as TestListResponse,
-    TestListResponsesV4PagePagination as TestListResponsesV4PagePagination,
+    TestsV4PagePagination as TestsV4PagePagination,
     type TestListParams as TestListParams,
   };
 
