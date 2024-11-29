@@ -17,10 +17,9 @@ export {
 } from './fleet-status/index';
 export { HTTPTests, type HTTPDetails, type HTTPTestGetParams } from './http-tests/index';
 export {
-  TestListResponsesV4PagePagination,
+  TestsV4PagePagination,
   type Tests,
   type AggregateTimePeriod,
-  type TestListResponse,
   type TestListParams,
 } from './tests/index';
 export { TracerouteTestResults } from './traceroute-test-results/index';

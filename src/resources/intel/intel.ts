@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../resource';
 import * as DNSAPI from './dns';
-import { DNS, DNSListParams, DNSListResponse, DNSListResponsesV4PagePagination } from './dns';
+import { DNS, DNSListParams, DNSV4PagePagination } from './dns';
 import * as DomainHistoryAPI from './domain-history';
 import {
   DomainHistory,
@@ -66,7 +66,7 @@ export class Intel extends APIResource {
 }
 
 Intel.ASN = ASN;
-Intel.DNSListResponsesV4PagePagination = DNSListResponsesV4PagePagination;
+Intel.DNSV4PagePagination = DNSV4PagePagination;
 Intel.Domains = Domains;
 Intel.DomainHistoryResource = DomainHistoryResource;
 Intel.IPs = IPs;
@@ -81,12 +81,7 @@ Intel.AttackSurfaceReport = AttackSurfaceReport;
 export declare namespace Intel {
   export { ASN as ASN, type ASNGetParams as ASNGetParams };
 
-  export {
-    type DNS as DNS,
-    type DNSListResponse as DNSListResponse,
-    DNSListResponsesV4PagePagination as DNSListResponsesV4PagePagination,
-    type DNSListParams as DNSListParams,
-  };
+  export { type DNS as DNS, DNSV4PagePagination as DNSV4PagePagination, type DNSListParams as DNSListParams };
 
   export { Domains as Domains, type Domain as Domain, type DomainGetParams as DomainGetParams };
 

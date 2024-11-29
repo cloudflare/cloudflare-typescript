@@ -2,7 +2,6 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import * as SpectrumAPI from './spectrum';
 import { V4PagePaginationArray, type V4PagePaginationArrayParams } from '../../pagination';
 
@@ -336,20 +335,7 @@ export namespace AppUpdateResponse {
   }
 }
 
-export interface AppListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-
-  result?: Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
-
-  result_info?: AppListResponse.ResultInfo;
-}
+export type AppListResponse = Array<AppListResponse.UnionMember0> | Array<AppListResponse.UnionMember1>;
 
 export namespace AppListResponse {
   export interface UnionMember0 {
@@ -471,28 +457,6 @@ export namespace AppListResponse {
      * balancing.
      */
     origin_direct?: Array<string>;
-  }
-
-  export interface ResultInfo {
-    /**
-     * Total number of results for the requested service
-     */
-    count?: number;
-
-    /**
-     * Current page within paginated list of results
-     */
-    page?: number;
-
-    /**
-     * Number of results per page of results
-     */
-    per_page?: number;
-
-    /**
-     * Total results available without any search parameters
-     */
-    total_count?: number;
   }
 }
 

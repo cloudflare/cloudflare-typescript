@@ -3024,11 +3024,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/intel/dns.ts">DNS</a></code>
-- <code><a href="./src/resources/intel/dns.ts">DNSListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/intel/dns">client.intel.dns.<a href="./src/resources/intel/dns.ts">list</a>({ ...params }) -> DNSListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/intel/dns">client.intel.dns.<a href="./src/resources/intel/dns.ts">list</a>({ ...params }) -> DNSV4PagePagination</code>
 
 ## Domains
 
@@ -4928,11 +4927,10 @@ Types:
 
 - <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">AggregateTimePeriod</a></code>
 - <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">Tests</a></code>
-- <code><a href="./src/resources/zero-trust/dex/tests/tests.ts">TestListResponse</a></code>
 
 Methods:
 
-- <code title="get /accounts/{account_id}/dex/tests/overview">client.zeroTrust.dex.tests.<a href="./src/resources/zero-trust/dex/tests/tests.ts">list</a>({ ...params }) -> TestListResponsesV4PagePagination</code>
+- <code title="get /accounts/{account_id}/dex/tests/overview">client.zeroTrust.dex.tests.<a href="./src/resources/zero-trust/dex/tests/tests.ts">list</a>({ ...params }) -> TestsV4PagePagination</code>
 
 #### UniqueDevices
 
