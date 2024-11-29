@@ -101,62 +101,47 @@ export type SeverityQueryParam = 'low' | 'moderate' | 'critical';
 export type SeverityQueryParamParam = 'low' | 'moderate' | 'critical';
 
 export interface IssueListResponse {
-  errors: Array<Shared.ResponseInfo>;
+  /**
+   * Total number of results
+   */
+  count?: number;
 
-  messages: Array<Shared.ResponseInfo>;
+  issues?: Array<IssueListResponse.Issue>;
 
   /**
-   * Whether the API call was successful
+   * Current page within paginated list of results
    */
-  success: true;
+  page?: number;
 
-  result?: IssueListResponse.Result;
+  /**
+   * Number of results per page of results
+   */
+  per_page?: number;
 }
 
 export namespace IssueListResponse {
-  export interface Result {
-    /**
-     * Total number of results
-     */
-    count?: number;
+  export interface Issue {
+    id?: string;
 
-    issues?: Array<Result.Issue>;
+    dismissed?: boolean;
 
-    /**
-     * Current page within paginated list of results
-     */
-    page?: number;
+    issue_class?: string;
 
-    /**
-     * Number of results per page of results
-     */
-    per_page?: number;
-  }
+    issue_type?: IssuesAPI.IssueType;
 
-  export namespace Result {
-    export interface Issue {
-      id?: string;
+    payload?: unknown;
 
-      dismissed?: boolean;
+    resolve_link?: string;
 
-      issue_class?: string;
+    resolve_text?: string;
 
-      issue_type?: IssuesAPI.IssueType;
+    severity?: 'Low' | 'Moderate' | 'Critical';
 
-      payload?: unknown;
+    since?: string;
 
-      resolve_link?: string;
+    subject?: string;
 
-      resolve_text?: string;
-
-      severity?: 'Low' | 'Moderate' | 'Critical';
-
-      since?: string;
-
-      subject?: string;
-
-      timestamp?: string;
-    }
+    timestamp?: string;
   }
 }
 

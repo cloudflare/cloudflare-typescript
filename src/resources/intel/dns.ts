@@ -2,26 +2,22 @@
 
 import { APIResource } from '../../resource';
 import * as Core from '../../core';
-import * as Shared from '../shared';
 import { V4PagePagination, type V4PagePaginationParams } from '../../pagination';
 
 export class DNS extends APIResource {
   /**
    * Gets a list of all the domains that have resolved to a specific IP address.
    */
-  list(
-    params: DNSListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<DNSListResponsesV4PagePagination, DNSListResponse> {
+  list(params: DNSListParams, options?: Core.RequestOptions): Core.PagePromise<DNSV4PagePagination, DNS> {
     const { account_id, ...query } = params;
-    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSListResponsesV4PagePagination, {
+    return this._client.getAPIList(`/accounts/${account_id}/intel/dns`, DNSV4PagePagination, {
       query,
       ...options,
     });
   }
 }
 
-export class DNSListResponsesV4PagePagination extends V4PagePagination<DNSListResponse> {}
+export class DNSV4PagePagination extends V4PagePagination<DNS> {}
 
 export interface DNS {
   /**
@@ -64,45 +60,6 @@ export namespace DNS {
   }
 }
 
-export interface DNSListResponse {
-  errors: Array<Shared.ResponseInfo>;
-
-  messages: Array<Shared.ResponseInfo>;
-
-  /**
-   * Whether the API call was successful
-   */
-  success: true;
-
-  result?: DNS;
-
-  result_info?: DNSListResponse.ResultInfo;
-}
-
-export namespace DNSListResponse {
-  export interface ResultInfo {
-    /**
-     * Total number of results for the requested service
-     */
-    count?: number;
-
-    /**
-     * Current page within paginated list of results
-     */
-    page?: number;
-
-    /**
-     * Number of results per page of results
-     */
-    per_page?: number;
-
-    /**
-     * Total results available without any search parameters
-     */
-    total_count?: number;
-  }
-}
-
 export interface DNSListParams extends V4PagePaginationParams {
   /**
    * Path param: Identifier
@@ -134,13 +91,8 @@ export namespace DNSListParams {
   }
 }
 
-DNS.DNSListResponsesV4PagePagination = DNSListResponsesV4PagePagination;
+DNS.DNSV4PagePagination = DNSV4PagePagination;
 
 export declare namespace DNS {
-  export {
-    type DNS as DNS,
-    type DNSListResponse as DNSListResponse,
-    DNSListResponsesV4PagePagination as DNSListResponsesV4PagePagination,
-    type DNSListParams as DNSListParams,
-  };
+  export { type DNS as DNS, DNSV4PagePagination as DNSV4PagePagination, type DNSListParams as DNSListParams };
 }
