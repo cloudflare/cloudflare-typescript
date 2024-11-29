@@ -43,9 +43,9 @@ export { KeylessCertificates } from './keyless-certificates';
 export {
   LeakedCredentialChecks,
   type LeakedCredentialCheckCreateResponse,
-  type LeakedCredentialCheckListResponse,
+  type LeakedCredentialCheckGetResponse,
   type LeakedCredentialCheckCreateParams,
-  type LeakedCredentialCheckListParams,
+  type LeakedCredentialCheckGetParams,
 } from './leaked-credential-checks/leaked-credential-checks';
 export { LoadBalancers } from './load-balancers/load-balancers';
 export { Logpush } from './logpush/logpush';

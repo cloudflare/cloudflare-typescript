@@ -15,7 +15,7 @@ export {
 export {
   LeakedCredentialChecks,
   type LeakedCredentialCheckCreateResponse,
-  type LeakedCredentialCheckListResponse,
+  type LeakedCredentialCheckGetResponse,
   type LeakedCredentialCheckCreateParams,
-  type LeakedCredentialCheckListParams,
+  type LeakedCredentialCheckGetParams,
 } from './leaked-credential-checks';
