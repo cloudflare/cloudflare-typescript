@@ -38,14 +38,14 @@ export class LeakedCredentialChecks extends APIResource {
   /**
    * Retrieves the current status of Leaked Credential Checks
    */
-  list(
-    params: LeakedCredentialCheckListParams,
+  get(
+    params: LeakedCredentialCheckGetParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<LeakedCredentialCheckListResponse> {
+  ): Core.APIPromise<LeakedCredentialCheckGetResponse> {
     const { zone_id } = params;
     return (
       this._client.get(`/zones/${zone_id}/leaked-credential-checks`, options) as Core.APIPromise<{
-        result: LeakedCredentialCheckListResponse;
+        result: LeakedCredentialCheckGetResponse;
       }>
     )._thenUnwrap((obj) => obj.result);
   }
@@ -64,7 +64,7 @@ export interface LeakedCredentialCheckCreateResponse {
 /**
  * The overall status for Leaked Credential Checks
  */
-export interface LeakedCredentialCheckListResponse {
+export interface LeakedCredentialCheckGetResponse {
   /**
    * Whether or not Leaked Credential Checks are enabled
    */
@@ -83,7 +83,7 @@ export interface LeakedCredentialCheckCreateParams {
   enabled?: boolean;
 }
 
-export interface LeakedCredentialCheckListParams {
+export interface LeakedCredentialCheckGetParams {
   /**
    * Identifier
    */
@@ -96,9 +96,9 @@ LeakedCredentialChecks.DetectionListResponsesSinglePage = DetectionListResponses
 export declare namespace LeakedCredentialChecks {
   export {
     type LeakedCredentialCheckCreateResponse as LeakedCredentialCheckCreateResponse,
-    type LeakedCredentialCheckListResponse as LeakedCredentialCheckListResponse,
+    type LeakedCredentialCheckGetResponse as LeakedCredentialCheckGetResponse,
     type LeakedCredentialCheckCreateParams as LeakedCredentialCheckCreateParams,
-    type LeakedCredentialCheckListParams as LeakedCredentialCheckListParams,
+    type LeakedCredentialCheckGetParams as LeakedCredentialCheckGetParams,
   };
 
   export {

@@ -30,8 +30,8 @@ describe('resource leakedCredentialChecks', () => {
     });
   });
 
-  test('list: only required params', async () => {
-    const responsePromise = client.leakedCredentialChecks.list({
+  test('get: only required params', async () => {
+    const responsePromise = client.leakedCredentialChecks.get({
       zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -43,9 +43,7 @@ describe('resource leakedCredentialChecks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: required and optional params', async () => {
-    const response = await client.leakedCredentialChecks.list({
-      zone_id: '023e105f4ecef8ad9ca31a8372d0c353',
-    });
+  test('get: required and optional params', async () => {
+    const response = await client.leakedCredentialChecks.get({ zone_id: '023e105f4ecef8ad9ca31a8372d0c353' });
   });
 });

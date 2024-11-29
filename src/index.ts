@@ -69,8 +69,8 @@ import { KV } from './resources/kv/kv';
 import {
   LeakedCredentialCheckCreateParams,
   LeakedCredentialCheckCreateResponse,
-  LeakedCredentialCheckListParams,
-  LeakedCredentialCheckListResponse,
+  LeakedCredentialCheckGetParams,
+  LeakedCredentialCheckGetResponse,
   LeakedCredentialChecks,
 } from './resources/leaked-credential-checks/leaked-credential-checks';
 import { LoadBalancers } from './resources/load-balancers/load-balancers';
@@ -744,9 +744,9 @@ export declare namespace Cloudflare {
   export {
     LeakedCredentialChecks as LeakedCredentialChecks,
     type LeakedCredentialCheckCreateResponse as LeakedCredentialCheckCreateResponse,
-    type LeakedCredentialCheckListResponse as LeakedCredentialCheckListResponse,
+    type LeakedCredentialCheckGetResponse as LeakedCredentialCheckGetResponse,
     type LeakedCredentialCheckCreateParams as LeakedCredentialCheckCreateParams,
-    type LeakedCredentialCheckListParams as LeakedCredentialCheckListParams,
+    type LeakedCredentialCheckGetParams as LeakedCredentialCheckGetParams,
   };
 
   export type ASN = API.ASN;
